@@ -1,0 +1,13 @@
+{
+  "path": {
+    "css/style.scss": {
+      "sass.enabled": true,
+      "sass.options": {
+        "outputDir": "/css/",
+        "imagePath": "/img/",
+        "sourceComments": "map",
+        "outputStyle": "compressed"
+      }
+    }
+  }
+}

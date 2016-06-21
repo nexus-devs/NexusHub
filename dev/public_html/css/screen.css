@@ -73,4 +73,81 @@ body {
   font-size: 18px;
   font-weight: 500;
   color: #3f4958;
+  background: white;
+  overflow-x: hidden;
+}
+
+/* line 16, sass/screen.scss */
+.lp-bg {
+  position: fixed;
+  z-index: -1;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+/* line 24, sass/screen.scss */
+.top-nav {
+  position: fixed;
+  height: 90px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  line-height: 90px;
+}
+
+/* line 32, sass/screen.scss */
+.top-logo {
+  display: inline-block;
+  margin-left: 5%;
+  font-family: 'raleway';
+  font-size: 22px;
+  font-weight: 700;
+  color: #3f4958;
+}
+
+/* line 38, sass/screen.scss */
+.top-logo:hover {
+  text-decoration: none;
+}
+
+/* line 42, sass/screen.scss */
+.top-logo-text {
+  font-weight: 500;
+  margin-right: 1px;
+}
+
+/* line 47, sass/screen.scss */
+.top-logo-sub {
+  font-family: 'raleway';
+  font-size: 18px;
+  font-weight: 700;
+  color: #8ea1ac;
+  margin-left: 5px;
+}
+
+/* line 52, sass/screen.scss */
+.top-nav-links {
+  display: inline-block;
+  float: right;
+  margin-right: 5%;
+}
+/* line 57, sass/screen.scss */
+.top-nav-links a:first-of-type {
+  font-family: 'raleway';
+  font-size: 18px;
+  font-weight: 700;
+  color: #3f4958;
+}
+/* line 61, sass/screen.scss */
+.top-nav-links a {
+  font-family: 'raleway';
+  font-size: 18px;
+  font-weight: 700;
+  color: #8ea1ac;
+  float: right;
+  padding: 0 15px;
+}
+
+/* line 68, sass/screen.scss */
+a:hover {
+  text-decoration: none;
 }
