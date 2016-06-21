@@ -18,7 +18,7 @@
 @mixin font-title($color){
     font-family:'raleway';
     font-size:30px;
-    font-weight:700;
+    font-weight:600;
     color: $color;
 }
 
@@ -27,4 +27,20 @@
     font-size:22px;
     font-weight:700;
     color: $color;
+}
+
+
+
+
+// Positioning
+// ------------------------------
+
+@mixin vertical-align-helper($height){
+    display:inline-block;
+    height:$height;
+}
+
+@mixin vertical-align{
+    display:inline-block;
+    vertical-align: middle;
 }
