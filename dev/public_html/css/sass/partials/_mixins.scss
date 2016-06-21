@@ -15,3 +15,16 @@
     color: $color;
 }
 
+@mixin font-title($color){
+    font-family:'raleway';
+    font-size:30px;
+    font-weight:700;
+    color: $color;
+}
+
+@mixin font-logo($color){
+    font-family:'raleway';
+    font-size:22px;
+    font-weight:700;
+    color: $color;
+}
