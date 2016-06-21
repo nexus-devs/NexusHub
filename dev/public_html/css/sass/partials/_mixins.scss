@@ -1,0 +1,17 @@
+// Typography
+// ------------------------------
+
+@mixin font-default($color){
+    font-family:'raleway';
+    font-size:18px;
+    font-weight:500;
+    color: $color;
+}
+
+@mixin font-default-bold($color){
+    font-family:'raleway';
+    font-size:18px;
+    font-weight:700;
+    color: $color;
+}
+
