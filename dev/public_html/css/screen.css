@@ -67,7 +67,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 10, sass/screen.scss */
+/* line 9, sass/screen.scss */
 body {
   font-family: 'raleway';
   font-size: 18px;
@@ -77,7 +77,7 @@ body {
   overflow-x: hidden;
 }
 
-/* line 16, sass/screen.scss */
+/* line 15, sass/screen.scss */
 .lp-bg {
   position: fixed;
   z-index: -1;
@@ -85,16 +85,17 @@ body {
   min-width: 100%;
 }
 
-/* line 24, sass/screen.scss */
+/* line 22, sass/screen.scss */
 .top-nav {
   position: fixed;
+  z-index: 1;
   height: 90px;
   width: 100%;
   background: rgba(255, 255, 255, 0.8);
   line-height: 90px;
 }
 
-/* line 32, sass/screen.scss */
+/* line 31, sass/screen.scss */
 .top-logo {
   display: inline-block;
   margin-left: 5%;
@@ -104,18 +105,18 @@ body {
   color: #3f4958;
 }
 
-/* line 38, sass/screen.scss */
+/* line 37, sass/screen.scss */
 .top-logo:hover {
   text-decoration: none;
 }
 
-/* line 42, sass/screen.scss */
+/* line 41, sass/screen.scss */
 .top-logo-text {
   font-weight: 500;
   margin-right: 1px;
 }
 
-/* line 47, sass/screen.scss */
+/* line 46, sass/screen.scss */
 .top-logo-sub {
   font-family: 'raleway';
   font-size: 18px;
@@ -124,20 +125,21 @@ body {
   margin-left: 5px;
 }
 
-/* line 52, sass/screen.scss */
+/* line 51, sass/screen.scss */
 .top-nav-links {
   display: inline-block;
   float: right;
   margin-right: 5%;
+  margin-top: 2px;
 }
-/* line 57, sass/screen.scss */
+/* line 56, sass/screen.scss */
 .top-nav-links a:first-of-type {
   font-family: 'raleway';
   font-size: 18px;
   font-weight: 700;
   color: #3f4958;
 }
-/* line 61, sass/screen.scss */
+/* line 59, sass/screen.scss */
 .top-nav-links a {
   font-family: 'raleway';
   font-size: 18px;
@@ -147,7 +149,77 @@ body {
   padding: 0 15px;
 }
 
-/* line 68, sass/screen.scss */
-a:hover {
-  text-decoration: none;
+/* line 66, sass/screen.scss */
+a {
+  text-decoration: none !important;
+}
+
+/* line 70, sass/screen.scss */
+.lp-header {
+  height: 50vh;
+  min-height: 450px;
+  background: rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* line 77, sass/screen.scss */
+.lp-header-headline {
+  font-family: 'raleway';
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 48px;
+  text-transform: uppercase;
+}
+
+/* line 83, sass/screen.scss */
+.lp-header-headline-container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 87, sass/screen.scss */
+.lp-header-helper {
+  display: inline-block;
+  height: 61%;
+}
+
+/* line 91, sass/screen.scss */
+em {
+  font-family: 'raleway';
+  font-size: 30px;
+  font-weight: 600;
+  color: #34b083;
+  font-weight: 600;
+}
+
+/* line 96, sass/screen.scss */
+.lp-header-sub {
+  font-family: 'raleway';
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+/* line 102, sass/screen.scss */
+.lp-header-input-container {
+  height: 25vh;
+  min-height: 150px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+/* line 110, sass/screen.scss */
+.lp-header-input {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 114, sass/screen.scss */
+.lp-header-input-helper {
+  display: inline-block;
+  height: 50%;
 }

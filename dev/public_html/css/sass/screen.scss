@@ -6,65 +6,111 @@
 @import "compass/reset";
 @import "partials/variables";
 @import "partials/mixins";
-
-body{
+body {
     @include font-default($color-base);
-    background:white;
-    overflow-x:hidden;
+    background: white;
+    overflow-x: hidden;
 }
 
 .lp-bg {
-    position:fixed;
-    z-index:-1;
-    min-height:100%;
-    min-width:100%;
-
+    position: fixed;
+    z-index: -1;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 .top-nav {
-    position:fixed;
-    height:90px;
-    width:100%;
-    background:rgba(255,255,255,0.8);
-    line-height:90px;
+    position: fixed;
+    z-index: 1;
+    height: 90px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    line-height: 90px;
 }
 
 .top-logo {
-    display:inline-block;
-    margin-left:5%;
+    display: inline-block;
+    margin-left: 5%;
     @include font-logo($color-base);
 }
 
-.top-logo:hover{
+.top-logo:hover {
     text-decoration: none;
 }
 
 .top-logo-text {
-    font-weight:500;
-    margin-right:1px;
+    font-weight: 500;
+    margin-right: 1px;
 }
 
 .top-logo-sub {
     @include font-default-bold($color-subtle);
-    margin-left:5px;
+    margin-left: 5px;
 }
 
 .top-nav-links {
-    display:inline-block;
-    float:right;
-    margin-right:5%;
-
-    a:first-of-type{
+    display: inline-block;
+    float: right;
+    margin-right: 5%;
+    margin-top: 2px;
+    a:first-of-type {
         @include font-default-bold($color-base);
     }
-
-    a{
+    a {
         @include font-default-bold($color-subtle);
-        float:right;
-        padding:0 15px;
+        float: right;
+        padding: 0 15px;
     }
 }
 
-a:hover{
-    text-decoration:none;
+a {
+    text-decoration: none !important;
+}
+
+.lp-header {
+    height: 50vh;
+    min-height: 450px;
+    background: rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.lp-header-headline {
+    @include font-title($color-on-bg);
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.lp-header-headline-container {
+    @include vertical-align;
+}
+
+.lp-header-helper {
+    @include vertical-align-helper(61%);
+}
+
+em {
+    @include font-title($color-accent);
+    font-weight: 600;
+}
+
+.lp-header-sub {
+    @include font-title($color-on-bg);
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.lp-header-input-container {
+    height: 25vh;
+    min-height: 150px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    text-align:center;
+}
+
+.lp-header-input {
+    @include vertical-align;
+}
+
+.lp-header-input-helper {
+    @include vertical-align-helper(50%);
 }
