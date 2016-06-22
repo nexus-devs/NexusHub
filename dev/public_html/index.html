@@ -11,6 +11,12 @@
     <link href="css/queries.css" rel="stylesheet" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:300,500,600,700' rel='stylesheet' type='text/css'>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/gallery/motionblur.js"></script>
+    <script src="js/gallery/moment.js"></script>
+    <script src="js/gallery/gallery.js"></script>
+    <script src="js/gallery/TweenMax.min.js"></script>
+
 </head>
 
 
@@ -22,7 +28,6 @@
 
 <body>
     <img src='img/lp_bg.jpg' class='lp-bg' alt='Warframe Background'>
-
 
 
 
@@ -42,6 +47,7 @@
             <a href='#'>NexusBot for your Clan</a>
         </div>
     </nav>
+
 
 
 
@@ -80,6 +86,17 @@
 
     <div class='lp-content'>
 
+
+        <!-- Load SVG Blur for Gallery -->
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+                </filter>
+            </defs>
+        </svg>
+
+
         <!-- Popular Items -->
         <div class='lp-pop-header'>
 
@@ -98,16 +115,22 @@
                 <img src='img/lp_click.svg' alt='Next Item'>
             </button>
 
-
+ <div class='items-shade-l'></div>
+            <div class='items-shade-r'></div>
             <div class='items-wr'>
 
-                <!-- Item Info -->
+
+
+
+                <!-- Main Item (Nikana P) -->
+                <!--==============================-->
+
                 <div class='items-item' id='nikana'>
                     <div class='items-item-main-inf'>
                         <h2>Nikana Prime</h2>
                         <div class='items-images'>
 
-                            <!-- Main Item (Nikana P) -->
+                                          <!-- Item Info -->
                             <div class='items-images-main'>
                                 <div class='items-images-main-helper'></div>
                                 <img src='img/items/prime_nikana.png' alt='Nikana Prime'>
@@ -162,6 +185,144 @@
                         </a>
                     </div>
                 </div>
+
+
+                 <!-- Main Item (Nikana P) -->
+                <!--==============================-->
+
+                <div class='items-item' id='nikana'>
+                    <div class='items-item-main-inf'>
+                        <h2>Nikana Prime</h2>
+                        <div class='items-images'>
+
+                                          <!-- Item Info -->
+                            <div class='items-images-main'>
+                                <div class='items-images-main-helper'></div>
+                                <img src='img/items/prime_nikana.png' alt='Nikana Prime'>
+                            </div>
+
+                            <!-- Item Components -->
+                            <div class='items-images-components'>
+                                <div class='items-images-components-part'>
+
+                                    <!-- BP -->
+                                    <div class='item-images-components-wr item-selected'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blueprint</h3>
+                                            <h4>35p</h4>
+                                            <span>(35.0321)</span>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Comp 1 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comp 2 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a href='#'>
+                            Go to Item Page
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+
+
+                 <!-- Main Item (Nikana P) -->
+                <!--==============================-->
+
+                <div class='items-item' id='nikana'>
+                    <div class='items-item-main-inf'>
+                        <h2>Nikana Prime</h2>
+                        <div class='items-images'>
+
+                                          <!-- Item Info -->
+                            <div class='items-images-main'>
+                                <div class='items-images-main-helper'></div>
+                                <img src='img/items/prime_nikana.png' alt='Nikana Prime'>
+                            </div>
+
+                            <!-- Item Components -->
+                            <div class='items-images-components'>
+                                <div class='items-images-components-part'>
+
+                                    <!-- BP -->
+                                    <div class='item-images-components-wr item-selected'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blueprint</h3>
+                                            <h4>35p</h4>
+                                            <span>(35.0321)</span>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Comp 1 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comp 2 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a href='#'>
+                            Go to Item Page
+                        </a>
+                    </div>
+                </div>
+
+
+
+
             </div>
 
             <button class='item-slide-button' type=button>
@@ -191,6 +352,56 @@
     <!--==============================-->
     <div class='lp-recent-items'>
         <h2>Recently Requested Items</h2>
+        <div class='lp-recent-items-wr'>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+            <a href='#' class='lp-recent-items-item'>
+                <div class='lp-recent-items-helper'></div>
+                <img src='img/items/prime_nikana.png'>
+                <div class='lp-recent-items-info'>
+                    <h3>Nikana Prime</h3>
+                    <h4>135p</h4>
+                </div>
+            </a>
+        </div>
     </div>
 
 
@@ -215,21 +426,21 @@
         </div>
 
         <div class='footer-desc'>
-            <span>Most images displayed belong to <a href='www.warframe.com' target="_blank"><b>Warframe</b></a>. Check it out, it’s a great game!</span>
+            <span>Most images displayed belong to <a href='http://www.warframe.com' target="_blank"><b>Warframe</b></a>. Check it out, it’s a great game!</span>
             <br>
             <span>All Prices shown in real-time. Check your ingame chat if you don’t believe us :></span>
         </div>
 
         <div class='footer-social'>
-           <a href="#" target='_blank'>
+            <a href="#" target='_blank'>
                 <img src='img/lp_tiwtter.svg' alt='Twitter'>
-           </a>
+            </a>
             <a href="#" target='_blank'>
                 <img src='img/lp_fb.svg' alt='Facebook'>
-           </a>
+            </a>
             <a href="#" target='_blank'>
                 <img src='img/lp_google.svg' alt='Google Plus'>
-           </a>
+            </a>
         </div>
 
     </footer>

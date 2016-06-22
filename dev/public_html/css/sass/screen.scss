@@ -76,7 +76,7 @@ a:hover {
 
 .lp-header-headline {
     @include font-title($color-on-bg);
-    font-size: 48px;
+    font-size: 54px;
     text-transform: uppercase;
 }
 
@@ -139,6 +139,11 @@ b{
 .lp-content {
     width: 100%;
     background: white;
+
+    svg{
+        position:absolute;
+        height:0;
+    }
 }
 
 .lp-search-ico {
@@ -147,7 +152,8 @@ b{
 }
 
 .lp-pop-header {
-    padding: 105px 0 45px 0;
+    padding: 125px 0 45px 0;
+    margin-top:-10px;
     margin-left: 15%;
     img {
         display: inline-block;
@@ -178,6 +184,8 @@ b{
 }
 
 .items-item {
+    width:100%;
+    display:inline-block;
     text-align: left;
 }
 
@@ -341,6 +349,7 @@ b{
     right:calc(5% - 90px);
     top:210px;
     margin:0 90px;
+    z-index:2;
 
     img{
         transform:rotate(180deg);
@@ -358,15 +367,13 @@ b{
 }
 
 .lp-recent-items {
-    background:rgba(255,255,255,0.5);
+    background:rgba(255,255,255,0.7);
     width:100%;
     text-align:center;
 
     h2{
       @include font-title($color-base);
         padding-top:65px;
-        //placeholder
-        padding-bottom:350px;
     }
 }
 
@@ -411,4 +418,76 @@ footer {
     a{
         padding:0 10px;
     }
+}
+
+.lp-recent-items-wr {
+    width:70%;
+    margin:auto;
+    padding-top:90px;
+    padding-bottom:150px;
+    white-space:nowrap;
+    overflow:hidden;
+}
+
+.lp-recent-items-item {
+    display:inline-block;
+    width:300px;
+    height:180px;
+    cursor:pointer;
+    border:2px solid $color-subtle;
+    background: rgba(36,43,50,0.4);
+    margin:0 10px;
+
+    img{
+        @include vertical-align;
+    }
+}
+
+.lp-recent-items-helper {
+    @include vertical-align-helper(50%);
+}
+
+.lp-recent-items-info {
+    position:relative;
+    top:-40px;
+
+    h3{
+        @include font-title($color-on-bg);
+        font-weight:300;
+    }
+    h4{
+        @include font-small-title($color-on-bg);
+        @include font-number($color-on-bg);
+        font-size:20px;
+        margin-top:3px;
+    }
+}
+
+.items-shade-l {
+    position:absolute;
+    left:0;
+    height:100%;
+    width:20%;
+    pointer-events:none;
+    top:0;
+    z-index:1;
+  background: -webkit-linear-gradient(left, $color-base , transparent);
+  background: -o-linear-gradient(right, $color-base , transparent);
+  background: -moz-linear-gradient(right, $color-base , transparent);
+  background: linear-gradient(to right, $color-base , transparent);
+}
+
+
+.items-shade-r {
+        position:absolute;
+    right:0;
+    height:100%;
+    width:20%;
+    pointer-events:none;
+    top:0;
+    z-index:1;
+  background: -webkit-linear-gradient(left, transparent , $color-base);
+  background: -o-linear-gradient(right, transparent , $color-base);
+  background: -moz-linear-gradient(right, transparent , $color-base);
+  background: linear-gradient(to right, transparent , $color-base);
 }
