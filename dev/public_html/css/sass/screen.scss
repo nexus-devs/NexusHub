@@ -374,7 +374,7 @@ b{
 
     h2{
       @include font-title($color-base);
-        padding-top:65px;
+        padding-top:85px;
     }
 }
 
@@ -436,7 +436,7 @@ footer {
     height:180px;
     cursor:pointer;
     border:2px solid $color-subtle;
-    background: rgba(36,43,50,0.7);
+    background: rgba(36,43,50,0.8);
     margin:0 10px;
 
     img{
@@ -450,7 +450,7 @@ footer {
 }
 
 .lp-recent-items-info {
-    bottom:40px;
+    bottom:45px;
     position:absolute;
     width:100%;
 
@@ -462,14 +462,16 @@ footer {
         @include font-small-title($color-on-bg);
         @include font-number($color-on-bg);
         font-size:20px;
+        font-weight:300;
         margin-top:3px;
     }
     span{
         @include font-default($color-on-bg);
         font-weight:300;
-        font-size:18px;
+        font-size:16px;
         position:relative;
         top:25px;
+        opacity:0.6;
     }
 }
 

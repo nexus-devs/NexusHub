@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var
-        $gallery = $(".lp-recent-items"),
-        $galleryPictures = $(".lp-recent-items-wr"),
-        $galleryPicture = $(".lp-recent-items-item"),
+        $gallery_rec = $(".lp-recent-items"),
+        $galleryPictures_rec = $(".lp-recent-items-wr"),
+        $galleryPicture_rec = $(".lp-recent-items-item"),
 
         imgCount = [],
 
@@ -14,7 +14,7 @@ $(document).ready(function () {
         },
         GalPos = 0,
         currentImage = 0,
-        imageWidth = $($galleryPicture).width() * 1.0000,
+        imageWidth = $($galleryPicture_rec).width() * 1.0000,
         imageSpacing = 20,
         imageTotalWidth = imageWidth + imageSpacing,
         speedLog = [],
@@ -41,7 +41,7 @@ $(document).ready(function () {
     $(window).resize(function () {
         var NewVariable; // null initially
 
-        NewVariable = $($galleryPicture).width() * 1.00;
+        NewVariable = $($galleryPicture_rec).width() * 1.00;
         updateOldVar(NewVariable);
     });
 
@@ -64,12 +64,12 @@ $(document).ready(function () {
         lastBlur = v;
     }
 
-    $galleryPictures.css({
-        //webkitFilter: "url('#blur')",
-        //filter: "url('#blur')"
+    $galleryPictures_rec.css({
+        // webkitFilter: "url('#blur')",
+        // filter: "url('#blur')"
 
     });
-    $galleryPicture.each(function (i) {
+    $galleryPicture_rec.each(function (i) {
         var cur = $(this);
         cur.click(function () {
             if (Math.abs(totalDist) < distThreshold)
@@ -93,7 +93,7 @@ $(document).ready(function () {
     }
 
     function updateGalleryPos() {
-        TweenMax.set($galleryPictures, {
+        TweenMax.set($galleryPictures_rec, {
             x: galleryPos.x + 0,
             force3D: true,
             lazy: true
@@ -111,7 +111,7 @@ $(document).ready(function () {
         }
 
     }
-    $gallery.mousedown(function (event) {
+    $gallery_rec.mousedown(function (event) {
         event.preventDefault();
         dragging = true;
         dragPos.x = event.pageX;
@@ -159,9 +159,9 @@ $(document).ready(function () {
             if (targetImage < 0) {
                 excess = targetImage;
                 targetImage = 0;
-            } else if (targetImage >= $galleryPicture.length) {
-                excess = targetImage - ($galleryPicture.length - 1);
-                targetImage = $galleryPicture.length - 1;
+            } else if (targetImage >= $galleryPicture_rec.length) {
+                excess = targetImage - ($galleryPicture_rec.length - 1);
+                targetImage = $galleryPicture_rec.length - 1;
             }
             if (excess != 0) {
                 targetX = -targetImage * imageTotalWidth;
@@ -189,5 +189,6 @@ $(document).ready(function () {
     }
 
     setGalleryPos(0, false);
+
 
 })
