@@ -9,14 +9,24 @@
 
     <link href="css/screen.css" rel="stylesheet" type='text/css'>
     <link href="css/queries.css" rel="stylesheet" type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,600,700' rel='stylesheet' type='text/css'>
-    <script src="bootstrap/js/jquery.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:300,500,600,700' rel='stylesheet' type='text/css'>
 
 </head>
 
 
+
+
+
+
+
+
 <body>
     <img src='img/lp_bg.jpg' class='lp-bg' alt='Warframe Background'>
+
+
+
+    <!-- Menu Bar -->
+    <!--==============================-->
 
     <nav class='top-nav'>
         <a href='index.html' class='top-logo'>
@@ -30,10 +40,13 @@
         </div>
     </nav>
 
+
+
+    <!-- Header -->
+    <!--==============================-->
+
     <header>
         <div class='lp-header'>
-            <div class='lp-header-helper'>
-            </div>
             <div class='lp-header-headline-container'>
                 <h1 class='lp-header-headline'>All Warframe Item Prices</h1>
                 <h2 class='lp-header-sub'>Taken <em>directly</em> from the <em>ingame trade chat</em></h2>
@@ -41,14 +54,95 @@
 
         </div>
     </header>
-     <div class='lp-header-input-container'>
-              <div class='lp-header-input-helper'></div>
-               <div class='lp-header-input'>
-                   <input type='text' placeholder='Enter item name'>
-               </div>
+    <div class='lp-header-input-container'>
+        <div class='lp-header-input-helper'></div>
+        <div class='lp-header-input'>
+            <input type='text' placeholder='Enter Item Name'>
+        </div>
+        <button type='button'>
+            <img src='img/lp_search.svg' class='lp-search-ico' alt='Search'>
+        </button>
+    </div>
+
+
+
+    <!-- Main Content -->
+    <!--==============================-->
+
+    <div class='lp-content'>
+
+        <!-- Popular Items -->
+        <div class='lp-pop-header'>
+            <img src='img/lp_popular.svg' alt='Popular Items Icon'>
+            <h1>Popular Items</h1>
+        </div>
+        <div class='items-main'>
+            <div class='items-wr'>
+
+                <!-- Item Info -->
+                <div class='items-item' id='nikana'>
+                    <div class='items-item-main-inf'>
+                        <h2>Nikana Prime</h2>
+                        <div class='items-images'>
+
+                            <!-- Main Item (Nikana P) -->
+                            <div class='items-images-main'>
+                                <div class='items-images-main-helper'></div>
+                                <img src='img/items/prime_nikana.png' alt='Nikana Prime'>
+                            </div>
+
+                            <!-- Item Components -->
+                            <div class='items-images-components'>
+                                <div class='items-images-components-part'>
+
+                                    <!-- BP -->
+                                    <div class='item-images-components-wr item-selected'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blueprint</h3>
+                                            <h4>35p</h4>
+                                            <span>(35.0321)</span>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Comp 1 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comp 2 -->
+                                    <div class='item-images-components-wr'>
+                                        <div class='item-images-components-component'>
+                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
+                                        </div>
+                                        <div class='items-component-details'>
+                                            <h3>Blade</h3>
+                                            <h4>50p</h4>
+                                            <span>(49.9255)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a href='#'>
+                            Go to Item Page
+                        </a>
+                    </div>
+                </div>
             </div>
-
-
+        </div>
+    </div>
 
 
 </body>
