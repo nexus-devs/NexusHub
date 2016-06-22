@@ -105,18 +105,13 @@ body {
   color: #2e3540;
 }
 
-/* line 37, sass/screen.scss */
-.top-logo:hover {
-  text-decoration: none;
-}
-
-/* line 41, sass/screen.scss */
+/* line 39, sass/screen.scss */
 .top-logo-text {
-  font-weight: 500;
+  font-weight: 300;
   margin-right: 1px;
 }
 
-/* line 46, sass/screen.scss */
+/* line 44, sass/screen.scss */
 .top-logo-sub {
   font-family: 'raleway';
   font-size: 18px;
@@ -125,21 +120,21 @@ body {
   margin-left: 5px;
 }
 
-/* line 51, sass/screen.scss */
+/* line 49, sass/screen.scss */
 .top-nav-links {
   display: inline-block;
   float: right;
   margin-right: 5%;
   margin-top: 2px;
 }
-/* line 56, sass/screen.scss */
+/* line 54, sass/screen.scss */
 .top-nav-links a:first-of-type {
   font-family: 'raleway';
   font-size: 18px;
   font-weight: 700;
   color: #2e3540;
 }
-/* line 59, sass/screen.scss */
+/* line 57, sass/screen.scss */
 .top-nav-links a {
   font-family: 'raleway';
   font-size: 18px;
@@ -149,43 +144,56 @@ body {
   padding: 0 15px;
 }
 
-/* line 66, sass/screen.scss */
+/* line 64, sass/screen.scss */
 a {
   text-decoration: none !important;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
 }
 
-/* line 70, sass/screen.scss */
+/* line 69, sass/screen.scss */
+a:hover {
+  opacity: 0.7;
+}
+
+/* line 73, sass/screen.scss */
 .lp-header {
   text-align: center;
 }
 
-/* line 74, sass/screen.scss */
+/* line 77, sass/screen.scss */
 .lp-header-headline {
   font-family: 'raleway';
   font-size: 30px;
   font-weight: 600;
   color: #fff;
-  font-size: 48px;
+  font-size: 54px;
   text-transform: uppercase;
 }
 
-/* line 80, sass/screen.scss */
+/* line 83, sass/screen.scss */
 .lp-header-headline-container {
   padding: 22vh 10vw;
   position: relative;
   top: 5vh;
 }
 
-/* line 86, sass/screen.scss */
+/* line 89, sass/screen.scss */
 em {
-  font-family: 'raleway';
-  font-size: 30px;
-  font-weight: 600;
   color: #32ab7f;
   font-weight: 600;
 }
 
-/* line 91, sass/screen.scss */
+/* line 94, sass/screen.scss */
+b {
+  font-weight: 700;
+}
+
+/* line 98, sass/screen.scss */
 .lp-header-sub {
   font-family: 'raleway';
   font-size: 30px;
@@ -195,7 +203,7 @@ em {
   margin-top: 10px;
 }
 
-/* line 97, sass/screen.scss */
+/* line 104, sass/screen.scss */
 .lp-header-input-container {
   height: 25vh;
   min-height: 150px;
@@ -203,7 +211,7 @@ em {
   background: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
-/* line 103, sass/screen.scss */
+/* line 110, sass/screen.scss */
 .lp-header-input-container button {
   background: #32ab7f;
   outline: none;
@@ -221,7 +229,7 @@ em {
   width: 42px;
   margin-left: 0px;
 }
-/* line 110, sass/screen.scss */
+/* line 117, sass/screen.scss */
 .lp-header-input-container button:hover,
 .lp-header-input-container button:focus {
   background: #2e3540;
@@ -237,7 +245,7 @@ em {
   transition-duration: 0.15s;
 }
 
-/* line 116, sass/screen.scss */
+/* line 123, sass/screen.scss */
 .lp-header-input {
   display: inline-block;
   vertical-align: middle;
@@ -270,7 +278,7 @@ em {
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 119, sass/screen.scss */
+/* line 126, sass/screen.scss */
 .lp-header-input input {
   outline: none;
   border: none;
@@ -285,34 +293,41 @@ em {
   width: 315px;
 }
 
-/* line 128, sass/screen.scss */
+/* line 135, sass/screen.scss */
 .lp-header-input-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 132, sass/screen.scss */
+/* line 139, sass/screen.scss */
 .lp-content {
   width: 100%;
   background: white;
 }
+/* line 143, sass/screen.scss */
+.lp-content svg {
+  position: absolute;
+  height: 0;
+}
 
-/* line 137, sass/screen.scss */
+/* line 149, sass/screen.scss */
 .lp-search-ico {
   margin-top: 3px;
   height: 18px;
 }
 
-/* line 142, sass/screen.scss */
+/* line 154, sass/screen.scss */
 .lp-pop-header {
-  padding: 105px 0 45px 0;
+  padding: 125px 0 45px 0;
+  margin-top: -10px;
   margin-left: 15%;
 }
-/* line 145, sass/screen.scss */
+/* line 158, sass/screen.scss */
 .lp-pop-header img {
   display: inline-block;
+  margin-bottom: -5px;
 }
-/* line 148, sass/screen.scss */
+/* line 163, sass/screen.scss */
 .lp-pop-header h1 {
   font-family: 'raleway';
   font-size: 30px;
@@ -322,8 +337,9 @@ em {
   display: inline-block;
   vertical-align: super;
   margin-left: 5px;
+  margin-right: -30px;
 }
-/* line 155, sass/screen.scss */
+/* line 172, sass/screen.scss */
 .lp-pop-header h2 {
   display: inline-block;
   font-family: 'raleway';
@@ -331,29 +347,33 @@ em {
   font-weight: 600;
   color: #8ea1ac;
   vertical-align: super;
-  margin-left: 10px;
+  margin-left: 42px;
 }
 
-/* line 162, sass/screen.scss */
+/* line 180, sass/screen.scss */
 .items-main {
   background: #2e3540;
+  text-align: center;
+  position: relative;
 }
 
-/* line 166, sass/screen.scss */
+/* line 186, sass/screen.scss */
 .items-item {
+  width: 100%;
+  display: inline-block;
   text-align: left;
 }
 
-/* line 170, sass/screen.scss */
+/* line 192, sass/screen.scss */
 .items-wr {
+  display: inline-block;
   padding: 75px 0 75px 0;
   width: 70%;
   margin: auto;
-  text-align: center;
   white-space: nowrap;
 }
 
-/* line 179, sass/screen.scss */
+/* line 201, sass/screen.scss */
 .items-item-main-inf h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -362,7 +382,7 @@ em {
   font-size: 36px;
   font-weight: 300;
 }
-/* line 185, sass/screen.scss */
+/* line 207, sass/screen.scss */
 .items-item-main-inf a {
   font-family: 'raleway';
   font-size: 16px;
@@ -372,7 +392,7 @@ em {
   top: 15px;
 }
 
-/* line 192, sass/screen.scss */
+/* line 214, sass/screen.scss */
 .items-images-main {
   display: inline-block;
   margin-top: 25px;
@@ -382,31 +402,31 @@ em {
   overflow: hidden;
   border: 2px solid #8ea1ac;
 }
-/* line 201, sass/screen.scss */
+/* line 223, sass/screen.scss */
 .items-images-main img {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 206, sass/screen.scss */
+/* line 228, sass/screen.scss */
 .items-images-main-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 210, sass/screen.scss */
+/* line 232, sass/screen.scss */
 .items-images-components-part {
   display: inline-block;
 }
 
-/* line 214, sass/screen.scss */
+/* line 236, sass/screen.scss */
 .items-images-components {
   display: inline-block;
   vertical-align: top;
   margin-top: 25px;
 }
 
-/* line 220, sass/screen.scss */
+/* line 242, sass/screen.scss */
 .item-images-components-component {
   display: inline-block;
   width: 100px;
@@ -415,20 +435,20 @@ em {
   background: #8ea1ac;
   cursor: pointer;
 }
-/* line 228, sass/screen.scss */
+/* line 250, sass/screen.scss */
 .item-images-components-component img {
   opacity: 0.8;
   min-height: 100%;
   min-width: 100%;
 }
 
-/* line 235, sass/screen.scss */
+/* line 257, sass/screen.scss */
 .items-component-details {
   display: inline-block;
   vertical-align: top;
   margin-left: 5px;
 }
-/* line 240, sass/screen.scss */
+/* line 262, sass/screen.scss */
 .items-component-details h3 {
   font-family: 'raleway';
   font-size: 24px;
@@ -436,7 +456,7 @@ em {
   color: #fff;
   font-weight: 300;
 }
-/* line 245, sass/screen.scss */
+/* line 267, sass/screen.scss */
 .items-component-details h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -447,7 +467,7 @@ em {
   margin-top: 3px;
   display: inline-block;
 }
-/* line 252, sass/screen.scss */
+/* line 274, sass/screen.scss */
 .items-component-details span {
   display: inline-block;
   font-family: 'raleway';
@@ -459,25 +479,280 @@ em {
   font-size: 14px;
 }
 
-/* line 260, sass/screen.scss */
+/* line 282, sass/screen.scss */
 .item-images-components-wr {
   margin: 0 0 4px 0;
 }
 
-/* line 265, sass/screen.scss */
+/* line 287, sass/screen.scss */
 .item-selected .item-images-components-component {
   background: #32ab7f;
   border: 2px solid #32ab7f;
 }
-/* line 270, sass/screen.scss */
+/* line 292, sass/screen.scss */
 .item-selected .item-images-components-component img {
   opacity: 0.5;
 }
-/* line 273, sass/screen.scss */
+/* line 295, sass/screen.scss */
 .item-selected .items-component-details h3 {
   color: #32ab7f;
 }
-/* line 276, sass/screen.scss */
+/* line 298, sass/screen.scss */
 .item-selected .items-component-details h4 {
   color: #32ab7f;
+}
+
+/* line 303, sass/screen.scss */
+.items-drag-note {
+  text-align: center;
+  margin-top: 30px;
+  padding-bottom: 210px;
+}
+/* line 308, sass/screen.scss */
+.items-drag-note img:first-of-type {
+  transform: rotate(180deg);
+}
+/* line 312, sass/screen.scss */
+.items-drag-note img {
+  position: relative;
+  top: 5px;
+}
+/* line 317, sass/screen.scss */
+.items-drag-note span {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+
+/* line 324, sass/screen.scss */
+.item-slide-button:first-of-type {
+  position: absolute;
+  background: #32ab7f;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  padding: 1px;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  height: 38px;
+  width: 38px;
+  border-radius: 38px;
+  left: calc(5% - 90px);
+  top: 210px;
+  margin: 0 90px;
+}
+/* line 334, sass/screen.scss */
+.item-slide-button:first-of-type img {
+  height: 18px;
+  position: relative;
+  top: 2px;
+  left: -1px;
+  transform: rotate(0deg);
+}
+
+/* line 343, sass/screen.scss */
+.item-slide-button {
+  position: absolute;
+  background: #32ab7f;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  padding: 1px;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  height: 38px;
+  width: 38px;
+  border-radius: 38px;
+  right: calc(5% - 90px);
+  top: 210px;
+  margin: 0 90px;
+  z-index: 2;
+}
+/* line 354, sass/screen.scss */
+.item-slide-button img {
+  transform: rotate(180deg);
+  height: 18px;
+  position: relative;
+  top: 2px;
+  left: 1px;
+}
+
+/* line 365, sass/screen.scss */
+.item-slide-button:hover {
+  background: #8ea1ac;
+}
+
+/* line 369, sass/screen.scss */
+.lp-recent-items {
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  text-align: center;
+}
+/* line 374, sass/screen.scss */
+.lp-recent-items h2 {
+  font-family: 'raleway';
+  font-size: 30px;
+  font-weight: 600;
+  color: #2e3540;
+  padding-top: 65px;
+}
+
+/* line 380, sass/screen.scss */
+footer {
+  background: #2e3540;
+  text-align: center;
+  padding: 90px 0;
+}
+
+/* line 386, sass/screen.scss */
+.footer-logo {
+  font-family: 'raleway';
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* line 390, sass/screen.scss */
+.footer-contact {
+  margin-top: 50px;
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+  font-size: 20px;
+}
+/* line 395, sass/screen.scss */
+.footer-contact a {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+  font-size: 20px;
+  padding: 0 2px;
+}
+
+/* line 402, sass/screen.scss */
+.footer-desc {
+  line-height: 26px;
+  margin-top: 25px;
+}
+/* line 406, sass/screen.scss */
+.footer-desc span {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+/* line 408, sass/screen.scss */
+.footer-desc span b {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #b4c8d3;
+}
+
+/* line 414, sass/screen.scss */
+.footer-social {
+  margin-top: 50px;
+  margin-bottom: -30px;
+}
+/* line 418, sass/screen.scss */
+.footer-social a {
+  padding: 0 10px;
+}
+
+/* line 423, sass/screen.scss */
+.lp-recent-items-wr {
+  width: 70%;
+  margin: auto;
+  padding-top: 90px;
+  padding-bottom: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* line 432, sass/screen.scss */
+.lp-recent-items-item {
+  display: inline-block;
+  width: 300px;
+  height: 180px;
+  cursor: pointer;
+  border: 2px solid #8ea1ac;
+  background: rgba(36, 43, 50, 0.4);
+  margin: 0 10px;
+}
+/* line 441, sass/screen.scss */
+.lp-recent-items-item img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 446, sass/screen.scss */
+.lp-recent-items-helper {
+  display: inline-block;
+  height: 50%;
+}
+
+/* line 450, sass/screen.scss */
+.lp-recent-items-info {
+  position: relative;
+  top: -40px;
+}
+/* line 454, sass/screen.scss */
+.lp-recent-items-info h3 {
+  font-family: 'raleway';
+  font-size: 30px;
+  font-weight: 600;
+  color: #fff;
+  font-weight: 300;
+}
+/* line 458, sass/screen.scss */
+.lp-recent-items-info h4 {
+  font-family: 'raleway';
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  font-family: 'arial';
+  color: #fff;
+  font-size: 20px;
+  margin-top: 3px;
+}
+
+/* line 466, sass/screen.scss */
+.items-shade-l {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  pointer-events: none;
+  top: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(left, #2e3540, transparent);
+  background: -o-linear-gradient(right, #2e3540, transparent);
+  background: -moz-linear-gradient(right, #2e3540, transparent);
+  background: linear-gradient(to right, #2e3540, transparent);
+}
+
+/* line 481, sass/screen.scss */
+.items-shade-r {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 20%;
+  pointer-events: none;
+  top: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(left, transparent, #2e3540);
+  background: -o-linear-gradient(right, transparent, #2e3540);
+  background: -moz-linear-gradient(right, transparent, #2e3540);
+  background: linear-gradient(to right, transparent, #2e3540);
 }
