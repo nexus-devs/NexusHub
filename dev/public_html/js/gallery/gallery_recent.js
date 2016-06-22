@@ -1,8 +1,9 @@
 $(document).ready(function () {
     var
-        $gallery = $(".items-main"),
-        $galleryPictures = $(".items-wr"),
-        $galleryPicture = $(".items-item"),
+        $gallery = $(".lp-recent-items"),
+        $galleryPictures = $(".lp-recent-items-wr"),
+        $galleryPicture = $(".lp-recent-items-item"),
+
         imgCount = [],
 
         lastPos = {
@@ -13,8 +14,8 @@ $(document).ready(function () {
         },
         GalPos = 0,
         currentImage = 0,
-        imageWidth = $($galleryPictures).width() * 1.0000,
-        imageSpacing = 0,
+        imageWidth = $($galleryPicture).width() * 1.0000,
+        imageSpacing = 20,
         imageTotalWidth = imageWidth + imageSpacing,
         speedLog = [],
         speedLogLimit = 5,
@@ -40,7 +41,7 @@ $(document).ready(function () {
     $(window).resize(function () {
         var NewVariable; // null initially
 
-        NewVariable = $('.news-slideshow').width() * 1.00;
+        NewVariable = $($galleryPicture).width() * 1.00;
         updateOldVar(NewVariable);
     });
 
@@ -64,9 +65,8 @@ $(document).ready(function () {
     }
 
     $galleryPictures.css({
-        webkitFilter: "url('#blur')",
-        filter: "url('#blur')"
-            //Not Working in Firefox?? becomes invisible
+        //webkitFilter: "url('#blur')",
+        //filter: "url('#blur')"
 
     });
     $galleryPicture.each(function (i) {
@@ -189,27 +189,5 @@ $(document).ready(function () {
     }
 
     setGalleryPos(0, false);
-
-
-    $(document).on('ready', function () {
-
-        $($galleryPicture).each(function () {
-            imgCount.push('i')
-        })
-
-        var n = imgCount.length
-
-        galleryLoop = setInterval(function galleryAutoUpdate() {
-            if (dragging) {} else {
-                GalPos = currentImage;
-                if (GalPos == (n - 1)) {
-                    GalPos = 0;
-                } else {
-                    GalPos = GalPos + 1;
-                };
-                setGalleryPos(GalPos);
-            };
-        }, 8000);
-    });
 
 })
