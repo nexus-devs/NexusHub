@@ -37,11 +37,11 @@ $(document).ready(function () {
 
 
 
-     $($galleryPicture).each(function () {
-            imgCount.push('i')
-        })
+    $($galleryPicture).each(function () {
+        imgCount.push('i')
+    })
 
-        var n = imgCount.length
+    var n = imgCount.length
 
     $(window).resize(function () {
         var NewVariable; // null initially
@@ -197,18 +197,24 @@ $(document).ready(function () {
     setGalleryPos(0, false);
 
 
-     $('.item-slide-button').click(function () {
-
-        //incr
-         console.log(GalPos)
-         console.log(n)
-        if (GalPos == (n - 1)) {
-            GalPos = 0;
+    $('.item-slide-button').click(function () {
+        if ($(this).hasClass('dcr-btn')) {
+            //decr
+            if (GalPos == 0) {
+                GalPos = (n - 1);
+            } else {
+                GalPos = GalPos - 1;
+            };
+            setGalleryPos(GalPos);
         } else {
-            GalPos = GalPos + 1;
-        };
-        setGalleryPos(GalPos);
-
+            //incr
+            if (GalPos == (n - 1)) {
+                GalPos = 0;
+            } else {
+                GalPos = GalPos + 1;
+            };
+            setGalleryPos(GalPos);
+        }
     })
 
 

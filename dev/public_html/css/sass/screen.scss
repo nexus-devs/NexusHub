@@ -8,16 +8,17 @@
 @import "partials/mixins";
 body {
     @include font-default($color-base);
-    background: white;
+    background: url('../../img/lp_bg.jpg');
     overflow-x: hidden;
 }
 
 .lp-bg {
-    position: fixed;
+    position:fixed;
     z-index: -1;
     min-height: 100%;
     min-width: 100%;
 }
+
 
 .top-nav {
     position: fixed;
@@ -437,7 +438,7 @@ footer {
     cursor:pointer;
     border:2px solid $color-subtle;
     background: rgba(36,43,50,0.8);
-    margin:0 10px;
+    margin:0 15px;
 
     img{
         @include vertical-align;
@@ -530,4 +531,11 @@ footer {
   background: -o-linear-gradient(right, transparent , rgba(255,255,255,0.2));
   background: -moz-linear-gradient(right, transparent , rgba(255,255,255,0.2));
   background: linear-gradient(to right, transparent , rgba(255,255,255,0.2));
+}
+
+.lp-recent-bg {
+    position:absolute;
+    top:-10%;
+    height:110%;
+    width:100%;
 }
