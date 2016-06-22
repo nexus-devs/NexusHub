@@ -88,7 +88,7 @@ body {
 /* line 22, sass/screen.scss */
 .top-nav {
   position: fixed;
-  z-index: 1;
+  z-index: 5;
   height: 90px;
   width: 100%;
   background: rgba(255, 255, 255, 0.8);
@@ -596,8 +596,9 @@ b {
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
   text-align: center;
+  position: relative;
 }
-/* line 374, sass/screen.scss */
+/* line 375, sass/screen.scss */
 .lp-recent-items h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -606,14 +607,14 @@ b {
   padding-top: 65px;
 }
 
-/* line 380, sass/screen.scss */
+/* line 381, sass/screen.scss */
 footer {
   background: #2e3540;
   text-align: center;
   padding: 90px 0;
 }
 
-/* line 386, sass/screen.scss */
+/* line 387, sass/screen.scss */
 .footer-logo {
   font-family: 'raleway';
   font-size: 22px;
@@ -621,7 +622,7 @@ footer {
   color: #fff;
 }
 
-/* line 390, sass/screen.scss */
+/* line 391, sass/screen.scss */
 .footer-contact {
   margin-top: 50px;
   font-family: 'raleway';
@@ -630,7 +631,7 @@ footer {
   color: #8ea1ac;
   font-size: 20px;
 }
-/* line 395, sass/screen.scss */
+/* line 396, sass/screen.scss */
 .footer-contact a {
   font-family: 'raleway';
   font-size: 16px;
@@ -640,19 +641,19 @@ footer {
   padding: 0 2px;
 }
 
-/* line 402, sass/screen.scss */
+/* line 403, sass/screen.scss */
 .footer-desc {
   line-height: 26px;
   margin-top: 25px;
 }
-/* line 406, sass/screen.scss */
+/* line 407, sass/screen.scss */
 .footer-desc span {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 408, sass/screen.scss */
+/* line 409, sass/screen.scss */
 .footer-desc span b {
   font-family: 'raleway';
   font-size: 16px;
@@ -660,54 +661,56 @@ footer {
   color: #b4c8d3;
 }
 
-/* line 414, sass/screen.scss */
+/* line 415, sass/screen.scss */
 .footer-social {
   margin-top: 50px;
   margin-bottom: -30px;
 }
-/* line 418, sass/screen.scss */
+/* line 419, sass/screen.scss */
 .footer-social a {
   padding: 0 10px;
 }
 
-/* line 423, sass/screen.scss */
+/* line 424, sass/screen.scss */
 .lp-recent-items-wr {
-  width: 70%;
+  width: 100%;
   margin: auto;
-  padding-top: 90px;
-  padding-bottom: 150px;
+  padding-top: 60px;
+  padding-bottom: 110px;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 /* line 432, sass/screen.scss */
 .lp-recent-items-item {
   display: inline-block;
+  position: relative;
   width: 300px;
   height: 180px;
   cursor: pointer;
   border: 2px solid #8ea1ac;
-  background: rgba(36, 43, 50, 0.4);
+  background: rgba(36, 43, 50, 0.7);
   margin: 0 10px;
 }
-/* line 441, sass/screen.scss */
+/* line 442, sass/screen.scss */
 .lp-recent-items-item img {
   display: inline-block;
   vertical-align: middle;
+  opacity: 0.4;
 }
 
-/* line 446, sass/screen.scss */
+/* line 448, sass/screen.scss */
 .lp-recent-items-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 450, sass/screen.scss */
+/* line 452, sass/screen.scss */
 .lp-recent-items-info {
-  position: relative;
-  top: -40px;
+  bottom: 40px;
+  position: absolute;
+  width: 100%;
 }
-/* line 454, sass/screen.scss */
+/* line 457, sass/screen.scss */
 .lp-recent-items-info h3 {
   font-family: 'raleway';
   font-size: 30px;
@@ -715,7 +718,7 @@ footer {
   color: #fff;
   font-weight: 300;
 }
-/* line 458, sass/screen.scss */
+/* line 461, sass/screen.scss */
 .lp-recent-items-info h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -726,8 +729,19 @@ footer {
   font-size: 20px;
   margin-top: 3px;
 }
+/* line 467, sass/screen.scss */
+.lp-recent-items-info span {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  font-weight: 300;
+  font-size: 18px;
+  position: relative;
+  top: 25px;
+}
 
-/* line 466, sass/screen.scss */
+/* line 476, sass/screen.scss */
 .items-shade-l {
   position: absolute;
   left: 0;
@@ -742,7 +756,7 @@ footer {
   background: linear-gradient(to right, #2e3540, transparent);
 }
 
-/* line 481, sass/screen.scss */
+/* line 491, sass/screen.scss */
 .items-shade-r {
   position: absolute;
   right: 0;
@@ -755,4 +769,34 @@ footer {
   background: -o-linear-gradient(right, transparent, #2e3540);
   background: -moz-linear-gradient(right, transparent, #2e3540);
   background: linear-gradient(to right, transparent, #2e3540);
+}
+
+/* line 505, sass/screen.scss */
+.lp-recent-items-shade-l {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  pointer-events: none;
+  top: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.2), transparent);
+  background: -o-linear-gradient(right, rgba(255, 255, 255, 0.2), transparent);
+  background: -moz-linear-gradient(right, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* line 519, sass/screen.scss */
+.lp-recent-items-shade-r {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 20%;
+  pointer-events: none;
+  top: 0;
+  z-index: 1;
+  background: -webkit-linear-gradient(left, transparent, rgba(255, 255, 255, 0.2));
+  background: -o-linear-gradient(right, transparent, rgba(255, 255, 255, 0.2));
+  background: -moz-linear-gradient(right, transparent, rgba(255, 255, 255, 0.2));
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2));
 }

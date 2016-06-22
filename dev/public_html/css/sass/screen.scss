@@ -21,7 +21,7 @@ body {
 
 .top-nav {
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     height: 90px;
     width: 100%;
     background: rgba(255, 255, 255, 0.8);
@@ -370,6 +370,7 @@ b{
     background:rgba(255,255,255,0.7);
     width:100%;
     text-align:center;
+    position:relative;
 
     h2{
       @include font-title($color-base);
@@ -421,25 +422,26 @@ footer {
 }
 
 .lp-recent-items-wr {
-    width:70%;
+    width:100%;
     margin:auto;
-    padding-top:90px;
-    padding-bottom:150px;
+    padding-top:60px;
+    padding-bottom:110px;
     white-space:nowrap;
-    overflow:hidden;
 }
 
 .lp-recent-items-item {
     display:inline-block;
+    position:relative;
     width:300px;
     height:180px;
     cursor:pointer;
     border:2px solid $color-subtle;
-    background: rgba(36,43,50,0.4);
+    background: rgba(36,43,50,0.7);
     margin:0 10px;
 
     img{
         @include vertical-align;
+        opacity:0.4;
     }
 }
 
@@ -448,8 +450,9 @@ footer {
 }
 
 .lp-recent-items-info {
-    position:relative;
-    top:-40px;
+    bottom:40px;
+    position:absolute;
+    width:100%;
 
     h3{
         @include font-title($color-on-bg);
@@ -460,6 +463,13 @@ footer {
         @include font-number($color-on-bg);
         font-size:20px;
         margin-top:3px;
+    }
+    span{
+        @include font-default($color-on-bg);
+        font-weight:300;
+        font-size:18px;
+        position:relative;
+        top:25px;
     }
 }
 
@@ -490,4 +500,32 @@ footer {
   background: -o-linear-gradient(right, transparent , $color-base);
   background: -moz-linear-gradient(right, transparent , $color-base);
   background: linear-gradient(to right, transparent , $color-base);
+}
+
+.lp-recent-items-shade-l {
+     position:absolute;
+    left:0;
+    height:100%;
+    width:20%;
+    pointer-events:none;
+    top:0;
+    z-index:1;
+  background: -webkit-linear-gradient(left, rgba(255,255,255,0.2) , transparent);
+  background: -o-linear-gradient(right, rgba(255,255,255,0.2) , transparent);
+  background: -moz-linear-gradient(right, rgba(255,255,255,0.2) , transparent);
+  background: linear-gradient(to right, rgba(255,255,255,0.2) , transparent);
+}
+
+.lp-recent-items-shade-r {
+     position:absolute;
+    right:0;
+    height:100%;
+    width:20%;
+    pointer-events:none;
+    top:0;
+    z-index:1;
+  background: -webkit-linear-gradient(left, transparent , rgba(255,255,255,0.2));
+  background: -o-linear-gradient(right, transparent , rgba(255,255,255,0.2));
+  background: -moz-linear-gradient(right, transparent , rgba(255,255,255,0.2));
+  background: linear-gradient(to right, transparent , rgba(255,255,255,0.2));
 }
