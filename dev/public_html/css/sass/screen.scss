@@ -152,6 +152,12 @@ em {
         vertical-align: super;
         margin-left: 5px;
     }
+    h2{
+        display:inline-block;
+        @include font-small-title($color-subtle);
+        vertical-align: super;
+        margin-left:10px;
+    }
 }
 .items-main {
     background:$color-base;
