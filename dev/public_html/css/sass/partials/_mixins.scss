@@ -1,46 +1,111 @@
 // Typography
 // ------------------------------
 
-@mixin font-default($color){
-    font-family:'raleway';
-    font-size:18px;
-    font-weight:500;
+@mixin font-default($color) {
+    font-family: 'raleway';
+    font-size: 16px;
+    font-weight: 500;
     color: $color;
 }
 
-@mixin font-default-bold($color){
-    font-family:'raleway';
-    font-size:18px;
-    font-weight:700;
+@mixin font-default-bold($color) {
+    font-family: 'raleway';
+    font-size: 18px;
+    font-weight: 700;
     color: $color;
 }
 
-@mixin font-title($color){
-    font-family:'raleway';
-    font-size:30px;
-    font-weight:600;
+@mixin font-small-title($color) {
+    font-family: 'raleway';
+    font-size: 24px;
+    font-weight: 600;
     color: $color;
 }
 
-@mixin font-logo($color){
-    font-family:'raleway';
-    font-size:22px;
-    font-weight:700;
+@mixin font-title($color) {
+    font-family: 'raleway';
+    font-size: 30px;
+    font-weight: 600;
     color: $color;
 }
 
+@mixin font-logo($color) {
+    font-family: 'raleway';
+    font-size: 22px;
+    font-weight: 700;
+    color: $color;
+}
+
+@mixin font-number($color) {
+    font-family: 'arial';
+    color: $color;
+}
+
+
+
+// Animations
+// ------------------------------
+
+@mixin ease($timing){
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: $timing;
+    -moz-transition-duration: $timing;
+    -o-transition-duration: $timing;
+    transition-duration: $timing;
+}
 
 
 
 // Positioning
 // ------------------------------
 
-@mixin vertical-align-helper($height){
-    display:inline-block;
-    height:$height;
+@mixin vertical-align-helper($height) {
+    display: inline-block;
+    height: $height;
 }
 
-@mixin vertical-align{
-    display:inline-block;
+@mixin vertical-align {
+    display: inline-block;
     vertical-align: middle;
+}
+
+
+
+// Inputs
+// ------------------------------
+
+@mixin input {
+    outline: none;
+    border: none;
+    padding-left:10%;
+    padding-top:3px;
+}
+
+@mixin input-placeholder {
+    ::-webkit-input-placeholder {
+        @include font-default($color-subtle);
+
+    }
+    ::-moz-placeholder {
+        @include font-default($color-subtle);
+
+    }
+    :-ms-input-placeholder {
+        @include font-default($color-subtle);
+
+    }
+    :-moz-placeholder {
+        @include font-default($color-subtle);
+
+    }
+}
+
+@mixin input-button($color) {
+    background:$color;
+    outline:none;
+    cursor:pointer;
+    border:0;
+    padding:1px;
+    @include ease(0.15s);
 }
