@@ -1,11 +1,19 @@
 import builtins
+import pytesseract
+from PIL import Image
+from PIL import ImageGrab
 
+
+ImageGrab.grab().save("screen_capture.jpg", "JPEG")
+
+
+
+
+#Change python encoding and process through tesseract
 original_open = open
-def bin_open(filename, mode='rb'):       # note, the default mode now opens in binary
+def bin_open(filename, mode='rb'):
     return original_open(filename, mode)
 
-from PIL import Image
-import pytesseract
 
 img = Image.open('screen_capture.jpg')
 
