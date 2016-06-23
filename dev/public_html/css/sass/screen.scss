@@ -572,7 +572,7 @@ footer {
     input{
         @include input;
         @include font-default($color-subtle-2);
-        background:rgba(255,255,255,0.2);
+        background:rgba(255,255,255,0.1);
         margin-left:50px;
         height:35px;
         border:0.1em solid $color-subtle-2;
