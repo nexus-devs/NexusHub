@@ -645,15 +645,16 @@ footer {
 .footer-desc {
   line-height: 26px;
   margin-top: 25px;
+  padding: 0 20px;
 }
-/* line 408, sass/screen.scss */
+/* line 409, sass/screen.scss */
 .footer-desc span {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 410, sass/screen.scss */
+/* line 411, sass/screen.scss */
 .footer-desc span b {
   font-family: 'raleway';
   font-size: 16px;
@@ -661,17 +662,17 @@ footer {
   color: #b4c8d3;
 }
 
-/* line 416, sass/screen.scss */
+/* line 417, sass/screen.scss */
 .footer-social {
   margin-top: 50px;
   margin-bottom: -30px;
 }
-/* line 420, sass/screen.scss */
+/* line 421, sass/screen.scss */
 .footer-social a {
   padding: 0 10px;
 }
 
-/* line 425, sass/screen.scss */
+/* line 426, sass/screen.scss */
 .lp-recent-items-wr {
   width: 100%;
   margin: auto;
@@ -680,7 +681,7 @@ footer {
   white-space: nowrap;
 }
 
-/* line 433, sass/screen.scss */
+/* line 434, sass/screen.scss */
 .lp-recent-items-item {
   display: inline-block;
   position: relative;
@@ -691,26 +692,26 @@ footer {
   background: rgba(36, 43, 50, 0.8);
   margin: 0 15px;
 }
-/* line 443, sass/screen.scss */
+/* line 444, sass/screen.scss */
 .lp-recent-items-item img {
   display: inline-block;
   vertical-align: middle;
   opacity: 0.4;
 }
 
-/* line 449, sass/screen.scss */
+/* line 450, sass/screen.scss */
 .lp-recent-items-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 453, sass/screen.scss */
+/* line 454, sass/screen.scss */
 .lp-recent-items-info {
   bottom: 45px;
   position: absolute;
   width: 100%;
 }
-/* line 458, sass/screen.scss */
+/* line 459, sass/screen.scss */
 .lp-recent-items-info h3 {
   font-family: 'raleway';
   font-size: 30px;
@@ -718,7 +719,7 @@ footer {
   color: #fff;
   font-weight: 300;
 }
-/* line 462, sass/screen.scss */
+/* line 463, sass/screen.scss */
 .lp-recent-items-info h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -730,7 +731,7 @@ footer {
   font-weight: 300;
   margin-top: 3px;
 }
-/* line 469, sass/screen.scss */
+/* line 470, sass/screen.scss */
 .lp-recent-items-info span {
   font-family: 'raleway';
   font-size: 16px;
@@ -743,7 +744,7 @@ footer {
   opacity: 0.6;
 }
 
-/* line 479, sass/screen.scss */
+/* line 480, sass/screen.scss */
 .items-shade-l {
   position: absolute;
   left: 0;
@@ -758,7 +759,7 @@ footer {
   background: linear-gradient(to right, #2e3540, transparent);
 }
 
-/* line 494, sass/screen.scss */
+/* line 495, sass/screen.scss */
 .items-shade-r {
   position: absolute;
   right: 0;
@@ -773,7 +774,7 @@ footer {
   background: linear-gradient(to right, transparent, #2e3540);
 }
 
-/* line 508, sass/screen.scss */
+/* line 509, sass/screen.scss */
 .lp-recent-items-shade-l {
   position: absolute;
   left: 0;
@@ -788,7 +789,7 @@ footer {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* line 522, sass/screen.scss */
+/* line 523, sass/screen.scss */
 .lp-recent-items-shade-r {
   position: absolute;
   right: 0;
@@ -803,10 +804,44 @@ footer {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2));
 }
 
-/* line 536, sass/screen.scss */
+/* line 537, sass/screen.scss */
 .lp-recent-bg {
   position: absolute;
   top: -10%;
   height: 110%;
   width: 100%;
+}
+
+/* line 544, sass/screen.scss */
+.top-nav-bot-ico {
+  position: relative;
+  top: 8px;
+  margin-right: 6px;
+  height: 35px;
+}
+
+/* line 551, sass/screen.scss */
+.top-nav-mobile {
+  display: inline-block;
+  float: right;
+  cursor: pointer;
+  padding: 0 20px;
+}
+/* line 557, sass/screen.scss */
+.top-nav-mobile img {
+  position: relative;
+  top: 4px;
+}
+
+@media (max-width: 52em) {
+  /* line 565, sass/screen.scss */
+  .top-nav-links a:nth-of-type(2) {
+    display: none;
+  }
+}
+@media (max-width: 41em) {
+  /* line 571, sass/screen.scss */
+  .top-nav-links a {
+    display: none;
+  }
 }

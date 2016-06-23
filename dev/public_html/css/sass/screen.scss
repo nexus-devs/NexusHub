@@ -404,6 +404,7 @@ footer {
 .footer-desc {
     line-height:26px;
     margin-top:25px;
+    padding:0 20px;
 
     span{
             @include font-default($color-subtle);
@@ -539,3 +540,37 @@ footer {
     height:110%;
     width:100%;
 }
+
+.top-nav-bot-ico {
+    position:relative;
+    top:8px;
+    margin-right:6px;
+    height:35px;
+}
+
+.top-nav-mobile {
+    display:inline-block;
+    float:right;
+    cursor:pointer;
+    padding:0 20px;
+
+    img{
+        position:relative;
+        top:4px;
+    }
+}
+
+
+@media (max-width: 52em) {
+  .top-nav-links a:nth-of-type(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 41em) {
+  .top-nav-links a {
+    display: none;
+  }
+}
+
+
