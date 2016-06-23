@@ -170,3 +170,10 @@ footer {
   text-align: center;
   padding: 90px 0;
 }
+
+@media (max-width: 50em) {
+  /* line 85, sass/generic.scss */
+  .main-content-wrapper {
+    width: 80%;
+  }
+}
