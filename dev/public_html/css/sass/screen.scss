@@ -140,6 +140,7 @@ b{
 .lp-content {
     width: 100%;
     background: white;
+    overflow-x:hidden;
 
     svg{
         position:absolute;
@@ -370,6 +371,7 @@ b{
 .lp-recent-items {
     background:rgba(255,255,255,0.7);
     width:100%;
+    overflow-x:hidden;
     text-align:center;
     position:relative;
 
