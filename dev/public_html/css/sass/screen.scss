@@ -58,7 +58,7 @@ body {
     a {
         @include font-default-bold($color-subtle);
         float: right;
-        padding: 0 15px;
+        padding: 0 25px;
     }
 }
 
@@ -543,9 +543,9 @@ footer {
 
 .top-nav-bot-ico {
     position:relative;
-    top:8px;
+    top:7px;
     margin-right:6px;
-    height:35px;
+    height:30px;
 }
 
 .top-nav-mobile {
@@ -561,13 +561,13 @@ footer {
 }
 
 
-@media (max-width: 52em) {
+@media (max-width: 54em) {
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
 
-@media (max-width: 41em) {
+@media (max-width: 42.5em) {
   .top-nav-links a {
     display: none;
   }

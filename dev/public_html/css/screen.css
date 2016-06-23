@@ -141,7 +141,7 @@ body {
   font-weight: 700;
   color: #8ea1ac;
   float: right;
-  padding: 0 15px;
+  padding: 0 25px;
 }
 
 /* line 65, sass/screen.scss */
@@ -815,9 +815,9 @@ footer {
 /* line 544, sass/screen.scss */
 .top-nav-bot-ico {
   position: relative;
-  top: 8px;
+  top: 7px;
   margin-right: 6px;
-  height: 35px;
+  height: 30px;
 }
 
 /* line 551, sass/screen.scss */
@@ -833,13 +833,13 @@ footer {
   top: 4px;
 }
 
-@media (max-width: 52em) {
+@media (max-width: 54em) {
   /* line 565, sass/screen.scss */
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
-@media (max-width: 41em) {
+@media (max-width: 42.5em) {
   /* line 571, sass/screen.scss */
   .top-nav-links a {
     display: none;
