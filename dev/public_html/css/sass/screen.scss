@@ -561,16 +561,40 @@ footer {
 }
 
 
-@media (max-width: 54em) {
+
+.top-nav-search {
+    display:inline-block;
+    @include input-placeholder;
+
+    input{
+        @include input;
+        @include font-default($color-subtle-2);
+        background:rgba(255,255,255,0.2);
+        margin-left:50px;
+        height:35px;
+        border:0.1em solid $color-subtle-2;
+        border-radius:50px;
+        @include ease(0.25s);
+        opacity:0;
+    }
+}
+
+
+
+@media (max-width: 73em) {
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
 
-@media (max-width: 42.5em) {
+@media (max-width: 60em) {
   .top-nav-links a {
     display: none;
   }
 }
 
-
+@media (max-width: 40em) {
+  .top-nav-search {
+    display: none;
+  }
+}
