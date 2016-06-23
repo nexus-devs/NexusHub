@@ -359,9 +359,9 @@ b {
 
 /* line 187, sass/screen.scss */
 .items-item {
-  width: 100%;
   display: inline-block;
   text-align: left;
+  padding-right: 200px;
 }
 
 /* line 193, sass/screen.scss */
@@ -833,15 +833,84 @@ footer {
   top: 4px;
 }
 
-@media (max-width: 54em) {
-  /* line 565, sass/screen.scss */
+/* line 565, sass/screen.scss */
+.top-nav-search {
+  display: inline-block;
+}
+/* line 86, sass/partials/_mixins.scss */
+.top-nav-search ::-webkit-input-placeholder {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+/* line 90, sass/partials/_mixins.scss */
+.top-nav-search ::-moz-placeholder {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+/* line 94, sass/partials/_mixins.scss */
+.top-nav-search :-ms-input-placeholder {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+/* line 98, sass/partials/_mixins.scss */
+.top-nav-search :-moz-placeholder {
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #8ea1ac;
+}
+/* line 569, sass/screen.scss */
+.top-nav-search input {
+  outline: none;
+  border: none;
+  padding-left: 10%;
+  padding-top: 3px;
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: #acc2cf;
+  background: rgba(255, 255, 255, 0.2);
+  margin-left: 50px;
+  height: 35px;
+  border: 0.1em solid #acc2cf;
+  border-radius: 50px;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.25s;
+  -moz-transition-duration: 0.25s;
+  -o-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+  opacity: 0;
+}
+
+@media (max-width: 73em) {
+  /* line 585, sass/screen.scss */
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
-@media (max-width: 42.5em) {
-  /* line 571, sass/screen.scss */
+@media (max-width: 60em) {
+  /* line 591, sass/screen.scss */
   .top-nav-links a {
     display: none;
+  }
+}
+@media (max-width: 40em) {
+  /* line 597, sass/screen.scss */
+  .top-nav-search {
+    display: none;
+  }
+}
+@media (max-width: 30em) {
+  /* line 603, sass/screen.scss */
+  .lp-header-input-container button {
+    width: 350px;
+    margin-left: 5px;
   }
 }

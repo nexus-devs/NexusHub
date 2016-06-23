@@ -185,9 +185,9 @@ b{
 }
 
 .items-item {
-    width:100%;
     display:inline-block;
     text-align: left;
+    padding-right:200px;
 }
 
 .items-wr {
@@ -596,5 +596,12 @@ footer {
 @media (max-width: 40em) {
   .top-nav-search {
     display: none;
+  }
+}
+
+@media (max-width: 30em) {
+  .lp-header-input-container button {
+    width:350px;
+      margin-left:5px;
   }
 }
