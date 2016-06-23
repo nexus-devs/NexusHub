@@ -171,7 +171,7 @@ footer {
   padding: 90px 0;
 }
 
-@media (max-width: 60em) {
+@media (max-width: 80em) {
   /* line 85, sass/generic.scss */
   .main-content-wrapper {
     width: 80%;
