@@ -1,8 +1,9 @@
 import builtins
+import re
 import pytesseract
+import PIL.ImageOps
 from PIL import Image
 from PIL import ImageGrab
-import PIL.ImageOps
 from PIL import ImageEnhance
 
 
@@ -42,4 +43,20 @@ try:
 finally:
     builtins.open = original_open
 
-print(str(bts, 'cp1252', 'ignore'))
+"""print(str(bts, 'cp1252', 'ignore'))"""
+
+
+
+
+with open("str.txt","w+") as f:
+    f.write(str(bts, 'cp1252', 'ignore'))
+f.close()
+
+
+
+#Clean string and push in list
+bts = open("str.txt")
+Msg = bts.readlines()
+
+for i in range(0, len(Msg)):
+    print ("." + Msg[i])
