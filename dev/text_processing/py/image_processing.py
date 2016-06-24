@@ -1,6 +1,7 @@
 import builtins
 import re
 import pytesseract
+import string
 import PIL.ImageOps
 from PIL import Image
 from PIL import ImageGrab
@@ -65,21 +66,27 @@ f.close()
 
 #Clean string and push in list
 bts = open("str.txt")
-
 Msg = bts.readlines()
+Msg = [each.replace('>', ' ') for each in Msg]
+Msg = [each.replace('!', ' ') for each in Msg]
+Msg = [each.replace('<', ' ') for each in Msg]
+Msg = [each.replace('â€˜', ' ') for each in Msg]
+Msg = [each.replace('â€”', ' ') for each in Msg]
+Msg = [each.replace('ï¬', 'fl') for each in Msg]
+Msg = [each.replace('/', ' ') for each in Msg]
+Msg = [each.replace('\b', ' ') for each in Msg]
+Msg = [each.replace('[', ' ') for each in Msg]
+Msg = [each.replace(']', ' ') for each in Msg]
+Msg = [each.replace('|', ' ') for each in Msg]
+Msg = [each.replace('(', ' ') for each in Msg]
+Msg = [each.replace(')', ' ') for each in Msg]
+#Msg = [each.replace('-', '') for each in Msg] -- Filter for [message] part, may be contained in name
+Msg = [each.replace(',', ' ') for each in Msg]
+Msg = [each.replace('.', ' ') for each in Msg]
+Msg = [each.replace('\n', '') for each in Msg]
+Msg = [each.replace('\s \n', '') for each in Msg]
+Msg = list(filter(None, Msg))
+
+
 for i in range(0, len(Msg)):
-    if Msg[i] == '\n':
-        # del Msg[i]
-        print(' ')
-
- #   elif Msg[i] == '\s \n':
- #       del Msg[i]
-
- #   elif Msg[i] == '\s \s \n':
- #       del Msg[i]
- #
- #   elif Msg[i] == '\s \s \s \n':
- #       del Msg[i]
-
-    else:
         print (Msg[i])
