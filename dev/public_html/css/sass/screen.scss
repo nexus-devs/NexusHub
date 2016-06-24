@@ -79,6 +79,7 @@ a:hover {
 .lp-header-headline {
     @include font-title($color-on-bg);
     font-size: 54px;
+    font-weight:500;
     text-transform: uppercase;
 }
 
@@ -99,7 +100,7 @@ b{
 
 .lp-header-sub {
     @include font-title($color-on-bg);
-    font-weight: 400;
+    font-weight: 300;
     margin-top: 10px;
 }
 
@@ -582,7 +583,9 @@ footer {
     }
 }
 
-
+.lp-header-border {
+    padding:5px 0;
+}
 
 @media (max-width: 73em) {
   .top-nav-links a:nth-of-type(2) {
@@ -608,3 +611,12 @@ footer {
       margin-left:5px;
   }
 }
+
+@media (max-width: 54em) {
+  .lp-header-border {
+ opacity:0;
+      padding:0px 0;
+  }
+}
+
+
