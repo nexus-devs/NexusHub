@@ -12,6 +12,13 @@ from PIL import ImageEnhance
 ImageGrab.grab().save("screen_capture.jpg", "JPEG")
 img = Image.open('screen_capture.jpg')
 
+basewidth = 5300
+img = Image.open('screen_capture.jpg')
+wpercent = (basewidth / float(img.size[0]))
+hsize = int((float(img.size[1]) * float(wpercent)))
+img = img.resize((basewidth, hsize), PIL.Image.ANTIALIAS)
+img.save('screen_capture.jpg')
+
 
 #desaturate
 converter = PIL.ImageEnhance.Color(img)
@@ -43,7 +50,7 @@ try:
 finally:
     builtins.open = original_open
 
-"""print(str(bts, 'cp1252', 'ignore'))"""
+#print(str(bts, 'cp1252', 'ignore'))
 
 
 
@@ -54,9 +61,25 @@ f.close()
 
 
 
+
+
 #Clean string and push in list
 bts = open("str.txt")
-Msg = bts.readlines()
 
+Msg = bts.readlines()
 for i in range(0, len(Msg)):
-    print ("." + Msg[i])
+    if Msg[i] == '\n':
+        # del Msg[i]
+        print(' ')
+
+ #   elif Msg[i] == '\s \n':
+ #       del Msg[i]
+
+ #   elif Msg[i] == '\s \s \n':
+ #       del Msg[i]
+ #
+ #   elif Msg[i] == '\s \s \s \n':
+ #       del Msg[i]
+
+    else:
+        print (Msg[i])
