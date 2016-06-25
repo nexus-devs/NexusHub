@@ -113,7 +113,6 @@ for i in range(0, len(Msg)):
     MsgWords = [each.replace('.', '') for each in MsgWords]
     MsgWords = [each.replace(':', ' ') for each in MsgWords]
     MsgWords = [each.upper() for each in MsgWords]
-    #MsgWords[i].upper()
 
     print ('U: ' + Username)
 
@@ -130,6 +129,7 @@ for i in range(0, len(Msg)):
 
         else:
             if i == len(MsgWords) - 1:
+                del MsgWords[i]
                 break
             else:
                 del MsgWords[i]
@@ -150,6 +150,7 @@ for i in range(0, len(Msg)):
 
         if not PriceCheck == True:
             #get price
+            #if price > 1500: don't add/send note for confirmation
             break
 
             if PriceCheck == True:
