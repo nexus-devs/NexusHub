@@ -112,7 +112,7 @@ def Main():
     Arcane_E = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
     Mod_E = []
     Primed_E = ['Primed']
-    Generic_C = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    Generic_C = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
     Mod_C = []
 
 
@@ -255,7 +255,7 @@ def Main():
         k = 0
         ITEMval_L = []
 
-        #create list of characters, replace, move and rebind
+        #Create list of characters, replace, move and rebind
         while k < len(ITEMval):
             ITEM_L= list(str(ITEMval[k]))
             for i in range(0, len(TOval)):
