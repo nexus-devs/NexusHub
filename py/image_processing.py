@@ -136,7 +136,6 @@ while True:
 
     ITEMessential = ''
     ITEMcomponent = ''
-    ITEMprice = 0
 
     PriceCheck = False
 
@@ -154,9 +153,6 @@ while True:
     C_Mods = []
     C_Arcane = []
     C_Primed = []
-
-    Index_E_L = ["E_Prime", "E_Arcane", "E_Primed"]
-    Index_C_L = ["C_Prime", "C_Arcane", "C_Primed"]
 
 
     #Process single words per line
@@ -202,18 +198,20 @@ while True:
                 ITEMprice = 0
                 ITEMcount = 1
                 #check for components i+3 further
-                for y in range(0,4):
+                for y in range(0,5):
                     if len(MsgWords) >= i + y:
                         #check content of Word + (i+n) index
                         #is contained in component list?
                         if MsgWords[i + y - 1] in ComponentList:
                             ITEMcomponent = MsgWords[i + y - 1]
                         #has number?
-                        elif hasNumbers(MsgWords[i + y - 1]) == True:
+                        if hasNumbers(MsgWords[i + y - 1]) == True:
+                            print(ITEMcount)
                             #if x found -> indicates 6x count being used
                             if MsgWords[i + y - 1].find('X')!=-1:
-                                 re.sub("\D", "", MsgWords[i + y - 1])
-                                 ITEMcount = int(ITEMcount + int(MsgWords[i + y]))
+                                print('i shouldnt be here')
+                                re.sub("\D", "", MsgWords[i + y - 1])
+                                ITEMcount = int(ITEMcount + int(MsgWords[i + y]))
                             #otherwise, number is item price
                             else:
                                 re.sub("\D", "", MsgWords[i + y - 1])
@@ -233,6 +231,7 @@ while True:
 
                 if MsgWords[i] in E_List:
                     ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
+                    print(ITEMcount)
 
                     #Save Item values
                     if not ITEMprice == '0' and not ITEMessential == '':
