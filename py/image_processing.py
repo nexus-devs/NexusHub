@@ -12,7 +12,7 @@ from PIL import ImageEnhance
 
 
 while True:
-
+    
     #Screen rendering
     #---------------------------
     img_path = 'cache/screen.jpg'
@@ -173,9 +173,9 @@ while True:
         #Correct MsgWords
         for i in range(0, len(MsgWords)):
             correct(MsgWords[i])
+               
 
-
-
+                
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
@@ -206,12 +206,10 @@ while True:
                             ITEMcomponent = MsgWords[i + y - 1]
                         #has number?
                         if hasNumbers(MsgWords[i + y - 1]) == True:
-                            print(ITEMcount)
                             #if x found -> indicates 6x count being used
                             if MsgWords[i + y - 1].find('X')!=-1:
-                                print('i shouldnt be here')
                                 re.sub("\D", "", MsgWords[i + y - 1])
-                                ITEMcount = int(ITEMcount + int(MsgWords[i + y]))
+                                ITEMcount = int(ITEMcount + int(MsgWords[i + y]))                 
                             #otherwise, number is item price
                             else:
                                 re.sub("\D", "", MsgWords[i + y - 1])
@@ -221,17 +219,16 @@ while True:
                 return(ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
 
 
-
+            
 
             #Check if Item in List, assign component list to check
             ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
-
+                
                 if MsgWords[i] in E_List:
                     ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
-                    print(ITEMcount)
 
                     #Save Item values
                     if not ITEMprice == '0' and not ITEMessential == '':
