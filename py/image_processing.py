@@ -11,36 +11,37 @@ from PIL import ImageGrab
 from PIL import ImageEnhance
 
 
-def Main():
-    #threading.Timer(20.0, Main).start()
+while True:
+
     #Screen rendering
     #---------------------------
+    img_path = 'cache/screen.jpg'
 
-    ImageGrab.grab().save("screen_capture.jpg", "JPEG")
-    img = Image.open('screen_capture.jpg')
+    ImageGrab.grab(bbox=(0,530,1525,725)).save(img_path, "JPEG")
+    img = Image.open(img_path)
 
-    basewidth = 5300
-    img = Image.open('screen_capture.jpg')
+    basewidth = 3300
+    img = Image.open(img_path)
     wpercent = (basewidth / float(img.size[0]))
     hsize = int((float(img.size[1]) * float(wpercent)))
     img = img.resize((basewidth, hsize), PIL.Image.ANTIALIAS)
-    img.save('screen_capture.jpg')
+    img.save(img_path)
 
 
     converter = PIL.ImageEnhance.Color(img)
     img = converter.enhance(0.0)
-    img.save('screen_capture.jpg')
-    img = Image.open('screen_capture.jpg')
+    img.save(img_path)
+    img = Image.open(img_path)
 
 
     inverted_image = PIL.ImageOps.invert(img)
-    inverted_image.save('screen_capture.jpg')
-    img = Image.open('screen_capture.jpg')
+    inverted_image.save(img_path)
+    img = Image.open(img_path)
 
 
     contrast = ImageEnhance.Contrast(img)
     img = contrast.enhance(2.0)
-    img.save('screen_capture.jpg')
+    img.save(img_path)
 
 
 
@@ -62,12 +63,12 @@ def Main():
 
 
 
-    with open("str.txt","w+") as f:
+    with open("cache/input.txt","w+") as f:
         f.write(str(bts, 'cp1252', 'ignore'))
     f.close()
 
 
-    bts = open("str.txt")
+    bts = open("cache/input.txt")
     Msg = bts.readlines()
 
 
@@ -100,7 +101,7 @@ def Main():
         for f in features:
             model[f] += 1
         return model
-    f=open('known_words.txt', 'r')
+    f=open('sources/items.lib', 'r') #pull from DB later on
     NWORDS = train(words(f.read()))
 
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -136,19 +137,26 @@ def Main():
     ITEMessential = ''
     ITEMcomponent = ''
     ITEMprice = 0
-    ITEMsingleCount = 0
 
     PriceCheck = False
+
+
     WTS = ['WTS', 'S', 'BUYING']
     WTB = ['WTB','B', 'SELLING']
     PC = ['PC', 'PRICE', 'CHECK', 'PRICECHECK' 'MUCH'] #much -> how much? (experimental)
-    Prime_E = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
-    Arcane_E = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
-    Mod_E = []
-    Primed_E = ['Primed']
-    Generic_C = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
-    Mod_C = []
 
+    #make lists read from db
+    E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
+    E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
+    E_Mods = []
+    E_Primed = ['Primed']
+    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    C_Mods = []
+    C_Arcane = []
+    C_Primed = []
+
+    Index_E_L = ["E_Prime", "E_Arcane", "E_Primed"]
+    Index_C_L = ["C_Prime", "C_Arcane", "C_Primed"]
 
 
     #Process single words per line
@@ -166,14 +174,18 @@ def Main():
         def hasNumbers(inputString):
             return any(char.isdigit() for char in inputString)
 
+        #Correct MsgWords
+        for i in range(0, len(MsgWords)):
+            correct(MsgWords[i])
+
+
 
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
             if MsgWords[i] in WTS or MsgWords[i] in WTB:
                 TO = MsgWords[i]
-                TOcount = TOcount + 1;
-                ITEMcount = ITEMcount + 1; #increases every time TO is added -> see below
+                TOcount = TOcount + 1; #increases every time TO is added -> see below
                 TOval.extend((TO, TOcount)) #save as WTS, 1 & compare TO number with Item Number
                 TO = False
 
@@ -181,76 +193,56 @@ def Main():
             elif MsgWords[i] in PC:
                 PriceCheck = True
 
+
+
             #I[]
-            elif MsgWords[i] in Prime_E or MsgWords[i] in Arcane_E or MsgWords[i] in Mod_E or MsgWords[i] in Primed_E:
+            def ExtractItems(ComponentList):
                 ITEMessential = MsgWords[i]
-                ITEMsingleCount = 1
-
-                # check i + 3 for further arguments (component/prime/price)
-                if len(MsgWords) >= i + 4:
-                    for n in range(1, 4):
-                        if MsgWords[i + n] in Generic_C:
-                            ITEMcomponent = MsgWords[i + n]
-
-                        elif hasNumbers(MsgWords[i + n]) == True:
-                            re.sub("\D", "", MsgWords[i + n])
-                            ITEMprice = str( MsgWords[i + n] + 'PL')
-
-                            if MsgWords[i + n].find('P')!=-1:
-                                ITEMprice = str( MsgWords[i + n] + 'L')
-
-                            elif MsgWords[i + n].find('X')!=-1:
-                                    ITEMsingleCount = ITEMsingleCount + 1
-
-                else:
-                    if len(MsgWords) >= i + 3:
-                        for n in range(1, 3):
-                            if MsgWords[i + n] in Generic_C:
-                                ITEMcomponent = MsgWords[i + n]
-
-                            elif hasNumbers(MsgWords[i + n]) == True:
-                                re.sub("\D", "", MsgWords[i + n])
-                                ITEMprice = str( MsgWords[i + n] + 'PL')
-
-                                if MsgWords[i + n].find('P')!=-1:
-                                    ITEMprice = str( MsgWords[i + n] + 'L')
-
-                                elif MsgWords[i + n].find('X')!=-1:
-                                    ITEMsingleCount = ITEMsingleCount + 1
-
-                        else:
-                            if len(MsgWords) >= i + 2:
-                                for n in range(1, 2):
-                                    if MsgWords[i + n] in Generic_C:
-                                        ITEMcomponent = MsgWords[i + n]
-
-                                    elif hasNumbers(MsgWords[i + n]) == True:
-                                        re.sub("\D", "", MsgWords[i + n])
-                                        ITEMprice = str( MsgWords[i + n] + 'PL')
-
-                                        if MsgWords[i + n].find('P')!=-1:
-                                            ITEMprice = str( MsgWords[i + n] + 'L')
-
-                                        elif MsgWords[i + n].find('X')!=-1:
-                                            ITEMsingleCount = ITEMsingleCount + 1
-
-
-                ITEMsingleCount = str(ITEMsingleCount) + 'TIMES'
-
-                if ITEMcomponent in Generic_C:
-                    if not ITEMprice == '0':
-                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMprice, ITEMcount, ))
-                    else:
-                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMcount, ))
-                else:
-                    if not ITEMprice == '0':
-                        ITEMval.extend((ITEMessential, ITEMprice, ITEMcount, ))
-                    else:
-                        ITEMval.extend((ITEMessential, ITEMcount, ))
-
-                ITEMessential = ''
                 ITEMcomponent = ''
-                ITEMprice = ''
+                ITEMprice = 0
+                ITEMcount = 1
+                #check for components i+3 further
+                for y in range(0,4):
+                    if len(MsgWords) >= i + y:
+                        #check content of Word + (i+n) index
+                        #is contained in component list?
+                        if MsgWords[i + y - 1] in ComponentList:
+                            ITEMcomponent = MsgWords[i + y - 1]
+                        #has number?
+                        elif hasNumbers(MsgWords[i + y - 1]) == True:
+                            #if x found -> indicates 6x count being used
+                            if MsgWords[i + y - 1].find('X')!=-1:
+                                 re.sub("\D", "", MsgWords[i + y - 1])
+                                 ITEMcount = int(ITEMcount + int(MsgWords[i + y]))
+                            #otherwise, number is item price
+                            else:
+                                re.sub("\D", "", MsgWords[i + y - 1])
+                                ITEMprice = str( MsgWords[i + y - 1] + 'PL')
+
+
+                return(ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
+
+
+
+
+            #Check if Item in List, assign component list to check
+            ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
+            for x in range(0, len(ListsToCheck)):
+                E_List = eval('E_' + str(ListsToCheck[x]))
+                C_List = eval('C_' + str(ListsToCheck[x]))
+
+                if MsgWords[i] in E_List:
+                    ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
+
+                    #Save Item values
+                    if not ITEMprice == '0' and not ITEMessential == '':
+                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
+                    elif not ITEMessential == '':
+                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
+
+        ITEMessential = ''
+        ITEMcomponent = ''
+        ITEMprice = ''
 
         # ======= End of Message Body Interpretation ========
 
@@ -301,6 +293,8 @@ def Main():
             ITEM_L[-2], ITEM_L[0] = ITEM_L[0], ITEM_L[-2]
             ITEM_L.insert( 1, ' ')
             ITEM_L.pop(-1)
+            ITEM_L.pop(-1)
+            ITEM_L.pop(-1)
             ITEMval_L.append("".join(ITEM_L))
 
             k = k + 1
@@ -319,6 +313,18 @@ def Main():
 
 
 
+
+        #Respond to Price check (cant gather information because it defocuses chat)
+        #---------------------------
+        while True:
+            #perform operations
+            #focus window
+            #type
+            #done
+            break;
+
+
+
         # Clean var after message is interpreted
         TOcount = 0
         TOval = []
@@ -327,9 +333,8 @@ def Main():
         ITEMprice = 0
         ITEMvalSplit = 0
 
-
-
-Main()
+    print('Job Done')
+    break
 
 
 

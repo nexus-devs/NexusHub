@@ -1,8 +1,0 @@
-Options -MultiViews
-RewriteEngine On
-
-RewriteBase /warframenexus/public
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-
-RewriteRule ^(.+)$ index.php?url=$1 [QSA, L]
