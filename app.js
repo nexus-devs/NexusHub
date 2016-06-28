@@ -6,13 +6,24 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
+var jobs = require('./routes/jobs')
 //var users = require('./routes/users');
+
 
 var app = express();
 
+
+// set up local vars
+app.locals.jobs = require('./routes/json/jobs.json')
+//app.locals.prime = require(); //prime key goes here
+//app.locals.mods = require(); //mods key goes here
+//app.locals.arcanes = require(); //arcanes key goes here
+//app.locals.other = require(); //other key goes here
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,10 +33,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', routes);
+app.use('/jobs', jobs)
 //app.use('/users', users);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
