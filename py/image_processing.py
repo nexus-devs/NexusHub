@@ -101,7 +101,7 @@ while True:
         for f in features:
             model[f] += 1
         return model
-    f=open('sources/items.lib', 'r') #pull from DB later on
+    f=open('sources/items.txt', 'r') #pull from DB later on
     NWORDS = train(words(f.read()))
 
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -214,6 +214,8 @@ while True:
                             else:
                                 re.sub("\D", "", MsgWords[i + y - 1])
                                 ITEMprice = str( MsgWords[i + y - 1] + 'PL')
+                        else:
+                            ITEMprice = ''
 
 
                 return(ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)

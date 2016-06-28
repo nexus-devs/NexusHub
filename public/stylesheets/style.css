@@ -1,10 +1,8 @@
-/* line 1, C:/xampp/htdocs/WarframeNexus/public/stylesheets/style.sass */
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
 
-/* line 5, C:/xampp/htdocs/WarframeNexus/public/stylesheets/style.sass */
 a {
-  color: #00B7FF; }
-
-/*# sourceMappingURL=style.css.map */
+  color: #00B7FF;
+}
