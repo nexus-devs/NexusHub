@@ -24,8 +24,6 @@
 <% include .\templates\nav %>
 
 
-
-
     <!-- Header -->
     <!--==============================-->
 
@@ -95,12 +93,12 @@
 
                 <!-- Main Item (Nikana P) -->
                 <!--==============================-->
-                <% content.item.forEach(function(item) { %>
-                  <!-- include item -->
+                <% content.items.forEach(function(item) { %>
+                  <% include .\templates\main_item %>
                 <% }); %>
 
-
-                <button class='item-slide-button-r' type=button>
+            </div>
+                <button class='item-slide-button' type=button>
                     <img src='img/lp_click.svg' alt='Next Item'>
                 </button>
 
@@ -114,7 +112,6 @@
             </div>
 
         </div>
-    </div>
 
 
 

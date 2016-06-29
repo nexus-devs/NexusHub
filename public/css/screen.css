@@ -424,39 +424,47 @@ b {
 
 /* line 236, sass/screen.scss */
 .items-images-components-part {
-  display: inline-block;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 223px;
+  flex-direction: column;
 }
 
-/* line 240, sass/screen.scss */
+/* line 247, sass/screen.scss */
 .items-images-components {
   display: inline-block;
   vertical-align: top;
   margin-top: 25px;
 }
 
-/* line 246, sass/screen.scss */
+/* line 253, sass/screen.scss */
 .item-images-components-component {
   display: inline-block;
+  overflow: hidden;
   width: 100px;
-  height: 67px;
+  height: 100%;
   border: 2px solid #8ea1ac;
   background: #8ea1ac;
   cursor: pointer;
 }
-/* line 254, sass/screen.scss */
+/* line 262, sass/screen.scss */
 .item-images-components-component img {
   opacity: 0.8;
-  min-height: 100%;
   min-width: 100%;
+  min-height: 100%;
 }
 
-/* line 261, sass/screen.scss */
+/* line 269, sass/screen.scss */
 .items-component-details {
   display: inline-block;
   vertical-align: top;
   margin-left: 5px;
 }
-/* line 266, sass/screen.scss */
+/* line 274, sass/screen.scss */
 .items-component-details h3 {
   font-family: 'raleway';
   font-size: 24px;
@@ -464,7 +472,7 @@ b {
   color: #fff;
   font-weight: 300;
 }
-/* line 271, sass/screen.scss */
+/* line 279, sass/screen.scss */
 .items-component-details h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -472,10 +480,10 @@ b {
   color: #fff;
   font-family: 'arial';
   color: #fff;
-  margin-top: 3px;
+  margin-top: 0px;
   display: inline-block;
 }
-/* line 278, sass/screen.scss */
+/* line 286, sass/screen.scss */
 .items-component-details span {
   display: inline-block;
   font-family: 'raleway';
@@ -487,45 +495,48 @@ b {
   font-size: 14px;
 }
 
-/* line 286, sass/screen.scss */
+/* line 294, sass/screen.scss */
 .item-images-components-wr {
-  margin: 0 0 4px 0;
+  margin: 0 0 0 2px;
+  overflow: hidden;
+  position: relative;
+  flex: 1;
 }
 
-/* line 291, sass/screen.scss */
+/* line 302, sass/screen.scss */
 .item-selected .item-images-components-component {
   background: #32ab7f;
   border: 2px solid #32ab7f;
 }
-/* line 296, sass/screen.scss */
+/* line 307, sass/screen.scss */
 .item-selected .item-images-components-component img {
   opacity: 0.5;
 }
-/* line 299, sass/screen.scss */
+/* line 310, sass/screen.scss */
 .item-selected .items-component-details h3 {
   color: #32ab7f;
 }
-/* line 302, sass/screen.scss */
+/* line 313, sass/screen.scss */
 .item-selected .items-component-details h4 {
   color: #32ab7f;
 }
 
-/* line 307, sass/screen.scss */
+/* line 318, sass/screen.scss */
 .items-drag-note {
   text-align: center;
   margin-top: 30px;
   padding-bottom: 210px;
 }
-/* line 312, sass/screen.scss */
+/* line 323, sass/screen.scss */
 .items-drag-note img:first-of-type {
   transform: rotate(180deg);
 }
-/* line 316, sass/screen.scss */
+/* line 327, sass/screen.scss */
 .items-drag-note img {
   position: relative;
   top: 5px;
 }
-/* line 321, sass/screen.scss */
+/* line 332, sass/screen.scss */
 .items-drag-note span {
   font-family: 'raleway';
   font-size: 16px;
@@ -533,7 +544,7 @@ b {
   color: #8ea1ac;
 }
 
-/* line 328, sass/screen.scss */
+/* line 339, sass/screen.scss */
 .item-slide-button:first-of-type {
   position: absolute;
   background: #32ab7f;
@@ -561,7 +572,7 @@ b {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 340, sass/screen.scss */
+/* line 351, sass/screen.scss */
 .item-slide-button:first-of-type img {
   height: 18px;
   position: relative;
@@ -570,12 +581,49 @@ b {
   transform: rotate(0deg);
 }
 
-/* line 353, sass/screen.scss */
+/* line 360, sass/screen.scss */
+.item-slide-button {
+  position: absolute;
+  background: #32ab7f;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  padding: 1px;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.15s;
+  -moz-transition-duration: 0.15s;
+  -o-transition-duration: 0.15s;
+  transition-duration: 0.15s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: 0.25s;
+  -moz-transition-duration: 0.25s;
+  -o-transition-duration: 0.25s;
+  transition-duration: 0.25s;
+  height: 38px;
+  width: 38px;
+  border-radius: 38px;
+  right: calc(5% - 90px);
+  top: 210px;
+  margin: 0 90px;
+  z-index: 2;
+}
+/* line 372, sass/screen.scss */
+.item-slide-button img {
+  transform: rotate(180deg);
+  height: 18px;
+  position: relative;
+  top: 2px;
+  left: 1px;
+}
+
+/* line 385, sass/screen.scss */
 .item-slide-button:hover {
   background: #8ea1ac;
 }
 
-/* line 357, sass/screen.scss */
+/* line 389, sass/screen.scss */
 .lp-recent-items {
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
@@ -583,7 +631,7 @@ b {
   text-align: center;
   position: relative;
 }
-/* line 364, sass/screen.scss */
+/* line 396, sass/screen.scss */
 .lp-recent-items h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -592,14 +640,14 @@ b {
   padding-top: 85px;
 }
 
-/* line 370, sass/screen.scss */
+/* line 402, sass/screen.scss */
 footer {
   background: #2e3540;
   text-align: center;
   padding: 90px 0;
 }
 
-/* line 376, sass/screen.scss */
+/* line 408, sass/screen.scss */
 .footer-logo {
   font-family: 'raleway';
   font-size: 22px;
@@ -607,7 +655,7 @@ footer {
   color: #fff;
 }
 
-/* line 380, sass/screen.scss */
+/* line 412, sass/screen.scss */
 .footer-contact {
   margin-top: 50px;
   font-family: 'raleway';
@@ -616,7 +664,7 @@ footer {
   color: #8ea1ac;
   font-size: 20px;
 }
-/* line 385, sass/screen.scss */
+/* line 417, sass/screen.scss */
 .footer-contact a {
   font-family: 'raleway';
   font-size: 16px;
@@ -626,20 +674,20 @@ footer {
   padding: 0 2px;
 }
 
-/* line 392, sass/screen.scss */
+/* line 424, sass/screen.scss */
 .footer-desc {
   line-height: 26px;
   margin-top: 25px;
   padding: 0 20px;
 }
-/* line 397, sass/screen.scss */
+/* line 429, sass/screen.scss */
 .footer-desc span {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 399, sass/screen.scss */
+/* line 431, sass/screen.scss */
 .footer-desc span b {
   font-family: 'raleway';
   font-size: 16px;
@@ -647,17 +695,17 @@ footer {
   color: #b4c8d3;
 }
 
-/* line 405, sass/screen.scss */
+/* line 437, sass/screen.scss */
 .footer-social {
   margin-top: 50px;
   margin-bottom: -30px;
 }
-/* line 409, sass/screen.scss */
+/* line 441, sass/screen.scss */
 .footer-social a {
   padding: 0 10px;
 }
 
-/* line 414, sass/screen.scss */
+/* line 446, sass/screen.scss */
 .lp-recent-items-wr {
   width: 100%;
   margin: auto;
@@ -666,7 +714,7 @@ footer {
   white-space: nowrap;
 }
 
-/* line 422, sass/screen.scss */
+/* line 454, sass/screen.scss */
 .lp-recent-items-item {
   display: inline-block;
   position: relative;
@@ -677,26 +725,26 @@ footer {
   background: rgba(36, 43, 50, 0.8);
   margin: 0 15px;
 }
-/* line 432, sass/screen.scss */
+/* line 464, sass/screen.scss */
 .lp-recent-items-item img {
   display: inline-block;
   vertical-align: middle;
   opacity: 0.4;
 }
 
-/* line 438, sass/screen.scss */
+/* line 470, sass/screen.scss */
 .lp-recent-items-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 442, sass/screen.scss */
+/* line 474, sass/screen.scss */
 .lp-recent-items-info {
   bottom: 45px;
   position: absolute;
   width: 100%;
 }
-/* line 447, sass/screen.scss */
+/* line 479, sass/screen.scss */
 .lp-recent-items-info h3 {
   font-family: 'raleway';
   font-size: 30px;
@@ -704,7 +752,7 @@ footer {
   color: #fff;
   font-weight: 300;
 }
-/* line 451, sass/screen.scss */
+/* line 483, sass/screen.scss */
 .lp-recent-items-info h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -716,7 +764,7 @@ footer {
   font-weight: 300;
   margin-top: 3px;
 }
-/* line 458, sass/screen.scss */
+/* line 490, sass/screen.scss */
 .lp-recent-items-info span {
   font-family: 'raleway';
   font-size: 16px;
@@ -729,7 +777,7 @@ footer {
   opacity: 0.6;
 }
 
-/* line 468, sass/screen.scss */
+/* line 500, sass/screen.scss */
 .items-shade-l {
   position: absolute;
   left: 0;
@@ -744,7 +792,7 @@ footer {
   background: linear-gradient(to right, #2e3540, transparent);
 }
 
-/* line 483, sass/screen.scss */
+/* line 515, sass/screen.scss */
 .items-shade-r {
   position: absolute;
   right: 0;
@@ -759,7 +807,7 @@ footer {
   background: linear-gradient(to right, transparent, #2e3540);
 }
 
-/* line 497, sass/screen.scss */
+/* line 529, sass/screen.scss */
 .lp-recent-items-shade-l {
   position: absolute;
   left: 0;
@@ -774,7 +822,7 @@ footer {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* line 511, sass/screen.scss */
+/* line 543, sass/screen.scss */
 .lp-recent-items-shade-r {
   position: absolute;
   right: 0;
@@ -789,7 +837,7 @@ footer {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2));
 }
 
-/* line 525, sass/screen.scss */
+/* line 557, sass/screen.scss */
 .lp-recent-bg {
   position: absolute;
   top: -10%;
@@ -797,7 +845,7 @@ footer {
   width: 100%;
 }
 
-/* line 532, sass/screen.scss */
+/* line 564, sass/screen.scss */
 .top-nav-bot-ico {
   position: relative;
   top: 7px;
@@ -805,20 +853,20 @@ footer {
   height: 30px;
 }
 
-/* line 539, sass/screen.scss */
+/* line 571, sass/screen.scss */
 .top-nav-mobile {
   display: inline-block;
   float: right;
   cursor: pointer;
   padding: 0 20px;
 }
-/* line 545, sass/screen.scss */
+/* line 577, sass/screen.scss */
 .top-nav-mobile img {
   position: relative;
   top: 4px;
 }
 
-/* line 553, sass/screen.scss */
+/* line 585, sass/screen.scss */
 .top-nav-search {
   display: inline-block;
 }
@@ -850,7 +898,7 @@ footer {
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 557, sass/screen.scss */
+/* line 589, sass/screen.scss */
 .top-nav-search input {
   outline: none;
   border: none;
@@ -874,44 +922,44 @@ footer {
   opacity: 0;
 }
 
-/* line 570, sass/screen.scss */
+/* line 602, sass/screen.scss */
 .lp-header-border {
   padding: 5px 0;
 }
 
 @media (max-width: 73em) {
-  /* line 575, sass/screen.scss */
+  /* line 607, sass/screen.scss */
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
 @media (max-width: 60em) {
-  /* line 581, sass/screen.scss */
+  /* line 613, sass/screen.scss */
   .top-nav-links a {
     display: none;
   }
 }
 @media (max-width: 40em) {
-  /* line 587, sass/screen.scss */
+  /* line 619, sass/screen.scss */
   .top-nav-search {
     display: none;
   }
 }
 @media (max-width: 30em) {
-  /* line 593, sass/screen.scss */
+  /* line 625, sass/screen.scss */
   .lp-header-input-container button {
     width: 350px;
     margin-left: 5px;
   }
 }
 @media (max-width: 54em) {
-  /* line 600, sass/screen.scss */
+  /* line 632, sass/screen.scss */
   .lp-header-border {
     opacity: 0;
     padding: 0px 0;
   }
 }
-/* line 608, sass/screen.scss */
+/* line 640, sass/screen.scss */
 .item-slide-button-r {
   position: absolute;
   background: #32ab7f;
@@ -939,7 +987,7 @@ footer {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 620, sass/screen.scss */
+/* line 652, sass/screen.scss */
 .item-slide-button-r img {
   transform: rotate(180deg);
   height: 18px;
@@ -948,7 +996,7 @@ footer {
   left: 1px;
 }
 
-/* line 629, sass/screen.scss */
+/* line 661, sass/screen.scss */
 .item-slide-button-r:hover {
   background: #8ea1ac;
 }
