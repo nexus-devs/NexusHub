@@ -1,63 +1,38 @@
+<% content.item.forEach(function(item) { %>
+    <div class='items-item' id='nikana'>
+        <div class='items-item-main-inf'>
+            <h2><%= item.Title %><%= item.Type %></h2>
+            <div class='items-images'>
 
-        <!-- For each, add item to slideshow -->
-        <!-- means, we'll have a popular.json specifically for landing page with 3 items contained -->
-  <% content.item.forEach(function(item) { %>
-                <div class='items-item' id='nikana'>
-                    <div class='items-item-main-inf'>
-                        <h2>Nikana Prime</h2>
-                        <div class='items-images'>
+                <!-- Item Info -->
+                <div class='items-images-main'>
+                    <div class='items-images-main-helper'></div>
+                    <img src='<%= item.Img %>' alt='<%= item.Title %>'>
+                </div>
 
-                            <!-- Item Info -->
-                            <div class='items-images-main'>
-                                <div class='items-images-main-helper'></div>
-                                <img src='img/items/prime_nikana.png' alt='Nikana Prime'>
-                            </div>
-
-                            <!-- Item Components -->
-                            <div class='items-images-components'>
-                                <div class='items-images-components-part'>
-
-                                    <!-- BP -->
-                                    <div class='item-images-components-wr item-selected'>
-                                        <div class='item-images-components-component'>
-                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
-                                        </div>
-                                        <div class='items-component-details'>
-                                            <h3>Blueprint</h3>
-                                            <h4>35p</h4>
-                                            <span>(35.0321)</span>
-                                        </div>
-                                    </div>
+                <!-- Item Components -->
+                <div class='items-images-components'>
+                    <div class='items-images-components-part'>
 
 
-                                    <!-- Comp 1 -->
-                                    <div class='item-images-components-wr'>
-                                        <div class='item-images-components-component'>
-                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
-                                        </div>
-                                        <div class='items-component-details'>
-                                            <h3>Blade</h3>
-                                            <h4>50p</h4>
-                                            <span>(49.9255)</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Comp 2 -->
-                                    <div class='item-images-components-wr'>
-                                        <div class='item-images-components-component'>
-                                            <img src='img/generic/generic_blueprint.png' alt='Nikana Prime Blueprint'>
-                                        </div>
-                                        <div class='items-component-details'>
-                                            <h3>Blade</h3>
-                                            <h4>50p</h4>
-                                            <span>(49.9255)</span>
-                                        </div>
-                                    </div>
-
+                        <% content.items.components.forEach(function(item) { %>
+                            <!-- Component -->
+                            <div class='item-images-components-wr item-selected'>
+                                <div class='item-images-components-component'>
+                                    <img src='img/generic/<%= item.Comp %>' alt='<%= item.Title %><%= item.Comp %>'>
+                                </div>
+                                <div class='items-component-details'>
+                                    <h3><%= item.Comp %></h3>
+                                    <h4><%= item.Comp_val %></h4>
+                                    <span>(<%= item.Comp_val_rt %>)</span>
                                 </div>
                             </div>
-                        </div>
-                        <a href='#'>Go to Item Page</a>
+                            <% }); %>
+
                     </div>
                 </div>
-            <% }); %>
+            </div>
+            <a href='/<%= item.Type %>/<%= item.Title %>'>Go to Item Page</a>
+        </div>
+    </div>
+    <% }); %>
