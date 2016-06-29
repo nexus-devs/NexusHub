@@ -1,0 +1,29 @@
+{
+    "items": [
+    {
+        "Title": "Nikana Prime",
+        "Comp_1": "Blueprint",
+        "Comp_1_val": "35p",
+        "Comp_1_val_rt": "real time price",
+        "Comp_2": "Blueprint",
+        "Comp_2_val": "35p",
+        "Comp_2_val_rt": "real time price",
+        "Comp_3": "Blueprint",
+        "Comp_3_val": "35p",
+        "Comp_3_val_rt": "real time price",
+
+    },
+    {
+        "Title": "Frost Prime",
+        "Comp_1": "Blueprint",
+        "Comp_1_val": "35p",
+        "Comp_1_val_rt": "real time price",
+        "Comp_2": "Blueprint",
+        "Comp_2_val": "35p",
+        "Comp_2_val_rt": "real time price",
+        "Comp_3": "Blueprint",
+        "Comp_3_val": "35p",
+        "Comp_3_val_rt": "real time price",
+    }
+    ]
+}
