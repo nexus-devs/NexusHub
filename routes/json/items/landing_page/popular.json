@@ -8,19 +8,19 @@
                 {
                     "Comp": "Blueprint",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             },
                 {
                     "Comp": "Blade",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             },
                 {
                     "Comp": "Hilt",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             }
-        ],
+        ]
     },
         {
             "Title": "Frost Prime",
@@ -29,24 +29,24 @@
                 {
                     "Comp": "Blueprint",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             },
                 {
                     "Comp": "Helmet",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             },
                 {
                     "Comp": "Chassis",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             },
                 {
                     "Comp": "Systems",
                     "Comp_val": "35p",
-                    "Comp_val_rt": "real time price",
+                    "Comp_val_rt": "real time price"
             }
-        ],
+        ]
     }
     ]
 }
