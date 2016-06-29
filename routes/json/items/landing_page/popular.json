@@ -1,29 +1,52 @@
 {
     "items": [
-    {
-        "Title": "Nikana Prime",
-        "Comp_1": "Blueprint",
-        "Comp_1_val": "35p",
-        "Comp_1_val_rt": "real time price",
-        "Comp_2": "Blueprint",
-        "Comp_2_val": "35p",
-        "Comp_2_val_rt": "real time price",
-        "Comp_3": "Blueprint",
-        "Comp_3_val": "35p",
-        "Comp_3_val_rt": "real time price",
-
+        {
+            "Title": "Nikana",
+            "Type": "Prime",
+            "Img": "img/items/prime_nikana",
+            "Components": [
+                {
+                    "Comp": "Blueprint",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            },
+                {
+                    "Comp": "Blade",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            },
+                {
+                    "Comp": "Hilt",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            }
+        ],
     },
-    {
-        "Title": "Frost Prime",
-        "Comp_1": "Blueprint",
-        "Comp_1_val": "35p",
-        "Comp_1_val_rt": "real time price",
-        "Comp_2": "Blueprint",
-        "Comp_2_val": "35p",
-        "Comp_2_val_rt": "real time price",
-        "Comp_3": "Blueprint",
-        "Comp_3_val": "35p",
-        "Comp_3_val_rt": "real time price",
+        {
+            "Title": "Frost Prime",
+            "img": "img/items/frost_prime",
+            "Components": [
+                {
+                    "Comp": "Blueprint",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            },
+                {
+                    "Comp": "Helmet",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            },
+                {
+                    "Comp": "Chassis",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            },
+                {
+                    "Comp": "Systems",
+                    "Comp_val": "35p",
+                    "Comp_val_rt": "real time price",
+            }
+        ],
     }
     ]
 }
