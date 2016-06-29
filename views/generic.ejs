@@ -41,7 +41,6 @@
         <div class='generic-header-headline-container'>
             <h1 class='generic-header-headline'><%= page_title %></h1>
         </div>
-
     </div>
 </header>
 
@@ -55,14 +54,13 @@
 
 <div class='generic-content'>
     <div class='main-content-wrapper'>
-       <h1><%= main_title %></h1>
-
-       <h2>Backend Developers</h2>
-       <span>If you're a <b>backend developer</b> interested in joining our team, simply contact us on <a href='https://discord.gg/AG8RPZ8'><em>Discord</em></a>!<br><br>
-       Please make sure to bring references of your previous work as well as the confidence to have our user's money depend on your knowledge. :)  </span>
-
-       <h2>Marketing</h2>
-        <span>If you're someone driving lead-generation in the numbers of vaulted primes' prices, we will probably have a place for you in our team soon! As of now, we have no urgent need of someone specializing in marketing - But if you think you can convince us otherwise, join us on <a href='https://discord.gg/AG8RPZ8'><em>Discord</em></a>.<br><br></span>
+        <h1><%= main_title %></h1>
+        <% content.content_comps.forEach(function(item) { %>
+           <h2><%= item.Title %></h2>
+           <span>
+           <%- item.Desc %>
+           </span>
+        <% }); %>
     </div>
 </div>
 

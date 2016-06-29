@@ -1,0 +1,15 @@
+{
+    "PageTitle": "Imprint",
+    "Headline": "Imprint",
+
+    "content_comps": [
+    {
+        "Title": "WarframeNexus",
+        "Desc": "Swiggetystreet 420<br>60322 Frankfurt<br>Germany<br>"
+    },
+        {
+        "Title": "Owners",
+        "Desc": "Mads Jakobsen <br>Niggele$ Dressler"
+    }
+    ]
+}

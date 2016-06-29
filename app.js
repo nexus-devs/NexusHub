@@ -1,3 +1,5 @@
+const url = require('url');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,19 +8,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var jobs = require('./routes/jobs')
+var generic = require('./routes/generic')
 //var users = require('./routes/users');
 
 
 var app = express();
-
-
-// set up local vars
-app.locals.jobs = require('./routes/json/jobs.json')
-//app.locals.prime = require(); //prime key goes here
-//app.locals.mods = require(); //mods key goes here
-//app.locals.arcanes = require(); //arcanes key goes here
-//app.locals.other = require(); //other key goes here
 
 
 // view engine setup
@@ -34,8 +28,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/jobs', jobs)
+app.use('/jobs', generic)
+app.use('/imprint', generic)
 //app.use('/users', users);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,6 +43,9 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
+
+
+
 
 // development error handler
 // will print stacktrace
@@ -57,6 +58,9 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+
+
 
 // production error handler
 // no stacktraces leaked to user

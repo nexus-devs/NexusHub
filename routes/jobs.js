@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var json = require('./json/jobs.json');
+
+
 
 /* GET home page. */
 router.get('/', function(req, res){
   res.render('generic', {
-    page_title: jobs.PageTitle,
-    main_title: "We're currenlty hiring!",
-    title_1: "Backend Developers",
-    title_2: "Marketing"
+    content: json,
+    page_title: json.PageTitle,
+    main_title: json.Headline,
+    title: "Title",
+    desc: "Desc"
   })
 })
 
