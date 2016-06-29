@@ -328,12 +328,14 @@ b{
 .item-slide-button:first-of-type {
     position:absolute;
     @include input-button($color-accent);
+    @include ease(0.25s);
     height:38px;
     width:38px;
     border-radius:38px;
     left:calc(5% - 90px);
     top:210px;
     margin:0 90px;
+    z-index: 2;
 
     img{
         height:18px;
@@ -344,25 +346,7 @@ b{
     }
 }
 
-.item-slide-button{
-    position:absolute;
-    @include input-button($color-accent);
-    height:38px;
-    width:38px;
-    border-radius:38px;
-    right:calc(5% - 90px);
-    top:210px;
-    margin:0 90px;
-    z-index:2;
 
-    img{
-        transform:rotate(180deg);
-        height:18px;
-        position:relative;
-        top:2px;
-        left:1px;
-    }
-}
 
 
 
@@ -620,3 +604,28 @@ footer {
 }
 
 
+
+.item-slide-button-r {
+    position:absolute;
+    @include input-button($color-accent);
+    @include ease(0.25s);
+    height:38px;
+    width:38px;
+    border-radius:38px;
+    right:calc(5% - 90px);
+    top:210px;
+    margin:0 90px;
+    z-index:2;
+
+    img{
+        transform:rotate(180deg);
+        height:18px;
+        position:relative;
+        top:2px;
+        left:1px;
+    }
+}
+
+.item-slide-button-r:hover {
+    background:$color-subtle;
+}
