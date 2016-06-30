@@ -143,11 +143,6 @@ b{
     width: 100%;
     background: white;
     overflow-x:hidden;
-
-    svg{
-        position:absolute;
-        height:0;
-    }
 }
 
 .lp-search-ico {
@@ -202,6 +197,7 @@ b{
 }
 
 .items-item-main-inf {
+    display:inline-block;
     h2{
         @include font-title($color-on-bg);
         font-size:36px;
@@ -269,7 +265,7 @@ b{
 .items-component-details {
     display:inline-block;
     vertical-align: top;
-    margin-left:5px;
+    margin-left:15px;
 
     h3{
         @include font-small-title($color-on-bg);
@@ -660,4 +656,31 @@ footer {
 
 .item-slide-button-r:hover {
     background:$color-subtle;
+}
+
+.chart {
+    height:223px;
+    width:500px;
+    z-index: 5;
+    opacity:1;
+}
+
+.chart-helper {
+}
+
+
+
+.hidden {
+   height:0;
+}
+
+.items-item-stats {
+    display:inline-block;
+    vertical-align: top;
+
+     h2{
+        @include font-title($color-on-bg);
+        font-size:36px;
+        font-weight:300;
+    }
 }
