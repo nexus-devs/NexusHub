@@ -364,7 +364,7 @@ b {
 .items-item {
   display: inline-block;
   text-align: left;
-  padding-right: 200px;
+  width: 1600px;
 }
 
 /* line 191, sass/screen.scss */
@@ -1017,8 +1017,9 @@ footer {
 .items-item-stats {
   display: inline-block;
   vertical-align: top;
+  margin-left: 130px;
 }
-/* line 681, sass/screen.scss */
+/* line 682, sass/screen.scss */
 .items-item-stats h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -1026,4 +1027,5 @@ footer {
   color: #fff;
   font-size: 36px;
   font-weight: 300;
+  padding-bottom: 25px;
 }
