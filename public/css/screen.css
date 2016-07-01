@@ -85,7 +85,7 @@ body {
   min-width: 100%;
 }
 
-/* line 23, sass/screen.scss */
+/* line 22, sass/screen.scss */
 .top-nav {
   position: fixed;
   z-index: 5;
@@ -101,7 +101,7 @@ body {
   transition-duration: 0.4s;
 }
 
-/* line 33, sass/screen.scss */
+/* line 32, sass/screen.scss */
 .top-logo {
   display: inline-block;
   margin-left: 5%;
@@ -111,13 +111,13 @@ body {
   color: #2e3540;
 }
 
-/* line 41, sass/screen.scss */
+/* line 38, sass/screen.scss */
 .top-logo-text {
   font-weight: 300;
   margin-right: 1px;
 }
 
-/* line 46, sass/screen.scss */
+/* line 43, sass/screen.scss */
 .top-logo-sub {
   font-family: 'raleway';
   font-size: 18px;
@@ -126,21 +126,21 @@ body {
   margin-left: 5px;
 }
 
-/* line 51, sass/screen.scss */
+/* line 48, sass/screen.scss */
 .top-nav-links {
   display: inline-block;
   float: right;
   margin-right: 5%;
   margin-top: 2px;
 }
-/* line 56, sass/screen.scss */
+/* line 53, sass/screen.scss */
 .top-nav-links a:first-of-type {
   font-family: 'raleway';
   font-size: 18px;
   font-weight: 700;
   color: #2e3540;
 }
-/* line 59, sass/screen.scss */
+/* line 56, sass/screen.scss */
 .top-nav-links a {
   font-family: 'raleway';
   font-size: 18px;
@@ -150,7 +150,7 @@ body {
   padding: 0 25px;
 }
 
-/* line 66, sass/screen.scss */
+/* line 63, sass/screen.scss */
 a {
   text-decoration: none !important;
   -webkit-transition-timing-function: ease;
@@ -161,17 +161,17 @@ a {
   transition-duration: 0.15s;
 }
 
-/* line 71, sass/screen.scss */
+/* line 68, sass/screen.scss */
 a:hover {
   opacity: 0.7;
 }
 
-/* line 75, sass/screen.scss */
+/* line 72, sass/screen.scss */
 .lp-header {
   text-align: center;
 }
 
-/* line 79, sass/screen.scss */
+/* line 76, sass/screen.scss */
 .lp-header-headline {
   font-family: 'raleway';
   font-size: 30px;
@@ -182,25 +182,25 @@ a:hover {
   text-transform: uppercase;
 }
 
-/* line 86, sass/screen.scss */
+/* line 83, sass/screen.scss */
 .lp-header-headline-container {
   padding: 22vh 10vw;
   position: relative;
   top: 5vh;
 }
 
-/* line 92, sass/screen.scss */
+/* line 89, sass/screen.scss */
 em {
   color: #32ab7f;
   font-weight: 600;
 }
 
-/* line 97, sass/screen.scss */
+/* line 94, sass/screen.scss */
 b {
   font-weight: 700;
 }
 
-/* line 101, sass/screen.scss */
+/* line 98, sass/screen.scss */
 .lp-header-sub {
   font-family: 'raleway';
   font-size: 30px;
@@ -210,7 +210,7 @@ b {
   margin-top: 10px;
 }
 
-/* line 107, sass/screen.scss */
+/* line 104, sass/screen.scss */
 .lp-header-input-container {
   height: 25vh;
   min-height: 150px;
@@ -218,7 +218,7 @@ b {
   background: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
-/* line 113, sass/screen.scss */
+/* line 110, sass/screen.scss */
 .lp-header-input-container button {
   background: #32ab7f;
   outline: none;
@@ -236,7 +236,7 @@ b {
   width: 42px;
   margin-left: 0px;
 }
-/* line 120, sass/screen.scss */
+/* line 117, sass/screen.scss */
 .lp-header-input-container button:hover,
 .lp-header-input-container button:focus {
   background: #2e3540;
@@ -252,7 +252,7 @@ b {
   transition-duration: 0.15s;
 }
 
-/* line 126, sass/screen.scss */
+/* line 123, sass/screen.scss */
 .lp-header-input {
   display: inline-block;
   vertical-align: middle;
@@ -285,7 +285,7 @@ b {
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 129, sass/screen.scss */
+/* line 126, sass/screen.scss */
 .lp-header-input input {
   outline: none;
   border: none;
@@ -300,37 +300,37 @@ b {
   width: 315px;
 }
 
-/* line 138, sass/screen.scss */
+/* line 135, sass/screen.scss */
 .lp-header-input-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 142, sass/screen.scss */
+/* line 139, sass/screen.scss */
 .lp-content {
   width: 100%;
   background: white;
   overflow-x: hidden;
 }
 
-/* line 148, sass/screen.scss */
+/* line 145, sass/screen.scss */
 .lp-search-ico {
   margin-top: 3px;
   height: 18px;
 }
 
-/* line 153, sass/screen.scss */
+/* line 150, sass/screen.scss */
 .lp-pop-header {
   padding: 125px 0 45px 0;
   margin-top: -10px;
   margin-left: 15%;
 }
-/* line 157, sass/screen.scss */
+/* line 154, sass/screen.scss */
 .lp-pop-header img {
   display: inline-block;
   margin-bottom: -5px;
 }
-/* line 162, sass/screen.scss */
+/* line 158, sass/screen.scss */
 .lp-pop-header h1 {
   font-family: 'raleway';
   font-size: 30px;
@@ -342,7 +342,7 @@ b {
   margin-left: 5px;
   margin-right: -30px;
 }
-/* line 171, sass/screen.scss */
+/* line 166, sass/screen.scss */
 .lp-pop-header h2 {
   display: inline-block;
   font-family: 'raleway';
@@ -353,21 +353,21 @@ b {
   margin-left: 42px;
 }
 
-/* line 179, sass/screen.scss */
+/* line 174, sass/screen.scss */
 .items-main {
   background: #2e3540;
   text-align: center;
   position: relative;
 }
 
-/* line 185, sass/screen.scss */
+/* line 180, sass/screen.scss */
 .items-item {
   display: inline-block;
   text-align: left;
   width: 1700px;
 }
 
-/* line 191, sass/screen.scss */
+/* line 186, sass/screen.scss */
 .items-wr {
   display: inline-block;
   padding: 75px 0 75px 0;
@@ -376,11 +376,11 @@ b {
   white-space: nowrap;
 }
 
-/* line 199, sass/screen.scss */
+/* line 194, sass/screen.scss */
 .items-item-main-inf {
   display: inline-block;
 }
-/* line 201, sass/screen.scss */
+/* line 196, sass/screen.scss */
 .items-item-main-inf h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -389,7 +389,7 @@ b {
   font-size: 36px;
   font-weight: 300;
 }
-/* line 207, sass/screen.scss */
+/* line 201, sass/screen.scss */
 .items-item-main-inf a {
   font-family: 'raleway';
   font-size: 16px;
@@ -399,7 +399,7 @@ b {
   top: 15px;
 }
 
-/* line 214, sass/screen.scss */
+/* line 208, sass/screen.scss */
 .items-images-main {
   display: inline-block;
   margin-top: 25px;
@@ -409,19 +409,19 @@ b {
   overflow: hidden;
   border: 2px solid #8ea1ac;
 }
-/* line 223, sass/screen.scss */
+/* line 216, sass/screen.scss */
 .items-images-main img {
   display: inline-block;
   vertical-align: middle;
 }
 
-/* line 228, sass/screen.scss */
+/* line 221, sass/screen.scss */
 .items-images-main-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 232, sass/screen.scss */
+/* line 225, sass/screen.scss */
 .items-images-components-part {
   position: relative;
   display: -webkit-box;
@@ -433,14 +433,14 @@ b {
   flex-direction: column;
 }
 
-/* line 243, sass/screen.scss */
+/* line 236, sass/screen.scss */
 .items-images-components {
   display: inline-block;
   vertical-align: top;
   margin-top: 25px;
 }
 
-/* line 249, sass/screen.scss */
+/* line 242, sass/screen.scss */
 .item-images-components-component {
   display: inline-block;
   overflow: hidden;
@@ -450,20 +450,20 @@ b {
   background: #8ea1ac;
   cursor: pointer;
 }
-/* line 258, sass/screen.scss */
+/* line 250, sass/screen.scss */
 .item-images-components-component img {
   opacity: 0.95;
   min-width: 100%;
   min-height: 100%;
 }
 
-/* line 265, sass/screen.scss */
+/* line 257, sass/screen.scss */
 .items-component-details {
   display: inline-block;
   vertical-align: top;
   margin-left: 15px;
 }
-/* line 270, sass/screen.scss */
+/* line 261, sass/screen.scss */
 .items-component-details h3 {
   font-family: 'raleway';
   font-size: 24px;
@@ -471,7 +471,7 @@ b {
   color: #fff;
   font-weight: 300;
 }
-/* line 275, sass/screen.scss */
+/* line 265, sass/screen.scss */
 .items-component-details h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -482,7 +482,7 @@ b {
   margin-top: 0px;
   display: inline-block;
 }
-/* line 282, sass/screen.scss */
+/* line 271, sass/screen.scss */
 .items-component-details span {
   display: inline-block;
   font-family: 'raleway';
@@ -494,7 +494,7 @@ b {
   font-size: 14px;
 }
 
-/* line 290, sass/screen.scss */
+/* line 279, sass/screen.scss */
 .item-images-components-wr {
   margin: 0 0 0 2px;
   overflow: hidden;
@@ -502,46 +502,46 @@ b {
   flex: 1;
 }
 
-/* line 298, sass/screen.scss */
+/* line 287, sass/screen.scss */
 .item-selected:first-of-type .item-images-components-component {
   background: #32ab7f;
   border: 2px solid #32ab7f;
 }
 
-/* line 315, sass/screen.scss */
+/* line 303, sass/screen.scss */
 .item-selected:nth-of-type(2) .item-images-components-component {
   background: #40bebf;
   border: 2px solid #40bebf;
 }
 
-/* line 332, sass/screen.scss */
+/* line 319, sass/screen.scss */
 .item-selected:nth-of-type(3) .item-images-components-component {
   background: #2a7c9e;
   border: 2px solid #2a7c9e;
 }
 
-/* line 349, sass/screen.scss */
+/* line 335, sass/screen.scss */
 .item-selected:nth-of-type(4) .item-images-components-component {
   background: #6abf40;
   border: 2px solid #6abf40;
 }
 
-/* line 365, sass/screen.scss */
+/* line 350, sass/screen.scss */
 .items-drag-note {
   text-align: center;
   margin-top: 30px;
   padding-bottom: 210px;
 }
-/* line 370, sass/screen.scss */
+/* line 354, sass/screen.scss */
 .items-drag-note img:first-of-type {
   transform: rotate(180deg);
 }
-/* line 374, sass/screen.scss */
+/* line 357, sass/screen.scss */
 .items-drag-note img {
   position: relative;
   top: 5px;
 }
-/* line 379, sass/screen.scss */
+/* line 361, sass/screen.scss */
 .items-drag-note span {
   font-family: 'raleway';
   font-size: 16px;
@@ -549,7 +549,7 @@ b {
   color: #8ea1ac;
 }
 
-/* line 386, sass/screen.scss */
+/* line 366, sass/screen.scss */
 .item-slide-button:first-of-type {
   position: absolute;
   background: #32ab7f;
@@ -577,7 +577,7 @@ b {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 398, sass/screen.scss */
+/* line 377, sass/screen.scss */
 .item-slide-button:first-of-type img {
   height: 18px;
   position: relative;
@@ -586,7 +586,7 @@ b {
   transform: rotate(0deg);
 }
 
-/* line 407, sass/screen.scss */
+/* line 386, sass/screen.scss */
 .item-slide-button {
   position: absolute;
   background: #32ab7f;
@@ -614,7 +614,7 @@ b {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 419, sass/screen.scss */
+/* line 397, sass/screen.scss */
 .item-slide-button img {
   transform: rotate(180deg);
   height: 18px;
@@ -623,12 +623,12 @@ b {
   left: 1px;
 }
 
-/* line 432, sass/screen.scss */
+/* line 406, sass/screen.scss */
 .item-slide-button:hover {
   background: #8ea1ac;
 }
 
-/* line 436, sass/screen.scss */
+/* line 410, sass/screen.scss */
 .lp-recent-items {
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
@@ -636,7 +636,7 @@ b {
   text-align: center;
   position: relative;
 }
-/* line 443, sass/screen.scss */
+/* line 416, sass/screen.scss */
 .lp-recent-items h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -645,14 +645,14 @@ b {
   padding-top: 85px;
 }
 
-/* line 449, sass/screen.scss */
+/* line 422, sass/screen.scss */
 footer {
   background: #2e3540;
   text-align: center;
   padding: 90px 0;
 }
 
-/* line 455, sass/screen.scss */
+/* line 428, sass/screen.scss */
 .footer-logo {
   font-family: 'raleway';
   font-size: 22px;
@@ -660,7 +660,7 @@ footer {
   color: #fff;
 }
 
-/* line 459, sass/screen.scss */
+/* line 432, sass/screen.scss */
 .footer-contact {
   margin-top: 50px;
   font-family: 'raleway';
@@ -669,7 +669,7 @@ footer {
   color: #8ea1ac;
   font-size: 20px;
 }
-/* line 464, sass/screen.scss */
+/* line 436, sass/screen.scss */
 .footer-contact a {
   font-family: 'raleway';
   font-size: 16px;
@@ -679,20 +679,20 @@ footer {
   padding: 0 2px;
 }
 
-/* line 471, sass/screen.scss */
+/* line 443, sass/screen.scss */
 .footer-desc {
   line-height: 26px;
   margin-top: 25px;
   padding: 0 20px;
 }
-/* line 476, sass/screen.scss */
+/* line 447, sass/screen.scss */
 .footer-desc span {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 478, sass/screen.scss */
+/* line 449, sass/screen.scss */
 .footer-desc span b {
   font-family: 'raleway';
   font-size: 16px;
@@ -700,17 +700,17 @@ footer {
   color: #b4c8d3;
 }
 
-/* line 484, sass/screen.scss */
+/* line 455, sass/screen.scss */
 .footer-social {
   margin-top: 50px;
   margin-bottom: -30px;
 }
-/* line 488, sass/screen.scss */
+/* line 458, sass/screen.scss */
 .footer-social a {
   padding: 0 10px;
 }
 
-/* line 493, sass/screen.scss */
+/* line 463, sass/screen.scss */
 .lp-recent-items-wr {
   width: 100%;
   margin: auto;
@@ -719,7 +719,7 @@ footer {
   white-space: nowrap;
 }
 
-/* line 501, sass/screen.scss */
+/* line 471, sass/screen.scss */
 .lp-recent-items-item {
   display: inline-block;
   position: relative;
@@ -730,26 +730,26 @@ footer {
   background: rgba(36, 43, 50, 0.8);
   margin: 0 15px;
 }
-/* line 511, sass/screen.scss */
+/* line 480, sass/screen.scss */
 .lp-recent-items-item img {
   display: inline-block;
   vertical-align: middle;
   opacity: 0.4;
 }
 
-/* line 517, sass/screen.scss */
+/* line 486, sass/screen.scss */
 .lp-recent-items-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 521, sass/screen.scss */
+/* line 490, sass/screen.scss */
 .lp-recent-items-info {
   bottom: 45px;
   position: absolute;
   width: 100%;
 }
-/* line 526, sass/screen.scss */
+/* line 494, sass/screen.scss */
 .lp-recent-items-info h3 {
   font-family: 'raleway';
   font-size: 30px;
@@ -757,7 +757,7 @@ footer {
   color: #fff;
   font-weight: 300;
 }
-/* line 530, sass/screen.scss */
+/* line 498, sass/screen.scss */
 .lp-recent-items-info h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -769,7 +769,7 @@ footer {
   font-weight: 300;
   margin-top: 3px;
 }
-/* line 537, sass/screen.scss */
+/* line 505, sass/screen.scss */
 .lp-recent-items-info span {
   font-family: 'raleway';
   font-size: 16px;
@@ -782,7 +782,7 @@ footer {
   opacity: 0.6;
 }
 
-/* line 547, sass/screen.scss */
+/* line 515, sass/screen.scss */
 .items-shade-l {
   position: absolute;
   left: 0;
@@ -797,7 +797,7 @@ footer {
   background: linear-gradient(to right, #2e3540, transparent);
 }
 
-/* line 562, sass/screen.scss */
+/* line 529, sass/screen.scss */
 .items-shade-r {
   position: absolute;
   right: 0;
@@ -812,7 +812,7 @@ footer {
   background: linear-gradient(to right, transparent, #2e3540);
 }
 
-/* line 576, sass/screen.scss */
+/* line 543, sass/screen.scss */
 .lp-recent-items-shade-l {
   position: absolute;
   left: 0;
@@ -827,7 +827,7 @@ footer {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* line 590, sass/screen.scss */
+/* line 557, sass/screen.scss */
 .lp-recent-items-shade-r {
   position: absolute;
   right: 0;
@@ -842,7 +842,7 @@ footer {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2));
 }
 
-/* line 604, sass/screen.scss */
+/* line 571, sass/screen.scss */
 .lp-recent-bg {
   position: absolute;
   top: -10%;
@@ -850,7 +850,7 @@ footer {
   width: 100%;
 }
 
-/* line 611, sass/screen.scss */
+/* line 578, sass/screen.scss */
 .top-nav-bot-ico {
   position: relative;
   top: 7px;
@@ -858,20 +858,20 @@ footer {
   height: 30px;
 }
 
-/* line 618, sass/screen.scss */
+/* line 585, sass/screen.scss */
 .top-nav-mobile {
   display: inline-block;
   float: right;
   cursor: pointer;
   padding: 0 20px;
 }
-/* line 624, sass/screen.scss */
+/* line 590, sass/screen.scss */
 .top-nav-mobile img {
   position: relative;
   top: 4px;
 }
 
-/* line 632, sass/screen.scss */
+/* line 596, sass/screen.scss */
 .top-nav-search {
   display: inline-block;
 }
@@ -903,7 +903,7 @@ footer {
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 636, sass/screen.scss */
+/* line 599, sass/screen.scss */
 .top-nav-search input {
   outline: none;
   border: none;
@@ -927,86 +927,70 @@ footer {
   opacity: 0;
 }
 
-/* line 649, sass/screen.scss */
+/* line 612, sass/screen.scss */
 .lp-header-border {
   padding: 5px 0;
 }
 
+@media (max-width: 100em) {
+  /* line 618, sass/screen.scss */
+  .items-item {
+    width: 90vw;
+    min-width: 800px;
+  }
+
+  /* line 622, sass/screen.scss */
+  .items-item-stats {
+    display: block;
+    position: relative;
+    top: 90px;
+    right: 130px;
+    padding-bottom: 90px;
+  }
+
+  /* line 629, sass/screen.scss */
+  .items-item-main-inf {
+    display: block;
+  }
+
+  /* line 632, sass/screen.scss */
+  .item-slide-button {
+    top: 400px !important;
+  }
+}
 @media (max-width: 73em) {
-  /* line 654, sass/screen.scss */
+  /* line 638, sass/screen.scss */
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
 @media (max-width: 60em) {
-  /* line 660, sass/screen.scss */
+  /* line 644, sass/screen.scss */
   .top-nav-links a {
     display: none;
   }
 }
 @media (max-width: 40em) {
-  /* line 666, sass/screen.scss */
+  /* line 650, sass/screen.scss */
   .top-nav-search {
     display: none;
   }
 }
 @media (max-width: 30em) {
-  /* line 672, sass/screen.scss */
+  /* line 656, sass/screen.scss */
   .lp-header-input-container button {
     width: 350px;
     margin-left: 5px;
   }
 }
 @media (max-width: 54em) {
-  /* line 679, sass/screen.scss */
+  /* line 663, sass/screen.scss */
   .lp-header-border {
     opacity: 0;
     padding: 0px 0;
   }
 }
-/* line 687, sass/screen.scss */
-.item-slide-button-r {
-  position: absolute;
-  background: #32ab7f;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  padding: 1px;
-  -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-transition-duration: 0.15s;
-  -moz-transition-duration: 0.15s;
-  -o-transition-duration: 0.15s;
-  transition-duration: 0.15s;
-  -webkit-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-transition-duration: 0.25s;
-  -moz-transition-duration: 0.25s;
-  -o-transition-duration: 0.25s;
-  transition-duration: 0.25s;
-  height: 38px;
-  width: 38px;
-  border-radius: 38px;
-  right: calc(5% - 90px);
-  top: 210px;
-  margin: 0 90px;
-  z-index: 2;
-}
-/* line 699, sass/screen.scss */
-.item-slide-button-r img {
-  transform: rotate(180deg);
-  height: 18px;
-  position: relative;
-  top: 2px;
-  left: 1px;
-}
-
-/* line 708, sass/screen.scss */
-.item-slide-button-r:hover {
-  background: #8ea1ac;
-}
-
-/* line 712, sass/screen.scss */
+/* line 670, sass/screen.scss */
 .chart {
   height: 255px;
   width: 620px;
@@ -1014,18 +998,18 @@ footer {
   opacity: 1;
 }
 
-/* line 724, sass/screen.scss */
+/* line 679, sass/screen.scss */
 .hidden {
   height: 0;
 }
 
-/* line 728, sass/screen.scss */
+/* line 683, sass/screen.scss */
 .items-item-stats {
   display: inline-block;
   vertical-align: top;
   margin-left: 130px;
 }
-/* line 733, sass/screen.scss */
+/* line 687, sass/screen.scss */
 .items-item-stats h2 {
   font-family: 'raleway';
   font-size: 30px;
