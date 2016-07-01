@@ -364,7 +364,7 @@ b {
 .items-item {
   display: inline-block;
   text-align: left;
-  width: 1600px;
+  width: 1700px;
 }
 
 /* line 191, sass/screen.scss */
@@ -452,7 +452,7 @@ b {
 }
 /* line 258, sass/screen.scss */
 .item-images-components-component img {
-  opacity: 0.8;
+  opacity: 0.95;
   min-width: 100%;
   min-height: 100%;
 }
@@ -503,39 +503,45 @@ b {
 }
 
 /* line 298, sass/screen.scss */
-.item-selected .item-images-components-component {
+.item-selected:first-of-type .item-images-components-component {
   background: #32ab7f;
   border: 2px solid #32ab7f;
 }
-/* line 303, sass/screen.scss */
-.item-selected .item-images-components-component img {
-  opacity: 0.5;
-}
-/* line 306, sass/screen.scss */
-.item-selected .items-component-details h3 {
-  color: #32ab7f;
-}
-/* line 309, sass/screen.scss */
-.item-selected .items-component-details h4 {
-  color: #32ab7f;
+
+/* line 315, sass/screen.scss */
+.item-selected:nth-of-type(2) .item-images-components-component {
+  background: #40bebf;
+  border: 2px solid #40bebf;
 }
 
-/* line 314, sass/screen.scss */
+/* line 332, sass/screen.scss */
+.item-selected:nth-of-type(3) .item-images-components-component {
+  background: #2a7c9e;
+  border: 2px solid #2a7c9e;
+}
+
+/* line 349, sass/screen.scss */
+.item-selected:nth-of-type(4) .item-images-components-component {
+  background: #6abf40;
+  border: 2px solid #6abf40;
+}
+
+/* line 365, sass/screen.scss */
 .items-drag-note {
   text-align: center;
   margin-top: 30px;
   padding-bottom: 210px;
 }
-/* line 319, sass/screen.scss */
+/* line 370, sass/screen.scss */
 .items-drag-note img:first-of-type {
   transform: rotate(180deg);
 }
-/* line 323, sass/screen.scss */
+/* line 374, sass/screen.scss */
 .items-drag-note img {
   position: relative;
   top: 5px;
 }
-/* line 328, sass/screen.scss */
+/* line 379, sass/screen.scss */
 .items-drag-note span {
   font-family: 'raleway';
   font-size: 16px;
@@ -543,7 +549,7 @@ b {
   color: #8ea1ac;
 }
 
-/* line 335, sass/screen.scss */
+/* line 386, sass/screen.scss */
 .item-slide-button:first-of-type {
   position: absolute;
   background: #32ab7f;
@@ -571,7 +577,7 @@ b {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 347, sass/screen.scss */
+/* line 398, sass/screen.scss */
 .item-slide-button:first-of-type img {
   height: 18px;
   position: relative;
@@ -580,7 +586,7 @@ b {
   transform: rotate(0deg);
 }
 
-/* line 356, sass/screen.scss */
+/* line 407, sass/screen.scss */
 .item-slide-button {
   position: absolute;
   background: #32ab7f;
@@ -608,7 +614,7 @@ b {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 368, sass/screen.scss */
+/* line 419, sass/screen.scss */
 .item-slide-button img {
   transform: rotate(180deg);
   height: 18px;
@@ -617,12 +623,12 @@ b {
   left: 1px;
 }
 
-/* line 381, sass/screen.scss */
+/* line 432, sass/screen.scss */
 .item-slide-button:hover {
   background: #8ea1ac;
 }
 
-/* line 385, sass/screen.scss */
+/* line 436, sass/screen.scss */
 .lp-recent-items {
   background: rgba(255, 255, 255, 0.7);
   width: 100%;
@@ -630,7 +636,7 @@ b {
   text-align: center;
   position: relative;
 }
-/* line 392, sass/screen.scss */
+/* line 443, sass/screen.scss */
 .lp-recent-items h2 {
   font-family: 'raleway';
   font-size: 30px;
@@ -639,14 +645,14 @@ b {
   padding-top: 85px;
 }
 
-/* line 398, sass/screen.scss */
+/* line 449, sass/screen.scss */
 footer {
   background: #2e3540;
   text-align: center;
   padding: 90px 0;
 }
 
-/* line 404, sass/screen.scss */
+/* line 455, sass/screen.scss */
 .footer-logo {
   font-family: 'raleway';
   font-size: 22px;
@@ -654,7 +660,7 @@ footer {
   color: #fff;
 }
 
-/* line 408, sass/screen.scss */
+/* line 459, sass/screen.scss */
 .footer-contact {
   margin-top: 50px;
   font-family: 'raleway';
@@ -663,7 +669,7 @@ footer {
   color: #8ea1ac;
   font-size: 20px;
 }
-/* line 413, sass/screen.scss */
+/* line 464, sass/screen.scss */
 .footer-contact a {
   font-family: 'raleway';
   font-size: 16px;
@@ -673,20 +679,20 @@ footer {
   padding: 0 2px;
 }
 
-/* line 420, sass/screen.scss */
+/* line 471, sass/screen.scss */
 .footer-desc {
   line-height: 26px;
   margin-top: 25px;
   padding: 0 20px;
 }
-/* line 425, sass/screen.scss */
+/* line 476, sass/screen.scss */
 .footer-desc span {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 427, sass/screen.scss */
+/* line 478, sass/screen.scss */
 .footer-desc span b {
   font-family: 'raleway';
   font-size: 16px;
@@ -694,17 +700,17 @@ footer {
   color: #b4c8d3;
 }
 
-/* line 433, sass/screen.scss */
+/* line 484, sass/screen.scss */
 .footer-social {
   margin-top: 50px;
   margin-bottom: -30px;
 }
-/* line 437, sass/screen.scss */
+/* line 488, sass/screen.scss */
 .footer-social a {
   padding: 0 10px;
 }
 
-/* line 442, sass/screen.scss */
+/* line 493, sass/screen.scss */
 .lp-recent-items-wr {
   width: 100%;
   margin: auto;
@@ -713,7 +719,7 @@ footer {
   white-space: nowrap;
 }
 
-/* line 450, sass/screen.scss */
+/* line 501, sass/screen.scss */
 .lp-recent-items-item {
   display: inline-block;
   position: relative;
@@ -724,26 +730,26 @@ footer {
   background: rgba(36, 43, 50, 0.8);
   margin: 0 15px;
 }
-/* line 460, sass/screen.scss */
+/* line 511, sass/screen.scss */
 .lp-recent-items-item img {
   display: inline-block;
   vertical-align: middle;
   opacity: 0.4;
 }
 
-/* line 466, sass/screen.scss */
+/* line 517, sass/screen.scss */
 .lp-recent-items-helper {
   display: inline-block;
   height: 50%;
 }
 
-/* line 470, sass/screen.scss */
+/* line 521, sass/screen.scss */
 .lp-recent-items-info {
   bottom: 45px;
   position: absolute;
   width: 100%;
 }
-/* line 475, sass/screen.scss */
+/* line 526, sass/screen.scss */
 .lp-recent-items-info h3 {
   font-family: 'raleway';
   font-size: 30px;
@@ -751,7 +757,7 @@ footer {
   color: #fff;
   font-weight: 300;
 }
-/* line 479, sass/screen.scss */
+/* line 530, sass/screen.scss */
 .lp-recent-items-info h4 {
   font-family: 'raleway';
   font-size: 24px;
@@ -763,7 +769,7 @@ footer {
   font-weight: 300;
   margin-top: 3px;
 }
-/* line 486, sass/screen.scss */
+/* line 537, sass/screen.scss */
 .lp-recent-items-info span {
   font-family: 'raleway';
   font-size: 16px;
@@ -776,7 +782,7 @@ footer {
   opacity: 0.6;
 }
 
-/* line 496, sass/screen.scss */
+/* line 547, sass/screen.scss */
 .items-shade-l {
   position: absolute;
   left: 0;
@@ -791,7 +797,7 @@ footer {
   background: linear-gradient(to right, #2e3540, transparent);
 }
 
-/* line 511, sass/screen.scss */
+/* line 562, sass/screen.scss */
 .items-shade-r {
   position: absolute;
   right: 0;
@@ -806,7 +812,7 @@ footer {
   background: linear-gradient(to right, transparent, #2e3540);
 }
 
-/* line 525, sass/screen.scss */
+/* line 576, sass/screen.scss */
 .lp-recent-items-shade-l {
   position: absolute;
   left: 0;
@@ -821,7 +827,7 @@ footer {
   background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
 }
 
-/* line 539, sass/screen.scss */
+/* line 590, sass/screen.scss */
 .lp-recent-items-shade-r {
   position: absolute;
   right: 0;
@@ -836,7 +842,7 @@ footer {
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2));
 }
 
-/* line 553, sass/screen.scss */
+/* line 604, sass/screen.scss */
 .lp-recent-bg {
   position: absolute;
   top: -10%;
@@ -844,7 +850,7 @@ footer {
   width: 100%;
 }
 
-/* line 560, sass/screen.scss */
+/* line 611, sass/screen.scss */
 .top-nav-bot-ico {
   position: relative;
   top: 7px;
@@ -852,20 +858,20 @@ footer {
   height: 30px;
 }
 
-/* line 567, sass/screen.scss */
+/* line 618, sass/screen.scss */
 .top-nav-mobile {
   display: inline-block;
   float: right;
   cursor: pointer;
   padding: 0 20px;
 }
-/* line 573, sass/screen.scss */
+/* line 624, sass/screen.scss */
 .top-nav-mobile img {
   position: relative;
   top: 4px;
 }
 
-/* line 581, sass/screen.scss */
+/* line 632, sass/screen.scss */
 .top-nav-search {
   display: inline-block;
 }
@@ -897,7 +903,7 @@ footer {
   font-weight: 500;
   color: #8ea1ac;
 }
-/* line 585, sass/screen.scss */
+/* line 636, sass/screen.scss */
 .top-nav-search input {
   outline: none;
   border: none;
@@ -921,44 +927,44 @@ footer {
   opacity: 0;
 }
 
-/* line 598, sass/screen.scss */
+/* line 649, sass/screen.scss */
 .lp-header-border {
   padding: 5px 0;
 }
 
 @media (max-width: 73em) {
-  /* line 603, sass/screen.scss */
+  /* line 654, sass/screen.scss */
   .top-nav-links a:nth-of-type(2) {
     display: none;
   }
 }
 @media (max-width: 60em) {
-  /* line 609, sass/screen.scss */
+  /* line 660, sass/screen.scss */
   .top-nav-links a {
     display: none;
   }
 }
 @media (max-width: 40em) {
-  /* line 615, sass/screen.scss */
+  /* line 666, sass/screen.scss */
   .top-nav-search {
     display: none;
   }
 }
 @media (max-width: 30em) {
-  /* line 621, sass/screen.scss */
+  /* line 672, sass/screen.scss */
   .lp-header-input-container button {
     width: 350px;
     margin-left: 5px;
   }
 }
 @media (max-width: 54em) {
-  /* line 628, sass/screen.scss */
+  /* line 679, sass/screen.scss */
   .lp-header-border {
     opacity: 0;
     padding: 0px 0;
   }
 }
-/* line 636, sass/screen.scss */
+/* line 687, sass/screen.scss */
 .item-slide-button-r {
   position: absolute;
   background: #32ab7f;
@@ -986,7 +992,7 @@ footer {
   margin: 0 90px;
   z-index: 2;
 }
-/* line 648, sass/screen.scss */
+/* line 699, sass/screen.scss */
 .item-slide-button-r img {
   transform: rotate(180deg);
   height: 18px;
@@ -995,31 +1001,31 @@ footer {
   left: 1px;
 }
 
-/* line 657, sass/screen.scss */
+/* line 708, sass/screen.scss */
 .item-slide-button-r:hover {
   background: #8ea1ac;
 }
 
-/* line 661, sass/screen.scss */
+/* line 712, sass/screen.scss */
 .chart {
-  height: 223px;
-  width: 500px;
+  height: 255px;
+  width: 620px;
   z-index: 5;
   opacity: 1;
 }
 
-/* line 673, sass/screen.scss */
+/* line 724, sass/screen.scss */
 .hidden {
   height: 0;
 }
 
-/* line 677, sass/screen.scss */
+/* line 728, sass/screen.scss */
 .items-item-stats {
   display: inline-block;
   vertical-align: top;
   margin-left: 130px;
 }
-/* line 682, sass/screen.scss */
+/* line 733, sass/screen.scss */
 .items-item-stats h2 {
   font-family: 'raleway';
   font-size: 30px;
