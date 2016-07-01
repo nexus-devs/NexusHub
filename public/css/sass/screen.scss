@@ -185,7 +185,7 @@ b{
 .items-item {
     display:inline-block;
     text-align: left;
-    padding-right:200px;
+    width:1600px;
 }
 
 .items-wr {
@@ -677,10 +677,12 @@ footer {
 .items-item-stats {
     display:inline-block;
     vertical-align: top;
+    margin-left:130px;
 
      h2{
         @include font-title($color-on-bg);
         font-size:36px;
         font-weight:300;
+         padding-bottom:25px;
     }
 }

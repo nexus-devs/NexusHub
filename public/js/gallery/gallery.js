@@ -217,20 +217,4 @@ $(document).ready(function () {
         }
     })
 
-
-    $(document).on('ready', function () {
-
-        galleryLoop = setInterval(function galleryAutoUpdate() {
-            if (dragging) {} else {
-                GalPos = currentImage;
-                if (GalPos == (n - 1)) {
-                    GalPos = 0;
-                } else {
-                    GalPos = GalPos + 1;
-                };
-                setGalleryPos(GalPos);
-            };
-        }, 8000);
-    });
-
 })
