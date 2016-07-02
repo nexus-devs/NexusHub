@@ -7,18 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WarframeNexus - Trade Prices</title>
 
-    <link href="css/screen.css" rel="stylesheet" type='text/css'>
+    <link href="<%= css %>/screen.css" rel="stylesheet" type='text/css'>
+    <link href="<%= css %>/generic.css" rel="stylesheet" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:300,500,600,700' rel='stylesheet' type='text/css'>
 
-    <script src="js/jquery.min.js"></script>
-    <script src='js/highcharts.js'></script>
-    <script src="js/gallery/motionblur.js"></script>
-    <script src="js/gallery/gallery.js"></script>
-    <script src="js/gallery/gallery_recent.js"></script>
-    <script src="js/gallery/TweenMax.min.js"></script>
+    <script src="<%= js %>jquery.min.js"></script>
+    <script src='<%= js %>highcharts.js'></script>
+    <script src="<%= js %>gallery/motionblur.js"></script>
+    <script src="<%= js %>gallery/gallery.js"></script>
+    <script src="<%= js %>gallery/gallery_recent.js"></script>
+    <script src="<%= js %>gallery/TweenMax.min.js"></script>
 
-    <script src="js/parallax.js"></script>
-    <script src="js/index.js"></script>
+    <script src="<%= js %>parallax.js"></script>
+    <script src="<%= js %>index.js"></script>
 
 </head>
 
@@ -27,13 +28,13 @@
 
     <!-- Header -->
     <!--==============================-->
- <div class='lp-bg' data-parallax="scroll" data-image-src="img/lp_bg.jpg"></div>
+ <div class='lp-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
 
     <header>
         <div class='lp-header'>
             <div class='lp-header-headline-container'>
                 <h1 class='lp-header-headline'>Warframe Item Prices</h1>
-                <img src='img/lp_header_border.png' class='lp-header-border'>
+                <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
                 <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <em>from the chat</em>!</h2>
             </div>
 
@@ -45,7 +46,7 @@
             <input type='text' placeholder='Enter Item Name'>
         </div>
         <button type='button'>
-            <img src='img/lp_search.svg' class='lp-search-ico' alt='Search'>
+            <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
         </button>
     </div>
 
@@ -73,7 +74,7 @@
         <div class='lp-pop-header'>
 
             <h1>
-            <img src='img/lp_popular.svg' alt='Popular Items Icon'>
+            <img src='<%= img %>lp_popular.svg' alt='Popular Items Icon'>
             Popular Items
             <h2>Real Time Updates from Trade Chat</h2>
             </h1>
@@ -84,7 +85,7 @@
         <div class='items-main'>
 
             <button class='item-slide-button dcr-btn' type='button'>
-                <img src='img/lp_click.svg' alt='Next Item'>
+                <img src='<%= img %>lp_click.svg' alt='Next Item'>
             </button>
 
             <div class='items-shade-l'></div>
@@ -101,16 +102,16 @@
 
             </div>
                 <button class='item-slide-button' type=button>
-                    <img src='img/lp_click.svg' alt='Next Item'>
+                    <img src='<%= img %>lp_click.svg' alt='Next Item'>
                 </button>
 
             </div>
 
             <!-- Drag Note -->
             <div class='items-drag-note'>
-                <img src='img/lp_drag.svg' alt='Drag'>
+                <img src='<%= img %>lp_drag.svg' alt='Drag'>
                 <span><b>Click</b> or <b>Drag</b> for more information.</span>
-                <img src='img/lp_drag.svg' alt='Drag'>
+                <img src='<%= img %>lp_drag.svg' alt='Drag'>
             </div>
 
 
@@ -124,7 +125,7 @@
             <!-- Recently Requested -->
     <!--==============================-->
     <div class='lp-recent-items' >
-       <div class='lp-recent-bg' data-parallax="scroll" data-image-src="img/lp_bg.jpg"></div>
+       <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
         <div class='lp-recent-items-shade-l'></div>
                 <div class='lp-recent-items-shade-r'></div>
         <h2>Recently Requested Items</h2>
@@ -134,7 +135,7 @@
         <div class='lp-recent-items-wr'>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -143,7 +144,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -152,7 +153,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -161,7 +162,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -170,7 +171,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -179,7 +180,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -188,7 +189,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -197,7 +198,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
@@ -206,7 +207,7 @@
             </a>
             <a href='#' class='lp-recent-items-item'>
                 <div class='lp-recent-items-helper'></div>
-                <img src='img/items/prime_nikana.png'>
+                <img src='<%= img %>items/prime_nikana.png'>
                 <div class='lp-recent-items-info'>
                     <h3>Nikana Prime</h3>
                     <h4>135p</h4>
