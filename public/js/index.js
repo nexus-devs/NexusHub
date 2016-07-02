@@ -40,7 +40,7 @@ $(window).on('scroll', function () {
 
 // Define Chart Options
 options = {
-    colors: ['#34b083', '#8ea1ac', '#ff', '#6abf40', '#8ea1ac', '#64E572',
+    colors: ['#34b083', '#acbace', '#fff', '#8ea1ac', '#fff', '#64E572',
              '#FF9655', '#FFF263', '#fff'],
     chart: {
         backgroundColor: {
