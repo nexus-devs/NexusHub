@@ -20,6 +20,17 @@
     <script src="<%= js %>gallery/TweenMax.min.js"></script>
     <script src="<%= js %>parallax.js"></script>
     <script src="<%= js %>index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', {
+                my: 'data'
+            });
+        });
+    </script>
+
 
 </head>
 
@@ -105,7 +116,8 @@
     <!-- Note -->
     <div class='main-item-bot'>
 
-        <img src='<%= img %>donation_paypal.png'><br>
+        <img src='<%= img %>donation_paypal.png'>
+        <br>
         <span>Like our Service? Help us keep it alive! <span>(without shitty ads)</span></span>
     </div>
 
