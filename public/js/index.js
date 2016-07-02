@@ -33,14 +33,15 @@ $(window).on('scroll', function () {
     if (y_scroll_pos > scroll_pos_test) {
         $('.top-nav-search > input').css('opacity', '1');
     }
+
 });
 
 
 
 // Define Chart Options
 options = {
-    colors: ['#34b083', '#40bebf', '#2a7c9e', '#6abf40', '#8ea1ac', '#64E572',
-             '#FF9655', '#FFF263', '#6AF9C4'],
+    colors: ['#34b083', '#8ea1ac', '#ff', '#6abf40', '#8ea1ac', '#64E572',
+             '#FF9655', '#FFF263', '#fff'],
     chart: {
         backgroundColor: {
             linearGradient: [0, 0, 500, 500],

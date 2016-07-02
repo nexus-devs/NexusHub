@@ -11,7 +11,10 @@ router.get('/', function(req, res){
         page_title: json.PageTitle,
         main_title: json.Headline,
         title: "Title",
-        desc: "Desc"
+        desc: "Desc",
+        css: "/css/",
+        js: "/js/",
+        img: "/img/"
   })
 })
 

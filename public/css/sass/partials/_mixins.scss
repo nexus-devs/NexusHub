@@ -82,21 +82,25 @@
     padding-top:3px;
 }
 
-@mixin input-placeholder {
+@mixin input-placeholder($color) {
     ::-webkit-input-placeholder {
-        @include font-default($color-subtle);
+        @include font-default($color-base);
+        color:$color !important;
 
     }
     ::-moz-placeholder {
-        @include font-default($color-subtle);
+        @include font-default($color-base);
+        color:$color !important;
 
     }
     :-ms-input-placeholder {
-        @include font-default($color-subtle);
+        @include font-default($color-base);
+        color:$color !important;
 
     }
     :-moz-placeholder {
-        @include font-default($color-subtle);
+        @include font-default($color-base);
+        color:$color !important;
 
     }
 }
