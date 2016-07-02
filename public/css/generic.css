@@ -171,8 +171,17 @@ footer {
   padding: 90px 0;
 }
 
+/* line 83, sass/generic.scss */
+.top-nav-search {
+  opacity: 1;
+}
+/* line 84, sass/generic.scss */
+.top-nav-search input {
+  opacity: 1;
+}
+
 @media (max-width: 80em) {
-  /* line 85, sass/generic.scss */
+  /* line 91, sass/generic.scss */
   .main-content-wrapper {
     width: 80%;
   }

@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var generic = require('./routes/generic')
+var main_item = require('./routes/main_item')
 //var users = require('./routes/users');
 
 
@@ -30,7 +31,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/jobs', generic)
 app.use('/imprint', generic)
+app.use('/prime/nikana', main_item)
 //app.use('/users', users);
+
 
 
 
