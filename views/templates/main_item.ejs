@@ -14,16 +14,16 @@
                 <div class='items-images-components-part'>
 
 
-                    <% item.Components.forEach(function(item) { %>
+                    <% item.Components.forEach(function(itemcomp) { %>
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
-                                <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= item.Title %><%= item.name8i %>'>
+                                <img src='<%= img %>generic/<%= itemcomp.name %>.png' alt='<%= item.Title %><%= itemcomp.name %>'>
                             </div>
                             <div class='items-component-details'>
-                                <h3><%= item.name %></h3>
-                                <h4><%= item.avg %></h4>
-                                <span>(<%= item.Comp_val_rt %>)</span>
+                                <h3><%= itemcomp.name %></h3>
+                                <h4><%= itemcomp.avg %></h4>
+                                <span>(<%= itemcomp.Comp_val_rt %>)</span>
                             </div>
                         </div>
                         <% }); %>

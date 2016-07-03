@@ -6,7 +6,6 @@
   "keywords": [],
   "dependencies": {
     "ejs": "2.3.4",
-    "grunt-contrib-sass": "^1.0.0",
     "include-all": "~0.1.6",
     "rc": "1.0.1",
     "sails": "~0.12.3",
@@ -26,7 +25,8 @@
     "grunt-contrib-uglify": "0.7.0",
     "grunt-contrib-watch": "0.5.3",
     "grunt-sails-linker": "~0.10.1",
-    "grunt-sync": "0.2.4"
+    "grunt-sync": "0.2.4",
+    "grunt-contrib-sass": "^1.0.0"
   },
   "scripts": {
     "debug": "node debug app.js",
