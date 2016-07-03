@@ -127,14 +127,14 @@ b {
     font-family: 'raleway';
     font-size: 30px;
     font-weight: 600;
-    color: #2e3540; }
+    color: #2e3840; }
   /* line 51, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/generic.scss */
   .main-content-wrapper h2 {
     padding-top: 90px;
     font-family: 'raleway';
     font-size: 24px;
     font-weight: 600;
-    color: #2e3540;
+    color: #2e3840;
     padding-bottom: 20px; }
   /* line 57, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/generic.scss */
   .main-content-wrapper span {
@@ -142,7 +142,7 @@ b {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     line-height: 32px;
     font-size: 18px;
     width: 80%; }
@@ -151,12 +151,12 @@ b {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     font-size: 18px; }
 
 /* line 72, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/generic.scss */
 footer {
-  background: #2e3540;
+  background: #2e3840;
   text-align: center;
   padding: 90px 0; }
 
@@ -181,7 +181,7 @@ body {
   font-family: 'raleway';
   font-size: 16px;
   font-weight: 500;
-  color: #2e3540;
+  color: #2e3840;
   overflow-x: hidden; }
 
 /* line 11, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
@@ -213,7 +213,7 @@ body {
   font-family: 'raleway';
   font-size: 22px;
   font-weight: 700;
-  color: #2e3540; }
+  color: #2e3840; }
 
 /* line 34, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .top-logo-text {
@@ -239,7 +239,7 @@ body {
     font-family: 'raleway';
     font-size: 18px;
     font-weight: 700;
-    color: #2e3540; }
+    color: #2e3840; }
   /* line 52, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .top-nav-links a {
     font-family: 'raleway';
@@ -328,7 +328,7 @@ b {
   /* line 114, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .lp-header-input-container button:hover,
   .lp-header-input-container button:focus {
-    background: #2e3540;
+    background: #2e3840;
     outline: none;
     cursor: pointer;
     border: 0;
@@ -349,29 +349,29 @@ b {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
-    color: #2e3540 !important; }
+    color: #2e3840;
+    color: #2e3840 !important; }
   /* line 91, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .lp-header-input ::-moz-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
-    color: #2e3540 !important; }
+    color: #2e3840;
+    color: #2e3840 !important; }
   /* line 96, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .lp-header-input :-ms-input-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
-    color: #2e3540 !important; }
+    color: #2e3840;
+    color: #2e3840 !important; }
   /* line 101, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .lp-header-input :-moz-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
-    color: #2e3540 !important; }
+    color: #2e3840;
+    color: #2e3840 !important; }
   /* line 122, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .lp-header-input input {
     outline: none;
@@ -381,7 +381,7 @@ b {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     background: white;
     height: 45px;
     width: 315px; }
@@ -416,7 +416,7 @@ b {
     font-family: 'raleway';
     font-size: 30px;
     font-weight: 600;
-    color: #2e3540;
+    color: #2e3840;
     font-weight: 700;
     display: inline-block;
     vertical-align: super;
@@ -434,7 +434,7 @@ b {
 
 /* line 170, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .items-main {
-  background: #2e3540;
+  background: #2e3840;
   text-align: center;
   position: relative; }
 
@@ -704,7 +704,7 @@ b {
 
 /* line 434, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 footer {
-  background: #2e3540;
+  background: #2e3840;
   text-align: center;
   padding: 90px 0; }
 
@@ -831,10 +831,10 @@ footer {
   pointer-events: none;
   top: 0;
   z-index: 1;
-  background: -webkit-linear-gradient(left, #2e3540, transparent);
-  background: -o-linear-gradient(right, #2e3540, transparent);
-  background: -moz-linear-gradient(right, #2e3540, transparent);
-  background: linear-gradient(to right, #2e3540, transparent); }
+  background: -webkit-linear-gradient(left, #2e3840, transparent);
+  background: -o-linear-gradient(right, #2e3840, transparent);
+  background: -moz-linear-gradient(right, #2e3840, transparent);
+  background: linear-gradient(to right, #2e3840, transparent); }
 
 /* line 541, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .items-shade-r {
@@ -845,10 +845,10 @@ footer {
   pointer-events: none;
   top: 0;
   z-index: 1;
-  background: -webkit-linear-gradient(left, transparent, #2e3540);
-  background: -o-linear-gradient(right, transparent, #2e3540);
-  background: -moz-linear-gradient(right, transparent, #2e3540);
-  background: linear-gradient(to right, transparent, #2e3540); }
+  background: -webkit-linear-gradient(left, transparent, #2e3840);
+  background: -o-linear-gradient(right, transparent, #2e3840);
+  background: -moz-linear-gradient(right, transparent, #2e3840);
+  background: linear-gradient(to right, transparent, #2e3840); }
 
 /* line 555, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-recent-items-shade-l {
@@ -912,28 +912,28 @@ footer {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     color: #8ea1ac !important; }
   /* line 91, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .top-nav-search ::-moz-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     color: #8ea1ac !important; }
   /* line 96, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .top-nav-search :-ms-input-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     color: #8ea1ac !important; }
   /* line 101, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
   .top-nav-search :-moz-placeholder {
     font-family: 'raleway';
     font-size: 16px;
     font-weight: 500;
-    color: #2e3540;
+    color: #2e3840;
     color: #8ea1ac !important; }
   /* line 612, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .top-nav-search input {
@@ -1068,7 +1068,7 @@ footer {
   /* line 734, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .input-container button:hover,
   .input-container button:focus {
-    background: #2e3540;
+    background: #2e3840;
     outline: none;
     cursor: pointer;
     border: 0;
@@ -1165,7 +1165,7 @@ footer {
 
 /* line 813, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .main-items {
-  background: #2e3540;
+  background: #2e3840;
   position: relative;
   text-align: center;
   margin-top: -16px; }

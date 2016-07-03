@@ -19,7 +19,7 @@
                             <!-- Component -->
                             <div class='item-images-components-wr'>
                                 <div class='item-images-components-component'>
-                                    <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= itemdata.Title %><%= item.name %>'>
+                                    <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= itemdata.Title %> <%= item.name %>'>
                                 </div>
                                 <div class='items-component-details'>
                                     <h3><%= item.name %></h3>
@@ -66,8 +66,8 @@
     <script>
         $(function () {
             var SupDem = <%- JSON.stringify(itemdata.SupDem)%>;
-            var Supply = SupDem[1];
-            var Demand = SupDem[0];
+            var Supply = SupDem[0];
+            var Demand = SupDem[1];
             $('sup').html(Supply);
             $('dem').html(Demand);
         });
@@ -205,8 +205,8 @@
                             var Supply = SupDem[1];
                             var Demand = SupDem[0];
                             var SupDemNum = <%- JSON.stringify(itemdata.SupDemNum)%>;
-                            var SupplyNum = SupDemNum[1];
-                            var DemandNum = SupDemNum[0];
+                            var SupplyNum = SupDemNum[0];
+                            var DemandNum = SupDemNum[1];
                             var colors = Highcharts.getOptions().colors,
                                 categories = ['Demand', 'Supply'],
                                 data = [{
@@ -215,7 +215,7 @@
         },
                                     {
                                         y: Supply,
-                                        color: colors[3],
+                                        color: colors[0],
                                    }],
                                 browserData = [],
                                 versionsData = [],
