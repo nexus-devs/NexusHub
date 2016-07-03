@@ -1,31 +1,9 @@
 {
   "name": "WarframeNexus",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
-  },
-  "dependencies": {
-    "body-parser": "~1.15.1",
-    "chart.js": "^2.1.6",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
-    "dynamic-routes": "^0.2.1",
-    "ejs": "~2.4.1",
-    "express": "~4.13.4",
-    "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
-    "socket.io": "latest"
-  }
-}
-
-
-{
-  "name": "socket-notification",
-  "version": "1.0.0",
-  "main": "./Server/",
-  "scripts": {
-    "start": "node ./Server/"
+    "start": "node ./Server"
   },
   "author": "",
   "dependencies": {
