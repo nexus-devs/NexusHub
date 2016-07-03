@@ -20,6 +20,7 @@
  * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
+//var package = req.originalUrl;
 
 module.exports.routes = {
     '/': {
@@ -30,7 +31,11 @@ module.exports.routes = {
             js: "/js/",
             img: "/img/"
         }
-    }
+    },
+
+    'get /jobs': 'GenericController',
+    'get /imprint': 'GenericController',
+    'get /prime/:id': 'ItemsController'
 
     /***************************************************************************
      *                                                                          *

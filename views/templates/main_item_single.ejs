@@ -1,13 +1,13 @@
 <div class='main-item'>
     <div class='main-items-item'>
         <div class='items-item-main-inf'>
-            <h2><%= item.Title %> <%= item.Type %></h2>
+            <h2><%= itemdata.Title %> <%= itemdata.Type %></h2>
             <div class='items-images'>
 
                 <!-- Item Info -->
                 <div class='items-images-main'>
                     <div class='items-images-main-helper'></div>
-                    <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png' alt='<%= item.Title %>'>
+                    <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
                 </div>
 
                 <!-- Item Components -->
@@ -15,11 +15,11 @@
                     <div class='items-images-components-part'>
 
 
-                        <% item.Components.forEach(function(item) { %>
+                        <% itemdata.Components.forEach(function(item) { %>
                             <!-- Component -->
                             <div class='item-images-components-wr'>
                                 <div class='item-images-components-component'>
-                                    <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= item.Title %><%= item.name8i %>'>
+                                    <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= itemdata.Title %><%= item.name %>'>
                                 </div>
                                 <div class='items-component-details'>
                                     <h3><%= item.name %></h3>
@@ -41,7 +41,7 @@
         <h2 class=' main-item-headline-fix'>Weekly Statistics</h2>
         <div class='main-stats'>
             <div class='items-images'>
-                <div class='chart' id="<%= item.Title %>"></div>
+                <div class='chart' id="<%= itemdata.Title %>"></div>
             </div>
         </div>
     </div>
@@ -62,53 +62,63 @@
 </div>
 
 
-
-
-<% if (item.Title, item.Components) { %>
+<% if (itemdata.SupDem) { %>
     <script>
-        var ItemName = <%- JSON.stringify(item.Title)%>;
-        var series = [];
-        var compData = <%- JSON.stringify(item.Components) %>;
+        $(function () {
+            var SupDem = <%- JSON.stringify(itemdata.SupDem)%>;
+            var Supply = SupDem[1];
+            var Demand = SupDem[0];
+            $('sup').html(Supply);
+            $('dem').html(Demand);
+        });
+    </script>
+    <% } %>
 
-        Highcharts.setOptions(options);
 
-        var chartdata = {
-            chart: {
-                type: 'areaspline',
-                style: {
-                    font: '18px "Raleway", Verdana, sans-serif',
-                    color: '#8ea1ac'
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            title: {
-                text: ''
-            },
-            legend: {
-                enabled: true,
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                floating: false,
-                itemMarginBottom: 20,
-                itemStyle: {
-                    'color': '#8ea1ac',
-                    'font': '16px Raleway'
-                },
-                itemHoverStyle: {
-                    color: '#fff'
-                }
-            },
-            xAxis: {
-                gridLineColor: "#69767e",
-                gridLineDashStyle: 'dash',
-                gridLineWidth: 1,
-                minorGridLineColor: "#E0E0E0",
-                minorGridLineDashStyle: "Solid",
-                minorGridLineWidth: 1,
-                categories: [
+
+        <% if (itemdata.Title, itemdata.Components) { %>
+            <script>
+                var ItemName = <%- JSON.stringify(itemdata.Title)%>;
+                var series = [];
+                var compData = <%- JSON.stringify(itemdata.Components) %>;
+                Highcharts.setOptions(options);
+                var chartdata = {
+                    chart: {
+                        type: 'areaspline',
+                        style: {
+                            font: '18px "Raleway", Verdana, sans-serif',
+                            color: '#8ea1ac'
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    title: {
+                        text: ''
+                    },
+                    legend: {
+                        enabled: true,
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        floating: false,
+                        itemMarginBottom: 20,
+                        itemStyle: {
+                            'color': '#8ea1ac',
+                            'font': '16px Raleway'
+                        },
+                        itemHoverStyle: {
+                            color: '#fff'
+                        }
+                    },
+                    xAxis: {
+                        gridLineColor: "#69767e",
+                        gridLineDashStyle: 'dash',
+                        gridLineWidth: 1,
+                        minorGridLineColor: "#E0E0E0",
+                        minorGridLineDashStyle: "Solid",
+                        minorGridLineWidth: 1,
+                        categories: [
                 'Mon',
                 'Tue',
                 'Wed',
@@ -117,184 +127,65 @@
                 'Sat',
                 'Sun'
             ],
-                allowDecimals: false,
-                lineColor: '#8ea1ac',
-                tickColor: 'rgba(0,0,0,0)',
-                startOnTick: true,
-                labels: {
-                    style: {
-                        color: '#8ea1ac',
-                        font: '14px Arial'
-                    },
-                    formatter: function () {
-                        return this.value; // clean, unformatted number for year
-                    }
-                }
-            },
-            yAxis: {
-                gridLineColor: "#69767e",
-                gridLineDashStyle: 'dash',
-                gridLineWidth: 1,
-
-                lineColor: '#8ea1ac',
-                tickColor: 'rgba(0,0,0,0)',
-                title: {
-                    text: ''
-                },
-                labels: {
-                    style: {
-                        color: '#8ea1ac',
-                        font: '14px Arial'
-                    },
-                    formatter: function () {
-                        return this.value;
-                    }
-                }
-            },
-            tooltip: {
-                style: {
-                    color: '#8ea1ac',
-                    font: '24px Arial',
-                    fontSize: '16px'
-                },
-                pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
-            },
-            plotOptions: {
-                area: {
-                    marker: {
-                        enabled: false,
-                        symbol: 'circle',
-                        radius: 3,
-                        states: {
-                            hover: {
-                                enabled: true
+                        allowDecimals: false,
+                        lineColor: '#8ea1ac',
+                        tickColor: 'rgba(0,0,0,0)',
+                        startOnTick: true,
+                        labels: {
+                            style: {
+                                color: '#8ea1ac',
+                                font: '14px Arial'
+                            },
+                            formatter: function () {
+                                return this.value; // clean, unformatted number for year
                             }
                         }
-                    }
-                }
-            },
-
-            series: []
-        }
-
-        chartdata.series = compData;
-
-        $('#' + ItemName).highcharts(chartdata);
-    </script>
-    <% } %>
-
-
-
-
-
-
-
-
-
-
-        <% if (item.SupDem, item.SupDemNum) { %>
-            <script>
-                $(function () {
-                    var SupDem = <%- JSON.stringify(item.SupDem)%>;
-                    var Supply = SupDem[1];
-                    var Demand = SupDem[0];
-
-                    var SupDemNum = <%- JSON.stringify(item.SupDemNum)%>;
-                    var SupplyNum = SupDemNum[1];
-                    var DemandNum = SupDemNum[0];
-
-                    var colors = Highcharts.getOptions().colors,
-                        categories = ['Demand', 'Supply'],
-                        data = [{
-                                y: Demand,
-                                color: colors[8],
-        },
-                            {
-                                y: Supply,
-                                color: colors[3],
-                                   }],
-                        browserData = [],
-                        versionsData = [],
-                        i,
-                        j,
-                        dataLen = data.length,
-                        drillDataLen,
-                        brightness;
-
-
-                    // Build the data arrays
-                    for (i = 0; i < dataLen; i += 1) {
-
-                        // add browser data
-                        browserData.push({
-                            name: categories[i],
-                            y: data[i].y,
-                            color: data[i].color
-                        });
-
-                    }
-
-
-
-                    // Create the chart
-                    $('#Demand').highcharts({
-                        credits: {
-                            enabled: false
-                        },
-                        chart: {
-                            type: 'pie',
-                            categories: ['WTS', 'WTB']
-                        },
+                    },
+                    yAxis: {
+                        gridLineColor: "#69767e",
+                        gridLineDashStyle: 'dash',
+                        gridLineWidth: 1,
+                        lineColor: '#8ea1ac',
+                        tickColor: 'rgba(0,0,0,0)',
                         title: {
                             text: ''
                         },
-
-                        plotOptions: {
-                            pie: {
-                                allowPointSelect: true,
-                                cursor: 'pointer',
-                                dataLabels: {
-                                    enabled: false,
-                                },
-                                borderWidth: 0,
-                            }
-                        },
-                        tooltip: {
+                        labels: {
                             style: {
                                 color: '#8ea1ac',
-                                font: '24px Arial',
-                                fontSize: '16px'
+                                font: '14px Arial'
                             },
-                            useHTML: true,
-
                             formatter: function () {
-                                if (this.point.name == 'Demand') {
-                                    return '<b>Supply</b>:' + SupplyNum + ' Offers';
-                                } else {
-                                    if (this.point.name == 'Supply') {}
-                                    return '<b>Demand</b>:' + DemandNum + ' Offers';
-                                }
-
+                                return this.value;
                             }
-
-                            //pointFormat: '<b>'+ this.point.name +'</b> at <b>{point.y:,.0f} Platinum'
+                        }
+                    },
+                    tooltip: {
+                        style: {
+                            color: '#8ea1ac',
+                            font: '24px Arial',
+                            fontSize: '16px'
                         },
-                        series: [{
-                            name: 'Supply/Demand',
-                            data: browserData,
-                            size: '100%',
-                            innerSize: '95%',
-                            dataLabels: {
-                                formatter: function () {
-                                    return this.y > 5 ? this.point.name : null;
-                                },
-                                color: '#ffffff',
-                                distance: -30
+                        pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
+                    },
+                    plotOptions: {
+                        area: {
+                            marker: {
+                                enabled: false,
+                                symbol: 'circle',
+                                radius: 3,
+                                states: {
+                                    hover: {
+                                        enabled: true
+                                    }
+                                }
                             }
-
-                                }]
-                    });
-                });
+                        }
+                    },
+                    series: []
+                }
+                chartdata.series = compData;
+                $('#' + ItemName).highcharts(chartdata);
             </script>
             <% } %>
 
@@ -305,14 +196,96 @@
 
 
 
-                <% if (item.SupDem) { %>
+
+
+                <% if (itemdata.SupDem, itemdata.SupDemNum) { %>
                     <script>
                         $(function () {
-                            var SupDem = <%- JSON.stringify(item.SupDem)%>;
+                            var SupDem = <%- JSON.stringify(itemdata.SupDem)%>;
                             var Supply = SupDem[1];
                             var Demand = SupDem[0];
-                            $('sup').html(Supply);
-                            $('dem').html(Demand);
+                            var SupDemNum = <%- JSON.stringify(itemdata.SupDemNum)%>;
+                            var SupplyNum = SupDemNum[1];
+                            var DemandNum = SupDemNum[0];
+                            var colors = Highcharts.getOptions().colors,
+                                categories = ['Demand', 'Supply'],
+                                data = [{
+                                        y: Demand,
+                                        color: colors[8],
+        },
+                                    {
+                                        y: Supply,
+                                        color: colors[3],
+                                   }],
+                                browserData = [],
+                                versionsData = [],
+                                i,
+                                j,
+                                dataLen = data.length,
+                                drillDataLen,
+                                brightness;
+                            // Build the data arrays
+                            for (i = 0; i < dataLen; i += 1) {
+                                // add browser data
+                                browserData.push({
+                                    name: categories[i],
+                                    y: data[i].y,
+                                    color: data[i].color
+                                });
+                            }
+                            // Create the chart
+                            $('#Demand').highcharts({
+                                credits: {
+                                    enabled: false
+                                },
+                                chart: {
+                                    type: 'pie',
+                                    categories: ['WTS', 'WTB']
+                                },
+                                title: {
+                                    text: ''
+                                },
+                                plotOptions: {
+                                    pie: {
+                                        allowPointSelect: true,
+                                        cursor: 'pointer',
+                                        dataLabels: {
+                                            enabled: false,
+                                        },
+                                        borderWidth: 0,
+                                    }
+                                },
+                                tooltip: {
+                                    style: {
+                                        color: '#8ea1ac',
+                                        font: '24px Arial',
+                                        fontSize: '16px'
+                                    },
+                                    useHTML: true,
+                                    formatter: function () {
+                                            if (this.point.name == 'Demand') {
+                                                return '<b>Supply</b>:' + SupplyNum + ' Offers';
+                                            } else {
+                                                if (this.point.name == 'Supply') {}
+                                                return '<b>Demand</b>:' + DemandNum + ' Offers';
+                                            }
+                                        }
+                                        //pointFormat: '<b>'+ this.point.name +'</b> at <b>{point.y:,.0f} Platinum'
+                                },
+                                series: [{
+                                    name: 'Supply/Demand',
+                                    data: browserData,
+                                    size: '100%',
+                                    innerSize: '95%',
+                                    dataLabels: {
+                                        formatter: function () {
+                                            return this.y > 5 ? this.point.name : null;
+                                        },
+                                        color: '#ffffff',
+                                        distance: -30
+                                    }
+                                }]
+                            });
                         });
                     </script>
                     <% } %>
