@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WarframeNexus - Trade Prices</title>
 
-    <link href="<%= css %>/screen.css" rel="stylesheet" type='text/css'>
-    <link href="<%= css %>/generic.css" rel="stylesheet" type='text/css'>
+    <link href="<%= css %>/importer.css" rel="stylesheet" type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Raleway:300,500,600,700' rel='stylesheet' type='text/css'>
 
     <script src="<%= js %>jquery.min.js"></script>
@@ -21,7 +20,7 @@
     <script src="<%= js %>parallax.js"></script>
     <script src="<%= js %>index.js"></script>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script type "text/javascript" src="/js/dependencies/sails.io.js"></script>
     <script>
         var socket = io.connect('http://localhost');
         socket.on('news', function (data) {
