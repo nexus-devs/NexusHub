@@ -18,3 +18,27 @@
     "socket.io": "latest"
   }
 }
+
+
+{
+  "name": "socket-notification",
+  "version": "1.0.0",
+  "main": "./Server/",
+  "scripts": {
+    "start": "node ./Server/"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.13.4",
+    "mysql": "~2.9.0",
+    "chart.js": "^2.1.6",
+    "ejs": "~2.4.1",
+    "express": "~4.13.4",
+    "socket.io": "latest"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-nodemon": "^0.4.0"
+  }
+}
