@@ -18,24 +18,26 @@
     <script src="<%= js %>gallery/TweenMax.min.js"></script>
     <script src="<%= js %>parallax.js"></script>
     <script src="<%= js %>index.js"></script>
+    <script src="<%= js %>/dependencies/sails.io.js"></script>
+    <script src="<%= js %>sockets.js"></script>
 
 </head>
 
 <% include .\templates\nav %>
 
 
-
+<body>
     <!-- Main Content -->
     <!--==============================-->
 
     <div class='lp-content main-content'>
         <div class='top-spacing'></div>
 
-        <!-- <div class='lp-recent-items'>
+           <!-- <div class='lp-recent-items item-search'>
             <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
             <div class='input-container'>
                 <div class='lp-header-input-helper'></div>
-                <div class='lp-header-input' id='search'>
+                <div class='lp-header-input item-search-input' id='search'>
                     <input type='text' placeholder='Find another item'>
                 </div>
                 <button type='button'>
@@ -43,6 +45,8 @@
                 </button>
             </div>
         </div> -->
+
+
 
 
 
@@ -82,7 +86,7 @@
 
         </div>
 
-        <div class='item-options'>
+           <div class='item-options'>
             <div class='item-options-buyers'>
                 <div class='item-options-ico'><img src='<%= img %>main_buyers.svg'></div><span>Show Buyers List </span><span> (Coming Soon)</span>
             </div>
@@ -95,20 +99,20 @@
         </div>
 
 
-
     </div>
+
+
 
 
 
     <!-- Note -->
     <div class='main-item-bot'>
-
         <img src='<%= img %>donation_paypal.png'>
         <br>
         <span>Like our Service? Help us keep it alive! <span>(without shitty ads)</span></span>
     </div>
 
-
+</body>
 
 
     <% include .\templates\footer %>

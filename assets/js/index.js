@@ -1,9 +1,11 @@
 // General Site Functions
 // ------------------------------
 
-// Bug Hunters
+// Bug Hunters + js
 $(document).ready(function () {
+    $('.javascript-notf').remove()
     console.log('Find any bugs or security issues? Contact us on https://discord.gg/8mCNvKp. We greatly appreciate your help :)')
+    $('.top-nav-search > input').css('opacity', '1');
 })
 
 
@@ -40,7 +42,7 @@ $(window).on('scroll', function () {
 
 // Define Chart Options
 options = {
-    colors: ['#34b083', '#acbace', '#fff', '#ff6955', '#fff', '#64E572',
+    colors: ['#34b083', '#acbace', '#fff', '#449ce7', '#fff', '#64E572',
              '#FF9655', '#FFF263', '#fff'],
     chart: {
         backgroundColor: {
