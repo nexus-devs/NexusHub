@@ -10,6 +10,7 @@ function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+
 module.exports = {
     index: function (req, res) {
         // load according file
@@ -34,7 +35,7 @@ module.exports = {
 
         // Save Items to index
         data.items.forEach(function (items) {
-            itemsArray.push(JSON.stringify(items).toLowerCase()); //push values here
+            itemsArray.push(JSON.stringify(items).toLowerCase());
         });
 
 
