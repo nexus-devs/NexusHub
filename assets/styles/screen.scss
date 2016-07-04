@@ -127,6 +127,17 @@ b {
         width: 315px;
     }
 }
+.item-search {
+    @include vertical-align;
+    @include input-placeholder($color-subtle);
+    input {
+        @include input;
+        @include font-default(white);
+        background: #242932;
+        height: 45px;
+        width: 315px;
+    }
+}
 
 .lp-header-input-helper {
     @include vertical-align-helper(50%);
@@ -500,7 +511,7 @@ footer {
 }
 
 .lp-recent-items-info {
-    bottom: 45px;
+    bottom: 65px;
     position: absolute;
     width: 100%;
     h3 {
@@ -722,7 +733,6 @@ footer {
     margin:-20px 0;
     width: 70%;
     margin:auto;
-    text-align: right;
     button {
         @include input-button($color-accent);
         height: 49px;
@@ -888,4 +898,25 @@ background:transparent !important;
         position:relative;
         top:9px;
     }
+}
+
+.javascript-notf {
+    background:$color-warning;
+}
+
+.javascript-notf-container {
+    text-align:center;
+    color:white;
+    padding:20px 0;
+}
+
+.js-sub-span {
+    a{
+        color:white;
+        opacity:0.7;
+    }
+}
+
+.item-search {
+    background:rgba(24,27,33,0.8)
 }

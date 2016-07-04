@@ -19,205 +19,138 @@
 
     <script src="<%= js %>parallax.js"></script>
     <script src="<%= js %>index.js"></script>
+    <script src="<%= js %>/dependencies/sails.io.js"></script>
+    <script src="<%= js %>sockets.js"></script>
 
 
 </head>
 
+
+
 <% include .\templates\nav %>
 
+    <body>
+        <!-- Header -->
+        <!--==============================-->
+        <div class='lp-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
 
-    <!-- Header -->
-    <!--==============================-->
-    <div class='lp-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
+        <header>
+            <div class='lp-header'>
+                <div class='lp-header-headline-container'>
+                    <h1 class='lp-header-headline'>Warframe Item Prices</h1>
+                    <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
+                    <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <em>from the chat</em>!</h2>
+                </div>
 
-    <header>
-        <div class='lp-header'>
-            <div class='lp-header-headline-container'>
-                <h1 class='lp-header-headline'>Warframe Item Prices</h1>
-                <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
-                <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <em>from the chat</em>!</h2>
             </div>
-
+        </header>
+        <div class='lp-header-input-container'>
+            <div class='lp-header-input-helper'></div>
+            <div class='lp-header-input' id='search'>
+                <input type='text' placeholder='Enter Item Name'>
+            </div>
+            <button type='button'>
+                <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
+            </button>
         </div>
-    </header>
-    <div class='lp-header-input-container'>
-        <div class='lp-header-input-helper'></div>
-        <div class='lp-header-input' id='search'>
-            <input type='text' placeholder='Enter Item Name'>
-        </div>
-        <button type='button'>
-            <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
-        </button>
-    </div>
 
 
 
 
-    <!-- Main Content -->
-    <!--==============================-->
+        <!-- Main Content -->
+        <!--==============================-->
 
-    <div class='lp-content'>
-
-
-
-        <!-- Load SVG Blur for Gallery -->
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
-            <defs>
-                <filter id="blur">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
-                </filter>
-            </defs>
-        </svg>
+        <div class='lp-content'>
 
 
-        <!-- Popular Items -->
-        <div class='lp-pop-header'>
 
-            <h1>
+            <!-- Load SVG Blur for Gallery -->
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
+                <defs>
+                    <filter id="blur">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+                    </filter>
+                </defs>
+            </svg>
+
+
+            <!-- Popular Items -->
+            <div class='lp-pop-header'>
+
+                <h1>
             <img src='<%= img %>lp_popular.svg' alt='Popular Items Icon'>
             Popular Items
             <h2>Real Time Updates from Trade Chat</h2>
             </h1>
 
-        </div>
+            </div>
 
 
-        <div class='items-main'>
+            <div class='items-main'>
 
-            <button class='item-slide-button dcr-btn' type='button'>
-                <img src='<%= img %>lp_click.svg' alt='Next Item'>
-            </button>
+                <button class='item-slide-button dcr-btn' type='button'>
+                    <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                </button>
 
-            <div class='items-shade-l'></div>
-            <div class='items-shade-r'></div>
-            <div class='items-wr'>
+                <div class='items-shade-l'></div>
+                <div class='items-shade-r'></div>
+                <div class='items-wr'>
 
 
-                <!-- Main Item (Nikana P) -->
-                <!--==============================-->
-                <% content.items.forEach(function(item) { %>
-                    <% include .\templates\main_item %>
-                        <% }); %>
+                    <!-- Main Item (Nikana P) -->
+                    <!--==============================-->
+                    <% content.items.forEach(function(item) { %>
+                        <% include .\templates\main_item %>
+                            <% }); %>
 
+
+                </div>
+                <button class='item-slide-button' type=button>
+                    <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                </button>
 
             </div>
-            <button class='item-slide-button' type=button>
-                <img src='<%= img %>lp_click.svg' alt='Next Item'>
-            </button>
+
+            <!-- Drag Note -->
+            <div class='items-drag-note'>
+                <img src='<%= img %>lp_drag.svg' alt='Drag'>
+                <span><b>Click</b> or <b>Drag</b> for more information.</span>
+                <img src='<%= img %>lp_drag.svg' alt='Drag'>
+            </div>
+
+
+
 
         </div>
 
-        <!-- Drag Note -->
-        <div class='items-drag-note'>
-            <img src='<%= img %>lp_drag.svg' alt='Drag'>
-            <span><b>Click</b> or <b>Drag</b> for more information.</span>
-            <img src='<%= img %>lp_drag.svg' alt='Drag'>
+
+
+
+        <!-- Recently Requested -->
+        <!--==============================-->
+        <div class='lp-recent-items'>
+            <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
+            <div class='lp-recent-items-shade-l'></div>
+            <div class='lp-recent-items-shade-r'></div>
+            <h2>Recently Requested Items</h2>
+
+
+
+            <div class='lp-recent-items-wr'>
+                 <% content.items.forEach(function(item) { %>
+                <a href='/<%= item.Type %>/<%= item.Title %>' class='lp-recent-items-item'>
+                    <div class='lp-recent-items-helper'></div>
+                    <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png'>
+                    <div class='lp-recent-items-info'>
+                        <h3><%= item.Title %><%= item.Type %></h3>
+                        <h4>135p</h4>
+                    </div>
+                </a>
+                <% }); %>
+            </div>
         </div>
 
-
-
-
-    </div>
-
-
-
-
-    <!-- Recently Requested -->
-    <!--==============================-->
-    <div class='lp-recent-items'>
-        <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
-        <div class='lp-recent-items-shade-l'></div>
-        <div class='lp-recent-items-shade-r'></div>
-        <h2>Recently Requested Items</h2>
-
-
-
-        <div class='lp-recent-items-wr'>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-            <a href='#' class='lp-recent-items-item'>
-                <div class='lp-recent-items-helper'></div>
-                <img src='<%= img %>items/prime_nikana.png'>
-                <div class='lp-recent-items-info'>
-                    <h3>Nikana Prime</h3>
-                    <h4>135p</h4>
-                    <span>lLdglichigo2</span>
-                </div>
-            </a>
-        </div>
-    </div>
-
-
+    </body>
 
     <% include .\templates\footer %>
 

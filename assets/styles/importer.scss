@@ -25,3 +25,9 @@
 // @import 'foundation.scss';
 //
 // etc.
+
+.nav-sticky {
+        position:fixed;
+    z-index:5;
+    width:100%;
+}
