@@ -1,38 +1,11 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WarframeNexus -
-        <%= itemdata.Title %>
-            <%= itemdata.Type %>
-    </title>
-    <link href="<%= css %>/importer.css" rel="stylesheet" type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Raleway:300,500,600,700' rel='stylesheet' type='text/css'>
-
-    <script src="<%= js %>jquery.min.js"></script>
-    <script src='<%= js %>highcharts.js'></script>
-    <script src="<%= js %>gallery/motionblur.js"></script>
-    <script src="<%= js %>gallery/gallery_main.js"></script>
-    <script src="<%= js %>gallery/TweenMax.min.js"></script>
-    <script src="<%= js %>parallax.js"></script>
-    <script src="<%= js %>index.js"></script>
-    <script src="<%= js %>/dependencies/sails.io.js"></script>
-    <script src="<%= js %>sockets.js"></script>
-
-</head>
-
 <% include .\templates\nav %>
-
-
 <body>
     <!-- Main Content -->
     <!--==============================-->
-
     <div class='lp-content main-content'>
         <div class='top-spacing'></div>
-
            <!-- <div class='lp-recent-items item-search'>
             <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
             <div class='input-container'>
@@ -46,10 +19,6 @@
             </div>
         </div> -->
 
-
-
-
-
         <!-- Load SVG Blur for Gallery -->
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
             <defs>
@@ -59,9 +28,8 @@
             </defs>
         </svg>
 
-
+       <!-- Load Items -->
         <div class='main-items'>
-
             <button class='item-slide-button dcr-btn' type='button'>
                 <img src='<%= img %>lp_click.svg' alt='Next Item'>
             </button>
@@ -69,23 +37,17 @@
             <div class='items-shade-l'></div>
             <div class='items-shade-r'></div>
             <div class='items-wr'>
-
-                <!-- Main Item (Nikana P) -->
-                <!--==============================-->
                 <% if (itemdata) { %>
                     <% include .\templates\main_item_single %>
-
                         <% }; %>
-
             </div>
-
 
             <button class='item-slide-button' type=button>
                 <img src='<%= img %>lp_click.svg' alt='Next Item'>
             </button>
-
         </div>
 
+          <!-- Item Options -->
            <div class='item-options'>
             <div class='item-options-buyers'>
                 <div class='item-options-ico'><img src='<%= img %>main_buyers.svg'></div><span>Show Buyers List </span><span> (Coming Soon)</span>
@@ -97,12 +59,7 @@
                 <div class='item-options-ico'><img src='<%= img %>main_watch.svg' style='top:11px'></div><span>Watch Item </span><span> (Coming Soon)</span>
             </div>
         </div>
-
-
     </div>
-
-
-
 
 
     <!-- Note -->
@@ -113,7 +70,6 @@
     </div>
 
 </body>
-
 
     <% include .\templates\footer %>
 
