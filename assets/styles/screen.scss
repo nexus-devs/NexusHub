@@ -959,4 +959,13 @@ background:transparent !important;
 .nexusbot-bot {
     text-align:left;
     margin-top:50px;
+    margin-bottom:-40px;
+}
+
+.alert {
+    display:inline-block;
+    @include font-default(white);
+    padding:15px 10px;
+    background: $color-warning;
+    margin-top:10px;
 }
