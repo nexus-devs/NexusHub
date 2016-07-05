@@ -22,27 +22,22 @@ module.exports = {
         var itemname = url.split('/').pop().toLowerCase();
         var itemnamecap = capitalize(itemname);
         var data = require(`../../json/items/${itembase}.json`);
-        var item = data.items.components;
+        var item = data.items.Components;
 
         var itemsArray = []
         var i = 0;
 
 
-        // PROPER: populate items model with each item in prime DB, if inside, pass current model data to view
-        //^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-        // Save Items to index
+        // Count Items in index array
         data.items.forEach(function (items) {
-            itemsArray.push(JSON.stringify(items).toLowerCase());
+            itemsArray.push(data.items.Title);
         });
 
 
         // If index contains item searched, render view
         while (i < itemsArray.length) {
-            var n = itemsArray[i]
-            var indexed = n.indexOf(itemname)
+            var n = data.items[i].Title
+            var indexed = n.indexOf(itemnamecap)
 
             if (indexed != -1) {
                 return res.view('item', {

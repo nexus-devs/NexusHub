@@ -920,3 +920,43 @@ background:transparent !important;
 .item-search {
     background:rgba(24,27,33,0.8)
 }
+
+.generic-desc {
+    margin-top:30px;
+}
+
+.nexusbot-donate {
+    margin-top:40px;
+}
+
+.nexusbot-forms {
+    padding:40px 0;
+
+    h3{
+        @include font-small-title($color-base);
+        margin-top:40px;
+    }
+    input{
+                @include input;
+            @include input-placeholder($color-subtle);
+        @include font-default($color-subtle);
+        margin-top:10px;
+        padding:15px 40px;
+        background:#dee3e6;
+    }
+    button{
+        @include input-button($color-base);
+        margin-top:20px;
+        padding:10px 25px;
+        @include font-default($color-subtle);
+    }
+    button:hover{
+        background:$color-accent !important;
+        color:white;
+    }
+}
+
+.nexusbot-bot {
+    text-align:left;
+    margin-top:50px;
+}
