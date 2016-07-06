@@ -25,12 +25,15 @@ module.exports = {
             Note: data.Note,
             css: "/css/",
             js: "/js/",
-            img: "/img/"
+            img: "/img/",
+            result: 'false'
         });
     },
 
-    create: function (req, res, next) {
+    create: function (req, res) {
         NexusBot.create(req.params.all(), function NexusBotCreated(err, user) {
+            var package = req.originalUrl;
+            var data = require(`../../json/nexusbot.json`);
 
             // Error
             if (err) {
@@ -42,7 +45,25 @@ module.exports = {
                 return res.redirect('/nexusbot')
             }
             // Redirect on Success
-            res.json(user);
+            return res.view('nexusbot', {
+                // Input Data
+                clanName: user.clanName,
+                result: 'true',
+
+
+                // Standard Data
+                content: data,
+                page_title: data.PageTitle,
+                main_title: data.Headline,
+                desc: data.Desc,
+                BotCHeadline: data.BotCommandHeadline,
+                BotCDesc: data.BotCommandDesc,
+                Note: data.Note,
+                css: "/css/",
+                js: "/js/",
+                img: "/img/",
+                flash: {}
+            });
             req.session.flash = {}
         })
     }
