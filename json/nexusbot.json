@@ -1,0 +1,9 @@
+{
+    "PageTitle": "NexusBot for your Clan",
+    "Headline": "Perform Price Checks right in your Clan Chat.",
+    "Desc": "Our NexusBot allows your clan members to check item prices right inside the clan chat! No delays. No fees. No trouble. Just fill out the form below and we'll contact you soon!",
+    "BotCommandHeadline": "How to use the bot?",
+    "BotCommandDesc":"Simply type <b>!PC Item Name</b> ( e.g.  '!PC Frost Prime Helmet' ) in the chat and we'll instantly post the item price." ,
+    "Note": "Please keep in mind that we can currently only serve Moon Clans due to high maintenance costs.<br>If you want to help us keep up the service, feel free to donate below."
+
+}

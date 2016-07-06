@@ -511,7 +511,7 @@ footer {
 }
 
 .lp-recent-items-info {
-    bottom: 65px;
+    bottom: 60px;
     position: absolute;
     width: 100%;
     h3 {
@@ -639,18 +639,18 @@ footer {
 
 @media (max-width:100em) {
         .items-item{
-        width:90vw;
-            min-width:800px;
+        width:60vw;
+            min-width:500px;
     }
     .items-item{
         .items-item-stats {
-            display:block;
+            display:none;
             position:relative;
             top:90px;
             right:90px;
-            padding-top:70px;
+            padding-top:30px;
             padding-bottom:90px;
-            border-top:1px solid $color-subtle;
+            width:300px;
             text-align:left;
         }
 
@@ -919,4 +919,57 @@ background:transparent !important;
 
 .item-search {
     background:rgba(24,27,33,0.8)
+}
+
+.generic-desc {
+    margin-top:30px;
+}
+
+.nexusbot-donate {
+    margin-top:40px;
+}
+
+.nexusbot-forms {
+    padding:40px 0;
+
+    h3{
+        @include font-small-title($color-base);
+        margin-top:40px;
+    }
+    input{
+                @include input;
+            @include input-placeholder($color-subtle);
+        @include font-default($color-subtle);
+        margin-top:10px;
+        padding:15px 40px;
+        background:#dee3e6;
+    }
+    button{
+        @include input-button($color-base);
+        margin-top:20px;
+        padding:10px 25px;
+        @include font-default($color-subtle);
+    }
+    button:hover{
+        background:$color-accent !important;
+        color:white;
+    }
+}
+
+.nexusbot-bot {
+    text-align:left;
+    margin-top:50px;
+    margin-bottom:-40px;
+}
+
+.alert {
+    display:inline-block;
+    @include font-default(white);
+    padding:15px 30px;
+    background: $color-warning;
+    margin-top:10px;
+}
+
+.alert-success {
+    background: $color-accent;
 }

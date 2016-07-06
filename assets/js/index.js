@@ -3,7 +3,6 @@
 
 // Bug Hunters + js
 $(document).ready(function () {
-    $('.javascript-notf').remove()
     console.log('Find any bugs or security issues? Contact us on https://discord.gg/8mCNvKp. We greatly appreciate your help :)')
     $('.top-nav-search > input').css('opacity', '1');
 })

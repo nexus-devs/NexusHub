@@ -12,37 +12,9 @@ module.exports = {
 
     Model.find({where: {id: { '>' : ['0'] }}, sort: 'id ASC' });
 
-    //Item Model
     attributes: {
-        "Title": {
-            type: 'string'
-        },
-        "Type": {
-            type: 'string'
-        },
-        "SupDem": {
-            type: 'array'
-        },
-        "SupDemNum": {
-            type: 'array'
-        },
-        "Components": [
-            {
-                "name": {
-                    type: 'string'
-                },
-                "avg": {
-                    type: 'string'
-                },
-                "data": {
-                    type: 'array'
-                },
-                "fillOpacity": {
-                    type: 'float',
-                    defaultsTo: 0.15
-                },
-                "Comp_val_rt": "float"
-            }
-        ]
+        item: {
+            type:'string'
+        }
     }
 };

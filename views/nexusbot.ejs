@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<div class='lp-bg' data-parallax="scroll" data-image-src="img/lp_bg.jpg"></div>
+<% include .\templates\nav %>
+
+    <body>
+        <!-- Header -->
+        <!--==============================-->
+
+        <header>
+            <div class='generic-header'>
+                <div class='generic-header-headline-container'>
+                    <h1 class='generic-header-headline'><%= page_title %></h1>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Content -->
+        <!--==============================-->
+
+        <div class='generic-content' ng-app='NexusBotModule' ng-app='NexusBotController' ng-cloak>
+            <div class='main-content-wrapper'>
+                <h1><%= main_title %></h1>
+                <span class='generic-desc'><%- desc %></span>
+
+                <form class='nexusbot-forms' method='post' action='nexusbot/create'>
+                    <h3>Your Clan Name</h3>
+                    <input type='text' name='clanName'>
+                    <h3>Your Ingame Name</h3>
+                    <input type='text' name='name'>
+                    <br>
+                    <button type='submit' value='Register Nexusbot'>
+                        Submit
+                    </button>
+                    <input type='hidden' name='_csrf' value='<%= _csrf %>'>
+
+                    <% if (flash && flash.err){ %>
+                     <br>
+                    <div class='alert'>
+                       <div>Please fill out the form first.</div>
+                    </div>
+                    <% } %>
+
+                    <% if (result == 'true'){ %>
+                    <br>
+                    <div class='alert alert-success'>
+                        '<%= clanName %>' has been added to our list!<br> Depending on current demand, we may take up to 1 week to contact you.
+                    </div>
+                    <% } %>
+                </form>
+
+
+                <h2><%= BotCHeadline %></h2>
+                <span class=''><%- BotCDesc %></span>
+
+
+                <div class='main-item-bot nexusbot-bot'>
+                    <span><%- Note %></span>
+                    <br>
+                    <img src='<%= img %>donation_paypal.png' class='nexusbot-donate'>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+    </body>
+
+    <% include .\templates\footer %>
+
+
+</html>
