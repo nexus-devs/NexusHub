@@ -18,14 +18,14 @@
 @mixin font-small-title($color) {
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: $color;
 }
 
 @mixin font-title($color) {
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: $color;
 }
 

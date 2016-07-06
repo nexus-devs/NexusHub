@@ -102,7 +102,7 @@ b {
 .generic-header-headline {
   font-family: 'raleway';
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   font-size: 36px;
   text-transform: uppercase; }
@@ -126,16 +126,16 @@ b {
     padding-top: 90px;
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: #2e3840; }
   /* line 51, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/generic.scss */
   .main-content-wrapper h2 {
     padding-top: 90px;
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #2e3840;
-    padding-bottom: 20px; }
+    padding-bottom: 15px; }
   /* line 57, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/generic.scss */
   .main-content-wrapper span {
     display: inline-block;
@@ -271,7 +271,7 @@ a:hover {
 .lp-header-headline {
   font-family: 'raleway';
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   font-size: 54px;
   font-weight: 500;
@@ -296,7 +296,7 @@ b {
 .lp-header-sub {
   font-family: 'raleway';
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
   font-weight: 300;
   margin-top: 10px; }
@@ -461,7 +461,7 @@ b {
   .lp-pop-header h1 {
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: #2e3840;
     font-weight: 700;
     display: inline-block;
@@ -473,7 +473,7 @@ b {
     display: inline-block;
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #8ea1ac;
     vertical-align: super;
     margin-left: 42px; }
@@ -514,7 +514,7 @@ b {
   .items-item-main-inf h2 {
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-size: 36px;
     font-weight: 300; }
@@ -589,14 +589,14 @@ b {
   .items-component-details h3 {
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-weight: 300; }
   /* line 285, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .items-component-details h4 {
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-family: 'arial';
     color: #fff;
@@ -835,21 +835,21 @@ footer {
 
 /* line 513, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-recent-items-info {
-  bottom: 65px;
+  bottom: 60px;
   position: absolute;
   width: 100%; }
   /* line 517, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .lp-recent-items-info h3 {
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-weight: 300; }
   /* line 521, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .lp-recent-items-info h4 {
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-family: 'arial';
     color: #fff;
@@ -1010,17 +1010,17 @@ footer {
 @media (max-width: 100em) {
   /* line 641, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .items-item {
-    width: 90vw;
-    min-width: 800px; }
+    width: 60vw;
+    min-width: 500px; }
   /* line 646, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .items-item .items-item-stats {
-    display: block;
+    display: none;
     position: relative;
     top: 90px;
     right: 90px;
-    padding-top: 70px;
+    padding-top: 30px;
     padding-bottom: 90px;
-    border-top: 1px solid #8ea1ac;
+    width: 300px;
     text-align: left; }
   /* line 657, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .items-item .items-images-components {
@@ -1079,7 +1079,7 @@ footer {
   .items-item-stats h2 {
     font-family: 'raleway';
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 700;
     color: #fff;
     font-size: 36px;
     font-weight: 300;
@@ -1139,7 +1139,7 @@ footer {
   .main-item-bot h3 {
     font-family: 'raleway';
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 700;
     color: #6a7880; }
   /* line 761, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
   .main-item-bot span:first-of-type {
@@ -1310,6 +1310,110 @@ footer {
 /* line 920, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .item-search {
   background: rgba(24, 27, 33, 0.8); }
+
+/* line 924, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.generic-desc {
+  margin-top: 30px; }
+
+/* line 928, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.nexusbot-donate {
+  margin-top: 40px; }
+
+/* line 932, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.nexusbot-forms {
+  padding: 40px 0; }
+  /* line 935, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .nexusbot-forms h3 {
+    font-family: 'raleway';
+    font-size: 24px;
+    font-weight: 700;
+    color: #2e3840;
+    margin-top: 40px; }
+  /* line 939, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .nexusbot-forms input {
+    outline: none;
+    border: none;
+    padding-left: 10%;
+    padding-top: 3px;
+    font-family: 'raleway';
+    font-size: 16px;
+    font-weight: 500;
+    color: #8ea1ac;
+    margin-top: 10px;
+    padding: 15px 40px;
+    background: #dee3e6; }
+    /* line 86, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
+    .nexusbot-forms input ::-webkit-input-placeholder {
+      font-family: 'raleway';
+      font-size: 16px;
+      font-weight: 500;
+      color: #2e3840;
+      color: #8ea1ac !important; }
+    /* line 91, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
+    .nexusbot-forms input ::-moz-placeholder {
+      font-family: 'raleway';
+      font-size: 16px;
+      font-weight: 500;
+      color: #2e3840;
+      color: #8ea1ac !important; }
+    /* line 96, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
+    .nexusbot-forms input :-ms-input-placeholder {
+      font-family: 'raleway';
+      font-size: 16px;
+      font-weight: 500;
+      color: #2e3840;
+      color: #8ea1ac !important; }
+    /* line 101, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/partials/_mixins.scss */
+    .nexusbot-forms input :-moz-placeholder {
+      font-family: 'raleway';
+      font-size: 16px;
+      font-weight: 500;
+      color: #2e3840;
+      color: #8ea1ac !important; }
+  /* line 947, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .nexusbot-forms button {
+    background: #2e3840;
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    padding: 1px;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: 0.15s;
+    -moz-transition-duration: 0.15s;
+    -o-transition-duration: 0.15s;
+    transition-duration: 0.15s;
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-family: 'raleway';
+    font-size: 16px;
+    font-weight: 500;
+    color: #8ea1ac; }
+  /* line 953, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .nexusbot-forms button:hover {
+    background: #32ab7f !important;
+    color: white; }
+
+/* line 959, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.nexusbot-bot {
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: -40px; }
+
+/* line 965, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.alert {
+  display: inline-block;
+  font-family: 'raleway';
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  padding: 15px 30px;
+  background: #f2433a;
+  margin-top: 10px; }
+
+/* line 973, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.alert-success {
+  background: #32ab7f; }
 
 /* line 29, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/importer.scss */
 .nav-sticky {
