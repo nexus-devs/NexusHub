@@ -17,15 +17,15 @@
 
             </div>
         </header>
-        <div class='lp-header-input-container'>
+        <form class='lp-header-input-container' method='get' action='/items/search'>
             <div class='lp-header-input-helper'></div>
-            <div class='lp-header-input' id='search'>
-                <input type='text' placeholder='Enter Item Name'>
+            <div class='lp-header-input' id='search' >
+                <input type='text' placeholder='Enter Item Name' name='item'>
             </div>
             <button type='button'>
                 <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
             </button>
-        </div>
+        </form>
 
 
 

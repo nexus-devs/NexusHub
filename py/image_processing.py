@@ -142,7 +142,7 @@ while True:
 
     WTS = ['WTS', 'S', 'BUYING']
     WTB = ['WTB','B', 'SELLING']
-    PC = ['PC', 'PRICE', 'CHECK', 'PRICECHECK' 'MUCH'] #much -> how much? (experimental)
+    PC = ['PC', 'PRICE', 'CHECK', 'PRICECHECK', 'MUCH', 'CHECK'] #much -> how much? (experimental)
 
     #make lists read from db
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
@@ -184,6 +184,7 @@ while True:
                 TOcount = TOcount + 1; #increases every time TO is added -> see below
                 TOval.extend((TO, TOcount)) #save as WTS, 1 & compare TO number with Item Number
                 TO = False
+
 
             #Price Check
             elif MsgWords[i] in PC:
@@ -314,12 +315,12 @@ while True:
 
         #Respond to Price check (cant gather information because it defocuses chat)
         #---------------------------
-        while True:
+        if PriceCheck == True:
             #perform operations
             #focus window
             #type
             #done
-            break;
+            print ('pricecheck true')
 
 
 
