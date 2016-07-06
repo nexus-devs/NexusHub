@@ -639,18 +639,18 @@ footer {
 
 @media (max-width:100em) {
         .items-item{
-        width:90vw;
-            min-width:800px;
+        width:60vw;
+            min-width:500px;
     }
     .items-item{
         .items-item-stats {
-            display:block;
+            display:none;
             position:relative;
             top:90px;
             right:90px;
-            padding-top:70px;
+            padding-top:30px;
             padding-bottom:90px;
-            border-top:1px solid $color-subtle;
+            width:300px;
             text-align:left;
         }
 

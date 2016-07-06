@@ -91,14 +91,15 @@ module.exports = {
 
                 if (indexed != -1) { // Render view when found
                         var itembase = data.items[j].Type
-
-                    return res.view('item', {
+                        return res.redirect(`../../${itembase}/${itemname}`)
+                    /* return res.view('item', {
                         HeaderTitle: `${itemnamecap} ${itembase} - WarframeNexus`,
                         itemdata: data.items[j],
                         css: "../css/",
                         js: "../js/",
                         img: "../img/"
-                    })
+                    }) */
+
                 } else {
 
 
