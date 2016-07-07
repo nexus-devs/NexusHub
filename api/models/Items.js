@@ -6,15 +6,10 @@
  */
 
 module.exports = {
-    tableName: 'prime',
-    adapter: 'WARFRAMENEXUS',
-    migrate: 'safe'
-
-    Model.find({where: {id: { '>' : ['0'] }}, sort: 'id ASC' });
 
     attributes: {
-        item: {
-            type:'string'
-        }
-    }
+
+    },
+
+    adapter: 'sails-mongo'
 };

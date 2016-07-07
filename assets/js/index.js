@@ -5,6 +5,11 @@
 $(document).ready(function () {
     console.log('Find any bugs or security issues? Contact us on https://discord.gg/8mCNvKp. We greatly appreciate your help :)')
     $('.top-nav-search > input').css('opacity', '1');
+
+
+    io.socket.on('user', function gotHelloMessage(data) {
+        console.log('User alert!', data);
+    });
 })
 
 

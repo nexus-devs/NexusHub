@@ -7,6 +7,7 @@
 
 module.exports = {
 
+
     schema:true,
 
     attributes: {
@@ -24,7 +25,7 @@ module.exports = {
             delete obj._csrf;
             return obj;
         }
-    }
-
+    },
+    adapter: 'sails-mongo'
 
 };
