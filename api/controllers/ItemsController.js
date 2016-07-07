@@ -30,6 +30,7 @@ module.exports = {
         var i = 0
 
 
+
         // Count Items in index array
         data.items.forEach(function (items) {
             itemsArray.push(data.items.Title)
@@ -71,14 +72,12 @@ module.exports = {
 
 
 
-        User.find({
-            name: 'Finn'
-        }).exec(function (err, usersNamedFinn) {
-            if (err) {
-                return res.negotiate(err);
-            }
-            sails.log('Wow, there are %d users named Finn.  Check it out:', usersNamedFinn.length, usersNamedFinn);
-            return res.json(usersNamedFinn);
+        Items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
+          if (err) {
+            return res.negotiate(err);
+          }
+          sails.log('Wow, there are %d users named Finn.  Check it out:', NikanaItems.length, NikanaItems);
+          return res.json(NikanaItems);
         });
 
 
