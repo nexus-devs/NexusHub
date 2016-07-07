@@ -59,9 +59,9 @@ module.exports = {
                 BotCHeadline: data.BotCommandHeadline,
                 BotCDesc: data.BotCommandDesc,
                 Note: data.Note,
-                css: "/css/",
-                js: "/js/",
-                img: "/img/",
+                css: "../css/",
+                js: "../js/",
+                img: "../img/",
                 flash: {}
             });
             req.session.flash = {}

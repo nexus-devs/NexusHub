@@ -11,6 +11,8 @@ function capitalize(string) {
 }
 
 
+//    Model.find({where: {id: { '>' : ['0'] }}, sort: 'id ASC' });
+
 module.exports = {
     index: function (req, res) {
         // load according file
@@ -61,12 +63,23 @@ module.exports = {
 
     // Redirect to index on search
     search: function (req, res) {
-        console.log(req.query.item)
         var fullstring = req.query.item
         var data = require(`../../json/items.json`)
         var item = data.items.Components
         var itemsArray = []
         var stringArray = fullstring.split(" ")
+
+
+
+        User.find({
+            name: 'Finn'
+        }).exec(function (err, usersNamedFinn) {
+            if (err) {
+                return res.negotiate(err);
+            }
+            sails.log('Wow, there are %d users named Finn.  Check it out:', usersNamedFinn.length, usersNamedFinn);
+            return res.json(usersNamedFinn);
+        });
 
 
 
@@ -90,15 +103,15 @@ module.exports = {
                 var indexed = n.indexOf(itemnamecap)
 
                 if (indexed != -1) { // Render view when found
-                        var itembase = data.items[j].Type
-                        return res.redirect(`../../${itembase}/${itemname}`)
-                    /* return res.view('item', {
-                        HeaderTitle: `${itemnamecap} ${itembase} - WarframeNexus`,
-                        itemdata: data.items[j],
-                        css: "../css/",
-                        js: "../js/",
-                        img: "../img/"
-                    }) */
+                    var itembase = data.items[j].Type
+                    return res.redirect(`../../${itembase}/${itemnamecap}`)
+                        /* return res.view('item', {
+                            HeaderTitle: `${itemnamecap} ${itembase} - WarframeNexus`,
+                            itemdata: data.items[j],
+                            css: "../css/",
+                            js: "../js/",
+                            img: "../img/"
+                        }) */
 
                 } else {
 
@@ -107,6 +120,6 @@ module.exports = {
             }
         }
 
-            res.notFound(`${itemnamecap} couldn't be found. Please check your spelling`)
+        res.notFound(`${itemnamecap} couldn't be found. Please check your spelling`)
     }
 }
