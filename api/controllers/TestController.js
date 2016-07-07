@@ -8,7 +8,7 @@
 module.exports = {
 
      index: function (req, res) {
-	 Test.find({name:'Nikana'}).exec(function (err, NikanaItems){
+	 Test.find({name:'benis'}).exec(function (err, NikanaItems){
           if (err) {
             return res.negotiate(err);
           }
