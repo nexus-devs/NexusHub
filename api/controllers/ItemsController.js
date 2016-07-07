@@ -72,12 +72,12 @@ module.exports = {
 
 
 
-        Items.items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
+        Items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
           if (err) {
             return res.negotiate(err);
           }
-          sails.log('Wow, there are %d users named Finn.  Check it out:', NikanaItems.length, NikanaItems);
-          return res.json(NikanaItems);
+          sails.log('Items found:', NikanaItems.length, NikanaItems);
+          //return res.json(NikanaItems);
         });
 
 
