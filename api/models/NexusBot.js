@@ -26,6 +26,5 @@ module.exports = {
             return obj;
         }
     },
-    adapter: 'sails-mongo'
 
 };

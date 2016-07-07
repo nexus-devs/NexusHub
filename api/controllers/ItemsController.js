@@ -72,7 +72,7 @@ module.exports = {
 
 
 
-        Items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
+        Items.items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
           if (err) {
             return res.negotiate(err);
           }
