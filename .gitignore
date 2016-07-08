@@ -8,4 +8,4 @@ node_modules/
 /db/mongod.lock
 /db/sizeStorer.wt
 /db/WiredTiger.turtle
-/.gitignore
+/db/WiredTiger.lock
