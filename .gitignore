@@ -5,7 +5,3 @@ node_modules/
 /db/journal
 /db/mongod.lock
 /db/WiredTiger.lock
-/db/WiredTiger.wt
-/db/WiredTigerLAS.wt
-/db/WiredTiger.turtle
-/db/storage.bson
