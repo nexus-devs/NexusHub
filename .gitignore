@@ -4,3 +4,6 @@ node_modules/
 db/diagnostic.data
 db/journal
 db/wiredtiger.turtle
+db/wiredtiger.wt
+db/mongod.lock
+db/sizeStorer.wt

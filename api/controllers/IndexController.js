@@ -36,6 +36,7 @@ module.exports = {
 
             var pop_items = [pop_obj_1, pop_obj_2] //Add pop 3
 
+
             return res.view('index', {
                 content: pop_items,
                 css: "/css/",
