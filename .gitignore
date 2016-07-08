@@ -2,3 +2,5 @@ node_modules/
 .sass-cache/
 .tmp/
 /db/journal
+/db/mongod.lock
+/db/WiredTiger.lock
