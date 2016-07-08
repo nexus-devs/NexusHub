@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-/* line 18, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 18, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -24,30 +24,30 @@ time, mark, audio, video {
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
-/* line 28, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 28, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block; }
 
-/* line 31, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 31, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 body {
   line-height: 1; }
 
-/* line 34, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 34, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 ol, ul {
   list-style: none; }
 
-/* line 37, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 37, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 blockquote, q {
   quotes: none; }
 
-/* line 41, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 41, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none; }
 
-/* line 45, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/reset.scss */
+/* line 45, C:/Users/Mads_Jakobsen/new/assets/styles/reset.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
