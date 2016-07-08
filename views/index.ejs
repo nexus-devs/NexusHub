@@ -72,9 +72,9 @@
 
                     <!-- Main Item (Nikana P) -->
                     <!--==============================-->
-                    <% content.items.forEach(function(item) { %>
+                    <% content.forEach(function(item) { %>
                         <% include .\templates\main_item %>
-                            <% }); %>
+                    <% }); %>
 
 
                 </div>
@@ -110,7 +110,7 @@
 
 
             <div class='lp-recent-items-wr'>
-                 <% content.items.forEach(function(item) { %>
+                 <% content.forEach(function(item) { %>
                 <a href='/<%= item.Type %>/<%= item.Title %>' class='lp-recent-items-item'>
                     <div class='lp-recent-items-helper'></div>
                     <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png'>
