@@ -4,5 +4,4 @@ node_modules/
 /db/diagnostic.data
 /db/journal
 /db/mongod.lock
-/db/sizeStorer.wt
 /db/WiredTiger.lock
