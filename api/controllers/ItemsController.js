@@ -11,114 +11,73 @@ function capitalize(string) {
 }
 
 
-//    Model.find({where: {id: { '>' : ['0'] }}, sort: 'id ASC' });
-
 module.exports = {
     index: function (req, res) {
         // load according file
         var url = req.originalUrl
         var urlbase = url.split('/')
-
-
         var itembase = urlbase[1]
         var itemname = url.split('/').pop().toLowerCase()
-        var itemnamecap = capitalize(itemname)
-        var data = require(`../../json/items.json`)
-        var item = data.items.Components
-
-        var itemsArray = []
-        var i = 0
 
 
+        console.log('wtf am i doing here')
 
-        // Count Items in index array
-        data.items.forEach(function (items) {
-            itemsArray.push(data.items.Title)
+        // Check for each query word
+        Items.find({
+            Title: itemname
+        }).exec(function (err, dbItem) {
+            var itembase = dbItem[0].Type
+            var itemname = dbItem[0].Title
+
+            return res.view('item', {
+                HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
+                itemdata: dbItem[0],
+                css: "../css/",
+                js: "../js/",
+                img: "../img/"
+            })
+
         })
 
-
-        // If index contains item searched, render view
-        while (i < itemsArray.length) {
-            var n = data.items[i].Title
-            var indexed = n.indexOf(itemnamecap)
-
-            if (indexed != -1) {
-                return res.view('item', {
-                    HeaderTitle: `${itemnamecap} ${itembase} - WarframeNexus`,
-                    itemdata: data.items[i],
-                    css: "../css/",
-                    js: "../js/",
-                    img: "../img/"
-                })
-                break
-
-            } else {
-                if (i == (itemsArray.length - 1)) {
-                    res.notFound(`${itemnamecap} couldn't be found. Please check your spelling`)
-                }
-            }
-            i++
-        }
     },
 
 
-    // Redirect to index on search
+    // Search function
     search: function (req, res) {
         var fullstring = req.query.item
-        var data = require(`../../json/items.json`)
-        var item = data.items.Components
-        var itemsArray = []
         var stringArray = fullstring.split(" ")
+        var viewrendered = 'false'
+        var obama = 'normal fucking person'
 
-
-
-        Items.find({Title:'Nikana'}).exec(function (err, NikanaItems){
-          if (err) {
-            return res.negotiate(err);
-          }
-          sails.log('Items found:', NikanaItems.length, NikanaItems);
-          //return res.json(NikanaItems);
-        });
-
-
-
-
+        // Check for each query word
         for (i = 0; i < stringArray.length; i++) {
-            // Try first word, else try next
-            var itemname = stringArray[i]
-            var itemnamecap = capitalize(itemname)
 
-            // Count Items in index array
-            data.items.forEach(function (items) {
-                itemsArray.push(data.items.Title)
-            })
+            Items.find({
+                Title: stringArray[i]
+            }).exec(function (err, dbItem) {
+                var u = 0
+                u  = u + 1
+                console.log(u)
+                var itemcheck = JSON.stringify(dbItem)
 
+                if (itemcheck !== '[]') {
+                    viewrendered = 'true'
+                    var itembase = dbItem[0].Type
+                    var itemname = dbItem[0].Title
 
-
-            // Check if in index :: USE .find() INSTEAD FOR MODEL COMPARISON :: http://sailsjs.org/documentation/reference/waterline-orm/models/find
-
-            for (j = 0; j < itemsArray.length; j++) {
-                var n = data.items[j].Title
-                var indexed = n.indexOf(itemnamecap)
-
-                if (indexed != -1) { // Render view when found
-                    var itembase = data.items[j].Type
-                    return res.redirect(`../../${itembase}/${itemnamecap}`)
-                        /* return res.view('item', {
-                            HeaderTitle: `${itemnamecap} ${itembase} - WarframeNexus`,
-                            itemdata: data.items[j],
-                            css: "../css/",
-                            js: "../js/",
-                            img: "../img/"
-                        }) */
+                    return res.redirect(`../../${itembase}/${itemname}`)
 
                 } else {
-
+                    if (viewrendered == 'false' && i > stringArray.length) {
+                        console.log('error passed')
+                        res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
+                    }
 
                 }
-            }
-        }
+            })
+            console.log('im last')
+        } // End Loop
 
-        res.notFound(`${itemnamecap} couldn't be found. Please check your spelling`)
+
     }
 }
