@@ -60,6 +60,40 @@
                     "Comp_val_rt": "real time price"
             }
         ]
+    },
+         {
+            "Title": "Vauban",
+            "Type": "Prime",
+            "Components": [
+                {
+                   "name": "Blueprint",
+                    "avg":"135p",
+                    "data": [155, 160, 175, 165, 190, 240, 269],
+                                     "fillOpacity": 0.15,
+                    "Comp_val_rt": "real time price"
+            },
+                {
+                  "name": "Helmet",
+                    "avg":"65p",
+                    "data": [55, 50, 55, 50, 65, 55, 65],
+                                     "fillOpacity": 0.15,
+                    "Comp_val_rt": "real time price"
+            },
+                {
+                    "name": "Chassis",
+                    "avg":"35p",
+                    "data": [255, 250, 255, 250, 265, 255, 265],
+                                     "fillOpacity": 0.15,
+                    "Comp_val_rt": "real time price"
+            },
+                {
+                   "name": "Systems",
+                    "avg":"235p",
+                    "data": [155, 150, 155, 150, 165, 155, 165],
+                                     "fillOpacity": 0.15,
+                    "Comp_val_rt": "real time price"
+            }
+        ]
     }
     ]
 }

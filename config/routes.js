@@ -23,16 +23,7 @@
 //var package = req.originalUrl;
 
 module.exports.routes = {
-    '/': {
-        view: 'index',
-        locals: {
-            content: require(`../json/items/landing_page/popular.json`),
-            css: "/css/",
-            js: "/js/",
-            img: "/img/"
-        }
-    },
-
+    '/': 'IndexController',
     'get /jobs': 'GenericController',
     'get /imprint': 'GenericController',
     'get /prime/:id': 'ItemsController.index',

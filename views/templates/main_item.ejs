@@ -12,21 +12,23 @@
             <!-- Item Components -->
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
+ <% JSON.parse(JSON.stringify(item)).Components.forEach(function(itemdata) { %>
+
+                            <!-- Component -->
+                            <div class='item-images-components-wr'>
+                                <div class='item-images-components-component'>
+                                    <img src='<%= img %>generic/<%= itemdata.name %>.png' alt='<%= item.Title %> <%= itemdata.name %>'>
+                                </div>
+                                <div class='items-component-details'>
+                                    <h3><%= itemdata.name %></h3>
+                                    <h4><%= itemdata.avg %></h4>
+                                    <span>(<%= itemdata.Comp_val_rt %>)</span>
+                                </div>
+                            </div>
+                            <% }); %>
 
 
-                    <% item.Components.forEach(function(itemcomp) { %>
-                        <!-- Component -->
-                        <div class='item-images-components-wr'>
-                            <div class='item-images-components-component'>
-                                <img src='<%= img %>generic/<%= itemcomp.name %>.png' alt='<%= item.Title %> <%= itemcomp.name %>'>
-                            </div>
-                            <div class='items-component-details'>
-                                <h3><%= itemcomp.name %></h3>
-                                <h4><%= itemcomp.avg %></h4>
-                                <span>(<%= itemcomp.Comp_val_rt %>)</span>
-                            </div>
-                        </div>
-                        <% }); %>
+
 
                 </div>
             </div>
