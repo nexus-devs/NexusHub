@@ -20,7 +20,6 @@ module.exports = {
         var itemname = url.split('/').pop().toLowerCase()
 
 
-        console.log('wtf am i doing here')
 
         // Check for each query word
         Items.find({
@@ -47,37 +46,38 @@ module.exports = {
         var fullstring = req.query.item
         var stringArray = fullstring.split(" ")
         var viewrendered = 'false'
-        var obama = 'normal fucking person'
+        var i = 0
 
-        // Check for each query word
-        for (i = 0; i < stringArray.length; i++) {
+        // Check for each search term
+        async.forEach(stringArray, function (string, next){
 
             Items.find({
-                Title: stringArray[i]
+                Title: string
             }).exec(function (err, dbItem) {
-                var u = 0
-                u  = u + 1
-                console.log(u)
-                var itemcheck = JSON.stringify(dbItem)
 
-                if (itemcheck !== '[]') {
+                var itemcheck = JSON.stringify(dbItem)
+                i++
+
+                // If found, redirect to proper url
+                if (itemcheck !== '[]' && viewrendered == 'false') {
                     viewrendered = 'true'
                     var itembase = dbItem[0].Type
                     var itemname = dbItem[0].Title
-
                     return res.redirect(`../../${itembase}/${itemname}`)
 
+                // Else, if end of function: return 404
                 } else {
-                    if (viewrendered == 'false' && i > stringArray.length) {
+                    if (viewrendered == 'false' && i == stringArray.length) {
                         console.log('error passed')
                         res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
                     }
 
                 }
-            })
-            console.log('im last')
-        } // End Loop
 
+                next()
 
+            }) // End Query
+
+        }) // End Loop
     }
 }
