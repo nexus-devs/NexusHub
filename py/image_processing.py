@@ -5,10 +5,17 @@ import pytesseract
 import string
 import PIL.ImageOps
 import datetime
-import threading
+from pymongo import MongoClient
 from PIL import Image
 from PIL import ImageGrab
 from PIL import ImageEnhance
+
+
+
+#Connect to MongoDB
+client = MongoClient('mongodb://localhost:27017/')
+db = client.warframenexus
+#db.items.insert(item val)
 
 
 while True:
@@ -17,7 +24,7 @@ while True:
     #---------------------------
     img_path = 'cache/screen.jpg'
 
-    ImageGrab.grab(bbox=(0,530,1525,725)).save(img_path, "JPEG")
+    ImageGrab.grab(bbox=(0,540,1525,730)).save(img_path, "JPEG")
     img = Image.open(img_path)
 
     basewidth = 3300
@@ -311,6 +318,43 @@ while True:
         print ('\n')
 
 
+
+        # BSON format for .items collection
+        cursor = db.items.find({"Title": "Frost"})
+
+        for document in cursor:
+            print(document)
+
+
+        item_new = {
+            "Title": "Nikana",
+            "Type": "Prime",
+             "SupDem": [28, 72],
+            "SupDemNum": [4345, 13349],
+               "Components": [
+                   {
+                       "name": "Blueprint",
+                       "avg": "35p",
+                       "data": [55, 50, 55, 50, 65, 55, 65],
+                       "fillOpacity": 0.15,
+                       "Comp_val_rt": "real time price"
+               },
+                   {
+                       "name": "Blade",
+                       "avg": "35p",
+                       "data": [35, 30, 25, 30, 25, 35, 45],
+                       "fillOpacity": 0.15,
+                       "Comp_val_rt": "real time price"
+               },
+                   {
+                       "name": "Handle",
+                       "avg": "35p",
+                       "data": [15, 20, 15, 10, 15, 15, 15],
+                       "fillOpacity": 0.15,
+                       "Comp_val_rt": "real time price"
+               }
+           ]
+           }
 
 
         #Respond to Price check (cant gather information because it defocuses chat)

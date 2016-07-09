@@ -68,7 +68,6 @@ module.exports = {
                 // Else, if end of function: return 404
                 } else {
                     if (viewrendered == 'false' && i == stringArray.length) {
-                        console.log('error passed')
                         res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
                     }
 
