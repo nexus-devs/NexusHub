@@ -151,12 +151,20 @@ while True:
     WTB = ['WTB', 'B', 'SELLING', 'SELL']
     PC = ['PC', 'CHECK', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
 
-    #make lists read from db
+    #Define component variations
+    Blueprint = ['BLUEPRINT', 'BP']
+    Systems = ['SYSTEMS', 'SYSTEM', 'SYS']
+    Chassis = ['CHASSIS', 'CHAS']
+    Neuroptics = ['NEUROPTICS, HELMET, HELM, HEAD']
+    CompParts = ['Blueprint', 'Systems', 'Chassis', 'Neuroptics']
+
+    #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
     E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
     E_Mods = ['FLEETING']
     E_Primed = ['PRIMED']
-    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYSTEM', 'SYS', 'CHAS', 'HELMET', 'HELM', 'NEUROPTICS', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    C_Prime = ['LINK', 'STOCK', 'HELMET' 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
     C_Mods = ['EXPERTISE']
     C_Arcane = []
     C_Primed = []
@@ -316,12 +324,20 @@ while True:
             REQ_TO = REQ[0]
             REQ_Type = REQ[1].title()
 
+
             #Type = Prime
             if REQ_Type == 'Prime':
                 REQ_Main = REQ[2].title()
 
                 if len(REQ) > 4:
-                    REQ_Comp = REQ[3].title()
+
+                    #Convert Component name to official standard
+                    for u in range(0, len(CompParts)):
+                        CompCheckList = eval(CompParts[u])
+                        if REQ[3] in CompCheckList:
+                            REQ_Comp = CompParts[u].title()
+
+
                     if hasNumbers(REQ[4]) == True:
                         REQ_Price = re.sub("\D", "", REQ[4])
                     else:
@@ -333,6 +349,7 @@ while True:
                         REQ_Price = re.sub("\D", "", REQ[3])
                     else:
                         REQ_Price = 'null'
+
 
             #Type = Mods/Other
             elif REQ_Type == 'Mods' or REQ_Type == 'Arcane':
