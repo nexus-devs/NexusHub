@@ -47,7 +47,7 @@ while True:
 
 
     contrast = ImageEnhance.Contrast(img)
-    img = contrast.enhance(2.0)
+    img = contrast.enhance(2)
     img.save(img_path)
 
 
@@ -154,10 +154,10 @@ while True:
     #make lists read from db
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
     E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
-    E_Mods = []
+    E_Mods = ['FLEETING']
     E_Primed = ['PRIMED']
-    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYSTEM', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
-    C_Mods = []
+    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYSTEM', 'SYS', 'CHAS', 'HELMET', 'HELM', 'NEUROPTICS', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    C_Mods = ['EXPERTISE']
     C_Arcane = []
     C_Primed = []
 
@@ -206,6 +206,8 @@ while True:
                 ITEMcomponent = ''
                 ITEMprice = 'null'
                 ITEMcount = 1
+                ITEMtype = ListsToCheck[x].upper()
+
                 #check for components i+3 further
                 for y in range(0,5):
                     if len(MsgWords) >= i + y:
@@ -226,7 +228,7 @@ while True:
 
 
 
-                return(ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
+                return(ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
 
 
             
@@ -238,17 +240,19 @@ while True:
                 C_List = eval('C_' + str(ListsToCheck[x]))
                 
                 if MsgWords[i] in E_List:
-                    ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
+                    ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
+
 
                     #Save Item values
                     if not ITEMprice == '0' and not ITEMessential == '':
-                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
+                        ITEMval.extend((ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
                     elif not ITEMessential == '':
-                        ITEMval.extend((ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
+                        ITEMval.extend((ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, TOcount ))
 
         ITEMessential = ''
         ITEMcomponent = ''
         ITEMprice = ''
+        ITEMtype = ''
 
         # ======= End of Message Body Interpretation ========
 
@@ -310,25 +314,43 @@ while True:
             REQ = []
             REQ = (("".join(ITEM_L)).split())
             REQ_TO = REQ[0]
-            REQ_Main = REQ[1]
+            REQ_Type = REQ[1].title()
 
-            if len(REQ) > 3:
-                REQ_Comp = REQ[2]
-                if hasNumbers(REQ[3]) == True:
-                    REQ_Price = re.sub("\D", "", REQ[3])
+            #Type = Prime
+            if REQ_Type == 'Prime':
+                REQ_Main = REQ[2].title()
+
+                if len(REQ) > 4:
+                    REQ_Comp = REQ[3].title()
+                    if hasNumbers(REQ[4]) == True:
+                        REQ_Price = re.sub("\D", "", REQ[4])
+                    else:
+                        REQ_Price = 'null'
+
                 else:
-                    REQ_Price = 'null'
+                    REQ_Comp = 'null'
+                    if hasNumbers(REQ[3]) == True:
+                        REQ_Price = re.sub("\D", "", REQ[3])
+                    else:
+                        REQ_Price = 'null'
 
-            else:
-                REQ_Comp = 'null'
-                if hasNumbers(REQ[2]) == True:
-                    REQ_Price = re.sub("\D", "", REQ[2])
+            #Type = Mods/Other
+            elif REQ_Type == 'Mods' or REQ_Type == 'Arcane':
+                if not hasNumbers(REQ[3]) == True:
+                    REQ_Main = re.sub("[^\w]", " ", str(REQ[2].title() + ' ' + REQ[3].title()))
+                    REQ_Comp = 'null'
+
+                    if len(REQ) > 4:
+                        REQ_Price = re.sub("\D", "", REQ[4])
+
                 else:
-                    REQ_Price = 'null'
+                    REQ_Main = REQ[2].title()
+                    REQ_Comp = 'null'
+                    REQ_Price = REQ[3]
 
 
-            print(REQ_Price)
 
+            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
 
