@@ -232,6 +232,8 @@ b {
     overflow: hidden;
     border: 2px solid $color-subtle;
     img {
+        position:relative;
+        top:-40px;
         @include vertical-align;
     }
 }
@@ -972,4 +974,21 @@ background:transparent !important;
 
 .alert-success {
     background: $color-accent;
+}
+
+.items-images-main-conent {
+    position:relative;
+    top:140px;
+    z-index:2;
+
+    .items-images-main-text{
+        @include font-small-title($color-on-bg);
+        font-weight:300;
+    }
+    .items-images-main-price{
+                @include font-small-title($color-on-bg);
+        @include font-number($color-on-bg);
+        margin-top: 0px;
+        display: inline-block;
+    }
 }
