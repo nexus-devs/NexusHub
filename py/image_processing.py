@@ -24,10 +24,10 @@ while True:
     #---------------------------
     img_path = 'cache/screen.jpg'
 
-    ImageGrab.grab(bbox=(0,540,1525,730)).save(img_path, "JPEG")
+    ImageGrab.grab(bbox=(0,565,1525,755)).save(img_path, "JPEG")
     img = Image.open(img_path)
 
-    basewidth = 3300
+    basewidth = 5300
     img = Image.open(img_path)
     wpercent = (basewidth / float(img.size[0]))
     hsize = int((float(img.size[1]) * float(wpercent)))
@@ -147,24 +147,25 @@ while True:
     PriceCheck = False
 
 
-    WTS = ['WTS', 'S', 'BUYING']
-    WTB = ['WTB','B', 'SELLING']
-    PC = ['PC', 'PRICE', 'CHECK', 'PRICECHECK', 'MUCH', 'CHECK'] #much -> how much? (experimental)
+    WTS = ['WTS', 'S', 'BUYING', 'SELL']
+    WTB = ['WTB', 'B', 'SELLING', 'SELL']
+    PC = ['PC', 'CHECK', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
 
     #make lists read from db
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
     E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
     E_Mods = []
-    E_Primed = ['Primed']
-    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    E_Primed = ['PRIMED']
+    C_Prime = ['BLUEPRINT', 'LINK', 'BP', 'SYSTEMS', 'SYSTEM', 'SYS', 'CHAS', 'HELMET', 'HELM', 'CHASSIS', 'HEAD', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
     C_Mods = []
     C_Arcane = []
     C_Primed = []
 
 
-    #Process single words per line
+    #Process each line
     for i in range(0, len(Msg)):
         MsgWords = re.sub("[^\w+.]", " ",  Msg[i]).split()
+        MsgWordsOriginal = MsgWords
         Username = MsgWords[0]
 
         #Leave only pure message behind & clean
@@ -177,9 +178,9 @@ while True:
         def hasNumbers(inputString):
             return any(char.isdigit() for char in inputString)
 
-        #Correct MsgWords
-        for i in range(0, len(MsgWords)):
-            correct(MsgWords[i])
+        #Correct MsgWords -- UNRELIABLE, needs modification, otherwise no result, high performance hit
+        #for i in range(0, len(MsgWords)):
+        #    correct(MsgWords[i])
                
 
                 
@@ -203,7 +204,7 @@ while True:
             def ExtractItems(ComponentList):
                 ITEMessential = MsgWords[i]
                 ITEMcomponent = ''
-                ITEMprice = 0
+                ITEMprice = 'null'
                 ITEMcount = 1
                 #check for components i+3 further
                 for y in range(0,5):
@@ -214,16 +215,15 @@ while True:
                             ITEMcomponent = MsgWords[i + y - 1]
                         #has number?
                         if hasNumbers(MsgWords[i + y - 1]) == True:
-                            #if x found -> indicates 6x count being used
+                            #if x found -> indicates x offers
                             if MsgWords[i + y - 1].find('X')!=-1:
-                                re.sub("\D", "", MsgWords[i + y - 1])
-                                ITEMcount = int(ITEMcount + int(MsgWords[i + y]))                 
+                                ITEMcount = re.sub("\D", "", MsgWords[i + y - 1])
+                                ITEMcount = str(ITEMcount + 'x')
                             #otherwise, number is item price
-                            else:
-                                re.sub("\D", "", MsgWords[i + y - 1])
-                                ITEMprice = str( MsgWords[i + y - 1] + 'PL')
-                        else:
-                            ITEMprice = ''
+                            elif not MsgWords[i + y - 1].find('R')!=-1:
+                                ITEMprice = re.sub("\D", "", MsgWords[i + y - 1])
+                                ITEMprice = str( ITEMprice + 'P')
+
 
 
                 return(ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
@@ -255,7 +255,7 @@ while True:
 
 
 
-        #Split Items into parseable parts
+        #Split Message into parseable requests
         Split = []
         ITEMvalSplit = []
         indices = []
@@ -303,7 +303,35 @@ while True:
             ITEM_L.pop(-1)
             ITEMval_L.append("".join(ITEM_L))
 
+
+            #Process each request, add to DB
+
+            #Assign request values to variables
+            REQ = []
+            REQ = (("".join(ITEM_L)).split())
+            REQ_TO = REQ[0]
+            REQ_Main = REQ[1]
+
+            if len(REQ) > 3:
+                REQ_Comp = REQ[2]
+                if hasNumbers(REQ[3]) == True:
+                    REQ_Price = re.sub("\D", "", REQ[3])
+                else:
+                    REQ_Price = 'null'
+
+            else:
+                REQ_Comp = 'null'
+                if hasNumbers(REQ[2]) == True:
+                    REQ_Price = re.sub("\D", "", REQ[2])
+                else:
+                    REQ_Price = 'null'
+
+
+            print(REQ_Price)
+
             k = k + 1
+
+
         ITEMval = ITEMval_L
 
 
@@ -314,17 +342,14 @@ while True:
         print('Requests: ' + str(ITEMval))
         print('Date: ' + str(datetime.datetime.now().isoformat()))
         print (' ------------------------------------------------- ')
-        print ('Original: '  + str(MsgWords)) #Display Full Message for error checking
+        print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
         print ('\n')
+
 
 
 
         # BSON format for .items collection
         cursor = db.items.find({"Title": "Frost"})
-
-        for document in cursor:
-            print(document)
-
 
         item_new = {
             "Title": "Nikana",
@@ -374,6 +399,7 @@ while True:
         ITEMcount = 0
         ITEMval = []
         ITEMprice = 0
+        ITEMprice_val = []
         ITEMvalSplit = 0
 
     print('Job Done')

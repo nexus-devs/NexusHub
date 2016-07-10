@@ -234,6 +234,7 @@ b {
     img {
         position:relative;
         top:-40px;
+        opacity:0.6;
         @include vertical-align;
     }
 }
