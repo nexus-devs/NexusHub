@@ -5,8 +5,10 @@ import pytesseract
 import string
 import PIL.ImageOps
 import datetime
+import NexusBot
 import win32api
 import win32gui
+import ctypes
 from pywinauto import application
 from pywinauto.application import Application
 from pymongo import MongoClient
@@ -388,37 +390,6 @@ while True:
             # NexusBot Functions
             #---------------------------
 
-            def ReplyPC(Name, Type, Comp, PriceLo, PriceHi, PriceAvg):
-                if not Comp == '':
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ' + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
-                else:
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ]:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
-
-                return (ItemInfo)
-
-
-
-            def FocusWindow(windowname):
-                def windowEnumerationHandler(hwnd, top_windows):
-                    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
-
-                if __name__ == "__main__":
-                    results = []
-                    top_windows = []
-                    win32gui.EnumWindows(windowEnumerationHandler, top_windows)
-                    for i in top_windows:
-                        if windowname in i[1].lower():
-                            print (i)
-                            win32gui.ShowWindow(i[0],5)
-                            win32gui.SetForegroundWindow(i[0])
-                            break
-
-            def TypeText(string, windowname):
-                app = application.Application()
-                app.Window_(title="Untitled - Notepad").SetFocus()
-                app.Window_(title="Untitled - Notepad").edit.TypeKeys((string + '{ENTER}'), with_spaces = True)
-
-
 
             #Find relevant item information
             if REQ_TO == 'PC' and not Username == 'NexusBot':
@@ -447,10 +418,11 @@ while True:
 
 
                 #Create Message
-                ItemInfo = ReplyPC(ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
-                print(ItemInfo)
+                ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
 
-                TypeText(ItemInfo, "ruby")
+                NexusBot.TypeText("ignore", "Untitled - Notepad")
+                NexusBot.switch_program()
+                NexusBot.send_test()
 
 
 
@@ -480,8 +452,8 @@ while True:
         ITEMprice_val = []
         ITEMvalSplit = 0
 
-    print('Job Done')
-    break
+    prin('Job Done')
+    brea
 
 
 
