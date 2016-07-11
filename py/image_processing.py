@@ -5,6 +5,10 @@ import pytesseract
 import string
 import PIL.ImageOps
 import datetime
+import win32api
+import win32gui
+from pywinauto import application
+from pywinauto.application import Application
 from pymongo import MongoClient
 from PIL import Image
 from PIL import ImageGrab
@@ -144,12 +148,9 @@ while True:
     ITEMessential = ''
     ITEMcomponent = ''
 
-    PriceCheck = False
-
-
     WTS = ['WTS', 'S', 'BUYING', 'SELL']
     WTB = ['WTB', 'B', 'SELLING', 'SELL']
-    PC = ['PC', 'CHECK', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
+    PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
 
     #Define component variations
     Blueprint = ['BLUEPRINT', 'BP']
@@ -195,18 +196,11 @@ while True:
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
-            if MsgWords[i] in WTS or MsgWords[i] in WTB:
+            if MsgWords[i] in WTS or MsgWords[i] in WTB or MsgWords[i] in PC:
                 TO = MsgWords[i]
-                TOcount = TOcount + 1; #increases every time TO is added -> see below
+                TOcount = TOcount + 1 #increases every time TO is added -> see below
                 TOval.extend((TO, TOcount)) #save as WTS, 1 & compare TO number with Item Number
                 TO = False
-
-
-            #Price Check
-            elif MsgWords[i] in PC:
-                PriceCheck = True
-
-
 
             #I[]
             def ExtractItems(ComponentList):
@@ -267,7 +261,10 @@ while True:
 
 
 
-        #Split Message into parseable requests
+
+        # Split Message into parseable requests
+        #---------------------------
+
         Split = []
         ITEMvalSplit = []
         indices = []
@@ -316,13 +313,23 @@ while True:
             ITEMval_L.append("".join(ITEM_L))
 
 
-            #Process each request, add to DB
+
+
+
+            # Request Processing
+            #---------------------------
 
             #Assign request values to variables
             REQ = []
             REQ = (("".join(ITEM_L)).split())
-            REQ_TO = REQ[0]
             REQ_Type = REQ[1].title()
+
+            if REQ[0] in WTB:
+                REQ_TO = 'WTB'
+            elif REQ[0] in WTS:
+                REQ_TO = 'WTS'
+            else:
+                REQ_TO = 'PC'
 
 
             #Type = Prime
@@ -367,13 +374,86 @@ while True:
 
 
 
-            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
+            #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
 
             # ==========================================
             # UPDATE DATA BASE WITH VARIABLES ABOVE HERE
             # ==========================================
+
+
+
+
+            # NexusBot Functions
+            #---------------------------
+
+            def ReplyPC(Name, Type, Comp, PriceLo, PriceHi, PriceAvg):
+                if not Comp == '':
+                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ' + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+                else:
+                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ]:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+
+                return (ItemInfo)
+
+
+
+            def FocusWindow(windowname):
+                def windowEnumerationHandler(hwnd, top_windows):
+                    top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
+
+                if __name__ == "__main__":
+                    results = []
+                    top_windows = []
+                    win32gui.EnumWindows(windowEnumerationHandler, top_windows)
+                    for i in top_windows:
+                        if windowname in i[1].lower():
+                            print (i)
+                            win32gui.ShowWindow(i[0],5)
+                            win32gui.SetForegroundWindow(i[0])
+                            break
+
+            def TypeText(string, windowname):
+                app = application.Application()
+                app.Window_(title="Untitled - Notepad").SetFocus()
+                app.Window_(title="Untitled - Notepad").edit.TypeKeys((string + '{ENTER}'), with_spaces = True)
+
+
+
+            #Find relevant item information
+            if REQ_TO == 'PC' and not Username == 'NexusBot':
+                cursor = db.items.find({"Title": REQ_Main})
+                for document in cursor:
+
+                        if REQ_Comp == 'null':
+                            ItemName = document["Title"]
+                            ItemType = document["Type"]
+                            ComponentName = ''
+                            ItemPriceLow = int(min(document["data"]))
+                            ItemPriceHigh = int(max(document["data"]))
+                            ItemPriceAvg = int(sum(document["data"])/len(document["data"]))
+
+
+                        else:
+                            for i in range(len(document["Components"])):
+                                Component = document["Components"][i]
+                                if REQ_Comp == Component["name"]:
+                                    ItemName = document["Title"]
+                                    ItemType = document["Type"]
+                                    ComponentName = Component["name"]
+                                    ItemPriceLow = int(min(Component["data"]))
+                                    ItemPriceHigh = int(max(Component["data"]))
+                                    ItemPriceAvg = int(sum(Component["data"])/len(Component["data"]))
+
+
+                #Create Message
+                ItemInfo = ReplyPC(ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+                print(ItemInfo)
+
+                TypeText(ItemInfo, "ruby")
+
+
+
 
 
         ITEMval = ITEMval_L
@@ -388,19 +468,6 @@ while True:
         print (' ------------------------------------------------- ')
         print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
         print ('\n')
-
-
-
-
-
-        #Respond to Price check (cant gather information because it defocuses chat)
-        #---------------------------
-        if PriceCheck == True:
-            #perform operations
-            #focus window
-            #type
-            #done
-            print ('pricecheck true')
 
 
 

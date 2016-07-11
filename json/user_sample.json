@@ -6,7 +6,7 @@
                 "to": "WTB",
                 "title": "Nikana",
                 "type": "Prime",
-                "data": "50"
+                "data": 50,
                 "updatedAt": "ISO String",
                 "udpateCount": "$inc + 1",
                 "components": [
@@ -28,7 +28,7 @@
                 "to": "WTB",
                 "title": "Frost",
                 "type": "Prime",
-                "data": "900"
+                "data": 900,
                 "updatedAt": "ISO String",
                 "udpateCount": "$inc + 1",
                 "components": [
@@ -49,7 +49,7 @@
                 "to": "WTS",
                 "title": "Boar",
                 "type": "Prime",
-                "data": "69"
+                "data": 69,
                 "updatedAt": "ISO String",
                 "udpateCount": "$inc + 1",
                 "components": [

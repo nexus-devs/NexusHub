@@ -1,6 +1,18 @@
 from pymongo import MongoClient
 import datetime
 
+########
+db.collection.insert(
+   <document or array of documents>,
+   {
+     writeConcern: <document>,
+     ordered: <boolean>
+   }
+)
+#######
+
+
+
 
 Username = input("Username ")#Username
 REQ_TO = "WTB"#input("Trade Operator ")#Trade Operator
@@ -22,10 +34,10 @@ user_exists=db.wtbwts.count({"Username":Username}) #check if user already exists
 if user_exists == 1:
     if REQ_Type == "PRIME" and REQ_Comp != "null": #check if PRIME COMPONENT
         print("hello")
-        
+
     else:
         db.stack.update({"Request":[{}]}, {"$push": {"Request":{"Timestamp":datetime, "TO":REQ_TO, "Item":[{"Item_Type":REQ_Type, "Item_Name":REQ_Main, "data":REQ_Price}]}}})
-        
+
 
 else:
     if REQ_Type == "PRIME" and REQ_Comp != "null": #check if PRIME COMPONENT
