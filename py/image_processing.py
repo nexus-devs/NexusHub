@@ -174,7 +174,10 @@ while True:
     for i in range(0, len(Msg)):
         MsgWords = re.sub("[^\w+.]", " ",  Msg[i]).split()
         MsgWordsOriginal = MsgWords
-        Username = MsgWords[0]
+        if len(MsgWords) > 0:
+            Username = MsgWords[0]
+        else:
+            Username = ''
 
         #Leave only pure message behind & clean
         MsgWords.remove(Username)
@@ -376,7 +379,7 @@ while True:
 
 
 
-            #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
+            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
 
@@ -394,9 +397,11 @@ while True:
             #Find relevant item information
             if REQ_TO == 'PC' and not Username == 'NexusBot':
                 cursor = db.items.find({"Title": REQ_Main})
+
                 for document in cursor:
 
-                        if REQ_Comp == 'null':
+                    #Calculate Relevant Stats
+                        if REQ_Comp == 'null':                          # If component requested, else
                             REQ_Check = 'valid'
                             ItemName = document["Title"]
                             ItemType = document["Type"]
@@ -407,26 +412,28 @@ while True:
 
 
                         else:
-                            for i in range(len(document["Components"])):
+                            for i in range(len(document["Components"])): # Look through all components
                                 Component = document["Components"][i]
+                                print(REQ_Comp)
+                                print(Component["name"])
                                 if REQ_Comp == Component["name"]:
                                     REQ_Check = 'valid'
                                     ItemName = document["Title"]
+                                    print(ItemName)
                                     ItemType = document["Type"]
                                     ComponentName = Component["name"]
                                     ItemPriceLow = int(min(Component["data"]))
                                     ItemPriceHigh = int(max(Component["data"]))
                                     ItemPriceAvg = int(sum(Component["data"])/len(Component["data"]))
-                                else:
+                                    break
+                                else:                                   # If component doesn't exist
                                     REQ_Check = 'invalid'
 
 
+
                 #Create Message
-                ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
-
                 if REQ_Check == 'valid':
-                    print(ItemInfo)
-
+                    ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
                     NexusBot.clip(ItemInfo)
                     NexusBot.click(50, 770)
                     NexusBot.pressAndHold('ctrl', 'v')
@@ -465,6 +472,7 @@ while True:
         ITEMvalSplit = 0
 
     print('Job Done')
+    break
 
 
 
