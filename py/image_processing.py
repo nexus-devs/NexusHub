@@ -1,18 +1,35 @@
-import builtins
-import re
-import collections
-import pytesseract
-import string
-import PIL.ImageOps
-import datetime
-import NexusBot
-import ctypes
-import time
-from pywinauto import application
-from pymongo import MongoClient
+# Image Processing
+# ----------------------
 from PIL import Image
 from PIL import ImageGrab
 from PIL import ImageEnhance
+
+# Text Processing
+# ----------------------
+import re
+import collections
+import builtins
+import pytesseract
+import string
+import PIL.ImageOps
+
+# Connections
+# ----------------------
+import sys
+import requests
+from pymongo import MongoClient
+
+# NexusBot
+# ----------------------
+import NexusBot
+from pywinauto import application
+
+# Misc
+# ----------------------
+import datetime
+import time
+
+
 
 
 
@@ -379,14 +396,25 @@ while True:
 
 
 
-            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
+            #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
 
-            # ==========================================
-            # UPDATE DATA BASE WITH VARIABLES ABOVE HERE
-            # ==========================================
 
+            if REQ_TO == 'WTS' or REQ_TO == 'WTB':
+                URL = 'http://localhost:1337/test'
+
+                client = requests.session()
+
+                # Retrieve the CSRF token first
+                client.get(URL)  # sets cookie
+                print(client.cookies.keys())
+                csrftoken = client.cookies['csrf']
+                print(csrftoken)
+
+                login_data = dict(csrfmiddlewaretoken=csrftoken, next='/')
+                #r = client.post(URL, data=login_data, headers=dict(Referer=URL))
+                #requests.post('http://localhost:1337/test', data = {'name': 'pythonswag'})
 
 
 
@@ -414,12 +442,10 @@ while True:
                         else:
                             for i in range(len(document["Components"])): # Look through all components
                                 Component = document["Components"][i]
-                                print(REQ_Comp)
-                                print(Component["name"])
+
                                 if REQ_Comp == Component["name"]:
                                     REQ_Check = 'valid'
                                     ItemName = document["Title"]
-                                    print(ItemName)
                                     ItemType = document["Type"]
                                     ComponentName = Component["name"]
                                     ItemPriceLow = int(min(Component["data"]))
@@ -432,7 +458,8 @@ while True:
 
 
                 #Create Message
-                if REQ_Check == 'valid':
+                debug = 'true'
+                if REQ_Check == 'valid' and debug == 'false':
                     ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
                     NexusBot.clip(ItemInfo)
                     NexusBot.click(50, 770)
@@ -455,7 +482,7 @@ while True:
         # Output
         print ('Username: ' + Username)
         print('Requests: ' + str(ITEMval))
-        print('Date: ' + str(datetime.datetime.now().isoformat()))
+        print('Date: ' + str(datetime.datetime.now().replace(microsecond=0).isoformat()))
         print (' ------------------------------------------------- ')
         print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
         print ('\n')
