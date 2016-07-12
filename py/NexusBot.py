@@ -1,19 +1,37 @@
 import win32api
 import win32gui
+import win32con
 import ctypes
+from tkinter import Tk
 import time
 from pywinauto import application
 from pywinauto.application import Application
+
+
+
+def clip(text):
+    r = Tk()
+    r.withdraw()
+    r.clipboard_clear()
+    r.clipboard_append(text)
+    r.destroy()
+
+def click(x,y):
+    win32api.SetCursorPos((x,y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
+
 
 
 def ReplyPC(Username, Name, Type, Comp, PriceLo, PriceHi, PriceAvg):
                 if not Comp == '':
                     ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ' + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
                 else:
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ]:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
 
                 return (ItemInfo)
 
+"""
 def FocusWindow(windowname):
     def windowEnumerationHandler(hwnd, top_windows):
         top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
@@ -23,7 +41,7 @@ def FocusWindow(windowname):
         top_windows = []
         win32gui.EnumWindows(windowEnumerationHandler, top_windows)
         for i in top_windows:
-            if windowname in i[1].lower():
+            if "notepad" in i[1].lower():
                 print (i)
                 win32gui.ShowWindow(i[0],5)
                 win32gui.SetForegroundWindow(i[0])
@@ -33,418 +51,550 @@ def TypeText(string, windowname):
     app = application.Application()
     app.Window_(title=windowname).SetFocus()
     #app.Window_(title=windowname).edit.TypeKeys((r'^v' + '{ENTER}'), with_spaces = True)
+"""
 
 
 
-LONG = ctypes.c_long
-DWORD = ctypes.c_ulong
-ULONG_PTR = ctypes.POINTER(DWORD)
-WORD = ctypes.c_ushort
 
-class MOUSEINPUT(ctypes.Structure):
-    _fields_ = (('dx', LONG),
-                ('dy', LONG),
-                ('mouseData', DWORD),
-                ('dwFlags', DWORD),
-                ('time', DWORD),
-                ('dwExtraInfo', ULONG_PTR))
 
-class KEYBDINPUT(ctypes.Structure):
-    _fields_ = (('wVk', WORD),
-                ('wScan', WORD),
-                ('dwFlags', DWORD),
-                ('time', DWORD),
-                ('dwExtraInfo', ULONG_PTR))
 
-class HARDWAREINPUT(ctypes.Structure):
-    _fields_ = (('uMsg', DWORD),
-                ('wParamL', WORD),
-                ('wParamH', WORD))
 
-class _INPUTunion(ctypes.Union):
-    _fields_ = (('mi', MOUSEINPUT),
-                ('ki', KEYBDINPUT),
-                ('hi', HARDWAREINPUT))
 
-class INPUT(ctypes.Structure):
-    _fields_ = (('type', DWORD),
-                ('union', _INPUTunion))
+VK_CODE = {'backspace':0x08,
+           'tab':0x09,
+           'clear':0x0C,
+           'enter':0x0D,
+           'shift':0x10,
+           'ctrl':0x11,
+           'alt':0x12,
+           'pause':0x13,
+           'caps_lock':0x14,
+           'esc':0x1B,
+           'spacebar':0x20,
+           'page_up':0x21,
+           'page_down':0x22,
+           'end':0x23,
+           'home':0x24,
+           'left_arrow':0x25,
+           'up_arrow':0x26,
+           'right_arrow':0x27,
+           'down_arrow':0x28,
+           'select':0x29,
+           'print':0x2A,
+           'execute':0x2B,
+           'print_screen':0x2C,
+           'ins':0x2D,
+           'del':0x2E,
+           'help':0x2F,
+           '0':0x30,
+           '1':0x31,
+           '2':0x32,
+           '3':0x33,
+           '4':0x34,
+           '5':0x35,
+           '6':0x36,
+           '7':0x37,
+           '8':0x38,
+           '9':0x39,
+           'a':0x41,
+           'b':0x42,
+           'c':0x43,
+           'd':0x44,
+           'e':0x45,
+           'f':0x46,
+           'g':0x47,
+           'h':0x48,
+           'i':0x49,
+           'j':0x4A,
+           'k':0x4B,
+           'l':0x4C,
+           'm':0x4D,
+           'n':0x4E,
+           'o':0x4F,
+           'p':0x50,
+           'q':0x51,
+           'r':0x52,
+           's':0x53,
+           't':0x54,
+           'u':0x55,
+           'v':0x56,
+           'w':0x57,
+           'x':0x58,
+           'y':0x59,
+           'z':0x5A,
+           'numpad_0':0x60,
+           'numpad_1':0x61,
+           'numpad_2':0x62,
+           'numpad_3':0x63,
+           'numpad_4':0x64,
+           'numpad_5':0x65,
+           'numpad_6':0x66,
+           'numpad_7':0x67,
+           'numpad_8':0x68,
+           'numpad_9':0x69,
+           'multiply_key':0x6A,
+           'add_key':0x6B,
+           'separator_key':0x6C,
+           'subtract_key':0x6D,
+           'decimal_key':0x6E,
+           'divide_key':0x6F,
+           'F1':0x70,
+           'F2':0x71,
+           'F3':0x72,
+           'F4':0x73,
+           'F5':0x74,
+           'F6':0x75,
+           'F7':0x76,
+           'F8':0x77,
+           'F9':0x78,
+           'F10':0x79,
+           'F11':0x7A,
+           'F12':0x7B,
+           'F13':0x7C,
+           'F14':0x7D,
+           'F15':0x7E,
+           'F16':0x7F,
+           'F17':0x80,
+           'F18':0x81,
+           'F19':0x82,
+           'F20':0x83,
+           'F21':0x84,
+           'F22':0x85,
+           'F23':0x86,
+           'F24':0x87,
+           'num_lock':0x90,
+           'scroll_lock':0x91,
+           'left_shift':0xA0,
+           'right_shift ':0xA1,
+           'left_control':0xA2,
+           'right_control':0xA3,
+           'left_menu':0xA4,
+           'right_menu':0xA5,
+           'browser_back':0xA6,
+           'browser_forward':0xA7,
+           'browser_refresh':0xA8,
+           'browser_stop':0xA9,
+           'browser_search':0xAA,
+           'browser_favorites':0xAB,
+           'browser_start_and_home':0xAC,
+           'volume_mute':0xAD,
+           'volume_Down':0xAE,
+           'volume_up':0xAF,
+           'next_track':0xB0,
+           'previous_track':0xB1,
+           'stop_media':0xB2,
+           'play/pause_media':0xB3,
+           'start_mail':0xB4,
+           'select_media':0xB5,
+           'start_application_1':0xB6,
+           'start_application_2':0xB7,
+           'attn_key':0xF6,
+           'crsel_key':0xF7,
+           'exsel_key':0xF8,
+           'play_key':0xFA,
+           'zoom_key':0xFB,
+           'clear_key':0xFE,
+           '+':0xBB,
+           ',':0xBC,
+           '-':0xBD,
+           '.':0xBE,
+           '/':0xBF,
+           '`':0xC0,
+           ';':0xBA,
+           '[':0xDB,
+           '\\':0xDC,
+           ']':0xDD,
+           "'":0xDE,
+           '`':0xC0}
 
-def SendInput(*inputs):
-    nInputs = len(inputs)
-    LPINPUT = INPUT * nInputs
-    pInputs = LPINPUT(*inputs)
-    cbSize = ctypes.c_int(ctypes.sizeof(INPUT))
-    return ctypes.windll.user32.SendInput(nInputs, pInputs, cbSize)
 
-INPUT_MOUSE = 0
-INPUT_KEYBOARD = 1
-INPUT_HARDWARD = 2
 
-def Input(structure):
-    if isinstance(structure, MOUSEINPUT):
-        return INPUT(INPUT_MOUSE, _INPUTunion(mi=structure))
-    if isinstance(structure, KEYBDINPUT):
-        return INPUT(INPUT_KEYBOARD, _INPUTunion(ki=structure))
-    if isinstance(structure, HARDWAREINPUT):
-        return INPUT(INPUT_HARDWARE, _INPUTunion(hi=structure))
-    raise TypeError('Cannot create INPUT structure!')
+def press(*args):
+    '''
+    one press, one release.
+    accepts as many arguments as you want. e.g. press('left_arrow', 'a','b').
+    '''
+    for i in args:
+        win32api.keybd_event(VK_CODE[i], 0,0,0)
+        time.sleep(.15)
+        win32api.keybd_event(VK_CODE[i],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-WHEEL_DELTA = 120
-XBUTTON1 = 0x0001
-XBUTTON2 = 0x0002
-MOUSEEVENTF_ABSOLUTE = 0x8000
-MOUSEEVENTF_HWHEEL = 0x01000
-MOUSEEVENTF_MOVE = 0x0001
-MOUSEEVENTF_MOVE_NOCOALESCE = 0x2000
-MOUSEEVENTF_LEFTDOWN = 0x0002
-MOUSEEVENTF_LEFTUP = 0x0004
-MOUSEEVENTF_RIGHTDOWN = 0x0008
-MOUSEEVENTF_RIGHTUP = 0x0010
-MOUSEEVENTF_MIDDLEDOWN = 0x0020
-MOUSEEVENTF_MIDDLEUP = 0x0040
-MOUSEEVENTF_VIRTUALDESK = 0x4000
-MOUSEEVENTF_WHEEL = 0x0800
-MOUSEEVENTF_XDOWN = 0x0080
-MOUSEEVENTF_XUP = 0x0100
+def pressAndHold(*args):
+    '''
+    press and hold. Do NOT release.
+    accepts as many arguments as you want.
+    e.g. pressAndHold('left_arrow', 'a','b').
+    '''
+    for i in args:
+        win32api.keybd_event(VK_CODE[i], 0,0,0)
+        time.sleep(.05)
 
-def MouseInput(flags, x, y, data):
-    return MOUSEINPUT(x, y, data, flags, 0, None)
+def pressHoldRelease(*args):
+    '''
+    press and hold passed in strings. Once held, release
+    accepts as many arguments as you want.
+    e.g. pressAndHold('left_arrow', 'a','b').
 
-VK_LBUTTON = 0x01               # Left mouse button
-VK_RBUTTON = 0x02               # Right mouse button
-VK_CANCEL = 0x03                # Control-break processing
-VK_MBUTTON = 0x04               # Middle mouse button (three-button mouse)
-VK_XBUTTON1 = 0x05              # X1 mouse button
-VK_XBUTTON2 = 0x06              # X2 mouse button
-VK_BACK = 0x08                  # BACKSPACE key
-VK_TAB = 0x09                   # TAB key
-VK_CLEAR = 0x0C                 # CLEAR key
-VK_RETURN = 0x0D                # ENTER key
-VK_SHIFT = 0x10                 # SHIFT key
-VK_CONTROL = 0x11               # CTRL key
-VK_MENU = 0x12                  # ALT key
-VK_PAUSE = 0x13                 # PAUSE key
-VK_CAPITAL = 0x14               # CAPS LOCK key
-VK_KANA = 0x15                  # IME Kana mode
-VK_HANGUL = 0x15                # IME Hangul mode
-VK_JUNJA = 0x17                 # IME Junja mode
-VK_FINAL = 0x18                 # IME final mode
-VK_HANJA = 0x19                 # IME Hanja mode
-VK_KANJI = 0x19                 # IME Kanji mode
-VK_ESCAPE = 0x1B                # ESC key
-VK_CONVERT = 0x1C               # IME convert
-VK_NONCONVERT = 0x1D            # IME nonconvert
-VK_ACCEPT = 0x1E                # IME accept
-VK_MODECHANGE = 0x1F            # IME mode change request
-VK_SPACE = 0x20                 # SPACEBAR
-VK_PRIOR = 0x21                 # PAGE UP key
-VK_NEXT = 0x22                  # PAGE DOWN key
-VK_END = 0x23                   # END key
-VK_HOME = 0x24                  # HOME key
-VK_LEFT = 0x25                  # LEFT ARROW key
-VK_UP = 0x26                    # UP ARROW key
-VK_RIGHT = 0x27                 # RIGHT ARROW key
-VK_DOWN = 0x28                  # DOWN ARROW key
-VK_SELECT = 0x29                # SELECT key
-VK_PRINT = 0x2A                 # PRINT key
-VK_EXECUTE = 0x2B               # EXECUTE key
-VK_SNAPSHOT = 0x2C              # PRINT SCREEN key
-VK_INSERT = 0x2D                # INS key
-VK_DELETE = 0x2E                # DEL key
-VK_HELP = 0x2F                  # HELP key
-VK_LWIN = 0x5B                  # Left Windows key (Natural keyboard)
-VK_RWIN = 0x5C                  # Right Windows key (Natural keyboard)
-VK_APPS = 0x5D                  # Applications key (Natural keyboard)
-VK_SLEEP = 0x5F                 # Computer Sleep key
-VK_NUMPAD0 = 0x60               # Numeric keypad 0 key
-VK_NUMPAD1 = 0x61               # Numeric keypad 1 key
-VK_NUMPAD2 = 0x62               # Numeric keypad 2 key
-VK_NUMPAD3 = 0x63               # Numeric keypad 3 key
-VK_NUMPAD4 = 0x64               # Numeric keypad 4 key
-VK_NUMPAD5 = 0x65               # Numeric keypad 5 key
-VK_NUMPAD6 = 0x66               # Numeric keypad 6 key
-VK_NUMPAD7 = 0x67               # Numeric keypad 7 key
-VK_NUMPAD8 = 0x68               # Numeric keypad 8 key
-VK_NUMPAD9 = 0x69               # Numeric keypad 9 key
-VK_MULTIPLY = 0x6A              # Multiply key
-VK_ADD = 0x6B                   # Add key
-VK_SEPARATOR = 0x6C             # Separator key
-VK_SUBTRACT = 0x6D              # Subtract key
-VK_DECIMAL = 0x6E               # Decimal key
-VK_DIVIDE = 0x6F                # Divide key
-VK_F1 = 0x70                    # F1 key
-VK_F2 = 0x71                    # F2 key
-VK_F3 = 0x72                    # F3 key
-VK_F4 = 0x73                    # F4 key
-VK_F5 = 0x74                    # F5 key
-VK_F6 = 0x75                    # F6 key
-VK_F7 = 0x76                    # F7 key
-VK_F8 = 0x77                    # F8 key
-VK_F9 = 0x78                    # F9 key
-VK_F10 = 0x79                   # F10 key
-VK_F11 = 0x7A                   # F11 key
-VK_F12 = 0x7B                   # F12 key
-VK_F13 = 0x7C                   # F13 key
-VK_F14 = 0x7D                   # F14 key
-VK_F15 = 0x7E                   # F15 key
-VK_F16 = 0x7F                   # F16 key
-VK_F17 = 0x80                   # F17 key
-VK_F18 = 0x81                   # F18 key
-VK_F19 = 0x82                   # F19 key
-VK_F20 = 0x83                   # F20 key
-VK_F21 = 0x84                   # F21 key
-VK_F22 = 0x85                   # F22 key
-VK_F23 = 0x86                   # F23 key
-VK_F24 = 0x87                   # F24 key
-VK_NUMLOCK = 0x90               # NUM LOCK key
-VK_SCROLL = 0x91                # SCROLL LOCK key
-VK_LSHIFT = 0xA0                # Left SHIFT key
-VK_RSHIFT = 0xA1                # Right SHIFT key
-VK_LCONTROL = 0xA2              # Left CONTROL key
-VK_RCONTROL = 0xA3              # Right CONTROL key
-VK_LMENU = 0xA4                 # Left MENU key
-VK_RMENU = 0xA5                 # Right MENU key
-VK_BROWSER_BACK = 0xA6          # Browser Back key
-VK_BROWSER_FORWARD = 0xA7       # Browser Forward key
-VK_BROWSER_REFRESH = 0xA8       # Browser Refresh key
-VK_BROWSER_STOP = 0xA9          # Browser Stop key
-VK_BROWSER_SEARCH = 0xAA        # Browser Search key
-VK_BROWSER_FAVORITES = 0xAB     # Browser Favorites key
-VK_BROWSER_HOME = 0xAC          # Browser Start and Home key
-VK_VOLUME_MUTE = 0xAD           # Volume Mute key
-VK_VOLUME_DOWN = 0xAE           # Volume Down key
-VK_VOLUME_UP = 0xAF             # Volume Up key
-VK_MEDIA_NEXT_TRACK = 0xB0      # Next Track key
-VK_MEDIA_PREV_TRACK = 0xB1      # Previous Track key
-VK_MEDIA_STOP = 0xB2            # Stop Media key
-VK_MEDIA_PLAY_PAUSE = 0xB3      # Play/Pause Media key
-VK_LAUNCH_MAIL = 0xB4           # Start Mail key
-VK_LAUNCH_MEDIA_SELECT = 0xB5   # Select Media key
-VK_LAUNCH_APP1 = 0xB6           # Start Application 1 key
-VK_LAUNCH_APP2 = 0xB7           # Start Application 2 key
-VK_OEM_1 = 0xBA                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the ';:' key
-VK_OEM_PLUS = 0xBB              # For any country/region, the '+' key
-VK_OEM_COMMA = 0xBC             # For any country/region, the ',' key
-VK_OEM_MINUS = 0xBD             # For any country/region, the '-' key
-VK_OEM_PERIOD = 0xBE            # For any country/region, the '.' key
-VK_OEM_2 = 0xBF                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the '/?' key
-VK_OEM_3 = 0xC0                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the '`~' key
-VK_OEM_4 = 0xDB                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the '[{' key
-VK_OEM_5 = 0xDC                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the '\|' key
-VK_OEM_6 = 0xDD                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the ']}' key
-VK_OEM_7 = 0xDE                 # Used for miscellaneous characters; it can vary by keyboard.
-                                # For the US standard keyboard, the 'single-quote/double-quote' key
-VK_OEM_8 = 0xDF                 # Used for miscellaneous characters; it can vary by keyboard.
-VK_OEM_102 = 0xE2               # Either the angle bracket key or the backslash key on the RT 102-key keyboard
-VK_PROCESSKEY = 0xE5            # IME PROCESS key
-VK_PACKET = 0xE7                # Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP
-VK_ATTN = 0xF6                  # Attn key
-VK_CRSEL = 0xF7                 # CrSel key
-VK_EXSEL = 0xF8                 # ExSel key
-VK_EREOF = 0xF9                 # Erase EOF key
-VK_PLAY = 0xFA                  # Play key
-VK_ZOOM = 0xFB                  # Zoom key
-VK_PA1 = 0xFD                   # PA1 key
-VK_OEM_CLEAR = 0xFE             # Clear key
+    this is useful for issuing shortcut command or shift commands.
+    e.g. pressHoldRelease('ctrl', 'alt', 'del'), pressHoldRelease('shift','a')
+    '''
+    for i in args:
+        win32api.keybd_event(VK_CODE[i], 0,0,0)
+        time.sleep(.05)
 
-KEYEVENTF_EXTENDEDKEY = 0x0001
-KEYEVENTF_KEYUP = 0x0002
-KEYEVENTF_SCANCODE = 0x0008
-KEYEVENTF_UNICODE = 0x0004
+    for i in args:
+            win32api.keybd_event(VK_CODE[i],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            time.sleep(.1)
 
-KEY_0 = 0x30
-KEY_1 = 0x31
-KEY_2 = 0x32
-KEY_3 = 0x33
-KEY_4 = 0x34
-KEY_5 = 0x35
-KEY_6 = 0x36
-KEY_7 = 0x37
-KEY_8 = 0x38
-KEY_9 = 0x39
-KEY_A = 0x41
-KEY_B = 0x42
-KEY_C = 0x43
-KEY_D = 0x44
-KEY_E = 0x45
-KEY_F = 0x46
-KEY_G = 0x47
-KEY_H = 0x48
-KEY_I = 0x49
-KEY_J = 0x4A
-KEY_K = 0x4B
-KEY_L = 0x4C
-KEY_M = 0x4D
-KEY_N = 0x4E
-KEY_O = 0x4F
-KEY_P = 0x50
-KEY_Q = 0x51
-KEY_R = 0x52
-KEY_S = 0x53
-KEY_T = 0x54
-KEY_U = 0x55
-KEY_V = 0x56
-KEY_W = 0x57
-KEY_X = 0x58
-KEY_Y = 0x59
-KEY_Z = 0x5A
 
-def KeybdInput(code, flags):
-    return KEYBDINPUT(code, code, flags, 0, None)
 
-def HardwareInput(message, parameter):
-    return HARDWAREINPUT(message & 0xFFFFFFFF,
-                         parameter & 0xFFFF,
-                         parameter >> 16 & 0xFFFF)
+def release(*args):
+    '''
+    release depressed keys
+    accepts as many arguments as you want.
+    e.g. release('left_arrow', 'a','b').
+    '''
+    for i in args:
+           win32api.keybd_event(VK_CODE[i],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-def Mouse(flags, x=0, y=0, data=0):
-    return Input(MouseInput(flags, x, y, data))
 
-def Keyboard(code, flags=0):
-    return Input(KeybdInput(code, flags))
+def typer(string=None,*args):
+##    time.sleep(4)
+    for i in string:
+        if i == ' ':
+            win32api.keybd_event(VK_CODE['spacebar'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['spacebar'],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-def Hardware(message, parameter=0):
-    return Input(HardwareInput(message, parameter))
+        elif i == '!':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['1'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['1'],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-################################################################################
+        elif i == '@':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['2'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['2'],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-import string
+        elif i == '{':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['['], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['['],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-UPPER = frozenset('~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?')
-LOWER = frozenset("`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./")
-ORDER = string.ascii_letters + string.digits + ' \b\r\t'
-ALTER = dict(zip('!@#$%^&*()', '1234567890'))
-OTHER = {'`': VK_OEM_3,
-         '~': VK_OEM_3,
-         '-': VK_OEM_MINUS,
-         '_': VK_OEM_MINUS,
-         '=': VK_OEM_PLUS,
-         '+': VK_OEM_PLUS,
-         '[': VK_OEM_4,
-         '{': VK_OEM_4,
-         ']': VK_OEM_6,
-         '}': VK_OEM_6,
-         '\\': VK_OEM_5,
-         '|': VK_OEM_5,
-         ';': VK_OEM_1,
-         ':': VK_OEM_1,
-         "'": VK_OEM_7,
-         '"': VK_OEM_7,
-         ',': VK_OEM_COMMA,
-         '<': VK_OEM_COMMA,
-         '.': VK_OEM_PERIOD,
-         '>': VK_OEM_PERIOD,
-         '/': VK_OEM_2,
-         '?': VK_OEM_2}
+        elif i == '?':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['/'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['/'],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-def keyboard_stream(string):
-    mode = False
-    for character in string.replace('\r\n', '\r').replace('\n', '\r'):
-        if mode and character in LOWER or not mode and character in UPPER:
-            yield Keyboard(VK_SHIFT, mode and KEYEVENTF_KEYUP)
-            mode = not mode
-        character = ALTER.get(character, character)
-        if character in ORDER:
-            code = ord(character.upper())
-        elif character in OTHER:
-            code = OTHER[character]
+        elif i == ':':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE[';'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE[';'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '"':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['\''], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['\''],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '}':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE[']'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE[']'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '#':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['3'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['3'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '$':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['4'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['4'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '%':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['5'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['5'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '^':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['6'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['6'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '&':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['7'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['7'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '*':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['8'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['8'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '(':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['9'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['9'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == ')':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['0'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['0'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '_':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['-'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['-'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+
+        elif i == '=':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['+'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['+'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '~':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['`'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['`'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '<':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE[','], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE[','],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == '>':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['.'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['.'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'A':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['a'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['a'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'B':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['b'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['b'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'C':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['c'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['c'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'D':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['d'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['d'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'E':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['e'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['e'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'F':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['f'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['f'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'G':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['g'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['g'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'H':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['h'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['h'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'I':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['i'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['i'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'J':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['j'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['j'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'K':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['k'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['k'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'L':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['l'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['l'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'M':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['m'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['m'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'N':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['n'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['n'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'O':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['o'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['o'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'P':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['p'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['p'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'Q':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['q'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['q'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'R':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['r'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['r'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'S':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['s'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['s'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'T':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['t'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['t'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'U':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['u'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['u'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'V':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['v'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['v'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'W':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['w'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['w'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'X':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['x'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['x'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'Y':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['y'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['y'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+        elif i == 'Z':
+            win32api.keybd_event(VK_CODE['left_shift'], 0,0,0)
+            win32api.keybd_event(VK_CODE['z'], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE['left_shift'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+            win32api.keybd_event(VK_CODE['z'],0 ,win32con.KEYEVENTF_KEYUP ,0)
+
+
         else:
-            continue
-            raise ValueError('String is not understood!')
-        yield Keyboard(code)
-        yield Keyboard(code, KEYEVENTF_KEYUP)
-    if mode:
-        yield Keyboard(VK_SHIFT, KEYEVENTF_KEYUP)
+            win32api.keybd_event(VK_CODE[i], 0,0,0)
+            time.sleep(.05)
+            win32api.keybd_event(VK_CODE[i],0 ,win32con.KEYEVENTF_KEYUP ,0)
 
-################################################################################
 
-import time, sys
 
-def main():
-    time.sleep(5)
-    for event in keyboard_stream('o2E^uXh#:SHn&HQ+t]YF'):
-        SendInput(event)
-        time.sleep(0.1)
 
-##if __name__ == '__main__':
-##    main()
-
-def switch_program():
-    SendInput(Keyboard(VK_MENU), Keyboard(VK_TAB))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_TAB, KEYEVENTF_KEYUP),
-              Keyboard(VK_MENU, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-
-def select_line():
-    SendInput(Keyboard(VK_SHIFT, KEYEVENTF_EXTENDEDKEY),
-              Keyboard(VK_END, KEYEVENTF_EXTENDEDKEY))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_SHIFT, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP),
-              Keyboard(VK_END, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-
-def copy_line():
-    SendInput(Keyboard(VK_CONTROL), Keyboard(KEY_C))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_CONTROL, KEYEVENTF_KEYUP),
-              Keyboard(KEY_C, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-
-def next_line():
-    SendInput(Keyboard(VK_HOME), Keyboard(VK_DOWN))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_HOME, KEYEVENTF_KEYUP),
-              Keyboard(VK_DOWN, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-
-def prepare_text():
-    # Open Text
-    SendInput(Keyboard(KEY_M))
-    time.sleep(0.2)
-    SendInput(Keyboard(KEY_M, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-    # Goto Area
-    SendInput(Keyboard(VK_TAB))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_TAB, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-    # Paste Message
-    SendInput(Keyboard(VK_CONTROL), Keyboard(KEY_V))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_CONTROL, KEYEVENTF_KEYUP),
-              Keyboard(KEY_V, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-    # Goto Button
-    SendInput(Keyboard(VK_TAB))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_TAB, KEYEVENTF_KEYUP))
-    time.sleep(0.2)
-
-def send_one_message():
-    select_line()
-    copy_line()
-    next_line()
-    switch_program()
-    prepare_text()
-    # Send Message
-    SendInput(Keyboard(VK_RETURN))
-    time.sleep(0.2)
-    SendInput(Keyboard(VK_RETURN, KEYEVENTF_KEYUP))
-    time.sleep(10)
-    switch_program()
-
-def send_messages(total):
-    time.sleep(10)
-    for _ in range(total):
-        send_one_message()
-
-def send_test():
-    SendInput(Keyboard(KEY_A))
