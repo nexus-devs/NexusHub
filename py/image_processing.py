@@ -6,11 +6,9 @@ import string
 import PIL.ImageOps
 import datetime
 import NexusBot
-import win32api
-import win32gui
 import ctypes
+import time
 from pywinauto import application
-from pywinauto.application import Application
 from pymongo import MongoClient
 from PIL import Image
 from PIL import ImageGrab
@@ -21,7 +19,6 @@ from PIL import ImageEnhance
 #Connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
 db = client.warframenexus
-#db.items.insert(item val)
 
 
 while True:
@@ -158,7 +155,7 @@ while True:
     Blueprint = ['BLUEPRINT', 'BP']
     Systems = ['SYSTEMS', 'SYSTEM', 'SYS']
     Chassis = ['CHASSIS', 'CHAS']
-    Neuroptics = ['NEUROPTICS, HELMET, HELM, HEAD']
+    Neuroptics = ['NEUROPTICS', 'HELMET', 'HELM', 'HEAD']
     CompParts = ['Blueprint', 'Systems', 'Chassis', 'Neuroptics']
 
     #Define valid items
@@ -345,6 +342,9 @@ while True:
                         CompCheckList = eval(CompParts[u])
                         if REQ[3] in CompCheckList:
                             REQ_Comp = CompParts[u].title()
+                        #If in standard list
+                        elif REQ[3] in C_Prime:
+                            REQ_Comp = REQ[3].title()
 
 
                     if hasNumbers(REQ[4]) == True:
@@ -397,6 +397,7 @@ while True:
                 for document in cursor:
 
                         if REQ_Comp == 'null':
+                            REQ_Check = 'valid'
                             ItemName = document["Title"]
                             ItemType = document["Type"]
                             ComponentName = ''
@@ -409,21 +410,32 @@ while True:
                             for i in range(len(document["Components"])):
                                 Component = document["Components"][i]
                                 if REQ_Comp == Component["name"]:
+                                    REQ_Check = 'valid'
                                     ItemName = document["Title"]
                                     ItemType = document["Type"]
                                     ComponentName = Component["name"]
                                     ItemPriceLow = int(min(Component["data"]))
                                     ItemPriceHigh = int(max(Component["data"]))
                                     ItemPriceAvg = int(sum(Component["data"])/len(Component["data"]))
+                                else:
+                                    REQ_Check = 'invalid'
 
 
                 #Create Message
                 ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
 
-                NexusBot.TypeText("ignore", "Untitled - Notepad")
-                NexusBot.switch_program()
-                NexusBot.send_test()
+                if REQ_Check == 'valid':
+                    print(ItemInfo)
 
+                    NexusBot.clip(ItemInfo)
+                    NexusBot.click(50, 770)
+                    NexusBot.pressAndHold('ctrl', 'v')
+                    NexusBot.release('ctrl', 'v')
+                    app = application.Application()
+                    app.WARFRAME.TypeKeys('{ENTER}')
+
+
+                ItemInfo = ''
 
 
 
@@ -452,8 +464,8 @@ while True:
         ITEMprice_val = []
         ITEMvalSplit = 0
 
-    prin('Job Done')
-    brea
+    print('Job Done')
+
 
 
 
