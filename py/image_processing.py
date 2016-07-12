@@ -5,6 +5,10 @@ import pytesseract
 import string
 import PIL.ImageOps
 import datetime
+import NexusBot
+import ctypes
+import time
+from pywinauto import application
 from pymongo import MongoClient
 from PIL import Image
 from PIL import ImageGrab
@@ -15,7 +19,6 @@ from PIL import ImageEnhance
 #Connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
 db = client.warframenexus
-#db.items.insert(item val)
 
 
 while True:
@@ -144,18 +147,15 @@ while True:
     ITEMessential = ''
     ITEMcomponent = ''
 
-    PriceCheck = False
-
-
     WTS = ['WTS', 'S', 'BUYING', 'SELL']
     WTB = ['WTB', 'B', 'SELLING', 'SELL']
-    PC = ['PC', 'CHECK', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
+    PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
 
     #Define component variations
     Blueprint = ['BLUEPRINT', 'BP']
     Systems = ['SYSTEMS', 'SYSTEM', 'SYS']
     Chassis = ['CHASSIS', 'CHAS']
-    Neuroptics = ['NEUROPTICS, HELMET, HELM, HEAD']
+    Neuroptics = ['NEUROPTICS', 'HELMET', 'HELM', 'HEAD']
     CompParts = ['Blueprint', 'Systems', 'Chassis', 'Neuroptics']
 
     #Define valid items
@@ -174,7 +174,10 @@ while True:
     for i in range(0, len(Msg)):
         MsgWords = re.sub("[^\w+.]", " ",  Msg[i]).split()
         MsgWordsOriginal = MsgWords
-        Username = MsgWords[0]
+        if len(MsgWords) > 0:
+            Username = MsgWords[0]
+        else:
+            Username = ''
 
         #Leave only pure message behind & clean
         MsgWords.remove(Username)
@@ -195,18 +198,11 @@ while True:
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
-            if MsgWords[i] in WTS or MsgWords[i] in WTB:
+            if MsgWords[i] in WTS or MsgWords[i] in WTB or MsgWords[i] in PC:
                 TO = MsgWords[i]
-                TOcount = TOcount + 1; #increases every time TO is added -> see below
+                TOcount = TOcount + 1 #increases every time TO is added -> see below
                 TOval.extend((TO, TOcount)) #save as WTS, 1 & compare TO number with Item Number
                 TO = False
-
-
-            #Price Check
-            elif MsgWords[i] in PC:
-                PriceCheck = True
-
-
 
             #I[]
             def ExtractItems(ComponentList):
@@ -267,7 +263,10 @@ while True:
 
 
 
-        #Split Message into parseable requests
+
+        # Split Message into parseable requests
+        #---------------------------
+
         Split = []
         ITEMvalSplit = []
         indices = []
@@ -316,13 +315,23 @@ while True:
             ITEMval_L.append("".join(ITEM_L))
 
 
-            #Process each request, add to DB
+
+
+
+            # Request Processing
+            #---------------------------
 
             #Assign request values to variables
             REQ = []
             REQ = (("".join(ITEM_L)).split())
-            REQ_TO = REQ[0]
             REQ_Type = REQ[1].title()
+
+            if REQ[0] in WTB:
+                REQ_TO = 'WTB'
+            elif REQ[0] in WTS:
+                REQ_TO = 'WTS'
+            else:
+                REQ_TO = 'PC'
 
 
             #Type = Prime
@@ -336,6 +345,9 @@ while True:
                         CompCheckList = eval(CompParts[u])
                         if REQ[3] in CompCheckList:
                             REQ_Comp = CompParts[u].title()
+                        #If in standard list
+                        elif REQ[3] in C_Prime:
+                            REQ_Comp = REQ[3].title()
 
 
                     if hasNumbers(REQ[4]) == True:
@@ -376,6 +388,65 @@ while True:
             # ==========================================
 
 
+
+
+            # NexusBot Functions
+            #---------------------------
+
+
+            #Find relevant item information
+            if REQ_TO == 'PC' and not Username == 'NexusBot':
+                cursor = db.items.find({"Title": REQ_Main})
+
+                for document in cursor:
+
+                    #Calculate Relevant Stats
+                        if REQ_Comp == 'null':                          # If component requested, else
+                            REQ_Check = 'valid'
+                            ItemName = document["Title"]
+                            ItemType = document["Type"]
+                            ComponentName = ''
+                            ItemPriceLow = int(min(document["data"]))
+                            ItemPriceHigh = int(max(document["data"]))
+                            ItemPriceAvg = int(sum(document["data"])/len(document["data"]))
+
+
+                        else:
+                            for i in range(len(document["Components"])): # Look through all components
+                                Component = document["Components"][i]
+                                print(REQ_Comp)
+                                print(Component["name"])
+                                if REQ_Comp == Component["name"]:
+                                    REQ_Check = 'valid'
+                                    ItemName = document["Title"]
+                                    print(ItemName)
+                                    ItemType = document["Type"]
+                                    ComponentName = Component["name"]
+                                    ItemPriceLow = int(min(Component["data"]))
+                                    ItemPriceHigh = int(max(Component["data"]))
+                                    ItemPriceAvg = int(sum(Component["data"])/len(Component["data"]))
+                                    break
+                                else:                                   # If component doesn't exist
+                                    REQ_Check = 'invalid'
+
+
+
+                #Create Message
+                if REQ_Check == 'valid':
+                    ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+                    NexusBot.clip(ItemInfo)
+                    NexusBot.click(50, 770)
+                    NexusBot.pressAndHold('ctrl', 'v')
+                    NexusBot.release('ctrl', 'v')
+                    app = application.Application()
+                    app.WARFRAME.TypeKeys('{ENTER}')
+
+
+                ItemInfo = ''
+
+
+
+
         ITEMval = ITEMval_L
 
 
@@ -391,19 +462,6 @@ while True:
 
 
 
-
-
-        #Respond to Price check (cant gather information because it defocuses chat)
-        #---------------------------
-        if PriceCheck == True:
-            #perform operations
-            #focus window
-            #type
-            #done
-            print ('pricecheck true')
-
-
-
         # Clean var after message is interpreted
         TOcount = 0
         TOval = []
@@ -415,6 +473,7 @@ while True:
 
     print('Job Done')
     break
+
 
 
 

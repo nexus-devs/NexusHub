@@ -6,10 +6,10 @@
             <!-- Item Info -->
             <div class='items-images-main'>
                 <div class='items-images-main-conent'>
-                       <span class='items-images-main-text'>Full Set Price</span>
-                       <br>
-                       <span class='items-images-main-price'>322p</span>
-                   </div>
+                    <span class='items-images-main-text'>Full Set Price</span>
+                    <br>
+                    <span class='items-images-main-price'>322p</span>
+                </div>
                 <div class='items-images-main-helper'></div>
                 <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png' alt='<%= item.Title %>'>
             </div>
@@ -17,20 +17,20 @@
             <!-- Item Components -->
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
- <% JSON.parse(JSON.stringify(item)).Components.forEach(function(itemdata) { %>
+                    <% JSON.parse(JSON.stringify(item)).Components.forEach(function(itemdata) { %>
 
-                            <!-- Component -->
-                            <div class='item-images-components-wr'>
-                                <div class='item-images-components-component'>
-                                    <img src='<%= img %>generic/<%= itemdata.name %>.png' alt='<%= item.Title %> <%= itemdata.name %>'>
-                                </div>
-                                <div class='items-component-details'>
-                                    <h3><%= itemdata.name %></h3>
-                                    <h4><%= itemdata.avg %></h4>
-                                    <span>(<%= itemdata.Comp_val_rt %>)</span>
-                                </div>
+                        <!-- Component -->
+                        <div class='item-images-components-wr'>
+                            <div class='item-images-components-component'>
+                                <img src='<%= img %>generic/<%= itemdata.name %>.png' alt='<%= item.Title %> <%= itemdata.name %>'>
                             </div>
-                            <% }); %>
+                            <div class='items-component-details'>
+                                <h3><%= itemdata.name %></h3>
+                                <h4><%= itemdata.avg %></h4>
+                                <span>(<%= itemdata.Comp_val_rt %>)</span>
+                            </div>
+                        </div>
+                        <% }); %>
 
 
 
@@ -79,9 +79,9 @@
                 verticalAlign: 'middle',
                 floating: false,
                 itemMarginBottom: 20,
-                itemStyle:{
-                    'color':'#8ea1ac',
-                    'font':'16px Raleway'
+                itemStyle: {
+                    'color': '#8ea1ac',
+                    'font': '16px Raleway'
                 }
             },
             xAxis: {
@@ -163,6 +163,5 @@
         chartdata.series = compData;
 
         $('#' + ItemName).highcharts(chartdata);
-
     </script>
     <% } %>

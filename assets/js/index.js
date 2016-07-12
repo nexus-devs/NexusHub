@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 
     io.socket.on('user', function gotHelloMessage(data) {
-        console.log('User alert!', data);
+        console.log('User alert!');
     });
 })
 
