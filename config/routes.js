@@ -29,9 +29,7 @@ module.exports.routes = {
     'get /prime/:id': 'ItemsController.index',
     'get /nexusbot': 'NexusBotController.index',
     'get /items/': 'ItemsController.search',
-    'get /test': 'TestController.index',
-    'get /test/request': 'TestController.create',
-    'post /requests': ['AuthController.login', 'RequestsController.create']
+    'post /requests': 'RequestsController.create'
 
     /***************************************************************************
      *                                                                          *
