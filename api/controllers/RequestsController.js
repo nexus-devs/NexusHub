@@ -9,71 +9,58 @@ var projectController = require('./ItemListController');
 
 module.exports = {
     create: function (req, res) {
+         var request = req.body
+         function NexusBotCreated(err, request) {
+            var REQ_User = request.username;
+            var REQ_TO = request.to;
+            var REQ_Main = request.item;
+            var REQ_Type = request.type;
+            var REQ_Comp = request.comp;
+            var REQ_Price = request.price;
 
-        Requests.create(req.body, function NexusBotCreated(err, request) {
-
+            // Error Handling
             if (err) {
                 return res.negotiate(err);
             }
 
-            function GenerateItemsList(callback) {
-                var REQ_User = request.username;
-                var REQ_TO = request.to;
-                var REQ_Main = request.item;
-                var REQ_Type = request.type;
-                var REQ_Comp = request.comp;
-                var REQ_Price = request.price;
 
+            // Check if component matches item
+            function validity(item, component) {
 
-                // Check if component matches item
-                function validity(item, component) {
+                if (REQ_Comp === 'null') {
+                    var request_status = 'valid'
+                } else {
 
-                    if (REQ_Comp === 'null') {
-                        var request_status = 'valid'
-                    } else {
-
-                        // Find Item in ItemList & compare component array
-                        ItemList.find({
-                            title: item
-                        }).exec(function (err, itemschema) {
-                            console.log("item" + item)
-                            console.log(itemschema)
-                            var request_status = 'false'
-                            itemschema.components.forEach(function (itemcomponent) {
-                                if (itemcomponent === component) {
-                                    var request_status = 'valid'
-                                }
-                            })
+                    // Find Item in ItemList & compare component array
+                    ItemList.find({
+                        title: item
+                    }).exec(function (err, itemschema) {
+                        console.log("item" + item)
+                        console.log(itemschema)
+                        var request_status = 'false'
+                        itemschema.components.forEach(function (itemcomponent) {
+                            if (itemcomponent === component) {
+                                var request_status = 'valid'
+                            }
                         })
-                    }
-
-                    return (request_status)
-
+                    })
                 }
 
-
-
-
-                console.log(validity(REQ_Main, REQ_Comp))
-
-
-
-                callback();
+                return (request_status)
             }
 
-            function wait10sec() {
-                setTimeout(function () {
-                    GenerateItemsList(wait10sec);
-                }, 5555000);
-            }
 
-            GenerateItemsList(wait10sec);
+            console.log(validity(REQ_Main, REQ_Comp))
+
+            // Do other stuff here, if validity === 'valid'
 
 
-            // Clear tmp request
+
+            // Clear current request
             Requests.destroy({})
 
+            // Return info
             return res.json(request);
-        });
+        }
     }
 };
