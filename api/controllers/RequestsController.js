@@ -17,10 +17,10 @@ module.exports = {
 
     // Request Processing
     // -------------------------------------------------
-    create: function(req, res) {
-         var request = req.body // catch data sent from python POST
+    create: function (req, res) {
+        var request = req.body // catch data sent from python POST
 
-         function ProcessRequest(err, request){
+        function ProcessRequest(err, request) {
 
             //Convert data from Python to similar variables
             var REQ_User = request.username;
@@ -36,39 +36,33 @@ module.exports = {
             }
 
             console.log(REQ_Main + ' ' + REQ_Comp)
+
+
+
             // Check if component matches item
-            function validity(item, component) {
 
-                // If No component -> nothing to compare -> Full item
-                if (REQ_Comp === 'null') {
-                    var request_status = 'valid'
-                } else {
+            if (REQ_Comp === 'null') {
+                var request_status = 'valid'
+            } else {
 
-                    console.log(component)
 
-                    // Find Item in ItemList & compare component array
-                    ItemList.find({
-                        title: item
-                    }).exec(function (err, itemschema) {
+                ItemList.find({
+                    name: REQ_Main
+                }).exec(function (err, itemschema) {
+                    var request_status = 'false'
 
-                        // Set validity to false by default, changes when component is found
-                        var request_status = 'false'
-                        // Check if component found for each item in ItemList
-                        itemschema.components.forEach(function (itemcomponent) {
-                            if (itemcomponent === component) {
-                                var request_status = 'valid'
-                            }
-                        })
+                    // Check if component found for each item in ItemList
+                    itemschema[0].components.forEach(function (itemcomponent) {
+                        if (itemcomponent === REQ_Comp) {
+                            var request_status = 'valid'
+                        }
                     })
-                }
-
-                // Return if the Component was found for the respective item
-                return (request_status)
+                })
             }
 
+
             // Check Validity for Request
-            var request_validity = validity(REQ_Main, REQ_Comp)
-            console.log(request_validity)
+            console.log(request_status)
 
             // Do other stuff here, if validity === 'valid'
 
