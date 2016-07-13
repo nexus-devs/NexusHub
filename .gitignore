@@ -7,3 +7,5 @@ node_modules/
 /db/WiredTiger.lock
 /py/cache/input.txt
 /py/cache/screen.jpg
+
+/py/__pycache__
