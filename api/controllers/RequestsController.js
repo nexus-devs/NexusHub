@@ -8,9 +8,11 @@
 var projectController = require('./ItemListController');
 
 module.exports = {
-    create: function (req, res) {
+    create: function(req, res) {
          var request = req.body
-         function NexusBotCreated(err, request) {
+         console.log(request)
+
+         function ProcessRequest(err, request){
             var REQ_User = request.username;
             var REQ_TO = request.to;
             var REQ_Main = request.item;
@@ -27,6 +29,8 @@ module.exports = {
             // Check if component matches item
             function validity(item, component) {
 
+                console.log("item " + item)
+
                 if (REQ_Comp === 'null') {
                     var request_status = 'valid'
                 } else {
@@ -35,7 +39,7 @@ module.exports = {
                     ItemList.find({
                         title: item
                     }).exec(function (err, itemschema) {
-                        console.log("item" + item)
+                        console.log("item " + item)
                         console.log(itemschema)
                         var request_status = 'false'
                         itemschema.components.forEach(function (itemcomponent) {
@@ -62,5 +66,7 @@ module.exports = {
             // Return info
             return res.json(request);
         }
+
+        ProcessRequest('', request)
     }
 };
