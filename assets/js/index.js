@@ -3,7 +3,7 @@
 
 // Bug Hunters + js
 $(document).ready(function () {
-    console.log('Find any bugs or security issues? Contact us on https://discord.gg/8mCNvKp. We greatly appreciate your help :)')
+    console.log('Find any bugs or security issues? Contact us on https://github.com/Mads-Jakobsen/WarframeNexus/issues . We greatly appreciate your help :)')
     $('.top-nav-search > input').css('opacity', '1');
 
 

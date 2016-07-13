@@ -1,0 +1,69 @@
+[
+
+
+    {
+        _id: "Ash",
+        name: "Ash",
+        type: "Prime",
+        category: "Warframe",
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Trinity",
+        name: "Trinity",
+        type: "Prime",
+        category: "Warframe",
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Rhino",
+        name: "Rhino",
+        type: "Prime",
+        category: "Warframe",
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+
+
+
+
+
+
+    {
+        _id: "Soma",
+        name: "Soma",
+        type: "Prime",
+        category: "Weapon",
+        components: ["Blueprint", "Barrel", "Stock", "Receiver"]
+    },
+    {
+        _id: "Spira",
+        name: "Spira",
+        category: "Weapon",
+        components: ["Blueprint", "Pouch", "Blade"]
+    },
+
+
+
+
+
+
+
+    {
+        _id: "Carrier",
+        name: "Carrier",
+        type: "Prime",
+        category: "Sentinel",
+        components: ["Blueprint", "Helmet", "Chassis", "Systems"]
+    },
+
+]
+
+
+
+// see below why name necessary
+{
+    _id: "Kamas",
+    name: "Dual Kamas",
+    type: "Prime"
+}
+

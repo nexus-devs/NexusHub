@@ -406,16 +406,18 @@ while True:
             if REQ_TO == 'WTS' or REQ_TO == 'WTB':
 
 
+
                 payload = \
-                [
-                   {
-                       'to': REQ_TO,
-                       'item': REQ_Main,
-                       'comp': REQ_Comp,
-                       'type': REQ_Type,
-                       'price': REQ_Price
-                   }
-                ]
+                [{
+                    'username': Username,
+                    'to': REQ_TO,
+                    'item': REQ_Main,
+                    'comp': REQ_Comp,
+                    'type': REQ_Type,
+                    'price': REQ_Price,
+                    'user': 'python',
+                    'password': 'root'
+                }]
 
                 res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
 
