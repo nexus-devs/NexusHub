@@ -408,7 +408,7 @@ while True:
 
 
                 payload = \
-                [{
+                {
                     'username': Username,
                     'to': REQ_TO,
                     'item': REQ_Main,
@@ -417,7 +417,7 @@ while True:
                     'price': REQ_Price,
                     'user': 'python',
                     'password': 'root'
-                }]
+                }
 
                 res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
 

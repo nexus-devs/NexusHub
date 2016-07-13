@@ -5,16 +5,24 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+
+
 // Import Foreign Collections
 var projectController = require('./ItemListController');
 
+
+
 module.exports = {
 
-    // Process Request
+
+    // Request Processing
+    // -------------------------------------------------
     create: function(req, res) {
          var request = req.body // catch data sent from python POST
 
          function ProcessRequest(err, request){
+            console.log(request)
+
 
             //Convert data from Python to similar variables
             var REQ_User = request.username;
@@ -29,7 +37,7 @@ module.exports = {
                 return res.negotiate(err);
             }
 
-
+            console.log(REQ_Main)
             // Check if component matches item
             function validity(item, component) {
 
@@ -58,7 +66,7 @@ module.exports = {
                 return (request_status)
             }
 
-
+            // Check Validity for Request
             var request_validity = validity(REQ_Main, REQ_Comp)
             console.log(request_validity)
 
