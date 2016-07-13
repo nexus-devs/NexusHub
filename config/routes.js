@@ -30,7 +30,8 @@ module.exports.routes = {
     'get /nexusbot': 'NexusBotController.index',
     'get /items/': 'ItemsController.search',
     'get /test': 'TestController.index',
-    'get /test/request': 'TestController.create'
+    'get /test/request': 'TestController.create',
+    'post /requests': ['AuthController.login', 'RequestsController.create']
 
     /***************************************************************************
      *                                                                          *

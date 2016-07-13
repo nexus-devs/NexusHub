@@ -9,8 +9,6 @@
 
 module.exports = {
     index: function (req, res) {
-
-
         function GenerateItemsList(callback) {
             Requests.find().exec(function (err, dbItem) {
                     dbItem.forEach(function (user) {
@@ -80,5 +78,15 @@ module.exports = {
 
         GenerateItemsList(wait10sec);
 
+    },
+
+    create: function (req, res) {
+        Requests.create(req.params.all(), function NexusBotCreated(err, request) {
+            console.log(request)
+            if (err) {
+                return res.negotiate(err);
+            }
+            return res.json(request);
+        });
     }
 };

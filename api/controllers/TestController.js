@@ -7,42 +7,13 @@
 
 module.exports = {
 
-
-
-     index: function (req, res) {
-         res.locals.flash = _.clone(req.session.flash);
-         req.session.flash = {};
-
-         console.log('python sweg')
-
-         var package = req.originalUrl;
-         var data = require(`../../json/nexusbot.json`);
-
-         return res.view('nexusbot', {
-             content: data,
-             page_title: data.PageTitle,
-             main_title: data.Headline,
-             desc: data.Desc,
-             BotCHeadline: data.BotCommandHeadline,
-             BotCDesc: data.BotCommandDesc,
-             Note: data.Note,
-             css: "/css/",
-             js: "/js/",
-             img: "/img/",
-             result: 'false'
-         });
-
-     },
-
     create: function (req, res) {
-        Test.find({name:'benis'}).exec(req.params.all(), function (err, NikanaItems){
+        Test.find({name:'benis'}).exec(function (err, NikanaItems){
             if (err) {
                 return res.negotiate(err);
             }
             sails.log('Wow, there are %d users named Finn.  Check it out:', NikanaItems.length, NikanaItems);
             return res.json(NikanaItems);
-
-            req.session.flash = {}
         });
     }
 
