@@ -23,6 +23,11 @@ module.exports.http = {
 
   middleware: {
 
+
+      passportInit    : require('passport').initialize(),
+      passportSession : require('passport').session(),
+
+
   /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
@@ -30,23 +35,24 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    // order: [
-    //   'startRequestTimer',
-    //   'cookieParser',
-    //   'session',
-    //   'myRequestLogger',
-    //   'bodyParser',
-    //   'handleBodyParserError',
-    //   'compress',
-    //   'methodOverride',
-    //   'poweredBy',
-    //   '$custom',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    //   '404',
-    //   '500'
-    // ],
+      order: [
+          'startRequestTimer',
+          'cookieParser',
+          'session',
+          'passportInit',
+          'passportSession',
+          'myRequestLogger',
+          'bodyParser',
+          'handleBodyParserError',
+          'compress',
+          'methodOverride',
+          'poweredBy',
+          'router',
+          'www',
+          'favicon',
+          '404',
+          '500'
+      ],
 
   /****************************************************************************
   *                                                                           *

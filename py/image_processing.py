@@ -17,6 +17,7 @@ import PIL.ImageOps
 # ----------------------
 import sys
 import requests
+import json
 from pymongo import MongoClient
 
 # NexusBot
@@ -193,11 +194,12 @@ while True:
         MsgWordsOriginal = MsgWords
         if len(MsgWords) > 0:
             Username = MsgWords[0]
+            MsgWords.remove(Username)
         else:
             Username = ''
 
         #Leave only pure message behind & clean
-        MsgWords.remove(Username)
+
         MsgWords = [each.replace('-', '') for each in MsgWords]
         MsgWords = [each.replace('.', '') for each in MsgWords]
         MsgWords = [each.replace(':', ' ') for each in MsgWords]
@@ -402,19 +404,21 @@ while True:
 
 
             if REQ_TO == 'WTS' or REQ_TO == 'WTB':
-                URL = 'http://localhost:1337/test'
 
-                client = requests.session()
 
-                # Retrieve the CSRF token first
-                client.get(URL)  # sets cookie
-                print(client.cookies.keys())
-                csrftoken = client.cookies['csrf']
-                print(csrftoken)
+                payload = \
+                [
+                   {
+                       'to': REQ_TO,
+                       'item': REQ_Main,
+                       'comp': REQ_Comp,
+                       'type': REQ_Type,
+                       'price': REQ_Price
+                   }
+                ]
 
-                login_data = dict(csrfmiddlewaretoken=csrftoken, next='/')
-                #r = client.post(URL, data=login_data, headers=dict(Referer=URL))
-                #requests.post('http://localhost:1337/test', data = {'name': 'pythonswag'})
+                res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
+
 
 
 
