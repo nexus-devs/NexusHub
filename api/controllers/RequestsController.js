@@ -21,8 +21,6 @@ module.exports = {
          var request = req.body // catch data sent from python POST
 
          function ProcessRequest(err, request){
-            console.log(request)
-
 
             //Convert data from Python to similar variables
             var REQ_User = request.username;
