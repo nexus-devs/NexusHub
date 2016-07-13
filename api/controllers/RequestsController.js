@@ -35,7 +35,7 @@ module.exports = {
                 return res.negotiate(err);
             }
 
-            console.log(REQ_Main)
+            console.log(REQ_Main + ' ' + REQ_Comp)
             // Check if component matches item
             function validity(item, component) {
 
@@ -43,6 +43,8 @@ module.exports = {
                 if (REQ_Comp === 'null') {
                     var request_status = 'valid'
                 } else {
+
+                    console.log(component)
 
                     // Find Item in ItemList & compare component array
                     ItemList.find({
