@@ -39,42 +39,49 @@ module.exports = {
 
 
 
-            // Check if component matches item
-
-            if (REQ_Comp === 'null') {
-                var request_status = 'valid'
-            } else {
-
-
-                ItemList.find({
-                    name: REQ_Main
-                }).exec(function (err, itemschema) {
-                    var request_status = 'false'
-
-                    // Check if component found for each item in ItemList
-                    itemschema[0].components.forEach(function (itemcomponent) {
-                        if (itemcomponent === REQ_Comp) {
-                            var request_status = 'valid'
+            async.waterfall([
+                function generateItemSchema(callback) {
+                    ItemList.find({ name: REQ_Main }).exec(function (err, itemschema) {
+                        if (err) {
+                            callback(err, null);
+                            return;
                         }
-                    })
-                })
-            }
+                        callback(null, itemschema);
+                    });
+                },
+                function validateItemComponent(itemschema, callback) {
 
+                    // Component not given
+                    if (REQ_Comp === 'null') {
+                        var request_status = 'valid'
+                        callback(null, request_status)
 
-            // Check Validity for Request
-            console.log(request_status)
+                    // Component is given
+                    } else {
+                        var request_status = 'false'
 
-            // Do other stuff here, if validity === 'valid'
+                        // Check if component found for each item in itemschema
+                        itemschema[0].components.forEach(function (itemcomponent) {
+                            if (itemcomponent === REQ_Comp) {
+                                var request_status = 'valid'
+                                callback(null, request_status)
+                            }
+                            // else: if itemschema len at end ++ request status 'false' -> callback error
+                        })
+                    }
+                },
+                function showResults(request_status, callback) {
+                    console.log(request_status)
+                    console.log('--------------')
 
+                    // Clear current request
+                    Requests.destroy({})
 
-
-            // Clear current request
-            Requests.destroy({})
-
-            // Return info
-            return res.json(request);
+                    // Return info
+                    return res.json(request);
+                }
+                ])
         }
-
         ProcessRequest('', request)
     }
-};
+}
