@@ -9,3 +9,4 @@ node_modules/
 /py/cache/screen.jpg
 
 /py/__pycache__
+/py/sources

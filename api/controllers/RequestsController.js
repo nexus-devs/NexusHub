@@ -2,18 +2,18 @@
  * RequestsController
  *
  * @description :: Server-side logic for managing requests
+ *                 Validates requests from python POST, generates list of users and their respective requests
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
 
 
-// Import Foreign Collections
-var projectController = require('./ItemListController');
-
+// Import Dependencies
+var bcrypt = require('bcryptjs');
+var fs = require('fs');
 
 
 module.exports = {
-
 
     // Request Processing
     // -------------------------------------------------
@@ -23,6 +23,7 @@ module.exports = {
         function ProcessRequest(err, request) {
 
             //Convert data from Python to similar variables
+
             var REQ_User = request.username;
             var REQ_TO = request.to;
             var REQ_Main = request.item;
@@ -38,27 +39,58 @@ module.exports = {
             console.log(REQ_Main + ' ' + REQ_Comp)
 
 
-
+            // Validate Item Request
             async.waterfall([
-                function generateItemSchema(callback) {
-                    ItemList.find({ name: REQ_Main }).exec(function (err, itemschema) {
+
+
+                    // Get local pwd
+                    function getPwd(callback) {
+                    fs.readFile('./py/sources/pwd.txt', 'utf8', function (err, data) {
                         if (err) {
-                            callback(err, null);
-                            return;
+                            callback(err, null)
+                            return
                         }
-                        callback(null, itemschema);
+                        callback(null, data)
                     });
-                },
-                function validateItemComponent(itemschema, callback) {
+                    },
+
+
+                    // Compare Passwords
+                    function authenticate(data, callback) {
+                    var hash = bcrypt.hashSync(request.password, 5);
+                    if (request.user === 'python' && bcrypt.compareSync(data, hash) === true) {
+                        callback();
+                    } else {
+                        res.forbidden()
+                    }
+                    },
+
+
+                    // Get itemschema from itemlist
+                    function generateItemSchema(callback) {
+                    ItemList.find({
+                        name: REQ_Main
+                    }).exec(function (err, itemschema) {
+                        if (err) {
+                            callback(err, null)
+                            return
+                        }
+                        callback(null, itemschema)
+                    });
+                    },
+
+
+                    // Check if requested item component exists
+                    function validateItemComponent(itemschema, callback) {
+                    var request_status = 'false'
 
                     // Component not given
                     if (REQ_Comp === 'null') {
                         var request_status = 'valid'
                         callback(null, request_status)
 
-                    // Component is given
+                        // Component is given
                     } else {
-                        var request_status = 'false'
 
                         // Check if component found for each item in itemschema
                         itemschema[0].components.forEach(function (itemcomponent) {
@@ -66,22 +98,38 @@ module.exports = {
                                 var request_status = 'valid'
                                 callback(null, request_status)
                             }
-                            // else: if itemschema len at end ++ request status 'false' -> callback error
                         })
                     }
-                },
-                function showResults(request_status, callback) {
+                    },
+
+
+                    function cancelOnError(request_status, callback) {
+                    if (request_status === 'valid') {
+                        callback(null, request_status);
+                    } else {
+                        return res.forbidden();
+                    }
+                    },
+
+
+                    //function updateUserList(callback) {
+                    // -------------------------------------------------------------------------
+                    // Generate WTB/WTS list here. Item is confirmed to be valid at tihs point.
+                    // -------------------------------------------------------------------------
+                    //},
+
+                    // final logs
+                    function showResults(request_status, callback) {
                     console.log(request_status)
                     console.log('--------------')
 
-                    // Clear current request
-                    Requests.destroy({})
-
                     // Return info
                     return res.json(request);
-                }
+                    }
                 ])
         }
+
+        // Call function above
         ProcessRequest('', request)
     }
 }
