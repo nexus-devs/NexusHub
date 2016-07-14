@@ -416,7 +416,7 @@ while True:
                     'type': REQ_Type,
                     'price': REQ_Price,
                     'user': 'python',
-                    'password': 'root'
+                    'password': 'some_hash'
                 }
 
                 res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
