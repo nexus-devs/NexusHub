@@ -36,8 +36,6 @@ module.exports = {
                 return res.negotiate(err);
             }
 
-            console.log(REQ_Main + ' ' + REQ_Comp)
-
 
             // Validate Item Request
             async.waterfall([
@@ -61,6 +59,7 @@ module.exports = {
                     if (request.user === 'python' && bcrypt.compareSync(data, hash) === true) {
                         callback();
                     } else {
+                        console.log('Connection to Requests forbidden.')
                         res.forbidden()
                     }
                     },
@@ -120,6 +119,7 @@ module.exports = {
 
                     // final logs
                     function showResults(request_status, callback) {
+                    console.log(REQ_Main + ' ' + REQ_Comp)
                     console.log(request_status)
                     console.log('--------------')
 

@@ -403,9 +403,13 @@ while True:
 
 
 
+            # If Request is valid, send to server
             if REQ_TO == 'WTS' or REQ_TO == 'WTB':
 
-
+                # Open secret password (hi github)
+                with open('./sources/pwd.txt', 'r') as myfile:
+                    pwd=myfile.read().replace('\n', '')
+                print(pwd)
 
                 payload = \
                 {
@@ -416,7 +420,7 @@ while True:
                     'type': REQ_Type,
                     'price': REQ_Price,
                     'user': 'python',
-                    'password': 'some_hash'
+                    'password': pwd
                 }
 
                 res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
