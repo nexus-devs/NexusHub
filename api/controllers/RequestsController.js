@@ -42,20 +42,22 @@ module.exports = {
 
                     // Get local pwd
                     function getPwd(callback) {
-                    fs.readFile('./py/sources/pwd.txt', 'utf8', function (err, data) {
+                    Root.find(
+                        {user: request.user}
+                    ).exec(function (err, user) {
                         if (err) {
                             callback(err, null)
                             return
                         }
-                        callback(null, data)
+                        callback(null, user[0].pass)
                     });
                     },
 
 
                     // Compare Passwords
-                    function authenticate(data, callback) {
-                    var hash = bcrypt.hashSync(request.password, 5);
-                    if (request.user === 'python' && bcrypt.compareSync(data, hash) === true) {
+                    function authenticate(pass, callback) {
+                    //console.log(hash)
+                    if (request.user === 'python' && bcrypt.compareSync(request.password, pass) === true) {
                         callback();
                     } else {
                         console.log('Connection to Requests forbidden.')
