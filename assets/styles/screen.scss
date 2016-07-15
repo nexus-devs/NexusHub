@@ -183,6 +183,7 @@ b {
     background: $color-base;
     text-align: center;
     position: relative;
+    padding:20px 0px 40px 0px;
 }
 
 .items-item {
@@ -394,7 +395,7 @@ b {
     width: 38px;
     border-radius: 38px;
     left: calc(5% - 90px);
-    top: 210px;
+    top: 235px;
     margin: 0 90px;
     z-index: 2;
     img {
@@ -414,7 +415,7 @@ b {
     width: 38px;
     border-radius: 38px;
     right: calc(5% - 90px);
-    top: 210px;
+    top: 235px;
     margin: 0 90px;
     z-index: 2;
     img {
@@ -664,9 +665,7 @@ footer {
         .items-item-main-inf{
             display:block;
         }
-        .item-slide-button{
-            top:400px !important;
-        }
+
     }
 }
 
@@ -997,12 +996,10 @@ background:transparent !important;
 
 .lp-header-vidbg {
     position: absolute;
-    left:-15%;
     min-width: 115vw;
     min-height: 100vh;
     z-index: -1;
     opacity:0.4;
-    background:url('//n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccessvaubanBG/VaubanHeader.jpg');
 }
 
 .lp-header-vid {
