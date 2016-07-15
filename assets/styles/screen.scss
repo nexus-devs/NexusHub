@@ -6,6 +6,7 @@
 body {
     @include font-default($color-base);
     overflow-x: hidden;
+    background:$color-base;
 }
 
 .lp-bg {
@@ -992,4 +993,18 @@ background:transparent !important;
         margin-top: 0px;
         display: inline-block;
     }
+}
+
+.lp-header-vidbg {
+    position: absolute;
+    left:-15%;
+    min-width: 115vw;
+    min-height: 100vh;
+    z-index: -1;
+    opacity:0.6;
+    background:url('//n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccessvaubanBG/VaubanHeader.jpg');
+}
+
+.lp-header-vid {
+
 }

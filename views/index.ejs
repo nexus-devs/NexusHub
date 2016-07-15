@@ -2,11 +2,13 @@
 <html>
 <% include .\templates\nav %>
 
+    <video loop muted autoplay class='lp-header-vidbg'>
+        <source class='lp-header-vid' src="//n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccessvaubanBG/VaubanPrimeWebM.webm" type="video/webm">
+    </video>
+
     <body>
         <!-- Header -->
         <!--==============================-->
-        <div class='lp-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
-
         <header>
             <div class='lp-header'>
                 <div class='lp-header-headline-container'>
@@ -14,7 +16,6 @@
                     <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
                     <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <em>from the chat</em>!</h2>
                 </div>
-
             </div>
         </header>
         <form class='lp-header-input-container' method='get' action='/items/search'>
