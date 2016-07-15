@@ -18,15 +18,19 @@ module.exports = {
         var itemname = capitalize(url.split('/').pop().toLowerCase())
 
         // Validate entered URL (if done manually)
-        Items.find({
+        Itemcache.find({
             Title: itemname
         }).exec(function (err, itemobj) {
+            console.log(itemobj)
             var itembase = capitalize(urlbase[1])
             var itemname = capitalize(url.split('/').pop().toLowerCase())
 
             if (typeof itemobj[0] !== 'undefined') {
                 var itembase = itemobj[0].Type
                 var itemname = itemobj[0].Title
+
+
+
 
                 return res.view('item', {
                     HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,

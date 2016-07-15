@@ -9,7 +9,7 @@
                    <div class='items-images-main-conent'>
                        <span class='items-images-main-text'>Full Set Price</span>
                        <br>
-                       <span class='items-images-main-price'>322p</span>
+                       <span class='items-images-main-price'><%= itemdata.Components[0].avg %></span>
                    </div>
                     <div class='items-images-main-helper'></div>
                     <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
@@ -174,6 +174,9 @@
                         pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
                     },
                     plotOptions: {
+                        areaspline: {
+                            fillOpacity: 0.15
+                        },
                         area: {
                             marker: {
                                 enabled: false,
