@@ -1,5 +1,10 @@
 [
 
+    {
+        user: "python",
+        pass: "$2a$05$f.sAiOz26IFcWcJczTPiBOSBUbrT5g.6dInSoGI/C1OWMw.EJ0tlO"
+    }
+
 
     {
         _id: "Ash",

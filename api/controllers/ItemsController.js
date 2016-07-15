@@ -30,7 +30,7 @@ module.exports = {
 
                 return res.view('item', {
                     HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
-                    itemdata: dbItem[0],
+                    itemdata: itemobj[0],
                     css: "../css/",
                     js: "../js/",
                     img: "../img/"
