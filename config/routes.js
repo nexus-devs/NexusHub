@@ -25,7 +25,7 @@
 module.exports.routes = {
     '/': 'IndexController',
     'get /jobs': 'GenericController',
-    'get /imprint': 'GenericController',
+    //'get /imprint': 'GenericController',
     'get /prime/:id': 'ItemsController.index',
     'get /nexusbot': 'NexusBotController.index',
     'get /items/': 'ItemsController.search',

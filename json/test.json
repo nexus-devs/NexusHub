@@ -36,6 +36,13 @@
         components: ["Blueprint", "Barrel", "Stock", "Receiver"]
     },
     {
+        _id: "Nikana",
+        name: "Nikana",
+        type: "Prime",
+        category: "Weapon",
+        components: ["Blueprint", "Blade", "Hilt"]
+    },
+    {
         _id: "Spira",
         name: "Spira",
         category: "Weapon",

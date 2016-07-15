@@ -22,8 +22,8 @@ module.exports = {
 
         function ProcessRequest(err, request) {
 
-            //Convert data from Python to similar variables
 
+            //Convert data from Python to similar variables
             var REQ_User = request.username;
             var REQ_TO = request.to;
             var REQ_Main = request.item;
@@ -37,9 +37,8 @@ module.exports = {
             }
 
 
-            // Validate Item Request
+            // Request Processing Main Functions
             async.waterfall([
-
 
                     // Get local pwd
                     function getPwd(callback) {
@@ -84,7 +83,7 @@ module.exports = {
                     var request_status = 'false'
 
                     // Component not given
-                    if (REQ_Comp === 'null') {
+                    if (REQ_Comp === 'Set') {
                         var request_status = 'valid'
                         callback(null, request_status)
 
@@ -102,6 +101,7 @@ module.exports = {
                     },
 
 
+                    // Cancel if request is invalid
                     function cancelOnError(request_status, callback) {
                     if (request_status === 'valid') {
                         callback(null, request_status);

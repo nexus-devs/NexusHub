@@ -12,31 +12,33 @@ function capitalize(string) {
 
 module.exports = {
     index: function (req, res) {
-        // load according file
         var url = req.originalUrl
         var urlbase = url.split('/')
-        var itembase = urlbase[1]
-        var itemname = url.split('/').pop().toLowerCase()
+        var itembase = capitalize(urlbase[1])
+        var itemname = capitalize(url.split('/').pop().toLowerCase())
 
-
-
-        // Check for each query word
+        // Validate entered URL (if done manually)
         Items.find({
             Title: itemname
-        }).exec(function (err, dbItem) {
-            var itembase = dbItem[0].Type
-            var itemname = dbItem[0].Title
+        }).exec(function (err, itemobj) {
+            var itembase = capitalize(urlbase[1])
+            var itemname = capitalize(url.split('/').pop().toLowerCase())
 
-            return res.view('item', {
-                HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
-                itemdata: dbItem[0],
-                css: "../css/",
-                js: "../js/",
-                img: "../img/"
-            })
+            if (typeof itemobj[0] !== 'undefined') {
+                var itembase = itemobj[0].Type
+                var itemname = itemobj[0].Title
 
+                return res.view('item', {
+                    HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
+                    itemdata: dbItem[0],
+                    css: "../css/",
+                    js: "../js/",
+                    img: "../img/"
+                })
+            } else {
+                res.notFound(`${itemname} ${itembase} couldn't be found. Please check your spelling`)
+            }
         })
-
     },
 
 
@@ -48,34 +50,38 @@ module.exports = {
         var i = 0
 
         // Check for each search term
-        async.forEach(stringArray, function (string, next) {
+        async.forEach(stringArray, function (string, callback) {
 
-                Items.find({
-                        Title: string
-                    }).exec(function (err, dbItem) {
+                async.waterfall([
 
-                        var itemcheck = JSON.stringify(dbItem)
-                        i++
+                // Try retrieving item name
+                function retrieveItem(callback) {
+                            ItemList.find({
+                                _id: capitalize(string)
+                            }).exec(function (err, itemobj) {
+                                if (err) {
+                                    callback(err, null)
+                                    return
+                                }
+                                callback(null, itemobj)
+                            })
 
-                        // If found, redirect to proper url
-                        if (itemcheck !== '[]' && viewrendered == 'false') {
-                            viewrendered = 'true'
-                            var itembase = dbItem[0].Type
-                            var itemname = dbItem[0].Title
-                            return res.redirect(`../../${itembase}/${itemname}`)
-
-                            // Else, if end of function: return 404
-                        } else {
-                            if (viewrendered == 'false' && i == stringArray.length) {
+                            // Check if item was found
+                },
+                        function checkValidity(itemobj, callback) {
+                            if (typeof itemobj[0] !== 'undefined') {
+                                var itembase = itemobj[0].type
+                                var itemname = itemobj[0].name
+                                return res.redirect(`../../${itembase}/${itemname}`)
+                            } else {
                                 res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
                             }
 
-                        }
+                }
 
-                        next()
+            ]) // End async.waterfall
+                callback();
+            }) // End Query
 
-                    }) // End Query
-
-            }) // End Loop
     }
 }

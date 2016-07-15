@@ -168,6 +168,7 @@ while True:
     WTS = ['WTS', 'S', 'BUYING', 'SELL']
     WTB = ['WTB', 'B', 'SELLING', 'SELL']
     PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
+    TOlist = ['WTS', 'WTB', 'PC']
 
     #Define component variations
     Blueprint = ['BLUEPRINT', 'BP']
@@ -217,10 +218,21 @@ while True:
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
-            if MsgWords[i] in WTS or MsgWords[i] in WTB or MsgWords[i] in PC:
-                TO = MsgWords[i]
+
+            if MsgWords[i] in WTS:
+                TO = 'WTS'
                 TOcount = TOcount + 1 #increases every time TO is added -> see below
                 TOval.extend((TO, TOcount)) #save as WTS, 1 & compare TO number with Item Number
+                TO = False
+            elif MsgWords[i] in WTB:
+                TO = 'WTB'
+                TOcount = TOcount + 1
+                TOval.extend((TO, TOcount))
+                TO = False
+            if MsgWords[i] in PC:
+                TO = 'PC'
+                TOcount = TOcount + 1
+                TOval.extend((TO, TOcount))
                 TO = False
 
             #I[]
@@ -375,7 +387,7 @@ while True:
                         REQ_Price = 'null'
 
                 else:
-                    REQ_Comp = 'null'
+                    REQ_Comp = 'Set'
                     if hasNumbers(REQ[3]) == True:
                         REQ_Price = re.sub("\D", "", REQ[3])
                     else:
@@ -386,14 +398,14 @@ while True:
             elif REQ_Type == 'Mods' or REQ_Type == 'Arcane':
                 if not hasNumbers(REQ[3]) == True:
                     REQ_Main = re.sub("[^\w]", " ", str(REQ[2].title() + ' ' + REQ[3].title()))
-                    REQ_Comp = 'null'
+                    REQ_Comp = 'Set'
 
                     if len(REQ) > 4:
                         REQ_Price = re.sub("\D", "", REQ[4])
 
                 else:
                     REQ_Main = REQ[2].title()
-                    REQ_Comp = 'null'
+                    REQ_Comp = 'Set'
                     REQ_Price = REQ[3]
 
 
@@ -409,7 +421,6 @@ while True:
                 # Open secret password (hi github)
                 with open('./sources/pwd.txt', 'r') as myfile:
                     pwd=myfile.read().replace('\n', '')
-                print(pwd)
 
                 payload = \
                 {
@@ -431,7 +442,6 @@ while True:
             # NexusBot Functions
             #---------------------------
 
-
             #Find relevant item information
             if REQ_TO == 'PC' and not Username == 'NexusBot':
                 cursor = db.items.find({"Title": REQ_Main})
@@ -439,7 +449,7 @@ while True:
                 for document in cursor:
 
                     #Calculate Relevant Stats
-                        if REQ_Comp == 'null':                          # If component requested, else
+                        if REQ_Comp == 'Set':                          # If component requested, else
                             REQ_Check = 'valid'
                             ItemName = document["Title"]
                             ItemType = document["Type"]
