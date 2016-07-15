@@ -1,16 +1,10 @@
 [
-
-    {
-        user: "python",
-        pass: "$2a$05$f.sAiOz26IFcWcJczTPiBOSBUbrT5g.6dInSoGI/C1OWMw.EJ0tlO"
-    }
-
-
     {
         _id: "Ash",
         name: "Ash",
         type: "Prime",
         category: "Warframe",
+        update: 'pending',
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -18,6 +12,7 @@
         name: "Trinity",
         type: "Prime",
         category: "Warframe",
+        update: 'pending',
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -25,19 +20,15 @@
         name: "Rhino",
         type: "Prime",
         category: "Warframe",
+        update: 'pending',
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
-
-
-
-
-
-
     {
         _id: "Soma",
         name: "Soma",
         type: "Prime",
         category: "Weapon",
+        update: 'pending',
         components: ["Blueprint", "Barrel", "Stock", "Receiver"]
     },
     {
@@ -45,29 +36,24 @@
         name: "Nikana",
         type: "Prime",
         category: "Weapon",
+        update: 'pending',
         components: ["Blueprint", "Blade", "Hilt"]
     },
     {
         _id: "Spira",
         name: "Spira",
         category: "Weapon",
+        update: 'pending',
         components: ["Blueprint", "Pouch", "Blade"]
     },
-
-
-
-
-
-
-
     {
         _id: "Carrier",
         name: "Carrier",
         type: "Prime",
         category: "Sentinel",
+        update: 'pending',
         components: ["Blueprint", "Helmet", "Chassis", "Systems"]
-    },
-
+    }
 ]
 
 

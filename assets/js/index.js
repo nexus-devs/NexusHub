@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 // Show/Hide Menu Bar when appropriate
-/* var lastScrollTop = 0;
+ var lastScrollTop = 0;
 
 $(window).scroll(function (event) {
     var st = $(this).scrollTop();
@@ -26,7 +26,7 @@ $(window).scroll(function (event) {
         $('.top-nav').css('transform', 'translateY(0)')
     }
     lastScrollTop = st;
-});*/
+});
 
 
 
