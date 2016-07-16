@@ -31,6 +31,7 @@ module.exports = {
             var REQ_Comp = request.comp;
             var REQ_Price = request.price;
             var REQ_Obj = {
+                user: REQ_User,
                 requests: [{
                     title: REQ_Main,
                     type: REQ_Type,
