@@ -66,6 +66,7 @@ module.exports = {
                 var WTS = 0
 
                 console.log('item: ' + itemname)
+                console.log('==========================')
 
 
 
@@ -97,12 +98,6 @@ module.exports = {
                         // For each user, check if item in each request (loop through every relevant request)
                         user.forEach(function (user) {
                             user.requests.forEach(function (req_item) {
-                                if (req_item.to === 'WTB') {
-                                    WTB++
-                                } else {
-                                    WTS++
-                                }
-
 
                                 // Validate request belonging to item
                                 if (req_item.title === itemname) {
@@ -116,6 +111,11 @@ module.exports = {
 
                                         // Check if Request has been comitted within timerange
                                         if (component === req_component.name && delta < timerange) {
+                                            if (req_item.to === 'WTB') {
+                                                WTB++
+                                            } else {
+                                                WTS++
+                                            }
 
                                             // Generate data array
                                             for (var i = 0; i < timerange; i++) {
@@ -146,25 +146,34 @@ module.exports = {
 
                         // Generate average value
                         var avg = 0
+                        var valid_count = 0
                         for (var i = 0; i < comp_data.length; i++) {
-                            if (comp_data[i] === 'null') {
-                                var current_value = 0
-                            } else {
+                            if (comp_data[i] !== 'null') {
                                 var current_value = comp_data[i]
+                                valid_count++
+                                avg = avg + current_value
                             }
-                            avg = avg + current_value
-                        }
-                        // Realtime avg
-                        console.log('comp_val_rt: ' + avg / comp_data.length)
 
-                        // Normal avg
-                        avg = Math.floor((avg / comp_data.length)).toString() + 'p'
+                        }
+                        if (avg !== 0) {
+                            // Realtime avg
+                            var comp_val_rt = avg / valid_count
+                            avg = Math.floor((avg / valid_count)).toString() + 'p'
+                        } else {
+                            var comp_val_rt = ''
+                            avg = ''
+                        }
+
+                        console.log('comp_val_rt: ' + comp_val_rt)
                         console.log('avg: ' + avg)
-                        console.log('----------------------')
+
+                        // visibile: false if SET
+                        if (component === 'Set') {
+                            console.log('visible: false')
+                        }
+
 
                         callback(null, WTS, WTB)
-                            // When all data is collected: create database entry
-                            // Dont forget to set update to false in itemlist
                     })
 
                 })
@@ -172,9 +181,24 @@ module.exports = {
 
                 },
 
-            function (supply, demand, callback) {
-                console.log('Supply: ' + supply)
-                console.log('Demand: ' + demand)
+            function (supply, demand, components, callback) {
+                var SupDemNum = [supply, demand]
+                if (supply !== 0 && demand !== 0) {
+                    var SupDem = [((supply + demand) / supply * 100), ((supply + demand) / demand * 100)]
+                } else if (supply !== 0 && demand === 0) {
+                    var SupDem = [((supply + demand) / supply * 100), 0]
+                } else if (supply === 0 && demand !== 0) {
+                    var SupDem = [0, ((supply + demand) / demand * 100)]
+                } else {
+                    var SupDem = [0, 0]
+                }
+
+                console.log('SupDemNum: ' + SupDemNum)
+                console.log('Percentages: ' + SupDem)
+                console.log('----------------------')
+
+                // When all data is collected: create database entry
+                // Dont forget to set update to false in itemlist
                 }
         ])
     },

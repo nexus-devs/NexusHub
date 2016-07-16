@@ -279,7 +279,7 @@ a:hover {
 
 /* line 79, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-header-headline-container {
-  padding: 22vh 10vw;
+  padding: 20vh 10vw;
   position: relative;
   top: 5vh; }
 
@@ -303,8 +303,8 @@ b {
 
 /* line 100, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-header-input-container {
-  height: 25vh;
-  min-height: 150px;
+  height: 150px;
+  min-height: 175px;
   width: 100%;
   background: rgba(255, 255, 255, 0.5);
   text-align: center; }
@@ -435,7 +435,7 @@ b {
 /* line 142, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-header-input-helper {
   display: inline-block;
-  height: 50%; }
+  height: 52%; }
 
 /* line 146, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .lp-content {
