@@ -31,6 +31,7 @@ module.exports = {
             var REQ_Comp = request.comp;
             var REQ_Price = request.price;
             var REQ_Obj = {
+                user: REQ_User,
                 requests: [{
                     title: REQ_Main,
                     type: REQ_Type,
@@ -146,23 +147,23 @@ module.exports = {
 
                     // Create Request entries
                     function createEntries(callback) {
-                    Users.native(function (err, collection) {
-                            collection.update({
-                                "user": REQ_User,
-                                "requests.title": REQ_Main,
-                            }, {
-                                $set: {
-                                    "requests.$.components": {to: REQ_TO,
-                                                              name: REQ_Comp,
-                                                              data: REQ_Price}
-                                }
-                            }, function (error, result) {
-                                console.log(result);
+                    Users.find({
+                        user: REQ_User
+                    }).exec(function (err, request) {
+                        console.log(request)
+                        if (typeof request[0] !== 'undefined') {
+                            Users.native(function (err, collection) {
+                                collection.insert(REQ_Obj),
+                                    function (error, result) {
+                                        console.log(result);
+                                    }
                             })
-                        })
-                        // if req_item exists > if date larger 1 > create new + component
-                        // else if req_item exists > if date smaller 1 > update values / create component if not exist
-                        // else > if req_item NOT exist > create new + component
+                        }
+                    })
+
+                    // if req_item exists > if date larger 1 > create new + component
+                    // else if req_item exists > if date smaller 1 > update values / create component if not exist
+                    // else > if req_item NOT exist > create new + component
                     callback();
                                 },
 
