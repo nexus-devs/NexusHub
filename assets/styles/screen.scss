@@ -77,7 +77,7 @@ a:hover {
 }
 
 .lp-header-headline-container {
-    padding: 22vh 10vw;
+    padding: 20vh 10vw;
     position: relative;
     top: 5vh;
 }
@@ -98,8 +98,8 @@ b {
 }
 
 .lp-header-input-container {
-    height: 25vh;
-    min-height: 150px;
+    height:150px;
+    min-height: 175px;
     width: 100%;
     background: rgba(255, 255, 255, 0.5);
     text-align: center;
@@ -140,7 +140,7 @@ b {
 }
 
 .lp-header-input-helper {
-    @include vertical-align-helper(50%);
+    @include vertical-align-helper(52%);
 }
 
 .lp-content {

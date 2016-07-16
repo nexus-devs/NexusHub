@@ -12,14 +12,6 @@ var REQ_Price = 300
 
 //check if same item older than 1 week if yes update
 
-// Get the documents collection
-var collection = db.warframenexus('users');
-
-//Create some entries
-var first_prime = {username: Username, requests:[{to:REQ_TO, title:REQ_Main, type:REQ_Type, components:[{name:REQ_Comp, data:REQ_Price}], updatedAt:datetime}]};
-var first = {username:Username, requests:[{to:REQ_TO, title:REQ_Main, type:REQ_Type, data:REQ_Price, updatedAt:datetime}]};
-//var another_prime = {requests:[{to:REQ_TO, title:REQ_Main, type:REQ_Type, components:[{name:REQ_Comp, data:REQ_Price}], updatedAt:datetime}]};
-//var another = {username:Username, requests:[{to:REQ_TO, title:REQ_Main, type:REQ_Type, data:REQ_Price, updatedAt:datetime}]};
 
 //check if user already exists (1=yes)
 //user_exists=db.users.count({"user":Username});
