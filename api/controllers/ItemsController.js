@@ -62,118 +62,119 @@ module.exports = {
             function generateItem(item, callback) {
                 var components = item[0].components // component schema
                 components.push('Set')
+                var WTB = 0
+                var WTS = 0
 
                 console.log('item: ' + itemname)
+
+
+
                 // Loop through each component and check if requests contain component
                 components.forEach(function (component) {
 
-                    async.waterfall([
 
-                        // Find all users offering item
-                        function findUsers(callback) {
-                            Users.find({
-                                'requests.title': itemname,
-                            }).exec(function (err, user) {
-                                callback(null, user)
-                            })
+                    // Find all users offering item
+                    Users.find({
+                        'requests.title': itemname,
+                    }).exec(function (err, user) {
 
                         // Generate values for each Component
-                                },
-                        function log(user, callback) {
-                            console.log('component: ' + component)
-
-                            // Clear values when starting with new component // generate array w/ 0 for timerange
-                            var comp_data = []
-                            var comp_count = []
-                            for (var i = 0; i < timerange; i++) {
-                                comp_count.push(0)
-                            }
-                            var comp_val = []
-                            for (var i = 0; i < timerange; i++) {
-                                comp_val.push(0)
-                            }
-                            var WTB = 0
-                            var WTS = 0
+                        console.log('component: ' + component)
 
 
-                            // For each user, check if item in each request (loop through every relevant request)
-                            user.forEach(function (user) {
-                                user.requests.forEach(function (req_item) {
-                                    if (req_item.to === 'WTB'){
-                                        WTB++
-                                    } else{
-                                        WTS++
-                                    }
+                        // Clear values when starting with new component // generate array w/ 0 for timerange
+                        var comp_data = []
+                        var comp_count = []
+                        for (var i = 0; i < timerange; i++) {
+                            comp_count.push(0)
+                        }
+                        var comp_val = []
+                        for (var i = 0; i < timerange; i++) {
+                            comp_val.push(0)
+                        }
 
 
-                                    // Validate request belonging to item
-                                    if (req_item.title === itemname) {
-                                        req_item.components.forEach(function (req_component) {
+                        // For each user, check if item in each request (loop through every relevant request)
+                        user.forEach(function (user) {
+                            user.requests.forEach(function (req_item) {
+                                if (req_item.to === 'WTB') {
+                                    WTB++
+                                } else {
+                                    WTS++
+                                }
 
-                                            // Check Time between Request and now
-                                            var prevTime = new Date(req_item.updatedAt);
-                                            var thisTime = new Date();
-                                            var diff = thisTime.getTime() - prevTime.getTime();
-                                            var delta = (diff / (1000 * 60 * 60 * 24));
 
-                                            // Check if Request has been comitted within timerange
-                                            if (component === req_component.name && delta < timerange) {
+                                // Validate request belonging to item
+                                if (req_item.title === itemname) {
+                                    req_item.components.forEach(function (req_component) {
 
-                                                // Generate data array
-                                                for (var i = 0; i < timerange; i++) {
-                                                        // If request at 'i' day, value and position to according place
-                                                    if (Math.floor(delta) === i) {
-                                                        comp_val[i] = comp_val[i] + req_component.data
-                                                        comp_count[i]++
-                                                    }
+                                        // Check Time between Request and now
+                                        var prevTime = new Date(req_item.updatedAt);
+                                        var thisTime = new Date();
+                                        var diff = thisTime.getTime() - prevTime.getTime();
+                                        var delta = (diff / (1000 * 60 * 60 * 24));
+
+                                        // Check if Request has been comitted within timerange
+                                        if (component === req_component.name && delta < timerange) {
+
+                                            // Generate data array
+                                            for (var i = 0; i < timerange; i++) {
+                                                // If request at 'i' day, value and position to according place
+                                                if (Math.floor(delta) === i) {
+                                                    comp_val[i] = comp_val[i] + req_component.data
+                                                    comp_count[i]++
                                                 }
                                             }
-                                        })
-                                    }
-                                })
+                                        }
+                                    })
+                                }
                             })
+                        })
 
-                            // Take average of value divided by count
-                            for (var i = 0; i < timerange; i++) {
-                                if (comp_val[i] !== 0) {
-                                   comp_data.push((comp_val[i] / comp_count[i]))
-                                } else {
+                        // Take average of value divided by count
+                        for (var i = 0; i < timerange; i++) {
+                            if (comp_val[i] !== 0) {
+                                comp_data.push((comp_val[i] / comp_count[i]))
+                            } else {
                                 comp_data.push('null')
-                                }
                             }
+                        }
 
-                            // Reverse array (newest at end to match chart)
-                            comp_data.reverse();
-                            console.log(comp_data)
+                        // Reverse array (newest at end to match chart)
+                        comp_data.reverse();
+                        console.log(comp_data)
 
-                            // Generate average value
-                            var avg = 0
-                            for (var i = 0; i < comp_data.length; i++){
-                                if (comp_data[i] === 'null'){
-                                    var current_value = 0
-                                } else {
-                                    var current_value = comp_data[i]
-                                }
-                                avg = avg + current_value
+                        // Generate average value
+                        var avg = 0
+                        for (var i = 0; i < comp_data.length; i++) {
+                            if (comp_data[i] === 'null') {
+                                var current_value = 0
+                            } else {
+                                var current_value = comp_data[i]
                             }
-                            // Realtime avg
-                            console.log('comp_val_rt: ' + avg/comp_data.length)
+                            avg = avg + current_value
+                        }
+                        // Realtime avg
+                        console.log('comp_val_rt: ' + avg / comp_data.length)
 
-                            // Normal avg
-                            avg = Math.floor((avg/comp_data.length)).toString() + 'p'
-                            console.log('avg: ' + avg)
-                            console.log('----------------------')
+                        // Normal avg
+                        avg = Math.floor((avg / comp_data.length)).toString() + 'p'
+                        console.log('avg: ' + avg)
+                        console.log('----------------------')
 
-
-
+                        callback(null, WTS, WTB)
                             // When all data is collected: create database entry
                             // Dont forget to set update to false in itemlist
-                                }
-
-                    ])
+                    })
 
                 })
-                //console.log('Supply: ' + WTB)
+
+
+                },
+
+            function (supply, demand, callback) {
+                console.log('Supply: ' + supply)
+                console.log('Demand: ' + demand)
                 }
         ])
     },
