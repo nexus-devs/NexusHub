@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+<video loop muted autoplay class='lp-header-vidbg'>
+    <source class='lp-header-vid' src="<%= img %>lp_header_vid.webm" type="video/webm">
+</video>
+
 <% include .\templates\nav %>
 
-    <video loop muted autoplay class='lp-header-vidbg'>
-        <source class='lp-header-vid' src="<%= img %>lp_header_vid.webm" type="video/webm">
-    </video>
 
     <body>
         <!-- Header -->
@@ -20,7 +21,7 @@
         </header>
         <form class='lp-header-input-container' method='get' action='/items/search'>
             <div class='lp-header-input-helper'></div>
-            <div class='lp-header-input' id='search' >
+            <div class='lp-header-input' id='search'>
                 <input type='text' placeholder='Enter Item Name' name='item'>
             </div>
             <button type='button' type='submit'>
@@ -75,7 +76,7 @@
                     <!--==============================-->
                     <% content.forEach(function(item) { %>
                         <% include .\templates\main_item %>
-                    <% }); %>
+                            <% }); %>
 
 
                 </div>
@@ -102,7 +103,7 @@
 
         <!-- Recently Requested -->
         <!--==============================-->
-        <div class='lp-recent-items'>
+        <!-- <div class='lp-recent-items'>
             <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
             <div class='lp-recent-items-shade-l'></div>
             <div class='lp-recent-items-shade-r'></div>
@@ -124,6 +125,7 @@
             </div>
         </div>
 
+   -->
     </body>
 
     <% include .\templates\footer %>

@@ -191,7 +191,7 @@ while True:
 
     #Process each line
     for i in range(0, len(Msg)):
-        MsgWords = re.sub("[^\w+.]", " ",  Msg[i]).split()
+        MsgWords = re.sub("[^\w+.-]", " ",  Msg[i]).split()
         MsgWordsOriginal = MsgWords
         if len(MsgWords) > 0:
             Username = MsgWords[0]
