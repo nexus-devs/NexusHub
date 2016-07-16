@@ -17,7 +17,6 @@ body {
 }
 
 .top-nav {
-    position: fixed;
     z-index: 5;
     height: 90px;
     width: 100%;
@@ -174,6 +173,7 @@ b {
     h2 {
         display: inline-block;
         @include font-small-title($color-subtle);
+        font-weight:400;
         vertical-align: super;
         margin-left: 42px;
     }
