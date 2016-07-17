@@ -1,7 +1,7 @@
 module.exports = {
     index: function (req, res) {
 
-        Items.find(function (err, items) {
+        Itemcache.find(function (err, items) {
             var pop_old_1 = 0
             var pop_old_2 = 0
             var pop_old_3 = 0
@@ -34,8 +34,8 @@ module.exports = {
 
             })
 
-            var pop_items = [pop_obj_1, pop_obj_2] //Add pop 3
-
+            var pop_items = [pop_obj_1] //Add pop 3, pop 2
+            console.log(pop_items)
 
             return res.view('index', {
                 content: pop_items,
