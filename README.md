@@ -1,7 +1,6 @@
 # Development
-Warframe Data Processing
 
-Development builds are found here.
+Development builds can be found here.
 
 
 # Roadmap

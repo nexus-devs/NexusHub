@@ -10,3 +10,7 @@ node_modules/
 
 /py/__pycache__
 /py/sources
+/assets/styles/importer.css
+/assets/styles/importer.css.map
+/assets/styles/reset.css
+/assets/styles/reset.css.map
