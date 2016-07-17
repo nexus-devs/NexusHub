@@ -111,7 +111,8 @@ module.exports = {
 
                                         // Check if Request has been comitted within timerange
                                         if (component === req_component.name && delta < timerange) {
-                                            if (req_item.to === 'WTB') {
+
+                                            if (req_item.components[0].to === 'WTB') {
                                                 WTB++
                                             } else {
                                                 WTS++
@@ -122,7 +123,7 @@ module.exports = {
                                                 // If request at 'i' day, value and position to according place
                                                 if (Math.floor(delta) === i) {
                                                     if (req_component.data !== 'null'){
-                                                        comp_val[i] = comp_val[i] + req_component.data
+                                                        comp_val[i] = +comp_val[i] + +req_component.data
                                                         comp_count[i]++
                                                     }
                                                 }
