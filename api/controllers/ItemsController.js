@@ -24,7 +24,7 @@ module.exports = {
             // Validate entered URL (if done manually)
             function getItemInfo(callback) {
                 ItemList.find({
-                    name: itemname
+                    _id: itemname
                 }).exec(function (err, item) {
                     if (typeof item[0] === 'undefined') {
                         res.notFound(`${itemname} ${itembase} couldn't be found. Please check your spelling`)
@@ -55,7 +55,7 @@ module.exports = {
                         })
                     })
                 }
-                },
+            },
 
 
             // Generate Item Stats from requests
@@ -66,13 +66,29 @@ module.exports = {
                 var WTS = 0
 
                 console.log('item: ' + itemname)
+                console.log('type: ' + itembase)
                 console.log('==========================')
 
+                Itemcache.native(function (err, collection) {
+                    collection.update({
+                        "_id": itemname,
+                    }, {
+                        $set: {
+                            "Title": itemname,
+                            "Type": itembase,
+                            "SupDem": [],
+                            "SupDemNum": [],
+                            "Components": []
+                        }
+                    }, {
+                        upsert: true
+                    })
+                })
 
 
-                // Loop through each component and check if requests contain component
-                components.forEach(function (component) {
 
+                // Define Loop Actions
+                var getComponentStats = function(component, callback){
 
                     // Find all users offering item
                     Users.find({
@@ -80,8 +96,6 @@ module.exports = {
                     }).exec(function (err, user) {
 
                         // Generate values for each Component
-                        console.log('component: ' + component)
-
 
                         // Clear values when starting with new component // generate array w/ 0 for timerange
                         var comp_data = []
@@ -93,7 +107,6 @@ module.exports = {
                         for (var i = 0; i < timerange; i++) {
                             comp_val.push(0)
                         }
-
 
                         // For each user, check if item in each request (loop through every relevant request)
                         user.forEach(function (user) {
@@ -122,7 +135,7 @@ module.exports = {
                                             for (var i = 0; i < timerange; i++) {
                                                 // If request at 'i' day, value and position to according place
                                                 if (Math.floor(delta) === i) {
-                                                    if (req_component.data !== 'null'){
+                                                    if (req_component.data !== 'null') {
                                                         comp_val[i] = +comp_val[i] + +req_component.data
                                                         comp_count[i]++
                                                     }
@@ -139,7 +152,7 @@ module.exports = {
                             if (comp_val[i] !== 0) {
                                 comp_data.push((comp_val[i] / comp_count[i]))
                             } else {
-                                comp_data.push('null')
+                                comp_data.push(null)
                             }
                         }
 
@@ -151,7 +164,7 @@ module.exports = {
                         var avg = 0
                         var valid_count = 0
                         for (var i = 0; i < comp_data.length; i++) {
-                            if (comp_data[i] !== 'null') {
+                            if (comp_data[i] !== null) {
                                 var current_value = comp_data[i]
                                 valid_count++
                                 avg = avg + current_value
@@ -172,38 +185,123 @@ module.exports = {
 
                         // visibile: false if SET
                         if (component === 'Set') {
-                            console.log('visible: false')
+                            Itemcache.native(function (err, collection) {
+                                collection.update({
+                                    "_id": itemname,
+                                }, {
+                                    $push: {
+                                        "Components": {
+                                            name: component,
+                                            avg: avg,
+                                            comp_val_rt: comp_val_rt,
+                                            data: comp_data,
+                                            visible: false
+                                        }
+                                    }
+                                })
+                            })
+                            return callback();
+                        } else {
+                            Itemcache.native(function (err, collection) {
+                                collection.update({
+                                    "_id": itemname,
+                                }, {
+                                    $push: {
+                                        "Components": {
+                                            name: component,
+                                            avg: avg,
+                                            comp_val_rt: comp_val_rt,
+                                            data: comp_data
+                                        }
+                                    }
+                                })
+                            })
+                            return callback();
                         }
 
-
-                        callback(null, WTS, WTB)
                     })
+                }
 
+
+
+
+
+
+                // Loop through each component and check if requests contain component
+                async.forEach(components, getComponentStats, function (component) {
+                    console.log(WTS)
+                    callback(null, WTS, WTB)
                 })
 
+            },
 
-                },
 
-            function (supply, demand, components, callback) {
+
+
+            function (supply, demand, callback) {
                 var SupDemNum = [supply, demand]
-                if (supply !== 0 && demand !== 0) {
-                    var SupDem = [((supply + demand) / supply * 100), ((supply + demand) / demand * 100)]
-                } else if (supply !== 0 && demand === 0) {
-                    var SupDem = [((supply + demand) / supply * 100), 0]
-                } else if (supply === 0 && demand !== 0) {
-                    var SupDem = [0, ((supply + demand) / demand * 100)]
-                } else {
-                    var SupDem = [0, 0]
-                }
+                if (supply < demand) {
+                    var supply_val = supply / demand
+                    var SupDem = [supply_val * 100, (1 - supply_val) * 100]
+                    } else if (supply > demand) {
+                        var demand_val = demand / supply
+                        var SupDem = [demand_val * 100, (1 - demand_val) * 100]
+                        } else if (supply === demand) {
+                            var SupDem = [50, 50]
+                            } else if (supply === 0 && demand === 0) {
+                                var SupDem = [0, 0]
+                                }
+
+                // check
+                Itemcache.native(function (err, collection) {
+                    collection.update({
+                        "_id": itemname,
+                    }, {
+                        $set: {
+                            "SupDem": SupDem,
+                            "SupDemNum": SupDemNum
+                        }
+                    })
+                })
+
+                ItemList.native(function (err, collection) {
+                    collection.update({
+                        "_id": itemname,
+                    }, {
+                        $set: {
+                            "update": 'false'
+                        }
+                    })
+                })
 
                 console.log('SupDemNum: ' + SupDemNum)
                 console.log('Percentages: ' + SupDem)
                 console.log('----------------------')
 
+                callback();
+
                 // When all data is collected: create database entry
                 // Dont forget to set update to false in itemlist
-                }
-        ])
+
+            },
+
+
+            function (callback) {
+                Itemcache.find({
+                    Title: itemname
+                }).exec(function (err, itemobj) {
+                    var itembase = itemobj[0].Type
+                    var itemname = itemobj[0].Title
+
+                    return res.view('item', {
+                        HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
+                        itemdata: itemobj[0],
+                        css: "../css/",
+                        js: "../js/",
+                        img: "../img/"
+                    })
+                })
+            }])
     },
 
 
@@ -217,36 +315,36 @@ module.exports = {
         // Check for each search term
         async.forEach(stringArray, function (string, callback) {
 
-                async.waterfall([
+            async.waterfall([
 
                 // Try retrieving item name
                 function retrieveItem(callback) {
-                            ItemList.find({
-                                _id: capitalize(string)
-                            }).exec(function (err, itemobj) {
-                                if (err) {
-                                    callback(err, null)
-                                    return
-                                }
-                                callback(null, itemobj)
-                            })
+                    ItemList.find({
+                        _id: capitalize(string)
+                    }).exec(function (err, itemobj) {
+                        if (err) {
+                            callback(err, null)
+                            return
+                        }
+                        callback(null, itemobj)
+                    })
 
-                            // Check if item was found
+                    // Check if item was found
                 },
-                        function checkValidity(itemobj, callback) {
-                            if (typeof itemobj[0] !== 'undefined') {
-                                var itembase = itemobj[0].type
-                                var itemname = itemobj[0].name
-                                return res.redirect(`../../${itembase}/${itemname}`)
-                            } else {
-                                res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
-                            }
+                function checkValidity(itemobj, callback) {
+                    if (typeof itemobj[0] !== 'undefined') {
+                        var itembase = itemobj[0].type
+                        var itemname = capitalize(string)
+                        return res.redirect(`../../${itembase}/${itemname}`)
+                    } else {
+                        res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
+                    }
 
                 }
 
             ]) // End async.waterfall
-                callback();
-            }) // End Query
+            callback();
+        }) // End Query
 
     }
 }
