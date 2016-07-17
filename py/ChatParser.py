@@ -40,7 +40,7 @@ db = client.warframenexus
 
 
 while True:
-    
+
     #Screen rendering
     #---------------------------
     img_path = 'cache/screen.jpg'
@@ -216,9 +216,9 @@ while True:
         #Correct MsgWords -- UNRELIABLE, needs modification, otherwise no result, high performance hit
         #for i in range(0, len(MsgWords)):
         #    correct(MsgWords[i])
-               
 
-                
+
+
         # ======= Start Message Body Interpretation ========
         for i in range(0, len(MsgWords)):
             #TO
@@ -270,7 +270,7 @@ while True:
                 return(ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, ITEMcount)
 
 
-            
+
 
             #Check if Item in List, assign component list to check
             ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
@@ -278,7 +278,7 @@ while True:
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
-                
+
                 if MsgWords[i] in E_List:
                     ITEMtype, ITEMessential, ITEMcomponent, ITEMprice, ITEMCount = ExtractItems(C_List)
 
@@ -526,6 +526,7 @@ while True:
         ITEMvalSplit = 0
 
     print('Job Done')
+    break
 
 
 
