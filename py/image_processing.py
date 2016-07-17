@@ -179,12 +179,16 @@ while True:
 
     #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
-    E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
-    E_Mods = ['FLEETING']
-    E_Primed = ['PRIMED']
+    #E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
+    #E_Mods = ['FLEETING']
+    #E_Primed = ['PRIMED']
     C_Prime = ['LINK', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+
+    #Create prime list without converted names for comparison later
+    C_Prime_Basic = []
+    C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
-    C_Mods = ['EXPERTISE']
+    #C_Mods = ['EXPERTISE']
     C_Arcane = []
     C_Primed = []
 
@@ -270,6 +274,7 @@ while True:
 
             #Check if Item in List, assign component list to check
             ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
+            ListsToCheck = ['Prime']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
@@ -373,11 +378,12 @@ while True:
 
                     #Convert Component name to official standard
                     for u in range(0, len(CompParts)):
+
                         CompCheckList = eval(CompParts[u])
                         if REQ[3] in CompCheckList:
                             REQ_Comp = CompParts[u].title()
-                        #If in standard list
-                        elif REQ[3] in C_Prime:
+                        #If in standard list (without appended Conversion List)
+                        elif REQ[3] in C_Prime_Basic:
                             REQ_Comp = REQ[3].title()
 
 
@@ -445,6 +451,7 @@ while True:
             #Find relevant item information
             if REQ_TO == 'PC' and not Username == 'NexusBot':
                 cursor = db.items.find({"Title": REQ_Main})
+                REQ_Check = 'invalid'
 
                 for document in cursor:
 
@@ -519,7 +526,8 @@ while True:
         ITEMvalSplit = 0
 
     print('Job Done')
-    break
+
+
 
 
 

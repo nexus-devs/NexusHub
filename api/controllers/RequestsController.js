@@ -44,7 +44,6 @@ module.exports = {
                 }]
             }
 
-
             // Request Processing Main Functions
             async.waterfall([
 
@@ -83,7 +82,11 @@ module.exports = {
                             callback(err, null)
                             return
                         }
-                        callback(null, itemschema)
+                        if (typeof itemschema[0] !== 'undefined') {
+                            callback(null, itemschema)
+                        } else {
+                            res.notFound()
+                        }
                     });
                     },
 
@@ -94,8 +97,8 @@ module.exports = {
 
                     // Component not given
                     if (REQ_Comp === 'Set') {
-                        var request_status = 'valid'
-                        callback(null, request_status)
+                        request_status = 'valid'
+                        callback();
 
                         // Component is given
                     } else {
@@ -103,20 +106,14 @@ module.exports = {
                         // Check if component found for each item in itemschema
                         itemschema[0].components.forEach(function (itemcomponent) {
                             if (itemcomponent === REQ_Comp && itemschema[0].type === REQ_Type) {
-                                var request_status = 'valid'
-                                callback(null, request_status)
+                                request_status = 'valid'
                             }
                         })
-                    }
-                    },
-
-
-                    // Cancel if request is invalid
-                    function cancelOnError(request_status, callback) {
-                    if (request_status === 'valid') {
-                        callback();
-                    } else {
-                        return res.forbidden();
+                        if (request_status === 'valid'){
+                            callback();
+                        } else {
+                            res.notFound()
+                        }
                     }
                     },
 
@@ -151,83 +148,99 @@ module.exports = {
                         // Check if user has requested items
                         if (typeof user[0].requests !== 'undefined') {
 
+                            var requested = 'false'
+                            var itemrequestdate = ''
+
+
                             // Check each request for item & update
                             user[0].requests.forEach(function (itemrequest) {
 
                                 // Check if item has been requested
                                 if (itemrequest.title === REQ_Main) {
-                                    var prevTime = new Date(itemrequest.updatedAt);
-                                    var thisTime = new Date();
-                                    var diff = thisTime.getTime() - prevTime.getTime();
-                                    var delta = (diff / (1000 * 60 * 60 * 24));
+                                    requested = 'true'
+                                    itemrequestdate = itemrequest.updatedAt
+                                }
+                            })
 
 
-                                    // Check if request older than 1 but not older than 2 days > then create new
-                                    if (delta > 1 && delta < 2) {
-                                        Users.native(function (err, collection) { // Probably removes old components
-                                            collection.update({
-                                                "user": REQ_User,
-                                            }, {
-                                                $push: {
-                                                    requests: [{
-                                                        title: REQ_Main,
-                                                        type: REQ_Type,
-                                                        updatedAt: new Date(),
-                                                        components: [{
-                                                            to: REQ_TO,
-                                                            name: REQ_Comp,
-                                                            data: REQ_Price
-                                                        }]
-                                                    }]
-                                                }
-                                            })
-                                        })
-                                        callback();
+                            // If item has been requested
+                            if (requested === 'true') {
 
-                                        // If request already sent today > then update values to latest request
-                                    } else if (delta < 1) {
-                                        Users.native(function (err, collection) { // Probably removes old components
-                                            collection.update({
-                                                "user": REQ_User,
-                                                "requests.title": REQ_Main
-                                            }, {
-                                                $set: {
-                                                    "requests.$.updatedAt": `${new Date()}`,
-                                                    "requests.$.components": [{
-                                                        to: REQ_TO,
-                                                        name: REQ_Comp,
-                                                        data: REQ_Price
-                                                }]
-                                                }
-                                            }, false, true)
-                                        })
-                                        callback();
-                                    }
+                                var prevTime = new Date(itemrequestdate);
+                                var thisTime = new Date();
+                                var diff = thisTime.getTime() - prevTime.getTime();
+                                var delta = (diff / (1000 * 60 * 60 * 24));
 
-                                    // If Item is new request
-                                } else {
-                                    Users.native(function (err, collection) { // Probably removes old components
+
+                                // Check if request older than 1 > then create new
+                                if (delta > 1) {
+                                    Users.native(function (err, collection) {
                                         collection.update({
                                             "user": REQ_User,
                                         }, {
                                             $push: {
-                                                requests: [{
+                                                "requests": {
                                                     title: REQ_Main,
                                                     type: REQ_Type,
-                                                    updatedAt: new Date(),
+                                                    updatedAt: `${new Date()}`,
                                                     components: [{
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
                                                         data: REQ_Price
                                                     }]
-                                                }]
+                                                }
                                             }
                                         })
                                     })
                                     callback();
-                                }
-                            })
 
+                                    // If request already sent today > then update values to latest request
+                                    // Maybe check if component is part of requets > if not: push component
+                                } else if (delta < 1) {
+                                    Users.native(function (err, collection) { // Probably removes old components
+                                        collection.update({
+                                            "user": REQ_User,
+                                            "requests.title": REQ_Main
+                                        }, {
+                                            $set: {
+                                                "requests.$.updatedAt": `${new Date()}`,
+                                                "requests.$.components": [{
+                                                    to: REQ_TO,
+                                                    name: REQ_Comp,
+                                                    data: REQ_Price
+                                                                }]
+                                            }
+                                        }, false, true)
+                                    })
+                                    callback();
+                                }
+
+
+                                // Create New Requst
+                            } else {
+                                Users.native(function (err, collection) {
+                                    collection.update({
+                                        "user": REQ_User,
+                                    }, {
+                                        $push: {
+                                            "requests": {
+                                                title: REQ_Main,
+                                                type: REQ_Type,
+                                                updatedAt: `${new Date()}`,
+                                                components: [{
+                                                    to: REQ_TO,
+                                                    name: REQ_Comp,
+                                                    data: REQ_Price
+                                                }]
+                                            }
+                                        }
+                                    })
+                                })
+                                callback();
+                            }
+
+
+                            // if user has no requests, create
                         } else {
                             Users.native(function (err, collection) {
                                 collection.update({
@@ -237,7 +250,7 @@ module.exports = {
                                         "requests": {
                                             title: REQ_Main,
                                             type: REQ_Type,
-                                            updatedAt: new Date(),
+                                            updatedAt: `${new Date()}`,
                                             components: [{
                                                 to: REQ_TO,
                                                 name: REQ_Comp,
@@ -263,7 +276,8 @@ module.exports = {
                                 function showResults(callback) {
                     console.log(REQ_Main + ' ' + REQ_Comp)
                     console.log('valid')
-                    console.log('--------------')
+                    console.log('===================')
+                    console.log(' ')
 
                     // Return info
                     return res.json(request);
