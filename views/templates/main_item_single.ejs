@@ -6,11 +6,15 @@
 
                 <!-- Item Info -->
                 <div class='items-images-main'>
-                   <div class='items-images-main-conent'>
-                       <span class='items-images-main-text'>Full Set Price</span>
-                       <br>
-                       <span class='items-images-main-price'><%= itemdata.Components[0].avg %></span>
-                   </div>
+                    <div class='items-images-main-conent'>
+                        <span class='items-images-main-text'>Full Set Price</span>
+                        <br>
+                        <% itemdata.Components.forEach(function(item) { %>
+                            <% if (item.name === 'Set') { %>
+                                <span class='items-images-main-price'><%= item.avg %></span>
+                                <% } %>
+                                    <% }); %>
+                    </div>
                     <div class='items-images-main-helper'></div>
                     <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
                 </div>
@@ -21,18 +25,20 @@
 
 
                         <% itemdata.Components.forEach(function(item) { %>
-                            <!-- Component -->
-                            <div class='item-images-components-wr'>
-                                <div class='item-images-components-component'>
-                                    <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= itemdata.Title %> <%= item.name %>'>
+                            <% if (item.name !== 'Set') { %>
+                                <!-- Component -->
+                                <div class='item-images-components-wr'>
+                                    <div class='item-images-components-component'>
+                                        <img src='<%= img %>generic/<%= item.name %>.png' alt='<%= itemdata.Title %> <%= item.name %>'>
+                                    </div>
+                                    <div class='items-component-details'>
+                                        <h3><%= item.name %></h3>
+                                        <h4><%= item.avg %></h4>
+                                        <span>(<%= item.Comp_val_rt %>)</span>
+                                    </div>
                                 </div>
-                                <div class='items-component-details'>
-                                    <h3><%= item.name %></h3>
-                                    <h4><%= item.avg %></h4>
-                                    <span>(<%= item.Comp_val_rt %>)</span>
-                                </div>
-                            </div>
-                            <% }); %>
+                                <% } %>
+                                    <% }); %>
 
                     </div>
                 </div>

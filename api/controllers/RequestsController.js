@@ -109,7 +109,7 @@ module.exports = {
                                 request_status = 'valid'
                             }
                         })
-                        if (request_status === 'valid'){
+                        if (request_status === 'valid') {
                             callback();
                         } else {
                             res.notFound()
@@ -185,7 +185,6 @@ module.exports = {
                                                     title: REQ_Main,
                                                     type: REQ_Type,
                                                     updatedAt: `${new Date()}`,
-                                                    update: 'pending',
                                                     components: [{
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
@@ -208,7 +207,6 @@ module.exports = {
                                         }, {
                                             $set: {
                                                 "requests.$.updatedAt": `${new Date()}`,
-                                                "requests.$.update": 'pending',
                                                 "requests.$.components": [{
                                                     to: REQ_TO,
                                                     name: REQ_Comp,
@@ -233,7 +231,6 @@ module.exports = {
                                                 title: REQ_Main,
                                                 type: REQ_Type,
                                                 updatedAt: `${new Date()}`,
-                                                update: 'pending',
                                                 components: [{
                                                     to: REQ_TO,
                                                     name: REQ_Comp,
@@ -259,7 +256,6 @@ module.exports = {
                                             title: REQ_Main,
                                             type: REQ_Type,
                                             updatedAt: `${new Date()}`,
-                                            update: 'pending',
                                             components: [{
                                                 to: REQ_TO,
                                                 name: REQ_Comp,
@@ -279,10 +275,19 @@ module.exports = {
                     // else if req_item exists > if date smaller 1 > update values / create component if not exist
                     // else > if req_item NOT exist > create new + component
 
-                                },
+                    },
 
-                                // final logs
-                                function showResults(callback) {
+                    // final logs
+                    function showResults(callback) {
+                    ItemList.native(function (err, collection) {
+                        collection.update({
+                            "_id": REQ_Main,
+                        }, {
+                            $set: {
+                                "update": 'pending'
+                            }
+                        })
+                    })
 
                     console.log('===================')
                     console.log(' ')
