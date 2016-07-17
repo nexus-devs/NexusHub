@@ -44,11 +44,6 @@ module.exports = {
                 }]
             }
 
-            // Error Handling
-            if (err) {
-                return res.negotiate(err);
-            }
-
 
             // Request Processing Main Functions
             async.waterfall([
@@ -127,7 +122,7 @@ module.exports = {
 
 
                     // Ensure user exists. If not, create
-                    /* function updateUserList(callback) {
+                    function updateUserList(callback) {
                     Users.find({
                         user: REQ_User
                     }).exec(function (err, user) {
@@ -143,7 +138,7 @@ module.exports = {
                             callback();
                         }
                     })
-                    }, */
+                    },
 
 
                     // Create Request entries
@@ -153,64 +148,103 @@ module.exports = {
                     }).exec(function (err, user) {
 
 
-                        // Check if item contained in request
-                        if (typeof user[0] !== 'undefined') {
+                        // Check if user has requested items
+                        if (typeof user[0].requests !== 'undefined') {
 
-                            // Check each request for item & update DONT FORGET CALLBACK
+                            // Check each request for item & update
                             user[0].requests.forEach(function (itemrequest) {
-                                var prevTime = new Date(itemrequest.updatedAt);
-                                var thisTime = new Date();
-                                var diff = thisTime.getTime() - prevTime.getTime();
-                                var delta = (diff / (1000 * 60 * 60 * 24));
-                                console.log(itemrequest)
-                                console.log(delta)
+
+                                // Check if item has been requested
+                                if (itemrequest.title === REQ_Main) {
+                                    var prevTime = new Date(itemrequest.updatedAt);
+                                    var thisTime = new Date();
+                                    var diff = thisTime.getTime() - prevTime.getTime();
+                                    var delta = (diff / (1000 * 60 * 60 * 24));
 
 
-                                // Check if request older than 1 but not older than 2 days > then create new
-                                if (delta > 1 && delta < 2) {
+                                    // Check if request older than 1 but not older than 2 days > then create new
+                                    if (delta > 1 && delta < 2) {
+                                        Users.native(function (err, collection) { // Probably removes old components
+                                            collection.update({
+                                                "user": REQ_User,
+                                            }, {
+                                                $push: {
+                                                    requests: [{
+                                                        title: REQ_Main,
+                                                        type: REQ_Type,
+                                                        updatedAt: new Date(),
+                                                        components: [{
+                                                            to: REQ_TO,
+                                                            name: REQ_Comp,
+                                                            data: REQ_Price
+                                                        }]
+                                                    }]
+                                                }
+                                            })
+                                        })
+                                        callback();
 
-
-                                // If request already sent today > then update values to latest request
-                                } else {
-                                    Users.native(function (err, collection) {
-                                        collection.update({
-                                            "user": REQ_User,
-                                        }, {
-                                            $addToSet: {
-                                                "requests": {
-                                                    title: REQ_Main,
-                                                    type: REQ_Type,
-                                                    updatedAt: `${new Date()}`,
-                                                    components: [{
+                                        // If request already sent today > then update values to latest request
+                                    } else if (delta < 1) {
+                                        Users.native(function (err, collection) { // Probably removes old components
+                                            collection.update({
+                                                "user": REQ_User,
+                                                "requests.title": REQ_Main
+                                            }, {
+                                                $set: {
+                                                    "requests.$.updatedAt": `${new Date()}`,
+                                                    "requests.$.components": [{
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
                                                         data: REQ_Price
                                                 }]
                                                 }
-                                            }
-                                        }, {
-                                            upsert: true
+                                            }, false, true)
                                         })
                                         callback();
+                                    }
+
+                                    // If Item is new request
+                                } else {
+                                    Users.native(function (err, collection) { // Probably removes old components
+                                        collection.update({
+                                            "user": REQ_User,
+                                        }, {
+                                            $push: {
+                                                requests: [{
+                                                    title: REQ_Main,
+                                                    type: REQ_Type,
+                                                    updatedAt: new Date(),
+                                                    components: [{
+                                                        to: REQ_TO,
+                                                        name: REQ_Comp,
+                                                        data: REQ_Price
+                                                    }]
+                                                }]
+                                            }
+                                        })
                                     })
+                                    callback();
                                 }
                             })
+
                         } else {
                             Users.native(function (err, collection) {
                                 collection.update({
-                                    "user": REQ_User
-                                }, {
                                     "user": REQ_User,
-                                    "requests": [{
-                                        title: REQ_Main,
-                                        type: REQ_Type,
-                                        updatedAt: `${new Date()}`,
-                                        components: [{
-                                            to: REQ_TO,
-                                            name: REQ_Comp,
-                                            data: REQ_Price
-                                        }]
-                                    }]
+                                }, {
+                                    $addToSet: {
+                                        "requests": {
+                                            title: REQ_Main,
+                                            type: REQ_Type,
+                                            updatedAt: new Date(),
+                                            components: [{
+                                                to: REQ_TO,
+                                                name: REQ_Comp,
+                                                data: REQ_Price
+                                            }]
+                                        }
+                                    }
                                 }, {
                                     upsert: true
                                 })
