@@ -174,6 +174,8 @@ module.exports = {
 
                                 // Check if request older than 1 > then create new
                                 if (delta > 1) {
+                                    console.log(REQ_Main + ' ' + REQ_Comp)
+                                    console.log('Upserted new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                     Users.native(function (err, collection) {
                                         collection.update({
                                             "user": REQ_User,
@@ -183,6 +185,7 @@ module.exports = {
                                                     title: REQ_Main,
                                                     type: REQ_Type,
                                                     updatedAt: `${new Date()}`,
+                                                    update: 'pending',
                                                     components: [{
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
@@ -197,6 +200,7 @@ module.exports = {
                                     // If request already sent today > then update values to latest request
                                     // Maybe check if component is part of requets > if not: push component
                                 } else if (delta < 1) {
+                                    console.log('Updated request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                     Users.native(function (err, collection) { // Probably removes old components
                                         collection.update({
                                             "user": REQ_User,
@@ -204,6 +208,7 @@ module.exports = {
                                         }, {
                                             $set: {
                                                 "requests.$.updatedAt": `${new Date()}`,
+                                                "requests.$.update": 'pending',
                                                 "requests.$.components": [{
                                                     to: REQ_TO,
                                                     name: REQ_Comp,
@@ -218,6 +223,7 @@ module.exports = {
 
                                 // Create New Requst
                             } else {
+                                console.log('Created new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                 Users.native(function (err, collection) {
                                     collection.update({
                                         "user": REQ_User,
@@ -227,6 +233,7 @@ module.exports = {
                                                 title: REQ_Main,
                                                 type: REQ_Type,
                                                 updatedAt: `${new Date()}`,
+                                                update: 'pending',
                                                 components: [{
                                                     to: REQ_TO,
                                                     name: REQ_Comp,
@@ -242,6 +249,7 @@ module.exports = {
 
                             // if user has no requests, create
                         } else {
+                            console.log('Created new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                             Users.native(function (err, collection) {
                                 collection.update({
                                     "user": REQ_User,
@@ -251,6 +259,7 @@ module.exports = {
                                             title: REQ_Main,
                                             type: REQ_Type,
                                             updatedAt: `${new Date()}`,
+                                            update: 'pending',
                                             components: [{
                                                 to: REQ_TO,
                                                 name: REQ_Comp,
@@ -274,8 +283,7 @@ module.exports = {
 
                                 // final logs
                                 function showResults(callback) {
-                    console.log(REQ_Main + ' ' + REQ_Comp)
-                    console.log('valid')
+
                     console.log('===================')
                     console.log(' ')
 
