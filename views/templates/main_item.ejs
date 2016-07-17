@@ -1,6 +1,6 @@
 <div class='items-item'>
     <div class='items-item-main-inf'>
-        <h2><%= item.Title %> <%= item.Type %></h2>
+        <h2><%= itemdata.Title %> <%= itemdata.Type %></h2>
         <div class='items-images'>
 
             <!-- Item Info -->
@@ -8,21 +8,25 @@
                 <div class='items-images-main-conent'>
                     <span class='items-images-main-text'>Full Set Price</span>
                     <br>
-                    <span class='items-images-main-price'>322p</span>
+                    <% itemdata.Components.forEach(function(item) { %>
+                    <% if (item.name === 'Set') { %>
+                    <span class='items-images-main-price'><%= item.avg %></span>
+                    <% } %>
+                    <% }); %>
                 </div>
                 <div class='items-images-main-helper'></div>
-                <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png' alt='<%= item.Title %>'>
+                <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
             </div>
 
             <!-- Item Components -->
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
-                    <% JSON.parse(JSON.stringify(item)).Components.forEach(function(itemdata) { %>
+                    <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(itemdata) { %>
 
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
-                                <img src='<%= img %>generic/<%= itemdata.name %>.png' alt='<%= item.Title %> <%= itemdata.name %>'>
+                                <img src='<%= img %>generic/<%= itemdata.name %>.png' alt='<%= itemdata.Title %> <%= itemdata.name %>'>
                             </div>
                             <div class='items-component-details'>
                                 <h3><%= itemdata.name %></h3>
@@ -38,23 +42,23 @@
                 </div>
             </div>
         </div>
-        <a href='/<%= item.Type %>/<%= item.Title %>'>Go to Item Page</a>
+        <a href='/<%= itemdata.Type %>/<%= itemdata.Title %>'>Go to Item Page</a>
     </div>
     <div class='items-item-stats'>
         <h2>Weekly Statistics</h2>
         <div class='items-images'>
-            <div class='chart' id="<%= item.Title %>"></div>
+            <div class='chart' id="<%= itemdata.Title %>"></div>
         </div>
     </div>
 </div>
 
 
 
-<% if (item.Title, item.Components) { %>
+<% if (itemdata.Title, itemdata.Components) { %>
     <script>
-        var ItemName = <%- JSON.stringify(item.Title)%>;
+        var ItemName = <%- JSON.stringify(itemdata.Title)%>;
         var series = [];
-        var compData = <%- JSON.stringify(item.Components) %>;
+        var compData = <%- JSON.stringify(itemdata.Components) %>;
 
         Highcharts.setOptions(options);
 
