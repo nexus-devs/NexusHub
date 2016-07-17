@@ -8,6 +8,78 @@
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
+        _id: "Ember",
+        name: "Ember",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Frost",
+        name: "Frost",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Loki",
+        name: "Loki",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Mag",
+        name: "Mag",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Nova",
+        name: "Nova",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Nyx",
+        name: "Nyx",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Saryn",
+        name: "Saryn",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Vauban",
+        name: "Vauban",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Volt",
+        name: "Volt",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
         _id: "Trinity",
         name: "Trinity",
         type: "Prime",
