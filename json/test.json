@@ -56,8 +56,24 @@
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
+        _id: "Rhino",
+        name: "Rhino",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
         _id: "Saryn",
         name: "Saryn",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Trinity",
+        name: "Trinity",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -80,20 +96,52 @@
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
-        _id: "Trinity",
-        name: "Trinity",
+        _id: "Boar",
+        name: "Boar",
         type: "Prime",
-        category: "Warframe",
+        category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
-        _id: "Rhino",
-        name: "Rhino",
+        _id: "Boltor",
+        name: "Boltor",
         type: "Prime",
-        category: "Warframe",
+        category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Braton",
+        name: "Braton",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Burston",
+        name: "Burston",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Latron",
+        name: "Latron",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Paris",
+        name: "Paris",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Grip", "String", "Upper Limb", "Lower Limb"]
     },
     {
         _id: "Soma",
@@ -101,7 +149,135 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Barrel", "Stock", "Receiver"]
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Vectis",
+        name: "Vectis",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver", "Stock"]
+    },
+    {
+        _id: "Akbronco",
+        name: "Akbronco",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Link"]
+    },
+    {
+        _id: "Akstiletto",
+        name: "Akstiletto",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver", "Link"]
+    },
+    {
+        _id: "Bronco",
+        name: "Bronco",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver"]
+    },
+    {
+        _id: "Hikou",
+        name: "Hikou",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Pouch", "Stars"]
+    },
+    {
+        _id: "Lex",
+        name: "Lex",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver"]
+    },
+    {
+        _id: "Sicarus",
+        name: "Sicarus",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Receiver"]
+    },
+        {
+        _id: "Spira",
+        name: "Spira",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Pouch", "Blade"]
+    },
+    {
+        _id: "Vasto",
+        name: "Vasto",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Barrel", "Reciever"]
+    },
+    {
+        _id: "Ankyros",
+        name: "Ankyros",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Gauntlet"]
+    },
+    {
+        _id: "Bo",
+        name: "Bo",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Ornament", "Handle"]
+    },
+    {
+        _id: "Dakra",
+        name: "Dakra",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Kamas",
+        name: "Dual Kamas",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Fang",
+        name: "Fang",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Fragor",
+        name: "Fragor",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Head", "Handle"]
+    },
+    {
+        _id: "Glaive",
+        name: "Glaive",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Disc"]
     },
     {
         _id: "Nikana",
@@ -112,12 +288,28 @@
         components: ["Blueprint", "Blade", "Hilt"]
     },
     {
-        _id: "Spira",
-        name: "Spira",
+        _id: "Orthos",
+        name: "Orthor",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Pouch", "Blade"]
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Reaper",
+        name: "Reaper",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Scindo",
+        name: "Scindo",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        components: ["Blueprint", "Blade", "Handle"]
     },
     {
         _id: "Carrier",
@@ -125,7 +317,31 @@
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
-        components: ["Blueprint", "Helmet", "Chassis", "Systems"]
+        components: ["Blueprint", "Cerebrum", "Carapace", "Systems"]
+    },
+    {
+        _id: "Wyrm",
+        name: "Wyrm",
+        type: "Prime",
+        category: "Sentinel",
+        update: 'pending',
+        components: ["Blueprint", "Cerebrum", "Carapace", "Systems"]
+    },
+    {
+        _id: "Kavasa",
+        name: "Kavasa Collar",
+        type: "Prime",
+        category: "Sentinel",
+        update: 'pending',
+        components: ["Blueprint", "Band", "Buckle"]
+    },
+    {
+        _id: "Odonata",
+        name: "Odonata",
+        type: "Prime",
+        category: "Archwing",
+        update: 'pending',
+        components: ["Blueprint", "Harness", "Wings", "Systems"]
     }
 ]
 
