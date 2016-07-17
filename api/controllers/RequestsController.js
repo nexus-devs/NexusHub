@@ -127,7 +127,7 @@ module.exports = {
 
 
                     // Ensure user exists. If not, create
-                    function updateUserList(callback) {
+                    /* function updateUserList(callback) {
                     Users.find({
                         user: REQ_User
                     }).exec(function (err, user) {
@@ -136,35 +136,93 @@ module.exports = {
                                 user: REQ_User
                             }).exec(function createCB(err, created) {
                                 console.log('Created user with name ' + created.user);
+                                callback();
                             });
                         } else {
                             console.log(REQ_User + ' already in db')
+                            callback();
                         }
-                        callback();
                     })
-                    },
+                    }, */
 
 
                     // Create Request entries
                     function createEntries(callback) {
                     Users.find({
                         user: REQ_User
-                    }).exec(function (err, request) {
-                        console.log(request)
-                        if (typeof request[0] !== 'undefined') {
-                            Users.native(function (err, collection) {
-                                collection.insert(REQ_Obj),
-                                    function (error, result) {
-                                        console.log(result);
-                                    }
+                    }).exec(function (err, user) {
+
+
+                        // Check if item contained in request
+                        if (typeof user[0] !== 'undefined') {
+
+                            // Check each request for item & update DONT FORGET CALLBACK
+                            user[0].requests.forEach(function (itemrequest) {
+                                var prevTime = new Date(itemrequest.updatedAt);
+                                var thisTime = new Date();
+                                var diff = thisTime.getTime() - prevTime.getTime();
+                                var delta = (diff / (1000 * 60 * 60 * 24));
+                                console.log(itemrequest)
+                                console.log(delta)
+
+
+                                // Check if request older than 1 but not older than 2 days > then create new
+                                if (delta > 1 && delta < 2) {
+
+
+                                // If request already sent today > then update values to latest request
+                                } else {
+                                    Users.native(function (err, collection) {
+                                        collection.update({
+                                            "user": REQ_User,
+                                        }, {
+                                            $addToSet: {
+                                                "requests": {
+                                                    title: REQ_Main,
+                                                    type: REQ_Type,
+                                                    updatedAt: `${new Date()}`,
+                                                    components: [{
+                                                        to: REQ_TO,
+                                                        name: REQ_Comp,
+                                                        data: REQ_Price
+                                                }]
+                                                }
+                                            }
+                                        }, {
+                                            upsert: true
+                                        })
+                                        callback();
+                                    })
+                                }
                             })
+                        } else {
+                            Users.native(function (err, collection) {
+                                collection.update({
+                                    "user": REQ_User
+                                }, {
+                                    "user": REQ_User,
+                                    "requests": [{
+                                        title: REQ_Main,
+                                        type: REQ_Type,
+                                        updatedAt: `${new Date()}`,
+                                        components: [{
+                                            to: REQ_TO,
+                                            name: REQ_Comp,
+                                            data: REQ_Price
+                                        }]
+                                    }]
+                                }, {
+                                    upsert: true
+                                })
+                            })
+                            callback();
                         }
                     })
 
                     // if req_item exists > if date larger 1 > create new + component
                     // else if req_item exists > if date smaller 1 > update values / create component if not exist
                     // else > if req_item NOT exist > create new + component
-                    callback();
+
                                 },
 
                                 // final logs
