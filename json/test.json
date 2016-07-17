@@ -42,6 +42,7 @@
     {
         _id: "Spira",
         name: "Spira",
+        type: "Prime",
         category: "Weapon",
         update: 'pending',
         components: ["Blueprint", "Pouch", "Blade"]

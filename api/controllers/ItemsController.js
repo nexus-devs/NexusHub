@@ -121,8 +121,10 @@ module.exports = {
                                             for (var i = 0; i < timerange; i++) {
                                                 // If request at 'i' day, value and position to according place
                                                 if (Math.floor(delta) === i) {
-                                                    comp_val[i] = comp_val[i] + req_component.data
-                                                    comp_count[i]++
+                                                    if (req_component.data !== 'null'){
+                                                        comp_val[i] = comp_val[i] + req_component.data
+                                                        comp_count[i]++
+                                                    }
                                                 }
                                             }
                                         }
