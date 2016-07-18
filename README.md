@@ -7,8 +7,10 @@ Development builds can be found here.
 Planned updates
 
 High Priority:
+- Proper Chart dates
 - Real time updates with sockets
 - Weekly/Monthly/All Time timerange for charts
+- Support for Mods
 - Advanced price gathering algorithm
 
 Other:
