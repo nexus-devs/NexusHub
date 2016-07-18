@@ -47,7 +47,7 @@ module.exports = {
                         var itemname = itemobj[0].Title
 
                         return res.view('item', {
-                            HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
+                            HeaderTitle: `${itemname} - WarframeNexus`,
                             itemdata: itemobj[0],
                             css: "../css/",
                             js: "../js/",
@@ -189,7 +189,7 @@ module.exports = {
                         }
                         if (avg !== 0) {
                             // Realtime avg
-                            var comp_val_rt = avg / valid_count
+                            var comp_val_rt = ((avg / valid_count)).toFixed(4)
                             avg = Math.floor((avg / valid_count)).toString() + 'p'
                         } else {
                             var comp_val_rt = ''

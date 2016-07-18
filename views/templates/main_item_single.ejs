@@ -16,7 +16,7 @@
                                     <% }); %>
                     </div>
                     <div class='items-images-main-helper'></div>
-                    <img src='<%= img %>items/<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
+                    <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.id %>.png' alt='<%= itemdata.Title %>'>
                 </div>
 
                 <!-- Item Components -->
@@ -34,7 +34,7 @@
                                     <div class='items-component-details'>
                                         <h3><%= item.name %></h3>
                                         <h4><%= item.avg %></h4>
-                                        <span>(<%= item.Comp_val_rt %>)</span>
+                                        <span> | <%= item.comp_val_rt %></span>
                                     </div>
                                 </div>
                                 <% } %>

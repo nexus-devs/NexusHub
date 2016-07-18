@@ -108,8 +108,8 @@ module.exports = {
                             if (itemcomponent === REQ_Comp && itemschema[0].type === REQ_Type) {
                                 request_status = 'valid'
 
-                            // Items without components
-                            } else if (typeof itemcomponent[0] === 'undefined'){
+                                // Items without components
+                            } else if (typeof itemcomponent[0] === 'undefined') {
                                 request_status = 'valid'
                             }
                         })
@@ -155,6 +155,7 @@ module.exports = {
 
                             var requested = 'false'
                             var itemrequestdate = ''
+                            var requested_comp = 'false'
 
 
                             // Check each request for item & update
@@ -165,6 +166,11 @@ module.exports = {
                                     requested = 'true'
                                     itemrequestdate = itemrequest.updatedAt
                                 }
+                                itemrequest.components.forEach(function (component) {
+                                    if (component.name === REQ_Comp) {
+                                        requested_comp = 'true'
+                                    }
+                                })
                             })
 
 
@@ -204,22 +210,33 @@ module.exports = {
                                     // If request already sent today > then update values to latest request
                                     // Maybe check if component is part of requets > if not: push component
                                 } else if (delta < 1) {
-                                    console.log('Updated request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
-                                    Users.native(function (err, collection) { // Probably removes old components
-                                        collection.update({
-                                            "user": REQ_User,
-                                            "requests.title": REQ_Main
-                                        }, {
-                                            $set: {
-                                                "requests.$.updatedAt": `${new Date()}`,
-                                                "requests.$.components": [{
-                                                    to: REQ_TO,
-                                                    name: REQ_Comp,
-                                                    data: REQ_Price
-                                                                }]
-                                            }
-                                        }, false, true)
-                                    })
+                                    if (requested_comp !== 'true') {
+                                        console.log('Updated request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                                        Users.native(function (err, collection) { // Probably removes old components
+                                            collection.update({
+                                                "user": REQ_User,
+                                                "requests.title": REQ_Main
+                                            }, {
+                                                $set: {
+                                                    "requests.$.updatedAt": `${new Date()}`,
+                                                }
+                                            }, false, true)
+                                        })
+                                        Users.native(function (err, collection) { // Probably removes old components
+                                            collection.update({
+                                                "user": REQ_User,
+                                                "requests.title": REQ_Main
+                                            }, {
+                                                $push: {
+                                                    "requests.$.components": {
+                                                        to: REQ_TO,
+                                                        name: REQ_Comp,
+                                                        data: REQ_Price
+                                                }
+                                                }
+                                            })
+                                        })
+                                    }
                                     callback();
                                 }
 
