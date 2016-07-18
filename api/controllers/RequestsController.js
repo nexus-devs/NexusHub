@@ -76,7 +76,7 @@ module.exports = {
                     // Get itemschema from itemlist
                     function generateItemSchema(callback) {
                     ItemList.find({
-                        name: REQ_Main
+                        _id: REQ_Main
                     }).exec(function (err, itemschema) {
                         if (err) {
                             callback(err, null)
@@ -107,8 +107,13 @@ module.exports = {
                         itemschema[0].components.forEach(function (itemcomponent) {
                             if (itemcomponent === REQ_Comp && itemschema[0].type === REQ_Type) {
                                 request_status = 'valid'
+
+                            // Items without components
+                            } else if (typeof itemcomponent[0] === 'undefined'){
+                                request_status = 'valid'
                             }
                         })
+
                         if (request_status === 'valid') {
                             callback();
                         } else {

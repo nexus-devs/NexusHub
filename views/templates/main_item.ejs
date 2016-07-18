@@ -1,12 +1,12 @@
 <div class='items-item'>
     <div class='items-item-main-inf'>
-        <h2><%= itemdata.Title %> <%= itemdata.Type %></h2>
+        <h2><%= itemdata.Title %></h2>
         <div class='items-images'>
 
             <!-- Item Info -->
             <div class='items-images-main'>
                 <div class='items-images-main-conent'>
-                    <span class='items-images-main-text'>Full Set Price</span>
+                    <span class='items-images-main-text'>Full Item Price</span>
                     <br>
                     <% itemdata.Components.forEach(function(item) { %>
                     <% if (item.name === 'Set') { %>
