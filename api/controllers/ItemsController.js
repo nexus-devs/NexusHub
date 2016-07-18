@@ -37,7 +37,7 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, callback) {
-                if (item[0].update === 'pending') {
+                if (item[0].update !== 'notpending') { // === 'pending' normally
                     callback(null, item)
                 } else {
                     Itemcache.find({
@@ -229,7 +229,6 @@ module.exports = {
 
                 // Loop through each component and check if requests contain component
                 async.forEach(components, getComponentStats, function (component) {
-                    console.log(WTS)
                     callback(null, WTS, WTB)
                 })
 
@@ -241,10 +240,12 @@ module.exports = {
             function (supply, demand, callback) {
                 var SupDemNum = [supply, demand]
                 if (supply < demand) {
-                    var supply_val = supply / demand
+                    console.log('hi')
+                    var supply_val = (supply / demand).toFixed(2)
+                    console.log(supply_val)
                     var SupDem = [supply_val * 100, (1 - supply_val) * 100]
                     } else if (supply > demand) {
-                        var demand_val = demand / supply
+                        var demand_val = (demand / supply).toFixed(2)
                         var SupDem = [demand_val * 100, (1 - demand_val) * 100]
                         } else if (supply === demand) {
                             var SupDem = [50, 50]
