@@ -422,6 +422,14 @@
         category: "Arcane Helmet",
         update: 'pending',
         components: []
+    },
+    {
+        _id: "Fleeting Expertise",
+        name: "Fleeting Expertise",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
     }
 ]
 

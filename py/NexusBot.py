@@ -23,11 +23,11 @@ def click(x,y):
 
 
 
-def ReplyPC(Username, Name, Type, Comp, PriceLo, PriceHi, PriceAvg):
+def ReplyPC(Username, Name, Comp, PriceLo, PriceHi, PriceAvg):
                 if not Comp == '':
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ' ' + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' '  + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
                 else:
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' ' + Type + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
 
                 return (ItemInfo)
 

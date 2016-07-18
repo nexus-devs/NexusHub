@@ -348,10 +348,10 @@ module.exports = {
         var fullstring = req.query.item
         var stringArray = fullstring.split(" ")
         var viewrendered = 'false'
-        var i = 0
+        var loopcount = 0
 
         // Check for each search term
-        stringArray.forEach(function (string, callback) {
+        async.eachSeries(stringArray, function (string, eachCallback) {
 
                 async.waterfall([
 
@@ -367,7 +367,7 @@ module.exports = {
                                         callback(err, null)
                                         return
                                     }
-                                    callback(null, itemobj)
+                                    callback(null, itemobj, loopcount)
                                 })
                             } else {
                                 ItemList.find({
@@ -384,17 +384,21 @@ module.exports = {
                             // Check if item was found
                 },
                 function checkValidity(itemobj, callback) {
+                    console.log(loopcount)
+                    loopcount++
                             if (viewrendered === 'false') {
                                 if (typeof itemobj[0] !== 'undefined') {
                                     viewrendered = 'true'
                                     var itembase = itemobj[0].type
                                     var itemname = itemobj[0].id
                                     return res.redirect(`../../${itembase}/${itemname}`)
-                                } else {
+                                } else if (loopcount === (stringArray.length)) {
                                     viewrendered = 'true'
                                     res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
                                 }
                             }
+                            eachCallback();
+
                 }
 
             ]) // End async.waterfall
