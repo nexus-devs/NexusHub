@@ -37,7 +37,7 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, callback) {
-                if (item[0].update !== 'notpending') { // === 'pending' normally
+                if (item[0].update !== 'pending') { // === 'pending' normally
                     callback(null, item)
                 } else {
                     Itemcache.find({
@@ -88,7 +88,7 @@ module.exports = {
 
 
                 // Define Loop Actions
-                var getComponentStats = function(component, callback){
+                var getComponentStats = function (component, callback) {
 
                     // Find all users offering item
                     Users.find({
@@ -238,22 +238,24 @@ module.exports = {
 
 
             function (supply, demand, callback) {
+
+                // Create SupDem/SupDemNum
                 var SupDemNum = [supply, demand]
                 if (supply < demand) {
-                    console.log('hi')
-                    var supply_val = (supply / demand).toFixed(2)
-                    console.log(supply_val)
+                    var SupDemMax = supply + demand
+                    var supply_val = supply / SupDemMax
                     var SupDem = [supply_val * 100, (1 - supply_val) * 100]
-                    } else if (supply > demand) {
-                        var demand_val = (demand / supply).toFixed(2)
-                        var SupDem = [demand_val * 100, (1 - demand_val) * 100]
-                        } else if (supply === demand) {
-                            var SupDem = [50, 50]
-                            } else if (supply === 0 && demand === 0) {
-                                var SupDem = [0, 0]
-                                }
+                } else if (supply > demand) {
+                    var SupDemMax = supply + demand
+                    var demand_val = demand / SupDemMax
+                    var SupDem = [demand_val * 100, (1 - demand_val) * 100]
+                } else if (supply === demand) {
+                    var SupDem = [50, 50]
+                } else if (supply === 0 && demand === 0) {
+                    var SupDem = [0, 0]
+                }
 
-                // check
+                // Update itemcache with supply/demand
                 Itemcache.native(function (err, collection) {
                     collection.update({
                         "_id": itemname,
@@ -265,6 +267,7 @@ module.exports = {
                     })
                 })
 
+                // Set item as updated -> won't run this all again unless new request comes in
                 ItemList.native(function (err, collection) {
                     collection.update({
                         "_id": itemname,
@@ -280,13 +283,10 @@ module.exports = {
                 console.log('----------------------')
 
                 callback();
-
-                // When all data is collected: create database entry
-                // Dont forget to set update to false in itemlist
-
             },
 
 
+            // Render view
             function (callback) {
                 Itemcache.find({
                     Title: itemname
@@ -314,38 +314,41 @@ module.exports = {
         var i = 0
 
         // Check for each search term
-        async.forEach(stringArray, function (string, callback) {
+        stringArray.forEach(function (string, callback) {
 
-            async.waterfall([
+                async.waterfall([
 
                 // Try retrieving item name
                 function retrieveItem(callback) {
-                    ItemList.find({
-                        _id: capitalize(string)
-                    }).exec(function (err, itemobj) {
-                        if (err) {
-                            callback(err, null)
-                            return
-                        }
-                        callback(null, itemobj)
-                    })
+                            ItemList.find({
+                                _id: capitalize(string)
+                            }).exec(function (err, itemobj) {
+                                if (err) {
+                                    callback(err, null)
+                                    return
+                                }
+                                callback(null, itemobj)
+                            })
 
-                    // Check if item was found
+                            // Check if item was found
                 },
                 function checkValidity(itemobj, callback) {
-                    if (typeof itemobj[0] !== 'undefined') {
-                        var itembase = itemobj[0].type
-                        var itemname = capitalize(string)
-                        return res.redirect(`../../${itembase}/${itemname}`)
-                    } else {
-                        res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
-                    }
-
+                            if (viewrendered === 'false') {
+                                if (typeof itemobj[0] !== 'undefined') {
+                                    viewrendered = 'true'
+                                    var itembase = itemobj[0].type
+                                    var itemname = capitalize(string)
+                                    return res.redirect(`../../${itembase}/${itemname}`)
+                                } else {
+                                    viewrendered = 'true'
+                                    res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
+                                }
+                            }
                 }
 
             ]) // End async.waterfall
-            callback();
-        }) // End Query
+
+            }) // End Query
 
     }
 }
