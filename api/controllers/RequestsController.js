@@ -193,6 +193,7 @@ module.exports = {
                                         }, {
                                             $push: {
                                                 "requests": {
+                                                    _id: REQ_Main,
                                                     title: REQ_Main,
                                                     type: REQ_Type,
                                                     updatedAt: `${new Date()}`,
@@ -250,6 +251,7 @@ module.exports = {
                                     }, {
                                         $push: {
                                             "requests": {
+                                                _id: REQ_Main,
                                                 title: REQ_Main,
                                                 type: REQ_Type,
                                                 updatedAt: `${new Date()}`,
@@ -275,6 +277,7 @@ module.exports = {
                                 }, {
                                     $addToSet: {
                                         "requests": {
+                                            _id: REQ_Main,
                                             title: REQ_Main,
                                             type: REQ_Type,
                                             updatedAt: `${new Date()}`,
