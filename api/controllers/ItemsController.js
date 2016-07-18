@@ -346,7 +346,7 @@ module.exports = {
     // Search function
     search: function (req, res) {
         var fullstring = req.query.item
-        var stringArray = fullstring.split(" ")
+        var stringArray = fullstring.split(" ") // (don't split request at each word, but for each in list that's gonna have to be created in python)
         var viewrendered = 'false'
         var loopcount = 0
 
@@ -384,7 +384,6 @@ module.exports = {
                             // Check if item was found
                 },
                 function checkValidity(itemobj, callback) {
-                    console.log(loopcount)
                     loopcount++
                             if (viewrendered === 'false') {
                                 if (typeof itemobj[0] !== 'undefined') {

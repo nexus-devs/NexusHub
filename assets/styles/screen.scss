@@ -237,6 +237,7 @@ b {
         position:relative;
         top:-40px;
         opacity:0.6;
+        max-width:90%;
         @include vertical-align;
     }
 }
