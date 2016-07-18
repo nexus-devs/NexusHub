@@ -531,7 +531,7 @@ while True:
         ITEMvalSplit = 0
 
     print('Job Done')
-    break
+
 
 
 
