@@ -289,7 +289,7 @@
     },
     {
         _id: "Orthos",
-        name: "Orthor Prime",
+        name: "Orthos Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -329,7 +329,7 @@
     },
     {
         _id: "Kavasa",
-        name: "Kavasa Collar Prime",
+        name: "Kavasa Prime Collar",
         type: "Prime",
         category: "Sentinel",
         update: 'pending',

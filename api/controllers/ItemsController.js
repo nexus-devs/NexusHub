@@ -280,12 +280,12 @@ module.exports = {
                 var SupDemNum = [supply, demand]
                 if (supply < demand) {
                     var SupDemMax = supply + demand
-                    var supply_val = supply / SupDemMax
-                    var SupDem = [supply_val.toFixed(2) * 100, (1 - supply_val.toFixed(2)) * 100]
+                    var supply_val = Math.floor((supply / SupDemMax) * 100)
+                    var SupDem = [supply_val, 100 - supply_val]
                 } else if (supply > demand) {
                     var SupDemMax = supply + demand
-                    var demand_val = demand / SupDemMax
-                    var SupDem = [(1 - demand_val.toFixed(2)) * 100, demand_val.toFixed(2) * 100]
+                    var demand_val = Math.ceil((demand / SupDemMax) * 100)
+                    var SupDem = [100 - demand_val, demand_val]
                 } else if (supply === demand) {
                     var SupDem = [50, 50]
                 } else if (supply === 0 && demand === 0) {
