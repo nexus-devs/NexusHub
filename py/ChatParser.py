@@ -3,15 +3,15 @@
 from PIL import Image
 from PIL import ImageGrab
 from PIL import ImageEnhance
+import PIL.ImageOps
+import pytesseract
 
 # Text Processing
 # ----------------------
 import re
 import collections
 import builtins
-import pytesseract
 import string
-import PIL.ImageOps
 
 # Connections
 # ----------------------
@@ -29,7 +29,6 @@ from pywinauto import application
 # ----------------------
 import datetime
 import time
-
 
 
 
@@ -167,7 +166,7 @@ while True:
 
     WTS = ['WTS', 'S', 'BUYING', 'SELL']
     WTB = ['WTB', 'B', 'SELLING', 'SELL']
-    PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
+    PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'PRICING', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
     TOlist = ['WTS', 'WTB', 'PC']
 
     #Define component variations
@@ -179,8 +178,8 @@ while True:
 
     #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
-    #E_Arcane = ['ARCANE', 'SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
-    #E_Mods = ['FLEETING']
+    E_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
+    E_Mods = ['FLEETING']
     #E_Primed = ['PRIMED']
     C_Prime = ['LINK', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
 
@@ -188,8 +187,8 @@ while True:
     C_Prime_Basic = []
     C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
-    #C_Mods = ['EXPERTISE']
     C_Arcane = []
+    C_Mods = ['EXPERTISE']
     C_Primed = []
 
 
@@ -274,7 +273,7 @@ while True:
 
             #Check if Item in List, assign component list to check
             ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
-            ListsToCheck = ['Prime']
+            ListsToCheck = ['Prime', 'Arcane', 'Mods']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
@@ -295,8 +294,6 @@ while True:
         ITEMtype = ''
 
         # ======= End of Message Body Interpretation ========
-
-
 
 
 
@@ -402,21 +399,29 @@ while True:
 
             #Type = Mods/Other
             elif REQ_Type == 'Mods' or REQ_Type == 'Arcane':
-                if not hasNumbers(REQ[3]) == True:
+
+                #If has Components > merge (only mods have 'components')
+                if len(REQ) > 4:
                     REQ_Main = re.sub("[^\w]", " ", str(REQ[2].title() + ' ' + REQ[3].title()))
                     REQ_Comp = 'Set'
 
-                    if len(REQ) > 4:
+                    if hasNumbers(REQ[4]) == True:
                         REQ_Price = re.sub("\D", "", REQ[4])
-
+                    else:
+                        REQ_Price = 'null'
                 else:
-                    REQ_Main = REQ[2].title()
-                    REQ_Comp = 'Set'
-                    REQ_Price = REQ[3]
+                    if not hasNumbers(REQ[3]) == True:
+                        REQ_Main = re.sub("[^\w]", " ", REQ[2].title())
+                        REQ_Comp = 'Set'
+                        REQ_Price = 'null'
+                    else:
+                        REQ_Main = re.sub("[^\w]", " ", REQ[2].title())
+                        REQ_Comp = 'Set'
+                        REQ_Price = REQ[3]
 
 
 
-            #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
+            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
 
@@ -449,45 +454,56 @@ while True:
             #---------------------------
 
             #Find relevant item information
-            if REQ_TO == 'PC' and not Username == 'NexusBot':
-                cursor = db.items.find({"Title": REQ_Main})
+            if REQ_TO == 'PC' and not Username == 'xPsycon':
+                cursor = db.itemcache.find({"_id": REQ_Main})
                 REQ_Check = 'invalid'
 
                 for document in cursor:
 
                     #Calculate Relevant Stats
-                        if REQ_Comp == 'Set':                          # If component requested, else
+                    for i in range(len(document["Components"])): # Look through all components
+                        Component = document["Components"][i]
+
+                        if REQ_Comp == Component["name"]:
+
+                            #Convert 'None' to '' in Component Data
+                            ComponentData = []
+                            ComponentNotNull = 0
+
+                            for i in range(len(Component["data"])):
+                                if Component["data"][i] is not None:
+                                    print(Component["data"][i])
+                                    ComponentData.append(Component["data"][i])
+                                    ComponentNotNull = ComponentNotNull + 1
+
                             REQ_Check = 'valid'
                             ItemName = document["Title"]
-                            ItemType = document["Type"]
-                            ComponentName = ''
-                            ItemPriceLow = int(min(document["data"]))
-                            ItemPriceHigh = int(max(document["data"]))
-                            ItemPriceAvg = int(sum(document["data"])/len(document["data"]))
 
+                            if REQ_Comp == 'Set':
+                                ComponentName = ''
+                            else:
+                                ComponentName = Component["name"]
 
-                        else:
-                            for i in range(len(document["Components"])): # Look through all components
-                                Component = document["Components"][i]
+                            if  ComponentNotNull > 0:
+                                print('sorting')
+                                ItemPriceLow = int(min(ComponentData))
+                                ItemPriceHigh = int(max(ComponentData))
+                                ItemPriceAvg = int(sum(ComponentData)/len(ComponentData))
+                            else:
+                                print('not sorting')
+                                REQ_Check = 'invalid'
+                                break
 
-                                if REQ_Comp == Component["name"]:
-                                    REQ_Check = 'valid'
-                                    ItemName = document["Title"]
-                                    ItemType = document["Type"]
-                                    ComponentName = Component["name"]
-                                    ItemPriceLow = int(min(Component["data"]))
-                                    ItemPriceHigh = int(max(Component["data"]))
-                                    ItemPriceAvg = int(sum(Component["data"])/len(Component["data"]))
-                                    break
-                                else:                                   # If component doesn't exist
-                                    REQ_Check = 'invalid'
+                            break
+                        else:                                   # If component doesn't exist
+                            REQ_Check = 'invalid'
 
 
 
                 #Create Message
-                debug = 'true'
+                debug = 'false'
                 if REQ_Check == 'valid' and debug == 'false':
-                    ItemInfo = NexusBot.ReplyPC(Username, ItemName, ItemType, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+                    ItemInfo = NexusBot.ReplyPC(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
                     NexusBot.clip(ItemInfo)
                     NexusBot.click(50, 770)
                     NexusBot.pressAndHold('ctrl', 'v')
@@ -526,6 +542,8 @@ while True:
         ITEMvalSplit = 0
 
     print('Job Done')
+    break
+
 
 
 
