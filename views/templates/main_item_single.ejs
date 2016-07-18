@@ -1,7 +1,7 @@
 <div class='main-item'>
     <div class='main-items-item'>
         <div class='items-item-main-inf'>
-            <h2><%= itemdata.Title %> <%= itemdata.Type %></h2>
+            <h2><%= itemdata.Title %></h2>
             <div class='items-images'>
 
                 <!-- Item Info -->
@@ -16,7 +16,7 @@
                                     <% }); %>
                     </div>
                     <div class='items-images-main-helper'></div>
-                    <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
+                    <img src='<%= img %>items/<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
                 </div>
 
                 <!-- Item Components -->
@@ -52,7 +52,7 @@
         <h2 class=' main-item-headline-fix'>Weekly Statistics</h2>
         <div class='main-stats'>
             <div class='items-images'>
-                <div class='chart' id="<%= itemdata.Title %>"></div>
+                <div class='chart' id="<%= itemdata.id %>"></div>
             </div>
         </div>
     </div>
@@ -87,9 +87,9 @@
 
 
 
-        <% if (itemdata.Title, itemdata.Components) { %>
+        <% if (itemdata.id, itemdata.Components) { %>
             <script>
-                var ItemName = <%- JSON.stringify(itemdata.Title)%>;
+                var ItemName = <%- JSON.stringify(itemdata.id)%>;
                 var series = [];
                 var compData = <%- JSON.stringify(itemdata.Components) %>;
                 Highcharts.setOptions(options);

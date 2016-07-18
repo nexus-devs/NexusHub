@@ -29,19 +29,19 @@ module.exports = {
                     if (typeof item[0] === 'undefined') {
                         res.notFound(`${itemname} ${itembase} couldn't be found. Please check your spelling`)
                     } else {
-                        callback(null, item)
+                        callback(null, item, item[0].name)
                     }
                 })
             },
 
 
             // Check if item has been updated
-            function checkUpdate(item, callback) {
-                if (item[0].update !== 'pending') { // === 'pending' normally
-                    callback(null, item)
+            function checkUpdate(item, itemnamefull, callback) {
+                if (item[0].update === 'pending') { // === 'pending' normally
+                    callback(null, item, itemnamefull)
                 } else {
                     Itemcache.find({
-                        Title: itemname
+                        _id: itemname
                     }).exec(function (err, itemobj) {
                         var itembase = itemobj[0].Type
                         var itemname = itemobj[0].Title
@@ -57,9 +57,23 @@ module.exports = {
                 }
             },
 
+            function checkIfSingleItem(item, itemnamefull, callback) {
+                // Check if Item without Component
+                ItemList.find({
+                    _id: itemname
+                }).exec(function (err, item) {
+                    if (typeof item[0].components[0] === 'undefined') {
+                        var single_item = 'true'
+                    } else {
+                        var single_item = 'false'
+                    }
+                    callback(null, item, itemnamefull, single_item)
+                })
+            },
+
 
             // Generate Item Stats from requests
-            function generateItem(item, callback) {
+            function generateItem(item, itemnamefull, single_item, callback) {
                 var components = item[0].components // component schema
                 components.push('Set')
                 var WTB = 0
@@ -69,12 +83,13 @@ module.exports = {
                 console.log('type: ' + itembase)
                 console.log('==========================')
 
+
                 Itemcache.native(function (err, collection) {
                     collection.update({
                         "_id": itemname,
                     }, {
                         $set: {
-                            "Title": itemname,
+                            "Title": itemnamefull,
                             "Type": itembase,
                             "SupDem": [],
                             "SupDemNum": [],
@@ -84,6 +99,7 @@ module.exports = {
                         upsert: true
                     })
                 })
+
 
 
 
@@ -183,8 +199,28 @@ module.exports = {
                         console.log('comp_val_rt: ' + comp_val_rt)
                         console.log('avg: ' + avg)
 
-                        // visibile: false if SET
-                        if (component === 'Set') {
+
+
+
+                        // visibile: false if SET w/ multi components
+                        if (component === 'Set' && single_item === 'true') {
+                            Itemcache.native(function (err, collection) {
+                                collection.update({
+                                    "_id": itemname,
+                                }, {
+                                    $push: {
+                                        "Components": {
+                                            name: component,
+                                            avg: avg,
+                                            comp_val_rt: comp_val_rt,
+                                            data: comp_data,
+                                            visible: true
+                                        }
+                                    }
+                                })
+                            })
+                            return callback();
+                        } else if (component === 'Set' && single_item === 'false') {
                             Itemcache.native(function (err, collection) {
                                 collection.update({
                                     "_id": itemname,
@@ -228,6 +264,7 @@ module.exports = {
 
 
                 // Loop through each component and check if requests contain component
+                console.log(components)
                 async.forEach(components, getComponentStats, function (component) {
                     callback(null, WTS, WTB)
                 })
@@ -244,11 +281,11 @@ module.exports = {
                 if (supply < demand) {
                     var SupDemMax = supply + demand
                     var supply_val = supply / SupDemMax
-                    var SupDem = [supply_val * 100, (1 - supply_val) * 100]
+                    var SupDem = [supply_val.toFixed(2) * 100, (1 - supply_val.toFixed(2)) * 100]
                 } else if (supply > demand) {
                     var SupDemMax = supply + demand
                     var demand_val = demand / SupDemMax
-                    var SupDem = [demand_val * 100, (1 - demand_val) * 100]
+                    var SupDem = [(1 - demand_val.toFixed(2)) * 100, demand_val.toFixed(2) * 100]
                 } else if (supply === demand) {
                     var SupDem = [50, 50]
                 } else if (supply === 0 && demand === 0) {
@@ -289,13 +326,13 @@ module.exports = {
             // Render view
             function (callback) {
                 Itemcache.find({
-                    Title: itemname
+                    _id: itemname
                 }).exec(function (err, itemobj) {
                     var itembase = itemobj[0].Type
                     var itemname = itemobj[0].Title
 
                     return res.view('item', {
-                        HeaderTitle: `${itemname} ${itembase} - WarframeNexus`,
+                        HeaderTitle: `${itemname} - WarframeNexus`,
                         itemdata: itemobj[0],
                         css: "../css/",
                         js: "../js/",

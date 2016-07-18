@@ -1,7 +1,7 @@
 [
     {
         _id: "Ash",
-        name: "Ash",
+        name: "Ash Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -9,7 +9,7 @@
     },
     {
         _id: "Ember",
-        name: "Ember",
+        name: "Ember Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -17,7 +17,7 @@
     },
     {
         _id: "Frost",
-        name: "Frost",
+        name: "Frost Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -25,7 +25,7 @@
     },
     {
         _id: "Loki",
-        name: "Loki",
+        name: "Loki Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -33,7 +33,7 @@
     },
     {
         _id: "Mag",
-        name: "Mag",
+        name: "Mag Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -41,7 +41,7 @@
     },
     {
         _id: "Nova",
-        name: "Nova",
+        name: "Nova Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -49,7 +49,7 @@
     },
     {
         _id: "Nyx",
-        name: "Nyx",
+        name: "Nyx Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -57,7 +57,7 @@
     },
     {
         _id: "Rhino",
-        name: "Rhino",
+        name: "Rhino Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -65,7 +65,7 @@
     },
     {
         _id: "Saryn",
-        name: "Saryn",
+        name: "Saryn Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -73,7 +73,7 @@
     },
     {
         _id: "Trinity",
-        name: "Trinity",
+        name: "Trinity Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -81,7 +81,7 @@
     },
     {
         _id: "Vauban",
-        name: "Vauban",
+        name: "Vauban Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -89,7 +89,7 @@
     },
     {
         _id: "Volt",
-        name: "Volt",
+        name: "Volt Prime",
         type: "Prime",
         category: "Warframe",
         update: 'pending',
@@ -97,7 +97,7 @@
     },
     {
         _id: "Boar",
-        name: "Boar",
+        name: "Boar Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -105,7 +105,7 @@
     },
     {
         _id: "Boltor",
-        name: "Boltor",
+        name: "Boltor Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -113,7 +113,7 @@
     },
     {
         _id: "Braton",
-        name: "Braton",
+        name: "Braton Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -121,7 +121,7 @@
     },
     {
         _id: "Burston",
-        name: "Burston",
+        name: "Burston Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -129,7 +129,7 @@
     },
     {
         _id: "Latron",
-        name: "Latron",
+        name: "Latron Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -137,7 +137,7 @@
     },
     {
         _id: "Paris",
-        name: "Paris",
+        name: "Paris Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -145,7 +145,7 @@
     },
     {
         _id: "Soma",
-        name: "Soma",
+        name: "Soma Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -153,7 +153,7 @@
     },
     {
         _id: "Vectis",
-        name: "Vectis",
+        name: "Vectis Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -161,7 +161,7 @@
     },
     {
         _id: "Akbronco",
-        name: "Akbronco",
+        name: "Akbronco Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -169,7 +169,7 @@
     },
     {
         _id: "Akstiletto",
-        name: "Akstiletto",
+        name: "Akstiletto Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -177,7 +177,7 @@
     },
     {
         _id: "Bronco",
-        name: "Bronco",
+        name: "Bronco Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -185,7 +185,7 @@
     },
     {
         _id: "Hikou",
-        name: "Hikou",
+        name: "Hikou Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -193,7 +193,7 @@
     },
     {
         _id: "Lex",
-        name: "Lex",
+        name: "Lex Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -201,7 +201,7 @@
     },
     {
         _id: "Sicarus",
-        name: "Sicarus",
+        name: "Sicarus Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -209,7 +209,7 @@
     },
         {
         _id: "Spira",
-        name: "Spira",
+        name: "Spira Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -217,7 +217,7 @@
     },
     {
         _id: "Vasto",
-        name: "Vasto",
+        name: "Vasto Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -225,7 +225,7 @@
     },
     {
         _id: "Ankyros",
-        name: "Ankyros",
+        name: "Ankyros Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -233,7 +233,7 @@
     },
     {
         _id: "Bo",
-        name: "Bo",
+        name: "Bo Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -241,7 +241,7 @@
     },
     {
         _id: "Dakra",
-        name: "Dakra",
+        name: "Dakra Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -249,7 +249,7 @@
     },
     {
         _id: "Kamas",
-        name: "Dual Kamas",
+        name: "Dual Kamas Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -257,7 +257,7 @@
     },
     {
         _id: "Fang",
-        name: "Fang",
+        name: "Fang Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -265,7 +265,7 @@
     },
     {
         _id: "Fragor",
-        name: "Fragor",
+        name: "Fragor Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -273,7 +273,7 @@
     },
     {
         _id: "Glaive",
-        name: "Glaive",
+        name: "Glaive Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -281,7 +281,7 @@
     },
     {
         _id: "Nikana",
-        name: "Nikana",
+        name: "Nikana Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -289,7 +289,7 @@
     },
     {
         _id: "Orthos",
-        name: "Orthor",
+        name: "Orthor Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -297,7 +297,7 @@
     },
     {
         _id: "Reaper",
-        name: "Reaper",
+        name: "Reaper Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -305,7 +305,7 @@
     },
     {
         _id: "Scindo",
-        name: "Scindo",
+        name: "Scindo Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
@@ -313,7 +313,7 @@
     },
     {
         _id: "Carrier",
-        name: "Carrier",
+        name: "Carrier Prime",
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
@@ -321,7 +321,7 @@
     },
     {
         _id: "Wyrm",
-        name: "Wyrm",
+        name: "Wyrm Prime",
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
@@ -329,7 +329,7 @@
     },
     {
         _id: "Kavasa",
-        name: "Kavasa Collar",
+        name: "Kavasa Collar Prime",
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
@@ -337,7 +337,7 @@
     },
     {
         _id: "Odonata",
-        name: "Odonata",
+        name: "Odonata Prime",
         type: "Prime",
         category: "Archwing",
         update: 'pending',
@@ -349,7 +349,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Locsut",
@@ -357,7 +357,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Reverb",
@@ -365,7 +365,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Chorus",
@@ -373,7 +373,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Phoenix",
@@ -381,7 +381,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Backdraft",
@@ -389,7 +389,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Avalon",
@@ -397,7 +397,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Pendragon",
@@ -405,7 +405,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Aurora",
@@ -413,7 +413,7 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     },
      {
         _id: "Squall",
@@ -421,16 +421,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: [null]
+        components: []
     }
 ]
 
-
-
-// see below why name necessary
-{
-    _id: "Kamas",
-    name: "Dual Kamas",
-    type: "Prime"
-}
 
