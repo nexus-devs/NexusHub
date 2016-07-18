@@ -34,8 +34,7 @@ module.exports = {
 
             })
 
-            var pop_items = [pop_obj_1] //Add pop 3, pop 2
-            console.log(pop_items)
+            var pop_items = [pop_obj_1, pop_obj_2, pop_obj_3] //Add pop 3, pop 2
 
             return res.view('index', {
                 content: pop_items,

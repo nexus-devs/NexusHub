@@ -22,7 +22,7 @@
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
                     <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(itemdata) { %>
-
+                    <% if (itemdata.name !== 'Set') { %>
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
@@ -34,6 +34,7 @@
                                 <span>(<%= itemdata.Comp_val_rt %>)</span>
                             </div>
                         </div>
+                    <% } %>
                         <% }); %>
 
 
@@ -96,13 +97,13 @@
                 minorGridLineDashStyle: "Solid",
                 minorGridLineWidth: 1,
                 categories: [
-                'Mon',
-                'Tue',
-                'Wed',
-                'Thu',
-                'Fri',
-                'Sat',
-                'Sun'
+                    '6',
+                    '5',
+                    '4',
+                    '3',
+                    '2',
+                    '1',
+                    'Today'
             ],
                 allowDecimals: false,
                 lineColor: '#8ea1ac',
