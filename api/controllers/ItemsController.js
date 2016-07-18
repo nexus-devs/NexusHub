@@ -357,15 +357,29 @@ module.exports = {
 
                 // Try retrieving item name
                 function retrieveItem(callback) {
-                            ItemList.find({
-                                _id: capitalize(string)
-                            }).exec(function (err, itemobj) {
-                                if (err) {
-                                    callback(err, null)
-                                    return
-                                }
-                                callback(null, itemobj)
-                            })
+
+                            // All Hail the Railwayhead
+                            if (capitalize(string) === 'Booben') {
+                                ItemList.find({
+                                    _id: 'Vauban'
+                                }).exec(function (err, itemobj) {
+                                    if (err) {
+                                        callback(err, null)
+                                        return
+                                    }
+                                    callback(null, itemobj)
+                                })
+                            } else {
+                                ItemList.find({
+                                    _id: capitalize(string)
+                                }).exec(function (err, itemobj) {
+                                    if (err) {
+                                        callback(err, null)
+                                        return
+                                    }
+                                    callback(null, itemobj)
+                                })
+                            }
 
                             // Check if item was found
                 },
@@ -374,7 +388,7 @@ module.exports = {
                                 if (typeof itemobj[0] !== 'undefined') {
                                     viewrendered = 'true'
                                     var itembase = itemobj[0].type
-                                    var itemname = capitalize(string)
+                                    var itemname = itemobj[0].id
                                     return res.redirect(`../../${itembase}/${itemname}`)
                                 } else {
                                     viewrendered = 'true'
