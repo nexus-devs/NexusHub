@@ -342,6 +342,86 @@
         category: "Archwing",
         update: 'pending',
         components: ["Blueprint", "Harness", "Wings", "Systems"]
+    },
+        {
+        _id: "Scorpion",
+        name: "Scorpion Ash Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Locsut",
+        name: "Locust Ash Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Reverb",
+        name: "Reverb Banshee Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Chorus",
+        name: "Chorus Banshee Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Phoenix",
+        name: "Phoenix Ember Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Backdraft",
+        name: "Backdraft Ember Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Avalon",
+        name: "Avalon Excalibur Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Pendragon",
+        name: "Pendragon Excalibur Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Aurora",
+        name: "Aurora Frost Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
+    },
+     {
+        _id: "Squall",
+        name: "Squall Frost Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: [null]
     }
 ]
 
