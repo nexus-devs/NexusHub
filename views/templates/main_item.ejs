@@ -15,7 +15,7 @@
                     <% }); %>
                 </div>
                 <div class='items-images-main-helper'></div>
-                <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.Title %>.png' alt='<%= itemdata.Title %>'>
+                <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.id %>.png' alt='<%= itemdata.Title %>'>
             </div>
 
             <!-- Item Components -->
@@ -31,7 +31,7 @@
                             <div class='items-component-details'>
                                 <h3><%= itemdata.name %></h3>
                                 <h4><%= itemdata.avg %></h4>
-                                <span>(<%= itemdata.Comp_val_rt %>)</span>
+                                <span> | <%= itemdata.comp_val_rt %></span>
                             </div>
                         </div>
                     <% } %>
@@ -48,16 +48,16 @@
     <div class='items-item-stats'>
         <h2>Weekly Statistics</h2>
         <div class='items-images'>
-            <div class='chart' id="<%= itemdata.Title %>"></div>
+            <div class='chart' id="<%= itemdata.id %>"></div>
         </div>
     </div>
 </div>
 
 
 
-<% if (itemdata.Title, itemdata.Components) { %>
+<% if (itemdata.id, itemdata.Components) { %>
     <script>
-        var ItemName = <%- JSON.stringify(itemdata.Title)%>;
+        var ItemName = <%- JSON.stringify(itemdata.id)%>;
         var series = [];
         var compData = <%- JSON.stringify(itemdata.Components) %>;
 
