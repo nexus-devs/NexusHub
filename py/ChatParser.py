@@ -28,6 +28,7 @@ from pywinauto import application
 # Misc
 # ----------------------
 import datetime
+import calendar
 import time
 
 
@@ -36,6 +37,8 @@ import time
 #Connect to MongoDB
 client = MongoClient('mongodb://localhost:27017/')
 db = client.warframenexus
+timestart = calendar.timegm(time.gmtime())
+NexusBotCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 
 while True:
@@ -164,8 +167,8 @@ while True:
     ITEMessential = ''
     ITEMcomponent = ''
 
-    WTS = ['WTS', 'S', 'BUYING', 'SELL']
-    WTB = ['WTB', 'B', 'SELLING', 'SELL']
+    WTS = ['WTS', 'WTSELL', 'S', 'BUYING', 'SELL']
+    WTB = ['WTB', 'WTBUY', 'B', 'SELLING', 'SELL']
     PC = ['PC', 'CHECK', 'CHECKING', 'PRICECHECK', 'PRICING', 'MUCH'] #dont use 'PRICE' -> PM Price rather common
     TOlist = ['WTS', 'WTB', 'PC']
 
@@ -178,18 +181,24 @@ while True:
 
     #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
-    E_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE']
+    E_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE', 'ACCELERATION', 'AEGIS', 'AGILITY', 'ARACHNE', 'AVENGER', 'AWAKENING', 'BARRIER', 'CONSEQUENCE', 'DEFLECTION', 'ENERGIZE', 'ERUPTION', 'FURY', 'GRACE', 'GUARDIAN', 'HEALING', 'ICE', 'MOMENTUM', 'NULLIFIER', 'PHANTASM', 'PRECISION', 'PULSE', 'RAGE', 'RESISTANCE', 'STRIKE', 'TEMPO', 'TRICKERY', 'ULTIMATUM', 'VELOCITY', 'VICTORY', 'WARMTH']
     E_Mods = ['FLEETING']
+    E_Special = ['NEZHA']
+    E_Prisma = ['SKANA', 'SHADE', 'CLEAVERS', 'GORGON', 'VERITUX', 'GRAKATA', 'TETRA']
     #E_Primed = ['PRIMED']
-    C_Prime = ['LINK', 'STOCK', 'RECEIVER', 'BARREL', 'BLADE', 'HANDLE', 'HANDEL', 'DISC', 'STARS', 'POUCH', 'CARAPACE', 'CEREBUM']
+    E_Kavat = ['SMEETA', 'ADARZA']
 
-    #Create prime list without converted names for comparison later
+    C_Prime = ['BAND', 'BARREL', 'BLADE', 'BUCKLE', 'CARAPACE', 'CEREBRUM', 'CHASSIS', 'DISC', 'GAUNTLET', 'GRIP', 'HANDLE', 'HARNESS', 'HEAD', 'HILT', 'LINK', 'LIMB', 'POUCH', 'RECEIVER', 'STARS', 'WINGS']
     C_Prime_Basic = []
     C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
     C_Arcane = []
     C_Mods = ['EXPERTISE']
+    C_Special = []
+    C_Special.extend(Blueprint + Systems + Chassis +  Neuroptics)
+    C_Prisma = []
     C_Primed = []
+    C_Kavat = []
 
 
     #Process each line
@@ -272,8 +281,7 @@ while True:
 
 
             #Check if Item in List, assign component list to check
-            ListsToCheck = ['Prime', 'Arcane', 'Primed', 'Mods']
-            ListsToCheck = ['Prime', 'Arcane', 'Mods']
+            ListsToCheck = ['Prime', 'Arcane', 'Mods', 'Special', 'Prisma', 'Kavat']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
@@ -368,7 +376,7 @@ while True:
 
 
             #Type = Prime
-            if REQ_Type == 'Prime':
+            if REQ_Type == 'Prime' or REQ_Type == 'Special':
                 REQ_Main = REQ[2].title()
 
                 if len(REQ) > 4:
@@ -398,7 +406,7 @@ while True:
 
 
             #Type = Mods/Other
-            elif REQ_Type == 'Mods' or REQ_Type == 'Arcane':
+            elif REQ_Type == 'Mods' or REQ_Type == 'Arcane' or REQ_Type == 'Prisma' or REQ_Type == 'Kavat':
 
                 #If has Components > merge (only mods have 'components')
                 if len(REQ) > 4:
@@ -421,9 +429,12 @@ while True:
 
 
 
-            print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
+            #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
+
+            update_cache = requests.get('http://localhost:1337/' + REQ_Type + '/' + REQ_Main)
+            update_cache.status_code
 
 
             # If Request is valid, send to server
@@ -454,7 +465,8 @@ while True:
             #---------------------------
 
             #Find relevant item information
-            if REQ_TO == 'PC' and not Username == 'xPsycon':
+            if REQ_TO == 'PC' and not Username == 'xPsycon' and (calendar.timegm(time.gmtime()) - timestart) > 90:
+                timestart = calendar.timegm(time.gmtime())
                 cursor = db.itemcache.find({"_id": REQ_Main})
                 REQ_Check = 'invalid'
 
@@ -485,12 +497,10 @@ while True:
                                 ComponentName = Component["name"]
 
                             if  ComponentNotNull > 0:
-                                print('sorting')
                                 ItemPriceLow = int(min(ComponentData))
                                 ItemPriceHigh = int(max(ComponentData))
                                 ItemPriceAvg = int(sum(ComponentData)/len(ComponentData))
                             else:
-                                print('not sorting')
                                 REQ_Check = 'invalid'
                                 break
 
@@ -501,15 +511,19 @@ while True:
 
 
                 #Create Message
-                debug = 'false'
+                debug = 'true'
                 if REQ_Check == 'valid' and debug == 'false':
                     ItemInfo = NexusBot.ReplyPC(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
-                    NexusBot.clip(ItemInfo)
-                    NexusBot.click(50, 770)
-                    NexusBot.pressAndHold('ctrl', 'v')
-                    NexusBot.release('ctrl', 'v')
-                    app = application.Application()
-                    app.WARFRAME.TypeKeys('{ENTER}')
+                    if not ItemInfo in NexusBotCache:
+                        NexusBotCache.pop(0)
+                        NexusBotCache.append(ItemInfo)
+                        print(NexusBotCache) #### DEBUG
+                        #NexusBot.clip(ItemInfo)
+                        #NexusBot.click(50, 770)
+                        #NexusBot.pressAndHold('ctrl', 'v')
+                        #NexusBot.release('ctrl', 'v')
+                        #app = application.Application()
+                        #app.WARFRAME.TypeKeys('{ENTER}')
 
 
                 ItemInfo = ''
@@ -523,12 +537,12 @@ while True:
 
 
         # Output
-        print ('Username: ' + Username)
+        """print ('Username: ' + Username)
         print('Requests: ' + str(ITEMval))
         print('Date: ' + str(datetime.datetime.now().replace(microsecond=0).isoformat()))
         print (' ------------------------------------------------- ')
         print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
-        print ('\n')
+        print ('\n')"""
 
 
 
@@ -543,6 +557,8 @@ while True:
 
     print('Job Done')
     break
+
+
 
 
 
