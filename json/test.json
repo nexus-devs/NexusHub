@@ -360,7 +360,7 @@
         components: []
     },
      {
-        _id: "Locsut",
+        _id: "Locust",
         name: "Locust Ash Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -657,7 +657,7 @@
     },
                      {
         _id: "Awakening",
-        name: "Arcane Barrier",
+        name: "Arcane Awakening",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
@@ -776,14 +776,6 @@
         components: []
     },
                      {
-        _id: "Pulse",
-        name: "Arcane Pulse",
-        type: "Arcane",
-        category: "Arcane Enhancements",
-        update: 'pending',
-        components: []
-    },
-                     {
         _id: "Rage",
         name: "Arcane Rage",
         type: "Arcane",
@@ -856,6 +848,22 @@
         components: []
     },
     {
+        _id: "Smeeta",
+        name: "Smeeta Kavat",
+        type: "Kavat",
+        category: "Companion",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Adarza",
+        name: "Adarza Kavat",
+        type: "Kavat",
+        category: "Companion",
+        update: 'pending',
+        components: []
+    },
+    {
         _id: "Fleeting Expertise",
         name: "Fleeting Expertise",
         type: "Mods",
@@ -864,5 +872,3 @@
         components: []
     }
 ]
-
-

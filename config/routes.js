@@ -29,6 +29,9 @@ module.exports.routes = {
     'get /prime/:id': 'ItemsController.index',
     'get /arcane/:id': 'ItemsController.index',
     'get /mods/:id': 'ItemsController.index',
+    'get /kavat/:id': 'ItemsController.index',
+    'get /prisma/:id': 'ItemsController.index',
+    'get /special/:id': 'ItemsController.index',
     'get /nexusbot': 'NexusBotController.index',
     'get /items/': 'ItemsController.search',
     'post /requests': 'RequestsController.create'
