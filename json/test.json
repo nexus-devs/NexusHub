@@ -1,4 +1,12 @@
 [
+        {
+        _id: "Nezha",
+        name: "Nezha",
+        type: "Special",
+        category: "Warframe",
+        update: 'pending',
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
     {
         _id: "Ash",
         name: "Ash Prime",
@@ -420,6 +428,430 @@
         name: "Squall Frost Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Essence",
+        name: "Essence Loki Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Swindle",
+        name: "Swindle Loki Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Coil",
+        name: "Coil Mag Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Gauss",
+        name: "Gauss Mag Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Flux",
+        name: "Flux Nova Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Menticide",
+        name: "Menticide Nyx Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Vespa",
+        name: "Vespa Nyx Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Thrak",
+        name: "Thrak Rhino Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Vanguard",
+        name: "Vanguard Rhino Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Hemlock",
+        name: "Hemlock Saryn Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Chlora",
+        name: "Chlora Saryn Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Aura",
+        name: "Aura Trinity Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Meridian",
+        name: "Meridian Trinity Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Esprit",
+        name: "Esprit Vauban Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Gambit",
+        name: "Gambit Vauban Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Storm",
+        name: "Storm Volt Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Pulse",
+        name: "Pulse Volt Helmet",
+        type: "Arcane",
+        category: "Arcane Helmet",
+        update: 'pending',
+        components: []
+    },
+         {
+        _id: "Skana",
+        name: "Prisma Skana",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+             {
+        _id: "Cleavers",
+        name: "Prisma Dual Cleavers",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+             {
+        _id: "Gorgon",
+        name: "Prisma Gorgon",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+             {
+        _id: "Grakata",
+        name: "Prisma Grakata",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+             {
+        _id: "Veritux",
+        name: "Prisma Veritux",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+             {
+        _id: "Shade",
+        name: "Prisma Shade",
+        type: "Prisma",
+        category: "Prisma",
+        update: 'pending',
+        components: []
+    },
+                 {
+        _id: "Acceleration",
+        name: "Arcane Acceleration",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Aegis",
+        name: "Arcane Aegis",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Agility",
+        name: "Arcane Agility",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Arachne",
+        name: "Arcane Arachne",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Avenger",
+        name: "Arcane Avenger",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Awakening",
+        name: "Arcane Barrier",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Barrier",
+        name: "Arcane Barrier",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Consequence",
+        name: "Arcane Consequence",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Deflection",
+        name: "Arcane Deflection",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Energize",
+        name: "Arcane Energize",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Eruption",
+        name: "Arcane Eruption",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Fury",
+        name: "Arcane Fury",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Grace",
+        name: "Arcane Grace",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Guardian",
+        name: "Arcane Guardian",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Healing",
+        name: "Arcane Healing",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Ice",
+        name: "Arcane Ice",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Momemntum",
+        name: "Arcane Momentum",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Nullifier",
+        name: "Arcane Nullifier",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Phantasm",
+        name: "Arcane Phantasm",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Precision",
+        name: "Arcane Precision",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Pulse",
+        name: "Arcane Pulse",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Rage",
+        name: "Arcane Rage",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Resistance",
+        name: "Arcane Resistance",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Strike",
+        name: "Arcane Strike",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Tempo",
+        name: "Arcane Tempo",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Trickery",
+        name: "Arcane Trickery",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Ultimatum",
+        name: "Arcane Ultimatum",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Velocity",
+        name: "Arcane Velocity",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Victory",
+        name: "Arcane Victory",
+        type: "Arcane",
+        category: "Arcane Enhancements",
+        update: 'pending',
+        components: []
+    },
+                     {
+        _id: "Warmth",
+        name: "Arcane Warmth",
+        type: "Arcane",
+        category: "Arcane Enhancements",
         update: 'pending',
         components: []
     },
