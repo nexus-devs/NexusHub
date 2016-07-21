@@ -20,5 +20,16 @@ module.exports = {
             js: "/js/",
             img: "/img/"
         });
+    },
+    privacy: function (req, res) {
+        var package = req.originalUrl;
+
+        return res.view('privacy_policy',{
+            title: "Title",
+            desc: "Desc",
+            css: "/css/",
+            js: "/js/",
+            img: "/img/"
+        });
     }
 };

@@ -25,7 +25,8 @@
 module.exports.routes = {
     '/': 'IndexController',
     'get /jobs': 'GenericController',
-    //'get /imprint': 'GenericController',
+    'get /imprint': 'GenericController',
+    'get /privacy_policy': 'GenericController.privacy',
     'get /prime/:id': 'ItemsController.index',
     'get /arcane/:id': 'ItemsController.index',
     'get /mods/:id': 'ItemsController.index',

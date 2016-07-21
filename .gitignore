@@ -18,3 +18,5 @@ node_modules/
 /config/blueprints.js
 /config/local.js
 /json/users.json
+/assets/img/generic/fullsize
+/assets/img/items/fullsize
