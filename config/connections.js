@@ -52,10 +52,10 @@ module.exports.connections = {
      ***************************************************************************/
     mongodb: {
         adapter: 'sails-mongo',
-        host: 'localhost',
+        host: '139.59.177.214',
         port: 27017,
-        //   user: 'username', //optional
-        //   password: 'password', //optional
+        user: 'nexus', //optional
+        password: 'b2f979da817fb836$', //optional
         database: 'warframenexus' //optional
     }
 

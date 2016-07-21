@@ -33,9 +33,8 @@ import time
 
 
 
-
-#Connect to MongoDB
-client = MongoClient('mongodb://localhost:27017/')
+# Connect to MongoDB
+client = MongoClient('mongodb://192.168.2.101:27017/')
 db = client.warframenexus
 timestart = calendar.timegm(time.gmtime())
 NexusBotCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
@@ -43,7 +42,7 @@ NexusBotCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 while True:
 
-    #Screen rendering
+    # Screen rendering
     #---------------------------
     img_path = 'cache/screen.jpg'
 
@@ -78,7 +77,7 @@ while True:
 
 
 
-    #Tesseract in array
+    # Tesseract in array
     #---------------------------
 
     original_open = open
@@ -104,7 +103,7 @@ while True:
 
 
 
-    #Message cleanup
+    # Message cleanup
     #---------------------------
 
     Msg = [each.replace('ï¬', 'fl') for each in Msg]
@@ -121,7 +120,7 @@ while True:
 
 
 
-    #Message correction
+    # Message correction
     #---------------------------
 
     def words(text): return re.findall('[A-Z]+', text.upper())
@@ -156,7 +155,7 @@ while True:
 
 
 
-    #Message interpretation
+    # Message interpretation
     #---------------------------
     TOcount = 0
     TOval = []
@@ -201,7 +200,7 @@ while True:
     C_Kavat = []
 
 
-    #Process each line
+    # Process each line
     for i in range(0, len(Msg)):
         MsgWords = re.sub("[^\w+.-]", " ",  Msg[i]).split()
         MsgWordsOriginal = MsgWords
@@ -211,7 +210,7 @@ while True:
         else:
             Username = ''
 
-        #Leave only pure message behind & clean
+        # Leave only pure message behind & clean
 
         MsgWords = [each.replace('-', '') for each in MsgWords]
         MsgWords = [each.replace('.', '') for each in MsgWords]
@@ -221,8 +220,8 @@ while True:
         def hasNumbers(inputString):
             return any(char.isdigit() for char in inputString)
 
-        #Correct MsgWords -- UNRELIABLE, needs modification, otherwise no result, high performance hit
-        #for i in range(0, len(MsgWords)):
+        # Correct MsgWords -- UNRELIABLE, needs modification, otherwise no result, high performance hit
+        # for i in range(0, len(MsgWords)):
         #    correct(MsgWords[i])
 
 
@@ -280,7 +279,7 @@ while True:
 
 
 
-            #Check if Item in List, assign component list to check
+            # Check if Item in List, assign component list to check
             ListsToCheck = ['Prime', 'Arcane', 'Mods', 'Special', 'Prisma', 'Kavat']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
@@ -312,12 +311,12 @@ while True:
         ITEMvalSplit = []
         indices = []
 
-        #Get Splittable Parts
+        # Get Splittable Parts
         for j in range (0, len(ITEMval)):
             if str(ITEMval[j]).isdigit() and ITEMval[j] > 0:
                 Split.append(j)
 
-        #Split
+        # Split
         if len(Split) > 0:
             indices = [(0, Split[0])]
             for j in range (1, len(Split)):
@@ -328,18 +327,18 @@ while True:
         ITEMval = []
 
 
-        #Cleanup
+        # Cleanup
         for i in range(0, len(Split)):
             MsgVal = re.sub("[^\w]", " ",  str(ITEMvalSplit[i]))
             MsgVal = re.sub(' +',' ', MsgVal)
             ITEMval.append(MsgVal)
 
 
-        #Assign TO to Item
+        # Assign TO to Item
         k = 0
         ITEMval_L = []
 
-        #Create list of characters, replace, move and rebind
+        # Create list of characters, replace, move and rebind
         while k < len(ITEMval):
             ITEM_L= list(str(ITEMval[k]))
             for i in range(0, len(TOval)):
@@ -362,7 +361,7 @@ while True:
             # Request Processing
             #---------------------------
 
-            #Assign request values to variables
+            # Assign request values to variables
             REQ = []
             REQ = (("".join(ITEM_L)).split())
             REQ_Type = REQ[1].title()
@@ -375,7 +374,7 @@ while True:
                 REQ_TO = 'PC'
 
 
-            #Type = Prime
+            # Type = Prime
             if REQ_Type == 'Prime' or REQ_Type == 'Special':
                 REQ_Main = REQ[2].title()
 
@@ -405,7 +404,7 @@ while True:
                         REQ_Price = 'null'
 
 
-            #Type = Mods/Other
+            # Type = Mods/Other
             elif REQ_Type == 'Mods' or REQ_Type == 'Arcane' or REQ_Type == 'Prisma' or REQ_Type == 'Kavat':
 
                 #If has Components > merge (only mods have 'components')
@@ -425,16 +424,13 @@ while True:
                     else:
                         REQ_Main = re.sub("[^\w]", " ", REQ[2].title())
                         REQ_Comp = 'Set'
-                        REQ_Price = REQ[3]
+                        REQ_Price = re.sub("\D", "", REQ[3])
 
 
 
             #print(Username + ' ' + REQ_TO + ' ' + REQ_Type + ' ' + REQ_Main + ' ' + REQ_Comp + ' ' + REQ_Price)
             k = k + 1
 
-
-            update_cache = requests.get('http://localhost:1337/' + REQ_Type + '/' + REQ_Main)
-            update_cache.status_code
 
 
             # If Request is valid, send to server
@@ -456,7 +452,7 @@ while True:
                     'password': pwd
                 }
 
-                res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
+                res = requests.post('http://192.168.2.101:80', data=json.dumps(payload))
 
 
 
@@ -464,9 +460,12 @@ while True:
             # NexusBot Functions
             #---------------------------
 
-            #Find relevant item information
+            # Find relevant item information
             if REQ_TO == 'PC' and not Username == 'xPsycon' and (calendar.timegm(time.gmtime()) - timestart) > 90:
-                timestart = calendar.timegm(time.gmtime())
+
+                #Update itemcache and pull stats
+                update_cache = requests.get('http://192.168.2.101:80/' + REQ_Type + '/' + REQ_Main)
+                time.sleep(0.25)
                 cursor = db.itemcache.find({"_id": REQ_Main})
                 REQ_Check = 'invalid'
 
@@ -510,20 +509,21 @@ while True:
 
 
 
-                #Create Message
+                # Create Message
                 debug = 'true'
                 if REQ_Check == 'valid' and debug == 'false':
                     ItemInfo = NexusBot.ReplyPC(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
                     if not ItemInfo in NexusBotCache:
+                        timestart = calendar.timegm(time.gmtime())
                         NexusBotCache.pop(0)
                         NexusBotCache.append(ItemInfo)
                         print(NexusBotCache) #### DEBUG
-                        #NexusBot.clip(ItemInfo)
-                        #NexusBot.click(50, 770)
-                        #NexusBot.pressAndHold('ctrl', 'v')
-                        #NexusBot.release('ctrl', 'v')
-                        #app = application.Application()
-                        #app.WARFRAME.TypeKeys('{ENTER}')
+                        NexusBot.clip(ItemInfo)
+                        NexusBot.click(50, 770)
+                        NexusBot.pressAndHold('ctrl', 'v')
+                        NexusBot.release('ctrl', 'v')
+                        app = application.Application()
+                        app.WARFRAME.TypeKeys('{ENTER}')
 
 
                 ItemInfo = ''
@@ -537,12 +537,12 @@ while True:
 
 
         # Output
-        """print ('Username: ' + Username)
-        print('Requests: ' + str(ITEMval))
-        print('Date: ' + str(datetime.datetime.now().replace(microsecond=0).isoformat()))
-        print (' ------------------------------------------------- ')
-        print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
-        print ('\n')"""
+        #print ('Username: ' + Username)
+        #print('Requests: ' + str(ITEMval))
+        #print('Date: ' + str(datetime.datetime.now().replace(microsecond=0).isoformat()))
+        #print (' ------------------------------------------------- ')
+        #print ('Original: '  + str(MsgWordsOriginal)) #Display Full Message for error checking
+        #print ('\n')
 
 
 
@@ -555,8 +555,11 @@ while True:
         ITEMprice_val = []
         ITEMvalSplit = 0
 
+
+
     print('Job Done')
-    break
+
+
 
 
 

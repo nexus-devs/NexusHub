@@ -27,7 +27,7 @@ module.exports = {
                     _id: itemname
                 }).exec(function (err, item) {
                     if (typeof item[0] === 'undefined') {
-                        res.notFound(`${itemname} ${itembase} couldn't be found. Please check your spelling`)
+                        res.notFound(itemname + ' ' + itembase + " couldn't be found. Please check your spelling")
                     } else {
                         callback(null, item, item[0].name)
                     }
@@ -47,7 +47,7 @@ module.exports = {
                         var itemname = itemobj[0].Title
 
                         return res.view('item', {
-                            HeaderTitle: `${itemname} - WarframeNexus`,
+                            HeaderTitle: itemname +' - WarframeNexus',
                             itemdata: itemobj[0],
                             css: "../css/",
                             js: "../js/",
@@ -79,9 +79,9 @@ module.exports = {
                 var WTB = 0
                 var WTS = 0
 
-                console.log('item: ' + itemname)
-                console.log('type: ' + itembase)
-                console.log('==========================')
+                //console.log('item: ' + itemname)
+                //console.log('type: ' + itembase)
+                //console.log('==========================')
 
 
                 Itemcache.native(function (err, collection) {
@@ -151,8 +151,8 @@ module.exports = {
                                             for (var i = 0; i < timerange; i++) {
                                                 // If request at 'i' day, value and position to according place
                                                 if (Math.floor(delta) === i) {
-                                                    if (req_component.data !== 'null') {
-                                                        comp_val[i] = +comp_val[i] + +req_component.data
+                                                    if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
+                                                        comp_val[i] = +comp_val[i] + (+req_component.data * 1.27334)
                                                         comp_count[i]++
                                                     }
                                                 }
@@ -174,7 +174,7 @@ module.exports = {
 
                         // Reverse array (newest at end to match chart)
                         comp_data.reverse();
-                        console.log(comp_data)
+                        //console.log(comp_data)
 
                         // Generate average value
                         var avg = 0
@@ -196,8 +196,8 @@ module.exports = {
                             avg = ''
                         }
 
-                        console.log('comp_val_rt: ' + comp_val_rt)
-                        console.log('avg: ' + avg)
+                        //console.log('comp_val_rt: ' + comp_val_rt)
+                        //console.log('avg: ' + avg)
 
 
 
@@ -264,7 +264,7 @@ module.exports = {
 
 
                 // Loop through each component and check if requests contain component
-                console.log(components)
+                //console.log(components)
                 async.forEach(components, getComponentStats, function (component) {
                     callback(null, WTS, WTB)
                 })
@@ -315,9 +315,9 @@ module.exports = {
                     })
                 })
 
-                console.log('SupDemNum: ' + SupDemNum)
-                console.log('Percentages: ' + SupDem)
-                console.log('----------------------')
+                //console.log('SupDemNum: ' + SupDemNum)
+                //console.log('Percentages: ' + SupDem)
+                //console.log('----------------------')
 
                 callback();
             },
@@ -332,7 +332,7 @@ module.exports = {
                     var itemname = itemobj[0].Title
 
                     return res.view('item', {
-                        HeaderTitle: `${itemname} - WarframeNexus`,
+                        HeaderTitle: itemname + ' - WarframeNexus',
                         itemdata: itemobj[0],
                         css: "../css/",
                         js: "../js/",
@@ -390,10 +390,10 @@ module.exports = {
                                     viewrendered = 'true'
                                     var itembase = itemobj[0].type
                                     var itemname = itemobj[0].id
-                                    return res.redirect(`../../${itembase}/${itemname}`)
+                                    return res.redirect('../../' + itembase + '/'+ itemname)
                                 } else if (loopcount === (stringArray.length)) {
                                     viewrendered = 'true'
-                                    res.notFound(`${fullstring} couldn't be found. Please check your spelling`)
+                                    res.notFound(fullstring + " couldn't be found. Please check your spelling")
                                 }
                             }
                             eachCallback();

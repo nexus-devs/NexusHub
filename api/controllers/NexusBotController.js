@@ -13,7 +13,7 @@ module.exports = {
 
 
         var package = req.originalUrl;
-        var data = require(`../../json/nexusbot.json`);
+        var data = require('../../json/nexusbot.json');
 
         return res.view('nexusbot', {
             content: data,
@@ -33,7 +33,7 @@ module.exports = {
     create: function (req, res) {
         NexusBot.create(req.params.all(), function NexusBotCreated(err, user) {
             var package = req.originalUrl;
-            var data = require(`../../json/nexusbot.json`);
+            var data = require('../../json/nexusbot.json');
 
             // Error
             if (err) {

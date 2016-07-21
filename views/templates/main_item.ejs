@@ -148,6 +148,12 @@
                 pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
             },
             plotOptions: {
+                series: {
+                    connectNulls: true
+                },
+                areaspline: {
+                    fillOpacity: 0.15
+                },
                 area: {
                     marker: {
                         enabled: false,

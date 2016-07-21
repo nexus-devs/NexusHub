@@ -33,7 +33,8 @@ module.exports.routes = {
     'get /prisma/:id': 'ItemsController.index',
     'get /special/:id': 'ItemsController.index',
     'get /nexusbot': 'NexusBotController.index',
-    'get /items/': 'ItemsController.search',
+    'post /nexusbot/create': 'NexusBotController.create',
+    'get /items/search': 'ItemsController.search',
     'post /requests': 'RequestsController.create'
 
     /***************************************************************************
