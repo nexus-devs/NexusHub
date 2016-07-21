@@ -229,7 +229,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Barrel", "Reciever"]
+        components: ["Blueprint", "Barrel", "Receiver"]
     },
     {
         _id: "Ankyros",

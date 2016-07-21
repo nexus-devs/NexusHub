@@ -203,7 +203,7 @@ b {
 .main-items{
     .items-wr {
     display: inline-block;
-    padding: 75px 0 10px 0;
+    padding:90px 0px 40px 0px;
     width: 70%;
     margin: auto;
     white-space: nowrap;
@@ -1005,4 +1005,34 @@ background:transparent !important;
 
 .lp-header-vid {
 
+}
+
+.error-top-part {
+    width:100%;
+    text-align:center;
+    background: $color-base;
+
+    h1{
+        @include font-title($color-on-bg);
+        padding-top:32vh;
+        font-size:42px;
+    }
+    h2{
+        @include font-small-title($color-subtle);
+        font-weight:300;
+        margin-top:10px;
+        padding-bottom:25vh;
+    }
+}
+
+.main {
+    background: $color-on-bg;
+}
+
+.error-body {
+    background:white;
+}
+
+.error-bot-part {
+    background:$color-subtle;
 }
