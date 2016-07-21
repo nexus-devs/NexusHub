@@ -185,7 +185,6 @@ module.exports = {
 
                                 // Check if request older than 1 > then create new
                                 if (delta > 1) {
-                                    console.log(REQ_Main + ' ' + REQ_Comp)
                                     console.log('Upserted new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                     Users.native(function (err, collection) {
                                         collection.update({
@@ -196,7 +195,7 @@ module.exports = {
                                                     _id: REQ_Main,
                                                     title: REQ_Main,
                                                     type: REQ_Type,
-                                                    updatedAt: `${new Date()}`,
+                                                    updatedAt: new Date(),
                                                     components: [{
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
@@ -219,7 +218,7 @@ module.exports = {
                                                 "requests.title": REQ_Main
                                             }, {
                                                 $set: {
-                                                    "requests.$.updatedAt": `${new Date()}`,
+                                                    "requests.$.updatedAt": new Date(),
                                                 }
                                             }, false, true)
                                         })
@@ -254,7 +253,7 @@ module.exports = {
                                                 _id: REQ_Main,
                                                 title: REQ_Main,
                                                 type: REQ_Type,
-                                                updatedAt: `${new Date()}`,
+                                                updatedAt: new Date(),
                                                 components: [{
                                                     to: REQ_TO,
                                                     name: REQ_Comp,
@@ -280,7 +279,7 @@ module.exports = {
                                             _id: REQ_Main,
                                             title: REQ_Main,
                                             type: REQ_Type,
-                                            updatedAt: `${new Date()}`,
+                                            updatedAt: new Date(),
                                             components: [{
                                                 to: REQ_TO,
                                                 name: REQ_Comp,

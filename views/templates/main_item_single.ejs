@@ -7,7 +7,7 @@
                 <!-- Item Info -->
                 <div class='items-images-main'>
                     <div class='items-images-main-conent'>
-                        <span class='items-images-main-text'>Full Set Price</span>
+                        <span class='items-images-main-text'>Full Item Price</span>
                         <br>
                         <% itemdata.Components.forEach(function(item) { %>
                             <% if (item.name === 'Set') { %>
@@ -180,6 +180,9 @@
                         pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
                     },
                     plotOptions: {
+                        series: {
+                            connectNulls: true
+                        },
                         areaspline: {
                             fillOpacity: 0.15
                         },

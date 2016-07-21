@@ -7,8 +7,8 @@
 
 module.exports = {
     index: function (req, res) {
-        var package = req.originalUrl;
-       var data = require(`../../json${package}.json`);
+       var package = req.originalUrl;
+       var data = require('../../json' + package + '.json');
 
         return res.view('generic',{
             content: data,
