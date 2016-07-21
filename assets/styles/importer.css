@@ -504,7 +504,7 @@ b {
 /* line 204, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
 .main-items .items-wr {
   display: inline-block;
-  padding: 75px 0 10px 0;
+  padding: 90px 0px 40px 0px;
   width: 70%;
   margin: auto;
   white-space: nowrap; }
@@ -1448,6 +1448,41 @@ footer {
   min-height: 100vh;
   z-index: -1;
   opacity: 0.4; }
+
+/* line 1010, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.error-top-part {
+  width: 100%;
+  text-align: center;
+  background: #2e3840; }
+  /* line 1015, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .error-top-part h1 {
+    font-family: 'raleway';
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    padding-top: 32vh;
+    font-size: 42px; }
+  /* line 1020, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+  .error-top-part h2 {
+    font-family: 'raleway';
+    font-size: 24px;
+    font-weight: 700;
+    color: #8ea1ac;
+    font-weight: 300;
+    margin-top: 10px;
+    padding-bottom: 25vh; }
+
+/* line 1028, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.main {
+  background: #fff; }
+
+/* line 1032, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.error-body {
+  background: white; }
+
+/* line 1036, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/screen.scss */
+.error-bot-part {
+  background: #8ea1ac; }
 
 /* line 29, C:/Users/Mads_Jakobsen/WarframeNexus/assets/styles/importer.scss */
 .nav-sticky {
