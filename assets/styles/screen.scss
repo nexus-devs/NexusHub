@@ -67,6 +67,9 @@ a:hover {
 
 .lp-header {
     text-align: center;
+    position:relative;
+    overflow:hidden;
+    width:100%
 }
 
 .lp-header-headline {
@@ -781,6 +784,9 @@ background:transparent !important;
               -webkit-filter:grayscale(0);
         filter:grayscale(0);
     }
+    a:hover{
+        opacity:1;
+    }
 }
 
 @media (max-width:40em) {
@@ -962,8 +968,11 @@ background:transparent !important;
 
 .nexusbot-bot {
     text-align:left;
-    margin-top:50px;
-    margin-bottom:-40px;
+    margin-top:10px;
+    margin-bottom:-30px;
+    span{
+        padding-bottom:15px;
+    }
 }
 
 .alert {
@@ -999,6 +1008,8 @@ background:transparent !important;
     position: absolute;
     min-width: 115vw;
     min-height: 100vh;
+    top:0;
+    left:0;
     z-index: -1;
     opacity:0.4;
 }
@@ -1035,4 +1046,9 @@ background:transparent !important;
 
 .error-bot-part {
     background:$color-subtle;
+}
+
+.video-wrapper {
+    position:absolute;
+    overflow-x:hidden;
 }

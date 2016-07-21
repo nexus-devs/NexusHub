@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-<video loop muted autoplay class='lp-header-vidbg'>
-    <source class='lp-header-vid' src="<%= img %>lp_header_vid.webm" type="video/webm">
-</video>
+
 
 <% include /templates/nav %>
 
@@ -12,22 +10,27 @@
         <!--==============================-->
         <header>
             <div class='lp-header'>
+                <video loop muted autoplay class='lp-header-vidbg'>
+                    <source class='lp-header-vid' src="<%= img %>lp_header_vid.webm" type="video/webm">
+                </video>
+
                 <div class='lp-header-headline-container'>
                     <h1 class='lp-header-headline'>Warframe Item Prices</h1>
                     <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
                     <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <em>from the chat</em>!</h2>
                 </div>
+                <form class='lp-header-input-container' method='get' action='/items/search'>
+                    <div class='lp-header-input-helper'></div>
+                    <div class='lp-header-input' id='search'>
+                        <input type='text' placeholder='Enter Item Name' name='item'>
+                    </div>
+                    <button type='button' type='submit'>
+                        <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
+                    </button>
+                </form>
             </div>
         </header>
-        <form class='lp-header-input-container' method='get' action='/items/search'>
-            <div class='lp-header-input-helper'></div>
-            <div class='lp-header-input' id='search'>
-                <input type='text' placeholder='Enter Item Name' name='item'>
-            </div>
-            <button type='button' type='submit'>
-                <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
-            </button>
-        </form>
+
 
 
 
@@ -36,8 +39,6 @@
         <!--==============================-->
 
         <div class='lp-content'>
-
-
 
             <!-- Load SVG Blur for Gallery -->
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
