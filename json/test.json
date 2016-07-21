@@ -353,7 +353,7 @@
     },
         {
         _id: "Scorpion",
-        name: "Scorpion Ash Helmet",
+        name: "Arcane Scorpion Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -361,7 +361,7 @@
     },
      {
         _id: "Locust",
-        name: "Locust Ash Helmet",
+        name: "Arcane Locust Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -369,7 +369,7 @@
     },
      {
         _id: "Reverb",
-        name: "Reverb Banshee Helmet",
+        name: "Arcane Reverb Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -377,7 +377,7 @@
     },
      {
         _id: "Chorus",
-        name: "Chorus Banshee Helmet",
+        name: "Arcane Chrous Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -385,7 +385,7 @@
     },
      {
         _id: "Phoenix",
-        name: "Phoenix Ember Helmet",
+        name: "Arcane Phoenix Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -393,7 +393,7 @@
     },
      {
         _id: "Backdraft",
-        name: "Backdraft Ember Helmet",
+        name: "Arcane Backdraft Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -401,7 +401,7 @@
     },
      {
         _id: "Avalon",
-        name: "Avalon Excalibur Helmet",
+        name: "Arcane Avalon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -409,7 +409,7 @@
     },
      {
         _id: "Pendragon",
-        name: "Pendragon Excalibur Helmet",
+        name: "Arcane Pendragon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -417,7 +417,7 @@
     },
      {
         _id: "Aurora",
-        name: "Aurora Frost Helmet",
+        name: "Arcane Aurora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -425,7 +425,7 @@
     },
      {
         _id: "Squall",
-        name: "Squall Frost Helmet",
+        name: "Arcane Squall Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -433,7 +433,7 @@
     },
          {
         _id: "Essence",
-        name: "Essence Loki Helmet",
+        name: "Arcane Essence Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -441,7 +441,7 @@
     },
          {
         _id: "Swindle",
-        name: "Swindle Loki Helmet",
+        name: "Arcane Swindle Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -449,7 +449,7 @@
     },
          {
         _id: "Coil",
-        name: "Coil Mag Helmet",
+        name: "Arcane Coil Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -457,7 +457,7 @@
     },
          {
         _id: "Gauss",
-        name: "Gauss Mag Helmet",
+        name: "Arcane Gauss Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -465,7 +465,7 @@
     },
          {
         _id: "Flux",
-        name: "Flux Nova Helmet",
+        name: "Arcane Flux Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -473,7 +473,7 @@
     },
          {
         _id: "Menticide",
-        name: "Menticide Nyx Helmet",
+        name: "Arcane Menticide Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -481,7 +481,7 @@
     },
          {
         _id: "Vespa",
-        name: "Vespa Nyx Helmet",
+        name: "Arcane Vespa Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -489,7 +489,7 @@
     },
          {
         _id: "Thrak",
-        name: "Thrak Rhino Helmet",
+        name: "Arcane Thrak Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -497,7 +497,7 @@
     },
          {
         _id: "Vanguard",
-        name: "Vanguard Rhino Helmet",
+        name: "Arcane Vanguard Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -505,7 +505,7 @@
     },
          {
         _id: "Hemlock",
-        name: "Hemlock Saryn Helmet",
+        name: "Arcane Hemlock Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -513,7 +513,7 @@
     },
          {
         _id: "Chlora",
-        name: "Chlora Saryn Helmet",
+        name: "Arcane Chlora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -521,7 +521,7 @@
     },
          {
         _id: "Aura",
-        name: "Aura Trinity Helmet",
+        name: "Arcane Aura Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -529,7 +529,7 @@
     },
          {
         _id: "Meridian",
-        name: "Meridian Trinity Helmet",
+        name: "Arcane Meridian Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -537,7 +537,7 @@
     },
          {
         _id: "Esprit",
-        name: "Esprit Vauban Helmet",
+        name: "Arcane Esprit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -545,7 +545,7 @@
     },
          {
         _id: "Gambit",
-        name: "Gambit Vauban Helmet",
+        name: "Arcane Gambit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -553,7 +553,7 @@
     },
          {
         _id: "Storm",
-        name: "Storm Volt Helmet",
+        name: "Arcane Storm Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
@@ -561,7 +561,7 @@
     },
          {
         _id: "Pulse",
-        name: "Pulse Volt Helmet",
+        name: "Arcane Pulse Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
