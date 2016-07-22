@@ -1,0 +1,78 @@
+{
+    "items": [
+        {
+            "Title": "Nikana",
+            "Type": "Prime",
+            "SupDem": [28, 72],
+            "SupDemNum": [4345, 13349],
+            "Components": [
+                {
+                    "name": "Set",
+                    "avg": "800p",
+                    "visible": false,
+                    "data": [200, 290, 259, 280, 270, 340, 260],
+                    "comp_val_rt": 55.23436
+                },
+                {
+                    "name": "Blueprint",
+                    "avg": "35p",
+                    "data": [55, 50, 55, 50, 65, 55, 65],
+                    "comp_val_rt": 55.23436
+            },
+                {
+                    "name": "Blade",
+                    "avg": "35p",
+                    "data": [35, 30, 25, 30, 25, 35, 45],
+                    "comp_val_rt": 55.23436
+            },
+                {
+                    "name": "Handle",
+                    "avg": "35p",
+                    "data": [15, 20, 15, 10, 15, 15, 15],
+                    "comp_val_rt": 55.23436
+            }
+        ]
+        },
+        {
+            "Title": "Frost",
+            "Type": "Prime",
+            "Data": [800, 890, 859, 780, 570, 540, 560],
+            "SupDem": [28, 72],
+            "SupDemNum": [4345, 13349],
+            "Components": [
+                {
+                    "name": "Set",
+                    "avg": "800p",
+                    "visible": false,
+                    "data": [200, 290, 259, 280, 270, 340, 260],
+                    "comp_val_rt": 55.23436
+                },
+                {
+                    "name": "Blueprint",
+                    "avg": "35p",
+                    "data": [155, 160, 175, 165, 190, 240, 269],
+                    "comp_val_rt": 55.23436
+            },
+                {
+                    "name": "Neuroptics",
+                    "avg": "35p",
+                    "data": [55, 50, 55, 50, 65, 55, 65],
+                    "comp_val_rt": 55.23436
+            },
+                {
+                    "name": "Chassis",
+                    "avg": "35p",
+                    "data": [255, 250, 255, 250, 265, 255, 265],
+
+                    "comp_val_rt": 55.23436
+            },
+                {
+                    "name": "Systems",
+                    "avg": "35p",
+                    "data": [155, 150, 155, 150, 165, 155, 165],
+                    "comp_val_rt": 55.23436
+            }
+        ]
+        }
+]
+}

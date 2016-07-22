@@ -1,0 +1,178 @@
+<div class='items-item'>
+    <div class='items-item-main-inf'>
+        <h2><%= itemdata.Title %></h2>
+        <div class='items-images'>
+
+            <!-- Item Info -->
+            <div class='items-images-main'>
+                <div class='items-images-main-conent'>
+                    <span class='items-images-main-text'>Full Item Price</span>
+                    <br>
+                    <% itemdata.Components.forEach(function(item) { %>
+                    <% if (item.name === 'Set') { %>
+                    <span class='items-images-main-price'><%= item.avg %></span>
+                    <% } %>
+                    <% }); %>
+                </div>
+                <div class='items-images-main-helper'></div>
+                <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.id %>-min.png' alt='<%= itemdata.Title %>'>
+            </div>
+
+            <!-- Item Components -->
+            <div class='items-images-components'>
+                <div class='items-images-components-part'>
+                    <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(itemdata) { %>
+                    <% if (itemdata.name !== 'Set') { %>
+                        <!-- Component -->
+                        <div class='item-images-components-wr'>
+                            <div class='item-images-components-component'>
+                                <img src='<%= img %>generic/<%= itemdata.name %>-min.png' alt='<%= itemdata.Title %> <%= itemdata.name %>'>
+                            </div>
+                            <div class='items-component-details'>
+                                <h3><%= itemdata.name %></h3>
+                                <h4><%= itemdata.avg %></h4>
+                                <span> | <%= itemdata.comp_val_rt %></span>
+                            </div>
+                        </div>
+                    <% } %>
+                        <% }); %>
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <a href='/<%= itemdata.Type %>/<%= itemdata.id %>'>Go to Item Page</a>
+    </div>
+    <div class='items-item-stats'>
+        <h2>Weekly Statistics</h2>
+        <div class='items-images'>
+            <div class='chart' id="<%= itemdata.id %>"></div>
+        </div>
+    </div>
+</div>
+
+
+
+<% if (itemdata.id, itemdata.Components) { %>
+    <script>
+        var ItemName = <%- JSON.stringify(itemdata.id)%>;
+        var series = [];
+        var compData = <%- JSON.stringify(itemdata.Components) %>;
+
+        Highcharts.setOptions(options);
+
+        var chartdata = {
+            chart: {
+                type: 'areaspline',
+                style: {
+                    font: '18px "Raleway", Verdana, sans-serif',
+                    color: '#8ea1ac'
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                enabled: true,
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                floating: false,
+                itemMarginBottom: 20,
+                itemStyle: {
+                    'color': '#8ea1ac',
+                    'font': '16px Raleway'
+                }
+            },
+            xAxis: {
+                gridLineColor: "#69767e",
+                gridLineDashStyle: 'dash',
+                gridLineWidth: 1,
+                minorGridLineColor: "#E0E0E0",
+                minorGridLineDashStyle: "Solid",
+                minorGridLineWidth: 1,
+                categories: [
+                    '6',
+                    '5',
+                    '4',
+                    '3',
+                    '2',
+                    '1',
+                    'Today'
+            ],
+                allowDecimals: false,
+                lineColor: '#8ea1ac',
+                tickColor: 'rgba(0,0,0,0)',
+                startOnTick: true,
+                labels: {
+                    style: {
+                        color: '#8ea1ac',
+                        font: '14px Arial'
+                    },
+                    formatter: function () {
+                        return this.value; // clean, unformatted number for year
+                    }
+                }
+            },
+            yAxis: {
+                gridLineColor: "#69767e",
+                gridLineDashStyle: 'dash',
+                gridLineWidth: 1,
+
+                lineColor: '#8ea1ac',
+                tickColor: 'rgba(0,0,0,0)',
+                title: {
+                    text: ''
+                },
+                labels: {
+                    style: {
+                        color: '#8ea1ac',
+                        font: '14px Arial'
+                    },
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    color: '#8ea1ac',
+                    font: '24px Arial',
+                    fontSize: '16px'
+                },
+                pointFormat: '<b>{series.name}</b> at <b>{point.y:,.0f} Platinum'
+            },
+            plotOptions: {
+                series: {
+                    connectNulls: true
+                },
+                areaspline: {
+                    fillOpacity: 0.05
+                },
+                area: {
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 3,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+
+            series: []
+        }
+
+        chartdata.series = compData;
+
+        $('#' + ItemName).highcharts(chartdata);
+    </script>
+    <% } %>

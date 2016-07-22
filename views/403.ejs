@@ -1,0 +1,41 @@
+<!-- Menu Bar -->
+<!--==============================-->
+<div class='nav-sticky'>
+    <nav class='top-nav'>
+        <a href='/' class='top-logo'>
+            <span class='top-logo-text'>Nexus</span>Stats
+            <span class='top-logo-sub'>BETA</span>
+        </a>
+    </nav>
+</div>
+
+
+<body class='error-body'>
+    <div class="main">
+        <div class='error-top-part'>
+            <h1>
+                403. "OUT! OUT! OUT!" -Trump, 2016
+            </h1>
+            <h2>
+                <% if (typeof data!== 'undefined') { %>
+                <%= data %>
+                <% } else { %>
+                You don't have permission to access this page.
+                <% } %>
+            </h2>
+        </div>
+        <div class='error-bot-part'>
+            <form class='lp-header-input-container' method='get' action='/items/search'>
+                <div class='lp-header-input-helper'></div>
+                <div class='lp-header-input' id='search'>
+                    <input type='text' placeholder='Enter Item Name' name='item'>
+                </div>
+                <button type='button' type='submit'>
+                    <img src='/img/lp_search.svg' class='lp-search-ico' alt='Search'>
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+
+
