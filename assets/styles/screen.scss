@@ -458,6 +458,7 @@ footer {
 
 .footer-logo {
     @include font-logo($color-on-bg);
+    font-size:28px;
 }
 
 .footer-contact {

@@ -43,9 +43,9 @@ var jsFilesToInject = [
     "js/index.js",
     "js/highcharts.js",
     "js/gallery/motionblur.js",
-    "js/gallery/gallery.js",
-    "js/gallery/gallery_main.js",
-    "js/gallery/gallery_recent.js",
+    //"js/gallery/gallery.js",
+    //"js/gallery/gallery_main.js",
+    //"js/gallery/gallery_recent.js",
     "js/gallery/TweenMax.min.js",
 ];
 
