@@ -49,7 +49,7 @@ $(window).on('scroll', function () {
 
 // Define Chart Options
 options = {
-    colors: ['#34b083', '#34b083', '#acbace', '#449ce7', '#915ed7', '#64E572',
+    colors: ['#34b083', '#65b5ba', '#acbace', '#449ce7', '#915ed7', '#64E572',
              '#FF9655', '#FFF263', '#fff'],
     chart: {
         backgroundColor: {

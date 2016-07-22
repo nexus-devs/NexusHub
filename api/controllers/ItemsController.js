@@ -209,7 +209,7 @@ module.exports = {
                         // Generate normalized daily average value (single offer a day at 10 times the price shouldn't display the price for said day at such an exaggerated value)
                         // (( avg[i] * c[i] ) + (( c_sum - c[i] ) * avg_b )) / c_sum
                         var comp_data = []
-                        var c_sum = comp_count.reduce((pv, cv) => pv + cv, 0);
+                        var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
 
                        //console.log(c_sum)
 
