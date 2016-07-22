@@ -1,0 +1,15 @@
+{
+    "PageTitle": "Imprint",
+    "Headline": "Imprint",
+
+    "content_comps": [
+    {
+        "Title": "NexusStats",
+        "Desc": "Kilian Volb <br>Schillerstr. 13<br>66497 Contwig<br>Germany<br>"
+    },
+        {
+        "Title": "Contact",
+        "Desc": "kln.volb@protonmail.com<br>+49633256120 (No Support)"
+    }
+    ]
+}
