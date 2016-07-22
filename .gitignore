@@ -14,9 +14,7 @@ node_modules/
 /assets/styles/importer.css.map
 /assets/styles/reset.css
 /assets/styles/reset.css.map
-/config/connections.js
-/config/blueprints.js
-/config/local.js
 /json/users.json
 /assets/img/generic/fullsize
 /assets/img/items/fullsize
+/npm-debug.log
