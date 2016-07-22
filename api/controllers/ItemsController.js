@@ -167,7 +167,7 @@ module.exports = {
                                 }
                             })
                         })
-                        console.log(comp_count)
+                        //console.log(comp_count)
 
 
                         // Take daily value divided by daily request-count (generates basic average)
@@ -211,7 +211,7 @@ module.exports = {
                         var comp_data = []
                         var c_sum = comp_count.reduce((pv, cv) => pv + cv, 0);
 
-                        console.log(c_sum)
+                       //console.log(c_sum)
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {

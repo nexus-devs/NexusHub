@@ -3,6 +3,15 @@
 Development builds can be found here.
 
 
+# Data Processing
+
+- Trade Chat Requests are processed by /py/ChatParser.py
+- Parsed Requests are sent to /api/controllers/RequestController.js
+- When a client requests statistics for an item, they're either processed
+  by the ItemController or taken from the itemcache collection if no update
+  is necessary.
+
+
 # Roadmap
 Planned updates
 
