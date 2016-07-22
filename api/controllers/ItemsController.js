@@ -47,7 +47,7 @@ module.exports = {
                         var itemname = itemobj[0].Title
 
                         return res.view('item', {
-                            HeaderTitle: itemname +' - WarframeNexus',
+                            HeaderTitle: itemname + ' - NexusStats',
                             itemdata: itemobj[0],
                             css: "../css/",
                             js: "../js/",
@@ -114,7 +114,7 @@ module.exports = {
                         // Generate values for each Component
 
                         // Clear values when starting with new component // generate array w/ 0 for timerange
-                        var comp_data = []
+                        var comp_val_arr = []
                         var comp_count = []
                         for (var i = 0; i < timerange; i++) {
                             comp_count.push(0)
@@ -149,9 +149,14 @@ module.exports = {
 
                                             // Generate data array
                                             for (var i = 0; i < timerange; i++) {
+
                                                 // If request at 'i' day, value and position to according place
                                                 if (Math.floor(delta) === i) {
+
+                                                    // If Request data is legit
                                                     if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
+
+                                                        // then add requested value to value array
                                                         comp_val[i] = +comp_val[i] + (+req_component.data * 1.27334)
                                                         comp_count[i]++
                                                     }
@@ -162,34 +167,35 @@ module.exports = {
                                 }
                             })
                         })
+                        console.log(comp_count)
 
-                        // Take average of value divided by count
+
+                        // Take daily value divided by daily request-count (generates basic average)
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                comp_data.push((comp_val[i] / comp_count[i]))
+                                comp_val_arr.push((comp_val[i] / comp_count[i]))
                             } else {
-                                comp_data.push(null)
+                                comp_val_arr.push(null)
                             }
                         }
 
-                        // Reverse array (newest at end to match chart)
-                        comp_data.reverse();
-                        //console.log(comp_data)
 
                         // Generate average value
                         var avg = 0
+                        var avg_b = 0
                         var valid_count = 0
-                        for (var i = 0; i < comp_data.length; i++) {
-                            if (comp_data[i] !== null) {
-                                var current_value = comp_data[i]
+
+                        for (var i = 0; i < comp_val_arr.length; i++) {
+                            if (comp_val_arr[i] !== null) {
                                 valid_count++
-                                avg = avg + current_value
+                                avg = avg + comp_val_arr[i]
                             }
 
                         }
                         if (avg !== 0) {
                             // Realtime avg
                             var comp_val_rt = ((avg / valid_count)).toFixed(4)
+                            avg_b = Math.floor((avg / valid_count))
                             avg = Math.floor((avg / valid_count)).toString() + 'p'
                         } else {
                             var comp_val_rt = ''
@@ -200,7 +206,23 @@ module.exports = {
                         //console.log('avg: ' + avg)
 
 
+                        // Generate normalized daily average value (single offer a day at 10 times the price shouldn't display the price for said day at such an exaggerated value)
+                        // (( avg[i] * c[i] ) + (( c_sum - c[i] ) * avg_b )) / c_sum
+                        var comp_data = []
+                        var c_sum = comp_count.reduce((pv, cv) => pv + cv, 0);
 
+                        console.log(c_sum)
+
+                        for (var i = 0; i < timerange; i++) {
+                            if (comp_val[i] !== 0) {
+                                comp_data.push(((comp_val_arr[i] * comp_count[i]) + ((c_sum - comp_count[i]) * avg_b)) / c_sum)
+                            } else {
+                                comp_data.push(null)
+                            }
+                        }
+
+
+                        comp_data.reverse()
 
                         // visibile: false if SET w/ multi components
                         if (component === 'Set' && single_item === 'true') {
@@ -332,7 +354,7 @@ module.exports = {
                     var itemname = itemobj[0].Title
 
                     return res.view('item', {
-                        HeaderTitle: itemname + ' - WarframeNexus',
+                        HeaderTitle: itemname + ' - NexusStats',
                         itemdata: itemobj[0],
                         css: "../css/",
                         js: "../js/",
@@ -384,13 +406,13 @@ module.exports = {
                             // Check if item was found
                 },
                 function checkValidity(itemobj, callback) {
-                    loopcount++
+                            loopcount++
                             if (viewrendered === 'false') {
                                 if (typeof itemobj[0] !== 'undefined') {
                                     viewrendered = 'true'
                                     var itembase = itemobj[0].type
                                     var itemname = itemobj[0].id
-                                    return res.redirect('../../' + itembase + '/'+ itemname)
+                                    return res.redirect('../../' + itembase + '/' + itemname)
                                 } else if (loopcount === (stringArray.length)) {
                                     viewrendered = 'true'
                                     res.notFound(fullstring + " couldn't be found. Please check your spelling")

@@ -212,7 +212,7 @@ module.exports = {
                                 } else if (delta < 1) {
                                     if (requested_comp !== 'true') {
                                         console.log('Updated request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
-                                        Users.native(function (err, collection) { // Probably removes old components
+                                        Users.native(function (err, collection) {
                                             collection.update({
                                                 "user": REQ_User,
                                                 "requests.title": REQ_Main
@@ -222,7 +222,7 @@ module.exports = {
                                                 }
                                             }, false, true)
                                         })
-                                        Users.native(function (err, collection) { // Probably removes old components
+                                        Users.native(function (err, collection) {
                                             collection.update({
                                                 "user": REQ_User,
                                                 "requests.title": REQ_Main
