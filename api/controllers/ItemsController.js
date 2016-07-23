@@ -37,7 +37,7 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, itemnamefull, callback) {
-                if (item[0].update === 'pending') { // === 'pending' normally
+                if (item[0].update !== 'fpending') { // === 'pending' normally
                     callback(null, item, itemnamefull)
                 } else {
                     Itemcache.find({
@@ -170,33 +170,31 @@ module.exports = {
                         //console.log(comp_count)
 
 
-                        // Take daily value divided by daily request-count (generates basic average)
+                        // Generate average value
+
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                comp_val_arr.push((comp_val[i] / comp_count[i]))
+                                console.log(comp_val[i])
+                                console.log(comp_count[i])
+                                comp_val_arr.push((comp_val[i]))
                             } else {
-                                comp_val_arr.push(null)
+                                comp_val_arr.push(0)
                             }
                         }
 
 
-                        // Generate average value
                         var avg = 0
                         var avg_b = 0
-                        var valid_count = 0
+                        var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
+                        var v_sum = comp_val_arr.reduce(function(pv, cv) { return pv + cv; }, 0);
 
-                        for (var i = 0; i < comp_val_arr.length; i++) {
-                            if (comp_val_arr[i] !== null) {
-                                valid_count++
-                                avg = avg + comp_val_arr[i]
-                            }
+                        console.log(comp_val_arr)
+                        console.log(v_sum)
+                        avg_b = v_sum/c_sum
 
-                        }
-                        if (avg !== 0) {
-                            // Realtime avg
-                            var comp_val_rt = ((avg / valid_count)).toFixed(4)
-                            avg_b = Math.floor((avg / valid_count))
-                            avg = Math.floor((avg / valid_count)).toString() + 'p'
+                        if (v_sum !== 0) {
+                            var comp_val_rt = avg_b.toFixed(4)
+                            avg = Math.floor(avg_b).toString() + 'p'
                         } else {
                             var comp_val_rt = ''
                             avg = ''
@@ -209,13 +207,12 @@ module.exports = {
                         // Generate normalized daily average value (single offer a day at 10 times the price shouldn't display the price for said day at such an exaggerated value)
                         // (( avg[i] * c[i] ) + (( c_sum - c[i] ) * avg_b )) / c_sum
                         var comp_data = []
-                        var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
 
                        //console.log(c_sum)
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                comp_data.push(((comp_val_arr[i] * comp_count[i]) + ((c_sum - comp_count[i]) * avg_b)) / c_sum)
+                                comp_data.push(((comp_val_arr[i]) + ((c_sum - comp_count[i]) * avg_b)) / c_sum)
                             } else {
                                 comp_data.push(null)
                             }
