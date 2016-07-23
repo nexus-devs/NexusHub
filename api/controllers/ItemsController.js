@@ -4,18 +4,23 @@
  * @description :: Server-side logic for managing items
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-//Capitalize function
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+//title function
+function title(str) {
+    str = str.toLowerCase().split(' ');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(' ');
 }
+
 
 
 module.exports = {
     index: function (req, res) {
         var url = req.originalUrl
         var urlbase = url.split('/')
-        var itembase = capitalize(urlbase[1])
-        var itemname = capitalize(url.split('/').pop().toLowerCase())
+        var itembase = title(urlbase[1])
+        var itemname = title(url.split('/').pop().replace("%20", " "))
         var timerange = 7 // This would usually be included in POST method of time range selection in main screen
 
 
@@ -128,48 +133,48 @@ module.exports = {
 
                         // For each user, check if item in each request (loop through every relevant request)
                         user.forEach(function (user) {
-                            user.requests.forEach(function (req_item) {
+                                user.requests.forEach(function (req_item) {
 
-                                // Validate request belonging to item
-                                if (req_item.title === itemname) {
-                                    req_item.components.forEach(function (req_component) {
+                                    // Validate request belonging to item
+                                    if (req_item.title === itemname) {
+                                        req_item.components.forEach(function (req_component) {
 
-                                        // Check Time between Request and now
-                                        var prevTime = new Date(req_item.updatedAt);
-                                        var thisTime = new Date();
-                                        var diff = thisTime.getTime() - prevTime.getTime();
-                                        var delta = (diff / (1000 * 60 * 60 * 24));
+                                            // Check Time between Request and now
+                                            var prevTime = new Date(req_item.updatedAt);
+                                            var thisTime = new Date();
+                                            var diff = thisTime.getTime() - prevTime.getTime();
+                                            var delta = (diff / (1000 * 60 * 60 * 24));
 
-                                        // Check if Request has been comitted within timerange
-                                        if (component === req_component.name && delta < timerange) {
+                                            // Check if Request has been comitted within timerange
+                                            if (component === req_component.name && delta < timerange) {
 
-                                            if (req_item.components[0].to === 'WTB') {
-                                                WTB++
-                                            } else {
-                                                WTS++
-                                            }
+                                                if (req_item.components[0].to === 'WTB') {
+                                                    WTB++
+                                                } else {
+                                                    WTS++
+                                                }
 
-                                            // Generate data array
-                                            for (var i = 0; i < timerange; i++) {
+                                                // Generate data array
+                                                for (var i = 0; i < timerange; i++) {
 
-                                                // If request at 'i' day, value and position to according place
-                                                if (Math.floor(delta) === i) {
+                                                    // If request at 'i' day, value and position to according place
+                                                    if (Math.floor(delta) === i) {
 
-                                                    // If Request data is legit
-                                                    if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
+                                                        // If Request data is legit
+                                                        if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
 
-                                                        // then add requested value to value array
-                                                        comp_val[i] = +comp_val[i] + (+req_component.data)
-                                                        comp_count[i]++
+                                                            // then add requested value to value array
+                                                            comp_val[i] = +comp_val[i] + (+req_component.data)
+                                                            comp_count[i]++
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                    })
-                                }
+                                        })
+                                    }
+                                })
                             })
-                        })
-                        //console.log(comp_count)
+                            //console.log(comp_count)
 
 
                         // Generate average value
@@ -185,10 +190,14 @@ module.exports = {
 
                         var avg = 0
                         var avg_b = 0
-                        var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
-                        var v_sum = comp_val_arr.reduce(function(pv, cv) { return pv + cv; }, 0);
+                        var c_sum = comp_count.reduce(function (pv, cv) {
+                            return pv + cv;
+                        }, 0);
+                        var v_sum = comp_val_arr.reduce(function (pv, cv) {
+                            return pv + cv;
+                        }, 0);
 
-                        avg_b = v_sum/c_sum
+                        avg_b = v_sum / c_sum
 
                         if (v_sum !== 0) {
                             var comp_val_rt = avg_b.toFixed(4)
@@ -206,7 +215,7 @@ module.exports = {
                         // (( avg[i] * c[i] ) + (( c_sum - c[i] ) * avg_b )) / c_sum
                         var comp_data = []
 
-                       //console.log(c_sum)
+                        //console.log(c_sum)
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
@@ -363,7 +372,7 @@ module.exports = {
     // Search function
     search: function (req, res) {
         var fullstring = req.query.item
-        var stringArray = fullstring.split(" ") // (don't split request at each word, but for each in list that's gonna have to be created in python)
+        var stringArray = fullstring.split(" ")
         var viewrendered = 'false'
         var loopcount = 0
 
@@ -376,7 +385,7 @@ module.exports = {
                 function retrieveItem(callback) {
 
                             // All Hail the Railwayhead
-                            if (capitalize(string) === 'Booben') {
+                            if (title(string) === 'Booben') {
                                 ItemList.find({
                                     _id: 'Vauban'
                                 }).exec(function (err, itemobj) {
@@ -388,13 +397,26 @@ module.exports = {
                                 })
                             } else {
                                 ItemList.find({
-                                    _id: capitalize(string)
+                                    _id: title(string)
                                 }).exec(function (err, itemobj) {
                                     if (err) {
                                         callback(err, null)
                                         return
                                     }
-                                    callback(null, itemobj)
+                                    if (typeof itemobj[0] !== 'undefined') {
+                                        callback(null, itemobj)
+                                    } else {
+                                        ItemList.find({
+                                            _id: title(fullstring)
+                                        }).exec(function (err, itemobj) {
+                                            if (err) {
+                                                callback(err, null)
+                                                return
+                                            } else {
+                                                callback(null, itemobj)
+                                            }
+                                        })
+                                    }
                                 })
                             }
 
