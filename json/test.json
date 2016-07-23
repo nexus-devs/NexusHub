@@ -870,5 +870,29 @@
         category: "Corrupted",
         update: 'pending',
         components: []
-    }
+    },
+    {
+        _id: "Transient Fortitude",
+        name: "Transient Fortitude",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Power Drift",
+        name: "Power Drift",
+        type: "Mods",
+        category: "Moon",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Power Drift",
+        name: "Power Drift",
+        type: "Mods",
+        category: "Moon",
+        update: 'pending',
+        components: []
+    },
 ]
