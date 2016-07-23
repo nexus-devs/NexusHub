@@ -37,7 +37,7 @@ import time
 client = MongoClient('mongodb://192.168.2.101:27017/')
 db = client.warframenexus
 timestart = calendar.timegm(time.gmtime())
-RequestCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+RequestCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
 NexusBotCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 
 
@@ -435,7 +435,7 @@ while True:
 
 
             # If Request is valid, send to server
-            if REQ_TO == 'WTS' or REQ_TO == 'WTB' and Username not in RequestCache:
+            if not Username in RequestCache and REQ_TO == 'WTS' or REQ_TO == 'WTB':
 
                 # Open secret password (hi github)
                 with open('./sources/pwd.txt', 'r') as myfile:
