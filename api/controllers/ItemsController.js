@@ -79,9 +79,11 @@ module.exports = {
                 var WTB = 0
                 var WTS = 0
 
-                //console.log('item: ' + itemname)
-                //console.log('type: ' + itembase)
-                //console.log('==========================')
+                console.log('[CLIENT]')
+                console.log('item: ' + itemname)
+                console.log('type: ' + itembase)
+                console.log('==========================')
+                console.log(' ')
 
 
                 Itemcache.native(function (err, collection) {
@@ -157,7 +159,7 @@ module.exports = {
                                                     if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
 
                                                         // then add requested value to value array
-                                                        comp_val[i] = +comp_val[i] + (+req_component.data * 1.27334)
+                                                        comp_val[i] = +comp_val[i] + (+req_component.data)
                                                         comp_count[i]++
                                                     }
                                                 }
@@ -174,8 +176,6 @@ module.exports = {
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                console.log(comp_val[i])
-                                console.log(comp_count[i])
                                 comp_val_arr.push((comp_val[i]))
                             } else {
                                 comp_val_arr.push(0)
@@ -188,8 +188,6 @@ module.exports = {
                         var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
                         var v_sum = comp_val_arr.reduce(function(pv, cv) { return pv + cv; }, 0);
 
-                        console.log(comp_val_arr)
-                        console.log(v_sum)
                         avg_b = v_sum/c_sum
 
                         if (v_sum !== 0) {
