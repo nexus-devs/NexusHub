@@ -864,8 +864,32 @@
         components: []
     },
     {
+        _id: "Blind Rage",
+        name: "Blind Rage",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
         _id: "Fleeting Expertise",
         name: "Fleeting Expertise",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Narrow Minded",
+        name: "Narrow Minded",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Overextended",
+        name: "Overextended",
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
@@ -880,10 +904,146 @@
         components: []
     },
     {
-        _id: "Power Drift",
-        name: "Power Drift",
+        _id: "Critical Delay",
+        name: "Critical Delay",
         type: "Mods",
-        category: "Moon",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Heavy Caliber",
+        name: "Heavy Caliber",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vile Precision",
+        name: "Vile Precision",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Mag",
+        name: "Tainted Mag",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vile Acceleration",
+        name: "Vile Acceleration",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Depleted Reload",
+        name: "Depleted Reload",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Burdened Magazine",
+        name: "Burdened Magazine",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vicious Speed",
+        name: "Vicious Speed",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Shell",
+        name: "Tainted Shell",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frail Momentum",
+        name: "Frail Momentum",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Critical Deceleration",
+        name: "Critical Deceleration",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Anemic Agility",
+        name: "Anemic Agility",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Creeping Bullseye",
+        name: "Creeping Bullseye",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Hollow Point",
+        name: "Hollow Point",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Magnum Force",
+        name: "Magnum Force",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Clip",
+        name: "Tainted Clip",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Spoiled Strike",
+        name: "Spoiled Strike",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Corrupt Charge",
+        name: "Corrupt Charge",
+        type: "Mods",
+        category: "Corrupted",
         update: 'pending',
         components: []
     },
@@ -891,7 +1051,391 @@
         _id: "Power Drift",
         name: "Power Drift",
         type: "Mods",
-        category: "Moon",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Coaction Drift",
+        name: "Coaction Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Cunning Drift",
+        name: "Cunning Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Speed Drift",
+        name: "Speed Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Endurance Drift",
+        name: "Endurance Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Agility Drift",
+        name: "Agility Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Stealth Drift",
+        name: "Stealth Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Body Count",
+        name: "Body Count",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Focused Defense",
+        name: "Focused Defense",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Blood Rush",
+        name: "Blood Rush",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Weeping Wounds",
+        name: "Weeping Wounds",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Maiming Strike",
+        name: "Maiming Strike",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Argon Scope",
+        name: "Argon Scope",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Bladed Rounds",
+        name: "Bladed Rounds",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Catalyzer Link",
+        name: "Catalyzer Link",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Guided Ordinance",
+        name: "Guided Ordinance",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Spring-Loaded Chamber",
+        name: "Spring-Loaded Chamber",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shrapnel Shot",
+        name: "Shrapnel Shot",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Laser Sight",
+        name: "Laser Sight",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Repeater Clip",
+        name: "Repeater Clip",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Nano-Applicator",
+        name: "Nano-Applicator",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Narrow Barrel",
+        name: "Narrow Barrel",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Hydraulic Crosshairs",
+        name: "Hydraulic Crosshairs",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Embedded Catalyzer",
+        name: "Embedded Catalyzer",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sharpened Bullets",
+        name: "Sharpened Bullets",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Targeting Subsystem",
+        name: "Targeting Subsystem",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pressurized Magazine",
+        name: "Pressurized Magazine",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Continuity",
+        name: "Primed Continuity",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Flow",
+        name: "Primed Flow",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Vigor",
+        name: "Primed Vigor",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Fury",
+        name: "Primed Fury",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Pressure Point",
+        name: "Primed Pressure Point",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Reach",
+        name: "Primed Reach",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Point Blank",
+        name: "Primed Point Blank",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Ravage",
+        name: "Primed Ravage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Morphic Transformer",
+        name: "Primed Morphic Transformer",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Pistol Gambit",
+        name: "Primed Pistol Gambit",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Heavy Trauma",
+        name: "Primed Heavy Trauma",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Target Cracker",
+        name: "Primed Target Cracker",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Fast Hands",
+        name: "Primed Fast Hands",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Bane of Grineer",
+        name: "Primed Bane of Grineer",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Heated Charge",
+        name: "Primed Heated Charge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Bane of Corpus",
+        name: "Primed Bane of Corpus",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Bane of Infested",
+        name: "Primed Bane of Infested",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Rifle Ammo Mutation",
+        name: "Primed Rifle Ammo Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Pistol Mutation",
+        name: "Primed Pistol Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Slip Magazine",
+        name: "Primed Slip Magazine",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Shotgun Ammo Mutation",
+        name: "Primed Shotgun Ammo Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Ammo Stock",
+        name: "Primed Ammo Stock",
+        type: "Mods",
+        category: "Primed",
         update: 'pending',
         components: []
     },
