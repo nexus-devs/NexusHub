@@ -23,9 +23,10 @@ High Priority:
 
 Other:
 - Premium Service
-  includes:
+  including:
     - Buyers List
     - Sellers List
     - Trackable Items
+    - Busy Times
     - Alerts on unusually low priced requests
     - Auction-house styled inline offers visible to everyone (Idea requires validation)
