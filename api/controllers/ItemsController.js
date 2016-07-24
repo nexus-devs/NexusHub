@@ -407,7 +407,7 @@ module.exports = {
                                         callback(null, itemobj)
                                     } else {
                                         ItemList.find({
-                                            _id: title(fullstring)
+                                            name: title(fullstring)
                                         }).exec(function (err, itemobj) {
                                             if (err) {
                                                 callback(err, null)
