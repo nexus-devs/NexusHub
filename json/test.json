@@ -960,8 +960,8 @@
         components: []
     },
     {
-        _id: "Vicious Speed",
-        name: "Vicious Speed",
+        _id: "Vicious Spread",
+        name: "Vicious Spread",
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
@@ -1420,6 +1420,366 @@
         name: "Primed Ammo Stock",
         type: "Mods",
         category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tempo Royale",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shred",
+        name: "Shred",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Buzz Kill",
+        name: "Buzz Kill",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Chamber",
+        name: "Primed Chamber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "High Voltage",
+        name: "High Voltage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rime Rounds",
+        name: "Rime Rounds",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Thermite Rounds",
+        name: "Thermite Rounds",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Jolt",
+        name: "Jolt",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Piercing Caliber",
+        name: "Piercing Caliber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Fanged Fusillade",
+        name: "Fanged Fusillade",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shell Shock",
+        name: "Shell Shock",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Voltaic Strike",
+        name: "Voltaic Strike",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Malignant Force",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sweeping Serration",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frigid Blast",
+        name: "Frigid Blast",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Volcanic Edge",
+        name: "Volcanic Edge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Virulent Scourge",
+        name: "Virulent Scourge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vicious Frost",
+        name: "Vicious Frost",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frostbite",
+        name: "Frostbite",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Auger Strike",
+        name: "Auger Strike",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Collision Force",
+        name: "Collision Force",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Magma Chamber",
+        name: "Magma Chamber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pistol Pestilence",
+        name: "Pistol Pestilence",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Toxic Barrage",
+        name: "Toxic Barrage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Aviator",
+        name: "Aviator",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Bore",
+        name: "Bore",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Breach Loader",
+        name: "Breach Loader",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pummel",
+        name: "Pummel",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Crash Course",
+        name: "Crash Course",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Full Contact",
+        name: "Full Contact",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Searing Steel",
+        name: "Searing Steel",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Maim",
+        name: "Maim",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vaykor Hek",
+        name: "Vaykor Hek",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vaykor Marelok",
+        name: "Vaykor Marelok",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Telos Boltor",
+        name: "Telos Boltor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Telos Akbolto",
+        name: "Telos Akbolto",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Synoid Simulor",
+        name: "Synoid Simulor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Synoid Gammacor",
+        name: "Synoid Gammacor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Secura Penta",
+        name: "Secura Penta",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Secura Dual",
+        name: "Secura Dual Cestra",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rakta Cernos",
+        name: "Rakta Cernos",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rakta Ballistica",
+        name: "Rakta Ballistica",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sancti Tigris",
+        name: "Sancti Tigris",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sancti Castanas",
+        name: "Sancti Castanas",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Mara Detron",
+        name: "Mara Detron",
+        type: "Special",
+        category: "Weapon",
         update: 'pending',
         components: []
     },
