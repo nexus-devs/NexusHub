@@ -21,17 +21,17 @@
             <!-- Item Components -->
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
-                    <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(itemdata) { %>
-                    <% if (itemdata.name !== 'Set') { %>
+                    <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(item) { %>
+                    <% if (item.name !== 'Set') { %>
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
-                                <img src='<%= img %>generic/<%= itemdata.name %>-min.png' alt='<%= itemdata.Title %> <%= itemdata.name %>'>
+                                <img src='<%= img %>generic/<%= item.name %>-min.png' alt='<%= itemdata.Title %> <%= item.name %>'>
                             </div>
                             <div class='items-component-details'>
-                                <h3><%= itemdata.name %></h3>
-                                <h4><%= itemdata.avg %></h4>
-                                <span> | <%= itemdata.comp_val_rt %></span>
+                                <h3><%= item.name %></h3>
+                                <h4><%= item.avg %></h4>
+                                <span> | <%= item.comp_val_rt %></span>
                             </div>
                         </div>
                     <% } %>
