@@ -9,7 +9,7 @@
     },
         {
         "Title": "Open Source",
-            "Desc": "While we do not appreciate unauthorized copies of our source code, we believe that providing access to our code is vital for letting people know what's going on behind the scenes, as well as potentially inspiring others to create great tools for this awesome game!<br>As a matter or fact, we're hosting everything on <a href='https://github.com/Mads-Jakobsen/WarframeNexus'><em>Github<em>.</a>"
+            "Desc": "While we do not appreciate unauthorized copies of our source code, we believe that providing access to our code is vital for letting people know what's going on behind the scenes, as well as potentially inspiring others to create great tools for this awesome game!<br>As a matter or fact, we're hosting everything on <a href='https://github.com/Mads-Jakobsen/WarframeNexus' target=\"_blank\" ><em>Github<em>.</a>"
     }
     ]
 }

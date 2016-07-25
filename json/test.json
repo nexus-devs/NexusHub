@@ -1168,8 +1168,8 @@
         components: []
     },
     {
-        _id: "Guided Ordinance",
-        name: "Guided Ordinance",
+        _id: "Guided Ordnance",
+        name: "Guided Ordnance",
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
