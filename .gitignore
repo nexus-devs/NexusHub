@@ -21,3 +21,4 @@ node_modules/
 /py/tools/sitemap.py
 /sitemap.txt
 /views/google.ejs
+/py/tools/autocomplete.py
