@@ -352,7 +352,7 @@
         components: ["Blueprint", "Harness", "Wings", "Systems"]
     },
         {
-        _id: "Scorpion",
+        _id: "Arcane Scorpion",
         name: "Arcane Scorpion Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -360,7 +360,7 @@
         components: []
     },
      {
-        _id: "Locust",
+        _id: "Arcane Locust",
         name: "Arcane Locust Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -368,7 +368,7 @@
         components: []
     },
      {
-        _id: "Reverb",
+        _id: "Arcane Reverb",
         name: "Arcane Reverb Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -376,7 +376,7 @@
         components: []
     },
      {
-        _id: "Chorus",
+        _id: "Arcane Chorus",
         name: "Arcane Chrous Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -384,7 +384,7 @@
         components: []
     },
      {
-        _id: "Phoenix",
+        _id: "Arcane Phoenix",
         name: "Arcane Phoenix Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -392,7 +392,7 @@
         components: []
     },
      {
-        _id: "Backdraft",
+        _id: "Arcane Backdraft",
         name: "Arcane Backdraft Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -400,7 +400,7 @@
         components: []
     },
      {
-        _id: "Avalon",
+        _id: "Arcane Avalon",
         name: "Arcane Avalon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -408,7 +408,7 @@
         components: []
     },
      {
-        _id: "Pendragon",
+        _id: "Arcane Pendragon",
         name: "Arcane Pendragon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -416,7 +416,7 @@
         components: []
     },
      {
-        _id: "Aurora",
+        _id: "Arcane Aurora",
         name: "Arcane Aurora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -424,7 +424,7 @@
         components: []
     },
      {
-        _id: "Squall",
+        _id: "Arcane Squall",
         name: "Arcane Squall Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -432,7 +432,7 @@
         components: []
     },
          {
-        _id: "Essence",
+        _id: "Arcane Essence",
         name: "Arcane Essence Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -440,7 +440,7 @@
         components: []
     },
          {
-        _id: "Swindle",
+        _id: "Arcane Swindle",
         name: "Arcane Swindle Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -448,7 +448,7 @@
         components: []
     },
          {
-        _id: "Coil",
+        _id: "Arcane Coil",
         name: "Arcane Coil Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -456,7 +456,7 @@
         components: []
     },
          {
-        _id: "Gauss",
+        _id: "Arcane Gauss",
         name: "Arcane Gauss Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -464,7 +464,7 @@
         components: []
     },
          {
-        _id: "Flux",
+        _id: "Arcane Flux",
         name: "Arcane Flux Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -472,7 +472,7 @@
         components: []
     },
          {
-        _id: "Menticide",
+        _id: "Arcane Menticide",
         name: "Arcane Menticide Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -480,7 +480,7 @@
         components: []
     },
          {
-        _id: "Vespa",
+        _id: "Arcane Vespa",
         name: "Arcane Vespa Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -488,7 +488,7 @@
         components: []
     },
          {
-        _id: "Thrak",
+        _id: "Arcane Thrak",
         name: "Arcane Thrak Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -496,7 +496,7 @@
         components: []
     },
          {
-        _id: "Vanguard",
+        _id: "Arcane Vanguard",
         name: "Arcane Vanguard Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -504,7 +504,7 @@
         components: []
     },
          {
-        _id: "Hemlock",
+        _id: "Arcane Hemlock",
         name: "Arcane Hemlock Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -512,7 +512,7 @@
         components: []
     },
          {
-        _id: "Chlora",
+        _id: "Arcane Chlora",
         name: "Arcane Chlora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -520,7 +520,7 @@
         components: []
     },
          {
-        _id: "Aura",
+        _id: "Arcane Aura",
         name: "Arcane Aura Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -528,7 +528,7 @@
         components: []
     },
          {
-        _id: "Meridian",
+        _id: "Arcane Meridian",
         name: "Arcane Meridian Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -536,7 +536,7 @@
         components: []
     },
          {
-        _id: "Esprit",
+        _id: "Arcane Esprit",
         name: "Arcane Esprit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -544,7 +544,7 @@
         components: []
     },
          {
-        _id: "Gambit",
+        _id: "Arcane Gambit",
         name: "Arcane Gambit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -552,7 +552,7 @@
         components: []
     },
          {
-        _id: "Storm",
+        _id: "Arcane Storm",
         name: "Arcane Storm Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -560,7 +560,7 @@
         components: []
     },
          {
-        _id: "Pulse",
+        _id: "Arcane Pulse",
         name: "Arcane Pulse Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
@@ -568,7 +568,7 @@
         components: []
     },
          {
-        _id: "Skana",
+        _id: "Prisma Skana",
         name: "Prisma Skana",
         type: "Prisma",
         category: "Prisma",
@@ -576,7 +576,7 @@
         components: []
     },
              {
-        _id: "Cleavers",
+        _id: "Prisma Cleavers",
         name: "Prisma Dual Cleavers",
         type: "Prisma",
         category: "Prisma",
@@ -584,7 +584,7 @@
         components: []
     },
              {
-        _id: "Gorgon",
+        _id: "Prisma Gorgon",
         name: "Prisma Gorgon",
         type: "Prisma",
         category: "Prisma",
@@ -592,7 +592,7 @@
         components: []
     },
              {
-        _id: "Grakata",
+        _id: "Prisma Grakata",
         name: "Prisma Grakata",
         type: "Prisma",
         category: "Prisma",
@@ -600,7 +600,7 @@
         components: []
     },
              {
-        _id: "Veritux",
+        _id: "Prisma Veritux",
         name: "Prisma Veritux",
         type: "Prisma",
         category: "Prisma",
@@ -608,7 +608,7 @@
         components: []
     },
              {
-        _id: "Shade",
+        _id: "Prisma Shade",
         name: "Prisma Shade",
         type: "Prisma",
         category: "Prisma",
@@ -616,7 +616,7 @@
         components: []
     },
                  {
-        _id: "Acceleration",
+        _id: "Arcane Acceleration",
         name: "Arcane Acceleration",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -624,7 +624,7 @@
         components: []
     },
                      {
-        _id: "Aegis",
+        _id: "Arcane Aegis",
         name: "Arcane Aegis",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -632,7 +632,7 @@
         components: []
     },
                      {
-        _id: "Agility",
+        _id: "Arcane Agility",
         name: "Arcane Agility",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -640,7 +640,7 @@
         components: []
     },
                      {
-        _id: "Arachne",
+        _id: "Arcane Arachne",
         name: "Arcane Arachne",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -648,7 +648,7 @@
         components: []
     },
                      {
-        _id: "Avenger",
+        _id: "Arcane Avenger",
         name: "Arcane Avenger",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -656,7 +656,7 @@
         components: []
     },
                      {
-        _id: "Awakening",
+        _id: "Arcane Awakening",
         name: "Arcane Awakening",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -664,7 +664,7 @@
         components: []
     },
                      {
-        _id: "Barrier",
+        _id: "Arcane Barrier",
         name: "Arcane Barrier",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -672,7 +672,7 @@
         components: []
     },
                      {
-        _id: "Consequence",
+        _id: "Arcane Consequence",
         name: "Arcane Consequence",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -680,7 +680,7 @@
         components: []
     },
                      {
-        _id: "Deflection",
+        _id: "Arcane Deflection",
         name: "Arcane Deflection",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -688,7 +688,7 @@
         components: []
     },
                      {
-        _id: "Energize",
+        _id: "Arcane Energize",
         name: "Arcane Energize",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -696,7 +696,7 @@
         components: []
     },
                      {
-        _id: "Eruption",
+        _id: "Arcane Eruption",
         name: "Arcane Eruption",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -704,7 +704,7 @@
         components: []
     },
                      {
-        _id: "Fury",
+        _id: "Arcane Fury",
         name: "Arcane Fury",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -712,7 +712,7 @@
         components: []
     },
                      {
-        _id: "Grace",
+        _id: "Arcane Grace",
         name: "Arcane Grace",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -720,7 +720,7 @@
         components: []
     },
                      {
-        _id: "Guardian",
+        _id: "Arcane Guardian",
         name: "Arcane Guardian",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -728,7 +728,7 @@
         components: []
     },
                      {
-        _id: "Healing",
+        _id: "Arcane Healing",
         name: "Arcane Healing",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -736,7 +736,7 @@
         components: []
     },
                      {
-        _id: "Ice",
+        _id: "Arcane Ice",
         name: "Arcane Ice",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -744,7 +744,7 @@
         components: []
     },
                      {
-        _id: "Momemntum",
+        _id: "Arcane Momemntum",
         name: "Arcane Momentum",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -752,7 +752,7 @@
         components: []
     },
                      {
-        _id: "Nullifier",
+        _id: "Arcane Nullifier",
         name: "Arcane Nullifier",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -760,7 +760,7 @@
         components: []
     },
                      {
-        _id: "Phantasm",
+        _id: "Arcane Phantasm",
         name: "Arcane Phantasm",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -768,7 +768,7 @@
         components: []
     },
                      {
-        _id: "Precision",
+        _id: "Arcane Precision",
         name: "Arcane Precision",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -776,7 +776,7 @@
         components: []
     },
                      {
-        _id: "Rage",
+        _id: "Arcane Rage",
         name: "Arcane Rage",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -784,7 +784,7 @@
         components: []
     },
                      {
-        _id: "Resistance",
+        _id: "Arcane Resistance",
         name: "Arcane Resistance",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -792,7 +792,7 @@
         components: []
     },
                      {
-        _id: "Strike",
+        _id: "Arcane Strike",
         name: "Arcane Strike",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -800,7 +800,7 @@
         components: []
     },
                      {
-        _id: "Tempo",
+        _id: "Arcane Tempo",
         name: "Arcane Tempo",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -808,7 +808,7 @@
         components: []
     },
                      {
-        _id: "Trickery",
+        _id: "Arcane Trickery",
         name: "Arcane Trickery",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -816,7 +816,7 @@
         components: []
     },
                      {
-        _id: "Ultimatum",
+        _id: "Arcane Ultimatum",
         name: "Arcane Ultimatum",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -824,7 +824,7 @@
         components: []
     },
                      {
-        _id: "Velocity",
+        _id: "Arcane Velocity",
         name: "Arcane Velocity",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -832,7 +832,7 @@
         components: []
     },
                      {
-        _id: "Victory",
+        _id: "Arcane Victory",
         name: "Arcane Victory",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -840,7 +840,7 @@
         components: []
     },
                      {
-        _id: "Warmth",
+        _id: "Arcane Warmth",
         name: "Arcane Warmth",
         type: "Arcane",
         category: "Arcane Enhancements",
@@ -864,11 +864,923 @@
         components: []
     },
     {
+        _id: "Blind Rage",
+        name: "Blind Rage",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
         _id: "Fleeting Expertise",
         name: "Fleeting Expertise",
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
         components: []
-    }
+    },
+    {
+        _id: "Narrow Minded",
+        name: "Narrow Minded",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Overextended",
+        name: "Overextended",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Transient Fortitude",
+        name: "Transient Fortitude",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Critical Delay",
+        name: "Critical Delay",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Heavy Caliber",
+        name: "Heavy Caliber",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vile Precision",
+        name: "Vile Precision",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Mag",
+        name: "Tainted Mag",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vile Acceleration",
+        name: "Vile Acceleration",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Depleted Reload",
+        name: "Depleted Reload",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Burdened Magazine",
+        name: "Burdened Magazine",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vicious Spread",
+        name: "Vicious Spread",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Shell",
+        name: "Tainted Shell",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frail Momentum",
+        name: "Frail Momentum",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Critical Deceleration",
+        name: "Critical Deceleration",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Anemic Agility",
+        name: "Anemic Agility",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Creeping Bullseye",
+        name: "Creeping Bullseye",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Hollow Point",
+        name: "Hollow Point",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Magnum Force",
+        name: "Magnum Force",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tainted Clip",
+        name: "Tainted Clip",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Spoiled Strike",
+        name: "Spoiled Strike",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Corrupt Charge",
+        name: "Corrupt Charge",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Power Drift",
+        name: "Power Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Coaction Drift",
+        name: "Coaction Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Cunning Drift",
+        name: "Cunning Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Speed Drift",
+        name: "Speed Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Endurance Drift",
+        name: "Endurance Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Agility Drift",
+        name: "Agility Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Stealth Drift",
+        name: "Stealth Drift",
+        type: "Mods",
+        category: "Exilus",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Body Count",
+        name: "Body Count",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Focused Defense",
+        name: "Focused Defense",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Blood Rush",
+        name: "Blood Rush",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Weeping Wounds",
+        name: "Weeping Wounds",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Maiming Strike",
+        name: "Maiming Strike",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Argon Scope",
+        name: "Argon Scope",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Bladed Rounds",
+        name: "Bladed Rounds",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Catalyzer Link",
+        name: "Catalyzer Link",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Guided Ordnance",
+        name: "Guided Ordnance",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Spring-Loaded Chamber",
+        name: "Spring-Loaded Chamber",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shrapnel Shot",
+        name: "Shrapnel Shot",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Laser Sight",
+        name: "Laser Sight",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Repeater Clip",
+        name: "Repeater Clip",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Nano-Applicator",
+        name: "Nano-Applicator",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Narrow Barrel",
+        name: "Narrow Barrel",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Hydraulic Crosshairs",
+        name: "Hydraulic Crosshairs",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Embedded Catalyzer",
+        name: "Embedded Catalyzer",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sharpened Bullets",
+        name: "Sharpened Bullets",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Targeting Subsystem",
+        name: "Targeting Subsystem",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pressurized Magazine",
+        name: "Pressurized Magazine",
+        type: "Mods",
+        category: "Acolyte",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Continuity",
+        name: "Primed Continuity",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Flow",
+        name: "Primed Flow",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Vigor",
+        name: "Primed Vigor",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Fury",
+        name: "Primed Fury",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Pressure",
+        name: "Primed Pressure Point",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Reach",
+        name: "Primed Reach",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Point",
+        name: "Primed Point Blank",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Ravage",
+        name: "Primed Ravage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Morphic",
+        name: "Primed Morphic Transformer",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Gambit",
+        name: "Primed Pistol Gambit",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Heavy",
+        name: "Primed Heavy Trauma",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Target",
+        name: "Primed Target Cracker",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Fast",
+        name: "Primed Fast Hands",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Heated",
+        name: "Primed Heated Charge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Bane",
+        name: "Primed Bane of Infested",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Rifle",
+        name: "Primed Rifle Ammo Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Pistol",
+        name: "Primed Pistol Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Slip",
+        name: "Primed Slip Magazine",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Shotgun",
+        name: "Primed Shotgun Ammo Mutation",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Ammo",
+        name: "Primed Ammo Stock",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Tempo Royale",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shred",
+        name: "Shred",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Buzz Kill",
+        name: "Buzz Kill",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Primed Chamber",
+        name: "Primed Chamber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "High Voltage",
+        name: "High Voltage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rime Rounds",
+        name: "Rime Rounds",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Thermite Rounds",
+        name: "Thermite Rounds",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Jolt",
+        name: "Jolt",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Piercing Caliber",
+        name: "Piercing Caliber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Fanged Fusillade",
+        name: "Fanged Fusillade",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Shell Shock",
+        name: "Shell Shock",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Voltaic Strike",
+        name: "Voltaic Strike",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Malignant Force",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sweeping Serration",
+        name: "Tempo Royale",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frigid Blast",
+        name: "Frigid Blast",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Volcanic Edge",
+        name: "Volcanic Edge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Virulent Scourge",
+        name: "Virulent Scourge",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vicious Frost",
+        name: "Vicious Frost",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Frostbite",
+        name: "Frostbite",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Auger Strike",
+        name: "Auger Strike",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Collision Force",
+        name: "Collision Force",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Magma Chamber",
+        name: "Magma Chamber",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pistol Pestilence",
+        name: "Pistol Pestilence",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Toxic Barrage",
+        name: "Toxic Barrage",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Aviator",
+        name: "Aviator",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Bore",
+        name: "Bore",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Breach Loader",
+        name: "Breach Loader",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Pummel",
+        name: "Pummel",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Crash Course",
+        name: "Crash Course",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Full Contact",
+        name: "Full Contact",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Searing Steel",
+        name: "Searing Steel",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Maim",
+        name: "Maim",
+        type: "Mods",
+        category: "Primed",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vaykor Hek",
+        name: "Vaykor Hek",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Vaykor Marelok",
+        name: "Vaykor Marelok",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Telos Boltor",
+        name: "Telos Boltor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Telos Akbolto",
+        name: "Telos Akbolto",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Synoid Simulor",
+        name: "Synoid Simulor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Synoid Gammacor",
+        name: "Synoid Gammacor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Secura Penta",
+        name: "Secura Penta",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Secura Dual",
+        name: "Secura Dual Cestra",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rakta Cernos",
+        name: "Rakta Cernos",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Rakta Ballistica",
+        name: "Rakta Ballistica",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sancti Tigris",
+        name: "Sancti Tigris",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Sancti Castanas",
+        name: "Sancti Castanas",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Mara Detron",
+        name: "Mara Detron",
+        type: "Special",
+        category: "Weapon",
+        update: 'pending',
+        components: []
+    },
 ]

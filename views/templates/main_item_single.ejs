@@ -16,7 +16,7 @@
                                     <% }); %>
                     </div>
                     <div class='items-images-main-helper'></div>
-                    <img src='<%= img %>items/<%= itemdata.Type %>_<%= itemdata.id %>-min.png' alt='<%= itemdata.Title %>'>
+                    <img src='<%= img %>items/<%= itemdata.Title %>-min.png' alt='<%= itemdata.Title %>'>
                 </div>
 
                 <!-- Item Components -->
@@ -52,7 +52,7 @@
         <h2 class=' main-item-headline-fix'>Weekly Statistics</h2>
         <div class='main-stats'>
             <div class='items-images'>
-                <div class='chart' id="<%= itemdata.id %>"></div>
+                <div class='chart' id="<%- (itemdata.id).replace(/\s/g,'') %>"></div>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
 
         <% if (itemdata.id, itemdata.Components) { %>
             <script>
-                var ItemName = <%- JSON.stringify(itemdata.id)%>;
+                var ItemName = <%- JSON.stringify(itemdata.id).replace(/\s/g,'')%>;
                 var series = [];
                 var compData = <%- JSON.stringify(itemdata.Components) %>;
                 Highcharts.setOptions(options);

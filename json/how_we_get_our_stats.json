@@ -1,0 +1,15 @@
+{
+    "PageTitle": "How do we get our stats?",
+    "Headline": "Reading the chat just like you would! (almost)",
+
+    "content_comps": [
+    {
+        "Title": "NexusBot",
+        "Desc": "Our NexusBot, or '-NexusBot', as seen in the trade chat, is an automated system which takes screenshots from the chat every few seconds and parses the text into computer-readable strings. From there we interpret each request and send it to our servers where statistics are being calculated. We do not rely on any API from Digital Extremes that they have not made available to the public. Though, if someone from DE is reading this, giving such an API to the community would certainly result in great tools for the players to use ;)"
+    },
+        {
+        "Title": "Open Source",
+            "Desc": "While we do not appreciate unauthorized copies of our source code, we believe that providing access to our code is vital for letting people know what's going on behind the scenes, as well as potentially inspiring others to create great tools for this awesome game!<br>As a matter or fact, we're hosting everything on <a href='https://github.com/Mads-Jakobsen/WarframeNexus' target=\"_blank\" ><em>Github<em>.</a>"
+    }
+    ]
+}
