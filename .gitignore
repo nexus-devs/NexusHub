@@ -18,3 +18,4 @@ node_modules/
 /assets/img/generic/fullsize
 /assets/img/items/fullsize
 /npm-debug.log
+/py/tools/sitemap.py
