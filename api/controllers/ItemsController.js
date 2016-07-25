@@ -181,11 +181,8 @@ module.exports = {
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-<<<<<<< HEAD
                                 console.log(comp_val[i])
                                 console.log(comp_count[i])
-=======
->>>>>>> development
                                 comp_val_arr.push((comp_val[i]))
                             } else {
                                 comp_val_arr.push(0)
@@ -195,14 +192,12 @@ module.exports = {
 
                         var avg = 0
                         var avg_b = 0
-<<<<<<< HEAD
                         var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
                         var v_sum = comp_val_arr.reduce(function(pv, cv) { return pv + cv; }, 0);
 
                         console.log(comp_val_arr)
                         console.log(v_sum)
                         avg_b = v_sum/c_sum
-=======
                         var c_sum = comp_count.reduce(function (pv, cv) {
                             return pv + cv;
                         }, 0);
@@ -211,7 +206,6 @@ module.exports = {
                         }, 0);
 
                         avg_b = v_sum / c_sum
->>>>>>> development
 
                         if (v_sum !== 0) {
                             var comp_val_rt = avg_b.toFixed(4)

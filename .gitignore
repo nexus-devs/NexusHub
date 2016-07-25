@@ -19,8 +19,5 @@ node_modules/
 /assets/img/items/fullsize
 /npm-debug.log
 /py/tools/sitemap.py
-<<<<<<< HEAD
-=======
 /sitemap.txt
 /views/google.ejs
->>>>>>> development
