@@ -3,7 +3,7 @@
 
 
 <% include /templates/nav %>
-
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="js/gallery/gallery.js"></script>
     <body>
         <!-- Header -->
@@ -19,15 +19,17 @@
                     <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
                     <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <a href='/how_we_get_our_stats'><em>from the chat</em></a>!</h2>
                 </div>
+
                 <form class='lp-header-input-container' method='get' action='/items/search'>
                     <div class='lp-header-input-helper'></div>
                     <div class='lp-header-input' id='search'>
-                        <input type='text' placeholder='Enter Item Name' name='item'>
+                        <input type='text' placeholder='Enter Item Name' name='item' id='tags'>
                     </div>
                     <button type='button' type='submit'>
                         <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
                     </button>
                 </form>
+
             </div>
         </header>
 
@@ -98,37 +100,38 @@
 
 
         </div>
-
-
-
-
-        <!-- Recently Requested -->
-        <!--==============================-->
-        <!-- <div class='lp-recent-items'>
-            <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
-            <div class='lp-recent-items-shade-l'></div>
-            <div class='lp-recent-items-shade-r'></div>
-            <h2>Recently Requested Items</h2>
-
-
-
-            <div class='lp-recent-items-wr'>
-                 <% content.forEach(function(item) { %>
-                <a href='/<%= item.Type %>/<%= item.Title %>' class='lp-recent-items-item'>
-                    <div class='lp-recent-items-helper'></div>
-                    <img src='<%= img %>items/<%= item.Type %>_<%= item.Title %>.png'>
-                    <div class='lp-recent-items-info'>
-                        <h3><%= item.Title %><%= item.Type %></h3>
-                        <h4>135p</h4>
-                    </div>
-                </a>
-                <% }); %>
-            </div>
-        </div>
-
-   -->
     </body>
-
+    <script>
+        $( function() {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $( "#tags" ).autocomplete({
+                source: availableTags
+            });
+        } );
+    </script>
     <% include /templates/footer %>
 
 </html>
