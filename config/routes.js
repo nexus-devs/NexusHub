@@ -24,10 +24,16 @@
 
 module.exports.routes = {
     '/': 'IndexController',
+
+    // Generic
     'get /jobs': 'GenericController',
     'get /imprint': 'GenericController',
     'get /how_we_get_our_stats': 'GenericController',
     'get /privacy_policy': 'GenericController.privacy',
+    'post /nexusbot/create': 'NexusBotController.create',
+    'get /nexusbot': 'NexusBotController.index',
+
+    // Items
     'get /prime/*': 'ItemsController.index',
     'get /arcane/*': 'ItemsController.index',
     'get /mods/*': 'ItemsController.index',
@@ -35,8 +41,6 @@ module.exports.routes = {
     'get /prisma/*': 'ItemsController.index',
     'get /syndicate/*': 'ItemsController.index',
     'get /special/*': 'ItemsController.index',
-    'get /nexusbot': 'NexusBotController.index',
-    'post /nexusbot/create': 'NexusBotController.create',
     'get /items/search': 'ItemsController.search',
     'post /requests': 'RequestsController.create'
 
