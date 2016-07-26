@@ -5,7 +5,7 @@
         type: "Special",
         category: "Warframe",
         update: 'pending',
-        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+        components: ["Neuroptics", "Chassis", "Systems"]
     },
     {
         _id: "Ash",
