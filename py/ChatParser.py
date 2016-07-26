@@ -34,11 +34,20 @@ import time
 
 
 # Connect to MongoDB
-client = MongoClient('mongodb://192.168.2.101:27017/')
+client = MongoClient('mongodb://localhost:27017/')
 db = client.warframenexus
+
+# Set up Request Lists to avoid double-posting in short time
 timestart = calendar.timegm(time.gmtime())
-RequestCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-NexusBotCache = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+NexusBotCount = 7
+RequestCache = []
+NexusBotCache = []
+for i in range(0, 30):
+    RequestCache.append(i)
+for i in range(0, 6):
+    NexusBotCache.append(i)
+
+
 
 
 while True:
@@ -181,23 +190,23 @@ while True:
 
     #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
-    E_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE', 'ACCELERATION', 'AEGIS', 'AGILITY', 'ARACHNE', 'AVENGER', 'AWAKENING', 'BARRIER', 'CONSEQUENCE', 'DEFLECTION', 'ENERGIZE', 'ERUPTION', 'FURY', 'GRACE', 'GUARDIAN', 'HEALING', 'ICE', 'MOMENTUM', 'NULLIFIER', 'PHANTASM', 'PRECISION', 'PULSE', 'RAGE', 'RESISTANCE', 'STRIKE', 'TEMPO', 'TRICKERY', 'ULTIMATUM', 'VELOCITY', 'VICTORY', 'WARMTH']
-    E_Mods = ['FLEETING']
-    E_Special = ['NEZHA']
-    E_Prisma = ['SKANA', 'SHADE', 'CLEAVERS', 'GORGON', 'VERITUX', 'GRAKATA', 'TETRA']
-    #E_Primed = ['PRIMED']
+    E_Arcane = ['ARCANE']
+    E_Mods = ['PRIMED', 'FANGED', 'SHELL', 'TEMPO', 'AUGER', 'COLLISION', 'MAGMA', 'FULL', 'SEARING', 'MAIM', 'PISTOL', 'TOXIC', 'AVIATOR', 'BORE', 'BREACH', 'PUMMEL', 'CRASH', 'VOLTAIC', 'MALIGNANT', 'FROSTBITE', 'SWEEPING', 'VOLCANIC', 'FRIGID', 'VIRULENT', 'SHRED', 'BUZZ', 'HIGH', 'RIME', 'THERMITE', 'JOLT', 'PIERCING', 'FLEETING','TRANSIENT', 'POWER', 'RAGE', 'COACTION', 'BLIND', 'NARROW', 'CONTINUITY', 'CUNNING', 'ARMORED', 'INTENSIFY', 'OVEREXTENDED', 'ENERGY SIPHON', 'AGILITY', 'ENDURANCE', 'SPEED', 'STEALTH', 'CRITICAL', 'HEAVY', 'VILE', 'TAINTED', 'VILE', 'DEPLETED', 'BURDENED', 'VICIOUS', 'TAINTED', 'FRAIL', 'ANEMIC', 'CREEPING', 'HOLLOW', 'MAGNUM', 'SPOILED', 'CORRUPT', 'BODY', 'FOCUSED', 'BLOOD', 'WEEPING', 'MAIMING', 'ARGON', 'BLADED', 'CATALYZER', 'GUIDED', 'SPRING-LOADED', 'SHRAPNEL', 'LASER', 'REPEATER', 'NANO-APPLICATOR', 'NARROW', 'HYDRAULIC', 'EMBEDDED', 'SHARPENED', 'TARGETING', 'PRESSURIZED']
+    E_Special = ['NEZHA', 'MARA',]
+    E_Prisma = ['PRISMA']
+    E_Syndicate = ['VAYKOR', 'TELOS', 'SYNOID', 'SECURA', 'RAKTA', 'SANCTI']
     E_Kavat = ['SMEETA', 'ADARZA']
 
-    C_Prime = ['BAND', 'BARREL', 'BLADE', 'BUCKLE', 'CARAPACE', 'CEREBRUM', 'CHASSIS', 'DISC', 'GAUNTLET', 'GRIP', 'HANDLE', 'HARNESS', 'HEAD', 'HILT', 'LINK', 'LIMB', 'POUCH', 'RECEIVER', 'STARS', 'WINGS']
+    C_Prime = ['BAND', 'BARREL', 'BLADE', 'BUCKLE', 'CARAPACE', 'CEREBRUM', 'CHASSIS', 'DISC', 'GAUNTLET', 'GRIP', 'HANDLE', 'HARNESS', 'HEAD', 'HILT', 'LINK', 'LIMB', 'POUCH', 'RECEIVER', 'STARS', 'WINGS', 'STOCK']
     C_Prime_Basic = []
     C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
-    C_Arcane = []
-    C_Mods = ['EXPERTISE']
-    C_Special = []
+    C_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE', 'ACCELERATION', 'AEGIS', 'AGILITY', 'ARACHNE', 'AVENGER', 'AWAKENING', 'BARRIER', 'CONSEQUENCE', 'DEFLECTION', 'ENERGIZE', 'ERUPTION', 'FURY', 'GRACE', 'GUARDIAN', 'HEALING', 'ICE', 'MOMENTUM', 'NULLIFIER', 'PHANTASM', 'PRECISION', 'PULSE', 'RAGE', 'RESISTANCE', 'STRIKE', 'TEMPO', 'TRICKERY', 'ULTIMATUM', 'VELOCITY', 'VICTORY', 'WARMTH']
+    C_Mods = ['CHAMBER', 'FUSILLADE', 'SHOCK', 'ROYALE', 'PESTILENCE', 'BARRAGE', 'CONTACT', 'STEEL', 'LOADER', 'COURSE', 'STRIKE', 'FORCE', 'SERRATION', 'BLAST', 'EDGE', 'SCOURGE', 'FROST', 'KILL', 'VOLTAGE', 'ROUNDS', 'CALIBER', 'CONTINUITY', 'FAST', 'FLOW', 'FURY', 'PRESSURE', 'HEATED', 'VIGOR', 'RAVAGE', 'POINT', 'SHOTGUN', 'REACH', 'HEAVY', 'RIFLE', 'PISTOL', 'GAMBIT', 'SLIP', 'TARGET', 'MORPHIC', 'EXPERTISE', 'FORTITUDE', 'DRIFT', 'RAGE', 'MINDED', 'AGILITY', 'SIPHON', 'DELAY', 'CALIBER', 'PRECISION', 'MAG', 'ACCELERATION', 'RELOAD', 'MAGAZINE', 'SPREAD', 'SHELL', 'MOMENTUM', 'DECELERATION', 'BULLSEYE', 'POINT', 'FORCE', 'CLIP', 'STRIKE', 'CHARGE', 'COUNT', 'DEFENSE', 'RUSH', 'WOUNDS', 'STRIKE', 'SCOPE', 'ROUNDS', 'LINK', 'ORDINANCE', 'CHAMBER', 'SHOT', 'SIGHT', 'BARREL', 'CROSSHAIRS', 'CATALYZER', 'BULLETS', 'SUBSYSTEMS', 'MAGAZINE']
+    C_Special = ['DETRON']
     C_Special.extend(Blueprint + Systems + Chassis +  Neuroptics)
-    C_Prisma = []
-    C_Primed = []
+    C_Prisma = ['SKANA', 'SHADE', 'CLEAVERS', 'GORGON', 'VERITUX', 'GRAKATA', 'TETRA']
+    C_Syndicate = ['HEK', 'BOLTOR', 'SIMULOR', 'PENTA', 'CERNOS', 'TIGRIS', 'MARELOK', 'AKBOLTO', 'GAMMACOR', 'DUAL', 'BALLISTICA', 'CASTANAS']
     C_Kavat = []
 
 
@@ -281,7 +290,7 @@ while True:
 
 
             # Check if Item in List, assign component list to check
-            ListsToCheck = ['Prime', 'Arcane', 'Mods', 'Special', 'Prisma', 'Kavat']
+            ListsToCheck = ['Prime', 'Arcane', 'Mods', 'Special', 'Prisma', 'Kavat', 'Syndicate']
             for x in range(0, len(ListsToCheck)):
                 E_List = eval('E_' + str(ListsToCheck[x]))
                 C_List = eval('C_' + str(ListsToCheck[x]))
@@ -406,7 +415,7 @@ while True:
 
 
             # Type = Mods/Other
-            elif REQ_Type == 'Mods' or REQ_Type == 'Arcane' or REQ_Type == 'Prisma' or REQ_Type == 'Kavat':
+            elif REQ_Type == 'Mods' or REQ_Type == 'Arcane' or REQ_Type == 'Prisma' or REQ_Type == 'Kavat' or REQ_Type == 'Syndicate':
 
                 #If has Components > merge (only mods have 'components')
                 if len(REQ) > 4:
@@ -435,7 +444,7 @@ while True:
 
 
             # If Request is valid, send to server
-            if not Username in RequestCache and REQ_TO == 'WTS' or REQ_TO == 'WTB':
+            if not Username in RequestCache and (REQ_TO == 'WTS' or REQ_TO == 'WTB'):
 
                 # Open secret password (hi github)
                 with open('./sources/pwd.txt', 'r') as myfile:
@@ -453,7 +462,7 @@ while True:
                     'password': pwd
                 }
 
-                res = requests.post('http://192.168.2.101:80', data=json.dumps(payload))
+                res = requests.post('localhost:1337', data=json.dumps(payload))
 
 
 
@@ -462,11 +471,11 @@ while True:
             #---------------------------
 
             # Find relevant item information
-            if REQ_TO == 'PC' and not Username == 'xPsycon' and (calendar.timegm(time.gmtime()) - timestart) > 90:
+            if REQ_TO == 'PC' and not Username == 'NexusBot' and (calendar.timegm(time.gmtime()) - timestart) > 90:
 
                 #Update itemcache and pull stats
-                update_cache = requests.get('http://192.168.2.101:80/' + REQ_Type + '/' + REQ_Main)
-                time.sleep(0.25)
+                update_cache = requests.get('localhost:1337' + REQ_Type + '/' + REQ_Main)
+                time.sleep(0.25) #Wait for stats to process
                 cursor = db.itemcache.find({"_id": REQ_Main})
                 REQ_Check = 'invalid'
 
@@ -484,7 +493,6 @@ while True:
 
                             for i in range(len(Component["data"])):
                                 if Component["data"][i] is not None:
-                                    print(Component["data"][i])
                                     ComponentData.append(Component["data"][i])
                                     ComponentNotNull = ComponentNotNull + 1
 
@@ -513,7 +521,15 @@ while True:
                 # Create Message
                 debug = 'true'
                 if REQ_Check == 'valid' and debug == 'false':
-                    ItemInfo = NexusBot.ReplyPC(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+
+                    # Only include website on every 7th price check
+                    if NexusBotCount == 7:
+                        ItemInfo = NexusBot.ReplyPC_Full(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+                        NexusBotCount = 0
+                    elif NexusBotCount < 7:
+                        ItemInfo = NexusBot.ReplyPC(Username, ItemName, ComponentName, ItemPriceLow, ItemPriceHigh, ItemPriceAvg)
+                        NexusBotCount = NexusBotCount + 1
+
                     if not ItemInfo in NexusBotCache:
                         timestart = calendar.timegm(time.gmtime())
                         NexusBotCache.pop(0)
