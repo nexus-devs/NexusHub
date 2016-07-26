@@ -3,6 +3,8 @@
         <h2><%= itemdata.Title %></h2>
         <div class='items-images'>
 
+
+
             <!-- Item Info -->
             <div class='items-images-main'>
                 <div class='items-images-main-conent'>
@@ -17,6 +19,8 @@
                 <div class='items-images-main-helper'></div>
                 <img src='<%= img %>items/<%= itemdata.Title %>-min.png' alt='<%= itemdata.Title %>'>
             </div>
+
+
 
             <!-- Item Components -->
             <div class='items-images-components'>
@@ -38,12 +42,14 @@
                         <% }); %>
 
 
-
-
                 </div>
             </div>
         </div>
+        <% if (itemdata.Type !== 'Prime') { %>
+        <a href='/<%= itemdata.Type %>/<%= itemdata.Title %>'>Go to Item Page</a>
+        <% } else { %>
         <a href='/<%= itemdata.Type %>/<%= itemdata.id %>'>Go to Item Page</a>
+        <% } %>
     </div>
     <div class='items-item-stats'>
         <h2>Weekly Statistics</h2>
