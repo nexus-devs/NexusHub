@@ -197,7 +197,7 @@ while True:
     E_Syndicate = ['VAYKOR', 'TELOS', 'SYNOID', 'SECURA', 'RAKTA', 'SANCTI']
     E_Kavat = ['SMEETA', 'ADARZA']
 
-    C_Prime = ['BAND', 'BARREL', 'BLADE', 'BUCKLE', 'CARAPACE', 'CEREBRUM', 'CHASSIS', 'DISC', 'GAUNTLET', 'GRIP', 'HANDLE', 'HARNESS', 'HEAD', 'HILT', 'LINK', 'LIMB', 'POUCH', 'RECEIVER', 'STARS', 'WINGS', 'STOCK']
+    C_Prime = ['BAND', 'BARREL', 'BLADE', 'BUCKLE', 'CARAPACE', 'CEREBRUM', 'CHASSIS', 'DISC', 'GAUNTLET', 'GRIP', 'HANDLE', 'HARNESS', 'HEAD', 'HILT', 'LINK', 'LIMB', 'ORNAMENT', 'POUCH', 'RECEIVER', 'STARS', 'WINGS', 'STOCK']
     C_Prime_Basic = []
     C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
