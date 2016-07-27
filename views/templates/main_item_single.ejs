@@ -33,8 +33,12 @@
                                     </div>
                                     <div class='items-component-details'>
                                         <h3><%= item.name %></h3>
-                                        <h4><%= item.avg %></h4>
-                                        <span> | <%= item.comp_val_rt %></span>
+                                        <% if (item.avg !== '') { %>
+                                        <h4><%- Math.round (parseInt(item.avg) / 5)*5 %>p&nbsp;</h4>
+                                        <span> |&nbsp; <%= item.comp_val_rt %></span>
+                                        <% } else { %>
+                                        <span>COMING SOON™</span>
+                                        <% } %>
                                     </div>
                                 </div>
                                 <% } %>
