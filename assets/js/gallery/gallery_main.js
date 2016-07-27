@@ -19,8 +19,8 @@ $(document).ready(function () {
         speedLog = [],
         speedLogLimit = 5,
         minBlur = 2,
-        maxBlur = 200,
-        blurMultiplier = 0.25,
+        maxBlur = 100,
+        blurMultiplier = 0.15,
         lastBlur = 0,
         dragging = false,
         lastDragPos = {
