@@ -42,8 +42,20 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, itemnamefull, callback) {
-                if (item[0].update !== 'fpending') { // === 'pending' normally
+                if (item[0].update !== 'pending') { // === 'pending' normally
+
+                    // Set item as updated -> won't run this all again unless new request comes in
+                    ItemList.native(function (err, collection) {
+                        collection.update({
+                            "_id": itemname,
+                        }, {
+                            $set: {
+                                "update": 'false'
+                            }
+                        })
+                    })
                     callback(null, item, itemnamefull)
+
                 } else {
                     Itemcache.find({
                         _id: itemname
@@ -192,12 +204,16 @@ module.exports = {
 
                         var avg = 0
                         var avg_b = 0
-                        var c_sum = comp_count.reduce(function(pv, cv) { return pv + cv; }, 0);
-                        var v_sum = comp_val_arr.reduce(function(pv, cv) { return pv + cv; }, 0);
+                        var c_sum = comp_count.reduce(function (pv, cv) {
+                            return pv + cv;
+                        }, 0);
+                        var v_sum = comp_val_arr.reduce(function (pv, cv) {
+                            return pv + cv;
+                        }, 0);
 
                         console.log(comp_val_arr)
                         console.log(v_sum)
-                        avg_b = v_sum/c_sum
+                        avg_b = v_sum / c_sum
                         var c_sum = comp_count.reduce(function (pv, cv) {
                             return pv + cv;
                         }, 0);
@@ -236,7 +252,7 @@ module.exports = {
 
                         comp_data.reverse()
 
-                        // visibile: false if SET w/ multi components
+                        // visible: false if SET w/ multi components
                         if (component === 'Set' && single_item === 'true') {
                             Itemcache.native(function (err, collection) {
                                 collection.update({
@@ -338,27 +354,16 @@ module.exports = {
                     })
                 })
 
-                // Set item as updated -> won't run this all again unless new request comes in
-                ItemList.native(function (err, collection) {
-                    collection.update({
-                        "_id": itemname,
-                    }, {
-                        $set: {
-                            "update": 'false'
-                        }
-                    })
-                })
-
                 //console.log('SupDemNum: ' + SupDemNum)
                 //console.log('Percentages: ' + SupDem)
                 //console.log('----------------------')
 
                 callback();
-            },
+                                },
 
 
-            // Render view
-            function (callback) {
+                                // Render view
+                                function (callback) {
                 Itemcache.find({
                     _id: itemname
                 }).exec(function (err, itemobj) {
@@ -373,7 +378,7 @@ module.exports = {
                         img: "../img/"
                     })
                 })
-            }])
+                                }])
     },
 
 

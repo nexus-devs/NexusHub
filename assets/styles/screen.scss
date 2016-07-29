@@ -650,7 +650,7 @@ footer {
 @media (max-width:100em) {
         .items-item{
         width:60vw;
-            min-width:500px;
+            min-width:1000px;
     }
     .items-item{
         .items-item-stats {
@@ -674,13 +674,13 @@ footer {
     }
 }
 
-@media (max-width: 73em) {
+@media (max-width: 90em) {
     .top-nav-links a:nth-of-type(2) {
         display: none;
     }
 }
 
-@media (max-width: 60em) {
+@media (max-width: 70em) {
     .top-nav-links a {
         display: none;
     }
@@ -922,6 +922,14 @@ background:transparent !important;
         margin-top:40px;
     }
     input{
+                @include input;
+            @include input-placeholder($color-subtle);
+        @include font-default($color-subtle);
+        margin-top:10px;
+        padding:15px 40px;
+        background:#dee3e6;
+    }
+    textarea{
                 @include input;
             @include input-placeholder($color-subtle);
         @include font-default($color-subtle);

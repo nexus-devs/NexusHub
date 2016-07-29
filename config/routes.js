@@ -33,6 +33,10 @@ module.exports.routes = {
     'post /nexusbot/create': 'NexusBotController.create',
     'get /nexusbot': 'NexusBotController.index',
 
+    // Feedback
+    'get /feedback': 'FeedbackController.index',
+    'post /feedback': 'FeedbackController.create',
+
     // Items
     'get /prime/*': 'ItemsController.index',
     'get /arcane/*': 'ItemsController.index',

@@ -6,11 +6,6 @@ $(document).ready(function () {
     console.log('Find any bugs or security issues? Contact us on https://github.com/Mads-Jakobsen/WarframeNexus/issues . We greatly appreciate your help :)')
     $('.top-nav-search > input').css('opacity', '1');
 
-    // Initialize sockets
-    io.socket.on('user', function gotHelloMessage(data) {
-        console.log('User alert!');
-    });
-
     // Auto focus search
     $('.lp-header-input > input').focus()
 })

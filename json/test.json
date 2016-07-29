@@ -1,5 +1,5 @@
 [
-        {
+    {
         _id: "Nezha",
         name: "Nezha",
         type: "Special",
@@ -864,6 +864,30 @@
         components: []
     },
     {
+        _id: "Life Strike",
+        name: "Life Strike",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Quickening",
+        name: "Quickening",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
+        _id: "Corrupt Charge",
+        name: "Corrupt Charge",
+        type: "Mods",
+        category: "Corrupted",
+        update: 'pending',
+        components: []
+    },
+    {
         _id: "Blind Rage",
         name: "Blind Rage",
         type: "Mods",
@@ -1034,14 +1058,6 @@
     {
         _id: "Spoiled Strike",
         name: "Spoiled Strike",
-        type: "Mods",
-        category: "Corrupted",
-        update: 'pending',
-        components: []
-    },
-    {
-        _id: "Corrupt Charge",
-        name: "Corrupt Charge",
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
@@ -1782,5 +1798,13 @@
         category: "Weapon",
         update: 'pending',
         components: []
+    },
+    {
+        _id: "Cyngas",
+        name: "Cyngas",
+        type: "Special",
+        category: "Weapon",
+        update: 'pending',
+        components: ['Barrel', 'Receiver', 'Stock']
     },
 ]
