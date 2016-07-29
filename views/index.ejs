@@ -330,6 +330,17 @@
             ];
             $("#tags").autocomplete({
                 source: availableTags,
+                response: function(event, ui) {
+                    $('#spinner').hide();
+                },
+                messages: {
+                    noResults: '',
+                    results: function() {}
+                }
+            }).keyup(function (e) {
+                if(e.which === 13) {
+                    $(".ui-menu-item").hide();
+                }
             });
         });
     </script>

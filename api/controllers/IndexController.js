@@ -51,7 +51,7 @@ module.exports = {
             var ran_two = (Math.floor(Math.random() * (additional_items.length)))
             var j = 0
 
-            additional_items.forEach(function(additional_item){
+            additional_items.forEach(function (additional_item) {
                 if (j === ran_one) {
                     ran_obj_1 = additional_item
                 } else if (j === ran_two) {
@@ -62,6 +62,13 @@ module.exports = {
 
 
             var pop_items = [pop_obj_1, pop_obj_2, pop_obj_3, ran_obj_1, ran_obj_2]
+            var x = 0
+            pop_items.forEach(function (pop_item) {
+                if (typeof pop_item.Title === 'undefined') {
+                    pop_items.pop(x)
+                }
+                x++
+            })
 
             return res.view('index', {
                 content: pop_items,
