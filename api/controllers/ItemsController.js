@@ -42,7 +42,7 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, itemnamefull, callback) {
-                if (item[0].update !== 'pending') { // === 'pending' normally
+                if (item[0].update !== 'not pending') { // === 'pending' normally
 
                     // Set item as updated -> won't run this all again unless new request comes in
                     ItemList.native(function (err, collection) {
@@ -134,14 +134,19 @@ module.exports = {
 
                         // Clear values when starting with new component // generate array w/ 0 for timerange
                         var comp_val_arr = []
-                        var comp_count = []
-                        for (var i = 0; i < timerange; i++) {
-                            comp_count.push(0)
-                        }
                         var comp_val = []
                         for (var i = 0; i < timerange; i++) {
                             comp_val.push(0)
                         }
+                        var comp_count = []
+                        for (var i = 0; i < timerange; i++) {
+                            comp_count.push(0)
+                        }
+                        var req_arr = {}
+                        for (var i = 0; i < timerange; i++) {
+                            req_arr[i] = []
+                        }
+
 
                         // For each user, check if item in each request (loop through every relevant request)
                         user.forEach(function (user) {
@@ -171,13 +176,8 @@ module.exports = {
 
                                                     // If request at 'i' day, value and position to according place
                                                     if (Math.floor(delta) === i) {
-
-                                                        // If Request data is legit
-                                                        if (req_component.data !== 'null' && req_component.data >= 10 && req_component.data < 3000 && req_item.components[0].to === 'WTS') {
-
-                                                            // then add requested value to value array
-                                                            comp_val[i] = +comp_val[i] + (+req_component.data)
-                                                            comp_count[i]++
+                                                        if (req_component.data !== 'null'){
+                                                            req_arr[i].push(req_component.data)
                                                         }
                                                     }
                                                 }
@@ -186,21 +186,58 @@ module.exports = {
                                     }
                                 })
                             })
-                            //console.log(comp_count)
+
+
+                            for(var y = 0; y < timerange; y++){
+                                var req_arr_day = req_arr[y]
+                                var req_arr_clean = []
+                                var req_arr_real = []
+
+
+                                // Filter out Max Limit entries
+                                for(var i = 0; i < req_arr_day.length; i++){
+                                    if (req_arr_day[i] < 2500){
+                                        req_arr_clean.push(+req_arr_day[i])
+                                    }
+                                }
+
+
+                                // Create daily average
+                                var req_sum = req_arr_clean.reduce(function (pv, cv) {
+                                    return pv + cv;
+                                }, 0);
+
+                                var req_avg = req_sum / req_arr_clean.length
+
+
+                                // Remove Entries above 300% price & below 33% price
+                                req_arr_clean.forEach(function(request){
+                                    if (request < 3 * req_avg && request > 0.3 * req_avg){
+                                        req_arr_real.push(request)
+                                    }
+                                })
+
+
+                                // Create full day value for later steps
+                                var req_arr_real_sum = req_arr_real.reduce(function (pv, cv) {
+                                    return pv + cv;
+                                }, 0);
+
+                                comp_val[y] = req_arr_real_sum
+                                comp_count[y] = req_arr_real.length
+                            }
 
 
                         // Generate average value
-
+                        console.log(comp_val)
+                        console.log(comp_count)
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                console.log(comp_val[i])
-                                console.log(comp_count[i])
                                 comp_val_arr.push((comp_val[i]))
                             } else {
                                 comp_val_arr.push(0)
                             }
                         }
-
 
                         var avg = 0
                         var avg_b = 0
@@ -211,8 +248,6 @@ module.exports = {
                             return pv + cv;
                         }, 0);
 
-                        console.log(comp_val_arr)
-                        console.log(v_sum)
                         avg_b = v_sum / c_sum
                         var c_sum = comp_count.reduce(function (pv, cv) {
                             return pv + cv;
@@ -243,7 +278,7 @@ module.exports = {
 
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                comp_data.push(((comp_val_arr[i]) + ((c_sum - comp_count[i]) * avg_b)) / c_sum)
+                                comp_data.push((((comp_val_arr[i] / comp_count[i]) * (comp_count[i] * 2)) + ((c_sum - (comp_count[i] * 2)) * avg_b)) / c_sum)
                             } else {
                                 comp_data.push(null)
                             }
