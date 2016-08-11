@@ -23,6 +23,12 @@ module.exports = {
         var itemname = title(url.split('/').pop().replace("%20", " "))
         var timerange = 7 // This would usually be included in POST method of time range selection in main screen
 
+        console.log('[CLIENT]')
+        console.log('item: ' + itemname)
+        console.log('type: ' + itembase)
+        console.log('==========================')
+        console.log(' ')
+
 
         async.waterfall([
 
@@ -42,7 +48,13 @@ module.exports = {
 
             // Check if item has been updated
             function checkUpdate(item, itemnamefull, callback) {
-                if (item[0].update !== 'not pending') { // === 'pending' normally
+                var prevTime = new Date(item[0].updatedAt);
+                var thisTime = new Date();
+                var diff = thisTime.getTime() - prevTime.getTime();
+                var delta = (diff / (1000 * 60 * 60 * 24));
+
+
+                if (item[0].update === 'pending' && delta > 0.99) { // === 'pending' normally
 
                     // Set item as updated -> won't run this all again unless new request comes in
                     ItemList.native(function (err, collection) {
@@ -50,7 +62,8 @@ module.exports = {
                             "_id": itemname,
                         }, {
                             $set: {
-                                "update": 'false'
+                                "update": 'false',
+                                "updatedAt": new Date()
                             }
                         })
                     })
@@ -96,11 +109,6 @@ module.exports = {
                 var WTB = 0
                 var WTS = 0
 
-                console.log('[CLIENT]')
-                console.log('item: ' + itemname)
-                console.log('type: ' + itembase)
-                console.log('==========================')
-                console.log(' ')
 
 
                 Itemcache.native(function (err, collection) {
@@ -150,87 +158,85 @@ module.exports = {
 
                         // For each user, check if item in each request (loop through every relevant request)
                         user.forEach(function (user) {
-                                user.requests.forEach(function (req_item) {
+                            user.requests.forEach(function (req_item) {
 
-                                    // Validate request belonging to item
-                                    if (req_item.title === itemname) {
-                                        req_item.components.forEach(function (req_component) {
+                                // Validate request belonging to item
+                                if (req_item.title === itemname) {
+                                    req_item.components.forEach(function (req_component) {
 
-                                            // Check Time between Request and now
-                                            var prevTime = new Date(req_item.updatedAt);
-                                            var thisTime = new Date();
-                                            var diff = thisTime.getTime() - prevTime.getTime();
-                                            var delta = (diff / (1000 * 60 * 60 * 24));
+                                        // Check Time between Request and now
+                                        var prevTime = new Date(req_item.updatedAt);
+                                        var thisTime = new Date();
+                                        var diff = thisTime.getTime() - prevTime.getTime();
+                                        var delta = (diff / (1000 * 60 * 60 * 24));
 
-                                            // Check if Request has been comitted within timerange
-                                            if (component === req_component.name && delta < timerange) {
+                                        // Check if Request has been comitted within timerange
+                                        if (component === req_component.name && delta < timerange) {
 
-                                                if (req_item.components[0].to === 'WTB') {
-                                                    WTB++
-                                                } else {
-                                                    WTS++
-                                                }
+                                            if (req_item.components[0].to === 'WTB') {
+                                                WTB++
+                                            } else {
+                                                WTS++
+                                            }
 
-                                                // Generate data array
-                                                for (var i = 0; i < timerange; i++) {
+                                            // Generate data array
+                                            for (var i = 0; i < timerange; i++) {
 
-                                                    // If request at 'i' day, value and position to according place
-                                                    if (Math.floor(delta) === i) {
-                                                        if (req_component.data !== 'null'){
-                                                            req_arr[i].push(req_component.data)
-                                                        }
+                                                // If request at 'i' day, value and position to according place
+                                                if (Math.floor(delta) === i) {
+                                                    if (req_component.data !== 'null') {
+                                                        req_arr[i].push(req_component.data)
                                                     }
                                                 }
                                             }
-                                        })
-                                    }
-                                })
+                                        }
+                                    })
+                                }
+                            })
+                        })
+
+                        // Price Filter Functions
+                        for (var y = 0; y < timerange; y++) {
+                            var req_arr_day = req_arr[y]
+                            var req_arr_clean = []
+                            var req_arr_real = []
+
+
+                            // Filter out Max Limit entries & Single Offers
+                            for (var i = 0; i < req_arr_day.length; i++) {
+                                if (req_arr_day[i] < 2500 && req_arr_day.length > 3) {
+                                    req_arr_clean.push(+req_arr_day[i])
+                                }
+                            }
+
+                            // Create daily average
+                            var req_sum = req_arr_clean.reduce(function (pv, cv) {
+                                return pv + cv;
+                            }, 0);
+
+                            var req_avg = req_sum / req_arr_clean.length
+
+
+                            // Remove Entries above 300% price & below 33% price
+                            req_arr_clean.forEach(function (request) {
+                                if (request < 3 * req_avg && request > 0.3 * req_avg) {
+                                    req_arr_real.push(request)
+                                }
                             })
 
 
-                            for(var y = 0; y < timerange; y++){
-                                var req_arr_day = req_arr[y]
-                                var req_arr_clean = []
-                                var req_arr_real = []
+                            // Create full day value for later steps
+                            var req_arr_real_sum = req_arr_real.reduce(function (pv, cv) {
+                                return pv + cv;
+                            }, 0);
 
+                            comp_val[y] = req_arr_real_sum
+                            comp_count[y] = req_arr_real.length
+                        }
 
-                                // Filter out Max Limit entries
-                                for(var i = 0; i < req_arr_day.length; i++){
-                                    if (req_arr_day[i] < 2500){
-                                        req_arr_clean.push(+req_arr_day[i])
-                                    }
-                                }
-
-
-                                // Create daily average
-                                var req_sum = req_arr_clean.reduce(function (pv, cv) {
-                                    return pv + cv;
-                                }, 0);
-
-                                var req_avg = req_sum / req_arr_clean.length
-
-
-                                // Remove Entries above 300% price & below 33% price
-                                req_arr_clean.forEach(function(request){
-                                    if (request < 3 * req_avg && request > 0.3 * req_avg){
-                                        req_arr_real.push(request)
-                                    }
-                                })
-
-
-                                // Create full day value for later steps
-                                var req_arr_real_sum = req_arr_real.reduce(function (pv, cv) {
-                                    return pv + cv;
-                                }, 0);
-
-                                comp_val[y] = req_arr_real_sum
-                                comp_count[y] = req_arr_real.length
-                            }
 
 
                         // Generate average value
-                        console.log(comp_val)
-                        console.log(comp_count)
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
                                 comp_val_arr.push((comp_val[i]))
@@ -274,11 +280,16 @@ module.exports = {
                         // (( avg[i] * c[i] ) + (( c_sum - c[i] ) * avg_b )) / c_sum
                         var comp_data = []
 
-                        //console.log(c_sum)
-
                         for (var i = 0; i < timerange; i++) {
                             if (comp_val[i] !== 0) {
-                                comp_data.push((((comp_val_arr[i] / comp_count[i]) * (comp_count[i] * 2)) + ((c_sum - (comp_count[i] * 2)) * avg_b)) / c_sum)
+                                var avg_pure = comp_val_arr[i] / comp_count[i]
+                                var avg_single = ((avg_pure * comp_count[i] * 2) + ((c_sum - comp_count[i] * 2) * avg_b)) / c_sum
+                                if (avg_single > 0) {
+                                    comp_data.push(avg_single)
+                                } else {
+                                    comp_data.push(null)
+                                }
+
                             } else {
                                 comp_data.push(null)
                             }
@@ -389,6 +400,11 @@ module.exports = {
                     })
                 })
 
+                console.log('[SYSTEM]')
+                console.log('Updated ' + itemname)
+                console.log('==========================')
+                console.log(' ')
+
                 //console.log('SupDemNum: ' + SupDemNum)
                 //console.log('Percentages: ' + SupDem)
                 //console.log('----------------------')
@@ -491,5 +507,20 @@ module.exports = {
 
             }) // End Query
 
+    },
+
+
+    query:function (req, res) {
+        Itemcache.find().exec(function (err, data) {
+            if (err) {
+                callback(err, null)
+                return
+            }
+            console.log('[SYSTEM]')
+            console.log('API Call')
+            console.log('==========================')
+            console.log(' ')
+            return res.json(data)
+        })
     }
 }
