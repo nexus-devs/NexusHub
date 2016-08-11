@@ -13,11 +13,11 @@ $(document).ready(function () {
         },
         GalPos = 0,
         currentImage = 0,
-        imageWidth = $($galleryPicture).width() * 0.8000,
+        imageWidth = $($galleryPicture).width(),
         imageSpacing = 0,
         imageTotalWidth = imageWidth + imageSpacing,
         speedLog = [],
-        speedLogLimit = 5,
+        speedLogLimit = 3,
         minBlur = 2,
         maxBlur = 100,
         blurMultiplier = 0.15,
@@ -90,7 +90,7 @@ $(document).ready(function () {
     function setGalleryPos(v, anim) {
         if (typeof anim == "undefined") anim = true;
         stopMomentum();
-        TweenMax.to(galleryPos, anim ? 1.4 : 0, {
+        TweenMax.to(galleryPos, anim ? 1.1 : 0, {
             x: -v * imageTotalWidth,
             ease: Quint.easeOut,
             onUpdate: updateGalleryPos,

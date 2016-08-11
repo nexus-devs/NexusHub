@@ -120,7 +120,7 @@ while True:
     Msg = [each.replace('\n', '') for each in Msg]
     Msg = [each.replace('\s \n', '') for each in Msg]
 
-    Filters = ['â€˜', 'Â»', 'â€”', '>', '*', '!', '<', '=', '/', '\b', '[', ']', '|', '(', ')', ',', "'"]
+    Filters = ['â€˜', 'Ã', 'Â»', 'â€”', '>', '*', '!', '<', '=', '/', '\b', '[', ']', '|', '(', ')', ',', "'"]
 
     for i in range(0, len(Filters)):
         Msg = [each.replace(Filters[i], ' ') for each in Msg]
@@ -191,8 +191,8 @@ while True:
     #Define valid items
     E_Prime = ['ASH', 'EMBER', 'FROST', 'LOKI', 'MAG', 'NOVA', 'NYX', 'RHINO', 'SARYN', 'TRINITY', 'VAUBAN', 'VOLT', 'BOAR', 'BOLTOR', 'BRATON', 'BURSTON', 'LATRON', 'PARIS', 'SOMA', 'VECTIS', 'AKBRONCO', 'AKSTILETTO', 'BRONCO', 'HIKOU', 'LEX', 'SICARUS', 'SPIRA', 'VASTO', 'ANKYROS', 'BO', 'DAKRA', 'KAMAS', 'FANG', 'FRAGOR', 'GLAIVE', 'NIKANA', 'ORTHOS', 'REAPER', 'SCINDO', 'CARRIER', 'WYRM', 'KAVASA']
     E_Arcane = ['ARCANE']
-    E_Mods = ['PRIMED', 'FANGED', 'SHELL', 'TEMPO', 'AUGER', 'COLLISION', 'MAGMA', 'FULL', 'SEARING', 'MAIM', 'PISTOL', 'TOXIC', 'AVIATOR', 'BORE', 'BREACH', 'PUMMEL', 'CRASH', 'VOLTAIC', 'MALIGNANT', 'FROSTBITE', 'SWEEPING', 'VOLCANIC', 'FRIGID', 'VIRULENT', 'SHRED', 'BUZZ', 'HIGH', 'RIME', 'THERMITE', 'JOLT', 'PIERCING', 'FLEETING','TRANSIENT', 'POWER', 'RAGE', 'COACTION', 'BLIND', 'NARROW', 'CONTINUITY', 'CUNNING', 'ARMORED', 'INTENSIFY', 'OVEREXTENDED', 'ENERGY SIPHON', 'AGILITY', 'ENDURANCE', 'SPEED', 'STEALTH', 'CRITICAL', 'HEAVY', 'VILE', 'TAINTED', 'VILE', 'DEPLETED', 'BURDENED', 'VICIOUS', 'TAINTED', 'FRAIL', 'ANEMIC', 'CREEPING', 'HOLLOW', 'MAGNUM', 'SPOILED', 'CORRUPT', 'BODY', 'FOCUSED', 'BLOOD', 'WEEPING', 'MAIMING', 'ARGON', 'BLADED', 'CATALYZER', 'GUIDED', 'SPRING-LOADED', 'SHRAPNEL', 'LASER', 'REPEATER', 'NANO-APPLICATOR', 'NARROW', 'HYDRAULIC', 'EMBEDDED', 'SHARPENED', 'TARGETING', 'PRESSURIZED']
-    E_Special = ['NEZHA', 'MARA',]
+    E_Mods = ['PRIMED','CRUSHING', 'CRIMSON', 'CLEAVING', 'FINAL', 'DECISIVE', 'TRANQUIL', 'HIGH', 'SHATTERING', 'SWIRLING', 'RENDING', 'ASTRAL', 'DEFILED', 'IRON', 'VULPINE', 'SHIMMERING', 'CROSSING', 'BLEEDING', 'ATLANTIS', 'ELEVENTH', 'FOUR', 'STALKING', 'POINTED', 'GNASHING', 'SPINNING', 'FLAILING', 'VERMILION', 'BRUTAL', 'GLEAMING', 'CLASHING', "GAIA'S", 'MALICIOUS', 'REAPING', 'HOMING', 'GEMINI', 'GRIM', 'SEISMIC', 'FATEFUL', 'SINKING', 'SUNDERING', 'COILING', 'BURNING', 'FRACTURING', 'RISING', 'NOBLE', 'FANGED', 'QUICKENING', 'LIFE', 'SHELL', 'TEMPO', 'AUGER', 'COLLISION', 'MAGMA', 'FULL', 'SEARING', 'MAIM', 'PISTOL', 'TOXIC', 'AVIATOR', 'BORE', 'BREACH', 'PUMMEL', 'CRASH', 'VOLTAIC', 'MALIGNANT', 'FROSTBITE', 'SWEEPING', 'VOLCANIC', 'FRIGID', 'VIRULENT', 'SHRED', 'BUZZ', 'HIGH', 'RIME', 'THERMITE', 'JOLT', 'PIERCING', 'FLEETING','TRANSIENT', 'POWER', 'RAGE', 'COACTION', 'BLIND', 'NARROW', 'CONTINUITY', 'CUNNING', 'ARMORED', 'INTENSIFY', 'OVEREXTENDED', 'ENERGY SIPHON', 'AGILITY', 'ENDURANCE', 'SPEED', 'STEALTH', 'CRITICAL', 'HEAVY', 'VILE', 'TAINTED', 'VILE', 'DEPLETED', 'BURDENED', 'VICIOUS', 'TAINTED', 'FRAIL', 'ANEMIC', 'CREEPING', 'HOLLOW', 'MAGNUM', 'SPOILED', 'CORRUPT', 'BODY', 'FOCUSED', 'BLOOD', 'WEEPING', 'MAIMING', 'ARGON', 'BLADED', 'CATALYZER', 'GUIDED', 'SPRING-LOADED', 'SHRAPNEL', 'LASER', 'REPEATER', 'NANO-APPLICATOR', 'NARROW', 'HYDRAULIC', 'EMBEDDED', 'SHARPENED', 'TARGETING', 'PRESSURIZED']
+    E_Special = ['NEZHA', 'MARA', 'CYNGAS']
     E_Prisma = ['PRISMA']
     E_Syndicate = ['VAYKOR', 'TELOS', 'SYNOID', 'SECURA', 'RAKTA', 'SANCTI']
     E_Kavat = ['SMEETA', 'ADARZA']
@@ -202,7 +202,7 @@ while True:
     C_Prime_Basic.extend(C_Prime)
     C_Prime.extend(Blueprint + Systems + Chassis + Neuroptics)
     C_Arcane = ['SCORPION', 'LOCUST', 'REVERB', 'CHORUS', 'PHOENIX', 'BACKDRAFT', 'AVALON', 'PENDRAGON', 'SQUALL', 'AURORA', 'ESSENCE', 'SWINDLE', 'COIL', 'GAUSS', 'FLUX', 'MENTICIDE', 'VESPA', 'THRAK', 'VANGUARD', 'HEMLOCK', 'CHLORA', 'AURA', 'MERIDIAN', 'ESPIRT', 'GAMBIT', 'STORM', 'PULSE', 'ACCELERATION', 'AEGIS', 'AGILITY', 'ARACHNE', 'AVENGER', 'AWAKENING', 'BARRIER', 'CONSEQUENCE', 'DEFLECTION', 'ENERGIZE', 'ERUPTION', 'FURY', 'GRACE', 'GUARDIAN', 'HEALING', 'ICE', 'MOMENTUM', 'NULLIFIER', 'PHANTASM', 'PRECISION', 'PULSE', 'RAGE', 'RESISTANCE', 'STRIKE', 'TEMPO', 'TRICKERY', 'ULTIMATUM', 'VELOCITY', 'VICTORY', 'WARMTH']
-    C_Mods = ['CHAMBER', 'FUSILLADE', 'SHOCK', 'ROYALE', 'PESTILENCE', 'BARRAGE', 'CONTACT', 'STEEL', 'LOADER', 'COURSE', 'STRIKE', 'FORCE', 'SERRATION', 'BLAST', 'EDGE', 'SCOURGE', 'FROST', 'KILL', 'VOLTAGE', 'ROUNDS', 'CALIBER', 'CONTINUITY', 'FAST', 'FLOW', 'FURY', 'PRESSURE', 'HEATED', 'VIGOR', 'RAVAGE', 'POINT', 'SHOTGUN', 'REACH', 'HEAVY', 'RIFLE', 'PISTOL', 'GAMBIT', 'SLIP', 'TARGET', 'MORPHIC', 'EXPERTISE', 'FORTITUDE', 'DRIFT', 'RAGE', 'MINDED', 'AGILITY', 'SIPHON', 'DELAY', 'CALIBER', 'PRECISION', 'MAG', 'ACCELERATION', 'RELOAD', 'MAGAZINE', 'SPREAD', 'SHELL', 'MOMENTUM', 'DECELERATION', 'BULLSEYE', 'POINT', 'FORCE', 'CLIP', 'STRIKE', 'CHARGE', 'COUNT', 'DEFENSE', 'RUSH', 'WOUNDS', 'STRIKE', 'SCOPE', 'ROUNDS', 'LINK', 'ORDINANCE', 'CHAMBER', 'SHOT', 'SIGHT', 'BARREL', 'CROSSHAIRS', 'CATALYZER', 'BULLETS', 'SUBSYSTEMS', 'MAGAZINE']
+    C_Mods = ['RUIN', 'DERVISH', 'WHIRLWIND', 'HARBINGER', 'JUSTICE', 'JUDGEMENT', 'CLEAVE', 'NOON', 'STORM', 'TIGER', 'CRANE', 'TWILIGHT', 'SNAPDRAGON', 'PHOENIX', 'MASK', 'BLIGHT', 'SNAKES', 'WILLOW', 'VULCAN', 'STORM', 'RIDERS', 'FAN', 'WIND', 'PAYARA', 'NEEDLE', 'BRANCH', 'TIDE', 'TALON', 'FOREST', 'TRAGEDY', 'RAPTOR', 'SPIRAL', 'FANG', 'CROSS', 'FURY', 'PALM', 'TRUTH', 'TALON', 'WEAVE', 'VIPER', 'WASP', 'WIND', 'STEEL', 'CADENCE', 'CHAMBER', 'FUSILLADE', 'SHOCK', 'ROYALE', 'PESTILENCE', 'BARRAGE', 'CONTACT', 'STEEL', 'LOADER', 'COURSE', 'STRIKE', 'FORCE', 'SERRATION', 'BLAST', 'EDGE', 'SCOURGE', 'FROST', 'KILL', 'VOLTAGE', 'ROUNDS', 'CALIBER', 'CONTINUITY', 'FAST', 'FLOW', 'FURY', 'PRESSURE', 'HEATED', 'VIGOR', 'RAVAGE', 'POINT', 'SHOTGUN', 'REACH', 'HEAVY', 'RIFLE', 'PISTOL', 'GAMBIT', 'SLIP', 'TARGET', 'MORPHIC', 'EXPERTISE', 'FORTITUDE', 'DRIFT', 'RAGE', 'MINDED', 'AGILITY', 'SIPHON', 'DELAY', 'CALIBER', 'PRECISION', 'MAG', 'ACCELERATION', 'RELOAD', 'MAGAZINE', 'SPREAD', 'SHELL', 'MOMENTUM', 'DECELERATION', 'BULLSEYE', 'POINT', 'FORCE', 'CLIP', 'STRIKE', 'CHARGE', 'COUNT', 'DEFENSE', 'RUSH', 'WOUNDS', 'STRIKE', 'SCOPE', 'ROUNDS', 'LINK', 'ORDINANCE', 'CHAMBER', 'SHOT', 'SIGHT', 'BARREL', 'CROSSHAIRS', 'CATALYZER', 'BULLETS', 'SUBSYSTEMS', 'MAGAZINE']
     C_Special = ['DETRON']
     C_Special.extend(Blueprint + Systems + Chassis +  Neuroptics)
     C_Prisma = ['SKANA', 'SHADE', 'CLEAVERS', 'GORGON', 'VERITUX', 'GRAKATA', 'TETRA']
@@ -311,7 +311,6 @@ while True:
         ITEMtype = ''
 
         # ======= End of Message Body Interpretation ========
-
 
 
         # Split Message into parseable requests
@@ -444,7 +443,7 @@ while True:
 
 
             # If Request is valid, send to server
-            if not Username in RequestCache and (REQ_TO == 'WTS' or REQ_TO == 'WTB'):
+            if not str(MsgWordsOriginal) in RequestCache and (REQ_TO == 'WTS' or REQ_TO == 'WTB'):
 
                 # Open secret password (hi github)
                 with open('./sources/pwd.txt', 'r') as myfile:
@@ -534,13 +533,19 @@ while True:
                         timestart = calendar.timegm(time.gmtime())
                         NexusBotCache.pop(0)
                         NexusBotCache.append(ItemInfo)
-                        print(NexusBotCache) #### DEBUG
                         NexusBot.clip(ItemInfo)
                         NexusBot.click(50, 770)
+                        time.sleep(0.25)
                         NexusBot.pressAndHold('ctrl', 'v')
+                        time.sleep(0.15)
                         NexusBot.release('ctrl', 'v')
+                        time.sleep(0.25)
                         app = application.Application()
                         app.WARFRAME.TypeKeys('{ENTER}')
+                        time.sleep(0.3)
+                        NexusBot.pressAndHold('alt', 'tab')
+                        time.sleep(0.1)
+                        NexusBot.release('alt', 'tab')
 
 
                 ItemInfo = ''
@@ -552,7 +557,7 @@ while True:
 
         # Add User to Request Cache
         RequestCache.pop(0)
-        RequestCache.append(Username)
+        RequestCache.append(str(MsgWordsOriginal))
 
 
         # Output
