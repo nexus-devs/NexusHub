@@ -22,3 +22,5 @@ node_modules/
 /sitemap.txt
 /views/google.ejs
 /py/tools/autocomplete.py
+/.brackets.json
+/.mongo
