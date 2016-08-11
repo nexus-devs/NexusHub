@@ -5,6 +5,7 @@
         type: "Special",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -13,6 +14,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -21,6 +23,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -29,6 +32,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -37,6 +41,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -45,6 +50,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -53,6 +59,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -61,6 +68,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -69,6 +77,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -77,6 +86,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -85,6 +95,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -93,6 +104,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -101,6 +113,7 @@
         type: "Prime",
         category: "Warframe",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
     },
     {
@@ -109,6 +122,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -117,6 +131,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -125,6 +140,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -133,6 +149,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -141,6 +158,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -149,6 +167,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Grip", "String", "Upper Limb", "Lower Limb"]
     },
     {
@@ -157,6 +176,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -165,6 +185,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Stock"]
     },
     {
@@ -173,6 +194,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Link"]
     },
     {
@@ -181,6 +203,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver", "Link"]
     },
     {
@@ -189,6 +212,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver"]
     },
     {
@@ -197,6 +221,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Pouch", "Stars"]
     },
     {
@@ -205,6 +230,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver"]
     },
     {
@@ -213,6 +239,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver"]
     },
         {
@@ -221,7 +248,8 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
-        components: ["Blueprint", "Pouch", "Blade"]
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+            components: ["Blueprint", "Pouch", "Blade"]
     },
     {
         _id: "Vasto",
@@ -229,6 +257,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver"]
     },
     {
@@ -237,6 +266,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Gauntlet"]
     },
     {
@@ -245,6 +275,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Ornament", "Handle"]
     },
     {
@@ -253,6 +284,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -261,6 +293,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -269,6 +302,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -277,6 +311,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Head", "Handle"]
     },
     {
@@ -285,6 +320,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Disc"]
     },
     {
@@ -293,6 +329,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Hilt"]
     },
     {
@@ -301,6 +338,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -309,6 +347,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -317,6 +356,7 @@
         type: "Prime",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Blade", "Handle"]
     },
     {
@@ -325,6 +365,7 @@
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Cerebrum", "Carapace", "Systems"]
     },
     {
@@ -333,6 +374,7 @@
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Cerebrum", "Carapace", "Systems"]
     },
     {
@@ -341,6 +383,7 @@
         type: "Prime",
         category: "Sentinel",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Band", "Buckle"]
     },
     {
@@ -349,6 +392,7 @@
         type: "Prime",
         category: "Archwing",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Harness", "Wings", "Systems"]
     },
         {
@@ -357,7 +401,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+            components: []
     },
      {
         _id: "Arcane Locust",
@@ -365,7 +410,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Reverb",
@@ -373,7 +419,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Chorus",
@@ -381,7 +428,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Phoenix",
@@ -389,7 +437,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Backdraft",
@@ -397,7 +446,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Avalon",
@@ -405,7 +455,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Pendragon",
@@ -413,7 +464,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Aurora",
@@ -421,7 +473,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
      {
         _id: "Arcane Squall",
@@ -429,7 +482,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+         components: []
     },
          {
         _id: "Arcane Essence",
@@ -437,7 +491,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Swindle",
@@ -445,7 +500,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Coil",
@@ -453,7 +509,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Gauss",
@@ -461,7 +518,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Flux",
@@ -469,7 +527,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Menticide",
@@ -477,7 +536,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Vespa",
@@ -485,7 +545,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Thrak",
@@ -493,7 +554,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Vanguard",
@@ -501,7 +563,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Hemlock",
@@ -509,7 +572,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Chlora",
@@ -517,7 +581,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Aura",
@@ -525,7 +590,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Meridian",
@@ -533,7 +599,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Esprit",
@@ -541,7 +608,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Gambit",
@@ -549,7 +617,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Storm",
@@ -557,7 +626,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Arcane Pulse",
@@ -565,7 +635,8 @@
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
          {
         _id: "Prisma Skana",
@@ -573,7 +644,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+             components: []
     },
              {
         _id: "Prisma Cleavers",
@@ -581,7 +653,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                 components: []
     },
              {
         _id: "Prisma Gorgon",
@@ -589,7 +662,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                 components: []
     },
              {
         _id: "Prisma Grakata",
@@ -597,7 +671,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                 components: []
     },
              {
         _id: "Prisma Veritux",
@@ -605,7 +680,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                 components: []
     },
              {
         _id: "Prisma Shade",
@@ -613,7 +689,8 @@
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                 components: []
     },
                  {
         _id: "Arcane Acceleration",
@@ -621,7 +698,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                     components: []
     },
                      {
         _id: "Arcane Aegis",
@@ -629,7 +707,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Agility",
@@ -637,7 +716,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Arachne",
@@ -645,7 +725,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Avenger",
@@ -653,7 +734,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Awakening",
@@ -661,7 +743,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Barrier",
@@ -669,7 +752,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Consequence",
@@ -677,7 +761,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Deflection",
@@ -685,7 +770,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Energize",
@@ -693,7 +779,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Eruption",
@@ -701,7 +788,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Fury",
@@ -709,7 +797,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Grace",
@@ -717,7 +806,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Guardian",
@@ -725,7 +815,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Healing",
@@ -733,7 +824,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Ice",
@@ -741,7 +833,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Momemntum",
@@ -749,7 +842,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Nullifier",
@@ -757,7 +851,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Phantasm",
@@ -765,7 +860,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Precision",
@@ -773,7 +869,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Rage",
@@ -781,7 +878,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Resistance",
@@ -789,7 +887,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Strike",
@@ -797,7 +896,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Tempo",
@@ -805,7 +905,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Trickery",
@@ -813,7 +914,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Ultimatum",
@@ -821,7 +923,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Velocity",
@@ -829,7 +932,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Victory",
@@ -837,7 +941,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
                      {
         _id: "Arcane Warmth",
@@ -845,7 +950,8 @@
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-        components: []
+         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+                         components: []
     },
     {
         _id: "Smeeta",
@@ -853,6 +959,7 @@
         type: "Kavat",
         category: "Companion",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -861,6 +968,7 @@
         type: "Kavat",
         category: "Companion",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -869,6 +977,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -877,6 +986,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -885,6 +995,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -893,6 +1004,16 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Vengeful Revenant",
+        name: "Vengeful Revenant",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -901,6 +1022,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -909,6 +1031,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -917,6 +1040,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -925,6 +1049,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -933,6 +1058,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -941,6 +1067,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -949,6 +1076,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -957,6 +1085,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -965,6 +1094,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -973,6 +1103,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -981,6 +1112,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -989,6 +1121,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -997,6 +1130,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1005,6 +1139,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1013,6 +1148,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1021,6 +1157,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1029,6 +1166,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1037,6 +1175,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1045,6 +1184,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1053,6 +1193,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1061,6 +1202,7 @@
         type: "Mods",
         category: "Corrupted",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1069,6 +1211,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1077,6 +1220,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1085,6 +1229,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1093,6 +1238,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1101,6 +1247,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1109,6 +1256,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1117,6 +1265,7 @@
         type: "Mods",
         category: "Exilus",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1125,6 +1274,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1133,6 +1283,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1141,6 +1292,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1149,6 +1301,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1157,6 +1310,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1165,6 +1319,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1173,6 +1328,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1181,6 +1337,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1189,6 +1346,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1197,6 +1355,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1205,6 +1364,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1213,6 +1373,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1221,6 +1382,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1229,6 +1391,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1237,6 +1400,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1245,6 +1409,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1253,6 +1418,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1261,6 +1427,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1269,6 +1436,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1277,6 +1445,7 @@
         type: "Mods",
         category: "Acolyte",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1285,6 +1454,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1293,6 +1463,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1301,6 +1472,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1309,6 +1481,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1317,6 +1490,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1325,6 +1499,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1333,6 +1508,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1341,6 +1517,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1349,6 +1526,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1357,6 +1535,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1365,6 +1544,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1373,6 +1553,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1381,6 +1562,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1389,6 +1571,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1397,6 +1580,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1405,6 +1589,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1413,6 +1598,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1421,6 +1607,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1429,6 +1616,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1437,6 +1625,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1445,6 +1634,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1453,6 +1643,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1461,6 +1652,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1469,6 +1661,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1477,6 +1670,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1485,6 +1679,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1493,6 +1688,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1501,6 +1697,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1509,6 +1706,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1517,6 +1715,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1525,6 +1724,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1533,6 +1733,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1541,6 +1742,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1549,6 +1751,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1557,6 +1760,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1565,6 +1769,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1573,6 +1778,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1581,6 +1787,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1589,6 +1796,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1597,6 +1805,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1605,6 +1814,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1613,6 +1823,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1621,6 +1832,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1629,6 +1841,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1637,6 +1850,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1645,6 +1859,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1653,6 +1868,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1661,6 +1877,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1669,6 +1886,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1677,6 +1895,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1685,6 +1904,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1693,6 +1913,7 @@
         type: "Mods",
         category: "Primed",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1701,6 +1922,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1709,6 +1931,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1717,6 +1940,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1725,6 +1949,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1733,6 +1958,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1741,6 +1967,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1749,6 +1976,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1757,6 +1985,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1765,6 +1994,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1773,6 +2003,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1781,6 +2012,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1789,6 +2021,7 @@
         type: "Syndicate",
         category: "Syndicate",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1797,6 +2030,7 @@
         type: "Special",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
     {
@@ -1805,6 +2039,394 @@
         type: "Special",
         category: "Weapon",
         update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ['Barrel', 'Receiver', 'Stock']
+    },
+    {
+        _id: "Crimson Dervish",
+        name: "Crimson Dervish",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Crushing Ruin",
+        name: "Crushing Ruin",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Cleaving Whirlwind",
+        name: "Cleaving Whirlwind",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Final Harbinger",
+        name: "Final Harbinger",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Decisive Judgement",
+        name: "Decisive Judgement",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Tranquil Cleave",
+        name: "Tranquil Cleave",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Blind Justice",
+        name: "Blind Justice",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "High Noon",
+        name: "High Noon",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Swirling Tiger",
+        name: "Swirling Tiger",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Rending Crane",
+        name: "Rending Crane",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Iron Phoenix",
+        name: "Iron Phoenix",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Astral Twilight",
+        name: "Astral Twilight",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Defiled Snapdragon",
+        name: "Dfiled Snapdragon",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Vulpine Mask",
+        name: "Vulpine Mask",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Shimmering Blight",
+        name: "Shimmering Blight",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Crossing Snakes",
+        name: "Crossing Snakes",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Bleeding Willow",
+        name: "Bleeding Willow",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Atlantis Vulcan",
+        name: "Atlantis Vulcan",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Eleventh Storm",
+        name: "Eleventh Storm",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Four Riders",
+        name: "Four Riders",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Stalking Fan",
+        name: "Stalking Fan",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Pointed Wind",
+        name: "Pointed Wind",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Gnashing Payara",
+        name: "Gnashing Payara",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Spinning Needle",
+        name: "Spinning Needle",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Flailing Breach",
+        name: "Flailing Breach",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Vermilion Storm",
+        name: "Vermilion Storm",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Brutlal Tide",
+        name: "Brutlal Tide",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Gleaming Talon",
+        name: "Gleaming Talon",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Gaia's Tragedy",
+        name: "Gaia's Tragedy",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Seismic Palm",
+        name: "Seismic Palm",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Coiling Viper",
+        name: "Coiling Viper",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Malicious Raptor",
+        name: "Malicious Raptor",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Clashing Forest",
+        name: "Clashing Forest",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Reaping Spiral",
+        name: "Reaping Spiral",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Homing Fang",
+        name: "Homing Fang",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Gemini Cross",
+        name: "Gemini Cross",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Grim Fury",
+        name: "Grim Fury",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Fateful Truth",
+        name: "Fateful Truth",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Sinking Talon",
+        name: "Sinking Talon",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Sundering Weave",
+        name: "Sundering Weave",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Burning Wasp",
+        name: "Burning Wasp",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Fracturing Wind",
+        name: "Fracturing Wind",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Rising Steel",
+        name: "Rising Steel",
+        type: "Mods",
+        category: "Stance",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
 ]

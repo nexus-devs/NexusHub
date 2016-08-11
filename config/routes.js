@@ -46,7 +46,13 @@ module.exports.routes = {
     'get /syndicate/*': 'ItemsController.index',
     'get /special/*': 'ItemsController.index',
     'get /items/search': 'ItemsController.search',
-    'post /requests': 'RequestsController.create'
+    'post /requests': 'RequestsController.create',
+
+    // API
+    'get /api': 'ItemsController.query'
+
+    // Testing
+    //'get /update/*/*': 'ItemsController.update'
 
     /***************************************************************************
      *                                                                          *

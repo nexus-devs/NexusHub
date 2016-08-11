@@ -634,11 +634,11 @@ footer {
         @include input;
         @include font-default($color-subtle);
         background: rgba(255, 255, 255, 0.1);
-        margin-left: 50px;
+        margin-left: 20px;
         height: 35px;
+        width:200px !important;
         border: 0.1em solid $color-subtle-2;
         @include ease(0.25s);
-        opacity: 0;
     }
 }
 
@@ -989,17 +989,14 @@ background:transparent !important;
 
 .lp-header-vidbg {
     position: absolute;
-    min-width: 115vw;
+    min-width: 100%;
     min-height: 100vh;
     top:0;
     left:0;
     z-index: -1;
-    opacity:0.4;
+    opacity:0.2;
 }
 
-.lp-header-vid {
-
-}
 
 .error-top-part {
     width:100%;
