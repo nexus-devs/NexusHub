@@ -2,31 +2,24 @@
 
 Development builds can be found here.
 
+[![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
 
 # Data Processing
 
 - Trade Chat Requests are processed by /py/ChatParser.py
 - Parsed Requests are sent to /api/controllers/RequestController.js
 - When a client requests statistics for an item, they're either processed
-  by the ItemController or taken from the itemcache collection if no update
+  by /api/controllers/ItemController.js or taken from the itemcache collection if no update
   is necessary.
 
 
-# Roadmap
-Planned updates
+# Links
 
-High Priority:
-- Proper Chart dates
-- Real time updates with sockets
-- Weekly/Monthly/All Time timerange for charts
-- Advanced price gathering algorithm
+NexusStats site can be found at www.nexus-stats.com
 
-Other:
-- Premium Service
-  including:
-    - Buyers List
-    - Sellers List
-    - Trackable Items
-    - Busy Times
-    - Alerts on unusually low priced requests
-    - Auction-house styled inline offers visible to everyone (Idea requires validation)
+JSON with all Item Stats can be found here: www.nexus-stats.com/api
+
+API query adapter by Tobiah for easy API access: www.npmjs.com/package/warframe-nexus-query
+
+
+
