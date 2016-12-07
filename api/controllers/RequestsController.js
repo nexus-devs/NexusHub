@@ -63,7 +63,6 @@ module.exports = {
 
                     // Compare Passwords
                     function authenticate(pass, callback) {
-                    //console.log(hash)
                     if (request.user === 'python' && bcrypt.compareSync(request.password, pass) === true) {
                         callback();
                     } else {

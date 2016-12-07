@@ -242,14 +242,14 @@
         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Barrel", "Receiver"]
     },
-        {
+    {
         _id: "Spira",
         name: "Spira Prime",
         type: "Prime",
         category: "Weapon",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-            components: ["Blueprint", "Pouch", "Blade"]
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Pouch", "Blade"]
     },
     {
         _id: "Vasto",
@@ -395,563 +395,563 @@
         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: ["Blueprint", "Harness", "Wings", "Systems"]
     },
-        {
+    {
         _id: "Arcane Scorpion",
         name: "Arcane Scorpion Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-            components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Locust",
         name: "Arcane Locust Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Reverb",
         name: "Arcane Reverb Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Chorus",
         name: "Arcane Chrous Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Phoenix",
         name: "Arcane Phoenix Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Backdraft",
         name: "Arcane Backdraft Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Avalon",
         name: "Arcane Avalon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Pendragon",
         name: "Arcane Pendragon Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Aurora",
         name: "Arcane Aurora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-     {
+    {
         _id: "Arcane Squall",
         name: "Arcane Squall Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Essence",
         name: "Arcane Essence Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Swindle",
         name: "Arcane Swindle Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Coil",
         name: "Arcane Coil Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Gauss",
         name: "Arcane Gauss Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Flux",
         name: "Arcane Flux Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Menticide",
         name: "Arcane Menticide Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Vespa",
         name: "Arcane Vespa Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Thrak",
         name: "Arcane Thrak Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Vanguard",
         name: "Arcane Vanguard Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Hemlock",
         name: "Arcane Hemlock Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Chlora",
         name: "Arcane Chlora Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Aura",
         name: "Arcane Aura Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Meridian",
         name: "Arcane Meridian Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Esprit",
         name: "Arcane Esprit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Gambit",
         name: "Arcane Gambit Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Storm",
         name: "Arcane Storm Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Arcane Pulse",
         name: "Arcane Pulse Helmet",
         type: "Arcane",
         category: "Arcane Helmet",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-         {
+    {
         _id: "Prisma Skana",
         name: "Prisma Skana",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-             components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-             {
+    {
         _id: "Prisma Cleavers",
         name: "Prisma Dual Cleavers",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                 components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-             {
+    {
         _id: "Prisma Gorgon",
         name: "Prisma Gorgon",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                 components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-             {
+    {
         _id: "Prisma Grakata",
         name: "Prisma Grakata",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                 components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-             {
+    {
         _id: "Prisma Veritux",
         name: "Prisma Veritux",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                 components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-             {
+    {
         _id: "Prisma Shade",
         name: "Prisma Shade",
         type: "Prisma",
         category: "Prisma",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                 components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                 {
+    {
         _id: "Arcane Acceleration",
         name: "Arcane Acceleration",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                     components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Aegis",
         name: "Arcane Aegis",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Agility",
         name: "Arcane Agility",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Arachne",
         name: "Arcane Arachne",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Avenger",
         name: "Arcane Avenger",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Awakening",
         name: "Arcane Awakening",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Barrier",
         name: "Arcane Barrier",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Consequence",
         name: "Arcane Consequence",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Deflection",
         name: "Arcane Deflection",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Energize",
         name: "Arcane Energize",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Eruption",
         name: "Arcane Eruption",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Fury",
         name: "Arcane Fury",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Grace",
         name: "Arcane Grace",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Guardian",
         name: "Arcane Guardian",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Healing",
         name: "Arcane Healing",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Ice",
         name: "Arcane Ice",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Momemntum",
         name: "Arcane Momentum",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Nullifier",
         name: "Arcane Nullifier",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Phantasm",
         name: "Arcane Phantasm",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Precision",
         name: "Arcane Precision",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Rage",
         name: "Arcane Rage",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Resistance",
         name: "Arcane Resistance",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Strike",
         name: "Arcane Strike",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Tempo",
         name: "Arcane Tempo",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Trickery",
         name: "Arcane Trickery",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Ultimatum",
         name: "Arcane Ultimatum",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Velocity",
         name: "Arcane Velocity",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Victory",
         name: "Arcane Victory",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
-                     {
+    {
         _id: "Arcane Warmth",
         name: "Arcane Warmth",
         type: "Arcane",
         category: "Arcane Enhancements",
         update: 'pending',
-         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
-                         components: []
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
     },
     {
         _id: "Smeeta",
@@ -2429,4 +2429,130 @@
         updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
         components: []
     },
+    {
+        _id: "Nekros",
+        name: "Nekros Prime",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Galatine",
+        name: "Galatine Prime",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Blade", "Handle"]
+    },
+    {
+        _id: "Tigris",
+        name: "Tigris Prime",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Stock", "Barrel", "Receiver"]
+    },
+    {
+        _id: "Telos Boltace",
+        name: "Telos Boltace",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Synoid Heliocor",
+        name: "Synoid Heliocor",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Sancti Magistar",
+        name: "Sancti Magistar",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Secura Lecta",
+        name: "Secura Lecta",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Rakta Dagger",
+        name: "Rakta Dark Dagger",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Vaykor Sydon",
+        name: "Vaykor Sydon",
+        type: "Syndicate",
+        category: "Syndicate",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Legendary Core",
+        name: "Legendary Core",
+        type: "Mods",
+        category: "Mods",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: []
+    },
+    {
+        _id: "Valkyr",
+        name: "Valkyr Prime",
+        type: "Prime",
+        category: "Warframe",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Neuroptics", "Chassis", "Systems"]
+    },
+    {
+        _id: "Cernos",
+        name: "Cernos Prime",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Grip", "String", "Upper Limb", "Lower Limb"]
+    },
+    {
+        _id: "Venka",
+        name: "Venka Prime",
+        type: "Prime",
+        category: "Weapon",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Blade", "Gauntlet"]
+    },
+    {
+        _id: "Orvius",
+        name: "Orvius",
+        type: "Special",
+        category: "Weapon",
+        update: 'pending',
+        updatedAt: ISODate("2014-08-07T15:57:59.345Z"),
+        components: ["Blueprint", "Blade", "Disc"]
+    }
 ]

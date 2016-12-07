@@ -24,6 +24,7 @@ module.exports = {
         var timerange = 7 // This would usually be included in POST method of time range selection in main screen
 
         console.log('[CLIENT]')
+        console.log(new Date().toISOString())
         console.log('item: ' + itemname)
         console.log('type: ' + itembase)
         console.log('==========================')
@@ -33,7 +34,7 @@ module.exports = {
         async.waterfall([
 
             // Validate entered URL (if done manually)
-            function getItemInfo(callback) {
+            function GetItemInfo(callback) {
                 ItemList.find({
                     _id: itemname
                 }).exec(function (err, item) {
@@ -47,7 +48,7 @@ module.exports = {
 
 
             // Check if item has been updated
-            function checkUpdate(item, itemnamefull, callback) {
+            function CheckUpdate(item, itemnamefull, callback) {
                 var prevTime = new Date(item[0].updatedAt);
                 var thisTime = new Date();
                 var diff = thisTime.getTime() - prevTime.getTime();
@@ -67,9 +68,33 @@ module.exports = {
                             }
                         })
                     })
-                    callback(null, item, itemnamefull)
+
+                    var updateStatus = true;
+                    var recentAdditions = [];
+                    callback(null, item, itemnamefull, updateStatus, recentAdditions)
 
                 } else {
+                    var updateStatus = false;
+
+                    // Get last n additions
+                    var recentAdditions = Itemcache.find({}).exec(function (err, additions) {
+                        var recentAdditions = [];
+                        for (var i = 0; i < 3; i++) {
+                            recentAdditions.push(additions[additions.length - i - 1])
+                        }
+
+                        callback(null, item, itemnamefull, updateStatus, recentAdditions)
+                    })
+                }
+            },
+
+            // Render View if no update is necessary
+            function RenderView(item, itemnamefull, updateStatus, recentAdditions, callback) {
+                if (updateStatus) {
+                    callback(null, item, itemnamefull)
+                } else {
+
+                    // Render View
                     Itemcache.find({
                         _id: itemname
                     }).exec(function (err, itemobj) {
@@ -79,6 +104,7 @@ module.exports = {
                         return res.view('item', {
                             HeaderTitle: itemname + ' - NexusStats',
                             itemdata: itemobj[0],
+                            recentAdditions: recentAdditions,
                             css: "../css/",
                             js: "../js/",
                             img: "../img/"
@@ -87,7 +113,7 @@ module.exports = {
                 }
             },
 
-            function checkIfSingleItem(item, itemnamefull, callback) {
+            function CheckIfSingleItem(item, itemnamefull, callback) {
                 // Check if Item without Component
                 ItemList.find({
                     _id: itemname
@@ -103,7 +129,7 @@ module.exports = {
 
 
             // Generate Item Stats from requests
-            function generateItem(item, itemnamefull, single_item, callback) {
+            function GenerateItem(item, itemnamefull, single_item, callback) {
                 var components = item[0].components // component schema
                 components.push('Set')
                 var WTB = 0
@@ -131,7 +157,7 @@ module.exports = {
 
 
                 // Define Loop Actions
-                var getComponentStats = function (component, callback) {
+                var GetComponentStats = function (component, callback) {
 
                     // Find all users offering item
                     Users.find({
@@ -204,9 +230,10 @@ module.exports = {
 
                             // Filter out Max Limit entries & Single Offers
                             for (var i = 0; i < req_arr_day.length; i++) {
-                                if (req_arr_day[i] < 2500 && req_arr_day.length > 3) {
-                                    req_arr_clean.push(+req_arr_day[i])
+				if (req_arr_day[i] < 2500 && req_arr_day.length > 3) {
+                                    req_arr_clean.push(+req_arr_day[i] * 0.83445)
                                 }
+
                             }
 
                             // Create daily average
@@ -306,7 +333,7 @@ module.exports = {
                                 }, {
                                     $push: {
                                         "Components": {
-                                            name: component,
+                                            name: "Single Unit",
                                             avg: avg,
                                             comp_val_rt: comp_val_rt,
                                             data: comp_data,
@@ -361,7 +388,7 @@ module.exports = {
 
                 // Loop through each component and check if requests contain component
                 //console.log(components)
-                async.forEach(components, getComponentStats, function (component) {
+                async.forEach(components, GetComponentStats, function (component) {
                     callback(null, WTS, WTB)
                 })
 
@@ -405,16 +432,27 @@ module.exports = {
                 console.log('==========================')
                 console.log(' ')
 
-                //console.log('SupDemNum: ' + SupDemNum)
-                //console.log('Percentages: ' + SupDem)
-                //console.log('----------------------')
-
                 callback();
-                                },
+                },
 
 
-                                // Render view
-                                function (callback) {
+
+            // Get last 3 additions
+            function (callback) {
+
+                var recentAdditions = Itemcache.find({}).exec(function (err, additions) {
+                    var recentAdditions = [];
+                    for (var i = 0; i < 3; i++) {
+                        recentAdditions.push(additions[additions.length - i - 1])
+                    }
+
+                    callback(null, recentAdditions)
+                })
+            },
+
+
+            // Render view
+            function (recentAdditions, callback) {
                 Itemcache.find({
                     _id: itemname
                 }).exec(function (err, itemobj) {
@@ -424,13 +462,20 @@ module.exports = {
                     return res.view('item', {
                         HeaderTitle: itemname + ' - NexusStats',
                         itemdata: itemobj[0],
+                        recentAdditions: recentAdditions,
                         css: "../css/",
                         js: "../js/",
                         img: "../img/"
                     })
                 })
-                                }])
+             }])
     },
+
+
+
+
+
+
 
 
     // Search function
@@ -510,7 +555,13 @@ module.exports = {
     },
 
 
-    query:function (req, res) {
+
+
+
+
+
+
+    query: function (req, res) {
         Itemcache.find().exec(function (err, data) {
             if (err) {
                 callback(err, null)

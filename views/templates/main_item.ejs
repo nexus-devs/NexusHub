@@ -3,15 +3,13 @@
         <h2><%= itemdata.Title %></h2>
         <div class='items-images'>
 
-
-
             <!-- Item Info -->
             <div class='items-images-main'>
                 <div class='items-images-main-conent'>
                     <span class='items-images-main-text'>Full Item Price</span>
                     <br>
                     <% itemdata.Components.forEach(function(item) { %>
-                    <% if (item.name === 'Set') { %>
+                    <% if (item.name === 'Single Unit' || item.name === 'Set') { %>
                     <span class='items-images-main-price'><%= item.avg %></span>
                     <% } %>
                     <% }); %>
@@ -26,7 +24,7 @@
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
                     <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(item) { %>
-                    <% if (item.name !== 'Set') { %>
+                    <% if (item.name !== 'Single Unit' && item.name !== 'Set') { %>
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
@@ -38,14 +36,12 @@
                                 <h4><%- Math.round (parseInt(item.avg) / 5)*5 %>p&nbsp;</h4>
                                 <span> |&nbsp; <%= item.comp_val_rt %></span>
                                 <% } else { %>
-                                <span>COMING SOON™</span>
+                                <span>NO DATA</span>
                                 <% } %>
                             </div>
                         </div>
                     <% } %>
                         <% }); %>
-
-
                 </div>
             </div>
         </div>

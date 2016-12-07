@@ -4,27 +4,27 @@
 @mixin font-default($color) {
     font-family: 'raleway';
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     color: $color;
 }
 
 @mixin font-default-bold($color) {
     font-family: 'raleway';
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-small-title($color) {
     font-family: 'raleway';
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-title($color) {
     font-family: 'raleway';
-    font-size: 30px;
+    font-size: 26px;
     font-weight: 700;
     color: $color;
 }
@@ -41,6 +41,9 @@
     color: $color;
 }
 
+@mixin font-shadow() {
+    text-shadow: 0 5px 78px rgba(0,0,0,0.8), 0 5px 42px rgba(0,0,0,0.8);
+}
 
 
 // Animations
@@ -78,7 +81,6 @@
 @mixin input {
     outline: none;
     border: none;
-    padding-left:10%;
     padding-top:3px;
 }
 

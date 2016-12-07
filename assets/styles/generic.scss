@@ -68,6 +68,18 @@ b{
     }
 }
 
+.nexusbot-bot{
+    span{
+        margin-top:20px;
+        display:inline-block;
+        @include font-default($color-subtle);
+        font-size:16px;
+    }
+    span a{
+        color:$color-subtle;
+        font-size:16px;
+    }
+}
 
 footer {
     background:$color-base;
