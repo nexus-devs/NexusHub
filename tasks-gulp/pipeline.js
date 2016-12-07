@@ -32,6 +32,7 @@ var jsFilesToInject = [
     // Dependencies like jQuery, or Angular are brought in here
     //'js/dependencies/**/*.js',
     "js/dependencies/jquery.min.js",
+    "js/typeahead.js/typeahead.bundle.min.js",
     //  "js/dependencies/angular.min.js",
 
 

@@ -2,6 +2,7 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/typeahead.js/typeahead.bundle.min.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/highcharts.js"></script>
     <script src="/js/gallery/motionblur.js"></script>
@@ -11,15 +12,24 @@
 
 <head>
     <title>
-        <%=typeof HeaderTitle == 'undefined' ? 'NexusStats - Warframe Item Prices' : HeaderTitle %>
+        [dev-server] | <%=typeof HeaderTitle == 'undefined' ? 'NexusStats - Warframe Item Prices' : HeaderTitle %>
     </title>
+
+    <!-- Google Stuff FeelsBadMan -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-9753711242300802",
+            enable_page_level_ads: true
+        });
+    </script>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Warframe item prices taken directly from the trade chat. Get real prices for both item sets and components.">
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/css/importer.css">
     <!--STYLES END-->
 
 
@@ -28,9 +38,6 @@
 <body>
 
     <%- body %>
-
-
-
 
 </body>
 

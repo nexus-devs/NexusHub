@@ -23,35 +23,24 @@ def click(x,y):
 
 
 
-def ReplyPC(Username, Name, Comp, PriceLo, PriceHi, PriceAvg):
-                if not Comp == '':
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ' '  + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
-                else:
-                    ItemInfo = str('@' + Username + " > Price Check for [" + Name + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p  |  Stats taken from warframenexus.com   |  Next Check can be performed in 90s :heart:')
+def createMessage(Username, Name, Comp, PriceLo, PriceHi, PriceAvg):
+    if not Comp == '':
+        ItemInfo = str('/w ' + Username + " Price Check for: [" + Name + ' '  + Comp + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p')
+    else:
+        ItemInfo = str('/w ' + Username + " Price Check for: [" + Name + ']:  Min:'+ str(PriceLo) + 'p  Avg:' + str(PriceAvg) + 'p  Max:' + str(PriceHi) + 'p')
 
-                return (ItemInfo)
+    return (ItemInfo)
 
-"""
-def FocusWindow(windowname):
-    def windowEnumerationHandler(hwnd, top_windows):
-        top_windows.append((hwnd, win32gui.GetWindowText(hwnd)))
 
-    if __name__ == "__main__":
-        results = []
-        top_windows = []
-        win32gui.EnumWindows(windowEnumerationHandler, top_windows)
-        for i in top_windows:
-            if "notepad" in i[1].lower():
-                print (i)
-                win32gui.ShowWindow(i[0],5)
-                win32gui.SetForegroundWindow(i[0])
-                break
-
-def TypeText(string, windowname):
-    app = application.Application()
-    app.Window_(title=windowname).SetFocus()
-    #app.Window_(title=windowname).edit.TypeKeys((r'^v' + '{ENTER}'), with_spaces = True)
-"""
+def send():
+     time.sleep(0.25)
+     pressAndHold('ctrl', 'v')
+     time.sleep(0.15)
+     release('ctrl', 'v')
+     time.sleep(0.25)
+     app = application.Application()
+     app.WARFRAME.TypeKeys('{ENTER}')
+     time.sleep(0.3)
 
 
 

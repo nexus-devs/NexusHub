@@ -24,3 +24,6 @@ node_modules/
 /py/tools/autocomplete.py
 /.mongo
 /.brackets.json
+/assets/img/
+/py/tools/
+/json/
