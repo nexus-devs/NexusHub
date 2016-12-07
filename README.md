@@ -1,4 +1,4 @@
-** Development **
+**Development**
 
 Development builds can be found here.
 
