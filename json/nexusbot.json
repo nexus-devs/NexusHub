@@ -1,9 +1,0 @@
-{
-    "PageTitle": "NexusBot for your Clan",
-    "Headline": "Perform Price Checks right on Discord.",
-    "Desc": "After collaborating with <a href='https://github.com/aliasfalse/warframe-worldstate-parser'><em>AliasFalse</em></a>, you can now do price checks right on your Discord Server!",
-    "BotCommandHeadline": "How to use the bot?",
-    "BotCommandDesc":"Simply type <b>!PC Item Name</b> ( e.g.  '!PC Frost Prime Helmet' ) in the chat and we'll instantly post the item price." ,
-    "Note": "Please keep in mind that we can currently only serve Moon Clans due to high maintenance costs.<br>If you want to help us keep up the service, feel free to donate below."
-
-}
