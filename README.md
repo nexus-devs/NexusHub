@@ -1,10 +1,10 @@
-# Development
+** Development **
 
 Development builds can be found here.
 
 [![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
 
-# Data Processing
+## Data Processing
 
 - Trade Chat Requests are processed by /py/ChatParser.py
 - Parsed Requests are sent to /api/controllers/RequestController.js
@@ -13,7 +13,7 @@ Development builds can be found here.
   is necessary.
 
 
-# Links
+## Links
 
 NexusStats site can be found at www.nexus-stats.com
 
