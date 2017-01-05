@@ -25,3 +25,5 @@ node_modules/
 /.brackets.json
 /.mongo
 /assets/img/
+/json/
+/api/controllers/ItemsController_bckp*.js
