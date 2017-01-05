@@ -16,6 +16,115 @@ function title(str) {
 
 
 module.exports = {
+
+    // GENERATE CATEGORIES
+    categories: function (req, res) {
+        var countPrime = 0,
+            countArcane = 0,
+            countMods = 0,
+            countPrisma = 0,
+            countSyndicate = 0,
+            countSpecial = 0
+
+        // Lazy ass counting for individual categories
+        async.waterfall([
+
+            function CountPrime(callback) {
+                ItemList.count({
+                    type: 'Prime'
+                }).exec(function (error, count) {
+                    countPrime = count
+                    callback(null)
+                })
+            },
+
+            function CountArcane(callback) {
+                ItemList.count({
+                    type: 'Arcane'
+                }).exec(function (error, count) {
+                    countArcane = count
+                    callback(null)
+                })
+            },
+
+            function CountMods(callback) {
+                ItemList.count({
+                    type: 'Mods'
+                }).exec(function (error, count) {
+                    countMods = count
+                    callback(null)
+                })
+            },
+
+            function CountPrisma(callback) {
+                ItemList.count({
+                    type: 'Prisma'
+                }).exec(function (error, count) {
+                    countPrisma = count
+                    callback(null)
+                })
+            },
+
+            function CountSyndicate(callback) {
+                ItemList.count({
+                    type: 'Syndicate'
+                }).exec(function (error, count) {
+                    countSyndicate = count
+                    callback(null)
+                })
+            },
+
+            function CountSpecial(callback) {
+                ItemList.count({
+                    type: 'Special'
+                }).exec(function (error, count) {
+                    countSpecial = count
+                    callback(null)
+                })
+            },
+
+            function RenderView(callback) {
+                return res.view('categories', {
+                    countPrime: countPrime,
+                    countArcane: countArcane,
+                    countMods: countMods,
+                    countPrisma: countPrisma,
+                    countSyndicate: countSyndicate,
+                    countSpecial: countSpecial
+                })
+            }
+        ])
+
+
+    },
+    // END CATEGORIES
+
+
+    // GENERATE ITEM LIST
+    list: function (req, res) {
+        var url = req.originalUrl;
+        var urlbase = url.split('/');
+        var type = title(url.split('/').pop());
+
+        Itemcache.find({
+            Type: type
+        }).exec(function (err, items) {
+            return res.view('list', {
+                type: type,
+                items: items
+            })
+        })
+    },
+    // END GENERATE ITEM LIST
+
+
+
+
+
+
+
+
+    // RENDER ITEM PAGE
     index: function (req, res) {
         var url = req.originalUrl
         var urlbase = url.split('/')
@@ -23,10 +132,15 @@ module.exports = {
         var itemname = title(url.split('/').pop().replace("%20", " "))
         var timerange = 7 // This would usually be included in POST method of time range selection in main screen
 
+        // Redirect if category is entered manually
+        if (itemname === ''){
+            return res.redirect('../../' + itembase)
+        }
+
         console.log('[CLIENT]')
-        console.log(new Date().toISOString())
-        console.log('item: ' + itemname)
-        console.log('type: ' + itembase)
+        console.log('Item: ' + itemname)
+        console.log('Type: ' + itembase)
+        console.log('Date: ' + new Date().toISOString())
         console.log('==========================')
         console.log(' ')
 
@@ -70,21 +184,41 @@ module.exports = {
                     })
 
                     var updateStatus = true;
-                    var recentAdditions = [];
-                    callback(null, item, itemnamefull, updateStatus, recentAdditions)
+                    var recentAdditionsID = [];
+                    callback(null, item, itemnamefull, updateStatus, recentAdditionsID)
 
                 } else {
                     var updateStatus = false;
 
-                    // Get last n additions
-                    var recentAdditions = Itemcache.find({}).exec(function (err, additions) {
-                        var recentAdditions = [];
+                    // Get last n addition IDs
+                    ItemList.find({}).exec(function (err, item) {
+                        var recentAdditionsID = [];
                         for (var i = 0; i < 3; i++) {
-                            recentAdditions.push(additions[additions.length - i - 1])
+                            recentAdditionsID.push(item[item.length - i - 1].id)
                         }
 
-                        callback(null, item, itemnamefull, updateStatus, recentAdditions)
+                        callback(null, item, itemnamefull, updateStatus, recentAdditionsID)
                     })
+                }
+            },
+
+            // Find most recent items
+            function AggregateRecentItems(item, itemnamefull, updateStatus, recentAdditionsID, callback) {
+                if (updateStatus) {
+                    callback(null, item, itemnamefull, updateStatus, [])
+                } else {
+                    var recentAdditions = []
+                    Itemcache.find({}).exec(function (err, JSON) {
+                            JSON.forEach(function (item) {
+                                for (var i = 0; i < recentAdditionsID.length; i++) {
+                                    if (item.id === recentAdditionsID[i]) {
+                                        recentAdditions.push(item)
+                                    }
+                                }
+                            })
+
+                            callback(null, item, itemnamefull, updateStatus, recentAdditions)
+                        }) // end ItemList query
                 }
             },
 
@@ -105,9 +239,6 @@ module.exports = {
                             HeaderTitle: itemname + ' - NexusStats',
                             itemdata: itemobj[0],
                             recentAdditions: recentAdditions,
-                            css: "../css/",
-                            js: "../js/",
-                            img: "../img/"
                         })
                     })
                 }
@@ -230,7 +361,7 @@ module.exports = {
 
                             // Filter out Max Limit entries & Single Offers
                             for (var i = 0; i < req_arr_day.length; i++) {
-				if (req_arr_day[i] < 2500 && req_arr_day.length > 3) {
+                                if (req_arr_day[i] < 2500 && req_arr_day.length > 3) {
                                     req_arr_clean.push(+req_arr_day[i] * 0.83445)
                                 }
 
@@ -429,6 +560,7 @@ module.exports = {
 
                 console.log('[SYSTEM]')
                 console.log('Updated ' + itemname)
+                console.log('Date: ' + new Date().toISOString())
                 console.log('==========================')
                 console.log(' ')
 
@@ -437,19 +569,34 @@ module.exports = {
 
 
 
-            // Get last 3 additions
+            // Get last n addition IDs
             function (callback) {
 
-                var recentAdditions = Itemcache.find({}).exec(function (err, additions) {
-                    var recentAdditions = [];
+                ItemList.find({}).exec(function (err, item) {
+                    var recentAdditionsID = [];
                     for (var i = 0; i < 3; i++) {
-                        recentAdditions.push(additions[additions.length - i - 1])
+                        recentAdditionsID.push(item[item.length - i - 1].id)
                     }
 
-                    callback(null, recentAdditions)
+                    callback(null, recentAdditionsID)
                 })
+
             },
 
+            function AggregateRecentItemsPostUpdate(recentAdditionsID, callback) {
+                var recentAdditions = []
+                Itemcache.find({}).exec(function (err, JSON) {
+                        JSON.forEach(function (item) {
+                            for (var i = 0; i < recentAdditionsID.length; i++) {
+                                if (item.id === recentAdditionsID[i]) {
+                                    recentAdditions.push(item)
+                                }
+                            }
+                        })
+
+                        callback(null, recentAdditions)
+                    }) // end ItemList query
+            },
 
             // Render view
             function (recentAdditions, callback) {
@@ -463,13 +610,11 @@ module.exports = {
                         HeaderTitle: itemname + ' - NexusStats',
                         itemdata: itemobj[0],
                         recentAdditions: recentAdditions,
-                        css: "../css/",
-                        js: "../js/",
-                        img: "../img/"
                     })
                 })
              }])
     },
+    // END RENDER ITEM PAGE
 
 
 
@@ -478,7 +623,7 @@ module.exports = {
 
 
 
-    // Search function
+    // REDIRECT SEARCH QUERIES
     search: function (req, res) {
         var fullstring = req.query.item
         var stringArray = fullstring.split(" ")
@@ -553,25 +698,50 @@ module.exports = {
             }) // End Query
 
     },
+    // END REDIRECT SEARCH QUERIES
 
 
 
 
 
 
-
-
+    // PROCESS API REQUESTS
     query: function (req, res) {
-        Itemcache.find().exec(function (err, data) {
+            Itemcache.find().exec(function (err, data) {
+                if (err) {
+                    callback(err, null)
+                    return
+                }
+                console.log('[SYSTEM]')
+                console.log('API Call')
+                console.log('Date: ' + new Date().toISOString())
+                console.log('==========================')
+                console.log(' ')
+                return res.json(data)
+            })
+        },
+        // END PROCESS API REQUESTS
+
+
+
+
+
+
+
+    // PROCESS LOG REQUESTS
+    logs: function (req, res) {
+        Logs.find().exec(function (err, data) {
             if (err) {
                 callback(err, null)
                 return
             }
             console.log('[SYSTEM]')
-            console.log('API Call')
+            console.log('Log Call')
+            console.log('Date: ' + new Date().toISOString())
             console.log('==========================')
             console.log(' ')
             return res.json(data)
         })
-    }
+    },
+    // END PROCESS API REQUESTS
 }
