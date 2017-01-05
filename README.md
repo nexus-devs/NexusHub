@@ -29,13 +29,13 @@ You can find the **last 100 parsed requests** here: www.nexus-stats.com/logs
 Schema for the logs:
 ```
 {
-user: str,
-request: <item> <item component>,
-request_operator: WTB/WTS,
-request_param: new/add/update/same,
-request_url: link to page on nexus,
-price: int,
-date: date
+    user: str,
+    request: <item> <item component>,
+    request_operator: WTB/WTS,
+    request_param: new/add/update/same,
+    request_url: link to page on nexus,
+    price: int,
+    date: date
 }
 ```
 
