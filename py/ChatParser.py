@@ -519,7 +519,7 @@ while True:
 
                 # Create Message
                 debug = 'true'
-                if REQ_Check == 'valid' and debug == 'false':
+                """if REQ_Check == 'valid' and debug == 'false':
 
                     # Only include website on every 7th price check
                     if NexusBotCount == 7:
@@ -546,7 +546,7 @@ while True:
                         NexusBot.pressAndHold('alt', 'tab')
                         time.sleep(0.1)
                         NexusBot.release('alt', 'tab')
-
+                """
 
                 ItemInfo = ''
 
@@ -582,18 +582,3 @@ while True:
 
 
     print('Job Done')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

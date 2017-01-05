@@ -1,5 +1,3 @@
-<% include /templates/nav %>
-
     <script src="/js/gallery/gallery_main.js"></script>
 
     <!-- Main Content -->
@@ -7,14 +5,14 @@
     <div class='lp-content main-content'>
         <div class='top-spacing'></div>
         <!-- <div class='lp-recent-items item-search'>
-            <div class='lp-recent-bg' data-parallax="scroll" data-image-src="<%= img %>lp_bg.jpg"></div>
+            <div class='lp-recent-bg' data-parallax="scroll" data-image-src="/img/lp_bg.jpg"></div>
             <div class='input-container'>
                 <div class='lp-header-input-helper'></div>
                 <div class='lp-header-input item-search-input' id='search'>
                     <input type='text' placeholder='Find another item'>
                 </div>
                 <button type='button'>
-                    <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
+                    <img src='/img/lp_search.svg' class='lp-search-ico' alt='Search'>
                 </button>
             </div>
         </div> -->
@@ -37,7 +35,7 @@
         <!-- Load Items -->
         <div class='main-items'>
             <button class='item-slide-button dcr-btn' type='button'>
-                <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                <img src='/img/lp_click.svg' alt='Next Item'>
             </button>
 
             <div class='items-shade-l'></div>
@@ -49,7 +47,7 @@
             </div>
 
             <button class='item-slide-button' type=button>
-                <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                <img src='/img/lp_click.svg' alt='Next Item'>
             </button>
         </div>
 
@@ -58,13 +56,13 @@
         <!-- Item Options -->
         <div class='item-options'>
             <div class='item-options-buyers'>
-                <div class='item-options-ico'><img src='<%= img %>main_buyers.svg'></div><span>Show Buyers List </span><span> (Coming Soon)</span>
+                <div class='item-options-ico'><img src='/img/main_buyers.svg'></div><span>Show Buyers List </span><span> (Coming Soon)</span>
             </div>
             <div class='item-options-buyers'>
-                <div class='item-options-ico'><img src='<%= img %>main_buyers.svg'></div><span>Show Sellers List </span><span> (Coming Soon)</span>
+                <div class='item-options-ico'><img src='/img/main_buyers.svg'></div><span>Show Sellers List </span><span> (Coming Soon)</span>
             </div>
             <div class='item-options-buyers'>
-                <div class='item-options-ico'><img src='<%= img %>main_watch.svg' ></div><span>Watch Item </span><span> (Coming Soon)</span>
+                <div class='item-options-ico'><img src='/img/main_watch.svg' ></div><span>Watch Item </span><span> (Coming Soon)</span>
             </div>
         </div>
     </div>
@@ -73,9 +71,9 @@
     <!-- Recent Items -->
     <div class="main-recent-bot">
         <% recentAdditions.forEach(function(addition) { %>
-            <a href='/<%= addition.Type %>/<%= addition.id %>' class="main-item-bot">
+            <a href='/<%= addition.Type %>/<%= addition.id %>' class="main-item-bot selectable-object">
                 <div class="main-item-bot-img">
-                    <img src='<%= img %>items/<%= addition.Title %>-min.png' alt='<%= addition.Title %>'>
+                    <img src='/img/items/<%= addition.Title %>-min.png' alt='<%= addition.Title %>'>
                 </div>
                 <div class="main-item-bot-inf">
                     <span><%= addition.Title %></span><br>
@@ -94,8 +92,7 @@
                 <p>Recently added items</p>
                 <br>
                 <br>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Main Item Sub Item Block -->
+        <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9753711242300802"
@@ -103,7 +100,5 @@
              data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        </script> -->
     </div>
-
-    <% include /templates/footer %>

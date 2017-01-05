@@ -1,10 +1,6 @@
 node_modules/
 .sass-cache/
 .tmp/
-/db/diagnostic.data
-/db/journal
-/db/mongod.lock
-/db/WiredTiger.lock
 /py/cache/input.txt
 /py/cache/screen.jpg
 
@@ -26,3 +22,5 @@ node_modules/
 /.brackets.json
 /assets/img/
 /py/tools/
+/json/
+/api/controllers/ItemsController_bckp*.js

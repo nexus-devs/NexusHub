@@ -20,8 +20,6 @@
  * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
-//var package = req.originalUrl;
-
 module.exports.routes = {
     '/': 'IndexController',
 
@@ -48,11 +46,18 @@ module.exports.routes = {
     'get /items/search': 'ItemsController.search',
     'post /requests': 'RequestsController.create',
 
-    // API
-    'get /api': 'ItemsController.query'
+    // Item Categories
+    'get /categories': 'ItemsController.categories',
+    'get /prime': 'ItemsController.list',
+    'get /arcane': 'ItemsController.list',
+    'get /mods': 'ItemsController.list',
+    'get /prisma': 'ItemsController.list',
+    'get /syndicate': 'ItemsController.list',
+    'get /special': 'ItemsController.list',
 
-    // Testing
-    //'get /update/*/*': 'ItemsController.update'
+    // API
+    'get /api': 'ItemsController.query',
+    'get /logs': 'ItemsController.logs'
 
     /***************************************************************************
      *                                                                          *
