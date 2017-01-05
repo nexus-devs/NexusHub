@@ -43,3 +43,5 @@ Where `request_param` describes a bit of the user's history:
 - add: Item was requested before, but > 24h ago
 - same: Item was requested before, but < 24h ago (no changes)
 - update: Item was requested before, but < 24h ago (with changed values, like price, components)
+
+**Note:** Keep in mind that the bot may not update for several hours if a patch has been released.
