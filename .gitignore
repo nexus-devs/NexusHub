@@ -24,3 +24,4 @@ node_modules/
 /py/tools/
 /json/
 /api/controllers/ItemsController_bckp*.js
+/clean_db.js
