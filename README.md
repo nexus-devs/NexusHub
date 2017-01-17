@@ -1,7 +1,7 @@
 # WarframeNexus
 Warframe Trade Chat Parser based on TesseractOCR. Server runs on node/sails.js & mongodb.
 
-[![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
+[![Supported by Warframe Community Developers](https://raw.githubusercontent.com/Warframe-Community-Developers/banner/master/banner.png)](https://github.com/Warframe-Community-Developers "Supported by Warframe Community Developers")
 
 **Checkout the development branch to see current progress.**
 
