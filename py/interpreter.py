@@ -137,6 +137,8 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
     else:
         TO = ''
 
+    i = i
+
     ItemID = ''
     ItemComp = ''
     ItemType = ''
@@ -178,7 +180,7 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
 
 
             # Check if Components in messages i + 3
-            for y in range(0, 3):
+            for y in range(0, 5):
 
                 if i + y < len(stringArr):
 
@@ -212,6 +214,10 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
 
             break # stop matching further entries
 
+
+    # If no components -> set
+    if ItemComp == '':
+        ItemComp = 'Set'
 
     # Extend Request Array and return
     Request.extend((TO, ItemID, ItemComp, ItemType, ItemPrice, ItemCount, ItemRank))
