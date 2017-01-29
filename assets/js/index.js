@@ -51,7 +51,7 @@ $(document).ready(function () {
                      "Arcane Scorpion Helmet",
                      "Arcane Locust Helmet",
                      "Arcane Reverb Helmet",
-                     "Arcane Chrous Helmet",
+                     "Arcane Chorus Helmet",
                      "Arcane Phoenix Helmet",
                      "Arcane Backdraft Helmet",
                      "Arcane Avalon Helmet",
@@ -243,7 +243,7 @@ $(document).ready(function () {
                      "Rending Crane",
                      "Iron Phoenix",
                      "Astral Twilight",
-                     "Defiled Snapdragon",
+                     "Dfiled Snapdragon",
                      "Vulpine Mask",
                      "Shimmering Blight",
                      "Crossing Snakes",
@@ -284,10 +284,12 @@ $(document).ready(function () {
                      "Rakta Dark Dagger",
                      "Vaykor Sydon",
                      "Legendary Core",
+                     "Orvius",
+                     "Sovereign Outcast",
                      "Valkyr Prime",
                      "Cernos Prime",
                      "Venka Prime",
-                     "Orvius"
+                     "Booben Prime"
                     ]
 
 
