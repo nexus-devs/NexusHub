@@ -1,5 +1,9 @@
 {
+  "hooks": {
+    "gulp": false
+  },
   "generators": {
-    "modules": {}
+    "modules": {
+    }
   }
 }

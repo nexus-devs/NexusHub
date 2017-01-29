@@ -1,34 +1,32 @@
-<!DOCTYPE html>
-<html>
-
-
-<% include /templates/nav %>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <script src="js/gallery/gallery.js"></script>
+    <script src="js/parallax.js"></script>
 
     <body>
         <!-- Header -->
         <!--==============================-->
         <header>
             <div class='lp-header'>
-                <video loop muted autoplay class='lp-header-vidbg'>
-                    <source class='lp-header-vid' src="<%= img %>lp_header_vid.webm" type="video/webm">
-                </video>
+
+                <img data-image-src="img/lp_bg.jpg" class='lp-header-vidbg' data-parallax="scroll">
+
+
 
                 <div class='lp-header-headline-container'>
                     <h1 class='lp-header-headline'>Warframe Item Prices</h1>
-                    <img src='<%= img %>lp_header_border.png' class='lp-header-border'>
+                    <img src='/img/lp_header_border.png' class='lp-header-border'>
                     <h2 class='lp-header-sub'>Forget an auction house - Get all <em>stats</em> directly <a href='/how_we_get_our_stats'><em>from the chat</em></a>!</h2>
                 </div>
 
+
+
+                <!-- Search -->
                 <form class='lp-header-input-container' method='get' action='/items/search' id='search-form'>
                     <div class='lp-header-input-helper'></div>
-                    <div class='lp-header-input' id='search'>
-                        <input type='text' placeholder='Enter Item Name' name='item' id='tags'>
-                    </div>
+                    <div class="lp-header-input-helper-2"></div>
+                    <input type='text' placeholder='Enter Item Name' name='item' class='search' id='search'>
                     <button type='submit' form='search-form'>
-                        <img src='<%= img %>lp_search.svg' class='lp-search-ico' alt='Search'>
-                    </button>
+                        <img src='/img/lp_search.svg' class='lp-search-ico' alt='Search'>
+                    </button><br>
                 </form>
             </div>
         </header>
@@ -54,9 +52,8 @@
 
             <!-- Popular Items -->
             <div class='lp-pop-header'>
-
                 <h1>
-            <img src='<%= img %>lp_popular.svg' alt='Popular Items Icon'>
+            <img src='/img/lp_popular.svg' alt='Popular Items Icon'>
             Popular Items
             <h2>Real Time Updates from the Trade Chat</h2>
             </h1>
@@ -67,7 +64,7 @@
             <div class='items-main'>
 
                 <button class='item-slide-button dcr-btn' type='button'>
-                    <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                    <img src='/img/lp_click.svg' alt='Next Item'>
                 </button>
 
                 <div class='items-shade-l'></div>
@@ -80,259 +77,46 @@
                     <% content.forEach(function(itemdata) { %>
                         <% include /templates/main_item %>
                             <% }); %>
+                    <div class='items-item'>
+                        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                        <!-- Landing Page Item Block -->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-9753711242300802"
+                             data-ad-slot="7495981770"
+                             data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
 
 
                 </div>
                 <button class='item-slide-button' type=button>
-                    <img src='<%= img %>lp_click.svg' alt='Next Item'>
+                    <img src='/img/lp_click.svg' alt='Next Item'>
                 </button>
 
             </div>
 
             <!-- Drag Note -->
             <div class='items-drag-note'>
-                <img src='<%= img %>lp_drag.svg' alt='Drag'>
+                <img src='/img/lp_drag.svg' alt='Drag'>
                 <span><b>Click</b> or <b>Drag</b> for more information.</span>
-                <img src='<%= img %>lp_drag.svg' alt='Drag'>
+                <img src='/img/lp_drag.svg' alt='Drag'>
+
+                <div>
+                   <br>
+                   <br>
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Landing Page Sub Item Block -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9753711242300802"
+                         data-ad-slot="2564424570"
+                         data-ad-format="auto"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
             </div>
-
-
-
-
         </div>
-    </body>
-    <script>
-        $(function () {
-            var availableTags = [
-                "Nezha",
-                "Ash Prime",
-                "Ember Prime",
-                "Frost Prime",
-                "Loki Prime",
-                "Mag Prime",
-                "Nova Prime",
-                "Nyx Prime",
-                "Rhino Prime",
-                "Saryn Prime",
-                "Trinity Prime",
-                "Vauban Prime",
-                "Volt Prime",
-                "Boar Prime",
-                "Boltor Prime",
-                "Braton Prime",
-                "Burston Prime",
-                "Latron Prime",
-                "Paris Prime",
-                "Soma Prime",
-                "Vectis Prime",
-                "Akbronco Prime",
-                "Akstiletto Prime",
-                "Bronco Prime",
-                "Hikou Prime",
-                "Lex Prime",
-                "Sicarus Prime",
-                "Spira Prime",
-                "Vasto Prime",
-                "Ankyros Prime",
-                "Bo Prime",
-                "Dakra Prime",
-                "Dual Kamas Prime",
-                "Fang Prime",
-                "Fragor Prime",
-                "Glaive Prime",
-                "Nikana Prime",
-                "Orthos Prime",
-                "Reaper Prime",
-                "Scindo Prime",
-                "Carrier Prime",
-                "Wyrm Prime",
-                "Kavasa Prime Collar",
-                "Odonata Prime",
-                "Arcane Scorpion Helmet",
-                "Arcane Locust Helmet",
-                "Arcane Reverb Helmet",
-                "Arcane Chrous Helmet",
-                "Arcane Phoenix Helmet",
-                "Arcane Backdraft Helmet",
-                "Arcane Avalon Helmet",
-                "Arcane Pendragon Helmet",
-                "Arcane Aurora Helmet",
-                "Arcane Squall Helmet",
-                "Arcane Essence Helmet",
-                "Arcane Swindle Helmet",
-                "Arcane Coil Helmet",
-                "Arcane Gauss Helmet",
-                "Arcane Flux Helmet",
-                "Arcane Menticide Helmet",
-                "Arcane Vespa Helmet",
-                "Arcane Thrak Helmet",
-                "Arcane Vanguard Helmet",
-                "Arcane Hemlock Helmet",
-                "Arcane Chlora Helmet",
-                "Arcane Aura Helmet",
-                "Arcane Meridian Helmet",
-                "Arcane Esprit Helmet",
-                "Arcane Gambit Helmet",
-                "Arcane Storm Helmet",
-                "Arcane Pulse Helmet",
-                "Prisma Skana",
-                "Prisma Dual Cleavers",
-                "Prisma Gorgon",
-                "Prisma Grakata",
-                "Prisma Veritux",
-                "Prisma Shade",
-                "Arcane Acceleration",
-                "Arcane Aegis",
-                "Arcane Agility",
-                "Arcane Arachne",
-                "Arcane Avenger",
-                "Arcane Awakening",
-                "Arcane Barrier",
-                "Arcane Consequence",
-                "Arcane Deflection",
-                "Arcane Energize",
-                "Arcane Eruption",
-                "Arcane Fury",
-                "Arcane Grace",
-                "Arcane Guardian",
-                "Arcane Healing",
-                "Arcane Ice",
-                "Arcane Momentum",
-                "Arcane Nullifier",
-                "Arcane Phantasm",
-                "Arcane Precision",
-                "Arcane Rage",
-                "Arcane Resistance",
-                "Arcane Strike",
-                "Arcane Tempo",
-                "Arcane Trickery",
-                "Arcane Ultimatum",
-                "Arcane Velocity",
-                "Arcane Victory",
-                "Arcane Warmth",
-                "Smeeta Kavat",
-                "Adarza Kavat",
-                "Blind Rage",
-                "Fleeting Expertise",
-                "Narrow Minded",
-                "Overextended",
-                "Transient Fortitude",
-                "Critical Delay",
-                "Heavy Caliber",
-                "Vile Precision",
-                "Tainted Mag",
-                "Vile Acceleration",
-                "Depleted Reload",
-                "Burdened Magazine",
-                "Vicious Spread",
-                "Tainted Shell",
-                "Frail Momentum",
-                "Critical Deceleration",
-                "Anemic Agility",
-                "Creeping Bullseye",
-                "Hollow Point",
-                "Magnum Force",
-                "Tainted Clip",
-                "Spoiled Strike",
-                "Corrupt Charge",
-                "Power Drift",
-                "Coaction Drift",
-                "Cunning Drift",
-                "Speed Drift",
-                "Endurance Drift",
-                "Agility Drift",
-                "Stealth Drift",
-                "Body Count",
-                "Focused Defense",
-                "Blood Rush",
-                "Weeping Wounds",
-                "Maiming Strike",
-                "Argon Scope",
-                "Bladed Rounds",
-                "Catalyzer Link",
-                "Guided Ordnance",
-                "Spring-Loaded Chamber",
-                "Shrapnel Shot",
-                "Laser Sight",
-                "Repeater Clip",
-                "Nano-Applicator",
-                "Narrow Barrel",
-                "Hydraulic Crosshairs",
-                "Embedded Catalyzer",
-                "Sharpened Bullets",
-                "Targeting Subsystem",
-                "Pressurized Magazine",
-                "Primed Continuity",
-                "Primed Flow",
-                "Primed Vigor",
-                "Primed Fury",
-                "Primed Pressure Point",
-                "Primed Reach",
-                "Primed Point Blank",
-                "Primed Ravage",
-                "Primed Morphic Transformer",
-                "Primed Pistol Gambit",
-                "Primed Heavy Trauma",
-                "Primed Target Cracker",
-                "Primed Fast Hands",
-                "Primed Heated Charge",
-                "Primed Bane of Infested",
-                "Primed Rifle Ammo Mutation",
-                "Primed Pistol Mutation",
-                "Primed Slip Magazine",
-                "Primed Shotgun Ammo Mutation",
-                "Primed Ammo Stock",
-                "Tempo Royale",
-                "Shred",
-                "Buzz Kill",
-                "Primed Chamber",
-                "High Voltage",
-                "Rime Rounds",
-                "Thermite Rounds",
-                "Jolt",
-                "Piercing Caliber",
-                "Fanged Fusillade",
-                "Shell Shock",
-                "Voltaic Strike",
-                "Tempo Royale",
-                "Tempo Royale",
-                "Frigid Blast",
-                "Volcanic Edge",
-                "Virulent Scourge",
-                "Vicious Frost",
-                "Frostbite",
-                "Auger Strike",
-                "Collision Force",
-                "Magma Chamber",
-                "Pistol Pestilence",
-                "Toxic Barrage",
-                "Aviator",
-                "Bore",
-                "Breach Loader",
-                "Pummel",
-                "Crash Course",
-                "Full Contact",
-                "Searing Steel",
-                "Maim",
-                "Vaykor Hek",
-                "Vaykor Marelok",
-                "Telos Boltor",
-                "Telos Akbolto",
-                "Synoid Simulor",
-                "Synoid Gammacor",
-                "Secura Penta",
-                "Secura Dual Cestra",
-                "Rakta Cernos",
-                "Rakta Ballistica",
-                "Sancti Tigris",
-                "Sancti Castanas",
-                "Mara Detron"
-            ];
-            $("#tags").autocomplete({
-                source: availableTags,
-            });
-        });
-    </script>
-    <% include /templates/footer %>
-
-</html>

@@ -1,8 +1,4 @@
-<!doctype html>
-<html>
-
 <div class='lp-bg' data-parallax="scroll" data-image-src="img/lp_bg.jpg"></div>
-<% include /templates/nav %>
     <script src="/js/parallax.js"></script>
 
     <body>
@@ -23,60 +19,19 @@
 
         <div class='generic-content' ng-app='NexusBotModule' ng-app='NexusBotController' ng-cloak>
             <div class='main-content-wrapper'>
-                <h1><%= main_title %></h1>
-                <span class='generic-desc'><%- desc %></span>
-
-                <form class='nexusbot-forms' method='post' action='nexusbot/create'>
-                    <h3>Your Clan Name</h3>
-                    <input type='text' name='clanName'>
-                    <h3>Your Ingame Name</h3>
-                    <input type='text' name='name'>
-                    <br>
-                    <button type='submit' value='Register Nexusbot'>
-                        Submit
-                    </button>
-                    <input type='hidden' name='_csrf' value='<%= _csrf %>'>
-
-                    <% if (flash && flash.err){ %>
-                     <br>
-                    <div class='alert'>
-                       <div>Please fill out the form first.</div>
-                    </div>
-                    <% } %>
-
-                    <% if (result == 'true'){ %>
-                    <br>
-                    <div class='alert alert-success'>
-                        '<%= clanName %>' has been added to our list!<br> Depending on current demand, we may take up to 1 week to contact you.
-                    </div>
-                    <% } %>
-                </form>
+                <h1>Perform Price Checks right on Discord.</h1>
+                <span class='generic-desc'>With our NexusBot integration for Genesis, you can now do price checks right on your Discord Server! <a href="http://genesis.morningstar.ninja"><em>Click here to get the bot.</em></a></span>
 
 
-                <h2><%= BotCHeadline %></h2>
-                <span class=''><%- BotCDesc %></span>
 
 
-                <div class='main-item-bot nexusbot-bot'>
-                    <span><%- Note %></span>
-                    <br>
-                    <a href='https://paypal.me/warframenexus' target="_blank">
-                        <img src='<%= img %>donation_paypal.png' class='nexusbot-donate'>
-                    </a>
+                <h2>How to use the bot?</h2>
+                <span class=''>Simply type <b>/PC Item Name</b> ( e.g.  '/PC Frost Prime Helmet' ) in the chat and we'll instantly post the item price.</span>
+
+
+                <div class='nexusbot-bot'>
+                    <span>Thanks to <a href='https://github.com/aliasfalse/'>AliasFalse</a> for integrating this into his Warframe Bot. His bot comes with many more functions. If you don't want those, simply type /stop and it will stop auto-posting anything else.</span>
                 </div>
 
             </div>
         </div>
-
-
-
-
-
-
-
-    </body>
-
-    <% include /templates/footer %>
-
-
-</html>

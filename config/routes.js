@@ -20,8 +20,6 @@
  * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
-//var package = req.originalUrl;
-
 module.exports.routes = {
     '/': 'IndexController',
 
@@ -33,6 +31,10 @@ module.exports.routes = {
     'post /nexusbot/create': 'NexusBotController.create',
     'get /nexusbot': 'NexusBotController.index',
 
+    // Feedback
+    'get /feedback': 'FeedbackController.index',
+    'post /feedback': 'FeedbackController.create',
+
     // Items
     'get /prime/*': 'ItemsController.index',
     'get /arcane/*': 'ItemsController.index',
@@ -42,7 +44,20 @@ module.exports.routes = {
     'get /syndicate/*': 'ItemsController.index',
     'get /special/*': 'ItemsController.index',
     'get /items/search': 'ItemsController.search',
-    'post /requests': 'RequestsController.create'
+    'post /requests': 'RequestsController.create',
+
+    // Item Categories
+    'get /categories': 'ItemsController.categories',
+    'get /prime': 'ItemsController.list',
+    'get /arcane': 'ItemsController.list',
+    'get /mods': 'ItemsController.list',
+    'get /prisma': 'ItemsController.list',
+    'get /syndicate': 'ItemsController.list',
+    'get /special': 'ItemsController.list',
+
+    // API
+    'get /api': 'ItemsController.query',
+    'get /logs': 'ItemsController.logs'
 
     /***************************************************************************
      *                                                                          *

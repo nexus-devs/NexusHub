@@ -9,41 +9,47 @@
                     <span class='items-images-main-text'>Full Item Price</span>
                     <br>
                     <% itemdata.Components.forEach(function(item) { %>
-                    <% if (item.name === 'Set') { %>
+                    <% if (item.name === 'Single Unit' || item.name === 'Set') { %>
                     <span class='items-images-main-price'><%= item.avg %></span>
                     <% } %>
                     <% }); %>
                 </div>
                 <div class='items-images-main-helper'></div>
-                <img src='<%= img %>items/<%= itemdata.Title %>-min.png' alt='<%= itemdata.Title %>'>
+                <img src='/img/items/<%= itemdata.Title %>-min.png' alt='<%= itemdata.Title %>'>
             </div>
+
+
 
             <!-- Item Components -->
             <div class='items-images-components'>
                 <div class='items-images-components-part'>
                     <% JSON.parse(JSON.stringify(itemdata)).Components.forEach(function(item) { %>
-                    <% if (item.name !== 'Set') { %>
+                    <% if (item.name !== 'Single Unit' && item.name !== 'Set') { %>
                         <!-- Component -->
                         <div class='item-images-components-wr'>
                             <div class='item-images-components-component'>
-                                <img src='<%= img %>generic/<%= item.name %>-min.png' alt='<%= itemdata.Title %> <%= item.name %>'>
+                                <img src='/img/generic/<%= item.name %>-min.png' alt='<%= itemdata.Title %> <%= item.name %>'>
                             </div>
                             <div class='items-component-details'>
                                 <h3><%= item.name %></h3>
-                                <h4><%= item.avg %></h4>
-                                <span> | <%= item.comp_val_rt %></span>
+                                <% if (item.avg !== '') { %>
+                                <h4><%- Math.round (parseInt(item.avg) / 5)*5 %>p&nbsp;</h4>
+                                <span> |&nbsp; <%= item.comp_val_rt %></span>
+                                <% } else { %>
+                                <span>NO DATA</span>
+                                <% } %>
                             </div>
                         </div>
                     <% } %>
                         <% }); %>
-
-
-
-
                 </div>
             </div>
         </div>
+        <% if (itemdata.Type !== 'Prime') { %>
+        <a href='/<%= itemdata.Type %>/<%= itemdata.Title %>'>Go to Item Page</a>
+        <% } else { %>
         <a href='/<%= itemdata.Type %>/<%= itemdata.id %>'>Go to Item Page</a>
+        <% } %>
     </div>
     <div class='items-item-stats'>
         <h2>Weekly Statistics</h2>

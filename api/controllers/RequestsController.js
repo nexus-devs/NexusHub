@@ -125,6 +125,7 @@ module.exports = {
 
                     // Ensure user exists. If not, create
                     function updateUserList(callback) {
+                    console.log('[PYTHON]')
                     Users.find({
                         user: REQ_User
                     }).exec(function (err, user) {
@@ -132,11 +133,11 @@ module.exports = {
                             Users.create({
                                 user: REQ_User
                             }).exec(function createCB(err, created) {
-                                console.log('Created user with name ' + created.user);
+                                console.log('User: ' + created.user + ' (new)');
                                 callback();
                             });
                         } else {
-                            console.log(REQ_User + ' already in db')
+                            console.log('User: ' + REQ_User)
                             callback();
                         }
                     })
@@ -150,7 +151,7 @@ module.exports = {
                     }).exec(function (err, user) {
 
 
-                        // Check if user has requested items
+                        // Check if user has requested any items before
                         if (typeof user[0].requests !== 'undefined') {
 
                             var requested = 'false'
@@ -185,7 +186,7 @@ module.exports = {
 
                                 // Check if request older than 1 > then create new
                                 if (delta > 1) {
-                                    console.log('Upserted new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                                    console.log('Request: Add ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                     Users.native(function (err, collection) {
                                         collection.update({
                                             "user": REQ_User,
@@ -205,13 +206,25 @@ module.exports = {
                                             }
                                         })
                                     })
+                                    Logs.native(function (err, collection) {
+                                        collection.insert({
+                                            user: REQ_User,
+                                            request: REQ_Main + ' ' + REQ_Comp,
+                                            request_operator: REQ_TO,
+                                            request_param: "add",
+                                            request_url: "www.nexus-stats.com/" +  REQ_Type + '/' + REQ_Main,
+                                            price: REQ_Price,
+                                            date: new Date()
+                                        })
+                                    })
                                     callback();
 
                                     // If request already sent today > then update values to latest request
-                                    // Maybe check if component is part of requets > if not: push component
                                 } else if (delta < 1) {
                                     if (requested_comp !== 'true') {
-                                        console.log('Updated request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                                        console.log('Request: Update ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+
+                                        // Set request as updated
                                         Users.native(function (err, collection) {
                                             collection.update({
                                                 "user": REQ_User,
@@ -232,8 +245,32 @@ module.exports = {
                                                         to: REQ_TO,
                                                         name: REQ_Comp,
                                                         data: REQ_Price
+                                                    }
                                                 }
-                                                }
+                                            })
+                                        })
+                                        Logs.native(function (err, collection) {
+                                            collection.insert({
+                                                user: REQ_User,
+                                                request: REQ_Main + ' ' + REQ_Comp,
+                                                request_operator: REQ_TO,
+                                                request_param: "update",
+                                                request_url: "www.nexus-stats.com/" +  REQ_Type + '/' + REQ_Main,
+                                                price: REQ_Price,
+                                                date: new Date()
+                                            })
+                                        })
+                                    } else { // Nothing to update/same request in same day
+                                        console.log('Request: Same ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                                        Logs.native(function (err, collection) {
+                                            collection.insert({
+                                                user: REQ_User,
+                                                request: REQ_Main + ' ' + REQ_Comp,
+                                                request_operator: REQ_TO,
+                                                request_param: "same",
+                                                request_url: "www.nexus-stats.com/" +  REQ_Type + '/' + REQ_Main,
+                                                price: REQ_Price,
+                                                date: new Date()
                                             })
                                         })
                                     }
@@ -243,7 +280,7 @@ module.exports = {
 
                                 // Create New Requst
                             } else {
-                                console.log('Created new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                                console.log('Request: New ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                                 Users.native(function (err, collection) {
                                     collection.update({
                                         "user": REQ_User,
@@ -263,13 +300,24 @@ module.exports = {
                                         }
                                     })
                                 })
+                                Logs.native(function (err, collection) {
+                                    collection.insert({
+                                        user: REQ_User,
+                                        request: REQ_Main + ' ' + REQ_Comp,
+                                        request_operator: REQ_TO,
+                                        request_param: "new",
+                                        request_url: "www.nexus-stats.com/" +  REQ_Type + '/' + REQ_Main,
+                                        price: REQ_Price,
+                                        date: new Date()
+                                    })
+                                })
                                 callback();
                             }
 
 
-                            // if user has no requests, create
+                        // if user has no previous requests at all, create new
                         } else {
-                            console.log('Created new request ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
+                            console.log('Request: New ( ' + REQ_Main + ' ' + REQ_Comp + ' )')
                             Users.native(function (err, collection) {
                                 collection.update({
                                     "user": REQ_User,
@@ -289,6 +337,17 @@ module.exports = {
                                     }
                                 }, {
                                     upsert: true
+                                })
+                            })
+                            Logs.native(function (err, collection) {
+                                collection.insert({
+                                    user: REQ_User,
+                                    request: REQ_Main + ' ' + REQ_Comp,
+                                    request_operator: REQ_TO,
+                                    request_param: "new",
+                                    request_url: "www.nexus-stats.com/" +  REQ_Type + '/' + REQ_Main,
+                                    price: REQ_Price,
+                                    date: new Date()
                                 })
                             })
                             callback();
@@ -313,7 +372,8 @@ module.exports = {
                         })
                     })
 
-                    console.log('===================')
+                    console.log('Date: ' + new Date().toISOString())
+                    console.log('----------------------')
                     console.log(' ')
 
                     // Return info

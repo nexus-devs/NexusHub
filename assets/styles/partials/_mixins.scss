@@ -2,45 +2,48 @@
 // ------------------------------
 
 @mixin font-default($color) {
-    font-family: 'raleway';
+    font-family: 'raleway', sans-serif;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     color: $color;
 }
 
 @mixin font-default-bold($color) {
-    font-family: 'raleway';
-    font-size: 18px;
+    font-family: 'raleway', sans-serif;
+    font-size: 16px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-small-title($color) {
-    font-family: 'raleway';
-    font-size: 24px;
+    font-family: 'raleway', sans-serif;
+    font-size: 20px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-title($color) {
-    font-family: 'raleway';
-    font-size: 30px;
+    font-family: 'raleway', sans-serif;
+    font-size: 26px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-logo($color) {
-    font-family: 'raleway';
+    font-family: 'raleway', sans-serif;
     font-size: 22px;
     font-weight: 700;
     color: $color;
 }
 
 @mixin font-number($color) {
-    font-family: 'arial';
+    font-family: 'arial', sans-serif;
     color: $color;
 }
 
+@mixin font-shadow() {
+    text-shadow: 0 5px 78px rgba(0,0,0,0.8), 0 5px 42px rgba(0,0,0,0.8);
+}
 
 
 // Animations
@@ -54,6 +57,16 @@
     -o-transition-duration: $timing;
     transition-duration: $timing;
 }
+
+@mixin ease-out($timing){
+    -webkit-transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
+    transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
+    -webkit-transition-duration: $timing;
+    -moz-transition-duration: $timing;
+    -o-transition-duration: $timing;
+    transition-duration: $timing;
+}
+
 
 
 
@@ -70,6 +83,12 @@
     vertical-align: middle;
 }
 
+@mixin va-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 
 // Inputs
@@ -78,7 +97,6 @@
 @mixin input {
     outline: none;
     border: none;
-    padding-left:10%;
     padding-top:3px;
 }
 
@@ -113,3 +131,102 @@
     padding:1px;
     @include ease(0.15s);
 }
+
+
+
+// Gradients
+// ------------------------------
+
+@mixin gradient-top($color){
+    background: -webkit-linear-gradient(to top, transparent, $color);
+    background: -o-linear-gradient(to top, transparent, $color);
+    background: -moz-linear-gradient(to top, transparent, $color);
+    background: linear-gradient(to top, transparent, $color);
+}
+
+@mixin gradient-bottom($color){
+    background: -webkit-linear-gradient(to bottom, transparent, $color);
+    background: -o-linear-gradient(to bottom, transparent, $color);
+    background: -moz-linear-gradient(to bottom, transparent, $color);
+    background: linear-gradient(to bottom, transparent, $color);
+}
+
+@mixin gradient-bg($col-1, $col-2){
+    background-image: linear-gradient(to top, $col-1, $col-2);
+}
+
+@mixin gradient-border($col-1, $col-2){
+    border-width: 1px;
+    border-style: solid;
+    -webkit-border-image: -webkit-gradient(linear, 0 0, 0 100%, from($col-1), to($col-2)) 1 100%;
+    -webkit-border-image: -webkit-linear-gradient($col-1, $col-2) 1 100%;
+    -moz-border-image: -moz-linear-gradient($col-1, $col-2) 1 100%;
+    -o-border-image: -o-linear-gradient($col-1, $col-2) 1 100%;
+    border-image: linear-gradient(to bottom, $col-1, $col-2) 1 100%;
+}
+
+
+// Avatars
+// ------------------------------
+
+@mixin ava-small($border-color){
+    overflow:hidden;
+    border-radius: 40px;
+    border: 2px solid $border-color;
+    height:30px;
+    width:30px;
+    background:$color-accent;
+    img{
+        height:100%;
+    }
+}
+
+@mixin ava-mid($border-color){
+    overflow:hidden;
+    border-radius: 55px;
+    border: 2px solid $border-color;
+    height:55px;
+    width:55px;
+    background:$color-accent;
+    img{
+        height:100%;
+    }
+}
+@mixin ava-large($border-color){
+    overflow:hidden;
+    border-radius: 160px;
+    border: 2px solid $border-color;
+    height:160px;
+    width:160px;
+    background:$color-accent;
+    img{
+        height:100%;
+    }
+}
+
+@mixin ava-offline(){
+    border: 2px solid grey;
+    -webkit-filter: grayscale(100%);
+    filter: gray;
+    filter: grayscale(100%);
+    filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+    background-blend-mode: luminosity, normal;
+}
+
+
+// Other
+// ------------------------------
+
+@mixin drop-shadow(){
+    box-shadow: 0px 3px 20px rgba(15, 24, 33, 0.6);
+}
+
+@mixin grayscale(){
+    -webkit-filter: grayscale(100%);
+    filter: gray;
+    filter: grayscale(100%);
+    filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+    background-blend-mode: luminosity, normal;
+}
+
+

@@ -2,6 +2,7 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/typeahead.js/typeahead.bundle.min.js"></script>
     <script src="/js/index.js"></script>
     <script src="/js/highcharts.js"></script>
     <script src="/js/gallery/motionblur.js"></script>
@@ -11,12 +12,16 @@
 
 <head>
     <title>
-        <%=typeof HeaderTitle == 'undefined' ? 'NexusStats - Warframe Item Prices' : HeaderTitle %>
+        [dev-server] | <%= typeof HeaderTitle == 'undefined' ? 'NexusStats - Warframe Item Prices' : HeaderTitle %>
     </title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <% if (typeof HeaderTitle == 'undefined'){ %>
     <meta name="description" content="Warframe item prices taken directly from the trade chat. Get real prices for both item sets and components.">
+    <% } else { %>
+    <meta name="description" content="<%= itemdata.Title %> Price | <% itemdata.Components.forEach(function(item) { %><%= item.name %>: <%- Math.round (parseInt(item.avg) / 5)*5 %>p, <% }) %>stats taken from trade chat." >
+    <% } %>
 
     <!--STYLES-->
     <link rel="stylesheet" href="/css/importer.css">
@@ -26,12 +31,9 @@
 </head>
 
 <body>
-
+    <% include ./templates/nav %>
     <%- body %>
-
-
-
-
+    <% include ./templates/footer %>
 </body>
 
 </html>
