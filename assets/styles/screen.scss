@@ -1471,3 +1471,62 @@ footer {
         color:$color-on-bg;
     }
 }
+.ui-corner-all
+{
+    -moz-border-radius: 4px 4px 4px 4px;
+}
+.ui-widget-content
+{
+    color:$color-subtle;
+    background-color: white;
+}
+.ui-widget
+{
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 15px;
+}
+.ui-menu
+{
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 2px;
+}
+.ui-autocomplete
+{
+    cursor: default;
+    position: absolute;
+    max-height:100px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+.ui-menu .ui-menu-item
+{
+    clear: left;
+    float: left;
+    margin: 15px 30px;
+    padding: 0;
+    width: 100%;
+}
+.ui-menu .ui-menu-item a
+{
+    display: block;
+    padding: 3px 3px 3px 3px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: Green;
+}
+.ui-menu .ui-menu-item a:hover
+{
+    display: block;
+    padding: 3px 3px 3px 3px;
+    text-decoration: none;
+    color: White;
+    cursor: pointer;
+    background-color: ButtonText;
+}
+.ui-widget-content a
+{
+    color: #222222;
+}
