@@ -113,8 +113,6 @@ while True:
             # If Request is valid, send to server
             if not str(Msg[l]) in RequestCache and not (Request[0] == '' or Request[1] == ''):
 
-                print(Request)
-
                 # Open secret password
                 with open('./sources/pwd.txt', 'r') as myfile:
                     pwd=myfile.read().replace('\n', '')
@@ -130,8 +128,6 @@ while True:
                     'user': 'python',
                     'password': pwd
                 }
-
-                print(payload)
 
                 res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
 
