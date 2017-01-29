@@ -4,7 +4,7 @@
 
 ## Data Processing
 
-- Trade Chat Requests are processed by /py/ChatParser.py
+- Trade Chat Requests are processed by /py/NexusSentry.py
 - Parsed Requests are sent to /api/controllers/RequestController.js
 - When a client requests statistics for an item, they're either processed
   by /api/controllers/ItemController.js or taken from the itemcache collection if no update
