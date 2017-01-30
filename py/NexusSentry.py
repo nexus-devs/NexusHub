@@ -61,8 +61,6 @@ while True:
 
 
 
-
-
     # Message interpretation
     #---------------------------
 
@@ -113,6 +111,8 @@ while True:
             # If Request is valid, send to server
             if not str(Msg[l]) in RequestCache and not (Request[0] == '' or Request[1] == ''):
 
+                print(Request)
+
                 # Open secret password
                 with open('./sources/pwd.txt', 'r') as myfile:
                     pwd=myfile.read().replace('\n', '')
@@ -121,15 +121,15 @@ while True:
                 {
                     'username': Username,
                     'to': Request[0],
-                    'item': Request[1].title(),
-                    'comp': Request[2].title(),
-                    'type': Request[3].title(),
+                    'item': Request[1],
+                    'comp': Request[2],
+                    'type': Request[3],
                     'price': Request[4],
                     'user': 'python',
                     'password': pwd
                 }
 
-                res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
+                #res = requests.post('http://localhost:1337/requests', data=json.dumps(payload))
 
         # = End of Message Body Interpretation =
 
