@@ -144,7 +144,7 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
     ItemType = ''
     ItemPrice = 'null'
     ItemCount = 1
-    ItemRank = ''
+    ItemRank = 1
     Request = [] # Create Array to fill later
 
 
@@ -154,7 +154,6 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
         dbIDwords = dbID.split()
         dbType = ItemJSON[j]["type"].upper()
         dbComp = [each.upper() for each in ItemJSON[j]["components"]]
-        dbComp = appendComponents(dbComp)
 
 
         # If string in Message matches
@@ -179,10 +178,14 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
                 ItemType = dbType
 
 
-            # Check if Components in messages i + 3
-            for y in range(0, 5):
+            # Append Alternatives to Components
+            dbComp = appendComponents(dbComp)
 
-                if i + y < len(stringArr):
+
+            # Check if Components in messages i + 5
+            for y in range(0, 6):
+
+                if i + y <= len(stringArr):
 
                     # is contained in component list?
                     if stringArr[i + y - 1] in dbComp:
@@ -193,7 +196,7 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
                             CompCheckList = eval(CompParts[u])
 
                             if ItemComp in CompCheckList:
-                                ItemComp = CompParts[u]
+                                ItemComp = CompParts[u].upper()
 
 
                     # has number?
@@ -217,7 +220,7 @@ def getRequest(i, stringArr, ItemJSON, TOcount, TOval):
 
     # If no components -> set
     if ItemComp == '':
-        ItemComp = 'Set'
+        ItemComp = 'SET'
 
     # Extend Request Array and return
     Request.extend((TO, ItemID, ItemComp, ItemType, ItemPrice, ItemCount, ItemRank))
@@ -232,7 +235,7 @@ def appendComponents(array):
         for u in range(0, len(CompParts)):
             CompList = eval(CompParts[u])
 
-            if array[i] == CompParts[u]:
+            if array[i] in CompList:
                 array.extend(CompList)
 
     return(array)

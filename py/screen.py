@@ -13,7 +13,7 @@ import builtins
 def shot():
 
     global img
-    img = ImageGrab.grab(bbox=(0,565,1525,755))
+    img = ImageGrab.grab(bbox=(0,365,1525,755))
 
     basewidth = 5300
     wpercent = (basewidth / float(img.size[0]))
