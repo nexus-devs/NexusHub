@@ -6,7 +6,7 @@ import string
 
 
 
-# Message interpretation
+# Message modifications
 #---------------------------
 
 # Remove redundant characters
