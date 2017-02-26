@@ -1,27 +1,15 @@
-node_modules/
-.sass-cache/
-.tmp/
-/py/cache/input.txt
-/py/cache/screen.jpg
+# https://git-scm.com/docs/gitignore
+# https://help.github.com/articles/ignoring-files
+# Example .gitignore files: https://github.com/github/gitignore
+/bower_components/
+/*/node_modules/
+/ocr/__pycache__/
 
-/py/__pycache__
-/py/sources
-/assets/styles/importer.css
-/assets/styles/importer.css.map
-/assets/styles/reset.css
-/assets/styles/reset.css.map
-/json/users.json
-/assets/img/generic/fullsize
-/assets/img/items/fullsize
-/npm-debug.log
-/py/tools/sitemap.py
-/sitemap.txt
-/views/google.ejs
-/py/tools/autocomplete.py
-/.mongo
+/client/.tmp/
+/client/assets/img/generic/fullsize
+/client/assets/img/items/fullsize
+/client/npm-debug.log
+/client/sitemap.txt
+/client/.brackets.json
+/client/assets/img/
 /.brackets.json
-/assets/img/
-/py/tools/
-/json/
-/api/controllers/ItemsController_bckp*.js
-/clean_db.js
