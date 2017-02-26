@@ -1,9 +1,0 @@
-{
-  "hooks": {
-    "gulp": false
-  },
-  "generators": {
-    "modules": {
-    }
-  }
-}

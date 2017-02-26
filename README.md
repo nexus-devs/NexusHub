@@ -2,46 +2,24 @@
 
 [![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
 
-## Data Processing
+## Build Information
 
-- Trade Chat Requests are processed by /py/NexusSentry.py
-- Parsed Requests are sent to /api/controllers/RequestController.js
-- When a client requests statistics for an item, they're either processed
-  by /api/controllers/ItemController.js or taken from the itemcache collection if no update
-  is necessary.
+**This build is part of the Nexus Rework and currently won't run much of what you'd expect**
+Old development builds can be found in the commit history starting at #271
 
 
-## Links
+## Requirements
+_Server_
+- Redis
+- Mongodb
 
-**NexusStats site** can be found at www.nexus-stats.com
-
-**JSON with all Item Stats** can be found here: www.nexus-stats.com/api
-
-**API query adapter** by Tobiah for easy API access: www.npmjs.com/package/warframe-nexus-query
+_NexusSentry_
+- TesseractOCR
 
 
-## Chat Logs
-
-You can find the **last 100 parsed requests** here: www.nexus-stats.com/logs 
-(Average time for 100 requests is ~1 minute, so please scrape responsibly.)
-
-Schema for the logs:
-```
-{
-    user: str,
-    request: <item> <item component>,
-    request_operator: WTB/WTS,
-    request_param: new/add/update/same,
-    request_url: link to page on nexus,
-    price: int,
-    date: date
-}
-```
-
-Where `request_param` describes a bit of the user's history:
-- new: Item was **never** requested before by user
-- add: Item was requested before, but > 24h ago
-- same: Item was requested before, but < 24h ago (no changes)
-- update: Item was requested before, but < 24h ago (with changed values, like price, components)
-
-**Note:** Keep in mind that the bot may not update for several hours if a patch has been released.
+## Expected Ports
+- client node: 3000
+- api node: 3400
+- db node: 3405
+- redis: 6379
+- mongo: 27017
