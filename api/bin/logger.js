@@ -37,7 +37,7 @@ class cli {
         var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
 
 
-        this.log(caller, 'ok', (request.method + ' /' + request.resource + '/' + request.query + '/?' + params), 'in')
+        this.log(caller, 'ok', (request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
         this.time(caller, '> ')
     }
 

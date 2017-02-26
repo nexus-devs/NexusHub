@@ -1,20 +1,34 @@
-module.exports = function (app, passport, httpAdapter, cli) {
+/**
+ * Logging
+ */
+const cli = require('../bin/logger.js')
+
+
+module.exports = function (httpAdapter, auth, passport) {
 
     /**
-     * Authentification endpoints
+     * Authentication endpoint to receive token
      * Necessary for local connections
      * Also used for higher rate limits
      */
-    app.get('/authenticate', (req, res) => {
-        cli.log('REST', 'warn', 'Auth attempted', 'in')
-        res.send('Documentation gonna be here')
+    httpAdapter.app.post('/auth', (req, res, next) => {
+        auth.matchPassport(passport, req, res, next)
     })
+
+    // Then set that token in the headers to access routes requiring authorization:
+    // Authorization: Bearer <token here>
+    httpAdapter.app.get('/message', (req, res) => {
+        return res.json({
+            status: 'ok',
+            message: 'Congratulations ' + req.user.user_key + '. You have a token.'
+        });
+    });
 
 
     /**
      * Render API Documentation on index
      */
-    app.get('/', (req, res) => {
+    httpAdapter.app.get('/', (req, res) => {
         cli.time('REST', '> ')
         cli.log('REST', 'ok', '/', 'in')
         cli.log('REST', 'ok', 'Documentation gonna be here', 'out')
@@ -27,7 +41,7 @@ module.exports = function (app, passport, httpAdapter, cli) {
      * Items properties
      * Example: /warframe/v1/items/nikana prime/trends
      */
-    app.get('/warframe/v1/items/:item/:query', (req, res) => {
+    httpAdapter.app.get('/warframe/v1/items/:item/:query', (req, res) => {
         httpAdapter.res(req, res, ('items/' + req.params.item))
     })
 
@@ -35,13 +49,7 @@ module.exports = function (app, passport, httpAdapter, cli) {
     /**
      * If missing element in item query
      */
-    app.get('/warframe/v1/items/:query/', (req, res) => {
+    httpAdapter.app.get('/warframe/v1/items/:query/', (req, res) => {
         httpAdapter.res(req, res, 'items')
-    })
-
-
-    app.get('/exit', (req, res) => {
-        cli.log('Root', 'warn', 'Going down.', false)
-        process.exit(0)
     })
 }
