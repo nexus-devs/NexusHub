@@ -10,6 +10,7 @@
 const express      = require('express')
 const bodyParser   = require('body-parser')
 const routes       = require('../config/routes.js')
+const ejwt = require('express-jwt')
 
 
 /**
@@ -21,10 +22,11 @@ const cli = require('../bin/logger.js')
 
 
 /**
- * Set up Authentication
+ * Set up Authentication requirements
  */
 const auth = require('../config/auth.js')
 var passport  = require('passport')
+auth.configPassport(passport)
 
 
 class HttpAdapter {
@@ -35,11 +37,6 @@ class HttpAdapter {
          * Load Express
          */
         this.app = express()
-
-        /**
-         * Apply passport config to passport var
-         */
-        auth.configPassport(passport)
 
         /**
          * Apply Middleware Config to this.app
@@ -54,22 +51,17 @@ class HttpAdapter {
 
 
     /**
-     * Passport config
-     * Required for persistent login sessions
-     * Passport needs ability to serialize and unserialize users out of session
-     */
-    configPassport() {
-        require('../config/passport.js')(passport, auth)
-    }
-
-
-    /**
      * Let App use middleware from authController
      */
     configMiddleware() {
+
+        // Middleware to parse auth requests
         this.app.use(bodyParser.urlencoded({ extended: false }))
             .use(bodyParser.json())
             .use(passport.initialize())
+
+        // Enable JWT auth
+        auth.configExpress(this.app)
     }
 
 
@@ -77,7 +69,7 @@ class HttpAdapter {
      * Config Routes
      */
     configRoutes() {
-        require('../config/routes.js')(this.app, passport, this, cli)
+        require('../config/routes.js')(this, auth, passport)
     }
 
 

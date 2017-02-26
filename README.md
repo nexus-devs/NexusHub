@@ -4,7 +4,7 @@
 
 ## Build Information
 
-**This build is part of the Nexus Rework and currently won't run much of what you'd expect**
+**This build is part of the Nexus Rework and currently won't run much of what you'd expect.**
 Old development builds can be found in the commit history starting at #271
 
 
