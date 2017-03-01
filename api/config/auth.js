@@ -1,6 +1,7 @@
 /**
  * Token based authentication using JWT & Passport
  */
+const cli = require('../bin/logger.js')
 
 /**
  * Connect to mongodb
@@ -29,6 +30,7 @@ const bcrypt = require('bcryptjs')
 var users = [
         {
             id: 0,
+            user_id: 'AliasFalse',
             user_key: 'test',
             user_secret: 'test',
             permissions: {
@@ -46,6 +48,7 @@ var users = [
 ]
     // NOTE: Also create default user containing all specifications
     // EVERYONE WITHOUT AUTH will be using default user specifications
+    // RATE LIMITING for unauthenticated users will be IP-based
     // AUTHENTICATED USERS will have their role merged with default
 
 
@@ -71,14 +74,22 @@ class Authentication {
     configPassport(passport) {
 
         // Local Strategy
-        passport.use(new LocalStrategy((username, password, cb) => {
-            var user = users.filter(user => {
-                return user.user_key === username && user.user_secret === password
+        passport.use(new LocalStrategy({
+            usernameField: 'user_key',
+            passwordField: 'user_secret',
+            session: false
+        }, (username, password, done) => {
+
+            // match against "model"
+            var user = users.filter(u => {
+                return u.user_key === username && u.user_secret === password
             })
+
+            // if user valid
             if (user.length === 1) {
-                return cb(null, user[0])
+                return done(null, user[0])
             } else {
-                return cb(null, false)
+                return done(null, false)
             }
         }))
     }
@@ -86,61 +97,64 @@ class Authentication {
 
     /**
      * Force JWT auth on all routes
+     * No token -> Default user
      */
     configExpress(app) {
+
+        // Check Token on all routes
         app.use(ejwt({
             secret: this.secret,
             credentialsRequired: false,
             userProperty: 'tokenPayload'
-        }).unless({path: ['/', '/auth']}))
+        }).unless({
+            path: ['/', '/auth']
+        }))
+
+        // Load user from db if token found
+        app.use((req, res, next) => {
+            if (req.tokenPayload) {
+
+                console.log(req.tokenPayload) // IF EXPIRED: RETURN ERR?? (may do automatically already)
+
+                req.user = users[req.tokenPayload.id];
+            }
+            if (req.user) {
+                return next() // HOW TO RETURN USER?
+            } else {
+                return next() // default next function without passing user
+            }
+        })
     }
 
 
     /**
-     * Function to check supplied user info & send token
+     * Check supplied user info & send token
      */
     matchPassport(passport, req, res, next) {
+
+        cli.log('Auth', 'ok', JSON.stringify(req.body), 'in')
+
         passport.authenticate('local', (err, user, info) => {
-            if (err) return next(err);
+            if (err) return next(err)
+
+            // No matching user found
             if (!user) {
+                cli.log('Auth', 'err', '401. Unauthorized.', 'out')
                 return res.status(401).json({
                     status: 'error',
                     code: 'unauthorized'
-                });
+                })
+
+            // User authenticated, send token
             } else {
+                var token = jwt.sign({ id: user.id }, this.secret, {expiresIn: '1h'})
+                cli.log('Auth', 'ok', '<token>', 'out')
+
                 return res.json({
-                    token: jwt.sign({
-                        id: user.id
-                    }, this.secret)
+                    token: token,
                 });
             }
         })(req, res, next);
-    }
-
-
-    /**
-     * Load user from db if token found
-     */
-    matchToken(req, res, next) {
-        if (req.tokenPayload) {
-            req.user = users[req.tokenPayload.id];
-        }
-        if (req.user) {
-            return next();
-        } else {
-            return res.status(401).json({
-                status: 'error',
-                code: 'unauthorized'
-            });
-        }
-    }
-
-
-    /**
-     * Validate token for restricted routes
-     */
-    validateToken() {
-
     }
 
 
