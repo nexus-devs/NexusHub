@@ -2,7 +2,7 @@
  * Express app for public HTTP server
  * The public socket server will also bind to this server
  */
-
+const cli = require('../bin/logger.js')
 
 /**
  * Set up express
@@ -10,7 +10,7 @@
 const express      = require('express')
 const bodyParser   = require('body-parser')
 const routes       = require('../config/routes.js')
-const ejwt = require('express-jwt')
+const ejwt         = require('express-jwt')
 
 
 /**
@@ -18,7 +18,6 @@ const ejwt = require('express-jwt')
  */
 const requestController = new(require('../controllers/requestController.js'))
 const cacheController = new(require('../controllers/cacheController.js'))
-const cli = require('../bin/logger.js')
 
 
 /**
@@ -77,7 +76,9 @@ class HttpAdapter {
      * Respond to incoming requests passed by routes
      * Resource is set in routes
      */
-    res(req, res, resource) {
+    pass(req, res, resource) {
+
+        console.log(req.headers)
 
         // Assign values to schema
         var request = {

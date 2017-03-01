@@ -9,19 +9,47 @@ const timeEnd = console.timeEnd
  */
 class cli {
 
-    constructor() {}
+    constructor() {
+    }
 
 
+    /**
+     * Timed Logging
+     */
     time(caller, msg) {
         var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
-        time(prefix + chalk.styles.gray.open + msg)
+        time(prefix + chalk.styles.gray.open + msg + chalk.styles.gray.close)
     }
 
     timeEnd(caller, msg) {
         var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
-        timeEnd(prefix + chalk.styles.gray.open + msg)
+        timeEnd(prefix + chalk.styles.gray.open + msg + chalk.styles.gray.close)
     }
 
+
+    /**
+     * Log API Requests
+     * Makes important code a bit less messy
+     */
+    logRequest(caller, request){
+
+        // Parse params obj into original source
+        var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
+
+
+        this.log(caller, 'ok', (request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+        this.time(caller, '> ')
+    }
+
+    logRequestEnd(caller, response){
+        if(response.status === 200){
+            this.log(caller, 'ok', response.body, 'out')
+        } else {
+            this.log(caller, 'err', response.body, 'out')
+        }
+
+        this.timeEnd(caller, '> ')
+    }
 
     /**
      * @caller describes place where log is invoked
@@ -39,7 +67,7 @@ class cli {
 
     logIO(caller, status, msg, io) {
         // Set Prefix, Remove Time Measurement color
-        var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
+        var prefix = (this.getPrefix(caller))
 
         //ok
         if (status === 'ok') {
@@ -88,7 +116,7 @@ class cli {
 
     logOther(caller, status, msg) {
         // Set Prefix
-        var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
+        var prefix = (this.getPrefix(caller))
 
         //ok
         if (status === 'ok') {
@@ -112,6 +140,10 @@ class cli {
 
     }
 
+
+    /**
+     * Generate Prefix for caller, so everything is in the same vertical line
+     */
     getPrefix(caller) {
         var prefix = caller
 

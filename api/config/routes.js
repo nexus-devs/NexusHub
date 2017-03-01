@@ -7,9 +7,7 @@ const cli = require('../bin/logger.js')
 module.exports = function (httpAdapter, auth, passport) {
 
     /**
-     * Authentication endpoint to receive token
-     * Necessary for local connections
-     * Also used for higher rate limits
+     * Authentication endpoint to receive authorization token
      */
     httpAdapter.app.post('/auth', (req, res, next) => {
         auth.matchPassport(passport, req, res, next)
@@ -42,7 +40,7 @@ module.exports = function (httpAdapter, auth, passport) {
      * Example: /warframe/v1/items/nikana prime/trends
      */
     httpAdapter.app.get('/warframe/v1/items/:item/:query', (req, res) => {
-        httpAdapter.res(req, res, ('items/' + req.params.item))
+        httpAdapter.pass(req, res, ('items/' + req.params.item))
     })
 
 
@@ -50,6 +48,6 @@ module.exports = function (httpAdapter, auth, passport) {
      * If missing element in item query
      */
     httpAdapter.app.get('/warframe/v1/items/:query/', (req, res) => {
-        httpAdapter.res(req, res, 'items')
+        httpAdapter.pass(req, res, 'items')
     })
 }

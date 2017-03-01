@@ -15,7 +15,7 @@ const cli = require('../bin/logger.js')
 /**
  * Authentication
  */
-const passport = require('passport')
+const socketioJWT = require('socketio-jwt')
 
 
 /**
@@ -35,34 +35,26 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         /**
-         * Start Procedure
+         * Config Pseudo Routes
          */
-        this.init()
-    }
-
-
-    /**
-     * Calls necessary actions before setting up listener
-     */
-    init() {
         this.configRoutes()
     }
 
 
-    auth(socket) {
-
-    }
-
-
     /**
-     * Listens to incoming connections
+     * Listens to incoming events
      * Not really routes, but named this way to stay parallel to httpAdapter
      * They essentially route to the same actions
      */
     configRoutes() {
-        this.io.on('connection', socket => {
+        this.io.on('connection', /** socketioJWT.authorize({
+            secret: 'super secret'
+        })).on('authenticated', **/ socket => {
 
-            // Authenticate
+            console.log(socket.request.headers)
+
+            // Authorize with token
+            // Get User belonging to Token, then set nickname
             // socket.set('nickname', 'mongo')
 
             // Log connection
@@ -73,24 +65,24 @@ class SocketAdapter {
 
             // RESTful-like event types
             socket.on('GET', request => {
-                this.res(socket, 'GET', request)
+                this.pass(socket, 'GET', request)
             })
 
             socket.on('POST', request => {
-                this.res(socket, 'POST', request)
+                this.pass(socket, 'POST', request)
             })
 
             socket.on('PUT', request => {
-                this.res(socket, 'PUT', request)
+                this.pass(socket, 'PUT', request)
             })
 
             socket.on('DELETE', request => {
-                this.res(socket, 'DELETE', request)
+                this.pass(socket, 'DELETE', request)
             })
 
-            // Private Endpoints, require authorisation
-            socket.on('UPDATE', resource => {
-                this.update(resource)
+            // Private Endpoints, requires authorization
+            socket.on('UPDATE', data => {
+                this.update(data)
             })
         })
     }
@@ -111,16 +103,16 @@ class SocketAdapter {
 
 
     /**
-     * Handles outgoing responses
+     * Handles requests to local nodes
      */
-    res(socket, method, request) {
+    pass(socket, method, request) {
 
         // Add method to request
         if(typeof request === 'object'){
             request.method = method
         } else {
             cli.log('Socket.io', 'err', ('<' + typeof request + '> ' + request), 'in')
-            socket.emit('res', 'Wrong request format. Refer to api.nexus-stats.com for help')
+            socket.emit('res', 'Error. Request needs to be JSON Object.')
             return false
         }
 
@@ -139,15 +131,10 @@ class SocketAdapter {
     /**
      * When local node has new data: update for everyone in relevant rooms
      */
-    update(resource){
-        this.io.in(resource.room).emit(resource.event, resource.data)
+    update(data){
+        this.io.in(data.room).emit(data.event, data.body)
     }
 
-
-
-    attachSocketID() {
-
-    }
 
     matchSocketID(identifier) {
         return target
