@@ -9,7 +9,6 @@ Old development builds can be found in the commit history starting at #271
 
 
 ## Requirements
-_Server_
 - Redis
 - Mongodb
 
