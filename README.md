@@ -13,9 +13,6 @@ _Server_
 - Redis
 - Mongodb
 
-_NexusSentry_
-- TesseractOCR
-
 
 ## Expected Ports
 - client node: 3000
