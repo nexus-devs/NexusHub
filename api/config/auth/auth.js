@@ -1,7 +1,6 @@
 /**
  * Token based authentication using JWT & Passport
  */
-const cli = require('../bin/logger.js')
 
 /**
  * Connect to mongodb
@@ -12,6 +11,7 @@ const db = require('mongoose').connect('mongodb://localhost/nexus-stats')
 /**
  * Passport Strategies
  */
+const passport  = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const BearerStrategy = require('passport-http-bearer').Strategy
 
@@ -62,6 +62,10 @@ class Authentication {
     constructor() {
         this.secret = 'super secret'
 
+        this.passport = passport
+
+        this.configPassport()
+
         this.userModel;
 
         this.setModel()
@@ -71,10 +75,10 @@ class Authentication {
     /**
      * Passport Authentication Strategies
      */
-    configPassport(passport) {
+    configPassport() {
 
         // Local Strategy
-        passport.use(new LocalStrategy({
+        this.passport.use(new LocalStrategy({
             usernameField: 'user_key',
             passwordField: 'user_secret',
             session: false
@@ -130,11 +134,11 @@ class Authentication {
     /**
      * Check supplied user info & send token
      */
-    matchPassport(passport, req, res, next) {
+    matchPassport(req, res, next) {
 
         cli.log('Auth', 'ok', JSON.stringify(req.body), 'in')
 
-        passport.authenticate('local', (err, user, info) => {
+        this.passport.authenticate('local', (err, user, info) => {
             if (err) return next(err)
 
             // No matching user found

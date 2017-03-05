@@ -1,5 +1,4 @@
-const Promise = require('bluebird')
-const Redis   = Promise.promisifyAll(require('redis'))
+const Redis = require('redis')
 
 /**
  * Controls Caching done on Redis

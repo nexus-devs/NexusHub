@@ -2,40 +2,43 @@
  * Express app for public HTTP server
  * The public socket server will also bind to this server
  */
-const cli = require('../bin/logger.js')
 
 /**
- * Set up express
+ * Express dependencies
  */
-const express      = require('express')
-const bodyParser   = require('body-parser')
-const routes       = require('../config/routes.js')
-const ejwt         = require('express-jwt')
+const express = require('express')
+const http = require('http')
+const bodyParser = require('body-parser')
 
 
 /**
  * Local Controllers
  */
-const requestController = new(require('../controllers/requestController.js'))
-const cacheController = new(require('../controllers/cacheController.js'))
+const requestController = new(require('../../controllers/requestController.js'))
+const cacheController = new(require('../../controllers/cacheController.js'))
 
 
 /**
  * Set up Authentication requirements
  */
-const auth = require('../config/auth.js')
-var passport  = require('passport')
-auth.configPassport(passport)
+const auth = require('../../config/auth/auth.js')
 
 
 class HttpAdapter {
 
-    constructor() {
+    constructor(port) {
 
         /**
          * Load Express
          */
         this.app = express()
+
+        /**
+         * Start HTTP server.
+         */
+        this.app.set('port', port)
+        this.server = http.createServer(this.app)
+        this.server.listen(port)
 
         /**
          * Apply Middleware Config to this.app
@@ -55,9 +58,11 @@ class HttpAdapter {
     configMiddleware() {
 
         // Middleware to parse auth requests
-        this.app.use(bodyParser.urlencoded({ extended: false }))
+        this.app.use(bodyParser.urlencoded({
+                extended: false
+            }))
             .use(bodyParser.json())
-            .use(passport.initialize())
+            .use(auth.passport.initialize())
 
         // Enable JWT auth
         auth.configExpress(this.app)
@@ -68,7 +73,7 @@ class HttpAdapter {
      * Config Routes
      */
     configRoutes() {
-        require('../config/routes.js')(this, auth, passport)
+        require('../../config/endpoints/routes.js')(this, auth)
     }
 
 
@@ -100,4 +105,4 @@ class HttpAdapter {
     }
 }
 
-module.exports = new HttpAdapter()
+module.exports = HttpAdapter
