@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const cli = require('./bin/logger.js')
+global.cli = require('./bin/logger.js')
 
 /**
  * Start time measurements

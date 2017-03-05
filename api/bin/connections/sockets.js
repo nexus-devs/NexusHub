@@ -8,14 +8,14 @@ const port = 3400
 /**
  * Local Controllers
  */
-const requestController = new(require('../controllers/requestController.js'))
-const cli = require('../bin/logger.js')
+const requestController = new(require('../../controllers/requestController.js'))
 
 
 /**
  * Authentication
  */
 const socketioJWT = require('socketio-jwt')
+const auth = require('../../config/auth/auth.js')
 
 
 /**
@@ -35,56 +35,17 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         /**
-         * Config Pseudo Routes
+         * Config Event Listeners
          */
-        this.configRoutes()
+        this.configEvents()
     }
 
 
     /**
      * Listens to incoming events
-     * Not really routes, but named this way to stay parallel to httpAdapter
-     * They essentially route to the same actions
      */
-    configRoutes() {
-        this.io.on('connection', /** socketioJWT.authorize({
-            secret: 'super secret'
-        })).on('authenticated', **/ socket => {
-
-            console.log(socket.request.headers)
-
-            // Authorize with token
-            // Get User belonging to Token, then set nickname
-            // socket.set('nickname', 'mongo')
-
-            // Log connection
-            cli.log('Socket.io', 'ok', 'Client connected', 'in')
-
-            // Log disconnect
-            socket.on('disconnect', () => cli.log('Socket.io', 'neutral', 'Client disconnected', 'out'))
-
-            // RESTful-like event types
-            socket.on('GET', request => {
-                this.pass(socket, 'GET', request)
-            })
-
-            socket.on('POST', request => {
-                this.pass(socket, 'POST', request)
-            })
-
-            socket.on('PUT', request => {
-                this.pass(socket, 'PUT', request)
-            })
-
-            socket.on('DELETE', request => {
-                this.pass(socket, 'DELETE', request)
-            })
-
-            // Private Endpoints, requires authorization
-            socket.on('UPDATE', data => {
-                this.update(data)
-            })
-        })
+    configEvents() {
+        require('../../config/endpoints/events.js')(this, auth)
     }
 
 

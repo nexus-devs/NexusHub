@@ -26,38 +26,28 @@ cli.time('REST', ('Express Server on :' + port + ' in'))
 /**
  * Express Dependencies
  */
-const httpAdapter = require('../adapters/httpAdapter.js')
-const app = httpAdapter.app
-const http = require('http')
-
-
-/**
- * Start HTTP server.
- */
-app.set('port', port)
-const server = http.createServer(app)
-server.listen(port)
+const http = new(require('./connections/http.js'))(port)
 
 
 /**
  * Event Handling
  */
-server.on('error', err => debug.onError(err, port))
+http.server.on('error', err => debug.onError(err, port))
 
-server.on('listening', listener => {
-    debug.onListening(listener, server)
+http.server.on('listening', listener => {
+
+    // include debugging
+    debug.onListening(listener, http.server)
+
+    // End http server timer
     cli.timeEnd('REST', ('Express Server on :' + port + ' in'))
 
-    /**
-     * Start Timers
-     */
+    // Start Socket.io timer
     cli.time('Socket.io', "Socket.IO Server on :" + port + " in")
 
-    /**
-     * Initialize socket on HTTP server
-     */
-    const SocketAdapter = require('../adapters/socketAdapter.js')
-    global.socketAdapter = new SocketAdapter(server)
+    // Initialize Socket.io on http server
+    const Sockets = require('./connections/sockets.js')
+    global.sockets = new Sockets(http.server)
 
     cli.timeEnd('Socket.io', "Socket.IO Server on :" + port + " in")
     cli.timeEnd('Root', 'Set up API Node in') // From server.js

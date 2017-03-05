@@ -1,8 +1,8 @@
 /**
- * Load endpoints
+ * Load endpoint resources
  */
 const endpoints = {
-    items: require('../config/endpoints/items.js'),
+    items: require('../config/endpoints/resources/items.js'),
 }
 
 /**
