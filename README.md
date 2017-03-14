@@ -11,18 +11,18 @@ Old development builds can be found in the commit history starting at #271
 <br>
 <br>
 
-## Quickstart
+### Quickstart
 Just run `npm start` in the root folder once requirements are met.
 <br>
 <br>
 
-## Requirements
+### Requirements
 - Redis
 - Mongodb
 <br>
 <br>
 
-## Default Ports
+### Default Ports
 - client node: 3000
 - api node: 3400
 - db node: 3405
