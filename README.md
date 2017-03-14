@@ -20,7 +20,6 @@ Just run `npm start` in the root folder once requirements are met.
 - Redis
 - Mongodb
 <br>
-<br>
 
 ### Default Ports
 - client node: 3000
