@@ -1,7 +1,7 @@
 /**
  * Socket requirements
  */
-const io = require('socket.io')
+const io = require('Socket.io')
 const port = 3400
 
 
@@ -74,15 +74,17 @@ class SocketAdapter {
             method: method,
             resource: request.resource,
             query: request.query,
-            params: request.params
+            params: request.params,
+            channel: 'Sockets' // only relevant for logging
         }
 
-        cli.logRequest('Socket.io', request)
+        cli.logRequest(process.env.api_id, request)
 
         // Send Request to Controller
         var response = requestController.getResponse(request)
+        response.channel = 'Sockets' // only relevant for logging
 
-        cli.logRequestEnd('Socket.io', response)
+        cli.logRequestEnd(process.env.api_id, response)
 
         // Send Response back to requesting Socket
         socket.emit('res', response)
@@ -103,7 +105,7 @@ class SocketAdapter {
 
     /** Debug **/
     getClients() {
-        cli.log('Socket.io', 'neutral', ('Clients connected: ' + this.io.sockets.clients.length), false)
+        cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + 'Clients connected: ' + this.io.sockets.clients.length, false)
     }
 }
 

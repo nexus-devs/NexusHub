@@ -8,7 +8,7 @@ global.cli = require('../config/log/logger.js')
 /**
  * Start time measurements
  */
-console.time("API Node    : " + "Port: " + process.env.api_port + cli.chalk.green(' [online]'))
+cli.time(process.env.api_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
 
 
 /**
@@ -16,6 +16,7 @@ console.time("API Node    : " + "Port: " + process.env.api_port + cli.chalk.gree
  * Used for item data caching
  */
 const cache = new(require('./controllers/cacheController'))
+
 
 /**
  * When connected to Redis

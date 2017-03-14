@@ -83,6 +83,8 @@ class HttpAdapter {
     pass(req, res, resource) {
         let user = req.user ? req.user : {sub: req.ip}
 
+        console.log(user)
+
         // Assign values to request
         var request = {
             user: user,
@@ -92,12 +94,12 @@ class HttpAdapter {
             params: req.query
         }
 
-        cli.logRequest('REST', request)
+        cli.logRequest(process.env.api_id, 'REST ' + request)
 
         // Send Request to Controller
         var response = requestController.getResponse(request)
 
-        cli.logRequestEnd('REST', response)
+        cli.logRequestEnd(process.env.api_id, 'REST ' + response)
 
         // Return data from RequestController
         res.status(response.status).send(response.body)

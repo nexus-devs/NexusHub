@@ -49,7 +49,7 @@ class Authentication {
         })
 
         io.on('unauthorized', err => {
-            cli.log('Socket.io', 'err', JSON.stringify(err.data), 'out')
+            cli.log(process.env.api_id, 'err', JSON.stringify(err.data), 'out')
         })
     }
 }

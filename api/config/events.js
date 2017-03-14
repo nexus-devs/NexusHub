@@ -11,10 +11,10 @@ module.exports = (socket) => {
         //socket.set('user', socket.handshake.decoded_token.sub)
 
         // Log connection
-        cli.log('Socket.io', 'ok', socket.user.sub + ' connected', 'in')
+        cli.log(process.env.api_id, 'ok', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' connected', 'in')
 
         // Log disconnect
-        socket.on('disconnect', () => cli.log('Socket.io', 'neutral', socket.user.sub + ' disconnected', 'out'))
+        socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' disconnected', 'out'))
 
         // RESTful-like event types
         socket.on('GET', request => {

@@ -4,7 +4,7 @@
  * Start Logging Timers
  */
 global.cli = require('../config/log/logger.js')
-console.time("SRC Node    : " + "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
+cli.time(process.env.src_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
 
 /**
  * Load Nexus API
@@ -12,14 +12,14 @@ console.time("SRC Node    : " + "Port: " + process.env.src_port + cli.chalk.gree
 const Nexus = require('../../NexusStatsApi/index.js')
 const api = new Nexus({
     game_name: 'warframe',
-    use_socket: false,
+    use_socket: true,
     user_key: 'test',
     user_secret: 'test'
 })
 
 api.on('ready', () => {
 
-    console.timeEnd("SRC Node    : " + "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
+    cli.timeEnd(process.env.src_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
 
     /** api.connection.refreshToken()
 
@@ -46,10 +46,8 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command    */
     api.getItem({name: 'Nikana Prime'}).then(item => {
-        cli.log('Nexus', 'ok', 'GET Nikana Prime', 'out')
-
         if(item){
-            cli.log('API Node', 'ok', item, 'in')
+            cli.log(process.env.src_id, 'ok', 'Nexus    | ' + item, 'in')
         }
     })
 })
