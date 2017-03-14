@@ -21,7 +21,7 @@ const cacheController = new(require('../../controllers/cacheController.js'))
 /**
  * Set up Authentication requirements
  */
-const auth = require('../../config/auth/auth.js')
+const auth = require('../../config/auth.js')
 
 
 class HttpAdapter {
@@ -62,7 +62,6 @@ class HttpAdapter {
                 extended: false
             }))
             .use(bodyParser.json())
-            .use(auth.passport.initialize())
 
         // Enable JWT auth
         auth.configExpress(this.app)
@@ -73,7 +72,7 @@ class HttpAdapter {
      * Config Routes
      */
     configRoutes() {
-        require('../../config/endpoints/routes.js')(this, auth)
+        require('../../config/routes.js')(this, auth)
     }
 
 
@@ -82,11 +81,11 @@ class HttpAdapter {
      * Resource is set in routes
      */
     pass(req, res, resource) {
+        let user = req.user ? req.user : {sub: req.ip}
 
-        console.log(req.headers)
-
-        // Assign values to schema
+        // Assign values to request
         var request = {
+            user: user,
             method: req.method,
             resource: resource,
             query: req.params.query,

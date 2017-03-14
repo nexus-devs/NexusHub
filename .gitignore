@@ -2,7 +2,7 @@
 # https://help.github.com/articles/ignoring-files
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
-/*/node_modules/
+/node_modules/
 /ocr/__pycache__/
 
 /client/.tmp/

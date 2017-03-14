@@ -5,28 +5,11 @@
 module.exports = (http, auth) => {
 
     /**
-     * Authentication endpoint to receive authorization token
-     */
-    http.app.post('/auth', (req, res, next) => {
-        auth.matchPassport(req, res, next)
-    })
-
-    // Then set that token in the headers to access routes requiring authorization:
-    // Authorization: Bearer <token here>
-    http.app.get('/message', (req, res) => {
-        return res.json({
-            status: 'ok',
-            message: 'Congratulations ' + req.user.user_key + '. You have a token.'
-        })
-    });
-
-
-    /**
      * Render API Documentation on index
      */
     http.app.get('/', (req, res) => {
         cli.time('REST', '> ')
-        cli.log('REST', 'ok', '/', 'in')
+        cli.log('REST', 'ok', req.ip + ': /', 'in')
         cli.log('REST', 'ok', 'Documentation gonna be here', 'out')
         cli.timeEnd('REST', '> ')
         res.send('Documentation gonna be here')

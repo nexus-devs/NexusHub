@@ -9,13 +9,13 @@ const port = 3400
  * Local Controllers
  */
 const requestController = new(require('../../controllers/requestController.js'))
+const cacheController = new(require('../../controllers/cacheController.js'))
 
 
 /**
- * Authentication
+ * Set up Authentication requirements
  */
-const socketioJWT = require('socketio-jwt')
-const auth = require('../../config/auth/auth.js')
+const auth = require('../../config/auth.js')
 
 
 /**
@@ -35,9 +35,9 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         /**
-         * Config Event Listeners
+         * Config Event Listeners / Auth
          */
-        this.configEvents()
+        auth.configSockets(this.io)
     }
 
 
@@ -45,7 +45,7 @@ class SocketAdapter {
      * Listens to incoming events
      */
     configEvents() {
-        require('../../config/endpoints/events.js')(this, auth)
+        require('../../config/events.js')(this)
     }
 
 
@@ -68,13 +68,13 @@ class SocketAdapter {
      */
     pass(socket, method, request) {
 
-        // Add method to request
-        if(typeof request === 'object'){
-            request.method = method
-        } else {
-            cli.log('Socket.io', 'err', ('<' + typeof request + '> ' + request), 'in')
-            socket.emit('res', 'Error. Request needs to be JSON Object.')
-            return false
+        // Assign values to request
+        var request = {
+            user: socket.user,
+            method: method,
+            resource: request.resource,
+            query: request.query,
+            params: request.params
         }
 
         cli.logRequest('Socket.io', request)
