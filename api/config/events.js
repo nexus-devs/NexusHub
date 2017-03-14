@@ -1,26 +1,24 @@
 /**
  * Event Configuration for Socket.io Server
  */
+const socketioJWT = require('socketio-jwt')
 
-module.exports = (sockets, auth) => {
-    sockets.io.on('connection', /** socketioJWT.authorize({
-            secret: 'super secret'
-        })).on('authenticated', **/ socket => {
+module.exports = (socket) => {
 
-        console.log(socket.request.headers)
 
         // Authorize with token
         // Get User belonging to Token, then set nickname
-        // socket.set('nickname', 'mongo')
+        //socket.set('user', socket.handshake.decoded_token.sub)
 
         // Log connection
-        cli.log('Socket.io', 'ok', 'Client connected', 'in')
+        cli.log('Socket.io', 'ok', socket.user.sub + ' connected', 'in')
 
         // Log disconnect
-        socket.on('disconnect', () => cli.log('Socket.io', 'neutral', 'Client disconnected', 'out'))
+        socket.on('disconnect', () => cli.log('Socket.io', 'neutral', socket.user.sub + ' disconnected', 'out'))
 
         // RESTful-like event types
         socket.on('GET', request => {
+            //console.log(socket.user)
             sockets.pass(socket, 'GET', request)
         })
 
@@ -40,5 +38,4 @@ module.exports = (sockets, auth) => {
         socket.on('UPDATE', data => {
             sockets.update(data)
         })
-    })
 }

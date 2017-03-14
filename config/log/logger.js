@@ -10,6 +10,7 @@ const timeEnd = console.timeEnd
 class cli {
 
     constructor() {
+        this.chalk = chalk
     }
 
 
@@ -37,7 +38,7 @@ class cli {
         var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
 
 
-        this.log(caller, 'ok', (request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+        this.log(caller, 'ok', (request.user.sub + ': ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
         this.time(caller, '> ')
     }
 
@@ -50,6 +51,7 @@ class cli {
 
         this.timeEnd(caller, '> ')
     }
+
 
     /**
      * @caller describes place where log is invoked
@@ -148,10 +150,10 @@ class cli {
         var prefix = caller
 
         // Fill up 15 chars in width
-        for (var i = 0; i < 15 - caller.length; i++) {
+        for (var i = 0; i < 12 - caller.length; i++) {
             prefix += " "
         }
-        prefix += "| "
+        prefix += ": "
 
         return prefix
     }
