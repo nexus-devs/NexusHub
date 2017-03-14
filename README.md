@@ -3,7 +3,6 @@
 [![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
 - - - -
 <br>
-<br>
 
 ## Build Information
 **This build is part of the Nexus Rework and currently won't run much of what you'd expect.**
