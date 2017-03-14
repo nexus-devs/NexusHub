@@ -4,13 +4,17 @@ const time = console.time
 const timeEnd = console.timeEnd
 
 /**
- * Useless Console output Class
+ * Useless, messy, inefficient Console Logger
  * Might be used for actual logging later
  */
 class cli {
 
     constructor() {
         this.chalk = chalk
+
+        this.id_max = 17 // characters used for process id
+
+        this.service_max = 9 // characters used for services (socket/express, etc)
     }
 
 
@@ -18,13 +22,13 @@ class cli {
      * Timed Logging
      */
     time(caller, msg) {
-        var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
-        time(prefix + chalk.styles.gray.open + msg + chalk.styles.gray.close)
+        let prefix = (chalk.styles.gray.close + this.getPrefix(caller, this.id_max))
+        time(prefix + chalk.grey(msg))
     }
 
     timeEnd(caller, msg) {
-        var prefix = (chalk.styles.gray.close + this.getPrefix(caller))
-        timeEnd(prefix + chalk.styles.gray.open + msg + chalk.styles.gray.close)
+        let prefix = (chalk.styles.gray.close + this.getPrefix(caller, this.id_max))
+        timeEnd(prefix + chalk.grey(msg))
     }
 
 
@@ -32,21 +36,34 @@ class cli {
      * Log API Requests
      * Makes important code a bit less messy
      */
-    logRequest(caller, request){
+    logRequest(caller, request) {
 
         // Parse params obj into original source
-        var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
+        let params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
 
+        // Get Service prefix
+        let service = this.getPrefix(request.channel, this.service_max)
 
-        this.log(caller, 'ok', (request.user.sub + ': ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
-        this.time(caller, '> ')
+        // User authenticated? -> Highlight in green
+        if (request.user.scope) {
+            this.log(caller, 'ok', (service + chalk.green(request.user.sub) + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+            this.time(caller, '> ')
+        } else {
+            this.log(caller, 'ok', (service + request.user.sub + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+            this.time(caller, '> ')
+        }
+
     }
 
-    logRequestEnd(caller, response){
-        if(response.status === 200){
-            this.log(caller, 'ok', response.body, 'out')
+    logRequestEnd(caller, response) {
+
+        // Get Service prefix
+        let service = this.getPrefix(response.channel, this.service_max)
+
+        if (response.status === 200) {
+            this.log(caller, 'ok', service + response.body, 'out')
         } else {
-            this.log(caller, 'err', response.body, 'out')
+            this.log(caller, 'err', service + response.body, 'out')
         }
 
         this.timeEnd(caller, '> ')
@@ -69,7 +86,7 @@ class cli {
 
     logIO(caller, status, msg, io) {
         // Set Prefix, Remove Time Measurement color
-        var prefix = (this.getPrefix(caller))
+        let prefix = (this.getPrefix(caller, this.id_max))
 
         //ok
         if (status === 'ok') {
@@ -118,7 +135,7 @@ class cli {
 
     logOther(caller, status, msg) {
         // Set Prefix
-        var prefix = (this.getPrefix(caller))
+        let prefix = (this.getPrefix(caller, this.id_max))
 
         //ok
         if (status === 'ok') {
@@ -146,14 +163,17 @@ class cli {
     /**
      * Generate Prefix for caller, so everything is in the same vertical line
      */
-    getPrefix(caller) {
-        var prefix = caller
+    getPrefix(caller, max) {
+
+        // Attach pid to caller if max >= 15
+        if(max >= 15) caller = caller + " [" + process.pid + "]"
+        let prefix = caller
 
         // Fill up 15 chars in width
-        for (var i = 0; i < 12 - caller.length; i++) {
+        for (let i = 0; i < max - caller.length; i++) {
             prefix += " "
         }
-        prefix += ": "
+        prefix += "| "
 
         return prefix
     }
