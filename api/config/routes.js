@@ -8,10 +8,10 @@ module.exports = (http, auth) => {
      * Render API Documentation on index
      */
     http.app.get('/', (req, res) => {
-        cli.time('REST', '> ')
-        cli.log('REST', 'ok', req.ip + ': /', 'in')
-        cli.log('REST', 'ok', 'Documentation gonna be here', 'out')
-        cli.timeEnd('REST', '> ')
+        cli.time(process.env.api_id, '> ')
+        cli.log(process.env.api_id, 'ok', 'REST     | ' + req.ip + ' /', 'in')
+        cli.log(process.env.api_id, 'ok', 'REST     | Documentation gonna be here', 'out')
+        cli.timeEnd(process.env.api_id, '> ')
         res.send('Documentation gonna be here')
     })
 

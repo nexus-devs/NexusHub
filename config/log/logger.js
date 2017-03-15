@@ -1,5 +1,7 @@
 const chalk = require('chalk')
 const log = console.log
+const err = console.error
+const warn = console.warn
 const time = console.time
 const timeEnd = console.timeEnd
 
@@ -46,10 +48,10 @@ class cli {
 
         // User authenticated? -> Highlight in green
         if (request.user.scope) {
-            this.log(caller, 'ok', (service + chalk.green(request.user.sub) + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+            this.log(caller, 'neutral', (service + chalk.green(request.user.sub) + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
             this.time(caller, '> ')
         } else {
-            this.log(caller, 'ok', (service + request.user.sub + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
+            this.log(caller, 'neutral', (service + request.user.sub + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in')
             this.time(caller, '> ')
         }
 
@@ -95,29 +97,29 @@ class cli {
             } else if (io === 'out') {
                 log(prefix + chalk.green('> ') + msg)
             } else {
-                log(chalk.red('Use in/out for io parameter'))
+                err(chalk.red('Use in/out for io parameter'))
             }
         }
 
         //warn
         if (status === 'warn') {
             if (io === 'in') {
-                log(prefix + chalk.yellow('< ') + msg)
+                warn(prefix + chalk.yellow('< ') + msg)
             } else if (io === 'out') {
-                log(prefix + chalk.yellow('> ') + msg)
+                warn(prefix + chalk.yellow('> ') + msg)
             } else {
-                log(chalk.red('Use in/out for io parameter'))
+                err(chalk.red('Use in/out for io parameter'))
             }
         }
 
-        //warn
+        //err
         if (status === 'err') {
             if (io === 'in') {
-                log(prefix + chalk.red('< ') + msg)
+                err(prefix + chalk.red('< ') + msg)
             } else if (io === 'out') {
-                log(prefix + chalk.red('> ') + msg)
+                err(prefix + chalk.red('> ') + msg)
             } else {
-                log(chalk.red('Use in/out for io parameter'))
+                err(chalk.red('Use in/out for io parameter'))
             }
         }
 
@@ -128,7 +130,7 @@ class cli {
             } else if (io === 'out') {
                 log(prefix + '> ' + msg)
             } else {
-                log(chalk.red('Use in/out for io parameter'))
+                err(chalk.red('Use in/out for io parameter'))
             }
         }
     }
@@ -144,12 +146,12 @@ class cli {
 
         //warn
         if (status === 'warn') {
-            log(prefix + chalk.yellow(msg))
+            warn(prefix + chalk.yellow(msg))
         }
 
         //err
         if (status === 'err') {
-            log(prefix + chalk.red(msg))
+            err(prefix + chalk.red(msg))
         }
 
         //neut
