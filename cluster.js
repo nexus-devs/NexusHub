@@ -15,6 +15,7 @@ const cluster = require('multi-cluster')
 /**
  * Big useless Intro
  */
+process.stdout.write('\033c')
 log(" ")
 log(chalk.grey("Nexus-Stats Warframe Resource Server v0.0.1"))
 log(chalk.grey("Launching Cluster..."))

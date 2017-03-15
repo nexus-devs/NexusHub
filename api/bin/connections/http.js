@@ -81,9 +81,8 @@ class HttpAdapter {
      * Resource is set in routes
      */
     pass(req, res, resource) {
+        //console.log(req)
         let user = req.user ? req.user : {sub: req.ip}
-
-        console.log(user)
 
         // Assign values to request
         var request = {
@@ -91,15 +90,17 @@ class HttpAdapter {
             method: req.method,
             resource: resource,
             query: req.params.query,
-            params: req.query
+            params: req.query,
+            channel: 'REST' // only relevant for logging
         }
 
-        cli.logRequest(process.env.api_id, 'REST ' + request)
+        cli.logRequest(process.env.api_id, request)
 
         // Send Request to Controller
         var response = requestController.getResponse(request)
+        response.channel = 'REST' // only relevant for logging
 
-        cli.logRequestEnd(process.env.api_id, 'REST ' + response)
+        cli.logRequestEnd(process.env.api_id, response)
 
         // Return data from RequestController
         res.status(response.status).send(response.body)

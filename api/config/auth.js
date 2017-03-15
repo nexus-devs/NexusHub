@@ -52,6 +52,10 @@ class Authentication {
             cli.log(process.env.api_id, 'err', JSON.stringify(err.data), 'out')
         })
     }
+
+    expirationCheck(token){
+        console.log(token)
+    }
 }
 
 module.exports = new Authentication()
