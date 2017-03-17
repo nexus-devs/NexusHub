@@ -1,20 +1,15 @@
 /**
  * Event Configuration for Socket.io Server
  */
-const socketioJWT = require('socketio-jwt')
+module.exports = (sockets) => {
 
-module.exports = (socket) => {
-
-
-        // Authorize with token
-        // Get User belonging to Token, then set nickname
-        //socket.set('user', socket.handshake.decoded_token.sub)
+    sockets.io.on('connection', (socket) => {
 
         // Log connection
         cli.log(process.env.api_id, 'ok', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' connected', 'in')
 
         // Log disconnect
-        socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' disconnected', 'out'))
+        socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' disconnected', 'in'))
 
         // RESTful-like event types
         socket.on('GET', request => {
@@ -38,4 +33,5 @@ module.exports = (socket) => {
         socket.on('UPDATE', data => {
             sockets.update(data)
         })
+    })
 }

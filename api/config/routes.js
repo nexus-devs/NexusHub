@@ -1,8 +1,7 @@
 /**
  * HTTP Route Configuration
  */
-
-module.exports = (http, auth) => {
+module.exports = (http) => {
 
     /**
      * Render API Documentation on index
