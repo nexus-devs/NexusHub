@@ -35,9 +35,14 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         /**
-         * Config Event Listeners / Auth
+         * Config JWT Auth
          */
         auth.configSockets(this.io)
+
+        /**
+         * Config Events to listen to
+         */
+        this.configEvents()
     }
 
 

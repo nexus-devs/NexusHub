@@ -72,7 +72,7 @@ class HttpAdapter {
      * Config Routes
      */
     configRoutes() {
-        require('../../config/routes.js')(this, auth)
+        require('../../config/routes.js')(this)
     }
 
 
@@ -81,12 +81,10 @@ class HttpAdapter {
      * Resource is set in routes
      */
     pass(req, res, resource) {
-        //console.log(req)
-        let user = req.user ? req.user : {sub: req.ip}
 
         // Assign values to request
         var request = {
-            user: user,
+            user: req.user,
             method: req.method,
             resource: resource,
             query: req.params.query,

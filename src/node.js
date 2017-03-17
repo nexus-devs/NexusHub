@@ -12,7 +12,7 @@ cli.time(process.env.src_id, "Port: " + process.env.src_port + cli.chalk.green('
 const Nexus = require('../../NexusStatsApi/index.js')
 const api = new Nexus({
     game_name: 'warframe',
-    use_socket: false,
+    use_socket: true,
 
     // Example Credentials taken from <nexus-auth>/register
     user_key: 'dGme6V44iEtefIvDk8P40DvFWkm3OkFEo0tYbWaizWQCuxVtiyxX5Nd0Iv4rLEQn',
@@ -47,8 +47,6 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command    */
     api.getItem({name: 'Nikana Prime'}).then(item => {
-        if(item){
-            cli.log(process.env.src_id, 'ok', 'Nexus    | ' + item, 'in')
-        }
+        cli.log(process.env.src_id, 'ok', 'API      | ' + item, 'in')
     })
 })

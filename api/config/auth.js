@@ -5,13 +5,7 @@
 /**
  * JSON Web Tokens
  */
-const ejwt = require('express-jwt')
-const socketioJWT = require('socketio-jwt')
-
-/**
- * Socket related
- */
-const events = require('./events.js')
+const jwt = require('jsonwebtoken')
 
 
 /**
@@ -27,34 +21,58 @@ class Authentication {
      */
     configExpress(app) {
 
-        // Verify Token on all routes
-        app.use(ejwt({
-            secret: process.env.cert,
-            credentialsRequired: false
-        }))
+        // Verify JWT
+        app.use((req, res, next) => {
+
+            // Token present?
+            if (req.headers.authorization) {
+                let token = req.headers.authorization.replace("bearer ", "").replace("Bearer ", "")
+
+                // Set req.user from token
+                req.user = jwt.verify(token, process.env.cert)
+            }
+
+            // Set IP as user instead of that of token
+            else {
+                req.user = {
+                    sub: req.ip
+                }
+            }
+            next()
+        })
     }
 
     /**
      * Enable JWT on socket connect to assing socket.user
      */
     configSockets(io) {
-        io.use(socketioJWT.authorize({
-            secret: process.env.cert,
-            handshake: true
-        }))
+        io.use((socket, next) => {
 
-        io.on('connection', socket => {
-            socket.user = socket.decoded_token
-            events(socket)
+            if (socket.handshake.query) {
+                let token = socket.handshake.query.bearer.replace("bearer ", "").replace("Bearer ", "")
+
+                // Set req.user from token
+                socket.user = jwt.verify(token, process.env.cert)
+                return next()
+            }
+
+            // Set IP as user instead of that of token
+            else {
+                socket.client.user = {
+                    sub: socket.request.connection.remoteAddress
+                }
+                return next()
+            }
+
+            // call next() with an Error if rejected.
+            cli.log(process.env.api_id, 'err', 'Invalid Token', 'out')
+            socket.emit("unauthorized", "Invalid Token")
+            return next()
         })
 
         io.on('unauthorized', err => {
-            cli.log(process.env.api_id, 'err', JSON.stringify(err.data), 'out')
-        })
-    }
 
-    expirationCheck(token){
-        console.log(token)
+        })
     }
 }
 
