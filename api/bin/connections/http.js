@@ -101,7 +101,7 @@ class HttpAdapter {
         cli.logRequestEnd(process.env.api_id, response)
 
         // Return data from RequestController
-        res.status(response.status).send(response.body)
+        res.status(response.statusCode).send(response.body)
     }
 }
 

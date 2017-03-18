@@ -6,7 +6,11 @@ module.exports = (sockets) => {
     sockets.io.on('connection', (socket) => {
 
         // Log connection
-        cli.log(process.env.api_id, 'ok', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' connected', 'in')
+        if (socket.user.scope) {
+            cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' connected', 'in')
+        } else {
+            cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.sub + ' connected', 'in')
+        }
 
         // Log disconnect
         socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' disconnected', 'in'))

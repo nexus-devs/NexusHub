@@ -62,7 +62,7 @@ class cli {
         // Get Service prefix
         let service = this.getPrefix(response.channel, this.service_max)
 
-        if (response.status === 200) {
+        if (response.statusCode === 200) {
             this.log(caller, 'ok', service + response.body, 'out')
         } else {
             this.log(caller, 'err', service + response.body, 'out')

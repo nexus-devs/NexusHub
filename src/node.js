@@ -4,7 +4,8 @@
  * Start Logging Timers
  */
 global.cli = require('../config/log/logger.js')
-cli.time(process.env.src_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
+cli.time(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
+
 
 /**
  * Load Nexus API
@@ -19,34 +20,27 @@ const api = new Nexus({
     user_secret: 'czJqmAQ3sC3JE0zygRAxGe3SViXDCgn54qAJkl0O6P2p92Ppb8vZH7FxleIREJHu'
 })
 
+cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
+
+
+/**
+ * When connected to API
+ */
 api.on('ready', () => {
 
-    cli.timeEnd(process.env.src_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
-
-    /** api.connection.refreshToken()
-
     setTimeout(() => {
-        console.log(api.connection.access_token)
         api.getItem({name: 'Nikana Prime'}).then(item => {
-            cli.log(item)
+            cli.log(process.env.src_id, 'ok', 'API      | ' + item, 'in')
         })
     }, 15000)
 
-    setTimeout(() => {
-        api.connection.refreshToken()
-    }, 18000)
-
-    setTimeout(() => {
-        console.log(api.connection.access_token)
-        api.getItem({name: 'Nikana Prime'}).then(item => {
-            cli.log(item)
-        })
-    }, 20000) **/
-
 
     /**
-     * get nikana prime stats test command    */
-    api.getItem({name: 'Nikana Prime'}).then(item => {
+     * get nikana prime stats test command
+     */
+    api.getItem({
+        name: 'Nikana Prime'
+    }).then(item => {
         cli.log(process.env.src_id, 'ok', 'API      | ' + item, 'in')
     })
 })
