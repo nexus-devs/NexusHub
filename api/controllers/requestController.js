@@ -155,13 +155,13 @@ class RequestController {
 
             // socketAdapter.req(this.request) //
             return ({
-                status: 200,
+                statusCode: 200,
                 body: 'Data will be here soon'
             })
         }
 
         return ({
-            status: 405,
+            statusCode: 405,
             body: '405. Refer to api.nexus-stats.com for documentation.'
         })
     }

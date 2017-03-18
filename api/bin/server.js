@@ -36,5 +36,5 @@ http.server.on('listening', listener => {
     const Sockets = require('./connections/sockets.js')
     global.sockets = new Sockets(http.server)
 
-    cli.timeEnd(process.env.api_id, "Port: " + process.env.src_port + cli.chalk.green(' [online]'))
+    cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]'))
 })
