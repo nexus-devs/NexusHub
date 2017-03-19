@@ -5,6 +5,7 @@ const endpoints = {
     items: require('../config/endpoints/resources/items.js'),
 }
 
+
 /**
  * Parses requests and returns response
  */

@@ -2,14 +2,13 @@
  * Socket requirements
  */
 const io = require('Socket.io')
-const port = 3400
+const port = process.env.api_port
 
 
 /**
  * Local Controllers
  */
 const requestController = new(require('../../controllers/requestController.js'))
-const cacheController = new(require('../../controllers/cacheController.js'))
 
 
 /**
@@ -38,7 +37,6 @@ class SocketAdapter {
          * Config JWT Auth
          */
         auth.configSockets(this.io)
-
         /**
          * Config Events to listen to
          */
@@ -59,7 +57,7 @@ class SocketAdapter {
      * Returns response from node
      * MAYBE NEED TO SPECIFY RETURN BOOL?
      */
-    req(target, model, method, attributes) {
+    local(target, model, method, attributes) {
         target.emit('req', {
             method: method,
             attributes: attributes,

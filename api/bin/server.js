@@ -17,9 +17,14 @@ const port = debug.normalizePort(process.env.PORT || process.env.api_port)
 
 
 /**
- * Express Dependencies
+ * Set Up Express Server
  */
 const http = new(require('./connections/http.js'))(port)
+
+/**
+ * Set up Socket.io Server on http server
+ */
+const Sockets = new(require('./connections/sockets.js'))(http.server)
 
 
 /**
@@ -31,10 +36,6 @@ http.server.on('listening', listener => {
 
     // include debugging
     debug.onListening(listener, http.server)
-
-    // Initialize Socket.io on http server
-    const Sockets = require('./connections/sockets.js')
-    global.sockets = new Sockets(http.server)
 
     cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]'))
 })
