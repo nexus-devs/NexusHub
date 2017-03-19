@@ -3,6 +3,7 @@
  * The public socket server will also bind to this server
  */
 
+
 /**
  * Express dependencies
  */
@@ -15,7 +16,6 @@ const bodyParser = require('body-parser')
  * Local Controllers
  */
 const requestController = new(require('../../controllers/requestController.js'))
-const cacheController = new(require('../../controllers/cacheController.js'))
 
 
 /**
@@ -24,6 +24,9 @@ const cacheController = new(require('../../controllers/cacheController.js'))
 const auth = require('../../config/auth.js')
 
 
+/**
+ * Listens to and handles incoming HTTP connections
+ */
 class HttpAdapter {
 
     constructor(port) {

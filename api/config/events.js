@@ -6,14 +6,10 @@ module.exports = (sockets) => {
     sockets.io.on('connection', (socket) => {
 
         // Log connection
-        if (socket.user.scope) {
-            cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' connected', 'in')
-        } else {
-            cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.sub + ' connected', 'in')
-        }
+        cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' connected', 'in')
 
         // Log disconnect
-        socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + cli.chalk.green(socket.user.sub) + ' disconnected', 'in'))
+        socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' disconnected', 'in'))
 
         // RESTful-like event types
         socket.on('GET', request => {
