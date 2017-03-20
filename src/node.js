@@ -16,8 +16,8 @@ const api = new Nexus({
     use_socket: true,
 
     // Example Credentials taken from <nexus-auth>/register
-    user_key: '7eH4A6ri1SbQ1JRHqvf3dtr6lQxPI3Lz3eGsRgpsmxvBau0sFRx4etD726PIEUVz',
-    user_secret: 'm0lbRFP3xfzfl0zOqalNKy6JxFdtTwcF7uS0WuNl8T5iMyE8zTWA76hU7MZQvmew'
+    user_key: 'dGme6V44iEtefIvDk8P40DvFWkm3OkFEo0tYbWaizWQCuxVtiyxX5Nd0Iv4rLEQn',
+    user_secret: 'czJqmAQ3sC3JE0zygRAxGe3SViXDCgn54qAJkl0O6P2p92Ppb8vZH7FxleIREJHu'
 })
 
 cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
