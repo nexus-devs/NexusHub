@@ -18,6 +18,7 @@ Just run `npm start` in the root folder once requirements are met.
 ### Requirements
 - Redis
 - Mongodb
+- [Nexus-Auth](https://github.com/Kaptard/nexus-auth) instance
 <br>
 
 ### Default Ports
