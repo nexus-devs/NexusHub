@@ -69,7 +69,7 @@ class SocketAdapter {
     /**
      * Handles requests to local nodes
      */
-    pass(socket, method, request) {
+    pass(socket, method, request, ack) {
 
         // Assign values to request
         var request = {
@@ -90,7 +90,7 @@ class SocketAdapter {
         cli.logRequestEnd(process.env.api_id, response)
 
         // Send Response back to requesting Socket
-        socket.emit('res', response)
+        ack(response)
     }
 
 
