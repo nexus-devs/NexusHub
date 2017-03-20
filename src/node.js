@@ -28,6 +28,10 @@ cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port)
  */
 api.on('ready', () => {
 
+    //api.connection.client.socket.emit("GET", "yourmom", ack => {
+    //    console.log(ack)
+    //})
+
     /**
      * get nikana prime stats test command
      */

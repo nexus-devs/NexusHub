@@ -65,8 +65,13 @@ class cli {
      */
     logRequest(caller, request) {
 
-        // Parse params obj into original source
-        let params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
+        if (request.params) {
+            // Parse params obj into original source
+            var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
+        } else {
+            var params = undefined
+        }
+
 
         // Get Service prefix
         let service = this.getPrefix(request.channel, this.service_max)
@@ -108,7 +113,7 @@ class cli {
      */
     log(caller, status, msg, io, highlight) {
         if (io !== false) {
-            if(highlight){
+            if (highlight) {
                 this.logIO(caller, status, msg, io, true)
             } else {
                 this.logIO(caller, 'neutral', msg, io)
@@ -122,7 +127,7 @@ class cli {
     logIO(caller, status, msg, io, highlight) {
 
         // Set Prefix
-        if(highlight){
+        if (highlight) {
             var prefix = (chalk.styles.gray.close + this.getPrefix(caller, this.id_max)) //Fix space issue
         } else {
             var prefix = (chalk.styles.gray.open + this.getPrefix(caller, this.id_max))

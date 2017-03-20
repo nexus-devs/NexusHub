@@ -163,7 +163,7 @@ class RequestController {
 
         return ({
             statusCode: 405,
-            body: '405. Refer to api.nexus-stats.com for documentation.'
+            body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
         })
     }
 
