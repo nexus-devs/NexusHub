@@ -12,8 +12,8 @@ cli.time(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + 
  */
 const Nexus = require('../../NexusStatsApi/index.js')
 const api = new Nexus({
-    game_name: 'warframe',
-    use_socket: true,
+    game: 'warframe',
+    use_socket: false,
 
     // Example Credentials taken from <nexus-auth>/register
     user_key: 'dGme6V44iEtefIvDk8P40DvFWkm3OkFEo0tYbWaizWQCuxVtiyxX5Nd0Iv4rLEQn',
@@ -39,7 +39,7 @@ api.on('ready', () => {
 
 
     //api.connection.client.socket.emit("GET", "yourmom", ack => {
-    //    console.log(ack)
+    //    console.log('\n' + ack.body)
     //})
 
     /**
