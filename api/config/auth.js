@@ -47,7 +47,7 @@ const high_limit = RateLimiter({
 
 
 /**
- * Describes interactions with mongo/redis for auth
+ * Describes authorization protocol for socket/http requests
  */
 class Authentication {
 
@@ -75,75 +75,17 @@ class Authentication {
      */
     configSockets(io) {
 
-        // Verify JWT
+        // Verify JWT on initial connect
         io.use((socket, next) => this.verifySocket(socket, next))
 
         // Rate Limiting
-        io.use((socket, next) => {
-            socket.use((packet, next) => {
-                this.rateLimiter(socket, next)
-            })
-            next()
-        })
-    }
-
-
-    /**
-     * Rolling Rate Limiting with Redis
-     */
-    rateLimiter(req, next, res) {
-
-        // No Token provided -> High limit, 1req/s
-        if (!req.user.scp) {
-            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, next, timeLeft, req, res))
-        }
-
-        // User is root -> skip limiting
-        else if (req.user.scp.includes("root")) {
-            next()
-        }
-
-        // Token provided & privileged user -> No minDifference, 5req/s
-        else if (req.user.scp.includes("privileged")) {
-            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, next, timeLeft, req, res))
-        }
-
-        // Token provided & default user -> Enhanced limits, 2req/s
-        else if (req.user.scp.includes("default")) {
-            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, next, timeLeft, req, res))
-        }
-    }
-
-
-    /**
-     * Actual rate limiting logic
-     */
-    limit(err, next, timeLeft, req, res) {
-
-        // Fix negative timeLeft when spamming w/ minInterval
-        timeLeft = Math.abs(timeLeft)
-
-        // Return any errors
-        if (err) {
-            return res.status(500).send()
-        }
-
-        // Respond
-        else if (timeLeft) {
-
-            // Distinguish between REST/Sockets
-            if (req.nsp) {
-                let err = {
-                    statusCode: 429,
-                    body: "You must wait " + timeLeft + " ms before you can make requests."
-                }
-                next(new Error(err))
-            } else {
-                return res.status(429).send("You must wait " + timeLeft + " ms before you can make requests.")
-            }
-        } else {
-            return next()
-        }
+        //io.use((socket, next) => {
+        //
+        //    socket.use((packet, next) => {
+        //       this.rateLimiter(socket, null, next)
+        //    })
+        //    next()
+        //})
     }
 
 
@@ -161,13 +103,13 @@ class Authentication {
             // Set req.user from token
             try {
                 req.user = jwt.verify(token, process.env.cert)
-                this.log(null, req.user.uid, 'REST')
+                this.sendException(null, req.user.uid, 'REST')
                 next()
             }
 
             // Invalid Token
             catch (err) {
-                this.log(err.name, user, 'REST', next)
+                this.sendException(err.name, user, 'REST', next)
             }
         }
 
@@ -194,22 +136,13 @@ class Authentication {
             // Set req.user from token
             try {
                 socket.user = jwt.verify(token, process.env.cert)
-
-                // Check Token Expiration on every request
-                socket.use((packet, next) => {
-                    if (new Date().getTime() / 1000 - socket.user.exp > 0) {
-                        this.log('TokenExpiredError', socket.user.uid, 'Sockets', next)
-                    } else {
-                        next()
-                    }
-                })
-                this.log(null, socket.user.uid, 'Sockets')
+                this.sendException(null, socket.user.uid, 'Sockets')
                 next()
             }
 
             // Invalid Token
             catch (err) {
-                this.log(err.name, user, 'Sockets', next)
+                this.sendException(err.name, user, 'Sockets', next)
             }
         }
 
@@ -223,28 +156,76 @@ class Authentication {
     }
 
 
+    /**
+     * Rolling Rate Limiting with Redis
+     */
+    rateLimiter(req, res, next) {
 
+        // No Token provided -> High limit, 1req/s
+        if (!req.user.scp) {
+            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+        }
+
+        // User is root -> skip limiting
+        else if (req.user.scp.includes("root")) {
+            next()
+        }
+
+        // Token provided & privileged user -> No minDifference, 5req/s
+        else if (req.user.scp.includes("privileged")) {
+            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+        }
+
+        // Token provided & default user -> Enhanced limits, 2req/s
+        else if (req.user.scp.includes("default")) {
+            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+        }
+    }
+
+
+    /**
+     * Actual rate limiting logic
+     */
+    limit(err, req, res, next, timeLeft, user) {
+
+        // Return any errors
+        if (err) {
+            this.sendException("Rate Limit Exceeded.", user, 'Sockets', next)
+        }
+
+        // Limit Rate if necessary
+        else if (timeLeft) {
+
+            // If socket -> change source
+            if (req.nsp) {
+                this.sendException("Rate Limit Exceeded.", user, 'Sockets', next)
+            }
+
+        }
+
+        // Otherwise allow
+        else {
+            next()
+        }
+    }
 
 
     /**
      * Handles errors and logs authentications
      */
-    log(err, user, source, next) {
-        if (source === 'Sockets') var prefix = 'Sockets  | '
-        else var prefix = 'REST     | '
+    sendException(err, user, source, next) {
+        let prefix = cli.getPrefix(source, cli.service_max)
 
         // Err check
         if (err) {
             cli.log(process.env.api_id, 'warn', prefix + user + ' ' + err, 'out')
 
-            if (source === 'Sockets') {
-                var prefix = 'Sockets  | '
-                err = {
-                    statusCode: 500,
-                    body: err
-                }
+            // Socket.io error handling is shit -> send raw err obj
+            if(source === 'Sockets'){
+                next()
             }
             next(new Error(err))
+
         } else {
             cli.log(process.env.api_id, 'ok', prefix + user + ' authorized', 'in')
         }
