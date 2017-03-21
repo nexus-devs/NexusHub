@@ -157,7 +157,7 @@ class RequestController {
             // socketAdapter.req(this.request) //
             return ({
                 statusCode: 200,
-                body: 'Data will be here soon'
+                body: 'Data will be here soon ' + Math.random()*100 // Differentiate output for mutiple hundreds of requests
             })
         }
 

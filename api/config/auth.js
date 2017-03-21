@@ -132,8 +132,12 @@ class Authentication {
         else if (timeLeft) {
 
             // Distinguish between REST/Sockets
-            if(req.nsp){
-                next(new Error("You must wait " + timeLeft + " ms before you can make requests."))
+            if (req.nsp) {
+                let err = {
+                    statusCode: 429,
+                    body: "You must wait " + timeLeft + " ms before you can make requests."
+                }
+                next(new Error(err))
             } else {
                 return res.status(429).send("You must wait " + timeLeft + " ms before you can make requests.")
             }
@@ -141,7 +145,6 @@ class Authentication {
             return next()
         }
     }
-
 
 
     /**
@@ -230,8 +233,17 @@ class Authentication {
         if (source === 'Sockets') var prefix = 'Sockets  | '
         else var prefix = 'REST     | '
 
+        // Err check
         if (err) {
             cli.log(process.env.api_id, 'warn', prefix + user + ' ' + err, 'out')
+
+            if (source === 'Sockets') {
+                var prefix = 'Sockets  | '
+                err = {
+                    statusCode: 500,
+                    body: err
+                }
+            }
             next(new Error(err))
         } else {
             cli.log(process.env.api_id, 'ok', prefix + user + ' authorized', 'in')

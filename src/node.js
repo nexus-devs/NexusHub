@@ -28,6 +28,16 @@ cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port)
  */
 api.on('ready', () => {
 
+    // Token Expiration Test
+    setTimeout(() => {
+        api.getItem({
+            name: 'Nikana Prime'
+        }).then(item => {
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        })
+    }, 15000)
+
+
     //api.connection.client.socket.emit("GET", "yourmom", ack => {
     //    console.log(ack)
     //})
@@ -35,9 +45,11 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command
      */
+    //for(var i = 0; i < 100; i++){
     api.getItem({
         name: 'Nikana Prime'
     }).then(item => {
         cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
     })
+    //}
 })
