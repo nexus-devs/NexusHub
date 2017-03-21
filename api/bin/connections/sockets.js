@@ -85,12 +85,13 @@ class SocketAdapter {
 
         // Send Request to Controller
         var response = requestController.getResponse(request)
-        response.channel = 'Sockets' // only relevant for logging
-
-        cli.logRequestEnd(process.env.api_id, response)
 
         // Send Response back to requesting Socket
         ack(response)
+
+        // Log Output
+        response.channel = 'Sockets' // only relevant for logging
+        cli.logRequestEnd(process.env.api_id, response)
     }
 
 
