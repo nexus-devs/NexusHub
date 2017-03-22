@@ -215,8 +215,6 @@ class Authentication {
      */
     limit(err, req, res, next, timeLeft, user) {
 
-        console.log('check')
-
         // Return any errors
         if (err) {
             this.sendException("Uncaught Exception.", user, 'RateLimit', next)
@@ -224,7 +222,7 @@ class Authentication {
 
         // Limit Rate if necessary
         else if (timeLeft) {
-            console.log('revoked')
+
             // If socket -> let socket.pass() handle rejections
             if (req.nsp) {
                 req.blocked = true
@@ -236,7 +234,6 @@ class Authentication {
 
         // Otherwise allow
         else {
-                        console.log('granted')
             if(req.nsp) req.blocked = false// Remove Blocked State for socket
             else next() // next express middleware
         }
