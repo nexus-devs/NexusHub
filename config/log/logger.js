@@ -17,7 +17,7 @@ class cli {
     constructor() {
         this.chalk = chalk
 
-        this.id_max = 17 // characters used for process id
+        this.id_max = 10 // characters used for process id
 
         this.service_max = 9 // characters used for services (socket/express, etc)
     }
@@ -212,7 +212,7 @@ class cli {
     getPrefix(caller, max) {
 
         // Attach pid to caller if max >= 15
-        if (max >= 15) caller = caller + " [" + process.pid + "]"
+        if (max > 9) caller = caller + "-" + process.pid
         let prefix = caller
 
         // Fill up 15 chars in width

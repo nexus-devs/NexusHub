@@ -50,7 +50,7 @@ class SocketAdapter {
      * Listens to incoming events
      */
     configEvents() {
-        require('../../config/events.js')(this)
+        require('../../config/events.js')(this, auth)
     }
 
 
@@ -67,47 +67,48 @@ class SocketAdapter {
         })
     }
 
+    /**
+     * Verify each request for rate limit/token expiration
+     * Restrictive socket.io middleware requires this to be separate, ortherwise client callbacks can't be triggered
+     */
+    prepass(socket, verb, request, ack) {
+        let pass = auth.verifySocketRequest(socket)
+
+        // Check result from auth check
+        if (pass === "granted") {
+            this.pass(socket, verb, request, ack)
+        } else {
+            ack(pass) // pass otherwise contains error
+        }
+    }
+
 
     /**
      * Handles requests to local nodes
      */
     pass(socket, method, request, ack) {
 
-        // Do Error Handling here due to socket.io middleware restrictions
-        // Check if token expired
-        if (new Date().getTime() / 1000 - socket.user.exp > 0) {
-            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + "TokenExpiredError", 'out')
-            ack({
-                statusCode: 500,
-                body: "TokenExpiredError"
-            })
+        // Assign values to request
+        var request = {
+            user: socket.user,
+            method: method,
+            resource: request.resource,
+            query: request.query,
+            params: request.params,
+            channel: 'Sockets' // only relevant for logging
         }
 
-        // Normal response
-        else {
+        cli.logRequest(process.env.api_id, request)
 
-            // Assign values to request
-            var request = {
-                user: socket.user,
-                method: method,
-                resource: request.resource,
-                query: request.query,
-                params: request.params,
-                channel: 'Sockets' // only relevant for logging
-            }
+        // Send Request to Controller
+        var response = requestController.getResponse(request)
 
-            cli.logRequest(process.env.api_id, request)
+        // Send Response back to requesting Socket
+        ack(response)
 
-            // Send Request to Controller
-            var response = requestController.getResponse(request)
-
-            // Send Response back to requesting Socket
-            ack(response)
-
-            // Log Output
-            response.channel = 'Sockets' // only relevant for logging
-            cli.logRequestEnd(process.env.api_id, response)
-        }
+        // Log Output
+        response.channel = 'Sockets' // only relevant for logging
+        cli.logRequestEnd(process.env.api_id, response)
     }
 
 

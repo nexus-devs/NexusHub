@@ -16,8 +16,8 @@ const api = new Nexus({
     use_socket: false,
 
     // Example Credentials taken from <nexus-auth>/register
-    user_key: 'dGme6V44iEtefIvDk8P40DvFWkm3OkFEo0tYbWaizWQCuxVtiyxX5Nd0Iv4rLEQn',
-    user_secret: 'czJqmAQ3sC3JE0zygRAxGe3SViXDCgn54qAJkl0O6P2p92Ppb8vZH7FxleIREJHu'
+    user_key: 'alaIz8cqU7cv2d336ssww28f0DufMbdJaMXZyg6BlaSiK453pspSygd81X5kLYMk',
+    user_secret: 'DNQt6oBMzTisRPHDXqbpxqEYpvtlpn2aHLMuKdEJMnrFNi6qxP87Al9iS3eP9Yui'
 })
 
 cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
@@ -37,6 +37,15 @@ api.on('ready', () => {
         })
     }, 15000)
 
+        // Token Expiration Test
+    setTimeout(() => {
+        api.getItem({
+            name: 'Nikana Prime'
+        }).then(item => {
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        })
+    }, 25000)
+
 
     //api.connection.client.socket.emit("GET", "yourmom", ack => {
     //    console.log('\n' + ack.body)
@@ -45,11 +54,14 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command
      */
-    //for(var i = 0; i < 100; i++){
+    //for(var i = 0; i < 200; i++){
+    //setTimeout(() => {
+
     api.getItem({
         name: 'Nikana Prime'
     }).then(item => {
         cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
     })
+    //}, 2)
     //}
 })
