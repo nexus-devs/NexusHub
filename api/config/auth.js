@@ -26,7 +26,7 @@ const low_limit = RateLimiter({
     maxInInterval: 50
 })
 
-// Rate Limiter for privileged scope
+// Rate Limiter for registered users
 const mid_limit = RateLimiter({
     redis: client,
     namespace: "MidAccessLimit",
@@ -77,15 +77,6 @@ class Authentication {
 
         // Verify JWT on initial connect
         io.use((socket, next) => this.verifySocket(socket, next))
-
-        // Rate Limiting
-        //io.use((socket, next) => {
-        //
-        //    socket.use((packet, next) => {
-        //       this.rateLimiter(socket, null, next)
-        //    })
-        //    next()
-        //})
     }
 
 
@@ -157,13 +148,49 @@ class Authentication {
 
 
     /**
+     * Callback-supported error handling on each socket request
+     * Circumvents restrictive socket.io middleware
+     */
+    verifySocketRequest(socket){
+
+        // Rate Limit Check
+        this.rateLimiter(socket)
+
+        // .blocked is assigned through auth.rateLimiter
+        if (socket.blocked) {
+            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + "Rate Limit Exceeded.", 'out')
+
+            return ({
+                statusCode: 429,
+                body: "Rate Limit Exceeded."
+            })
+        }
+
+        // Check if token expired
+        else if (new Date().getTime() / 1000 - socket.user.exp > 0) {
+            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + "TokenExpiredError", 'out')
+
+            return ({
+                statusCode: 500,
+                body: "TokenExpiredError"
+            })
+        }
+
+        // Normal response
+        else {
+            return "granted"
+        }
+    }
+
+
+    /**
      * Rolling Rate Limiting with Redis
      */
     rateLimiter(req, res, next) {
 
         // No Token provided -> High limit, 1req/s
         if (!req.user.scp) {
-            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
         }
 
         // User is root -> skip limiting
@@ -173,12 +200,12 @@ class Authentication {
 
         // Token provided & privileged user -> No minDifference, 5req/s
         else if (req.user.scp.includes("privileged")) {
-            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
         }
 
         // Token provided & default user -> Enhanced limits, 2req/s
         else if (req.user.scp.includes("default")) {
-            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user))
+            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
         }
     }
 
@@ -188,24 +215,30 @@ class Authentication {
      */
     limit(err, req, res, next, timeLeft, user) {
 
+        console.log('check')
+
         // Return any errors
         if (err) {
-            this.sendException("Rate Limit Exceeded.", user, 'Sockets', next)
+            this.sendException("Uncaught Exception.", user, 'RateLimit', next)
         }
 
         // Limit Rate if necessary
         else if (timeLeft) {
-
-            // If socket -> change source
+            console.log('revoked')
+            // If socket -> let socket.pass() handle rejections
             if (req.nsp) {
-                this.sendException("Rate Limit Exceeded.", user, 'Sockets', next)
+                req.blocked = true
+            } else {
+                this.sendException("Rate Limit Exceeded.", user, 'REST', next)
             }
 
         }
 
         // Otherwise allow
         else {
-            next()
+                        console.log('granted')
+            if(req.nsp) req.blocked = false// Remove Blocked State for socket
+            else next() // next express middleware
         }
     }
 
@@ -220,8 +253,8 @@ class Authentication {
         if (err) {
             cli.log(process.env.api_id, 'warn', prefix + user + ' ' + err, 'out')
 
-            // Socket.io error handling is shit -> send raw err obj
-            if(source === 'Sockets'){
+            // Socket.io error handling is shit -> send raw err obj separately or bind data to socket object
+            if (source === 'Sockets') {
                 next()
             }
             next(new Error(err))
