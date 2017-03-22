@@ -78,7 +78,7 @@ class SocketAdapter {
         if (pass === "granted") {
             this.pass(socket, verb, request, ack)
         } else {
-            ack(pass) // pass otherwise contains error
+            ack(pass) // pass var otherwise contains error
         }
     }
 

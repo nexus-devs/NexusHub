@@ -22,17 +22,17 @@ const RateLimiter = require("rolling-rate-limiter")
 const low_limit = RateLimiter({
     redis: client,
     namespace: "LowAccessLimit",
-    interval: 10000,
-    maxInInterval: 50
+    interval: 5000,
+    maxInInterval: 25
 })
 
 // Rate Limiter for registered users
 const mid_limit = RateLimiter({
     redis: client,
     namespace: "MidAccessLimit",
-    interval: 10000,
-    maxInInterval: 20,
-    minDifference: 250
+    interval: 5000,
+    maxInInterval: 10,
+    minDifference: 150
 })
 
 // Rate Limiter for no tokens
@@ -41,7 +41,7 @@ const high_limit = RateLimiter({
     namespace: "HighAccessLimit",
     interval: 10000,
     maxInInterval: 10,
-    minDifference: 500
+    minDifference: 300
 })
 
 
@@ -217,7 +217,7 @@ class Authentication {
 
         // Return any errors
         if (err) {
-            this.sendException("Uncaught Exception.", user, 'RateLimit', next)
+            this.sendException("Uncaught Exception.", user, 'RateLimit', next, res)
         }
 
         // Limit Rate if necessary
@@ -227,7 +227,7 @@ class Authentication {
             if (req.nsp) {
                 req.blocked = true
             } else {
-                this.sendException("Rate Limit Exceeded.", user, 'REST', next)
+                this.sendException("Rate Limit Exceeded.", user, 'REST', next, res)
             }
 
         }
@@ -243,7 +243,7 @@ class Authentication {
     /**
      * Handles errors and logs authentications
      */
-    sendException(err, user, source, next) {
+    sendException(err, user, source, next, res) {
         let prefix = cli.getPrefix(source, cli.service_max)
 
         // Err check
@@ -254,7 +254,8 @@ class Authentication {
             if (source === 'Sockets') {
                 next()
             }
-            next(new Error(err))
+            if (err === "Rate Limit Exceeded.") res.status(429).send(err)
+            else next(new Error(err))
 
         } else {
             cli.log(process.env.api_id, 'ok', prefix + user + ' authorized', 'in')
