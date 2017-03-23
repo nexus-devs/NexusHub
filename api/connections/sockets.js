@@ -6,15 +6,9 @@ const port = process.env.api_port
 
 
 /**
- * Local Controllers
- */
-const requestController = new(require('../../controllers/requestController.js'))
-
-
-/**
  * Set up Authentication requirements
  */
-const auth = require('../../config/auth.js')
+const auth = require('../config/auth.js')
 
 
 /**
@@ -50,7 +44,7 @@ class SocketAdapter {
      * Listens to incoming events
      */
     configEvents() {
-        require('../../config/events.js')(this, auth)
+        require('../config/events.js')(this, auth)
     }
 
 
@@ -67,6 +61,7 @@ class SocketAdapter {
         })
     }
 
+
     /**
      * Verify each request for rate limit/token expiration
      * Restrictive socket.io middleware requires this to be separate, ortherwise client callbacks can't be triggered
@@ -75,11 +70,12 @@ class SocketAdapter {
         let pass = auth.verifySocketRequest(socket)
 
         // Check result from auth check
-        if (pass === "granted") {
-            this.pass(socket, verb, request, ack)
-        } else {
-            ack(pass) // pass var otherwise contains error
-        }
+        if (pass !== "granted") ack(pass) // pass var otherwise contains error
+
+        // RequestController already bound?
+        else if(this.requestController) this.pass(socket, verb, request, ack)
+
+        else ack({statusCode: 503, body: 'Rebooting. Try again in a few seconds.'})
     }
 
 
@@ -101,7 +97,7 @@ class SocketAdapter {
         cli.logRequest(process.env.api_id, request)
 
         // Send Request to Controller
-        var response = requestController.getResponse(request)
+        var response = this.requestController.getResponse(request)
 
         // Send Response back to requesting Socket
         ack(response)
@@ -117,16 +113,6 @@ class SocketAdapter {
      */
     update(data) {
         this.io.in(data.room).emit(data.event, data.body)
-    }
-
-
-    matchSocketID(identifier) {
-        return target
-    }
-
-    /** Debug **/
-    getClients() {
-        cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + 'Clients connected: ' + this.io.sockets.clients.length, false)
     }
 }
 
