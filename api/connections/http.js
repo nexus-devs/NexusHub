@@ -13,15 +13,9 @@ const bodyParser = require('body-parser')
 
 
 /**
- * Local Controllers
- */
-const requestController = new(require('../../controllers/requestController.js'))
-
-
-/**
  * Set up Authentication requirements
  */
-const auth = require('../../config/auth.js')
+const auth = require('../config/auth.js')
 
 
 /**
@@ -75,7 +69,22 @@ class HttpAdapter {
      * Config Routes
      */
     configRoutes() {
-        require('../../config/routes.js')(this)
+        require('../config/routes.js')(this)
+    }
+
+
+    /**
+     * Functions to run before allowing request
+     * Will be manual for now, middleware later
+     */
+    prepass(req, res, resource) {
+
+        // RequestController already bound?
+        if (this.requestController) this.pass(req, res, resource)
+
+
+        // Send 503 instead
+        else res.status(503).send('Rebooting. Try again in a few seconds.')
     }
 
 
@@ -98,7 +107,7 @@ class HttpAdapter {
         cli.logRequest(process.env.api_id, request)
 
         // Send Request to Controller
-        var response = requestController.getResponse(request)
+        var response = this.requestController.getResponse(request)
         response.channel = 'REST' // only relevant for logging
 
         cli.logRequestEnd(process.env.api_id, response)
@@ -106,6 +115,7 @@ class HttpAdapter {
         // Return data from RequestController
         res.status(response.statusCode).send(response.body)
     }
+
 }
 
 module.exports = HttpAdapter

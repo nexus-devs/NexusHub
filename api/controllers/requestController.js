@@ -26,6 +26,14 @@ class RequestController {
 
 
     /**
+     * Set communication adapater for retrieving data
+     */
+    setClient(adapter){
+        this.client = adapter
+    }
+
+
+    /**
      * Normalizes Socket and HTTP Requests
      * Turns given resource path into array
      * Keep accepting path on Socket for user-friendliness
