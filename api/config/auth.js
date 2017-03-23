@@ -158,11 +158,11 @@ class Authentication {
 
         // .blocked is assigned through auth.rateLimiter
         if (socket.blocked) {
-            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + "Rate Limit Exceeded.", 'out')
+            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + socket.blocked, 'out')
 
             return ({
                 statusCode: 429,
-                body: "Rate Limit Exceeded."
+                body: socket.blocked
             })
         }
 
@@ -223,11 +223,18 @@ class Authentication {
         // Limit Rate if necessary
         else if (timeLeft) {
 
+            // Figure out why request got limited
+            if(timeLeft > 0){
+                var err = "Rate limit exceeded. Request intervals too close."
+            } else {
+                var err = "Rate limit exceeded. Max requests per interval reached."
+            }
+
             // If socket -> let socket.pass() handle rejections
             if (req.nsp) {
-                req.blocked = true
+                req.blocked = err
             } else {
-                this.sendException("Rate Limit Exceeded.", user, 'REST', next, res)
+                this.sendException(err, user, 'REST', next, res)
             }
 
         }
@@ -254,7 +261,7 @@ class Authentication {
             if (source === 'Sockets') {
                 next()
             }
-            if (err === "Rate Limit Exceeded.") res.status(429).send(err)
+            if (err.includes("Rate Limit Exceeded.")) res.status(429).send(err)
             else next(new Error(err))
 
         } else {
