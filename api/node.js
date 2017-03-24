@@ -82,6 +82,15 @@ class api {
             resolve()
         })
     }
+
+
+    /**
+     * Sets up connection adapter middleware fired on each request
+     */
+    use(fn) {
+        this.http.use(fn)
+        this.sockets.use(fn)
+    }
 }
 
 module.exports = new api

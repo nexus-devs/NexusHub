@@ -116,6 +116,13 @@ class HttpAdapter {
         res.status(response.statusCode).send(response.body)
     }
 
+
+    /**
+     * Accepts middleware & passes it to express directly.
+     */
+    use(fn){
+        this.app.use(fn)
+    }
 }
 
 module.exports = HttpAdapter

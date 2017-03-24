@@ -63,11 +63,10 @@ class SocketAdapter {
 
 
     /**
-     * Verify each request for rate limit/token expiration
-     * Restrictive socket.io middleware requires this to be separate, ortherwise client callbacks can't be triggered
+     * Run middleware before passing to ReqController
      */
     prepass(socket, verb, request, ack) {
-        let pass = auth.verifySocketRequest(socket)
+        /** let pass = auth.verifySocketRequest(socket)
 
         // Check result from auth check
         if (pass !== "granted") ack(pass) // pass var otherwise contains error
@@ -75,22 +74,32 @@ class SocketAdapter {
         // RequestController already bound?
         else if(this.requestController) this.pass(socket, verb, request, ack)
 
-        else ack({statusCode: 503, body: 'Rebooting. Try again in a few seconds.'})
+        else ack({statusCode: 503, body: 'Rebooting. Try again in a few seconds.'}) **/
+
+        /**
+         * Modify req/res object to allow same middleware approach as in express
+         */
+        let req = request
+        req.user = socket.user
+        req.method = verb
+
+        let res = this.convertRes(ack)
+        this.pass(req, res)
     }
 
 
     /**
      * Handles requests to local nodes
      */
-    pass(socket, method, request, ack) {
+    pass(req, res) {
 
         // Assign values to request
         var request = {
-            user: socket.user,
-            method: method,
-            resource: request.resource,
-            query: request.query,
-            params: request.params,
+            user: req.user,
+            method: req.method,
+            resource: req.resource,
+            query: req.query,
+            params: req.params,
             channel: 'Sockets' // only relevant for logging
         }
 
@@ -100,11 +109,56 @@ class SocketAdapter {
         var response = this.requestController.getResponse(request)
 
         // Send Response back to requesting Socket
-        ack(response)
+        res.status(response.statusCode).send(response.body)
 
         // Log Output
         response.channel = 'Sockets' // only relevant for logging
         cli.logRequestEnd(process.env.api_id, response)
+    }
+
+
+    /**
+     * Adds functions to queue that is processed before this.pass() gets called
+     */
+    use(fn) {
+        this.fns.push(fn)
+    }
+
+
+    /**
+     * Executes middleware functions
+     */
+    runMiddleware(req, res, next){
+
+    }
+
+
+    /**
+     * Convert ack callback into res-like object
+     */
+    convertRes(ack) {
+
+        // Default response value
+        let res = {
+            msg: {
+                statusCode: 200,
+                body: "<empty>"
+            }
+        }
+
+        // Send method, invoking client callback with previously customized data
+        res.send = (data) => {
+            res.msg.body = data
+            ack(res.msg)
+        }
+
+        // Apply Status before res.send
+        res.status = (code) => {
+            res.msg.statusCode = code
+            return res
+        }
+
+        return res
     }
 
 
