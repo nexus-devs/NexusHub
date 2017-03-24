@@ -13,13 +13,13 @@ module.exports = (sockets) => {
         socket.on('disconnect', () => cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' disconnected', 'in'))
 
         // RESTful-like event types
-        socket.on('GET', (request, ack) => sockets.prepass(socket, 'GET', request, ack))
+        socket.on('GET', (req, res) => sockets.prepass(socket, 'GET', req, res))
 
-        socket.on('POST', (request, ack) => sockets.prepass(socket, 'POST', request, ack))
+        socket.on('POST', (req, res) => sockets.prepass(socket, 'POST', req, res))
 
-        socket.on('PUT', (request, ack) => sockets.prepass(socket, 'PUT', request, ack))
+        socket.on('PUT', (req, res) => sockets.prepass(socket, 'PUT', req, res))
 
-        socket.on('DELETE', (request, ack) => sockets.prepass(socket, 'DELETE', request, ack))
+        socket.on('DELETE', (req, res) => sockets.prepass(socket, 'DELETE', req, res))
 
         // Private Endpoints, requires authorization
         socket.on('UPDATE', (data, ack) => sockets.update(data, ack))
