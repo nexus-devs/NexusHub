@@ -91,10 +91,12 @@ class Layer {
      * Convert Socket.io request into req-like object
      */
     convertReq(request, socket, verb) {
-        request.user = socket.user
-        request.method = verb
-        request.channel = "Sockets"
-        return request
+        let req = {}
+        req.body = request
+        req.user = socket.user
+        req.method = verb
+        req.channel = "Sockets"
+        return req
     }
 
     /**
@@ -112,8 +114,16 @@ class Layer {
 
         // Send method, invoking client callback with previously customized data
         res.send = (data) => {
-            res.msg.body = data
-            ack(res.msg)
+            if (!res.sent) {
+                res.sent = true
+                res.msg.body = data
+                ack(res.msg)
+            } else {
+                console.error(" ")
+                console.error("Can't respond to same request multiple times.")
+                console.error(" ")
+                _next("Can't respond to same request multiple times.")
+            }
         }
 
         // Apply Status before res.send
