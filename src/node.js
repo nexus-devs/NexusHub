@@ -13,8 +13,8 @@ cli.time(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + 
 const Nexus = require('../../NexusStatsApi/index.js')
 const api = new Nexus({
     game: 'warframe',
-    use_socket: true,
-    //ignore_limiter: true, // Root-access has no limiter
+    use_socket: false,
+    //ignore_limiter: true, // Root-Access not getting limited anyway
 
     // Example Credentials taken from <nexus-auth>/register
     user_key: 'alaIz8cqU7cv2d336ssww28f0DufMbdJaMXZyg6BlaSiK453pspSygd81X5kLYMk',
@@ -34,7 +34,7 @@ api.on('ready', () => {
         api.getItem({
             name: 'Nikana Prime'
         }).then(item => {
-            //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
         })
     }, 15000)
 
@@ -43,7 +43,7 @@ api.on('ready', () => {
         api.getItem({
             name: 'Nikana Prime'
         }).then(item => {
-            //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
         })
     }, 25000)
 
@@ -55,7 +55,7 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command
      */
-    for(var i = 0; i < 20; i++){
+    for(var i = 0; i < 10; i++){
 
     api.getItem({
         name: 'Nikana Prime'

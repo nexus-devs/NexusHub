@@ -6,9 +6,9 @@ const port = process.env.api_port
 
 
 /**
- * Set up Authentication requirements
+ * Middleware
  */
-const auth = require('../config/auth.js')
+const Layers = require('./layers.js')
 
 
 /**
@@ -22,29 +22,11 @@ class SocketAdapter {
      */
     constructor(server) {
 
-        /**
-         * Listen on server
-         */
+        // Create empty middleware stack
+        this.stack = []
+
+        // Listen on server
         this.io = io.listen(server)
-            //this.io.use(iowildcard)
-
-        /**
-         * Config JWT Auth
-         */
-        auth.configSockets(this.io)
-
-        /**
-         * Config Events to listen to
-         */
-        this.configEvents()
-    }
-
-
-    /**
-     * Listens to incoming events
-     */
-    configEvents() {
-        require('../config/events.js')(this, auth)
     }
 
 
@@ -66,25 +48,25 @@ class SocketAdapter {
      * Run middleware before passing to ReqController
      */
     prepass(socket, verb, request, ack) {
-        /** let pass = auth.verifySocketRequest(socket)
 
-        // Check result from auth check
-        if (pass !== "granted") ack(pass) // pass var otherwise contains error
+        // Create new layer object for middleware
+        let layer = new Layers()
+
+        // Modify req/res object to allow same middleware approach as in express
+        let req = layer.convertReq(request, socket, verb)
+        let res = layer.convertRes(ack)
 
         // RequestController already bound?
-        else if(this.requestController) this.pass(socket, verb, request, ack)
+        if (!this.requestController) res.status(503).send('Rebooting. Try again in a few seconds')
 
-        else ack({statusCode: 503, body: 'Rebooting. Try again in a few seconds.'}) **/
+        // RequestController available -> respond
+        else {
 
-        /**
-         * Modify req/res object to allow same middleware approach as in express
-         */
-        let req = request
-        req.user = socket.user
-        req.method = verb
-
-        let res = this.convertRes(ack)
-        this.pass(req, res)
+            // Iterate through middleware function stack
+            layer.runStack(req, res, this.stack)
+                .then(() => this.pass(req, res))
+                .catch(() => {})
+        }
     }
 
 
@@ -121,44 +103,7 @@ class SocketAdapter {
      * Adds functions to queue that is processed before this.pass() gets called
      */
     use(fn) {
-        this.fns.push(fn)
-    }
-
-
-    /**
-     * Executes middleware functions
-     */
-    runMiddleware(req, res, next){
-
-    }
-
-
-    /**
-     * Convert ack callback into res-like object
-     */
-    convertRes(ack) {
-
-        // Default response value
-        let res = {
-            msg: {
-                statusCode: 200,
-                body: "<empty>"
-            }
-        }
-
-        // Send method, invoking client callback with previously customized data
-        res.send = (data) => {
-            res.msg.body = data
-            ack(res.msg)
-        }
-
-        // Apply Status before res.send
-        res.status = (code) => {
-            res.msg.statusCode = code
-            return res
-        }
-
-        return res
+        this.stack.unshift(fn)
     }
 
 

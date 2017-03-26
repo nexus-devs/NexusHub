@@ -7,15 +7,27 @@ global.cli = require('../config/log/logger.js')
 
 
 /**
+ * Local Dependencies
+ */
+const auth = require('./config/auth.js')
+
+
+/**
  * Describes parent class which controls all objects handling input/output
  */
 class api {
 
     constructor() {
 
-        // Start time measurement
+        /**
+         * Time measurement
+         */
         cli.time(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]'))
 
+
+        /**
+         * Actual Server Setup
+         */
 
         // Setup HTTP (Express) server
         this.setupHttpServer()
@@ -23,10 +35,19 @@ class api {
         // Attach Socket.io to server
         .then(() => this.setupSockets())
 
-        // Load RequestController into server adapters
+        // Apply Standard Middleware
+        .then(() => this.applyMiddleware())
+
+        // Apply Routes/Events after middleware for correct order
+        .then(() => this.applyRoutes())
+
+        // Bind RequestController to server adapters
         .then(() => this.applyRequestController())
 
-        // Finish time measurements
+
+        /**
+         * Finish time measurement
+         */
         .then(cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
     }
 
@@ -57,10 +78,34 @@ class api {
      * Lets Socket.io connect to previously set up http server
      */
     setupSockets() {
-        return new Promise((resolve, reject) => {
-            this.sockets = new(require('./connections/sockets.js'))(this.http.server)
-            resolve()
-        })
+        this.sockets = new(require('./connections/sockets.js'))(this.http.server)
+    }
+
+
+    /**
+     * Applies Middleware to adapters
+     */
+    applyMiddleware() {
+
+        // Enable JWT auth
+        auth.configExpress(this.http.app)
+        auth.configSockets(this.sockets)
+
+        // Rate limiting middleware for express/sockets
+        this.use((req, res, next) => auth.rateLimiter(req, res, next))
+    }
+
+
+    /**
+     * Apply Routes/Events after Middleware for correct order
+     */
+    applyRoutes() {
+
+        // Express
+        require('./config/routes.js')(this.http)
+
+        // Socket.io
+        require('./config/events.js')(this.sockets)
     }
 
 
@@ -68,19 +113,14 @@ class api {
      * Loads RequestController into server adapters to process actual request handling
      */
     applyRequestController() {
-        return new Promise((resolve, reject) => {
 
-            // Prepare RequestController Object
-            let RequestController = require('./controllers/requestController.js')
-            var requestController = new RequestController()
-            requestController.setClient(this.sockets)
+        // Prepare RequestController Object
+        let requestController = new(require('./controllers/requestController.js'))
+        requestController.setClient(this.sockets)
 
-            // Bind RequestController to adapters
-            this.http.requestController = requestController
-            this.sockets.requestController = requestController
-
-            resolve()
-        })
+        // Bind RequestController to adapters
+        this.http.requestController = requestController
+        this.sockets.requestController = requestController
     }
 
 
