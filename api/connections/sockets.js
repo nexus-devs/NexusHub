@@ -56,17 +56,10 @@ class SocketAdapter {
         let req = layer.convertReq(request, socket, verb)
         let res = layer.convertRes(ack)
 
-        // RequestController already bound?
-        if (!this.requestController) res.status(503).send('Rebooting. Try again in a few seconds')
-
-        // RequestController available -> respond
-        else {
-
-            // Iterate through middleware function stack
-            layer.runStack(req, res, this.stack)
-                .then(() => this.pass(req, res))
-                .catch(() => {})
-        }
+        // Iterate through middleware function stack
+        layer.runStack(req, res, this.stack)
+            .then(() => this.pass(req, res))
+            .catch(() => {})
     }
 
 
