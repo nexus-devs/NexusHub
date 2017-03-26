@@ -11,65 +11,35 @@ const express = require('express')
 const http = require('http')
 const bodyParser = require('body-parser')
 
-
 /**
- * Set up Authentication requirements
+ * Middleware
  */
-const auth = require('../config/auth.js')
+const Layers = require('./layers.js')
 
 
 /**
- * Listens to and handles incoming HTTP connections
+ * Class describing the logic for handling each incoming request
  */
 class HttpAdapter {
 
     constructor(port) {
 
-        /**
-         * Load Express
-         */
+        // Load Express
         this.app = express()
 
-        /**
-         * Start HTTP server.
-         */
+        // Start HTTP server.
         this.app.set('port', port)
         this.server = http.createServer(this.app)
         this.server.listen(port)
 
-        /**
-         * Apply Middleware Config to this.app
-         */
-        this.configMiddleware()
-
-        /**
-         * Set Routes for this.app
-         */
-        this.configRoutes()
-    }
-
-
-    /**
-     * Let App use middleware from authController
-     */
-    configMiddleware() {
-
-        // Middleware to parse auth requests
+        // Body Parser Middleware
         this.app.use(bodyParser.urlencoded({
                 extended: false
             }))
             .use(bodyParser.json())
 
-        // Enable JWT auth
-        auth.configExpress(this.app)
-    }
-
-
-    /**
-     * Config Routes
-     */
-    configRoutes() {
-        require('../config/routes.js')(this)
+        // Create empty adapter middleware stack
+        this.stack = []
     }
 
 
@@ -79,12 +49,20 @@ class HttpAdapter {
      */
     prepass(req, res, resource) {
 
+        // Create new layer object for middleware
+        let layer = new Layers()
+
         // RequestController already bound?
-        if (this.requestController) this.pass(req, res, resource)
+        if (!this.requestController) res.status(503).send('Rebooting. Try again in a few seconds')
 
+        // RequestController available -> respond
+        else {
 
-        // Send 503 instead
-        else res.status(503).send('Rebooting. Try again in a few seconds.')
+            // Iterate through middleware function stack
+            layer.runStack(req, res, this.stack)
+                .then(() => this.pass(req, res, resource))
+                .catch(() => {})
+        }
     }
 
 
@@ -118,10 +96,10 @@ class HttpAdapter {
 
 
     /**
-     * Accepts middleware & passes it to express directly.
+     * Accepts middleware to run before this.pass().
      */
-    use(fn){
-        this.app.use(fn)
+    use(fn) {
+        this.stack.unshift(fn)
     }
 }
 
