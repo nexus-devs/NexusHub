@@ -11,71 +11,50 @@ const express = require('express')
 const http = require('http')
 const bodyParser = require('body-parser')
 
-
 /**
- * Local Controllers
+ * Middleware
  */
-const requestController = new(require('../../controllers/requestController.js'))
+const Layers = require('./layers.js')
 
 
 /**
- * Set up Authentication requirements
- */
-const auth = require('../../config/auth.js')
-
-
-/**
- * Listens to and handles incoming HTTP connections
+ * Class describing the logic for handling each incoming request
  */
 class HttpAdapter {
 
     constructor(port) {
 
-        /**
-         * Load Express
-         */
+        // Load Express
         this.app = express()
 
-        /**
-         * Start HTTP server.
-         */
+        // Start HTTP server.
         this.app.set('port', port)
         this.server = http.createServer(this.app)
         this.server.listen(port)
 
-        /**
-         * Apply Middleware Config to this.app
-         */
-        this.configMiddleware()
-
-        /**
-         * Set Routes for this.app
-         */
-        this.configRoutes()
-    }
-
-
-    /**
-     * Let App use middleware from authController
-     */
-    configMiddleware() {
-
-        // Middleware to parse auth requests
+        // Body Parser Middleware
         this.app.use(bodyParser.urlencoded({
                 extended: false
             }))
             .use(bodyParser.json())
 
-        // Enable JWT auth
-        auth.configExpress(this.app)
+        // Create empty adapter middleware stack
+        this.stack = []
     }
 
 
     /**
-     * Config Routes
+     * Functions to run before allowing request
      */
-    configRoutes() {
-        require('../../config/routes.js')(this)
+    prepass(req, res, resource) {
+
+        // Create new layer object for middleware
+        let layer = new Layers()
+
+        // Iterate through middleware function stack
+        layer.runStack(req, res, this.stack)
+            .then(() => this.pass(req, res, resource))
+            .catch(() => {})
     }
 
 
@@ -98,13 +77,21 @@ class HttpAdapter {
         cli.logRequest(process.env.api_id, request)
 
         // Send Request to Controller
-        var response = requestController.getResponse(request)
+        var response = this.requestController.getResponse(request)
         response.channel = 'REST' // only relevant for logging
 
         cli.logRequestEnd(process.env.api_id, response)
 
         // Return data from RequestController
         res.status(response.statusCode).send(response.body)
+    }
+
+
+    /**
+     * Accepts middleware to run before this.pass().
+     */
+    use(fn) {
+        this.stack.unshift(fn)
     }
 }
 

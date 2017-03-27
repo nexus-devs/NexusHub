@@ -14,7 +14,7 @@ const Nexus = require('../../nexus-stats-api/index.js')
 const api = new Nexus({
     game: 'warframe',
     use_socket: true,
-    //ignore_limiter: true, // Root-access has no limiter
+    //ignore_limiter: true, // Root-Access not getting limited anyway
 
     // Example Credentials taken from <nexus-auth>/register
     user_key: 'W2XhwzUxHWiiirJHzJvQ1nPQwTppZdsdMV0htPr8xcRmnWt98MEl4h8MNPQwtbXS',
@@ -31,19 +31,15 @@ api.on('ready', () => {
 
     // Token Expiration Test
     setTimeout(() => {
-        api.getItem({
-            name: 'Nikana Prime'
-        }).then(item => {
-            //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        api.getItem('Nikana Prime').then(item => {
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
         })
     }, 15000)
 
         // Token Expiration Test
     setTimeout(() => {
-        api.getItem({
-            name: 'Nikana Prime'
-        }).then(item => {
-            //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        api.getItem('Nikana Prime').then(item => {
+            cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
         })
     }, 25000)
 
@@ -55,11 +51,8 @@ api.on('ready', () => {
     /**
      * get nikana prime stats test command
      */
-    for(var i = 0; i < 20; i++){
-
-    api.getItem({
-        name: 'Nikana Prime'
-    }).then(item => {
+    for(var i = 0; i < 10; i++){
+    api.getItem('Nikana Prime', {component: "Blade"}).then(item => {
         //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
     })
     }
