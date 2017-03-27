@@ -7,7 +7,7 @@ const endpoints = {
 
 
 /**
- * Parses requests and returns response
+ * Checks request against endpoints given by dbs node
  */
 class RequestController {
 
@@ -24,27 +24,11 @@ class RequestController {
         this.query;
     }
 
-
     /**
-     * Set communication adapater for retrieving data
+     * Set Client to send request to dbs node
      */
-    setClient(adapter){
-        this.client = adapter
-    }
-
-
-    /**
-     * Normalizes Socket and HTTP Requests
-     * Turns given resource path into array
-     * Keep accepting path on Socket for user-friendliness
-     */
-    normalize(request) {
-        if (typeof request == 'object' && Object.keys(request).length !== 0) {
-            if (typeof request.resource !== 'undefined') {
-                request.resource = request.resource.split('/')
-            }
-        }
-        return request
+    setClient(client) {
+        this.client = client
     }
 
 
@@ -153,11 +137,8 @@ class RequestController {
      */
     getResponse(request) {
 
-        // Clear variables
+        // Clear variables from previous request
         this.clear()
-
-        // Use standard format for backend
-        request = this.normalize(request)
 
         // Verify request matches schema
         if (this.isValid(request)) {
