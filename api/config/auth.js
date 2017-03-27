@@ -32,7 +32,7 @@ const mid_limit = RateLimiter({
     namespace: "MidAccessLimit",
     interval: 5000,
     maxInInterval: 10,
-    minDifference: 150
+    minDifference: 250
 })
 
 // Rate Limiter for no tokens
@@ -41,7 +41,7 @@ const high_limit = RateLimiter({
     namespace: "HighAccessLimit",
     interval: 10000,
     maxInInterval: 10,
-    minDifference: 300
+    minDifference: 500
 })
 
 
@@ -62,29 +62,31 @@ class Authentication {
         // Verify JWT
         app.use((req, res, next) => this.verifyExpress(req, res, next))
 
-        // Rate Limiting
-        app.use((req, res, next) => this.rateLimiter(req, res, next))
-
-        // Error Handler
+        // Middleware Error Handler
         app.use((err, req, res, next) => res.status(err.status || 500).send(err.message))
     }
 
 
     /**
-     * Enable JWT on socket connect to assing socket.user
+     * Verify JWT on socket connect to assing socket.user on handshake
      */
-    configSockets(io) {
+    configSockets(sockets) {
 
-        // Verify JWT on initial connect
-        io.use((socket, next) => this.verifySocket(socket, next))
+        // JWT Verification on handshake (uses native middleware)
+        sockets.io.use((socket, next) => this.verifySocket(socket, next))
+
+        // JWT Verification on each transaction (goes through adapter middleware)
+        sockets.use((req, res, next) => this.verifyExpiration(req, res, next))
     }
 
 
     /**
-     * Express Middleware to verify JWT if present
+     * Express Middleware to verify JWT if present. Also adds user to req.
      */
     verifyExpress(req, res, next) {
-        let user = req.ip // + ' [' + req.headers['user-agent'] + ']'
+        req.user = {
+            uid: req.ip
+        }
 
         // Token present?
         if (req.headers.authorization) {
@@ -94,31 +96,31 @@ class Authentication {
             // Set req.user from token
             try {
                 req.user = jwt.verify(token, process.env.cert)
-                this.sendException(null, req.user.uid, 'REST')
-                next()
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + req.user.uid + ' authorized', 'in')
+                return next()
             }
 
             // Invalid Token
             catch (err) {
-                this.sendException(err.name, user, 'REST', next)
+                cli.log(process.env.api_id, 'warn', cli.getPrefix("REST", cli.service_max) + req.user.uid + ' ' + err, 'out')
+                return next(err)
             }
         }
 
-        // Set IP as user instead of that of token
+        // No token provided
         else {
-            req.user = {
-                uid: user
-            }
             next()
         }
     }
 
 
     /**
-     * Socket.io Middleware to verify JWT if present
+     * Socket.io Middleware to verify JWT if present. Also adds user to req.
      */
     verifySocket(socket, next) {
-        let user = socket.request.connection.remoteAddress // + ' [' + socket.request.headers['user-agent'] + ']'
+        socket.user = {
+            uid: socket.request.connection.remoteAddress
+        }
 
         // Token sent at all?
         if (socket.handshake.query.bearer) {
@@ -127,58 +129,33 @@ class Authentication {
             // Set req.user from token
             try {
                 socket.user = jwt.verify(token, process.env.cert)
-                this.sendException(null, socket.user.uid, 'Sockets')
-                next()
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + socket.user.uid + ' authorized', 'in')
+                return next()
             }
 
             // Invalid Token
             catch (err) {
-                this.sendException(err.name, user, 'Sockets', next)
+                cli.log(process.env.api_id, 'warn', cli.getPrefix("Sockets", cli.service_max) + socket.user.uid + ' ' + err, 'out')
+                return next(err)
             }
         }
 
         // Set IP as user instead of that of token
         else {
-            socket.user = {
-                uid: user
-            }
-            next()
+            return next()
         }
     }
 
 
     /**
-     * Callback-supported error handling on each socket request
-     * Circumvents restrictive socket.io middleware
+     * JWT Expiration check middleware for sockets (run on each prepass())
      */
-    verifySocketRequest(socket){
-
-        // Rate Limit Check
-        this.rateLimiter(socket)
-
-        // .blocked is assigned through auth.rateLimiter
-        if (socket.blocked) {
-            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + socket.blocked, 'out')
-
-            return ({
-                statusCode: 429,
-                body: socket.blocked
-            })
-        }
-
-        // Check if token expired
-        else if (new Date().getTime() / 1000 - socket.user.exp > 0) {
-            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' ' + "TokenExpiredError", 'out')
-
-            return ({
-                statusCode: 500,
-                body: "TokenExpiredError"
-            })
-        }
-
-        // Normal response
-        else {
-            return "granted"
+    verifyExpiration(req, res, next) {
+        if (new Date().getTime() / 1000 - req.user.exp > 0) {
+            cli.log(process.env.api_id, 'warn', cli.getPrefix('Sockets', cli.service_max) + req.user.uid + ' ' + "TokenExpiredError: jwt expired", 'out')
+            return next("jwt expired")
+        } else {
+            return next()
         }
     }
 
@@ -190,82 +167,60 @@ class Authentication {
 
         // No Token provided -> High limit, 1req/s
         if (!req.user.scp) {
-            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
+            high_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft))
         }
 
         // User is root -> skip limiting
         else if (req.user.scp.includes("root")) {
-            next()
+            return next()
         }
 
         // Token provided & privileged user -> No minDifference, 5req/s
         else if (req.user.scp.includes("privileged")) {
-            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
+            low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft))
         }
 
         // Token provided & default user -> Enhanced limits, 2req/s
         else if (req.user.scp.includes("default")) {
-            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft, req.user.uid))
+            mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft))
         }
     }
 
 
     /**
-     * Actual rate limiting logic
+     * Rate Limit error handling
      */
-    limit(err, req, res, next, timeLeft, user) {
+    limit(err, req, res, next, timeLeft) {
 
         // Return any errors
         if (err) {
-            this.sendException("Uncaught Exception.", user, 'RateLimit', next, res)
+            return next(new Error("Uncaught Exception"))
         }
 
         // Limit Rate if necessary
         else if (timeLeft) {
 
             // Figure out why request got limited
-            if(timeLeft > 0){
+            if (timeLeft > 0) {
                 var err = "Rate limit exceeded. Request intervals too close."
             } else {
                 var err = "Rate limit exceeded. Max requests per interval reached."
             }
 
-            // If socket -> let socket.pass() handle rejections
-            if (req.nsp) {
-                req.blocked = err
-            } else {
-                this.sendException(err, user, 'REST', next, res)
-            }
+            // Figure out Source of Request
+            if(req.channel === "Sockets") var prefix = "Sockets"
+            else var prefix = "REST"
 
+            // Log output
+            cli.log(process.env.api_id, 'warn', cli.getPrefix(prefix, cli.service_max) + req.user.uid + ' ' + err, 'out')
+
+            // Respond with error
+            return next(err)
         }
 
         // Otherwise allow
         else {
-            if(req.nsp) req.blocked = false// Remove Blocked State for socket
-            else next() // next express middleware
-        }
-    }
-
-
-    /**
-     * Handles errors and logs authentications
-     */
-    sendException(err, user, source, next, res) {
-        let prefix = cli.getPrefix(source, cli.service_max)
-
-        // Err check
-        if (err) {
-            cli.log(process.env.api_id, 'warn', prefix + user + ' ' + err, 'out')
-
-            // Socket.io error handling is shit -> send raw err obj separately or bind data to socket object
-            if (source === 'Sockets') {
-                next()
-            }
-            if (err.includes("Rate Limit Exceeded.")) res.status(429).send(err)
-            else next(new Error(err))
-
-        } else {
-            cli.log(process.env.api_id, 'ok', prefix + user + ' authorized', 'in')
+            return next()
         }
     }
 }
