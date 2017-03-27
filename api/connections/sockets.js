@@ -68,6 +68,8 @@ class SocketAdapter {
      */
     pass(req, res) {
 
+        console.log(req)
+
         // Assign values to request
         var request = {
             user: req.user,

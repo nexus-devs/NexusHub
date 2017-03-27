@@ -45,7 +45,6 @@ class HttpAdapter {
 
     /**
      * Functions to run before allowing request
-     * Will be manual for now, middleware later
      */
     prepass(req, res, resource) {
 

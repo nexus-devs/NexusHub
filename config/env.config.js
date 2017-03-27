@@ -10,7 +10,7 @@ process.env['environment'] = 'development'
 // Local Nodes
 process.env['api_id'] = "API"
 process.env['api_port'] = 3400
-process.env['src_id'] = "SRC"
+process.env['src_id'] = "DBS"
 process.env['src_port'] = 3405
 process.env['web_id'] = "WEB"
 process.env['web_port'] = 3000
