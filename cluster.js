@@ -26,8 +26,8 @@ if (process.env.environment === 'development') {
     let api = new cluster('./api/node.js', 1)
     api.watch('./api')
 
-    let src = new cluster('./src/node.js', 1)
-    src.watch('./src')
+    let src = new cluster('./dbs/node.js', 1)
+    src.watch('./dbs')
 }
 
 /**
