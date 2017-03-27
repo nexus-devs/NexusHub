@@ -9,7 +9,7 @@ global.cli = require('../config/log/logger.js')
 /**
  * Local Dependencies
  */
-const auth = require('./config/auth.js')
+const auth = require('./controllers/AuthController.js')
 
 
 /**
@@ -121,7 +121,7 @@ class api {
     applyRequestController() {
 
         // Prepare RequestController Object
-        let requestController = new(require('./controllers/requestController.js'))
+        let requestController = new(require('./controllers/RequestController.js'))
         requestController.setClient(this.sockets)
 
         // Bind RequestController to adapters
