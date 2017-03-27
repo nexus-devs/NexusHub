@@ -7,9 +7,10 @@ global.cli = require('../config/log/logger.js')
 
 
 /**
- * Local Dependencies
+ * Middleware Functions
  */
-const auth = require('./config/auth.js')
+const auth = require('./middleware/auth.js')
+const parser = require('./middleware/requestParser.js')
 
 
 /**
@@ -99,6 +100,12 @@ class api {
             if (!this.http.requestController || !this.sockets.requestController) next('Rebooting. Try again in a few seconds')
             else next()
         })
+<<<<<<< HEAD
+=======
+
+        // Parse URL Request into JSON Object
+        this.use((req, res, next) => parser.parse(req, res, next))
+>>>>>>> origin/development
     }
 
 
@@ -121,7 +128,7 @@ class api {
     applyRequestController() {
 
         // Prepare RequestController Object
-        let requestController = new(require('./controllers/requestController.js'))
+        let requestController = new(require('./controllers/RequestController.js'))
         requestController.setClient(this.sockets)
 
         // Bind RequestController to adapters
