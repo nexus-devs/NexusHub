@@ -100,12 +100,9 @@ class api {
             if (!this.http.requestController || !this.sockets.requestController) next('Rebooting. Try again in a few seconds')
             else next()
         })
-<<<<<<< HEAD
-=======
 
         // Parse URL Request into JSON Object
         this.use((req, res, next) => parser.parse(req, res, next))
->>>>>>> origin/development
     }
 
 
