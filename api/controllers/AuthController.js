@@ -2,10 +2,12 @@
  * Token based authentication using JWT & Passport
  */
 
+
 /**
  * JSON Web Tokens
  */
 const jwt = require('jsonwebtoken')
+
 
 /**
  * Redis Client for rate limiting
