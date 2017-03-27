@@ -10,15 +10,15 @@ cli.time(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + 
 /**
  * Load Nexus API
  */
-const Nexus = require('../../NexusStatsApi/index.js')
+const Nexus = require('../../nexus-stats-api/index.js')
 const api = new Nexus({
     game: 'warframe',
     use_socket: true,
     //ignore_limiter: true, // Root-access has no limiter
 
     // Example Credentials taken from <nexus-auth>/register
-    user_key: 'alaIz8cqU7cv2d336ssww28f0DufMbdJaMXZyg6BlaSiK453pspSygd81X5kLYMk',
-    user_secret: 'DNQt6oBMzTisRPHDXqbpxqEYpvtlpn2aHLMuKdEJMnrFNi6qxP87Al9iS3eP9Yui'
+    user_key: 'W2XhwzUxHWiiirJHzJvQ1nPQwTppZdsdMV0htPr8xcRmnWt98MEl4h8MNPQwtbXS',
+    user_secret: '3j9tnaN8MGQH9Ay3G9BKBkavN17buEpiCVOWVSScSg2XbkNSJnfaYRMatM607Icd'
 })
 
 cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
