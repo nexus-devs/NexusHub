@@ -95,13 +95,8 @@ class api {
         this.use((req, res, next) => auth.rateLimiter(req, res, next))
 
         // Check if RequestController is already bound to adapter
-        this.http.use((req, res, next) => {
-            if (!this.http.requestController) next('Rebooting. Try again in a few seconds')
-            else next()
-        })
-
-        this.sockets.use((req, res, next) => {
-            if (!this.sockets.requestController) next('Rebooting. Try again in a few seconds')
+        this.use((req, res, next) => {
+            if (!this.http.requestController || !this.sockets.requestController) next('Rebooting. Try again in a few seconds')
             else next()
         })
     }
