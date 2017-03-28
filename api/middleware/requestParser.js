@@ -3,8 +3,10 @@
  */
 class RequestParser {
     parse(req, res, next) {
-        let body = req.body
+        let body = req.body || req.url
         let json = {}
+
+        console.log(body)
 
         // Proper request format?
         if (typeof body === 'string' || body instanceof String) {
