@@ -6,8 +6,6 @@ class RequestParser {
         let body = req.body || req.url
         let json = {}
 
-        console.log(body)
-
         // Proper request format?
         if (typeof body === 'string' || body instanceof String) {
             json.original = body

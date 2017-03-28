@@ -14,7 +14,8 @@ const bodyParser = require('body-parser')
 /**
  * Middleware
  */
-const Layers = require('./layers.js')
+const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
+let Layer = reload('./layers.js')
 
 
 /**
@@ -49,7 +50,8 @@ class HttpAdapter {
     prepass(req, res, resource) {
 
         // Create new layer object for middleware
-        let layer = new Layers()
+        Layer = reload('./layers.js')
+        let layer = new Layer()
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)

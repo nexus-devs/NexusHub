@@ -30,7 +30,7 @@ class dbs {
 
         this.client = new Nexus({
             game: 'warframe',
-            use_socket: true,
+            use_socket: false,
             ignore_limiter: true, // Root-Access not getting limited anyway
             user_key: 'alaIz8cqU7cv2d336ssww28f0DufMbdJaMXZyg6BlaSiK453pspSygd81X5kLYMk',
             user_secret: 'DNQt6oBMzTisRPHDXqbpxqEYpvtlpn2aHLMuKdEJMnrFNi6qxP87Al9iS3eP9Yui'
