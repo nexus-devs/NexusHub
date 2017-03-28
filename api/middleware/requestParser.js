@@ -2,30 +2,56 @@
  * Converts standard URL string into JSON object usable by dbs nodes
  */
 class RequestParser {
-    parse(req, res, next){
+    parse(req, res, next) {
         let body = req.body
         let json = {}
 
-        console.log(req)
-
         // Proper request format?
-        //if(body instanceof String){
+        if (typeof body === 'string' || body instanceof String) {
+            json.original = body
+
+            // Clean up
+            body = body.replace("%20", " ")
             body = body.replace("https://", "")
             body = body.replace("http://", "")
 
             // Slice sub-categories
-            body = body.slice("/")
-            console.log(body)
+            body = body.split("/")
 
-            // Slice params in last sub
-            //json.method = (body[body.length - 1].slice("?"))[0]
-            //json.query = body[body.length - 1].slice("")
+            // Base Information
+            json.host = body[0] // api.nexus-stats.com
+            json.game = body[1] // warframe
+            json.version = body [2] // v1/v2
+
+            // Get Method
+            let params = body[body.length - 1].split("?")
+            json.method = params[0]
+            json.params = {}
+
+            // Get Query from rest of query string
+            if (params.length > 1) {
+                params.splice(0, 1)
+                params = params[0].split("&")
+
+                // Assign left/right value of param to individual key
+                for (var i = 0; i < params.length; i++) {
+                    let val = params[i].split("=")
+                    json.params[val[0]] = val[1]
+                }
+            }
+
+            // Remove already-assigned data
+            body.pop()
+            body.splice(0, 3)
+
+            // Assign Resource Path
+            json.resource = body
+            req.body = json
             next()
-
-        //}
+        }
 
         // Improper request format
-        //else next("Invalid Request Format. Please provide URL string")
+        else next("Invalid Request Format. Please provide a URL string")
     }
 }
 
