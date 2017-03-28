@@ -67,30 +67,16 @@ class SocketAdapter {
      * Handles requests to local nodes
      */
     pass(req, res) {
-
-        console.log(req)
-
-        // Assign values to request
-        var request = {
-            user: req.user,
-            method: req.method,
-            resource: req.resource,
-            query: req.query,
-            params: req.params,
-            channel: 'Sockets' // only relevant for logging
-        }
-
-        cli.logRequest(process.env.api_id, request)
+        cli.logRequest(process.env.api_id, 'Sockets', req)
 
         // Send Request to Controller
-        var response = this.requestController.getResponse(request)
+        var response = this.requestController.getResponse(req)
 
         // Send Response back to requesting Socket
         res.status(response.statusCode).send(response.body)
 
         // Log Output
-        response.channel = 'Sockets' // only relevant for logging
-        cli.logRequestEnd(process.env.api_id, response)
+        cli.logRequestEnd(process.env.api_id, 'Sockets', response)
     }
 
 

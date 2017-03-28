@@ -63,36 +63,24 @@ class cli {
      * Log API Requests
      * Makes important code a bit less messy
      */
-    logRequest(caller, request) {
-
-        if (request.params) {
-            // Parse params obj into original source
-            var params = JSON.stringify(request.params).replace(/{/g, '').replace(/}/g, '').replace(/,/g, '&').replace(/:/g, '=').replace(/"/g, '')
-        } else {
-            var params = undefined
-        }
-
-
-        // Get Service prefix
-        let service = this.getPrefix(request.channel, this.service_max)
-
+    logRequest(caller, channel, request) {
+        let service = this.getPrefix(channel, this.service_max)
         log(" ")
 
         // User authenticated? -> Highlight in green
         if (request.user.scp) {
-            this.log(caller, 'ok', (service + chalk.green(request.user.uid) + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in', true)
-            this.time(caller, '> ', true)
+            this.log(caller, 'ok', service + chalk.green(request.user.uid) + ' ' + request.method + ' ' + request.body.original, 'in', true)
+            this.time(caller, '> ')
         } else {
-            this.log(caller, 'neutral', (service + request.user.uid + ' ' + request.method + ' /' + request.resource + '/' + request.query + '?' + params), 'in', true)
-            this.time(caller, '> ', true)
+            this.log(caller, 'neutral', service + request.user.uid + ' ' + request.method + ' ' + request.body.original, 'in', true)
+            this.time(caller, '> ')
         }
-
     }
 
-    logRequestEnd(caller, response) {
+    logRequestEnd(caller, channel, response) {
 
         // Get Service prefix
-        let service = this.getPrefix(response.channel, this.service_max)
+        let service = this.getPrefix(channel, this.service_max)
 
         if (response.statusCode === 200) {
             this.log(caller, 'neutral', service + response.body, 'out', true)
