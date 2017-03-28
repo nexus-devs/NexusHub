@@ -24,27 +24,19 @@ const parser = require('./middleware/requestParser.js')
  */
 class api {
 
+    /**
+     * Loads up HTTP/Sockets server and modifies it
+     */
     constructor() {
 
-        // Setup HTTP (Express) server
+        // Build up Server
         this.setupHttpServer()
-
-        // Attach Socket.io to server
         .then(() => this.setupSockets())
-
-        // Apply Standard Middleware
         .then(() => this.applyMiddleware())
-
-        // Apply Routes/Events after middleware for correct order
         .then(() => this.applyRoutes())
-
-        // Bind RequestController to server adapters
         .then(() => this.applyRequestController())
 
-
-        /**
-         * Finish time measurement
-         */
+        // Finish Time Measurement
         .then(cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
     }
 
