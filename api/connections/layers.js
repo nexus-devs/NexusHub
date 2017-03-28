@@ -122,7 +122,7 @@ class Layer {
                 console.error(" ")
                 console.error("Can't respond to same request multiple times.")
                 console.error(" ")
-                _next("Can't respond to same request multiple times.")
+                throw(new Error("Can't respond to same request multiple times."))
             }
         }
 
