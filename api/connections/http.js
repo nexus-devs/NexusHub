@@ -64,23 +64,12 @@ class HttpAdapter {
      */
     pass(req, res, resource) {
 
-        // Assign values to request
-        var request = {
-            user: req.user,
-            method: req.method,
-            resource: resource,
-            query: req.params.query,
-            params: req.query,
-            channel: 'REST' // only relevant for logging
-        }
-
-        cli.logRequest(process.env.api_id, request)
+        cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller
         var response = this.requestController.getResponse(request)
-        response.channel = 'REST' // only relevant for logging
 
-        cli.logRequestEnd(process.env.api_id, response)
+        cli.logRequestEnd(process.env.api_id, 'REST', response)
 
         // Return data from RequestController
         res.status(response.statusCode).send(response.body)

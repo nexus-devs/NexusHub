@@ -7,6 +7,12 @@ global.cli = require('../config/log/logger.js')
 
 
 /**
+ * Time measurement
+ */
+cli.time(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]'))
+
+
+/**
  * Middleware Functions
  */
 const auth = require('./middleware/auth.js')
@@ -19,16 +25,6 @@ const parser = require('./middleware/requestParser.js')
 class api {
 
     constructor() {
-
-        /**
-         * Time measurement
-         */
-        cli.time(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]'))
-
-
-        /**
-         * Actual Server Setup
-         */
 
         // Setup HTTP (Express) server
         this.setupHttpServer()

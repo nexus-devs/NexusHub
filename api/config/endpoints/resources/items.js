@@ -9,9 +9,9 @@ const moment = require('moment')
 module.exports = {
     'statistics': {
         method: 'getItemStats',
-        target: 'coreDB',
+        target: 'dbs-local',
         scope: 'public',
-        attributes: {
+        params: {
             component: {
                 type: 'string',
                 default: '',
@@ -31,9 +31,9 @@ module.exports = {
     },
     'list': {
         method: 'getList',
-        target: 'coreDB',
+        target: 'dbs-local',
         scope: 'public',
-        attributes: {
+        params: {
             timeStart: {
                 type: 'object',
                 default: moment().toJSON(),
@@ -48,9 +48,9 @@ module.exports = {
     },
     'fuzzy-list': {
         method: 'getFuzzyList',
-        target: 'coreDB',
+        target: 'dbs-local',
         scope: 'public',
-        attributes: {
+        params: {
             name: {
                 type: 'string',
                 default: '',
