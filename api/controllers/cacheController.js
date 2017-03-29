@@ -1,3 +1,5 @@
+'use strict'
+
 const Redis = require('redis')
 
 /**
