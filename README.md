@@ -21,10 +21,4 @@ Just run `npm start` in the root folder once requirements are met.
 - [Nexus-Auth](https://github.com/Kaptard/nexus-auth) instance
 <br>
 
-### Default Ports
-- client node: 3000
-- api node: 3400
-- redis: 6379
-- mongo: 27017
-
-You can change these at any time in /config/env.config.js
+**Note:** Make sure to set your preferences in /config/env.config.js
