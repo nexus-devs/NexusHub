@@ -38,7 +38,7 @@ If necessary, you can still target native connection middleware which runs befor
 let api = require('path/to/api-node.js')
 
 api.http.app.use((req, res, next) => {}) // Native Express Middleware
-api.sockets.io.use((socket, next)) // Native Socket.io Middleware
+api.sockets.io.use((socket, next) => {}) // Native Socket.io Middleware
 ```
 Keep in mind that native socket middleware won't allow you to respond to requests with callback functions as of v1.7.3 or lower.
 
