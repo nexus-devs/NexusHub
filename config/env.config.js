@@ -10,7 +10,7 @@ process.env['environment'] = 'development'
 // Local Nodes
 process.env['api_id'] = "API"
 process.env['api_port'] = 3400
-process.env['src_id'] = "DBS"
+process.env['src_id'] = "COR"
 process.env['src_port'] = 3405
 process.env['src_user'] = "alaIz8cqU7cv2d336ssww28f0DufMbdJaMXZyg6BlaSiK453pspSygd81X5kLYMk"
 process.env['src_secret'] = "DNQt6oBMzTisRPHDXqbpxqEYpvtlpn2aHLMuKdEJMnrFNi6qxP87Al9iS3eP9Yui"

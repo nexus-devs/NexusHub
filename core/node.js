@@ -39,7 +39,7 @@ class dbs {
         this.client.on('ready', () => {
 
             // Finish time measurement
-            cli.timeEnd(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
+            cli.timeEnd(process.env.src_id, cli.chalk.green('[connected]'))
         })
     }
 }
