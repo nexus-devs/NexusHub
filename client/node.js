@@ -1,16 +1,21 @@
 /**
+ * Globals
+ */
+global.cli = require('../config/log/logger.js')
+cli.time(process.env.test_id, cli.chalk.green('[connected]'))
+
+/**
  * Test Client to simulate all kinds of requests
  */
-const Nexus = require('../nexus-stats-api/index.js')
+const Nexus = require('../../nexus-stats-api/index.js')
+
 
 class Client {
     constructor() {
         this.client = new Nexus({
-            game: 'warframe',
-            use_socket: true,
-            //ignore_limiter: true, // Root-Access not getting limited anyway
-            user_key: 'Xp1D1zBl6SpPLCQCFeG2VwnDTe3JC9LImZywghBspieNaNTkPSGNTEoVXavM2wPK',
-            user_secret: 'y5Ygb3zhK8c5YiC2G27Gd4Dafj0ePuIExZ3YzwdrcomSloSxVMc2AD8aUkI190fn'
+            use_socket: false,
+            user_key: 't8urhaKsLBpIZ7xLeRCDtlPFaeX5oRXArPjR7aynSAxsB4Rz8HWhe7dKQdcMuZHq',
+            user_secret: '1jRBkbi9MCTZUXj14VcIHry0q9lWEA7PbfSY5czdKfA4jEL0Nq55QEu4AoHEdprq'
         })
 
         this.client.on('ready', () => {
@@ -32,14 +37,14 @@ class Client {
         // Token Expiration Test
         setTimeout(() => {
             this.client.getItem('Nikana Prime').then(item => {
-                cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+                cli.log(process.env.tst_id, 'neutral', 'API      | ' + item ? item.toString() : item, 'in')
             })
         }, 15000)
 
         // Token Expiration Test
         setTimeout(() => {
             this.client.getItem('Nikana Prime').then(item => {
-                cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+                cli.log(process.env.tst_id, 'neutral', 'API      | ' + item ? item.toString() : item, 'in')
             })
         }, 25000)
 
@@ -61,4 +66,4 @@ class Client {
     }
 }
 
-modules.export = new Client()
+module.export = new Client()
