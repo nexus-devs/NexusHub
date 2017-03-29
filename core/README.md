@@ -18,4 +18,4 @@ Schema  | CRUD URL
 <br>
 
 #### Authorization
-You can also choose which minimum access scopes, e.g. `scope: "elevated-read-write"`. The API node will automatically include any higher scopes in the hierarchy.
+You can also choose which minimum access scopes to grant access too, e.g. `scope: "elevated-read-write"`. The API node will automatically include any higher scopes in the hierarchy.
