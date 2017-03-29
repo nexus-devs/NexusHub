@@ -57,10 +57,7 @@ class HttpAdapter {
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)
-            .then(() => {
-                this.pass(req, res, resource)
-                layer = null
-            })
+            .then(() => this.pass(req, res, resource))
             .catch(() => {})
     }
 
@@ -73,7 +70,7 @@ class HttpAdapter {
         cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller
-        let response = this.requestController.getResponse(request)
+        let response = this.requestController.getResponse(req)
 
         cli.logRequestEnd(process.env.api_id, 'REST', response)
 
