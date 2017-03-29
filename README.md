@@ -24,7 +24,6 @@ Just run `npm start` in the root folder once requirements are met.
 ### Default Ports
 - client node: 3000
 - api node: 3400
-- db node: 3405
 - redis: 6379
 - mongo: 27017
 
