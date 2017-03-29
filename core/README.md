@@ -5,7 +5,7 @@ Node.js server for data-processing of fundamental statistics. Uses the standard 
 
 ### Method Handling
 **Basic Usage:**
-Imagine a script saved as `/methods/items/statistics.js`. Once connected, we'll let the API node know that there's an available resource at `/items/statistics`. This will automatically generate a route on our RESTful API at runtime.
+Imagine a script saved as `/methods/items/statistics.js`. Once connected, we'll let the API node know that there's an available resource at `/items/statistics`. This will automatically generate a route on our RESTful API for all methods at runtime.
 <br>
 <br>
 #### Endpoint Customization
