@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Socket requirements
  */
@@ -74,7 +76,6 @@ class SocketAdapter {
         // Send Request to Controller
         var response = this.requestController.getResponse(req)
 
-        console.log('sockets.pass done')
         // Send Response back to requesting Socket
         res.status(response.statusCode).send(response.body)
 

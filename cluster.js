@@ -9,6 +9,7 @@ global.cli = require('./config/log/logger.js')
  * Dependencies
  */
 const cluster = require('multi-cluster')
+const heapdump = require('heapdump')
 
 
 /**
@@ -36,3 +37,10 @@ if (process.env.environment === 'development') {
 if (process.env.environment === 'production') {
     let api = new cluster('./api/app.js')
 }
+
+
+setTimeout(() => {
+    heapdump.writeSnapshot(function (err, filename) {
+        console.log('dump written to', filename);
+    });
+}, 125000)
