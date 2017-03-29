@@ -1,3 +1,5 @@
+'use strict'
+
 const chalk = require('chalk')
 const log = console.log
 const err = console.error

@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Token based authentication using JWT & Passport
  */
@@ -32,9 +34,9 @@ const low_limit = RateLimiter({
 const mid_limit = RateLimiter({
     redis: client,
     namespace: "MidAccessLimit",
-    interval: 5000,
-    maxInInterval: 10,
-    minDifference: 250
+    interval: 10000,
+    maxInInterval: 12,
+    minDifference: 750
 })
 
 // Rate Limiter for no tokens
@@ -42,8 +44,8 @@ const high_limit = RateLimiter({
     redis: client,
     namespace: "HighAccessLimit",
     interval: 10000,
-    maxInInterval: 10,
-    minDifference: 500
+    maxInInterval: 8,
+    minDifference: 1000
 })
 
 
@@ -131,7 +133,7 @@ class Authentication {
             // Set req.user from token
             try {
                 socket.user = jwt.verify(token, process.env.cert)
-                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + socket.user.uid + ' authorized', 'in')
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authorized', 'in')
                 return next()
             }
 

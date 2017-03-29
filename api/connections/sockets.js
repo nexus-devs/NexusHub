@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Socket requirements
  */
@@ -6,9 +8,10 @@ const port = process.env.api_port
 
 
 /**
- * Middleware
+ * Middleware Dependencies
  */
-const Layers = require('./layers.js')
+const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
+let Layer = reload('./layers.js')
 
 
 /**
@@ -50,7 +53,8 @@ class SocketAdapter {
     prepass(socket, verb, request, ack) {
 
         // Create new layer object for middleware
-        let layer = new Layers()
+        Layer = reload('./layers.js')
+        let layer = new Layer()
 
         // Modify req/res object to allow same middleware approach as in express
         let req = layer.convertReq(request, socket, verb)

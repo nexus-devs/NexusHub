@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Express app for public HTTP server
  * The public socket server will also bind to this server
@@ -14,7 +16,8 @@ const bodyParser = require('body-parser')
 /**
  * Middleware
  */
-const Layers = require('./layers.js')
+const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
+let Layer = reload('./layers.js')
 
 
 /**
@@ -49,11 +52,15 @@ class HttpAdapter {
     prepass(req, res, resource) {
 
         // Create new layer object for middleware
-        let layer = new Layers()
+        Layer = reload('./layers.js')
+        let layer = new Layer()
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)
-            .then(() => this.pass(req, res, resource))
+            .then(() => {
+                this.pass(req, res, resource)
+                layer = null
+            })
             .catch(() => {})
     }
 
@@ -63,11 +70,10 @@ class HttpAdapter {
      * Resource is set in routes
      */
     pass(req, res, resource) {
-
         cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller
-        var response = this.requestController.getResponse(request)
+        let response = this.requestController.getResponse(request)
 
         cli.logRequestEnd(process.env.api_id, 'REST', response)
 
