@@ -12,7 +12,7 @@ Imagine a script saved as `/methods/items/statistics.js`. Once connected, we'll 
 With the example above in mind, we can further control the endpoints through each classes' schema attribute: <br>
 
 Schema  | CRUD URL
-- | -
+------ | ------
 `resource: {item: true, component: true}`   | `/items/:item/:component/method`
 `query: {timestart: Number, timeend: Number}` | `/items/method?timestart=1490717012&timeend=1490817012`
 <br>
