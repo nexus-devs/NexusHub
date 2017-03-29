@@ -14,6 +14,7 @@ socket.emit("GET", "api.nexus-stats.com/game/version/query", res => {
 
 <br>
 <br>
+
 ### Writing Middleware
 The server also provides a simple express-like middleware stack to be executed before each request gets passed to another node, but **after** native express/socket middleware.<br>
 
@@ -43,12 +44,14 @@ Keep in mind that native socket middleware won't allow you to respond to request
 
 <br>
 <br>
+
 ### Authentication
 Simple authentication via JSON Web Tokens. Runs as native middleware for express. Initial authentication on Sockets is done natively - expiration check through own middleware.<br>
 Tokens are provided by a [nexus-auth](https://github.com/kaptard/nexus-auth) server.
 
 <br>
 <br>
+
 ### Rate Limiting
 We are using a rate limiting implementation following the token bucket algorithm.<br>
 
