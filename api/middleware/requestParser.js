@@ -1,9 +1,11 @@
+'use strict'
+
 /**
  * Converts standard URL string into JSON object usable by dbs nodes
  */
 class RequestParser {
     parse(req, res, next) {
-        let body = req.body || req.url
+        let body = req.url || req.body
         let json = {}
 
         // Proper request format?
@@ -51,7 +53,10 @@ class RequestParser {
         }
 
         // Improper request format
-        else next("Invalid Request Format. Please provide a URL string")
+        else {
+            cli.log(process.env.api_id, 'neutral', cli.getPrefix("Parser", cli.service_max) + req.user.uid + ' Invalid Request Format: ' + body, 'out')
+            next("Invalid Request Format. Please provide a URL string")
+        }
     }
 }
 

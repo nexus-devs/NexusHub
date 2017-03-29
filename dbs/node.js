@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+'use strict'
 
 /**
  * Globals
@@ -53,18 +53,18 @@ class dbs {
     test() {
 
         // Token Expiration Test
-        setTimeout(() => {
-            this.client.getItem('Nikana Prime').then(item => {
-                cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
-            })
-        }, 15000)
+        //setTimeout(() => {
+        //    this.client.getItem('Nikana Prime').then(item => {
+        //        cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        //    })
+        //}, 15000)
 
         // Token Expiration Test
-        setTimeout(() => {
-            this.client.getItem('Nikana Prime').then(item => {
-                cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
-            })
-        }, 25000)
+        //setTimeout(() => {
+        //    this.client.getItem('Nikana Prime').then(item => {
+        //        cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+        //    })
+        //}, 25000)
 
         // Circumvent standard module connection & send malformed request
         //this.client.connection.client.socket.emit("GET", "yourmom", ack => {
@@ -72,7 +72,7 @@ class dbs {
         //})
 
         // Rate Limit Testing
-        for (var i = 0; i < 15; i++) {
+        for (var i = 0; i < 15415; i++) {
             this.client.getItem('Nikana Prime', {
                 component: "Blade",
                 timestart: 3824983243892,

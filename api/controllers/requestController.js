@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Load endpoint resources
  */

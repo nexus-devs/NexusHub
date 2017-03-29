@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Item Endpoints for recognition by RequestController
  * URL: api.nexus-stats.com/v1/items

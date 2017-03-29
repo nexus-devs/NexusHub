@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Lodash for array deep clone
  */
@@ -80,6 +82,7 @@ class Layer {
         _req = req
         _res = res
         _stack = lo.cloneDeep(stack) // clone original stack
+
         _next = this.next
 
         // Stack needs buffer to be popped on first next()

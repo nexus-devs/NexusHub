@@ -1,3 +1,5 @@
+'use strict'
+
 const debug = require('debug')('api:server');
 
 module.exports = {
