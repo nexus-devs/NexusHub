@@ -28,6 +28,9 @@ if (process.env.environment === 'development') {
 
     let src = new cluster('./dbs/node.js', 1)
     src.watch('./dbs')
+
+    let tst = new cluster('./client/node.js', 1)
+    tst.watch('./client')
 }
 
 /**
