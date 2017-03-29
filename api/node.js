@@ -24,6 +24,7 @@ const parser = require('./middleware/requestParser.js')
  */
 class api {
 
+
     /**
      * Loads up HTTP/Sockets server and modifies it
      */
@@ -85,7 +86,6 @@ class api {
 
         // Check if RequestController is already bound to adapter
         this.use((req, res, next) => {
-            console.log(req.url)
             if (!this.http.requestController || !this.sockets.requestController) next('Rebooting. Try again in a few seconds')
             else next()
         })

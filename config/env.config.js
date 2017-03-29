@@ -14,6 +14,7 @@ process.env['src_id'] = "DBS"
 process.env['src_port'] = 3405
 process.env['web_id'] = "WEB"
 process.env['web_port'] = 3000
+process.env['test_id'] = "TST"
 
 // Databases
 process.env['redis_port'] = 6379
