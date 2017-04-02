@@ -9,7 +9,7 @@ global.cli = require('../config/log/logger.js')
 /**
  * Time measurement
  */
-cli.time(process.env.src_id, cli.chalk.reset("Port: " + process.env.src_port) + cli.chalk.green(' [online]'))
+cli.time(process.env.src_id, cli.chalk.green('[connected]'))
 
 
 /**

@@ -2,7 +2,7 @@
  * Globals
  */
 global.cli = require('../config/log/logger.js')
-cli.time(process.env.test_id, cli.chalk.green('[connected]'))
+cli.time(process.env.tst_id, cli.chalk.green('[connected]'))
 
 /**
  * Test Client to simulate all kinds of requests
@@ -14,8 +14,8 @@ class Client {
     constructor() {
         this.client = new Nexus({
             use_socket: false,
-            user_key: 't8urhaKsLBpIZ7xLeRCDtlPFaeX5oRXArPjR7aynSAxsB4Rz8HWhe7dKQdcMuZHq',
-            user_secret: '1jRBkbi9MCTZUXj14VcIHry0q9lWEA7PbfSY5czdKfA4jEL0Nq55QEu4AoHEdprq'
+            user_key: 'hPIpcqhXlQVUbRVZxOqbgwhznrD5YLUOD66B6hgZPzencUuSArJJxtxb2tzcMkcq',
+            user_secret: 'a9MkmlDySgI8I7O8jnxuYFFY0VK5jU8QLfalHA9sBrRjWUku7GF0Q7piupXeV41p'
         })
 
         this.client.on('ready', () => {
