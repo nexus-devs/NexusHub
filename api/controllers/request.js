@@ -1,44 +1,51 @@
 'use strict'
 
 /**
- * Load endpoint resources
+ * Dependencies
  */
-const endpoints = {
-    items: require('../config/endpoints/resources/items.js'),
-}
-
+ const cache = require('./cache.js')
+ const db = require('mongoose')
 
 /**
  * Checks request against endpoints given by dbs node
  */
-class RequestController {
-
-    constructor() {
-
-        /**
-         * Endpoint for current request
-         */
-        this.endpoint;
-
-        /**
-         * Requested query
-         */
-        this.query;
-    }
+class Request {
 
     /**
-     * Set Client to send request to dbs node
+     * Connect to databases
      */
-    setClient(client) {
-        this.client = client
-    }
+     constructor(){
+
+         // Array for connected database state
+         this.readystack = []
+         this.ready = false
+         this.minclients = 2
+
+         // Load up cache controller
+         this.cache = new Cache()
+         this.cache.client.on('ready', () => this.confirm("redis"))
+
+         // Connect to mongo
+         this.db = db
+         db.connect(process.env.mongo_url)
+         db.connection.on('connected', () => this.confirm("mongodb"))
+     }
+
+
+     /**
+      * Adds db client name to readystack, if all clients connected -> this.readystack
+      */
+     confirm(client) {
+         this.readystack.push(client)
+         if(this.readystack.length === this.minclients) this.ready = true
+     }
 
 
     /**
      * Verify Request Validity with cached data from dbs-node
      */
     isValid(req){
-
+        return false
     }
 
 
@@ -86,4 +93,4 @@ class RequestController {
     }
 }
 
-module.exports = RequestController
+module.exports = Request
