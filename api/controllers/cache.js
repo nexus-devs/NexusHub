@@ -30,4 +30,4 @@ class CacheController {
 }
 
 
-module.exports = CacheController
+module.exports = new CacheController()

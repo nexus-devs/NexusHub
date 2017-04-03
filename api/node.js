@@ -17,13 +17,14 @@ cli.time(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + 
  */
 const auth = require('./middleware/auth.js')
 const parser = require('./middleware/requestParser.js')
+const endpoints = require('./controllers/endpoint.js')
+const request = require('./controllers/request.js')
 
 
 /**
  * Procedurally builds up http/sockets server
  */
 class api {
-
 
     /**
      * Loads up HTTP/Sockets server and modifies it
@@ -35,13 +36,15 @@ class api {
             .then(() => this.setupSockets())
             .then(() => this.applyMiddleware())
             .then(() => this.applyRoutes())
-            .then(() => this.applyRequestController())
+            .then(() => this.setRequestClient())
+            .then(() => endpoints.listen())
+            .then(() => endpoints.apply())
 
             // Finish Time Measurement
             .then(() => cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
 
             // Listen to route config transmission from core Nodes
-            .then(() => this.listenConfig())
+            .then(() => endpointController.listen())
     }
 
 
@@ -89,7 +92,7 @@ class api {
 
         // Check if RequestController is already bound to adapter
         this.use((req, res, next) => {
-            if (!this.http.requestController || !this.sockets.requestController) next('Rebooting. Try again in a few seconds')
+            if (!this.http.request.ready || !this.sockets.request.ready) next('Rebooting. Try again in a few seconds')
             else next()
         })
 
@@ -114,15 +117,9 @@ class api {
     /**
      * Loads RequestController into server adapters to process actual request handling
      */
-    applyRequestController() {
-
-        // Prepare RequestController Object
-        let requestController = new(require('./controllers/RequestController.js'))
-        requestController.setClient(this.sockets)
-
-        // Bind RequestController to adapters
-        this.http.requestController = requestController
-        this.sockets.requestController = requestController
+    setRequestClient() {
+        this.http.request.client = this.sockets.io
+        this.sockets.request.client =  this.sockets.io
     }
 
 
@@ -132,34 +129,6 @@ class api {
     use(fn) {
         this.http.use(fn)
         this.sockets.use(fn)
-    }
-
-
-    /**
-     * Listens to incoming endpoint configs from core nodes
-     */
-    listenConfig() {
-        this.sockets.root.on('connection', (socket) => {
-            socket.on('config', (schema) => {
-                console.log(schema)
-                schema.forEach((endpoint) => {
-                    this.http.app.all(endpoint.route, (req, res) => {
-                        res.send(req.url)
-                        //this.http.prepass(req, res)
-                    })
-                })
-            })
-        })
-
-        //apiState.on('config', (schema) => {
-        //    console.log(schema)
-        //})
-
-        // Listen to root sockets for specific event
-        // NOTE: ADD SOCKETS WITH ROOT SCOPE TO ROOT NAMESPACE ON HANDSHAKE
-        // THEN LISTEN TO CREATED ROOM FOR CONFIG EVENT
-        // THEN APPLY NEW SCHEMA TO REQ CONTROLLER
-
     }
 
 
