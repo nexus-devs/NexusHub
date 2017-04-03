@@ -13,15 +13,15 @@ const Nexus = require('../../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            use_socket: false,
-            user_key: 'hPIpcqhXlQVUbRVZxOqbgwhznrD5YLUOD66B6hgZPzencUuSArJJxtxb2tzcMkcq',
-            user_secret: 'a9MkmlDySgI8I7O8jnxuYFFY0VK5jU8QLfalHA9sBrRjWUku7GF0Q7piupXeV41p'
+            use_socket: true,
+            user_key: 'TnKNwhSQ1n7XDxISYdo5qC555RBbt0T0H8uqWX7z8mU36J7lsCuyXBKg6CzMw58F',
+            user_secret: 'JTl4A22PCebac6xVomRUQ6qEcs174NCzo9EdFI5mA1xwyrTX8aAra0UAxUSG0f8D'
         })
 
         this.client.on('ready', () => {
 
             // Finish time measurement
-            cli.timeEnd(process.env.test_id, cli.chalk.green('[connected]'))
+            cli.timeEnd(process.env.tst_id, cli.chalk.green('[connected]'))
 
             // Launch test requests
             this.test()

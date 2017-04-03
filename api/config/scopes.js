@@ -4,7 +4,10 @@
  */
 
 module.exports = () => {
-    let standard = ['standard-read', 'standard-read-write']
+    let basic = ['basic-read', 'basic-read-write']
     let elevated = ['elevated-read', 'elevated-read-write']
     let root = ['root-read', 'root-read-write']
+    let scopes = (basic.concat(elevated)).concat(root)
+
+    return scopes
 }

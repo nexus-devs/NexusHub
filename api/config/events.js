@@ -4,6 +4,9 @@
 
 module.exports = (sockets) => {
 
+    /**
+     * Default namespace
+     */
     sockets.io.on('connection', (socket) => {
 
         // Log connection

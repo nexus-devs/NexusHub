@@ -49,7 +49,7 @@ class HttpAdapter {
     /**
      * Functions to run before allowing request
      */
-    prepass(req, res, resource) {
+    prepass(req, res) {
 
         // Create new layer object for middleware
         Layer = reload('./layers.js')
@@ -57,7 +57,7 @@ class HttpAdapter {
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)
-            .then(() => this.pass(req, res, resource))
+            .then(() => this.pass(req, res))
             .catch(() => {})
     }
 
@@ -66,7 +66,7 @@ class HttpAdapter {
      * Respond to incoming requests passed by routes
      * Resource is set in routes
      */
-    pass(req, res, resource) {
+    pass(req, res) {
         cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller

@@ -15,7 +15,7 @@ let Layer = reload('./layers.js')
 
 
 /**
- * Initializes socket server and handles socket requests
+ * Handles all I/O for Socket.io
  */
 class SocketAdapter {
 
@@ -30,20 +30,9 @@ class SocketAdapter {
 
         // Listen on server
         this.io = io.listen(server)
-    }
 
-
-    /**
-     * Sends requests from requestController to local nodes
-     * Returns response from node
-     * MAYBE NEED TO SPECIFY RETURN BOOL?
-     */
-    local(target, model, method, attributes) {
-        target.emit('req', {
-            method: method,
-            attributes: attributes,
-            model: model
-        })
+        // Create root namespace
+        this.root = this.io.of('/root')
     }
 
 
@@ -97,6 +86,21 @@ class SocketAdapter {
      */
     update(data) {
         this.io.in(data.room).emit(data.event, data.body)
+    }
+
+
+
+    /**
+     * Sends requests from requestController to local nodes
+     * Returns response from node
+     * MAYBE NEED TO SPECIFY RETURN BOOL?
+     */
+    local(target, model, method, attributes) {
+        target.emit('req', {
+            method: method,
+            attributes: attributes,
+            model: model
+        })
     }
 }
 

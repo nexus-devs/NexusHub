@@ -1,7 +1,7 @@
 /**
  * Globals
  */
-require('./config/env.config.js')
+require('./config/env.js')
 global.cli = require('./config/log/logger.js')
 
 
@@ -32,6 +32,7 @@ if (process.env.environment === 'development') {
     let tst = new cluster('./client/node.js', 1)
     tst.watch('./client')
 }
+
 
 /**
  * All cores w/o watch in production
