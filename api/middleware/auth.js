@@ -81,6 +81,10 @@ class Authentication {
 
         // JWT Verification on each transaction (goes through adapter middleware)
         sockets.use((req, res, next) => this.verifyExpiration(req, res, next))
+
+        // Root Namespace middleware
+        sockets.root.use((socket, next) => this.verifySocket(socket, next))
+        sockets.root.use((socket, next) => this.authorize(socket, next))
     }
 
 
@@ -100,7 +104,7 @@ class Authentication {
             // Set req.user from token
             try {
                 req.user = jwt.verify(token, process.env.cert)
-                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + req.user.uid + ' authorized', 'in')
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + req.user.uid + ' verified', 'in')
                 return next()
             }
 
@@ -122,6 +126,7 @@ class Authentication {
      * Socket.io Middleware to verify JWT if present. Also adds user to req.
      */
     verifySocket(socket, next) {
+
         socket.user = {
             uid: socket.request.connection.remoteAddress
         }
@@ -133,7 +138,7 @@ class Authentication {
             // Set req.user from token
             try {
                 socket.user = jwt.verify(token, process.env.cert)
-                cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authorized', 'in')
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' verified', 'in')
                 return next()
             }
 
@@ -161,6 +166,20 @@ class Authentication {
         } else {
             return next()
         }
+    }
+
+
+    /**
+     * Authorizes sockets attempting connections to higher namespace
+     */
+    authorize(socket, next) {
+        if (socket.nsp.name === '/root' && socket.user.scp.includes('root')) {
+            cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authorized', 'in')
+            next()
+        }
+
+        // No criteria matched
+        next(new Error("Rejected connection to " + socket.nsp.name))
     }
 
 
@@ -212,7 +231,7 @@ class Authentication {
             }
 
             // Figure out Source of Request
-            if(req.channel === "Sockets") var prefix = "Sockets"
+            if (req.channel === "Sockets") var prefix = "Sockets"
             else var prefix = "REST"
 
             // Log output

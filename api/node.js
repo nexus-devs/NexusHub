@@ -20,7 +20,7 @@ const parser = require('./middleware/requestParser.js')
 
 
 /**
- * Describes parent class which controls all objects handling input/output
+ * Procedurally builds up http/sockets server
  */
 class api {
 
@@ -32,13 +32,16 @@ class api {
 
         // Build up Server
         this.setupHttpServer()
-        .then(() => this.setupSockets())
-        .then(() => this.applyMiddleware())
-        .then(() => this.applyRoutes())
-        .then(() => this.applyRequestController())
+            .then(() => this.setupSockets())
+            .then(() => this.applyMiddleware())
+            .then(() => this.applyRoutes())
+            .then(() => this.applyRequestController())
 
-        // Finish Time Measurement
-        .then(cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
+            // Finish Time Measurement
+            .then(() => cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
+
+            // Listen to route config transmission from core Nodes
+            .then(() => this.listenConfig())
     }
 
 
@@ -130,6 +133,42 @@ class api {
         this.http.use(fn)
         this.sockets.use(fn)
     }
+
+
+    /**
+     * Listens to incoming endpoint configs from core nodes
+     */
+    listenConfig() {
+        this.sockets.root.on('connection', (socket) => {
+            socket.on('config', (schema) => {
+                console.log(schema)
+                schema.forEach((endpoint) => {
+                    this.http.app.all(endpoint.route, (req, res) => {
+                        res.send(req.url)
+                        //this.http.prepass(req, res)
+                    })
+                })
+            })
+        })
+
+        //apiState.on('config', (schema) => {
+        //    console.log(schema)
+        //})
+
+        // Listen to root sockets for specific event
+        // NOTE: ADD SOCKETS WITH ROOT SCOPE TO ROOT NAMESPACE ON HANDSHAKE
+        // THEN LISTEN TO CREATED ROOM FOR CONFIG EVENT
+        // THEN APPLY NEW SCHEMA TO REQ CONTROLLER
+
+    }
+
+
+    /**
+     * Parses Schema sent via config event, translates into url
+     */
+     parseConfig() {
+
+     }
 }
 
 module.exports = new api
