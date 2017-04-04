@@ -14,8 +14,8 @@ class Client {
     constructor() {
         this.client = new Nexus({
             use_socket: true,
-            user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
-            user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
+            user_key: 'TnKNwhSQ1n7XDxISYdo5qC555RBbt0T0H8uqWX7z8mU36J7lsCuyXBKg6CzMw58F',
+            user_secret: 'JTl4A22PCebac6xVomRUQ6qEcs174NCzo9EdFI5mA1xwyrTX8aAra0UAxUSG0f8D'
         })
 
         this.client.on('ready', () => {
