@@ -13,11 +13,18 @@ const express = require('express')
 const http = require('http')
 const bodyParser = require('body-parser')
 
+
 /**
  * Middleware
  */
 const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
 let Layer = reload('./layers.js')
+
+
+/**
+ * Request Controller
+ */
+const Request = require('../controllers/request.js')
 
 
 /**
@@ -43,6 +50,9 @@ class HttpAdapter {
 
         // Create empty adapter middleware stack
         this.stack = []
+
+        // Bind Request Controller to object
+        this.request = new Request()
     }
 
 
@@ -70,8 +80,7 @@ class HttpAdapter {
         cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller
-        let response = this.requestController.getResponse(req)
-
+        let response = this.request.getResponse(req)
         cli.logRequestEnd(process.env.api_id, 'REST', response)
 
         // Return data from RequestController

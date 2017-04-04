@@ -15,6 +15,12 @@ let Layer = reload('./layers.js')
 
 
 /**
+ * Request Controller
+ */
+const Request = require('../controllers/request.js')
+
+
+/**
  * Handles all I/O for Socket.io
  */
 class SocketAdapter {
@@ -30,6 +36,9 @@ class SocketAdapter {
 
         // Listen on server
         this.io = io.listen(server)
+
+        // Bind Request Controller to object
+        this.request = new Request()
 
         // Create root namespace
         this.root = this.io.of('/root')
@@ -63,13 +72,11 @@ class SocketAdapter {
         cli.logRequest(process.env.api_id, 'Sockets', req)
 
         // Send Request to Controller
-        var response = this.requestController.getResponse(req)
+        var response = this.request.getResponse(req)
+        cli.logRequestEnd(process.env.api_id, 'Sockets', response)
 
         // Send Response back to requesting Socket
         res.status(response.statusCode).send(response.body)
-
-        // Log Output
-        cli.logRequestEnd(process.env.api_id, 'Sockets', response)
     }
 
 
@@ -79,15 +86,6 @@ class SocketAdapter {
     use(fn) {
         this.stack.unshift(fn)
     }
-
-
-    /**
-     * When local node has new data: update for everyone in relevant rooms
-     */
-    update(data) {
-        this.io.in(data.room).emit(data.event, data.body)
-    }
-
 
 
     /**
