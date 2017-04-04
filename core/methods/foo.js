@@ -8,9 +8,10 @@ const Method = require('../Method.js')
  class Foo extends Method {
      constructor(){
          super()
+         this.schema.description = "Simple testing method which returns 'bar'."
      }
 
-     run(){
+    main(){
          return("bar")
      }
  }

@@ -64,7 +64,6 @@ class Request {
 
     /**
      * Controls Request processing
-     * returns {response}
      */
     getResponse(req) {
 

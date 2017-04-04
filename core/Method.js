@@ -11,7 +11,8 @@ class Method{
         this.schema = {
             resources: [],
             params: {},
-            scope: 'basic-read'
+            scope: 'basic-read',
+            description: "There is no description for this endpoint yet."
         }
 
         // Establish MongoDB connection

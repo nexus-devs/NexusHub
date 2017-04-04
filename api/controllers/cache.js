@@ -9,7 +9,6 @@ class CacheController {
 
     /**
      * Creates connection to Redis
-     * @param {string} adapter      Adapter name which wants to access the cache
      */
     constructor() {
 
@@ -17,15 +16,6 @@ class CacheController {
          * Create Redis Client
          */
         this.client = Redis.createClient()
-    }
-
-
-    /**
-     * Some Logging Functions
-     * @param {string} adapter      Adapter name which wants to access the cache
-     */
-    init() {
-
     }
 }
 
