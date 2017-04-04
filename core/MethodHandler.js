@@ -20,7 +20,7 @@ mongodb.connect('mongodb://localhost/nexus-stats')
 class MethodHandler {
 
     /**
-     * Generates endpoint schema from local methods
+     * Generates flat endpoint schema from method tree
      */
     generateConfig() {
 
@@ -79,6 +79,9 @@ class MethodHandler {
 
             // Authentication scope
             method.scope = schema.scope
+
+            // Endpoint description
+            method.description = schema.description
         }
 
         return method

@@ -3,14 +3,3 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
-/ocr/__pycache__/
-
-/client/.tmp/
-/client/assets/img/generic/fullsize
-/client/assets/img/items/fullsize
-/client/npm-debug.log
-/client/sitemap.txt
-/client/.brackets.json
-/client/assets/img/
-/.brackets.json
-/test.py
