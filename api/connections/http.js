@@ -11,11 +11,10 @@
  */
 const express = require('express')
 const http = require('http')
-const bodyParser = require('body-parser')
 
 
 /**
- * Middleware
+ * Middleware helpers
  */
 const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
 let Layer = reload('./layers.js')
@@ -42,17 +41,11 @@ class HttpAdapter {
         this.server = http.createServer(this.app)
         this.server.listen(port)
 
-        // Body Parser Middleware
-        this.app.use(bodyParser.urlencoded({
-                extended: false
-            }))
-            .use(bodyParser.json())
-
         // Create empty adapter middleware stack
         this.stack = []
 
         // Bind Request Controller to object
-        this.request = new Request()
+        this.request = Request
     }
 
 

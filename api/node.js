@@ -15,10 +15,9 @@ cli.time(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + 
 /**
  * Middleware Functions
  */
+const bodyParser = require('body-parser')
 const auth = require('./middleware/auth.js')
 const parser = require('./middleware/requestParser.js')
-const endpoints = require('./controllers/endpoint.js')
-const request = require('./controllers/request.js')
 
 
 /**
@@ -33,18 +32,15 @@ class api {
 
         // Build up Server
         this.setupHttpServer()
+
+            // Core Sockets Logic
             .then(() => this.setupSockets())
             .then(() => this.applyMiddleware())
             .then(() => this.applyRoutes())
             .then(() => this.setRequestClient())
-            .then(() => endpoints.listen())
-            .then(() => endpoints.apply())
 
             // Finish Time Measurement
             .then(() => cli.timeEnd(process.env.api_id, cli.chalk.reset("Port: " + process.env.api_port) + cli.chalk.green(' [online]')))
-
-            // Listen to route config transmission from core Nodes
-            .then(() => endpointController.listen())
     }
 
 
@@ -83,6 +79,12 @@ class api {
      */
     applyMiddleware() {
 
+        // Use BodyParser for express
+        this.http.app.use(bodyParser.urlencoded({
+                extended: false
+            }))
+            .use(bodyParser.json())
+
         // Enable JWT auth
         auth.configExpress(this.http.app)
         auth.configSockets(this.sockets)
@@ -118,8 +120,8 @@ class api {
      * Loads RequestController into server adapters to process actual request handling
      */
     setRequestClient() {
-        this.http.request.client = this.sockets.io
-        this.sockets.request.client =  this.sockets.io
+        this.http.request.client = this.sockets
+        this.sockets.request.client = this.sockets
     }
 
 
@@ -130,14 +132,6 @@ class api {
         this.http.use(fn)
         this.sockets.use(fn)
     }
-
-
-    /**
-     * Parses Schema sent via config event, translates into url
-     */
-     parseConfig() {
-
-     }
 }
 
 module.exports = new api

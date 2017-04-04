@@ -8,7 +8,7 @@ const port = process.env.api_port
 
 
 /**
- * Middleware Dependencies
+ * Middleware helpers
  */
 const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
 let Layer = reload('./layers.js')
@@ -38,7 +38,7 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         // Bind Request Controller to object
-        this.request = new Request()
+        this.request = Request
 
         // Create root namespace
         this.root = this.io.of('/root')
