@@ -4,12 +4,12 @@
 global.cli = require('../config/log/logger.js')
 cli.time(process.env.tst_id, cli.chalk.green('[connected]'))
 
-/**
- * Test Client to simulate all kinds of requests
- */
 const Nexus = require('../../nexus-stats-api/index.js')
 
 
+/**
+ * Test Client to simulate all kinds of requests
+ */
 class Client {
     constructor() {
         this.client = new Nexus({

@@ -74,13 +74,10 @@ class MethodHandler {
                 method.route = url.join('/')
             }
 
-            // Params
+            // Other Modified values
             method.params = schema.params
-
-            // Authentication scope
             method.scope = schema.scope
-
-            // Endpoint description
+            method.verb = schema.verb
             method.description = schema.description
         }
 
