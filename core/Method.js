@@ -12,6 +12,7 @@ class Method{
             resources: [],
             params: {},
             scope: 'basic-read',
+            verb: 'GET',
             description: "There is no description for this endpoint yet."
         }
 
