@@ -11,8 +11,7 @@ class Foo extends Method {
 
         // Modify schema
         this.schema.resources = ['item']
-        this.schema.params = [
-            {
+        this.schema.params = [{
                 name: "component",
                 type: String,
                 default: ""
@@ -20,14 +19,20 @@ class Foo extends Method {
             {
                 name: "timestart",
                 type: Number,
-                default: "now"
+                default: () => {
+                    return moment().toJSON()
+                }
             },
             {
                 name: "timeend",
                 type: Number,
-                default: "week"
+                default: () => {
+                    return moment().subtract(21, 'day').toJSON()
+                }
             }
         ]
+
+        console.log(this.schema.params[1])
     }
 
     run() {}
