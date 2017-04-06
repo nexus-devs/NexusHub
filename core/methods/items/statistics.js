@@ -20,14 +20,14 @@ class Foo extends Method {
                 name: "timestart",
                 type: Number,
                 default: () => {
-                    return moment().toJSON()
+                    return new Date().getTime() / 1000 // current time
                 }
             },
             {
                 name: "timeend",
                 type: Number,
                 default: () => {
-                    return moment().subtract(21, 'day').toJSON()
+                    return new Date(new Date().setDate(new Date().getDate() - 21)) / 1000 // 3 weeks ago
                 }
             }
         ]

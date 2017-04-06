@@ -17,7 +17,7 @@ let Layer = reload('./layers.js')
 /**
  * Request Controller
  */
-const Request = require('../controllers/request_tmp.js')
+const Request = require('../controllers/request.js')
 
 
 /**
