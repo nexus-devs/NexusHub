@@ -22,7 +22,7 @@ class MethodHandler {
     /**
      * Generates flat endpoint schema from method tree
      */
-    generateConfig() {
+    generateEndpointSchema() {
 
         // Generate File Tree
         let config = []
@@ -31,9 +31,6 @@ class MethodHandler {
 
         // Cleanup (last 2 el always garbage (first due to empty initial folder, second makes no sense))
         config.splice(config.length - 2, 2)
-
-        console.log('\n before sending')
-        console.log(config[1].params)
 
         // Return config to send to api node
         return config
@@ -73,15 +70,17 @@ class MethodHandler {
                 schema.resources.forEach(resource => {
                     url.splice((url.length - 1), 0, ':' + resource) // before method, but not -2 because split has empty first el due to route starting with '/'
                 })
-
                 method.route = url.join('/')
             }
 
             // Stringify functions to be preserved on socket's emit
-            Object.keys(schema.params).map((param, i) => {
-                if (typeof param.default === 'function') schema.params[i].default = param.default.toString()
-                console.log(schema.params[i].default)
+            Object.keys(schema.params).map((i) => {
+                let param = schema.params[i]
+                if (typeof param.default === 'function') {
+                    schema.params[i].default = param.default.toString()
+                }
             })
+            method.params = schema.params
 
             // Other Modified values
             method.scope = schema.scope

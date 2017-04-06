@@ -44,7 +44,7 @@ class core {
             cli.timeEnd(process.env.src_id, cli.chalk.green('[connected]'))
 
             // Send Endpoint Config
-            this.client.connection.request('config', MethodHandler.generateConfig())
+            this.client.connection.request('config', MethodHandler.generateEndpointSchema())
         })
     }
 }
