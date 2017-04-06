@@ -32,6 +32,9 @@ class MethodHandler {
         // Cleanup (last 2 el always garbage (first due to empty initial folder, second makes no sense))
         config.splice(config.length - 2, 2)
 
+        console.log('\n before sending')
+        console.log(config[1].params)
+
         // Return config to send to api node
         return config
     }
@@ -74,8 +77,13 @@ class MethodHandler {
                 method.route = url.join('/')
             }
 
+            // Stringify functions to be preserved on socket's emit
+            Object.keys(schema.params).map((param, i) => {
+                if (typeof param.default === 'function') schema.params[i].default = param.default.toString()
+                console.log(schema.params[i].default)
+            })
+
             // Other Modified values
-            method.params = schema.params
             method.scope = schema.scope
             method.verb = schema.verb
             method.description = schema.description

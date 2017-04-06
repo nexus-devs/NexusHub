@@ -36,7 +36,8 @@ module.exports = (sockets) => {
 
         // Listen to endpoint config event
         socket.on('config', (schema) => {
-            console.log(sockets.request.toString())
+            console.log('\n before calling Method')
+            console.log(schema[1].params)
             sockets.request.saveEndpoints(schema)
         })
     })

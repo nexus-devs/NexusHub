@@ -6,6 +6,7 @@
  */
 const Cache = require('./cache.js')
 const db = require('mongodb').MongoClient
+const moment = require('moment')
 
 /**
  * Checks request against endpoints given by dbs node
@@ -49,6 +50,8 @@ class Request {
      * Listens to config event for endpoint configuration from core node
      */
     saveEndpoints(endpoints) {
+        console.log('\n after calling method')
+        console.log(endpoints[1].params)
         this.schema.endpoints = endpoints
     }
 
@@ -61,17 +64,35 @@ class Request {
         //if(req.user.scp !><><>>< endpoint.scope) return false
         if (req.verb !== endpoint.verb) return false
 
+        // Initialize param array
+        let params = []
+
         // Compare param types
-        Object.keys(req.params).map(function(key, index) {
-            console.log(key) // name
-            var value = req.params[key]
-            console.log(value) // value
-            // then do comparison below with above values
+        endpoint.params.forEach((specs) => {
+
+            // Param included in request?
+            let requested = false
+            Object.keys(req.params).map((key, index) => {
+                if (key === specs.name) requested = req.params[key]
+            })
+
+            // Requested not falsy -> request value in `requested`
+            if (requested) params.push(requested)
+
+            // Not requested -> assign default value
+            else {
+                if(typeof specs.default === 'function') params.push(specs.default())
+                else params.push(specs.default)
+            }
         })
 
-        for (_param in req.params) {
-            let param = req.params[_param]
+        console.log(params)
+
+        /** Object.keys(req.params).map(function(key, index) {
+            let param = key
+            let value = req.params[param]
             let specs
+            console.log(param)
 
             // Find param specs in schema if exist
             for (_specs in endpoint.params) {
@@ -89,7 +110,7 @@ class Request {
 
             // No Specs found
             else return false
-        }
+        })*/
 
         return true
     }

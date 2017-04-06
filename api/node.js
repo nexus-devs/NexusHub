@@ -80,9 +80,7 @@ class api {
     applyMiddleware() {
 
         // Use BodyParser for express
-        this.http.app.use(bodyParser.urlencoded({
-                extended: false
-            }))
+        this.http.app.use(bodyParser.urlencoded({extended: false}))
             .use(bodyParser.json())
 
         // Enable JWT auth
@@ -92,7 +90,7 @@ class api {
         // Rate limiting middleware for express/sockets
         this.use((req, res, next) => auth.rateLimiter(req, res, next))
 
-        // Check if RequestController is already bound to adapter
+        // Check if RequestController is connected to db && bound to adapter
         this.use((req, res, next) => {
             if (!this.http.request.ready || !this.sockets.request.ready) next('Rebooting. Try again in a few seconds')
             else next()
