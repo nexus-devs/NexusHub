@@ -89,7 +89,8 @@ class Request {
                 let params = []
 
                 // Compare param types
-                this.schema.endpoints[endpoint].params.forEach((specs, i) => {
+                for(var i = 0; i < this.schema.endpoints[endpoint].params.length; i++){
+                    let specs = this.schema.endpoints[endpoint].params[i]
 
                     // Param included in request?
                     let requested = false
@@ -98,14 +99,20 @@ class Request {
                     })
 
                     // Requested not falsy -> request value in `requested`
-                    if (requested) params.push(requested)
+                    if (requested) {
+                        if(specs.type === 'number') {
+                            if(isNaN(requested)) return false
+                            else requested = parseFloat(requested)
+                        }
+                        params.push(requested)
+                    }
 
                     // Not requested -> assign default value
                     else {
                         if (typeof specs.default === 'function') params.push(specs.default())
                         else params.push(specs.default)
                     }
-                })
+                }
 
                 console.log(params)
             }
