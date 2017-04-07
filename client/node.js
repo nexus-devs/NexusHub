@@ -58,7 +58,7 @@ class Client {
             this.client.getItem('Nikana Prime', {
                 component: "Blade",
                 //timestart: 3824983243892,
-                timeend: 3894982348932
+                timeend: '389498test2348932'
             }).then(item => {
                 //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
             })
