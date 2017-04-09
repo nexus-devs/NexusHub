@@ -62,6 +62,7 @@ class Layer {
      */
     runStack(req, res, stack) {
         return new Promise((resolve, reject) => {
+            
             // Pass  request & function stack to middleware
             this.new(req, res, stack)
 

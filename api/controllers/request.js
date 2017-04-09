@@ -1,12 +1,9 @@
 'use strict'
 
-/**
- * TEMPORARY REPLACEMENT FOR MAIN CUS I FORGOT TO PUSH LAST CHANGES
- * SETS SCHEMA DIRECTLY IN MEMORY
- */
 const Cache = require('./cache.js')
-const db = require('mongodb').MongoClient
+const mongodb = require('mongodb').MongoClient
 const _ = require('lodash')
+
 
 /**
  * Checks request against endpoints given by dbs node
@@ -18,7 +15,10 @@ class Request {
      */
     constructor() {
 
-        this.schema = {}
+        // Initialize endpoint config
+        this.schema = {
+            uat: new Date()
+        }
 
         // Array for connected database state
         this.dbstack = []
@@ -30,9 +30,12 @@ class Request {
         this.cache.client.on('ready', () => this.confirmDB("redis"))
 
         // Connect to mongo
-        this.db = db
-        db.connect(process.env.mongo_url, (err, db) => {
-            if (!err) this.confirmDB("mongodb")
+        this.db = mongodb
+        this.db.connect(process.env.mongo_url, (err, db) => {
+            if (!err) {
+                this.db.config = db.collection("config")
+                this.confirmDB("mongodb")
+            }
         })
     }
 
@@ -47,50 +50,76 @@ class Request {
 
 
     /**
-     * Saves endpoints from core node to
+     * Saves endpoints from core node to db
      */
     saveEndpoints(endpoints) {
+        let config = {
+            type: 'endpoints',
+            schema: endpoints
+        }
+        this.db.config.save(config)
 
-        // Modify
-        for (var endpoint in endpoints) {
+        // Save in memory store
+        this.convertSchema(config.schema)
+        this.schema.endpoints = config.schema
+        this.schema.uat = new Date()
+    }
 
-            if (Object.keys(endpoints[endpoint].params).length > 0) {
-                endpoints[endpoint].params.forEach((specs, i) => {
 
-                    // If string -> check if function (workaround for json.stringify on socket.emit)
-                    if (typeof specs.default === 'string' && (specs.default.includes("() => {") || specs.default.includes("function ("))) {
+    /**
+     * Controls Request processing
+     */
+    getResponse(req) {
 
-                        // Function from String (remove everything before first { and last }), override default
-                        let fn = new Function(specs.default.substring(specs.default.indexOf("{") + 1).slice(0, -1))
-                        endpoints[endpoint].params[i].default = fn
-                    }
-                })
-            }
+        // Assign values to request
+        let request = {
+            user: req.user,
+            verb: req.method,
+            resource: req.body.resource,
+            method: req.body.method,
+            params: req.body.params,
         }
 
-        // Save Endpoints
-        this.schema.endpoints = endpoints
+        // Verify & Parse request
+        let params = this.parse(request)
+
+        // Response Handling
+        if (params) {
+
+            // socketAdapter.req(this.request) //
+            return ({
+                statusCode: 200,
+                body: 'Data will be here soon ' + Math.random() * 100 // Differentiate output for mutiple hundreds of requests
+            })
+        } else return ({
+            statusCode: 405,
+            body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
+        })
     }
 
 
     /**
      * Verify Request Validity with cached data from core-node
      */
-    isValid(req) {
+    parse(req) {
+
+        // Check if Schema requires updating
+        this.compareSchema()
 
         // Check if method in schema
-        for (var endpoint in this.schema.endpoints) {
-            if (this.schema.endpoints[endpoint].method === req.method) {
+        for (var sub in this.schema.endpoints) {
+            let endpoint = this.schema.endpoints[sub]
 
-                //if(req.user.scp !><><>>< endpoint.scope) return false
-                if (req.verb !== this.schema.endpoints[endpoint].verb) return false
+            if (endpoint.method === req.method) {
+                if (!endpoint.scope.includes(req.user.scp)) return false
+                if (req.verb !== endpoint.verb) return false
 
                 // Initialize param array
                 let params = []
 
                 // Compare param types
-                for(var i = 0; i < this.schema.endpoints[endpoint].params.length; i++){
-                    let specs = this.schema.endpoints[endpoint].params[i]
+                for (var i = 0; i < endpoint.params.length; i++) {
+                    let specs = endpoint.params[i]
 
                     // Param included in request?
                     let requested = false
@@ -100,8 +129,8 @@ class Request {
 
                     // Requested not falsy -> request value in `requested`
                     if (requested) {
-                        if(specs.type === 'number') {
-                            if(isNaN(requested)) return false
+                        if (specs.type === 'number') {
+                            if (isNaN(requested)) return false
                             else requested = parseFloat(requested)
                         }
                         params.push(requested)
@@ -114,43 +143,61 @@ class Request {
                     }
                 }
 
-                console.log(params)
+                return params
             }
         }
 
         // No endpoint matched
-        return true
+        return false
     }
 
 
     /**
-     * Controls Request processing
+     * Refresh endpoint config every 30 minutes
      */
-    getResponse(req) {
-
-        // Assign values to request
-        var request = {
-            user: req.user,
-            verb: req.method,
-            resource: req.body.resource,
-            method: req.body.method,
-            params: req.body.params,
-        }
-
-        // Verify request matches schema
-        if (this.isValid(request)) {
-
-            // socketAdapter.req(this.request) //
-            return ({
-                statusCode: 200,
-                body: 'Data will be here soon ' + Math.random() * 100 // Differentiate output for mutiple hundreds of requests
+    compareSchema() {
+        let now = new Date()
+        if (now - this.schema.uat > 1800000) {
+            this.db.config.findOne({
+                type: "endpoints"
+            }, (err, config) => {
+                this.convertSchema(config.schema)
+                this.schema.endpoints = config.schema
+                this.schema.uat = now
             })
         }
+    }
 
-        return ({
-            statusCode: 405,
-            body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
-        })
+
+    /**
+     * Converts Schema to local standards & converts string functions to real functions
+     */
+    convertSchema(endpoints) {
+        for (var endpoint in endpoints) {
+
+            // Param modifications
+            if (Object.keys(endpoints[endpoint].params).length > 0) {
+                endpoints[endpoint].params.forEach((specs, i) => {
+
+                    // If string -> check if function (workaround for json.stringify on socket.emit)
+                    if (typeof specs.default === 'string' && (specs.default.includes("() => {") || specs.default.includes("function ("))) {
+
+                        // Function from String (remove everything before first { and last }), override default
+                        let fn = new Function(specs.default.substring(specs.default.indexOf("{") + 1).slice(0, -1))
+                        endpoints[endpoint].params[i].default = fn
+                    }
+                })
+            }
+
+            // Minimum scope to full array
+            if (typeof endpoints[endpoint].scope === 'string') {
+                let scope = require('../config/scopes.js')
+                for (var i = 0; i < scope.length; i++) {
+                    if (scope[i] === endpoints[endpoint].scope) scope = scope.slice(i, scope.length)
+                }
+                endpoints[endpoint].scope = scope
+            }
+        }
     }
 }
 

@@ -111,6 +111,32 @@ class api {
 
         // Socket.io
         require('./config/events.js')(this.sockets)
+
+        // Listen to endpoint config from core nodes
+        this.sockets.root.on('connection', (socket) => {
+
+            // Listen to endpoint config event
+            socket.on('config', (schema) => {
+                cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' CONFIG ' + schema, 'in')
+
+                // Sockets
+                this.sockets.request.saveEndpoints(schema)
+
+                // HTTP
+                this.http.request.saveEndpoints(schema)
+                this.applyEndpoints(schema)
+            })
+        })
+    }
+
+
+    /**
+     * Apply Routes from given core node endpoints
+     */
+    applyEndpoints(schema) {
+        schema.forEach((endpoint) => {
+            this.http.app.all(endpoint.route, (req, res) => this.http.prepass(req, res))
+        })
     }
 
 
