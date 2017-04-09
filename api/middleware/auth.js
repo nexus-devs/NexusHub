@@ -104,7 +104,7 @@ class Authentication {
             // Set req.user from token
             try {
                 req.user = jwt.verify(token, process.env.cert)
-                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + req.user.uid + ' verified', 'in')
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('REST', cli.service_max) + req.user.uid + ' authenticated', 'in')
                 return next()
             }
 
@@ -138,7 +138,7 @@ class Authentication {
             // Set req.user from token
             try {
                 socket.user = jwt.verify(token, process.env.cert)
-                cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' verified', 'in')
+                cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authenticated', 'in')
                 return next()
             }
 
@@ -170,16 +170,16 @@ class Authentication {
 
 
     /**
-     * Authorizes sockets attempting connections to higher namespace
+     * Authorizes sockets attempting connections to higher namespaces
      */
     authorize(socket, next) {
         if (socket.nsp.name === '/root' && socket.user.scp.includes('root')) {
-            cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authorized', 'in')
+            cli.log(process.env.api_id, 'ok', cli.getPrefix('Sockets', cli.service_max) + socket.user.uid + ' authorized at /root', 'in')
             next()
         }
 
         // No criteria matched
-        next(new Error("Rejected connection to " + socket.nsp.name))
+        return next(new Error("Rejected connection to " + socket.nsp.name))
     }
 
 
@@ -199,14 +199,16 @@ class Authentication {
         }
 
         // Token provided & privileged user -> No minDifference, 5req/s
-        else if (req.user.scp.includes("privileged")) {
+        else if (req.user.scp.includes("elevated")) {
             low_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft))
         }
 
         // Token provided & default user -> Enhanced limits, 2req/s
-        else if (req.user.scp.includes("default")) {
+        else if (req.user.scp.includes("basic")) {
             mid_limit(req.user.uid, (err, timeLeft) => this.limit(err, req, res, next, timeLeft))
         }
+
+        else return next("Invalid Authorization Scope. Please contact a developer on our discord server.")
     }
 
 

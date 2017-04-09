@@ -13,7 +13,7 @@ const Nexus = require('../../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            use_socket: true,
+            use_socket: false,
             user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
             user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
         })
@@ -58,7 +58,7 @@ class Client {
             this.client.getItem('Nikana Prime', {
                 component: "Blade",
                 //timestart: 3824983243892,
-                timeend: '389498test2348932'
+                timeend: '3894982348932'
             }).then(item => {
                 //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
             })

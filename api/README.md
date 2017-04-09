@@ -5,9 +5,9 @@ Node.js server for validating, authorizing and distributing incoming requests.
 
 ### Connection Types
 By default, the server accepts both normal HTTP and Socket.io connections. HTTP requests are in standard CRUD format, Socket requests should be called like this: <br>
-```
-socket.emit("GET", "api.nexus-stats.com/game/version/query", res => {
-    // Do something with res
+```javascript
+socket.emit("GET", "api.nexus-stats.com/game/version/query", data => {
+    // Do something with data
 })
 ```
 **Note the callback function as third parameter.** Due to race-conditions on non-rate-limited connections, the standard approach of listening to a response event is unfeasible.
@@ -19,7 +19,7 @@ socket.emit("GET", "api.nexus-stats.com/game/version/query", res => {
 The server also provides a simple express-like middleware stack to be executed before each request gets passed to another node, but **after** native express/socket middleware.<br>
 
 #### Example
-```
+```javascript
 let api = require('path/to/api-node.js')
 
 api.use((req, res, next) => {
@@ -34,7 +34,7 @@ Note that socket requests get modified to behave just like an express request, t
 
 #### Native Middleware
 If necessary, you can still target native connection middleware which runs before the one explained above.
-```
+```javascript
 let api = require('path/to/api-node.js')
 
 api.http.app.use((req, res, next) => {}) // Native Express Middleware

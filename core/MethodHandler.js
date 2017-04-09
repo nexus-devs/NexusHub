@@ -29,8 +29,11 @@ class MethodHandler {
         config.push(util.inspect(this.getMethodTree('./core/methods/', config), false, null))
         config = _.flattenDeep(config)
 
-        // Cleanup (last 2 el always garbage (first due to empty initial folder, second makes no sense))
-        config.splice(config.length - 2, 2)
+        // Cleanup
+        for(var i = 0; i < config.length; i++) {
+            if (Object.keys(config[i]).length <= 0)config.splice(i, 1)
+        }
+        config.splice(config.length - 2, 2) // empty {} string
 
         // Return config to send to api node
         return config
@@ -57,12 +60,13 @@ class MethodHandler {
             // Basic File information
             method.file = filename.replace("//", "/").replace("./core/", "./")
             method.method = path.basename(filename).replace(".js", "")
-            method.route = filename.replace("./core/methods/", "").replace(".js", "")
 
             // Custom schema values
             let schema = new(require(method.file))(mongodb).schema
 
             // Routes
+            method.route = filename.replace("./core/methods/", "").replace(".js", "")
+
             if (schema.resources !== false) {
                 let url = method.route.split('/')
 

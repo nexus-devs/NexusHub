@@ -27,16 +27,4 @@ module.exports = (sockets) => {
         // Private Endpoints, requires authorization
         socket.on('UPDATE', (data, ack) => sockets.update(data, ack))
     })
-
-
-    /**
-     * Root namespace
-     */
-    sockets.root.on('connection', (socket) => {
-
-        // Listen to endpoint config event
-        socket.on('config', (schema) => {
-            sockets.request.saveEndpoints(schema)
-        })
-    })
 }
