@@ -29,7 +29,7 @@ class core {
      */
     constructor() {
 
-        this.client = new Nexus({
+        this.api = new Nexus({
             game: 'warframe',
             use_socket: true,
             namespace: '/root',
@@ -38,13 +38,18 @@ class core {
             user_secret: process.env.src_secret
         })
 
-        this.client.on('ready', () => {
+        this.api.on('ready', () => {
 
             // Finish time measurement
             cli.timeEnd(process.env.src_id, cli.chalk.green('[connected]'))
 
+            // Listen to requests
+            this.api.client.on('req', options => {
+                this.api.client.emit(options.callback, 'ayy lmao')
+            })
+
             // Send Endpoint Config
-            this.client.connection.request('config', MethodHandler.generateEndpointSchema())
+            this.api.connection.request('config', MethodHandler.generateEndpointSchema())
         })
     }
 }
