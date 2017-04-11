@@ -50,23 +50,6 @@ class Request {
 
 
     /**
-     * Saves endpoints from core node to db
-     */
-    saveEndpoints(endpoints) {
-        let config = {
-            type: 'endpoints',
-            data: endpoints,
-        }
-        this.db.config.save(config)
-
-        // Save in memory store
-        this.convertSchema(config.data)
-        this.schema.endpoints = config.data
-        this.schema.uat = new Date()
-    }
-
-
-    /**
      * Controls Request processing
      */
     getResponse(req) {
@@ -170,7 +153,9 @@ class Request {
                 else if (scmroute[i] !== reqroute[i]) {
                     matching = false
                     break
-                } else matching = true
+                }
+
+                else matching = true
             }
 
             // Route matches
@@ -217,6 +202,26 @@ class Request {
         return false
     }
 
+    /**
+     * Saves endpoints from core node to db
+     */
+    saveEndpoints(endpoints) {
+        let config = {
+            type: 'endpoints',
+            data: endpoints,
+        }
+        this.db.config.updateOne(
+            {type: 'endpoints'},
+            {$set: config},
+            {upsert: true}
+        )
+
+        // Save in memory store
+        this.convertSchema(config.data)
+        this.schema.endpoints = config.data
+        this.schema.uat = new Date()
+    }
+
 
     /**
      * Refresh endpoint config every 30 minutes
@@ -227,8 +232,8 @@ class Request {
             this.db.config.findOne({
                 type: "endpoints"
             }, (err, config) => {
-                this.convertSchema(config.schema)
-                this.schema.endpoints = config.schema
+                this.convertSchema(config.data)
+                this.schema.endpoints = config.data
                 this.schema.uat = now
             })
         }

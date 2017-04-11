@@ -45,7 +45,9 @@ class core {
 
             // Listen to requests
             this.api.client.on('req', options => {
-                this.api.client.emit(options.callback, 'ayy lmao')
+                MethodHandler.callMethod(options).then((data) => {
+                    this.api.client.emit(options.callback, data)
+                })
             })
 
             // Send Endpoint Config
