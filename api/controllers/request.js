@@ -72,26 +72,43 @@ class Request {
     getResponse(req) {
 
         // Assign values to request
+        let route = req.url.split('/')
+        route.pop()
+        route = route.join('/') + '/' + req.body.method
+
         let request = {
             user: req.user,
             verb: req.method,
-            resource: req.body.resource,
+            route: route,
             method: req.body.method,
             params: req.body.params,
         }
 
+        console.log('route: ' + request.route)
+
         // Verify & Parse request
         let params = this.parse(request)
 
-        // Response Handling
-        if (params) {
+        // Unauthorized
+        if (params === "unauthorized") {
+            return ({
+                statusCode: 401,
+                body: "Unauthorized"
+            })
+        }
+
+        // Params returned
+        else if (params) {
 
             // socketAdapter.req(this.request) //
             return ({
                 statusCode: 200,
                 body: 'Data will be here soon ' + Math.random() * 100 // Differentiate output for mutiple hundreds of requests
             })
-        } else return ({
+        }
+
+        // No params returned
+        else return ({
             statusCode: 405,
             body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
         })
@@ -109,13 +126,17 @@ class Request {
         // Check if method in schema
         for (var sub in this.schema.endpoints) {
             let endpoint = this.schema.endpoints[sub]
+            console.log(req.route)
+            console.log(endpoint.route)
 
             if (endpoint.method === req.method) {
-                if (!endpoint.scope.includes(req.user.scp)) return false
+                if (!endpoint.scope.includes(req.user.scp)) return "unauthorized"
                 if (req.verb !== endpoint.verb) return false
 
                 // Initialize param array
                 let params = []
+
+                // Compare resource params
 
                 // Compare param types
                 for (var i = 0; i < endpoint.params.length; i++) {

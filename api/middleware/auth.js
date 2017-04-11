@@ -93,7 +93,8 @@ class Authentication {
      */
     verifyExpress(req, res, next) {
         req.user = {
-            uid: req.ip
+            uid: req.ip,
+            scp: 'basic-read'
         }
 
         // Token present?
@@ -128,7 +129,8 @@ class Authentication {
     verifySocket(socket, next) {
 
         socket.user = {
-            uid: socket.request.connection.remoteAddress
+            uid: socket.request.connection.remoteAddress,
+            scp: 'basic-read'
         }
 
         // Token sent at all?
