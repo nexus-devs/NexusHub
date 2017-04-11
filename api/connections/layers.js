@@ -62,7 +62,7 @@ class Layer {
      */
     runStack(req, res, stack) {
         return new Promise((resolve, reject) => {
-            
+
             // Pass  request & function stack to middleware
             this.new(req, res, stack)
 
@@ -95,8 +95,18 @@ class Layer {
      * Convert Socket.io request into req-like object
      */
     convertReq(request, socket, verb) {
+        let url = request.split('/')
+        for(var i = 0; i < url.length; i++) {
+            if(url[i].includes('localhost') || url[i].includes('nexus-stats.com')){
+                url.splice(0, i + 1)
+            }
+        }
+        url = url.join('/')
+        
+
         let req = {}
         req.body = request
+        req.url = url
         req.user = socket.user
         req.method = verb
         req.channel = "Sockets"

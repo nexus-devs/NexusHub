@@ -13,7 +13,7 @@ const Nexus = require('../../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            use_socket: false,
+            use_socket: true,
             user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
             user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
         })
