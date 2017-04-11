@@ -69,14 +69,8 @@ class cli {
         let service = this.getPrefix(channel, this.service_max)
         log(" ")
 
-        // User authenticated? -> Highlight in green
-        if (request.user.scp) {
-            this.log(caller, 'ok', service + chalk.green(request.user.uid) + ' ' + request.method + ' ' + request.body.original, 'in', true)
-            this.time(caller, '> ')
-        } else {
-            this.log(caller, 'neutral', service + request.user.uid + ' ' + request.method + ' ' + request.body.original, 'in', true)
-            this.time(caller, '> ')
-        }
+        this.log(caller, 'ok', service + chalk.green(request.user.uid) + ' ' + request.method + ' ' + request.body.original, 'in', true)
+        this.time(caller, '> ')
     }
 
     logRequestEnd(caller, channel, response) {

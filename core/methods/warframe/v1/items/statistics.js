@@ -33,7 +33,16 @@ class Foo extends Method {
         ]
     }
 
-    run() {}
+    main(item, component, timestart, timeend) {
+        return new Promise((resolve, reject) => {
+            console.log("\n::DATA ARRIVED AT CORE METHOD")
+            console.log("item: " + item)
+            console.log("compoennt: " + component)
+            console.log("timestart: " + timestart)
+            console.log("timeend: " + timeend + '\n')
+            resolve("statistics")
+        })
+    }
 }
 
 module.exports = Foo

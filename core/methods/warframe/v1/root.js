@@ -13,7 +13,7 @@ const Method = require('../../../Method.js')
      }
 
     main(){
-         return("auhtorized")
+         return new Promise((resolve, reject) => resolve("authorized"))
      }
  }
 

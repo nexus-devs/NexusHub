@@ -12,7 +12,7 @@ const Method = require('../../../Method.js')
      }
 
     main(){
-         return("bar")
+         return new Promise((resolve, reject) => resolve("bar"))
      }
  }
 

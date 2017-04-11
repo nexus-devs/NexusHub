@@ -20,6 +20,17 @@ mongodb.connect('mongodb://localhost/nexus-stats')
 class MethodHandler {
 
     /**
+     * Calls method with given param Array
+     */
+     callMethod(options) {
+         return new Promise((resolve, reject) => {
+             let method = new(require(options.file))
+             method.main.apply(null, options.params).then(data => resolve(data))
+         })
+     }
+
+
+    /**
      * Generates flat endpoint schema from method tree
      */
     generateEndpointSchema() {
