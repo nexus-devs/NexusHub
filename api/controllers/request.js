@@ -52,16 +52,18 @@ class Request {
     /**
      * Saves endpoints from core node to db
      */
-    saveEndpoints(endpoints) {
+    saveEndpoints(schema) {
         let config = {
             type: 'endpoints',
-            schema: endpoints
+            data: schema.endpoints,
+            sid: schema.sid
         }
         this.db.config.save(config)
 
         // Save in memory store
-        this.convertSchema(config.schema)
-        this.schema.endpoints = config.schema
+        this.convertSchema(config.data)
+        this.schema.endpoints = config.data
+        this.schema.sid = config.sid
         this.schema.uat = new Date()
     }
 
@@ -74,7 +76,7 @@ class Request {
         // Assign values to request
         let route = req.url.split('/')
         route.pop()
-        route = route.join('/') + '/' + req.body.method
+        route = (route.join('/') + '/' + req.body.method).replace("%20", " ")
 
         let request = {
             user: req.user,
@@ -83,8 +85,6 @@ class Request {
             method: req.body.method,
             params: req.body.params,
         }
-
-        console.log('route: ' + request.route)
 
         // Verify & Parse request
         let params = this.parse(request)
@@ -126,17 +126,32 @@ class Request {
         // Check if method in schema
         for (var sub in this.schema.endpoints) {
             let endpoint = this.schema.endpoints[sub]
-            console.log(req.route)
-            console.log(endpoint.route)
+            let reqroute = req.route.split('/')
+            let scmroute = endpoint.route.split('/')
+            let matching = false
+            let params = []
 
-            if (endpoint.method === req.method) {
+            // Match route with endpoint
+            for(var i = 0; i < scmroute.length; i++) {
+
+                // Get route resource params
+                if (scmroute[i][0] === ':') {
+                    matching = true
+                    params.push(reqroute[i])
+                }
+
+                // Mismatch
+                else if (scmroute[i] !== reqroute[i]) {
+                    matching = false
+                    break
+                }
+                else matching = true
+            }
+
+            // Route matches
+            if (matching) {
                 if (!endpoint.scope.includes(req.user.scp)) return "unauthorized"
                 if (req.verb !== endpoint.verb) return false
-
-                // Initialize param array
-                let params = []
-
-                // Compare resource params
 
                 // Compare param types
                 for (var i = 0; i < endpoint.params.length; i++) {
@@ -163,7 +178,7 @@ class Request {
                         else params.push(specs.default)
                     }
                 }
-
+                console.log(params)
                 return params
             }
         }

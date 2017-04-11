@@ -101,8 +101,8 @@ class Layer {
                 url.splice(0, i + 1)
             }
         }
-        url = url.join('/')
-        
+        url = '/' + url.join('/')
+
 
         let req = {}
         req.body = request

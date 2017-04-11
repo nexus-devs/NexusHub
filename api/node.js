@@ -116,15 +116,21 @@ class api {
         this.sockets.root.on('connection', (socket) => {
 
             // Listen to endpoint config event
-            socket.on('config', (schema) => {
-                cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' CONFIG ' + schema, 'in')
+            socket.on('config', (endpoints) => {
+                cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' CONFIG ' + endpoints, 'in')
+
+                // Add recipient to schema
+                let schema = {
+                    endpoints: endpoints,
+                    sid: socket.id
+                }
 
                 // Sockets
                 this.sockets.request.saveEndpoints(schema)
 
                 // HTTP
                 this.http.request.saveEndpoints(schema)
-                this.applyEndpoints(schema)
+                this.applyEndpoints(schema.endpoints)
             })
         })
     }
@@ -133,8 +139,8 @@ class api {
     /**
      * Apply Routes from given core node endpoints
      */
-    applyEndpoints(schema) {
-        schema.forEach((endpoint) => {
+    applyEndpoints(endpoints) {
+        endpoints.forEach((endpoint) => {
             this.http.app.all(endpoint.route, (req, res) => this.http.prepass(req, res))
         })
     }
