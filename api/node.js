@@ -119,18 +119,15 @@ class api {
             socket.on('config', (endpoints) => {
                 cli.log(process.env.api_id, 'neutral', 'Sockets  | ' + socket.user.uid + ' CONFIG ' + endpoints, 'in')
 
-                // Add recipient to schema
-                let schema = {
-                    endpoints: endpoints,
-                    sid: socket.id
-                }
+                // Add recipient to each endpoint
+                endpoints.forEach((endpoint, i) => endpoints[i].sid = socket.id)
 
                 // Sockets
-                this.sockets.request.saveEndpoints(schema)
+                this.sockets.request.saveEndpoints(endpoints)
 
                 // HTTP
-                this.http.request.saveEndpoints(schema)
-                this.applyEndpoints(schema.endpoints)
+                this.http.request.saveEndpoints(endpoints)
+                this.applyEndpoints(endpoints)
             })
         })
     }

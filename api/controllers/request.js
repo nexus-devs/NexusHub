@@ -52,18 +52,16 @@ class Request {
     /**
      * Saves endpoints from core node to db
      */
-    saveEndpoints(schema) {
+    saveEndpoints(endpoints) {
         let config = {
             type: 'endpoints',
-            data: schema.endpoints,
-            sid: schema.sid
+            data: endpoints,
         }
         this.db.config.save(config)
 
         // Save in memory store
         this.convertSchema(config.data)
         this.schema.endpoints = config.data
-        this.schema.sid = config.sid
         this.schema.uat = new Date()
     }
 
@@ -72,45 +70,73 @@ class Request {
      * Controls Request processing
      */
     getResponse(req) {
+        return new Promise((resolve, reject) => {
 
-        // Assign values to request
-        let route = req.url.split('/')
-        route.pop()
-        route = (route.join('/') + '/' + req.body.method).replace("%20", " ")
+            // Assign values to request
+            let route = req.url.split('/')
+            route.pop()
+            route = (route.join('/') + '/' + req.body.method).replace("%20", " ")
 
-        let request = {
-            user: req.user,
-            verb: req.method,
-            route: route,
-            method: req.body.method,
-            params: req.body.params,
-        }
+            let request = {
+                user: req.user,
+                verb: req.method,
+                route: route,
+                method: req.body.method,
+                params: req.body.params,
+            }
 
-        // Verify & Parse request
-        let params = this.parse(request)
+            // Verify & Parse request
+            let options = this.parse(request)
 
-        // Unauthorized
-        if (params === "unauthorized") {
-            return ({
-                statusCode: 401,
-                body: "Unauthorized"
+            // Unauthorized
+            if (options === "unauthorized") {
+                resolve({
+                    statusCode: 401,
+                    body: "Unauthorized"
+                })
+            }
+
+            // Params returned
+            else if (options) {
+                this.send(options).then(data => {
+                    resolve({ statusCode: 200, body: data})
+                })
+            }
+
+            // No params returned
+            else {
+                resolve({
+                    statusCode: 405,
+                    body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
+                })
+            }
+        })
+    }
+
+
+    /**
+     * Sends request to connected sockets. First response is accepted
+     * Note: figure out way to cancel operations after one node already finished
+     * E.g.: Listen to options.callback with data 'cancel' -> stop current progress
+     */
+    send(options) {
+        return new Promise((resolve, reject) => {
+
+            // Generate unique callback for emit & pass to responding node
+            options.callback = process.hrtime().join('').toString()
+
+            // Send Request to all Core Nodes
+            this.client.root.emit('req', options)
+
+            // Listen to all sockets for response
+            Object.keys(this.client.root.sockets).forEach(id => {
+                let socket = this.client.root.sockets[id]
+
+                socket.on(options.callback, data => {
+                    socket.removeAllListeners(options.callback)
+                    resolve(data)
+                })
             })
-        }
-
-        // Params returned
-        else if (params) {
-
-            // socketAdapter.req(this.request) //
-            return ({
-                statusCode: 200,
-                body: 'Data will be here soon ' + Math.random() * 100 // Differentiate output for mutiple hundreds of requests
-            })
-        }
-
-        // No params returned
-        else return ({
-            statusCode: 405,
-            body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
         })
     }
 
@@ -132,7 +158,7 @@ class Request {
             let params = []
 
             // Match route with endpoint
-            for(var i = 0; i < scmroute.length; i++) {
+            for (var i = 0; i < scmroute.length; i++) {
 
                 // Get route resource params
                 if (scmroute[i][0] === ':') {
@@ -144,8 +170,7 @@ class Request {
                 else if (scmroute[i] !== reqroute[i]) {
                     matching = false
                     break
-                }
-                else matching = true
+                } else matching = true
             }
 
             // Route matches
@@ -178,8 +203,13 @@ class Request {
                         else params.push(specs.default)
                     }
                 }
-                console.log(params)
-                return params
+
+                let options = {
+                    file: endpoint.file,
+                    params: params
+                }
+
+                return options
             }
         }
 

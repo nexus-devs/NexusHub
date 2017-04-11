@@ -73,11 +73,11 @@ class HttpAdapter {
         cli.logRequest(process.env.api_id, 'REST', req)
 
         // Send Request to Controller
-        let response = this.request.getResponse(req)
-        cli.logRequestEnd(process.env.api_id, 'REST', response)
-
-        // Return data from RequestController
-        res.status(response.statusCode).send(response.body)
+        this.request.getResponse(req)
+        .then(response => {
+            cli.logRequestEnd(process.env.api_id, 'REST', response)
+            res.status(response.statusCode).send(response.body)
+        })
     }
 
 

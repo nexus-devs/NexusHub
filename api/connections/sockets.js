@@ -72,11 +72,14 @@ class SocketAdapter {
         cli.logRequest(process.env.api_id, 'Sockets', req)
 
         // Send Request to Controller
-        var response = this.request.getResponse(req)
-        cli.logRequestEnd(process.env.api_id, 'Sockets', response)
+        this.request.getResponse(req)
+        .then(response => {
+            cli.logRequestEnd(process.env.api_id, 'Sockets', response)
+            res.status(response.statusCode).send(response.body)
+        })
 
         // Send Response back to requesting Socket
-        res.status(response.statusCode).send(response.body)
+
     }
 
 
