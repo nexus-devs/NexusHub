@@ -36,10 +36,10 @@ class Foo extends Method {
     main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
             console.log("\n::DATA ARRIVED AT CORE METHOD")
-            console.log("item: " + item)
-            console.log("compoennt: " + component)
-            console.log("timestart: " + timestart)
-            console.log("timeend: " + timeend + '\n')
+            console.log("Item: " + item)
+            console.log("Component: " + component)
+            console.log("Timestart: " + timestart)
+            console.log("Timeend: " + timeend + '\n')
             resolve("statistics")
         })
     }
