@@ -61,6 +61,8 @@ class Client {
                 timeend: '3894982348932'
             }).then(item => {
                 //cli.log(process.env.src_id, 'neutral', 'API      | ' + item, 'in')
+            }).catch(err => {
+                console.log('Error: ' + err.body)
             })
         }
     }
