@@ -56,7 +56,7 @@ class SocketAdapter {
 
         // Modify req/res object to allow same middleware approach as in express
         let req = layer.convertReq(request, socket, verb)
-        let res = layer.convertRes(ack)
+        let res = layer.convertRes(socket, ack)
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)
@@ -84,7 +84,7 @@ class SocketAdapter {
 
 
     /**
-     * Adds functions to queue that is processed before this.pass() gets called
+     * Adds functions to queue that are processed before this.pass() gets called
      */
     use(fn) {
         this.stack.unshift(fn)

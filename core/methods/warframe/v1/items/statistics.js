@@ -14,33 +14,34 @@ class Foo extends Method {
         this.schema.params = [{
                 name: "component",
                 type: "string",
-                default: ""
+                default: "",
+                description: "Specifies item component to look up. No component returns full set data."
             },
             {
                 name: "timestart",
                 type: "number",
                 default: () => {
                     return new Date().getTime() / 1 // current time
-                }
+                },
+                description: "Returns data recorded between timestart and timeend"
             },
             {
                 name: "timeend",
                 type: "number",
                 default: () => {
                     return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
-                }
+                },
+                description: "Returns data recorded between timestart and timeend"
             }
         ]
     }
 
+    /**
+     * Main method which is called by MethoHandler on request
+     */
     main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
-            console.log("\n::DATA ARRIVED AT CORE METHOD")
-            console.log("Item: " + item)
-            console.log("Component: " + component)
-            console.log("Timestart: " + timestart)
-            console.log("Timeend: " + timeend + '\n')
-            resolve("statistics")
+            resolve("statistics will be here")
         })
     }
 }

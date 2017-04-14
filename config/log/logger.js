@@ -69,7 +69,7 @@ class cli {
         let service = this.getPrefix(channel, this.service_max)
         log(" ")
 
-        this.log(caller, 'ok', service + chalk.green(request.user.uid) + ' ' + request.method + ' ' + request.body.original, 'in', true)
+        this.log(caller, 'ok', service + chalk.green(request.user.uid) + ' ' + request.method + ' ' + request.parsed.original, 'in', true)
         this.time(caller, '> ')
     }
 

@@ -1,4 +1,4 @@
-'use strict'
+"use strict"
 
 /**
  * Lodash for array deep clone
@@ -95,17 +95,30 @@ class Layer {
      * Convert Socket.io request into req-like object
      */
     convertReq(request, socket, verb) {
-        let url = request.split('/')
+        let req = {}
+        let url = null
+
+        if(verb === "GET" && typeof request === "string" && request.includes("/")) {
+             url = request.split("/")
+        }
+
+        else if (verb === "POST" && request !== null && typeof request === "object" && typeof request.url === 'string' && request.url.includes("/")) {
+            url = request.url.split("/")
+        }
+
+        else {
+            url = []
+        }
+
+        // Remove domain from url
         for(var i = 0; i < url.length; i++) {
-            if(url[i].includes('localhost') || url[i].includes('nexus-stats.com')){
+            if(url[i].includes("localhost") || url[i].includes("nexus-stats.com")){
                 url.splice(0, i + 1)
             }
         }
-        url = '/' + url.join('/')
 
-
-        let req = {}
-        req.body = request
+        url = "/" + url.join("/")
+        req.body = request.body
         req.url = url
         req.user = socket.user
         req.method = verb
@@ -116,7 +129,7 @@ class Layer {
     /**
      * Convert Socket.io ack callback into res-like object
      */
-    convertRes(ack) {
+    convertRes(socket, ack) {
 
         // Default response value
         let res = {
@@ -126,26 +139,47 @@ class Layer {
             }
         }
 
-        // Send method, invoking client callback with previously customized data
-        res.send = (data) => {
-            if (!res.sent) {
-                res.sent = true
-                res.msg.body = data
-                ack(res.msg)
-            } else {
-                console.error(" ")
-                console.error("Can't respond to same request multiple times.")
-                console.error(" ")
-                throw(new Error("Can't respond to same request multiple times."))
+        // Socket.io ack passed?
+        if (ack) {
+
+            // Send method, invoking client callback with previously customized data
+            res.send = (data) => {
+                if (!res.sent) {
+                    res.sent = true
+                    res.msg.body = data
+                    ack(res.msg)
+                } else {
+                    console.error(" ")
+                    console.error("Can't respond to same request multiple times.")
+                    console.error(" ")
+                    throw(new Error("Can't respond to same request multiple times."))
+                }
+            }
+
+            // Apply Status before res.send
+            res.status = (code) => {
+                res.msg.statusCode = code
+                return res
             }
         }
 
-        // Apply Status before res.send
-        res.status = (code) => {
-            res.msg.statusCode = code
-            return res
+        // Non-ack request
+        else {
+
+            // Simple socket emit
+            res.send = (data) => {
+                res.msg.body = data
+                socket.emit("res", res.msg)
+            }
+
+            // Apply Status before res.send
+            res.status = (code) => {
+                res.msg.statusCode = code
+                return res
+            }
         }
 
+        // Modified res object
         return res
     }
 }
