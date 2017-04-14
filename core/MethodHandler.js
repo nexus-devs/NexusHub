@@ -24,8 +24,12 @@ class MethodHandler {
      */
      callMethod(options) {
          return new Promise((resolve, reject) => {
-             let method = new(require(options.file))
-             method.main.apply(null, options.params).then(data => resolve(data))
+             try{
+                 let method = new(require(options.file))
+                 method.main.apply(null, options.params).then(data => resolve(data))
+             } catch(err) {
+                 reject()
+             }
          })
      }
 
@@ -42,7 +46,7 @@ class MethodHandler {
 
         // Cleanup
         for(var i = 0; i < config.length; i++) {
-            if (Object.keys(config[i]).length <= 0)config.splice(i, 1)
+            if (Object.keys(config[i]).length <= 0) config.splice(i, 1)
         }
         config.splice(config.length - 2, 2) // empty {} string
 
@@ -88,7 +92,7 @@ class MethodHandler {
                 method.route = url.join('/')
             }
 
-            // Stringify functions to be preserved on socket's emit
+            // Stringify functions to be preserved on socket.io's emit
             Object.keys(schema.params).map((i) => {
                 let param = schema.params[i]
                 if (typeof param.default === 'function') {

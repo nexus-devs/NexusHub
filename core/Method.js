@@ -10,7 +10,7 @@ class Method{
         // Default Config for API node
         this.schema = {
             resources: [],
-            params: {},
+            params: [],
             scope: 'basic-read',
             verb: 'GET',
             description: "There is no description for this endpoint yet."

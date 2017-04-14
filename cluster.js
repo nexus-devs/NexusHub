@@ -8,7 +8,7 @@ global.cli = require('./config/log/logger.js')
 /**
  * Dependencies
  */
-const cluster = require('multi-cluster')
+const Cluster = require('multi-Cluster')
 
 
 /**
@@ -23,14 +23,14 @@ cli.intro()
  * Single process & watch for development.
  */
 if (process.env.environment === 'development') {
-    let api = new cluster('./api/node.js', 1)
+    let api = new Cluster('./api/node.js', 1)
     api.watch('./api')
 
-    let src = new cluster('./core/node.js', 1)
+    let src = new Cluster('./core/node.js', 1)
     src.watch('./core')
 
-    let tst = new cluster('./client/node.js', 1)
-    tst.watch('./client')
+    let tst = new Cluster('./test/node.js', 1)
+    tst.watch('./test')
 }
 
 
@@ -38,5 +38,5 @@ if (process.env.environment === 'development') {
  * All cores w/o watch in production
  */
 if (process.env.environment === 'production') {
-    let api = new cluster('./api/app.js')
+    let api = new Cluster('./api/app.js')
 }

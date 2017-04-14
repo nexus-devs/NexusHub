@@ -58,14 +58,15 @@ class Request {
             // Assign values to request
             let route = req.url.split('/')
             route.pop()
-            route = (route.join('/') + '/' + req.body.method).replace("%20", " ")
+            route = (route.join('/') + '/' + req.parsed.method).replace("%20", " ")
 
             let request = {
                 user: req.user,
                 verb: req.method,
                 route: route,
-                method: req.body.method,
-                params: req.body.params,
+                method: req.parsed.method,
+                params: req.parsed.params,
+                body: req.body
             }
 
             // Verify & Parse request
@@ -187,6 +188,11 @@ class Request {
                         if (typeof specs.default === 'function') params.push(specs.default())
                         else params.push(specs.default)
                     }
+                }
+
+                // POST? -> Add posted body as last arg
+                if (req.verb === "POST" || req.verb === "PUT") {
+                    params.push(req.body)
                 }
 
                 let options = {

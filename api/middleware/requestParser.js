@@ -5,28 +5,28 @@
  */
 class RequestParser {
     parse(req, res, next) {
-        let body = req.url || req.body
+        let url = req.url
         let json = {}
 
         // Proper request format?
-        if (typeof body === 'string' || body instanceof String) {
-            json.original = body
+        if (typeof url === 'string' || url instanceof String) {
+            json.original = url
 
             // Clean up
-            body = body.replace("%20", " ")
-            body = body.replace("https://", "")
-            body = body.replace("http://", "")
+            url = url.replace("%20", " ")
+            url = url.replace("https://", "")
+            url = url.replace("http://", "")
 
             // Slice sub-categories
-            body = body.split("/")
+            url = url.split("/")
 
             // Base Information
-            json.host = body[0] // api.nexus-stats.com
-            json.game = body[1] // warframe
-            json.version = body [2] // v1/v2
+            json.host = url[0] // api.nexus-stats.com
+            json.game = url[1] // warframe, dota2, ...
+            json.version = url [2] // v1/v2...
 
             // Get Method
-            let params = body[body.length - 1].split("?")
+            let params = url[url.length - 1].split("?")
             json.method = params[0]
             json.params = {}
 
@@ -43,18 +43,18 @@ class RequestParser {
             }
 
             // Remove already-assigned data
-            body.pop()
-            body.splice(0, 3)
+            url.pop()
+            url.splice(0, 3)
 
             // Assign Resource Path
-            json.resource = body
-            req.body = json
+            json.resource = url
+            req.parsed = json
             next()
         }
 
         // Improper request format
         else {
-            cli.log(process.env.api_id, 'neutral', cli.getPrefix("Parser", cli.service_max) + req.user.uid + ' Invalid Request Format: ' + body, 'out')
+            cli.log(process.env.api_id, 'neutral', cli.getPrefix("Parser", cli.service_max) + req.user.uid + ' Invalid Request Format: ' + url, 'out')
             next("Invalid Request Format. Please provide a URL string")
         }
     }

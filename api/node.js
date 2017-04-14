@@ -33,8 +33,10 @@ class api {
         // Build up Server
         this.setupHttpServer()
 
-            // Core Sockets Logic
+            // Hook Sockets.io on Express server
             .then(() => this.setupSockets())
+
+            // Config Express & Sockets.io
             .then(() => this.applyMiddleware())
             .then(() => this.applyRoutes())
             .then(() => this.setRequestClient())
@@ -79,7 +81,7 @@ class api {
      */
     applyMiddleware() {
 
-        // Use BodyParser for express
+        // Use BodyParser for Express
         this.http.app.use(bodyParser.urlencoded({extended: false}))
             .use(bodyParser.json())
 

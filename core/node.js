@@ -33,7 +33,7 @@ class core {
             game: 'warframe',
             use_socket: true,
             namespace: '/root',
-            ignore_limiter: true, // Root-Access not getting limited anyway
+            ignore_limiter: true,
             user_key: process.env.src_user,
             user_secret: process.env.src_secret
         })
@@ -45,9 +45,9 @@ class core {
 
             // Listen to requests
             this.api.client.on('req', options => {
-                MethodHandler.callMethod(options).then((data) => {
-                    this.api.client.emit(options.callback, data)
-                })
+                MethodHandler.callMethod(options)
+                    .then(data => this.api.client.emit(options.callback, data))
+                    .catch(() => {}) // Just don't respond if file not locally available
             })
 
             // Send Endpoint Config
