@@ -5,20 +5,20 @@
 <br>
 
 ## Build Information
-**This build is part of the Nexus Rework and currently won't run much of what you'd expect.**
+**This build is part of the Nexus Rework and still misses fundamental features.**
 Old development builds can be found in the commit history starting at #271
 <br>
 <br>
 
 ### Quickstart
-Just run `npm start` in the root folder once requirements are met.
+`npm install && npm start`<br>
 <br>
 <br>
 
 ### Requirements
 - Redis
 - Mongodb
-- [Nexus-Auth](https://github.com/Kaptard/nexus-auth) instance
+- [nexus-auth](https://github.com/Kaptard/nexus-auth) instance
 <br>
 
 **Note:** Make sure to set your preferences in /config/env.config.js
