@@ -10,6 +10,7 @@ const io = require("Socket.io")
 /**
  * Middleware helpers
  */
+const converter = require("../../middleware/socketConverter.js")
 const reload = require("require-reload")(require) // layer needs to be hot-reloaded for out-of-class variables
 let Layer = reload("../layers.js")
 
@@ -54,8 +55,8 @@ class SocketAdapter {
         let layer = new Layer()
 
         // Modify req/res object to allow same middleware approach as in express
-        let req = layer.convertReq(request, socket, verb)
-        let res = layer.convertRes(socket, ack)
+        let req = converter.convertReq(request, socket, verb)
+        let res = converter.convertRes(socket, ack)
 
         // Iterate through middleware function stack
         layer.runStack(req, res, this.stack)

@@ -99,7 +99,7 @@ const high_limit = RateLimiter({
              else var prefix = "REST"
 
              // Respond with error
-             return next(err)
+             return res.status(429).send(err)
          }
 
          // Otherwise allow

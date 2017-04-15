@@ -35,7 +35,6 @@ class Server {
      * Loads up instance of the http class including an express http server
      */
     setupHttpServer() {
-        // Set up Express server
         this.http = new(require("./adapters/http.js"))(process.env.api_port)
     }
 
@@ -71,12 +70,6 @@ class Server {
 
         // Rate limiting middleware for express/sockets
         this.use((req, res, next) => limit.check(req, res, next))
-
-        // Check if RequestController is connected to db && bound to adapter
-        this.use((req, res, next) => {
-            if (!this.http.request.ready || !this.sockets.request.ready) next("API-Node rebooting. Try again in a few seconds")
-            else next()
-        })
     }
 
 

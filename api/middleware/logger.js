@@ -7,17 +7,17 @@ const chalk = require('chalk')
  */
 class Logger {
     log(req, res, next) {
-        this.req = req
-        this.res = res
 
         // Prepare output
         this.setPrefix(req)
+        this.setUser(req)
         this.logErr(next)
         this.logRes(res)
         this.addTimer(res)
 
         // Actual Console Output
-        console.log(this.prefix + "< " + req.user.uid + " " + req.method + " " + req.url)
+        console.log(this.prefix + chalk.grey(":: " + new Date()))
+        console.log(this.prefix + "< " + this.user.uid + ": " + req.method + " " + req.url)
         next()
     }
 
@@ -32,6 +32,20 @@ class Logger {
             this.prefix = chalk.grey("Express   | ")
         }
      }
+
+
+     /**
+      * Color-code user authentication
+      */
+    setUser(req) {
+        this.user = {}
+
+        if(req.user.scp.includes("basic")) {
+            this.user.uid = req.user.uid
+        } else {
+            this.user.uid = chalk.green(req.user.uid)
+        }
+    }
 
 
      /**
@@ -60,7 +74,7 @@ class Logger {
            _send.call(this, body)
 
            // Output is error?
-           if(res.statusCode.toString().includes('2') || res.statusCode.toString().includes('2')){
+           if(res.statusCode.toString()[0] < 4){
                io = chalk.green(io)
            } else {
                io = chalk.red(io)

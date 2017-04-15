@@ -11,11 +11,8 @@ module.exports = (sockets, http) => {
 
         // RESTful-like event types
         socket.on('GET', (req, res) => sockets.prepass(socket, 'GET', req, res))
-
         socket.on('POST', (req, res) => sockets.prepass(socket, 'POST', req, res))
-
         socket.on('PUT', (req, res) => sockets.prepass(socket, 'PUT', req, res))
-
         socket.on('DELETE', (req, res) => sockets.prepass(socket, 'DELETE', req, res))
 
         // Private Endpoints, requires authorization
@@ -33,11 +30,11 @@ module.exports = (sockets, http) => {
         // Listen to endpoint config event
         socket.on('config', (endpoints) => {
 
-            // Sockets
-            sockets.request.saveEndpoints(endpoints)
+            // Request Controllers
+            sockets.request.endpoints.saveEndpoints(endpoints)
+            http.request.endpoints.saveEndpoints(endpoints)
 
-            // HTTP
-            http.request.saveEndpoints(endpoints)
+            // Express Routes
             endpoints.forEach((endpoint) => {
                 http.app.all(endpoint.route, (req, res) => http.prepass(req, res))
             })

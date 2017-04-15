@@ -8,7 +8,7 @@ const Nexus = require('../../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            use_socket: false,
+            //use_socket: false,
             //ignore_limiter: true,
             user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
             user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
@@ -60,7 +60,7 @@ class Client {
 
 
         // Rate Limit Testing
-        for (var i = 0; i < 15000; i++) {
+        for (var i = 0; i < 5000; i++) {
             this.client.getItem('Nikana Prime', {
                 component: "Blade",
                 //timestart: 3824983243892,
