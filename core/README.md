@@ -10,12 +10,14 @@ Imagine having a script saved as `/methods/warframe/v1/items/statistics.js`. Onc
 <br>
 ### Endpoint Customization
 With the example above in mind, we can further control the endpoints through each classes' schema attribute: <br>
+<br>
 
 > **Schema:** 
 ```javascript
 resource: ["item", "component"]
 ```
 > **Express Route:** `/items/:item/:component/method` 
+<br>
 <br>
 
 > **Schema:** 
