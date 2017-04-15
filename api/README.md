@@ -4,7 +4,7 @@ Node.js server for validating, authorizing and distributing incoming requests.
 <br>
 
 ### Connection Types
-By default, the server accepts both normal HTTP and Socket.io connections. HTTP requests are in standard CRUD format, Socket requests should be called like this: <br>
+By default, the server accepts both normal HTTP and Socket.io connections. HTTP requests are in standard CRUD format, **Socket requests should be called like this:** <br>
 
 #### GET
 ```javascript
@@ -15,7 +15,7 @@ socket.emit("GET", "api.nexus-stats.com/foo", data => {
 
 #### POST
 ```javascript
-socket.emit("GET", {
+socket.emit("POST", {
         url: "api.nexus-stats.com/resource/method",
         body: "Your POST data"
 }, data => {
