@@ -12,7 +12,6 @@ socket.emit("GET", "api.nexus-stats.com/foo", data => {
     console.log(data) // bar
 })
 ```
-<br>
 
 #### POST
 ```javascript
