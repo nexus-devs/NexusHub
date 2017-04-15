@@ -13,6 +13,7 @@ socket.emit("GET", "api.nexus-stats.com/foo", data => {
 })
 ```
 <br>
+
 #### POST
 ```javascript
 socket.emit("GET", {
