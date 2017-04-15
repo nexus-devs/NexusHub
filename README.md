@@ -1,6 +1,6 @@
-**Development builds can be found here.**
 
-[![Supported by Warframe Community Developers](https://github.com/Warframe-Community-Developers/banner/blob/master/banner.png)](https://github.com/Warframe-Community-Developers)
+![Nexus-Stats Dev Version v0.1.1](/banner.png)
+
 - - - -
 <br>
 
