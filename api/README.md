@@ -5,12 +5,26 @@ Node.js server for validating, authorizing and distributing incoming requests.
 
 ### Connection Types
 By default, the server accepts both normal HTTP and Socket.io connections. HTTP requests are in standard CRUD format, Socket requests should be called like this: <br>
+
+#### GET
 ```javascript
-socket.emit("GET", "api.nexus-stats.com/game/version/query", data => {
+socket.emit("GET", "api.nexus-stats.com/foo", data => {
+    console.log(data) // bar
+})
+```
+<br>
+#### POST
+```javascript
+socket.emit("GET", {
+        url: "api.nexus-stats.com/resource/method",
+        body: "Your POST data"
+}, data => {
     // Do something with data
 })
 ```
-**Note the callback function as third parameter.** Due to race-conditions on non-rate-limited connections, the standard approach of listening to a response event is unfeasible.
+<br>
+**The ack function as third parameter is heavily recommended** so as not to get bugs due to race-conditions.<br>
+However you __can__ omit the ack and listen to incoming `res` events holding the same data.
 
 <br>
 <br>
