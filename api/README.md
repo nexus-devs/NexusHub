@@ -22,7 +22,7 @@ socket.emit("POST", {
     // Do something with data
 })
 ```
-<br>
+
 **The ack function as third parameter is heavily recommended** so as not to get bugs due to race-conditions.<br>
 However you __can__ omit the ack and listen to incoming `res` events holding the same data.
 
