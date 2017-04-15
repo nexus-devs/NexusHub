@@ -45,13 +45,16 @@ class MethodHandler {
         config = _.flattenDeep(config)
 
         // Cleanup
-        for(var i = 0; i < config.length; i++) {
-            if (Object.keys(config[i]).length <= 0) config.splice(i, 1)
-        }
-        config.splice(config.length - 2, 2) // empty {} string
+        let parsed = []
 
+        for(var i = 0; i < config.length; i++) {
+            if (typeof config[i] !== "string" && Object.keys(config[i]).length !== 0){
+                parsed.push(config[i])
+            }
+        }
+        
         // Return config to send to api node
-        return config
+        return parsed
     }
 
 

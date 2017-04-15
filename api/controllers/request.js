@@ -1,8 +1,8 @@
-'use strict'
+"use strict"
 
-const Cache = require('./cache.js')
-const mongodb = require('mongodb').MongoClient
-const _ = require('lodash')
+const Cache = require("./cache.js")
+const mongodb = require("mongodb").MongoClient
+const _ = require("lodash")
 
 
 /**
@@ -27,7 +27,7 @@ class Request {
 
         // Load up cache controller
         this.cache = new Cache()
-        this.cache.client.on('ready', () => this.confirmDB("redis"))
+        this.cache.client.on("ready", () => this.confirmDB("redis"))
 
         // Connect to mongo
         this.db = mongodb
@@ -56,9 +56,9 @@ class Request {
         return new Promise((resolve, reject) => {
 
             // Assign values to request
-            let route = req.url.split('/')
+            let route = req.url.split("/")
             route.pop()
-            route = (route.join('/') + '/' + req.parsed.method).replace("%20", " ")
+            route = (route.join("/") + "/" + req.parsed.method).replace("%20", " ")
 
             let request = {
                 user: req.user,
@@ -91,7 +91,7 @@ class Request {
             else {
                 resolve({
                     statusCode: 405,
-                    body: 'Invalid Request. Refer to api.nexus-stats.com for documentation.'
+                    body: "Invalid Request. Refer to api.nexus-stats.com for documentation."
                 })
             }
         })
@@ -101,16 +101,16 @@ class Request {
     /**
      * Sends request to connected sockets. First response is accepted
      * Note: figure out way to cancel operations after one node already finished
-     * E.g.: Listen to options.callback with data 'cancel' -> stop current progress
+     * E.g.: Listen to options.callback with data "cancel" -> stop current progress
      */
     send(options) {
         return new Promise((resolve, reject) => {
 
             // Generate unique callback for emit & pass to responding node
-            options.callback = process.hrtime().join('').toString()
+            options.callback = process.hrtime().join("").toString()
 
             // Send Request to all Core Nodes
-            this.client.root.emit('req', options)
+            this.client.root.emit("req", options)
 
             // Listen to all sockets for response
             Object.keys(this.client.root.sockets).forEach(id => {
@@ -136,8 +136,8 @@ class Request {
         // Check if method in schema
         for (var sub in this.schema.endpoints) {
             let endpoint = this.schema.endpoints[sub]
-            let reqroute = req.route.split('/')
-            let scmroute = endpoint.route.split('/')
+            let reqroute = req.route.split("/")
+            let scmroute = endpoint.route.split("/")
             let matching = false
             let params = []
 
@@ -145,7 +145,7 @@ class Request {
             for (var i = 0; i < scmroute.length; i++) {
 
                 // Get route resource params
-                if (scmroute[i][0] === ':') {
+                if (scmroute[i][0] === ":") {
                     matching = true
                     params.push(reqroute[i])
                 }
@@ -176,7 +176,7 @@ class Request {
 
                     // Requested not falsy -> request value in `requested`
                     if (requested) {
-                        if (specs.type === 'number') {
+                        if (specs.type === "number") {
                             if (isNaN(requested)) return false
                             else requested = parseFloat(requested)
                         }
@@ -185,7 +185,7 @@ class Request {
 
                     // Not requested -> assign default value
                     else {
-                        if (typeof specs.default === 'function') params.push(specs.default())
+                        if (typeof specs.default === "function") params.push(specs.default())
                         else params.push(specs.default)
                     }
                 }
@@ -213,11 +213,11 @@ class Request {
      */
     saveEndpoints(endpoints) {
         let config = {
-            type: 'endpoints',
+            type: "endpoints",
             data: endpoints,
         }
         this.db.config.updateOne(
-            {type: 'endpoints'},
+            {type: "endpoints"},
             {$set: config},
             {upsert: true}
         )
@@ -257,7 +257,7 @@ class Request {
                 endpoints[endpoint].params.forEach((specs, i) => {
 
                     // If string -> check if function (workaround for json.stringify on socket.emit)
-                    if (typeof specs.default === 'string' && (specs.default.includes("() => {") || specs.default.includes("function ("))) {
+                    if (typeof specs.default === "string" && (specs.default.includes("() => {") || specs.default.includes("function ("))) {
 
                         // Function from String (remove everything before first { and last }), override default
                         let fn = new Function(specs.default.substring(specs.default.indexOf("{") + 1).slice(0, -1))
@@ -267,8 +267,8 @@ class Request {
             }
 
             // Minimum scope to full array
-            if (typeof endpoints[endpoint].scope === 'string') {
-                let scope = require('../config/scopes.js')
+            if (typeof endpoints[endpoint].scope === "string") {
+                let scope = require("../config/scopes.js")
                 for (var i = 0; i < scope.length; i++) {
                     if (scope[i] === endpoints[endpoint].scope) scope = scope.slice(i, scope.length)
                 }
