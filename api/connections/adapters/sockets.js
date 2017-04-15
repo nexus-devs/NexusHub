@@ -1,23 +1,23 @@
-'use strict'
+"use strict"
+
 
 /**
  * Socket requirements
  */
-const io = require('Socket.io')()
-const port = process.env.api_port
+const io = require("Socket.io")
 
 
 /**
  * Middleware helpers
  */
-const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
-let Layer = reload('./layers.js')
+const reload = require("require-reload")(require) // layer needs to be hot-reloaded for out-of-class variables
+let Layer = reload("../layers.js")
 
 
 /**
  * Request Controller
  */
-const Request = require('../controllers/request.js')
+const Request = require("../../controllers/request.js")
 
 
 /**
@@ -27,7 +27,6 @@ class SocketAdapter {
 
     /**
      * Constructs Socket
-     * @param {server} server   HTTP Server to bind to
      */
     constructor(server) {
 
@@ -41,7 +40,7 @@ class SocketAdapter {
         this.request = Request
 
         // Create root namespace
-        this.root = this.io.of('/root')
+        this.root = this.io.of("/root")
     }
 
 
@@ -51,7 +50,7 @@ class SocketAdapter {
     prepass(socket, verb, request, ack) {
 
         // Create new layer object for middleware
-        Layer = reload('./layers.js')
+        Layer = reload("../layers.js")
         let layer = new Layer()
 
         // Modify req/res object to allow same middleware approach as in express
@@ -66,20 +65,11 @@ class SocketAdapter {
 
 
     /**
-     * Handles requests to local nodes
+     * Passes request to RequestController
      */
     pass(req, res) {
-        cli.logRequest(process.env.api_id, 'Sockets', req)
-
-        // Send Request to Controller
         this.request.getResponse(req)
-        .then(response => {
-            cli.logRequestEnd(process.env.api_id, 'Sockets', response)
-            res.status(response.statusCode).send(response.body)
-        })
-
-        // Send Response back to requesting Socket
-
+        .then(response => res.status(response.statusCode).send(response.body))
     }
 
 
@@ -88,20 +78,6 @@ class SocketAdapter {
      */
     use(fn) {
         this.stack.unshift(fn)
-    }
-
-
-    /**
-     * Sends requests from requestController to local nodes
-     * Returns response from node
-     * MAYBE NEED TO SPECIFY RETURN BOOL?
-     */
-    local(target, model, method, attributes) {
-        target.emit('req', {
-            method: method,
-            attributes: attributes,
-            model: model
-        })
     }
 }
 

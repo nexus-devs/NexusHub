@@ -1,29 +1,24 @@
-'use strict'
-
-/**
- * Express app for public HTTP server
- * The public socket server will also bind to this server
- */
+"use strict"
 
 
 /**
  * Express dependencies
  */
-const express = require('express')
-const http = require('http')
+const express = require("express")
+const http = require("http")
 
 
 /**
  * Middleware helpers
  */
-const reload = require('require-reload')(require) // layer needs to be hot-reloaded for out-of-class variables
-let Layer = reload('./layers.js')
+const reload = require("require-reload")(require) // layer needs to be hot-reloaded for out-of-class variables
+let Layer = reload("../layers.js")
 
 
 /**
  * Request Controller
  */
-const Request = require('../controllers/request.js')
+const Request = require("../../controllers/request.js")
 
 
 /**
@@ -37,7 +32,7 @@ class HttpAdapter {
         this.app = express()
 
         // Start HTTP server.
-        this.app.set('port', port)
+        this.app.set("port", port)
         this.server = http.createServer(this.app)
         this.server.listen(port)
 
@@ -55,7 +50,7 @@ class HttpAdapter {
     prepass(req, res) {
 
         // Create new layer object for middleware
-        Layer = reload('./layers.js')
+        Layer = reload("../layers.js")
         let layer = new Layer()
 
         // Iterate through middleware function stack
@@ -66,18 +61,11 @@ class HttpAdapter {
 
 
     /**
-     * Respond to incoming requests passed by routes
-     * Resource is set in routes
+     * Passes request to RequestController
      */
     pass(req, res) {
-        cli.logRequest(process.env.api_id, 'REST', req)
-
-        // Send Request to Controller
         this.request.getResponse(req)
-        .then(response => {
-            cli.logRequestEnd(process.env.api_id, 'REST', response)
-            res.status(response.statusCode).send(response.body)
-        })
+        .then(response => res.status(response.statusCode).send(response.body))
     }
 
 

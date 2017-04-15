@@ -1,6 +1,6 @@
 'use strict'
 
-const Method = require('../../../Method.js')
+const Method = require('../Method.js')
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values

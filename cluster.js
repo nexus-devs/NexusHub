@@ -2,20 +2,19 @@
  * Globals
  */
 require('./config/env.js')
-global.cli = require('./config/log/logger.js')
 
 
 /**
  * Dependencies
  */
 const Cluster = require('multi-Cluster')
+const Logger = require('./config/logger.js')
 
 
 /**
- * Big useless Intro
+ * Big useless intro
  */
-process.stdout.write('\033c')
-cli.intro()
+ Logger.intro()
 
 
 /**

@@ -1,18 +1,6 @@
 #!/usr/bin/env node
 
 /**
- * Globals
- */
-global.cli = require('../config/log/logger.js')
-
-
-/**
- * Time measurement
- */
-cli.time(process.env.src_id, cli.chalk.green('[connected]'))
-
-
-/**
  * Module Dependencies
  */
 const Nexus = require('../../nexus-stats-api/index.js')
@@ -39,9 +27,6 @@ class core {
         })
 
         this.api.on('ready', () => {
-
-            // Finish time measurement
-            cli.timeEnd(process.env.src_id, cli.chalk.green('[connected]'))
 
             // Listen to requests
             this.api.client.on('req', options => {

@@ -29,7 +29,7 @@ class Layer {
 
         // Error occured? Send back to client.
         if (err) {
-            _res.status(500).send(err)
+            _res.status(400).send(err)
             _reject()
         }
 
@@ -102,7 +102,7 @@ class Layer {
              url = request.split("/")
         }
 
-        else if (verb === "POST" && request !== null && typeof request === "object" && typeof request.url === 'string' && request.url.includes("/")) {
+        else if ((verb === "POST" || verb === "PUT") && request !== null && typeof request === "object" && typeof request.url === 'string' && request.url.includes("/")) {
             url = request.url.split("/")
         }
 
@@ -133,10 +133,8 @@ class Layer {
 
         // Default response value
         let res = {
-            msg: {
-                statusCode: 200,
-                body: "<empty>"
-            }
+            statusCode: 200,
+            body: "<empty>"
         }
 
         // Socket.io ack passed?
@@ -146,8 +144,8 @@ class Layer {
             res.send = (data) => {
                 if (!res.sent) {
                     res.sent = true
-                    res.msg.body = data
-                    ack(res.msg)
+                    res.body = data
+                    ack(res)
                 } else {
                     console.error(" ")
                     console.error("Can't respond to same request multiple times.")
@@ -158,7 +156,7 @@ class Layer {
 
             // Apply Status before res.send
             res.status = (code) => {
-                res.msg.statusCode = code
+                res.statusCode = code
                 return res
             }
         }
@@ -168,13 +166,13 @@ class Layer {
 
             // Simple socket emit
             res.send = (data) => {
-                res.msg.body = data
+                res.body = data
                 socket.emit("res", res.msg)
             }
 
             // Apply Status before res.send
             res.status = (code) => {
-                res.msg.statusCode = code
+                res.statusCode = code
                 return res
             }
         }
