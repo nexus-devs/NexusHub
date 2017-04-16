@@ -9,18 +9,17 @@
 Old development builds can be found in the commit history starting at #271
 <br>
 <br>
+<br>
 
 ## What's working so far?
 - [x] **API-Node:** HTTP/Socket.io Web-API which automatically exposes Resource-Node methods. Also handles authorization.
 - [ ] **Core-Node:** Resource-Node with all application Logic. Statistics are calculated here.
 - [ ] **Web-Node:** View Layer for End-User.
 <br>
-<br>
 
 ## Quickstart
 >`npm install && npm start`
 => then go to `localhost:3400/foo` to get your `bar`
-<br>
 <br>
 
 ## Requirements
@@ -30,3 +29,8 @@ Old development builds can be found in the commit history starting at #271
 <br>
 
 **Note:** Make sure to set your preferences in /config/env.config.js
+
+<br>
+
+## License
+[CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/)
