@@ -33,4 +33,4 @@ Old development builds can be found in the commit history starting at #271
 <br>
 
 ## License
-[CC BY-NC 2.0](https://creativecommons.org/licenses/by-nc/2.0/)
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
