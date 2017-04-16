@@ -17,7 +17,6 @@ class RequestParser {
 
         // Improper request format
         else {
-            cli.log(process.env.api_id, 'neutral', cli.getPrefix("Parser", cli.service_max) + req.user.uid + ' Invalid Request Format: ' + url, 'out')
             next("Invalid Request Format. Please provide a URL string")
         }
     }

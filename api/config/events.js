@@ -23,21 +23,12 @@ module.exports = (sockets, http) => {
     /**
      * Root namespace
      */
-
-    // Listen to endpoint config from core nodes
     sockets.root.on('connection', (socket) => {
 
-        // Listen to endpoint config event
+        // Listen to endpoint config event & save in db/memstore
         socket.on('config', (endpoints) => {
-
-            // Request Controllers
             sockets.request.endpoints.saveEndpoints(endpoints)
             http.request.endpoints.saveEndpoints(endpoints)
-
-            // Express Routes
-            endpoints.forEach((endpoint) => {
-                http.app.all(endpoint.route, (req, res) => http.prepass(req, res))
-            })
         })
     })
 }

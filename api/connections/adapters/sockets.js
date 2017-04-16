@@ -38,7 +38,7 @@ class SocketAdapter {
         this.io = io.listen(server)
 
         // Bind Request Controller to object
-        this.request = Request
+        this.request = new Request(this)
 
         // Create root namespace
         this.root = this.io.of("/root")

@@ -10,13 +10,15 @@ class EndpointController {
     /**
      * Connect to databases
      */
-    constructor() {
-        this.db = mongodb
-        this.db.connect(process.env.mongo_url, (err, db) => {
-            if (!err) {
-                this.db.config = db.collection("config")
-                this.db.ready = true
-            }
+    connect() {
+        return new Promise((resolve, reject) => {
+            this.db = mongodb
+            this.db.connect(process.env.mongo_url, (err, db) => {
+                if (!err) {
+                    this.db.config = db.collection("config")
+                    resolve()
+                }
+            })
         })
     }
 
@@ -42,7 +44,7 @@ class EndpointController {
     /**
      * Refresh endpoint config every 30 minutes
      */
-    compare(schema) {
+    compare(schema, adapter) {
         let now = new Date()
         if (now - schema.uat > 1800000) {
             this.db.config.findOne({
@@ -51,6 +53,13 @@ class EndpointController {
                 this.convert(config.data)
                 schema.endpoints = config.data
                 schema.uat = now
+
+                // Express Routing
+                if(adapter.app) {
+                    schema.endpoints.forEach((endpoint) => {
+                        adapter.app.all(endpoint.route, (req, res) => adapter.prepass(req, res))
+                    })
+                }
             })
         }
     }
@@ -140,7 +149,7 @@ class EndpointController {
     parseBase(req) {
         let route = req.url.split("/")
         route.pop()
-        route = (route.join("/") + "/" + req.parsed.method).replace("%20", " ")
+        route = (`${route.join("/")}/${req.parsed.method}`).replace("%20", " ")
 
         let request = {
             user: req.user,

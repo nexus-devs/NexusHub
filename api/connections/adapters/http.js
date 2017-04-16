@@ -40,7 +40,7 @@ class HttpAdapter {
         this.stack = []
 
         // Bind Request Controller to object
-        this.request = Request
+        this.request = new Request(this)
     }
 
 

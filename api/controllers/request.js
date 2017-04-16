@@ -10,15 +10,14 @@ class RequestController {
     /**
      * Connect to databases
      */
-    constructor() {
-
-        // Initialize endpoint config
-        this.schema = {
-            uat: 0 // Make sure schema gets loaded on boot-up
-        }
-
-        // Make endpoints accessible from outside
+    constructor(adapter) {
+        this.schema = { uat: 0 }
         this.endpoints = endpoints
+        this.adapter = adapter
+
+        // Load endpoint config directly on bootup
+        this.endpoints.connect()
+        .then(() => this.endpoints.compare(this.schema, this.adapter))
     }
 
 
@@ -29,7 +28,7 @@ class RequestController {
         return new Promise((resolve, reject) => {
 
             // Check if Schema requires updating
-            endpoints.compare(this.schema)
+            endpoints.compare(this.schema, this.adapter)
 
             // Verify & Parse request
             let request = endpoints.parse(req, this.schema)
@@ -90,4 +89,4 @@ class RequestController {
     }
 }
 
-module.exports = new RequestController()
+module.exports = RequestController
