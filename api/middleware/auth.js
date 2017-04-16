@@ -129,7 +129,7 @@ class Authentication {
         }
 
         // No criteria matched
-        return next(new Error("Rejected connection to " + socket.nsp.name))
+        return next(new Error(`Rejected connection to ${socket.nsp.name}`))
     }
 }
 

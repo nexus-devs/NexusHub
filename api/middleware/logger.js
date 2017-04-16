@@ -17,7 +17,7 @@ class Logger {
 
         // Actual Console Output
         console.log(this.prefix + chalk.grey(":: " + new Date()))
-        console.log(this.prefix + "< " + this.user.uid + ": " + req.method + " " + req.url)
+        console.log(`${this.prefix}< ${this.user.uid}: ${req.method} ${req.url}`)
         next()
     }
 
