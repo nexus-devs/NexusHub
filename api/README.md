@@ -34,7 +34,7 @@ The server also provides a simple express-like middleware stack to be executed b
 
 ### Example
 ```javascript
-let api = require('path/to/api-node.js')
+let api = require('path/to/api/node.js')
 
 api.use((req, res, next) => {
     if(req.user.uid === 'foo'){
@@ -49,7 +49,7 @@ Note that socket requests get modified to behave just like an express request, t
 ### Native Middleware
 If necessary, you can still target native connection middleware which runs before the one explained above.
 ```javascript
-let api = require('path/to/api-node.js')
+let api = require('path/to/api/node.js')
 
 api.http.app.use((req, res, next) => {}) // Native Express Middleware
 api.sockets.io.use((socket, next) => {}) // Native Socket.io Middleware
