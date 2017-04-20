@@ -34,7 +34,7 @@ The server also provides a simple express-like middleware stack to be executed b
 
 ### Example
 ```javascript
-let api = require('path/to/api-node.js')
+let api = require('path/to/api/node.js')
 
 api.use((req, res, next) => {
     if(req.user.uid === 'foo'){
