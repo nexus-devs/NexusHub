@@ -7,7 +7,7 @@ module.exports = (sockets, http) => {
     /**
      * Default namespace
      */
-    sockets.io.on('connection', (socket) => {
+    sockets.io.on('connection', socket => {
 
         // RESTful-like event types
         socket.on('GET', (req, res) => sockets.prepass(socket, 'GET', req, res))
@@ -23,7 +23,7 @@ module.exports = (sockets, http) => {
     /**
      * Root namespace
      */
-    sockets.root.on('connection', (socket) => {
+    sockets.root.on('connection', socket => {
 
         // Listen to endpoint config event & save in db/memstore
         socket.on('config', (endpoints) => {
