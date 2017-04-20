@@ -2,6 +2,11 @@
  * Globals
  */
 require('./config/env.js')
+var heapdump = require('heapdump')
+setTimeout(() => {
+    heapdump.writeSnapshot()
+}, 72000000)
+
 
 
 /**
@@ -28,8 +33,7 @@ if (process.env.environment === 'development') {
     let src = new Cluster('./core/node.js', 1)
     src.watch('./core')
 
-    let tst = new Cluster('./test/node.js', 1)
-    tst.watch('./test')
+    let tst = new Cluster('./test.js', 1)
 }
 
 

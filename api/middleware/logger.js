@@ -73,7 +73,7 @@ class Logger {
         res.send = function(body) {
            _send.call(this, body)
 
-           // Output is error?
+           // Output is error? (4xx/5xx/etc)
            if(res.statusCode.toString()[0] < 4){
                io = chalk.green(io)
            } else {

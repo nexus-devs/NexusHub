@@ -10,11 +10,13 @@ class Foo extends Method {
         super(db)
 
         // Modify schema
+        this.schema.description = "Get Item Statistics"
         this.schema.resources = ["item"]
         this.schema.params = [{
                 name: "component",
                 type: "string",
                 default: "",
+                required: true,
                 description: "Specifies item component to look up. No component returns full set data."
             },
             {

@@ -53,7 +53,6 @@ class Authentication {
 
         // Token present?
         if (req.headers.authorization) {
-
             let token = req.headers.authorization.replace("bearer ", "").replace("Bearer ", "")
 
             // Set req.user from token
@@ -101,7 +100,7 @@ class Authentication {
             }
         }
 
-        // Set IP as user instead of that of token
+        // No Token provided
         else {
             return next()
         }

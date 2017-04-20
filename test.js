@@ -1,6 +1,6 @@
 "use strict"
 
-const Nexus = require('../../nexus-stats-api/index.js')
+const Nexus = require('../nexus-stats-api/index.js')
 
 /**
  * Test Client to simulate all kinds of requests
@@ -60,7 +60,7 @@ class Client {
 
 
         // Rate Limit Testing
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 50000; i++) {
             this.client.getItem('Nikana Prime', {
                 component: "Blade",
                 //timestart: 3824983243892,
