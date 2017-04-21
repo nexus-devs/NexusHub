@@ -51,7 +51,7 @@ class Prices extends Method {
             }
 
             // Append component if one is given
-            if (component != "") query['component'] = component
+            if (component != "") query['component'] = parseInt(component)
 
             // Query and resolve results
             this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
