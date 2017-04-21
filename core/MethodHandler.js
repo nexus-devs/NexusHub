@@ -10,8 +10,8 @@ const _ = require('lodash')
 /**
  * Mongodb connection for methods
  */
-let mongodb = require('mongoose')
-mongodb.connect('mongodb://localhost/nexus-stats')
+let mongodb = require("mongodb").MongoClient
+mongodb.connect(process.env.mongo_url)
 
 
 /**
