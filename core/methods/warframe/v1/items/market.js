@@ -10,7 +10,7 @@ class Market extends Method {
         super(db)
 
         // Modify schema
-        this.schema.description = "Get supply and demand statistics."
+        this.schema.description = "Get supply and demand statistics over a specified time frame."
         this.schema.resources = ["item"]
         this.schema.params = [{
                 name: "component",
@@ -43,7 +43,36 @@ class Market extends Method {
      */
     main(item, component) {
         return new Promise((resolve, reject) => {
-            resolve("supply and demand will be here")
+            // TODO: change collection to production
+            // Query object
+            let query = {
+                'item': 50,
+                'createdAt': { $gte: new Date(timestart), $lte: new Date(timeend) }
+            }
+
+            // Append component if one is given
+            if (component != "") query['component'] = component
+
+            // Query and resolve results
+            this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
+                if (err) throw err
+
+                let buying = 0
+                let selling = 0
+
+                for (let i = result.length-1; i >= 0; i--) {
+                    if (result[i].offer == "buying") {
+                        buying++
+                    } else {
+                        selling++
+                    }
+                }
+
+                resolve({
+                    'buying': {'count': buying, 'percent': buying/(buying+selling)},
+                    'selling': {'count': selling, 'percent': selling/(buying+selling)}
+                })
+            })
         })
     }
 }
