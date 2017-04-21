@@ -55,7 +55,7 @@ class Prices extends Method {
 
             // Query and resolve results
             this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
-                if (err) throw err
+                if (err) reject(err)
 
                 // Calculate min, max and avg
                 let min = Number.POSITIVE_INFINITY
