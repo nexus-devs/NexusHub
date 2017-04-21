@@ -55,7 +55,7 @@ class Market extends Method {
 
             // Query and resolve results
             this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
-                if (err) throw err
+                if (err) reject(err)
 
                 let buying = 0
                 let selling = 0
