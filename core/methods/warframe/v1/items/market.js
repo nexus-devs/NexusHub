@@ -37,7 +37,7 @@ class Market extends Method {
     /**
      * Main method which is called by MethodHandler on request
      */
-    main(item, component, mode) {
+    main(item, component, mode, percent) {
         return new Promise((resolve, reject) => {
             resolve("supply and demand will be here")
         })
