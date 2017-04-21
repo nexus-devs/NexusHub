@@ -31,7 +31,8 @@ class Statistics extends Method {
                 name: "timeend",
                 type: "number",
                 default: () => {
-                    return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
+                    //return new Date(new Date().setDate(new Date().getDate() - 21)).getTime() // 3 weeks ago
+                    return new Date(2017, 3, 21).getTime()
                 },
                 description: "Returns data recorded between timestart and timeend."
             }
@@ -49,7 +50,7 @@ class Statistics extends Method {
             // Query object
             let query = {
                 'item': 50,
-                'createdAt': { $gte: new Date(timestart), $lte: new Date(timeend) }
+                'createdAt': { $gte: new Date(timeend), $lte: new Date(timestart) }
             }
 
             // Append component if one is given
