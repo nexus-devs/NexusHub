@@ -5,12 +5,12 @@ const Method = require("../../../../Method.js")
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
-class Foo extends Method {
+class Statistics extends Method {
     constructor(db) {
         super(db)
 
         // Modify schema
-        this.schema.description = "Get Item Statistics"
+        this.schema.description = "Get item statistics between a specified time frame."
         this.schema.resources = ["item"]
         this.schema.params = [{
                 name: "component",
@@ -23,7 +23,7 @@ class Foo extends Method {
                 name: "timestart",
                 type: "number",
                 default: () => {
-                    return new Date().getTime() / 1 // current time
+                    return new Date().getTime() // current time
                 },
                 description: "Returns data recorded between timestart and timeend"
             },
@@ -39,7 +39,7 @@ class Foo extends Method {
     }
 
     /**
-     * Main method which is called by MethoHandler on request
+     * Main method which is called by MethodHandler on request
      */
     main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
@@ -48,4 +48,4 @@ class Foo extends Method {
     }
 }
 
-module.exports = Foo
+module.exports = Statistics
