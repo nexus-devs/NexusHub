@@ -8,13 +8,6 @@ const _ = require('lodash')
 
 
 /**
- * Mongodb connection for methods
- */
-let mongodb = require("mongodb").MongoClient
-mongodb.connect(process.env.mongo_url)
-
-
-/**
  * Interface for handling methods
  */
 class MethodHandler {
@@ -26,7 +19,7 @@ class MethodHandler {
          return new Promise((resolve, reject) => {
              try{
                  let method = new(require(options.file))
-                 method.main.apply(null, options.params).then(data => resolve(data))
+                 method.main.apply(method, options.params).then(data => resolve(data))
              } catch(err) {
                  reject()
              }
@@ -80,7 +73,7 @@ class MethodHandler {
             method.method = path.basename(filename).replace(".js", "")
 
             // Custom schema values
-            let schema = new(require(method.file))(mongodb).schema
+            let schema = new(require(method.file))().schema
 
             // Routes
             method.route = filename.replace("./core/methods/", "").replace(".js", "")

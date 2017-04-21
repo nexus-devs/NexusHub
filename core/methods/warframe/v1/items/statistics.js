@@ -6,8 +6,8 @@ const Method = require("../../../../Method.js")
  * Contains multi-purpose functions for child-methods and provides default values
  */
 class Statistics extends Method {
-    constructor(db) {
-        super(db)
+    constructor() {
+        super()
 
         // Modify schema
         this.schema.description = "Get item statistics between a specified time frame."
@@ -38,11 +38,13 @@ class Statistics extends Method {
         ]
     }
 
+
     /**
      * Main method which is called by MethodHandler on request
      */
     main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
+
             // TODO: change collection to production
             // Query object
             let query = {
