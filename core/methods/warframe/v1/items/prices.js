@@ -31,7 +31,7 @@ class Prices extends Method {
                 name: "timeend",
                 type: "number",
                 default: () => {
-                    return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
+                    return new Date(new Date().setDate(new Date().getDate() - 21)).getTime() // 3 weeks ago
                 },
                 description: "Returns data recorded between timestart and timeend."
             }
@@ -41,13 +41,13 @@ class Prices extends Method {
     /**
      * Main method which is called by MethodHandler on request
      */
-    main(item, component, mode, timestart, timeend) {
+    main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
             // TODO: change collection to production
             // Query object
             let query = {
                 'item': 50,
-                'createdAt': { $gte: new Date(timestart), $lte: new Date(timeend) }
+                'createdAt': { $gte: new Date(timeend), $lte: new Date(timestart) }
             }
 
             // Append component if one is given
