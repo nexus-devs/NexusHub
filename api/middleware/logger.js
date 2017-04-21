@@ -80,7 +80,7 @@ class Logger {
                io = chalk.red(io)
            }
 
-           console.log(prefix + io + res.statusCode + ": " + body)
+           //console.log(prefix + io + res.statusCode + ": " + body)
         }
     }
 
