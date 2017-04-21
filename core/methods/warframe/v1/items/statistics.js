@@ -43,7 +43,22 @@ class Statistics extends Method {
      */
     main(item, component, timestart, timeend) {
         return new Promise((resolve, reject) => {
-            resolve("statistics will be here")
+            // TODO: change collection to production
+            // Query object
+            let query = {
+                'item': 50,
+                'createdAt': { $gte: new Date(timestart), $lte: new Date(timeend) }
+            }
+
+            // Append component if one is given
+            if (component != "") query['component'] = component
+
+            // Query and resolve results
+            this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
+                if (err) throw err
+
+                resolve(result)
+            })
         })
     }
 }
