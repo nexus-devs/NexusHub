@@ -25,7 +25,7 @@ class Statistics extends Method {
                 default: () => {
                     return new Date().getTime() // current time
                 },
-                description: "Returns data recorded between timestart and timeend"
+                description: "Returns data recorded between timestart and timeend."
             },
             {
                 name: "timeend",
@@ -33,7 +33,7 @@ class Statistics extends Method {
                 default: () => {
                     return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
                 },
-                description: "Returns data recorded between timestart and timeend"
+                description: "Returns data recorded between timestart and timeend."
             }
         ]
     }
