@@ -66,7 +66,7 @@ class Prices extends Method {
                     tmp = result[i].price
                     if (tmp < min) min = tmp
                     if (tmp > max) max = tmp
-                    avg += result[i]
+                    avg += tmp
                 }
                 avg = avg / result.length
 
