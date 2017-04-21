@@ -10,7 +10,7 @@ class Prices extends Method {
         super(db)
 
         // Modify schema
-        this.schema.description = "Get price statistics."
+        this.schema.description = "Get price statistics over a specified time frame."
         this.schema.resources = ["item"]
         this.schema.params = [{
                 name: "component",
@@ -18,12 +18,6 @@ class Prices extends Method {
                 default: "",
                 required: true,
                 description: "Specifies item component to look up. No component returns full set data."
-            },
-            {
-                name: "mode",
-                type: "string",
-                default: "avg",
-                description: "Accepts min and max as mode to list either the minimum or the maximum price. Default is average."
             },
             {
                 name: "timestart",
@@ -49,7 +43,35 @@ class Prices extends Method {
      */
     main(item, component, mode, timestart, timeend) {
         return new Promise((resolve, reject) => {
-            resolve("prices will be here")
+            // TODO: change collection to production
+            // Query object
+            let query = {
+                'item': 50,
+                'createdAt': { $gte: new Date(timestart), $lte: new Date(timeend) }
+            }
+
+            // Append component if one is given
+            if (component != "") query['component'] = component
+
+            // Query and resolve results
+            this.db.collection('dummy_requests').find(query).toArray(function(err, result) {
+                if (err) throw err
+
+                // Calculate min, max and avg
+                let min = Number.POSITIVE_INFINITY
+                let max = Number.NEGATIVE_INFINITY
+                let avg = 0
+                let tmp
+                for (let i = result.length-1; i >= 0; i--) {    // TODO: Make steps bigger depending on size
+                    tmp = result[i].price
+                    if (tmp < min) min = tmp
+                    if (tmp > max) max = tmp
+                    avg += result[i]
+                }
+                avg = avg / result.length
+
+                resolve({avg, min, max})
+            })
         })
     }
 }
