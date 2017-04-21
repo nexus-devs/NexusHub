@@ -2,11 +2,6 @@
  * Globals
  */
 require('./config/env.js')
-var heapdump = require('heapdump')
-setTimeout(() => {
-    heapdump.writeSnapshot()
-}, 72000000)
-
 
 
 /**

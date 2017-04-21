@@ -52,7 +52,7 @@ class MethodHandler {
                 parsed.push(config[i])
             }
         }
-        
+
         // Return config to send to api node
         return parsed
     }
