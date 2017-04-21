@@ -50,15 +50,17 @@ class EndpointController {
             this.db.config.findOne({
                 type: "endpoints"
             }, (err, config) => {
-                this.convert(config.data)
-                schema.endpoints = config.data
-                schema.uat = now
+                if (config) {
+                    this.convert(config.data)
+                    schema.endpoints = config.data
+                    schema.uat = now
 
-                // Express Routing
-                if(adapter.app) {
-                    schema.endpoints.forEach((endpoint) => {
-                        adapter.app.all(endpoint.route, (req, res) => adapter.prepass(req, res))
-                    })
+                    // Express Routing
+                    if (adapter.app) {
+                        schema.endpoints.forEach((endpoint) => {
+                            adapter.app.all(endpoint.route, (req, res) => adapter.prepass(req, res))
+                        })
+                    }
                 }
             })
         }
@@ -131,7 +133,7 @@ class EndpointController {
                 this.parseParams(req, endpoint, params)
                 this.parseBody(req, params)
 
-                return({
+                return ({
                     file: endpoint.file,
                     params: params
                 })
@@ -177,14 +179,10 @@ class EndpointController {
             if (scmroute[i][0] === ":") {
                 matching = true
                 params.push(reqroute[i])
-            }
-
-            else if (scmroute[i] !== reqroute[i]) {
+            } else if (scmroute[i] !== reqroute[i]) {
                 matching = false
                 break
-            }
-
-            else {
+            } else {
                 matching = true
             }
         }
