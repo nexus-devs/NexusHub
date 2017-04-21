@@ -19,25 +19,13 @@ class Market extends Method {
                 required: true,
                 description: "Specifies item component to look up. No component returns full set data."
             },
-            {
-                name: "mode",
-                type: "string",
-                default: "supply",
-                description: "Accepts supply and demand as a mode."
-            },
-            {
-                name: "percent",
-                type: "boolean",
-                default: false,
-                description: "Returns the requested statistic in percent."
-            },
         ]
     }
 
     /**
      * Main method which is called by MethodHandler on request
      */
-    main(item, component, mode, percent) {
+    main(item, component) {
         return new Promise((resolve, reject) => {
             resolve("supply and demand will be here")
         })
