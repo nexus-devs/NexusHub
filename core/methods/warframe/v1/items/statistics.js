@@ -68,8 +68,8 @@ class Statistics extends Method {
                 let doc = {
                     title: "Saryn Prime", // TODO: Change this to reflect the actual item
                     type: "Prime",
-                    supply: { count: 0, percent: 0 },
-                    demand: { count: 0, percent: 0 },
+                    supply: { count: 0, percentage: 0 },
+                    demand: { count: 0, percentage: 0 },
                     components: []
                 }
 
@@ -93,8 +93,8 @@ class Statistics extends Method {
                             avg: 0,
                             min: Number.POSITIVE_INFINITY,
                             max: Number.NEGATIVE_INFINITY,
-                            supply: { count: 0, percent: 0 },
-                            demand: { count: 0, percent: 0 },
+                            supply: { count: 0, percentage: 0 },
+                            demand: { count: 0, percentage: 0 },
                             interval: []
                         }
 
@@ -104,8 +104,8 @@ class Statistics extends Method {
                                 avg: 0,
                                 min: Number.POSITIVE_INFINITY,
                                 max: Number.NEGATIVE_INFINITY,
-                                supply: { count: 0, percent: 0 },
-                                demand: { count: 0, percent: 0 }
+                                supply: { count: 0, percentage: 0 },
+                                demand: { count: 0, percentage: 0 }
                             }
 
                             component.interval.push(intervalObj)
@@ -137,8 +137,8 @@ class Statistics extends Method {
                         // Calculate avg and supply/demand percentages
                         offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
                         doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
-                        doc.components[i].interval[j].supply.percent = doc.components[i].interval[j].supply.count / offerCount
-                        doc.components[i].interval[j].demand.percent = doc.components[i].interval[j].demand.count / offerCount
+                        doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
+                        doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
 
                         // Add interval vars on component vars
                         doc.components[i].avg += doc.components[i].interval[j].avg
@@ -151,8 +151,8 @@ class Statistics extends Method {
                     // Calculate avg and supply/demand percentages
                     offerCount = doc.components[i].supply.count + doc.components[i].demand.count
                     doc.components[i].avg = doc.components[i].avg / doc.components[i].interval.length
-                    doc.components[i].supply.percent = doc.components[i].supply.count / offerCount
-                    doc.components[i].demand.percent = doc.components[i].demand.count / offerCount
+                    doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
+                    doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
 
                     // Add component vars to document vars
                     doc.supply.count += doc.components[i].supply.count
@@ -161,8 +161,8 @@ class Statistics extends Method {
 
                 // Calculate document supply/demand percentages
                 offerCount = doc.supply.count + doc.demand.count
-                doc.supply.percent = doc.supply.count / offerCount
-                doc.demand.percent = doc.demand.count / offerCount
+                doc.supply.percentage = doc.supply.count / offerCount
+                doc.demand.percentage = doc.demand.count / offerCount
 
                 // Return document
                 resolve(doc)
