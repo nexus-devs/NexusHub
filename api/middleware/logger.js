@@ -89,13 +89,15 @@ class Logger {
      * Add Timer to original res.send
      */
      addTimer(res) {
-         let timestart = process.hrtime()
+         //let timestart = process.hrtime()
+         let timestart = new Date()
          let _send = res.send
          let prefix = this.prefix
 
          res.send = function(body) {
             _send.call(this, body)
-            console.log(prefix + chalk.grey("> " + (process.hrtime()[1] - timestart[1]) / 1000000 + "ms"))
+            //console.log(prefix + chalk.grey("> " + (process.hrtime()[1] - timestart[1]) / 1000000 + "ms"))
+            console.log(prefix + chalk.grey("> " + (new Date() - timestart) + "ms"))
             console.log(" ")
          }
      }
