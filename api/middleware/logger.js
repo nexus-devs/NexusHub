@@ -81,7 +81,7 @@ class Logger {
                 io = chalk.red(io)
             }
 
-            console.log(prefix + io + res.statusCode + ": " + body)
+            console.log(prefix + io + res.statusCode + ": " + body.slice(0, 100) + (body.length > 100 ? "..." : ""))
         }
     }
 
