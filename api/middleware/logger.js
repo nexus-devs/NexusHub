@@ -98,8 +98,9 @@ class Logger {
         res.send = function(body) {
 
             // Response Logic
-            if (typeof body === "object") _json.call(this, body)
-            else {
+            if (typeof body === "object") {
+                _json.call(this, body)
+            } else {
                 _send.call(this, body)
 
                 // Time Logging
