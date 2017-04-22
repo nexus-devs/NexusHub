@@ -75,6 +75,12 @@ class Converter {
                 res.statusCode = code
                 return res
             }
+
+            // Pseudo res.json to stay parallel with express
+            res.json = (data) => {
+                data = JSON.stringify(data)
+                return res.send(data)
+            }
         }
 
         // Non-ack request
@@ -90,6 +96,12 @@ class Converter {
             res.status = (code) => {
                 res.statusCode = code
                 return res
+            }
+
+            // Pseudo res.json to stay parallel with express
+            res.json = (data) => {
+                data = JSON.stringify(data)
+                return res.send(data)
             }
         }
 
