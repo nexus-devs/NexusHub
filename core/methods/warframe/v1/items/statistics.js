@@ -31,10 +31,15 @@ class Statistics extends Method {
                 name: "timeend",
                 type: "number",
                 default: () => {
-                    //return new Date(new Date().setDate(new Date().getDate() - 21)).getTime() // 3 weeks ago
-                    return new Date(2017, 3, 21).getTime()
+                    return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 weeks ago
                 },
                 description: "Returns data recorded between timestart and timeend."
+            },
+            {
+                name: "interval",
+                type: "number",
+                default: 1,
+                description: "Days between each interval."
             }
         ]
     }
@@ -43,9 +48,8 @@ class Statistics extends Method {
     /**
      * Main method which is called by MethodHandler on request
      */
-    main(item, component, timestart, timeend) {
+    main(item, component, timestart, timeend, interval) {
         return new Promise((resolve, reject) => {
-
             // TODO: change collection to production
             // Query object
             let query = {
