@@ -13,7 +13,7 @@ class Logger {
         this.setPrefix(req)
         this.setUser(req)
         this.logErr(next)
-        this.logRes(res)
+        //this.logRes(res)
         this.addTimer(res)
 
         // Actual Console Output
@@ -81,7 +81,7 @@ class Logger {
                io = chalk.red(io)
            }
 
-           //console.log(prefix + io + res.statusCode + ": " + body)
+           console.log(prefix + io + res.statusCode + ": " + body)
         }
     }
 
