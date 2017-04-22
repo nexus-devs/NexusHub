@@ -95,10 +95,16 @@ class Logger {
          let prefix = this.prefix
 
          res.send = function(body) {
-            _send.call(this, body)
-            let diff = process.hrtime(timestart)
-            console.log(prefix + chalk.grey(`> ${(diff[0] * 1e9 + diff[1])/1e6} ms`))
-            console.log(" ")
+             if (typeof body === "object") {
+                 body = JSON.stringify(body, this.app.get('json replacer'), this.app.get('json spaces'))
+                 this.charset = this.charset || 'utf-8';
+                 this.get('Content-Type') || this.set('Content-Type', 'application/json');
+             }
+
+             _send.call(this, body)
+             let diff = process.hrtime(timestart)
+             console.log(prefix + chalk.grey(`> ${(diff[0] * 1e9 + diff[1])/1e6} ms`))
+             console.log(" ")
          }
      }
 }
