@@ -6,6 +6,7 @@ const chalk = require('chalk')
  * Logger Middleware
  */
 class Logger {
+
     log(req, res, next) {
 
         // Prepare output
@@ -89,15 +90,14 @@ class Logger {
      * Add Timer to original res.send
      */
      addTimer(res) {
-         //let timestart = process.hrtime()
-         let timestart = new Date()
+         let timestart = process.hrtime()
          let _send = res.send
          let prefix = this.prefix
 
          res.send = function(body) {
             _send.call(this, body)
-            //console.log(prefix + chalk.grey("> " + (process.hrtime()[1] - timestart[1]) / 1000000 + "ms"))
-            console.log(prefix + chalk.grey("> " + (new Date() - timestart) + "ms"))
+            let diff = process.hrtime(timestart)
+            console.log(prefix + chalk.grey(`> ${(diff[0] * 1e9 + diff[1])/1e6} ms`))
             console.log(" ")
          }
      }
