@@ -69,8 +69,8 @@ class Market extends Method {
                 }
 
                 resolve({
-                    'buying': {'count': buying, 'percent': buying/(buying+selling)},
-                    'selling': {'count': selling, 'percent': selling/(buying+selling)}
+                    'buying': {'count': buying, 'percentage': buying/(buying+selling)},
+                    'selling': {'count': selling, 'percentage': selling/(buying+selling)}
                 })
             })
         })
