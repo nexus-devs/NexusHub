@@ -62,7 +62,7 @@ class Client {
         // Rate Limit Testing
         for (var i = 0; i < 25; i++) {
             this.client.getItem('Nikana Prime', {
-                component: "Blade",
+                component: "0",
                 //timestart: 3824983243892,
                 timeend: 3894982348932
             }).then(item => {
