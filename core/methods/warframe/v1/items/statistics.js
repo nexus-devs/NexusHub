@@ -121,8 +121,7 @@ class Statistics extends Method {
                     // Add to current interval
                     p = currentRequest.price
                     doc.components[componentIndex].interval[currentInterval].avg += p
-                    if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
-                    if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
+                    this.calcMinMax(doc.components[componentIndex].interval[currentInterval], p)
                     if (currentRequest.offer == "selling") {
                         doc.components[componentIndex].interval[currentInterval].supply.count++
                     } else {
@@ -131,28 +130,23 @@ class Statistics extends Method {
                 }
 
                 // Loop through intervals
-                let offerCount = 0
                 for (let i = 0; i < doc.components.length; i++) {
                     for (let j = 0; j < doc.components[i].interval.length; j++) {
                         // Calculate avg and supply/demand percentages
-                        offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
-                        doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
-                        doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
-                        doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
+                        this.calcAverage(doc.components[i].interval[j], doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count)
+                        this.calcSupplyAndDemand(doc.components[i].interval[j])
 
                         // Add interval vars on component vars
                         doc.components[i].avg += doc.components[i].interval[j].avg
                         doc.components[i].supply.count += doc.components[i].interval[j].supply.count
                         doc.components[i].demand.count += doc.components[i].interval[j].demand.count
-                        if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
-                        if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
+                        this.calcMinMax(doc.components[i], doc.components[i].interval[j].min)
+                        this.calcMinMax(doc.components[i], doc.components[i].interval[j].max)
                     }
 
                     // Calculate avg and supply/demand percentages
-                    offerCount = doc.components[i].supply.count + doc.components[i].demand.count
-                    doc.components[i].avg = doc.components[i].avg / doc.components[i].interval.length
-                    doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
-                    doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
+                    this.calcAverage(doc.components[i], doc.components[i].interval.length)
+                    this.calcSupplyAndDemand(doc.components[i])
 
                     // Add component vars to document vars
                     doc.supply.count += doc.components[i].supply.count
@@ -160,14 +154,36 @@ class Statistics extends Method {
                 }
 
                 // Calculate document supply/demand percentages
-                offerCount = doc.supply.count + doc.demand.count
-                doc.supply.percentage = doc.supply.count / offerCount
-                doc.demand.percentage = doc.demand.count / offerCount
+                this.calcSupplyAndDemand(doc)
 
                 // Return document
                 resolve(doc)
             })
         })
+    }
+
+    /**
+     * Calculates supply and demand percentages
+     */
+    calcSupplyAndDemand(doc) {
+        let offerCount = doc.supply.count + doc.demand.count
+        doc.supply.percentage = doc.supply.count / offerCount
+        doc.demand.percentage = doc.demand.count / offerCount
+    }
+
+    /**
+     * Calculates the average price
+     */
+    calcAverage(doc, divider) {
+        doc.avg = doc.avg / divider
+    }
+
+    /**
+     * Calculates minimum and maximum
+     */
+    calcMinMax(doc, p) {
+        if (p < doc.min) doc.min = p
+        if (p > doc.max) doc.max = p
     }
 }
 
