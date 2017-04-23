@@ -7,7 +7,7 @@ require('./config/env.js')
 /**
  * Dependencies
  */
-const Cluster = require('multi-Cluster')
+const Cluster = require('multi-cluster')
 const Logger = require('./config/logger.js')
 
 

@@ -4,7 +4,7 @@
 /**
  * Socket requirements
  */
-const io = require("Socket.io")
+const io = require("socket.io")
 
 
 /**
