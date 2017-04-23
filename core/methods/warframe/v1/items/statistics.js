@@ -6,19 +6,36 @@ const Method = require("../../../../Method.js")
  * Contains multi-purpose functions for child-methods and provides default values
  */
 class Statistics extends Method {
+    /**
+     * Creates a new statistics call
+     * @constructor
+     */
     constructor() {
         super()
 
-        // Modify schema
+        /**
+         * Schema description
+         * @type {string}
+         */
         this.schema.description = "Get item statistics between a specified time frame."
+
+        /**
+         * Schema resources
+         * @type {string[]}
+         */
         this.schema.resources = ["item"]
+
+        /**
+         * Schema parameters
+         * @type {Array.<string, string, *, boolean, string>}
+         */
         this.schema.params = [{
-            name: "component",
-            type: "string",
-            default: "",
-            required: true,
-            description: "Specifies item component to look up. No component returns full set data."
-        },
+                name: "component",
+                type: "string",
+                default: "",
+                required: true,
+                description: "Specifies item component to look up. No component returns full set data."
+            },
             {
                 name: "timestart",
                 type: "number",
@@ -47,6 +64,12 @@ class Statistics extends Method {
 
     /**
      * Main method which is called by MethodHandler on request
+     * @param {string} item - Item to look up
+     * @param {string} component - Component to look up
+     * @param {number} timestart - Start of the time window
+     * @param {number} timeend - End of the time window
+     * @param {number} interval - Number of intervals to split data into
+     * @returns {Promise}
      */
     main(item, component, timestart, timeend, interval) {
         return new Promise((resolve, reject) => {
