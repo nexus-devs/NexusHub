@@ -15,7 +15,7 @@ class MethodHandler {
     /**
      * Calls method with given param Array
      * @param {object} options - Options to pass to method
-     * @returns {Promise} Method promise
+     * @returns {Promise} Calculated data from method
      */
      callMethod(options) {
          return new Promise((resolve, reject) => {
@@ -56,8 +56,8 @@ class MethodHandler {
 
     /**
      * Generates endpoint tree
-     * @param {string} filename - Method file
-     * @param {array} config - Method config
+     * @param {string} filename - Method file path
+     * @param {array} config - Config array to push available methods into
      * @returns {Object} Method endpoint tree
      */
     getMethodTree(filename, config) {
