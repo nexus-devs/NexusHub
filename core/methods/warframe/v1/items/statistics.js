@@ -68,8 +68,8 @@ class Statistics extends Method {
      * @param {string} component - Component to look up
      * @param {number} timestart - Start of the time window
      * @param {number} timeend - End of the time window
-     * @param {number} interval - Number of intervals to split data into
-     * @returns {Promise} Method promise
+     * @param {number} interval - Number of intervals to split time window into
+     * @returns {Promise} Item Statistics
      */
     main(item, component, timestart, timeend, interval) {
         return new Promise((resolve, reject) => {
