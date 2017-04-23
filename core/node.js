@@ -13,10 +13,15 @@ const MethodHandler = require('./MethodHandler.js')
 class core {
 
     /**
-     * Set Up Nexus Client
+     * Set up Nexus client
+     * @constructor
      */
     constructor() {
 
+        /**
+         * API type
+         * @type {Nexus}
+         */
         this.api = new Nexus({
             game: 'warframe',
             use_socket: true,
