@@ -7,6 +7,12 @@ const chalk = require('chalk')
  */
 class Logger {
 
+    /**
+     * Console logs complete output
+     * @param {object} req - HTTP request object
+     * @param {object} res - HTTP response object
+     * @param {function} next - Next middleware function
+     */
     log(req, res, next) {
 
         // Prepare output
@@ -25,6 +31,7 @@ class Logger {
 
     /**
      * Identify if request sent by Socket.io or Express
+     * @param {object} req - HTTP request object
      */
     setPrefix(req) {
         if (req.channel === "Sockets") {
@@ -37,6 +44,7 @@ class Logger {
 
     /**
      * Color-code user authentication
+     * @param {object} req - HTTP request object
      */
     setUser(req) {
         this.user = {}
@@ -51,6 +59,7 @@ class Logger {
 
     /**
      * Log any errors passed to next()
+     * @param {function} next - Next middleware function
      */
     logErr(next) {
         let _next = next
@@ -65,6 +74,7 @@ class Logger {
 
     /**
      * Log Output of res.send
+     * @param {object} res - HTTP response object
      */
     logRes(res) {
         let _send = res.send
@@ -88,6 +98,7 @@ class Logger {
 
     /**
      * Add Timer to original res.send
+     * @param {object} res - HTTP response object
      */
     addTimer(res) {
         let timestart = process.hrtime()
