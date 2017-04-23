@@ -47,7 +47,7 @@ class Authentication {
      */
     verifyExpress(req, res, next) {
         req.user = {
-            uid: req.ip,
+            uid: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
             scp: "basic-read"
         }
 
