@@ -14,6 +14,8 @@ class MethodHandler {
 
     /**
      * Calls method with given param Array
+     * @param {object} options - Options to pass to method
+     * @returns {Promise} Method promise
      */
      callMethod(options) {
          return new Promise((resolve, reject) => {
@@ -29,6 +31,7 @@ class MethodHandler {
 
     /**
      * Generates flat endpoint schema from method tree
+     * @returns {Array} Flat endpoint schema
      */
     generateEndpointSchema() {
 
@@ -53,6 +56,9 @@ class MethodHandler {
 
     /**
      * Generates endpoint tree
+     * @param {string} filename - Method file
+     * @param {array} config - Method config
+     * @returns {Object} Method endpoint tree
      */
     getMethodTree(filename, config) {
         let stats = fs.lstatSync(filename)
