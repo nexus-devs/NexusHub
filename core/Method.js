@@ -15,9 +15,15 @@ mongodb.connect(process.env.mongo_url, (err, connected) => {
  * Any lower-level method extends this class
  */
 class Method{
+    /**
+     * Creates a new API call
+     * @constructor
+     */
     constructor(){
-
-        // Default Config for API node
+        /**
+         * Default schema for API calls
+         * @type {{resources: Array, params: Array, scope: string, verb: string, description: string}}
+         */
         this.schema = {
             resources: [],
             params: [],
@@ -26,7 +32,10 @@ class Method{
             description: "There is no description for this endpoint yet."
         }
 
-        // Establish MongoDB connection
+        /**
+         * MongoDB database
+         * @type {Db}
+         */
         this.db = db
     }
 }
