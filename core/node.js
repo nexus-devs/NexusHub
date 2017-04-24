@@ -23,9 +23,11 @@ class core {
          * @type {Nexus}
          */
         this.api = new Nexus({
+            api_url: "http://localhost:3400/",
+            auth_url: "http://localhost:7119/",
             game: 'warframe',
             use_socket: true,
-            namespace: '/root',
+            namespace: 'root',
             ignore_limiter: true,
             user_key: process.env.src_user,
             user_secret: process.env.src_secret
