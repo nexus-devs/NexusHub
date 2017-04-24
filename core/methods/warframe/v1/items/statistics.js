@@ -191,8 +191,10 @@ class Statistics extends Method {
 
                 // Calculate document supply/demand percentages
                 offerCount = doc.supply.count + doc.demand.count
-                doc.supply.percentage = doc.supply.count / offerCount
-                doc.demand.percentage = doc.demand.count / offerCount
+                if (offerCount > 0) {
+                    doc.supply.percentage = doc.supply.count / offerCount
+                    doc.demand.percentage = doc.demand.count / offerCount
+                }
 
                 // Return document
                 resolve(doc)
