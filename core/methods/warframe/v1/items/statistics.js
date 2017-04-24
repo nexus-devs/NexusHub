@@ -210,7 +210,7 @@ class Statistics extends Method {
      * @return {object[]} Filtered documents
      */
     despoof(docs, intervalSize) {
-        let users = []  // { name, lastRequest }
+        let users = []  // { name, lastRequest, component }
         let components = [] // { name, avg, count }
         let userIndex
         let componentIndex
@@ -219,7 +219,7 @@ class Statistics extends Method {
         // Filter too many requests from one user
         for (let i = docs.length - 1; i >= 0; i--) {
             currentRequest = docs[i]
-            userIndex = users.findIndex(x => x.name == currentRequest.user)
+            userIndex = users.findIndex(x => x.name == currentRequest.user && x.component == currentRequest.component)
             componentIndex = components.findIndex(x => x.name == currentRequest.component)
 
             if (componentIndex == -1) {
@@ -229,7 +229,7 @@ class Statistics extends Method {
 
             if (userIndex == -1) {
                 // User doesn't exist, create object
-                users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt})
+                users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt, component: currentRequest.component})
                 components[componentIndex].count++
                 components[componentIndex].avg += currentRequest.price
             } else {
