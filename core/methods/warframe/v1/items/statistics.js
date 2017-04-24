@@ -159,23 +159,30 @@ class Statistics extends Method {
                     for (let j = 0; j < doc.components[i].interval.length; j++) {
                         // Calculate avg and supply/demand percentages
                         offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
-                        doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
-                        doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
-                        doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
+                        if (offerCount > 0) {   // Catches empty interval
+                            doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
+                            doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
+                            doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
+
+                            if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
+                            if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
+                        }
 
                         // Add interval vars on component vars
                         doc.components[i].avg += doc.components[i].interval[j].avg
                         doc.components[i].supply.count += doc.components[i].interval[j].supply.count
                         doc.components[i].demand.count += doc.components[i].interval[j].demand.count
-                        if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
-                        if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
                     }
 
                     // Calculate avg and supply/demand percentages
                     offerCount = doc.components[i].supply.count + doc.components[i].demand.count
-                    doc.components[i].avg = doc.components[i].avg / doc.components[i].interval.length
                     doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
                     doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
+                    offerCount = 0
+                    for (let k = 0; k < doc.components[i].interval.length; k++) {
+                        if (doc.components[i].interval[k].supply.count + doc.components[i].interval[k].demand.count) offerCount++
+                    }
+                    doc.components[i].avg = doc.components[i].avg / offerCount
 
                     // Add component vars to document vars
                     doc.supply.count += doc.components[i].supply.count
