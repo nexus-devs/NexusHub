@@ -97,11 +97,12 @@ class Statistics extends Method {
                 }
 
                 // Query vars
+                let intervalSize = (timestart - timeend) / interval // How big is the interval gap
+                result = this.despoof(result, intervalSize)
                 let resultLength = result.length
                 let currentInterval = 0 // Interval helper
                 let componentIndex = 0 // Cached variable for speed
                 let currentRequest // Cached variable for speed
-                let intervalSize = (timestart - timeend) / interval // How big is the interval gap
                 let p = 0   // Cached variable for price
 
                 for (let i = resultLength - 1; i >= 0; i--) {
@@ -200,6 +201,41 @@ class Statistics extends Method {
                 resolve(doc)
             })
         })
+    }
+
+    /**
+     * Filters below/above average requests and user spam
+     * @param {object[]} docs - Documents to filter
+     * @param {number} intervalSize - Interval size in .getTime() format
+     * @return {object[]} Filtered documents
+     */
+    despoof(docs, intervalSize) {
+        let users = []  // { name, lastRequest }
+        let userIndex
+        let currentRequest
+        for (let i = docs.length - 1; i >= 0; i--) {
+            currentRequest = docs[i]
+            userIndex = users.findIndex(x => x.name == currentRequest.user)
+
+            if (currentRequest.price == 99999) {
+                console.log(currentRequest)
+            }
+
+            if (userIndex == -1) {
+                // User doesn't exist, create object
+                users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt})
+            } else {
+                if (users[userIndex].lastRequest.getTime() - currentRequest.createdAt.getTime() < intervalSize) {
+                    // Last request too close, purge
+                    docs.splice(i, 1)
+                } else {
+                    // Everything is okay, update lastRequest
+                    users[userIndex].lastRequest = currentRequest.createdAt
+                }
+            }
+        }
+
+        return docs
     }
 }
 
