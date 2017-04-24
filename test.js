@@ -8,10 +8,14 @@ const Nexus = require('../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            //use_socket: false,
+            //api_url: "http://localhost:3400/",
+            //auth_url:"http://localhost:7119/",
+            use_socket: false,
             //ignore_limiter: true,
-            user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
-            user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
+            //user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
+            //user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
+            user_key: '2UNqyZH3ChJfNiLdRiYr8jqyuIVEirBil6rj5UBy6vEVTUYQ2ngpokfN3rBDmPG9',
+            user_secret: '8HeczdsZb6KODVF3htb22v3VtHTK1C44WbElsRITJhXw3OWPBsARnkN3kmO4t9nR'
         })
 
         this.client.on('ready', () => {
@@ -64,7 +68,7 @@ class Client {
             this.client.getItem('Nikana Prime', {
                 component: "0",
                 //timestart: 3824983243892,
-                timeend: 3894982348932
+                //timeend: 3894982348932
             }).then(item => {
                 //console.log(item.body)
             }).catch(err => {
