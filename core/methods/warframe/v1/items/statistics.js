@@ -97,11 +97,12 @@ class Statistics extends Method {
                 }
 
                 // Query vars
+                let intervalSize = (timestart - timeend) / interval // How big is the interval gap
+                result = this.despoof(result, intervalSize)
                 let resultLength = result.length
                 let currentInterval = 0 // Interval helper
                 let componentIndex = 0 // Cached variable for speed
                 let currentRequest // Cached variable for speed
-                let intervalSize = (timestart - timeend) / interval // How big is the interval gap
                 let p = 0   // Cached variable for price
 
                 for (let i = resultLength - 1; i >= 0; i--) {
@@ -159,23 +160,30 @@ class Statistics extends Method {
                     for (let j = 0; j < doc.components[i].interval.length; j++) {
                         // Calculate avg and supply/demand percentages
                         offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
-                        doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
-                        doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
-                        doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
+                        if (offerCount > 0) {   // Catches empty interval
+                            doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
+                            doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
+                            doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
+
+                            if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
+                            if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
+                        }
 
                         // Add interval vars on component vars
                         doc.components[i].avg += doc.components[i].interval[j].avg
                         doc.components[i].supply.count += doc.components[i].interval[j].supply.count
                         doc.components[i].demand.count += doc.components[i].interval[j].demand.count
-                        if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
-                        if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
                     }
 
                     // Calculate avg and supply/demand percentages
                     offerCount = doc.components[i].supply.count + doc.components[i].demand.count
-                    doc.components[i].avg = doc.components[i].avg / doc.components[i].interval.length
                     doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
                     doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
+                    offerCount = 0
+                    for (let k = 0; k < doc.components[i].interval.length; k++) {
+                        if (doc.components[i].interval[k].supply.count + doc.components[i].interval[k].demand.count) offerCount++
+                    }
+                    doc.components[i].avg = doc.components[i].avg / offerCount
 
                     // Add component vars to document vars
                     doc.supply.count += doc.components[i].supply.count
@@ -184,13 +192,81 @@ class Statistics extends Method {
 
                 // Calculate document supply/demand percentages
                 offerCount = doc.supply.count + doc.demand.count
-                doc.supply.percentage = doc.supply.count / offerCount
-                doc.demand.percentage = doc.demand.count / offerCount
+                if (offerCount > 0) {
+                    doc.supply.percentage = doc.supply.count / offerCount
+                    doc.demand.percentage = doc.demand.count / offerCount
+                }
 
                 // Return document
                 resolve(doc)
             })
         })
+    }
+
+    /**
+     * Filters below/above average requests and user spam
+     * @param {object[]} docs - Documents to filter
+     * @param {number} intervalSize - Interval size in .getTime() format
+     * @return {object[]} Filtered documents
+     */
+    despoof(docs, intervalSize) {
+        let users = []  // { name, lastRequest, component }
+        let components = [] // { name, avg, count }
+        let userIndex
+        let componentIndex
+        let currentRequest
+
+        // Filter too many requests from one user
+        for (let i = docs.length - 1; i >= 0; i--) {
+            currentRequest = docs[i]
+            userIndex = users.findIndex(x => x.name == currentRequest.user && x.component == currentRequest.component)
+            componentIndex = components.findIndex(x => x.name == currentRequest.component)
+
+            if (componentIndex == -1) {
+                // Component doesn't exist, create object
+                componentIndex = components.push({name: currentRequest.component, avg: 0, count: 0}) - 1
+            }
+
+            if (userIndex == -1) {
+                // User doesn't exist, create object
+                users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt, component: currentRequest.component})
+                components[componentIndex].count++
+                components[componentIndex].avg += currentRequest.price
+            } else {
+                if (users[userIndex].lastRequest.getTime() - currentRequest.createdAt.getTime() < intervalSize) {
+                    // Last request too close, purge
+                    docs.splice(i, 1)
+                } else {
+                    // Everything is okay, update lastRequest
+                    users[userIndex].lastRequest = currentRequest.createdAt
+                    components[componentIndex].count++
+                    components[componentIndex].avg += currentRequest.price
+                }
+            }
+        }
+
+        // Process averages
+        for (let i = 0; i < components.length; i++) {
+            components[i].avg = components[i].avg / components[i].count
+        }
+
+        // Filter too high/low from average
+        for (let i = docs.length - 1; i >= 0; i--) {
+            currentRequest = docs[i]
+            componentIndex = components.findIndex(x => x.name == currentRequest.component)
+
+            if (componentIndex != -1) {
+                if (currentRequest.price / components[componentIndex].avg > 6) {
+                    // Current price is 600% over average, purge
+                    docs.splice(i, 1)
+                } else if (currentRequest.price / components[componentIndex].avg < 0.84) {
+                    // Current price is 16% under average, purge
+                    docs.splice(i, 1)
+                }
+            }
+        }
+
+        return docs
     }
 }
 
