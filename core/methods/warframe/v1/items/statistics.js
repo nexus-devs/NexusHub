@@ -211,19 +211,27 @@ class Statistics extends Method {
      */
     despoof(docs, intervalSize) {
         let users = []  // { name, lastRequest }
+        let components = [] // { name, avg, count }
         let userIndex
+        let componentIndex
         let currentRequest
+
+        // Filter too many requests from one user
         for (let i = docs.length - 1; i >= 0; i--) {
             currentRequest = docs[i]
             userIndex = users.findIndex(x => x.name == currentRequest.user)
+            componentIndex = components.findIndex(x => x.name == currentRequest.component)
 
-            if (currentRequest.price == 99999) {
-                console.log(currentRequest)
+            if (componentIndex == -1) {
+                // Component doesn't exist, create object
+                componentIndex = components.push({name: currentRequest.component, avg: 0, count: 0}) - 1
             }
 
             if (userIndex == -1) {
                 // User doesn't exist, create object
                 users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt})
+                components[componentIndex].count++
+                components[componentIndex].avg += currentRequest.price
             } else {
                 if (users[userIndex].lastRequest.getTime() - currentRequest.createdAt.getTime() < intervalSize) {
                     // Last request too close, purge
@@ -231,6 +239,29 @@ class Statistics extends Method {
                 } else {
                     // Everything is okay, update lastRequest
                     users[userIndex].lastRequest = currentRequest.createdAt
+                    components[componentIndex].count++
+                    components[componentIndex].avg += currentRequest.price
+                }
+            }
+        }
+
+        // Process averages
+        for (let i = 0; i < components.length; i++) {
+            components[i].avg = components[i].avg / components[i].count
+        }
+
+        // Filter too high/low from average
+        for (let i = docs.length - 1; i >= 0; i--) {
+            currentRequest = docs[i]
+            componentIndex = components.findIndex(x => x.name == currentRequest.component)
+
+            if (componentIndex != -1) {
+                if (currentRequest.price / components[componentIndex].avg > 6) {
+                    // Current price is 600% over average, purge
+                    docs.splice(i, 1)
+                } else if (currentRequest.price / components[componentIndex].avg < 0.84) {
+                    // Current price is 16% under average, purge
+                    docs.splice(i, 1)
                 }
             }
         }
