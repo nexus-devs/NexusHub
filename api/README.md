@@ -78,4 +78,4 @@ We are using a rate limiting implementation following the token bucket algorithm
 <br>
 
 **Note:** You can easily get your credentials from `api.nexus-stats.com/register`<br>
-From there, we recommend using the [nexus-stats-api](https://github.com/kaptard/nexus-stats-api) module which will avoid rate limits and handle token refreshing automatically.
+From there, we recommend using the [nexus-stats-api](https://github.com/Kaptard/npm-nexus-stats-api) module which will avoid rate limits and handle token refreshing automatically.
