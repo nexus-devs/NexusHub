@@ -1,6 +1,6 @@
 "use strict"
 
-const Nexus = require('../nexus-stats-api/index.js')
+const Nexus = require('nexus-api')
 
 /**
  * Test Client to simulate all kinds of requests
@@ -8,14 +8,14 @@ const Nexus = require('../nexus-stats-api/index.js')
 class Client {
     constructor() {
         this.client = new Nexus({
-            //api_url: "http://localhost:3400/",
-            //auth_url:"http://localhost:7119/",
+            api_url: "http://localhost:3400/",
+            auth_url:"http://localhost:7119/",
             use_socket: false,
             //ignore_limiter: true,
-            //user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
-            //user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
-            user_key: '2UNqyZH3ChJfNiLdRiYr8jqyuIVEirBil6rj5UBy6vEVTUYQ2ngpokfN3rBDmPG9',
-            user_secret: '8HeczdsZb6KODVF3htb22v3VtHTK1C44WbElsRITJhXw3OWPBsARnkN3kmO4t9nR'
+            user_key: 'P4dE2whXjcCobnv8vdifPPEstOSBPXBjyRSY0I9HVJFAeJg5ag239zJdmwmEIQMN',
+            user_secret: 'jwZAbyVCUEI8w2opF3huddTBXWuQkKAvS0v9GtBFYrwLBY765d6DQVFy0QhR2OO4'
+            //user_key: '2UNqyZH3ChJfNiLdRiYr8jqyuIVEirBil6rj5UBy6vEVTUYQ2ngpokfN3rBDmPG9',
+            //user_secret: '8HeczdsZb6KODVF3htb22v3VtHTK1C44WbElsRITJhXw3OWPBsARnkN3kmO4t9nR'
         })
 
         this.client.on('ready', () => {

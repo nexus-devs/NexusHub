@@ -3,7 +3,7 @@
 /**
  * Module Dependencies
  */
-const Nexus = require('../../nexus-stats-api/index.js')
+const Nexus = require('nexus-api')
 const MethodHandler = require('./MethodHandler.js')
 
 

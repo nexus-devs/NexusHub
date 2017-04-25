@@ -17,6 +17,7 @@
     "mongodb": "^2.2.25",
     "mongoose": "^4.9.3",
     "multi-cluster": "^1.0.1",
+    "nexus-api": "0.0.4",
     "raven": "^1.2.1",
     "redis": "^2.6.5",
     "require-reload": "^0.2.2",
