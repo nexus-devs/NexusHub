@@ -3,7 +3,7 @@
 /**
  * Module Dependencies
  */
-const Nexus = require('nexus-api')
+const Nexus = require('blitz-api')
 const MethodHandler = require('./MethodHandler.js')
 
 
