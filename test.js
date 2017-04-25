@@ -1,6 +1,6 @@
 "use strict"
 
-const Nexus = require('nexus-api')
+const Nexus = require('blitz-api')
 
 /**
  * Test Client to simulate all kinds of requests
