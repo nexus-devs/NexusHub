@@ -1,5 +1,5 @@
 ## Nexus Core Resource Node
-Node.js server for data-processing of fundamental statistics. Uses the standard [nexus-stats-api](https://github.com/Kaptard/nexus-stats-api) module to connect to the nexus-stats infrastructure.
+Node.js server for data-processing of fundamental statistics. Uses the standard [nexus-stats-api](https://github.com/nexus-devs/npm-nexus-api) module to connect to the nexus-stats infrastructure.
 - - - -
 <br>
 
@@ -12,15 +12,15 @@ Imagine having a script saved as `/methods/warframe/v1/items/statistics.js`. Onc
 With the example above in mind, we can further control the endpoints through each classes' schema attribute: <br>
 <br>
 
-> **Schema:** 
+> **Schema:**
 ```javascript
 resource: ["item", "component"]
 ```
-> **Express Route:** `/items/:item/:component/method` 
+> **Express Route:** `/items/:item/:component/method`
 <br>
 <br>
 
-> **Schema:** 
+> **Schema:**
 ```javascript
 params: [
     {
@@ -39,8 +39,8 @@ params: [
          },
          description: "Returns data recorded between timestart and timeend"
     }]
-``` 
-> **Express Route:** `/items/method?timestart=1490717012&timeend=1490817012` 
+```
+> **Express Route:** `/items/method?timestart=1490717012&timeend=1490817012`
 <br>
 
 ### Authorization
