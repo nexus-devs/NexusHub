@@ -1,5 +1,5 @@
 
-![Nexus-Stats Dev Version v0.1.1](/banner.png)
+[![Warframe-Nexus](/banner.png)](https://github.com/nexus-devs)
 
 - - - -
 <br>
@@ -25,7 +25,7 @@ Old development builds can be found in the commit history starting at #271
 ## Requirements
 - Redis
 - Mongodb
-- [nexus-auth](https://github.com/Kaptard/nexus-auth) instance
+- [nexus-auth](https://github.com/nexus-devs/nexus-auth) instance
 <br>
 
 **Note:** Make sure to set your preferences in /config/env.config.js

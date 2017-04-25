@@ -61,7 +61,7 @@ Keep in mind that native socket middleware won't allow you to respond to request
 
 ## Authentication
 Simple authentication via JSON Web Tokens. Runs as native middleware for express. Initial authentication on Sockets is done natively - expiration check through own middleware.<br>
-Tokens are provided by a [nexus-auth](https://github.com/kaptard/nexus-auth) server.
+Tokens are provided by a [nexus-auth](https://github.com/nexus-devs/nexus-auth) server.
 
 <br>
 <br>
@@ -78,4 +78,4 @@ We are using a rate limiting implementation following the token bucket algorithm
 <br>
 
 **Note:** You can easily get your credentials from `api.nexus-stats.com/register`<br>
-From there, we recommend using the [nexus-stats-api](https://github.com/Kaptard/npm-nexus-stats-api) module which will avoid rate limits and handle token refreshing automatically.
+From there, we recommend using the [nexus-stats-api](https://github.com/nexus-devs/npm-nexus-api) module which will avoid rate limits and handle token refreshing automatically.
