@@ -35,7 +35,7 @@ params: [
          name: "timeend",
          type: "number",
          default: () => {
-              return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
+            return new Date(new Date().setDate(new Date().getDate() - 21)) / 1 // 3 weeks ago
          },
          description: "Returns data recorded between timestart and timeend"
     }]
