@@ -27,8 +27,8 @@ params: [
         name: "timestart",
         type: "number",
         default: () => {
-        return new Date().getTime() / 1 // current time
-    },
+            return new Date().getTime() / 1 // current time
+        },
         description: "Returns data recorded between timestart and timeend"
     },
     {
