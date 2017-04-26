@@ -1,6 +1,6 @@
 "use strict"
 
-const Nexus = require('nexus-stats-api')
+const Nexus = require('blitz-js-query')
 
 /**
  * Test Client to simulate all kinds of requests
@@ -21,7 +21,7 @@ class Client {
         this.client.on('ready', () => {
 
             // Launch test requests
-            this.test()
+            //this.test()
         })
     }
 
