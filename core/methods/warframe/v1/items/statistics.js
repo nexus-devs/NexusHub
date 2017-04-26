@@ -91,6 +91,7 @@ class Statistics extends Method {
                 let doc = {
                     title: "Saryn Prime", // TODO: Change this to reflect the actual item
                     type: "Prime",
+                    median: 0,
                     supply: { count: 0, percentage: 0 },
                     demand: { count: 0, percentage: 0 },
                     components: []
@@ -195,6 +196,18 @@ class Statistics extends Method {
                 if (offerCount > 0) {
                     doc.supply.percentage = doc.supply.count / offerCount
                     doc.demand.percentage = doc.demand.count / offerCount
+                }
+
+                // Calculate median
+                result.sort(function(a, b) {
+                    return a.price - b.price
+                })
+                if (resultLength % 2 != 0) {
+                    // Odd
+                    doc.median = result[resultLength/2].price
+                } else {
+                    // Even
+                    doc.median = (result[Math.floor(resultLength/2)].price + result[Math.ceil(resultLength/2)].price) / 2
                 }
 
                 // Return document
