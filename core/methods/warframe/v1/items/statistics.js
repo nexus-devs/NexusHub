@@ -204,10 +204,10 @@ class Statistics extends Method {
                 })
                 if (resultLength % 2 != 0) {
                     // Odd
-                    doc.median = result[resultLength/2].price
+                    doc.median = result[Math.floor(resultLength/2)].price
                 } else {
                     // Even
-                    doc.median = (result[Math.floor(resultLength/2)].price + result[Math.ceil(resultLength/2)].price) / 2
+                    doc.median = (result[resultLength/2 - 1].price + result[resultLength/2].price) / 2
                 }
 
                 // Return document
