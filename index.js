@@ -3,14 +3,23 @@
 /**
  * blitz.js setup
  */
-const blitzConfig = { logLevel: "silly" }
-const Blitz = require("blitz-js")(blitzConfig)
+const Blitz = require("blitz-js")()
 
 
 /**
  * Big useless intro
  */
 const intro = require("./config/logger.js")
+
+
+/**
+ * blitz.js authentication server
+ */
+const Auth = require("blitz-js-auth")
+const authOptions = {
+    mongoURL: "mongodb://localhost/nexus-stats"
+}
+blitz.use(new Auth(authOptions))
 
 
 /**
