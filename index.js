@@ -3,8 +3,8 @@
 /**
  * blitz.js setup
  */
-const blitzconfig = { logLevel: "silly" }
-const Blitz = require("blitz-js")(blitzconfig)
+const blitzConfig = { logLevel: "silly" }
+const Blitz = require("blitz-js")(blitzConfig)
 
 
 /**
@@ -24,7 +24,8 @@ blitz.use(new API())
  * blitz.js core node
  */
 const Core = require("blitz-js-core")
-let core_options = {
-    endpointPath: __dirname + "/endpoints"
+let coreOptions = {
+    endpointPath: __dirname + "/endpoints",
+    mongoURL: "mongodb://localhost/nexus-stats"
 }
-blitz.use(new Core(core_options))
+blitz.use(new Core(coreOptions))
