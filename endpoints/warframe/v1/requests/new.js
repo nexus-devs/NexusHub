@@ -11,6 +11,7 @@ class Request extends Method {
 
         // Modify schema
         this.schema.verb = "POST"
+        this.schema.scope = "root-read-write"
     }
 
     /**
