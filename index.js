@@ -17,7 +17,7 @@ const intro = require("./config/logger.js")
  */
 const Auth = require("blitz-js-auth")
 const authOptions = {
-    mongoURL: "mongodb://localhost/nexus-stats"
+    mongoURL: "mongodb://localhost/warframe-nexus"
 }
 blitz.use(new Auth(authOptions))
 
@@ -35,6 +35,6 @@ blitz.use(new API())
 const Core = require("blitz-js-core")
 let coreOptions = {
     endpointPath: __dirname + "/endpoints",
-    mongoURL: "mongodb://localhost/nexus-stats"
+    mongoURL: "mongodb://localhost/warframe-nexus"
 }
 blitz.use(new Core(coreOptions))

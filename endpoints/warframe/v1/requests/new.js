@@ -18,6 +18,7 @@ class Request extends Method {
      */
     main(request) {
         return new Promise((resolve, reject) => {
+            this.db.collection("requests").insertOne(request)
             resolve("Request processed. (" + JSON.stringify(request) + ")")
         })
     }
