@@ -9,7 +9,7 @@
   "author": "",
   "license": "All right reserved.",
   "dependencies": {
-    "blitz-js": "0.0.7",
+    "blitz-js": "0.0.8",
     "blitz-js-api": "^0.0.6",
     "blitz-js-auth": "0.0.0",
     "blitz-js-core": "^0.0.8",
