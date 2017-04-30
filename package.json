@@ -1,5 +1,5 @@
 {
-  "name": "warframe-stats",
+  "name": "warframe-nexus",
   "version": "2.1.1",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   "dependencies": {
     "blitz-js": "0.0.8",
     "blitz-js-api": "^0.0.6",
-    "blitz-js-auth": "0.0.0",
+    "blitz-js-auth": "0.0.1",
     "blitz-js-core": "^0.0.8",
     "chalk": "^1.1.3"
   }
