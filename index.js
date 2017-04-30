@@ -23,10 +23,13 @@ blitz.use(new Auth(authOptions))
 
 
 /**
- * blitz.js api node
+ * blitz.js api node1
  */
 const API = require("blitz-js-api")
-blitz.use(new API())
+const apiOptions = {
+    mongoURL: "mongodb://localhost/warframe-nexus"
+}
+blitz.use(new API(apiOptions))
 
 
 /**
