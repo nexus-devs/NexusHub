@@ -3,7 +3,7 @@
 /**
  * blitz.js setup
  */
-const Blitz = require("blitz-js")()
+const Blitz = require("blitz-js")({logLevel: "silly"})
 
 
 /**
@@ -37,8 +37,4 @@ let coreOptions = {
     endpointPath: __dirname + "/endpoints",
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
-
-let testFn = () => {console.log(blitz.config.core.mongoURL)}
-
-blitz.hook(Core, testFn)
 blitz.use(new Core(coreOptions))
