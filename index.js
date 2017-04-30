@@ -37,4 +37,8 @@ let coreOptions = {
     endpointPath: __dirname + "/endpoints",
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
+
+let testFn = () => {console.log(blitz.config.core.mongoURL)}
+
+blitz.hook(Core, testFn)
 blitz.use(new Core(coreOptions))
