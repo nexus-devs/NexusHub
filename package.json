@@ -11,7 +11,7 @@
   "dependencies": {
     "blitz-js": "0.0.8",
     "blitz-js-api": "^0.0.7",
-    "blitz-js-auth": "0.0.1",
+    "blitz-js-auth": "0.0.3",
     "blitz-js-core": "^0.0.8",
     "chalk": "^1.1.3"
   }
