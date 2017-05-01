@@ -106,112 +106,117 @@ class Statistics extends Method {
                 let currentRequest // Cached variable for speed
                 let p = 0   // Cached variable for price
 
-                for (let i = resultLength - 1; i >= 0; i--) {
-                    currentRequest = result[i]
-                    componentIndex = doc.components.findIndex(x => x.name == currentRequest.component)
+                if (resultLength == 0) {
+                    resolve({})
+                } else {
+                    for (let i = resultLength - 1; i >= 0; i--) {
+                        currentRequest = result[i]
+                        componentIndex = doc.components.findIndex(x => x.name == currentRequest.component)
 
-                    // Create component if it doesn't exist
-                    if (componentIndex == -1) {
-                        // Component blueprint
-                        let component = {
-                            name: currentRequest.component,
-                            avg: 0,
-                            min: Number.POSITIVE_INFINITY,
-                            max: Number.NEGATIVE_INFINITY,
-                            supply: { count: 0, percentage: 0 },
-                            demand: { count: 0, percentage: 0 },
-                            interval: []
-                        }
-
-                        // Fill interval array
-                        for (let j = 0; j < interval; j++) {
-                            let intervalObj = {     // Helper obj for field creation
+                        // Create component if it doesn't exist
+                        if (componentIndex == -1) {
+                            // Component blueprint
+                            let component = {
+                                name: currentRequest.component,
                                 avg: 0,
                                 min: Number.POSITIVE_INFINITY,
                                 max: Number.NEGATIVE_INFINITY,
-                                supply: { count: 0, percentage: 0 },
-                                demand: { count: 0, percentage: 0 }
+                                supply: {count: 0, percentage: 0},
+                                demand: {count: 0, percentage: 0},
+                                interval: []
                             }
 
-                            component.interval.push(intervalObj)
+                            // Fill interval array
+                            for (let j = 0; j < interval; j++) {
+                                let intervalObj = {     // Helper obj for field creation
+                                    avg: 0,
+                                    min: Number.POSITIVE_INFINITY,
+                                    max: Number.NEGATIVE_INFINITY,
+                                    supply: {count: 0, percentage: 0},
+                                    demand: {count: 0, percentage: 0}
+                                }
+
+                                component.interval.push(intervalObj)
+                            }
+
+                            // Set index and push object
+                            componentIndex = doc.components.push(component) - 1
                         }
 
-                        // Set index and push object
-                        componentIndex = doc.components.push(component) - 1
+                        // Find current interval
+                        currentInterval = Math.floor((currentRequest.createdAt.getTime() - timeend) / intervalSize)
+
+                        // Add to current interval
+                        p = currentRequest.price
+                        doc.components[componentIndex].interval[currentInterval].avg += p
+                        if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
+                        if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
+                        if (currentRequest.offer == "selling") {
+                            doc.components[componentIndex].interval[currentInterval].supply.count++
+                        } else {
+                            doc.components[componentIndex].interval[currentInterval].demand.count++
+                        }
                     }
 
-                    // Find current interval
-                    currentInterval = Math.floor((currentRequest.createdAt.getTime() - timeend) / intervalSize)
+                    // Loop through intervals
+                    let offerCount = 0
+                    for (let i = 0; i < doc.components.length; i++) {
+                        for (let j = 0; j < doc.components[i].interval.length; j++) {
+                            // Calculate avg and supply/demand percentages
+                            offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
+                            if (offerCount > 0) {   // Catches empty interval
+                                doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
+                                doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
+                                doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
 
-                    // Add to current interval
-                    p = currentRequest.price
-                    doc.components[componentIndex].interval[currentInterval].avg += p
-                    if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
-                    if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
-                    if (currentRequest.offer == "selling") {
-                        doc.components[componentIndex].interval[currentInterval].supply.count++
-                    } else {
-                        doc.components[componentIndex].interval[currentInterval].demand.count++
-                    }
-                }
+                                if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
+                                if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
+                            }
 
-                // Loop through intervals
-                let offerCount = 0
-                for (let i = 0; i < doc.components.length; i++) {
-                    for (let j = 0; j < doc.components[i].interval.length; j++) {
+                            // Add interval vars on component vars
+                            doc.components[i].avg += doc.components[i].interval[j].avg
+                            doc.components[i].supply.count += doc.components[i].interval[j].supply.count
+                            doc.components[i].demand.count += doc.components[i].interval[j].demand.count
+                        }
+
                         // Calculate avg and supply/demand percentages
-                        offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
-                        if (offerCount > 0) {   // Catches empty interval
-                            doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
-                            doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
-                            doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
-
-                            if (doc.components[i].interval[j].min < doc.components[i].min) doc.components[i].min = doc.components[i].interval[j].min
-                            if (doc.components[i].interval[j].max > doc.components[i].max) doc.components[i].max = doc.components[i].interval[j].max
+                        offerCount = doc.components[i].supply.count + doc.components[i].demand.count
+                        doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
+                        doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
+                        offerCount = 0
+                        for (let k = 0; k < doc.components[i].interval.length; k++) {
+                            if (doc.components[i].interval[k].supply.count + doc.components[i].interval[k].demand.count) offerCount++
                         }
+                        doc.components[i].avg = doc.components[i].avg / offerCount
 
-                        // Add interval vars on component vars
-                        doc.components[i].avg += doc.components[i].interval[j].avg
-                        doc.components[i].supply.count += doc.components[i].interval[j].supply.count
-                        doc.components[i].demand.count += doc.components[i].interval[j].demand.count
+                        // Add component vars to document vars
+                        doc.supply.count += doc.components[i].supply.count
+                        doc.demand.count += doc.components[i].demand.count
                     }
 
-                    // Calculate avg and supply/demand percentages
-                    offerCount = doc.components[i].supply.count + doc.components[i].demand.count
-                    doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
-                    doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
-                    offerCount = 0
-                    for (let k = 0; k < doc.components[i].interval.length; k++) {
-                        if (doc.components[i].interval[k].supply.count + doc.components[i].interval[k].demand.count) offerCount++
+                    // Calculate document supply/demand percentages
+                    offerCount = doc.supply.count + doc.demand.count
+                    if (offerCount > 0) {
+                        doc.supply.percentage = doc.supply.count / offerCount
+                        doc.demand.percentage = doc.demand.count / offerCount
                     }
-                    doc.components[i].avg = doc.components[i].avg / offerCount
 
-                    // Add component vars to document vars
-                    doc.supply.count += doc.components[i].supply.count
-                    doc.demand.count += doc.components[i].demand.count
+                    // Calculate median
+                    result.sort(function (a, b) {
+                        return a.price - b.price
+                    })
+                    if (resultLength % 2 != 0) {
+                        // Odd
+                        doc.median = result[Math.floor(resultLength / 2)].price
+                    } else {
+                        // Even
+                        console.log(resultLength)
+                        doc.median = (result[resultLength / 2 - 1].price + result[resultLength / 2].price) / 2
+                    }
+
+                    // Return document
+                    resolve(doc)
                 }
-
-                // Calculate document supply/demand percentages
-                offerCount = doc.supply.count + doc.demand.count
-                if (offerCount > 0) {
-                    doc.supply.percentage = doc.supply.count / offerCount
-                    doc.demand.percentage = doc.demand.count / offerCount
-                }
-
-                // Calculate median
-                result.sort(function(a, b) {
-                    return a.price - b.price
-                })
-                if (resultLength % 2 != 0) {
-                    // Odd
-                    doc.median = result[Math.floor(resultLength/2)].price
-                } else {
-                    // Even
-                    doc.median = (result[resultLength/2 - 1].price + result[resultLength/2].price) / 2
-                }
-
-                // Return document
-                resolve(doc)
             })
         })
     }
