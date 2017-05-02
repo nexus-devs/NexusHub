@@ -210,7 +210,6 @@ class Statistics extends Method {
                         doc.median = result[Math.floor(resultLength / 2)].price
                     } else {
                         // Even
-                        console.log(resultLength)
                         doc.median = (result[resultLength / 2 - 1].price + result[resultLength / 2].price) / 2
                     }
 
