@@ -19,6 +19,12 @@ class Request extends Method {
      */
     main(request) {
         return new Promise((resolve, reject) => {
+
+            // Modify request
+            request.createdAt = new Date().toISOString()
+            request.price = request.price === "null" ? null : request.price
+
+            // Insert and resolve
             this.db.collection("requests").insertOne(request)
             resolve("Request processed. (" + JSON.stringify(request) + ")")
         })
