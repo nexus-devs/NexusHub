@@ -21,7 +21,7 @@ class Request extends Method {
         return new Promise((resolve, reject) => {
 
             // Modify request
-            request.createdAt = new Date().toISOString()
+            request.createdAt = new Date()
             request.price = request.price === "null" ? null : request.price
 
             // Insert and resolve
