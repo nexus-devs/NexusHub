@@ -90,7 +90,7 @@ class Statistics extends Method {
             }
 
             // Append component if one is given
-            if (component != "") query['component'] = parseInt(component)
+            if (component !== "") query['component'] = parseInt(component)
 
             // Query and resolve results
             this.db.collection('requests').find(query).toArray((err, result) => {
