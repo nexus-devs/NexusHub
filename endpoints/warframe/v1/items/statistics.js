@@ -1,6 +1,7 @@
 'use strict'
 
 const Method = require(blitz.config.core.endpointParent)
+const _ = require("lodash")
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -72,28 +73,42 @@ class Statistics extends Method {
      * @returns {Promise} Item Statistics
      */
     main(item, component, timestart, timeend, interval) {
+
+        // match item case pattern
+        item = this.title(item)
+        component = this.title(component)
+
         return new Promise((resolve, reject) => {
-            // TODO: change collection to production
+
             // Query object
             let query = {
-                'item': 50,
-                'createdAt': { $gte: new Date(timeend), $lte: new Date(timestart) }
+                'item': item,
+                'createdAt': {
+                    $gte: new Date(timeend),
+                    $lte: new Date(timestart)
+                }
             }
 
             // Append component if one is given
             if (component != "") query['component'] = parseInt(component)
 
             // Query and resolve results
-            this.db.collection('dummy_requests').find(query).toArray((err, result) => {
+            this.db.collection('requests').find(query).toArray((err, result) => {
                 if (err) reject(err)
 
                 // Document to return
                 let doc = {
-                    title: "Saryn Prime", // TODO: Change this to reflect the actual item
+                    title: item,
                     type: "Prime",
                     median: 0,
-                    supply: { count: 0, percentage: 0 },
-                    demand: { count: 0, percentage: 0 },
+                    supply: {
+                        count: 0,
+                        percentage: 0
+                    },
+                    demand: {
+                        count: 0,
+                        percentage: 0
+                    },
                     components: []
                 }
 
@@ -104,7 +119,7 @@ class Statistics extends Method {
                 let currentInterval = 0 // Interval helper
                 let componentIndex = 0 // Cached variable for speed
                 let currentRequest // Cached variable for speed
-                let p = 0   // Cached variable for price
+                let p = 0 // Cached variable for price
 
                 if (resultLength == 0) {
                     resolve({})
@@ -121,19 +136,31 @@ class Statistics extends Method {
                                 avg: 0,
                                 min: Number.POSITIVE_INFINITY,
                                 max: Number.NEGATIVE_INFINITY,
-                                supply: {count: 0, percentage: 0},
-                                demand: {count: 0, percentage: 0},
+                                supply: {
+                                    count: 0,
+                                    percentage: 0
+                                },
+                                demand: {
+                                    count: 0,
+                                    percentage: 0
+                                },
                                 interval: []
                             }
 
                             // Fill interval array
                             for (let j = 0; j < interval; j++) {
-                                let intervalObj = {     // Helper obj for field creation
+                                let intervalObj = { // Helper obj for field creation
                                     avg: 0,
                                     min: Number.POSITIVE_INFINITY,
                                     max: Number.NEGATIVE_INFINITY,
-                                    supply: {count: 0, percentage: 0},
-                                    demand: {count: 0, percentage: 0}
+                                    supply: {
+                                        count: 0,
+                                        percentage: 0
+                                    },
+                                    demand: {
+                                        count: 0,
+                                        percentage: 0
+                                    }
                                 }
 
                                 component.interval.push(intervalObj)
@@ -151,7 +178,7 @@ class Statistics extends Method {
                         doc.components[componentIndex].interval[currentInterval].avg += p
                         if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
                         if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
-                        if (currentRequest.offer == "selling") {
+                        if (currentRequest.offer == "Selling") {
                             doc.components[componentIndex].interval[currentInterval].supply.count++
                         } else {
                             doc.components[componentIndex].interval[currentInterval].demand.count++
@@ -164,7 +191,7 @@ class Statistics extends Method {
                         for (let j = 0; j < doc.components[i].interval.length; j++) {
                             // Calculate avg and supply/demand percentages
                             offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
-                            if (offerCount > 0) {   // Catches empty interval
+                            if (offerCount > 0) { // Catches empty interval
                                 doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
                                 doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
                                 doc.components[i].interval[j].demand.percentage = doc.components[i].interval[j].demand.count / offerCount
@@ -202,7 +229,7 @@ class Statistics extends Method {
                     }
 
                     // Calculate median
-                    result.sort(function (a, b) {
+                    result.sort(function(a, b) {
                         return a.price - b.price
                     })
                     if (resultLength % 2 != 0) {
@@ -227,7 +254,7 @@ class Statistics extends Method {
      * @return {object[]} Filtered documents
      */
     despoof(docs, intervalSize) {
-        let users = []  // { name, lastRequest, component }
+        let users = [] // { name, lastRequest, component }
         let components = [] // { name, avg, count }
         let userIndex
         let componentIndex
@@ -241,14 +268,22 @@ class Statistics extends Method {
 
             if (componentIndex == -1) {
                 // Component doesn't exist, create object
-                componentIndex = components.push({name: currentRequest.component, avg: 0, count: 0}) - 1
+                componentIndex = components.push({
+                    name: currentRequest.component,
+                    avg: 0,
+                    count: 0
+                }) - 1
             }
 
             if (userIndex == -1) {
                 // User doesn't exist, create object
-                users.push({name: currentRequest.user, lastRequest: currentRequest.createdAt, component: currentRequest.component})
+                users.push({
+                    name: currentRequest.user,
+                    lastRequest: currentRequest.createdAt,
+                    component: currentRequest.component
+                })
                 components[componentIndex].count++
-                components[componentIndex].avg += currentRequest.price
+                    components[componentIndex].avg += currentRequest.price
             } else {
                 if (users[userIndex].lastRequest.getTime() - currentRequest.createdAt.getTime() < intervalSize) {
                     // Last request too close, purge
@@ -257,7 +292,7 @@ class Statistics extends Method {
                     // Everything is okay, update lastRequest
                     users[userIndex].lastRequest = currentRequest.createdAt
                     components[componentIndex].count++
-                    components[componentIndex].avg += currentRequest.price
+                        components[componentIndex].avg += currentRequest.price
                 }
             }
         }
@@ -284,6 +319,14 @@ class Statistics extends Method {
         }
 
         return docs
+    }
+
+
+    /**
+     * Title function for case sensitivity
+     */
+    title(str) {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
 }
 
