@@ -109,6 +109,7 @@ class Statistics extends Method {
                         count: 0,
                         percentage: 0
                     },
+                    ignore: 0,
                     components: []
                 }
 
@@ -144,6 +145,7 @@ class Statistics extends Method {
                                     count: 0,
                                     percentage: 0
                                 },
+                                ignore: 0,
                                 interval: []
                             }
 
@@ -160,7 +162,8 @@ class Statistics extends Method {
                                     demand: {
                                         count: 0,
                                         percentage: 0
-                                    }
+                                    },
+                                    ignore: 0
                                 }
 
                                 component.interval.push(intervalObj)
@@ -175,9 +178,15 @@ class Statistics extends Method {
 
                         // Add to current interval
                         p = currentRequest.price
-                        doc.components[componentIndex].interval[currentInterval].avg += p
-                        if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
-                        if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
+
+                        if (p) {
+                            doc.components[componentIndex].interval[currentInterval].avg += p
+                            if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
+                            if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
+                        } else {
+                            doc.components[componentIndex].interval[currentInterval].ignore++
+                        }
+
                         if (currentRequest.offer == "Selling") {
                             doc.components[componentIndex].interval[currentInterval].supply.count++
                         } else {
@@ -190,7 +199,7 @@ class Statistics extends Method {
                     for (let i = 0; i < doc.components.length; i++) {
                         for (let j = 0; j < doc.components[i].interval.length; j++) {
                             // Calculate avg and supply/demand percentages
-                            offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count
+                            offerCount = doc.components[i].interval[j].supply.count + doc.components[i].interval[j].demand.count - doc.components[i].interval[j].ignore
                             if (offerCount > 0) { // Catches empty interval
                                 doc.components[i].interval[j].avg = doc.components[i].interval[j].avg / offerCount
                                 doc.components[i].interval[j].supply.percentage = doc.components[i].interval[j].supply.count / offerCount
@@ -204,10 +213,14 @@ class Statistics extends Method {
                             doc.components[i].avg += doc.components[i].interval[j].avg
                             doc.components[i].supply.count += doc.components[i].interval[j].supply.count
                             doc.components[i].demand.count += doc.components[i].interval[j].demand.count
+                            doc.components[i].ignore += doc.components[i].interval[j].ignore
+
+                            // Delete ignore field
+                            delete doc.components[i].interval[j].ignore
                         }
 
                         // Calculate avg and supply/demand percentages
-                        offerCount = doc.components[i].supply.count + doc.components[i].demand.count
+                        offerCount = doc.components[i].supply.count + doc.components[i].demand.count - doc.components[i].ignore
                         doc.components[i].supply.percentage = doc.components[i].supply.count / offerCount
                         doc.components[i].demand.percentage = doc.components[i].demand.count / offerCount
                         offerCount = 0
@@ -219,16 +232,27 @@ class Statistics extends Method {
                         // Add component vars to document vars
                         doc.supply.count += doc.components[i].supply.count
                         doc.demand.count += doc.components[i].demand.count
+                        doc.ignore += doc.components[i].ignore
+
+                        // Delete ignore filed
+                        delete doc.components[i].ignore
                     }
 
                     // Calculate document supply/demand percentages
-                    offerCount = doc.supply.count + doc.demand.count
+                    offerCount = doc.supply.count + doc.demand.count - doc.ignore
                     if (offerCount > 0) {
                         doc.supply.percentage = doc.supply.count / offerCount
                         doc.demand.percentage = doc.demand.count / offerCount
                     }
 
-                    // Calculate median
+                    // Delete ignore field
+                    delete doc.ignore
+
+                    for (let i = resultLength-1; i >= 0; i--) {
+                        if (!result[i].price) result.splice(i, 1)
+                    }
+                    resultLength = result.length
+                    
                     result.sort(function(a, b) {
                         return a.price - b.price
                     })
