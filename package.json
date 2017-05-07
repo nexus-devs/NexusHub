@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "test": "mocha --timeout 10000"
   },
   "author": "",
   "license": "All right reserved.",
@@ -14,5 +15,10 @@
     "blitz-js-auth": "0.0.6",
     "blitz-js-core": "0.0.18",
     "chalk": "latest"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.3.0"
   }
 }
