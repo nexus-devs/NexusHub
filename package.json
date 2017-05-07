@@ -10,9 +10,9 @@
   "license": "All right reserved.",
   "dependencies": {
     "blitz-js": "0.0.12",
-    "blitz-js-api": "0.0.21",
+    "blitz-js-api": "0.0.22",
     "blitz-js-auth": "0.0.6",
-    "blitz-js-core": "0.0.17",
+    "blitz-js-core": "0.0.18",
     "chalk": "latest"
   }
 }
