@@ -3,7 +3,7 @@
 /**
  * blitz.js setup
  */
-const Blitz = require("blitz-js")({logLevel: "verbose"})
+const Blitz = require("blitz-js")({logLevel: "silly"})
 
 
 /**
