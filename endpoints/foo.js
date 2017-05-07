@@ -11,9 +11,9 @@ const Method = require(blitz.config.core.endpointParent)
          this.schema.description = "Simple testing method which returns 'bar'."
      }
 
-    main(){
-        return new Promise((resolve, reject) => resolve("bar"))
+    main() {
         this.publish("/foo", "lel")
+        return new Promise((resolve, reject) => resolve("bar"))
      }
  }
 
