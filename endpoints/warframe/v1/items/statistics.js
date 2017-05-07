@@ -100,7 +100,6 @@ class Statistics extends Method {
                 let doc = {
                     title: item,
                     type: "Prime",
-                    median: 0,
                     supply: {
                         count: 0,
                         percentage: 0
@@ -135,6 +134,7 @@ class Statistics extends Method {
                             let component = {
                                 name: currentRequest.component,
                                 avg: 0,
+                                median: [],
                                 min: Number.POSITIVE_INFINITY,
                                 max: Number.NEGATIVE_INFINITY,
                                 supply: {
@@ -180,6 +180,10 @@ class Statistics extends Method {
                         p = currentRequest.price
 
                         if (p) {
+                            // Add to median array
+                            doc.components[componentIndex].median.push(p)
+
+                            // Calculate avg, min, max
                             doc.components[componentIndex].interval[currentInterval].avg += p
                             if (p < doc.components[componentIndex].interval[currentInterval].min) doc.components[componentIndex].interval[currentInterval].min = p
                             if (p > doc.components[componentIndex].interval[currentInterval].max) doc.components[componentIndex].interval[currentInterval].max = p
@@ -234,6 +238,18 @@ class Statistics extends Method {
                         doc.demand.count += doc.components[i].demand.count
                         doc.ignore += doc.components[i].ignore
 
+                        // Get median
+                        doc.components[i].median.sort(function(a, b) {
+                            return a - b
+                        })
+                        let medianLength = doc.components[i].median.length
+                        if (medianLength % 2 != 0) {
+                            // Odd
+                            doc.components[i].median = doc.components[i].median[Math.floor(medianLength / 2)]
+                        } else {
+                            doc.components[i].median = (doc.components[i].median[medianLength / 2 - 1] + doc.components[i].median[medianLength / 2]) / 2
+                        }
+
                         // Delete ignore filed
                         delete doc.components[i].ignore
                     }
@@ -247,22 +263,6 @@ class Statistics extends Method {
 
                     // Delete ignore field
                     delete doc.ignore
-
-                    for (let i = resultLength-1; i >= 0; i--) {
-                        if (!result[i].price) result.splice(i, 1)
-                    }
-                    resultLength = result.length
-                    
-                    result.sort(function(a, b) {
-                        return a.price - b.price
-                    })
-                    if (resultLength % 2 != 0) {
-                        // Odd
-                        doc.median = result[Math.floor(resultLength / 2)].price
-                    } else {
-                        // Even
-                        doc.median = (result[resultLength / 2 - 1].price + result[resultLength / 2].price) / 2
-                    }
 
                     // Return document
                     resolve(doc)
