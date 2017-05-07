@@ -25,10 +25,15 @@ describe('Requests', () => {
     describe('/GET request', () => {
         it('it should GET all requests', (done) => {
             server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
-                res.body.should.be.a('array')
                 res.statusCode.should.equal(200)
+                result(res).should.be.a('object')
                 done()
             })
         })
     })
 })
+
+// result function
+function result(res) {
+    return JSON.parse(res.body)
+}
