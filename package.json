@@ -17,8 +17,8 @@
     "chalk": "latest"
   },
   "devDependencies": {
+    "blitz-js-query": "0.0.15",
     "chai": "^3.5.0",
-    "chai-http": "^3.0.0",
     "mocha": "^3.3.0"
   }
 }

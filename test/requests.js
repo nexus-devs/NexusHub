@@ -1,9 +1,8 @@
 // Dependencies
-let server = require('../testserver')
+let query = require('blitz-js-query')
+let server = new query()
 let chai = require('chai')
-let chaiHttp = require('chai-http')
 let should = chai.should()
-chai.use(chaiHttp)
 
 // Parent test
 describe('Requests', () => {
@@ -11,9 +10,24 @@ describe('Requests', () => {
     beforeEach((done) => {
         let MongoClient = require('mongodb').MongoClient
 
-        MongoClient.connect('mongodb://localhost/warframe-nexus-test', function(err, db) {
-            db.collection('requests', function(err, collection) {
-                collection.remove({}, function(err, removed){})
+        MongoClient.connect('mongodb://localhost/warframe-nexus-test', (err, db) => {
+            db.collection('requests', (err, collection) => {
+                collection.remove({}, (err, removed) => {
+                    done()
+                })
+            })
+        })
+    })
+
+    /*
+     Test the /GET route
+     */
+    describe('/GET request', () => {
+        it('it should GET all requests', (done) => {
+            server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
+                res.body.should.be.a('array')
+                res.statusCode.should.equal(200)
+                done()
             })
         })
     })
