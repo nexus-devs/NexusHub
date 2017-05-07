@@ -12,7 +12,8 @@ const Method = require(blitz.config.core.endpointParent)
      }
 
     main(){
-         return new Promise((resolve, reject) => resolve("bar"))
+        return new Promise((resolve, reject) => resolve("bar"))
+        this.publish("/foo", "lel")
      }
  }
 
