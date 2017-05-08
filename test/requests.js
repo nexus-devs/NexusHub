@@ -1,12 +1,11 @@
 // Dependencies
 let query = require('../../npm-blitz-query/index.js')
-let server = new query()
+/*let serverAuthed = new query({
+    'user_key': 'Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I',
+    'user_secret': 'wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C'
+})*/
 let chai = require('chai')
 let should = chai.should()
-
-/*process.on("unhandledRejection", (err) => {
-    console.error(err)
-})*/
 
 // Parent test
 describe('Requests', () => {
@@ -36,13 +35,23 @@ describe('Requests', () => {
             type: 'Prime'
         }
 
+        let server = new query()
+
         it("it shouldn't insert because user is unauthorized", (done) => {
-            server.post({url:'/warframe/v1/requests/new', data: userObj}).then((res) => {
+            server.post('/warframe/v1/requests/new', userObj).then((res) => {
                 res.statusCode.should.equal(401)
                 result(res).should.be.a('string')
-                result(res).should.equal('Unauthorized')
+                result(res).should.have.string('Unauthorized')
                 done()
-            })
+            }).catch((err) => done(err))
+        })
+        it("it shouldn't insert because request is wrong", (done) => {
+            server.post('/warframe/v1/requests/new', {}).then((res) => {
+                res.statusCode.should.equal(405)
+                result(res).should.be.a('string')
+                result(res).should.have.string('Invalid Request')
+                done()
+            }).catch((err) => done(err))
         })
     })
 })
