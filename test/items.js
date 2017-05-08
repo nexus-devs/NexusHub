@@ -108,10 +108,28 @@ describe('Items', () => {
     Test the item statistics
      */
     describe('/GET statistics', () => {
-        it("it should have intervals with a day each", (done) => {
+        it("it shouldn't get a result because rate limitation", (done) => {
             let server = new query({
                 "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
                 "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                "ignore_limiter": true
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
+                    res.statusCode.should.equal(200)
+                    done()
+                }).catch((err) => done(err))
+                server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
+                    res.statusCode.should.equal(429)
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
+
+        it("it should have intervals with a day each", (done) => {
+            let server = new query({
+                "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
                 "ignore_limiter": true
             })
             server.on('ready', () => {
@@ -124,6 +142,26 @@ describe('Items', () => {
                     for (let i = 0; i < 7; i++) {
                         res.components[0].interval[i].avg.should.equal(objects[i].price)
                     }
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
+
+        it("it should have the correct count and percentages", (done) => {
+            let server = new query({
+                "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                "ignore_limiter": true
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                    res.should.be.a('object')
+                    res.statusCode.should.equal(200)
+                    res = result(res)
+                    let sumCount = res.supply.count + res.demand.count
+                    sumCount.should.equal(objects.length)
+                    res.supply.percentage.should.equal(res.supply.count / sumCount)
+                    res.demand.percentage.should.equal(res.demand.count / sumCount)
                     done()
                 }).catch((err) => done(err))
             })
