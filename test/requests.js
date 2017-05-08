@@ -25,8 +25,7 @@ describe('Requests', () => {
     /*
      Test the /POST route
      */
-    describe('/POST new request', () => {
-        let responseArray = []
+    describe('/POST new requests', () => {
         let userObj = {
             user: 'TestUser',
             price: 75,
