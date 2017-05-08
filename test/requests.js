@@ -1,8 +1,12 @@
 // Dependencies
-let query = require('blitz-js-query')
+let query = require('../../npm-blitz-query/index.js')
 let server = new query()
 let chai = require('chai')
 let should = chai.should()
+
+/*process.on("unhandledRejection", (err) => {
+    console.error(err)
+})*/
 
 // Parent test
 describe('Requests', () => {
@@ -22,11 +26,21 @@ describe('Requests', () => {
     /*
      Test the /GET route
      */
-    describe('/GET request', () => {
-        it('it should GET all requests', (done) => {
-            server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
-                res.statusCode.should.equal(200)
-                result(res).should.be.a('object')
+    describe('/POST new request', () => {
+        let userObj = {
+            user: 'TestUser',
+            price: 75,
+            offer: 'Selling',
+            item: 'Nikana Prime',
+            component: 'Set',
+            type: 'Prime'
+        }
+
+        it("it shouldn't insert because user is unauthorized", (done) => {
+            server.post({url:'/warframe/v1/requests/new', data: userObj}).then((res) => {
+                res.statusCode.should.equal(401)
+                result(res).should.be.a('string')
+                result(res).should.equal('Unauthorized')
                 done()
             })
         })
@@ -35,5 +49,9 @@ describe('Requests', () => {
 
 // result function
 function result(res) {
-    return JSON.parse(res.body)
+    try {
+        return JSON.parse(res.body)
+    } catch(e) {
+        return res.body
+    }
 }
