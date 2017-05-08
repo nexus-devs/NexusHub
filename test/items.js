@@ -25,9 +25,11 @@ for (let i = 0; i < 7; i++) {
     objects.push(requestObj)
 }
 
+let items = []
+
 // Parent test
 describe('Items', () => {
-    // Empty database before each test
+    // Empty database before each test and fill with requests
     beforeEach((done) => {
         db.collection('requests', (err, collection) => {
             collection.remove({}, (err, removed) => {
@@ -36,6 +38,28 @@ describe('Items', () => {
                 })
             })
         })
+    })
+
+    // Empty database before each test and fill with item list
+    beforeEach((done) => {
+        db.collection('items', (err, collection) => {
+            collection.remove({}, (err, removed) => {
+                fs.readFile('itemlist.json', 'utf8', (err, data) => {
+                    let json = JSON.parse(data)
+                    items = json
+                    collection.insertMany(json, (err, result) => {
+                        done()
+                    })
+                })
+            })
+        })
+    })
+
+    /*
+    Test the item list
+     */
+    describe('/GET list', () => {
+        it("it should get ")
     })
 })
 
