@@ -63,14 +63,12 @@ describe('Requests', () => {
                         res.statusCode.should.equal(200)
                         result(res).should.be.a('string')
                         result(res).should.have.string('Request processed')
-                        responseArray.push(response(res))
                     }).catch((err) => done(err))
                 }
                 server.post('/warframe/v1/requests/new', userObj).then((res) => {
                     res.statusCode.should.equal(200)
                     result(res).should.be.a('string')
                     result(res).should.have.string('Request processed')
-                    responseArray.push(response(res))
                     db.collection('requests').count((err, count) => {
                         count.should.equal(10)
                         done()

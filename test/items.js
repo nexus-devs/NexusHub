@@ -2,6 +2,7 @@
 let query = require('../../npm-blitz-query/index.js')
 let chai = require('chai')
 let should = chai.should()
+let fs = require('fs')
 
 // Database
 const mongodb = require("mongodb").MongoClient
@@ -44,10 +45,14 @@ describe('Items', () => {
     beforeEach((done) => {
         db.collection('items', (err, collection) => {
             collection.remove({}, (err, removed) => {
-                fs.readFile('itemlist.json', 'utf8', (err, data) => {
-                    let json = JSON.parse(data)
-                    items = json
-                    collection.insertMany(json, (err, result) => {
+                fs.readFile('test/itemlist.json', 'utf8', (err, data) => {
+                    if (err) throw err
+                    items = JSON.parse(data)
+                    for (let i = 0; i < items.length; i++) {
+                        items[i].updatedAt = new Date(items[i].updatedAt['$date'])
+                    }
+                    collection.insertMany(items, (err, result) => {
+                        if (err) throw err
                         done()
                     })
                 })
@@ -59,7 +64,20 @@ describe('Items', () => {
     Test the item list
      */
     describe('/GET list', () => {
-        it("it should get ")
+        it("it should get the correct item count", (done) => {
+            let server = new query({
+                "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
+                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH"
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/list').then((res) => {
+                    res.statusCode.should.equal(200)
+                    result(res).should.be.a('array')
+                    result(res).should.have.length(items.length)
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
     })
 })
 
