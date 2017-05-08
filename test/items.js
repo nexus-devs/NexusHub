@@ -79,6 +79,26 @@ describe('Items', () => {
                 }).catch((err) => done(err))
             })
         })
+
+        it("it should have no duplicate items", (done) => {
+            let server = new query({
+                "user_key":"pMsMWnSl6g9RzIXmedhiuWwCJnX48M7Goq6Gg5PRXfyYCcNUuBLZM0cUcEfzOyrS",
+                "user_secret":"tRD0CaE1sWVND3DzpQQEPiAzp4TciwZ01jsNcPMCozVKklxQC3m41oGYnMnvNBLq",
+                "ignore_limiter": true
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/list').then((res) => {
+                    res.statusCode.should.equal(200)
+                    result(res).should.be.a('array')
+                    let duplicates = []
+                    for (let i = 0; i < result(res).length; i++) {
+                        if (duplicates.indexOf(result(res)[i].name) == -1) duplicates.push(result(res)[i].name)
+                    }
+                    duplicates.should.have.length(result(res).length)
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
     })
 })
 
