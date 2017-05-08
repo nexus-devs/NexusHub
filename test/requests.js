@@ -1,31 +1,32 @@
 // Dependencies
 let query = require('../../npm-blitz-query/index.js')
-/*let serverAuthed = new query({
-    'user_key': 'Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I',
-    'user_secret': 'wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C'
-})*/
 let chai = require('chai')
 let should = chai.should()
+
+// Database
+const mongodb = require("mongodb").MongoClient
+let db = null
+mongodb.connect('mongodb://localhost/warframe-nexus-test', (err, connected) => {
+    if(err) throw(err)
+    db = connected
+})
 
 // Parent test
 describe('Requests', () => {
     // Empty database before each test
     beforeEach((done) => {
-        let MongoClient = require('mongodb').MongoClient
-
-        MongoClient.connect('mongodb://localhost/warframe-nexus-test', (err, db) => {
-            db.collection('requests', (err, collection) => {
-                collection.remove({}, (err, removed) => {
-                    done()
-                })
+        db.collection('requests', (err, collection) => {
+            collection.remove({}, (err, removed) => {
+                done()
             })
         })
     })
 
     /*
-     Test the /GET route
+     Test the /POST route
      */
     describe('/POST new request', () => {
+        let responseArray = []
         let userObj = {
             user: 'TestUser',
             price: 75,
@@ -35,23 +36,49 @@ describe('Requests', () => {
             type: 'Prime'
         }
 
-        let server = new query()
-
         it("it shouldn't insert because user is unauthorized", (done) => {
-            server.post('/warframe/v1/requests/new', userObj).then((res) => {
-                res.statusCode.should.equal(401)
-                result(res).should.be.a('string')
-                result(res).should.have.string('Unauthorized')
-                done()
-            }).catch((err) => done(err))
+            let server = new query({
+                "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
+                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                'ignore_limiter': true
+            })
+            server.on('ready', () => {
+                server.post('/warframe/v1/requests/new', userObj).then((res) => {
+                    res.statusCode.should.equal(401)
+                    result(res).should.be.a('string')
+                    result(res).should.have.string('Unauthorized')
+                    done()
+                }).catch((err) => done(err))
+            })
         })
-        it("it shouldn't insert because request is wrong", (done) => {
-            server.post('/warframe/v1/requests/new', {}).then((res) => {
-                res.statusCode.should.equal(405)
-                result(res).should.be.a('string')
-                result(res).should.have.string('Invalid Request')
-                done()
-            }).catch((err) => done(err))
+
+        it("it should insert 10 request", (done) => {
+            let server = new query({
+                'user_key': 'Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I',
+                'user_secret': 'wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C',
+                'ignore_limiter': true
+            })
+            server.on('ready', () => {
+                for (let i = 0; i < 9; i++) {
+                    server.post('/warframe/v1/requests/new', userObj).then((res) => {
+                        res.statusCode.should.equal(200)
+                        result(res).should.be.a('string')
+                        result(res).should.have.string('Request processed')
+                        responseArray.push(response(res))
+                    }).catch((err) => done(err))
+                }
+                server.post('/warframe/v1/requests/new', userObj).then((res) => {
+                    res.statusCode.should.equal(200)
+                    result(res).should.be.a('string')
+                    result(res).should.have.string('Request processed')
+                    responseArray.push(response(res))
+                    db.collection('requests').count((err, count) => {
+                        count.should.equal(10)
+                        done()
+                    })
+                }).catch((err) => done(err))
+            })
+
         })
     })
 })
@@ -63,4 +90,10 @@ function result(res) {
     } catch(e) {
         return res.body
     }
+}
+
+// response obj function
+function response(res) {
+    res.body = res.body.match(/\(([^)]+)\)/)[1]
+    return result(res)
 }
