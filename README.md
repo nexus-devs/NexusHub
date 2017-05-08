@@ -22,6 +22,11 @@ Old development builds can be found in the commit history starting at #271
 => then go to `localhost:3010/foo` to get your `bar`
 <br>
 
+## Testing
+>`node testserver.js`<br>
+>`npm test`
+<br>
+
 ## Requirements
 - Redis
 - Mongodb
