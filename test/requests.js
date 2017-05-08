@@ -37,8 +37,8 @@ describe('Requests', () => {
 
         it("it shouldn't insert because user is unauthorized", (done) => {
             let server = new query({
-                "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
-                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                "user_key":"PXSoo3ehJ6dUR8trkzapEpJFG8jH0BttsZtnNhlib4bf01ae2akY0cSvcSNJBOVh",
+                "user_secret":"PRe77n5U8642G2Hixd6mxBlN5VPNWLrBLxKWEPtAVxMq45ONH0CW9wHNPOgwFfhC",
                 'ignore_limiter': true
             })
             server.on('ready', () => {
