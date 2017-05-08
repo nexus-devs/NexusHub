@@ -13,9 +13,11 @@ mongodb.connect('mongodb://localhost/warframe-nexus-test', (err, connected) => {
 })
 
 let objects = []
+let timestart = new Date().getTime()
+let timeend = new Date().getTime()
 for (let i = 0; i < 7; i++) {
     let requestObj = {
-        user: 'TestUser',
+        user: 'TestUser' + i,
         price: 75,
         offer: Math.random() < 0.5 ? "Buying" : "Selling",
         item: 'Nikana Prime',
@@ -23,6 +25,7 @@ for (let i = 0; i < 7; i++) {
         type: 'Prime',
         createdAt: new Date(new Date().getTime() - 1000*60*60*24*i)
     }
+    timeend = requestObj.createdAt.getTime() - 1
     objects.push(requestObj)
 }
 
@@ -95,6 +98,32 @@ describe('Items', () => {
                         if (duplicates.indexOf(result(res)[i].name) == -1) duplicates.push(result(res)[i].name)
                     }
                     duplicates.should.have.length(result(res).length)
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
+    })
+
+    /*
+    Test the item statistics
+     */
+    describe('/GET statistics', () => {
+        it("it should have intervals with a day each", (done) => {
+            let server = new query({
+                "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
+                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                "ignore_limiter": true
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                    res.statusCode.should.equal(200)
+                    res = result(res)
+                    res.should.be.a('object')
+                    res.components.should.have.length(1)
+                    res.components[0].interval.should.have.length(7)
+                    for (let i = 0; i < 7; i++) {
+                        res.components[0].interval[i].avg.should.equal(objects[i].price)
+                    }
                     done()
                 }).catch((err) => done(err))
             })
