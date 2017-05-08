@@ -67,7 +67,8 @@ describe('Items', () => {
         it("it should get the correct item count", (done) => {
             let server = new query({
                 "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
-                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH"
+                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                "ignore_limiter": true
             })
             server.on('ready', () => {
                 server.get('/warframe/v1/items/list').then((res) => {
