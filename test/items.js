@@ -126,6 +126,37 @@ describe('Items', () => {
             })
         })
 
+        it("it should have the correct formatting and names", (done) => {
+            let server = new query({
+                "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                "ignore_limiter": true
+            })
+            server.on('ready', () => {
+                server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                    res.statusCode.should.equal(200)
+                    res = result(res)
+                    res.should.be.a('object')
+                    res.title.should.equal('Nikana Prime')
+                    res.type.should.equal('Prime')
+                    res.components.should.be.a('array')
+                    res.supply.should.be.a('object')
+                    res.demand.should.be.a('object')
+                    for (let i = 0; i < res.components.length; i++) {
+                        res.components[i].interval.should.be.a('array')
+                        res.components[i].supply.should.be.a('object')
+                        res.components[i].demand.should.be.a('object')
+                        for (let j = 0; j < res.components[i].interval.length; j++) {
+                            res.components[i].interval[j].should.be.a('object')
+                            res.components[i].interval[j].supply.should.be.a('object')
+                            res.components[i].interval[j].demand.should.be.a('object')
+                        }
+                    }
+                    done()
+                }).catch((err) => done(err))
+            })
+        })
+
         it("it should have intervals with a day each", (done) => {
             let server = new query({
                 "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
