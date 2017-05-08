@@ -166,6 +166,48 @@ describe('Items', () => {
                 }).catch((err) => done(err))
             })
         })
+
+        it("it should have correct component avg/min/max", (done) => {
+            let requestObj = {
+                user: 'OtherTestUser',
+                price: objects[0].price - 10,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: new Date()
+            }
+            let requestObj2 = {
+                user: 'OtherTestUser2',
+                price: objects[0].price + 10,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: new Date()
+            }
+            db.collection('requests', (err, collection) => {
+                collection.insertMany([requestObj, requestObj2], (err, r) => {
+                    if (err) done(err)
+
+                    let server = new query({
+                        "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                        "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                        "ignore_limiter": true
+                    })
+                    server.on('ready', () => {
+                        server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                            res.should.be.a('object')
+                            res.statusCode.should.equal(200)
+                            result(res).components[0].avg.should.equal(objects[0].price)
+                            result(res).components[0].min.should.equal(requestObj.price)
+                            result(res).components[0].max.should.equal(requestObj2.price)
+                            done()
+                        }).catch((err) => done(err))
+                    })
+                })
+            })
+        })
     })
 })
 
