@@ -15,7 +15,7 @@ mongodb.connect('mongodb://localhost/warframe-nexus-test', (err, connected) => {
 let objects = []
 let timestart = new Date().getTime()
 let timeend = new Date().getTime()
-for (let i = 0; i < 7; i++) {
+for (let i = 0; i < 50; i++) {
     let requestObj = {
         user: 'TestUser' + i,
         price: 75,
@@ -233,6 +233,79 @@ describe('Items', () => {
                             result(res).components[0].avg.should.equal(objects[0].price)
                             result(res).components[0].min.should.equal(requestObj.price)
                             result(res).components[0].max.should.equal(requestObj2.price)
+                            done()
+                        }).catch((err) => done(err))
+                    })
+                })
+            })
+        })
+
+        it("it should correctly prevent price spoofing", (done) => {
+            let minSpoofObj = {
+                user: 'OtherTestUser',
+                price: objects[0].price*0.8,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: new Date()
+            }
+            let maxSpoofObj = {
+                user: 'OtherTestUser2',
+                price: objects[0].price*10,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: new Date()
+            }
+            db.collection('requests', (err, collection) => {
+                collection.insertMany([minSpoofObj, maxSpoofObj], (err, r) => {
+                    if (err) done(err)
+
+                    let server = new query({
+                        "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                        "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                        "ignore_limiter": true
+                    })
+                    server.on('ready', () => {
+                        server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                            res.should.be.a('object')
+                            res.statusCode.should.equal(200)
+                            result(res).components[0].min.should.not.equal(minSpoofObj.price)
+                            result(res).components[0].max.should.not.equal(maxSpoofObj.price)
+                            done()
+                        }).catch((err) => done(err))
+                    })
+                })
+            })
+        })
+
+        it("should correctly prevent mass request spoofing", (done) => {
+            let spoofObjDoubleRequest = objects[0]
+            spoofObjDoubleRequest.price += 5
+            delete spoofObjDoubleRequest._id
+
+            let spoofObjCorrectOne = objects[1]
+            spoofObjCorrectOne.price -= 5
+            spoofObjCorrectOne.createdAt = objects[objects.length-2].createdAt
+            delete spoofObjCorrectOne._id
+
+            db.collection('requests', (err, collection) => {
+                collection.insertMany([spoofObjDoubleRequest, spoofObjCorrectOne], (err, r) => {
+                    if (err) done(err)
+
+                    let server = new query({
+                        "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                        "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                        "ignore_limiter": true
+                    })
+                    server.on('ready', () => {
+                        server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                            res.should.be.a('object')
+                            res.statusCode.should.equal(200)
+                            result(res).components[0].max.should.not.equal(spoofObjDoubleRequest.price)
+                            result(res).components[0].min.should.equal(spoofObjCorrectOne.price)
                             done()
                         }).catch((err) => done(err))
                     })
