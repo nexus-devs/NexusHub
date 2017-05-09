@@ -1,6 +1,7 @@
 'use strict'
 
 const Method = require(blitz.config.core.endpointParent)
+const Statistics = new(require(__dirname + "/../items/statistics.js"))
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -11,7 +12,7 @@ class Request extends Method {
 
         // Modify schema
         this.schema.verb = "POST"
-        this.schema.scope = "root-read-write"
+        //this.schema.scope = "root-read-write"
     }
 
     /**
@@ -23,6 +24,14 @@ class Request extends Method {
             // Modify request
             request.createdAt = new Date()
             request.price = request.price === "null" ? null : request.price
+
+            // Get statistics for item
+            Statistics.main(request.item, "", new Date().getTime(), new Date(new Date().setDate(new Date().getDate() - 7)).getTime(), 7)
+
+            // Publish changes
+            .then((data) => {
+                this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
+            })
 
             // Insert and resolve
             this.db.collection("requests").insertOne(request)
