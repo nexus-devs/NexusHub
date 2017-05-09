@@ -8,7 +8,7 @@
     "test": "mocha --timeout 10000"
   },
   "author": "",
-  "license": "All right reserved.",
+  "license": "CC BY-NC 4.0",
   "dependencies": {
     "blitz-js": "0.0.12",
     "blitz-js-api": "0.0.23",
