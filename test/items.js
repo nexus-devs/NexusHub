@@ -116,11 +116,10 @@ describe('Items', () => {
             server.on('ready', () => {
                 server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
                     res.statusCode.should.equal(200)
-
-                    server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
-                        res.statusCode.should.equal(429)
-                        done()
-                    }).catch((err) => done(err))
+                }).catch((err) => done(err))
+                server.get('/warframe/v1/items/Nikana Prime/statistics').then((res) => {
+                    res.statusCode.should.equal(429)
+                    done()
                 }).catch((err) => done(err))
             })
         })
@@ -281,14 +280,24 @@ describe('Items', () => {
         })
 
         it("it should correctly prevent mass request spoofing", (done) => {
-            let spoofObjDoubleRequest = objects[0]
-            spoofObjDoubleRequest.price += 5
-            delete spoofObjDoubleRequest._id
-
-            let spoofObjCorrectOne = objects[1]
-            spoofObjCorrectOne.price -= 5
-            spoofObjCorrectOne.createdAt = objects[objects.length-2].createdAt
-            delete spoofObjCorrectOne._id
+            let spoofObjDoubleRequest = {
+                user: objects[0].user,
+                price: objects[0].price+5,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: objects[0].createdAt
+            }
+            let spoofObjCorrectOne = {
+                user: 'OtherTestUser2',
+                price: objects[1].price-5,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: objects[objects.length-2].createdAt
+            }
 
             db.collection('requests', (err, collection) => {
                 collection.insertMany([spoofObjDoubleRequest, spoofObjCorrectOne], (err, r) => {
