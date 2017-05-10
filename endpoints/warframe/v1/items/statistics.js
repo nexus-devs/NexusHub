@@ -145,7 +145,7 @@ class Statistics extends Method {
             if (componentIndex == -1) {
                 componentIndex = components.push({
                     name: request.component,
-                    avg: 0,
+                    avg: null,
                     count: 0
                 }) - 1
             }
@@ -320,7 +320,7 @@ class Statistics extends Method {
             // Fill interval array
             for (let j = 0; j < interval; j++) {
                 let sub = { // Helper obj for field creation
-                    avg: 0,
+                    avg: null,
                     min: Number.POSITIVE_INFINITY,
                     max: Number.NEGATIVE_INFINITY,
                     supply: {
