@@ -331,7 +331,7 @@ class Statistics extends Method {
             currentRequest = docs[i]
             componentIndex = components.findIndex(x => x.name == currentRequest.component)
 
-            if (componentIndex != -1) {
+            if (componentIndex != -1 && currentRequest.price != null) {
                 if (currentRequest.price / components[componentIndex].avg > 6) {
                     // Current price is 600% over average, purge
                     docs.splice(i, 1)
