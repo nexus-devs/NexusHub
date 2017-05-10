@@ -165,19 +165,21 @@ class Statistics extends Method {
 
             // User does exist, check if request in interval
             else {
+
+                // Last request too close, purge
                 if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalSize) {
-                    // Last request too close, purge
                     result.splice(i, 1)
                     counter ++
-                } else {
-                    // Everything is okay, update lastRequest
+                }
+
+                // Everything is okay, update lastRequest
+                else {
                     users[userIndex].lastRequest = request.createdAt
                     components[componentIndex].count++
                     components[componentIndex].avg += request.price
                 }
             }
         }
-        console.log(":: Purged " + counter + "/" + len + " entries. That's " + counter / len * 100 + "%")
     }
 
 
@@ -192,12 +194,12 @@ class Statistics extends Method {
             if (componentIndex != -1) {
 
                 // Current price is 600% over average, purge
-                if (request.price / components[componentIndex].avg > 6) {
+                if (request.price / components[componentIndex].avg > 3) {
                     result.splice(i, 1)
                 }
 
                 // Current price is 16% under average, purge
-                else if (request.price / components[componentIndex].avg < 0.84) {
+                else if (request.price / components[componentIndex].avg < 0.33) {
                     result.splice(i, 1)
                 }
             }
