@@ -159,8 +159,11 @@ class Statistics extends Method {
                     lastRequest: request.createdAt,
                     component: request.component
                 })
-                components[componentIndex].count++
+
+                if (request.price != null) {
+                    components[componentIndex].count++
                     components[componentIndex].avg += request.price
+                }
             }
 
             // User does exist, check if request in interval
@@ -175,8 +178,10 @@ class Statistics extends Method {
                 // Everything is okay, update lastRequest
                 else {
                     users[userIndex].lastRequest = request.createdAt
-                    components[componentIndex].count++
-                    components[componentIndex].avg += request.price
+                    if (request.price != null) {
+                        components[componentIndex].count++
+                        components[componentIndex].avg += request.price
+                    }
                 }
             }
         }
@@ -191,8 +196,7 @@ class Statistics extends Method {
             let request = result[i]
             let componentIndex = components.findIndex(x => x.name == request.component)
 
-            if (componentIndex != -1) {
-
+            if (componentIndex != -1 && request.price != null) {
                 // Current price is 600% over average, purge
                 if (request.price / components[componentIndex].avg > 3) {
                     result.splice(i, 1)

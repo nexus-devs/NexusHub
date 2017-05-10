@@ -306,8 +306,11 @@ class Statistics extends Method {
                     lastRequest: currentRequest.createdAt,
                     component: currentRequest.component
                 })
-                components[componentIndex].count++
+
+                if (currentRequest.price != null) {
+                    components[componentIndex].count++
                     components[componentIndex].avg += currentRequest.price
+                }
             } else {
                 if (users[userIndex].lastRequest.getTime() - currentRequest.createdAt.getTime() < intervalSize) {
                     // Last request too close, purge
@@ -315,8 +318,10 @@ class Statistics extends Method {
                 } else {
                     // Everything is okay, update lastRequest
                     users[userIndex].lastRequest = currentRequest.createdAt
-                    components[componentIndex].count++
+                    if (currentRequest.price != null) {
+                        components[componentIndex].count++
                         components[componentIndex].avg += currentRequest.price
+                    }
                 }
             }
         }

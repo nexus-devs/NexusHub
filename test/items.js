@@ -33,32 +33,43 @@ let items = []
 
 // Parent test
 describe('Items', () => {
-    /*
-    Test the item list
-     */
-    describe('/GET list', () => {
-        // Empty database before each test and fill with item list
-        beforeEach((done) => {
-            db.collection('items', (err, collection) => {
+    // Empty database before each test and fill with requests
+    beforeEach((done) => {
+        db.collection('requests', (err, collection) => {
+            collection.remove({}, (err, removed) => {
+                collection.insertMany(objects, (err, result) => {
+                    done()
+                })
+            })
+        })
+    })
+
+    // Empty database before each test and fill with item list
+    beforeEach((done) => {
+        db.collection('items', (err, collection) => {
+            if (err) throw err
+            collection.remove({}, (err, removed) => {
                 if (err) throw err
-                collection.remove({}, (err, removed) => {
+                fs.readFile('test/itemlist.json', 'utf8', (err, data) => {
                     if (err) throw err
-                    fs.readFile('test/itemlist.json', 'utf8', (err, data) => {
+                    items = JSON.parse(data)
+                    collection.insertMany(items, (err, result) => {
                         if (err) throw err
-                        items = JSON.parse(data)
-                        collection.insertMany(items, (err, result) => {
-                            if (err) throw err
-                            done()
-                        })
+                        done()
                     })
                 })
             })
         })
+    })
 
+    /*
+    Test the item list
+     */
+    describe('/GET list', () => {
         it("it should get the correct item count", (done) => {
             let server = new query({
-                "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
-                "user_secret":"Cvlke9Hsnxs4NmtQsRpAqwembfsiBlQh4CpSIexYKsYWTs5pSeKUhfkocsWqTeNH",
+                "user_key":"kMQ76CZh3Wj2udsslIsYQ9D6XRBnEVnRyZjTDFFoY0TPOLfoUkXVKn8VkVueR9oH",
+                "user_secret":"OZhPAFWOgyicImETaiewe7orJowgSVqoKSAtSI1HNHm2NvCH10RBXvh0BIXWsTPU",
                 "ignore_limiter": true
             })
             server.on('ready', () => {
@@ -96,17 +107,6 @@ describe('Items', () => {
     Test the item statistics
      */
     describe('/GET statistics', () => {
-        // Empty database before each test and fill with requests
-        beforeEach((done) => {
-            db.collection('requests', (err, collection) => {
-                collection.remove({}, (err, removed) => {
-                    collection.insertMany(objects, (err, result) => {
-                        done()
-                    })
-                })
-            })
-        })
-
         it("it shouldn't get a result because rate limitation", (done) => {
             let server = new query({
                 "user_key":"uxC3zU2154HRTb5kAMYgs7KHbHGNve5LUgSt5mlVEAcFvQZDk2ikxd6KnuSxIC22",
@@ -314,6 +314,40 @@ describe('Items', () => {
                             res.statusCode.should.equal(200)
                             result(res).components[0].max.should.not.equal(spoofObjDoubleRequest.price)
                             result(res).components[0].min.should.equal(spoofObjCorrectOne.price)
+                            done()
+                        }).catch((err) => done(err))
+                    })
+                })
+            })
+        })
+
+        it("it should correctly process null prices", (done) => {
+            let nullPricedObj = {
+                user: 'NullPriceUser',
+                price: null,
+                offer: Math.random() < 0.5 ? "Buying" : "Selling",
+                item: 'Nikana Prime',
+                component: 'Set',
+                type: 'Prime',
+                createdAt: new Date()
+            }
+
+            db.collection('requests', (err, collection) => {
+                collection.insertMany([nullPricedObj], (err, r) => {
+                    if (err) done(err)
+
+                    let server = new query({
+                        "user_key":"Vf9W14UqTOceb6p6hTarH9LCbJCIKpY1PLUFHFj68cpWnLM91S2pzELKUc8bGn9I",
+                        "user_secret":"wSIKrCEldMIeKi7W6Q0ITHSAudnzXWYUEAEFe1HmZEbPcyjnW4VNjjuwxpmAB05C",
+                        "ignore_limiter": true
+                    })
+                    server.on('ready', () => {
+                        server.get('/warframe/v1/items/Nikana Prime/statistics?timeend='+timeend).then((res) => {
+                            res.should.be.a('object')
+                            res.statusCode.should.equal(200)
+                            result(res).components[0].min.should.equal(objects[0].price)
+                            let count = result(res).supply.count + result(res).demand.count
+                            count.should.equal(objects.length + 1)
                             done()
                         }).catch((err) => done(err))
                     })
