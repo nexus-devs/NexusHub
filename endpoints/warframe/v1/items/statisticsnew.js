@@ -136,8 +136,6 @@ class Statistics extends Method {
      * Filter multiple requests from one user in single interval
      */
     purgeSpam(result, users, components, intervalSize) {
-        let counter = 0
-        let len = result.length
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
@@ -172,7 +170,6 @@ class Statistics extends Method {
                 // Last request too close, purge
                 if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalSize) {
                     result.splice(i, 1)
-                    counter ++
                 }
 
                 // Everything is okay, update lastRequest
@@ -197,13 +194,14 @@ class Statistics extends Method {
             let componentIndex = components.findIndex(x => x.name == request.component)
 
             if (componentIndex != -1 && request.price != null) {
-                // Current price is 600% over average, purge
+
+                // Current price is 300% over average, purge
                 if (request.price / components[componentIndex].avg > 3) {
                     result.splice(i, 1)
                 }
 
-                // Current price is 16% under average, purge
-                else if (request.price / components[componentIndex].avg < 0.33) {
+                // Current price is 20% under average, purge
+                else if (request.price / components[componentIndex].avg < 0.16) {
                     result.splice(i, 1)
                 }
             }
@@ -219,6 +217,7 @@ class Statistics extends Method {
         // Document to return
         let doc = {
             title: query.item,
+            type: result[0].type,
             supply: {
                 count: 0,
                 percentage: 0
@@ -302,7 +301,7 @@ class Statistics extends Method {
         if (!component) {
             component = {
                 name: request.component,
-                avg: 0,
+                avg: null,
                 median: [],
                 min: Number.POSITIVE_INFINITY,
                 max: Number.NEGATIVE_INFINITY,
@@ -368,9 +367,9 @@ class Statistics extends Method {
         component.interval.forEach((intvl, j) => {
 
             // Calculate avg and supply/demand percentages
-            offers = intvl.supply.count + intvl.demand.count - intvl.ignore
+            offers = intvl.supply.count + intvl.demand.count
             if (offers) {
-                intvl.avg = intvl.avg / offers
+                intvl.avg = intvl.avg / (offers - intvl.ignore)
                 intvl.supply.percentage = intvl.supply.count / offers
                 intvl.demand.percentage = intvl.demand.count / offers
 
@@ -400,7 +399,7 @@ class Statistics extends Method {
     processComponent(doc, component, offers) {
 
         // Determine demand/supply
-        offers = component.supply.count + component.demand.count - component.ignore
+        offers = component.supply.count + component.demand.count
         component.supply.percentage = component.supply.count / offers
         component.demand.percentage = component.demand.count / offers
         offers = 0
@@ -417,7 +416,7 @@ class Statistics extends Method {
         doc.ignore += component.ignore
 
         // Calculate document supply/demand percentages
-        offers = doc.supply.count + doc.demand.count - doc.ignore
+        offers = doc.supply.count + doc.demand.count
         if (offers > 0) {
             doc.supply.percentage = doc.supply.count / offers
             doc.demand.percentage = doc.demand.count / offers
