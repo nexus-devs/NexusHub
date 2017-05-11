@@ -379,7 +379,7 @@ class Statistics extends Method {
             }
 
             // Add interval vars on component vars
-            component.avg += intvl.avg
+            component.avg += intvl.avg ? intvl.avg : 0
             component.supply.count += intvl.supply.count
             component.demand.count += intvl.demand.count
             component.ignore += intvl.ignore
