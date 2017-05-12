@@ -138,7 +138,7 @@ class Statistics extends Method {
     purgeSpam(result, users, components, intervalSize) {
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
-            let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component && request.price)
+            let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
             let componentIndex = components.findIndex(x => x.name == request.component)
 
             // Component doesn't exist, create object
@@ -435,9 +435,9 @@ class Statistics extends Method {
         component.demand.percentage = component.demand.count / offers
         offers = 0
 
-        // Get Average values
+        // How many intervals have avg value?
         component.interval.forEach(intvl => {
-            if (intvl.supply.count + intvl.demand.count) offers++
+            if (intvl.avg) offers++
         })
 
         component.avg = component.avg / offers
