@@ -202,7 +202,7 @@ class Statistics extends Method {
 
                 // Current price is 20% under average, purge
                 else if (request.price / components[componentIndex].avg < 0.16) {
-                    result.splice(i, 1)
+                   result.splice(i, 1)
                 }
             }
         }
@@ -344,7 +344,6 @@ class Statistics extends Method {
             // Push to original doc
             this.pushSorted(doc.components, component)
         }
-
         return component
     }
 
@@ -360,8 +359,16 @@ class Statistics extends Method {
         // Not empty -> Push at correct position
         else {
             for (let i = 0; i < components.length; i++) {
+
+                // Sort if necessary
                 if (components[i].name > component.name) {
                     components.splice(i, 0, component)
+                    break
+                }
+
+                // Add to end if no sorting needed
+                if (i === components.length) {
+                    components.push(component)
                     break
                 }
             }
