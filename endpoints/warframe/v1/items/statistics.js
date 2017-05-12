@@ -159,8 +159,8 @@ class Statistics extends Method {
                 })
 
                 if (request.price != null) {
-                    components[componentIndex].count++
-                        components[componentIndex].avg += request.price
+                    ++components[componentIndex].count
+                    components[componentIndex].avg += request.price
                 }
             }
 
@@ -200,8 +200,8 @@ class Statistics extends Method {
                     result.splice(i, 1)
                 }
 
-                // Current price is 20% under average, purge
-                else if (request.price / components[componentIndex].avg < 0.16) {
+                // Current price is 33% under average, purge
+                else if (request.price / components[componentIndex].avg < 0.33) {
                    result.splice(i, 1)
                 }
             }
@@ -367,7 +367,7 @@ class Statistics extends Method {
                 }
 
                 // Add to end if no sorting needed
-                if (i === components.length) {
+                if (i === components.length - 1) {
                     components.push(component)
                     break
                 }
