@@ -264,6 +264,9 @@ class Statistics extends Method {
 
             // Find which interval the request is located in
             let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+
+            // Hacky race condition fix when i outside of interval
+            if (i >= interval) i = interval - 1
             let intvl = component.interval[i]
 
             // Request has price?
