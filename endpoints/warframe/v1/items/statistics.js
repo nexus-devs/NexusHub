@@ -158,7 +158,7 @@ class Statistics extends Method {
                     component: request.component
                 })
 
-                if (request.price != null) {
+                if (request.price != null  && request.price > 5 && request.price < 1000) {
                     ++components[componentIndex].count
                     components[componentIndex].avg += request.price
                 }
@@ -175,7 +175,7 @@ class Statistics extends Method {
                 // Everything is okay, update lastRequest
                 else {
                     users[userIndex].lastRequest = request.createdAt
-                    if (request.price != null && request.price > 5 && request.price < 5000) {
+                    if (request.price != null && request.price > 5 && request.price < 1000) {
                         ++components[componentIndex].count
                         components[componentIndex].avg += request.price
                     }
