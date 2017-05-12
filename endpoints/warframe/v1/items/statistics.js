@@ -175,9 +175,9 @@ class Statistics extends Method {
                 // Everything is okay, update lastRequest
                 else {
                     users[userIndex].lastRequest = request.createdAt
-                    if (request.price != null) {
-                        components[componentIndex].count++
-                            components[componentIndex].avg += request.price
+                    if (request.price != null && request.price > 5 && request.price < 5000) {
+                        ++components[componentIndex].count
+                        components[componentIndex].avg += request.price
                     }
                 }
             }
