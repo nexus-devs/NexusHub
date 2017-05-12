@@ -160,7 +160,7 @@ class Statistics extends Method {
 
                 if (request.price != null) {
                     components[componentIndex].count++
-                    components[componentIndex].avg += request.price
+                        components[componentIndex].avg += request.price
                 }
             }
 
@@ -177,7 +177,7 @@ class Statistics extends Method {
                     users[userIndex].lastRequest = request.createdAt
                     if (request.price != null) {
                         components[componentIndex].count++
-                        components[componentIndex].avg += request.price
+                            components[componentIndex].avg += request.price
                     }
                 }
             }
@@ -213,6 +213,11 @@ class Statistics extends Method {
      * Calculate queried item's statistics
      */
     getStatistics(query, interval, result) {
+
+        // Empty results?
+        if (result.length <= 0) {
+            return {}
+        }
 
         // Document to return
         let doc = {
@@ -333,15 +338,34 @@ class Statistics extends Method {
                     },
                     ignore: 0
                 }
-
                 component.interval.push(sub)
             }
 
             // Push to original doc
-            doc.components.push(component)
+            this.pushSorted(doc.components, component)
         }
 
         return component
+    }
+
+
+    /**
+     * Pushes Component into array at correct position
+     */
+    pushSorted(components, component) {
+
+        // Array empty? Just push
+        if (components.length <= 0) components.push(component)
+
+        // Not empty -> Push at correct position
+        else {
+            for (let i = 0; i < components.length; i++) {
+                if (components[i].name > component.name) {
+                    components.splice(i, 0, component)
+                    break
+                }
+            }
+        }
     }
 
 
