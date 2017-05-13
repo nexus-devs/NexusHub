@@ -69,6 +69,9 @@ class Statistics extends Method {
     main(item, component, timestart, timeend, interval) {
         return new Promise((resolve, reject) => {
 
+            // Check if time window makes sense
+            if (timestart < timeend) resolve("Invalid time frame. Please make sure that timestart is greater than timeend.")
+
             // Generate valid Query from input
             let query = this.generateQuery(item, component, timestart, timeend)
 
