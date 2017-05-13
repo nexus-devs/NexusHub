@@ -46,5 +46,5 @@ let coreOptions = {
     endpointPath: __dirname + "/endpoints",
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
-blitz.hook(Core, mongoHooks.mongoVerifyIndexes)
+blitz.hook(Core, mongoHooks.mongoVerifyIndices)
 blitz.use(new Core(coreOptions))
