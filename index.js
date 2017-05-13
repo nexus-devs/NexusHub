@@ -13,6 +13,12 @@ const intro = require("./config/logger.js")
 
 
 /**
+ * Import hooks
+ */
+let mongoHooks = require('./hooks/mongo')
+
+
+/**
  * blitz.js authentication server
  */
 const Auth = require("blitz-js-auth")
@@ -40,4 +46,5 @@ let coreOptions = {
     endpointPath: __dirname + "/endpoints",
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
+blitz.hook(Core, mongoHooks.mongoVerifyIndexes)
 blitz.use(new Core(coreOptions))
