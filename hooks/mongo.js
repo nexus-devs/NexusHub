@@ -18,13 +18,13 @@ module.exports = {
             console.log(" ")
             blitz.log.info("mongoHook | verifying request indices")
             db.collection('requests').createIndex({'component': 1})
-            blitz.log.verbose("mongoHook | component index verified")
+            blitz.log.verbose("mongoHook | verified component index")
             db.collection('requests').createIndex({'item': 1})
-            blitz.log.verbose("mongoHook | item index verified")
+            blitz.log.verbose("mongoHook | verified item index")
             db.collection('requests').createIndex({'timestamp': -1})
-            blitz.log.verbose("mongoHook | timestamp index verified")
+            blitz.log.verbose("mongoHook | verified timestamp index")
             db.collection('requests').createIndex({'timestamp': -1, 'item': 1})
-            blitz.log.verbose("mongoHook | compound timestamp/item index verified\n")
+            blitz.log.verbose("mongoHook | verified compound timestamp/item index\n")
         })
     }
 }
