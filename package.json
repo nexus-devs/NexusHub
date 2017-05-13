@@ -10,14 +10,14 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "0.0.12",
+    "blitz-js": "0.0.13",
     "blitz-js-api": "0.0.24",
     "blitz-js-auth": "0.0.6",
-    "blitz-js-core": "0.0.18",
+    "blitz-js-core": "0.0.19",
     "chalk": "latest"
   },
   "devDependencies": {
-    "blitz-js-query": "0.0.15",
+    "blitz-js-query": "0.0.19",
     "chai": "^3.5.0",
     "mocha": "^3.3.0"
   }

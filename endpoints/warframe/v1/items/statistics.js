@@ -116,20 +116,21 @@ class Statistics extends Method {
      * Filters below/above average requests and user spam
      */
     purge(result, timestart, timeend, interval) {
-        let intervalSize = (timestart - timeend) / interval
         let users = [] // { name, lastRequest, component }
         let components = [] // { name, avg, count }
 
         // Filter too many requests from one user
-        this.purgeSpam(result, users, components, intervalSize)
+        this.purgeSpam(result, users, components, timestart, timeend, interval)
 
         // Process averages
         for (let i = 0; i < components.length; i++) {
-            components[i].avg = components[i].avg / components[i].count
+            for (let j = 0; j < components[i].interval.length; j++) {
+                components[i].interval[j].avg = components[i].interval[j].avg / components[i].interval[j].count
+            }
         }
 
         // Filter too high/low from average
-        this.purgeExtremes(result, components)
+        this.purgeExtremes(result, components, timestart, timeend, interval)
 
         return result
     }
@@ -138,7 +139,9 @@ class Statistics extends Method {
     /**
      * Filter multiple requests from one user in single interval
      */
-    purgeSpam(result, users, components, intervalSize) {
+    purgeSpam(result, users, components, timestart, timeend, interval) {
+        let intervalSize = (timestart - timeend) / interval
+
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
@@ -148,10 +151,23 @@ class Statistics extends Method {
             if (componentIndex == -1) {
                 componentIndex = components.push({
                     name: request.component,
-                    avg: null,
-                    count: 0
+                    interval: []
                 }) - 1
+
+                // Fill interval array
+                for (let j = 0; j < interval; j++) {
+                    components[componentIndex].interval.push({
+                        avg: null,
+                        count: 0
+                    })
+                }
             }
+
+            // Find which interval the request is located in
+            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+
+            // Hacky race condition fix when i outside of interval
+            if (k >= interval) k = interval - 1
 
             // User doesn't exist, create object
             if (userIndex == -1) {
@@ -161,9 +177,9 @@ class Statistics extends Method {
                     component: request.component
                 })
 
-                if (request.price != null  && request.price > 5 && request.price < 1000) {
-                    ++components[componentIndex].count
-                    components[componentIndex].avg += request.price
+                if (request.price != null && request.price > 5 && request.price < 1000) {
+                    ++components[componentIndex].interval[k].count
+                    components[componentIndex].interval[k].avg += request.price
                 }
             }
 
@@ -179,8 +195,8 @@ class Statistics extends Method {
                 else {
                     users[userIndex].lastRequest = request.createdAt
                     if (request.price != null && request.price > 5 && request.price < 1000) {
-                        ++components[componentIndex].count
-                        components[componentIndex].avg += request.price
+                        ++components[componentIndex].interval[k].count
+                        components[componentIndex].interval[k].avg += request.price
                     }
                 }
             }
@@ -191,20 +207,28 @@ class Statistics extends Method {
     /**
      * Remove values above min/max limits
      */
-    purgeExtremes(result, components) {
+    purgeExtremes(result, components, timestart, timeend, interval) {
+        let intervalSize = (timestart - timeend) / interval
+
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let componentIndex = components.findIndex(x => x.name == request.component)
 
+            // Find which interval the request is located in
+            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+
+            // Hacky race condition fix when i outside of interval
+            if (k >= interval) k = interval - 1
+
             if (componentIndex != -1 && request.price != null) {
 
                 // Current price is 300% over average, purge
-                if (request.price / components[componentIndex].avg > 3) {
+                if (request.price / components[componentIndex].interval[k].avg > 3) {
                     result.splice(i, 1)
                 }
 
                 // Current price is 33% under average, purge
-                else if (request.price / components[componentIndex].avg < 0.33) {
+                else if (request.price / components[componentIndex].interval[k].avg < 0.33) {
                    result.splice(i, 1)
                 }
             }
