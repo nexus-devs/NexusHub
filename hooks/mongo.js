@@ -17,14 +17,47 @@ module.exports = {
             // TODO: Change item index to text
             console.log(" ")
             blitz.log.info("mongoHook | verifying request indices")
-            db.collection('requests').createIndex({'component': 1})
-            blitz.log.verbose("mongoHook | verified component index")
-            db.collection('requests').createIndex({'item': 1})
-            blitz.log.verbose("mongoHook | verified item index")
-            db.collection('requests').createIndex({'timestamp': -1})
-            blitz.log.verbose("mongoHook | verified timestamp index")
-            db.collection('requests').createIndex({'timestamp': -1, 'item': 1})
-            blitz.log.verbose("mongoHook | verified compound timestamp/item index\n")
+            mongoVerifySingleIndex(db, 'requests', {'component': 1})
+            mongoVerifySingleIndex(db, 'requests', {'item': 1})
+            mongoVerifySingleIndex(db, 'requests', {'timestamp': 1})
+            mongoVerifySingleIndex(db, 'requests', {'timestamp': -1, 'item': 1})
+            console.log(" ")
         })
     }
+}
+
+/**
+ * Verifies a single index
+ * @param {db} db - mongoDB
+ * @param {string} col - Collection to verify
+ * @param {object} index - Indices to verify
+ */
+function mongoVerifySingleIndex(db, col, index) {
+    // Verify index
+    db.collection(col).createIndex(index)
+
+    // Verbose log string
+    let str = "mongoHook | verified "
+
+    // Get obj length
+    let objLength = Object.keys(index).map(key => index.hasOwnProperty(key)).length
+
+    // Append possible compound
+    if (objLength > 1) {
+        str += "compound "
+    }
+
+    // Append names
+    let i = 0
+    for (let key in index) {
+        if (index.hasOwnProperty(key)) {
+            str += key
+            if (i < objLength - 1) str += "/"
+            i++
+        }
+    }
+
+    // Log
+    str += " index"
+    blitz.log.verbose(str)
 }
