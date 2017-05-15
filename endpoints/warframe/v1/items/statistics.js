@@ -122,11 +122,25 @@ class Statistics extends Method {
         // Filter too many requests from one user
         this.purgeSpam(result, users, components, timestart, timeend, interval)
 
-        // Process averages
+        // Process median
         for (let i = 0; i < components.length; i++) {
-            for (let j = 0; j < components[i].interval.length; j++) {
-                components[i].interval[j].avg = components[i].interval[j].avg / components[i].interval[j].count
-            }
+            components[i].interval.forEach(intvl => {
+                intvl.median.sort(function(a, b) {
+                    return a - b
+                })
+                let medianLength = intvl.median.length
+
+                if (medianLength > 1) {
+                    // Even number?
+                    if (medianLength % 2 != 0) {
+                        intvl.median = intvl.median[Math.floor(medianLength / 2)]
+                    } else {
+                        intvl.median = (intvl.median[medianLength / 2 - 1] + intvl.median[medianLength / 2]) / 2
+                    }
+                } else {
+                    intvl.median = medianLength > 0 ? intvl.median[0] : 0
+                }
+            })
         }
 
         // Filter too high/low from average
@@ -157,7 +171,7 @@ class Statistics extends Method {
                 // Fill interval array
                 for (let j = 0; j < interval; j++) {
                     components[componentIndex].interval.push({
-                        avg: null,
+                        median: [],
                         count: 0
                     })
                 }
@@ -177,9 +191,9 @@ class Statistics extends Method {
                     component: request.component
                 })
 
-                if (request.price != null && request.price > 5 && request.price < 1000) {
+                if (request.price != null) {
                     ++components[componentIndex].interval[k].count
-                    components[componentIndex].interval[k].avg += request.price
+                    components[componentIndex].interval[k].median.push(request.price)
                 }
             }
 
@@ -194,9 +208,9 @@ class Statistics extends Method {
                 // Everything is okay, update lastRequest
                 else {
                     users[userIndex].lastRequest = request.createdAt
-                    if (request.price != null && request.price > 5 && request.price < 1000) {
+                    if (request.price != null) {
                         ++components[componentIndex].interval[k].count
-                        components[componentIndex].interval[k].avg += request.price
+                        components[componentIndex].interval[k].median.push(request.price)
                     }
                 }
             }
@@ -223,12 +237,12 @@ class Statistics extends Method {
             if (componentIndex != -1 && request.price != null) {
 
                 // Current price is 300% over average, purge
-                if (request.price / components[componentIndex].interval[k].avg > 3) {
+                if (request.price / components[componentIndex].interval[k].median > 3) {
                     result.splice(i, 1)
                 }
 
                 // Current price is 33% under average, purge
-                else if (request.price / components[componentIndex].interval[k].avg < 0.33) {
+                else if (request.price / components[componentIndex].interval[k].median < 0.33) {
                    result.splice(i, 1)
                 }
             }
