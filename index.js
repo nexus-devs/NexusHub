@@ -3,7 +3,7 @@
 /**
  * blitz.js setup
  */
-const Blitz = require("blitz-js")({logLevel: "silly"})
+const Blitz = require("blitz-js")({logLevel: "verbose"})
 
 
 /**
@@ -48,3 +48,14 @@ let coreOptions = {
 }
 blitz.hook(Core, mongoHooks.mongoVerifyIndices)
 blitz.use(new Core(coreOptions))
+
+
+/**
+ * blitz.js view node
+
+const View = require("../../blitz/blitz.js-view/index.js")
+let viewOptions = {
+
+}
+blitz.use(new View(viewOptions))
+ */
