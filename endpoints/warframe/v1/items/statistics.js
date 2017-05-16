@@ -40,7 +40,6 @@ class Statistics extends Method {
             {
                 name: "timestart",
                 type: "number",
-                date: true,
                 default: () => {
                     return new Date().getTime() // current time
                 },
@@ -49,7 +48,6 @@ class Statistics extends Method {
             {
                 name: "timeend",
                 type: "number",
-                date: true,
                 default: () => {
                     return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 weeks ago
                 },
