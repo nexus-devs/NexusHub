@@ -40,6 +40,7 @@ class Statistics extends Method {
             {
                 name: "timestart",
                 type: "number",
+                date: true,
                 default: () => {
                     return new Date().getTime() // current time
                 },
@@ -48,6 +49,7 @@ class Statistics extends Method {
             {
                 name: "timeend",
                 type: "number",
+                date: true,
                 default: () => {
                     return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 weeks ago
                 },
@@ -81,7 +83,11 @@ class Statistics extends Method {
                 // Purge, Get Stats, Resolve
                 .then(result => this.purge(result, timestart, timeend, interval))
                 .then(result => this.getStatistics(query, interval, result))
-                .then(doc => resolve(doc))
+                .then(doc => {
+                    let url = this.getURL([item], [component, timestart, timeend, interval])
+                    this.cache(url, doc)
+                    resolve(doc)
+                })
         })
     }
 
