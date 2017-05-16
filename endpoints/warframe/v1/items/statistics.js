@@ -84,8 +84,7 @@ class Statistics extends Method {
                 .then(result => this.purge(result, timestart, timeend, interval))
                 .then(result => this.getStatistics(query, interval, result))
                 .then(doc => {
-                    let url = this.getURL([item], [component, timestart, timeend, interval])
-                    this.cache(url, doc)
+                    this.cache(this.url, doc)
                     resolve(doc)
                 })
         })
