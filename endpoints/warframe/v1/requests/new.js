@@ -12,7 +12,7 @@ class Request extends Method {
 
         // Modify schema
         this.schema.verb = "POST"
-        //this.schema.scope = "root-read-write"
+        this.schema.scope = "root-read-write"
     }
 
     /**
@@ -26,6 +26,7 @@ class Request extends Method {
             request.price = request.price === "null" ? null : request.price
 
             // Get statistics for item
+            Statistics.url = "/warframe/v1/items/" + request.item + "/statistics"
             Statistics.main(request.item, "", new Date().getTime(), new Date(new Date().setDate(new Date().getDate() - 7)).getTime(), 7)
 
             // Publish changes
