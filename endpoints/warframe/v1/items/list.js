@@ -44,6 +44,7 @@ class List extends Method {
                 if (err) reject(err)
 
                 // Return document
+                this.cache(this.url, result, 60)
                 resolve(result)
             })
         })
