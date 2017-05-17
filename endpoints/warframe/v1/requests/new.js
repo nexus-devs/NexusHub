@@ -26,7 +26,7 @@ class Request extends Method {
             request.price = request.price === "null" ? null : request.price
 
             // Get statistics for item
-            Statistics.url = "/warframe/v1/items/" + request.item + "/statistics"
+            Statistics.url = ("/warframe/v1/items/" + request.item + "/statistics").replace(" ", "%20")
             Statistics.main(request.item, "", new Date().getTime(), new Date(new Date().setDate(new Date().getDate() - 7)).getTime(), 7)
 
             // Publish changes
