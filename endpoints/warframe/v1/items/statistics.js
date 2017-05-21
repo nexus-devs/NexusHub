@@ -49,7 +49,7 @@ class Statistics extends Method {
                 name: "timeend",
                 type: "number",
                 default: () => {
-                    return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 weeks ago
+                    return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 week ago
                 },
                 description: "Returns data recorded between timestart and timeend."
             },
