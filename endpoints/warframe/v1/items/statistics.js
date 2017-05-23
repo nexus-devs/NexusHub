@@ -54,7 +54,7 @@ class Statistics extends Method {
                 description: "Returns data recorded between timestart and timeend."
             },
             {
-                name: "interval",
+                name: "intervals",
                 type: "number",
                 default: 7,
                 description: "Intervals to split the time in."
@@ -66,9 +66,8 @@ class Statistics extends Method {
     /**
      * Main method which is called by MethodHandler on request
      */
-    main(item, component, timestart, timeend, interval) {
+    main(item, component, timestart, timeend, intervals) {
         return new Promise((resolve, reject) => {
-
             // Check if time window makes sense
             if (timestart < timeend) resolve("Invalid time frame. Please make sure that timestart is greater than timeend.")
 
@@ -79,8 +78,8 @@ class Statistics extends Method {
             this.db.collection('requests').find(query).toArray()
 
                 // Purge, Get Stats, Resolve
-                .then(result => this.purge(result, timestart, timeend, interval))
-                .then(result => this.getStatistics(query, interval, result))
+                .then(result => this.purge(result, timestart, timeend, intervals))
+                .then(result => this.getStatistics(query, intervals, result))
                 .then(doc => {
                     this.cache(this.url, doc)
                     resolve(doc)
@@ -118,16 +117,16 @@ class Statistics extends Method {
     /**
      * Filters below/above average requests and user spam
      */
-    purge(result, timestart, timeend, interval) {
+    purge(result, timestart, timeend, intervals) {
         let users = [] // { name, lastRequest, component }
         let components = [] // { name, avg, count }
 
         // Filter too many requests from one user
-        this.purgeSpam(result, users, components, timestart, timeend, interval)
+        this.purgeSpam(result, users, components, timestart, timeend, intervals)
 
         // Process median
         for (let i = 0; i < components.length; i++) {
-            components[i].interval.forEach(intvl => {
+            components[i].intervals.forEach(intvl => {
                 intvl.median.sort(function(a, b) {
                     return a - b
                 })
@@ -147,17 +146,17 @@ class Statistics extends Method {
         }
 
         // Filter too high/low from average
-        this.purgeExtremes(result, components, timestart, timeend, interval)
+        this.purgeExtremes(result, components, timestart, timeend, intervals)
 
         return result
     }
 
 
     /**
-     * Filter multiple requests from one user in single interval
+     * Filter multiple requests from one user in single intervals
      */
-    purgeSpam(result, users, components, timestart, timeend, interval) {
-        let intervalSize = (timestart - timeend) / interval
+    purgeSpam(result, users, components, timestart, timeend, intervals) {
+        let intervalsSize = (timestart - timeend) / intervals
 
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
@@ -168,23 +167,23 @@ class Statistics extends Method {
             if (componentIndex == -1) {
                 componentIndex = components.push({
                     name: request.component,
-                    interval: []
+                    intervals: []
                 }) - 1
 
-                // Fill interval array
-                for (let j = 0; j < interval; j++) {
-                    components[componentIndex].interval.push({
+                // Fill intervals array
+                for (let j = 0; j < intervals; j++) {
+                    components[componentIndex].intervals.push({
                         median: [],
                         count: 0
                     })
                 }
             }
 
-            // Find which interval the request is located in
-            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+            // Find which intervals the request is located in
+            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
 
-            // Hacky race condition fix when i outside of interval
-            if (k >= interval) k = interval - 1
+            // Hacky race condition fix when i outside of intervals
+            if (k >= intervals) k = intervals - 1
 
             // User doesn't exist, create object
             if (userIndex == -1) {
@@ -195,16 +194,16 @@ class Statistics extends Method {
                 })
 
                 if (request.price != null) {
-                    ++components[componentIndex].interval[k].count
-                    components[componentIndex].interval[k].median.push(request.price)
+                    ++components[componentIndex].intervals[k].count
+                    components[componentIndex].intervals[k].median.push(request.price)
                 }
             }
 
-            // User does exist, check if request in interval
+            // User does exist, check if request in intervals
             else {
 
                 // Last request too close, purge
-                if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalSize) {
+                if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalsSize) {
                     result.splice(i, 1)
                 }
 
@@ -212,8 +211,8 @@ class Statistics extends Method {
                 else {
                     users[userIndex].lastRequest = request.createdAt
                     if (request.price != null) {
-                        ++components[componentIndex].interval[k].count
-                        components[componentIndex].interval[k].median.push(request.price)
+                        ++components[componentIndex].intervals[k].count
+                        components[componentIndex].intervals[k].median.push(request.price)
                     }
                 }
             }
@@ -224,28 +223,28 @@ class Statistics extends Method {
     /**
      * Remove values above min/max limits
      */
-    purgeExtremes(result, components, timestart, timeend, interval) {
-        let intervalSize = (timestart - timeend) / interval
+    purgeExtremes(result, components, timestart, timeend, intervals) {
+        let intervalsSize = (timestart - timeend) / intervals
 
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let componentIndex = components.findIndex(x => x.name == request.component)
 
-            // Find which interval the request is located in
-            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+            // Find which intervals the request is located in
+            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
 
-            // Hacky race condition fix when i outside of interval
-            if (k >= interval) k = interval - 1
+            // Hacky race condition fix when i outside of intervals
+            if (k >= intervals) k = intervals - 1
 
             if (componentIndex != -1 && request.price != null) {
 
                 // Current price is 300% over average, purge
-                if (request.price / components[componentIndex].interval[k].median > 3) {
+                if (request.price / components[componentIndex].intervals[k].median > 3) {
                     result.splice(i, 1)
                 }
 
                 // Current price is 33% under average, purge
-                else if (request.price / components[componentIndex].interval[k].median < 0.33) {
+                else if (request.price / components[componentIndex].intervals[k].median < 0.33) {
                    result.splice(i, 1)
                 }
             }
@@ -256,7 +255,7 @@ class Statistics extends Method {
     /**
      * Calculate queried item's statistics
      */
-    getStatistics(query, interval, result) {
+    getStatistics(query, intervals, result) {
 
         // Empty results?
         if (result.length <= 0) {
@@ -280,7 +279,7 @@ class Statistics extends Method {
         }
 
         // Accumulate data from all requests
-        this.accumulate(query, interval, result, doc)
+        this.accumulate(query, intervals, result, doc)
 
         // Calculate Statistics from accumulated values
         this.process(doc)
@@ -293,25 +292,25 @@ class Statistics extends Method {
     /**
      * Accumulate data from requests
      */
-    accumulate(query, interval, result, doc) {
+    accumulate(query, intervals, result, doc) {
 
         // Time window
         let timestart = query.createdAt.$lte.getTime()
         let timeend = query.createdAt.$gte.getTime()
 
         // Get Interval size
-        let intervalSize = (timestart - timeend) / interval
+        let intervalsSize = (timestart - timeend) / intervals
 
         // Accumulate data for each request
         result.forEach(request => {
-            let component = this.getComponent(doc, request, interval)
+            let component = this.getComponent(doc, request, intervals)
 
-            // Find which interval the request is located in
-            let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+            // Find which intervals the request is located in
+            let i = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
 
-            // Hacky race condition fix when i outside of interval
-            if (i >= interval) i = interval - 1
-            let intvl = component.interval[i]
+            // Hacky race condition fix when i outside of intervals
+            if (i >= intervals) i = intervals - 1
+            let intvl = component.intervals[i]
 
             // Request has price?
             let price = request.price
@@ -337,7 +336,7 @@ class Statistics extends Method {
 
             // Set Modified Interval in output doc
             let index = doc.components.findIndex(comp => comp.name == request.component)
-            doc.components[index].interval[i] = intvl
+            doc.components[index].intervals[i] = intvl
         })
     }
 
@@ -345,7 +344,7 @@ class Statistics extends Method {
     /**
      * Add missing component to output document and return
      */
-    getComponent(doc, request, interval) {
+    getComponent(doc, request, intervals) {
         let index = doc.components.findIndex(comp => comp.name == request.component)
         let component = doc.components[index]
 
@@ -366,11 +365,11 @@ class Statistics extends Method {
                     percentage: 0
                 },
                 ignore: 0,
-                interval: []
+                intervals: []
             }
 
-            // Fill interval array
-            for (let j = 0; j < interval; j++) {
+            // Fill intervals array
+            for (let j = 0; j < intervals; j++) {
                 let sub = { // Helper obj for field creation
                     avg: null,
                     min: Number.POSITIVE_INFINITY,
@@ -385,7 +384,7 @@ class Statistics extends Method {
                     },
                     ignore: 0
                 }
-                component.interval.push(sub)
+                component.intervals.push(sub)
             }
 
             // Push to original doc
@@ -429,7 +428,7 @@ class Statistics extends Method {
     process(doc) {
         let offers = 0
 
-        // Calculate data from each component's intervals
+        // Calculate data from each component's intervalss
         doc.components.forEach((component, i) => {
             this.processIntervals(doc, i, component, offers)
             this.processComponent(doc, component, offers)
@@ -442,7 +441,7 @@ class Statistics extends Method {
      * Calculate Data for each Interval of component
      */
     processIntervals(doc, i, component, offers) {
-        component.interval.forEach((intvl, j) => {
+        component.intervals.forEach((intvl, j) => {
 
             // Calculate avg and supply/demand percentages
             offers = intvl.supply.count + intvl.demand.count
@@ -456,7 +455,7 @@ class Statistics extends Method {
                 if (intvl.max > component.max) component.max = intvl.max
             }
 
-            // Add interval vars on component vars
+            // Add intervals vars on component vars
             component.avg += intvl.avg ? intvl.avg : 0
             component.supply.count += intvl.supply.count
             component.demand.count += intvl.demand.count
@@ -466,13 +465,13 @@ class Statistics extends Method {
             delete intvl.ignore
 
             // Save in output doc
-            doc.components[i].interval[j] = intvl
+            doc.components[i].intervals[j] = intvl
         })
     }
 
 
     /**
-     * Process Overall component stats from intervals
+     * Process Overall component stats from intervalss
      */
     processComponent(doc, component, offers) {
 
@@ -482,8 +481,8 @@ class Statistics extends Method {
         component.demand.percentage = component.demand.count / offers
         offers = 0
 
-        // How many intervals have avg value?
-        component.interval.forEach(intvl => {
+        // How many intervalss have avg value?
+        component.intervals.forEach(intvl => {
             if (intvl.avg) offers++
         })
 
