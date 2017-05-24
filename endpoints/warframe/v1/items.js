@@ -1,11 +1,11 @@
 'use strict'
 
-const Method = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config.core.endpointParent)
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
-class List extends Method {
+class List extends Endpoint {
     /**
      * Creates a new statistics call
      * @constructor
@@ -34,7 +34,7 @@ class List extends Method {
 
 
     /**
-     * Main method which is called by MethodHandler on request
+     * Main method which is called by EndpointHandler on request
      * @returns {Promise} Item List
      */
     main() {

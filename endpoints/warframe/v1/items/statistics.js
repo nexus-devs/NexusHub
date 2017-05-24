@@ -1,12 +1,12 @@
 'use strict'
 
-const Method = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config.core.endpointParent)
 const _ = require("lodash")
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
-class Statistics extends Method {
+class Statistics extends Endpoint {
     /**
      * Creates a new statistics call
      * @constructor
@@ -24,7 +24,7 @@ class Statistics extends Method {
          * Schema resources
          * @type {string[]}
          */
-        this.schema.resources = ["item"]
+        this.schema.url = "/warframe/v1/items/:item/statistics"
 
         /**
          * Schema parameters
@@ -64,7 +64,7 @@ class Statistics extends Method {
 
 
     /**
-     * Main method which is called by MethodHandler on request
+     * Main method which is called by EndpointHandler on request
      */
     main(item, component, timestart, timeend, intervals) {
         return new Promise((resolve, reject) => {
