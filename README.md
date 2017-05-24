@@ -6,12 +6,8 @@ Warframe Trade Chat Parser based on TesseractOCR. Server runs on node/sails.js &
 **Checkout the development branch to see current progress.**
 
 
-## Data Processing
-- Trade Chat Requests are processed by /py/NexusSentry.py
-- Parsed Requests are sent to /api/controllers/RequestController.js
-- When a client requests statistics for an item, they're either processed
-by /api/controllers/ItemController.js or taken from the itemcache collection if no update
-is necessary.
+## Notice
+Nexus-Stats is currently undergoing a full overhaul. Check out the [development branch](https://github.com/nexus-devs/warframe-nexus/tree/development) to see the latest version. Feature-wise, the new build already exceeds the previous. The only part missing now is the view layer/website.
 
 
 ## Links
@@ -21,10 +17,10 @@ is necessary.
 
 **API query adapter** by Tobiah for easy API access: www.npmjs.com/package/warframe-nexus-query
 
-## Chat Logs
+## Chat Logs (deprecated)
 
 You can find the **last 100 parsed requests** here: www.nexus-stats.com/logs 
-(Average time for 100 requests is ~1 minute, so please scrape responsibly.)
+(Note: This data is no longer being updated. For the time being, you can contact us on [discord](https://discord.gg/TCxe6P4) for an alternative approach.)
 
 Schema for the logs:
 ```
