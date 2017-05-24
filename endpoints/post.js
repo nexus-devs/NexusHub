@@ -1,11 +1,11 @@
 'use strict'
 
-const Method = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config.core.endpointParent)
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
- class Foo extends Method {
+ class Foo extends Endpoint {
      constructor(){
          super()
          this.schema.verb = "POST"
