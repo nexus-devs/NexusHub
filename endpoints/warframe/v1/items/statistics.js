@@ -68,8 +68,10 @@ class Statistics extends Endpoint {
      */
     main(item, component, timestart, timeend, intervals) {
         return new Promise((resolve, reject) => {
-            // Check if time window makes sense
-            if (timestart < timeend) resolve("Invalid time frame. Please make sure that timestart is greater than timeend.")
+
+            // Check if params are valid
+            if (timestart < timeend) return reject("Invalid time frame. Please make sure that timestart is greater than timeend.")
+            if (intervals <= 0) return reject("Intervals must be greater than 0")
 
             // Generate valid Query from input
             let query = this.generateQuery(item, component, timestart, timeend)
