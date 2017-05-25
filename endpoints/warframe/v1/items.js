@@ -18,18 +18,6 @@ class List extends Endpoint {
          * @type {string}
          */
         this.schema.description = "Get a list of all items."
-
-        /**
-         * Schema resources
-         * @type {string[]}
-         */
-        this.schema.resources = []
-
-        /**
-         * Schema parameters
-         * @type {Array.<string, string, *, boolean, string>}
-         */
-        this.schema.params = []
     }
 
 
