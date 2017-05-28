@@ -1,17 +1,17 @@
 'use strict'
 
-const Method = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config.core.endpointParent)
 const Statistics = new(require(__dirname + "/../items/statistics.js"))
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
-class Request extends Method {
+class Request extends Endpoint {
     constructor(db) {
         super(db)
 
         // Modify schema
-        this.schema.verb = "POST"
+        this.schema.method = "POST"
         this.schema.scope = "root-read-write"
     }
 

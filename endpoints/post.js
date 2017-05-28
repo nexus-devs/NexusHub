@@ -8,7 +8,7 @@ const Endpoint = require(blitz.config.core.endpointParent)
  class Foo extends Endpoint {
      constructor(){
          super()
-         this.schema.verb = "POST"
+         this.schema.method = "POST"
          this.schema.description = "Testing method for POST requests"
      }
 

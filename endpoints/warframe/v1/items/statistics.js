@@ -30,7 +30,7 @@ class Statistics extends Endpoint {
          * Schema parameters
          * @type {Array.<string, string, *, boolean, string>}
          */
-        this.schema.params = [{
+        this.schema.query = [{
                 name: "component",
                 type: "string",
                 default: "",
