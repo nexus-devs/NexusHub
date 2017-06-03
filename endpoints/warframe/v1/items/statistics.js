@@ -83,7 +83,7 @@ class Statistics extends Endpoint {
                 .then(result => this.purge(result, timestart, timeend, intervals))
                 .then(result => this.getStatistics(query, intervals, result))
                 .then(doc => {
-                    this.cache(this.url, doc)
+                    this.cache(this.url, doc, 86400)
                     resolve(doc)
                 })
         })
