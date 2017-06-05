@@ -15,6 +15,6 @@ Nexus-Stats is currently undergoing a full overhaul. Check out the [development 
 ## Links
 **NexusStats site** can be found at www.nexus-stats.com
 
-**JSON with all Item Stats** can be found here: www.nexus-stats.com/api
+**API** can be found at [api.nexus-stats.com](https://api.nexus-stats.com)
 
 **API query adapter** by Tobiah for easy API access: www.npmjs.com/package/warframe-nexus-query
