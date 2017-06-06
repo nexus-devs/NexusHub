@@ -35,12 +35,41 @@ class Base extends Endpoint {
                     delete item.type
                     delete item.prices
                     delete item._id
-                    delete item.components
                     delete item.category
                     delete item.ranks
 
-                    item.components = item.distribution
-                    delete item.distribution
+                    if (item.distribution) {
+                        item.components = item.distribution
+                        delete item.distribution
+                    } else {
+                        let components = []
+                        item.components.forEach(comp => {
+                            components.push({
+                                name: comp,
+                                supply: {
+                                    count: 0,
+                                    percentage: 0.5
+                                },
+                                demand: {
+                                    count: 0,
+                                    percentage: 0.5
+                                }
+                            })
+                        })
+                        item.components = components
+
+                        item.components.length === 0 ? item.components.push({
+                            name: "Set",
+                            supply: {
+                                count: 0,
+                                percentage: 0.5
+                            },
+                            demand: {
+                                count: 0,
+                                percentage: 0.5
+                            }
+                        }) : null
+                    }
                 })
 
                 this.cache(this.url, result, 60)
