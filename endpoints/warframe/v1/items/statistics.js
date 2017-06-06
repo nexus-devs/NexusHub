@@ -96,8 +96,8 @@ class Statistics extends Endpoint {
     generateQuery(item, component, timestart, timeend) {
 
         // Use same case pattern as requests
-        item = "/^" + item + "$/i"
-        component = "/^" + component + "$/i"
+        item = new RegExp("^" + item + "$", "i")
+        component = new RegExp("^" + component + "$", "i")
 
         // Query object
         let query = {
@@ -110,7 +110,6 @@ class Statistics extends Endpoint {
 
         // Append component if one is given
         if (component !== "") query.component = component
-
         return query
     }
 
@@ -133,7 +132,6 @@ class Statistics extends Endpoint {
                     return a - b
                 })
                 let medianLength = intvl.median.length
-
                 if (medianLength > 1) {
                     // Even number?
                     if (medianLength % 2 != 0) {
@@ -149,7 +147,6 @@ class Statistics extends Endpoint {
 
         // Filter too high/low from average
         this.purgeExtremes(result, components, timestart, timeend, intervals)
-
         return result
     }
 
