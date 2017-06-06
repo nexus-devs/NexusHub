@@ -11,13 +11,13 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "blitz-js": "0.0.17",
-    "blitz-js-api": "0.0.53",
-    "blitz-js-auth": "0.0.11",
-    "blitz-js-core": "0.0.42",
+    "blitz-js-api": "0.0.57",
+    "blitz-js-auth": "0.0.13",
+    "blitz-js-core": "0.0.45",
     "chalk": "latest"
   },
   "devDependencies": {
-    "blitz-js-query": "0.0.32",
+    "blitz-js-query": "0.0.35",
     "chai": "^4.0.0",
     "mocha": "^3.3.0"
   }
