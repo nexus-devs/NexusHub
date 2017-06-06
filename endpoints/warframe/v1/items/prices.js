@@ -35,15 +35,37 @@ class Base extends Endpoint {
                     delete item.type
                     delete item.distribution
                     delete item._id
-                    delete item.components
                     delete item.category
                     delete item.ranks
 
-                    item.components = item.prices
-                    delete item.prices
+                    if (item.prices) {
+                        item.components = item.prices
+                        delete item.prices
+                    } else {
+                        let components = []
+                        item.components.forEach(comp => {
+                            components.push({
+                                name: comp,
+                                avg: null,
+                                median: null,
+                                min: null,
+                                max: null
+                            })
+                        })
+                        item.components = components
+
+                        // No Components for Item? Set "Set"
+                        item.components.length === 0 ? item.components.push({
+                            name: "Set",
+                            avg: null,
+                            median: null,
+                            min: null,
+                            max: null
+                        }) : null
+                    }
                 })
 
-                this.cache(this.url, result, 60)
+                this.cache(this.url, result, 1)
                 resolve(result)
             })
         })

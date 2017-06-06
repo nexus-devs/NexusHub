@@ -34,7 +34,7 @@ class Base extends Endpoint {
     main(item) {
         return new Promise((resolve, reject) => {
             this.db.collection('items').findOne({
-                name: this.title(item)
+                name: "/^" + item + "$/i"
             }).then((doc) => {
 
                 // Remove unnecessary data
@@ -46,16 +46,6 @@ class Base extends Endpoint {
                 resolve(doc)
             })
         })
-    }
-
-
-    /**
-     * Title function for case sensitivity
-     */
-    title(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
     }
 }
 

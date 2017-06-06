@@ -96,8 +96,8 @@ class Statistics extends Endpoint {
     generateQuery(item, component, timestart, timeend) {
 
         // Use same case pattern as requests
-        item = this.title(item)
-        component = this.title(component)
+        item = "/^" + item + "$/i"
+        component = "/^" + component + "$/i"
 
         // Query object
         let query = {
@@ -528,16 +528,6 @@ class Statistics extends Endpoint {
 
         // Save in output doc
         doc.components[i] = component
-    }
-
-
-    /**
-     * Title function for case sensitivity
-     */
-    title(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
     }
 }
 
