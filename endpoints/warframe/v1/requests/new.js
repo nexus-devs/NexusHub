@@ -12,7 +12,7 @@ class Request extends Endpoint {
 
         // Modify schema
         this.schema.method = "POST"
-        //this.schema.scope = "root-read-write"
+        this.schema.scope = "root-read-write"
     }
 
     /**
