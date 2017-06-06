@@ -21,8 +21,8 @@ class Base extends Endpoint {
         this.schema.description = "Get item statistics between a specified time frame."
 
         /**
-         * Schema resources
-         * @type {string[]}
+         * Url used for routing by express/custom middleware handler
+         * @type {string}
          */
         this.schema.url = "/warframe/v1/items/:item"
     }
@@ -36,6 +36,12 @@ class Base extends Endpoint {
             this.db.collection('items').findOne({
                 name: this.title(item)
             }).then((doc) => {
+
+                // Remove unnecessary data
+                delete doc.prices
+                delete doc.distribution
+                delete doc._id
+
                 this.cache(this.url, doc, 60)
                 resolve(doc)
             })
