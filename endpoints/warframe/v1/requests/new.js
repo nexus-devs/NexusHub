@@ -12,7 +12,7 @@ class Request extends Endpoint {
 
         // Modify schema
         this.schema.method = "POST"
-        this.schema.scope = "root-read-write"
+        //this.schema.scope = "root-read-write"
     }
 
     /**
@@ -32,7 +32,7 @@ class Request extends Endpoint {
             // Publish changes
             .then((data) => {
                 this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
-                this.save(data)
+                data.components ? this.save(data) : null
             })
 
             // Insert and resolve
