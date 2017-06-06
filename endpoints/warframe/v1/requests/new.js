@@ -32,11 +32,49 @@ class Request extends Endpoint {
             // Publish changes
             .then((data) => {
                 this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
+                this.save(data)
             })
 
             // Insert and resolve
             this.db.collection("requests").insertOne(request)
             resolve("Request processed. (" + JSON.stringify(request) + ")")
+        })
+    }
+
+
+    /**
+     * Save prices/demand in local db for use by other endpoints
+     */
+    save(data) {
+        let prices = []
+        let distribution = []
+        data.components.forEach(component => {
+            let price = {
+                name: component.name,
+                avg: component.avg,
+                median: component.median,
+                min: component.min,
+                max: component.max
+            }
+            prices.push(price)
+
+            let dist = {
+                name: component.name,
+                supply: component.supply,
+                demand: component.demand
+            }
+            distribution.push(dist)
+        })
+
+        this.db.collection("items").updateOne({
+            name: data.title,
+        }, {
+            $set: {
+                prices: prices,
+                distribution: distribution
+            }
+        }, {
+            upsert: true
         })
     }
 }
