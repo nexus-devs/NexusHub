@@ -65,7 +65,7 @@ class Base extends Endpoint {
                     }
                 })
 
-                this.cache(this.url, result, 1)
+                this.cache(this.url, result, 60)
                 resolve(result)
             })
         })
