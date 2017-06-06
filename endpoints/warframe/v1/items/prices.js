@@ -38,6 +38,9 @@ class Base extends Endpoint {
                     delete item.components
                     delete item.category
                     delete item.ranks
+
+                    item.components = item.prices
+                    delete item.prices
                 })
 
                 this.cache(this.url, result, 60)
