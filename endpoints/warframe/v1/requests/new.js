@@ -67,7 +67,7 @@ class Request extends Endpoint {
         })
 
         this.db.collection("items").updateOne({
-            name: "/^" + data.title + "$/i",
+            name: new RegExp("^" + data.title + "$", "i")
         }, {
             $set: {
                 prices: prices,
