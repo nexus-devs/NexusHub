@@ -34,7 +34,7 @@ class Base extends Endpoint {
     main(item) {
         return new Promise((resolve, reject) => {
             this.db.collection('items').findOne({
-                name: "/^" + item + "$/i"
+                name: new RegExp("^" + item + "$", "i")
             }).then((doc) => {
 
                 // Remove unnecessary data
