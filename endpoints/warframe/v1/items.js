@@ -27,11 +27,16 @@ class List extends Endpoint {
      */
     main() {
         return new Promise((resolve, reject) => {
-            // Query and resolve results
             this.db.collection('items').find({}).toArray((err, result) => {
                 if (err) reject(err)
 
-                // Return document
+                // Remove unnecessary data
+                result.forEach(item => {
+                    delete item.distribution
+                    delete item.prices
+                    delete item._id
+                })
+
                 this.cache(this.url, result, 60)
                 resolve(result)
             })
