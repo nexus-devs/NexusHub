@@ -32,7 +32,8 @@ class Request extends Endpoint {
             // Publish changes
             .then((data) => {
                 this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
-                data.components ? this.save(data) : null
+                this.publish("/warframe/v1/requests", request)
+                data.components ? this.saveStats(data) : null
             })
 
             // Insert and resolve
@@ -45,7 +46,7 @@ class Request extends Endpoint {
     /**
      * Save prices/demand in local db for use by other endpoints
      */
-    save(data) {
+    saveStats(data) {
         let prices = []
         let distribution = []
         data.components.forEach(component => {
