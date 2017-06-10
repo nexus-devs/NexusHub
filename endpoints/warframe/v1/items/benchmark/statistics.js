@@ -90,7 +90,6 @@ class Statistics extends Endpoint {
                 .then(result => {
                     logging.result.query.results = result.length
                     logging.result.query.duration = (new Date() - logging.queryStart) + "ms"
-
                     logging.purgeStart = new Date()
                     logging.result.purge = {}
                     return this.purge(result, timestart, timeend, intervals)
