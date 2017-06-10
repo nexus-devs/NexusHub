@@ -17,10 +17,8 @@ module.exports = {
             // TODO: Change item index to text
             console.log(" ")
             blitz.log.info("mongoHook | verifying request indices")
-            //mongoVerifySingleIndex(db, 'requests', {'component': 1})
-            //mongoVerifySingleIndex(db, 'requests', {'item': 1})
-            //mongoVerifySingleIndex(db, 'requests', {'createdAt': 1})
             mongoVerifySingleIndex(db, 'requests', {'item': 1, 'createdAt': 1})
+            mongoVerifySingleIndex(db, 'requests', {'item': 1, 'component': 1, 'createdAt': 1})
             console.log(" ")
         })
     }
