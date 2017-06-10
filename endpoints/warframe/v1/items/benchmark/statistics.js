@@ -103,6 +103,7 @@ class Statistics extends Endpoint {
                 })
                 .then(doc => {
                     logging.result.calculations.duration = (new Date() - logging.statStart) + "ms"
+                    logging.result.duration = (new Date() - logging.queryStart) + "ms"
                     resolve(logging.result)
                 })
         })
