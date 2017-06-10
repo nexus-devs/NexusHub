@@ -6,8 +6,8 @@ const Endpoint = require(blitz.config.core.endpointParent)
  * Contains multi-purpose functions for child-methods and provides default values
  */
  class Foo extends Endpoint {
-     constructor(){
-         super()
+     constructor(api, db, url) {
+         super(api, db, url)
          this.schema.description = "Simple testing method which returns 'bar'."
      }
 

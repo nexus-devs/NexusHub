@@ -11,8 +11,8 @@ class Base extends Endpoint {
      * Creates a new statistics call
      * @constructor
      */
-    constructor() {
-        super()
+    constructor(api, db, url) {
+        super(api, db, url)
 
         /**
          * Schema description
