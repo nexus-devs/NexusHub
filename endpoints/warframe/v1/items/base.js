@@ -36,14 +36,18 @@ class Base extends Endpoint {
             this.db.collection('items').findOne({
                 name: new RegExp("^" + item + "$", "i")
             }).then((doc) => {
+                if (doc) {
+                    // Remove unnecessary data
+                    delete doc.prices
+                    delete doc.distribution
+                    delete doc._id
 
-                // Remove unnecessary data
-                delete doc.prices
-                delete doc.distribution
-                delete doc._id
-
-                this.cache(this.url, doc, 60)
-                resolve(doc)
+                    this.cache(this.url, doc, 60)
+                    resolve(doc)
+                } else {
+                    this.cache(this.url, item + " not found.", 60)
+                    resolve(item + " not found.")
+                }
             })
         })
     }
