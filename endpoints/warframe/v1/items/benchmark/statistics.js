@@ -139,35 +139,14 @@ class Statistics extends Endpoint {
      * Filters below/above average requests and user spam
      */
     purge(result, timestart, timeend, intervals) {
-        let users = [] // { name, lastRequest, component }
         let components = [] // { name, avg, count }
 
         logging.purgeSpamStart = new Date()
         logging.result.purge.spam = {}
+
         // Filter too many requests from one user
-        this.purgeSpam(result, users, components, timestart, timeend, intervals)
+        this.purgeSpam(result, components, timestart, timeend, intervals)
         logging.result.purge.spam.duration = (new Date() - logging.purgeSpamStart) + "ms"
-
-        // Process median
-        for (let i = 0; i < components.length; i++) {
-            components[i].intervals.forEach(intvl => {
-                intvl.median.sort(function(a, b) {
-                    return a - b
-                })
-                let medianLength = intvl.median.length
-
-                if (medianLength > 1) {
-                    // Even number?
-                    if (medianLength % 2 != 0) {
-                        intvl.median = intvl.median[Math.floor(medianLength / 2)]
-                    } else {
-                        intvl.median = (intvl.median[medianLength / 2 - 1] + intvl.median[medianLength / 2]) / 2
-                    }
-                } else {
-                    intvl.median = medianLength > 0 ? intvl.median[0] : 0
-                }
-            })
-        }
 
         // Filter too high/low from average
         logging.purgeExtremesStart = new Date()
@@ -182,23 +161,25 @@ class Statistics extends Endpoint {
     /**
      * Filter multiple requests from one user in single intervals
      */
-    purgeSpam(result, users, components, timestart, timeend, intervals) {
+    purgeSpam(result, components, timestart, timeend, intervals) {
         let intervalsSize = (timestart - timeend) / intervals
         let interval = 0
+        let users = {} // use object for users. faster for spam-check
         logging.result.purge.spam.removed = 0
 
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
 
-            // Find which intervals the request is located in
+            // Find which interval the request is located in
             let previousInterval = interval
             interval = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-            users = interval > previousInterval ? [] : users // keep user array small, remove unnecessary data
 
             // Hacky race condition fix when i outside of intervals
             interval = interval > intervals ? intervals - 1 : interval
+            users = interval > previousInterval ? {} : users // keep users object small, remove unnecessary data
 
-            let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
+            //if (users[request.user])
+            let spam = users[request.user] ? (users[request.user][request.item][request.component] ? true : false) : false
             let componentIndex = components.findIndex(x => x.name == request.component)
 
             // Component doesn't exist, create object
@@ -218,11 +199,10 @@ class Statistics extends Endpoint {
             }
 
             // User doesn't exist, create object
-            if (userIndex == -1) {
-                users.push({
-                    name: request.user,
-                    component: request.component
-                })
+            if (!spam) {
+                users[request.user] = {}
+                users[request.user][request.item] = {}
+                users[request.user][request.item][request.component] = {}
 
                 if (request.price != null) {
                     ++components[componentIndex].intervals[interval].count
@@ -246,6 +226,28 @@ class Statistics extends Endpoint {
         let intervalsSize = (timestart - timeend) / intervals
         logging.result.purge.extremes.removed = 0
 
+        // Process median
+        for (let i = 0; i < components.length; i++) {
+            components[i].intervals.forEach(intvl => {
+                intvl.median.sort(function(a, b) {
+                    return a - b
+                })
+                let medianLength = intvl.median.length
+
+                if (medianLength > 1) {
+                    // Even number?
+                    if (medianLength % 2 != 0) {
+                        intvl.median = intvl.median[Math.floor(medianLength / 2)]
+                    } else {
+                        intvl.median = (intvl.median[medianLength / 2 - 1] + intvl.median[medianLength / 2]) / 2
+                    }
+                } else {
+                    intvl.median = medianLength > 0 ? intvl.median[0] : 0
+                }
+            })
+        }
+
+        // Remove extremes based on median
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let componentIndex = components.findIndex(x => x.name == request.component)
