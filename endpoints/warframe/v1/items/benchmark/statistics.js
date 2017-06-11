@@ -175,7 +175,7 @@ class Statistics extends Endpoint {
             interval = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
 
             // Hacky race condition fix when i outside of intervals
-            interval = interval > intervals ? intervals - 1 : interval
+            interval = interval >= intervals ? intervals - 1 : interval
             users = interval > previousInterval ? {} : users // keep users object small, remove unnecessary data
 
             //if (users[request.user])
