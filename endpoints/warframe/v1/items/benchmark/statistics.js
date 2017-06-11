@@ -184,10 +184,20 @@ class Statistics extends Endpoint {
      */
     purgeSpam(result, users, components, timestart, timeend, intervals) {
         let intervalsSize = (timestart - timeend) / intervals
+        let interval = 0
         logging.result.purge.spam.removed = 0
 
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
+
+            // Find which intervals the request is located in
+            let previousInterval = interval
+            interval = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
+            users = interval > previousInterval ? [] : users // keep user array small, remove unnecessary data
+
+            // Hacky race condition fix when i outside of intervals
+            interval = interval > intervals ? intervals - 1 : interval
+
             let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
             let componentIndex = components.findIndex(x => x.name == request.component)
 
@@ -207,43 +217,23 @@ class Statistics extends Endpoint {
                 }
             }
 
-            // Find which intervals the request is located in
-            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-            // Hacky race condition fix when i outside of intervals
-            if (k >= intervals) k = intervals - 1
-
             // User doesn't exist, create object
             if (userIndex == -1) {
                 users.push({
                     name: request.user,
-                    lastRequest: request.createdAt,
                     component: request.component
                 })
 
                 if (request.price != null) {
-                    ++components[componentIndex].intervals[k].count
-                    components[componentIndex].intervals[k].median.push(request.price)
+                    ++components[componentIndex].intervals[interval].count
+                    components[componentIndex].intervals[interval].median.push(request.price)
                 }
             }
 
-            // User does exist, check if request in intervals
+            // User does exist, purge
             else {
-
-                // Last request too close, purge
-                if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalsSize) {
-                    result.splice(i, 1)
-                    logging.result.purge.spam.removed++
-                }
-
-                // Everything is okay, update lastRequest
-                else {
-                    users[userIndex].lastRequest = request.createdAt
-                    if (request.price != null) {
-                        ++components[componentIndex].intervals[k].count
-                        components[componentIndex].intervals[k].median.push(request.price)
-                    }
-                }
+                result.splice(i, 1)
+                logging.result.purge.spam.removed++
             }
         }
     }
@@ -276,8 +266,8 @@ class Statistics extends Endpoint {
 
                 // Current price is 33% under average, purge
                 else if (request.price / components[componentIndex].intervals[k].median < 0.33) {
-                   result.splice(i, 1)
-                   logging.result.purge.extremes.removed++
+                    result.splice(i, 1)
+                    logging.result.purge.extremes.removed++
                 }
             }
         }
