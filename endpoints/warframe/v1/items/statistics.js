@@ -120,11 +120,82 @@ class Statistics extends Endpoint {
      * Filters below/above average requests and user spam
      */
     purge(result, timestart, timeend, intervals) {
-        let users = [] // { name, lastRequest, component }
         let components = [] // { name, avg, count }
 
         // Filter too many requests from one user
-        this.purgeSpam(result, users, components, timestart, timeend, intervals)
+        this.purgeSpam(result, components, timestart, timeend, intervals)
+
+        // Filter too high/low from average
+        this.purgeExtremes(result, components, timestart, timeend, intervals)
+
+        return result
+    }
+
+
+    /**
+     * Filter multiple requests from one user in single intervals
+     */
+    purgeSpam(result, components, timestart, timeend, intervals) {
+        let intervalsSize = (timestart - timeend) / intervals
+        let interval = 0
+        let users = {} // use object for users. faster for spam-check
+
+        for (let i = result.length - 1; i >= 0; i--) {
+            let request = result[i]
+
+            // Find which interval the request is located in
+            let previousInterval = interval
+            interval = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
+
+            // Hacky race condition fix when i outside of intervals
+            interval = interval > intervals ? intervals - 1 : interval
+            users = interval > previousInterval ? {} : users // keep users object small, remove unnecessary data
+
+            //if (users[request.user])
+            let spam = users[request.user] ? (users[request.user][request.item][request.component] ? true : false) : false
+            let componentIndex = components.findIndex(x => x.name == request.component)
+
+            // Component doesn't exist, create object
+            if (componentIndex == -1) {
+                componentIndex = components.push({
+                    name: request.component,
+                    intervals: []
+                }) - 1
+
+                // Fill intervals array
+                for (let j = 0; j < intervals; j++) {
+                    components[componentIndex].intervals.push({
+                        median: [],
+                        count: 0
+                    })
+                }
+            }
+
+            // User doesn't exist, create object
+            if (!spam) {
+                users[request.user] = {}
+                users[request.user][request.item] = {}
+                users[request.user][request.item][request.component] = {}
+
+                if (request.price != null) {
+                    ++components[componentIndex].intervals[interval].count
+                    components[componentIndex].intervals[interval].median.push(request.price)
+                }
+            }
+
+            // User does exist, purge
+            else {
+                result.splice(i, 1)
+            }
+        }
+    }
+
+
+    /**
+     * Remove values above min/max limits
+     */
+    purgeExtremes(result, components, timestart, timeend, intervals) {
+        let intervalsSize = (timestart - timeend) / intervals
 
         // Process median
         for (let i = 0; i < components.length; i++) {
@@ -147,87 +218,7 @@ class Statistics extends Endpoint {
             })
         }
 
-        // Filter too high/low from average
-        this.purgeExtremes(result, components, timestart, timeend, intervals)
-
-        return result
-    }
-
-
-    /**
-     * Filter multiple requests from one user in single intervals
-     */
-    purgeSpam(result, users, components, timestart, timeend, intervals) {
-        let intervalsSize = (timestart - timeend) / intervals
-
-        for (let i = result.length - 1; i >= 0; i--) {
-            let request = result[i]
-            let userIndex = users.findIndex(x => x.name == request.user && x.component == request.component)
-            let componentIndex = components.findIndex(x => x.name == request.component)
-
-            // Component doesn't exist, create object
-            if (componentIndex == -1) {
-                componentIndex = components.push({
-                    name: request.component,
-                    intervals: []
-                }) - 1
-
-                // Fill intervals array
-                for (let j = 0; j < intervals; j++) {
-                    components[componentIndex].intervals.push({
-                        median: [],
-                        count: 0
-                    })
-                }
-            }
-
-            // Find which intervals the request is located in
-            let k = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-            // Hacky race condition fix when i outside of intervals
-            if (k >= intervals) k = intervals - 1
-
-            // User doesn't exist, create object
-            if (userIndex == -1) {
-                users.push({
-                    name: request.user,
-                    lastRequest: request.createdAt,
-                    component: request.component
-                })
-
-                if (request.price != null) {
-                    ++components[componentIndex].intervals[k].count
-                    components[componentIndex].intervals[k].median.push(request.price)
-                }
-            }
-
-            // User does exist, check if request in intervals
-            else {
-
-                // Last request too close, purge
-                if (users[userIndex].lastRequest.getTime() - request.createdAt.getTime() < intervalsSize) {
-                    result.splice(i, 1)
-                }
-
-                // Everything is okay, update lastRequest
-                else {
-                    users[userIndex].lastRequest = request.createdAt
-                    if (request.price != null) {
-                        ++components[componentIndex].intervals[k].count
-                        components[componentIndex].intervals[k].median.push(request.price)
-                    }
-                }
-            }
-        }
-    }
-
-
-    /**
-     * Remove values above min/max limits
-     */
-    purgeExtremes(result, components, timestart, timeend, intervals) {
-        let intervalsSize = (timestart - timeend) / intervals
-
+        // Remove extremes based on median
         for (let i = result.length - 1; i >= 0; i--) {
             let request = result[i]
             let componentIndex = components.findIndex(x => x.name == request.component)
