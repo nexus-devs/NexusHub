@@ -435,20 +435,20 @@ class Statistics extends Endpoint {
     processIntervals(doc, i, component, offers) {
         component.intervals.forEach((intvl, j) => {
 
+            // Leave raw sum for component
+            component.avg += intvl.avg ? intvl.avg : 0
+
             // Calculate avg and supply/demand percentages
             offers = intvl.supply.count + intvl.demand.count
-            if (offers) {
-                intvl.avg = intvl.avg / (offers - intvl.ignore)
-                intvl.supply.percentage = intvl.supply.count / offers
-                intvl.demand.percentage = intvl.demand.count / offers
+            intvl.avg = intvl.avg / (offers - intvl.ignore)
+            intvl.supply.percentage = intvl.supply.count / offers
+            intvl.demand.percentage = intvl.demand.count / offers
 
-                // New min/max?
-                if (intvl.min < component.min) component.min = intvl.min
-                if (intvl.max > component.max) component.max = intvl.max
-            }
+            // New min/max?
+            if (intvl.min < component.min) component.min = intvl.min
+            if (intvl.max > component.max) component.max = intvl.max
 
             // Add intervals vars on component vars
-            component.avg += intvl.avg ? intvl.avg : 0
             component.supply.count += intvl.supply.count
             component.demand.count += intvl.demand.count
             component.ignore += intvl.ignore
@@ -471,14 +471,9 @@ class Statistics extends Endpoint {
         offers = component.supply.count + component.demand.count
         component.supply.percentage = component.supply.count / offers
         component.demand.percentage = component.demand.count / offers
-        offers = 0
 
-        // How many intervalss have avg value?
-        component.intervals.forEach(intvl => {
-            if (intvl.avg) offers++
-        })
-
-        component.avg = component.avg / offers
+        // Avg based on supply count
+        component.avg = component.avg / (offers - component.ignore)
 
         // Add component vars to document vars
         doc.supply.count += component.supply.count
