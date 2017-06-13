@@ -3,7 +3,7 @@
 /**
  * blitz.js setup
  */
-const Blitz = require("blitz-js")({logLevel: "verbose"})
+const Blitz = require("blitz-js")({logLevel: "info"})
 
 
 /**
@@ -15,7 +15,7 @@ const intro = require("./config/logger.js")
 /**
  * Import hooks
  */
-let mongoHooks = require('./hooks/mongo')
+const mongoHooks = require('./hooks/mongo')
 
 
 /**
@@ -23,7 +23,9 @@ let mongoHooks = require('./hooks/mongo')
  */
 const Auth = require("blitz-js-auth")
 const authOptions = {
-    mongoURL: "mongodb://localhost/warframe-nexus"
+    cores: 1,
+    mongoURL: "mongodb://localhost/warframe-nexus",
+    exp: "10s"
 }
 blitz.use(new Auth(authOptions))
 
@@ -33,6 +35,7 @@ blitz.use(new Auth(authOptions))
  */
 const API = require("blitz-js-api")
 const apiOptions = {
+    cores: 1,
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
 blitz.use(new API(apiOptions))
@@ -43,17 +46,9 @@ blitz.use(new API(apiOptions))
  */
 const Core = require("blitz-js-core")
 let coreOptions = {
+    cores: 2,
     endpointPath: __dirname + "/endpoints",
     mongoURL: "mongodb://localhost/warframe-nexus"
 }
 blitz.hook(Core, mongoHooks.mongoVerifyIndices)
 blitz.use(new Core(coreOptions))
-
-
-/**
- * blitz.js view node
-const View = require("../../blitz/blitz.js-view/index.js")
-let viewOptions = {
-}
-blitz.use(new View(viewOptions))
- */
