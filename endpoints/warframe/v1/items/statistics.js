@@ -151,7 +151,7 @@ class Statistics extends Endpoint {
             interval = interval >= intervals ? intervals - 1 : interval
             users = interval > previousInterval ? {} : users // keep users object small, remove unnecessary data
 
-            //if (users[request.user])
+            // Check if user is recorded to avoid double requests
             let spam = users[request.user] ? (users[request.user][request.item][request.component] ? true : false) : false
             let componentIndex = components.findIndex(x => x.name == request.component)
 
