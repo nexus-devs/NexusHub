@@ -19,8 +19,8 @@ class Request extends Endpoint {
      */
     main(username) {
         return new Promise((resolve, reject) => {
-            if (username.length > 16) {
-                reject("Username can't have more than 16 characters.")
+            if (username.length > 16 || username.length < 4) {
+                reject("Username can't have more than 16 or less than 4 characters.")
             } else {
                 this.db.collection("players").findOne({
                     name: new RegExp("^" + username + "$", "i")
