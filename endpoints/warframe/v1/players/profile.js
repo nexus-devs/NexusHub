@@ -28,7 +28,7 @@ class Request extends Endpoint {
 
                     // User saved? Return cached data if younger than 24h
                     if (result) {
-                        if (new Date - result.createdAt < 86400000) {
+                        if (new Date - result.updatedAt < 86400000) {
                             return resolve(result)
                         } else {
                             resolve(result)
