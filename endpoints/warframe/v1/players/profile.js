@@ -19,29 +19,33 @@ class Request extends Endpoint {
      */
     main(username) {
         return new Promise((resolve, reject) => {
-            this.db.collection("players").findOne({
-                name: new RegExp("^" + username + "$", "i")
-            }).then((result) => {
+            if(username.length > 16) {
+                reject("Username can't have more than 16 characters.")
+            } else {
+                this.db.collection("players").findOne({
+                    name: new RegExp("^" + username + "$", "i")
+                }).then((result) => {
 
-                // User saved? Return cached.
-                if (result) {
-                    resolve(result)
-                }
+                    // User saved? Return cached.
+                    if (result) {
+                        resolve(result)
+                    }
 
-                // User not saved, get data
-                else {
-                    let playerURL = "/warframe/v1/players/" + username + "/profile"
-                    let botURL = "/warframe/v1/bots/getProfile"
+                    // User not saved, get data
+                    else {
+                        let playerURL = "/warframe/v1/players/" + username + "/profile"
+                        let botURL = "/warframe/v1/bots/getProfile"
 
-                    this.api.subscribe(playerURL)
-                    this.publish(botURL, username)
+                        this.api.subscribe(playerURL)
+                        this.publish(botURL, username)
 
-                    this.api.on(playerURL, player => {
-                        this.api.connection.client.off(playerURL)
-                        player.mastery ? resolve(player) : reject(username + " could not be found.")
-                    })
-                }
-            })
+                        this.api.on(playerURL, player => {
+                            this.api.connection.client.off(playerURL)
+                            player.mastery ? resolve(player) : reject(username + " could not be found.")
+                        })
+                    }
+                })
+            }
         })
     }
 }
