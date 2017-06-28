@@ -1,0 +1,49 @@
+'use strict'
+
+const Endpoint = require(blitz.config.core.endpointParent)
+const Statistics = require(__dirname + "/../items/statistics.js")
+
+/**
+ * Contains multi-purpose functions for child-methods and provides default values
+ */
+class Request extends Endpoint {
+    constructor(api, db, url) {
+        super(api, db, url)
+
+        // Modify schema
+        this.schema.url = "/warframe/v1/players/:username/profile"
+    }
+
+    /**
+     * Expect this method to only get triggered if user isn't saved already
+     */
+    main(username) {
+        return new Promise((resolve, reject) => {
+            this.db.collection("players").findOne({
+                name: new RegExp("^" + username + "$", "i")
+            }).then((result) => {
+
+                // User saved? Return cached.
+                if (result) {
+                    resolve(result)
+                }
+
+                // User not saved, get data
+                else {
+                    let playerURL = "/warframe/v1/players/" + username + "/profile"
+                    let botURL = "/warframe/v1/bots/getProfile"
+
+                    this.api.subscribe(playerURL)
+                    this.publish(botURL, username)
+
+                    this.api.on(playerURL, player => {
+                        this.api.connection.client.off(playerURL)
+                        player.mastery ? resolve(player) : reject(username + " could not be found.")
+                    })
+                }
+            })
+        })
+    }
+}
+
+module.exports = Request
