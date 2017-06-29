@@ -22,8 +22,9 @@ class Request extends Endpoint {
     main(username) {
         return new Promise((resolve, reject) => {
             if (username.length > 16 || username.length < 4) {
-                reject({
-                    error: "Username can't have more than 16 or less than 4 characters."
+                resolve({
+                    error: username + " could not be found.",
+                    reason: "Usernames can't have less than 4 or more than 16 characters"
                 })
             }
 
@@ -46,7 +47,8 @@ class Request extends Endpoint {
                     status.main().then(result => {
                         if (!result["Player-Sentry"].online) {
                             return resolve({
-                                error: "All bots are currently offline."
+                                error: username + " could not be found.",
+                                reason: "All bots are currently offline."
                             })
                         }
 
@@ -60,8 +62,9 @@ class Request extends Endpoint {
 
                             this.api.on(playerURL, player => {
                                 this.api.connection.client.off(playerURL)
-                                player.mastery ? resolve(player) : reject({
-                                    error: username + " could not be found."
+                                player.mastery ? resolve(player) : resolve({
+                                    error: username + " could not be found.",
+                                    reason: "Could not find user in-game."
                                 })
                             })
                         }
