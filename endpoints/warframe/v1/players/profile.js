@@ -48,7 +48,6 @@ class Request extends Endpoint {
 
                         // Query user if older than 24h or doesn't exist yet
                         else {
-
                             let playerURL = "/warframe/v1/players/" + username + "/profile"
                             let botURL = "/warframe/v1/bots/getProfile"
 
