@@ -45,7 +45,7 @@ class Request extends Endpoint {
                 }
 
                 // Publish received data either way
-                this.publish("/warframe/v1/players/" + player.name + "/profile", player)
+                this.publish("/warframe/v1/players/" + player.name.toLowerCase() + "/profile", player)
             })
 
             // Save request on db
