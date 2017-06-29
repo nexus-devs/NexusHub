@@ -31,7 +31,7 @@ class Request extends Endpoint {
             // Input is Valid
             else {
                 this.db.collection("players").findOne({
-                    name: new RegExp("^" + username + "$", "i")
+                    name: new RegExp("^" + username.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + "$", "i")
                 }).then((result) => {
 
                     // User saved? Return cached data if younger than 24h
@@ -60,8 +60,7 @@ class Request extends Endpoint {
                             this.api.subscribe(playerURL)
                             this.publish(botURL, username)
 
-                            this.api.on(playerURL, player => {
-                                this.api.connection.client.off(playerURL)
+                            this.api.connection.client.once(playerURL, player => {
                                 player.mastery ? resolve(player) : resolve({
                                     error: username + " could not be found.",
                                     reason: "Could not find user in-game."
