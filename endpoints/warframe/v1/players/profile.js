@@ -1,7 +1,8 @@
 'use strict'
 
 const Endpoint = require(blitz.config.core.endpointParent)
-const Statistics = require(__dirname + "/../items/statistics.js")
+const Status = require(__dirname + "/../bots/status.js")
+let status = undefined
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -9,6 +10,7 @@ const Statistics = require(__dirname + "/../items/statistics.js")
 class Request extends Endpoint {
     constructor(api, db, url) {
         super(api, db, url)
+        status = new Status(api, db, "/warframe/v1/bots/status")
 
         // Modify schema
         this.schema.url = "/warframe/v1/players/:username/profile"
@@ -21,7 +23,10 @@ class Request extends Endpoint {
         return new Promise((resolve, reject) => {
             if (username.length > 16 || username.length < 4) {
                 reject("Username can't have more than 16 or less than 4 characters.")
-            } else {
+            }
+
+            // Input is Valid
+            else {
                 this.db.collection("players").findOne({
                     name: new RegExp("^" + username + "$", "i")
                 }).then((result) => {
@@ -35,16 +40,25 @@ class Request extends Endpoint {
                         }
                     }
 
-                    // Query user if older than 24h or doesn't exist yet
-                    let playerURL = "/warframe/v1/players/" + username + "/profile"
-                    let botURL = "/warframe/v1/bots/getProfile"
+                    // Check if Bot is alive
+                    status.main().then(result => {
+                        if (!result["Player-Sentry"].online) {
+                            return resolve("Bot is currently offline. This is most likely due to updates requiring a restart.")
+                        }
 
-                    this.api.subscribe(playerURL)
-                    this.publish(botURL, username)
+                        // Query user if older than 24h or doesn't exist yet
+                        else {
+                            let playerURL = "/warframe/v1/players/" + username + "/profile"
+                            let botURL = "/warframe/v1/bots/getProfile"
 
-                    this.api.on(playerURL, player => {
-                        this.api.connection.client.off(playerURL)
-                        player.mastery ? resolve(player) : reject(username + " could not be found.")
+                            this.api.subscribe(playerURL)
+                            this.publish(botURL, username)
+
+                            this.api.on(playerURL, player => {
+                                this.api.connection.client.off(playerURL)
+                                player.mastery ? resolve(player) : reject(username + " could not be found.")
+                            })
+                        }
                     })
                 })
             }

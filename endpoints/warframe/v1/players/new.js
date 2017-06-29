@@ -1,7 +1,6 @@
 'use strict'
 
 const Endpoint = require(blitz.config.core.endpointParent)
-const Statistics = require(__dirname + "/../items/statistics.js")
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
