@@ -36,7 +36,7 @@ const Endpoint = require(blitz.config.core.endpointParent)
                     bots.forEach(bot => {
                         out[bot] = {
                             name: bot,
-                            status: "offline"
+                            online: false
                         }
                     })
                     this.api.connection.client.off("/warframe/v1/bots/pong")
