@@ -22,7 +22,7 @@ class Request extends Endpoint {
 
             // See if we're updating or creating new user
             this.db.collection("players").findOne({
-                name: new RegExp("^" + player.name + "$", "i")
+                name: new RegExp("^" + player.name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + "$", "i")
             }).then((result) => {
 
                 // Set updatedAt or createdAt accordingly
