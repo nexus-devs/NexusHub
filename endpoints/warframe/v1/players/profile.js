@@ -36,6 +36,7 @@ class Request extends Endpoint {
 
                     // User saved? Return cached data if younger than 24h
                     if (result) {
+                        delete result._id
                         if (new Date - result.updatedAt < 86400000) {
                             return resolve(result)
                         } else {
@@ -61,6 +62,7 @@ class Request extends Endpoint {
                             this.publish(botURL, username)
 
                             this.api.connection.client.once(playerURL, player => {
+                                delete player._id
                                 player.mastery ? resolve(player) : resolve({
                                     error: username + " could not be found.",
                                     reason: "Could not find user in-game."
