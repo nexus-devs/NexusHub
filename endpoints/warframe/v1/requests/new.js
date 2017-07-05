@@ -22,8 +22,7 @@ class Request extends Endpoint {
         return new Promise((resolve, reject) => {
 
             // Modify request
-            request.createdAt = new Date()
-            request.price = request.price === "null" ? null : request.price
+            request.createdAt = new Date(request.createdAt)
 
             // Get statistics for item
             let statistics = new Statistics(this.api, this.db, ("/warframe/v1/items/" + request.item + "/statistics").split(" ").join("%20"))
