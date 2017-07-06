@@ -13,7 +13,7 @@ const Endpoint = require(blitz.config.core.endpointParent)
 
     main() {
         return new Promise((resolve, reject) => {
-            let bots = ["Player-Sentry"]
+            let bots = ["Chat-Sentry", "Player-Sentry"]
             let out = {}
 
             this.api.subscribe("/warframe/v1/bots/pong")
