@@ -31,12 +31,14 @@ class Request extends Endpoint {
             // Publish changes
             .then((data) => {
                 this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
-                this.publish("/warframe/v1/requests", request)
                 data.components ? this.saveStats(data) : null
                 resolve("Request processed. (" + JSON.stringify(request) + ")")
             })
 
-            // Save request on db
+            // Publish and save request on db
+            this.publish("/warframe/v1/requests", request)
+            delete request.subMessage
+            delete request.rawMessage
             this.db.collection("requests").insertOne(request)
         })
     }
