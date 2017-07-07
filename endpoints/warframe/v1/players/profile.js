@@ -62,11 +62,16 @@ class Request extends Endpoint {
                             this.publish(botURL, username)
 
                             this.api.connection.client.once(playerURL, player => {
-                                delete player._id
-                                player.mastery ? resolve(player) : resolve({
-                                    error: username + " could not be found.",
-                                    reason: "Could not find user in-game."
-                                })
+                                if (player.mastery) {
+                                    resolve(player)
+                                } else {
+                                    let res = {
+                                        error: username + " could not be found.",
+                                        reason: "Could not find user in-game."
+                                    }
+                                    this.cache(this.url, res, 60)
+                                    resolve(res)
+                                }
                             })
                         }
                     })
