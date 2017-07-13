@@ -21,10 +21,10 @@ class Request extends Endpoint {
      */
     main(username) {
         return new Promise((resolve, reject) => {
-            if (username.length > 24) {
+            if (username.length > 24 || username.length < 1) {
                 resolve({
                     error: username + " could not be found.",
-                    reason: "Usernames can't have more than 24 characters"
+                    reason: "Usernames can't have less than one or more than 24 characters"
                 })
             }
 
