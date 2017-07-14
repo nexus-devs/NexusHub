@@ -4,20 +4,12 @@ const Endpoint = require(blitz.config.core.endpointParent)
 const _ = require("lodash")
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Provides price data for each item
  */
-class Base extends Endpoint {
-    /**
-     * Creates a new statistics call
-     * @constructor
-     */
+class Prices extends Endpoint {
+
     constructor(api, db, url) {
         super(api, db, url)
-
-        /**
-         * Schema description
-         * @type {string}
-         */
         this.schema.description = "Get item statistics between a specified time frame."
     }
 
@@ -72,4 +64,4 @@ class Base extends Endpoint {
     }
 }
 
-module.exports = Base
+module.exports = Prices

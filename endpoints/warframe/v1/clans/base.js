@@ -3,26 +3,13 @@
 const Endpoint = require(blitz.config.core.endpointParent)
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Provides clan data based on accumulated information from player profiles
  */
 class Base extends Endpoint {
-    /**
-     * Creates a new statistics call
-     * @constructor
-     */
+
     constructor(api, db, url) {
         super(api, db, url)
-
-        /**
-         * Schema description
-         * @type {string}
-         */
         this.schema.description = "Get clan details for specified clan"
-
-        /**
-         * Url used for routing by express/custom middleware handler
-         * @type {string}
-         */
         this.schema.url = "/warframe/v1/clans/:clan"
     }
 
