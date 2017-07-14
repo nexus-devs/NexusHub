@@ -23,9 +23,8 @@ Old development builds can be found in the commit history starting at #271
 <br>
 
 ## Testing
->`node testserver.js`
-<br>
->`npm test`
+>`node testserver.js && npm test`
+
 <br>
 
 ## Requirements
