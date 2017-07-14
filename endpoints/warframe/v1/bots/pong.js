@@ -3,9 +3,10 @@
 const Endpoint = require(blitz.config.core.endpointParent)
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Endpoint to receive ping responses from bots, including their status
  */
-class Request extends Endpoint {
+class Pong extends Endpoint {
+
     constructor(api, db, url) {
         super(api, db, url)
 
@@ -25,4 +26,4 @@ class Request extends Endpoint {
     }
 }
 
-module.exports = Request
+module.exports = Pong

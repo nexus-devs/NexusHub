@@ -3,9 +3,9 @@
 const Endpoint = require(blitz.config.core.endpointParent)
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Accepts new entries for recorded player profiles
  */
-class Request extends Endpoint {
+class Player extends Endpoint {
     constructor(api, db, url) {
         super(api, db, url)
 
@@ -51,4 +51,4 @@ class Request extends Endpoint {
     }
 }
 
-module.exports = Request
+module.exports = Player

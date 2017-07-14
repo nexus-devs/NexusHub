@@ -4,26 +4,13 @@ const Endpoint = require(blitz.config.core.endpointParent)
 const _ = require("lodash")
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Provides basic item properties
  */
 class Base extends Endpoint {
-    /**
-     * Creates a new statistics call
-     * @constructor
-     */
+
     constructor(api, db, url) {
         super(api, db, url)
-
-        /**
-         * Schema description
-         * @type {string}
-         */
         this.schema.description = "Get item statistics between a specified time frame."
-
-        /**
-         * Url used for routing by express/custom middleware handler
-         * @type {string}
-         */
         this.schema.url = "/warframe/v1/items/:item"
     }
 
