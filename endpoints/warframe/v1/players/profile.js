@@ -32,7 +32,7 @@ class Profile extends Endpoint {
 
             // Input is Valid
             else {
-                getProfile(username, resolve, reject)
+                this.getProfile(username, resolve, reject)
             }
         })
     }
