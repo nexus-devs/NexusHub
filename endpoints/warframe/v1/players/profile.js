@@ -42,6 +42,7 @@ class Profile extends Endpoint {
      * Get the player profile from the local db
      */
     getProfile(username, resolve, reject) {
+        username = username.split(" ").join("")
         this.db.collection("players").findOne({
             name: new RegExp("^" + username.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + "$", "i")
         }).then((result) => {
