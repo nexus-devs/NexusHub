@@ -35,8 +35,8 @@ class Base extends Endpoint {
                     this.cache(this.url, clan, 60)
                     resolve(clan)
                 } else {
-                    this.cache(this.url, "No player data saved for " + clan + ".", 60)
-                    resolve("No players data saved for " + clan + ".")
+                    this.cache(this.url, "No clan data saved for " + clan + ".", 60)
+                    resolve("No clan data saved for " + clan + ".")
                 }
             })
         })
