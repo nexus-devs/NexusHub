@@ -65,8 +65,17 @@ class Statistics extends Endpoint {
                 .then(result => this.purge(result, timestart, timeend, intervals))
                 .then(result => this.getStatistics(query, intervals, result))
                 .then(doc => {
-                    this.cache(this.url, doc, 86400)
-                    resolve(doc)
+                    if (Object.keys(doc).length > 0) {
+                        this.cache(this.url, doc, 86400)
+                        resolve(doc)
+                    } else {
+                        let res = {
+                            error: "Could not find data for " + item + " " + component + ".",
+                            reason: "Nobody offers this item or it doesn't exist."
+                        }
+                        this.cache(this.url, res, 86400)
+                        resolve(res)
+                    }
                 })
         })
     }
