@@ -10,13 +10,13 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.1.2",
-    "blitz-js-api": "^0.1.3",
-    "blitz-js-auth": "^0.1.2",
-    "blitz-js-core": "^0.1.2",
+    "blitz-js": "^0.1.3",
+    "blitz-js-api": "^0.1.6",
+    "blitz-js-auth": "^0.1.7",
+    "blitz-js-core": "^0.1.5",
     "chalk": "^2.1.0",
     "mongodb": "^2.2.30",
-    "warframe-updates": "^1.0.5"
+    "warframe-updates": "^1.0.6"
   },
   "devDependencies": {
     "blitz-js-query": "0.1.0",
