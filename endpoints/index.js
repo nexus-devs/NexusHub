@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -11,8 +9,8 @@ const Endpoint = require(blitz.config.core.endpointParent)
          this.schema.url = "/"
      }
 
-    main() {
-        return new Promise((resolve, reject) => resolve("Documentation can be found at https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE. I'm too busy to hook a web server for docs right now. Sorry :>"))
+    async main() {
+        return "Documentation can be found at https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE. I'm too busy to hook a web server for docs right now. Sorry :>"
      }
  }
 

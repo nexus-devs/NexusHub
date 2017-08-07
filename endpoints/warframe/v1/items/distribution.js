@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const _ = require("lodash")
 
 /**
@@ -17,57 +15,52 @@ class Distribution extends Endpoint {
     /**
      * Main method which is called by EndpointHandler on request
      */
-    main() {
-        return new Promise((resolve, reject) => {
-            this.db.collection('items').find({}).toArray((err, result) => {
-                if (err) reject(err)
+    async main() {
+        let items = await this.db.collection('items').find({}).toArray()
 
-                // Remove unnecessary data
-                result.forEach(item => {
-                    delete item.type
-                    delete item.prices
-                    delete item._id
-                    delete item.category
-                    delete item.ranks
+        // Remove unnecessary data
+        items.forEach(item => {
+            delete item.type
+            delete item.prices
+            delete item._id
+            delete item.category
+            delete item.ranks
 
-                    if (item.distribution) {
-                        item.components = item.distribution
-                        delete item.distribution
-                    } else {
-                        let components = []
-                        item.components.forEach(comp => {
-                            components.push({
-                                name: comp,
-                                supply: {
-                                    count: 0,
-                                    percentage: 0.5
-                                },
-                                demand: {
-                                    count: 0,
-                                    percentage: 0.5
-                                }
-                            })
-                        })
-                        item.components = components
-
-                        item.components.length === 0 ? item.components.push({
-                            name: "Set",
-                            supply: {
-                                count: 0,
-                                percentage: 0.5
-                            },
-                            demand: {
-                                count: 0,
-                                percentage: 0.5
-                            }
-                        }) : null
-                    }
+            if (item.distribution) {
+                item.components = item.distribution
+                delete item.distribution
+            } else {
+                let components = []
+                item.components.forEach(comp => {
+                    components.push({
+                        name: comp,
+                        supply: {
+                            count: 0,
+                            percentage: 0.5
+                        },
+                        demand: {
+                            count: 0,
+                            percentage: 0.5
+                        }
+                    })
                 })
-
-                this.cache(this.url, result, 60)
-                resolve(result)
-            })
+                item.components = components
+                item.components.length === 0 ? item.components.push({
+                    name: "Set",
+                    supply: {
+                        count: 0,
+                        percentage: 0.5
+                    },
+                    demand: {
+                        count: 0,
+                        percentage: 0.5
+                    }
+                }) : null
+            }
         })
+
+        this.cache(this.url, items, 60)
+        return items
     }
 }
 

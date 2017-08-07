@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -16,22 +14,18 @@ class List extends Endpoint {
     /**
      * Main method which is called by EndpointHandler on request
      */
-    main() {
-        return new Promise((resolve, reject) => {
-            this.db.collection('items').find({}).toArray((err, result) => {
-                if (err) reject(err)
+    async main() {
+        let result = await this.db.collection('items').find({}).toArray()
 
-                // Remove unnecessary data
-                result.forEach(item => {
-                    delete item.distribution
-                    delete item.prices
-                    delete item._id
-                })
-
-                this.cache(this.url, result, 60)
-                resolve(result)
-            })
+        // Remove unnecessary data
+        result.forEach(item => {
+            delete item.distribution
+            delete item.prices
+            delete item._id
         })
+
+        this.cache(this.url, result, 60)
+        return result
     }
 }
 

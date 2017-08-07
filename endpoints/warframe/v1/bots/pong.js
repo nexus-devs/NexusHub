@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
 /**
  * Endpoint to receive ping responses from bots, including their status
@@ -18,11 +16,9 @@ class Pong extends Endpoint {
     /**
      * Main method which is called by MethoHandler on request
      */
-    main(status) {
-        return new Promise((resolve, reject) => {
-            this.publish(this.url, status)
-            resolve("pong")
-        })
+    async main(status) {
+        this.publish(this.url, status)
+        return "pong"
     }
 }
 

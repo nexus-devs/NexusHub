@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
 /**
  * Retrieves upstatus for all known bots
@@ -12,7 +10,7 @@ const Endpoint = require(blitz.config.core.endpointParent)
          this.schema.description = "Returns the status of all bots."
      }
 
-    main() {
+    async main() {
         return new Promise((resolve, reject) => {
             let bots = ["Chat-Sentry", "Player-Sentry"]
             let out = {}
