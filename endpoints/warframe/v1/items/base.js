@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const _ = require("lodash")
 
 /**
@@ -18,25 +16,22 @@ class Base extends Endpoint {
     /**
      * Main method which is called by EndpointHandler on request
      */
-    main(item) {
-        return new Promise((resolve, reject) => {
-            this.db.collection('items').findOne({
-                name: new RegExp("^" + item + "$", "i")
-            }).then((doc) => {
-                if (doc) {
-                    // Remove unnecessary data
-                    delete doc.prices
-                    delete doc.distribution
-                    delete doc._id
-
-                    this.cache(this.url, doc, 60)
-                    resolve(doc)
-                } else {
-                    this.cache(this.url, item + " not found.", 60)
-                    resolve(item + " not found.")
-                }
-            })
+    async main(item) {
+        let doc = await this.db.collection('items').findOne({
+            name: new RegExp("^" + item + "$", "i")
         })
+        if (doc) {
+            // Remove unnecessary data
+            delete doc.prices
+            delete doc.distribution
+            delete doc._id
+
+            this.cache(this.url, doc, 60)
+            return doc
+        } else {
+            this.cache(this.url, item + " not found.", 60)
+            return item + " not found."
+        }
     }
 }
 

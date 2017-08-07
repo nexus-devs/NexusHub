@@ -16,7 +16,7 @@ module.exports = {
 
             // TODO: Change item index to text
             console.log(" ")
-            blitz.log.info("mongoHook | verifying request indices")
+            blitz.log.verbose("Core      | verifying request indices")
             mongoVerifySingleIndex(db, 'players', {'name': 1})
             mongoVerifySingleIndex(db, 'players', {'updatedAt': 1})
             mongoVerifySingleIndex(db, 'requests', {'item': 1, 'createdAt': 1})
@@ -37,7 +37,7 @@ function mongoVerifySingleIndex(db, col, index) {
     db.collection(col).createIndex(index)
 
     // Verbose log string
-    let str = "mongoHook | verified "
+    let str = "Core      | verified "
 
     // Get obj length
     let objLength = Object.keys(index).map(key => index.hasOwnProperty(key)).length
@@ -59,5 +59,5 @@ function mongoVerifySingleIndex(db, col, index) {
 
     // Log
     str += " index"
-    blitz.log.verbose(str)
+    blitz.log.silly(str)
 }

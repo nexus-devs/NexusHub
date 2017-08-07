@@ -1,6 +1,4 @@
-'use strict'
-
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const _ = require("lodash")
 
 /**
@@ -48,36 +46,31 @@ class Statistics extends Endpoint {
     /**
      * Main method which is called by EndpointHandler on request
      */
-    main(item, component, timestart, timeend, intervals) {
-        return new Promise((resolve, reject) => {
+    async main(item, component, timestart, timeend, intervals) {
 
-            // Check if params are valid
-            if (timestart < timeend) return reject("Invalid time frame. Please make sure that timestart is greater than timeend.")
-            if (intervals <= 0) return reject("Intervals must be greater than 0")
+        // Check if params are valid
+        if (timestart < timeend) return reject("Invalid time frame. Please make sure that timestart is greater than timeend.")
+        if (intervals <= 0) return reject("Intervals must be greater than 0")
 
-            // Generate valid Query from input
-            let query = this.generateQuery(item, component, timestart, timeend)
+        // Generate valid Query from input
+        let query = this.generateQuery(item, component, timestart, timeend)
 
-            // Get requests from mongodb
-            this.db.collection('requests').find(query).toArray()
+        // Get requests from mongodb
+        let requests = await this.db.collection('requests').find(query).toArray()
+        let purged = this.purge(requests, timestart, timeend, intervals)
+        let stats = this.getStatistics(query, intervals, purged)
 
-                // Purge, Get Stats, Resolve
-                .then(result => this.purge(result, timestart, timeend, intervals))
-                .then(result => this.getStatistics(query, intervals, result))
-                .then(doc => {
-                    if (Object.keys(doc).length > 0) {
-                        this.cache(this.url, doc, 86400)
-                        resolve(doc)
-                    } else {
-                        let res = {
-                            error: "Could not find data for " + item + " " + component + ".",
-                            reason: "Nobody offers this item or it doesn't exist."
-                        }
-                        this.cache(this.url, res, 86400)
-                        resolve(res)
-                    }
-                })
-        })
+        if (Object.keys(stats).length > 0) {
+            this.cache(this.url, stats, 86400)
+        }
+        else {
+            let res = {
+                error: "Could not find data for " + item + " " + component + ".",
+                reason: "Nobody offers this item or it doesn't exist."
+            }
+            this.cache(this.url, res, 86400)
+        }
+        return stats
     }
 
 
@@ -229,7 +222,7 @@ class Statistics extends Endpoint {
 
                 // Current price is 33% under average, purge
                 else if (request.price / components[componentIndex].intervals[k].median < 0.33) {
-                   result.splice(i, 1)
+                    result.splice(i, 1)
                 }
             }
         }

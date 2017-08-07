@@ -1,10 +1,8 @@
-'use strict'
-
 const WarframeVersion = require("warframe-updates")
 const warframeVersion = new WarframeVersion({
   interval: 10000
 })
-const Endpoint = require(blitz.config.core.endpointParent)
+const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
 /**
  * Monitors Warframe's WorldState for updates
@@ -21,10 +19,11 @@ class Updates extends Endpoint {
     /**
      * Main method which is called by EndpointHandler on request
      */
-    main() {
-        return new Promise((resolve, reject) => {
-            resolve("Could not find cached update data.")
-        })
+    async main() {
+        return {
+            error: "No data.",
+            reason: "Could not find cached update data."
+        }
     }
 
 
@@ -34,7 +33,7 @@ class Updates extends Endpoint {
     monitor() {
         warframeVersion.off("update") // Remove previous listeners from uncached calls
         warframeVersion.on("update", update => {
-            this.cache(this.url, update, 0)
+            this.cache(this.url, update)
             this.publish(this.url, update)
         })
     }
