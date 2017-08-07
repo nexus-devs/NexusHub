@@ -3,7 +3,7 @@
 /**
  * blitz.js setup
  */
-const Blitz = require("blitz-js")({logLevel: "verbose"})
+const Blitz = require("blitz-js")({logLevel: "info"})
 
 
 /**
@@ -34,7 +34,7 @@ const API = require("blitz-js-api")
 blitz.use(new API({
     mongoURL: "mongodb://localhost/warframe-nexus-core",
 }))
-
+blitz.nodes.api.get("/", (req, res, next) => res.send("Documentation can be found at https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE. I'm too busy to hook a web server for docs right now. Sorry :>"))
 
 /**
  * Resource worker which serves data to the API
