@@ -236,7 +236,10 @@ class Statistics extends Endpoint {
 
         // Empty results?
         if (result.length <= 0) {
-            return {}
+            return {
+                error: "Could not find data for " + item + " " + component + ".",
+                reason: "Nobody offers this item or it doesn't exist."
+            }
         }
 
         // Document to return
