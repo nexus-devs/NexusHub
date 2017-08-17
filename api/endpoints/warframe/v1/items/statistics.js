@@ -12,14 +12,12 @@ class Statistics extends Endpoint {
         this.schema.url = "/warframe/v1/items/:item/statistics"
         this.schema.query = [{
                 name: "component",
-                type: "string",
                 default: "",
                 required: true,
                 description: "Specifies item component to look up. No component returns full set data."
             },
             {
                 name: "timestart",
-                type: "number",
                 default: () => {
                     return new Date().getTime() // current time
                 },
@@ -27,7 +25,6 @@ class Statistics extends Endpoint {
             },
             {
                 name: "timeend",
-                type: "number",
                 default: () => {
                     return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 week ago
                 },
@@ -35,7 +32,6 @@ class Statistics extends Endpoint {
             },
             {
                 name: "intervals",
-                type: "number",
                 default: 7,
                 description: "Intervals to split the time in."
             }
@@ -49,8 +45,14 @@ class Statistics extends Endpoint {
     async main(item, component, timestart, timeend, intervals) {
 
         // Check if params are valid
-        if (timestart < timeend) return reject("Invalid time frame. Please make sure that timestart is greater than timeend.")
-        if (intervals <= 0) return reject("Intervals must be greater than 0")
+        if (timestart < timeend) return {
+            error: "Bad input.",
+            reason: "Invalid time frame. Please make sure that timestart is greater than timeend."
+        }
+        if (intervals <= 0) return {
+            error: "Bad input.",
+            reaon: "Intervals must be greater than 0"
+        }
 
         // Generate valid Query from input
         let query = this.generateQuery(item, component, timestart, timeend)
@@ -237,7 +239,7 @@ class Statistics extends Endpoint {
         // Empty results?
         if (result.length <= 0) {
             return {
-                error: "Could not find data for " + item + " " + component + ".",
+                error: "Could not find data.",
                 reason: "Nobody offers this item or it doesn't exist."
             }
         }

@@ -12,6 +12,7 @@ class Logger {
 
     constructor() {
         this.intro()
+        this.border = chalk.grey("---------------------------------------------------------------")
     }
 
     /**
