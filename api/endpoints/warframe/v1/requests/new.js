@@ -1,5 +1,6 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const Statistics = require(__dirname + "/../items/statistics.js")
+const _ = require("lodash")
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -23,7 +24,7 @@ class Request extends Endpoint {
         request.createdAt = new Date(request.createdAt)
 
         // Publish and save request on db
-        this.publish("/warframe/v1/requests", request)
+        this.publish("/warframe/v1/requests", _.cloneDeep(request))
         delete request.subMessage
         delete request.rawMessage
         this.db.collection("requests").insertOne(request)
