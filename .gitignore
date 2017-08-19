@@ -5,3 +5,10 @@
 /node_modules/
 .idea/
 /out/
+
+# Webpack generated content
+/view/dist/common.*.css
+/view/dist/*.bundle.js
+/view/dist/*manifest.json
+/view/dist/*bundle.json
+/view/dist/img/**.psd

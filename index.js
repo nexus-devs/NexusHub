@@ -11,14 +11,16 @@ const Blitz = require("blitz-js")({logLevel: "monitor"})
 const intro = require("./config/logger.js")
 const switchContext = async () => {
     await blitz.pingAll(blitz.nodes.view.workers)
-    console.log(" ")
-    console.log(`:: blitz.js stack ready in ${(new Date - epoch) / 1000}s`)
-    console.log(intro.border)
-    console.log(" ")
-    if (blitz.config.local.environment === "development") {
-        await blitz.setWorkerConfig("blitz.config.local.logLevel = 'info'")
-        blitz.config.local.logLevel = "info"
-    }
+    setTimeout(async () => {
+        console.log(" ")
+        console.log(`:: blitz.js stack ready in ${(new Date - epoch) / 1000}s`)
+        console.log(intro.border)
+        console.log(" ")
+        if (blitz.config.local.environment === "development") {
+            await blitz.setWorkerConfig("blitz.config.local.logLevel = 'info'")
+            blitz.config.local.logLevel = "info"
+        }
+    }, 1500) // too lazy to add ping propagation function right now
 }
 
 
@@ -60,12 +62,12 @@ blitz.use(new API({
 /**
  * View node for rendering webpages
  */
-const View = require("blitz-js-view")
+const View = require("../../blitz/blitz-js-view")
 blitz.use(new View({
     mongoURL: "mongodb://localhost/warframe-nexus-view",
-    //endpointPath: __dirname + "/view/endpoints",
-    //sourcePath: __dirname + "/view/src",
-    //publicPath: __dirname + "/view/public"
+    endpointPath: __dirname + "/view/endpoints",
+    sourcePath: __dirname + "/view/src",
+    publicPath: __dirname + "/view/dist"
 }))
 
 switchContext()
