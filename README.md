@@ -1,7 +1,7 @@
-
 [![Warframe-Nexus](/banner.png)](https://github.com/nexus-devs)
 
 - - - -
+[![Discord](https://img.shields.io/discord/195582152849620992.svg)](https://discord.gg/AG8RPZ8)
 <br>
 
 ## Build Information
