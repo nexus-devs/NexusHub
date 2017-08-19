@@ -12,7 +12,7 @@ const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
     async main() {
         return this.render("warframe/index.vue", {
-            node: blitz.id
+            test: "ma nem e jef"
         })
      }
  }
