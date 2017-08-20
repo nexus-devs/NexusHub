@@ -17,6 +17,7 @@
     "blitz-js-view": "0.0.1",
     "chalk": "^2.1.0",
     "mongodb": "^2.2.31",
+    "vue-router": "^2.7.0",
     "warframe-updates": "^1.0.6"
   },
   "devDependencies": {
