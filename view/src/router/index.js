@@ -8,7 +8,7 @@ import Router from 'vue-router'
 import routes from "./routes.js"
 
 // Views
-const IndexView = require("../views/index.vue")
+const IndexView = require("../views/index.vue").default
 
 Vue.use(Router)
 
