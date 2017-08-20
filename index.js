@@ -65,7 +65,7 @@ blitz.use(new API({
 const View = require("../../blitz/blitz-js-view")
 blitz.use(new View({
     mongoURL: "mongodb://localhost/warframe-nexus-view",
-    endpointPath: __dirname + "/view/endpoints",
+    endpointPath: __dirname + "/view/src/endpoints",
     sourcePath: __dirname + "/view/src",
     publicPath: __dirname + "/view/dist"
 }))

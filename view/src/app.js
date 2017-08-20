@@ -6,22 +6,18 @@
  */
 import Vue from 'vue'
 import App from './app.vue'
+import { createRouter } from "./router/index.js"
 
 // export a factory function for creating fresh app, router and store
 // instances
-export function createApp(ctx) {
-    console.log(ctx)
-    const app = new Vue({
-        render: createElement => {
-            const props = ctx ? ctx.data : {}
-            return createElement(App, {
-                props: {
-                    test: "cyka blyat"
-                }
-            })
-        }
-    })
-    return {
-        app
+export function createApp(context) {
+    const router = createRouter()
+    const props = {
+        props: context ? context.data : {}
     }
+    const app = new Vue({
+        router,
+        render: createElement => createElement(App, props)
+    })
+    return { app, router }
 }
