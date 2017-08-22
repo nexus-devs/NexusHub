@@ -1,0 +1,12 @@
+@mixin icon($height) {
+    display: inline-block;
+    vertical-align: middle;
+    height: $height;
+    padding: 2px;
+}
+@for $i from 12 to 36 {
+    .ico-#{$i} {
+        @include icon(#{$i});
+    }
+    $i: $i + 3;
+}

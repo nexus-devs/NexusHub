@@ -8,7 +8,7 @@ const Endpoint = require(blitz.config[blitz.id].endpointParent)
          super(api, db, url)
          this.schema.description = "Primary Landing Page"
          this.schema.url = "/"
-         this.schema.view = "views/index.vue"
+         this.schema.view = "views/warframe/index.vue"
      }
  }
 
