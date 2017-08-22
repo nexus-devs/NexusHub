@@ -54,7 +54,7 @@ blitz.use(new API({
  const Core = require("blitz-js-core")
  blitz.hook(Core, resourceHooks.verifyItemIndices)
  blitz.use(new Core({
-     endpointPath: __dirname + "/api/endpoints",
+     endpointPath: __dirname + "/endpoints/api",
      mongoURL: "mongodb://localhost/warframe-nexus-core",
  }))
 
@@ -65,7 +65,7 @@ blitz.use(new API({
 const View = require("../../blitz/blitz-js-view")
 blitz.use(new View({
     mongoURL: "mongodb://localhost/warframe-nexus-view",
-    endpointPath: __dirname + "/view/src/endpoints",
+    endpointPath: __dirname + "/endpoints/view",
     sourcePath: __dirname + "/view/src",
     publicPath: __dirname + "/view/dist"
 }))

@@ -1,0 +1,51 @@
+/**
+ * Acceleration Curves
+ */
+@mixin ease($timing) {
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: $timing;
+    -moz-transition-duration: $timing;
+    -o-transition-duration: $timing;
+    transition-duration: $timing;
+}
+
+@mixin ease-out($timing) {
+    -webkit-transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
+    transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
+    -webkit-transition-duration: $timing;
+    -moz-transition-duration: $timing;
+    -o-transition-duration: $timing;
+    transition-duration: $timing;
+}
+
+@mixin ease-touch($timing){
+    -webkit-transition-timing-function: cubic-bezier(.38,1,.54,.98);
+    transition-timing-function: cubic-bezier(.38,1,.54,.98);
+    -webkit-transition-duration: $timing;
+    -moz-transition-duration: $timing;
+    -o-transition-duration: $timing;
+    transition-duration: $timing;
+}
+
+@mixin notransition() {
+    -webkit-transition-timing-function: none !important;
+    transition-timing-function: none !important;
+    -webkit-transition-duration: 0s !important;
+    -moz-transition-duration: 0s !important;
+    -o-transition-duration: 0s !important;
+    transition-duration: 0s !important;
+}
+
+
+/**
+ * Interactive Items
+ */
+@mixin interactive() {
+    transform: scale(1);
+    @include ease(0.25s);
+
+    &:hover{
+        transform: scale(1.02);
+    }
+}

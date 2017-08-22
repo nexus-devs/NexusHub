@@ -11,13 +11,12 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "blitz-js": "^0.1.4",
-    "blitz-js-api": "^0.1.10",
+    "blitz-js-api": "^0.1.12",
     "blitz-js-auth": "^0.1.14",
-    "blitz-js-core": "^0.1.6",
-    "blitz-js-view": "0.0.1",
+    "blitz-js-core": "^0.1.7",
+    "blitz-js-view": "0.0.4",
     "chalk": "^2.1.0",
-    "mongodb": "^2.2.31",
-    "vue-router": "^2.7.0",
+    "extract-text-webpack-plugin": "^3.0.0",
     "warframe-updates": "^1.0.6"
   },
   "devDependencies": {

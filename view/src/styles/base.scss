@@ -1,0 +1,24 @@
+@import "partials/importer";
+@import "components/icons";
+@import "components/buttons";
+@import "components/typo";
+
+/**
+ * Globals
+ */
+body {
+    // Layout Properties / Sticky Footer
+    display: flex;
+    flex-direction: column;
+    min-height:100vh;
+
+    // Base Colors
+    background: $colorBackground;
+    color: $colorFontBody;
+    a {
+        color: white;
+    }
+    h1, h2, h3, h4, h5 {
+        color: white;
+    }
+}
