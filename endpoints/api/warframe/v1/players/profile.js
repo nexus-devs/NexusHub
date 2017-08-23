@@ -89,7 +89,8 @@ class Profile extends Endpoint {
             let res = {
               error: username + " could not be found.",
               reason: "Could not find user in-game."
-            }!responded ? this.cache(this.url, res, 10) : null
+            }
+            !responded ? this.cache(this.url, res, 10) : null
             resolve(res)
           }
         })
