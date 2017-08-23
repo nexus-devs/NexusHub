@@ -1,7 +1,12 @@
-@mixin gradient-transparent($col){
-    background: transparent; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(transparent, $col); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(transparent, $col); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(transparent, $col); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(transparent, $col); /* Standard syntax */
+@mixin gradient-transparent($col) {
+  background: transparent;
+  /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(transparent, $col);
+  /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(transparent, $col);
+  /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(transparent, $col);
+  /* For Firefox 3.6 to 15 */
+  background: linear-gradient(transparent, $col);
+  /* Standard syntax */
 }
