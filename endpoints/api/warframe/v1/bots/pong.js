@@ -5,21 +5,21 @@ const Endpoint = require(blitz.config[blitz.id].endpointParent)
  */
 class Pong extends Endpoint {
 
-    constructor(api, db, url) {
-        super(api, db, url)
+  constructor(api, db, url) {
+    super(api, db, url)
 
-        // Modify schema
-        this.schema.method = "POST"
-        this.schema.scope = "root-read-write"
-    }
+    // Modify schema
+    this.schema.method = "POST"
+    this.schema.scope = "root-read-write"
+  }
 
-    /**
-     * Main method which is called by MethoHandler on request
-     */
-    async main(status) {
-        this.publish(this.url, status)
-        return "pong"
-    }
+  /**
+   * Main method which is called by MethoHandler on request
+   */
+  async main(status) {
+    this.publish(this.url, status)
+    return "pong"
+  }
 }
 
 module.exports = Pong
