@@ -7,21 +7,32 @@ const mongodb = require('mongodb').MongoClient
 
 module.exports = {
 
-    /**
-     * Ensures mongodb indexes and creates missing ones
-     */
-     verifyItemIndices: () => {
-        mongodb.connect(blitz.config.core.mongoURL + "?socketTimeoutMS=0", function(err, db) {
-            if (err) throw err
+  /**
+   * Ensures mongodb indexes and creates missing ones
+   */
+  verifyItemIndices: () => {
+    mongodb.connect(blitz.config.core.mongoURL + "?socketTimeoutMS=0", function(err, db) {
+      if (err) throw err
 
-            // TODO: Change item index to text
-            blitz.log.verbose("Core      | verifying request indices")
-            mongoVerifySingleIndex(db, 'players', {'name': 1})
-            mongoVerifySingleIndex(db, 'players', {'updatedAt': 1})
-            mongoVerifySingleIndex(db, 'requests', {'item': 1, 'createdAt': 1})
-            mongoVerifySingleIndex(db, 'requests', {'item': 1, 'component': 1, 'createdAt': 1})
-        })
-    }
+      // TODO: Change item index to text
+      blitz.log.verbose("Core      | verifying request indices")
+      mongoVerifySingleIndex(db, 'players', {
+        'name': 1
+      })
+      mongoVerifySingleIndex(db, 'players', {
+        'updatedAt': 1
+      })
+      mongoVerifySingleIndex(db, 'requests', {
+        'item': 1,
+        'createdAt': 1
+      })
+      mongoVerifySingleIndex(db, 'requests', {
+        'item': 1,
+        'component': 1,
+        'createdAt': 1
+      })
+    })
+  }
 }
 
 /**
@@ -31,31 +42,31 @@ module.exports = {
  * @param {object} index - Indices to verify
  */
 function mongoVerifySingleIndex(db, col, index) {
-    // Verify index
-    db.collection(col).createIndex(index)
+  // Verify index
+  db.collection(col).createIndex(index)
 
-    // Verbose log string
-    let str = "Core      | verified "
+  // Verbose log string
+  let str = "Core      | verified "
 
-    // Get obj length
-    let objLength = Object.keys(index).map(key => index.hasOwnProperty(key)).length
+  // Get obj length
+  let objLength = Object.keys(index).map(key => index.hasOwnProperty(key)).length
 
-    // Append possible compound
-    if (objLength > 1) {
-        str += "compound "
+  // Append possible compound
+  if (objLength > 1) {
+    str += "compound "
+  }
+
+  // Append names
+  let i = 0
+  for (let key in index) {
+    if (index.hasOwnProperty(key)) {
+      str += key
+      if (i < objLength - 1) str += "/"
+      i++
     }
+  }
 
-    // Append names
-    let i = 0
-    for (let key in index) {
-        if (index.hasOwnProperty(key)) {
-            str += key
-            if (i < objLength - 1) str += "/"
-            i++
-        }
-    }
-
-    // Log
-    str += " index"
-    blitz.log.silly(str)
+  // Log
+  str += " index"
+  blitz.log.silly(str)
 }

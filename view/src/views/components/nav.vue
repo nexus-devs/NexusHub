@@ -22,6 +22,7 @@
         padding: 16px 25px;
         background: rgba(0,0,0,0.8);
         align-items: center;
+        @include shadow-1;
 
         a {
             margin: 0 15px;
