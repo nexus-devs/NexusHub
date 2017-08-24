@@ -16,12 +16,16 @@ module.exports = {
 
       // TODO: Change item index to text
       blitz.log.verbose("Core      | verifying request indices")
+
+      // Player profiles
       mongoVerifySingleIndex(db, 'players', {
         'name': 1
       })
       mongoVerifySingleIndex(db, 'players', {
         'updatedAt': 1
       })
+
+      // Item stats accumulation
       mongoVerifySingleIndex(db, 'requests', {
         'item': 1,
         'createdAt': 1
@@ -30,6 +34,20 @@ module.exports = {
         'item': 1,
         'component': 1,
         'createdAt': 1
+      })
+
+      // Last request lookups
+      mongoVerifySingleIndex(db, 'requests', {
+        'createdAt': -1
+      })
+      mongoVerifySingleIndex(db, 'requests', {
+        'item': 1,
+        'createdAt': -1
+      })
+      mongoVerifySingleIndex(db, 'requests', {
+        'item': 1,
+        'component': 1,
+        'createdAt': -1
       })
     })
   }
