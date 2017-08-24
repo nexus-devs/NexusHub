@@ -11,7 +11,7 @@
 
 
 <script>
-  import TopNav from "./views/components/nav.vue"
+  import TopNav from "src/components/nav.vue"
   export default {
     components: {
       "top-nav": TopNav

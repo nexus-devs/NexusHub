@@ -35,7 +35,7 @@ const resourceHooks = require('./hooks/mongo')
 /**
  * Authentication Server for incoming api connections
  */
-const Auth = require("blitz-js-auth")
+const Auth = require("../../blitz/blitz-js-auth")
 blitz.use(new Auth({
   mongoURL: "mongodb://localhost/warframe-nexus-auth"
 }))
