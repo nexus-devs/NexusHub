@@ -13,7 +13,6 @@
     },
 
     asyncData({ store }) {
-      console.log('triggured')
       return store.dispatch('setValue', '什么他妈的你他妈的刚才说我？')
     },
 
