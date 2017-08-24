@@ -2,7 +2,7 @@
   <nav class="row">
     <div class="col nav-l">
       <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class="ico-24">
-      <router-link to="/" exact><img src="/img/nav/logo.png" alt="" class="ico-28"><span>Nexus-Stats</span></router-link>
+      <router-link to="/" exact><img src="/img/nav/logo.svg" alt="" class="ico-24"><span>Nexus-Stats</span></router-link>
     </div>
     <div class="col nav-r">
       <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>

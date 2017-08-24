@@ -20,7 +20,9 @@
   },
   "devDependencies": {
     "blitz-js-query": "0.1.0",
+    "blitz-js-query-browser": "^0.1.1",
     "chai": "^4.1.1",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "vuex": "^2.3.1"
   }
 }
