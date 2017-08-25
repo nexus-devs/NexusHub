@@ -32,6 +32,7 @@ class Request extends Endpoint {
   async main(item, component, limit) {
     let data = await this.findLastRequests(item, component, limit)
     this.cache(this.url, data, 60)
+    return data
   }
 
   async findLastRequests(item, component, limit) {
