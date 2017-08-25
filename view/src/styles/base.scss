@@ -1,9 +1,7 @@
 @import "partials/importer";
-@import "components/icons";
-@import "components/buttons";
-@import "components/typo"; /**
- * Globals
- */
+@import "modules/icons";
+@import "modules/buttons";
+@import "modules/typo";
 
 body {
   // Layout Properties / Sticky Footer

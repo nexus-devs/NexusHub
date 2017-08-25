@@ -12,8 +12,9 @@
       }
     },
 
-    asyncData({ store }) {
-      return store.commit('setValue', '什么他妈的你他妈的刚才说我')
+    async asyncData({ store }, api) {
+      let requests = await api.get('/warframe/v1/requests')
+      store.commit('setValue', requests[0].user)
     },
 
     beforeMount() {
