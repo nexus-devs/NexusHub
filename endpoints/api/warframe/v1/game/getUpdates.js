@@ -15,17 +15,15 @@ class Updates extends Endpoint {
     this.schema.url = "/warframe/v1/game/updates"
   }
 
-
   /**
    * Main method which is called by EndpointHandler on request
    */
   async main() {
-    return {
+    res.status(404).send({
       error: "No data.",
       reason: "Could not find cached update data."
-    }
+    })
   }
-
 
   /**
    * Keep checking worldstate for updates

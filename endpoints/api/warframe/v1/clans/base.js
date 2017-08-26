@@ -15,7 +15,9 @@ class Base extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(clan) {
+  async main(req, res) {
+    const clan = req.params.clan
+
     let players = await this.db.collection('players').find({
       "clan.name": new RegExp("^" + clan + "$", "i")
     }).toArray()
@@ -31,14 +33,14 @@ class Base extends Endpoint {
         }
       }
       this.cache(this.url, clan, 10)
-      return clan
+      res.send(clan)
     } else {
-      let res = {
+      let response = {
         error: "No data.",
         reason: "No clan data saved for " + clan + "."
       }
-      this.cache(this.url, res, 10)
-      return res
+      this.cache(this.url, response, 10)
+      res.status(404).send(response)
     }
   }
 }

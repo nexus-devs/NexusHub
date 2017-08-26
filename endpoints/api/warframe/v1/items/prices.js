@@ -15,7 +15,7 @@ class Prices extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main() {
+  async main(req, res) {
     let items = await this.db.collection('items').find({}).toArray()
 
     // Remove unnecessary data
@@ -52,7 +52,7 @@ class Prices extends Endpoint {
     })
 
     this.cache(this.url, items, 60)
-    return items
+    res.send(items)
   }
 }
 

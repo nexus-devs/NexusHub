@@ -29,10 +29,14 @@ class Request extends Endpoint {
   /**
    * Main method which is called by MethoHandler on request
    */
-  async main(item, component, limit) {
+  async main(req, res) {
+    const item = req.query.item
+    const component = req.query.component
+    const limit = req.query.limit
+
     let data = await this.findLastRequests(item, component, limit)
     this.cache(this.url, data, 60)
-    return data
+    res.send(data)
   }
 
   async findLastRequests(item, component, limit) {

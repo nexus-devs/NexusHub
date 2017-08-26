@@ -14,7 +14,7 @@ class List extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main() {
+  async main(req, res) {
     let result = await this.db.collection('items').find({}).toArray()
 
     // Remove unnecessary data
@@ -25,7 +25,7 @@ class List extends Endpoint {
     })
 
     this.cache(this.url, result, 60)
-    return result
+    res.send(result)
   }
 }
 

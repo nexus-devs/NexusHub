@@ -16,9 +16,9 @@ class Pong extends Endpoint {
   /**
    * Main method which is called by MethoHandler on request
    */
-  async main(status) {
+  async main(req, res) {
     this.publish(this.url, status)
-    return "pong"
+    res.send('pong')
   }
 }
 

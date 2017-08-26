@@ -17,11 +17,12 @@ class Updates extends Endpoint {
     this.schema.scope = "post-game-updates"
   }
 
-
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(update) {
+  async main(req, res) {
+    const update = req.body
+
     if (update.type === "Redtext") {
       let redtext = update.data.split(/\r?\n/)
       let title = redtext[0].split(" is")[0]
@@ -34,12 +35,12 @@ class Updates extends Endpoint {
       }
       this.cache(this.url, updateData, 0)
       this.publish(this.url, updateData)
-      return updateData
+      res.send(updateData)
     } else {
-      return {
+      res.status(400).send({
         error: "Bad Request.",
         reason: "Update type not recognized (" + update.type + ")."
-      }
+      })
     }
   }
 }
