@@ -69,6 +69,7 @@ class Statistics extends Endpoint {
 
     if (Object.keys(stats).length > 0) {
       this.cache(this.url, stats, 86400)
+      res.send(stats)
     } else {
       let response = {
         error: "Could not find data for " + item + " " + component + ".",
@@ -77,7 +78,6 @@ class Statistics extends Endpoint {
       this.cache(this.url, response, 86400)
       res.status(404).send(response)
     }
-    res.send(stats)
   }
 
 
@@ -243,7 +243,7 @@ class Statistics extends Endpoint {
 
     // Empty results?
     if (result.length <= 0) {
-      res.status(404).send({
+      return res.status(404).send({
         error: "Could not find data.",
         reason: "Nobody offers this item or it doesn't exist."
       })
