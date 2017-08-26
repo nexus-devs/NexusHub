@@ -20,17 +20,19 @@ class Profile extends Endpoint {
   /**
    * Expect this method to get triggered only if the user isn't cached already
    */
-  async main(username) {
+  async main(req, res) {
+    const username = req.params.username
+
     if (username.length > 24 || username.length < 1) {
-      return {
+      res.status(404).send({
         error: username + " could not be found.",
         reason: "Usernames can't have less than one or more than 24 characters"
-      }
+      })
     }
 
     // Input is Valid
     else {
-      return this.getProfile(username)
+      res.send(getProfile(username))
     }
   }
 
@@ -38,7 +40,7 @@ class Profile extends Endpoint {
   /**
    * Get the player profile from the local db
    */
-  async getProfile(username, resolve, reject) {
+  async getProfile(username, res) {
     username = username.split(" ").join("") // trailing spaces
     let result = await this.db.collection("players").findOne({
       name: new RegExp("^" + username.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + "$", "i")
@@ -51,11 +53,11 @@ class Profile extends Endpoint {
         return result
       } else {
         responded = true
-        this.updateProfile(username)
+        this.updateProfile(username, res)
         return result
       }
     } else {
-      return this.updateProfile(username)
+      return this.updateProfile(username, res)
     }
   }
 
@@ -63,7 +65,7 @@ class Profile extends Endpoint {
   /**
    * Instruct bot to renew given player profile
    */
-  async updateProfile(username, resolve, reject) {
+  async updateProfile(username, res) {
 
     // Check if Bot is alive
     let result = await status.main()
@@ -84,14 +86,14 @@ class Profile extends Endpoint {
       return new Promise(resolve => {
         this.api.connection.client.once(playerURL, player => {
           if (player.mastery) {
-            resolve(player)
+            return player
           } else {
-            let res = {
+            let response = {
               error: username + " could not be found.",
               reason: "Could not find user in-game."
             }
-            !responded ? this.cache(this.url, res, 10) : null
-            resolve(res)
+            !responded ? this.cache(this.url, response, 10) : null
+            res.status(404).send(response)
           }
         })
       })

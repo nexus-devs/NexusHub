@@ -42,17 +42,21 @@ class Statistics extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(item, component, timestart, timeend, intervals) {
+  async main(req, res) {
+    const item = req.params.item
+    const timestart = req.query.timestart
+    const timeend = req.query.timeend
+    const intervals = req.query.intervals
 
     // Check if params are valid
-    if (timestart < timeend) return {
+    if (timestart < timeend) res.status(400).send({
       error: "Bad input.",
       reason: "Invalid time frame. Please make sure that timestart is greater than timeend."
-    }
-    if (intervals <= 0) return {
+    })
+    if (intervals <= 0) res.status(400).send({
       error: "Bad input.",
       reaon: "Intervals must be greater than 0"
-    }
+    })
 
     // Generate valid Query from input
     let query = this.generateQuery(item, component, timestart, timeend)
@@ -60,18 +64,19 @@ class Statistics extends Endpoint {
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query).toArray()
     let purged = this.purge(requests, timestart, timeend, intervals)
-    let stats = this.getStatistics(query, intervals, purged)
+    let stats = this.getStatistics(query, intervals, purged, res)
 
     if (Object.keys(stats).length > 0) {
       this.cache(this.url, stats, 86400)
     } else {
-      let res = {
+      let response = {
         error: "Could not find data for " + item + " " + component + ".",
         reason: "Nobody offers this item or it doesn't exist."
       }
-      this.cache(this.url, res, 86400)
+      this.cache(this.url, response, 86400)
+      res.status(404).send(response)
     }
-    return stats
+    res.send(stats)
   }
 
 
@@ -233,14 +238,14 @@ class Statistics extends Endpoint {
   /**
    * Calculate queried item's statistics
    */
-  getStatistics(query, intervals, result) {
+  getStatistics(query, intervals, result, res) {
 
     // Empty results?
     if (result.length <= 0) {
-      return {
+      res.status(404).send({
         error: "Could not find data.",
         reason: "Nobody offers this item or it doesn't exist."
-      }
+      })
     }
 
     // Document to return

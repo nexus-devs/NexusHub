@@ -15,7 +15,8 @@ class Player extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(player) {
+  async main(req, res) {
+    const player = req.query.player
 
     // See if we're updating or creating new user
     let result = await this.db.collection("players").findOne({
@@ -44,7 +45,7 @@ class Player extends Endpoint {
 
     // Publish received data either way
     this.publish("/warframe/v1/players/" + player.name.toLowerCase() + "/profile", player)
-    return player
+    res.send(player)
   }
 }
 

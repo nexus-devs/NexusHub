@@ -18,7 +18,8 @@ class Request extends Endpoint {
   /**
    * Main method which is called by MethoHandler on request
    */
-  async main(request) {
+  async main(req, res) {
+    const request = req.body
 
     // Modify request
     request.createdAt = new Date(request.createdAt)
@@ -43,7 +44,7 @@ class Request extends Endpoint {
     // Publish and save resulting statistics
     this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
     data.components ? this.saveStats(data) : null
-    return "Request processed. (" + JSON.stringify(request) + ")"
+    res.send("Request processed. (" + JSON.stringify(request) + ")")
   }
 
 

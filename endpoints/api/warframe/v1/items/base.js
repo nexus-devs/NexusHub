@@ -16,7 +16,8 @@ class Base extends Endpoint {
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(item) {
+  async main(req, res) {
+    const item = req.params.item
     let doc = await this.db.collection('items').findOne({
       name: new RegExp("^" + item + "$", "i")
     })

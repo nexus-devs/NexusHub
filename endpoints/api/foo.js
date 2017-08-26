@@ -9,8 +9,8 @@ class Foo extends Endpoint {
     this.schema.description = "Simple testing method which returns 'bar'."
   }
 
-  async main() {
-    return "bar"
+  async main(req, res) {
+    res.send('bar')
   }
 }
 
