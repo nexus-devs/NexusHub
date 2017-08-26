@@ -44,6 +44,7 @@ class Statistics extends Endpoint {
    */
   async main(req, res) {
     const item = req.params.item
+    const component = req.query.component
     const timestart = req.query.timestart
     const timeend = req.query.timeend
     const intervals = req.query.intervals
