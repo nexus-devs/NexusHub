@@ -12,14 +12,30 @@ const Blitz = require("blitz-js")({
  */
 const intro = require("./config/logger.js")
 const switchContext = async() => {
-  await blitz.pingAll(blitz.nodes.view.workers)
+  await blitz.pingAll(blitz.nodes.auth.workers)
   setTimeout(async() => {
     console.log(" ")
     console.log(`:: blitz.js stack ready in ${(new Date - epoch) / 1000}s`)
     console.log(intro.border)
     console.log(" ")
+
+    // Activate info logging two levels down. Recursion isn't possible because
+    // references can't be preserved across processes
     if (blitz.config.local.environment === "development") {
-      await blitz.setWorkerConfig("blitz.config.local.logLevel = 'info'")
+      for (let prop in blitz.nodes) {
+        let node = blitz.nodes[prop]
+
+        node.run(function() {
+          blitz.config.local.logLevel = "info"
+          for (let prop in blitz.nodes) {
+            let node = blitz.nodes[prop]
+
+            node.run(function() {
+              blitz.config.local.logLevel = "info"
+            })
+          }
+        })
+      }
       blitz.config.local.logLevel = "info"
     }
   }, 1500) // too lazy to add ping propagation function right now
@@ -35,7 +51,7 @@ const resourceHooks = require('./hooks/mongo')
 /**
  * Authentication Server for incoming api connections
  */
-const Auth = require("../../blitz/blitz-js-auth")
+const Auth = require("blitz-js-auth")
 blitz.use(new Auth({
   mongoURL: "mongodb://localhost/warframe-nexus-auth"
 }))
@@ -44,7 +60,7 @@ blitz.use(new Auth({
 /**
  * API Server for resource nodes
  */
-const API = require("../../blitz/blitz-js-api")
+const API = require("blitz-js-api")
 blitz.use(new API({
   mongoURL: "mongodb://localhost/warframe-nexus-core",
   limiter: {
@@ -61,7 +77,7 @@ blitz.use(new API({
 /**
  * Resource worker which serves data to the API
  */
-const Core = require("../../blitz/blitz-js-core")
+const Core = require("blitz-js-core")
 blitz.hook(Core, resourceHooks.verifyItemIndices)
 blitz.use(new Core({
   endpointPath: __dirname + "/endpoints/api",
@@ -71,13 +87,14 @@ blitz.use(new Core({
 
 /**
  * View node for rendering webpages
- */
 const View = require("../../blitz/blitz-js-view")
 blitz.use(new View({
   mongoURL: "mongodb://localhost/warframe-nexus-view",
   endpointPath: __dirname + "/endpoints/view",
   sourcePath: __dirname + "/view/src",
-  publicPath: __dirname + "/view/dist"
+  publicPath: __dirname + "/view/dist",
+  cacheDuration: 1
 }))
+ */
 
 switchContext()
