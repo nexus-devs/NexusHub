@@ -18,6 +18,7 @@ class Base extends Endpoint {
    */
   async main(req, res) {
     const item = req.params.item
+
     let doc = await this.db.collection('items').findOne({
       name: new RegExp("^" + item + "$", "i")
     })
@@ -28,10 +29,14 @@ class Base extends Endpoint {
       delete doc._id
 
       this.cache(this.url, doc, 60)
-      return doc
+      res.send(doc)
     } else {
-      this.cache(this.url, item + " not found.", 60)
-      return item + " not found."
+      let response = {
+        error: 'Not found.',
+        reason: `${item} could not be not found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
+      }
+      this.cache(this.url, response, 60)
+      res.status(404).send(response)
     }
   }
 }

@@ -67,7 +67,7 @@ class Statistics extends Endpoint {
     let purged = this.purge(requests, timestart, timeend, intervals)
     let stats = this.getStatistics(query, intervals, purged, res)
 
-    if (Object.keys(stats).length > 0) {
+    if (typeof stats === 'object' && Object.keys(stats).length > 0) {
       this.cache(this.url, stats, 86400)
       res.send(stats)
     } else {
@@ -85,14 +85,8 @@ class Statistics extends Endpoint {
    * Generate query from given params
    */
   generateQuery(item, component, timestart, timeend) {
-
-    // Use same case pattern as requests
-    item = this.title(item)
-    component = this.title(component)
-
-    // Query object
     let query = {
-      item: item,
+      item: new RegExp("^" + item + "$", "i"),
       createdAt: {
         $gte: new Date(timeend),
         $lte: new Date(timestart)
@@ -100,7 +94,9 @@ class Statistics extends Endpoint {
     }
 
     // Append component if one is given
-    if (component !== "") query.component = component
+    if (component !== "") {
+      query.component = new RegExp("^" + component + "$", "i")
+    }
 
     return query
   }
@@ -251,8 +247,7 @@ class Statistics extends Endpoint {
 
     // Document to return
     let doc = {
-      title: query.item,
-      type: result[0].type,
+      title: result[0].item,
       supply: {
         count: 0,
         percentage: 0
@@ -507,16 +502,6 @@ class Statistics extends Endpoint {
 
     // Save in output doc
     doc.components[i] = component
-  }
-
-
-  /**
-   * Title function for case sensitivity
-   */
-  title(str) {
-    return str.replace(/\w\S*/g, function(txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-    })
   }
 }
 
