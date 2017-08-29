@@ -34,7 +34,7 @@
       padding: 12px;
 
       &:first-of-type {
-        background: rgba(0,0,0,0.2);
+        background: rgba(0,5,10,0.4);
       }
     }
 
