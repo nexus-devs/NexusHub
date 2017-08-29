@@ -1,28 +1,127 @@
 <template>
-  <div class="row">
-    <h1>Hi!</h1>
-    <demo></demo>
+  <div>
+    <div class="search-container">
+      <video id="bgvid" playsinline autoplay muted loop>
+        <source src="https://n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccessoberon/background.webm" type="video/webm">
+      </video>
+      <div class="g-ct">
+        <div class="search-component">
+          <h1>
+            <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
+            <span>Search for item prices, player data and more.</span>
+          </h1>
+          <search></search>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import demo from "src/components/demo.vue"
+  import Search from 'src/components/search.vue'
   export default {
     components: {
-      demo
+      Search
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
+  @import '~src/styles/partials/importer';
+
   h1 {
-      font-weight: 200;
-      font-size: 4em;
+    font-size: 1.4em;
   }
-  .row {
-      height: 100vh;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+
+  video {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    opacity:0.4;
+    filter: grayscale(0.3) blur(7px);
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  .search-container {
+    position:relative;
+    overflow: hidden;
+    margin-top:-100px;
+    display:flex;
+    height: 65vh;
+    min-height: 450px;
+    align-items: center;
+    background-size: cover;
+  }
+  .search-component {
+    text-align: left;
+    transform: translateY(50px);
+    animation: moveUp 0.5s forwards;
+    animation-delay: 0.95s;
+
+    img {
+      animation: moveSide 0.8s forwards;
+      transform: translateX(250px);
+    }
+    span {
+      opacity: 0;
+      animation: fadeinSide 0.8s forwards;
+      animation-delay: 0.1s;
+    }
+  }
+
+  .search {
+    opacity: 0;
+    animation: fadeinUp 0.5s forwards;
+    animation-delay: 1.05s;
+  }
+
+  @keyframes fadeinSide {
+    from {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fadeinUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes moveSide {
+    from {
+      transform: translateX(200px);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes moveUp {
+    from {
+      transform: translateY(50px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: $breakpoint-s) {
+    .search-component {
+      img {
+        display: none;
+      }
+    }
   }
 </style>

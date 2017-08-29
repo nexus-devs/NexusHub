@@ -1,35 +1,36 @@
 <template>
-  <app>
+  <div id='app'>
+    <sidebar></sidebar>
     <top-nav></top-nav>
-    <div class="view">
-      <transition>
-        <router-view></router-view>
-      </transition>
-    </div>
-  </app>
+    <transition>
+      <router-view></router-view>
+    </transition>
+  </div>
 </template>
 
 
 <script>
-  import TopNav from "src/components/nav.vue"
+  import TopNav from 'src/components/nav.vue'
+  import Sidebar from 'src/components/sidebar.vue'
   export default {
     components: {
-      "top-nav": TopNav
+      'top-nav': TopNav,
+      Sidebar
     },
     head: {
-      title: "什么他妈的你他妈的刚才说我？",
+      title: '什么他妈的你他妈的刚才说我？',
       link: [{
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Roboto:400,700"
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Roboto:100,400,700'
       }]
     }
   }
 </script>
 
 
-<style lang="scss">
-  @import "./styles/partials/importer";
-  @import "./styles/reset";
-  @import "./styles/grid";
-  @import "./styles/base";
+<style lang='scss'>
+  @import '~src/styles/partials/importer';
+  @import '~src/styles/reset';
+  @import '~src/styles/grid';
+  @import '~src/styles/base';
 </style>

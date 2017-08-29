@@ -24,3 +24,7 @@ body {
     color: white;
   }
 }
+
+.a-ie {
+  @include ie();
+}

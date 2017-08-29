@@ -1,5 +1,5 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
-const _ = require("lodash")
+const _ = require('lodash')
 
 /**
  * Provides detailed item statistics for specific item
@@ -8,32 +8,32 @@ class Statistics extends Endpoint {
 
   constructor(api, db, url) {
     super(api, db, url)
-    this.schema.description = "Get item statistics between a specified time frame."
-    this.schema.url = "/warframe/v1/items/:item/statistics"
+    this.schema.description = 'Get item statistics between a specified time frame.'
+    this.schema.url = '/warframe/v1/items/:item/statistics'
     this.schema.query = [{
-        name: "component",
-        default: "",
+        name: 'component',
+        default: '',
         required: true,
-        description: "Specifies item component to look up. No component returns full set data."
+        description: 'Specifies item component to look up. No component returns full set data.'
       },
       {
-        name: "timestart",
+        name: 'timestart',
         default: () => {
           return new Date().getTime() // current time
         },
-        description: "Returns data recorded between timestart and timeend."
+        description: 'Returns data recorded between timestart and timeend.'
       },
       {
-        name: "timeend",
+        name: 'timeend',
         default: () => {
           return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 week ago
         },
-        description: "Returns data recorded between timestart and timeend."
+        description: 'Returns data recorded between timestart and timeend.'
       },
       {
-        name: "intervals",
+        name: 'intervals',
         default: 7,
-        description: "Intervals to split the time in."
+        description: 'Intervals to split the time in.'
       }
     ]
   }
@@ -51,12 +51,12 @@ class Statistics extends Endpoint {
 
     // Check if params are valid
     if (timestart < timeend) res.status(400).send({
-      error: "Bad input.",
-      reason: "Invalid time frame. Please make sure that timestart is greater than timeend."
+      error: 'Bad input.',
+      reason: 'Invalid time frame. Please make sure that timestart is greater than timeend.'
     })
     if (intervals <= 0) res.status(400).send({
-      error: "Bad input.",
-      reaon: "Intervals must be greater than 0"
+      error: 'Bad input.',
+      reaon: 'Intervals must be greater than 0'
     })
 
     // Generate valid Query from input
@@ -72,8 +72,8 @@ class Statistics extends Endpoint {
       res.send(stats)
     } else {
       let response = {
-        error: "Could not find data for " + item + " " + component + ".",
-        reason: "Nobody offers this item or it doesn't exist."
+        error: 'Could not find data for ' + item + ' ' + component + '.',
+        reason: 'Nobody offers this item or it doesn\'t exist.'
       }
       this.cache(this.url, response, 86400)
       res.status(404).send(response)
@@ -86,7 +86,7 @@ class Statistics extends Endpoint {
    */
   generateQuery(item, component, timestart, timeend) {
     let query = {
-      item: new RegExp("^" + item + "$", "i"),
+      item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
         $gte: new Date(timeend),
         $lte: new Date(timestart)
@@ -94,8 +94,8 @@ class Statistics extends Endpoint {
     }
 
     // Append component if one is given
-    if (component !== "") {
-      query.component = new RegExp("^" + component + "$", "i")
+    if (component !== '') {
+      query.component = new RegExp('^' + component + '$', 'i')
     }
 
     return query
@@ -240,8 +240,8 @@ class Statistics extends Endpoint {
     // Empty results?
     if (result.length <= 0) {
       return res.status(404).send({
-        error: "Could not find data.",
-        reason: "Nobody offers this item or it doesn't exist."
+        error: 'Could not find data.',
+        reason: 'Nobody offers this item or it doesn\'t exist.'
       })
     }
 
@@ -312,7 +312,7 @@ class Statistics extends Endpoint {
       else ++intvl.ignore
 
       // Determine Offer Type
-      if (request.offer === "Selling") ++intvl.supply.count
+      if (request.offer === 'Selling') ++intvl.supply.count
       else ++intvl.demand.count
 
       // Set Modified Interval in output doc

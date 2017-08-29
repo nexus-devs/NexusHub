@@ -2,45 +2,58 @@
  * Acceleration Curves
  */
 @mixin ease($timing) {
-  -webkit-transition-timing-function: ease;
   transition-timing-function: ease;
-  -webkit-transition-duration: $timing;
-  -moz-transition-duration: $timing;
-  -o-transition-duration: $timing;
   transition-duration: $timing;
 }
 @mixin ease-out($timing) {
-  -webkit-transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
   transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
-  -webkit-transition-duration: $timing;
-  -moz-transition-duration: $timing;
-  -o-transition-duration: $timing;
   transition-duration: $timing;
 }
 @mixin ease-touch($timing) {
-  -webkit-transition-timing-function: cubic-bezier(.38,1,.54,.98);
   transition-timing-function: cubic-bezier(.38,1,.54,.98);
-  -webkit-transition-duration: $timing;
-  -moz-transition-duration: $timing;
-  -o-transition-duration: $timing;
   transition-duration: $timing;
 }
 @mixin notransition() {
-  -webkit-transition-timing-function: none !important;
   transition-timing-function: none !important;
-  -webkit-transition-duration: 0s !important;
-  -moz-transition-duration: 0s !important;
-  -o-transition-duration: 0s !important;
   transition-duration: 0s !important;
 }
 /**
  * Interactive Items
  */
-@mixin interactive() {
+@mixin ie($size: 40) {
   transform: scale(1);
-  @include ease(0.25s);
+  padding: ($size / 3);
+  cursor: pointer;
+  user-select: none;
+  @include ease(0.2s);
+
+  &::before{
+   content: '';
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   left: 0;
+   top: 0;
+   opacity: 0;
+   border-radius: 1000px;
+   background: rgba(230,240,250,0.2);
+   @include ease(0.2s);
+}
 
   &:hover {
-    transform: scale(1.02);
+    &:before {
+      @include ease(0.8s);
+    }
+    transform: scale(1.05);
+    @include ease(0.4s);
+  }
+
+  &:active {
+    &:before {
+      opacity:1;
+      @include ease(0.1s);
+    }
+    @include ease(0.2s);
+    transform: scale(0.95);
   }
 }

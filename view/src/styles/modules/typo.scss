@@ -3,15 +3,18 @@
   font-size: 1em;
 }
 
-h1,
+h1 {
+  font-size: 1.6em;
+  font-weight: 300;
+}
 h2 {
-  font-size: 1.8em;
+  font-size: 1.4em;
 }
 
 h3,
 h4,
 h5 {
-  font-size: 1.4em;
+  font-size: 1.2em;
 }
 
 h2,
@@ -24,4 +27,11 @@ p + h1 {
 
 p + p {
   margin-top: 10px;
+}
+
+h1, h2, h3, h4, h5 {
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
