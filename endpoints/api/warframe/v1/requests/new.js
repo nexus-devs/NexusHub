@@ -1,6 +1,6 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
-const Statistics = require(__dirname + "/../items/statistics.js")
-const _ = require("lodash")
+const Statistics = require(__dirname + '/../items/statistics.js')
+const _ = require('lodash')
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -11,8 +11,8 @@ class Request extends Endpoint {
     super(api, db, url)
 
     // Modify schema
-    this.schema.method = "POST"
-    this.schema.scope = "requests-read-write"
+    this.schema.method = 'POST'
+    this.schema.scope = 'requests-read-write'
   }
 
   /**
@@ -25,26 +25,37 @@ class Request extends Endpoint {
     request.createdAt = new Date(request.createdAt)
 
     // Publish and save request on db
-    this.publish("/warframe/v1/requests", _.cloneDeep(request))
+    this.publish('/warframe/v1/requests', _.cloneDeep(request))
     delete request.subMessage
     delete request.rawMessage
-    this.db.collection("requests").insertOne(request)
+    this.db.collection('requests').insertOne(request)
 
     // Get statistics for item
-    let item = request.item
-    let component = ""
-    let timestart = new Date().getTime()
-    let timeend = new Date(new Date().setDate(new Date().getDate() - 7)).getTime()
-    let intervals = 7
-    let statistics = new Statistics(this.api, this.db, {
-      url: "/warframe/v1/items/" + request.item + "/statistics"
+    let statistics = new Statistics(this.api, this.db, '/warframe/v1/items/' + request.item + '/statistics')
+    let _req = {
+      params: {
+        item: request.item
+      },
+      query: {
+        component: '',
+        timestart: new Date().getTime(),
+        timeend: new Date(new Date().setDate(new Date().getDate() - 7)).getTime(),
+        intervals: 7
+      }
+    }
+    let data = await new Promise(resolve => {
+      let _res = {
+        send(data) {
+          resolve(data)
+        }
+      }
+      statistics.main(_req, _res)
     })
-    let data = await statistics.main(item, component, timestart, timeend, intervals)
 
     // Publish and save resulting statistics
-    this.publish("/warframe/v1/items/" + request.item + "/statistics", data)
+    this.publish('/warframe/v1/items/' + request.item + '/statistics', data)
     data.components ? this.saveStats(data) : null
-    res.send("Request processed. (" + JSON.stringify(request) + ")")
+    res.send('Request processed. (' + JSON.stringify(request) + ')')
   }
 
 
@@ -73,8 +84,8 @@ class Request extends Endpoint {
       distribution.push(dist)
     })
 
-    await this.db.collection("items").updateOne({
-      name: new RegExp("^" + data.title + "$", "i")
+    await this.db.collection('items').updateOne({
+      name: new RegExp('^' + data.title + '$', 'i')
     }, {
       $set: {
         prices: prices,

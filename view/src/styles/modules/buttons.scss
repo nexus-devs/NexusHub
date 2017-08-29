@@ -9,15 +9,11 @@ button {
   border-radius: 9999px;
   min-width: 200px;
   color: white !important;
-  @include interactive();
+  @include ie();
 
   &::-moz-focus-inner {
     border: 0;
   }
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 
   &:hover {

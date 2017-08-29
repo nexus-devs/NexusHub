@@ -1,14 +1,43 @@
+@import '~src/styles/partials/importer';
+
+// Icon base
 @mixin icon($size) {
   display: inline-block;
   vertical-align: middle;
+  padding: 2px;
+
+  &.ie {
+    @include ie($size);
+  }
+}
+
+// Square icon
+@mixin icon-h-w($size) {
   height: $size;
   width: $size;
-  padding: 2px;
+  @include icon($size)
 }
+
+// Height limited icon
+@mixin icon-h($size) {
+  height: $size;
+  @include icon($size)
+}
+
+// Generate square icons
+$i: 12;
+@while $i <= 48 {
+  .ico-#{$i} {
+    @include icon-h-w($i);
+  }
+  $i: $i + 4;
+}
+
+// Generate height limited icons
 $i: 12;
 @while $i <= 36 {
-  .ico-#{$i} {
-    @include icon(#{$i});
+  .ico-h-#{$i} {
+    @include icon-h($i);
   }
   $i: $i + 4;
 }

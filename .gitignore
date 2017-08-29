@@ -11,4 +11,5 @@
 /view/dist/*.bundle.js
 /view/dist/*manifest.json
 /view/dist/*bundle.json
+/view/dist/hot-update.*
 /view/dist/img/**.psd
