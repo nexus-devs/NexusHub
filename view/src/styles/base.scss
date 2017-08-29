@@ -8,9 +8,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
   // Base Colors
-  background: $colorBackground;
+  background: $colorBackgroundDarker;
   color: $colorFontBody;
+
+  input::placeholder {
+    color: $colorFontBody;
+  }
 
   a {
     color: white;

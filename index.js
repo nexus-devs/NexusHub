@@ -6,13 +6,12 @@ const Blitz = require("blitz-js")({
   logLevel: "monitor"
 })
 
-
 /**
  * Big useless intro
  */
 const intro = require("./config/logger.js")
 const switchContext = async() => {
-  await blitz.pingAll(blitz.nodes.auth.workers)
+  await blitz.pingAll(blitz.nodes.view.workers)
   setTimeout(async() => {
     console.log(" ")
     console.log(`:: blitz.js stack ready in ${(new Date - epoch) / 1000}s`)
@@ -41,12 +40,10 @@ const switchContext = async() => {
   }, 1500) // too lazy to add ping propagation function right now
 }
 
-
 /**
  * Import hooks
  */
 const resourceHooks = require('./hooks/mongo')
-
 
 /**
  * Authentication Server for incoming api connections
@@ -55,7 +52,6 @@ const Auth = require("blitz-js-auth")
 blitz.use(new Auth({
   mongoURL: "mongodb://localhost/warframe-nexus-auth"
 }))
-
 
 /**
  * API Server for resource nodes
@@ -73,7 +69,6 @@ blitz.use(new API({
   }
 }))
 
-
 /**
  * Resource worker which serves data to the API
  */
@@ -84,11 +79,10 @@ blitz.use(new Core({
   mongoURL: "mongodb://localhost/warframe-nexus-core",
 }))
 
-
 /**
  * View node for rendering webpages
  */
-const View = require("../../blitz/blitz-js-view")
+const View = require("blitz-js-view")
 blitz.use(new View({
   mongoURL: "mongodb://localhost/warframe-nexus-view",
   endpointPath: __dirname + "/endpoints/view",
@@ -97,4 +91,4 @@ blitz.use(new View({
   cacheDuration: 1
 }))
 
-//switchContext()
+switchContext()

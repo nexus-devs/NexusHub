@@ -20,10 +20,11 @@
 /**
  * Interactive Items
  */
-@mixin ie($size: 40) {
+@mixin ie($size: 28) {
   transform: scale(1);
   padding: ($size / 3);
   cursor: pointer;
+  border-radius: 1000px;
   user-select: none;
   @include ease(0.2s);
 
@@ -44,8 +45,9 @@
     &:before {
       @include ease(0.8s);
     }
-    transform: scale(1.05);
-    @include ease(0.4s);
+    background: rgba(255,255,255,0.1);
+    transform: scale(1.025);
+    @include ease(0.3s);
   }
 
   &:active {
@@ -54,6 +56,10 @@
       @include ease(0.1s);
     }
     @include ease(0.2s);
-    transform: scale(0.95);
+    transform: scale(0.98);
+  }
+
+  &.a-ie-nz {
+    transform: scale(1) !important;
   }
 }

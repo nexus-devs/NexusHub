@@ -41,8 +41,8 @@
     min-height: 100%;
     width: auto;
     height: auto;
-    opacity:0.4;
-    filter: grayscale(0.3) blur(7px);
+    opacity:0.7;
+    filter: grayscale(0.3) blur(7px) contrast(0.8);
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
   }
@@ -60,52 +60,23 @@
   .search-component {
     text-align: left;
     transform: translateY(50px);
-    animation: moveUp 0.5s forwards;
-    animation-delay: 0.95s;
-
-    img {
-      animation: moveSide 0.8s forwards;
-      transform: translateX(250px);
-    }
-    span {
-      opacity: 0;
-      animation: fadeinSide 0.8s forwards;
-      animation-delay: 0.1s;
-    }
+    animation: moveUp 0.7s forwards;
+    animation-delay: 0.15s;
   }
 
   .search {
     opacity: 0;
-    animation: fadeinUp 0.5s forwards;
-    animation-delay: 1.05s;
-  }
-
-  @keyframes fadeinSide {
-    from {
-      transform: translateX(50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+    animation: fadeinUp 0.7s forwards;
+    animation-delay: 0.3s;
   }
   @keyframes fadeinUp {
     from {
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(25px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-  @keyframes moveSide {
-    from {
-      transform: translateX(200px);
-    }
-    to {
-      transform: translateX(0);
     }
   }
   @keyframes moveUp {

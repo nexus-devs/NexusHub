@@ -33,4 +33,8 @@
   @import '~src/styles/reset';
   @import '~src/styles/grid';
   @import '~src/styles/base';
+
+  .a-ie {
+    @include ie()
+  }
 </style>
