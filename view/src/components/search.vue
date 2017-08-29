@@ -47,7 +47,7 @@
     min-width: 45vw;
   }
   .col-b {
-    background: rgba(27, 34, 40, 0.6);
+    background: rgba(27, 34, 40, 0.7);
     padding: 20px;
     margin: 1px;
     margin-top: 1px !important;
