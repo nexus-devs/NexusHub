@@ -14,20 +14,16 @@
 
 <style lang="scss" scoped>
   @import "~src/styles/partials/importer";
+
   nav {
+    position: relative;
     width: calc(100% - 50px);
-    z-index: 2;
+    z-index: 1;
     padding: 20px 25px;
     align-items: center;
 
     a {
         margin: 0 15px;
-        &,
-        & span {
-            display: inline-block;
-            vertical-align: middle;
-            margin-left: 3px;
-        }
     }
   }
   .nav-l {

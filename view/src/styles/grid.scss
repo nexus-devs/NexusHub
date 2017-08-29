@@ -1,8 +1,10 @@
-@import './partials/importer'; /**
+@import './partials/importer';
+
+ /**
  * Main content wrapper
  */
-
 .g-ct {
+  position: relative;
   max-width: $max-width;
   padding: 0 96px;
   margin: auto;
@@ -20,10 +22,10 @@
     margin-bottom: 40px;
   }
 }
+
 /**
  * Rows
  */
-
 .row {
   display: flex;
   flex-direction: row;
@@ -61,12 +63,13 @@
     margin: 30px;
   }
 }
+
 /**
  * Columns
  */
 @mixin column($size) {
   flex-grow: $size;
-  flex-basis: $size;
+  flex-basis: #{$size + %};
 }
 // .col-1, .col-2...
 @for $i from 0 through 12 {
@@ -80,8 +83,8 @@
 .col-b {
   @include column(1);
 }
-// Square columns
 
+// Square columns
 .col-sq {
   overflow: hidden;
   text-align: center;
@@ -101,6 +104,7 @@
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
 /**
 * Media Queries
 */

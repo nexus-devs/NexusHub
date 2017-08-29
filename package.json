@@ -11,10 +11,9 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "blitz-js": "^0.2.0",
-    "blitz-js-api": "^0.2.0",
     "blitz-js-auth": "^0.2.1",
     "blitz-js-core": "^0.2.1",
-    "blitz-js-view": "0.0.4",
+    "blitz-js-view": "0.0.11",
     "chalk": "^2.1.0",
     "warframe-updates": "^1.0.6"
   },

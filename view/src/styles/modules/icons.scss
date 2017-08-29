@@ -6,8 +6,12 @@
   vertical-align: middle;
   padding: 2px;
 
-  &.ie {
+  &.a-ie {
     @include ie($size);
+  }
+  & ~ span {
+    display: inline-block;
+    vertical-align: middle;
   }
 }
 
