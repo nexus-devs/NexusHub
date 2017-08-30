@@ -83,7 +83,7 @@ blitz.use(new Core({
 /**
  * View node for rendering webpages
  */
-const View = require('../../blitz/blitz-js-view')
+const View = require('blitz-js-view')
 blitz.use(new View({
   mongoURL: 'mongodb://localhost/warframe-nexus-view',
   endpointPath: __dirname + '/endpoints/view',
