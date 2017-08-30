@@ -51,7 +51,7 @@ class Prices extends Endpoint {
       }
     })
 
-    this.cache(this.url, items, 60)
+    this.cache(items, 60)
     res.send(items)
   }
 }

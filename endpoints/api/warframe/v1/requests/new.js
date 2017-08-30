@@ -12,7 +12,7 @@ class Request extends Endpoint {
 
     // Modify schema
     this.schema.method = 'POST'
-    this.schema.scope = 'requests-read-write'
+    this.schema.scope = 'write_requests_warframe'
   }
 
   /**
@@ -25,7 +25,7 @@ class Request extends Endpoint {
     request.createdAt = new Date(request.createdAt)
 
     // Publish and save request on db
-    this.publish('/warframe/v1/requests', _.cloneDeep(request))
+    this.publish(_.cloneDeep(request), '/warframe/v1/requests')
     delete request.subMessage
     delete request.rawMessage
     this.db.collection('requests').insertOne(request)
@@ -53,7 +53,7 @@ class Request extends Endpoint {
     })
 
     // Publish and save resulting statistics
-    this.publish('/warframe/v1/items/' + request.item + '/statistics', data)
+    this.publish(data, '/warframe/v1/items/' + request.item + '/statistics')
     data.components ? this.saveStats(data) : null
     res.send('Request processed. (' + JSON.stringify(request) + ')')
   }

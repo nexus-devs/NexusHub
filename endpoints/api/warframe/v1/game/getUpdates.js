@@ -31,8 +31,8 @@ class Updates extends Endpoint {
   monitor() {
     warframeVersion.off("update") // Remove previous listeners from uncached calls
     warframeVersion.on("update", update => {
-      this.cache(this.url, update)
-      this.publish(this.url, update)
+      this.cache(update)
+      this.publish(update)
     })
   }
 }

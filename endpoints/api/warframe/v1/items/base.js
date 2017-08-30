@@ -28,14 +28,14 @@ class Base extends Endpoint {
       delete doc.distribution
       delete doc._id
 
-      this.cache(this.url, doc, 60)
+      this.cache(doc, 60)
       res.send(doc)
     } else {
       let response = {
         error: 'Not found.',
         reason: `${item} could not be not found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
       }
-      this.cache(this.url, response, 60)
+      this.cache(response, 60)
       res.status(404).send(response)
     }
   }

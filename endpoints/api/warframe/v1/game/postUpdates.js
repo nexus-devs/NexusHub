@@ -14,7 +14,7 @@ class Updates extends Endpoint {
     this.schema.description = "Get details on the latest Warframe patches."
     this.schema.url = "/warframe/v1/game/updates"
     this.schema.method = "POST"
-    this.schema.scope = "post-game-updates"
+    this.schema.scope = "write_gameupdates_warframe"
   }
 
   /**
@@ -33,8 +33,8 @@ class Updates extends Endpoint {
         version: version,
         date: date
       }
-      this.cache(this.url, updateData, 0)
-      this.publish(this.url, updateData)
+      this.cache(updateData, 0)
+      this.publish(updateData)
       res.send(updateData)
     } else {
       res.status(400).send({

@@ -68,14 +68,14 @@ class Statistics extends Endpoint {
     let stats = this.getStatistics(query, intervals, purged, res)
 
     if (typeof stats === 'object' && Object.keys(stats).length > 0) {
-      this.cache(this.url, stats, 86400)
+      this.cache(stats, 86400)
       res.send(stats)
     } else {
       let response = {
         error: 'Could not find data for ' + item + ' ' + component + '.',
         reason: 'Nobody offers this item or it doesn\'t exist.'
       }
-      this.cache(this.url, response, 86400)
+      this.cache(response, 86400)
       res.status(404).send(response)
     }
   }
