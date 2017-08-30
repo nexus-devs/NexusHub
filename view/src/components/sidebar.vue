@@ -50,7 +50,6 @@
         font-weight: 400;
         width: 70px;
         padding: 5px;
-        border-radius: 4px;
         top: 18px;
         left: 45px;
         color: white;
