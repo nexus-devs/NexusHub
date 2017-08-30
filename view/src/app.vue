@@ -1,21 +1,25 @@
 <template>
   <div id='app'>
     <sidebar></sidebar>
-    <top-nav></top-nav>
+    <navigation></navigation>
     <transition>
       <router-view></router-view>
     </transition>
+    <notification></notification>
   </div>
 </template>
 
 
 <script>
-  import TopNav from 'src/components/nav.vue'
-  import Sidebar from 'src/components/sidebar.vue'
+  import navigation from 'src/components/nav.vue'
+  import sidebar from 'src/components/sidebar.vue'
+  import notification from 'src/components/notification.vue'
+
   export default {
     components: {
-      'top-nav': TopNav,
-      Sidebar
+      navigation,
+      sidebar,
+      notification
     },
     head: {
       title: '什么他妈的你他妈的刚才说我？',
