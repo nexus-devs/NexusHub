@@ -32,14 +32,14 @@ class Base extends Endpoint {
           members: players
         }
       }
-      this.cache(this.url, clan, 10)
+      this.cache(clan, 10)
       res.send(clan)
     } else {
       let response = {
         error: "No data.",
         reason: "No clan data saved for " + clan + "."
       }
-      this.cache(this.url, response, 10)
+      this.cache(response, 10)
       res.status(404).send(response)
     }
   }

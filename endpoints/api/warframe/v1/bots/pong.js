@@ -10,14 +10,14 @@ class Pong extends Endpoint {
 
     // Modify schema
     this.schema.method = "POST"
-    this.schema.scope = "root-read-write"
+    this.schema.scope = "write_botping_warframe"
   }
 
   /**
    * Main method which is called by MethoHandler on request
    */
   async main(req, res) {
-    this.publish(this.url, status)
+    this.publish(status)
     res.send('pong')
   }
 }

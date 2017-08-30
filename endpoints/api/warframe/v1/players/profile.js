@@ -81,7 +81,7 @@ class Profile extends Endpoint {
       let playerURL = "/warframe/v1/players/" + username.toLowerCase() + "/profile"
       let botURL = "/warframe/v1/bots/getProfile"
       this.api.subscribe(playerURL)
-      this.publish(botURL, username)
+      this.publish(username, botURL)
 
       return new Promise(resolve => {
         this.api.connection.client.once(playerURL, player => {
@@ -92,7 +92,7 @@ class Profile extends Endpoint {
               error: username + " could not be found.",
               reason: "Could not find user in-game."
             }
-            !responded ? this.cache(this.url, response, 10) : null
+            !responded ? this.cache(response, 10) : null
             res.status(404).send(response)
           }
         })

@@ -15,7 +15,7 @@ class Status extends Endpoint {
     let out = {}
 
     this.api.subscribe("/warframe/v1/bots/pong")
-    this.publish("/warframe/v1/bots/ping", "ping")
+    this.publish("ping", "/warframe/v1/bots/ping")
     this.api.on("/warframe/v1/bots/pong", bot => {
       if (bots.includes(bot.name)) {
         bots.splice(bots.indexOf(bot.name), 1)

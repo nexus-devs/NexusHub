@@ -35,7 +35,7 @@ class Request extends Endpoint {
     const limit = req.query.limit
 
     let data = await this.findLastRequests(item, component, limit)
-    this.cache(this.url, data, 60)
+    this.cache(data, 60)
     res.send(data)
   }
 

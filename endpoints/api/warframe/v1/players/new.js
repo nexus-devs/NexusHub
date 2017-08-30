@@ -9,7 +9,7 @@ class Player extends Endpoint {
 
     // Modify schema
     this.schema.method = "POST"
-    this.schema.scope = "players-read-write"
+    this.schema.scope = "write_players_warframe"
   }
 
   /**
@@ -44,7 +44,7 @@ class Player extends Endpoint {
     }
 
     // Publish received data either way
-    this.publish("/warframe/v1/players/" + player.name.toLowerCase() + "/profile", player)
+    this.publish(player, "/warframe/v1/players/" + player.name.toLowerCase() + "/profile")
     res.send(player)
   }
 }

@@ -24,7 +24,7 @@ class List extends Endpoint {
       delete item._id
     })
 
-    this.cache(this.url, result, 60)
+    this.cache(result, 60)
     res.send(result)
   }
 }
