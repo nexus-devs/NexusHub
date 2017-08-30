@@ -23,7 +23,7 @@
   border: 1.5px solid $colorPrimary;
   border-radius: 0;
   border-image-source: linear-gradient(to bottom right, $colorPrimary, $colorAccent);
-  border-image-slice: 25;
+  border-image-slice: 1;
 
   &:hover{
     @include gradient-background-dg($colorPrimary, $colorAccent);

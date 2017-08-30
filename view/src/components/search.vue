@@ -1,5 +1,5 @@
 <template>
-  <div class="search row">
+  <div class="row">
     <div class="col-b">
       <label for="item">Item</label><br />
       <input type="text" name="item" placeholder="Items, Players..">
@@ -29,6 +29,7 @@
   </div>
 </template>
 
+
 <script>
   export default {
     computed: {
@@ -39,20 +40,21 @@
   }
 </script>
 
+
 <style lang="scss" scoped>
   @import '~src/styles/partials/importer';
 
   .row {
     margin-top:10px;
-    min-width: 45vw;
   }
   .col-b {
     background: rgba(27, 34, 40, 0.7);
-    padding: 20px;
+    padding: 15px;
     margin: 1px;
     margin-top: 1px !important;
     margin-bottom: 1px !important;
     width: 33%;
+    @include shadow-1;
 
     .input-container, .button-container {
       display: inline-block;
@@ -74,7 +76,7 @@
       font-size: 1.05em;
       display: inline-block;
       color: white;
-      margin-bottom: -15px;
+      margin-bottom: -10px;
     }
 
     input {

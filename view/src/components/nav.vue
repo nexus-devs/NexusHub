@@ -6,7 +6,7 @@
     <div class="col nav-r">
       <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
       <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
-      <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
+      <img src="/img/nav/nav-more.svg" class="ctx ico-16 a-ie" alt="">
     </div>
   </nav>
 </template>
@@ -19,11 +19,16 @@
     position: relative;
     width: calc(100% - 50px);
     z-index: 1;
-    padding: 20px 25px;
+    padding: 18px 25px;
     align-items: center;
 
     a {
         margin: 0 15px;
+    }
+
+    @media (max-width: $breakpoint-s) {
+      position: fixed;
+      background: rgba(27, 34, 40, 0.8);
     }
   }
   .nav-l {
@@ -33,12 +38,27 @@
   }
   .nav-r {
     text-align: right;
-  }
-  @media (max-width: $breakpoint-s) {
-    .nav-r {
-      span {
+
+    @media (max-width: $breakpoint-s) {
+      a span {
         display: none;
       }
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      a img {
+        display: none;
+      }
+    }
+  }
+
+  // Context icon for mobile
+  .ctx {
+    display: none;
+    float: right;
+    
+    @media (max-width: $breakpoint-xs) {
+      display: block;
     }
   }
 </style>

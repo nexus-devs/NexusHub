@@ -1,16 +1,20 @@
 <template>
   <nav>
-    <div class="ico-wrapper">
-      <div class="ico-a-ie">
-        <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class='ico-20'>
+    <div class="nav-upper">
+      <div class="ico-wrapper">
+        <div class="ico-a-ie">
+          <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class='ico-20'>
+        </div>
+        <span>Expand</span>
       </div>
-      <span>Expand</span>
     </div>
-    <div class="ico-wrapper">
-      <div class="ico-a-ie">
-        <img src="/img/sidebar/search.svg" alt="" class='ico-20'>
+    <div class="nav-lower">
+      <div class="ico-wrapper">
+        <div class="ico-a-ie">
+          <img src="/img/sidebar/search.svg" alt="" class='ico-20'>
+        </div>
+        <span>Search</span>
       </div>
-      <span>Search</span>
     </div>
   </nav>
 </template>
@@ -25,16 +29,28 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    height: 100%;
-    @include gradient-background(rgba(47, 54, 60, 0.8), $colorBackgroundDark);
-    @include shadow-2;
+
+    .nav-upper {
+      background: rgba(0,5,10,0.6);
+    }
+
+    .nav-lower {
+      height: calc(100vh - 52px);
+      @include gradient-background(rgba(47, 54, 60, 0.8), $colorBackgroundDark);
+      @include shadow-2;
+      @include ease(0.35s);
+      
+      @media (max-width: $breakpoint-s) {
+        transform: translateX(-100%);
+      }
+    }
 
     .ico-wrapper {
       position: relative;
       padding: 12px;
 
       &:first-of-type {
-        background: rgba(0,5,10,0.4);
+        background: rgba(0,5,10,0.3);
       }
     }
 
