@@ -147,7 +147,8 @@
 
   .hint {
     position: fixed;
-    opacity: 0;
+    opacity: 0.1;
+    border: 1px solid rgba(255,255,255,0.5);
     top: calc(80vh + 5px);
     right: -25px;
     height: 40px;
@@ -160,6 +161,7 @@
 
     &:hover {
       opacity: 1;
+      border: 1px solid transparent;
     }
   }
 </style>
