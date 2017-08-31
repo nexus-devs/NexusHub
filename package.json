@@ -12,6 +12,7 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "blitz-js": "^0.2.0",
+    "blitz-js-api": "^0.2.3",
     "blitz-js-auth": "^0.2.2",
     "blitz-js-core": "^0.2.3",
     "blitz-js-view": "0.0.13",
