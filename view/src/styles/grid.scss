@@ -80,7 +80,7 @@
   flex-basis: #{$size + %};
 }
 // .col-1, .col-2...
-@for $i from 0 through 12 {
+@for $i from 0 through 8 {
   .col-#{$i},
   .col-b-#{$i} {
     @include column(#{$i});
@@ -117,23 +117,7 @@
 * Media Queries
 */
 @media (max-width: $breakpoint-m) {
-  /**
-    * Container Classes
-    */
-  .view {
-    section {
-      padding: 60px 15px;
-      margin: 0 -15px;
-    }
-  }
-  /**
-    * Rows
-    */
-  .row {
-    flex-wrap: wrap;
-  }
-
-  .row-margin {
+  .row, .row-margin {
     flex-wrap: wrap;
   }
 
@@ -161,20 +145,9 @@
   }
 }
 @media (max-width: $breakpoint-s) {
-  /**
-    * Rows
-    */
-  .row {
-    flex-wrap: wrap;
-  }
-
-  .row-margin {
-    flex-wrap: wrap;
-  }
-
   .row *[class*="col-b"] {
     flex-basis: 100%;
-    margin: 0 !important;
+    margin: 0;
   }
 
   .row-margin *[class*="col-b"] {

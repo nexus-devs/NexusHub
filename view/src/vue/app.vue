@@ -11,22 +11,15 @@
 
 
 <script>
-  import navigation from 'src/components/nav.vue'
-  import sidebar from 'src/components/sidebar.vue'
-  import notification from 'src/components/notification.vue'
+  import navigation from 'src/vue/components/nav.vue'
+  import sidebar from 'src/vue/components/sidebar.vue'
+  import notification from 'src/vue/components/notification.vue'
 
   export default {
     components: {
       navigation,
       sidebar,
       notification
-    },
-    head: {
-      title: '什么他妈的你他妈的刚才说我？',
-      link: [{
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Roboto:100,400,700'
-      }]
     }
   }
 </script>
@@ -37,8 +30,4 @@
   @import '~src/styles/reset';
   @import '~src/styles/grid';
   @import '~src/styles/base';
-
-  .a-ie {
-    @include ie()
-  }
 </style>

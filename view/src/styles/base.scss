@@ -6,6 +6,7 @@
 body {
   // Layout Properties / Sticky Footer
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   min-height: 100vh;
 
