@@ -89,6 +89,10 @@ blitz.use(new View({
   endpointPath: __dirname + '/endpoints/view',
   sourcePath: __dirname + '/view/src',
   publicPath: __dirname + '/view/dist',
+  webpack: {
+    serverConfig: __dirname + '/config/webpack/server.config.js',
+    clientConfig: __dirname + '/config/webpack/client.config.js'
+  },
   cacheDuration: 1
 }))
 

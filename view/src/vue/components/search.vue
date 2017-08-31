@@ -1,10 +1,12 @@
 <template>
   <div class="row">
+
     <div class="col-b">
       <label for="item">Item</label><br />
       <input type="text" name="item" placeholder="Items, Players..">
       <span class="autocomplete">{{ autocomplete }}</span>
     </div>
+
     <div class="col-b">
       <label>Time</label><br />
       <div class="input a-ie">
@@ -12,6 +14,7 @@
         <img src="/img/ui/add.svg" class="ico-16" alt="">
       </div>
     </div>
+
     <div class="col-b">
       <div class="input-container">
         <label>Rank</label><br />
@@ -48,7 +51,7 @@
     margin-top:10px;
   }
   .col-b {
-    background: rgba(27, 34, 40, 0.7);
+    background: rgba(27, 32, 37, 0.8);
     padding: 15px;
     margin: 1px;
     margin-top: 1px !important;

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Search from 'src/components/search.vue'
+  import Search from 'src/vue/components/search.vue'
   export default {
     components: {
       Search
@@ -29,6 +29,11 @@
 
   h1 {
     font-size: 1.4em;
+    @media (max-width: $breakpoint-s) {
+      img {
+        display: none;
+      }
+    }
   }
 
   video {
@@ -42,15 +47,15 @@
     opacity:0.7;
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
-    animation: blurin 3.5s forwards;
+    filter: grayscale(0.3) blur(7px) contrast(0.8);
   }
 
   .search-container {
     position:relative;
     overflow: hidden;
     display:flex;
-    height: 65vh;
-    min-height: 450px;
+    height: 45vh;
+    min-height: 500px;
     align-items: center;
     background-size: cover;
 
@@ -66,16 +71,6 @@
       animation-delay: 0.3s;
     }
   }
-
-  @keyframes blurin {
-    from {
-      filter: grayscale(0.3) blur(0px) contrast(0.8);
-    }
-    to {
-      filter: grayscale(0.3) blur(7px) contrast(0.8);
-    }
-  }
-
   @keyframes fadeinUp {
     from {
       opacity: 0;

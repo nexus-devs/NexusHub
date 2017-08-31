@@ -13,6 +13,7 @@ class Foo extends Endpoint {
 
   async main(req, res) {
     this.publish(req.body)
+    res.send(req.body)
   }
 }
 
