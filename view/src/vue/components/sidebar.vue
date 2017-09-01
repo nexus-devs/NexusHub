@@ -31,7 +31,7 @@
     position: fixed;
 
     .nav-upper {
-      background: rgba(0,5,10,0.6);
+      background: rgba(27,31,36,0.8);
     }
 
     .nav-lower {
@@ -61,6 +61,7 @@
       // Tooltips
       & + span {
         position: absolute;
+        pointer-events: none;
         text-align: center;
         font-size: 0.85em;
         font-weight: 400;

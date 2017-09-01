@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="search-container">
-      <video playsinline autoplay muted loop>
+      <!-- <video playsinline autoplay muted loop>
         <source src="https://n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccesshydroid/background.webm" type="video/webm">
-      </video>
+      </video> -->
       <div class="g-ct">
         <h1>
           <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
@@ -57,6 +57,7 @@
     height: 45vh;
     min-height: 500px;
     align-items: center;
+    background: url('/img/warframe/index/search-bg.jpg');
     background-size: cover;
 
     h1 {
