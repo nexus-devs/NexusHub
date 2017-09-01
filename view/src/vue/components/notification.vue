@@ -102,6 +102,7 @@
     right: 0;
     top: 80vh;
     transform: translateX(500px);
+    transition-delay: 0.1s;
     @include ease-out(0.5s);
     @include shadow-3;
 
@@ -157,6 +158,7 @@
 
     img {
       margin-top: 9px;
+      margin-left: 2px;
     }
 
     &:hover {
