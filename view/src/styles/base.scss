@@ -3,15 +3,14 @@
 @import "modules/buttons";
 @import "modules/typo";
 
-body {
+#app {
   // Layout Properties / Sticky Footer
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   min-height: 100vh;
 
   // Base Colors
-  background: $colorBackgroundDarker;
+  background: $colorBackgroundDark;
   color: $colorFontBody;
 
   input::placeholder {
@@ -20,6 +19,11 @@ body {
 
   a {
     color: white;
+    @include ease(0.1s);
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   h1,
