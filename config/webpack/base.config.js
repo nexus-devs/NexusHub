@@ -1,11 +1,11 @@
 const isProd = blitz.config.local.environment !== "development"
 const fs = require('fs')
-const vueConfig = require('./vue.config.js')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const extractSass = new ExtractTextPlugin({
   filename: "[name].[chunkhash].css",
   disable: !isProd
 })
+const vueConfig = require('./vue.config.js')(extractSass)
 
 // Actual config
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
                 optimizationLevel: 4
               },
               pngquant: {
-                quality: 50-70,
+                quality: 50 - 70,
                 speed: 3
               }
             }
