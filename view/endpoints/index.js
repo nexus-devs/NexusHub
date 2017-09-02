@@ -9,6 +9,7 @@ class Index extends Endpoint {
   }
 
   async run(req, res) {
+    console.log('in nigga')
     res.redirect("/warframe")
   }
 }
