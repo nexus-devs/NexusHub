@@ -6,20 +6,23 @@
       <router-view></router-view>
     </transition>
     <notification></notification>
+    <bottom></bottom>
   </div>
 </template>
 
 
 <script>
-  import navigation from 'src/vue/components/nav.vue'
-  import sidebar from 'src/vue/components/sidebar.vue'
-  import notification from 'src/vue/components/notification.vue'
+  import navigation from 'src/vue/components/ui/nav.vue'
+  import sidebar from 'src/vue/components/ui/sidebar.vue'
+  import notification from 'src/vue/components/ui/notification.vue'
+  import bottom from 'src/vue/components/ui/footer.vue'
 
   export default {
     components: {
       navigation,
       sidebar,
-      notification
+      notification,
+      bottom
     }
   }
 </script>
