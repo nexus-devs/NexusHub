@@ -71,6 +71,10 @@
       animation: fadeinUp 0.7s forwards;
       animation-delay: 0.3s;
     }
+
+    @media (max-width: $breakpoint-s) {
+      padding-top: 60px;
+    }
   }
   @keyframes fadeinUp {
     from {

@@ -11,35 +11,6 @@ const Blitz = require('blitz-js')({
  * Big useless intro
  */
 const intro = require('./config/logger.js')
-const switchContext = async() => {
-  await blitz.pingAll(blitz.nodes.view.workers)
-  setTimeout(async() => {
-    console.log(' ')
-    console.log(`:: blitz.js stack ready in ${(new Date - epoch) / 1000}s`)
-    console.log(intro.border)
-    console.log(' ')
-
-    // Activate info logging two levels down. Recursion isn't possible because
-    // references can't be preserved across processes
-    if (blitz.config.local.environment) {
-      for (let prop in blitz.nodes) {
-        let node = blitz.nodes[prop]
-
-        node.run(function() {
-          blitz.config.local.logLevel = 'info'
-          for (let prop in blitz.nodes) {
-            let node = blitz.nodes[prop]
-
-            node.run(function() {
-              blitz.config.local.logLevel = 'info'
-            })
-          }
-        })
-      }
-      blitz.config.local.logLevel = 'info'
-    }
-  }, 1500) // too lazy to add ping propagation function right now
-}
 
 /**
  * Import hooks
@@ -51,7 +22,9 @@ const resourceHooks = require('./hooks/mongo')
  */
 const Auth = require('blitz-js-auth')
 blitz.use(new Auth({
-  mongoURL: 'mongodb://localhost/warframe-nexus-auth'
+  core: {
+    mongoURL: 'mongodb://localhost/warframe-nexus-auth'
+  }
 }))
 
 /**
@@ -76,7 +49,7 @@ blitz.use(new API({
 const Core = require('blitz-js-core')
 blitz.hook(Core, resourceHooks.verifyItemIndices)
 blitz.use(new Core({
-  endpointPath: __dirname + '/endpoints/api',
+  endpointPath: __dirname + '/api',
   mongoURL: 'mongodb://localhost/warframe-nexus-core',
 }))
 
@@ -85,15 +58,14 @@ blitz.use(new Core({
  */
 const View = require('blitz-js-view')
 blitz.use(new View({
-  mongoURL: 'mongodb://localhost/warframe-nexus-view',
-  endpointPath: __dirname + '/endpoints/view',
-  sourcePath: __dirname + '/view/src',
-  publicPath: __dirname + '/view/dist',
+  core: {
+    mongoURL: 'mongodb://localhost/warframe-nexus-view',
+    endpointPath: __dirname + '/view/endpoints',
+    sourcePath: __dirname + '/view/src',
+    publicPath: __dirname + '/view/dist'
+  },
   webpack: {
     serverConfig: __dirname + '/config/webpack/server.config.js',
     clientConfig: __dirname + '/config/webpack/client.config.js'
-  },
-  cacheDuration: 1
+  }
 }))
-
-switchContext()
