@@ -32,5 +32,42 @@
   @import '~src/styles/partials/importer';
   @import '~src/styles/reset';
   @import '~src/styles/grid';
-  @import '~src/styles/base';
+  @import '~src/styles/modules/importer';
+
+  #app {
+    // Layout Properties / Sticky Footer
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    // Base Colors
+    background: $colorBackgroundDark;
+    color: $colorFontBody;
+
+    input::placeholder {
+      color: $colorFontBody;
+    }
+
+    a {
+      color: white;
+      @include ease(0.1s);
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: white;
+    }
+  }
+
+  .a-ie {
+    @include ie();
+  }
+
 </style>

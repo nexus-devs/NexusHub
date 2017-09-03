@@ -56,7 +56,7 @@
   .ctx {
     display: none;
     float: right;
-    
+
     @media (max-width: $breakpoint-xs) {
       display: block;
     }
