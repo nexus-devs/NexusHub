@@ -4,7 +4,7 @@
     <div class="col-b">
       <label for="item">Item</label><br />
       <input type="text" name="item" placeholder="Items, Players..">
-      <span class="autocomplete">{{ autocomplete }}</span>
+      <span class="autocomplete"> {{ autocomplete }} </span>
     </div>
 
     <div class="col-b">
@@ -39,6 +39,20 @@
       autocomplete() {
         return this.$store.state.search.autocomplete
       }
+    },
+
+    mounted() {
+      this.getItemList()
+    },
+
+    methods: {
+      async getItemList() {
+        this.$store.commit('setItemList', await this.$blitz.get('/warframe/v1/items/prices'))
+      },
+
+      search() {
+
+      }
     }
   }
 </script>
@@ -59,6 +73,14 @@
     width: 33%;
     @include shadow-1;
 
+    .autocomplete {
+      position: absolute;
+      left: 15px;
+      font-size: 1.05em;
+      margin-top: 9px;
+      z-index: 0;
+    }
+
     .input-container, .button-container {
       display: inline-block;
       vertical-align: middle;
@@ -76,6 +98,8 @@
     }
 
     input, .input {
+      position: relative;
+      z-index: 1;
       font-size: 1.05em;
       display: inline-block;
       color: white;

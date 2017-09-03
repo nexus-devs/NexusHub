@@ -23,5 +23,12 @@ export default {
   },
   addNotification(state, notification) {
     state.notifications.list.unshift(notification)
+  },
+
+  /**
+   * Items
+   */
+  setItemList(state, items) {
+    state.items = items
   }
 }

@@ -34,6 +34,13 @@ class Request extends Endpoint {
     const component = req.query.component
     const limit = req.query.limit
 
+    if (limit > 50) {
+      res.status(400).send({
+        error: 'Invalid query parameters.',
+        reason: 'Limit may not be greater than 50.'
+      })
+    }
+
     let data = await this.findLastRequests(item, component, limit)
     this.cache(data, 60)
     res.send(data)
