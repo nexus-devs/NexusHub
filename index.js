@@ -4,7 +4,7 @@ const Core = require('blitz-js-core')
 /**
  * Load blitz-js framework
  */
-const Blitz = require('../../blitz/blitz-js')({
+const Blitz = require('blitz-js')({
   blitz: {
     logLevel: 'info',
     environment: 'development'
