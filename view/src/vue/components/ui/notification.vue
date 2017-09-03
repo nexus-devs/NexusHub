@@ -50,7 +50,7 @@
     /**
      * Listen to notifications as soon as we load on the client
      */
-    beforeMount() {
+    mounted() {
       this.listen()
     },
 
