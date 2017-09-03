@@ -37,7 +37,7 @@ class Search extends Endpoint {
     }
 
     let result = await this.search(query, limit)
-    // cache result
+    this.cache(result, 60)
     res.send(result)
   }
 
@@ -46,7 +46,7 @@ class Search extends Endpoint {
    * data must be returned first
    */
   async search(query, limit) {
-    limit = Math.round(limit / 2)
+    limit = Math.floor(limit / 2)
     let items = await this.searchItems(query, limit)
     let players = await this.searchPlayers(query, limit)
     return items.concat(players)
