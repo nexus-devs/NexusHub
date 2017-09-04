@@ -26,9 +26,12 @@ export default {
   },
 
   /**
-   * Items
+   * Search
    */
-  setItemList(state, items) {
-    state.items = items
+  setSearchAutocomplete(state, content) {
+    state.search.autocomplete = content
+  },
+  setSearchSuggestions(state, suggestions) {
+    state.search.suggestions = suggestions
   }
 }

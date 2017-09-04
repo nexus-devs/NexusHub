@@ -100,7 +100,7 @@
     padding: 20px 10px;
     z-index: 3;
     right: 0;
-    top: 80vh;
+    bottom: 15vh;
     transform: translateX(500px);
     transition-delay: 0.1s;
     @include ease-out(0.5s);
@@ -150,7 +150,7 @@
     position: fixed;
     opacity: 0.1;
     border: 1px solid rgba(255,255,255,0.5);
-    top: calc(80vh + 5px);
+    bottom: calc(15vh + 20px);
     right: -25px;
     height: 40px;
     width: 40px;

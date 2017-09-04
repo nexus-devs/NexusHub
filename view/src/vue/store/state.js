@@ -1,5 +1,8 @@
 export default {
-  search: {},
+  search: {
+    autocomplete: '',
+    suggestions: []
+  },
   notifications: {
     active: false,
     current: {

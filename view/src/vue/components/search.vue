@@ -2,8 +2,8 @@
   <div class="row">
 
     <div class="col-b">
-      <label for="item">Item</label><br />
-      <input type="text" name="item" placeholder="Items, Players..">
+      <label>Item</label><br />
+      <input type="text" placeholder="Items, Players.." v-model="input" v-on:keyup="search">
       <span class="autocomplete"> {{ autocomplete }} </span>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="button-container">
-        <button class="btn-outline" type="button" name="search">
+        <button class="btn-outline" type="button">
           Search
         </button>
       </div>
@@ -35,23 +35,36 @@
 
 <script>
   export default {
+    data() {
+      return {
+        input: ""
+      }
+    },
+
     computed: {
       autocomplete() {
         return this.$store.state.search.autocomplete
       }
     },
 
-    mounted() {
-      this.getItemList()
-    },
-
     methods: {
-      async getItemList() {
-        this.$store.commit('setItemList', await this.$blitz.get('/warframe/v1/items/prices'))
-      },
+      async search(event) {
+        let result = []
+        let triggers = 'abcdefghijklmnopqrstuvwxyz0123456789-_.[]'.split('')
+        triggers.push('backspace')
 
-      search() {
-
+        if (triggers.includes(event.key.toLowerCase())) {
+          if (this.input.length > 1) {
+            result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+          }
+          if (result.length) {
+            let regex = new RegExp(`^${this.input}`, 'i')
+            this.$store.commit('setSearchAutocomplete', result[0].name.replace(regex, this.input))
+            this.$store.commit('setSearchSuggestions', result)
+          } else {
+            this.$store.commit('setSearchAutocomplete', '')
+          }
+        }
       }
     }
   }
