@@ -4,9 +4,9 @@ const Core = require('blitz-js-core')
 /**
  * Load blitz-js framework
  */
-const Blitz = require('../../blitz/blitz-js')({
+const Blitz = require('blitz-js')({
   blitz: {
-    logLevel: 'info',
+    logLevel: 'monitor',
     environment: 'development'
   },
   auth: {
@@ -15,15 +15,7 @@ const Blitz = require('../../blitz/blitz-js')({
     }
   },
   api: {
-    mongoURL: 'mongodb://localhost/warframe-nexus-core',
-    limiter: {
-      mid: {
-        minDifference: 10
-      },
-      high: {
-        minDifference: 50
-      }
-    }
+    mongoURL: 'mongodb://localhost/warframe-nexus-core'
   },
   core: {
     disable: true // we'll load them below to be more clear
