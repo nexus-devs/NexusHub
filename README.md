@@ -37,6 +37,7 @@ Old development builds can be found in the commit history starting at #271
 <br>
 
 ## Requirements
+- Node.js 8.4.0+
 - Redis
 - Mongodb
 <br>
