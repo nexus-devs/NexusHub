@@ -27,15 +27,6 @@
 <script>
   export default {
     /**
-     * Active state for class. Hidden when false
-     */
-    data() {
-      return {
-        active: false
-      }
-    },
-
-    /**
      * Reactive values for active notification
      */
     computed: {
@@ -44,6 +35,9 @@
       },
       content() {
         return this.$store.state.notifications.current.content
+      },
+      active() {
+        return this.$store.state.notifications.active
       }
     },
 
@@ -64,24 +58,17 @@
           // Push to store
           if (notification.game === 'warframe') {
             this.$store.commit('addNotification', notification.message)
-            this.$store.commit('selectNotification', 0)
           }
           // Show notification for 5s
           this.activate()
         })
       },
-
       activate() {
-        this.active = true
-        setTimeout(() => {
-          this.active = false
-        }, 5000)
+        this.$store.dispatch('displayNotification')
       },
-
       next() {
         this.$store.dispatch('nextNotification')
       },
-
       previous() {
         this.$store.dispatch('previousNotification')
       }

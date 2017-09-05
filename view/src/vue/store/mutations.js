@@ -24,6 +24,12 @@ export default {
   addNotification(state, notification) {
     state.notifications.list.unshift(notification)
   },
+  showNotification(state) {
+    state.notifications.active = true
+  },
+  hideNotification(state) {
+    state.notifications.active = false
+  },
 
   /**
    * Search
