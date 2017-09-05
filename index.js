@@ -1,10 +1,10 @@
 const hooks = require('./hooks/mongo')
-const Core = require('blitz-js-core')
+const Core = require('../../blitz/blitz-js-core')
 
 /**
  * Load blitz-js framework
  */
-const Blitz = require('blitz-js')({
+const Blitz = require('../../blitz/blitz-js')({
   blitz: {
     logLevel: 'monitor',
     environment: 'development'

@@ -45,3 +45,12 @@ $i: 12;
   }
   $i: $i + 4;
 }
+
+*[class*="ico-"] {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

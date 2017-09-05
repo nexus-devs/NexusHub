@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="search-container">
-      <!-- <video playsinline autoplay muted loop>
+      <video playsinline autoplay muted loop>
         <source src="https://n8k6e2y6.ssl.hwcdn.net/images/prime-access/primeaccesshydroid/background.webm" type="video/webm">
-      </video> -->
+      </video>
       <div class="g-ct">
         <h1>
           <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Search from 'src/vue/components/search.vue'
+  import Search from 'src/vue/components/search/index.vue'
   export default {
     components: {
       Search
@@ -37,7 +37,7 @@
   }
 
   video {
-    position:absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
     min-width: 100%;
@@ -45,8 +45,7 @@
     width: auto;
     height: auto;
     opacity:0.7;
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-35%);
     filter: grayscale(0.3) blur(7px) contrast(0.8);
   }
 
@@ -57,8 +56,8 @@
     height: 45vh;
     min-height: 500px;
     align-items: center;
-    background: url('/img/warframe/index/search-bg.jpg');
-    background-size: cover;
+    //background: url('/img/warframe/index/search-bg.jpg');
+    //background-size: cover;
 
     h1 {
       transform: translateY(50px);
@@ -76,6 +75,7 @@
       padding-top: 60px;
     }
   }
+
   @keyframes fadeinUp {
     from {
       opacity: 0;
