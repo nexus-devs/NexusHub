@@ -53,6 +53,12 @@
       animation: fadeinUp 0.7s forwards;
       animation-delay: 0.3s;
     }
+
+    @media (max-width: $breakpoint-s) {
+      .search-component {
+        width: 100%;
+      }
+    }
   }
 
   // Search fields
@@ -62,7 +68,6 @@
     margin: 1px;
     margin-top: 1px !important;
     margin-bottom: 1px !important;
-    @include shadow-1;
 
     .input-container, .button-container {
       display: inline-block;
@@ -106,6 +111,10 @@
       margin-top: 10px;
       z-index: 0;
     }
+    .autocomplete-type {
+      float: right;
+      padding: 10px;
+    }
   }
 
   /deep/ .col-b .tools {
@@ -114,15 +123,15 @@
     width: calc(33.33% - 2px);
     margin-top: -1px;
     margin-left: 1px;
+    z-index: 2;
 
     .suggestion {
       padding: 15px;
       cursor: pointer;
-      @include ease(0.3s);
+      @include ease-out(0.7s);
 
       &:hover {
         background: rgba(17, 22, 27, 0.8);
-        @include ease(0.1s);
       }
 
       .ico-36 {
@@ -162,6 +171,16 @@
           font-size: 0.9em;
         }
       }
+
+      .suggestion-data {
+        display: inline-block;
+        vertical-align: middle;
+        float: right;
+        font-size: 0.9em;
+        margin: 7px 0;
+        padding: 3px 10px;
+        border-left: 1px solid $colorSubtle;
+      }
     }
 
     @media (max-width: $breakpoint-s) {
@@ -185,16 +204,6 @@
     }
     to {
       transform: translateY(0);
-    }
-  }
-
-  @media (max-width: $breakpoint-s) {
-    .search-component {
-      width: 100%;
-
-      img {
-        display: none;
-      }
     }
   }
 </style>

@@ -5,10 +5,11 @@
       <input type="text" placeholder="Items, Players.." v-model="input"
                                                         v-on:keyup="search"
                                                         v-on:keydown.tab.prevent="complete">
-      <span class="autocomplete"> {{ autocomplete }} </span>
+      <span class="autocomplete">{{ autocomplete }}</span>
+      <span class="autocomplete-type">{{ autotype }}</span>
     </div>
     <div class="tools">
-      <div class="suggestion" v-for="suggestion in suggestions">
+      <div class="suggestion" v-for="suggestion in suggestions" v-on:click="complete(suggestion)">
         <div class="ico-36">
           <img :src="suggestion.imgUrl" :alt="suggestion.name">
           <img :src="suggestion.imgUrl" :alt="suggestion.name" class="backdrop">
@@ -34,7 +35,10 @@ export default {
 
   computed: {
     autocomplete() {
-      return this.$store.state.search.autocomplete
+      return this.$store.state.search.autocomplete.name
+    },
+    autotype() {
+      return this.$store.state.search.autocomplete.type
     },
     suggestions() {
       return this.$store.state.search.suggestions
@@ -56,10 +60,15 @@ export default {
         }
         if (result.length) {
           let regex = new RegExp(`^${this.input}`, 'i')
-          this.$store.commit('setSearchAutocomplete', result[0].name.replace(regex, this.input))
+          let autocomplete = result[0]
+          autocomplete.name = autocomplete.name.replace(regex, this.input)
+          this.$store.commit('setSearchAutocomplete', autocomplete)
           this.$store.commit('setSearchSuggestions', result)
         } else {
-          this.$store.commit('setSearchAutocomplete', '')
+          this.$store.commit('setSearchAutocomplete', {
+            name: '',
+            type: ''
+          })
         }
       }
     },
@@ -67,10 +76,15 @@ export default {
     /**
      * Change input to full suggestion with correct capitalization
      */
-    complete() {
-      if (this.$store.state.search.suggestions.length) {
-        let actual = this.$store.state.search.suggestions[0].name
-        this.input = actual
+    complete(suggestion) {
+      if (suggestion.name) {
+        this.input = suggestion.name
+        this.$store.commit('setSearchAutocomplete', suggestion)
+        this.$store.commit('setSearchSuggestions', [])
+      }
+      else if (this.$store.state.search.suggestions.length) {
+        let actual = this.$store.state.search.suggestions[0]
+        this.input = actual.name
         this.$store.commit('setSearchAutocomplete', actual)
       }
     }
