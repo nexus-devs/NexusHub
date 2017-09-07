@@ -27,11 +27,6 @@
 
     @media (max-width: $breakpoint-s) {
       padding-top: 60px;
-      width: 100%;
-
-      img {
-        display: none;
-      }
     }
   }
 </style>

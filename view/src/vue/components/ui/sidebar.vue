@@ -32,8 +32,7 @@
 
     .nav-lower {
       height: calc(100vh - 52px);
-      @include gradient-background(rgba(57, 64, 70, 0.8), $colorBackground);
-      @include shadow-2;
+      background: $colorBackgroundLight;
       @include ease(0.35s);
 
       @media (max-width: $breakpoint-s) {
