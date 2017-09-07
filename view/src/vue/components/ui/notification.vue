@@ -57,10 +57,8 @@
         this.$blitz.on('/notifications', notification => {
           // Push to store
           if (notification.game === 'warframe') {
-            this.$store.commit('addNotification', notification.message)
+            this.$store.dispatch('pushNotification', notification.message)
           }
-          // Show notification for 5s
-          this.activate()
         })
       },
       activate() {

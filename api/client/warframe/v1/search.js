@@ -64,7 +64,7 @@ class Search extends Endpoint {
     items.forEach(item => {
       let object = {
         name: item.name,
-        type: 'item',
+        type: 'Item',
         apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
         webUrl: `/warframe/items/${item.name.split(" ").join("%20")}`,
         imgUrl: `/img/warframe/items/${item.name.split(" ").join("-").toLowerCase()}.png`,
@@ -88,7 +88,7 @@ class Search extends Endpoint {
     players.forEach(player => {
       let object = {
         name: player.name,
-        type: 'player',
+        type: 'Player',
         apiUrl: `/warframe/v1/players/${player.name}/profile`,
         webUrl: 'soon™',
         imgUrl: `/img/warframe/players/${player.mastery.rank.name.split(" ").join("-").toLowerCase()}.png`,

@@ -30,10 +30,6 @@
     flex-direction: column;
     position: fixed;
 
-    .nav-upper {
-      background: rgba(27,31,36,0.8);
-    }
-
     .nav-lower {
       height: calc(100vh - 52px);
       @include gradient-background(rgba(57, 64, 70, 0.8), $colorBackground);
@@ -51,6 +47,10 @@
 
       &:first-of-type {
         background: rgba(0,5,10,0.3);
+      }
+
+      @media (max-width: $breakpoint-s) {
+        padding: 8px;
       }
     }
 

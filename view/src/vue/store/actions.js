@@ -16,5 +16,9 @@ export default {
     commit('selectNotification', 0)
     commit('showNotification')
     setTimeout(() => commit('hideNotification'), 5000)
+  },
+  pushNotification({ commit, dispatch }, notification) {
+    commit('addNotification', notification)
+    dispatch('displayNotification')
   }
 }

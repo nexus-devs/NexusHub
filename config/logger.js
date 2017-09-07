@@ -1,5 +1,3 @@
-"use strict"
-
 /**
  * Dependencies
  */
@@ -11,6 +9,7 @@ const chalk = require("chalk")
 class Logger {
 
   constructor() {
+    console.log('\x1B[2J\x1B[0f\u001b[0;0H')
     this.intro()
     this.border = chalk.grey("---------------------------------------------------------------")
   }

@@ -1,10 +1,10 @@
 const hooks = require('./hooks/mongo')
-const Core = require('blitz-js-core')
+const Core = require('../../blitz/blitz-js-core')
 
 /**
  * Load blitz-js framework
  */
-const Blitz = require('blitz-js')({
+const Blitz = require('../../blitz/blitz-js')({
   blitz: {
     logLevel: 'monitor',
     environment: 'development'
@@ -13,9 +13,6 @@ const Blitz = require('blitz-js')({
     core: {
       mongoURL: 'mongodb://localhost/warframe-nexus-auth'
     }
-  },
-  api: {
-    mongoURL: 'mongodb://localhost/warframe-nexus-core'
   },
   core: {
     disable: true // we'll load them below to be more clear
@@ -37,7 +34,7 @@ const Blitz = require('blitz-js')({
 /**
  * Core worker node for heavy processing. Item statistics, player data, etc.
  */
-blitz.hook(hooks.verifyItemIndices)
+blitz.hook('core_worker', hooks.verifyItemIndices)
 blitz.use(new Core({
   endpointPath: __dirname + '/api/core',
   mongoURL: 'mongodb://localhost/warframe-nexus-core',
