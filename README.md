@@ -37,8 +37,9 @@ Old development builds can be found in the commit history starting at #271
 <br>
 
 ## Requirements
-- Redis
-- Mongodb
+- [Node.js 8.4.0+](https://nodejs.org/en/)
+- [Redis](https://redis.io/)
+- [Mongodb](https://www.mongodb.com/download-center#community)
 <br>
 
 **Note:** You can change default ports and more via the standard [blitz.js](https://github.com/nexus-devs/blitz.js) config.
