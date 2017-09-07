@@ -12,13 +12,13 @@
       <router-link to="">Sitemap</router-link>
     </div>
     <div class="brands">
+      <a href="https://warframe.market"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
       <a href="https://discord.gg/TCxe6P4"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
     </div>
   </footer>
 </template>
 
 <script>
-
   export default {
     data() {
       return {
@@ -31,12 +31,11 @@
         document.onmousemove = this.move
         document.onmouseup = this.untrack
         setTimeout(() => {
-          this.$store.commit('addNotification', {
+          this.$store.dispatch('pushNotification', {
             title: '( ͡° ͜ʖ ͡°)',
             content: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
           })
-          this.$store.dispatch('displayNotification')
-        }, 2500)
+        }, 1500)
       },
       untrack() {
         document.onmousemove = null
@@ -105,10 +104,10 @@
     }
 
     .brands {
-      margin-top: -5px;
       margin-bottom: 20px;
       a {
         opacity: 0.65;
+        margin: 0 15px;
 
         &:hover {
           opacity: 1 !important;
