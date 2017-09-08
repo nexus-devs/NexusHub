@@ -1,6 +1,6 @@
 {
-  "name": "warframe-nexus",
-  "version": "2.1.1",
+  "name": "Nexus-Stats",
+  "version": "2.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.4.3",
+    "blitz-js": "^0.4.6",
     "blitz-js-core": "^0.4.3",
     "chalk": "^2.1.0",
     "warframe-updates": "^1.0.6"

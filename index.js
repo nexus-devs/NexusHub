@@ -1,35 +1,11 @@
+const config = require('./config/local.js')
 const hooks = require('./hooks/mongo')
-const Core = require('../../blitz/blitz-js-core')
+const Core = require('blitz-js-core')
 
 /**
  * Load blitz-js framework
  */
-const Blitz = require('../../blitz/blitz-js')({
-  blitz: {
-    logLevel: 'monitor',
-    environment: 'development'
-  },
-  auth: {
-    core: {
-      mongoURL: 'mongodb://localhost/warframe-nexus-auth'
-    }
-  },
-  core: {
-    disable: true // we'll load them below to be more clear
-  },
-  view: {
-    core: {
-      mongoURL: 'mongodb://localhost/warframe-nexus-view',
-      endpointPath: __dirname + '/view/endpoints',
-      sourcePath: __dirname + '/view/src',
-      publicPath: __dirname + '/view/dist'
-    },
-    webpack: {
-      serverConfig: __dirname + '/config/webpack/server.config.js',
-      clientConfig: __dirname + '/config/webpack/client.config.js'
-    }
-  }
-})
+const Blitz = require('blitz-js')(config)
 
 /**
  * Core worker node for heavy processing. Item statistics, player data, etc.
@@ -50,6 +26,3 @@ blitz.use(new Core({
   mongoURL: 'mongodb://localhost/warframe-nexus-core',
   id: 'client_worker'
 }))
-
-// Big useless intro
-const intro = require('./config/logger.js')
