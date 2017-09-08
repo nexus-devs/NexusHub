@@ -1,0 +1,26 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+$colorPrimary: #6ae974;
+$colorPrimaryDark: #58c761;
+$colorAccent: #3ad1d7;
+$colorAccentDark: #38b6b9;
+$colorBackgroundLight: #373e44;
+$colorBackground: #2f363c;
+$colorBackgroundDark: #20242a;
+$colorBackgroundDarker: #171a20;
+$colorBackgroundDarkest: #13181d;
+$colorSubtle: rgba(120, 132, 144, 0.4);
+$colorSubtleDark: rgba(62, 67, 72, 0.4);
+
+/**
+ * Color Codes
+ * Fonts
+*/
+$colorFontBody: #7c8e9b;
+$colorFontSubtle: #66707a;
+
+html {
+  background: $colorBackgroundDark
+}

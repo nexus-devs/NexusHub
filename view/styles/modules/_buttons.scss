@@ -1,0 +1,36 @@
+.btn, button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-radius: 2px;
+  @include ie(32);
+  @include gradient-background-dg($colorPrimary, $colorAccent);
+  padding: 8px 18px !important;
+  font-weight: 400;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-round {
+  border-radius: 1000px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid $colorPrimary;
+  border-radius: 2px;
+  border-image-source: linear-gradient(to bottom right, $colorPrimary, $colorAccent);
+  border-image-slice: 1;
+
+  &:hover{
+    @include gradient-background-dg($colorPrimary, $colorAccent);
+  }
+
+  &::before {
+    border-radius: 2px !important;
+  }
+}
