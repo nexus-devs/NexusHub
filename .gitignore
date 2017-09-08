@@ -7,9 +7,9 @@
 /out/
 
 # Webpack generated content
-/view/dist/*.*.css
-/view/dist/*.bundle*.js
-/view/dist/*manifest.json
-/view/dist/*bundle.json
-/view/dist/hot-update.*
-/view/dist/img/**.psd
+/assets/*.*.css
+/assets/*.bundle*.js
+/assets/*manifest.json
+/assets/*bundle.json
+/assets/hot-update.*
+/assets/img/**.psd
