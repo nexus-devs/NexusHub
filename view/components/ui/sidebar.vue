@@ -29,6 +29,7 @@
   </nav>
 </template>
 
+
 <script>
 const store = {
   state: {
@@ -57,6 +58,7 @@ export default {
   }
 }
 </script>
+
 
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';

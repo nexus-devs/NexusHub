@@ -15,6 +15,7 @@
 </template>
 
 
+
 <script>
   import searchfield from 'src/components/search/fields/input.vue'
   import timefield from 'src/components/search/fields/time.vue'
@@ -28,6 +29,7 @@
     }
   }
 </script>
+
 
 
 <style lang="scss" scoped>

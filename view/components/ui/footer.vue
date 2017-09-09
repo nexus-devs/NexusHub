@@ -18,6 +18,8 @@
   </footer>
 </template>
 
+
+
 <script>
   export default {
     data() {
@@ -50,6 +52,8 @@
     }
   }
 </script>
+
+
 
 <style lang='scss' scoped>
   @import '~src/styles/partials/importer';

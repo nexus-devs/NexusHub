@@ -12,9 +12,9 @@
       }
     },
 
-    async asyncData({ store }, api) {
-      let requests = await api.get('/warframe/v1/requests')
-      store.commit('setValue', requests[0].user)
+    async asyncData() {
+      let requests = await this.$blitz.get('/warframe/v1/requests')
+      this.$store.commit('setValue', requests[0].user)
     },
 
     beforeMount() {

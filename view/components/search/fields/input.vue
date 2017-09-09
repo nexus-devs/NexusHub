@@ -4,7 +4,8 @@
       <label>Search</label><br />
       <input type="text" placeholder="Items, Players.." v-model="input"
                                                         v-on:keyup="search"
-                                                        v-on:keydown.tab.prevent="complete">
+                                                        v-on:keydown.tab.prevent="complete"
+                                                        v-on:keydown.enter="complete">
       <span class="autocomplete">{{ autocomplete }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
     </div>
@@ -25,6 +26,7 @@
 </template>
 
 
+
 <script>
 const store = {
   state: {
@@ -32,11 +34,11 @@ const store = {
     suggestions: []
   },
   mutations: {
-    setSearchAutocomplete(search, content) {
-      search.autocomplete = content
+    setSearchAutocomplete(state, content) {
+      state.autocomplete = content
     },
-    setSearchSuggestions(search, suggestions) {
-      search.suggestions = suggestions
+    setSearchSuggestions(state, suggestions) {
+      state.suggestions = suggestions
     }
   }
 }
@@ -76,9 +78,10 @@ export default {
         }
         if (result.length) {
           let regex = new RegExp(`^${this.input}`, 'i')
-          let autocomplete = result[0]
-          autocomplete.name = autocomplete.name.replace(regex, this.input)
-          this.$store.commit('setSearchAutocomplete', autocomplete)
+          this.$store.commit('setSearchAutocomplete', {
+            name: result[0].name.replace(regex, this.input),
+            content: result[0].content
+          })
           this.$store.commit('setSearchSuggestions', result)
         } else {
           this.$store.commit('setSearchAutocomplete', {

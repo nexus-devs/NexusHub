@@ -15,7 +15,7 @@
 
 <script>
   import navigation from 'src/components/ui/nav.vue'
-  import sidebar from 'src/components/ui/sidebar.vue'
+  import sidebar from 'src/components/sidebar/index.vue'
   import notification from 'src/components/ui/notification.vue'
   import bottom from 'src/components/ui/footer.vue'
 
@@ -74,10 +74,10 @@
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    @include ease(0.4s);
+    @include ease(0.45s);
 
     /deep/ .g-ct {
-      @include ease(0.4s);
+      @include ease(0.45s);
     }
   }
   .activeSidebar {

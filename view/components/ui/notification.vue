@@ -24,6 +24,7 @@
 </template>
 
 
+
 <script>
 const store = {
   state: {
@@ -36,52 +37,41 @@ const store = {
     list: []
   },
   actions: {
-    nextNotification({
-      commit,
-      state
-    }) {
-      let list = state.notifications.list
-      let next = state.notifications.selected + 1
+    nextNotification({ commit, state }) {
+      let list = state.list
+      let next = state.selected + 1
       commit('selectNotification', next >= list.length ? 0 : next)
     },
-    previousNotification({
-      commit,
-      state
-    }) {
-      let list = state.notifications.list
-      let previous = state.notifications.selected - 1
+    previousNotification({ commit, state }) {
+      let list = state.list
+      let previous = state.selected - 1
       commit('selectNotification', previous < 0 ? list.length - 1 : previous)
     },
-    displayNotification({
-      commit
-    }) {
+    displayNotification({ commit }) {
       commit('selectNotification', 0)
       commit('toggleNotification')
       setTimeout(() => commit('toggleNotification'), 5000)
     },
-    pushNotification({
-      commit,
-      dispatch
-    }, notification) {
+    pushNotification({ commit, dispatch }, notification) {
       commit('addNotification', notification)
       dispatch('displayNotification')
     }
   },
   mutations: {
-    selectNotification(notifications, index) {
-      let list = notifications.list
+    selectNotification(state, index) {
+      let list = state.list
       let current = list[index]
 
       if (current) {
-        notifications.selected = index
-        notifications.current = current
+        state.selected = index
+        state.current = current
       }
     },
-    addNotification(notifications, notification) {
-      notifications.list.unshift(notification)
+    addNotification(state, notification) {
+      state.list.unshift(notification)
     },
-    toggleNotification(notifications) {
-      notifications.active = !state.active
+    toggleNotification(state) {
+      state.active = !state.active
     }
   }
 }
