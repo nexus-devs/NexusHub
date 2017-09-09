@@ -1,8 +1,10 @@
 <template>
-  <div class="panel">
-    <div class="panel-head">
-      <h3>Search</h3>
-      <span>CTRL + F</span>
+  <div class="panel-container">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Search</h3>
+        <span>CTRL + F</span>
+      </div>
     </div>
   </div>
 </template>
@@ -12,20 +14,26 @@
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.panel {
+.panel-container {
   position: absolute;
   margin-top: -53px;
   left: 64px;
   width: 286px;
   z-index: -1;
   transform: translateX(-300px);
-  @include ease(0.45s);
+  @include ease-out(0.6s);
+}
+
+.panel {
+  opacity: 0;
+  transition-delay: 0.2s;
+  @include ease(0.6s);
 
   .panel-head {
     padding: 21px 35px;
     cursor: pointer;
     border-top: 1px solid $colorSubtleDark;
-    @include ease(0.25s);
+    @include ease(0.3s);
 
     &:hover {
       background: $colorBackgroundDarker;

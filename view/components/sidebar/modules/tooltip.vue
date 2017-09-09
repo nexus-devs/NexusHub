@@ -17,8 +17,7 @@
     border-radius: 2px;
     font-size: 0.85em;
     font-weight: 400;
-    width: 70px;
-    padding: 5px;
+    padding: 5px 15px;
     top: 18px;
     left: 45px;
     color: white;
