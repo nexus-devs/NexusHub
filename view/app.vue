@@ -74,10 +74,10 @@
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    @include ease(0.45s);
+    @include ease-out(0.6s);
 
     /deep/ .g-ct {
-      @include ease(0.45s);
+      @include ease-out(0.6s);
     }
   }
   .activeSidebar {

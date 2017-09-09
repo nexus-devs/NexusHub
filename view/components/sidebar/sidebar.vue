@@ -72,8 +72,12 @@ nav {
         transform: translateX(0);
       }
 
-      /deep/ .panel {
+      /deep/ .panel-container {
         transform: translateX(0);
+
+        .panel {
+          opacity: 1;
+        }
       }
     }
   }
@@ -113,7 +117,7 @@ nav {
         width: 286px;
         background: $colorBackgroundDark;
         transform: translateX(-300px);
-        @include ease(0.45s);
+        @include ease-out(0.6s);
         @include shadow-3;
       }
 
