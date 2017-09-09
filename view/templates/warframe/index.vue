@@ -4,6 +4,8 @@
   </div>
 </template>
 
+
+
 <script>
   import Search from 'src/components/search/index.vue'
   export default {
@@ -12,6 +14,8 @@
     }
   }
 </script>
+
+
 
 <style lang='scss' scoped>
   @import '~src/styles/partials/importer';

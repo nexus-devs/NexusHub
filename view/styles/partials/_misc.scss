@@ -7,3 +7,11 @@
   background: transparent;
   background: linear-gradient(to bottom right, $top, $bot);
 }
+
+@mixin triangle-left($size, $color) {
+  width: 0;
+  height: 0;
+  border-top: $size solid transparent;
+  border-bottom: $size solid transparent;
+  border-right: $size solid $color;
+}
