@@ -104,11 +104,17 @@
         &:last-of-type {
           border-right: none;
         }
+
+        @media (max-width: $breakpoint-s) {
+          display: inline-block;
+          margin: 5px 0;
+        }
       }
     }
 
     .brands {
       margin-bottom: 20px;
+
       a {
         opacity: 0.65;
         margin: 0 15px;
@@ -116,6 +122,23 @@
         &:hover {
           opacity: 1 !important;
         }
+      }
+
+      @media (max-width: $breakpoint-s) {
+        margin-bottom: 10px;
+
+        img {
+          height: 28px;
+        }
+      }
+    }
+
+    @media (max-width: $breakpoint-s) {
+      .logo, .goose {
+        height: 32px;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: -10px;
       }
     }
   }

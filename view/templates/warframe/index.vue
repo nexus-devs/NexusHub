@@ -30,7 +30,7 @@
     background-size: cover;
 
     @media (max-width: $breakpoint-s) {
-      padding-top: 60px;
+      padding-top: 40px;
     }
   }
 </style>
