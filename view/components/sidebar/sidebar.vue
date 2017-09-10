@@ -72,10 +72,6 @@ nav {
   position: fixed;
 
   &.active {
-    /deep/ .ico-a-ie + .tooltip {
-      opacity: 0 !important;
-      pointer-events: none;
-    }
     .ico-wrapper {
       &:first-of-type::before {
         transform: translateX(0);
