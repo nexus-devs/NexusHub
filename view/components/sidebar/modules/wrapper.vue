@@ -32,7 +32,9 @@ export default {
       if (!this.$store.state.sidebar.active) {
         this.$store.commit('toggleSidebar')
       }
-      this.$store.commit('setActivePanel', this.id)
+      if (this.$store.state.sidebar.activeId !== this.id) {
+        this.$store.commit('setActivePanel', this.id)
+      }
     }
   }
 }
@@ -53,6 +55,20 @@ export default {
 
 .active {
   /deep/ .panel {
+    .panel-head {
+      cursor: auto;
+      &:hover {
+        background: none;
+      }
+      .shortcut {
+        pointer-events: none;
+        opacity: 0;
+      }
+      .back {
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
     .panel-body {
       transition-delay: 0.25s;
       opacity: 1;
