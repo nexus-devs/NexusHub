@@ -1,14 +1,21 @@
 <template>
-  <div class="panel-container">
+  <div class="panel-container" v-bind:style="{top: -100 * (id - 1) + '%'}">
     <div class="panel">
-      <div class="panel-head">
-        <h3>Search</h3>
-        <span>CTRL + F</span>
-      </div>
+      <slot></slot>
     </div>
   </div>
 </template>
 
+
+<script>
+export default {
+  data() {
+    return {
+      id: this.$store.state.sidebar.id
+    }
+  }
+}
+</script>
 
 
 <style lang="scss" scoped>
@@ -16,18 +23,17 @@
 
 .panel-container {
   position: absolute;
-  margin-top: -53px;
   left: 64px;
   width: 286px;
   z-index: -1;
-  transform: translateX(-300px);
+  transform: translateX(-400px);
   @include ease-out(0.6s);
 }
 
 .panel {
   opacity: 0;
   transition-delay: 0.2s;
-  @include ease(0.6s);
+  @include ease(0.5s);
 
   .panel-head {
     padding: 21px 35px;
@@ -57,6 +63,13 @@
         border: 1px solid $colorSubtle;
       }
     }
+  }
+
+  .panel-body {
+    padding: 20px 35px;
+    pointer-events: none;
+    opacity: 0;
+    @include ease(0.4s);
   }
 }
 </style>
