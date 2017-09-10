@@ -1,6 +1,6 @@
 <template>
 <nav v-bind:class="{ active }">
-  <div class="nav-upper" v-on:click="toggle">
+  <div class="nav-upper" v-on:click="toggle(true)">
     <div class="ico-wrapper">
       <div class="ico-a-ie">
         <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class='ico-20'>
@@ -22,11 +22,13 @@ import tooltip from './modules/tooltip.vue'
 const store = {
   state: {
     active: false,
+    expanded: false,
     id: 0,
     activeId: 0
   },
   mutations: {
-    toggleSidebar(state) {
+    toggleSidebar(state, expanded = false) {
+      state.expanded = expanded
       state.active = !state.active
       state.activeId = 0
     },
@@ -52,8 +54,8 @@ export default {
     }
   },
   methods: {
-    toggle() {
-      this.$store.commit('toggleSidebar')
+    toggle(expanded) {
+      this.$store.commit('toggleSidebar', expanded)
     }
   }
 }

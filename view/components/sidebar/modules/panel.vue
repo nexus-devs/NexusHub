@@ -51,13 +51,17 @@ export default {
       font-size: 1em;
 
       // Shortcut
-      & + span {
+      & ~ span {
         display: inline-block;
         vertical-align: middle;
         float: right;
-        font-size: 0.65em;
         margin-top: -0.2em;
-        color: $colorFontSubtle;
+        @include ease(0.15s);
+      }
+
+      & ~ .shortcut {
+        pointer-events: all;
+        font-size: 0.65em;
         padding: 5px;
         border-radius: 2px;
         border: 1px solid $colorSubtle;
