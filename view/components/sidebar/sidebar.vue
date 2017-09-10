@@ -21,11 +21,20 @@ import tooltip from './modules/tooltip.vue'
 
 const store = {
   state: {
-    active: false
+    active: false,
+    id: 0,
+    activeId: 0
   },
   mutations: {
-    toggleSidebar(sidebar) {
-      sidebar.active = !sidebar.active
+    toggleSidebar(state) {
+      state.active = !state.active
+      state.activeId = 0
+    },
+    setActivePanel(state, id) {
+      state.activeId = id
+    },
+    incrementId(state) {
+      state.id++
     }
   }
 }
@@ -84,13 +93,11 @@ nav {
 
   .nav-upper {
     background: $colorBackgroundDarkest;
-    @include shadow-1;
   }
 
   .nav-lower {
     height: calc(100vh - 64px);
-    background: $colorBackgroundLight;
-    @include shadow-1;
+    @include gradient-background(rgba(67, 74, 80, 0.8), $colorBackgroundLight);
 
     .ico-wrapper:first-of-type {
       background: rgba(0,5,10,0.4);
@@ -109,6 +116,7 @@ nav {
       // Background for panels
       &:first-of-type::before {
         content: '';
+        pointer-events: none;
         position: absolute;
         z-index: -1;
         left: 64px;
@@ -116,7 +124,7 @@ nav {
         height: 100vh;
         width: 286px;
         background: $colorBackgroundDark;
-        transform: translateX(-300px);
+        transform: translateX(-400px);
         @include ease-out(0.6s);
         @include shadow-3;
       }
