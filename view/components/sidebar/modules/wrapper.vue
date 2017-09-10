@@ -49,7 +49,7 @@ export default {
   .panel-container {
     // Overwrite inline style in panel. Without the inline style, there's no
     // non-div-soupy way to position the panel on top when active.
-    top: 0 !important;
+    transform: translateY(0) !important;
   }
 }
 

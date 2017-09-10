@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-container" v-bind:style="{top: -100 * (id - 1) + '%'}">
+  <div class="panel-container" v-bind:style="{ transform: [`translate(0, ${-64 * (id - 1)}px)`] }">
     <div class="panel">
       <slot></slot>
     </div>
@@ -23,16 +23,13 @@ export default {
 
 .panel-container {
   position: absolute;
+  top: 0;
   left: 64px;
   width: 286px;
   z-index: -1;
   transform: translateX(-400px);
-  will-change: top;
+  will-change: transform;
   @include ease-out(0.6s);
-
-  @media(max-width: $breakpoint-s) {
-    left: 56px;
-  }
 }
 
 .panel {
@@ -74,8 +71,6 @@ export default {
     }
 
     @media (max-width: $breakpoint-s) {
-      padding: 17px 35px;
-
       &:hover {
         background: $colorBackgroundDark;
       }
