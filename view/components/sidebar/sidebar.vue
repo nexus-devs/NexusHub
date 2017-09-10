@@ -110,16 +110,11 @@ nav {
       transform: translateX(-400px);
       @include ease-out(0.6s);
       @include shadow-3;
-
-      @media (max-width: $breakpoint-s) {
-        left: 56px;
-        top: 56px;
-      }
     }
   }
 
   .nav-lower {
-    height: calc(100vh - 64px);
+    height: 100vh;
     @include gradient-background(rgba(67, 74, 80, 0.8), $colorBackgroundLight);
     @include ease-out(0.6s);
 
@@ -129,9 +124,6 @@ nav {
 
     @media (max-width: $breakpoint-m) {
       transform: translateX(-400px);
-    }
-    @media (max-width: $breakpoint-s) {
-      height: 100vh;
     }
   }
 
@@ -143,10 +135,6 @@ nav {
     .ico-wrapper {
       position: relative;
       padding: 12px;
-
-      @media (max-width: $breakpoint-s) {
-        padding: 8px;
-      }
     }
 
     .ico-a-ie {

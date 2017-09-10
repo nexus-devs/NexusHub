@@ -29,7 +29,6 @@
 
     @media (max-width: $breakpoint-s) {
       position: fixed;
-      padding: 14px 25px;
       background: $colorBackgroundDark;
     }
   }
