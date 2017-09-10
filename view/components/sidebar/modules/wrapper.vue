@@ -29,6 +29,9 @@ export default {
   },
   methods: {
     toggle() {
+      if (!this.$store.state.sidebar.active) {
+        this.$store.commit('toggleSidebar')
+      }
       this.$store.commit('setActivePanel', this.id)
     }
   }
@@ -51,7 +54,7 @@ export default {
 .active {
   /deep/ .panel {
     .panel-body {
-      transition-delay: 0.3s;
+      transition-delay: 0.25s;
       opacity: 1;
     }
   }
