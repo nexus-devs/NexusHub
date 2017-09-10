@@ -30,7 +30,7 @@
     @media (max-width: $breakpoint-s) {
       position: fixed;
       padding: 14px 25px;
-      background: rgba(27, 34, 40, 0.8);
+      background: $colorBackgroundDark;
     }
   }
   .nav-l {

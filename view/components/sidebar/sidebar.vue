@@ -76,7 +76,7 @@ nav {
   &.active {
     .ico-wrapper {
       &:first-of-type::before {
-        transform: translateX(0);
+        transform: translateX(0) !important;
       }
 
       /deep/ .panel-container {
@@ -87,45 +87,62 @@ nav {
         }
       }
     }
+
+    .nav-lower {
+      transform: translateX(0);
+    }
   }
 
   .nav-upper {
     background: $colorBackgroundDarkest;
+
+    // Background for panels
+    .ico-wrapper:first-of-type::before {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+      left: 64px;
+      top: 64px;
+      height: 100vh;
+      width: 286px;
+      background: $colorBackgroundDark;
+      transform: translateX(-400px);
+      @include ease-out(0.6s);
+      @include shadow-3;
+
+      @media (max-width: $breakpoint-s) {
+        left: 56px;
+        top: 56px;
+      }
+    }
   }
 
   .nav-lower {
     height: calc(100vh - 64px);
     @include gradient-background(rgba(67, 74, 80, 0.8), $colorBackgroundLight);
+    @include ease-out(0.6s);
 
     .ico-wrapper:first-of-type {
       background: rgba(0,5,10,0.4);
     }
 
+    @media (max-width: $breakpoint-m) {
+      transform: translateX(-400px);
+    }
     @media (max-width: $breakpoint-s) {
-      transform: translateX(-100%);
+      height: 100vh;
     }
   }
 
   /deep/ {
+    .tooltip {
+      display: none;
+    }
+
     .ico-wrapper {
       position: relative;
       padding: 12px;
-
-      // Background for panels
-      &:first-of-type::before {
-        content: '';
-        pointer-events: none;
-        position: absolute;
-        z-index: -1;
-        left: 64px;
-        top: 64px;
-        height: 100vh;
-        width: 286px;
-        background: $colorBackgroundDark;
-        transform: translateX(-400px);
-        @include ease-out(0.6s);
-        @include shadow-3;
-      }
 
       @media (max-width: $breakpoint-s) {
         padding: 8px;

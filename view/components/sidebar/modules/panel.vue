@@ -27,7 +27,12 @@ export default {
   width: 286px;
   z-index: -1;
   transform: translateX(-400px);
+  will-change: top;
   @include ease-out(0.6s);
+
+  @media(max-width: $breakpoint-s) {
+    left: 56px;
+  }
 }
 
 .panel {
@@ -65,6 +70,14 @@ export default {
         padding: 5px;
         border-radius: 2px;
         border: 1px solid $colorSubtle;
+      }
+    }
+
+    @media (max-width: $breakpoint-s) {
+      padding: 17px 35px;
+
+      &:hover {
+        background: $colorBackgroundDark;
       }
     }
   }

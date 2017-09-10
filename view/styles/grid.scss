@@ -117,6 +117,10 @@
 * Media Queries
 */
 @media (max-width: $breakpoint-m) {
+  .g-ct {
+    padding: 0 40px;
+  }
+
   .row, .row-margin {
     flex-wrap: wrap;
   }
@@ -164,5 +168,10 @@
   .row-pad *[class*="col-b"] {
     margin: 15px 30px;
     flex-basis: calc(100%);
+  }
+}
+@media (max-width: $breakpoint-xs) {
+  .g-ct {
+    padding: 0 20px;
   }
 }

@@ -70,22 +70,37 @@
   .a-ie {
     @include ie();
   }
+
   .app-content {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 64px);
-    @include ease-out(0.6s);
+    will-change: transform margin-right;
 
-    /deep/ .g-ct {
-      @include ease-out(0.6s);
+    .g-ct {
+      will-change: padding;
+    }
+
+    @media (max-width: $breakpoint-s) {
+      min-height: 100vh;
     }
   }
-  .activeSidebar {
-    margin-right: 350px;
-    transform: translateX(350px);
 
-    /deep/ .g-ct {
-      padding: 0 96px 0 96px;
+  @media (min-width: $breakpoint-m) {
+    .app-content {
+      @include ease-out(0.6s);
+
+      /deep/ .g-ct {
+        @include ease-out(0.6s);
+      }
+    }
+    .activeSidebar {
+      margin-right: 350px;
+      transform: translateX(350px);
+
+      /deep/ .g-ct {
+        padding: 0 96px 0 96px;
+      }
     }
   }
 </style>
