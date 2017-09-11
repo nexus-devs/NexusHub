@@ -45,14 +45,6 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.ico-wrapper:not(.active) {
-  .panel-container {
-    // Overwrite inline style in panel. Without the inline style, there's no
-    // non-div-soupy way to position the panel on top when active.
-    transform: translateY(0) !important;
-  }
-}
-
 .active {
   /deep/ .panel {
     .panel-head {
