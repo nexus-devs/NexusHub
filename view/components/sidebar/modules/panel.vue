@@ -27,7 +27,6 @@ export default {
   left: 64px;
   width: 286px;
   z-index: -1;
-  transform: translateX(-400px);
   will-change: transform;
   @include ease-out(0.6s);
 }

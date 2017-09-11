@@ -35,10 +35,6 @@
   .nav-l {
     a:first-of-type {
       margin-left: 70px;
-
-      @media (max-width: $breakpoint-s) {
-        margin-left: 50px;
-      }
     }
   }
   .nav-r {

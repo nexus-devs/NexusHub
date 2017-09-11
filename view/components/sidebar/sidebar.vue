@@ -80,16 +80,29 @@ nav {
       }
 
       /deep/ .panel-container {
-        transform: translateX(0);
-
         .panel {
           opacity: 1;
         }
       }
     }
 
+    .ico-wrapper:not(.active) {
+      /deep/ .panel-container {
+        // Overwrite inline style in panel. Without the inline style, there's no
+        // non-div-soupy way to position the panel on top when active.
+        transform: translate(0, 0) !important;
+      }
+    }
+
     .nav-lower {
       transform: translateX(0);
+    }
+  }
+
+  // Move panels back in when sidebar is inactive
+  &:not(.active) {
+    /deep/ .panel-container {
+      transform: translate(-400px, 0) !important;
     }
   }
 
