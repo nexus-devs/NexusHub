@@ -65,7 +65,7 @@
 
   // Search fields
   /deep/ .col-b .field {
-    background: rgba(27, 32, 37, 0.8);
+    background: $colorBackgroundDark;
     padding: 15px;
     margin: 1px;
     margin-top: 1px !important;
@@ -95,6 +95,10 @@
       display: inline-block;
       color: white;
       margin-bottom: -10px;
+
+      span {
+        @include ease(0.15s);
+      }
     }
 
     input {
@@ -130,16 +134,17 @@
 
     @media (max-width: $breakpoint-s) {
       width: calc(100% - 2px);
-      background: rgba(27, 32, 37, 1);
+      background: $colorBackgroundDarker;
     }
 
+    // Input Suggestions
     .suggestion {
       padding: 15px;
       cursor: pointer;
-      @include ease-out(0.7s);
+      @include ease-out(0.25s);
 
       &:hover {
-        background: rgba(17, 22, 27, 0.8);
+        background: $colorBackgroundDark;
       }
 
       .ico-36 {
@@ -189,6 +194,54 @@
         margin: 7px 0;
         padding: 3px 10px;
         border-left: 1px solid $colorSubtle;
+      }
+    }
+
+    // Time picker
+    &.timepicker {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      @include ease(0.1s);
+
+      &.active {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0);
+      }
+
+      .suggestions {
+        padding: 10px 15px;
+
+        .col {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          background: $colorBackgroundDark;
+          font-size: 0.9em;
+          padding: 5px 15px;
+
+          &:hover {
+            color: white;
+          }
+
+          &:not(:last-of-type) {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  // Timepicker workaround to highlight active selection
+  /deep/ .col-b .field.active {
+    .input {
+      span:not(.selected) {
+        color: $colorFontBody;
+      }
+      img {
+        transform: rotate(-180deg);
       }
     }
   }
