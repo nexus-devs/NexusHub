@@ -1,5 +1,4 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
-const Status = require(__dirname + "/../bots/status.js")
 let status = undefined
 let responded = false
 
@@ -10,7 +9,6 @@ class Profile extends Endpoint {
 
   constructor(api, db, url) {
     super(api, db, url)
-    status = new Status(api, db, "/warframe/v1/bots/status")
 
     // Modify schema
     this.schema.url = "/warframe/v1/players/:username/profile"
@@ -22,7 +20,8 @@ class Profile extends Endpoint {
    */
   async main(req, res) {
     const username = req.params.username
-
+    status = await this.api.get('/warframe/v1/bots/status')
+    
     if (username.length > 24 || username.length < 1) {
       res.status(404).send({
         error: username + " could not be found.",
