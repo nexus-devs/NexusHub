@@ -39,7 +39,7 @@ const store = {
       },
       end: {
         time: moment().subtract(7, 'days').startOf('day'),
-        format: moment().subtract(7, 'days').format('[Last] dddd')
+        format: 'Last 7 days'
       }
     },
     compare: {
@@ -81,7 +81,7 @@ export default {
         format: moment().calendar(null, calendarOptions)
       }, {
         time: moment().subtract(7, 'days'),
-        format: moment().subtract(7, 'days').format('[Last] dddd')
+        format: 'Last 7 days'
       }, {
         time: moment().subtract(30, 'days'),
         format: 'Last 30 days'
@@ -134,8 +134,23 @@ export default {
         this.$store.commit('setFocusEnd', date)
         this.$store.commit('setCompareStart', this.$store.state.time.focus.end)
         this.$store.commit('setCompareEnd', compareDate)
+        this.validate()
         this.toggle()
         this.selected = 'start'
+      }
+    },
+    // Ensure picked time range makes sense (switch dates if necessary)
+    validate() {
+      const focusStart = this.$store.state.time.focus.start
+      const focusEnd = this.$store.state.time.focus.end
+      const compareStart = this.$store.state.time.compare.start
+      const compareEnd = this.$store.state.time.compare.end
+
+      if (focusStart.time < focusEnd.time) {
+        this.$store.commit('setFocusStart', focusEnd)
+        this.$store.commit('setFocusEnd', focusStart)
+        this.$store.commit('setCompareStart', compareEnd)
+        this.$store.commit('setCompareEnd', compareStart)
       }
     }
   }
