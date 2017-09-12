@@ -141,10 +141,6 @@ nav {
   }
 
   /deep/ {
-    .tooltip {
-      display: none;
-    }
-
     .ico-wrapper {
       position: relative;
       padding: 12px;
