@@ -5,7 +5,7 @@
         <label>Rank</label><br />
         <div class="input a-ie">
           <span>Any Rank</span>
-          <img src="/img/ui/add.svg" class="ico-16" alt="">
+          <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
         </div>
       </div>
       <div class="button-container">

@@ -5,7 +5,6 @@ class Index extends Endpoint {
     super(api, db, url)
     this.schema.description = "Primary Landing Page"
     this.schema.url = "/"
-    this.schema.view = "templates/warframe/index.vue"
   }
 
   async main(req, res) {
