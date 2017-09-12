@@ -218,6 +218,7 @@
           justify-content: center;
           align-items: center;
           text-align: center;
+          color: white;
           background: $colorBackgroundDark;
           font-size: 0.9em;
           padding: 5px 15px;
