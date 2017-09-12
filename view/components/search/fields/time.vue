@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     toggle() {
+      this.selected = 'start'
       this.active = !this.active
     },
     pick(date) {
