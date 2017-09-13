@@ -151,7 +151,7 @@
         position: relative;
         overflow: hidden;
         text-align: center;
-        background: rgba(47, 52, 57, 0.7);
+        background: $colorBackgroundLight;
         border-radius: 2px;
         margin-right: 10px;
 
@@ -224,13 +224,64 @@
           padding: 5px 15px;
 
           &:hover {
-            color: white;
+            background: $colorBackgroundLight;
           }
 
           &:not(:last-of-type) {
             margin-right: 5px;
           }
         }
+      }
+    }
+
+    // Rank selection
+    &.ranks {
+      top: 50%;
+      transform: scale(0.8) translateY(-50%);
+      transform-origin: 50% 20%;
+      max-width: 150px;
+      color: white;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      @include ease(0.15s);
+
+      &.active {
+        opacity: 1;
+        pointer-events: all;
+        transform: scale(1) translateY(-50%);
+      }
+
+      .ranks-head, .ranks-input {
+        padding: 10px 20px;
+        background: $colorBackgroundDark;
+        width: calc(100% - 40px);
+
+        h3 {
+          display: inline-block;
+          vertical-align: middle;
+          font-weight: 400;
+          font-size: 0.9em;
+
+          & + span {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0.9em;
+            color: $colorFontBody;
+          }
+        }
+
+        input {
+          max-width: calc(100% - 20px);
+          text-align: center;
+          font-size: 0.9em;
+          border-bottom: 1px solid $colorSubtle;
+        }
+      }
+
+      .suggestions {
+        max-height: 300px;
+        overflow-y: scroll;
       }
     }
   }
