@@ -10,7 +10,7 @@
     </div>
     <div class="tools timepicker" v-bind:class="{ active }">
       <div class="suggestions row">
-        <div class="col a-ie" v-for="suggestion in suggestions" v-on:click="pick(suggestion)">
+        <div class="col a-ie" v-for="suggestion in suggestions" v-on:click="select(suggestion)">
           {{ suggestion.format }}
         </div>
       </div>
@@ -39,7 +39,7 @@ const store = {
       },
       end: {
         time: moment().subtract(7, 'days').startOf('day'),
-        format: 'Last 7 days'
+        format: '7 days ago'
       }
     },
     compare: {
@@ -81,10 +81,10 @@ export default {
         format: moment().calendar(null, calendarOptions)
       }, {
         time: moment().subtract(7, 'days'),
-        format: 'Last 7 days'
+        format: '7 days ago'
       }, {
         time: moment().subtract(30, 'days'),
-        format: 'Last 30 days'
+        format: '30 days ago'
       }]
     }
   },
@@ -103,7 +103,7 @@ export default {
       this.selected = 'start'
       this.active = !this.active
     },
-    pick(date) {
+    select(date) {
       this.modified = true
 
       // Modify start of time range
