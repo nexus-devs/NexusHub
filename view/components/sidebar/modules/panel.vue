@@ -1,5 +1,5 @@
 <template>
-  <div class="panel-container" v-bind:style="{ transform: [`translate(0, ${-64 * (id - 1)}px)`] }">
+  <div class="panel-container" v-bind:style="{ transform: [`translate(0, ${-56 * (id - 1)}px)`] }">
     <div class="panel">
       <slot></slot>
     </div>
@@ -24,20 +24,19 @@ export default {
 .panel-container {
   position: absolute;
   top: 0;
-  left: 64px;
-  width: 286px;
+  left: 56px;
+  width: calc(246px + 5vw);
   z-index: -1;
   will-change: transform;
-  @include ease-out(0.6s);
+  @include ease-out(0.45s);
 }
 
 .panel {
   opacity: 0;
-  transition-delay: 0.2s;
-  @include ease(0.5s);
+  @include ease(0.35s);
 
   .panel-head {
-    padding: 21px 35px;
+    padding: 17px 35px;
     cursor: pointer;
     border-top: 1px solid $colorSubtleDark;
     @include ease(0.3s);
@@ -61,7 +60,6 @@ export default {
       }
 
       & ~ .shortcut {
-        pointer-events: all;
         font-size: 0.65em;
         padding: 5px;
         border-radius: 2px;
@@ -77,10 +75,10 @@ export default {
   }
 
   .panel-body {
-    padding: 20px 35px;
+    padding: 10px 35px;
     pointer-events: none;
     opacity: 0;
-    @include ease(0.4s);
+    @include ease(0.25s);
   }
 }
 </style>

@@ -13,6 +13,18 @@
 
 
 
+<script>
+import search from 'src/components/search/fields/input.vue'
+
+export default {
+  components: {
+    search
+  }
+}
+</script>
+
+
+
 <style lang="scss" scoped>
   @import "~src/styles/partials/importer";
 
@@ -20,11 +32,12 @@
     position: relative;
     width: calc(100% - 50px);
     z-index: 1;
-    padding: 18px 25px;
+    padding: 14px 25px;
     align-items: center;
 
     a {
         margin: 0 15px;
+        font-size: 0.9em;
     }
 
     @media (max-width: $breakpoint-s) {
@@ -34,7 +47,24 @@
   }
   .nav-l {
     a:first-of-type {
-      margin-left: 70px;
+      margin-left: 60px;
+    }
+
+    /deep/ .search {
+      display: inline-block;
+      vertical-align: middle;
+
+      label, br {
+        display: none;
+      }
+
+      input {
+        background: $colorBackgroundDarker;
+        padding: 5px 15px;
+        border-radius: 9999px;
+        font-size: 0.85em;
+        color: white;
+      }
     }
   }
   .nav-r {

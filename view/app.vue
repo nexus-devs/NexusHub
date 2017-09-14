@@ -74,7 +74,7 @@
   .app-content {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 56px);
     will-change: transform margin-right;
 
     .g-ct {
@@ -88,15 +88,15 @@
 
   @media (min-width: $breakpoint-m) {
     .app-content {
-      @include ease-out(0.6s);
+      @include ease-out(0.45s);
 
       /deep/ .g-ct {
-        @include ease-out(0.6s);
+        @include ease-out(0.45s);
       }
     }
     .activeSidebar {
-      margin-right: 350px;
-      transform: translateX(350px);
+      margin-right: calc(302px + 5vw);
+      transform: translateX(calc(302px + 5vw));
 
       /deep/ .g-ct {
         padding: 0 96px 0 96px;

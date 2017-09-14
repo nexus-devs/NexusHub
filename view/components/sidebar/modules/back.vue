@@ -28,7 +28,7 @@ export default {
 .back {
   position: absolute;
   right: 30px;
-  top: 18px;
+  top: 13px;
   pointer-events: none;
   font-size: 0.8em;
   color: white;
@@ -38,7 +38,7 @@ export default {
 
   img {
     margin-left: -4px;
-    margin-top: -5px;
+    margin-top: -4px;
     margin-bottom: -2px;
     padding: 0;
   }

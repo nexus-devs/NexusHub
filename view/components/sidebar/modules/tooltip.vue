@@ -18,7 +18,7 @@
     font-size: 0.85em;
     font-weight: 400;
     padding: 5px 15px;
-    top: 18px;
+    top: 14px;
     left: 45px;
     color: white;
     opacity: 0;

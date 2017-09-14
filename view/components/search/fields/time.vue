@@ -1,5 +1,5 @@
 <template>
-  <div class="col-b">
+  <div class="col-b time">
     <div class="field" v-bind:class="{ active }">
       <label>Time</label><br />
       <div class="input a-ie" v-on:click="toggle">
@@ -7,6 +7,7 @@
         <span v-bind:class="{ selected: selected === 'end' }">{{ to }}</span>
         <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
       </div>
+      <slot></slot>
     </div>
     <div class="tools timepicker" v-bind:class="{ active }">
       <div class="suggestions row">
