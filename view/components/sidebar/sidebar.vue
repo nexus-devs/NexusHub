@@ -126,9 +126,9 @@ nav {
       left: 56px;
       top: 56px;
       height: 100vh;
-      width: calc(246px + 5vw);
+      width: calc(206px + 5vw);
       background: $colorBackgroundDark;
-      transform: translateX(calc(-400px - 5vw));
+      transform: translateX(calc(-300px - 5vw));
       @include ease-out(0.45s);
       @include shadow-3;
     }
@@ -144,7 +144,7 @@ nav {
     }
 
     @media (max-width: $breakpoint-m) {
-      transform: translateX(calc(-400px - 5vw));
+      transform: translateX(calc(-300px - 5vw));
     }
   }
 
