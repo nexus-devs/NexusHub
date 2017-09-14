@@ -102,7 +102,7 @@ nav {
   // Move panels back in when sidebar is inactive
   &:not(.active) {
     /deep/ .panel-container {
-      transform: translate(0, 0) !important;
+      transform: translate(calc(-300px - 5vw), 0) !important;
     }
   }
 
