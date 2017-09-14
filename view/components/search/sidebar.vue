@@ -145,6 +145,7 @@
   padding-top: 25px;
 
   label {
+    font-size: 0.85em;
     margin-left: 10px;
     color: white;
   }
@@ -206,6 +207,7 @@
   padding-top: 25px;
 
   label {
+    font-size: 0.85em;
     color: white;
     margin-left: 10px;
   }

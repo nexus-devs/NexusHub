@@ -1,11 +1,11 @@
 const config = require('./config/local.js')
 const hooks = require('./hooks/mongo')
-const Core = require('blitz-js-core')
+const Core = require('../../blitz/blitz-js-core')
 
 /**
  * Load blitz-js framework
  */
-const Blitz = require('blitz-js')(config)
+const Blitz = require('../../blitz/blitz-js')(config)
 
 /**
  * Core worker node for heavy processing. Item statistics, player data, etc.

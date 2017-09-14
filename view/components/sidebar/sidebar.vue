@@ -102,7 +102,7 @@ nav {
   // Move panels back in when sidebar is inactive
   &:not(.active) {
     /deep/ .panel-container {
-      transform: translate(-300px, 0) !important;
+      transform: translate(0, 0) !important;
     }
   }
 
@@ -128,7 +128,7 @@ nav {
       height: 100vh;
       width: calc(246px + 5vw);
       background: $colorBackgroundDark;
-      transform: translateX(-400px);
+      transform: translateX(calc(-400px - 5vw));
       @include ease-out(0.45s);
       @include shadow-3;
     }
@@ -144,7 +144,7 @@ nav {
     }
 
     @media (max-width: $breakpoint-m) {
-      transform: translateX(-400px);
+      transform: translateX(calc(-400px - 5vw));
     }
   }
 
