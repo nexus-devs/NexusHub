@@ -1,13 +1,14 @@
 <template>
-  <div class="col-b">
+  <div class="col-b search">
     <div class="field">
       <label>Search</label><br />
       <input type="text" placeholder="Items, Players.." v-model="input"
                                                         v-on:keyup="search"
                                                         v-on:keydown.tab.prevent="complete"
                                                         v-on:keydown.enter="complete">
-      <span class="autocomplete">{{ autocomplete }}</span>
+      <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
+      <slot></slot>
     </div>
     <div class="tools">
       <div class="suggestion" v-for="suggestion in suggestions" v-on:click="complete(suggestion)">
@@ -28,39 +29,20 @@
 
 
 <script>
-const store = {
-  state: {
-    autocomplete: '',
-    suggestions: []
-  },
-  mutations: {
-    setSearchAutocomplete(state, content) {
-      state.autocomplete = content
-    },
-    setSearchSuggestions(state, suggestions) {
-      state.suggestions = suggestions
-    }
-  }
-}
-
 export default {
-  beforeCreate() {
-    this.$store.registerModule('search', store)
-  },
   data() {
     return {
-      input: ''
+      input: '',
+      autocomplete: {
+        name: '',
+        type: ''
+      },
+      suggestions: []
     }
   },
   computed: {
-    autocomplete() {
-      return this.$store.state.search.autocomplete.name
-    },
     autotype() {
-      return this.$store.state.search.autocomplete.type
-    },
-    suggestions() {
-      return this.$store.state.search.suggestions
+      return this.autocomplete.type
     }
   },
   methods: {
@@ -78,17 +60,17 @@ export default {
         }
         if (result.length) {
           let regex = new RegExp(`^${this.input}`, 'i')
-          this.$store.commit('setSearchAutocomplete', {
+          this.autocomplete = {
             name: result[0].name.replace(regex, this.input),
             content: result[0].content
-          })
-          this.$store.commit('setSearchSuggestions', result)
+          }
+          this.suggestions = result
         } else {
-          this.$store.commit('setSearchAutocomplete', {
+          this.autocomplete = {
             name: '',
             type: ''
-          })
-          this.$store.commit('setSearchSuggestions', [])
+          }
+          this.suggestions = []
         }
       }
     },
@@ -98,14 +80,14 @@ export default {
     complete(suggestion) {
       if (suggestion.name) {
         this.input = suggestion.name
-        this.$store.commit('setSearchAutocomplete', suggestion)
-        this.$store.commit('setSearchSuggestions', [])
+        this.autocomplete = suggestion
+        this.suggestions = []
       }
-      else if (this.$store.state.search.suggestions.length) {
-        let actual = this.$store.state.search.suggestions[0]
+      else if (this.suggestions.length) {
+        let actual = this.suggestions[0]
         this.input = actual.name
-        this.$store.commit('setSearchAutocomplete', actual)
-        this.$store.commit('setSearchSuggestions', [])
+        this.autocomplete = actual
+        this.suggestions = []
       }
     }
   }

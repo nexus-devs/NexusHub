@@ -49,6 +49,7 @@ export default {
   /deep/ .panel {
     .panel-head {
       cursor: auto;
+
       &:hover {
         background: none;
       }
@@ -62,8 +63,9 @@ export default {
       }
     }
     .panel-body {
-      transition-delay: 0.25s;
+      transition-delay: 0.15s;
       opacity: 1;
+      pointer-events: all;
     }
   }
 }
@@ -72,7 +74,9 @@ export default {
   &::before {
     pointer-events: none;
   }
-
+  .panel-head {
+    pointer-events: none;
+  }
   .panel-container {
     opacity: 0;
     pointer-events: none;

@@ -102,12 +102,20 @@ nav {
   // Move panels back in when sidebar is inactive
   &:not(.active) {
     /deep/ .panel-container {
-      transform: translate(-400px, 0) !important;
+      transform: translate(-300px, 0) !important;
     }
   }
 
   .nav-upper {
     background: $colorBackgroundDarkest;
+
+    .ico-a-ie {
+      margin: 0;
+
+      img {
+        height: 20px;
+      }
+    }
 
     // Background for panels
     .ico-wrapper:first-of-type::before {
@@ -115,13 +123,13 @@ nav {
       pointer-events: none;
       position: absolute;
       z-index: -1;
-      left: 64px;
-      top: 64px;
+      left: 56px;
+      top: 56px;
       height: 100vh;
-      width: 286px;
+      width: calc(246px + 5vw);
       background: $colorBackgroundDark;
       transform: translateX(-400px);
-      @include ease-out(0.6s);
+      @include ease-out(0.45s);
       @include shadow-3;
     }
   }
@@ -129,7 +137,7 @@ nav {
   .nav-lower {
     height: 100vh;
     @include gradient-background(rgba(67, 74, 80, 0.8), $colorBackgroundLight);
-    @include ease-out(0.6s);
+    @include ease-out(0.45s);
 
     .ico-wrapper:first-of-type {
       background: rgba(0,5,10,0.4);
@@ -143,12 +151,17 @@ nav {
   /deep/ {
     .ico-wrapper {
       position: relative;
-      padding: 12px;
+      padding: 8px;
     }
 
     .ico-a-ie {
       @include ie(24);
+      margin: 1px 0;
       display: inline-block;
+
+      img {
+        height: 18px;
+      }
 
       &:hover {
         & + .tooltip {

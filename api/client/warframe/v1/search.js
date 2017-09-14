@@ -21,7 +21,7 @@ class Search extends Endpoint {
    * Find the most relevant entries in the main collections for a given query
    */
   async main(req, res) {
-    const query = req.query.query
+    const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
     const limit = req.query.limit
 
     if (query.length < 2) {

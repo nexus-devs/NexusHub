@@ -1,5 +1,5 @@
 <template>
-  <div class="col-b">
+  <div class="col-b rank">
     <div class="field">
       <div class="input-container">
         <label>Rank</label><br />
@@ -8,11 +8,7 @@
           <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
         </div>
       </div>
-      <div class="button-container">
-        <button class="btn-outline" type="button">
-          Search
-        </button>
-      </div>
+      <slot></slot>
     </div>
     <div class="tools ranks" v-bind:class="{ active }">
       <div class="ranks-head">
@@ -34,10 +30,11 @@
 
 
 <script>
-const available = ['Any Rank']
+const available = []
 for (let i = 0; i < 11; i++) {
   available.push(i)
 }
+available.push('Any Rank')
 
 const store = {
   state: {

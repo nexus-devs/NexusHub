@@ -8,7 +8,9 @@
       <div class="row">
         <searchfield></searchfield>
         <timefield></timefield>
-        <rankfield></rankfield>
+        <rankfield>
+          <searchbutton></searchbutton>
+        </rankfield>
       </div>
     </div>
   </div>
@@ -17,15 +19,17 @@
 
 
 <script>
-  import searchfield from 'src/components/search/fields/input.vue'
-  import timefield from 'src/components/search/fields/time.vue'
-  import rankfield from 'src/components/search/fields/rank.vue'
+  import searchfield from './fields/input.vue'
+  import timefield from './fields/time.vue'
+  import rankfield from './fields/rank.vue'
+  import searchbutton from './modules/button.vue'
 
   export default {
     components: {
       searchfield,
       timefield,
       rankfield,
+      searchbutton
     }
   }
 </script>
@@ -48,14 +52,12 @@
         }
       }
     }
-
     .row {
       margin-top:10px;
       opacity: 0;
       animation: fadeinUp 0.7s forwards;
       animation-delay: 0.3s;
     }
-
     @media (max-width: $breakpoint-s) {
       .search-component {
         width: 100%;
@@ -75,23 +77,19 @@
       display: inline-block;
       vertical-align: middle;
     }
-
     .button-container {
       margin-top: 5px;
       margin-left: 10px;
       float:right;
     }
-
     label {
       font-size: 0.85em;
       font-weight: 400;
       color: white;
     }
-
     input, .input {
       position: relative;
       z-index: 1;
-      font-size: 1.05em;
       display: inline-block;
       color: white;
       margin-bottom: -10px;
@@ -100,24 +98,19 @@
         @include ease(0.15s);
       }
     }
-
     input {
       padding-top: 10px;
       padding-bottom: 9px;
     }
-
     .a-ie {
       margin-left:-10px;
     }
-
     .autocomplete {
       position: absolute;
-      font-size: 1.05em;
-      left: 15px;
+      left: 16px;
       margin-top: 10px;
       z-index: 0;
     }
-
     .autocomplete-type {
       float: right;
       padding: 10px;
@@ -146,7 +139,6 @@
       &:hover {
         background: $colorBackgroundDark;
       }
-
       .ico-36 {
         position: relative;
         overflow: hidden;
@@ -169,7 +161,6 @@
           filter: blur(15px);
         }
       }
-
       .suggestion-main {
         display: inline-block;
         vertical-align: middle;
@@ -185,7 +176,6 @@
           font-size: 0.9em;
         }
       }
-
       .suggestion-data {
         display: inline-block;
         vertical-align: middle;
@@ -209,7 +199,6 @@
         pointer-events: all;
         transform: translateY(0);
       }
-
       .suggestions {
         padding: 10px 15px;
 
@@ -226,7 +215,6 @@
           &:hover {
             background: $colorBackgroundLight;
           }
-
           &:not(:last-of-type) {
             margin-right: 5px;
           }
@@ -251,7 +239,6 @@
         pointer-events: all;
         transform: scale(1) translateY(-50%);
       }
-
       .ranks-head, .ranks-input {
         padding: 10px 20px;
         background: $colorBackgroundDark;
@@ -270,7 +257,6 @@
             color: $colorFontBody;
           }
         }
-
         input {
           max-width: calc(100% - 20px);
           text-align: center;
@@ -278,7 +264,6 @@
           border-bottom: 1px solid $colorSubtle;
         }
       }
-
       .suggestions {
         max-height: 300px;
         overflow-y: scroll;
