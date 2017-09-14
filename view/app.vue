@@ -95,8 +95,8 @@
       }
     }
     .activeSidebar {
-      margin-right: calc(302px + 5vw);
-      transform: translateX(calc(302px + 5vw));
+      margin-right: calc(262px + 5vw);
+      transform: translateX(calc(262px + 5vw));
 
       /deep/ .g-ct {
         padding: 0 96px 0 96px;
