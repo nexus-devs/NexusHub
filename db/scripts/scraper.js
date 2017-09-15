@@ -26,7 +26,12 @@ class Scraper {
 
   async getItemData(url, mult) {
     const targetUrl = baseUrl + '/items/' + url.replace('’', '%E2%80%99')
-    const item = await queue.delay(() => request.get(targetUrl, 'push', 50))
+    let item
+    try {
+      item = await queue.delay(() => request.get(targetUrl, 'push', 50))
+    } catch (err) {
+      return this.getItemData(url, mult)
+    }
 
     if (!item.includes('[404]')) {
       if (!this.isAdded(url, this.scraped)) {
