@@ -89,7 +89,7 @@ class Scraper {
     if (result) {
       result = result.replace(/([^a-z]|^)([a-z])(?=[a-z]{2})/g, (_, g1, g2) => g1 + g2.toUpperCase())
     } else {
-      console.log(`WARN: Could not find item type for ${itemSet[0].en.item_name} - assigning 'Misc'`)
+      console.log(`WARN: Could not find item type for ${itemSet[0].en.item_name} -> assigning 'Misc'`)
       result = 'Misc'
     }
     return result
