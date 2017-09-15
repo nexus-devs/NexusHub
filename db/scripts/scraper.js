@@ -13,25 +13,22 @@ class Scraper {
 
   async getItems() {
     const map = await request.get(baseUrl + "/items")
-
-    await new Promise(resolve => {
-      let items = JSON.parse(map).payload.items.en
-
-      items.forEach(async(item, i) => {
-        let url = item.url_name
-
-        await this.getItemData(url, i)
-        if (items.length - 1 === i) {
-          fs.writeFileSync("../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
-        }
-      })
+    const items = JSON.parse(map).payload.items.en
+    items.forEach(async(item, i) => {
+      let url = item.url_name
+      await this.getItemData(url, i)
+      console.log(`Fetched item data for ${item.item_name}`)
+      if (items.length - 1 === i) {
+        fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
+      }
     })
   }
 
   async getItemData(url, mult) {
-    const item = await queue.delay(() => request.get(baseUrl + '/items/' + url.replace('’', '%E2%80%99'), 'push', 50))
+    const targetUrl = baseUrl + '/items/' + url.replace('’', '%E2%80%99')
+    const item = await queue.delay(() => request.get(targetUrl, 'push', 50))
 
-    if (!(item.includes('[404]'))) {
+    if (!item.includes('[404]')) {
       if (!this.isAdded(url, this.scraped)) {
         const itemSet = JSON.parse(item).payload.item.items_in_set
 
@@ -46,6 +43,10 @@ class Scraper {
     }
   }
 
+  /**
+   * Find item name by checking for consistent string among all components
+   * Nikana Blade, Nikana Hilt, Nikana Blueprint -> Nikana
+   */
   getItemName(itemSet) {
     let name = itemSet[0].en.item_name
     let names = []
@@ -67,17 +68,24 @@ class Scraper {
     return name
   }
 
+  /**
+   * Retrieve intersection of elements in each component's tag array.
+   * [prime, blade], [prime, hilt], [prime, blueprint] -> [prime]
+   */
   getItemType(itemSet) {
     let tags = itemSet[0].tags
-    let filter_exclude = ['barrel', 'parts', 'blueprint', 'handle', 'common', 'uncommon', 'rare', 'neuroptics', 'system', 'chassis', 'blade', 'grip', 'link', 'systems']
-    let result = []
+    for (let i = 1; i < itemSet.length; i++) {
+      tags = tags.filter(tag => itemSet[i].tags.includes(tag))
+    }
+    let result = tags[0]
 
-    tags.forEach(tag => {
-      if (!filter_exclude.includes(tag)) {
-        result.push(tag)
-      }
-    })
-
+    // Capitalize output or log warning if nothing was found
+    if (result) {
+      result = result.replace(/([^a-z]|^)([a-z])(?=[a-z]{2})/g, (_, g1, g2) => g1 + g2.toUpperCase())
+    } else {
+      console.log(`WARN: Could not find item type for ${itemSet[0].en.item_name} - assigning 'Misc'`)
+      result = 'Misc'
+    }
     return result
   }
 
@@ -135,7 +143,7 @@ class Scraper {
   }
 
   isAdded(itemname, dataset) {
-    let itemname = itemname.toLowerCase();
+    itemname = itemname.toLowerCase();
     let filterType = ['vandal', 'wraith', 'prime', 'sheev', 'prime', 'xiphos',
                        'mantis', 'scimitar']
     let filter = ['barrel', 'blueprint', 'handle', 'neuroptics', 'system',
@@ -159,7 +167,6 @@ class Scraper {
         itemname = original.slice(0, original.length - length)
       }
     })
-
     for (let i = 0; i < dataset.length; i++) {
       if (dataset[i].name.toLowerCase().includes(itemname.replace(/_/g, ' ').toLowerCase())) {
         return true
