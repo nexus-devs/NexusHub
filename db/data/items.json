@@ -1328,6 +1328,7 @@
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
@@ -1950,7 +1951,7 @@
   },
   {
     "name": "Link Health",
-    "type": "Parts",
+    "type": "Kubrow",
     "rank": 10,
     "description": "<p>Link Health is a Kubrow mod that increases its health based on a percentage of the player's health. The player's health is unaffected by this mod.</p>",
     "components": []
@@ -2034,7 +2035,7 @@
   },
   {
     "name": "Barrel Diffusion",
-    "type": "Parts",
+    "type": "Pistol",
     "rank": 5,
     "description": "<p>Barrel Diffusion increases the multishot of pistols. These additional rounds do not consume extra ammunition.</p>",
     "components": []
@@ -2237,7 +2238,7 @@
   },
   {
     "name": "Tesla Link",
-    "type": "Parts",
+    "type": "Pve",
     "rank": 3,
     "description": "<p>Tesla Link is a Warframe Augment Mod for Vauban that makes each pair of Tesla balls form energy links between each other that deal  Slash damage upon contact.</p>",
     "components": []
@@ -2405,7 +2406,7 @@
   },
   {
     "name": "Blade of Truth",
-    "type": "Parts",
+    "type": "Weapons",
     "rank": 3,
     "description": "<p>The Blade of Truth mod is a Weapon Augment Mod that increases melee damage and Truth specifically for the Jaw Sword. It increases melee damage by 25% and Truth by 0.25 per rank, at a maximum of 100% and 1 at rank 3, respectively.</p>",
     "components": []
@@ -2545,7 +2546,7 @@
   },
   {
     "name": "Tempered Blade",
-    "type": "Parts",
+    "type": "Archwing Melee",
     "rank": 5,
     "description": "<p>Tempered Blade increases an Archwing melee weapon's Critical Chance by 25% per rank at a maximum of 150% at rank 5.</p>",
     "components": []
@@ -2587,7 +2588,7 @@
   },
   {
     "name": "Link Shields",
-    "type": "Parts",
+    "type": "Kubrow",
     "rank": 10,
     "description": "<p>Link Shields increases a Kubrow's maximum shields by adding a percent of the Warframe's shields to its own shields. </p>",
     "components": []
@@ -2671,7 +2672,7 @@
   },
   {
     "name": "Link Armor",
-    "type": "Parts",
+    "type": "Kubrow",
     "rank": 10,
     "description": "<p>Link Armor is a Companion mod that allows the owner to share their armor as an addition to the Companion's armor.</p>",
     "components": []
@@ -2706,7 +2707,7 @@
   },
   {
     "name": "Rubedo-Lined Barrel",
-    "type": "Parts",
+    "type": "Archwing Gun",
     "rank": 5,
     "description": "<p>The Rubedo-Lined Barrel mod increases the damage of an Archwing gun by 10% per rank for a maximum of 60% at rank 5.</p>",
     "components": []
@@ -2867,7 +2868,7 @@
   },
   {
     "name": "Galvanized Blade",
-    "type": "Parts",
+    "type": "Archwing Melee",
     "rank": 5,
     "description": "<p>The Galvanized Blade mod adds  Electric damage on Archwing melee weapons by 20% per rank at a maximum of 120% at rank 5.</p>",
     "components": []
@@ -3189,14 +3190,14 @@
   },
   {
     "name": "Justice Blades",
-    "type": "Parts",
+    "type": "Weapons",
     "rank": 3,
     "description": "<p>The Justice Blades mod is a Weapon Augment Mod that increases melee damage and Justice specifically for the Dual Cleavers. It increases melee damage by 25% and Justice by 0.25 per rank, at a maximum of 100% at ranks 1 and 3, respectively.</p>",
     "components": []
   },
   {
     "name": "Ammo Stock",
-    "type": "Parts",
+    "type": "Shotgun",
     "rank": 5,
     "description": "<p>The Ammo Stock mod increases shotgun magazine capacity by 10% per rank for a maximum of 60% at rank 5.</p>",
     "components": []
@@ -3419,7 +3420,7 @@
   },
   {
     "name": "Electrified Barrel",
-    "type": "Parts",
+    "type": "Archwing Gun",
     "rank": 5,
     "description": "<p>The Electrified Barrel mod adds  Electric damage on Archwing guns by 20% per rank at a maximum of 120% at rank 5.</p>",
     "components": []
@@ -3482,6 +3483,7 @@
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
@@ -3643,163 +3645,163 @@
   },
   {
     "name": "Vanguard Rhino Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Vanguard is an alternative Helmet Item for Rhino. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases movement speed at the expense of lowering power strength.\n</p><ul><li>Movement Speed <b>+25%</b>\n</li><li>Power Strength <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Pendragon Excalibur Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Pendragon is an alternative Helmet Item for Excalibur.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power strength at the expense of lowering his armor.\n</p><ul><li>Power Strength <b>+15%</b>\n</li><li>Armor <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Chlora Saryn Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Chlora is an alternative Helmet Item for Saryn. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum stamina at the expense of lowering her power duration.\n</p><ul><li>Increases velocity of parkour maneuvers <b>+10%</b>\n</li><li>Power duration <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Swindle Loki Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Swindle is an alternative Helmet Item for Loki.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power range at the expense of lowering his maximum health.\n</p><ul><li>Power Range <b>+15%</b>\n</li><li>Health Max <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Essence Loki Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Essence is an alternative Helmet Item for Loki. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power efficiency at the expense of lowering his armor.\n</p><ul><li>Power Efficiency <b>+15%</b>\n</li><li>Armor <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Thrak Rhino Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Thrak is an alternative Helmet Item for Rhino. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum health at the expense of lowering sprint speed.\n</p><ul><li>Health Max <b>+25</b>\n</li><li>Sprint Speed <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Menticide Nyx Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Menticide is an alternative Helmet Item for Nyx. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases parkour maneuver velocity at the expense of lowering her maximum shield.\n</p><ul><li>Increases Velocity of Parkour Maneuvers <b>+?% </b>\n</li><li>Shield Max <b>-5% </b> <sup><i>(Applies <b>after</b> all other bonuses)</i></sup>\n</li></ul>",
     "components": []
   },
   {
     "name": "Aurora Frost Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Aurora is an alternative Helmet Item for Frost. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases armor at the expense of lowering his maximum health.\n</p><ul><li>Armor <b>+25%</b>\n</li><li>Health Max <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Chorus Banshee Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Chorus is an alternative Helmet Item for Banshee.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power efficiency at the expense of lowering her aim glide and wall latch duration.\n</p><ul><li>Power Efficiency <b>+10%</b>\n</li><li>Aim Glide and Wall Latch Duration <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Squall Frost Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Squall is an alternative Helmet Item for Frost.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power strength at the expense of lowering his maximum shield.\n</p><ul><li>Power Strength <b>+15%</b>\n</li><li>Shield Max <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Locust Ash Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Locust is an alternative Helmet Item for Ash.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum energy at the expense of lowering his movement speed.\n</p><ul><li>Energy Max <b>+20%</b> <i>(additive)</i>\n</li><li>Movement Speed <b>-3%</b> <i>(multiplicative)</i>\n</li></ul>",
     "components": []
   },
   {
     "name": "Avalon Excalibur Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Avalon is an alternative Helmet Item for Excalibur. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum shield at the expense of lowering his maximum health.\n</p><ul><li>Shield Max <b>+25% </b>(from base shields)\n</li><li>Health Max <b>-5% </b>(from total health)\n</li></ul>",
     "components": []
   },
   {
     "name": "Flux Nova Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Flux is an alternative Helmet Item for Nova. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases the duration of Nova's Aim Glide and Wall Latch at the expense of lowering her maximum health.\n</p><ul><li>Aim Glide and Wall <span style=\"line-height:21px;\">Latch</span> Duration <b>+10%</b>\n</li><li>Max Health <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Aura Trinity Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Aura is an alternative Helmet Item for Trinity.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power duration at the expense of lowering her maximum health.\n</p><ul><li>Power duration <b>+25%</b>\n</li><li>Health Max <b>-5%</b> <sup><i>(Applies <b>after</b> all other bonuses)</i></sup>\n</li></ul>",
     "components": []
   },
   {
     "name": "Gambit Vauban Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Gambit is an alternative Helmet Item for Vauban. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum stamina at the expense of lowering power duration.\n</p><ul><li>Increases Velocity of Parkour Maneuvers <b>+?%</b>\n</li><li>Power Duration <b>-10%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Storm Volt Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Storm is an alternative Helmet Item for Volt.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases Power Strength at the expense of lowering the duration of his Aim Glide and Wall Latch.\n</p><ul><li>Power Strength <b>+10%</b>\n</li><li>Duration of Aim Glide and Wall Latch <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Esprit Vauban Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Esprit is an alternative Helmet Item for Vauban.</p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum energy at the expense of lowering his maximum shield.\n</p><ul><li> Energy Max <b>+10%</b> <sup><i>(Applies to Vauban's <b>base</b> power)</i></sup>\n</li><li> Shield Max <b>-10%</b> <sup><i>(Applies <b>after</b> all other bonuses)</i></sup>\n</li></ul>",
     "components": []
   },
   {
     "name": "Scorpion Ash Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Scorpion is an alternative Helmet Item for Ash. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases duration of Aim Glide and Wall Latch at the expense of lowering his power efficiency.\n</p><ul><li>Glide &amp; Latch duration <b>+?%</b>\n</li><li>Power Efficiency <b>-5% </b>(multiplicative)\n</li></ul>",
     "components": []
   },
   {
     "name": "Phoenix Ember Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Phoenix is an alternative Helmet Item for Ember. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum energy at the expense of lowering her maximum shield.\n</p><ul><li>Energy Max <b>+25%</b>\n</li><li>Shield Max <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Reverb Banshee Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Reverb is an alternative Helmet Item for Banshee. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum energy at the expense of lowering her maximum health.\n</p><ul><li>Energy Max <b>+10%</b> <sup><i>(Applies to Banshee's <b>base</b> Energy)</i></sup>\n</li><li>Health Max <b>-5%</b> <sup><i>(Applies <b>after</b> all other bonuses)</i></sup>\n</li></ul>",
     "components": []
   },
   {
     "name": "Vespa Nyx Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Vespa is an alternative Helmet Item for Nyx. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power efficiency at the expense of lowering her armor.\n</p><ul><li>Power Efficiency <b>+15%</b>\n</li><li>Armor <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Hemlock Saryn Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Hemlock is an alternative Helmet Item for Saryn. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases movement speed at the expense of lowering her maximum health.\n</p><ul><li>Movement Speed <b>+10%</b>\n</li><li>Health Max <b>-5%</b> <sup><i>(Applies <b>after</b> all other bonuses)</i></sup>\n</li></ul>",
     "components": []
   },
   {
     "name": "Pulse Volt Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Pulse is an alternative Helmet Item for Volt. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power duration at the expense of lowering his maximum shield.\n</p><ul><li>Power Duration <b>+10%</b>\n</li><li>Shield Max <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Coil Mag Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Coil is an alternative Helmet Item for Mag. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases power range at the expense of lowering her maximum shield.\n</p><ul><li>Power Range <b>+25%</b>\n</li><li>Shield Max <b>-5% </b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Meridian Trinity Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Meridian is an alternative Helmet Item for Trinity. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum shield at the expense of lowering her power efficiency.\n</p><ul><li>Shield Max <b>+15%</b>\n</li><li>Power Efficiency <b>-5%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Gauss Mag Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Gauss is an alternative Helmet Item for Mag. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum energy at the expense of lowering her movement speed.\n</p><ul><li>Energy Max <b>+25</b>\n</li><li>Movement Speed <b>-3%</b>\n</li></ul>",
     "components": []
   },
   {
     "name": "Backdraft Ember Helmet",
-    "type": "Parts",
+    "type": "Arcane Helmets",
     "description": "<p>Backdraft is an alternative Helmet Item for Ember. </p><p><a href=\"/wiki/Arcane\" title=\"Arcane\">Arcane</a> is a discontinued variant that increases maximum health at the expense of lowering her movement speed.\n</p><ul><li>Health Max <b>+15% Base Health</b>\n</li><li>Movement Speed <b>-3%</b>\n</li></ul>",
     "components": []
   },
@@ -4104,7 +4106,7 @@
   },
   {
     "name": "Abating Link",
-    "type": "Parts",
+    "type": "Pve",
     "rank": 3,
     "description": "<p>Abating Link is a Warframe Augment Mod for Trinity's Link that reduces the armor of all connected enemies.</p>",
     "components": []
@@ -5533,7 +5535,7 @@
   },
   {
     "name": "Double-Barrel Drift",
-    "type": "Parts",
+    "type": "Pvp",
     "rank": 3,
     "description": "<p>Double-Barrel Drift is a shotgun mod usable in both PvE and PvP that reduces recoil and spread when firing while sliding.</p>",
     "components": []
@@ -5764,7 +5766,7 @@
   },
   {
     "name": "Sharpened Blade",
-    "type": "Parts",
+    "type": "Pvp",
     "rank": 3,
     "description": "<p>Sharpened Blade is a PvP exclusive Melee Mod that converts an amount of physical damage to Slash damage.</p>",
     "components": []
@@ -5988,7 +5990,7 @@
   },
   {
     "name": "Hydraulic Barrel",
-    "type": "Parts",
+    "type": "Pvp",
     "rank": 3,
     "description": "<p>Hydraulic Barrel is a PvP-exclusive secondary weapon mod which reduces weapon recoil at the cost of reduced magazine capacity.</p>",
     "components": []
@@ -6114,7 +6116,7 @@
   },
   {
     "name": "Vital Systems Bypass",
-    "type": "Parts",
+    "type": "Pvp",
     "rank": 3,
     "description": "<p>Vital Systems Bypass is a PvP-exclusive Warframe mod that gives the Warframe constant health regeneration but lengthens the delay before their shield recharges after being damaged.</p>",
     "components": []
@@ -6219,7 +6221,7 @@
   },
   {
     "name": "Bladed Rounds",
-    "type": "Parts",
+    "type": "Rifle",
     "description": "<p>Bladed Rounds is an uncommon Rifle mod that increases Critical damage while aiming for a brief time upon a kill.</p>",
     "components": []
   },
@@ -6260,7 +6262,7 @@
   },
   {
     "name": "Catalyzer Link",
-    "type": "Parts",
+    "type": "Rifle",
     "description": "<p>Catalyzer Link is a common Rifle mod that increases Status chance while aiming for a brief time after casting an ability.</p>",
     "components": []
   },
@@ -6301,6 +6303,7 @@
   },
   {
     "name": "Strun Wraith ",
+    "type": "Misc",
     "description": "<p>The Strun Wraith is the first Wraith weapon, which was made available as a reward for the Survival Weekend Event. It is a modified version of the Strun shotgun, featuring improved stats and firing characteristics. </p>",
     "components": []
   },
@@ -6392,6 +6395,7 @@
   },
   {
     "name": "Sheev ",
+    "type": "Misc",
     "description": "<p>The Sheev is a close range dagger weapon of Grineer design that serves as a backup in the event that a Grineer is disarmed by any means. It offers high  Slash damage and status, but has a slow overall attack speed. The tip of the blade glows with charged plasma, which allows the weapon to deal  Heat procs on slam attacks.</p>",
     "components": []
   },
@@ -6439,12 +6443,13 @@
   },
   {
     "name": "Discharge Strike",
-    "type": "Parts",
+    "type": "Disc",
     "description": "<p>Discharge Strike is a Warframe Augment Mod for Nekros's Soul Punch in PvP that depletes energy from an opponent. </p>",
     "components": []
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
@@ -6528,18 +6533,21 @@
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
   },
   {
     "name": "Snipetron Vandal ",
+    "type": "Misc",
     "description": "<p>The Snipetron Vandal is the Vandal version of the Snipetron, first awarded as a special-edition reward for killing 20 Informers in the Informant Event and can be found as a Sortie Reward. The Snipetron Vandal has better characteristics than the regular Snipetron in magazine size and reload speed, but sacrifices  Impact and  Slash damages in order to boost its  Puncture damage.</p>",
     "components": []
   },
@@ -6932,31 +6940,31 @@
   },
   {
     "name": "Kaszas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
     "name": "Kaszas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
     "name": "Velocitus ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
     "name": "Velocitus ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
     "name": "Velocitus ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
@@ -6980,31 +6988,31 @@
   },
   {
     "name": "Dual Decurion ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
     "name": "Dual Decurion ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
     "name": "Phaedra ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
     "name": "Phaedra ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
     "name": "Phaedra ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
@@ -7028,13 +7036,13 @@
   },
   {
     "name": "Onorix ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
   {
     "name": "Onorix ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
@@ -7776,19 +7784,19 @@
   },
   {
     "name": "Corvas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
     "name": "Corvas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
     "name": "Corvas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
@@ -7994,7 +8002,7 @@
   },
   {
     "name": "Empowered Blades",
-    "type": "Parts",
+    "type": "Aura",
     "description": "<p>Empowered Blades is an aura that increases status chance and status damage (where applicable) of charged melee attacks, at the cost of draining a portion of shields per hit.</p>",
     "components": []
   },
@@ -8442,19 +8450,20 @@
   },
   {
     "name": "War",
+    "type": "Misc",
     "rank": 5,
     "description": "<p>Warrior allows Wyrm to attack the first visible enemy in range.</p>",
     "components": []
   },
   {
     "name": "Kaszas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
     "name": "Velocitus ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
@@ -8466,13 +8475,13 @@
   },
   {
     "name": "Dual Decurion ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
     "name": "Phaedra ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
@@ -8484,7 +8493,7 @@
   },
   {
     "name": "Onorix ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
@@ -8496,7 +8505,7 @@
   },
   {
     "name": "Corvas ",
-    "type": "Parts",
+    "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },

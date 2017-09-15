@@ -77,6 +77,12 @@ class Scraper {
     for (let i = 1; i < itemSet.length; i++) {
       tags = tags.filter(tag => itemSet[i].tags.includes(tag))
     }
+
+    // Remove 'parts' tag, because it's pretty damn useless
+    let index = tags.indexOf('parts')
+    if (index > -1) {
+      tags.splice(index, 1)
+    }
     let result = tags[0]
 
     // Capitalize output or log warning if nothing was found
