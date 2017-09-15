@@ -6,20 +6,21 @@
   "scripts": {
     "start": "node ./index.js",
     "test": "mocha --timeout 10000",
+    "scrape": "node ./db/scripts/index.js",
     "notification-test": "node ./tests/notifications.js"
   },
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.4.6",
-    "blitz-js-core": "^0.4.3",
+    "blitz-js": "^0.4.7",
+    "blitz-js-core": "^0.4.5",
     "chalk": "^2.1.0",
     "moment": "^2.18.1",
     "warframe-updates": "^1.0.6"
   },
   "devDependencies": {
-    "blitz-js-query": "0.2.3",
+    "blitz-js-query": "^0.2.3",
     "chai": "^4.1.2",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.3"
   }
 }

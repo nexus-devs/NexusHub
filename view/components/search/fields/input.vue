@@ -5,7 +5,7 @@
       <input type="text" placeholder="Items, Players.." v-model="input"
                                                         v-on:keyup="search"
                                                         v-on:keydown.tab.prevent="complete"
-                                                        v-on:keydown.enter="complete">
+                                                        v-on:keydown.enter="query">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
       <slot></slot>
@@ -29,7 +29,23 @@
 
 
 <script>
+import button from '../modules/button.vue' // to get the search function
+
+const store = {
+  state: {
+    input: ''
+  },
+  mutations: {
+    setSearchInput(state, input) {
+      state.input = input
+    }
+  }
+}
+
 export default {
+  beforeCreate() {
+    this.$store.registerModule('search', store)
+  },
   data() {
     return {
       input: '',
@@ -57,7 +73,12 @@ export default {
       if (triggers.includes(event.key.toLowerCase())) {
         if (this.input.length > 1) {
           result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+          this.$store.commit('setSearchInput', {
+            name: this.input,
+            type: 'Search'
+          })
         }
+        // Found suggestions
         if (result.length) {
           let regex = new RegExp(`^${this.input}`, 'i')
           this.autocomplete = {
@@ -65,30 +86,51 @@ export default {
             content: result[0].content
           }
           this.suggestions = result
-        } else {
+        }
+        // No suggestion -> Suggest 'Any' for custom search
+        else {
+          this.autocomplete = {
+            name: '',
+            type: 'Any'
+          }
+          this.suggestions = []
+        }
+        // Input cleared again
+        if (this.input.length < 1) {
           this.autocomplete = {
             name: '',
             type: ''
           }
-          this.suggestions = []
         }
       }
     },
+
     /**
      * Change input to full suggestion with correct capitalization
      */
-    complete(suggestion) {
+    complete(suggestion = {}) {
       if (suggestion.name) {
         this.input = suggestion.name
+        this.$store.commit('setSearchInput', suggestion)
         this.autocomplete = suggestion
         this.suggestions = []
       }
       else if (this.suggestions.length) {
         let actual = this.suggestions[0]
         this.input = actual.name
+        this.$store.commit('setSearchInput', actual)
         this.autocomplete = actual
         this.suggestions = []
       }
+    },
+
+    /**
+     * Visit link determined by user input
+     */
+    query() {
+      const query = button.methods.search.bind(this)
+      this.complete()
+      query()
     }
   }
 }

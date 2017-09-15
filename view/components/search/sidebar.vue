@@ -34,6 +34,8 @@
 @import '~src/styles/partials/importer';
 
 /deep/ .search {
+  margin-top: 15px;
+
   label, br {
     display: none;
   }
@@ -141,8 +143,8 @@
 
 /deep/ .time {
   border-top: 1px solid $colorSubtleDark;
-  margin-top: 25px;
-  padding-top: 25px;
+  margin-top: 30px;
+  padding-top: 30px;
 
   label {
     font-size: 0.85em;
@@ -180,6 +182,7 @@
         color: white;
         font-size: 0.9em;
         padding: 5px 15px;
+        background: $colorBackgroundDarker;
 
         &:hover {
           background: $colorBackgroundLight;
@@ -203,8 +206,8 @@
 
 /deep/ .rank {
   border-top: 1px solid $colorSubtleDark;
-  margin-top: 25px;
-  padding-top: 25px;
+  margin-top: 20px;
+  padding-top: 30px;
 
   label {
     font-size: 0.85em;

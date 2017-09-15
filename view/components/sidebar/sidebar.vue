@@ -111,9 +111,11 @@ nav {
 
     .ico-a-ie {
       margin: 0;
+      left: -1px;
 
       img {
         height: 20px;
+        width: 20px;
       }
     }
 
@@ -157,10 +159,13 @@ nav {
     .ico-a-ie {
       @include ie(24);
       margin: 1px 0;
+      position: relative;
+      left: 1px;
       display: inline-block;
 
       img {
         height: 18px;
+        width: 18px;
       }
 
       &:hover {

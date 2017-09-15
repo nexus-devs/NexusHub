@@ -61,7 +61,7 @@
   footer {
     margin-top: auto;
     text-align: center;
-    padding: 10px 0 20px;
+    padding: 0 0 20px;
     background: $colorBackgroundDarker;
 
     .logo {
@@ -89,7 +89,7 @@
 
     .resources {
       max-width: $max-width;
-      padding: 20px 0;
+      padding: 10px 0;
       margin: auto;
 
       a {
@@ -113,7 +113,8 @@
     }
 
     .brands {
-      margin-bottom: 20px;
+      margin-top: 5px;
+      margin-bottom: 10px;
 
       a {
         opacity: 0.65;
