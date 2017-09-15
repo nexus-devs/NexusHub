@@ -13,8 +13,10 @@ class Scraper {
 
   async getItems() {
     const map = await request.get(baseUrl + "/items")
+
     await new Promise(resolve => {
       let items = JSON.parse(map).payload.items.en
+
       items.forEach(async(item, i) => {
         let url = item.url_name
 
@@ -28,6 +30,7 @@ class Scraper {
 
   async getItemData(url, mult) {
     const item = await queue.delay(() => request.get(baseUrl + '/items/' + url.replace('’', '%E2%80%99'), 'push', 50))
+
     if (!(item.includes('[404]'))) {
       if (!this.isAdded(url, this.scraped)) {
         const itemSet = JSON.parse(item).payload.item.items_in_set
@@ -46,6 +49,7 @@ class Scraper {
   getItemName(itemSet) {
     let name = itemSet[0].en.item_name
     let names = []
+
     itemSet.forEach(item => {
       names.push(item.en.item_name)
     })
