@@ -128,7 +128,7 @@ export default {
     position: fixed;
     overflow: hidden;
     background: $colorBackground;
-    padding: 20px 10px;
+    padding: 15px 5px;
     z-index: 3;
     right: 0;
     bottom: 15vh;

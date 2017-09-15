@@ -34,6 +34,7 @@ const calendarOptions = {
 
 const store = {
   state: {
+    modified: false,
     focus: {
       start: {
         time: moment().endOf('day'),
@@ -53,17 +54,20 @@ const store = {
     }
   },
   mutations: {
-    setFocusStart(state, date) {
+    setTimeFocusStart(state, date) {
       state.focus.start = date
     },
-    setFocusEnd(state,  date) {
+    setTimeFocusEnd(state,  date) {
       state.focus.end = date
     },
-    setCompareStart(state, date) {
+    setTimeCompareStart(state, date) {
       state.compare.start = date
     },
-    setCompareEnd(state, date) {
+    setTimeCompareEnd(state, date) {
       state.compare.end = date
+    },
+    setTimeModified(state, bool) {
+      state.modified = bool
     }
   }
 }
@@ -75,7 +79,6 @@ export default {
   data() {
     return {
       active: false,
-      modified: false,
       selected: 'start',
       suggestions: [{
         time: moment(),
@@ -105,7 +108,7 @@ export default {
       this.active = !this.active
     },
     select(date) {
-      this.modified = true
+      this.$store.commit('setTimeModified', true)
 
       // Modify start of time range
       if (this.selected === 'start') {
@@ -117,8 +120,8 @@ export default {
 
         // Set new main time start and comparison end based on diff to
         // main time range end
-        this.$store.commit('setFocusStart', date)
-        this.$store.commit('setCompareEnd', compareDate)
+        this.$store.commit('setTimeFocusStart', date)
+        this.$store.commit('setTimeCompareEnd', compareDate)
         this.selected = 'end'
       }
 
@@ -132,9 +135,9 @@ export default {
 
         // Set new time range ends, but also new start of comparison range
         // Since it starts where the focus range ends
-        this.$store.commit('setFocusEnd', date)
-        this.$store.commit('setCompareStart', this.$store.state.time.focus.end)
-        this.$store.commit('setCompareEnd', compareDate)
+        this.$store.commit('setTimeFocusEnd', date)
+        this.$store.commit('setTimeCompareStart', this.$store.state.time.focus.end)
+        this.$store.commit('setTimeCompareEnd', compareDate)
         this.validate()
         this.toggle()
         this.selected = 'start'
@@ -148,10 +151,10 @@ export default {
       const compareEnd = this.$store.state.time.compare.end
 
       if (focusStart.time < focusEnd.time) {
-        this.$store.commit('setFocusStart', focusEnd)
-        this.$store.commit('setFocusEnd', focusStart)
-        this.$store.commit('setCompareStart', compareEnd)
-        this.$store.commit('setCompareEnd', compareStart)
+        this.$store.commit('setTimeFocusStart', focusEnd)
+        this.$store.commit('setTimeFocusEnd', focusStart)
+        this.$store.commit('setTimeCompareStart', compareEnd)
+        this.$store.commit('setTimeCompareEnd', compareStart)
       }
     }
   }
