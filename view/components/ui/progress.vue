@@ -20,6 +20,7 @@ export default {
       failedColor: '#ff0000',
     }
   },
+
   methods: {
     start () {
       this.show = true

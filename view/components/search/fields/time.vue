@@ -76,6 +76,7 @@ export default {
   beforeCreate() {
     this.$store.registerModule('time', store)
   },
+
   data() {
     return {
       active: false,
@@ -92,6 +93,7 @@ export default {
       }]
     }
   },
+
   computed: {
     from() {
       let date = this.$store.state.time.focus.start
@@ -102,6 +104,7 @@ export default {
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
+
   methods: {
     toggle() {
       this.selected = 'start'
@@ -143,6 +146,7 @@ export default {
         this.selected = 'start'
       }
     },
+
     // Ensure picked time range makes sense (switch dates if necessary)
     validate() {
       const focusStart = this.$store.state.time.focus.start

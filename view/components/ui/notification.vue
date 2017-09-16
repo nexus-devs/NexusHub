@@ -80,6 +80,7 @@ export default {
   beforeCreate() {
     this.$store.registerModule('notifications', store)
   },
+
   computed: {
     title() {
       return this.$store.state.notifications.current.title
@@ -91,12 +92,14 @@ export default {
       return this.$store.state.notifications.active
     }
   },
+
   /**
    * Listen to notifications as soon as we load on the client
    */
   mounted() {
     this.listen()
   },
+
   methods: {
     listen() {
       this.$blitz.subscribe('/notifications')

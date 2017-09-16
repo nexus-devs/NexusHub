@@ -45,14 +45,17 @@ export default {
   beforeCreate() {
     this.$store.registerModule('sidebar', store)
   },
+
   components: {
     tooltip
   },
+
   computed: {
     active() {
       return this.$store.state.sidebar.active
     }
   },
+
   methods: {
     toggle(expanded) {
       this.$store.commit('toggleSidebar', expanded)
