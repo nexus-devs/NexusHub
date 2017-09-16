@@ -40,7 +40,7 @@ class Scraper {
         let parsed = {}
         parsed.name = this.getItemName(itemSet)
         parsed.type = this.getItemType(itemSet)
-        parsed.rank = this.getItemMaxRank(itemSet)
+        parsed.ranks = this.getItemMaxRank(itemSet)
         parsed.description = this.getItemDescription(itemSet)
         parsed.components = this.getItemComponents(itemSet)
         this.scraped.push(parsed)
