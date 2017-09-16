@@ -1,6 +1,6 @@
 [
   {
-    "name": "Akbronco Prime ",
+    "name": "Akbronco Prime",
     "type": "Prime",
     "description": "<p>The Akbronco Prime lowers  Impact damage to increase  Slash damage, while gaining increased firing rate, critical damage, status chance and magazine size. The Akbronco Prime was added into the game in Update 12.4.</p>",
     "components": [
@@ -35,7 +35,7 @@
     ]
   },
   {
-    "name": "Ankyros Prime ",
+    "name": "Ankyros Prime",
     "type": "Prime",
     "description": "<p>The Ankyros Prime are the primed version of Ankyros, added in Update 12.4.</p>",
     "components": [
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "name": "Bo Prime ",
+    "name": "Bo Prime",
     "type": "Prime",
     "description": "<p>The Bo Prime is the primed variant of the Bo staff. It was added in Update 13.7, featuring higher damage and an additional  polarity.</p>",
     "components": [
@@ -79,7 +79,7 @@
     ]
   },
   {
-    "name": "Boar Prime ",
+    "name": "Boar Prime",
     "type": "Prime",
     "description": "<p>The Boar Prime is an ancient Orokin automatic shotgun that serves as an upgraded version of the Boar. The Boar Prime further improves on the strengths of the Boar, focusing on a high rate of fire, spread, and magazine capacity, on top of improving overall damage. This gives the Boar Prime extremely high damage per second, mitigated only by the short-comings of its predecessor, with its inability to effectively engage targets past short range. </p>",
     "components": [
@@ -126,7 +126,7 @@
     ]
   },
   {
-    "name": "Boltor Prime ",
+    "name": "Boltor Prime",
     "type": "Prime",
     "description": "<p>The Boltor Prime is the prime variant of the Boltor rifle. Like its classic version, its bolts' flight time require compensation, making this weapon more difficult to use at longer ranges, and requiring the user to lead targets for effectiveness. Despite this, the Boltor Prime can easily punish close-range targets with its high damage.</p>",
     "components": [
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "name": "Braton Prime ",
+    "name": "Braton Prime",
     "type": "Prime",
     "description": "<p>The Braton Prime is an ancient Orokin assault rifle that serves as an upgrade of the Braton. It features higher base damage and magazine capacity compared to the standard Braton, at the cost of lower ammo reserves. The Braton Prime sports a higher ratio of  Slash damage than the basic Braton, though its  Impact damage is comparatively lower. Overall, the Braton Prime is a formidable weapon, and is considered to be a reasonable upgrade from the basic Braton.</p>",
     "components": [
@@ -216,7 +216,7 @@
     ]
   },
   {
-    "name": "Burston Prime ",
+    "name": "Burston Prime",
     "type": "Prime",
     "description": "<p>The Burston Prime is the prime variant of the Burston. Compared to its predecessor, the Burston Prime features higher damage across the board, and a slightly higher status chance, making it a direct upgrade from the standard Burston. Like the standard Burston, the Burston Prime features the signature three-round burst mechanic, making it difficult for some Tenno to use, but rewarding if one can learn the patterns.</p>",
     "components": [
@@ -275,7 +275,7 @@
     ]
   },
   {
-    "name": "Dakra Prime ",
+    "name": "Dakra Prime",
     "type": "Prime",
     "description": "<p>The Dakra Prime is a standalone prime melee weapon which was added to the game in Update 10.0.</p>",
     "components": [
@@ -312,7 +312,7 @@
     ]
   },
   {
-    "name": "Fang Prime ",
+    "name": "Fang Prime",
     "type": "Prime",
     "description": "<p>Fang Prime features a higher base damage than Fang as well as a faster attack speed. The Fang Prime was added into the game in Update 9.0. </p>",
     "components": [
@@ -385,7 +385,7 @@
     ]
   },
   {
-    "name": "Glaive Prime ",
+    "name": "Glaive Prime",
     "type": "Prime",
     "description": "<p>The Glaive Prime is a Primed version of the Glaive. The Glaive Prime was added into the game in Update 11.0. If thrown, this weapon will bounce five times before returning to its owner or after reaching 30m away from its owner. </p>",
     "components": [
@@ -407,7 +407,7 @@
     ]
   },
   {
-    "name": "Hikou Prime ",
+    "name": "Hikou Prime",
     "type": "Prime",
     "description": "<p>The Hikou Prime is the primed version of the Hikou throwing stars, released in Update 14.8.</p>",
     "components": [
@@ -456,7 +456,7 @@
     ]
   },
   {
-    "name": "Latron Prime ",
+    "name": "Latron Prime",
     "type": "Prime",
     "description": "<p>The Latron Prime is an ancient Orokin semi-automatic rifle that serves as an upgrade to the Latron, that features higher base damage in the form of more  Puncture damage and critical chance. </p>",
     "components": [
@@ -483,7 +483,7 @@
     ]
   },
   {
-    "name": "Lex Prime ",
+    "name": "Lex Prime",
     "type": "Prime",
     "description": "<p>The Lex Prime is the primed version of the Lex heavy pistol, featuring improved stats.</p>",
     "components": [
@@ -536,7 +536,7 @@
     ]
   },
   {
-    "name": "Orthos Prime ",
+    "name": "Orthos Prime",
     "type": "Prime",
     "description": "<p>The Orthos Prime features a higher base damage, range, and attack speed than the Orthos. The Orthos Prime was added into the game in Update 9.</p>",
     "components": [
@@ -581,7 +581,7 @@
     ]
   },
   {
-    "name": "Paris Prime ",
+    "name": "Paris Prime",
     "type": "Prime",
     "description": "<p>The Paris Prime features higher base and charge damage, and a faster draw time than the Paris. The Paris Prime was added into the game in Update 9.0.</p>",
     "components": [
@@ -694,7 +694,7 @@
     ]
   },
   {
-    "name": "Reaper Prime ",
+    "name": "Reaper Prime",
     "type": "Prime",
     "description": "<p>The Reaper Prime is a standalone prime melee Scythe, added to the game in Update 8, along with the Frost Prime Warframe, and the Latron Prime.</p>",
     "components": [
@@ -716,7 +716,7 @@
     ]
   },
   {
-    "name": "Scindo Prime ",
+    "name": "Scindo Prime",
     "type": "Prime",
     "description": "<p>The primed version of the Scindo, the Scindo Prime offers improved overall statistics to the original, with increased damage, speed, critical chance, and status. Providing a formidable weapon surpassing the original, and many of its peers in the heavy blade category. Like the original, the Scindo Prime is also compatible with the Manticore skin, providing damage at the cost of speed.</p>",
     "components": [
@@ -753,7 +753,7 @@
     ]
   },
   {
-    "name": "Sicarus Prime ",
+    "name": "Sicarus Prime",
     "type": "Prime",
     "description": "<p>The Sicarus Prime is an improved Sicarus that sacrifices nearly half of its  Impact damage to double  Puncture and  Slash damage, and also sports higher accuracy, faster fire rate, and a larger magazine compared to its predecessor.</p>",
     "components": [
@@ -775,7 +775,7 @@
     ]
   },
   {
-    "name": "Soma Prime ",
+    "name": "Soma Prime",
     "type": "Prime",
     "description": "<p>The Soma Prime is the primed version of the Soma assault rifle. It primarily features a greater magazine size, greater ammo reserves, and a slight increase to physical damage and status chance.</p>",
     "components": [
@@ -834,7 +834,7 @@
     ]
   },
   {
-    "name": "Vasto Prime ",
+    "name": "Vasto Prime",
     "type": "Prime",
     "description": "<p>The primed version of the Vasto revolver, the Vasto Prime features enhanced damage over the original.</p>",
     "components": [
@@ -883,7 +883,7 @@
     ]
   },
   {
-    "name": "Nova Prime ",
+    "name": "Nova Prime",
     "type": "Prime",
     "description": "<p>Release Date: December 16, 2014</p><p>Nova Prime is the primed variant of the Nova Warframe featuring more powerful stats: possessing a higher energy capacity and shield capacity, as well as an additional  polarity. </p>",
     "components": [
@@ -946,7 +946,7 @@
     ]
   },
   {
-    "name": "Frost Prime ",
+    "name": "Frost Prime",
     "type": "Prime",
     "description": "<p>Release Date: May 3rd, 2013</p><p>Frost Prime is the primed variant of the Frost Warframe featuring more powerful stats, possessing higher shield capacity as well as an additional  polarity.</p>",
     "components": [
@@ -973,7 +973,7 @@
     ]
   },
   {
-    "name": "Ember Prime ",
+    "name": "Ember Prime",
     "type": "Prime",
     "description": "<p>Release Date: November 20th, 2013</p><p>Ember Prime is the primed variant of the Ember Warframe with more powerful stats; possessing higher shields and armor, as well as a  and  polarity. </p>",
     "components": [
@@ -1000,7 +1000,7 @@
     ]
   },
   {
-    "name": "Mag Prime ",
+    "name": "Mag Prime",
     "type": "Prime",
     "description": "<p>Release Date: September 13th, 2013</p><p>Mag Prime is the primed variant of the Mag Warframe featuring more powerful stats: possessing increased health, as well as an additional  polarity.</p>",
     "components": [
@@ -1047,7 +1047,7 @@
     ]
   },
   {
-    "name": "Rhino Prime ",
+    "name": "Rhino Prime",
     "type": "Prime",
     "description": "<p>Release Date: March 5th, 2014</p><p>Rhino Prime is the primed variant of the Rhino Warframe featuring more powerful stats: possessing higher armor and sprint speed, as well as an additional  polarity.</p>",
     "components": [
@@ -1074,7 +1074,7 @@
     ]
   },
   {
-    "name": "Loki Prime ",
+    "name": "Loki Prime",
     "type": "Prime",
     "description": "<p>Release Date: June 11th, 2014</p><p>Loki Prime is the primed variant of the Loki Warframe featuring more powerful stats: possessing a higher energy capacity, as well as an additional  and a  polarity.</p>",
     "components": [
@@ -1101,7 +1101,7 @@
     ]
   },
   {
-    "name": "Nyx Prime ",
+    "name": "Nyx Prime",
     "type": "Prime",
     "description": "<p>Release Date: September 23rd, 2014</p><p>Nyx Prime is the primed variant of the Nyx Warframe featuring more powerful stats: possessing higher armor, sprint speed and shield capacity, as well as an additional  polarity.</p>",
     "components": [
@@ -3900,7 +3900,7 @@
     "components": []
   },
   {
-    "name": "Wyrm Prime ",
+    "name": "Wyrm Prime",
     "type": "Prime",
     "description": "<p>Wyrm Prime is the first Prime Sentinel, a version of Wyrm featuring Orokin styling and modified stats.</p>",
     "components": [
@@ -4322,7 +4322,7 @@
     "components": []
   },
   {
-    "name": "Odonata Prime ",
+    "name": "Odonata Prime",
     "type": "Prime",
     "description": "<p>Release Date: March 24th, 2015</p><p>Comparisons:</p>",
     "components": [
@@ -4578,7 +4578,7 @@
     "components": []
   },
   {
-    "name": "Carrier Prime ",
+    "name": "Carrier Prime",
     "type": "Prime",
     "description": "<p>The Primed version of the Carrier Sentinel, the Carrier Prime features increased health and armor, and comes with the enhanced Sweeper Prime weapon. </p>",
     "components": [
@@ -4649,7 +4649,7 @@
     ]
   },
   {
-    "name": "Vectis Prime ",
+    "name": "Vectis Prime",
     "type": "Prime",
     "description": "<p>The Vectis Prime is the prime version of the Vectis sniper rifle. Featuring higher base damage and a doubled magazine, the Vectis Prime retains the standard version's 4x zoom setting, but swaps the Vectis' 3x zoom for a much higher 10x zoom, allowing for both medium and long range combat.</p>",
     "components": [
@@ -4936,7 +4936,7 @@
     "components": []
   },
   {
-    "name": "Dual Kamas Prime ",
+    "name": "Dual Kamas Prime",
     "type": "Melee",
     "description": "<p>The Dual Kamas Prime are the Primed versions of the Dual Kamas, featuring higher damage as well as improvements to most stats.</p>",
     "components": [
@@ -4989,7 +4989,7 @@
     ]
   },
   {
-    "name": "Kavasa Prime Collar ",
+    "name": "Kavasa Prime Collar",
     "type": "Kubrow",
     "description": "<p>The Kavasa Prime Collar is a Prime collar of Orokin design that can be equipped on a player's Kubrow. It records their genetic memory and DNA, allowing them to be reconstructed in an Incubator, just like the Taichen Collar. Equipping the collar grants +10 Health, +10 Shields, and +100 Armor to a kubrow. Health bonus is modified by DNA Stability.</p>",
     "components": [
@@ -5310,13 +5310,13 @@
     "components": []
   },
   {
-    "name": "Dera Vandal ",
+    "name": "Dera Vandal",
     "type": "Weapons",
     "description": "<p>The Dera Vandal is the Vandal version of the Dera assault rifle, offered as a possible reward to players who participated in the Operation: Tubemen of Regor Event, had Nef Anyo been victorious on PC or XB1. Its blueprint and components can also occur as Invasion rewards.</p>",
     "components": []
   },
   {
-    "name": "Karak Wraith ",
+    "name": "Karak Wraith",
     "type": "Weapons",
     "description": "<p>The Karak Wraith is the Wraith variant of the Karak assault rifle, offered as a reward for players who participated in the Operation: Tubemen of Regor Event with Alad V victorious. Its blueprint and components can also occur as Invasion rewards.</p>",
     "components": []
@@ -5426,25 +5426,25 @@
     "components": []
   },
   {
-    "name": "Nezha ",
+    "name": "Nezha",
     "type": "Warframes",
     "description": "<p>Release Date: December 16, 2015.</p><p>Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.</p>",
     "components": []
   },
   {
-    "name": "Nezha ",
+    "name": "Nezha",
     "type": "Warframes",
     "description": "<p>Release Date: December 16, 2015.</p><p>Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.</p>",
     "components": []
   },
   {
-    "name": "Nezha ",
+    "name": "Nezha",
     "type": "Warframes",
     "description": "<p>Release Date: December 16, 2015.</p><p>Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.</p>",
     "components": []
   },
   {
-    "name": "Nezha ",
+    "name": "Nezha",
     "type": "Warframes",
     "description": "<p>Release Date: December 16, 2015.</p><p>Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.</p>",
     "components": []
@@ -6302,7 +6302,7 @@
     "components": []
   },
   {
-    "name": "Strun Wraith ",
+    "name": "Strun Wraith",
     "type": "Misc",
     "description": "<p>The Strun Wraith is the first Wraith weapon, which was made available as a reward for the Survival Weekend Event. It is a modified version of the Strun shotgun, featuring improved stats and firing characteristics. </p>",
     "components": []
@@ -6350,7 +6350,7 @@
     "components": []
   },
   {
-    "name": "Nikana Prime ",
+    "name": "Nikana Prime",
     "type": "Prime",
     "description": "<p>The Nikana Prime is the primed version of the Nikana, added in Hotfix 18.4.12.</p>",
     "components": [
@@ -6394,7 +6394,7 @@
     "components": []
   },
   {
-    "name": "Sheev ",
+    "name": "Sheev",
     "type": "Misc",
     "description": "<p>The Sheev is a close range dagger weapon of Grineer design that serves as a backup in the event that a Grineer is disarmed by any means. It offers high  Slash damage and status, but has a slow overall attack speed. The tip of the blade glows with charged plasma, which allows the weapon to deal  Heat procs on slam attacks.</p>",
     "components": []
@@ -6546,7 +6546,7 @@
     "components": []
   },
   {
-    "name": "Snipetron Vandal ",
+    "name": "Snipetron Vandal",
     "type": "Misc",
     "description": "<p>The Snipetron Vandal is the Vandal version of the Snipetron, first awarded as a special-edition reward for killing 20 Informers in the Informant Event and can be found as a Sortie Reward. The Snipetron Vandal has better characteristics than the regular Snipetron in magazine size and reload speed, but sacrifices  Impact and  Slash damages in order to boost its  Puncture damage.</p>",
     "components": []
@@ -6558,19 +6558,19 @@
     "components": []
   },
   {
-    "name": "Xiphos ",
+    "name": "Xiphos",
     "type": "Landing Craft",
     "description": "<p>The Xiphos is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Xiphos is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a sentry gun. The Xiphos landed in Update 18.5.</p>",
     "components": []
   },
   {
-    "name": "Mantis ",
+    "name": "Mantis",
     "type": "Landing Craft",
     "description": "<p>The Mantis is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Mantis is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a Med Tower resembling a Life Support Capsule that heals for 100 Health upon each activation, with each Med Tower providing up to 20 healing charges that can be activated by any player. It landed in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Scimitar ",
+    "name": "Scimitar",
     "type": "Landing Craft",
     "description": "<p>The Scimitar is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Scimitar is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a Carpet Bomb ability. The Scimitar landed in Update 18.0.</p>",
     "components": []
@@ -6645,7 +6645,7 @@
     "components": []
   },
   {
-    "name": "Fragor Prime ",
+    "name": "Fragor Prime",
     "type": "Melee",
     "description": "<p>Fragor Prime is the Prime variant of the Fragor.</p>",
     "components": [
@@ -6686,7 +6686,7 @@
     ]
   },
   {
-    "name": "Akstiletto Prime ",
+    "name": "Akstiletto Prime",
     "type": "Pistol",
     "description": "<p>Akstiletto Prime is the Prime variant of the Akstiletto.</p>",
     "components": [
@@ -6737,7 +6737,7 @@
     ]
   },
   {
-    "name": "Imperator Vandal ",
+    "name": "Imperator Vandal",
     "type": "Archwing",
     "description": "<p>The Imperator Vandal is the Vandal form of the Imperator heavy machine gun for the Archwing flight system, offered as a reward for attaining 15 (10 for PS4/XB1) Battle Points in the Operation Eyes of Blight event. </p>",
     "components": []
@@ -6939,145 +6939,145 @@
     "components": []
   },
   {
-    "name": "Kaszas ",
+    "name": "Kaszas",
     "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Kaszas ",
+    "name": "Kaszas",
     "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Velocitus ",
+    "name": "Velocitus",
     "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
-    "name": "Velocitus ",
+    "name": "Velocitus",
     "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
-    "name": "Velocitus ",
+    "name": "Velocitus",
     "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
-    "name": "Fluctus ",
+    "name": "Fluctus",
     "type": "Archwing",
     "description": "<p>The Fluctus is an Archwing primary weapon which fires a wave of energy. It was released in Update 15.7.2.</p>",
     "components": []
   },
   {
-    "name": "Fluctus ",
+    "name": "Fluctus",
     "type": "Archwing",
     "description": "<p>The Fluctus is an Archwing primary weapon which fires a wave of energy. It was released in Update 15.7.2.</p>",
     "components": []
   },
   {
-    "name": "Fluctus ",
+    "name": "Fluctus",
     "type": "Archwing",
     "description": "<p>The Fluctus is an Archwing primary weapon which fires a wave of energy. It was released in Update 15.7.2.</p>",
     "components": []
   },
   {
-    "name": "Dual Decurion ",
+    "name": "Dual Decurion",
     "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Dual Decurion ",
+    "name": "Dual Decurion",
     "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Phaedra ",
+    "name": "Phaedra",
     "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Phaedra ",
+    "name": "Phaedra",
     "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Phaedra ",
+    "name": "Phaedra",
     "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Centaur ",
+    "name": "Centaur",
     "type": "Archwing",
     "description": "<p>The Centaur is an Archwing based melee that also acts as a shield, which shares its own basic six-hit combo with Rathbone, but also possesses its own six-hit combo when used in quick melee (primary weapon equipped).</p>",
     "components": []
   },
   {
-    "name": "Centaur ",
+    "name": "Centaur",
     "type": "Archwing",
     "description": "<p>The Centaur is an Archwing based melee that also acts as a shield, which shares its own basic six-hit combo with Rathbone, but also possesses its own six-hit combo when used in quick melee (primary weapon equipped).</p>",
     "components": []
   },
   {
-    "name": "Centaur ",
+    "name": "Centaur",
     "type": "Archwing",
     "description": "<p>The Centaur is an Archwing based melee that also acts as a shield, which shares its own basic six-hit combo with Rathbone, but also possesses its own six-hit combo when used in quick melee (primary weapon equipped).</p>",
     "components": []
   },
   {
-    "name": "Onorix ",
+    "name": "Onorix",
     "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Onorix ",
+    "name": "Onorix",
     "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Agkuza ",
+    "name": "Agkuza",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Puncture damage.</p>",
     "components": []
   },
   {
-    "name": "Agkuza ",
+    "name": "Agkuza",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Puncture damage.</p>",
     "components": []
   },
   {
-    "name": "Agkuza ",
+    "name": "Agkuza",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Puncture damage.</p>",
     "components": []
   },
   {
-    "name": "Cyngas ",
+    "name": "Cyngas",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Slash damage by a small margin</p>",
     "components": []
   },
   {
-    "name": "Cyngas ",
+    "name": "Cyngas",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Slash damage by a small margin</p>",
     "components": []
   },
   {
-    "name": "Cyngas ",
+    "name": "Cyngas",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Slash damage by a small margin</p>",
     "components": []
@@ -7783,31 +7783,31 @@
     "components": []
   },
   {
-    "name": "Corvas ",
+    "name": "Corvas",
     "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
-    "name": "Corvas ",
+    "name": "Corvas",
     "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
-    "name": "Corvas ",
+    "name": "Corvas",
     "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
-    "name": "Rathbone ",
+    "name": "Rathbone",
     "type": "Archwing",
     "description": "<p>A heavy Hammer exclusive to Archwing use, the Rathbone primarily deals  Impact damage, which is ideal for taking down Corpus shields. This weapon shares its own basic six combo with Centaur.</p>",
     "components": []
   },
   {
-    "name": "Rathbone ",
+    "name": "Rathbone",
     "type": "Archwing",
     "description": "<p>A heavy Hammer exclusive to Archwing use, the Rathbone primarily deals  Impact damage, which is ideal for taking down Corpus shields. This weapon shares its own basic six combo with Centaur.</p>",
     "components": []
@@ -7854,37 +7854,37 @@
     "components": []
   },
   {
-    "name": "Wraith Twin Vipers ",
+    "name": "Wraith Twin Vipers",
     "type": "Pistol",
     "description": "<p>The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. </p>",
     "components": []
   },
   {
-    "name": "Wraith Twin Vipers ",
+    "name": "Wraith Twin Vipers",
     "type": "Pistol",
     "description": "<p>The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. </p>",
     "components": []
   },
   {
-    "name": "Wraith Twin Vipers ",
+    "name": "Wraith Twin Vipers",
     "type": "Pistol",
     "description": "<p>The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. </p>",
     "components": []
   },
   {
-    "name": "Wraith Twin Vipers ",
+    "name": "Wraith Twin Vipers",
     "type": "Pistol",
     "description": "<p>The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. </p>",
     "components": []
   },
   {
-    "name": "Wraith Twin Vipers ",
+    "name": "Wraith Twin Vipers",
     "type": "Pistol",
     "description": "<p>The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. </p>",
     "components": []
   },
   {
-    "name": "Nekros Prime ",
+    "name": "Nekros Prime",
     "type": "Warframe",
     "description": "<p>Release Date: August 23rd, 2016</p><p>Nekros Prime is the Prime variant of the Nekros Warframe featuring higher shields and power values, as well as an additional  polarity.</p>",
     "components": [
@@ -7935,7 +7935,7 @@
     ]
   },
   {
-    "name": "Galatine Prime ",
+    "name": "Galatine Prime",
     "type": "Melee",
     "description": "<p>Galatine Prime is the primed variant of the Galatine heavy sword. </p>",
     "components": [
@@ -8122,73 +8122,73 @@
     "components": []
   },
   {
-    "name": "Amesha ",
+    "name": "Amesha",
     "type": "Archwing",
     "description": "<p>The Amesha is a support-type Archwing that sacrifices offensive power in exchange for area-of-effect defensive abilities that can buff and heal allies and weaken enemies. </p>",
     "components": []
   },
   {
-    "name": "Amesha ",
+    "name": "Amesha",
     "type": "Archwing",
     "description": "<p>The Amesha is a support-type Archwing that sacrifices offensive power in exchange for area-of-effect defensive abilities that can buff and heal allies and weaken enemies. </p>",
     "components": []
   },
   {
-    "name": "Amesha ",
+    "name": "Amesha",
     "type": "Archwing",
     "description": "<p>The Amesha is a support-type Archwing that sacrifices offensive power in exchange for area-of-effect defensive abilities that can buff and heal allies and weaken enemies. </p>",
     "components": []
   },
   {
-    "name": "Amesha ",
+    "name": "Amesha",
     "type": "Archwing",
     "description": "<p>The Amesha is a support-type Archwing that sacrifices offensive power in exchange for area-of-effect defensive abilities that can buff and heal allies and weaken enemies. </p>",
     "components": []
   },
   {
-    "name": "Elytron ",
+    "name": "Elytron",
     "type": "Archwing",
     "description": "<p>The Elytron is an offensive-type Archwing specializing in area bombardment, capable of dealing massive amounts of damage against multiple enemies with its selection of missiles, and boasting high durability among Archwings.</p>",
     "components": []
   },
   {
-    "name": "Elytron ",
+    "name": "Elytron",
     "type": "Archwing",
     "description": "<p>The Elytron is an offensive-type Archwing specializing in area bombardment, capable of dealing massive amounts of damage against multiple enemies with its selection of missiles, and boasting high durability among Archwings.</p>",
     "components": []
   },
   {
-    "name": "Elytron ",
+    "name": "Elytron",
     "type": "Archwing",
     "description": "<p>The Elytron is an offensive-type Archwing specializing in area bombardment, capable of dealing massive amounts of damage against multiple enemies with its selection of missiles, and boasting high durability among Archwings.</p>",
     "components": []
   },
   {
-    "name": "Elytron ",
+    "name": "Elytron",
     "type": "Archwing",
     "description": "<p>The Elytron is an offensive-type Archwing specializing in area bombardment, capable of dealing massive amounts of damage against multiple enemies with its selection of missiles, and boasting high durability among Archwings.</p>",
     "components": []
   },
   {
-    "name": "Itzal ",
+    "name": "Itzal",
     "type": "Archwing",
     "description": "<p>The Itzal is a stealth and support Archwing utilizing technologies that can hide it from enemy attention while it attacks with powerful disruptive abilities, sacrificing durability for a high amount of energy capacity.</p>",
     "components": []
   },
   {
-    "name": "Itzal ",
+    "name": "Itzal",
     "type": "Archwing",
     "description": "<p>The Itzal is a stealth and support Archwing utilizing technologies that can hide it from enemy attention while it attacks with powerful disruptive abilities, sacrificing durability for a high amount of energy capacity.</p>",
     "components": []
   },
   {
-    "name": "Itzal ",
+    "name": "Itzal",
     "type": "Archwing",
     "description": "<p>The Itzal is a stealth and support Archwing utilizing technologies that can hide it from enemy attention while it attacks with powerful disruptive abilities, sacrificing durability for a high amount of energy capacity.</p>",
     "components": []
   },
   {
-    "name": "Itzal ",
+    "name": "Itzal",
     "type": "Archwing",
     "description": "<p>The Itzal is a stealth and support Archwing utilizing technologies that can hide it from enemy attention while it attacks with powerful disruptive abilities, sacrificing durability for a high amount of energy capacity.</p>",
     "components": []
@@ -8443,7 +8443,7 @@
     "components": []
   },
   {
-    "name": "Cyngas ",
+    "name": "Cyngas",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Slash damage by a small margin</p>",
     "components": []
@@ -8456,73 +8456,73 @@
     "components": []
   },
   {
-    "name": "Kaszas ",
+    "name": "Kaszas",
     "type": "Archwing",
     "description": "<p>The Kaszas is an Archwing scythe released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Velocitus ",
+    "name": "Velocitus",
     "type": "Archwing",
     "description": "<p>The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. </p>",
     "components": []
   },
   {
-    "name": "Fluctus ",
+    "name": "Fluctus",
     "type": "Archwing",
     "description": "<p>The Fluctus is an Archwing primary weapon which fires a wave of energy. It was released in Update 15.7.2.</p>",
     "components": []
   },
   {
-    "name": "Dual Decurion ",
+    "name": "Dual Decurion",
     "type": "Archwing",
     "description": "<p>The Dual Decurion are twin rifles exclusive to the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Phaedra ",
+    "name": "Phaedra",
     "type": "Archwing",
     "description": "<p>The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.</p>",
     "components": []
   },
   {
-    "name": "Centaur ",
+    "name": "Centaur",
     "type": "Archwing",
     "description": "<p>The Centaur is an Archwing based melee that also acts as a shield, which shares its own basic six-hit combo with Rathbone, but also possesses its own six-hit combo when used in quick melee (primary weapon equipped).</p>",
     "components": []
   },
   {
-    "name": "Onorix ",
+    "name": "Onorix",
     "type": "Archwing",
     "description": "<p>The Onorix is a heavy axe designed for use with the Archwing flight system.</p>",
     "components": []
   },
   {
-    "name": "Agkuza ",
+    "name": "Agkuza",
     "type": "Archwing",
     "description": "<p>This weapon deals primarily  Puncture damage.</p>",
     "components": []
   },
   {
-    "name": "Corvas ",
+    "name": "Corvas",
     "type": "Archwing",
     "description": "<p>The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  </p>",
     "components": []
   },
   {
-    "name": "Rathbone ",
+    "name": "Rathbone",
     "type": "Archwing",
     "description": "<p>A heavy Hammer exclusive to Archwing use, the Rathbone primarily deals  Impact damage, which is ideal for taking down Corpus shields. This weapon shares its own basic six combo with Centaur.</p>",
     "components": []
   },
   {
-    "name": "Valkyr Prime ",
+    "name": "Valkyr Prime",
     "type": "Blueprint",
     "description": "<p>Release date: November 22nd, 2016</p><p>Valkyr Prime is the Prime variant of the Valkyr Warframe featuring higher armor and power values, as well as an additional Madurai Pol polarity.</p>",
     "components": []
   },
   {
-    "name": "Venka Prime ",
+    "name": "Venka Prime",
     "type": "Blueprint",
     "description": "<p>The Venka Prime are ancient Orokin claws that serve as an upgrade of the Venka. Apart from having higher base damage and slightly faster attack speed, the Venka Prime also has an improved melee combo multiplier.</p>",
     "components": []
