@@ -78,37 +78,43 @@ export default {
       triggers.push('backspace')
 
       if (triggers.includes(event.key.toLowerCase())) {
-        if (this.input.length > 1) {
-          result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
-          this.$store.commit('setSearchInput', {
-            name: this.input,
-            type: 'Search'
-          })
+        // Clear existing timeout (no search suggestions while typing fast)
+        if (this.inputQueryDelay) {
+          clearTimeout(this.inputQueryDelay)
         }
-        // Found suggestions
-        if (result.length) {
-          let regex = new RegExp(`^${this.input}`, 'i')
-          this.autocomplete = {
-            name: result[0].name.replace(regex, this.input),
-            content: result[0].content
+        this.inputQueryDelay = setTimeout(async () => {
+          if (this.input.length > 1) {
+            result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+            this.$store.commit('setSearchInput', {
+              name: this.input,
+              type: 'Search'
+            })
           }
-          this.suggestions = result
-        }
-        // No suggestion -> Suggest 'Any' for custom search
-        else {
-          this.autocomplete = {
-            name: '',
-            type: 'Any'
+          // Found suggestions
+          if (result.length) {
+            let regex = new RegExp(`^${this.input}`, 'i')
+            this.autocomplete = {
+              name: result[0].name.replace(regex, this.input),
+              content: result[0].content
+            }
+            this.suggestions = result
           }
-          this.suggestions = []
-        }
-        // Input cleared again
-        if (this.input.length < 1) {
-          this.autocomplete = {
-            name: '',
-            type: ''
+          // No suggestion -> Suggest 'Any' for custom search
+          else {
+            this.autocomplete = {
+              name: '',
+              type: 'Any'
+            }
+            this.suggestions = []
           }
-        }
+          // Input cleared again
+          if (this.input.length < 1) {
+            this.autocomplete = {
+              name: '',
+              type: ''
+            }
+          }
+        }, 200)
       }
     },
 
