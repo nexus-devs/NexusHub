@@ -78,43 +78,57 @@ export default {
       triggers.push('backspace')
 
       if (triggers.includes(event.key.toLowerCase())) {
+
         // Clear existing timeout (no search suggestions while typing fast)
         if (this.inputQueryDelay) {
           clearTimeout(this.inputQueryDelay)
         }
-        this.inputQueryDelay = setTimeout(async () => {
-          if (this.input.length > 1) {
-            result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
-            this.$store.commit('setSearchInput', {
-              name: this.input,
-              type: 'Search'
-            })
-          }
-          // Found suggestions
-          if (result.length) {
-            let regex = new RegExp(`^${this.input}`, 'i')
-            this.autocomplete = {
-              name: result[0].name.replace(regex, this.input),
-              content: result[0].content
-            }
-            this.suggestions = result
-          }
-          // No suggestion -> Suggest 'Any' for custom search
-          else {
-            this.autocomplete = {
-              name: '',
-              type: 'Any'
-            }
-            this.suggestions = []
-          }
-          // Input cleared again
-          if (this.input.length < 1) {
-            this.autocomplete = {
-              name: '',
-              type: ''
-            }
-          }
-        }, 100)
+
+        // Update if autocomplete doesn't match input in entered letters
+        if (!this.autocomplete.name.startsWith(this.input)) {
+          await this.fetchSuggestions(result)
+        }
+
+        // Wait until user finished typing fast chain of chars
+        else {
+          this.inputQueryDelay = setTimeout(() => {
+            this.fetchSuggestions(result)
+          }, 100)
+        }
+      }
+    },
+
+    async fetchSuggestions(result) {
+      if (this.input.length > 1) {
+        result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+        this.$store.commit('setSearchInput', {
+          name: this.input,
+          type: 'Search'
+        })
+      }
+      // Found suggestions
+      if (result.length) {
+        let regex = new RegExp(`^${this.input}`, 'i')
+        this.autocomplete = {
+          name: result[0].name.replace(regex, this.input),
+          content: result[0].content
+        }
+        this.suggestions = result
+      }
+      // No suggestion -> Suggest 'Any' for custom search
+      else {
+        this.autocomplete = {
+          name: '',
+          type: 'Any'
+        }
+        this.suggestions = []
+      }
+      // Input cleared again
+      if (this.input.length < 1) {
+        this.autocomplete = {
+          name: '',
+          type: ''
+        }
       }
     },
 

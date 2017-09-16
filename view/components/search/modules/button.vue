@@ -35,12 +35,6 @@ export default {
           params.rank = rank.selected
         }
 
-        // Fetch query data before visiting page. Usually this would be done
-        // server-sided on direct page access.
-        if (type === 'items') {
-
-        }
-
         // Visit generated router view
         this.$router.push({
           path: `/warframe/${type}/${search.input.name}`,
