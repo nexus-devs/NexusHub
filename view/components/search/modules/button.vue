@@ -12,35 +12,46 @@
 
 
 <script>
-// Helper function for &/? conditional in params
-const add = (url, query) => {
-  if (url.includes('?')) {
-    url += `&${query}`
-  } else {
-    url += `?${query}`
-  }
-  return url
-}
+import items from 'src/templates/warframe/items/index.vue'
 
 export default {
   methods: {
-    search() {
+    async search() {
       const search = this.$store.state.search
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 
       if (search.input) {
-        let url = `/warframe/${search.input.type.toLowerCase()}/${search.input.name}`
+        let params = {}
+        let type = search.input.type.toLowerCase()
+        this.$progress.start()
 
+        // Adjust params based on input state
         if (time.modified) {
-          const timequery = `timestart=${time.focus.start.time.unix()}&timeend=${time.focus.end.time.unix()}`
-          url = add(url, timequery)
+          params.timestart = time.focus.start.time.unix()
+          params.timeend = time.focus.end.time.unix()
         }
         if (rank.selected !== 'Any Rank') {
-          const rankquery = `rank=${rank.selected}`
-          url = add(url, rankquery)
+          params.rank = rank.selected
         }
-        this.$router.push(url)
+
+        // Fetch query data before visiting page. Usually this would be done
+        // server-sided on direct page access.
+        if (type === 'items') {
+
+        }
+
+        // Visit generated router view
+        this.$router.push({
+          path: `/warframe/${type}/${search.input.name}`,
+          params
+        })
+
+        // Toggle sidebar if open
+        if (this.$store.state.sidebar.active) {
+          this.$store.commit('toggleSidebar')
+        }
+        this.$progress.finish()
       }
     }
   }

@@ -5,7 +5,8 @@
       <input type="text" placeholder="Items, Players.." v-model="input"
                                                         v-on:keyup="search"
                                                         v-on:keydown.tab.prevent="complete"
-                                                        v-on:keydown.enter="query">
+                                                        v-on:keydown.enter="query"
+                                                        ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
       <slot></slot>
@@ -45,6 +46,9 @@ const store = {
 export default {
   beforeCreate() {
     this.$store.registerModule('search', store)
+  },
+  mounted() {
+    this.$refs.input.focus()
   },
   data() {
     return {

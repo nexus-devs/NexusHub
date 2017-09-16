@@ -2,6 +2,7 @@
   <nav class="row">
     <div class="col nav-l">
       <router-link to="/" exact><img src="/img/nav/logo-font.svg" alt="Nexus-Stats Logo" class="ico-h-24"></router-link>
+      <router-link :to="{ path: `/${game}`}" class="game">{{ game }}</router-link>
     </div>
     <div class="col nav-r">
       <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
@@ -17,6 +18,11 @@
 import search from 'src/components/search/fields/input.vue'
 
 export default {
+  computed: {
+    game() {
+      return this.$store.state.game.name
+    }
+  },
   components: {
     search
   }
@@ -36,8 +42,8 @@ export default {
     align-items: center;
 
     a {
-        margin: 0 15px;
-        font-size: 0.9em;
+      margin: 0 15px;
+      font-size: 0.9em;
     }
 
     @media (max-width: $breakpoint-s) {
@@ -48,6 +54,21 @@ export default {
   .nav-l {
     a:first-of-type {
       margin-left: 60px;
+    }
+
+    .game {
+      position: relative;
+      top: 1px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      font-size: 0.75em;
+      margin-left: -12px;
+      color: $colorFontBody !important;
+      @include ease(0.3s);
+
+      @media (max-width: $breakpoint-s) {
+        display: none;
+      }
     }
 
     /deep/ .search {

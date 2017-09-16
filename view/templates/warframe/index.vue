@@ -9,6 +9,9 @@
 <script>
   import Search from 'src/components/search/index.vue'
   export default {
+    beforeMount() {
+      this.$store.commit('setActiveGame', 'warframe')
+    },
     components: {
       Search
     }
