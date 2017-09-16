@@ -49,6 +49,7 @@ class Request extends Endpoint {
           resolve(data)
         }
       }
+      _res.status = () => _res
       statistics.main(_req, _res)
     })
 
