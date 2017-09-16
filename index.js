@@ -1,5 +1,6 @@
 const config = require('./config/local.js')
-const hooks = require('./hooks/mongo')
+const mongo = require('./hooks/mongo')
+const db = require('./hooks/db')
 const Core = require('blitz-js-core')
 
 /**
@@ -10,7 +11,8 @@ const Blitz = require('blitz-js')(config)
 /**
  * Core worker node for heavy processing. Item statistics, player data, etc.
  */
-blitz.hook('core_worker', hooks.verifyItemIndices)
+blitz.hook('core_worker', mongo.verifyItemIndices)
+blitz.hook('core_worker', db.verifyItemList)
 blitz.use(new Core({
   endpointPath: __dirname + '/api/core',
   mongoURL: 'mongodb://localhost/warframe-nexus-core',
