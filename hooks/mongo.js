@@ -1,8 +1,3 @@
-"use strict"
-
-/**
- * Dependencies
- */
 const mongodb = require('mongodb').MongoClient
 
 module.exports = {
