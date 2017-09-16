@@ -68,7 +68,7 @@ class Scraper {
           break
         }
       }
-      name = matched.join("")
+      name = matched.join("").replace(/\s+$/g,'')
     })
     return name
   }
