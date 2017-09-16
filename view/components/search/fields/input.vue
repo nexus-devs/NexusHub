@@ -3,7 +3,7 @@
     <div class="field">
       <label>Search</label><br />
       <input type="text" placeholder="Items, Players.." v-model="input"
-       v-on:keypress="search" v-on:keydown.delete="search"
+       v-on:keyup="search" v-on:keyup.delete="search"
        v-on:keydown.tab.prevent="complete" v-on:keydown.enter="query" ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
