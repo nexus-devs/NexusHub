@@ -34,7 +34,7 @@
 @import '~src/styles/partials/importer';
 
 /deep/ .search {
-  margin-top: 15px;
+  margin-top: 10px;
 
   label, br {
     display: none;
@@ -52,6 +52,7 @@
   .autocomplete {
     position: absolute;
     left: 50px;
+    top: 85px;
   }
   .autocomplete-type {
     display: none;
@@ -242,6 +243,7 @@
       .suggestion {
         display: inline-block;
         cursor: pointer;
+        font-size: 0.85em;
         margin: 3px;
         background: $colorBackgroundDarker;
         @include ie();

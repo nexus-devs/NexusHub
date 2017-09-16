@@ -102,7 +102,7 @@ export default {
       this.$blitz.subscribe('/notifications')
       this.$blitz.on('/notifications', notification => {
         // Push to store
-        if (notification.game === 'warframe') {
+        if (notification.game === this.$store.state.game.name || notification.game === 'global') {
           this.$store.dispatch('pushNotification', notification.message)
         }
       })

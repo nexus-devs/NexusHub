@@ -10,7 +10,7 @@
       </div>
       <slot></slot>
     </div>
-    <div class="tools ranks" v-bind:class="{ active }">
+    <div class="tools ranks" :class="{ active }">
       <div class="ranks-head">
         <h3>Rank</h3>
         <span>- {{ selected }}</span>
