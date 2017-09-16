@@ -11,12 +11,14 @@ export default {
   beforeCreate() {
     this.$store.commit('incrementId')
   },
+
   data() {
     return {
       // Unique id for panel received at create
       id: this.$store.state.sidebar.id
     }
   },
+
   computed: {
     // Check if the selected panel is this one
     active() {
@@ -27,6 +29,7 @@ export default {
       return this.$store.state.sidebar.activeId && !this.active
     }
   },
+
   methods: {
     toggle() {
       if (!this.$store.state.sidebar.active) {

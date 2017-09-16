@@ -32,18 +32,22 @@ export default {
     }
     this.$store.registerModule('item', store)
   },
+
   computed: {
     item() {
       return this.$store.state.item
     }
   },
+
   beforeMount() {
     this.$store.commit('setActiveGame', 'warframe')
     this.listen()
   },
+
   async asyncData({ store, route: { params: { item }}}) {
     await store.dispatch('fetchItemData', item)
   },
+
   methods: {
     async listen() {
       const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics`
