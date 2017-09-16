@@ -51,7 +51,6 @@ export default {
         if (this.$store.state.sidebar.active) {
           this.$store.commit('toggleSidebar')
         }
-        this.$progress.finish()
       }
     }
   }
