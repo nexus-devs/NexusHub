@@ -3,10 +3,8 @@
     <div class="field">
       <label>Search</label><br />
       <input type="text" placeholder="Items, Players.." v-model="input"
-                                                        v-on:keyup="search"
-                                                        v-on:keydown.tab.prevent="complete"
-                                                        v-on:keydown.enter="query"
-                                                        ref="input">
+       v-on:keypress="search" v-on:keydown.delete="search"
+       v-on:keydown.tab.prevent="complete" v-on:keydown.enter="query" ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
       <slot></slot>
@@ -74,27 +72,22 @@ export default {
      */
     async search(event) {
       let result = []
-      let triggers = ' abcdefghijklmnopqrstuvwxyz0123456789-_.[]'.split('')
-      triggers.push('backspace')
 
-      if (triggers.includes(event.key.toLowerCase())) {
+      // Clear existing timeout (no search suggestions while typing fast)
+      if (this.inputQueryDelay) {
+        clearTimeout(this.inputQueryDelay)
+      }
 
-        // Clear existing timeout (no search suggestions while typing fast)
-        if (this.inputQueryDelay) {
-          clearTimeout(this.inputQueryDelay)
-        }
+      // Update if autocomplete doesn't match input in entered letters
+      if (!this.autocomplete.name.startsWith(this.input)) {
+        await this.fetchSuggestions(result)
+      }
 
-        // Update if autocomplete doesn't match input in entered letters
-        if (!this.autocomplete.name.startsWith(this.input)) {
-          await this.fetchSuggestions(result)
-        }
-
-        // Wait until user finished typing fast chain of chars
-        else {
-          this.inputQueryDelay = setTimeout(() => {
-            this.fetchSuggestions(result)
-          }, 100)
-        }
+      // Wait until user finished typing fast chain of chars
+      else {
+        this.inputQueryDelay = setTimeout(() => {
+          this.fetchSuggestions(result)
+        }, 100)
       }
     },
 
@@ -141,8 +134,7 @@ export default {
         this.$store.commit('setSearchInput', suggestion)
         this.autocomplete = suggestion
         this.suggestions = []
-      }
-      else if (this.suggestions.length) {
+      } else if (this.suggestions.length) {
         let actual = this.suggestions[0]
         this.input = actual.name
         this.$store.commit('setSearchInput', actual)
