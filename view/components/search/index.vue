@@ -68,6 +68,7 @@
   // Search fields
   /deep/ .col-b .field {
     background: $colorBackgroundDark;
+    border-radius: 2px;
     padding: 15px;
     margin: 1px;
     margin-top: 1px !important;
@@ -119,6 +120,7 @@
 
   /deep/ .col-b .tools {
     position: absolute;
+    border-radius: 2px;
     background: rgba(27, 32, 37, 0.8);
     width: calc(33.33% - 2px);
     margin-top: -1px;
@@ -208,15 +210,20 @@
           align-items: center;
           text-align: center;
           color: white;
+          line-height: 1;
+          border-radius: 2px;
           background: $colorBackgroundDark;
           font-size: 0.9em;
-          padding: 5px 15px;
+          padding: 10px;
 
           &:hover {
             background: $colorBackgroundLight;
           }
           &:not(:last-of-type) {
             margin-right: 5px;
+          }
+          &::before {
+            border-radius: 2px;
           }
         }
       }
@@ -240,6 +247,7 @@
         transform: scale(1) translateY(-50%);
       }
       .ranks-head, .ranks-input {
+        border-radius: 2px;
         padding: 10px 20px;
         background: $colorBackgroundDark;
         width: calc(100% - 40px);
