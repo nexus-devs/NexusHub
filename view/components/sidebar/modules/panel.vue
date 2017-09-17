@@ -95,7 +95,7 @@ export default {
     @include ease(0.25s);
 
     @media (max-width: $breakpoint-m) {
-      padding: 1px 25px;
+      padding: 10px 25px;
     }
   }
 }

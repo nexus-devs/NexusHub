@@ -1,5 +1,5 @@
 <template>
-  <div class="button-container" v-on:click="search">
+  <div class="button-container" v-on:click.stop="search">
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
@@ -14,6 +14,16 @@
 <script>
 import items from 'src/templates/warframe/items/index.vue'
 
+// Helper function for &/? conditional in params
+const add = (url, query) => {
+  if (url.includes('?')) {
+    url += `&${query}`
+  } else {
+    url += `?${query}`
+  }
+  return url
+}
+
 export default {
   methods: {
     async search() {
@@ -22,24 +32,20 @@ export default {
       const rank = this.$store.state.rank
 
       if (search.input.name && !search.done) {
-        let params = {}
-        let type = search.input.type.toLowerCase()
-        this.$progress.start()
+        let url = `/warframe/${search.input.type.toLowerCase()}/${search.input.name}`
 
-        // Adjust params based on input state
+        // Add URL params based on state
         if (time.modified) {
-          params.timestart = time.focus.start.time.unix()
-          params.timeend = time.focus.end.time.unix()
+          const timequery = `timestart=${time.focus.start.time.unix()}&timeend=${time.focus.end.time.unix()}`
+          url = add(url, timequery)
         }
         if (rank.selected !== 'Any Rank') {
-          params.rank = rank.selected
+          const rankquery = `rank=${rank.selected}`
+          url = add(url, rankquery)
         }
 
-        // Visit generated router view
-        this.$router.push({
-          path: `/warframe/${type}/${search.input.name}`,
-          params
-        })
+        // View generated URL
+        this.$router.push(url)
 
         // Toggle sidebar if open
         if (this.$store.state.sidebar.active) {
