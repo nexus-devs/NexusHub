@@ -48,9 +48,7 @@ export default {
   },
   mounted() {
     shortcut.bind('shift + f', () => {
-      if (!this.$store.state.sidebar.active) {
-        this.$store.commit('toggleSidebar')
-      }
+      this.$store.commit('toggleSidebar')
       this.$store.commit('setActivePanel', this.id)
     })
   }
