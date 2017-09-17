@@ -20,12 +20,6 @@ Old development builds can be found in the commit history starting at #271
 <br>
 <br>
 
-## What's working so far?
-- [x] **API-Node:** HTTP/Socket.io Web-API which automatically exposes Resource-Node methods. Also handles authorization.
-- [x] **Core-Node:** Resource-Node with all application Logic. Statistics are calculated here.
-- [ ] **Web-Node:** View Layer for End-User.
-<br>
-
 ## Quickstart
 >`npm install && npm start`
 => then go to `localhost:3010/foo` to get your `bar`
