@@ -29,7 +29,7 @@ import search from '../../search/sidebar.vue'
 // Client-side-only requirements
 let shortcut
 try {
-  shortcut = require('keyboardJS')
+  shortcut = require('keyboardjs')
 } catch(err) {}
 
 
