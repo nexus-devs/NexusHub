@@ -54,6 +54,9 @@
     left: 50px;
     top: 85px;
 
+    @media (max-width: $breakpoint-m) {
+      left: 40px;
+    }
     @media (max-width: $breakpoint-s) {
       left: 40px;
       top: 75px;
@@ -100,10 +103,13 @@
   }
   // Input Suggestions
   .suggestion {
-    padding: 15px;
+    padding: 10px 15px;
     cursor: pointer;
     @include ease-out(0.25s);
 
+    &:first-of-type {
+      padding-top: 20px;
+    }
     &:hover {
       background: $colorBackgroundDark;
     }
@@ -151,9 +157,6 @@
 
     @media (max-width: $breakpoint-s) {
       padding: 10px;
-      &:first-of-type {
-        padding-top: 20px;
-      }
     }
   }
 }
