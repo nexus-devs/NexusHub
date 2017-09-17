@@ -97,6 +97,7 @@
         padding: 0 10px;
         border-right: 1px solid $colorSubtle;
         font-size: 0.9em;
+        line-height: 0.8;
 
         &:hover {
           color: white !important;

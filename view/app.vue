@@ -42,6 +42,9 @@ export default {
     notification,
     bottom
   },
+  beforeMount() {
+    window.scrollTo(0,1); // Autohide address bar on android
+  },
   computed: {
     activeSidebar() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
