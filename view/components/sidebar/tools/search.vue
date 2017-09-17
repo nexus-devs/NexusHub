@@ -7,7 +7,7 @@
     <panel>
       <div class="panel-head">
         <h3>Search</h3>
-        <span class="shortcut">CTRL + F</span>
+        <span class="shortcut">SHIFT + F</span>
         <back></back>
       </div>
       <div class="panel-body">
@@ -26,6 +26,13 @@ import panel from '../modules/panel.vue'
 import back from '../modules/back.vue'
 import search from '../../search/sidebar.vue'
 
+// Client-side-only requirements
+let shortcut
+try {
+  shortcut = require('keyboardJS')
+} catch(err) {}
+
+
 export default {
   components: {
     wrapper,
@@ -34,8 +41,18 @@ export default {
     back,
     search
   },
+  data() {
+    return {
+      id: this.$store.state.sidebar.id + 1 // required before wrapper which increments id
+    }
+  },
   mounted() {
-
+    shortcut.bind('shift + f', () => {
+      if (!this.$store.state.sidebar.active) {
+        this.$store.commit('toggleSidebar')
+      }
+      this.$store.commit('setActivePanel', this.id)
+    })
   }
 }
 </script>

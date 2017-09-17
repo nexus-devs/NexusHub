@@ -57,10 +57,6 @@
     @media (max-width: $breakpoint-m) {
       left: 40px;
     }
-    @media (max-width: $breakpoint-s) {
-      left: 40px;
-      top: 75px;
-    }
   }
   .autocomplete-type {
     display: none;
