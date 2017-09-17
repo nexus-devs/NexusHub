@@ -1,8 +1,6 @@
 <template>
   <sidebar>
     <search></search>
-    <search></search>
-    <search></search>
   </sidebar>
 </template>
 
