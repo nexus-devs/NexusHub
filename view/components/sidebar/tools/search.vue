@@ -33,6 +33,9 @@ export default {
     panel,
     back,
     search
+  },
+  mounted() {
+
   }
 }
 </script>
