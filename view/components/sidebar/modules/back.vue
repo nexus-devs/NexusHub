@@ -42,5 +42,9 @@ export default {
     margin-bottom: -2px;
     padding: 0;
   }
+
+  @media (max-width: $breakpoint-m) {
+    right: 20px;
+  }
 }
 </style>

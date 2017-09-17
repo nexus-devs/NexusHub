@@ -54,6 +54,10 @@ export default {
   .nav-l {
     a:first-of-type {
       margin-left: 60px;
+
+      @media (max-width: $breakpoint-s) {
+        margin-left: 50px;
+      }
     }
 
     .game {

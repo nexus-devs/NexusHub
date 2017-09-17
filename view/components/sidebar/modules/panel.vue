@@ -29,6 +29,10 @@ export default {
   z-index: -1;
   will-change: transform;
   @include ease-out(0.45s);
+
+  @media (max-width: $breakpoint-s) {
+    width: calc(250px + 5vw);
+  }
 }
 
 .panel {
@@ -64,7 +68,15 @@ export default {
         padding: 5px;
         border-radius: 2px;
         border: 1px solid $colorSubtle;
+
+        @media (max-width: $breakpoint-s) {
+          display: none;
+        }
       }
+    }
+
+    @media (max-width: $breakpoint-m) {
+      padding: 17px 25px;
     }
 
     @media (max-width: $breakpoint-s) {
@@ -77,8 +89,14 @@ export default {
   .panel-body {
     padding: 10px 35px;
     pointer-events: none;
+    max-height: calc(100vh - 116px);
+    overflow-y: scroll;
     opacity: 0;
     @include ease(0.25s);
+
+    @media (max-width: $breakpoint-m) {
+      padding: 1px 25px;
+    }
   }
 }
 </style>

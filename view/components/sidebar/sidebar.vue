@@ -136,12 +136,17 @@ nav {
       transform: translateX(calc(-300px - 5vw));
       @include ease-out(0.45s);
       @include shadow-3;
+
+      @media (max-width: $breakpoint-s) {
+        transform: translateX(calc(-320px - 5vw)) ;
+        width: calc(250px + 5vw);
+      }
     }
   }
 
   .nav-lower {
     height: 100vh;
-    @include gradient-background(rgba(67, 74, 80, 0.8), $colorBackgroundLight);
+    background: $colorBackgroundLight;
     @include ease-out(0.45s);
 
     .ico-wrapper:first-of-type {

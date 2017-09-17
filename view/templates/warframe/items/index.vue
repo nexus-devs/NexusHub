@@ -9,7 +9,20 @@
 <script>
 const store = {
   state: {
-    item: {}
+    item: {
+      name: '',
+      type: '',
+      description: '',
+      supply: {
+        count: 0,
+        percentage: 0
+      },
+      demand: {
+        count: 0,
+        percentage: 0
+      },
+      components: []
+    }
   },
   mutations: {
     setItem(state, item) {
@@ -27,15 +40,15 @@ const store = {
 
 export default {
   beforeCreate() {
-    if (this.$store.state.item) {
-      store.state = this.$store.state.item
+    if (this.$store.state.items) {
+      store.state.item = this.$store.state.items.item
     }
-    this.$store.registerModule('item', store)
+    this.$store.registerModule('items', store)
   },
 
   computed: {
     item() {
-      return this.$store.state.item
+      return this.$store.state.items.item
     }
   },
 
@@ -52,7 +65,9 @@ export default {
     async listen() {
       const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics`
       this.$blitz.subscribe(itemUrl)
-      this.$blitz.on(itemUrl, item => this.$store.commit('setItem', Object.assign(this.item, item)))
+      this.$blitz.on(itemUrl, item => {
+        this.$store.commit('setItem', Object.assign(item, this.$store.state.items.item))
+      })
     }
   }
 }

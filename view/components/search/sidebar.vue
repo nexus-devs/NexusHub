@@ -53,6 +53,11 @@
     position: absolute;
     left: 50px;
     top: 85px;
+
+    @media (max-width: $breakpoint-s) {
+      left: 40px;
+      top: 75px;
+    }
   }
   .autocomplete-type {
     display: none;
@@ -87,6 +92,10 @@
     }
     button {
       display: none;
+    }
+
+    @media (max-width: $breakpoint-m) {
+      right: 25px;
     }
   }
   // Input Suggestions
@@ -138,6 +147,13 @@
     }
     .suggestion-data {
       display: none;
+    }
+
+    @media (max-width: $breakpoint-s) {
+      padding: 10px;
+      &:first-of-type {
+        padding-top: 20px;
+      }
     }
   }
 }
