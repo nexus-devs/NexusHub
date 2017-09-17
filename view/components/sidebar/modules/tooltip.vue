@@ -32,5 +32,9 @@
       left: -4px;
       @include triangle-left(5px, $colorPrimaryDark);
     }
+
+    @media(max-width: $breakpoint-s) {
+      display: none;
+    }
   }
 </style>

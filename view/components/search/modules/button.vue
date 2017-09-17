@@ -21,7 +21,7 @@ export default {
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 
-      if (search.input) {
+      if (search.input.name && !search.done) {
         let params = {}
         let type = search.input.type.toLowerCase()
         this.$progress.start()
@@ -45,6 +45,9 @@ export default {
         if (this.$store.state.sidebar.active) {
           this.$store.commit('toggleSidebar')
         }
+
+        // Remove input from state (prevents search without further input)
+        this.$store.commit('setSearchDone', true)
       }
     }
   }

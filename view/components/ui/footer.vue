@@ -96,6 +96,7 @@
         color: $colorFontSubtle !important;
         padding: 0 10px;
         border-right: 1px solid $colorSubtle;
+        font-size: 0.9em;
 
         &:hover {
           color: white !important;
@@ -126,7 +127,7 @@
       }
 
       @media (max-width: $breakpoint-s) {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
 
         img {
           height: 28px;
@@ -136,10 +137,12 @@
 
     @media (max-width: $breakpoint-s) {
       .logo, .goose {
-        height: 32px;
+        height: 28px;
         padding: 10px;
-        margin-top: 10px;
         margin-bottom: -10px;
+      }
+      .goose {
+        height: 26px;
       }
     }
   }

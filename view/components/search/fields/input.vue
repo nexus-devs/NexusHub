@@ -2,9 +2,9 @@
   <div class="col-b search">
     <div class="field">
       <label>Search</label><br />
-      <input type="text" placeholder="Items, Players.." v-model="input"
+      <input type="text" placeholder="Items, Players.." :value="input" @input="input = $event.target.value"
        v-on:keyup="search" v-on:keyup.delete="search"
-       v-on:keydown.tab.prevent="complete" v-on:keydown.enter="query" ref="input">
+       v-on:keydown.tab.prevent="complete" v-on:keyup.enter="query" ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autotype }}</span>
       <slot></slot>
@@ -32,11 +32,18 @@ import button from '../modules/button.vue' // to get the search function
 
 const store = {
   state: {
-    input: ''
+    input: {
+      name: '',
+      type: ''
+    },
+    done: false
   },
   mutations: {
     setSearchInput(state, input) {
       state.input = input
+    },
+    setSearchDone(state, bool) {
+      state.done = bool
     }
   }
 }
@@ -72,6 +79,7 @@ export default {
      */
     async search(event) {
       let result = []
+      this.$store.commit('setSearchDone', false)
 
       // Clear existing timeout (no search suggestions while typing fast)
       if (this.inputQueryDelay) {
@@ -80,6 +88,10 @@ export default {
 
       // Update if autocomplete doesn't match input in entered letters
       if (!this.autocomplete.name.startsWith(this.input)) {
+        this.autocomplete = {
+          name: this.input,
+          type: ''
+        }
         await this.fetchSuggestions(result)
       }
 
@@ -92,35 +104,38 @@ export default {
     },
 
     async fetchSuggestions(result) {
-      if (this.input.length > 1) {
-        result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
-        this.$store.commit('setSearchInput', {
-          name: this.input,
-          type: 'Search'
-        })
-      }
-      // Found suggestions
-      if (result.length) {
-        let regex = new RegExp(`^${this.input}`, 'i')
-        this.autocomplete = {
-          name: result[0].name.replace(regex, this.input),
-          content: result[0].content
+      // Only run if timeout isn't after search is done
+      if (!this.$store.state.search.done) {
+        if (this.input.length > 1) {
+          result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+          this.$store.commit('setSearchInput', {
+            name: this.input,
+            type: 'Search'
+          })
         }
-        this.suggestions = result
-      }
-      // No suggestion -> Suggest 'Any' for custom search
-      else {
-        this.autocomplete = {
-          name: '',
-          type: 'Any'
+        // Found suggestions
+        if (result.length) {
+          let regex = new RegExp(`^${this.input}`, 'i')
+          this.autocomplete = {
+            name: result[0].name.replace(regex, this.input),
+            content: result[0].content
+          }
+          this.suggestions = result
         }
-        this.suggestions = []
-      }
-      // Input cleared again
-      if (this.input.length < 1) {
-        this.autocomplete = {
-          name: '',
-          type: ''
+        // No suggestion -> Suggest 'Any' for custom search
+        else {
+          this.autocomplete = {
+            name: '',
+            type: 'Any'
+          }
+          this.suggestions = []
+        }
+        // Input cleared again
+        if (this.input.length < 1) {
+          this.autocomplete = {
+            name: '',
+            type: ''
+          }
         }
       }
     },

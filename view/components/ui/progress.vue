@@ -15,7 +15,7 @@ export default {
       show: false,
       canSuccess: true,
       duration: 1500,
-      height: '2px',
+      height: '0.125em',
       color: '#ffca2b',
       failedColor: '#ff0000',
     }
@@ -104,7 +104,7 @@ export default {
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 2px;
+  height: 0.125em;
   width: 0%;
   transition: width 0.2s, opacity 0.4s;
   opacity: 1;

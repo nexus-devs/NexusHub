@@ -58,62 +58,63 @@ export default {
 @import '~src/styles/modules/importer';
 
 #app {
-    background: $colorBackgroundDark;
+  background: $colorBackgroundDark;
+  color: $colorFontBody;
+
+  input::placeholder {
     color: $colorFontBody;
+  }
 
-    input::placeholder {
-        color: $colorFontBody;
+  a {
+    color: white;
+    @include ease(0.3s);
+    &:hover {
+      opacity: 0.8;
     }
+  }
 
-    a {
-        color: white;
-        @include ease(0.3s);
-        &:hover {
-            opacity: 0.8;
-        }
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5 {
-        color: white;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+      color: white;
+  }
 }
 
 .a-ie {
-    @include ie();
+  @include ie();
 }
 
 .app-content {
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 56px);
-    will-change: transform margin-right;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 56px);
+  will-change: transform margin-right;
 
-    .g-ct {
-        will-change: padding;
-    }
-    @media (max-width: $breakpoint-s) {
-        min-height: 100vh;
-    }
+  .g-ct {
+    will-change: padding;
+  }
+  @media (max-width: $breakpoint-s) {
+    min-height: 100vh;
+  }
 }
+
 @media (min-width: $breakpoint-m) {
-    .app-content {
-        @include ease-out(0.45s);
+  .app-content {
+    @include ease-out(0.45s);
 
-        /deep/ .g-ct {
-            @include ease-out(0.45s);
-        }
+    /deep/ .g-ct {
+      @include ease-out(0.45s);
     }
-    .activeSidebar {
-        margin-right: calc(262px + 5vw);
-        transform: translateX(calc(262px + 5vw));
+  }
+  .activeSidebar {
+    margin-right: calc(262px + 5vw);
+    transform: translateX(calc(262px + 5vw));
 
-        /deep/ .g-ct {
-            padding: 0 96px;
-        }
+    /deep/ .g-ct {
+      padding: 0 96px;
     }
+  }
 }
 </style>

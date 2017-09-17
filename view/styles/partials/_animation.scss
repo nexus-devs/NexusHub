@@ -48,6 +48,10 @@
     }
     background: rgba(255,255,255,0.1);
     @include ease(0.3s);
+
+    @media (max-width: $breakpoint-s) {
+      background: transparent;
+    }
   }
 
   &:active {
