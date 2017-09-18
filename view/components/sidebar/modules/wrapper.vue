@@ -1,5 +1,5 @@
 <template>
-  <div class="ico-wrapper" v-bind:class="{ active, inactive }" v-on:click="toggle">
+  <div class="ico-wrapper" v-bind:class="{ active, inactive }" v-on:mousedown="toggle">
     <slot></slot>
   </div>
 </template>
@@ -38,6 +38,9 @@ export default {
       if (this.$store.state.sidebar.activeId !== this.id) {
         this.$store.commit('setActivePanel', this.id)
       }
+    },
+    test(e) {
+      console.log(e)
     }
   }
 }
@@ -47,6 +50,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
+.panel-body {
+  pointer-events: none;
+}
 
 .active {
   /deep/ .panel {
