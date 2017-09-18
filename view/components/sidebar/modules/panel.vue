@@ -1,6 +1,6 @@
 <template>
-  <div class="panel-container" v-bind:style="{ transform: [`translate(0, ${-56 * (id - 1)}px)`] }">
-    <div class="panel">
+  <div class="panel-container" v-bind:style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }">
+    <div class="panel" v-bind:style="{ opacity, 'transition-duration': deltaX ? '0s' : '0.35s' }">
       <slot></slot>
     </div>
   </div>
@@ -12,6 +12,26 @@ export default {
   data() {
     return {
       id: this.$store.state.sidebar.id
+    }
+  },
+  computed: {
+    deltaX() {
+      return this.$store.state.sidebar.deltaX
+    },
+    activeId() {
+      return this.$store.state.sidebar.activeId
+    },
+    transform() {
+      const open = this.$store.state.sidebar.active
+      const deltaX = this.deltaX
+      const id = this.id
+      const aid = this.activeId
+      return `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, ${aid === id ? -56 * (id - 1) : 0}px)`
+    },
+    opacity() {
+      const open = this.$store.state.sidebar.active
+      const deltaX = this.deltaX
+      return open || deltaX ? (deltaX + 300) / 3 / 100 : 0
     }
   }
 }

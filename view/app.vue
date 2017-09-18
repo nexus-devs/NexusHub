@@ -3,7 +3,10 @@
     <sidebar></sidebar>
     <navigation></navigation>
     <notification></notification>
-    <div class="app-content" v-bind:class="{ activeSidebar }">
+    <div class="app-content" v-bind:class="{ activeSidebar }"
+     v-bind:style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                   'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                   'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
       <transition>
         <router-view></router-view>
       </transition>
@@ -42,9 +45,26 @@ export default {
     notification,
     bottom
   },
+  data() {
+    return {
+      breakpoint: false
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', () => this.updateBreakpoint())
+    this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
+  },
   computed: {
     activeSidebar() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
+    },
+    deltaX() {
+      return this.$store.state.sidebar.deltaX
+    }
+  },
+  methods: {
+    updateBreakpoint() {
+      this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
     }
   }
 }
