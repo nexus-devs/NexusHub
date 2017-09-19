@@ -101,7 +101,7 @@ class Scraper {
   }
 
   getItemComponents(itemSet) {
-    let components = []
+    let components = ['Set']
     let relics = []
 
     itemSet.forEach(item => {
@@ -128,7 +128,7 @@ class Scraper {
         })
       }
     })
-    return components
+    return components.sort()
   }
 
   getItemMaxRank(itemSet) {
