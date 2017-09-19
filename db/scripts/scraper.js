@@ -101,7 +101,11 @@ class Scraper {
   }
 
   getItemComponents(itemSet) {
-    let components = ['Set']
+    let components = [{
+      name: 'Set',
+      ducats: 0,
+      droplocations: []
+    }]
     let relics = []
 
     itemSet.forEach(item => {
@@ -122,13 +126,19 @@ class Scraper {
             components.push({
               name: part[part.length - 1],
               ducats: item.ducats,
-              relics: relics
+              droplocations: relics
             })
+            // Add ducats to Set
+            components[0].ducats += item.ducats
           }
         })
       }
     })
-    return components.sort()
+    return components.sort((a, b) => {
+      if (a.name > b.name) return 1
+      if (a.name < b.name) return -1
+      return 0
+    })
   }
 
   getItemMaxRank(itemSet) {
