@@ -57,6 +57,7 @@ export default {
 
 .panel {
   opacity: 0;
+  will-change: opacity;
   @include ease(0.35s);
 
   .panel-head {

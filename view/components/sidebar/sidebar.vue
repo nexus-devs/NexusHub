@@ -9,7 +9,7 @@
         <tooltip>Expand</tooltip>
       </div>
     </div>
-    <div class="nav-lower">
+    <div class="nav-lower" v-bind:class="{ dragged: deltaX || active }">
       <div class="nav-lower-backdrop"></div>
       <slot></slot>
     </div>
@@ -80,7 +80,7 @@ export default {
       if (this.$store.state.sidebar.active && e.deltaX < 0) {
         this.$store.commit('setSidebarDeltaX', e.deltaX)
       }
-      if (!this.$store.state.sidebar.active && e.deltaX > 0) {
+      if (!this.$store.state.sidebar.active && e.deltaX > 0 && e.deltaX <= 300) {
         this.$store.commit('setSidebarDeltaX', -300 + e.deltaX)
       }
     },
@@ -118,13 +118,6 @@ nav {
           }
         }
       }
-
-      .ico-wrapper:not(.active) {
-        /deep/ .panel-container {
-
-        }
-      }
-
       .nav-lower {
         transform: translateX(0);
       }
@@ -156,6 +149,7 @@ nav {
         height: 100vh;
         width: calc(206px + 5vw);
         background: $colorBackgroundDark;
+        will-change: transform;
         @include ease-out(0.45s);
         @include shadow-3;
 
@@ -177,11 +171,14 @@ nav {
         width: 100%;
         @include shadow-1;
       }
+    }
 
-      @media (max-width: $breakpoint-m) {
+    @media (max-width: $breakpoint-m) {
+      .nav-lower:not(.dragged) {
         transform: translateX(calc(-300px - 5vw));
       }
     }
+
 
     .ico-wrapper {
       position: relative;
