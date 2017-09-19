@@ -85,11 +85,13 @@ export default {
       }
     },
     reset() {
+      // close
       if (this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX < -75) {
         this.$store.commit('toggleSidebar')
       }
+      // open
       else if (!this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX > -285) {
-        this.$store.commit('toggleSidebar')
+        this.$store.commit('toggleSidebar', true)
       }
       this.$store.commit('setSidebarDeltaX', 0)
     }
