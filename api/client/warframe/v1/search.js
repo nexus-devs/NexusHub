@@ -5,7 +5,7 @@ class Search extends Endpoint {
     super(api, db, url)
     this.schema.description = 'Find the most relevant entries in the main collections for a given query'
     this.schema.limit.maxInInterval = 360
-    this.schema.limit.interval: 60000
+    this.schema.limit.interval = 60000
     this.schema.query = [{
         name: 'query',
         default: "",
