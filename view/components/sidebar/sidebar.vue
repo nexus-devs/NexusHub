@@ -1,5 +1,5 @@
 <template>
-  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }" v-on:panend="reset">
+  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }" v-on:panend="reset" v-bind:pan-options="{ direction: 'horizontal'}">
     <div class="nav-upper" v-on:click="toggle(true)">
       <div class="ico-wrapper">
         <div class="panel-backdrop" v-bind:style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }"></div>
@@ -129,7 +129,6 @@ nav {
   /deep/ {
     .nav-upper {
       background: $colorBackgroundDarkest;
-      @include shadow-1;
 
       .ico-a-ie {
         margin: 0;
