@@ -5,11 +5,6 @@
     "description": "<p>The Akbronco Prime lowers  Impact damage to increase  Slash damage, while gaining increased firing rate, critical damage, status chance and magazine size. The Akbronco Prime was added into the game in Update 12.4.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 60,
-        "droplocations": []
-      },
-      {
         "name": "Blueprint",
         "ducats": 15,
         "droplocations": [
@@ -36,6 +31,11 @@
             "rarity": "Uncommon"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 60,
+        "droplocations": []
       }
     ]
   },
@@ -44,11 +44,6 @@
     "type": "Prime",
     "description": "<p>The Ankyros Prime are the primed version of Ankyros, added in Update 12.4.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 130,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 100,
@@ -63,6 +58,11 @@
         "name": "Gauntlet",
         "ducats": 15,
         "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 130,
+        "droplocations": []
       }
     ]
   },
@@ -71,11 +71,6 @@
     "type": "Prime",
     "description": "<p>The Bo Prime is the primed variant of the Bo staff. It was added in Update 13.7, featuring higher damage and an additional  polarity.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 75,
-        "droplocations": []
-      },
       {
         "name": "Blueprint",
         "ducats": 15,
@@ -90,6 +85,11 @@
         "name": "Ornament",
         "ducats": 15,
         "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 75,
+        "droplocations": []
       }
     ]
   },
@@ -98,11 +98,6 @@
     "type": "Prime",
     "description": "<p>The Boar Prime is an ancient Orokin automatic shotgun that serves as an upgraded version of the Boar. The Boar Prime further improves on the strengths of the Boar, focusing on a high rate of fire, spread, and magazine capacity, on top of improving overall damage. This gives the Boar Prime extremely high damage per second, mitigated only by the short-comings of its predecessor, with its inability to effectively engage targets past short range. </p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 45,
@@ -134,6 +129,11 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 100,
         "droplocations": [
@@ -151,11 +151,6 @@
     "description": "<p>The Boltor Prime is the prime variant of the Boltor rifle. Like its classic version, its bolts' flight time require compensation, making this weapon more difficult to use at longer ranges, and requiring the user to lead targets for effectiveness. Despite this, the Boltor Prime can easily punish close-range targets with its high damage.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
         "name": "Barrel",
         "ducats": 15,
         "droplocations": []
@@ -171,6 +166,11 @@
         "droplocations": []
       },
       {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 15,
         "droplocations": []
@@ -182,11 +182,6 @@
     "type": "Prime",
     "description": "<p>The Braton Prime is an ancient Orokin assault rifle that serves as an upgrade of the Braton. It features higher base damage and magazine capacity compared to the standard Braton, at the cost of lower ammo reserves. The Braton Prime sports a higher ratio of  Slash damage than the basic Braton, though its  Impact damage is comparatively lower. Overall, the Braton Prime is a formidable weapon, and is considered to be a reasonable upgrade from the basic Braton.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 100,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -226,6 +221,11 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 100,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 15,
         "droplocations": [
@@ -250,11 +250,6 @@
     "type": "Prime",
     "description": "<p>The Burston Prime is the prime variant of the Burston. Compared to its predecessor, the Burston Prime features higher damage across the board, and a slightly higher status chance, making it a direct upgrade from the standard Burston. Like the standard Burston, the Burston Prime features the signature three-round burst mechanic, making it difficult for some Tenno to use, but rewarding if one can learn the patterns.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 90,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 45,
@@ -290,6 +285,11 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 90,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 15,
         "droplocations": [
@@ -314,11 +314,6 @@
     "type": "Prime",
     "description": "<p>The Dakra Prime is a standalone prime melee weapon which was added to the game in Update 10.0.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 160,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 100,
@@ -348,6 +343,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 160,
+        "droplocations": []
       }
     ]
   },
@@ -356,11 +356,6 @@
     "type": "Prime",
     "description": "<p>Fang Prime features a higher base damage than Fang as well as a faster attack speed. The Fang Prime was added into the game in Update 9.0. </p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 55,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 15,
@@ -426,6 +421,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 55,
+        "droplocations": []
       }
     ]
   },
@@ -434,11 +434,6 @@
     "type": "Prime",
     "description": "<p>The Glaive Prime is a Primed version of the Glaive. The Glaive Prime was added into the game in Update 11.0. If thrown, this weapon will bounce five times before returning to its owner or after reaching 30m away from its owner. </p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 190,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 45,
@@ -453,6 +448,11 @@
         "name": "Disc",
         "ducats": 45,
         "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 190,
+        "droplocations": []
       }
     ]
   },
@@ -461,11 +461,6 @@
     "type": "Prime",
     "description": "<p>The Hikou Prime is the primed version of the Hikou throwing stars, released in Update 14.8.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 45,
-        "droplocations": []
-      },
       {
         "name": "Blueprint",
         "ducats": 15,
@@ -495,6 +490,11 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 45,
+        "droplocations": []
+      },
+      {
         "name": "Stars",
         "ducats": 15,
         "droplocations": [
@@ -516,11 +516,6 @@
     "description": "<p>The Latron Prime is an ancient Orokin semi-automatic rifle that serves as an upgrade to the Latron, that features higher base damage in the form of more  Puncture damage and critical chance. </p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 60,
-        "droplocations": []
-      },
-      {
         "name": "Barrel",
         "ducats": 15,
         "droplocations": []
@@ -536,6 +531,11 @@
         "droplocations": []
       },
       {
+        "name": "Set",
+        "ducats": 60,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 15,
         "droplocations": []
@@ -547,11 +547,6 @@
     "type": "Prime",
     "description": "<p>The Lex Prime is the primed version of the Lex heavy pistol, featuring improved stats.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 45,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -597,6 +592,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 45,
+        "droplocations": []
       }
     ]
   },
@@ -605,11 +605,6 @@
     "type": "Prime",
     "description": "<p>The Orthos Prime features a higher base damage, range, and attack speed than the Orthos. The Orthos Prime was added into the game in Update 9.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 105,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 45,
@@ -647,6 +642,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 105,
+        "droplocations": []
       }
     ]
   },
@@ -656,9 +656,26 @@
     "description": "<p>The Paris Prime features higher base and charge damage, and a faster draw time than the Paris. The Paris Prime was added into the game in Update 9.0.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 115,
-        "droplocations": []
+        "name": "Blueprint",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Lith F1",
+            "rarity": "Common"
+          },
+          {
+            "name": "Meso S1",
+            "rarity": "Common"
+          },
+          {
+            "name": "Meso V2",
+            "rarity": "Common"
+          },
+          {
+            "name": "Axi G1",
+            "rarity": "Common"
+          }
+        ]
       },
       {
         "name": "Grip",
@@ -693,26 +710,35 @@
         ]
       },
       {
-        "name": "Blueprint",
-        "ducats": 15,
+        "name": "Limb",
+        "ducats": 25,
         "droplocations": [
           {
-            "name": "Lith F1",
+            "name": "Lith F2",
+            "rarity": "Common"
+          },
+          {
+            "name": "Lith V1",
             "rarity": "Common"
           },
           {
             "name": "Meso S1",
-            "rarity": "Common"
+            "rarity": "Uncommon"
           },
           {
-            "name": "Meso V2",
-            "rarity": "Common"
+            "name": "Neo S2",
+            "rarity": "Uncommon"
           },
           {
-            "name": "Axi G1",
+            "name": "Axi N3",
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 115,
+        "droplocations": []
       },
       {
         "name": "String",
@@ -739,32 +765,6 @@
             "rarity": "Common"
           }
         ]
-      },
-      {
-        "name": "Limb",
-        "ducats": 25,
-        "droplocations": [
-          {
-            "name": "Lith F2",
-            "rarity": "Common"
-          },
-          {
-            "name": "Lith V1",
-            "rarity": "Common"
-          },
-          {
-            "name": "Meso S1",
-            "rarity": "Uncommon"
-          },
-          {
-            "name": "Neo S2",
-            "rarity": "Uncommon"
-          },
-          {
-            "name": "Axi N3",
-            "rarity": "Common"
-          }
-        ]
       }
     ]
   },
@@ -773,11 +773,6 @@
     "type": "Prime",
     "description": "<p>The Reaper Prime is a standalone prime melee Scythe, added to the game in Update 8, along with the Frost Prime Warframe, and the Latron Prime.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 40,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 20,
@@ -792,6 +787,11 @@
         "name": "Handle",
         "ducats": 10,
         "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 40,
+        "droplocations": []
       }
     ]
   },
@@ -800,11 +800,6 @@
     "type": "Prime",
     "description": "<p>The primed version of the Scindo, the Scindo Prime offers improved overall statistics to the original, with increased damage, speed, critical chance, and status. Providing a formidable weapon surpassing the original, and many of its peers in the heavy blade category. Like the original, the Scindo Prime is also compatible with the Manticore skin, providing damage at the cost of speed.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 190,
-        "droplocations": []
-      },
       {
         "name": "Blade",
         "ducats": 100,
@@ -834,6 +829,11 @@
             "rarity": "Uncommon"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 190,
+        "droplocations": []
       }
     ]
   },
@@ -842,11 +842,6 @@
     "type": "Prime",
     "description": "<p>The Sicarus Prime is an improved Sicarus that sacrifices nearly half of its  Impact damage to double  Puncture and  Slash damage, and also sports higher accuracy, faster fire rate, and a larger magazine compared to its predecessor.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 130,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -861,6 +856,11 @@
         "name": "Receiver",
         "ducats": 100,
         "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 130,
+        "droplocations": []
       }
     ]
   },
@@ -869,11 +869,6 @@
     "type": "Prime",
     "description": "<p>The Soma Prime is the primed version of the Soma assault rifle. It primarily features a greater magazine size, greater ammo reserves, and a slight increase to physical damage and status chance.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -913,6 +908,11 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
         "name": "Stock",
         "ducats": 100,
         "droplocations": [
@@ -933,11 +933,6 @@
     "type": "Prime",
     "description": "<p>The primed version of the Vasto revolver, the Vasto Prime features enhanced damage over the original.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 75,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -979,6 +974,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 75,
+        "droplocations": []
       }
     ]
   },
@@ -988,21 +988,12 @@
     "description": "<p>Release Date: December 16, 2014</p><p>Nova Prime is the primed variant of the Nova Warframe featuring more powerful stats: possessing a higher energy capacity and shield capacity, as well as an additional  polarity. </p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
-        "ducats": 15,
+        "name": "Blueprint",
+        "ducats": 45,
         "droplocations": [
           {
-            "name": "Lith C1",
-            "rarity": "Common"
-          },
-          {
-            "name": "Meso C1",
-            "rarity": "Common"
+            "name": "Neo N2",
+            "rarity": "Uncommon"
           }
         ]
       },
@@ -1021,6 +1012,25 @@
         ]
       },
       {
+        "name": "Neuroptics",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Lith C1",
+            "rarity": "Common"
+          },
+          {
+            "name": "Meso C1",
+            "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
         "name": "Systems",
         "ducats": 15,
         "droplocations": [
@@ -1037,16 +1047,6 @@
             "rarity": "Common"
           }
         ]
-      },
-      {
-        "name": "Blueprint",
-        "ducats": 45,
-        "droplocations": [
-          {
-            "name": "Neo N2",
-            "rarity": "Uncommon"
-          }
-        ]
       }
     ]
   },
@@ -1056,18 +1056,8 @@
     "description": "<p>Release Date: May 3rd, 2013</p><p>Frost Prime is the primed variant of the Frost Warframe featuring more powerful stats, possessing higher shield capacity as well as an additional  polarity.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
-        "ducats": 15,
-        "droplocations": []
-      },
-      {
-        "name": "Systems",
-        "ducats": 45,
+        "name": "Blueprint",
+        "ducats": 100,
         "droplocations": []
       },
       {
@@ -1076,8 +1066,18 @@
         "droplocations": []
       },
       {
-        "name": "Blueprint",
-        "ducats": 100,
+        "name": "Neuroptics",
+        "ducats": 15,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 45,
         "droplocations": []
       }
     ]
@@ -1088,18 +1088,8 @@
     "description": "<p>Release Date: November 20th, 2013</p><p>Ember Prime is the primed variant of the Ember Warframe with more powerful stats; possessing higher shields and armor, as well as a  and  polarity. </p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
-        "ducats": 15,
-        "droplocations": []
-      },
-      {
-        "name": "Systems",
-        "ducats": 45,
+        "name": "Blueprint",
+        "ducats": 100,
         "droplocations": []
       },
       {
@@ -1108,8 +1098,18 @@
         "droplocations": []
       },
       {
-        "name": "Blueprint",
-        "ducats": 100,
+        "name": "Neuroptics",
+        "ducats": 15,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 45,
         "droplocations": []
       }
     ]
@@ -1119,31 +1119,6 @@
     "type": "Prime",
     "description": "<p>Release Date: September 13th, 2013</p><p>Mag Prime is the primed variant of the Mag Warframe featuring more powerful stats: possessing increased health, as well as an additional  polarity.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
-        "ducats": 15,
-        "droplocations": [
-          {
-            "name": "Axi V2",
-            "rarity": "Common"
-          }
-        ]
-      },
-      {
-        "name": "Systems",
-        "ducats": 15,
-        "droplocations": [
-          {
-            "name": "Neo D1",
-            "rarity": "Common"
-          }
-        ]
-      },
       {
         "name": "Blueprint",
         "ducats": 100,
@@ -1163,6 +1138,31 @@
             "rarity": "Uncommon"
           }
         ]
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Axi V2",
+            "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Neo D1",
+            "rarity": "Common"
+          }
+        ]
       }
     ]
   },
@@ -1172,8 +1172,13 @@
     "description": "<p>Release Date: March 5th, 2014</p><p>Rhino Prime is the primed variant of the Rhino Warframe featuring more powerful stats: possessing higher armor and sprint speed, as well as an additional  polarity.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 260,
+        "name": "Blueprint",
+        "ducats": 100,
+        "droplocations": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 100,
         "droplocations": []
       },
       {
@@ -1182,13 +1187,8 @@
         "droplocations": []
       },
       {
-        "name": "Blueprint",
-        "ducats": 100,
-        "droplocations": []
-      },
-      {
-        "name": "Chassis",
-        "ducats": 100,
+        "name": "Set",
+        "ducats": 260,
         "droplocations": []
       },
       {
@@ -1204,18 +1204,8 @@
     "description": "<p>Release Date: June 11th, 2014</p><p>Loki Prime is the primed variant of the Loki Warframe featuring more powerful stats: possessing a higher energy capacity, as well as an additional  and a  polarity.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 175,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
+        "name": "Blueprint",
         "ducats": 15,
-        "droplocations": []
-      },
-      {
-        "name": "Systems",
-        "ducats": 100,
         "droplocations": []
       },
       {
@@ -1224,8 +1214,18 @@
         "droplocations": []
       },
       {
-        "name": "Blueprint",
+        "name": "Neuroptics",
         "ducats": 15,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 175,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 100,
         "droplocations": []
       }
     ]
@@ -1235,21 +1235,6 @@
     "type": "Prime",
     "description": "<p>Release Date: September 23rd, 2014</p><p>Nyx Prime is the primed variant of the Nyx Warframe featuring more powerful stats: possessing higher armor, sprint speed and shield capacity, as well as an additional  polarity.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 260,
-        "droplocations": []
-      },
-      {
-        "name": "Neuroptics",
-        "ducats": 100,
-        "droplocations": [
-          {
-            "name": "Meso N1",
-            "rarity": "Rare"
-          }
-        ]
-      },
       {
         "name": "Blueprint",
         "ducats": 15,
@@ -1273,6 +1258,21 @@
             "rarity": "Rare"
           }
         ]
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Meso N1",
+            "rarity": "Rare"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": 260,
+        "droplocations": []
       },
       {
         "name": "Systems",
@@ -6428,12 +6428,12 @@
     "description": "<p>Wyrm Prime is the first Prime Sentinel, a version of Wyrm featuring Orokin styling and modified stats.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 90,
+        "name": "Blueprint",
+        "ducats": 15,
         "droplocations": []
       },
       {
-        "name": "Blueprint",
+        "name": "Carapace",
         "ducats": 15,
         "droplocations": []
       },
@@ -6443,8 +6443,8 @@
         "droplocations": []
       },
       {
-        "name": "Carapace",
-        "ducats": 15,
+        "name": "Set",
+        "ducats": 90,
         "droplocations": []
       },
       {
@@ -7209,11 +7209,6 @@
     "description": "<p>Release Date: March 24th, 2015</p><p>Comparisons:</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 120,
-        "droplocations": []
-      },
-      {
         "name": "Blueprint",
         "ducats": 45,
         "droplocations": [
@@ -7246,14 +7241,9 @@
         ]
       },
       {
-        "name": "Wings",
-        "ducats": 45,
-        "droplocations": [
-          {
-            "name": "Axi N1",
-            "rarity": "Uncommon"
-          }
-        ]
+        "name": "Set",
+        "ducats": 120,
+        "droplocations": []
       },
       {
         "name": "Systems",
@@ -7270,6 +7260,16 @@
           {
             "name": "Axi V1",
             "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Wings",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Axi N1",
+            "rarity": "Uncommon"
           }
         ]
       }
@@ -7632,11 +7632,6 @@
     "description": "<p>The Primed version of the Carrier Sentinel, the Carrier Prime features increased health and armor, and comes with the enhanced Sweeper Prime weapon. </p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 145,
-        "droplocations": []
-      },
-      {
         "name": "Blueprint",
         "ducats": 15,
         "droplocations": [
@@ -7646,6 +7641,20 @@
           },
           {
             "name": "Neo S3",
+            "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Carapace",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Neo S1",
+            "rarity": "Common"
+          },
+          {
+            "name": "Axi N2",
             "rarity": "Common"
           }
         ]
@@ -7665,18 +7674,9 @@
         ]
       },
       {
-        "name": "Carapace",
-        "ducats": 15,
-        "droplocations": [
-          {
-            "name": "Neo S1",
-            "rarity": "Common"
-          },
-          {
-            "name": "Axi N2",
-            "rarity": "Common"
-          }
-        ]
+        "name": "Set",
+        "ducats": 145,
+        "droplocations": []
       },
       {
         "name": "Systems",
@@ -7707,11 +7707,6 @@
     "type": "Prime",
     "description": "<p>The Vectis Prime is the prime version of the Vectis sniper rifle. Featuring higher base damage and a doubled magazine, the Vectis Prime retains the standard version's 4x zoom setting, but swaps the Vectis' 3x zoom for a much higher 10x zoom, allowing for both medium and long range combat.</p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 260,
-        "droplocations": []
-      },
       {
         "name": "Barrel",
         "ducats": 15,
@@ -7745,6 +7740,11 @@
             "rarity": "Rare"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 260,
+        "droplocations": []
       },
       {
         "name": "Stock",
@@ -8210,9 +8210,14 @@
     "description": "<p>The Dual Kamas Prime are the Primed versions of the Dual Kamas, featuring higher damage as well as improvements to most stats.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 160,
-        "droplocations": []
+        "name": "Blade",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Meso D1",
+            "rarity": "Rare"
+          }
+        ]
       },
       {
         "name": "Blueprint",
@@ -8233,16 +8238,6 @@
         ]
       },
       {
-        "name": "Blade",
-        "ducats": 100,
-        "droplocations": [
-          {
-            "name": "Meso D1",
-            "rarity": "Rare"
-          }
-        ]
-      },
-      {
         "name": "Handle",
         "ducats": 45,
         "droplocations": [
@@ -8259,6 +8254,11 @@
             "rarity": "Uncommon"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 160,
+        "droplocations": []
       }
     ]
   },
@@ -8268,9 +8268,18 @@
     "description": "<p>The Kavasa Prime Collar is a Prime collar of Orokin design that can be equipped on a player's Kubrow. It records their genetic memory and DNA, allowing them to be reconstructed in an Incubator, just like the Taichen Collar. Equipping the collar grants +10 Health, +10 Shields, and +100 Armor to a kubrow. Health bonus is modified by DNA Stability.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 190,
-        "droplocations": []
+        "name": "Band",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Lith C1",
+            "rarity": "Uncommon"
+          },
+          {
+            "name": "Lith S2",
+            "rarity": "Uncommon"
+          }
+        ]
       },
       {
         "name": "Blueprint",
@@ -8301,18 +8310,9 @@
         ]
       },
       {
-        "name": "Band",
-        "ducats": 45,
-        "droplocations": [
-          {
-            "name": "Lith C1",
-            "rarity": "Uncommon"
-          },
-          {
-            "name": "Lith S2",
-            "rarity": "Uncommon"
-          }
-        ]
+        "name": "Set",
+        "ducats": 190,
+        "droplocations": []
       }
     ]
   },
@@ -10786,9 +10786,14 @@
     "description": "<p>The Nikana Prime is the primed version of the Nikana, added in Hotfix 18.4.12.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 300,
-        "droplocations": []
+        "name": "Blade",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Meso V2",
+            "rarity": "Rare"
+          }
+        ]
       },
       {
         "name": "Blueprint",
@@ -10796,16 +10801,6 @@
         "droplocations": [
           {
             "name": "Axi A1",
-            "rarity": "Rare"
-          }
-        ]
-      },
-      {
-        "name": "Blade",
-        "ducats": 100,
-        "droplocations": [
-          {
-            "name": "Meso V2",
             "rarity": "Rare"
           }
         ]
@@ -10819,6 +10814,11 @@
             "rarity": "Rare"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 300,
+        "droplocations": []
       }
     ]
   },
@@ -11314,11 +11314,6 @@
     "description": "<p>Fragor Prime is the Prime variant of the Fragor.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 215,
-        "droplocations": []
-      },
-      {
         "name": "Blueprint",
         "ducats": 100,
         "droplocations": [
@@ -11351,6 +11346,11 @@
             "rarity": "Common"
           }
         ]
+      },
+      {
+        "name": "Set",
+        "ducats": 215,
+        "droplocations": []
       }
     ]
   },
@@ -11360,9 +11360,14 @@
     "description": "<p>Akstiletto Prime is the Prime variant of the Akstiletto.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 235,
-        "droplocations": []
+        "name": "Barrel",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Axi A1",
+            "rarity": "Uncommon"
+          }
+        ]
       },
       {
         "name": "Blueprint",
@@ -11375,11 +11380,11 @@
         ]
       },
       {
-        "name": "Barrel",
+        "name": "Link",
         "ducats": 45,
         "droplocations": [
           {
-            "name": "Axi A1",
+            "name": "Axi N1",
             "rarity": "Uncommon"
           }
         ]
@@ -11399,14 +11404,9 @@
         ]
       },
       {
-        "name": "Link",
-        "ducats": 45,
-        "droplocations": [
-          {
-            "name": "Axi N1",
-            "rarity": "Uncommon"
-          }
-        ]
+        "name": "Set",
+        "ducats": 235,
+        "droplocations": []
       }
     ]
   },
@@ -13673,9 +13673,14 @@
     "description": "<p>Release Date: August 23rd, 2016</p><p>Nekros Prime is the Prime variant of the Nekros Warframe featuring higher shields and power values, as well as an additional  polarity.</p>",
     "components": [
       {
-        "name": "Set",
-        "ducats": 260,
-        "droplocations": []
+        "name": "Blueprint",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Axi N3",
+            "rarity": "Rare"
+          }
+        ]
       },
       {
         "name": "Chassis",
@@ -13702,21 +13707,16 @@
         ]
       },
       {
+        "name": "Set",
+        "ducats": 260,
+        "droplocations": []
+      },
+      {
         "name": "Systems",
         "ducats": 100,
         "droplocations": [
           {
             "name": "Neo N3",
-            "rarity": "Rare"
-          }
-        ]
-      },
-      {
-        "name": "Blueprint",
-        "ducats": 100,
-        "droplocations": [
-          {
-            "name": "Axi N3",
             "rarity": "Rare"
           }
         ]
@@ -13728,21 +13728,6 @@
     "type": "Melee",
     "description": "<p>Galatine Prime is the primed variant of the Galatine heavy sword. </p>",
     "components": [
-      {
-        "name": "Set",
-        "ducats": 160,
-        "droplocations": []
-      },
-      {
-        "name": "Handle",
-        "ducats": 45,
-        "droplocations": [
-          {
-            "name": "Neo V2",
-            "rarity": "Uncommon"
-          }
-        ]
-      },
       {
         "name": "Blade",
         "ducats": 15,
@@ -13770,6 +13755,21 @@
             "rarity": "Rare"
           }
         ]
+      },
+      {
+        "name": "Handle",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Neo V2",
+            "rarity": "Uncommon"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": 160,
+        "droplocations": []
       }
     ]
   },
