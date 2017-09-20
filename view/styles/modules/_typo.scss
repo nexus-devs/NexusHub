@@ -23,6 +23,10 @@ h5 {
   font-size: 1.2em;
 }
 
+p {
+  max-width: 800px;
+}
+
 p + p {
   margin-top: 10px;
 }
@@ -31,5 +35,8 @@ h1, h2, h3, h4, h5 {
   span {
     display: inline-block;
     vertical-align: middle;
+  }
+  & + p {
+    margin-top: 5px;
   }
 }

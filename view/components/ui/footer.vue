@@ -5,7 +5,7 @@
     <img src="/img/memes/goose.png" class="ico-48 goose">
     <div class="resources">
       <router-link to="/contact">Contact</router-link>
-      <router-link to="">Open Source</router-link>
+      <router-link to="/open-source">Open Source</router-link>
       <router-link to="">Developers</router-link>
       <router-link to="">Privacy Policy</router-link>
       <router-link to="">Imprint</router-link>

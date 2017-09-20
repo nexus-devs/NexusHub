@@ -38,7 +38,7 @@ export default {
     position: relative;
     width: calc(100% - 50px);
     padding: 14px 25px;
-    z-index: 1;
+    z-index: 2;
     align-items: center;
 
     a {
