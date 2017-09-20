@@ -21,7 +21,6 @@
 
 <script>
 import tooltip from './modules/tooltip.vue'
-let lastPos = 0
 
 const store = {
   state: {
@@ -86,11 +85,9 @@ export default {
       if (e.eventType <= 4) {
         if (this.$store.state.sidebar.active && e.deltaX < 0) {
           this.$store.commit('setSidebarDeltaX', e.deltaX)
-          lastPos = e.deltaX
         }
         if (!this.$store.state.sidebar.active && e.deltaX > 0 && e.deltaX <= 300) {
           this.$store.commit('setSidebarDeltaX', -300 + e.deltaX)
-          lastPos = e.deltaX
         }
       }
     },

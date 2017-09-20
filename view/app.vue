@@ -3,7 +3,7 @@
     <sidebar></sidebar>
     <navigation></navigation>
     <notification></notification>
-    <div class="app-content" v-bind:class="{ activeSidebar }"
+    <div class="app-content" v-bind:class="{ activeSidebar, deltaX }"
      v-bind:style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
                    'margin-right': `calc(${deltaX + 262}px + 5vw)`,
                    'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
@@ -112,6 +112,13 @@ export default {
   min-height: calc(100vh - 56px);
   will-change: transform margin-right;
 
+  // Disable accidental text selection on sidebar touch
+  &.deltaX {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
   .g-ct {
     will-change: padding;
   }
