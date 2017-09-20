@@ -1,5 +1,5 @@
 <template>
-  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }" v-on:panend="reset">
+  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }">
     <div class="nav-upper" v-on:click="toggle(true)">
       <div class="ico-wrapper">
         <div class="panel-backdrop" v-bind:style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }"></div>
@@ -78,6 +78,11 @@ export default {
       this.$store.commit('toggleSidebar', expanded)
     },
     move(e) {
+      // Reset on end
+      if (e.isFinal) {
+        return this.reset()
+      }
+      // Horizontal only
       if (e.eventType <= 4) {
         if (this.$store.state.sidebar.active && e.deltaX < 0) {
           this.$store.commit('setSidebarDeltaX', e.deltaX)
