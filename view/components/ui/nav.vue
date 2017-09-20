@@ -37,8 +37,8 @@ export default {
   nav {
     position: relative;
     width: calc(100% - 50px);
-    z-index: 1;
     padding: 14px 25px;
+    z-index: 1;
     align-items: center;
 
     a {
@@ -46,7 +46,7 @@ export default {
       font-size: 0.9em;
     }
 
-    @media (max-width: $breakpoint-s) {
+    @media (max-width: $breakpoint-m) {
       position: fixed;
       background: $colorBackgroundDark;
       @include shadow-1;

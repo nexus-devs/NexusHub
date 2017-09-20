@@ -40,7 +40,7 @@
     display: none;
   }
   .field {
-    border-radius: 9999px;
+    border-radius: 2px;
     padding: 8px 15px;
     background: $colorBackgroundDarker;
   }
@@ -66,7 +66,7 @@
     z-index: 1;
     overflow: hidden;
     margin-top: -29.5px;
-    border-radius: 9999px;
+    border-radius: 2px;
     right: 35px;
     height: 37px;
     width: 60px;

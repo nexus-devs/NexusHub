@@ -3,12 +3,11 @@ const Endpoint = require(blitz.config[blitz.id].endpointParent)
 /**
  * Contains multi-purpose functions for child-methods and provides default values
  */
-class Index extends Endpoint {
+class Contact extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
-    this.schema.url = "/warframe"
-    this.schema.view = "templates/warframe/index.vue"
+    this.schema.view = "templates/contact.vue"
   }
 }
 
-module.exports = Index
+module.exports = Contact

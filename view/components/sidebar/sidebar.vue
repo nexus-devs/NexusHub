@@ -13,7 +13,6 @@
       <div class="nav-lower-backdrop"></div>
       <slot></slot>
     </div>
-
   </v-touch>
 </template>
 
@@ -112,7 +111,9 @@ export default {
 @import '~src/styles/partials/importer';
 
 nav {
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;

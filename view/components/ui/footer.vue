@@ -4,7 +4,7 @@
       v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
     <img src="/img/memes/goose.png" class="ico-48 goose">
     <div class="resources">
-      <router-link to="">Contact</router-link>
+      <router-link to="/contact">Contact</router-link>
       <router-link to="">Open Source</router-link>
       <router-link to="">Developers</router-link>
       <router-link to="">Privacy Policy</router-link>
@@ -12,8 +12,8 @@
       <router-link to="">Sitemap</router-link>
     </div>
     <div class="brands">
-      <a href="https://warframe.market"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
-      <a href="https://discord.gg/TCxe6P4"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
+      <a href="https://warframe.market" target="_blank"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
+      <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
     </div>
   </footer>
 </template>
