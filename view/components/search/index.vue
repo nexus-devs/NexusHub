@@ -1,17 +1,15 @@
 <template>
-  <div class="search-components">
-    <div class="g-ct">
-      <h1>
-        <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
-        <span>Search for item prices, player data and more.</span>
-      </h1>
-      <div class="row">
-        <searchfield></searchfield>
-        <timefield></timefield>
-        <rankfield>
-          <searchbutton></searchbutton>
-        </rankfield>
-      </div>
+  <div class="search-components g-ct">
+    <h1>
+      <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
+      <span>Search for item prices, player data and more.</span>
+    </h1>
+    <div class="row">
+      <searchfield></searchfield>
+      <timefield></timefield>
+      <rankfield>
+        <searchbutton></searchbutton>
+      </rankfield>
     </div>
   </div>
 </template>

@@ -4,23 +4,15 @@
  * Main content wrapper
  */
 .g-ct {
-  position: relative;
-  width: 100%;
   max-width: $max-width;
   padding: 0 96px 0 160px;
   margin: auto;
 
-  & > section {
-    padding: 80px 30px;
-    margin: 0 -30px;
-  }
-
-  & > section:first-of-type {
-    margin-top: 20px;
-  }
-
-  & > section:last-of-type {
-    margin-bottom: 40px;
+  &:last-of-type {
+    section {
+      border-bottom: none;
+      margin-bottom: 40px;
+    }
   }
 
   @media(max-width: $breakpoint-m) {
@@ -29,6 +21,16 @@
   @media(max-width: $breakpoint-s) {
     padding: 0 24px;
   }
+}
+
+/**
+ * Sections
+ */
+section {
+  display: flex;
+  flex-flow: column;
+  padding: 70px 0;
+  border-bottom: 1px solid $colorSubtleDark;
 }
 
 /**

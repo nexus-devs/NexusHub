@@ -59,7 +59,7 @@ export default {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
     },
     deltaX() {
-      return this.$store.state.sidebar.deltaX
+      return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
     }
   },
   methods: {
@@ -119,10 +119,10 @@ export default {
     -ms-user-select: none;
     user-select: none;
   }
-  .g-ct {
+  & > .g-ct {
     will-change: padding;
   }
-  @media (max-width: $breakpoint-s) {
+  @media (max-width: $breakpoint-m) {
     min-height: 100vh;
   }
 }
@@ -139,7 +139,7 @@ export default {
     margin-right: calc(262px + 5vw);
     transform: translateX(calc(262px + 5vw));
 
-    /deep/ .g-ct {
+    & > .g-ct {
       padding: 0 96px;
     }
   }

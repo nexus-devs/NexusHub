@@ -1,39 +1,45 @@
 <template>
   <div>
-    <search></search>
+    <header>
+      <search></search>
+    </header>
   </div>
 </template>
 
 
 
 <script>
-  import Search from 'src/components/search/index.vue'
-  export default {
-    beforeMount() {
-      this.$store.commit('setActiveGame', 'warframe')
-    },
-    components: {
-      Search
-    }
+import search from 'src/components/search/index.vue'
+
+export default {
+  beforeMount() {
+    this.$store.commit('setActiveGame', 'warframe')
+  },
+  components: {
+    search
   }
+}
 </script>
 
 
 
 <style lang='scss' scoped>
-  @import '~src/styles/partials/importer';
+@import '~src/styles/partials/importer';
 
-  /deep/ .search-components {
-    display:flex;
-    height: 45vh;
-    min-height: 500px;
+header {
+  display:flex;
+  height: 45vh;
+  min-height: 500px;
+  width: 100%;
+  align-items: center;
+  background: url('/img/warframe/index/search-bg.jpg');
+  background-size: cover;
+
+  .search-components {
     width: 100%;
-    align-items: center;
-    background: url('/img/warframe/index/search-bg.jpg');
-    background-size: cover;
-
-    @media (max-width: $breakpoint-s) {
-      padding-top: 40px;
-    }
   }
+  @media (max-width: $breakpoint-m) {
+    padding-top: 40px;
+  }
+}
 </style>
