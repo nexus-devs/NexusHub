@@ -1,5 +1,5 @@
 <template>
-  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }" v-on:panend="reset" v-bind:pan-options="{ direction: 'horizontal'}">
+  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }" v-on:panend="reset">
     <div class="nav-upper" v-on:click="toggle(true)">
       <div class="ico-wrapper">
         <div class="panel-backdrop" v-bind:style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }"></div>
@@ -21,6 +21,7 @@
 
 <script>
 import tooltip from './modules/tooltip.vue'
+let lastPos = 0
 
 const store = {
   state: {
@@ -77,11 +78,15 @@ export default {
       this.$store.commit('toggleSidebar', expanded)
     },
     move(e) {
-      if (this.$store.state.sidebar.active && e.deltaX < 0) {
-        this.$store.commit('setSidebarDeltaX', e.deltaX)
-      }
-      if (!this.$store.state.sidebar.active && e.deltaX > 0 && e.deltaX <= 300) {
-        this.$store.commit('setSidebarDeltaX', -300 + e.deltaX)
+      if (e.eventType <= 4) {
+        if (this.$store.state.sidebar.active && e.deltaX < 0) {
+          this.$store.commit('setSidebarDeltaX', e.deltaX)
+          lastPos = e.deltaX
+        }
+        if (!this.$store.state.sidebar.active && e.deltaX > 0 && e.deltaX <= 300) {
+          this.$store.commit('setSidebarDeltaX', -300 + e.deltaX)
+          lastPos = e.deltaX
+        }
       }
     },
     reset() {
