@@ -2,7 +2,7 @@
   <div>
     <ui-header>
       <h1 slot="headline">Contact</h1>
-      <p slot="description">Wanna talk with us? Or just feeling lonely? We'll be there.</p>
+      <p slot="description">Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
     </ui-header>
     <div class="g-ct">
       <section>
