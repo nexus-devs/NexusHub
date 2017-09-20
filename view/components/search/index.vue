@@ -119,7 +119,7 @@
   /deep/ .col-b .tools {
     position: absolute;
     border-radius: 2px;
-    background: rgba(27, 32, 37, 0.8);
+    background: rgba(27, 32, 37, 0.7);
     width: calc(33.33% - 2px);
     margin-top: -1px;
     margin-left: 1px;

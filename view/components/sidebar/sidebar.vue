@@ -114,7 +114,7 @@ nav {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   position: fixed;
