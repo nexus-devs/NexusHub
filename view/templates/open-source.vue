@@ -25,7 +25,7 @@
           <h2>Documentation</h2>
           <p>
             For documentation regarding our source code, you'll find everything
-            in the repository readmes. For our API Documentation, please view
+            in the repository readmes. For our API documentation, please view
             <a href="https://developers.nexus-stats.com/api">this page</a>.
           </p>
       </section>

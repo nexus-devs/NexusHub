@@ -1,19 +1,41 @@
 <template>
   <footer>
-    <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-36 logo" v-on:mousedown="track"
-      v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
-    <img src="/img/memes/goose.png" class="ico-48 goose">
-    <div class="resources">
-      <router-link to="/contact">Contact</router-link>
-      <router-link to="/open-source">Open Source</router-link>
-      <router-link to="">Developers</router-link>
-      <router-link to="">Privacy Policy</router-link>
-      <router-link to="">Imprint</router-link>
-      <router-link to="">Sitemap</router-link>
-    </div>
-    <div class="brands">
-      <a href="https://warframe.market" target="_blank"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
-      <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
+    <div class="g-ct">
+      <div class="row row-b">
+        <div class="col-b">
+          <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo" v-on:mousedown="track"
+            v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
+          <img src="/img/memes/goose.png" class="ico-48 goose">
+        </div>
+        <div class="col-b">
+
+        </div>
+        <div class="col-b">
+          <h4>Product</h4>
+          <router-link to="/open-source">Open Source</router-link>
+          <router-link to="/branding">Branding</router-link>
+        </div>
+        <div class="col-b">
+          <h4>Developers</h4>
+          <router-link to="/">Applications</router-link>
+          <router-link to="https://developers.nexus-stats.com/api">API Documentation</router-link>
+          <router-link to="https://developers.nexus-stats.com/contribute">Contributions</router-link>
+        </div>
+        <div class="col-b">
+          <h4>Resources</h4>
+          <router-link to="/privacy-policy">Privacy Policy</router-link>
+          <router-link to="/imprint">Imprint</router-link>
+          <router-link to="/sitemap">Sitemap</router-link>
+        </div>
+        <div class="col-b">
+          <h4>Company</h4>
+          <router-link to="/privacy-policy">About</router-link>
+        </div>
+      </div>
+      <div class="brands">
+        <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
+        <a href="https://warframe.market" target="_blank"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
+      </div>
     </div>
   </footer>
 </template>
@@ -60,22 +82,65 @@
 
   footer {
     margin-top: auto;
-    text-align: center;
     padding: 0 0 20px;
     background: $colorBackgroundDarker;
+
+    .row {
+      padding: 10 0;
+      border-bottom: 1px solid $colorSubtleDark;
+    }
+
+    .col-b {
+      padding: 20px 10px;
+
+      @media (max-width: $breakpoint-s) {
+        padding: 5px 5px 20px;
+      }
+      &:first-of-type {
+        padding-left: 0;
+      }
+      &:last-of-type {
+        padding-right: 0;
+      }
+      // Dummy for mobile
+      &:nth-of-type(2) {
+        padding: 0;
+        flex: 0;
+        flex-basis: 0;
+
+        @media (max-width: $breakpoint-s) {
+          flex: 1;
+          flex-basis: calc(50% - 50px);
+        }
+      }
+      h4 {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+      }
+      a {
+        display: block;
+        font-size: 0.9em;
+        color: $colorFontSubtle !important;
+
+        &:hover {
+          color: white !important;
+        }
+      }
+    }
 
     .logo {
       position: relative;
       z-index: 1;
-      margin-top: 20px;
       opacity: 1;
       will-change: transform;
-      padding: 15px;
-      border-radius: 60px;
       background: $colorBackgroundDarker;
+      padding: 0;
 
       &:hover{
         @include shadow-1;
+      }
+      @media(max-width: $breakpoint-s) {
+          margin-top: 10px;
       }
     }
 
@@ -85,43 +150,26 @@
       margin-top: 30px;
       z-index: 0;
       border-radius: 60px;
-    }
 
-    .resources {
-      max-width: $max-width;
-      padding: 10px 0;
-      margin: auto;
-
-      a {
-        color: $colorFontSubtle !important;
-        padding: 0 10px;
-        border-right: 1px solid $colorSubtle;
-        font-size: 0.9em;
-        line-height: 0.8;
-
-        &:hover {
-          color: white !important;
-        }
-
-        &:last-of-type {
-          border-right: none;
-        }
-
-        @media (max-width: $breakpoint-s) {
-          display: inline-block;
-          margin: 5px 0;
-        }
+      @media (max-width: $breakpoint-s) {
+        display: none;
       }
     }
 
     .brands {
-      margin-top: 5px;
+      margin-top: 25px;
       margin-bottom: 10px;
 
       a {
         opacity: 0.65;
         margin: 0 15px;
 
+        &:first-of-type {
+          margin-left: 0;
+        }
+        &:last-of-type {
+          margin-right: 0;
+        }
         &:hover {
           opacity: 1 !important;
         }
@@ -133,17 +181,6 @@
         img {
           height: 28px;
         }
-      }
-    }
-
-    @media (max-width: $breakpoint-s) {
-      .logo, .goose {
-        height: 28px;
-        padding: 10px;
-        margin-bottom: -10px;
-      }
-      .goose {
-        height: 26px;
       }
     }
   }
