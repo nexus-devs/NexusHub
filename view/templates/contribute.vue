@@ -95,7 +95,8 @@ a {
 }
 
 p + span {
-  margin-top: 10px;
+  display: inline-block;
+  margin-top: 20px;
   font-size: 0.9em;
   opacity: 0.6;
 }
