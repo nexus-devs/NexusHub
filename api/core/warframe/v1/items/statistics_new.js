@@ -485,7 +485,7 @@ class Statistics extends Endpoint {
       }
 
       // Clean up component
-      //delete component.requests
+      delete component.requests
       delete component.offers.ignore
     })
 
@@ -496,7 +496,7 @@ class Statistics extends Endpoint {
     }
 
     // Clean up doc
-    //delete doc.requests
+    delete doc.requests
     delete doc.offers.ignore
   }
 
