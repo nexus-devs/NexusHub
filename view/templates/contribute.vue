@@ -13,17 +13,32 @@
             please take the following points into consideration to ensure your
             feature meets our quality standards.
           </p>
-          <h3>Which problem will your feature solve?</h3>
-          <p>
-            The most important part of each feature is that it solves actual
-            problems. Having features merely for their own sake will just take
-            away attention from the features that matter.
-          </p>
-          <h3>What scenario will your feature be used in?</h3>
-          <p>
-            The usage context of a feature is indispensable for us to ensure
-            the best possible UX.
-          </p>
+          <div class="list-container">
+            <div class="list-number">
+              <span>1</span>
+            </div>
+            <div class="list-description">
+              <h3>Which problem will your feature solve?</h3>
+              <p>
+                The most important part of each feature is that it solves actual
+                problems. Having features exist for their own sake will just take
+                away attention from the features that matter.
+              </p>
+            </div>
+          </div>
+          <div class="list-container">
+            <div class="list-number">
+              <span>2</span>
+            </div>
+            <div class="list-description">
+              <h3>What scenario will your feature be used in?</h3>
+              <p>
+                The usage context of a feature is indispensable for us to ensure
+                the best possible UX.
+              </p>
+            </div>
+          </div>
+          <br>
           <br>
           <br>
           <p>
@@ -32,7 +47,6 @@
             even building it. This ensures your code will meet user expectations
             and not the other way around.
           </p>
-          <br>
           <span>
             Note: If you plan to build a UI feature and need help with design,
             feel free to contact Kilian#8972 on Discord.
@@ -76,12 +90,12 @@ a {
   margin-top: 15px;
 }
 
-h3 {
+.list-container:first-of-type {
   margin-top: 50px;
 }
 
-span {
-  margin-top: -10px;
+p + span {
+  margin-top: 10px;
   font-size: 0.9em;
   opacity: 0.6;
 }
