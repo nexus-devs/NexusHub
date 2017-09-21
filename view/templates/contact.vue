@@ -22,7 +22,7 @@
         <p>
           If you rather stick with traditional means of communication, you can also send us a mail!
         </p>
-        <a href="mailto:contact@nexus-stats.com?Subjet=Regarding%20Nexus-Stats">contact@nexus-stats.com</a>
+        <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20Nexus-Stats">contact@nexus-stats.com</a>
       </section>
     </div>
   </div>

@@ -17,19 +17,19 @@
         </div>
         <div class="col-b">
           <h4>Developers</h4>
-          <router-link to="/">Applications</router-link>
-          <router-link to="https://developers.nexus-stats.com/api">API Documentation</router-link>
-          <router-link to="https://developers.nexus-stats.com/contribute">Contributions</router-link>
+          <a href="https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE" target="_blank">API Documentation</a>
+          <router-link to="/contribute">Contribute</router-link>
+        </div>
+        <div class="col-b">
+          <h4>Company</h4>
+          <router-link to="/company">About</router-link>
+          <router-link to="/contact">Contact</router-link>
         </div>
         <div class="col-b">
           <h4>Resources</h4>
           <router-link to="/privacy-policy">Privacy Policy</router-link>
           <router-link to="/imprint">Imprint</router-link>
           <router-link to="/sitemap">Sitemap</router-link>
-        </div>
-        <div class="col-b">
-          <h4>Company</h4>
-          <router-link to="/privacy-policy">About</router-link>
         </div>
       </div>
       <div class="brands">
@@ -138,9 +138,6 @@
       padding-bottom: 60px;
       padding-right: 20px;
 
-      &:hover{
-        @include shadow-1;
-      }
       @media(max-width: $breakpoint-s) {
         margin-top: 10px;
         padding-bottom: 0;

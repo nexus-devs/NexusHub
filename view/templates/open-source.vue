@@ -26,7 +26,7 @@
           <p>
             For documentation regarding our source code, you'll find everything
             in the repository readmes. For our API documentation, please view
-            <a href="https://developers.nexus-stats.com/api">this page</a>.
+            <a href="https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE">this page</a>.
           </p>
       </section>
     </div>
@@ -39,7 +39,7 @@
           like the big guys, but we'll never forget your help for helping us
           make this platform secure.
         </p>
-        <a href="mailto:devs@nexus-stats.com?Subjet=System%20Vulnerability%20Inquiry">devs@nexus-stats.com</a>
+        <a href="mailto:devs@nexus-stats.com?Subject=System%20Vulnerability%20Inquiry">devs@nexus-stats.com</a>
       </section>
     </div>
   </div>
