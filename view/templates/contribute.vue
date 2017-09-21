@@ -28,7 +28,7 @@
           <br>
           <p>
             If you can answer these questions with ease, go ahead and open a
-            <a>new issue here</a>. Please make sure to document your code before
+            <a href="https://github.com/nexus-devs/nexus-stats/issues/new?title=Feature%20Proposal:&body=%23%23%23%20Which%20problem%20will%20your%20feature%20solve?%0A[enter%20here]%0A%0A%23%23%23%20What%20scenario%20will%20your%20feature%20be%20used%20in?%0A[enter%20here]%0A%0A%23%23%23%20Documentation%0A[document%20how%20your%20code%20will%20be%20used.%20You%20should%20do%20this%20before%20writing%20your%20first%20line%20of%20code.]" target="_blank">new issue here</a>. Please make sure to document your code before
             even building it. This ensures your code will meet user expectations
             and not the other way around.
           </p>
