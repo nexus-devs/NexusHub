@@ -424,7 +424,6 @@ class Statistics extends Endpoint {
       this.addToParent(combinedComponent, component)
 
       // Calculate component median
-      this.sortRequests(component)
       this.calculateMedian(component)
 
       // Push requests to doc
@@ -439,7 +438,6 @@ class Statistics extends Endpoint {
     this.addToParent(combined, doc)
 
     // Calculate doc median
-    this.sortRequests(doc)
     this.calculateMedian(doc)
 
     // Push requests to combined
@@ -487,7 +485,7 @@ class Statistics extends Endpoint {
       }
 
       // Clean up component
-      delete component.requests
+      //delete component.requests
       delete component.offers.ignore
     })
 
@@ -498,7 +496,7 @@ class Statistics extends Endpoint {
     }
 
     // Clean up doc
-    delete doc.requests
+    //delete doc.requests
     delete doc.offers.ignore
   }
 
@@ -534,7 +532,11 @@ class Statistics extends Endpoint {
   sortRequests(interval) {
 
     interval.requests.sort((a, b) => {
-      return a.price - b.price
+      if (typeof a === 'object')
+        return a.price - b.price
+
+      else
+        return a - b
     })
   }
 
@@ -553,6 +555,8 @@ class Statistics extends Endpoint {
    */
   calculateMedian(interval) {
 
+    this.sortRequests(interval)
+
     let medianLength = interval.requests.length
 
     // More than one value in array
@@ -566,11 +570,10 @@ class Statistics extends Endpoint {
       else
         interval.median = (interval.requests[medianLength / 2 - 1] + interval.requests[medianLength / 2]) / 2
 
-      // Only one value
+    // Only one value
     } else
       interval.median = medianLength > 0 ? interval.requests[0] : null
   }
-
 
   /**
    * Calculates the median from a given interval with objects
