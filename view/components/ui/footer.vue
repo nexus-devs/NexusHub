@@ -135,19 +135,22 @@
       will-change: transform;
       background: $colorBackgroundDarker;
       padding: 0;
+      padding-bottom: 60px;
+      padding-right: 20px;
 
       &:hover{
         @include shadow-1;
       }
       @media(max-width: $breakpoint-s) {
-          margin-top: 10px;
+        margin-top: 10px;
+        padding-bottom: 0;
       }
     }
 
     .goose {
       position: absolute;
-      margin-left: -60px;
-      margin-top: 30px;
+      margin-left: -85px;
+      margin-top: 10px;
       z-index: 0;
       border-radius: 60px;
 
