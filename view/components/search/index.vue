@@ -1,7 +1,7 @@
 <template>
   <div class="search-components g-ct">
     <h1>
-      <img src="/img/brand/logo-white-outline.svg" alt="nexus-stats" class="ico-32">
+      <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
       <span>Search for item prices, player data and more.</span>
     </h1>
     <div class="row">
@@ -92,6 +92,7 @@
       display: inline-block;
       color: white;
       margin-bottom: -10px;
+      margin-top: -3px;
 
       span {
         @include ease(0.15s);
@@ -99,7 +100,7 @@
     }
     input {
       padding-top: 10px;
-      padding-bottom: 9px;
+      padding-bottom: 8px;
     }
     .a-ie {
       margin-left:-10px;
@@ -107,7 +108,7 @@
     .autocomplete {
       position: absolute;
       left: 16px;
-      margin-top: 10px;
+      margin-top: 8px;
       z-index: 0;
     }
     .autocomplete-type {

@@ -19,13 +19,14 @@
 header {
   position: relative;
   overflow: hidden;
+  padding: 30px 0;
   top: -56px;
   margin-bottom: -56px;
   display: flex;
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-  background: $colorBackground;
+  @include gradient-background-dg($colorBackgroundLight, $colorBackground);
 
   svg {
     position: absolute;
@@ -33,7 +34,7 @@ header {
     bottom: -5vw;
     left: -60px;
     width: calc(100% + 60px);
-    opacity: 0.5;
+    opacity: 0.2;
     fill: $colorBackgroundDark;
   }
 
@@ -49,7 +50,7 @@ header {
   }
   @media (max-width: $breakpoint-m) {
     top: 0;
-    padding-top: 30px;
+    padding-top: 60px;
     margin-bottom: 0;
   }
 }

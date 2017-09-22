@@ -110,7 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 56px);
-  will-change: transform margin-right;
+  will-change: transform;
 
   // Disable accidental text selection on sidebar touch
   &.deltaX {
