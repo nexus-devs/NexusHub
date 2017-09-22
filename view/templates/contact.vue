@@ -15,8 +15,6 @@
             <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join</a>
           </div>
       </section>
-    </div>
-    <div class="g-ct">
       <section>
         <h2>E-Mail</h2>
         <p>

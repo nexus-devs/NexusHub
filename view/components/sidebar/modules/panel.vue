@@ -61,7 +61,7 @@ export default {
   @include ease(0.35s);
 
   .panel-head {
-    padding: 17px 35px;
+    padding: 15px 35px;
     cursor: pointer;
     border-top: 1px solid $colorSubtleDark;
     @include ease(0.3s);
@@ -74,6 +74,7 @@ export default {
       display: inline-block;
       vertical-align: middle;
       font-size: 1em;
+      font-weight: 400;
 
       // Shortcut
       & ~ span {

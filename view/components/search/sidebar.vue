@@ -41,7 +41,7 @@
   }
   .field {
     border-radius: 2px;
-    padding: 8px 15px;
+    padding: 6px 15px;
     background: $colorBackgroundDarker;
   }
   input {
@@ -52,7 +52,7 @@
   .autocomplete {
     position: absolute;
     left: 50px;
-    top: 85px;
+    top: 86.5px;
 
     @media (max-width: $breakpoint-m) {
       left: 40px;
@@ -65,10 +65,10 @@
     position: absolute;
     z-index: 1;
     overflow: hidden;
-    margin-top: -29.5px;
+    margin-top: -30.5px;
     border-radius: 2px;
     right: 35px;
-    height: 37px;
+    height: 36px;
     width: 60px;
 
     .button-icon {
@@ -143,7 +143,7 @@
         color: white;
       }
       .suggestion-type {
-        margin-top: -3px;
+        margin-top: -6px;
         font-size: 0.9em;
       }
     }

@@ -172,10 +172,10 @@ nav {
     .nav-lower {
       height: 100vh;
       @include ease-out(0.45s);
+      @include gradient-background($colorBackgroundLight, $colorBackground);
 
       .nav-lower-backdrop {
         position: absolute;
-        background: $colorBackgroundLight;
         height: 100vh;
         width: 100%;
         @include shadow-1;

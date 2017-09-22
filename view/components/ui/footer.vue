@@ -7,9 +7,7 @@
             v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
           <img src="/img/memes/goose.png" class="ico-48 goose">
         </div>
-        <div class="col-b">
-
-        </div>
+        <div class="col-b"></div>
         <div class="col-b">
           <h4>Product</h4>
           <router-link to="/open-source">Open Source</router-link>
@@ -114,6 +112,7 @@
         }
       }
       h4 {
+        margin-top: 5px;
         font-size: 0.9em;
         margin-bottom: 10px;
       }

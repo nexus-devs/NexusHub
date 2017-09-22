@@ -2,7 +2,7 @@
  * Shadows
  */
 @mixin shadow-1() {
-  box-shadow: 0 1px 12px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.22);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.22);
 }
 @mixin shadow-2() {
   box-shadow: 0 3px 6px rgba(0,0,0,0.04), 0 3px 6px rgba(0,0,0,0.14);

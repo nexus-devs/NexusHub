@@ -8,13 +8,6 @@
   padding: 0 96px 0 160px;
   margin: auto;
 
-  &:last-of-type {
-    section {
-      border-bottom: none;
-      margin-bottom: 40px;
-    }
-  }
-
   @media(max-width: $breakpoint-m) {
     padding: 0 96px;
   }
@@ -27,8 +20,13 @@
  * Sections
  */
 section {
-  padding: 70px 0;
+  padding: 120px 0;
   border-bottom: 1px solid $colorSubtleDark;
+
+  &:last-of-type {
+    border-bottom: none;
+    margin-bottom: 120px;
+  }
 }
 
 /**
@@ -43,17 +41,12 @@ section {
 
 .row-margin {
   @extend .row;
+  margin-left: -5px;
+  margin-right: 5px;
+  margin-bottom: -5px;
 
   & > * {
     margin: 5px;
-
-    &:first-child {
-      margin-left: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 }
 

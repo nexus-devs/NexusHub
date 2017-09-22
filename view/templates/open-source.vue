@@ -19,8 +19,6 @@
           </p>
           <a href="http://github.com/nexus-devs" target="_blank">www.github.com/nexus-devs</a>
       </section>
-    </div>
-    <div class="g-ct">
       <section>
           <h2>Documentation</h2>
           <p>
@@ -29,8 +27,6 @@
             <a href="https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE">this page</a>.
           </p>
       </section>
-    </div>
-    <div class="g-ct">
       <section>
         <h2>Responsible Disclosure</h2>
         <p>
