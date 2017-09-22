@@ -12,8 +12,8 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.4.12",
-    "blitz-js-core": "^0.4.7",
+    "blitz-js": "^0.4.13",
+    "blitz-js-core": "^0.4.8",
     "chalk": "^2.1.0",
     "keyboardjs": "^2.3.4",
     "moment": "^2.18.1"

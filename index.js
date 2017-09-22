@@ -6,7 +6,7 @@ const Core = require('blitz-js-core')
 /**
  * Load blitz-js framework
  */
-const Blitz = require('../../blitz/blitz-js')(config)
+const Blitz = require('blitz-js')(config)
 
 /**
  * Core worker node for heavy processing. Item statistics, player data, etc.
