@@ -46,20 +46,6 @@
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White Nexus-Stats Logo">
-              <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
-              </div>
-            </div>
-            <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color Nexus-Stats Logo">
-              <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
-              </div>
-            </div>
-            <div class="col logo-alt">
               <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color Nexus-Stats Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-v-color.svg" download>.svg</a>
@@ -67,10 +53,24 @@
               </div>
             </div>
             <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
               <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White Nexus-Stats Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-v-bw.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-v-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
