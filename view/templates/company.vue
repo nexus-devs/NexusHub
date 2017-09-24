@@ -2,7 +2,7 @@
   <div class="">
     <div class="company">
       <video playsinline autoplay muted loop class="background">
-        <source src="/img/company/booberon.webm" type="video/webm">
+        <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
       </video>
       <div class="g-ct">
         <div class="row">

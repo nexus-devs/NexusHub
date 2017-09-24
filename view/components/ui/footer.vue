@@ -2,7 +2,7 @@
   <footer>
     <div class="g-ct">
       <div class="row row-b">
-        <v-touch class="col-b" v-on:pan="track">
+        <v-touch class="col-b" v-on:pan="move">
             <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo"
               v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
             <img src="/img/memes/goose.png" class="ico-48 goose">
@@ -49,25 +49,14 @@
     },
 
     methods: {
-      track() {
-        document.onmousemove = this.move
-        document.onmouseup = this.untrack
-        setTimeout(() => {
-          this.$store.dispatch('pushNotification', {
+      move(e) {
+        if (e.isFinal) {
+          return this.$store.dispatch('pushNotification', {
             title: '( ͡° ͜ʖ ͡°)',
             content: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
           })
-        }, 1500)
-      },
-      untrack() {
-        document.onmousemove = null
-        document.onmouseup = null
-      },
-      move(event) {
-        let posX = this.position[0]
-        let posY = this.position[1]
-        let updated = [posX += event.movementX, posY += event.movementY]
-        this.position = updated
+        }
+        this.position = [e.deltaX, e.deltaY]
       }
     }
   }

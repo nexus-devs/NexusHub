@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="notification-container">
     <div class="notification" v-bind:class="{ active }">
       <div class="navigation a-ie" v-on:click="next">
         <img src="/img/notifications/arrow-left.svg" class="ico-24" alt="next">
@@ -127,14 +127,18 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
+.notification-container {
+  position: fixed;
+  overflow: hidden;
+  z-index: 2;
+  right: 0;
+  bottom: 15vh;
+}
 .notification {
-    position: fixed;
-    overflow: hidden;
+    position: relative;
+    z-index: 1;
     background: $colorBackground;
     padding: 15px 5px;
-    z-index: 3;
-    right: 0;
-    bottom: 15vh;
     transform: translateX(500px);
     transition-delay: 0.1s;
     @include ease-out(0.5s);
