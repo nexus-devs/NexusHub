@@ -63,7 +63,7 @@ export default {
 
     .game {
       position: relative;
-      top: 1.75px;
+      top: 1.5px;
       vertical-align: middle;
       text-transform: uppercase;
       font-size: 0.75em;
