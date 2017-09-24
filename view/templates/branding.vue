@@ -148,6 +148,10 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+p {
+  font-size: 1.05em;
+}
+
 header {
   img {
     display: inline-block;

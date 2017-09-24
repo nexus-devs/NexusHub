@@ -2,11 +2,11 @@
   <footer>
     <div class="g-ct">
       <div class="row row-b">
-        <div class="col-b">
-          <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo" v-on:mousedown="track"
-            v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
-          <img src="/img/memes/goose.png" class="ico-48 goose">
-        </div>
+        <v-touch class="col-b" v-on:pan="track">
+            <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo"
+              v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
+            <img src="/img/memes/goose.png" class="ico-48 goose">
+        </v-touch>
         <div class="col-b"></div>
         <div class="col-b">
           <h4>Product</h4>
@@ -25,9 +25,9 @@
         </div>
         <div class="col-b">
           <h4>Resources</h4>
-          <router-link to="/privacy-policy">Privacy Policy</router-link>
+          <router-link to="/privacy">Privacy Policy</router-link>
           <router-link to="/imprint">Imprint</router-link>
-          <router-link to="/sitemap">Sitemap</router-link>
+          <a href="/sitemap.txt">Sitemap</a>
         </div>
       </div>
       <div class="brands">
