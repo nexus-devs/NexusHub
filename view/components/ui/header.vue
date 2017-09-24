@@ -34,6 +34,7 @@ header {
     bottom: -5vw;
     left: -60px;
     width: calc(100% + 60px);
+    min-width: 1600px;
     opacity: 0.2;
     fill: $colorBackgroundDark;
   }

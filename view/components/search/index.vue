@@ -108,7 +108,7 @@
     .autocomplete {
       position: absolute;
       left: 16px;
-      margin-top: 8px;
+      margin-top: 7px;
       z-index: 0;
     }
     .autocomplete-type {

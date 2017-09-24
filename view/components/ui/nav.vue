@@ -37,7 +37,7 @@ export default {
   nav {
     position: relative;
     width: calc(100% - 50px);
-    padding: 14px 25px;
+    padding: 13.25px 25px;
     z-index: 2;
     align-items: center;
 
@@ -63,7 +63,7 @@ export default {
 
     .game {
       position: relative;
-      top: 1px;
+      top: 1.75px;
       vertical-align: middle;
       text-transform: uppercase;
       font-size: 0.75em;

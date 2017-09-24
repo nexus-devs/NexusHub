@@ -84,14 +84,15 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+p {
+  font-size: 1.05em;
+}
 a {
   margin-top: 15px;
 }
-
 .list-container:first-of-type {
   margin-top: 50px;
 }
-
 p + span {
   display: inline-block;
   margin-top: 20px;

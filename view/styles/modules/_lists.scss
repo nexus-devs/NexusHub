@@ -23,7 +23,7 @@
     width: 35px;
     height: 35px;
     display: flex;
-    background: $colorBackgroundLight;
+    @include gradient-background-dg($colorPrimaryDark, $colorAccentDark);
     border-radius: 50%;
     color: white;
     font-weight: 600;

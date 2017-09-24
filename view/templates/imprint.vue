@@ -1,0 +1,47 @@
+<template>
+  <div>
+    <ui-header>
+      <h1 slot="headline">Imprint</h1>
+    </ui-header>
+    <div class="g-ct">
+      <section>
+        <h2>Nexus-Stats</h2>
+        <p>
+          Kilian Volb <br>
+          Schillerstr. 13 <br>
+          66497, Contwig <br>
+          Germany
+        </p>
+      </section>
+      <section>
+        <h2>Contact</h2>
+        <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20Nexus-Stats">contact@nexus-stats.com</a>
+      </section>
+    </div>
+  </div>
+</template>
+
+
+
+<script>
+import uiheader from 'src/components/ui/header.vue'
+
+export default {
+  components: {
+    'ui-header': uiheader
+  }
+}
+</script>
+
+
+
+<style lang="scss" scoped>
+@import '~src/styles/partials/importer';
+
+p {
+  font-size: 1.05em;
+}
+a {
+  margin-top: 15px;
+}
+</style>
