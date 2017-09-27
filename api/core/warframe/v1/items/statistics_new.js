@@ -219,7 +219,6 @@ class Statistics extends Endpoint {
       this.calculateOfferType(component.buying, component)
 
       // Calculate combined data
-      component.combined.requests.sort((a, b) =>  a.price - b.price)
       this.calculateMedian(component.combined)
       this.calculateAvg(component.combined)
       delete component.combined.requests
@@ -242,7 +241,6 @@ class Statistics extends Endpoint {
       let users = {} // for spam check. Object is faster than Array lookup.
 
       // Sort requests by price and get median
-      interval.requests.sort((a, b) =>  a.price - b.price)
       interval.offers.count = interval.requests.length
       this.calculateMedian(interval)
       interval.offers.count = 0
@@ -280,7 +278,6 @@ class Statistics extends Endpoint {
     // Add accumulations to combined and calculate component data from intervals
     this.addToParent(component.combined, type)
     this.calculateAvg(type)
-    type.requests.sort((a, b) =>  a.price - b.price)
     this.calculateMedian(type)
     delete type.requests
   }
@@ -321,16 +318,20 @@ class Statistics extends Endpoint {
    * Calculates the median from a given interval with objects
    */
   calculateMedian(obj) {
+    obj.requests.sort((a, b) =>  a.price - b.price)
     const requests = obj.requests.slice(obj.offers.count - obj.offers.hasValue, obj.requests.length)
 
     // Simple median calculation
-    if (requests.length === 1 || requests.length > 2) {
+    if (requests.length) {
       if (requests.length % 2 !== 0) {
         obj.median = requests[Math.floor(requests.length / 2)].price
       }
       else {
         obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
       }
+    }
+    if (obj.median === 0) {
+      console.log(requests)
     }
   }
 
