@@ -5,7 +5,6 @@ const _ = require('lodash')
  * Provides detailed item statistics for specific item
  */
 class Statistics extends Endpoint {
-
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.description = 'Get item statistics between a specified time frame.'
@@ -77,19 +76,11 @@ class Statistics extends Endpoint {
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query).toArray()
-    let stats = this.getStatistics(requests, res, query, intervals, itemResult)
+    let stats = this.getStatistics(requests, query, intervals, itemResult)
 
-    if (typeof stats === 'object' && Object.keys(stats).length > 0) {
-      this.cache(stats, 1)
-      res.send(stats)
-    } else {
-      let response = {
-        error: 'Could not find data for ' + item + ' ' + component + '.',
-        reason: 'Nobody offers this item.'
-      }
-      this.cache(response, 1)
-      res.status(404).send(response)
-    }
+    // Send to client and cache
+    this.cache(stats, 1)
+    res.send(stats)
   }
 
 
@@ -109,7 +100,6 @@ class Statistics extends Endpoint {
     if (component !== '') {
       query.component = new RegExp('^' + component + '$', 'i')
     }
-
     return query
   }
 
@@ -129,89 +119,24 @@ class Statistics extends Endpoint {
    * Stage 3: Process remainder and clean up
    *      - Calculate percentages for everything
    *      - Calculate avg/median/min/max for combined
-   *      - Clean up unneeded fields (offer ignores and median array)
+   *      - Clean up unneeded fields (offer hasValues and median array)
    */
-  getStatistics(result, res, query, intervals, itemResult) {
-
-    // Empty results?
-    if (result.length <= 0) {
-      return res.status(404).send({
-        error: 'Could not find data.',
-        reason: 'Nobody offers this item or it doesn\'t exist.'
-      })
-    }
+  getStatistics(result, query, intervals, itemResult) {
 
     // Main document to return
     let doc = {
-      item: itemResult.name,
-
-      buying: {
-        avg: null,
-        median: null,
-        min: Number.POSITIVE_INFINITY,
-        max: Number.NEGATIVE_INFINITY,
-
-        offers: {
-          count: 0,
-          percentage: 0,
-          ignore: 0,
-        },
-        components: [],
-        requests: [],
-      },
-
-      selling: {
-        avg: null,
-        median: null,
-        min: Number.POSITIVE_INFINITY,
-        max: Number.NEGATIVE_INFINITY,
-
-        offers: {
-          count: 0,
-          percentage: 0,
-          ignore: 0,
-        },
-        components: [],
-        requests: [],
-      },
-
-      combined: {
-        avg: null,
-        median: null,
-        min: Number.POSITIVE_INFINITY,
-        max: Number.NEGATIVE_INFINITY,
-
-        offers: {
-          count: 0,
-          percentage: 1,
-          ignore: 0,
-        },
-        components: [],
-        requests: [],
-      }
+      name: itemResult.name,
+      components: []
     }
 
     // Time window
     let timestart = query.createdAt.$lte.getTime()
     let timeend = query.createdAt.$gte.getTime()
 
-    // Fill document with components and intervals
+    // Fill document with components and interval, then calculate stats
     this.createComponents(doc, itemResult, intervals)
-
-    // Accumulate data from requests into intervals
     this.accumulate(timestart, timeend, intervals, result, doc)
-
-    // Process the main parts
-    this.process(doc.buying, doc.combined)
-    this.process(doc.selling, doc.combined)
-
-    // Calculate percentages
-    this.processCombined(doc.buying, doc.combined, false)
-    this.processCombined(doc.selling, doc.combined, false)
-
-    // Calculate combined
-    this.processCombined(doc.combined, doc.combined, true)
-
+    this.calculate(doc)
     return doc
   }
 
@@ -220,70 +145,40 @@ class Statistics extends Endpoint {
    * Fills the document with all components and the intervals
    */
   createComponents(doc, itemResult, intervals) {
+    itemResult.components.forEach(comp => {
+      const data = {
+        avg: null,
+        median: null,
+        min: null,
+        max: null,
+        offers: {
+          count: 0,
+          percentage: 0,
+          hasValue: 0,
+        },
+        intervals: [],
+        requests: [],
+      }
+      let component = {
+        name: comp.name,
+        buying: _.cloneDeep(data),
+        selling: _.cloneDeep(data),
+        combined: _.cloneDeep(data)
+      }
 
-    let components = [
-      [],
-      [],
-      []
-    ]
+      // Fill component with intervals
+      const interval = _.cloneDeep(data)
+      delete interval.intervals
 
-    // Create full component array in buying
-    for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < intervals; i++) {
+        component.buying.intervals.push(_.cloneDeep(interval))
+        component.selling.intervals.push(_.cloneDeep(interval))
+        component.combined.intervals.push(_.cloneDeep(interval))
+      }
 
-      itemResult.components.forEach(entry => {
-
-        // Create component
-        let component = {
-          name: entry.name,
-
-          avg: null,
-          median: null,
-          min: Number.POSITIVE_INFINITY,
-          max: Number.NEGATIVE_INFINITY,
-
-          offers: {
-            count: 0,
-            percentage: 0,
-            ignore: 0,
-          },
-
-          intervals: [],
-          requests: [],
-        }
-
-        // Fill component with intervals
-        for (let i = 0; i < intervals; i++) {
-
-          // Create interval
-          let interval = {
-            avg: null,
-            median: null,
-            min: Number.POSITIVE_INFINITY,
-            max: Number.NEGATIVE_INFINITY,
-
-            offers: {
-              count: 0,
-              percentage: 0,
-
-              ignore: 0,
-            },
-
-            requests: [],
-          }
-
-          // Add interval to component
-          component.intervals.push(interval)
-        }
-
-        // Push to component array
-        components[i].push(component)
-      })
-    }
-
-    // Add to buying/selling/combined
-    doc.buying.components = doc.buying.components.concat(components[0])
-    doc.selling.components = doc.selling.components.concat(components[1])
-    doc.combined.components = doc.combined.components.concat(components[2])
+      // Add to result
+      doc.components.push(component)
+    })
   }
 
 
@@ -291,45 +186,23 @@ class Statistics extends Endpoint {
    * Accumulates data from requests and add it into intervals
    */
   accumulate(timestart, timeend, intervals, result, doc) {
+    let intervalSize = (timestart - timeend) / intervals
 
-    // Get interval size
-    let intervalsSize = (timestart - timeend) / intervals
-
-    // Accumulate
     result.forEach(request => {
+      let componentIndex = doc.components.findIndex(comp => comp.name === request.component)
+      let component = doc.components[componentIndex][request.offer.toLowerCase()]
 
-      // Get doc for current request
-      let requestDoc = doc
+      // Determine which interval the request is in
+      let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+      if (i >= intervals) i = intervals - 1
 
-      // Determine buying/selling
-      if (request.offer === 'Selling') {
-
-        // Set to selling
-        requestDoc = doc.selling
-      } else {
-
-        // Set to buying
-        requestDoc = doc.buying
-      }
-
-      // Get current component
-      let index = requestDoc.components.findIndex(comp => comp.name === request.component)
-      if (index > -1) {
-
-        let component = requestDoc.components[index]
-
-        // Get fitting interval
-        let i = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-        // Hacky race condition fix when i outside of intervals
-        if (i >= intervals) i = intervals - 1
-        let intvl = component.intervals[i]
-
-        // Add request to interval
-        let req = {}
-        req.user = request.user
-        req.price = request.price
-        intvl.requests.push(req)
+      // Add request to interval
+      component.intervals[i].requests.push({
+        user: request.user,
+        price: request.price
+      })
+      if (request.price) {
+        component.intervals[i].offers.hasValue++
       }
     })
   }
@@ -340,164 +213,76 @@ class Statistics extends Endpoint {
    * Also purges spoofed requests
    * Avg, median, min, max, offer count
    */
-  process(doc, combined) {
-
+  calculate(doc) {
     doc.components.forEach(component => {
+      this.calculateOfferType(component.selling, component)
+      this.calculateOfferType(component.buying, component)
 
-      // Find corresponding combined component
-      let combinedComponentIndex = combined.components.findIndex(comp => comp.name === component.name)
-      let combinedComponent = combined.components[combinedComponentIndex]
+      // Calculate combined data
+      component.combined.requests.sort((a, b) =>  a.price - b.price)
+      this.calculateMedian(component.combined)
+      this.calculateAvg(component.combined)
+      delete component.combined.requests
 
-      component.intervals.forEach((interval, j) => {
-
-        // User object for user spoofing check
-        let users = {}
-
-        // Boolean to check if values aren't null anymore
-        let nullArrayReached = false
-
-        // Sort requests after price
-        this.sortRequests(interval)
-
-        interval.requests.forEach((request, i) => {
-
-          let price = request.price
-
-          // Check for user spoof
-          if (this.purgeUserSpam(users, request))
-            return
-
-          // Check if the null segment is over
-          if (!nullArrayReached && price !== null) {
-
-            nullArrayReached = true
-
-            // Calculate median
-            this.calculateMedianObjectArray(interval, i)
-          }
-
-          // Check for price spoof
-          if (this.purgeExtremes(interval, request))
-            return
-
-          // Add to offers
-          interval.offers.count++
-
-            // Add to avg, min, max
-            if (price !== null) {
-
-              // Add to avg
-              interval.avg += price
-
-              // New min/max?
-              if (price < interval.min) interval.min = price
-              if (price > interval.max) interval.max = price
-
-              // Add to component median
-              component.requests.push(price)
-
-              // Add to combined median
-              if (combinedComponentIndex > -1) combinedComponent.requests.push(price)
-            }
-
-          // Or to ignore
-          else
-            interval.offers.ignore++
-        })
-
-
-        // Add interval to component
-        this.addToParent(component, interval)
-
-        // Add interval to combined interval
-        this.addToParent(combinedComponent.intervals[j], interval)
-
-        // Calculate interval avg
+      // Calculate interval data for combined
+      component.combined.intervals.forEach(interval => {
+        this.calculateMedian(interval)
         this.calculateAvg(interval)
+        delete interval.requests
       })
-
-
-      // Add component to doc
-      this.addToParent(doc, component)
-
-      // Add component to combined component
-      this.addToParent(combinedComponent, component)
-
-      // Calculate component median
-      this.calculateMedian(component)
-
-      // Push requests to doc
-      doc.requests = doc.requests.concat(component.requests)
-
-      // Calculate component avg
-      this.calculateAvg(component)
     })
-
-
-    // Add to combined doc
-    this.addToParent(combined, doc)
-
-    // Calculate doc median
-    this.calculateMedian(doc)
-
-    // Push requests to combined
-    combined.requests = combined.requests.concat(doc.requests)
-
-    // Calculate doc avg
-    this.calculateAvg(doc)
   }
 
 
   /**
-   * Processes the percentages for each interval and component
-   * Also calculates the combined part and cleans up
+   * Calculate Statistics for buying/selling and add to combined
    */
-  processCombined(doc, combined, calculate) {
+  calculateOfferType(type, component) {
+    type.intervals.forEach((interval, j) => {
+      let users = {} // for spam check. Object is faster than Array lookup.
 
-    // Calculate main doc percentages
-    this.calculatePercentages(doc, combined)
+      // Sort requests by price and get median
+      interval.requests.sort((a, b) =>  a.price - b.price)
+      interval.offers.count = interval.requests.length
+      this.calculateMedian(interval)
+      interval.offers.count = 0
+      interval.offers.hasValue = 0
 
-    doc.components.forEach(component => {
+      // Purge, then calculate stats for interval
+      interval.requests.forEach((request, i) => {
+        let price = request.price
 
-      // Calculate component percentages
-      this.calculatePercentages(component, doc)
+        // Purge invalid offers (duplicates or too high/low)
+        if (this.purgeSpam(users, request)) return
+        if (this.purgeExtremes(interval, request)) return
 
-      component.intervals.forEach(interval => {
+        // Add to offers
+        interval.offers.count++
 
-        // Calculate interval percentages
-        this.calculatePercentages(interval, component)
+        // Update accumulations with purged results
+        if (price) {
+          interval.avg += price
+          interval.offers.hasValue++
 
-        // Calculate combined interval avg/median
-        if (calculate) {
-          this.calculateAvg(interval)
-          this.calculateMedian(interval)
+          // New min/max?
+          if (price < interval.min || !interval.min) interval.min = price
+          if (price > interval.max) interval.max = price
         }
-
-        // Clean up interval
-        delete interval.requests
-        delete interval.offers.ignore
       })
 
-      // Calculate combined component avg/median
-      if (calculate) {
-        this.calculateAvg(component)
-        this.calculateMedian(component)
-      }
-
-      // Clean up component
-      delete component.requests
-      delete component.offers.ignore
+      // Calculate interval data and add to component/combined
+      this.addToParent(type, interval)
+      this.addToParent(component.combined.intervals[j], interval)
+      this.calculateAvg(interval)
+      delete interval.requests
     })
 
-    // Calculate combined component avg/median
-    if (calculate) {
-      this.calculateAvg(doc)
-      this.calculateMedian(doc)
-    }
-
-    // Clean up doc
-    delete doc.requests
-    delete doc.offers.ignore
+    // Add accumulations to combined and calculate component data from intervals
+    this.addToParent(component.combined, type)
+    this.calculateAvg(type)
+    type.requests.sort((a, b) =>  a.price - b.price)
+    this.calculateMedian(type)
+    delete type.requests
   }
 
 
@@ -505,7 +290,6 @@ class Statistics extends Endpoint {
    * Calculate percentages for a given interval
    */
   calculatePercentages(interval, parent) {
-
     interval.offers.percentage = interval.offers.count / parent.offers.count
   }
 
@@ -514,103 +298,56 @@ class Statistics extends Endpoint {
    * Adds everything to the parent component
    */
   addToParent(parent, child) {
-
-    // Add avg and offers
     parent.avg += child.avg
     parent.offers.count += child.offers.count
-    parent.offers.ignore += child.offers.ignore
+    parent.offers.hasValue += child.offers.hasValue
 
-    // New component min/max?
-    if (child.min < parent.min) parent.min = child.min
+    if (child.min && (child.min < parent.min) || !parent.min) parent.min = child.min
     if (child.max > parent.max) parent.max = child.max
+
+    parent.requests = parent.requests.concat(child.requests)
   }
 
 
   /**
-   * Sorts the requests array after prices
-   */
-  sortRequests(interval) {
-
-    interval.requests.sort((a, b) => {
-      if (typeof a === 'object')
-        return a.price - b.price
-
-      else
-        return a - b
-    })
-  }
-
-
-  /**
-   * Calculates the average from a given interval
+   * Calculates the average of a given interval
    */
   calculateAvg(interval) {
-
-    interval.avg = interval.avg / (interval.offers.count - interval.offers.ignore)
+    interval.avg = interval.avg / interval.offers.hasValue
   }
 
-
-  /**
-   * Calculates the median from a given interval with numbers
-   */
-  calculateMedian(interval) {
-
-    this.sortRequests(interval)
-
-    let medianLength = interval.requests.length
-
-    // More than one value in array
-    if (medianLength > 1) {
-
-      // Odd?
-      if (medianLength % 2 !== 0)
-        interval.median = interval.requests[Math.floor(medianLength / 2)]
-
-      // Even?
-      else
-        interval.median = (interval.requests[medianLength / 2 - 1] + interval.requests[medianLength / 2]) / 2
-
-    // Only one value
-    } else
-      interval.median = medianLength > 0 ? interval.requests[0] : null
-  }
 
   /**
    * Calculates the median from a given interval with objects
    */
-  calculateMedianObjectArray(interval, start) {
+  calculateMedian(obj) {
+    const requests = obj.requests.slice(obj.offers.count - obj.offers.hasValue, obj.requests.length)
 
-    let medianLength = interval.requests.length - start
-
-    // More than one value in array
-    if (medianLength > 1) {
-
-      // Odd?
-      if (medianLength % 2 !== 0)
-        interval.median = interval.requests[start + Math.floor(medianLength / 2)].price
-
-      // Even?
-      else
-        interval.median = (interval.requests[start + medianLength / 2 - 1].price + interval.requests[start + medianLength / 2].price) / 2
-
-      // Only one value
-    } else
-      interval.median = medianLength > 0 ? interval.requests[start].price : null
+    // Simple median calculation
+    if (requests.length === 1 || requests.length > 2) {
+      if (requests.length % 2 !== 0) {
+        obj.median = requests[Math.floor(requests.length / 2)].price
+      }
+      else {
+        obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
+      }
+    }
   }
 
 
   /**
    * Checks if a user made multiple requests in the interval
    */
-  purgeUserSpam(users, request) {
+  purgeSpam(users, request) {
 
     // User already made a request
-    if (users[request.user])
+    if (users[request.user]) {
       return true
+    }
 
-    // User didn't made a request
+    // User didn't make a request
     else {
-      users[request.user] = {}
+      users[request.user] = 1
       return false
     }
   }
@@ -620,19 +357,12 @@ class Statistics extends Endpoint {
    * Checks if a user goes extremes under/over the median
    */
   purgeExtremes(interval, request) {
-
-    // Can extremes actually be checked?
     if (request.price !== null && interval.median !== null) {
-
-      // Check if 300% over or 33% under median
       let percentToMedian = request.price / interval.median
-      return (percentToMedian > 3) || (percentToMedian < 0.33)
+      return (percentToMedian > 2) || (percentToMedian < 0.66)
     }
-
     return false
   }
-
-
 }
 
 module.exports = Statistics
