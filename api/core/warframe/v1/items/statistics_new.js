@@ -330,9 +330,6 @@ class Statistics extends Endpoint {
         obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
       }
     }
-    if (obj.median === 0) {
-      console.log(requests)
-    }
   }
 
 
