@@ -5,7 +5,6 @@ const _ = require('lodash')
  * Provides detailed item statistics for specific item
  */
 class Statistics extends Endpoint {
-
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.description = 'Get item statistics between a specified time frame.'
@@ -56,28 +55,32 @@ class Statistics extends Endpoint {
     })
     if (intervals <= 0) res.status(400).send({
       error: 'Bad input.',
-      reaon: 'Intervals must be greater than 0'
+      reason: 'Intervals must be greater than 0'
     })
+
+    // Get item from db
+    let itemResult = await this.db.collection('items').findOne({
+      name: new RegExp('^' + item + '$', 'i')
+    })
+    if (!itemResult) {
+      let response = {
+        error: 'Could not find data for ' + item + ' ' + component + '.',
+        reason: 'Item doesn\'t exist.',
+      }
+      this.cache(response, 1)
+      res.status(404).send(response)
+    }
 
     // Generate valid Query from input
     let query = this.generateQuery(item, component, timestart, timeend)
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query).toArray()
-    let purged = this.purge(requests, timestart, timeend, intervals)
-    let stats = this.getStatistics(query, intervals, purged, res)
+    let stats = this.getStatistics(requests, query, intervals, itemResult)
 
-    if (typeof stats === 'object' && Object.keys(stats).length > 0) {
-      this.cache(stats, 86400)
-      res.send(stats)
-    } else {
-      let response = {
-        error: 'Could not find data for ' + item + ' ' + component + '.',
-        reason: 'Nobody offers this item or it doesn\'t exist.'
-      }
-      this.cache(response, 86400)
-      res.status(404).send(response)
-    }
+    // Send to client and cache
+    this.cache(stats, 1)
+    res.send(stats)
   }
 
 
@@ -97,411 +100,266 @@ class Statistics extends Endpoint {
     if (component !== '') {
       query.component = new RegExp('^' + component + '$', 'i')
     }
-
     return query
   }
 
 
-
   /**
-   * Filters below/above average requests and user spam
+   * Wrapper method for the statistics calculation
+   *
+   * Stage 1: Accumulate
+   *      - Create all components and intervals based on the item list
+   *      - Sort all requests into the corresponding intervals
+   *
+   * Stage 2: Process main parts (buying/selling only)
+   *      - Purges the intervals
+   *      - Calculate avg/median/min/max
+   *      - Add to combined
+   *
+   * Stage 3: Process remainder and clean up
+   *      - Calculate percentages for everything
+   *      - Calculate avg/median/min/max for combined
+   *      - Clean up unneeded fields (offer hasValues and median array)
    */
-  purge(result, timestart, timeend, intervals) {
-    let components = [] // { name, avg, count }
+  getStatistics(result, query, intervals, itemResult) {
 
-    // Filter too many requests from one user
-    this.purgeSpam(result, components, timestart, timeend, intervals)
-
-    // Filter too high/low from average
-    this.purgeExtremes(result, components, timestart, timeend, intervals)
-
-    return result
-  }
-
-
-  /**
-   * Filter multiple requests from one user in single intervals
-   */
-  purgeSpam(result, components, timestart, timeend, intervals) {
-    let intervalsSize = (timestart - timeend) / intervals
-    let interval = 0
-    let users = {} // use object for users. faster for spam-check
-
-    for (let i = result.length - 1; i >= 0; i--) {
-      let request = result[i]
-
-      // Find which interval the request is located in
-      let previousInterval = interval
-      interval = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-      // Hacky race condition fix when i outside of intervals
-      interval = interval >= intervals ? intervals - 1 : interval
-      users = interval > previousInterval ? {} : users // keep users object small, remove unnecessary data
-
-      // Check if user is recorded to avoid double requests
-      let spam = users[request.user] ? (users[request.user][request.item][request.component] ? true : false) : false
-      let componentIndex = components.findIndex(x => x.name == request.component)
-
-      // Component doesn't exist, create object
-      if (componentIndex == -1) {
-        componentIndex = components.push({
-          name: request.component,
-          intervals: []
-        }) - 1
-
-        // Fill intervals array
-        for (let j = 0; j < intervals; j++) {
-          components[componentIndex].intervals.push({
-            median: [],
-            count: 0
-          })
-        }
-      }
-
-      // User doesn't exist, create object
-      if (!spam) {
-        users[request.user] = {}
-        users[request.user][request.item] = {}
-        users[request.user][request.item][request.component] = {}
-
-        if (request.price != null) {
-          ++components[componentIndex].intervals[interval].count
-          components[componentIndex].intervals[interval].median.push(request.price)
-        }
-      }
-
-      // User does exist, purge
-      else {
-        result.splice(i, 1)
-      }
-    }
-  }
-
-
-  /**
-   * Remove values above min/max limits
-   */
-  purgeExtremes(result, components, timestart, timeend, intervals) {
-    let intervalsSize = (timestart - timeend) / intervals
-
-    // Process median
-    for (let i = 0; i < components.length; i++) {
-      components[i].intervals.forEach(intvl => {
-        intvl.median.sort(function(a, b) {
-          return a - b
-        })
-        let medianLength = intvl.median.length
-
-        if (medianLength > 1) {
-          // Even number?
-          if (medianLength % 2 != 0) {
-            intvl.median = intvl.median[Math.floor(medianLength / 2)]
-          } else {
-            intvl.median = (intvl.median[medianLength / 2 - 1] + intvl.median[medianLength / 2]) / 2
-          }
-        } else {
-          intvl.median = medianLength > 0 ? intvl.median[0] : 0
-        }
-      })
-    }
-
-    // Remove extremes based on median
-    for (let i = result.length - 1; i >= 0; i--) {
-      let request = result[i]
-      let componentIndex = components.findIndex(x => x.name == request.component)
-
-      // Find which intervals the request is located in
-      let k = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-      // Hacky race condition fix when i outside of intervals
-      if (k >= intervals) k = intervals - 1
-
-      if (componentIndex != -1 && request.price != null) {
-
-        // Current price is 300% over average, purge
-        if (request.price / components[componentIndex].intervals[k].median > 3) {
-          result.splice(i, 1)
-        }
-
-        // Current price is 33% under average, purge
-        else if (request.price / components[componentIndex].intervals[k].median < 0.33) {
-          result.splice(i, 1)
-        }
-      }
-    }
-  }
-
-
-  /**
-   * Calculate queried item's statistics
-   */
-  getStatistics(query, intervals, result, res) {
-
-    // Empty results?
-    if (result.length <= 0) {
-      return res.status(404).send({
-        error: 'Could not find data.',
-        reason: 'Nobody offers this item or it doesn\'t exist.'
-      })
-    }
-
-    // Document to return
+    // Main document to return
     let doc = {
-      title: result[0].item,
-      supply: {
-        count: 0,
-        percentage: 0
-      },
-      demand: {
-        count: 0,
-        percentage: 0
-      },
-      ignore: 0,
+      name: itemResult.name,
       components: []
     }
-
-    // Accumulate data from all requests
-    this.accumulate(query, intervals, result, doc)
-
-    // Calculate Statistics from accumulated values
-    this.process(doc)
-
-    return doc
-  }
-
-
-  /**
-   * Accumulate data from requests
-   */
-  accumulate(query, intervals, result, doc) {
 
     // Time window
     let timestart = query.createdAt.$lte.getTime()
     let timeend = query.createdAt.$gte.getTime()
 
-    // Get Interval size
-    let intervalsSize = (timestart - timeend) / intervals
-
-    // Accumulate data for each request
-    result.forEach(request => {
-      let component = this.getComponent(doc, request, intervals)
-
-      // Find which intervals the request is located in
-      let i = Math.floor((request.createdAt.getTime() - timeend) / intervalsSize)
-
-      // Hacky race condition fix when i outside of intervals
-      if (i >= intervals) i = intervals - 1
-      let intvl = component.intervals[i]
-
-      // Request has price?
-      let price = request.price
-      if (price) {
-
-        // Add to median array
-        component.median.push(price)
-
-        // Calculate avg, min, max
-        intvl.avg += price
-
-        // New min/max?
-        if (price < intvl.min) intvl.min = price
-        if (price > intvl.max) intvl.max = price
-      }
-
-      // No Price
-      else ++intvl.ignore
-
-      // Determine Offer Type
-      if (request.offer === 'Selling') ++intvl.supply.count
-      else ++intvl.demand.count
-
-      // Set Modified Interval in output doc
-      let index = doc.components.findIndex(comp => comp.name == request.component)
-      doc.components[index].intervals[i] = intvl
-    })
+    // Fill document with components and interval, then calculate stats
+    this.createComponents(doc, itemResult, intervals)
+    this.accumulate(timestart, timeend, intervals, result, doc)
+    this.calculate(doc)
+    return doc
   }
 
 
   /**
-   * Add missing component to output document and return
+   * Fills the document with all components and the intervals
    */
-  getComponent(doc, request, intervals) {
-    let index = doc.components.findIndex(comp => comp.name == request.component)
-    let component = doc.components[index]
-
-    // Component wasn't in doc => add
-    if (!component) {
-      component = {
-        name: request.component,
+  createComponents(doc, itemResult, intervals) {
+    itemResult.components.forEach(comp => {
+      const data = {
         avg: null,
-        median: [],
-        min: Number.POSITIVE_INFINITY,
-        max: Number.NEGATIVE_INFINITY,
-        supply: {
+        median: null,
+        min: null,
+        max: null,
+        offers: {
           count: 0,
-          percentage: 0
+          percentage: 0,
+          hasValue: 0,
         },
-        demand: {
-          count: 0,
-          percentage: 0
-        },
-        ignore: 0,
-        intervals: []
+        intervals: [],
+        requests: [],
+      }
+      let component = {
+        name: comp.name,
+        buying: _.cloneDeep(data),
+        selling: _.cloneDeep(data),
+        combined: _.cloneDeep(data)
       }
 
-      // Fill intervals array
-      for (let j = 0; j < intervals; j++) {
-        let sub = { // Helper obj for field creation
-          avg: null,
-          min: Number.POSITIVE_INFINITY,
-          max: Number.NEGATIVE_INFINITY,
-          supply: {
-            count: 0,
-            percentage: 0
-          },
-          demand: {
-            count: 0,
-            percentage: 0
-          },
-          ignore: 0
-        }
-        component.intervals.push(sub)
+      // Fill component with intervals
+      const interval = _.cloneDeep(data)
+      delete interval.intervals
+
+      for (let i = 0; i < intervals; i++) {
+        component.buying.intervals.push(_.cloneDeep(interval))
+        component.selling.intervals.push(_.cloneDeep(interval))
+        component.combined.intervals.push(_.cloneDeep(interval))
       }
 
-      // Push to original doc
-      this.pushSorted(doc.components, component)
-    }
-    return component
+      // Add to result
+      doc.components.push(component)
+    })
   }
 
 
   /**
-   * Pushes Component into array at correct position
+   * Accumulates data from requests and add it into intervals
    */
-  pushSorted(components, component) {
+  accumulate(timestart, timeend, intervals, result, doc) {
+    let intervalSize = (timestart - timeend) / intervals
 
-    // Array empty? Just push
-    if (components.length <= 0) components.push(component)
+    result.forEach(request => {
+      let componentIndex = doc.components.findIndex(comp => comp.name === request.component)
+      let component = doc.components[componentIndex][request.offer.toLowerCase()]
 
-    // Not empty -> Push at correct position
+      // Determine which interval the request is in
+      let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+      if (i >= intervals) i = intervals - 1
+
+      // Add request to interval
+      component.intervals[i].requests.push({
+        user: request.user,
+        price: request.price
+      })
+      if (request.price) {
+        component.intervals[i].offers.hasValue++
+      }
+    })
+  }
+
+
+  /**
+   * Processes each interval and components main parts
+   * Also purges spoofed requests
+   * Avg, median, min, max, offer count
+   */
+  calculate(doc) {
+    doc.components.forEach(component => {
+      this.calculateOfferType(component.selling, component)
+      this.calculateOfferType(component.buying, component)
+
+      // Calculate combined data
+      this.calculateMedian(component.combined)
+      this.calculateAvg(component.combined)
+      delete component.combined.requests
+
+      // Calculate interval data for combined
+      component.combined.intervals.forEach(interval => {
+        this.calculateMedian(interval)
+        this.calculateAvg(interval)
+        delete interval.requests
+      })
+    })
+  }
+
+
+  /**
+   * Calculate Statistics for buying/selling and add to combined
+   */
+  calculateOfferType(type, component) {
+    type.intervals.forEach((interval, j) => {
+      let users = {} // for spam check. Object is faster than Array lookup.
+
+      // Sort requests by price and get median
+      interval.offers.count = interval.requests.length
+      this.calculateMedian(interval)
+      interval.offers.count = 0
+      interval.offers.hasValue = 0
+
+      // Purge, then calculate stats for interval
+      interval.requests.forEach((request, i) => {
+        let price = request.price
+
+        // Purge invalid offers (duplicates or too high/low)
+        if (this.purgeSpam(users, request)) return
+        if (this.purgeExtremes(interval, request)) return
+
+        // Add to offers
+        interval.offers.count++
+
+        // Update accumulations with purged results
+        if (price) {
+          interval.avg += price
+          interval.offers.hasValue++
+
+          // New min/max?
+          if (price < interval.min || !interval.min) interval.min = price
+          if (price > interval.max) interval.max = price
+        }
+      })
+
+      // Calculate interval data and add to component/combined
+      this.addToParent(type, interval)
+      this.addToParent(component.combined.intervals[j], interval)
+      this.calculateAvg(interval)
+      delete interval.requests
+    })
+
+    // Add accumulations to combined and calculate component data from intervals
+    this.addToParent(component.combined, type)
+    this.calculateAvg(type)
+    this.calculateMedian(type)
+    delete type.requests
+  }
+
+
+  /**
+   * Calculate percentages for a given interval
+   */
+  calculatePercentages(interval, parent) {
+    interval.offers.percentage = interval.offers.count / parent.offers.count
+  }
+
+
+  /**
+   * Adds everything to the parent component
+   */
+  addToParent(parent, child) {
+    parent.avg += child.avg
+    parent.offers.count += child.offers.count
+    parent.offers.hasValue += child.offers.hasValue
+
+    if (child.min && (child.min < parent.min) || !parent.min) parent.min = child.min
+    if (child.max > parent.max) parent.max = child.max
+
+    parent.requests = parent.requests.concat(child.requests)
+  }
+
+
+  /**
+   * Calculates the average of a given interval
+   */
+  calculateAvg(interval) {
+    interval.avg = interval.avg / interval.offers.hasValue
+  }
+
+
+  /**
+   * Calculates the median from a given interval with objects
+   */
+  calculateMedian(obj) {
+    obj.requests.sort((a, b) =>  a.price - b.price)
+    const requests = obj.requests.slice(obj.offers.count - obj.offers.hasValue, obj.requests.length)
+
+    // Simple median calculation
+    if (requests.length) {
+      if (requests.length % 2 !== 0) {
+        obj.median = requests[Math.floor(requests.length / 2)].price
+      }
+      else {
+        obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
+      }
+    }
+  }
+
+
+  /**
+   * Checks if a user made multiple requests in the interval
+   */
+  purgeSpam(users, request) {
+
+    // User already made a request
+    if (users[request.user]) {
+      return true
+    }
+
+    // User didn't make a request
     else {
-      for (let i = 0; i < components.length; i++) {
-
-        // Sort if necessary
-        if (components[i].name > component.name) {
-          components.splice(i, 0, component)
-          break
-        }
-
-        // Add to end if no sorting needed
-        if (i === components.length - 1) {
-          components.push(component)
-          break
-        }
-      }
+      users[request.user] = 1
+      return false
     }
   }
 
 
   /**
-   * Calculate Statistics from accumulated data
+   * Checks if a user goes extremes under/over the median
    */
-  process(doc) {
-    let offers = 0
-
-    // Calculate data from each component's intervalss
-    doc.components.forEach((component, i) => {
-      this.processIntervals(doc, i, component, offers)
-      this.processComponent(doc, component, offers)
-      this.processMedian(doc, i, component)
-    })
-  }
-
-
-  /**
-   * Calculate Data for each Interval of component
-   */
-  processIntervals(doc, i, component, offers) {
-    component.intervals.forEach((intvl, j) => {
-
-      // Leave raw sum for component
-      component.avg += intvl.avg ? intvl.avg : 0
-
-      // Calculate avg and supply/demand percentages
-      offers = intvl.supply.count + intvl.demand.count
-      intvl.avg = intvl.avg / (offers - intvl.ignore)
-      intvl.supply.percentage = intvl.supply.count / offers
-      intvl.demand.percentage = intvl.demand.count / offers
-
-      // New min/max?
-      if (intvl.min < component.min) component.min = intvl.min
-      if (intvl.max > component.max) component.max = intvl.max
-
-      // Add intervals vars on component vars
-      component.supply.count += intvl.supply.count
-      component.demand.count += intvl.demand.count
-      component.ignore += intvl.ignore
-
-      // Delete ignore field
-      delete intvl.ignore
-
-      // Save in output doc
-      doc.components[i].intervals[j] = intvl
-    })
-  }
-
-
-  /**
-   * Process Overall component stats from intervalss
-   */
-  processComponent(doc, component, offers) {
-
-    // Determine demand/supply
-    offers = component.supply.count + component.demand.count
-    component.supply.percentage = component.supply.count / offers
-    component.demand.percentage = component.demand.count / offers
-
-    // Avg based on supply count
-    component.avg = component.avg / (offers - component.ignore)
-
-    // Add component vars to document vars
-    doc.supply.count += component.supply.count
-    doc.demand.count += component.demand.count
-    doc.ignore += component.ignore
-
-    // Calculate document supply/demand percentages
-    offers = doc.supply.count + doc.demand.count
-    if (offers > 0) {
-      doc.supply.percentage = doc.supply.count / offers
-      doc.demand.percentage = doc.demand.count / offers
+  purgeExtremes(interval, request) {
+    if (request.price !== null && interval.median !== null) {
+      let percentToMedian = request.price / interval.median
+      return (percentToMedian > 2) || (percentToMedian < 0.66)
     }
-
-    // Delete ignore field
-    delete doc.ignore
-  }
-
-
-  /**
-   * Process Median from given component
-   */
-  processMedian(doc, i, component) {
-    component.median.sort(function(a, b) {
-      return a - b
-    })
-    let medianLength = component.median.length
-
-    // Even number of requests?
-    if (medianLength % 2 != 0) {
-      component.median = component.median[Math.floor(medianLength / 2)]
-    } else {
-      component.median = (component.median[medianLength / 2 - 1] + component.median[medianLength / 2]) / 2
-    }
-
-    // Delete ignore filed
-    delete component.ignore
-
-    // Save in output doc
-    doc.components[i] = component
+    return false
   }
 }
 
