@@ -52,7 +52,7 @@
   .autocomplete {
     position: absolute;
     left: 50px;
-    top: 82.5px;
+    top: 79px;
 
     @media (max-width: $breakpoint-m) {
       left: 40px;

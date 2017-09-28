@@ -8,7 +8,7 @@
         <h1>{{ item.name }}</h1>
         <span v-for="component in item.components"
               :class="{ selected: components.find(c => c.name === component.name) }"
-              v-on:click="selectTag">
+              v-on:click="">
           {{ component.name }}
         </span>
       </div>
@@ -73,8 +73,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 40px 8px 85px;
-  border-bottom: 1px solid $colorSubtleDark;
+  padding: 10px 40px 10px 85px;
   @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.4));
 
   @media (max-width: $breakpoint-m) {
@@ -112,7 +111,7 @@ nav {
       }
       span {
         display: inline-block;
-        margin-top: -7px;
+        margin-top: -5px;
         margin-right: 7px;
         font-size: 0.85em;
         color: $colorFontSubtle;
