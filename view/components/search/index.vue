@@ -65,6 +65,7 @@
 
   // Search fields
   /deep/ .col-b .field {
+    position: relative;
     background: $colorBackgroundDark;
     border-radius: 2px;
     padding: 15px;
@@ -107,13 +108,14 @@
     }
     .autocomplete {
       position: absolute;
-      left: 16px;
+      left: 15px;
       margin-top: 7px;
       z-index: 0;
     }
     .autocomplete-type {
-      float: right;
-      padding: 10px;
+      position: absolute;
+      right: 10px;
+      padding: 7px 10px;
     }
   }
 

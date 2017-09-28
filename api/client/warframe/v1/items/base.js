@@ -23,13 +23,20 @@ class Base extends Endpoint {
       name: new RegExp("^" + item + "$", "i")
     })
     if (doc) {
-      // Remove unnecessary data
-      delete doc.prices
-      delete doc.distribution
-      delete doc._id
+      let result = {
+        name: doc.name,
+        type: doc.type,
+        description: doc.description,
+        components: doc.components,
+        webUrl: `/warframe/items/${doc.name.split(" ").join("%20")}`,
+        imgUrl: `/img/warframe/items/${doc.name.split(" ").join("-").toLowerCase()}.png`
+      }
+      result.components.forEach(component => {
+        component.imgUrl = `/img/warframe/items/${component.name.split(" ").join("-").toLowerCase()}.png`
+      })
 
-      this.cache(doc, 60)
-      res.send(doc)
+      this.cache(result, 60)
+      res.send(result)
     } else {
       let response = {
         error: 'Not found.',

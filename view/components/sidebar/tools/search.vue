@@ -48,8 +48,14 @@ export default {
   },
   mounted() {
     shortcut.bind('shift + f', () => {
-      this.$store.commit('toggleSidebar')
+      if (!this.$store.state.sidebar.active) {
+        this.$store.commit('toggleSidebar')
+      }
+      if (this.id === this.$store.state.sidebar.activeId) {
+        this.$store.commit('toggleSidebar')
+      }
       this.$store.commit('setActivePanel', this.id)
+      this.$children[0].$children[1].$children[1].$children[0].$refs.input.focus()
     })
   }
 }

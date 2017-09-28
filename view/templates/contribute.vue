@@ -1,7 +1,7 @@
 <template>
   <div>
     <ui-header>
-      <h1 slot="headline">Contributions</h1>
+      <h1 slot="headline">Contribution Guidelines</h1>
       <p slot="description">Help us shape the future of Nexus-Stats with your own ideas!</p>
     </ui-header>
     <div class="g-ct">
@@ -43,7 +43,7 @@
           <br>
           <p>
             If you can answer these questions with ease, go ahead and open a
-            <a href="https://github.com/nexus-devs/nexus-stats/issues/new?title=Feature%20Proposal:&body=%23%23%23%20Which%20problem%20will%20your%20feature%20solve?%0A[enter%20here]%0A%0A%23%23%23%20What%20scenario%20will%20your%20feature%20be%20used%20in?%0A[enter%20here]%0A%0A%23%23%23%20Documentation%0A[document%20how%20your%20code%20will%20be%20used.%20You%20should%20do%20this%20before%20writing%20your%20first%20line%20of%20code.]" target="_blank">new issue here</a>. Please make sure to document your code before
+            <a href="https://github.com/nexus-devs/nexus-stats/issues/new?body=%23%23%23%20Feature%20Description%0A[enter%20here]%0A%0A%23%23%23%20Which%20problem%20will%20your%20feature%20solve?%0A[enter%20here]%0A%0A%23%23%23%20What%20scenario%20will%20your%20feature%20be%20used%20in?%0A[enter%20here]%0A%0A%23%23%23%20Documentation%0A[document%20how%20your%20code%20will%20be%20used.%20You%20should%20do%20this%20before%20writing%20your%20first%20line%20of%20code.]&labels=Feature%20Proposal" target="_blank">new issue here</a>. Please make sure to document your code before
             even building it. This ensures your implementation will meet user expectations
             and not the other way around.
           </p>
@@ -57,10 +57,10 @@
         <p>
           If you're interested in leading Nexus-Stats as your own project in your
           favorite game, <router-link to="/contact">contact us here.</router-link>
-          If you have the skills it takes or can team up with the necessary talent,
-          we'll provide you with everything you need to get the project started.
-          Naturally, you can expect to receive payment in line with the revenue
-          your project is collecting.
+          If you have the experience and skill it takes or can team up with the
+          necessary talent, we'll provide you with everything you need to get the
+          project started. Naturally, you can expect to receive payment in line
+          with the revenue your project is collecting.
         </p>
       </section>
     </div>

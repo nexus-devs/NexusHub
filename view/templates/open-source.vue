@@ -13,18 +13,18 @@
       <section>
           <h2>Github</h2>
           <p>
-            Here you can open issues if you find bugs or have any requests, or
-            maybe even help us fix some of the issues if you have the necessary
-            skills.
+            Explore our source code or report any bugs you find here. If you're
+            bored, we always welcome contributions!
           </p>
-          <a href="http://github.com/nexus-devs" target="_blank">www.github.com/nexus-devs</a>
+          <a href="http://github.com/nexus-devs/nexus-stats" target="_blank">www.github.com/nexus-devs/nexus-stats</a>
       </section>
       <section>
-          <h2>Documentation</h2>
+          <h2>Contributing</h2>
           <p>
-            For documentation regarding our source code, you'll find everything
-            in the repository readmes. For our API documentation, please view
-            <a href="https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE">this page</a>.
+            If there's anything about Nexus-Stats that you'd like to change,
+            you can actually just do it. To keep everything organized, please
+            see our <router-link to="/contribute">contribution guidelines</router-link>
+            first.
           </p>
       </section>
       <section>

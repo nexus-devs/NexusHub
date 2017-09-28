@@ -49,6 +49,7 @@ export default {
     @media (max-width: $breakpoint-m) {
       position: fixed;
       background: $colorBackgroundDark;
+      padding: 13px 25px;
       @include shadow-1;
     }
   }
@@ -58,6 +59,9 @@ export default {
 
       @media (max-width: $breakpoint-s) {
         margin-left: 50px;
+        img {
+          margin-top: 1px;
+        }
       }
     }
 
