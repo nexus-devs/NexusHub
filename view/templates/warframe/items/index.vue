@@ -3,9 +3,12 @@
     <subnav></subnav>
     <header>
       <div class="g-ct">
-        <itemfield v-for="component in item.components" :data="component" :key="component.name">
-          {{ component }}
-        </itemfield>
+        <div class="row row-margin">
+          <pricefield v-for="component in item.components" :component="component"
+          :key="component.name" :item="item">
+
+          </pricefield>
+        </div>
       </div>
     </header>
   </div>
@@ -15,9 +18,33 @@
 
 <script>
 import subnav from 'src/components/ui/subnav.vue'
-import itemfield from 'src/components/fields/item.vue'
+import pricefield from 'src/components/fields/items/price.vue'
 import timefield from 'src/components/search/fields/time.vue'
 
+/**
+ * Helper function to merge multiple sources of data for the item
+ */
+const mergeItemData = (item, data) => {
+  for (let i = 0; i < item.components.length; i++) {
+    let component = item.components[i]
+    component = Object.assign(component, data.components[i])
+  }
+
+  // Set should be first item
+  let merged = Object.assign(data, item)
+  let index = merged.components.findIndex(c => c.name === 'Set')
+
+  if (index > -1) {
+    let set = merged.components.splice(index, 1)[0]
+    merged.components.unshift(set)
+  }
+
+  return merged
+}
+
+/**
+ * Initial Store state for item
+ */
 const store = {
   state: {
     item: {
@@ -45,21 +72,18 @@ const store = {
     async fetchItemData({ commit }, name) {
       const item = await this.$blitz.get(`/warframe/v1/items/${name}`)
       const stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics`)
-
-      // Merge Component array of item and stats endpoint
-      for (let i = 0; i < item.components.length; i++) {
-        let component = item.components[i]
-        component = Object.assign(component, stats.components[i])
-      }
-      commit('setItem', Object.assign(item, stats))
+      commit('setItem', mergeItemData(item, stats))
     }
   }
 }
 
+/**
+ * Vue Component
+ */
 export default {
   components: {
     subnav,
-    itemfield,
+    pricefield,
     timefield
   },
 
@@ -90,15 +114,10 @@ export default {
 
   methods: {
     async listen() {
-      const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics_new`
+      const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics`
       this.$blitz.subscribe(itemUrl)
-      this.$blitz.on(itemUrl, item => {
-        // Merge Component array of item and stats endpoint
-        for (let i = 0; i < item.components.length; i++) {
-          let component = item.components[i]
-          component = Object.assign(component, this.$store.state.items.item.components[i])
-        }
-        this.$store.commit('setItem', Object.assign(item, this.$store.state.items.item))
+      this.$blitz.on(itemUrl, data => {
+        this.$store.commit('setItem', mergeItemData(this.$store.state.item.item, data))
       })
     }
   }
@@ -113,5 +132,11 @@ export default {
 header {
   background: $colorBackground;
   padding: 136px 0 80px;
+
+  .row {
+    /deep/ {
+      .col-b {}
+    }
+  }
 }
 </style>

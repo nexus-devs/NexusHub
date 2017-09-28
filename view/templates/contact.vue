@@ -12,7 +12,7 @@
             and PM one of the devs.
           </p>
           <div class="row">
-            <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join</a>
+            <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
           </div>
       </section>
       <section>
@@ -48,5 +48,8 @@ p {
 }
 a {
   margin-top: 15px;
+}
+.btn {
+  white-space: nowrap;
 }
 </style>
