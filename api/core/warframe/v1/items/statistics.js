@@ -126,6 +126,14 @@ class Statistics extends Endpoint {
     // Main document to return
     let doc = {
       name: itemResult.name,
+      supply: {
+        count: 0,
+        hasValue: 0
+      },
+      demand: {
+        count: 0,
+        hasValue: 0
+      },
       components: []
     }
 
@@ -229,7 +237,17 @@ class Statistics extends Endpoint {
         this.calculateAvg(interval)
         delete interval.requests
       })
+
+      // Add supply/demand to root object
+      doc.supply.count += component.selling.offers.count
+      doc.supply.hasValue += component.selling.offers.hasValue
+      doc.demand.count += component.buying.offers.count
+      doc.demand.hasValue += component.buying.offers.hasValue
     })
+
+    const offers = doc.supply.count + doc.demand.count
+    doc.supply.percentage = doc.supply.count / offers
+    doc.demand.percentage = doc.demand.count / offers
   }
 
 
