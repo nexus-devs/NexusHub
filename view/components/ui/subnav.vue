@@ -19,7 +19,7 @@
     <div class="time-container">
       <span>Comparing </span>
       <timefield></timefield>
-      <span>to previous period.</span>
+      <span>to <span>previous period</span></span>
     </div>
   </nav>
 </template>
@@ -69,18 +69,18 @@ export default {
 
 nav {
   position: fixed;
-  width: calc(100vw - 120px);
+  width: calc(100vw - 125px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 35px 7px 85px;
+  padding: 8px 40px 8px 85px;
   border-bottom: 1px solid $colorSubtleDark;
-  @include gradient-background-dg(rgba(0,0,0,0.2), rgba(0,0,0,0.25));
+  @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.4));
 
   @media (max-width: $breakpoint-m) {
-    width: calc(100vw - 60px);
+    width: calc(100vw - 65px);
     margin-top: 56px;
-    padding: 15px 35px 15px 25px;
+    padding: 15px 40px 15px 25px;
   }
 
   .item {
@@ -136,6 +136,11 @@ nav {
     display: flex;
     align-items: center;
 
+    span span {
+      color: white;
+      margin-left: 5px;
+    }
+
     @media (max-width: $breakpoint-s) {
       display: none;
     }
@@ -150,7 +155,15 @@ nav {
     label, br {
       display: none;
     }
-
+    .input {
+      padding: 4px 8px;
+      margin: 0 5px;
+    }
+    .active {
+      span:not(.selected) {
+        color: $colorFontBody;
+      }
+    }
     .timepicker {
       position: absolute;
       opacity: 0;
@@ -165,10 +178,10 @@ nav {
       }
       .suggestions {
         padding: 10px 15px;
-        transform: translateX(-18%);
-        background: rgba(0,0,0,0.3);
+        transform: translateX(-30%);
+        background: rgba(15, 20, 25, 0.35);
         border-radius: 2px;
-        margin-top: 11px;
+        margin-top: 15px;
 
         .col {
           display: flex;
@@ -181,6 +194,7 @@ nav {
           background: $colorBackgroundDark;
           font-size: 0.9em;
           padding: 10px;
+          min-width: 90px;
 
           &:hover {
             background: $colorBackgroundLight;

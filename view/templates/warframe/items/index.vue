@@ -44,7 +44,13 @@ const store = {
   actions: {
     async fetchItemData({ commit }, name) {
       const item = await this.$blitz.get(`/warframe/v1/items/${name}`)
-      const stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics_new`)
+      const stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics`)
+
+      // Merge Component array of item and stats endpoint
+      for (let i = 0; i < item.components.length; i++) {
+        let component = item.components[i]
+        component = Object.assign(component, stats.components[i])
+      }
       commit('setItem', Object.assign(item, stats))
     }
   }
@@ -87,6 +93,11 @@ export default {
       const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics_new`
       this.$blitz.subscribe(itemUrl)
       this.$blitz.on(itemUrl, item => {
+        // Merge Component array of item and stats endpoint
+        for (let i = 0; i < item.components.length; i++) {
+          let component = item.components[i]
+          component = Object.assign(component, this.$store.state.items.item.components[i])
+        }
         this.$store.commit('setItem', Object.assign(item, this.$store.state.items.item))
       })
     }
