@@ -90,6 +90,7 @@ export default {
         padding: 5px;
         border-radius: 2px;
         border: 1px solid $colorSubtle;
+        color: $colorFontSubtle;
 
         @media (max-width: $breakpoint-s) {
           display: none;
