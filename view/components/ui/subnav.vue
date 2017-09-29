@@ -69,7 +69,7 @@ export default {
 
 nav {
   position: fixed;
-  width: calc(100vw - 125px);
+  width: calc(100vw - 133px);
   display: flex;
   justify-content: space-between;
   align-items: center;
