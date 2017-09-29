@@ -52,11 +52,9 @@ export default {
   beforeCreate() {
     this.$store.registerModule('search', store)
   },
-
   mounted() {
     this.$refs.input.focus()
   },
-
   data() {
     return {
       input: '',
@@ -67,7 +65,6 @@ export default {
       suggestions: []
     }
   },
-
   computed: {
     autotype() {
       return this.autocomplete.type
@@ -102,7 +99,6 @@ export default {
         }, 100)
       }
     },
-
     async fetchSuggestions(result) {
       // Only run if timeout isn't after search is done
       if (!this.$store.state.search.done) {

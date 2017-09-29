@@ -30,12 +30,19 @@
 
 
 <script>
+/**
+ * Generate item ranks
+ */
 const available = []
 for (let i = 0; i < 11; i++) {
   available.push(i)
 }
 available.push('Any Rank')
 
+
+/**
+ * Store Module which is hooked on beforeCreate
+ */
 const store = {
   state: {
     available,
@@ -59,18 +66,20 @@ const store = {
   }
 }
 
+
+/**
+ * Vue Component
+ */
 export default {
   beforeCreate() {
     this.$store.registerModule('rank', store)
   },
-
   data() {
     return {
       active: false,
       input: ''
     }
   },
-
   computed: {
     available() {
       return this.$store.state.rank.available
@@ -79,7 +88,6 @@ export default {
       return this.$store.state.rank.selected
     }
   },
-
   methods: {
     toggle() {
       this.active = !this.active

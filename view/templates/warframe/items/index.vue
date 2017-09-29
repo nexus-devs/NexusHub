@@ -5,9 +5,7 @@
       <div class="g-ct">
         <div class="row row-margin">
           <pricefield v-for="component in item.components" :component="component"
-          :key="component.name" :item="item">
-
-          </pricefield>
+          :key="component.name" :item="item"></pricefield>
         </div>
       </div>
     </header>
@@ -20,6 +18,8 @@
 import subnav from 'src/components/ui/subnav.vue'
 import pricefield from 'src/components/fields/items/price.vue'
 import timefield from 'src/components/search/fields/time.vue'
+import rankfield from 'src/components/search/fields/rank.vue'
+
 
 /**
  * Helper function to merge multiple sources of data for the item
@@ -42,26 +42,31 @@ const mergeItemData = (item, data) => {
   return merged
 }
 
+
 /**
  * Initial Store state for item
  */
+const item = {
+  name: '',
+  type: '',
+  description: '',
+  supply: {
+    count: 0,
+    percentage: 0,
+    hasValue: 0
+  },
+  demand: {
+    count: 0,
+    percentage: 0,
+    hasValue: 0
+  },
+  components: [],
+  selected: []
+}
 const store = {
   state: {
-    item: {
-      name: '',
-      type: '',
-      description: '',
-      supply: {
-        count: 0,
-        percentage: 0
-      },
-      demand: {
-        count: 0,
-        percentage: 0
-      },
-      components: [],
-      selected: []
-    }
+    item,
+    itemComparison: Object.assign({}, item)
   },
   mutations: {
     setItem(state, item) {
@@ -69,13 +74,38 @@ const store = {
     }
   },
   actions: {
-    async fetchItemData({ commit }, name) {
-      const item = await this.$blitz.get(`/warframe/v1/items/${name}`)
-      const stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics`)
+    async fetchItemData({ commit, rootState }, name) {
+      const time = rootState.time
+      const rank = rootState.rank
+      const compareStart = time.compare.start.time.milliseconds()
+      const compareEnd = time.compare.end.time.milliseconds()
+      let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
+      let item = await this.$blitz.get(`/warframe/v1/items/${name}`)
+      let stats, comparison
+
+      // Attach rank if specified
+      if (rank.selected !== 'Any Rank') {
+        compareUrl += `&rank=${rank.selected}`
+      }
+
+      // Get custom query which probably isn't cached
+      if (time.modified) {
+        const focusStart = time.focus.start.time.milliseconds()
+        const focusEnd = time.focus.end.time.milliseconds()
+        stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics?timestart=${focusStart}&timeend=${focusEnd}`)
+        comparison = await this.$blitz.get(compareUrl)
+      }
+
+      // No query always has a 24h data cache, so use for non explicit searches
+      else {
+        stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics`)
+        comparison = await this.$blitz.get(compareUrl)
+      }
       commit('setItem', mergeItemData(item, stats))
     }
   }
 }
+
 
 /**
  * Vue Component
@@ -86,14 +116,22 @@ export default {
     pricefield,
     timefield
   },
-
   beforeCreate() {
+    // Fill store data if not already done
+    if (!this.$store.state.time || !this.$store.state.rank) {
+      timefield.beforeCreate[0].bind(this)()
+      rankfield.beforeCreate[0].bind(this)()
+    }
+    // Merge pre-defined store with existing state.
+    // SSR will produce mismatching components otherwise.
     if (this.$store.state.items) {
       store.state.item = Object.assign(store.state.item, this.$store.state.items.item)
     }
     this.$store.registerModule('items', store)
   },
-
+  created() {
+    this.$store.commit('setActiveGame', 'warframe')
+  },
   computed: {
     item() {
       return this.$store.state.items.item
@@ -102,16 +140,12 @@ export default {
       return this.selected || this.$store.state.items.item.components
     }
   },
-
   beforeMount() {
-    this.$store.commit('setActiveGame', 'warframe')
     this.listen()
   },
-
   asyncData({ store, route: { params: { item }}}) {
     return store.dispatch('fetchItemData', item)
   },
-
   methods: {
     async listen() {
       const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics`
@@ -133,9 +167,12 @@ header {
   background: $colorBackground;
   padding: 136px 0 80px;
 
-  .row {
-    /deep/ {
-      .col-b {}
+  .row-margin {
+    margin-left: -20px;
+    margin-right: -20px;
+
+    .col-b {
+      margin: 0 20px;
     }
   }
 }

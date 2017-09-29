@@ -31,7 +31,15 @@ const calendarOptions = {
   lastWeek: '[Last] dddd',
   sameElse: 'DD/MM/YYYY'
 }
+const getDate = (date) => date instanceof moment ? {
+                            time: date,
+                            format: date.calendar(null, calendarOptions)
+                          } : date
 
+
+/**
+ * Store module for time selections
+ */
 const store = {
   state: {
     modified: false,
@@ -55,28 +63,60 @@ const store = {
   },
   mutations: {
     setTimeFocusStart(state, date) {
-      state.focus.start = date
+      state.focus.start = getDate(date)
     },
     setTimeFocusEnd(state,  date) {
-      state.focus.end = date
+      state.focus.end = getDate(date)
     },
     setTimeCompareStart(state, date) {
-      state.compare.start = date
+      state.compare.start = getDate(date)
     },
     setTimeCompareEnd(state, date) {
-      state.compare.end = date
+      state.compare.end = getDate(date)
     },
     setTimeModified(state, bool) {
-      state.modified = bool
+      state.modified = getDate(bool)
+    }
+  },
+  actions: {
+    applyTimeQuery({ commit }, route) {
+
+      // Focus Range
+      if (route.query.timestart) {
+        commit('setTimeFocusStart', moment.unix(route.query.timestart))
+        commit('setTimeModified', true)
+      }
+      if (route.query.timeend) {
+        commit('setTimeFocusEnd', moment.unix(route.query.timeend))
+        commit('setTimeModified', true)
+      }
+
+      // Compare Range
+      if (route.query.comparestart) {
+        commit('setTimeCompareStart', moment.unix(route.query.comparestart))
+        commit('setTimeModified', true)
+      }
+      if (route.query.compareend) {
+        commit('setTimeCompareEnd', moment.unix(route.query.compareend))
+        commit('setTimeModified', true)
+      }
     }
   }
 }
 
+
+/**
+ * Vue Component
+ */
 export default {
   beforeCreate() {
-    this.$store.registerModule('time', store)
+    if (!this.$store._actions.applyTimeQuery) {
+      this.$store.registerModule('time', store)
+    }
   },
-
+  created() {
+    this.$store.dispatch('applyTimeQuery', this.$route)
+  },
   data() {
     return {
       active: false,
@@ -93,7 +133,6 @@ export default {
       }]
     }
   },
-
   computed: {
     from() {
       let date = this.$store.state.time.focus.start
@@ -104,7 +143,12 @@ export default {
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
-
+  watch: {
+    // Automatically update time values on route query changes
+    $route(route) {
+      this.$store.dispatch('applyTimeQuery', route)
+    }
+  },
   methods: {
     toggle() {
       this.selected = 'start'
@@ -145,6 +189,18 @@ export default {
         this.toggle()
         this.selected = 'start'
       }
+
+      // Add time query to URL, we can express the current state through a link
+      // The query params are automatically applied to store state on load/change
+      const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
+
+      this.$router.push({
+        path: this.$route.fullPath,
+        query: Object.assign(query, {
+          timestart: this.$store.state.time.focus.start.time.unix(),
+          timeend: this.$store.state.time.focus.end.time.unix()
+        })
+      })
     },
 
     // Ensure picked time range makes sense (switch dates if necessary)
