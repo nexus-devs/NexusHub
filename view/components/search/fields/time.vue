@@ -192,7 +192,7 @@ export default {
         // The query params are automatically applied to store state on load/change
         const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
 
-        this.$router.push({
+        this.$router.replace({
           path: this.$route.fullPath,
           query: Object.assign(query, {
             timestart: time.focus.start.time.unix(),
