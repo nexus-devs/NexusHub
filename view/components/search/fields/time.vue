@@ -143,24 +143,18 @@ export default {
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
-  watch: {
-    // Automatically update time values on route query changes
-    $route(route) {
-      this.$store.dispatch('applyTimeQuery', route)
-    }
-  },
   methods: {
     toggle() {
       this.selected = 'start'
       this.active = !this.active
     },
     select(date) {
-      this.$store.commit('setTimeModified', true)
+      const time = this.$store.state.time
 
       // Modify start of time range
       if (this.selected === 'start') {
         date.time = date.time.endOf('day')
-        let timeend = this.$store.state.time.focus.end.time
+        let timeend = moment(time.focus.end.time)
         let compareDate = {
           time: timeend.subtract(date.time.diff(timeend, 'days'), 'days')
         }
@@ -175,32 +169,43 @@ export default {
       // Modify end of timerange
       else {
         date.time = date.time.startOf('day')
-        let timestart = this.$store.state.time.focus.start.time
+        let timestart = time.focus.start.time
         let compareDate = {
-          time: date.time.subtract(timestart.diff(date.time, 'days'), 'days')
+          time: moment(date.time).subtract(timestart.diff(date.time, 'days'), 'days')
         }
 
         // Set new time range ends, but also new start of comparison range
         // Since it starts where the focus range ends
         this.$store.commit('setTimeFocusEnd', date)
-        this.$store.commit('setTimeCompareStart', this.$store.state.time.focus.end)
+        this.$store.commit('setTimeCompareStart', time.focus.end)
         this.$store.commit('setTimeCompareEnd', compareDate)
         this.validate()
         this.toggle()
         this.selected = 'start'
       }
 
-      // Add time query to URL, we can express the current state through a link
-      // The query params are automatically applied to store state on load/change
-      const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
+      // Set modified if the default selection was changed
+      if (time.focus.start.format !== 'Today' || time.focus.end.format !== '7 days ago') {
+        this.$store.commit('setTimeModified', true)
 
-      this.$router.push({
-        path: this.$route.fullPath,
-        query: Object.assign(query, {
-          timestart: this.$store.state.time.focus.start.time.unix(),
-          timeend: this.$store.state.time.focus.end.time.unix()
+        // Add time query to URL, we can express the current state through a link
+        // The query params are automatically applied to store state on load/change
+        const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
+
+        this.$router.push({
+          path: this.$route.fullPath,
+          query: Object.assign(query, {
+            timestart: time.focus.start.time.unix(),
+            timeend: time.focus.end.time.unix()
+          })
         })
-      })
+      }
+
+      // Default format was re-selected, so ensure the '7 days ago' format
+      // is applied again. Seems there's no better way to handle this.
+      else {
+        this.$store.state.time.focus.end.format = '7 days ago'
+      }
     },
 
     // Ensure picked time range makes sense (switch dates if necessary)
