@@ -77,8 +77,8 @@ const store = {
     async fetchItemData({ commit, rootState }, name) {
       const time = rootState.time
       const rank = rootState.rank
-      const compareStart = time.compare.start.time.milliseconds()
-      const compareEnd = time.compare.end.time.milliseconds()
+      const compareStart = time.compare.start.time.valueOf()
+      const compareEnd = time.compare.end.time.valueOf()
       let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
       let item = await this.$blitz.get(`/warframe/v1/items/${name}`)
       let stats, comparison
@@ -90,8 +90,8 @@ const store = {
 
       // Get custom query which probably isn't cached
       if (time.modified) {
-        const focusStart = time.focus.start.time.milliseconds()
-        const focusEnd = time.focus.end.time.milliseconds()
+        const focusStart = time.focus.start.time.valueOf()
+        const focusEnd = time.focus.end.time.valueOf()
         stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics?timestart=${focusStart}&timeend=${focusEnd}`)
         comparison = await this.$blitz.get(compareUrl)
       }
