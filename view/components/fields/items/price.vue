@@ -8,7 +8,7 @@
       <div class="content">
         <h3>{{ component.name === 'Set' ? item.name : component.name }}</h3>
         <div class="content-data">
-          <span class="content-data-main-value">{{ component.combined.median }}p</span>
+          <span class="content-data-main-value">{{ component.combined.median ? component.combined.median + 'p' : 'No Data' }}</span>
         </div>
       </div>
     </div>

@@ -69,7 +69,7 @@ export default {
 
 nav {
   position: fixed;
-  width: calc(100vw - 133px);
+  width: calc(100% - 125px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,7 +77,7 @@ nav {
   @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.4));
 
   @media (max-width: $breakpoint-m) {
-    width: calc(100vw - 65px);
+    width: calc(100% - 65px);
     margin-top: 56px;
     padding: 15px 40px 15px 25px;
   }
