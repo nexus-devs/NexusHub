@@ -49,8 +49,10 @@ export default {
     @media (max-width: $breakpoint-m) {
       position: fixed;
       background: $colorBackgroundDark;
-      padding: 13px 25px;
       @include shadow-1;
+    }
+    @media (max-width: $breakpoint-s) {
+      padding: 13.5px 25px;
     }
   }
   .nav-l {
