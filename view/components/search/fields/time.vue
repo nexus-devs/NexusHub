@@ -62,18 +62,47 @@ const store = {
     }
   },
   mutations: {
+
+    // Focus time range. Automatically adjust to "previous period" when changing
     setTimeFocusStart(state, date) {
-      state.focus.start = getDate(date)
+      const focusStart = getDate(date)
+      const focusEnd = moment(state.focus.end.time)
+      const compareStart = moment(state.compare.start.time)
+
+      // Set new time range start and resize the comparison range by "moving"
+      // the compare end back or forth by as much as the focus start has been
+      // moved
+      const compareEnd = compareStart.subtract(focusStart.time.diff(focusEnd, 'days'), 'days')
+      state.focus.start = focusStart
+      state.compare.end = getDate(compareEnd)
     },
     setTimeFocusEnd(state,  date) {
-      state.focus.end = getDate(date)
+      const focusEnd = getDate(date)
+      const focusStart = moment(state.focus.start.time)
+      const compareStart = moment(focusEnd.time).subtract(1, 'days')
+
+      // Set new focus end and set the comparison start to be the day before.
+      // The new comparison end is the diff between the new focus end and start
+      // similar to the approach above.
+      const compareEnd = moment(compareStart.valueOf()).subtract(focusStart.diff(focusEnd.time, 'days'), 'days')
+      state.focus.end = focusEnd
+      state.compare.start = getDate(compareStart)
+      state.compare.end = getDate(compareEnd)
     },
+
+
+    // Comparison range setters. Just apply the explicit value.
     setTimeCompareStart(state, date) {
       state.compare.start = getDate(date)
     },
     setTimeCompareEnd(state, date) {
       state.compare.end = getDate(date)
     },
+
+
+    // Determine wether or not the default time range was changed. This is
+    // important so we query the cached data (without query params) instead of
+    // performing a custom time range query.
     setTimeModified(state, bool) {
       state.modified = getDate(bool)
     }
@@ -154,31 +183,14 @@ export default {
       // Modify start of time range
       if (this.selected === 'start') {
         date.time = date.time.endOf('day')
-        let timeend = moment(time.focus.end.time)
-        let compareDate = {
-          time: timeend.subtract(date.time.diff(timeend, 'days'), 'days')
-        }
-
-        // Set new main time start and comparison end based on diff to
-        // main time range end
         this.$store.commit('setTimeFocusStart', date)
-        this.$store.commit('setTimeCompareEnd', compareDate)
         this.selected = 'end'
       }
 
       // Modify end of timerange
       else {
         date.time = date.time.startOf('day')
-        let timestart = time.focus.start.time
-        let compareDate = {
-          time: moment(date.time).subtract(timestart.diff(date.time, 'days'), 'days')
-        }
-
-        // Set new time range ends, but also new start of comparison range
-        // Since it starts where the focus range ends
         this.$store.commit('setTimeFocusEnd', date)
-        this.$store.commit('setTimeCompareStart', time.focus.end)
-        this.$store.commit('setTimeCompareEnd', compareDate)
         this.validate()
         this.toggle()
         this.selected = 'start'
@@ -193,7 +205,7 @@ export default {
         const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
 
         this.$router.replace({
-          path: this.$route.fullPath,
+          path: this.$route.path,
           query: Object.assign(query, {
             timestart: time.focus.start.time.unix(),
             timeend: time.focus.end.time.unix()
@@ -205,6 +217,18 @@ export default {
       // is applied again. Seems there's no better way to handle this.
       else {
         this.$store.state.time.focus.end.format = '7 days ago'
+
+        // Reset URL query
+        const query = Object.assign({}, this.$route.query)
+        delete query.timestart
+        delete query.timeend
+        delete query.comparestart
+        delete query.compareend
+
+        this.$router.replace({
+          path: this.$route.path,
+          query
+        })
       }
     },
 
