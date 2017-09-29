@@ -35,6 +35,11 @@ class Statistics extends Endpoint {
         description: 'Intervals to split the time in.'
       }
     ]
+    this.schema.limit = {
+      disable: false,
+      interval: 5000,
+      maxInInterval: 2
+    }
   }
 
 
@@ -67,7 +72,7 @@ class Statistics extends Endpoint {
         error: 'Could not find data for ' + item + ' ' + component + '.',
         reason: 'Item doesn\'t exist.',
       }
-      this.cache(response, 1)
+      this.cache(response, 60)
       res.status(404).send(response)
     }
 
@@ -79,7 +84,7 @@ class Statistics extends Endpoint {
     let stats = this.getStatistics(requests, query, intervals, itemResult)
 
     // Send to client and cache
-    this.cache(stats, 1)
+    this.cache(stats, 86400)
     res.send(stats)
   }
 
