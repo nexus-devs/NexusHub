@@ -3,10 +3,10 @@
     <sidebar></sidebar>
     <navigation></navigation>
     <notification></notification>
-    <div class="app-content" v-bind:class="{ activeSidebar, deltaX }"
-     v-bind:style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                   'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                   'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+    <div class="app-content" :class="{ activeSidebar, deltaX }"
+         :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
       <transition>
         <router-view></router-view>
       </transition>
@@ -16,14 +16,18 @@
 </template>
 
 
+
 <script>
 import navigation from 'src/components/ui/nav.vue'
 import sidebar from 'src/components/sidebar/index.vue'
 import notification from 'src/components/ui/notification.vue'
 import bottom from 'src/components/ui/footer.vue'
 
-// Determine which game is currently being viewed
-// Useful for dynamic components like nav logo, notification listeners, etc
+
+/**
+ * Determine which game is currently being viewed
+ * Useful for dynamic components like nav logo, notification listeners, etc
+ */
 const store = {
   state: {
     name: ''
@@ -35,6 +39,10 @@ const store = {
   }
 }
 
+
+/**
+ * Vue Component
+ */
 export default {
   beforeCreate() {
     this.$store.registerModule('game', store)
@@ -58,17 +66,20 @@ export default {
     activeSidebar() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
     },
+    // Horizontal position for content when swiping out the sidebar
     deltaX() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
     }
   },
   methods: {
+    // Check if we reached $breakpoint-m. If so, don't "squeeze" the app content on menu swipe
     updateBreakpoint() {
       this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
     }
   }
 }
 </script>
+
 
 
 <style lang='scss'>
@@ -84,7 +95,6 @@ export default {
   input::placeholder {
     color: $colorFontBody;
   }
-
   a {
     color: white;
     @include ease(0.3s);
@@ -92,7 +102,6 @@ export default {
       opacity: 0.8;
     }
   }
-
   h1,
   h2,
   h3,

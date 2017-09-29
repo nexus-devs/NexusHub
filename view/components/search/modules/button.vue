@@ -14,16 +14,6 @@
 <script>
 import items from 'src/templates/warframe/items/index.vue'
 
-// Helper function for &/? conditional in params
-const add = (url, query) => {
-  if (url.includes('?')) {
-    url += `&${query}`
-  } else {
-    url += `?${query}`
-  }
-  return url
-}
-
 export default {
   methods: {
     async search() {
@@ -32,20 +22,23 @@ export default {
       const rank = this.$store.state.rank
 
       if (search.input.name && !search.done) {
-        let url = `/warframe/${search.input.type.toLowerCase()}/${search.input.name}`
+        let path = `/warframe/${search.input.type.toLowerCase()}/${search.input.name}`
+        let query = {}
 
         // Add URL params based on state
         if (time.modified) {
-          const timequery = `timestart=${time.focus.start.time.unix()}&timeend=${time.focus.end.time.unix()}`
-          url = add(url, timequery)
+          query.timestart = time.focus.start.time.unix()
+          query.timeend = time.focus.end.time.unix()
         }
         if (rank.selected !== 'Any Rank') {
-          const rankquery = `rank=${rank.selected}`
-          url = add(url, rankquery)
+          query.rank = rank.selected
         }
 
         // View generated URL
-        this.$router.push(url)
+        this.$router.push({
+          path,
+          query
+        })
 
         // Toggle sidebar if open
         if (this.$store.state.sidebar.active) {
