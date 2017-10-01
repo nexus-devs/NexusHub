@@ -103,6 +103,9 @@
   padding-bottom: 220px;
   @include gradient-background-dg($colorPrimaryDark, $colorAccentDark);
 
+  @media (max-width: $breakpoint-m) {
+    padding-top: 100px;
+  }
   p {
     color: white !important;
   }

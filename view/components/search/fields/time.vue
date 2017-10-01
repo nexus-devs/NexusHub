@@ -22,7 +22,9 @@
 
 
 <script>
+import _ from 'lodash'
 import moment from 'moment'
+
 const calendarOptions = {
   sameDay: '[Today]',
   nextDay: '[Tomorrow]',
@@ -31,10 +33,7 @@ const calendarOptions = {
   lastWeek: '[Last] dddd',
   sameElse: 'DD/MM/YYYY'
 }
-const getDate = (date) => date instanceof moment ? {
-                            time: date,
-                            format: date.calendar(null, calendarOptions)
-                          } : date
+const getDate = (date) => date instanceof moment ? { time: date, format: date.calendar(null, calendarOptions) } : date
 
 
 /**
@@ -54,7 +53,7 @@ const store = {
     },
     compare: {
       start: {
-        time: moment().subtract(7, 'days').endOf('day')
+        time: moment().subtract(8, 'days').endOf('day')
       },
       end: {
         time: moment().subtract(14, 'days').startOf('day')
@@ -202,7 +201,7 @@ export default {
 
         // Add time query to URL, we can express the current state through a link
         // The query params are automatically applied to store state on load/change
-        const query = Object.assign({}, this.$route.query) // route is immutable so make a clone
+        const query = _.cloneDeep(this.$route.query)
 
         this.$router.replace({
           path: this.$route.path,
@@ -216,10 +215,11 @@ export default {
       // Default format was re-selected, so ensure the '7 days ago' format
       // is applied again. Seems there's no better way to handle this.
       else {
+        this.$store.commit('setTimeModified', false)
         this.$store.state.time.focus.end.format = '7 days ago'
 
         // Reset URL query
-        const query = Object.assign({}, this.$route.query)
+        const query = _.cloneDeep(this.$route.query)
         delete query.timestart
         delete query.timeend
         delete query.comparestart
