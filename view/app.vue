@@ -140,7 +140,7 @@ export default {
   .app-content {
     @include ease-out(0.45s);
 
-    /deep/ .g-ct {
+    .g-ct {
       @include ease-out(0.45s);
     }
   }
