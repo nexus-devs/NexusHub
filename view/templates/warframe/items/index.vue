@@ -15,6 +15,7 @@
 
 
 <script>
+import _ from 'lodash'
 import subnav from 'src/components/ui/subnav.vue'
 import pricefield from 'src/components/fields/items/price.vue'
 import timefield from 'src/components/search/fields/time.vue'
@@ -25,20 +26,15 @@ import rankfield from 'src/components/search/fields/rank.vue'
  * Helper function to merge multiple sources of data for the item
  */
 const mergeItemData = (item, data) => {
-  for (let i = 0; i < item.components.length; i++) {
-    let component = item.components[i]
-    component = Object.assign(component, data.components[i])
-  }
+  const merged = _.merge(_.cloneDeep(item), data)
 
-  // Set should be first item
-  let merged = Object.assign(data, item)
+  // Item 'Set' should be first in list
+  // > -1 -> set exists, > 0 -> not the first in array already
   let index = merged.components.findIndex(c => c.name === 'Set')
-
-  if (index > -1) {
+  if (index > 0) {
     let set = merged.components.splice(index, 1)[0]
     merged.components.unshift(set)
   }
-
   return merged
 }
 
@@ -46,7 +42,7 @@ const mergeItemData = (item, data) => {
 /**
  * Initial Store state for item
  */
-const item = {
+const defaultItem = {
   name: '',
   type: '',
   description: '',
@@ -63,14 +59,18 @@ const item = {
   components: [],
   selected: []
 }
+
 const store = {
   state: {
-    item,
-    itemComparison: Object.assign({}, item)
+    item: _.cloneDeep(defaultItem),
+    itemComparison: _.cloneDeep(defaultItem)
   },
   mutations: {
     setItem(state, item) {
       state.item = Object.assign(state.item, item)
+    },
+    setItemComparison(state, item) {
+      state.itemComparison = Object.assign(state.itemComparison, item)
     }
   },
   actions: {
@@ -79,12 +79,14 @@ const store = {
       const rank = rootState.rank
       const compareStart = time.compare.start.time.valueOf()
       const compareEnd = time.compare.end.time.valueOf()
+
+      // Specify Target URLs
+      let focusUrl = `/warframe/v1/items/${name}/statistics`
       let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
-      let item = await this.$blitz.get(`/warframe/v1/items/${name}`)
-      let stats, comparison
 
       // Attach rank if specified
       if (rank.selected !== 'Any Rank') {
+        focusUrl += `?rank=${rank.selected}`
         compareUrl += `&rank=${rank.selected}`
       }
 
@@ -92,16 +94,23 @@ const store = {
       if (time.modified) {
         const focusStart = time.focus.start.time.valueOf()
         const focusEnd = time.focus.end.time.valueOf()
-        stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics?timestart=${focusStart}&timeend=${focusEnd}`)
-        comparison = await this.$blitz.get(compareUrl)
+        let query = `?timestart=${focusStart}&timeend=${focusEnd}`
+
+        if (focusUrl.includes('?')) {
+          query = query.replace('?', '&')
+        }
+        focusUrl += query
       }
 
-      // No query always has a 24h data cache, so use for non explicit searches
-      else {
-        stats = await this.$blitz.get(`/warframe/v1/items/${name}/statistics`)
-        comparison = await this.$blitz.get(compareUrl)
-      }
-      commit('setItem', mergeItemData(item, stats))
+      // Perform API query for base data, focus range and comparison range
+      const data = await Promise.all([
+        this.$blitz.get(`/warframe/v1/items/${name}`),
+        this.$blitz.get(focusUrl),
+        this.$blitz.get(compareUrl)
+      ])
+
+      commit('setItem', mergeItemData(data[0], data[1]))
+      commit('setItemComparison', mergeItemData(data[0], data[2]))
     }
   }
 }
@@ -122,10 +131,14 @@ export default {
       timefield.beforeCreate[0].bind(this)()
       rankfield.beforeCreate[0].bind(this)()
     }
+
+    // Apply URL time query to state
+    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
+
     // Merge pre-defined store with existing state.
     // SSR will produce mismatching components otherwise.
     if (this.$store.state.items) {
-      store.state.item = Object.assign(store.state.item, this.$store.state.items.item)
+      store.state.item = _.merge(store.state.item, this.$store.state.items.item)
     }
     this.$store.registerModule('items', store)
   },

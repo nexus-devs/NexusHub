@@ -69,6 +69,7 @@ export default {
 
 nav {
   position: fixed;
+  z-index: 1;
   width: calc(100% - 125px);
   display: flex;
   justify-content: space-between;
@@ -147,7 +148,6 @@ nav {
 
   /deep/ .time {
     color: white;
-    font-size: 0.9em;
     flex-grow: 0;
     flex-basis: auto;
 
@@ -165,6 +165,7 @@ nav {
     }
     .timepicker {
       position: absolute;
+      font-size: 0.9em;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-10px);
