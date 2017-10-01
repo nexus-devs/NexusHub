@@ -61,7 +61,7 @@ export default {
   @include ease(0.35s);
 
   .panel-head {
-    padding: 15px 35px;
+    padding: 17px 35px;
     cursor: pointer;
     border-top: 1px solid $colorSubtleDark;
     @include ease(0.3s);
