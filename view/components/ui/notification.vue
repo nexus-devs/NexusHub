@@ -127,87 +127,88 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-.notification-container {
+.notification {
   position: fixed;
   overflow: hidden;
-  z-index: 2;
+  z-index: 1;
   right: 0;
   bottom: 15vh;
-}
-.notification {
-    position: relative;
-    z-index: 1;
-    background: $colorBackground;
-    padding: 15px 5px;
-    transform: translateX(500px);
-    transition-delay: 0.1s;
-    @include ease-out(0.5s);
-    @include shadow-3;
+  background: $colorBackground;
+  padding: 15px 5px;
+  transform: translateX(500px);
+  transition-delay: 0.1s;
+  pointer-events: none;
+  @include ease-out(0.5s);
+  @include shadow-3;
+  @media (max-width: $breakpoint-s) {
+    padding: 15px;
+  }
+
+  .navigation {
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.5;
+    @include ease(0.25s);
     @media (max-width: $breakpoint-s) {
-        padding: 15px;
-    }
-
-    .navigation {
-        display: inline-block;
-        vertical-align: middle;
-        opacity: 0.5;
-        @include ease(0.25s);
-        @media (max-width: $breakpoint-s) {
-            padding: 0;
-        }
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-    .ico-28 {
-        vertical-align: top;
-    }
-
-    .message {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 5px;
-        max-width: 300px;
-        @media (max-width: $breakpoint-s) {
-            max-width: 250px;
-        }
-
-        h3 {
-            font-weight: 400;
-            font-size: 1.1em;
-        }
-
-        p {
-            margin-top: 5px;
-        }
+      padding: 0;
     }
     &:hover {
-        transform: translateX(0); // don't auto-hide on hover
+      opacity: 1;
+    }
+  }
+
+  .ico-28 {
+    vertical-align: top;
+  }
+
+  .message {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    max-width: 300px;
+    @media (max-width: $breakpoint-s) {
+      max-width: 250px;
     }
 
-    &.active {
-        transform: translateX(0);
+    h3 {
+      font-weight: 400;
+      font-size: 1.1em;
     }
+
+    p {
+      margin-top: 5px;
+    }
+  }
+  &:hover {
+    pointer-events: all;
+    transform: translateX(0); // don't auto-hide on hover
+  }
+
+  &.active {
+    pointer-events: all;
+    transform: translateX(0);
+  }
 }
 
 .hint {
-    position: fixed;
-    opacity: 0.1;
-    border: 1px solid rgba(255,255,255,0.5);
-    bottom: calc(15vh + 20px);
-    right: -25px;
-    height: 40px;
-    width: 40px;
-    @include ease(0.25s);
+  position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  opacity: 0.1;
+  border: 1px solid rgba(255,255,255,0.5);
+  bottom: calc(15vh + 20px);
+  right: -25px;
+  height: 40px;
+  width: 40px;
+  @include ease(0.25s);
 
-    img {
-        margin-top: 9px;
-        margin-left: 2px;
-    }
-    &:hover {
-        opacity: 1;
-        border: 1px solid transparent;
-    }
+  img {
+    margin-top: 9px;
+    margin-left: 2px;
+  }
+  &:hover {
+    opacity: 1;
+    border: 1px solid transparent;
+  }
 }
 </style>
