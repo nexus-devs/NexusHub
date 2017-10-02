@@ -236,14 +236,10 @@ export default {
     validate() {
       const focusStart = this.$store.state.time.focus.start
       const focusEnd = this.$store.state.time.focus.end
-      const compareStart = this.$store.state.time.compare.start
-      const compareEnd = this.$store.state.time.compare.end
 
       if (focusStart.time < focusEnd.time) {
         this.$store.commit('setTimeFocusStart', focusEnd)
         this.$store.commit('setTimeFocusEnd', focusStart)
-        this.$store.commit('setTimeCompareStart', compareEnd)
-        this.$store.commit('setTimeCompareEnd', compareStart)
       }
     }
   }

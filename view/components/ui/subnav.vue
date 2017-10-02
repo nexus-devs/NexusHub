@@ -39,7 +39,7 @@ export default {
       return this.$store.state.items.item
     },
     components() {
-      const selected = this.$store.state.items.item.selected
+      const selected = this.$store.state.items.selected.components
       if (selected.length) {
         return selected
       } else {
@@ -135,6 +135,7 @@ nav {
   .time-container {
     display: flex;
     align-items: center;
+    font-size: 0.9em;
 
     span span {
       color: white;
@@ -155,7 +156,7 @@ nav {
       display: none;
     }
     .input {
-      padding: 4px 8px;
+      padding: 4px 0px 4px 8px;
       margin: 0 5px;
     }
     .active {
@@ -165,10 +166,10 @@ nav {
     }
     .timepicker {
       position: absolute;
-      font-size: 0.9em;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-10px);
+      min-width: 400px;
       @include ease(0.1s);
 
       &.active {
@@ -183,6 +184,9 @@ nav {
         border-radius: 2px;
         margin-top: 15px;
 
+        @media(max-width: $breakpoint-m) {
+          margin-top: 20px;
+        }
         .col {
           display: flex;
           justify-content: center;

@@ -1,18 +1,25 @@
 <template>
   <div class="col-b row">
+    <!-- left panel -->
     <div class="col">
       <div class="background" :class="{ set: component.name === 'Set' }">
         <div class="background-overlay"></div>
         <img :src="component.name === 'Set' ? item.imgUrl : component.imgUrl" :alt="`${item.name} ${component.name}`">
       </div>
-      <div class="content">
+      <div class="content" :class="{ increase, decrease }">
         <h3>{{ component.name === 'Set' ? item.name : component.name }}</h3>
         <div class="content-data">
-          <span class="content-data-main-value">{{ component.combined.median ? component.combined.median + 'p' : 'No Data' }}</span>
-          {{ component.combined.offers.count }}
+          <span class="content-data-main-value">
+            {{ component[offerType].median ? component[offerType].median + 'p' : 'No Data' }}
+          </span>
+          <span class="content-data-main-diff">
+            {{ comparison[offerType].median ? comparison[offerType].median + 'p' : 'No Data' }}
+            (<span>{{ diff.percentage }}</span>)
+          </span>
         </div>
       </div>
     </div>
+    <!-- right panel -->
     <div class="col">
 
     </div>
@@ -23,7 +30,34 @@
 
 <script>
 export default {
-  props: ['component', 'item']
+  props: ['component', 'comparison', 'item'],
+  computed: {
+    diff() {
+      const comparison = this.comparison
+      const component = this.component
+      const offerType = this.offerType
+      const percentage = ((component[offerType].median - comparison[offerType].median) / comparison[offerType].median * 100).toFixed(2)
+
+      return { percentage: percentage > 0 ? `+${percentage}%` : `${percentage}%` }
+    },
+    increase() {
+      const comparison = this.comparison
+      const component = this.component
+      const offerType = this.offerType
+
+      return component[offerType].median > comparison[offerType].median
+    },
+    decrease() {
+      const comparison = this.comparison
+      const component = this.component
+      const offerType = this.offerType
+
+      return component[offerType].median < comparison[offerType].median
+    },
+    offerType() {
+      return this.$store.state.items.selected.offerType
+    }
+  }
 }
 </script>
 
@@ -68,7 +102,7 @@ export default {
           }
         }
         img {
-          opacity: 0.5;
+          opacity: 0.3;
           height: 50%;
           max-width: 100%;
         }
@@ -88,7 +122,7 @@ export default {
         text-align: center;
 
         h3 {
-          font-weight: 300;
+          font-weight: 400;
           text-transform: uppercase;
         }
         .content-data {
@@ -96,7 +130,29 @@ export default {
 
           .content-data-main-value {
             color: white;
-            font-size: 1.1em;
+            font-size: 1.2em;
+          }
+          .content-data-main-diff {
+            display: block;
+            font-size: 0.9em;
+
+            span {
+              color: white;
+            }
+          }
+        }
+      }
+      .increase {
+        .content-data-main-diff {
+          span {
+            color: $colorPrimary !important;
+          }
+        }
+      }
+      .decrease {
+        .content-data-main-diff {
+          span {
+            color: $colorError !important;
           }
         }
       }
