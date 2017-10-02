@@ -16,33 +16,11 @@ module.exports = {
       mongoVerifySingleIndex(db, 'players', {
         'name': 1
       })
-      mongoVerifySingleIndex(db, 'players', {
-        'updatedAt': 1
-      })
 
       // Item stats accumulation
       mongoVerifySingleIndex(db, 'requests', {
         'item': 1,
         'createdAt': 1
-      })
-      mongoVerifySingleIndex(db, 'requests', {
-        'item': 1,
-        'component': 1,
-        'createdAt': 1
-      })
-
-      // Last request lookups
-      mongoVerifySingleIndex(db, 'requests', {
-        'createdAt': -1
-      })
-      mongoVerifySingleIndex(db, 'requests', {
-        'item': 1,
-        'createdAt': -1
-      })
-      mongoVerifySingleIndex(db, 'requests', {
-        'item': 1,
-        'component': 1,
-        'createdAt': -1
       })
     })
   }
