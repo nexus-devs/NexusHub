@@ -9,12 +9,7 @@ class Statistics extends Endpoint {
     super(api, db, url)
     this.schema.description = 'Get item statistics between a specified time frame.'
     this.schema.url = '/warframe/v1/items/:item/statistics'
-    this.schema.query = [{
-        name: 'component',
-        default: '',
-        required: true,
-        description: 'Specifies item component to look up. No component returns full set data.'
-      },
+    this.schema.query = [
       {
         name: 'timestart',
         default: () => {
@@ -48,7 +43,6 @@ class Statistics extends Endpoint {
    */
   async main(req, res) {
     const item = req.params.item
-    const component = req.query.component
     const timestart = req.query.timestart
     const timeend = req.query.timeend
     const intervals = req.query.intervals
@@ -77,7 +71,7 @@ class Statistics extends Endpoint {
     }
 
     // Generate valid Query from input
-    let query = this.generateQuery(item, component, timestart, timeend)
+    let query = this.generateQuery(item, timestart, timeend)
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query).toArray()
@@ -92,18 +86,13 @@ class Statistics extends Endpoint {
   /**
    * Generate query from given params
    */
-  generateQuery(item, component, timestart, timeend) {
+  generateQuery(item, timestart, timeend) {
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
         $gte: new Date(timeend),
         $lte: new Date(timestart)
       }
-    }
-
-    // Append component if one is given
-    if (component !== '') {
-      query.component = new RegExp('^' + component + '$', 'i')
     }
     return query
   }
