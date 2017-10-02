@@ -4,8 +4,8 @@
     <header>
       <div class="g-ct">
         <div class="row row-margin">
-          <pricefield v-for="component in item.components" :component="component"
-          :key="component.name" :item="item"></pricefield>
+          <pricefield v-for="(component, index) in item.components" :component="component"
+          :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
         </div>
       </div>
     </header>
@@ -56,14 +56,17 @@ const defaultItem = {
     percentage: 0,
     hasValue: 0
   },
-  components: [],
-  selected: []
+  components: []
 }
 
 const store = {
   state: {
     item: _.cloneDeep(defaultItem),
-    itemComparison: _.cloneDeep(defaultItem)
+    itemComparison: _.cloneDeep(defaultItem),
+    selected: {
+      components: [],
+      offerType: 'combined'
+    }
   },
   mutations: {
     setItem(state, item) {
@@ -135,10 +138,11 @@ export default {
     // Apply URL time query to state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
 
-    // Merge pre-defined store with existing state.
-    // SSR will produce mismatching components otherwise.
+    // Merge with state from SSR. Not doing this will result in discarding
+    // the prerendered data.
     if (this.$store.state.items) {
       store.state.item = _.merge(store.state.item, this.$store.state.items.item)
+      store.state.itemComparison = _.merge(store.state.itemComparison, this.$store.state.items.itemComparison)
     }
     this.$store.registerModule('items', store)
   },
@@ -151,6 +155,9 @@ export default {
     },
     components() {
       return this.selected || this.$store.state.items.item.components
+    },
+    comparison() {
+      return this.$store.state.items.itemComparison.components
     }
   },
   beforeMount() {
@@ -180,6 +187,9 @@ header {
   background: $colorBackground;
   padding: 136px 0 80px;
 
+  @media (max-width: $breakpoint-m) {
+    padding: 185px 0 80px;
+  }
   .row-margin {
     margin-left: -20px;
     margin-right: -20px;
