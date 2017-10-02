@@ -135,24 +135,20 @@ export default {
           .content-data-main-diff {
             display: block;
             font-size: 0.9em;
-
-            span {
-              color: white;
-            }
           }
         }
       }
       .increase {
         .content-data-main-diff {
           span {
-            color: $colorPrimary !important;
+            color: $colorPrimary;
           }
         }
       }
       .decrease {
         .content-data-main-diff {
           span {
-            color: $colorError !important;
+            color: $colorError;
           }
         }
       }

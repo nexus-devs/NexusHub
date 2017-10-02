@@ -101,7 +101,7 @@
     }
     input {
       padding-top: 10px;
-      padding-bottom: 8px;
+      padding-bottom: 9px;
     }
     .a-ie {
       margin-left:-10px;
