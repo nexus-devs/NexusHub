@@ -203,19 +203,22 @@ class Statistics extends Endpoint {
 
     result.forEach(request => {
       let componentIndex = doc.components.findIndex(comp => comp.name === request.component)
-      let component = doc.components[componentIndex][request.offer.toLowerCase()]
 
-      // Determine which interval the request is in
-      let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
-      if (i >= intervals) i = intervals - 1
+      if (componentIndex > -1) {
+        let component = doc.components[componentIndex][request.offer.toLowerCase()]
 
-      // Add request to interval
-      component.intervals[i].requests.push({
-        user: request.user,
-        price: request.price
-      })
-      if (request.price) {
-        component.intervals[i].offers.hasValue++
+        // Determine which interval the request is in
+        let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
+        if (i >= intervals) i = intervals - 1
+
+        // Add request to interval
+        component.intervals[i].requests.push({
+          user: request.user,
+          price: request.price
+        })
+        if (request.price) {
+          component.intervals[i].offers.hasValue++
+        }
       }
     })
   }
