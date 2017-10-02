@@ -124,6 +124,7 @@
     height: auto;
     opacity: 0.4;
     z-index: 0;
+    filter: blur(7px);
     background: $colorBackground;
     transform: translateX(-50%) translateY(-25%);
   }
