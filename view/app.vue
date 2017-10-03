@@ -107,7 +107,7 @@ export default {
   h3,
   h4,
   h5 {
-      color: white;
+    color: white;
   }
 }
 

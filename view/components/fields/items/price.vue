@@ -1,27 +1,41 @@
 <template>
-  <div class="col-b row">
-    <!-- left panel -->
-    <div class="col">
-      <div class="background" :class="{ set: component.name === 'Set' }">
-        <div class="background-overlay"></div>
-        <img :src="component.name === 'Set' ? item.imgUrl : component.imgUrl" :alt="`${item.name} ${component.name}`">
-      </div>
-      <div class="content" :class="{ increase, decrease }">
-        <h3>{{ component.name === 'Set' ? item.name : component.name }}</h3>
-        <div class="content-data">
-          <span class="content-data-main-value">
-            {{ component[offerType].median ? component[offerType].median + 'p' : 'No Data' }}
-          </span>
-          <span class="content-data-main-diff">
-            {{ comparison[offerType].median ? comparison[offerType].median + 'p' : 'No Data' }}
-            (<span>{{ diff.percentage }}</span>)
-          </span>
+  <div>
+    <!-- Dummy for flexbox. We might add ads here -->
+    <div v-if="component.isDummy" class="dummy">
+
+    </div>
+
+    <!-- Actual price field -->
+    <div v-else class="row">
+
+      <!-- left panel -->
+      <div class="col">
+        <div class="background" :class="{ set: component.name === 'Set' }">
+          <div class="background-overlay"></div>
+          <img :src="component.name === 'Set' ? item.imgUrl : component.imgUrl" :alt="`${item.name} ${component.name}`">
+        </div>
+
+        <!-- Content -->
+        <div class="content" :class="{ increase, decrease }">
+          <h3>{{ component.name === 'Set' ? item.name : component.name }}</h3>
+
+          <!-- Actual data -->
+          <div class="content-data">
+            <span class="content-data-main-value">
+              {{ component[offerType].median ? component[offerType].median + 'p' : 'No Data' }}
+            </span>
+            <span class="content-data-main-diff">
+              {{ comparison[offerType].median ? comparison[offerType].median + 'p' : 'No Data' }}
+              (<span>{{ diff.percentage }}</span>)
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- right panel -->
-    <div class="col">
 
+      <!-- right panel -->
+      <div class="col">
+
+      </div>
     </div>
   </div>
 </template>
@@ -66,7 +80,11 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.col-b {
+.dummy {
+  width: 330px;
+}
+
+.row {
   @include shadow-1;
   @include ie;
   border-radius: 2px;
