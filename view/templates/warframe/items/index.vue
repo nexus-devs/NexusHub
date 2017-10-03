@@ -155,15 +155,16 @@ export default {
     },
     components() {
       const components = this.$store.state.items.item.components
+      const modded = [].concat(components)
       const offset = components.length % 3
-      console.log(offset)
+
       // Fill empty spaces with pseudo elements for flex
       if (offset) {
         for (let i = 0; i < offset; i++) {
-          components.push({ isDummy: true })
+          modded.push({ isDummy: true })
         }
       }
-      return components
+      return modded
     },
     comparison() {
       return this.$store.state.items.itemComparison.components
