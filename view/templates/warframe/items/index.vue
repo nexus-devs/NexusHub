@@ -3,8 +3,8 @@
     <subnav></subnav>
     <header>
       <div class="g-ct">
-        <div class="row row-margin">
-          <pricefield v-for="(component, index) in item.components" :component="component"
+        <div class="price-container">
+          <pricefield v-for="(component, index) in components" :component="component"
           :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
         </div>
       </div>
@@ -154,7 +154,16 @@ export default {
       return this.$store.state.items.item
     },
     components() {
-      return this.selected || this.$store.state.items.item.components
+      const components = this.$store.state.items.item.components
+      const offset = components.length % 3
+      console.log(offset)
+      // Fill empty spaces with pseudo elements for flex
+      if (offset) {
+        for (let i = 0; i < offset; i++) {
+          components.push({ isDummy: true })
+        }
+      }
+      return components
     },
     comparison() {
       return this.$store.state.items.itemComparison.components
@@ -190,12 +199,18 @@ header {
   @media (max-width: $breakpoint-m) {
     padding: 185px 0 80px;
   }
-  .row-margin {
-    margin-left: -20px;
-    margin-right: -20px;
+  .price-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -10px;
+    margin-right: -10px;
 
-    .col-b {
-      margin: 0 20px;
+    & > * {
+      margin: 10px;
+    }
+    @media (max-width: $breakpoint-m) {
+      justify-content: center;
     }
   }
 }
