@@ -47,33 +47,17 @@ import sparkline from 'src/components/charts/sparkline.vue'
 
 export default {
   props: ['component', 'comparison', 'item'],
-  data() {
-    return {
-      chartWidth: 0,
-      currentValue: null,
-      itemCount: 7,
-      min: 10,
-      max: 100
-    }
-  },
-  mounted() {
-    setInterval(() => {
-      const rand = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
-      const generateData = (size, min, max) => {
-        const data = [];
-        for (let i = 0; i < size; i++) {
-          const num = rand(min, max);
-          data.push(num);
-        }
-        return data;
-      }
-      this.data = generateData(this.itemCount,
-        parseInt(this.min, 10),
-        parseInt(this.max, 10))
-    }, 2000)
-  },
   components: {
     sparkline
+  },
+  mounted() {
+    if (!this.component.isDummy) {
+      setInterval(() => {
+        this.component[this.offerType].intervals.forEach(interval => {
+          interval.median = Math.random() * 100
+        })
+      }, 2000)
+    }
   },
   computed: {
     diff() {
