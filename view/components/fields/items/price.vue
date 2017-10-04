@@ -50,36 +50,24 @@ export default {
   components: {
     sparkline
   },
-  mounted() {
-    if (!this.component.isDummy) {
-      setInterval(() => {
-        this.component[this.offerType].intervals.forEach(interval => {
-          interval.median = Math.random() * 100
-        })
-      }, 2000)
-    }
-  },
   computed: {
     diff() {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
       const percentage = ((component[offerType].median - comparison[offerType].median) / comparison[offerType].median * 100).toFixed(2)
-
       return { percentage: percentage > 0 ? `+${percentage}%` : `${percentage}%` }
     },
     increase() {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
-
       return component[offerType].median > comparison[offerType].median
     },
     decrease() {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
-
       return component[offerType].median < comparison[offerType].median
     },
     offerType() {

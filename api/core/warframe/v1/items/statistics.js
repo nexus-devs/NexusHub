@@ -26,7 +26,7 @@ class Statistics extends Endpoint {
       },
       {
         name: 'intervals',
-        default: 7,
+        default: 14,
         description: 'Intervals to split the time in.'
       }
     ]
