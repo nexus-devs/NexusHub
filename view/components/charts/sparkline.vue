@@ -70,10 +70,9 @@ export default {
     },
 
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
-    createValueSelector: d3.area().x(d => d.visibleX).y0(d => d.max).y1(0),
 
     initialize() {
-      this.scaled.x = d3.scaleLinear().range([0, this.width])
+      this.scaled.x = d3.scaleLinear().range([this.width, 0])
       this.scaled.y = d3.scaleLinear().range([this.height, 0]).clamp(true)
     },
 
@@ -84,7 +83,7 @@ export default {
       // Transition old data to new data
       const tween = new Tween.Tween(oldData)
         .easing(Tween.Easing.Quadratic.Out)
-        .to(newData, 500)
+        .to(newData, 750)
         .onUpdate(function onUpdate() {
           vm.animatedData = normalize(this)
           vm.update()
@@ -110,7 +109,7 @@ export default {
     // Update graph render view
     update() {
       this.scaled.x.domain(d3.extent(this.data, (d, i) => i))
-      this.scaled.y.domain([0, this.height])
+      this.scaled.y.domain([0, this.ceil])
       this.points = []
 
       for (let d of this.animatedData) {
