@@ -1,13 +1,18 @@
 <template>
   <div>
-
+    <filter id="gradient">
+      <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="#05a"/>
+        <stop offset="100%" stop-color="#0a5"/>
+      </linearGradient>
+    </filter>
     <svg @mousemove="mouseover" :width="width" :height="height">
       <g>
-        <path class="line" :d="paths.line" />
+        <path class="line" :d="paths.line" filter="gradient" />
         <path class="selector" :d="paths.selector" />
       </g>
     </svg>
-    <div class="test">
+    <div class="blur">
       <svg id="blur">
         <path class="line" :d="paths.line" />
       </svg>
@@ -43,9 +48,6 @@ export default {
       points: [],
     }
   },
-  created() {
-    this.data = normalize(this.data)
-  },
   mounted() {
     window.addEventListener('resize', this.onResize)
     this.onResize()
@@ -54,8 +56,8 @@ export default {
     window.removeEventListener('resize', this.onResize)
   },
   watch: {
-    data: function dataChanged(newData, oldData) {
-      this.tweenData(normalize(newData), normalize(oldData))
+    data(newData, oldData) {
+      this.tweenData(newData, oldData)
     }
   },
   methods: {
@@ -78,11 +80,13 @@ export default {
     // Animate data changes by transitioning values from old to new value
     tweenData(newData, oldData) {
       const vm = this
+
+      // Transition old data to new data
       const tween = new Tween.Tween(oldData)
         .easing(Tween.Easing.Quadratic.Out)
         .to(newData, 500)
         .onUpdate(function onUpdate() {
-          vm.animatedData = this
+          vm.animatedData = normalize(this)
           vm.update()
         })
         .onComplete(() => {
@@ -100,7 +104,7 @@ export default {
           requestAnimationFrame(animate)
         }
       }
-      animate(window.performance.now())
+      animate(window ? window.performance.now() : null)
     },
 
     // Update graph render view
@@ -110,7 +114,6 @@ export default {
       this.points = []
 
       for (let d of this.animatedData) {
-        console.log(d.visibleY)
         this.points.push({
           actualX: d.actualX,
           actualY: d.actualY,
@@ -119,7 +122,6 @@ export default {
           max: this.height,
         })
       }
-      console.log(this.points)
       this.paths.line = this.createLine(this.points)
     },
 
@@ -164,8 +166,8 @@ export default {
   position: absolute;
   top: 15px; // box margin
 }
-.test {
-  filter: blur(25px);
+.blur {
+  filter: blur(20px);
 }
 .line {
   stroke: $colorPrimary;
