@@ -24,7 +24,6 @@ import Tween from 'tween.js'
 import normalize from './normalize.js'
 
 export default {
-  name: 'area-chart',
   props: ['data', 'margin', 'ceil'],
   data() {
     return {
@@ -44,9 +43,11 @@ export default {
       points: [],
     }
   },
+  created() {
+    this.data = normalize(this.data)
+  },
   mounted() {
     window.addEventListener('resize', this.onResize)
-    this.data = normalize(this.data)
     this.onResize()
   },
   beforeDestroy() {
@@ -54,7 +55,7 @@ export default {
   },
   watch: {
     data: function dataChanged(newData, oldData) {
-      this.tweenData(newData, oldData)
+      this.tweenData(normalize(newData), normalize(oldData))
     }
   },
   methods: {
@@ -63,16 +64,15 @@ export default {
       this.width = this.$el.offsetWidth
       this.height = this.$el.offsetHeight
       this.initialize()
-      this.update()
       this.tweenData(this.data, this.data)
     },
 
-    createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis),
-    createValueSelector: d3.area().x(d => d.x).y0(d => d.max).y1(0),
+    createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
+    createValueSelector: d3.area().x(d => d.visibleX).y0(d => d.max).y1(0),
 
     initialize() {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.y = d3.scaleLinear().range([this.height, 0])
+      this.scaled.y = d3.scaleLinear().range([this.height, 0]).clamp(true)
     },
 
     // Animate data changes by transitioning values from old to new value
@@ -106,15 +106,20 @@ export default {
     // Update graph render view
     update() {
       this.scaled.x.domain(d3.extent(this.data, (d, i) => i))
-      this.scaled.y.domain([0, this.ceil])
+      this.scaled.y.domain([0, this.height])
       this.points = []
-      for (const [i, d] of this.animatedData.entries()) {
+
+      for (let d of this.animatedData) {
+        console.log(d.visibleY)
         this.points.push({
-          x: this.scaled.x(i),
-          y: this.scaled.y(d),
+          actualX: d.actualX,
+          actualY: d.actualY,
+          visibleX: this.scaled.x(d.visibleX),
+          visibleY: this.scaled.y(d.visibleY),
           max: this.height,
         })
       }
+      console.log(this.points)
       this.paths.line = this.createLine(this.points)
     },
 
