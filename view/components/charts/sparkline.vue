@@ -21,6 +21,7 @@
 <script>
 import * as d3 from 'd3'
 import Tween from 'tween.js'
+import normalize from './normalize.js'
 
 export default {
   name: 'area-chart',
@@ -44,8 +45,8 @@ export default {
     }
   },
   mounted() {
-    console.log(this.data)
     window.addEventListener('resize', this.onResize)
+    this.data = normalize(this.data)
     this.onResize()
   },
   beforeDestroy() {
