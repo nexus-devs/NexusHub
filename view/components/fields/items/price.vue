@@ -34,7 +34,7 @@
 
       <!-- right panel -->
       <div class="col">
-
+        <sparkline :data="data" :ceil="max" class="sparkline"></sparkline>
       </div>
     </div>
   </div>
@@ -43,8 +43,39 @@
 
 
 <script>
+import sparkline from 'src/components/charts/sparkline.vue'
+
 export default {
   props: ['component', 'comparison', 'item'],
+  data() {
+    return {
+      data: [],
+      chartWidth: 0,
+      currentValue: null,
+      itemCount: 7,
+      min: 10,
+      max: 100
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      const rand = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+      const generateData = (size, min, max) => {
+        const data = [];
+        for (let i = 0; i < size; i++) {
+          const num = rand(min, max);
+          data.push(num);
+        }
+        return data;
+      }
+      this.data = generateData(this.itemCount,
+        parseInt(this.min, 10),
+        parseInt(this.max, 10))
+    }, 2000)
+  },
+  components: {
+    sparkline
+  },
   computed: {
     diff() {
       const comparison = this.comparison
@@ -97,8 +128,8 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    min-height: 125px;
-    min-width: 125px;
+    height: 125px;
+    width: 125px;
 
     &:first-of-type {
       @include gradient-background-dg($colorBackgroundLight, $colorBackground);
@@ -172,7 +203,13 @@ export default {
       }
     }
     &:last-of-type {
+      position: relative;
       @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
+
+      .sparkline {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 }
