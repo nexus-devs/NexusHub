@@ -195,10 +195,10 @@ export default {
 
 header {
   @include gradient-background-dg(#596570, $colorBackgroundLight);
-  padding: 136px 0 80px;
+  padding: 116px 0 60px;
 
   @media (max-width: $breakpoint-m) {
-    padding: 185px 0 80px;
+    padding: 185px 0 50px;
   }
   .price-container {
     display: flex;
