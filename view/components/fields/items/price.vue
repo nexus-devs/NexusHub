@@ -34,7 +34,7 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="chartData(component)" :ceil="max" class="sparkline"></sparkline>
+        <sparkline :data="chartData(component)" :ceil="component[offerType].max" class="sparkline"></sparkline>
       </div>
     </div>
   </div>

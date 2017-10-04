@@ -4,13 +4,18 @@
  function normalize(arr) {
    const result = []
 
-   arr.forEach((d, i) => {
-     d = Object.assign({}, d) // get rid of observer reference
-     let val = d ? d.y : d
+   arr.forEach((y, x) => {
+     let val = {
+       actualX: x,
+       actualY: y,
+       visibleX: x,
+       visibleY: y
+     }
 
-     if (!val) {
-       const n = findNearestNeighbours(arr, i)
-       val = (n[0] + n[1]) / 2
+     // Normalize null value from nearest neighbours
+     if (!val.actual) {
+       const n = findNearestNeighbours(arr, x)
+       val.visibleY = (n[0] + n[1]) / 2
      }
      result.push(val)
    })
