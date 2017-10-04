@@ -34,7 +34,7 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="data" :ceil="max" class="sparkline"></sparkline>
+        <sparkline :data="chartData(component)" :ceil="max" class="sparkline"></sparkline>
       </div>
     </div>
   </div>
@@ -49,7 +49,6 @@ export default {
   props: ['component', 'comparison', 'item'],
   data() {
     return {
-      data: [],
       chartWidth: 0,
       currentValue: null,
       itemCount: 7,
@@ -101,6 +100,17 @@ export default {
     },
     offerType() {
       return this.$store.state.items.selected.offerType
+    }
+  },
+  methods: {
+    chartData(component) {
+      const offerType = this.offerType
+      const data = []
+
+      component[offerType].intervals.forEach(interval => {
+        data.push(interval.median)
+      })
+      return data
     }
   }
 }

@@ -44,6 +44,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.data)
     window.addEventListener('resize', this.onResize)
     this.onResize()
   },
@@ -62,6 +63,7 @@ export default {
       this.height = this.$el.offsetHeight
       this.initialize()
       this.update()
+      this.tweenData(this.data, this.data)
     },
 
     createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis),
@@ -87,7 +89,7 @@ export default {
         })
         .start()
 
-      // Function which updates the transitioning value on each tick
+      // Function which updates the transFitioning value on each tick
       function animate(time) {
         tween.update(time)
 
@@ -157,7 +159,7 @@ export default {
   top: 15px; // box margin
 }
 .test {
-  filter: blur(20px);
+  filter: blur(25px);
 }
 .line {
   stroke: $colorPrimary;
