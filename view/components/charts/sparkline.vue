@@ -72,7 +72,7 @@ export default {
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
 
     initialize() {
-      this.scaled.x = d3.scaleLinear().range([this.width, 0])
+      this.scaled.x = d3.scaleLinear().range([0, this.width])
       this.scaled.y = d3.scaleLinear().range([this.height, 0]).clamp(true)
     },
 
