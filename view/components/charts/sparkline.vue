@@ -85,7 +85,7 @@ export default {
     // Functions which ease transitions between prop value cahnges
     adjustData(newData, oldData) {
       const vm = this
-      this.tweenData(newData, normalize(oldData, true), function() {
+      this.tweenData(normalize(newData, true), normalize(oldData, true), function() {
         vm.animatedData = normalize(this)
         vm.update()
       })
@@ -102,7 +102,7 @@ export default {
     tweenData(newData, oldData, onUpdate) {
       const tween = new Tween.Tween(oldData)
         .easing(Tween.Easing.Quadratic.Out)
-        .to(newData, 790)
+        .to(newData, 600)
         .onUpdate(onUpdate)
         .onComplete(() => {
           tween.done = true
