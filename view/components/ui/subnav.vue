@@ -69,7 +69,6 @@ export default {
 
 nav {
   position: fixed;
-  overflow: hidden;
   z-index: 1;
   width: 100%;
   display: flex;
@@ -134,6 +133,7 @@ nav {
   }
 
   .time-container {
+    position: relative;
     display: flex;
     align-items: center;
     font-size: 0.9em;
@@ -169,18 +169,17 @@ nav {
       position: absolute;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-10px);
+      transform: translate(-30%, -10px);
       min-width: 400px;
       @include ease(0.1s);
 
       &.active {
         opacity: 1;
         pointer-events: all;
-        transform: translateY(0);
+        transform: translate(-30%, 0);
       }
       .suggestions {
         padding: 10px 15px;
-        transform: translateX(-30%);
         background: rgba(15, 20, 25, 0.35);
         border-radius: 2px;
         margin-top: 15px;
