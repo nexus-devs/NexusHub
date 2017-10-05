@@ -34,7 +34,7 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="chartData(component)" :ceil="component[offerType].max" class="sparkline"></sparkline>
+        <sparkline :data="chartData(component)" :ceil="chartCeil(component)" class="sparkline"></sparkline>
       </div>
     </div>
   </div>
@@ -83,6 +83,15 @@ export default {
         data.push(interval.median)
       })
       return data
+    },
+    chartCeil(component) {
+      const offerType = this.offerType
+      let max = 0
+
+      component[offerType].intervals.forEach(interval => {
+        max = interval.median > max ? interval.median : max
+      })
+      return max * 2 // mutiply by two to center graph
     }
   }
 }
