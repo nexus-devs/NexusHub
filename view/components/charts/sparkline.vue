@@ -71,8 +71,8 @@ export default {
       this.width = this.$el.offsetWidth
       this.height = this.$el.offsetHeight
       this.initialize()
-      this.adjustData()
-      this.adjustCeil()
+      this.adjustData(this.data, this.data)
+      this.adjustCeil(this.ceil, this.ceil)
     },
 
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
@@ -92,8 +92,8 @@ export default {
     },
     adjustCeil(newData, oldData) {
       const vm = this
-      this.tweenData(newData, oldData, function() {
-        vm.animatedCeil = this
+      this.tweenData({ d: newData }, { d: oldData }, function() {
+        vm.animatedCeil = this.d
         vm.update()
       })
     },
@@ -124,7 +124,7 @@ export default {
 
     // Update graph render view
     update() {
-      this.scaled.x.domain(d3.extent(this.data, (d, i) => i))
+      this.scaled.x.domain(d3.extent(this.data, (y, x) => x))
       this.scaled.y.domain([0, this.animatedCeil])
       this.points = []
 
