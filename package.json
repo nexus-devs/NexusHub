@@ -12,10 +12,10 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.4.21",
-    "blitz-js-core": "^0.4.11",
+    "blitz-js": "^0.4.22",
+    "blitz-js-core": "^0.4.12",
     "chalk": "^2.1.0",
-    "d3": "^4.10.2",
+    "d3": "^4.11.0",
     "keyboardjs": "^2.3.4",
     "moment": "^2.18.1",
     "tween.js": "^16.6.0"
