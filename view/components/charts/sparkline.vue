@@ -45,6 +45,7 @@ export default {
         y: null,
       },
       animatedData: [],
+      animatedCeil: 0,
       points: [],
     }
   },
@@ -57,16 +58,21 @@ export default {
   },
   watch: {
     data(newData, oldData) {
-      this.tweenData(newData, oldData)
+      this.adjustData(newData, oldData)
+    },
+    ceil(newData, oldData) {
+      this.adjustCeil(newData, oldData)
     }
   },
   methods: {
+
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
     onResize() {
       this.width = this.$el.offsetWidth
       this.height = this.$el.offsetHeight
       this.initialize()
-      this.tweenData(this.data, this.data)
+      this.adjustData()
+      this.adjustCeil()
     },
 
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
@@ -76,18 +82,28 @@ export default {
       this.scaled.y = d3.scaleLinear().range([this.height, 0]).clamp(true)
     },
 
-    // Animate data changes by transitioning values from old to new value
-    tweenData(newData, oldData) {
+    // Functions which ease transitions between prop value cahnges
+    adjustData(newData, oldData) {
       const vm = this
+      this.tweenData(newData, oldData, function() {
+        vm.animatedData = normalize(this)
+        vm.update()
+      })
+    },
+    adjustCeil(newData, oldData) {
+      const vm = this
+      this.tweenData(newData, oldData, function() {
+        vm.animatedCeil = this
+        vm.update()
+      })
+    },
 
-      // Transition old data to new data
+    // Animate data changes by transitioning values from old to new value
+    tweenData(newData, oldData, onUpdate) {
       const tween = new Tween.Tween(oldData)
         .easing(Tween.Easing.Quadratic.Out)
         .to(newData, 750)
-        .onUpdate(function onUpdate() {
-          vm.animatedData = normalize(this)
-          vm.update()
-        })
+        .onUpdate(onUpdate)
         .onComplete(() => {
           tween.done = true
         })
@@ -103,13 +119,13 @@ export default {
           requestAnimationFrame(animate)
         }
       }
-      animate(window ? window.performance.now() : null)
+      animate(window.performance.now())
     },
 
     // Update graph render view
     update() {
       this.scaled.x.domain(d3.extent(this.data, (d, i) => i))
-      this.scaled.y.domain([0, this.ceil])
+      this.scaled.y.domain([0, this.animatedCeil])
       this.points = []
 
       for (let d of this.animatedData) {
