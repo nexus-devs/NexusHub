@@ -69,16 +69,17 @@ export default {
 
 nav {
   position: fixed;
+  overflow: hidden;
   z-index: 1;
-  width: calc(100% - 125px);
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
   padding: 10px 40px 10px 85px;
   @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.4));
 
   @media (max-width: $breakpoint-m) {
-    width: calc(100% - 65px);
     margin-top: 56px;
     padding: 15px 40px 15px 25px;
   }
