@@ -144,7 +144,9 @@ export default {
       store.state.item = _.merge(store.state.item, this.$store.state.items.item)
       store.state.itemComparison = _.merge(store.state.itemComparison, this.$store.state.items.itemComparison)
     }
-    this.$store.registerModule('items', store)
+    if (!this.$store._actions.fetchItemData) {
+      this.$store.registerModule('items', store)
+    }
   },
   created() {
     this.$store.commit('setActiveGame', 'warframe')
