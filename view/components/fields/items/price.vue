@@ -87,11 +87,13 @@ export default {
     chartCeil(component) {
       const offerType = this.offerType
       let max = 0
+      let min = Number.POSITIVE_INFINITY
 
       component[offerType].intervals.forEach(interval => {
         max = interval.median > max ? interval.median : max
+        min = interval.median && interval.median < min ? interval.median : min
       })
-      return max * 2 // mutiply by two to center graph
+      return max + min
     }
   }
 }
