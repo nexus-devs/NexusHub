@@ -1,23 +1,39 @@
 /**
  * Helper function for charts to normalize null values
  */
- function normalize(arr) {
+ function normalize(arr, raw) {
    const result = []
 
    arr.forEach((y, x) => {
-     let val = {
-       actualX: x,
-       actualY: y,
-       visibleX: x,
-       visibleY: y
+
+     // Raw flag specifying that we want raw numbers in the output instead of
+     // custom objects with visible/actual keys
+     if (raw) {
+       let val = y
+
+       if (!y) {
+         const n = findNearestNeighbours(arr, x)
+         val = (n[0] + n[1]) / 2
+       }
+       result.push(val)
      }
 
-     // Normalize null value from nearest neighbours
-     if (!val.actual) {
-       const n = findNearestNeighbours(arr, x)
-       val.visibleY = (n[0] + n[1]) / 2
+     // No raw request specified -> retrieve full object by default
+     else {
+       let val = {
+         actualX: x,
+         actualY: y,
+         visibleX: x,
+         visibleY: y
+       }
+
+       // Normalize null value from nearest neighbours
+       if (!val.actual) {
+         const n = findNearestNeighbours(arr, x)
+         val.visibleY = (n[0] + n[1]) / 2
+       }
+       result.push(val)
      }
-     result.push(val)
    })
    return result
  }
