@@ -102,7 +102,7 @@ export default {
     tweenData(newData, oldData, onUpdate) {
       const tween = new Tween.Tween(oldData)
         .easing(Tween.Easing.Quadratic.Out)
-        .to(newData, 750)
+        .to(newData, 790)
         .onUpdate(onUpdate)
         .onComplete(() => {
           tween.done = true
