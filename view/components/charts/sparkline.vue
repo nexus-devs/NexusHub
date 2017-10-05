@@ -85,7 +85,7 @@ export default {
     // Functions which ease transitions between prop value cahnges
     adjustData(newData, oldData) {
       const vm = this
-      this.tweenData(newData, oldData, function() {
+      this.tweenData(newData, normalize(oldData, true), function() {
         vm.animatedData = normalize(this)
         vm.update()
       })
