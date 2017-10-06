@@ -10,7 +10,10 @@
       <g>
         <path class="line" :d="paths.line" filter="gradient" />
         <path class="selector" :d="paths.selector" />
-        <text v-for="d in data">{{ d }}</text>
+        <text v-for="(d, i) in animatedData" :x="scaled.x(d.visibleX)"
+              :y="scaled.y(d.visibleY) + (d.isMin ? 20 : 0 || d.isMax ? -5 : 0)" fill='#66707a'>
+          {{ d.actualY && (d.isMax || d.isMin) ? Math.round(d.actualY) + 'p' : '' }}
+        </text>
       </g>
     </svg>
     <div class="blur">
@@ -20,7 +23,6 @@
     </div>
   </div>
 </template>
-
 
 
 
@@ -34,8 +36,9 @@ export default {
     return {
       width: 0,
       height: 0,
+      min: 0,
+      max: 0,
       paths: {
-        area: '',
         line: '',
         selector: '',
       },
@@ -77,7 +80,7 @@ export default {
 
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
 
-    // Set graph scale
+    // Set graph scaling
     initialize() {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
       this.scaled.y = d3.scaleLinear().range([this.height, 0])
@@ -94,8 +97,7 @@ export default {
           actualX: d.actualX,
           actualY: d.actualY,
           visibleX: this.scaled.x(d.visibleX),
-          visibleY: this.scaled.y(d.visibleY),
-          max: this.height,
+          visibleY: this.scaled.y(d.visibleY)
         })
       }
       this.paths.line = this.createLine(this.points)
@@ -121,14 +123,13 @@ export default {
         .map((point, index) => ({ x:
           point.x,
           diff: Math.abs(point.x - x),
-          index,
+          index
         }))
         .reduce((memo, val) => (memo.diff < val.diff ? memo : val))
     },
   },
 }
 </script>
-
 
 
 
