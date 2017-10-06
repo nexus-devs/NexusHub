@@ -6,7 +6,7 @@
         <div class="ico-a-ie">
           <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class='ico-20'>
         </div>
-        <tooltip>Expand</tooltip>
+        <tooltip>Tools</tooltip>
       </div>
     </div>
     <div class="nav-lower" v-bind:class="{ dragged: deltaX || active }">

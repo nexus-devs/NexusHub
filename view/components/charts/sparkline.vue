@@ -6,14 +6,16 @@
         <stop offset="100%" stop-color="#0a5"/>
       </linearGradient>
     </filter>
-    <svg @mousemove="mouseover" :width="width" :height="height">
+    <svg :width="width" :height="height">
       <g>
         <path class="line" :d="paths.line" filter="gradient" />
         <path class="selector" :d="paths.selector" />
-        <text v-for="(d, i) in animatedData" :x="scaled.x(d.visibleX)"
-              :y="scaled.y(d.visibleY) + (d.isMin ? 20 : 0 || d.isMax ? -5 : 0)" fill='#66707a'>
-          {{ d.actualY && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
+        <text v-for="(d, i) in animatedData" :x="scaled.x(d.x) + 5"
+              :y="scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -5 : 0)">
+          {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
+        <path class="pointer" :d="paths.pointer[0]"></path>
+        <path class="pointer" :d="paths.pointer[1]"></path>
       </g>
     </svg>
     <div class="blur">
@@ -40,7 +42,7 @@ export default {
       max: 0,
       paths: {
         line: '',
-        selector: '',
+        pointer: [],
       },
       lastHoverPoint: {},
       scaled: {
@@ -78,7 +80,9 @@ export default {
       Tween.adjustCeil(this, this.ceil, this.ceil)
     },
 
-    createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
+    createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis),
+    createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 20).y1(d => d.y - 5),
+    createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y + 5),
 
     // Set graph scaling
     initialize() {
@@ -94,40 +98,27 @@ export default {
 
       for (let d of this.animatedData) {
         this.points.push({
-          actualX: d.actualX,
-          actualY: d.actualY,
-          visibleX: this.scaled.x(d.visibleX),
-          visibleY: this.scaled.y(d.visibleY)
+          x: this.scaled.x(d.x),
+          y: this.scaled.y(d.y)
         })
-      }
-      this.paths.line = this.createLine(this.points)
-    },
 
-    // Display tooltip with data for next
-    mouseover({ offsetX }) {
-      if (this.points.length > 0) {
-        const x = offsetX
-        const closestPoint = this.getClosestPoint(x)
-        if (this.lastHoverPoint.index !== closestPoint.index) {
-          const point = this.points[closestPoint.index]
-          this.paths.selector = this.createValueSelector([point])
-          this.$emit('select', this.data[closestPoint.index])
-          this.lastHoverPoint = closestPoint
+        // Create min/max pointers
+        if (d.isMin) {
+          this.paths.pointer[0] = this.createMinPointer([{
+            x: this.scaled.x(d.x),
+            y: this.scaled.y(d.y)
+          }])
+        }
+        if (d.isMax) {
+          this.paths.pointer[1] = this.createMaxPointer([{
+            x: this.scaled.x(d.x),
+            y: this.scaled.y(d.y)
+          }])
         }
       }
-    },
-
-    // Helper function for mouseover tooltip which finds closest point to cursor
-    getClosestPoint(x) {
-      return this.points
-        .map((point, index) => ({ x:
-          point.x,
-          diff: Math.abs(point.x - x),
-          index
-        }))
-        .reduce((memo, val) => (memo.diff < val.diff ? memo : val))
-    },
-  },
+      this.paths.line = this.createLine(this.points)
+    }
+  }
 }
 </script>
 
@@ -146,14 +137,18 @@ export default {
 .blur {
   filter: blur(20px);
 }
+text {
+  font-size: 0.9em;
+  fill: $colorFontSubtle;
+}
+.pointer {
+  fill: $colorSubtle;
+  stroke: $colorSubtle;
+  stroke-width: 1px;
+}
 .line {
   stroke: $colorPrimary;
   stroke-width: 2px;
-  fill: none;
-}
-.selector {
-  stroke: $colorSubtle;
-  stroke-width: 1px;
   fill: none;
 }
 .area {
