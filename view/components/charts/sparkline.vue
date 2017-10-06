@@ -11,7 +11,7 @@
         <path class="line" :d="paths.line" filter="gradient" />
         <path class="selector" :d="paths.selector" />
         <text v-for="(d, i) in animatedData" :x="scaled.x(d.x) + 5"
-              :y="scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -5 : 0)">
+              :y="scaled.y(d.y) + (d.isMin ? 25 : 0 || d.isMax ? -15 : 0)">
           {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
         <path class="pointer" :d="paths.pointer[0]"></path>
@@ -80,9 +80,9 @@ export default {
       Tween.adjustCeil(this, this.ceil, this.ceil)
     },
 
-    createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis),
-    createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 20).y1(d => d.y),
-    createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y),
+    createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveCatmullRom),
+    createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 30).y1(d => d.y),
+    createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 30).y1(d => d.y),
 
     // Set graph scaling
     initialize() {
