@@ -81,8 +81,8 @@ export default {
     },
 
     createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveBasis),
-    createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 20).y1(d => d.y - 5),
-    createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y + 5),
+    createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 20).y1(d => d.y),
+    createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y),
 
     // Set graph scaling
     initialize() {
