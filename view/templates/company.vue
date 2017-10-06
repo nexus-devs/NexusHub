@@ -187,7 +187,7 @@ a {
   }
 }
 .stats {
-  max-width: 1100px;
+  max-width: 900px;
   margin: auto;
 
   .col-b {

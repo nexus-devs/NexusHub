@@ -23,10 +23,9 @@
      // No raw request specified -> retrieve full object by default
      else {
        let val = {
-         actualX: x,
-         actualY: y,
-         visibleX: x,
-         visibleY: y,
+         x,
+         y,
+         yRaw: y, // original value, required to assign min properly
          isMin: false,
          isMax: false
        }
@@ -34,9 +33,9 @@
        max = y > max ? y : max
 
        // Normalize null value from nearest neighbours
-       if (!val.actual) {
+       if (!val.y) {
          const n = findNearestNeighbours(arr, x)
-         val.visibleY = (n[0] + n[1]) / 2
+         val.y = (n[0] + n[1]) / 2
        }
        result.push(val)
      }
@@ -44,10 +43,15 @@
 
    // Apply min/max values to data object
    if (!raw) {
-     let minObj = result.find(d => d.actualY === min)
-     let maxObj = result.find(d => d.actualY === max)
+     let minObj = result.find(d => d.yRaw === min)
+     let maxObj = result.find(d => d.yRaw === max)
      minObj.isMin = true
      maxObj.isMax = true
+
+     // Cleanup
+     result.forEach(d => {
+       delete d.yRaw
+     })
    }
 
    return result
