@@ -10,6 +10,7 @@
       <g>
         <path class="line" :d="paths.line" filter="gradient" />
         <path class="selector" :d="paths.selector" />
+        <text v-for="d in data">{{ d }}</text>
       </g>
     </svg>
     <div class="blur">
@@ -25,8 +26,7 @@
 
 <script>
 import * as d3 from 'd3'
-import Tween from 'tween.js'
-import normalize from './normalize.js'
+import Tween from './_tween.js'
 
 export default {
   props: ['data', 'margin', 'ceil'],
@@ -58,10 +58,10 @@ export default {
   },
   watch: {
     data(newData, oldData) {
-      this.adjustData(newData, oldData)
+      Tween.adjustData(this, newData, oldData)
     },
     ceil(newData, oldData) {
-      this.adjustCeil(newData, oldData)
+      Tween.adjustCeil(this, newData, oldData)
     }
   },
   methods: {
@@ -71,55 +71,16 @@ export default {
       this.width = this.$el.offsetWidth
       this.height = this.$el.offsetHeight
       this.initialize()
-      this.adjustData(this.data, this.data)
-      this.adjustCeil(this.ceil, this.ceil)
+      Tween.adjustData(this, this.data, this.data)
+      Tween.adjustCeil(this, this.ceil, this.ceil)
     },
 
     createLine: d3.line().x(d => d.visibleX).y(d => d.visibleY).curve(d3.curveBasis),
 
+    // Set graph scale
     initialize() {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.y = d3.scaleLinear().range([this.height, 0]).clamp(true)
-    },
-
-    // Functions which ease transitions between prop value cahnges
-    adjustData(newData, oldData) {
-      const vm = this
-      this.tweenData(normalize(newData, true), normalize(oldData, true), function() {
-        vm.animatedData = normalize(this)
-        vm.update()
-      })
-    },
-    adjustCeil(newData, oldData) {
-      const vm = this
-      this.tweenData({ d: newData }, { d: oldData }, function() {
-        vm.animatedCeil = this.d
-        vm.update()
-      })
-    },
-
-    // Animate data changes by transitioning values from old to new value
-    tweenData(newData, oldData, onUpdate) {
-      const tween = new Tween.Tween(oldData)
-        .easing(Tween.Easing.Quadratic.Out)
-        .to(newData, 600)
-        .onUpdate(onUpdate)
-        .onComplete(() => {
-          tween.done = true
-        })
-        .start()
-
-      // Function which updates the transFitioning value on each tick
-      function animate(time) {
-        tween.update(time)
-
-        // Ensure we don't keep calling this once we're done
-        // Things will get super slow otherwise, **believe me**
-        if (!tween.done) {
-          requestAnimationFrame(animate)
-        }
-      }
-      animate(window.performance.now())
+      this.scaled.y = d3.scaleLinear().range([this.height, 0])
     },
 
     // Update graph render view
