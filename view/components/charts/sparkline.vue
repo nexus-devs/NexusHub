@@ -12,7 +12,7 @@
         <path class="selector" :d="paths.selector" />
         <text v-for="(d, i) in animatedData" :x="scaled.x(d.visibleX)"
               :y="scaled.y(d.visibleY) + (d.isMin ? 20 : 0 || d.isMax ? -5 : 0)" fill='#66707a'>
-          {{ d.actualY && (d.isMax || d.isMin) ? Math.round(d.actualY) + 'p' : '' }}
+          {{ d.actualY && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
       </g>
     </svg>
