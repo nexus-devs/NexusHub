@@ -3,6 +3,8 @@
  */
  function normalize(arr, raw) {
    const result = []
+   let min = Number.POSITIVE_INFINITY
+   let max = Number.NEGATIVE_INFINITY
 
    arr.forEach((y, x) => {
 
@@ -24,8 +26,12 @@
          actualX: x,
          actualY: y,
          visibleX: x,
-         visibleY: y
+         visibleY: y,
+         isMin: false,
+         isMax: false
        }
+       min = y < min ? y : min
+       max = y > max ? y : max
 
        // Normalize null value from nearest neighbours
        if (!val.actual) {
@@ -35,6 +41,15 @@
        result.push(val)
      }
    })
+
+   // Apply min/max values to data object
+   if (!raw) {
+     let minObj = result.find(d => d.actualY === min)
+     let maxObj = result.find(d => d.actualY === max)
+     minObj.isMin = true
+     maxObj.isMax = true
+   }
+
    return result
  }
 
