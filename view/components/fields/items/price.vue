@@ -144,7 +144,7 @@ export default {
           }
         }
         img {
-          opacity: 0.3;
+          opacity: 0.5;
           height: 50%;
           max-width: 100%;
         }

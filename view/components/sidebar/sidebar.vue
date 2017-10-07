@@ -160,7 +160,6 @@ nav {
         background: $colorBackgroundDark;
         will-change: transform;
         @include ease-out(0.45s);
-        @include shadow-3;
 
         @media (max-width: $breakpoint-s) {
           transform: translateX(calc(-320px - 5vw));
@@ -178,7 +177,6 @@ nav {
         position: absolute;
         height: 100vh;
         width: 100%;
-        @include shadow-1;
       }
     }
 
