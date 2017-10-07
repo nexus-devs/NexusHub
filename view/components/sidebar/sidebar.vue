@@ -160,6 +160,7 @@ nav {
         background: $colorBackgroundDark;
         will-change: transform;
         @include ease-out(0.45s);
+        @include shadow-1;
 
         @media (max-width: $breakpoint-s) {
           transform: translateX(calc(-320px - 5vw));
@@ -172,6 +173,7 @@ nav {
       height: 100vh;
       @include ease-out(0.45s);
       @include gradient-background($colorBackgroundLight, $colorBackground);
+      @include shadow-1;
 
       .nav-lower-backdrop {
         position: absolute;

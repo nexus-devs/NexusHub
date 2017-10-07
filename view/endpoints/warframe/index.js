@@ -4,7 +4,7 @@ class Index extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.url = "/warframe"
-    this.schema.view = "templates/warframe/index.vue"
+    this.schema.view = "pages/warframe/index.vue"
   }
 }
 
