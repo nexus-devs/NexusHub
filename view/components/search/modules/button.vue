@@ -22,7 +22,7 @@ export default {
       const rank = this.$store.state.rank
 
       if (search.input.name && !search.done) {
-        let path = `/warframe/${search.input.type.toLowerCase()}/${search.input.name}`
+        let path = `/warframe/${search.input.type.toLowerCase()}/${search.input.name.toLowerCase()}`.replace(/ /g, '-')
         let query = {}
 
         // Add URL params based on state
