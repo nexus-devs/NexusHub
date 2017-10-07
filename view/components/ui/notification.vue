@@ -130,7 +130,7 @@ export default {
 .notification {
   position: fixed;
   overflow: hidden;
-  z-index: 1;
+  z-index: 2;
   right: 0;
   bottom: 15vh;
   background: $colorBackground;
