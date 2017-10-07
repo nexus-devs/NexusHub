@@ -26,7 +26,7 @@
             </span>
             <span class="content-data-main-diff">
               {{ comparison[offerType].median ? comparison[offerType].median + 'p' : 'No Data' }}
-              (<span>{{ diff.percentage }}</span>)
+              <span>{{ comparison[offerType].median ? `(${diff.percentage})` : '' }}</span>
             </span>
           </div>
         </div>
@@ -86,13 +86,16 @@ export default {
     },
     chartCeil(component) {
       const offerType = this.offerType
-      let max = 0
+      let max = Number.NEGATIVE_INFINITY
       let min = Number.POSITIVE_INFINITY
 
       component[offerType].intervals.forEach(interval => {
         max = interval.median > max ? interval.median : max
         min = interval.median && interval.median < min ? interval.median : min
       })
+      max = max === Number.NEGATIVE_INFINITY ? 0 : max
+      min = min === Number.POSITIVE_INFINITY ? 0 : min
+
       return max + min
     }
   }
