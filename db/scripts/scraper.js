@@ -14,19 +14,21 @@ class Scraper {
   async getItems() {
     const map = await request.get(baseUrl + "/items")
     const items = JSON.parse(map).payload.items.en
-    items.forEach(async(item, i) => {
-      let url = item.url_name
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i]
+      const url = item.url_name
+
       await this.getItemData(url, i)
       console.log(`Fetched item data for ${item.item_name}`)
-      if (items.length - 1 === i) {
-        fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
-      }
-    })
+    }
+    fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
   }
 
   async getItemData(url, mult) {
     const targetUrl = baseUrl + '/items/' + url.replace('’', '%E2%80%99')
     let item
+
     try {
       item = await queue.delay(() => request.get(targetUrl, 'push', 50))
     } catch (err) {
@@ -44,6 +46,7 @@ class Scraper {
         parsed.description = this.getItemDescription(itemSet)
         parsed.components = this.getItemComponents(itemSet)
         this.scraped.push(parsed)
+        console.log('> Added components to data')
       }
     }
   }
@@ -70,6 +73,7 @@ class Scraper {
       }
       name = matched.join("").replace(/\s+$/g,'')
     })
+    console.log(`\n-- ${name}`)
     return name
   }
 
@@ -79,6 +83,7 @@ class Scraper {
    */
   getItemType(itemSet) {
     let tags = itemSet[0].tags
+
     for (let i = 1; i < itemSet.length; i++) {
       tags = tags.filter(tag => itemSet[i].tags.includes(tag))
     }
@@ -157,7 +162,7 @@ class Scraper {
 
     itemSet.forEach(item => {
       if (!(item.tags.includes('prime') && item.tags.includes('parts'))) {
-        descriptions.push(item.en.description)
+        descriptions.push(item.en.description.replace(/<[^>]*>/g, ''))
       }
     })
     return descriptions[0]
@@ -165,31 +170,8 @@ class Scraper {
 
   isAdded(itemname, dataset) {
     itemname = itemname.toLowerCase();
-    let filterType = ['vandal', 'wraith', 'prime', 'sheev', 'prime', 'xiphos',
-                       'mantis', 'scimitar']
-    let filter = ['barrel', 'blueprint', 'handle', 'neuroptics', 'system',
-                  'chassis', 'blade', 'grip', 'link', 'systems', 'heatsink',
-                  'wraith', 'vandal', 'blueprint', 'prime', 'hilt', 'set',
-                  'fuselage', 'engines', 'avionics']
-
-    filterType.forEach(type => {
-      if (itemname.includes(type) && !itemname.includes('primed')) {
-        const original = itemname
-        itemname = itemname.split('_')
-
-        let length = 0;
-        let enable = 0;
-        for (let i = 0; i < itemname.length; i++) {
-          if (filter.includes(itemname[i].toLowerCase()) || enable === 1) {
-            enable = 1;
-            length = length + itemname[i].length + 1
-          }
-        }
-        itemname = original.slice(0, original.length - length)
-      }
-    })
     for (let i = 0; i < dataset.length; i++) {
-      if (dataset[i].name.toLowerCase().includes(itemname.replace(/_/g, ' ').toLowerCase())) {
+      if (itemname.replace(/_/g, ' ').includes(dataset[i].name.toLowerCase())) {
         return true
       }
     }
