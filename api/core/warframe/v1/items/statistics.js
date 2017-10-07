@@ -63,7 +63,7 @@ class Statistics extends Endpoint {
     })
     if (!itemResult) {
       let response = {
-        error: 'Could not find data for ' + item + ' ' + component + '.',
+        error: 'Could not find data for ' + item + '.',
         reason: 'Item doesn\'t exist.',
       }
       this.cache(response, 60)
