@@ -40,7 +40,7 @@ class Request extends Endpoint {
         component: '',
         timestart: new Date().getTime(),
         timeend: new Date(new Date().setDate(new Date().getDate() - 7)).getTime(),
-        intervals: 7
+        intervals: 14
       }
     }
     let data = await new Promise(resolve => {
@@ -89,8 +89,8 @@ class Request extends Endpoint {
       name: new RegExp('^' + data.title + '$', 'i')
     }, {
       $set: {
-        prices: prices,
-        distribution: distribution
+        prices,
+        distribution
       }
     }, {
       upsert: true
