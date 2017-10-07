@@ -1,21 +1,15 @@
 <template>
   <div>
-    <filter id="gradient">
-      <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"   stop-color="#05a"/>
-        <stop offset="100%" stop-color="#0a5"/>
-      </linearGradient>
-    </filter>
     <svg :width="width" :height="height">
       <g>
-        <path class="line" :d="paths.line" filter="gradient" />
+        <path class="line" :d="paths.line" />
         <path class="selector" :d="paths.selector" />
-        <text v-for="(d, i) in animatedData" :x="scaled.x(d.x) + 5"
-              :y="scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)">
-          {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
-        </text>
         <path class="pointer" :d="paths.pointer[0]"></path>
         <path class="pointer" :d="paths.pointer[1]"></path>
+        <text v-for="(d, i) in animatedData" :x="getLabelPosition(d).x"
+              :y="getLabelPosition(d).y">
+          {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
+        </text>
       </g>
     </svg>
     <div class="blur">
@@ -84,6 +78,14 @@ export default {
     createMinPointer: d3.area().x(d => d.x).y0(d => d.y + 20).y1(d => d.y),
     createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y),
 
+    // Positioning for text labels
+    getLabelPosition(d) {
+      return {
+        x: this.scaled.x(d.x) + 5,
+        y: this.scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
+      }
+    },
+
     // Set graph scaling
     initialize() {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
@@ -97,23 +99,17 @@ export default {
       this.points = []
 
       for (let d of this.animatedData) {
-        this.points.push({
-          x: this.scaled.x(d.x),
-          y: this.scaled.y(d.y)
-        })
+        const x = this.scaled.x(d.x)
+        const y = this.scaled.y(d.y)
+
+        this.points.push({ x, y })
 
         // Create min/max pointers
         if (d.isMin) {
-          this.paths.pointer[0] = this.createMinPointer([{
-            x: this.scaled.x(d.x),
-            y: this.scaled.y(d.y)
-          }])
+          this.paths.pointer[0] = this.createMinPointer([{ x, y }])
         }
         if (d.isMax) {
-          this.paths.pointer[1] = this.createMaxPointer([{
-            x: this.scaled.x(d.x),
-            y: this.scaled.y(d.y)
-          }])
+          this.paths.pointer[1] = this.createMaxPointer([{ x, y }])
         }
       }
       this.paths.line = this.createLine(this.points)
