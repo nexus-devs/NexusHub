@@ -12,8 +12,6 @@
 
 
 <script>
-import items from 'src/templates/warframe/items/index.vue'
-
 export default {
   methods: {
     async search() {
