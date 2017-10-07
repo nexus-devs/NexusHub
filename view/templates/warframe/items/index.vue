@@ -162,7 +162,7 @@ export default {
 
       // Fill empty spaces with pseudo elements for flex
       if (offset) {
-        for (let i = 0; i < offset; i++) {
+        for (let i = 0; i < 3 - offset; i++) {
           modded.push({ isDummy: true })
         }
       }
