@@ -46,7 +46,7 @@ class Scraper {
         parsed.description = this.getItemDescription(itemSet)
         parsed.components = this.getItemComponents(itemSet)
         this.scraped.push(parsed)
-        console.log('> Added components to data')
+        console.log(`> Added [${parsed.components.map(item => item.name).join(', ')}]`)
       }
     }
   }
@@ -83,6 +83,12 @@ class Scraper {
    */
   getItemType(itemSet) {
     let tags = itemSet[0].tags
+    let name = itemSet[0].en.item_name.toLowerCase()
+
+    // Expect all primes to have 'Prime' in their name
+    if (name.includes('prime') && !name.includes('primed')) {
+      return 'Prime'
+    }
 
     for (let i = 1; i < itemSet.length; i++) {
       tags = tags.filter(tag => itemSet[i].tags.includes(tag))
@@ -114,7 +120,10 @@ class Scraper {
     let relics = []
 
     itemSet.forEach(item => {
-      if (item.tags.includes('prime') && item.tags.includes('set')) {
+
+      // Only add further components if the current one is a set, otherwise
+      // there'll be quite a few duplicates
+      if (item.en.item_name.toLowerCase().includes(' set')) {
         itemSet.forEach(item => {
           let partname = item.en.item_name
           let part = partname.split(' ')
@@ -130,7 +139,7 @@ class Scraper {
             }
             components.push({
               name: part[part.length - 1],
-              ducats: item.ducats,
+              ducats: item.ducats || 0,
               droplocations: relics
             })
             // Add ducats to Set
@@ -162,7 +171,7 @@ class Scraper {
 
     itemSet.forEach(item => {
       if (!(item.tags.includes('prime') && item.tags.includes('parts'))) {
-        descriptions.push(item.en.description.replace(/<[^>]*>/g, ''))
+        descriptions.push(item.en.description.replace('</p><p>', '. ').replace(/<[^>]*>/g, ''))
       }
     })
     return descriptions[0]

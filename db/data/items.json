@@ -1055,7 +1055,7 @@
   {
     "name": "Nova Prime",
     "type": "Prime",
-    "description": "Release Date: December 16, 2014Nova Prime is the primed variant of the Nova Warframe featuring more powerful stats: possessing a higher energy capacity and shield capacity, as well as an additional  polarity. ",
+    "description": "Release Date: December 16, 2014. Nova Prime is the primed variant of the Nova Warframe featuring more powerful stats: possessing a higher energy capacity and shield capacity, as well as an additional  polarity. ",
     "components": [
       {
         "name": "Blueprint",
@@ -1123,7 +1123,7 @@
   {
     "name": "Frost Prime",
     "type": "Prime",
-    "description": "Release Date: May 3rd, 2013Frost Prime is the primed variant of the Frost Warframe featuring more powerful stats, possessing higher shield capacity as well as an additional  polarity.",
+    "description": "Release Date: May 3rd, 2013. Frost Prime is the primed variant of the Frost Warframe featuring more powerful stats, possessing higher shield capacity as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -1155,7 +1155,7 @@
   {
     "name": "Ember Prime",
     "type": "Prime",
-    "description": "Release Date: November 20th, 2013Ember Prime is the primed variant of the Ember Warframe with more powerful stats; possessing higher shields and armor, as well as a  and  polarity. ",
+    "description": "Release Date: November 20th, 2013. Ember Prime is the primed variant of the Ember Warframe with more powerful stats; possessing higher shields and armor, as well as a  and  polarity. ",
     "components": [
       {
         "name": "Blueprint",
@@ -1187,7 +1187,7 @@
   {
     "name": "Mag Prime",
     "type": "Prime",
-    "description": "Release Date: September 13th, 2013Mag Prime is the primed variant of the Mag Warframe featuring more powerful stats: possessing increased health, as well as an additional  polarity.",
+    "description": "Release Date: September 13th, 2013. Mag Prime is the primed variant of the Mag Warframe featuring more powerful stats: possessing increased health, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -1239,7 +1239,7 @@
   {
     "name": "Rhino Prime",
     "type": "Prime",
-    "description": "Release Date: March 5th, 2014Rhino Prime is the primed variant of the Rhino Warframe featuring more powerful stats: possessing higher armor and sprint speed, as well as an additional  polarity.",
+    "description": "Release Date: March 5th, 2014. Rhino Prime is the primed variant of the Rhino Warframe featuring more powerful stats: possessing higher armor and sprint speed, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -1271,7 +1271,7 @@
   {
     "name": "Loki Prime",
     "type": "Prime",
-    "description": "Release Date: June 11th, 2014Loki Prime is the primed variant of the Loki Warframe featuring more powerful stats: possessing a higher energy capacity, as well as an additional  and a  polarity.",
+    "description": "Release Date: June 11th, 2014. Loki Prime is the primed variant of the Loki Warframe featuring more powerful stats: possessing a higher energy capacity, as well as an additional  and a  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -1303,7 +1303,7 @@
   {
     "name": "Nyx Prime",
     "type": "Prime",
-    "description": "Release Date: September 23rd, 2014Nyx Prime is the primed variant of the Nyx Warframe featuring more powerful stats: possessing higher armor, sprint speed and shield capacity, as well as an additional  polarity.",
+    "description": "Release Date: September 23rd, 2014. Nyx Prime is the primed variant of the Nyx Warframe featuring more powerful stats: possessing higher armor, sprint speed and shield capacity, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -1688,9 +1688,61 @@
     "description": "Warrior allows Wyrm to attack the first visible enemy in range.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blade",
         "ducats": 0,
         "droplocations": []
+      },
+      {
+        "name": "Coat",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "GrineerBombar",
+            "rarity": "GrineerBombard"
+          },
+          {
+            "name": "InfestedToxic",
+            "rarity": "Ancient"
+          },
+          {
+            "name": "Orokin Void",
+            "rarity": "Container"
+          }
+        ]
+      },
+      {
+        "name": "Hilt",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Recovery",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Conclave",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Warrior",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "CorpusNullifier",
+            "rarity": "Crewman"
+          },
+          {
+            "name": "CorpusSniper",
+            "rarity": "Crewman"
+          }
+        ]
       }
     ]
   },
@@ -5876,7 +5928,7 @@
   {
     "name": "Vanguard Rhino Helmet",
     "type": "Arcane Helmets",
-    "description": "Vanguard is an alternative Helmet Item for Rhino. Arcane is a discontinued variant that increases movement speed at the expense of lowering power strength.\nMovement Speed +25%\nPower Strength -5%\n",
+    "description": "Vanguard is an alternative Helmet Item for Rhino. . Arcane is a discontinued variant that increases movement speed at the expense of lowering power strength.\nMovement Speed +25%\nPower Strength -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5888,7 +5940,7 @@
   {
     "name": "Pendragon Excalibur Helmet",
     "type": "Arcane Helmets",
-    "description": "Pendragon is an alternative Helmet Item for Excalibur.Arcane is a discontinued variant that increases power strength at the expense of lowering his armor.\nPower Strength +15%\nArmor -5%\n",
+    "description": "Pendragon is an alternative Helmet Item for Excalibur.. Arcane is a discontinued variant that increases power strength at the expense of lowering his armor.\nPower Strength +15%\nArmor -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5900,7 +5952,7 @@
   {
     "name": "Chlora Saryn Helmet",
     "type": "Arcane Helmets",
-    "description": "Chlora is an alternative Helmet Item for Saryn. Arcane is a discontinued variant that increases maximum stamina at the expense of lowering her power duration.\nIncreases velocity of parkour maneuvers +10%\nPower duration -5%\n",
+    "description": "Chlora is an alternative Helmet Item for Saryn. . Arcane is a discontinued variant that increases maximum stamina at the expense of lowering her power duration.\nIncreases velocity of parkour maneuvers +10%\nPower duration -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5912,7 +5964,7 @@
   {
     "name": "Swindle Loki Helmet",
     "type": "Arcane Helmets",
-    "description": "Swindle is an alternative Helmet Item for Loki.Arcane is a discontinued variant that increases power range at the expense of lowering his maximum health.\nPower Range +15%\nHealth Max -5%\n",
+    "description": "Swindle is an alternative Helmet Item for Loki.. Arcane is a discontinued variant that increases power range at the expense of lowering his maximum health.\nPower Range +15%\nHealth Max -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5924,7 +5976,7 @@
   {
     "name": "Essence Loki Helmet",
     "type": "Arcane Helmets",
-    "description": "Essence is an alternative Helmet Item for Loki. Arcane is a discontinued variant that increases power efficiency at the expense of lowering his armor.\nPower Efficiency +15%\nArmor -5%\n",
+    "description": "Essence is an alternative Helmet Item for Loki. . Arcane is a discontinued variant that increases power efficiency at the expense of lowering his armor.\nPower Efficiency +15%\nArmor -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5936,7 +5988,7 @@
   {
     "name": "Thrak Rhino Helmet",
     "type": "Arcane Helmets",
-    "description": "Thrak is an alternative Helmet Item for Rhino. Arcane is a discontinued variant that increases maximum health at the expense of lowering sprint speed.\nHealth Max +25\nSprint Speed -5%\n",
+    "description": "Thrak is an alternative Helmet Item for Rhino. . Arcane is a discontinued variant that increases maximum health at the expense of lowering sprint speed.\nHealth Max +25\nSprint Speed -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5948,7 +6000,7 @@
   {
     "name": "Menticide Nyx Helmet",
     "type": "Arcane Helmets",
-    "description": "Menticide is an alternative Helmet Item for Nyx. Arcane is a discontinued variant that increases parkour maneuver velocity at the expense of lowering her maximum shield.\nIncreases Velocity of Parkour Maneuvers +?% \nShield Max -5%  (Applies after all other bonuses)\n",
+    "description": "Menticide is an alternative Helmet Item for Nyx. . Arcane is a discontinued variant that increases parkour maneuver velocity at the expense of lowering her maximum shield.\nIncreases Velocity of Parkour Maneuvers +?% \nShield Max -5%  (Applies after all other bonuses)\n",
     "components": [
       {
         "name": "Set",
@@ -5960,7 +6012,7 @@
   {
     "name": "Aurora Frost Helmet",
     "type": "Arcane Helmets",
-    "description": "Aurora is an alternative Helmet Item for Frost. Arcane is a discontinued variant that increases armor at the expense of lowering his maximum health.\nArmor +25%\nHealth Max -5%\n",
+    "description": "Aurora is an alternative Helmet Item for Frost. . Arcane is a discontinued variant that increases armor at the expense of lowering his maximum health.\nArmor +25%\nHealth Max -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5972,7 +6024,7 @@
   {
     "name": "Chorus Banshee Helmet",
     "type": "Arcane Helmets",
-    "description": "Chorus is an alternative Helmet Item for Banshee.Arcane is a discontinued variant that increases power efficiency at the expense of lowering her aim glide and wall latch duration.\nPower Efficiency +10%\nAim Glide and Wall Latch Duration -5%\n",
+    "description": "Chorus is an alternative Helmet Item for Banshee.. Arcane is a discontinued variant that increases power efficiency at the expense of lowering her aim glide and wall latch duration.\nPower Efficiency +10%\nAim Glide and Wall Latch Duration -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5984,7 +6036,7 @@
   {
     "name": "Squall Frost Helmet",
     "type": "Arcane Helmets",
-    "description": "Squall is an alternative Helmet Item for Frost.Arcane is a discontinued variant that increases power strength at the expense of lowering his maximum shield.\nPower Strength +15%\nShield Max -5%\n",
+    "description": "Squall is an alternative Helmet Item for Frost.. Arcane is a discontinued variant that increases power strength at the expense of lowering his maximum shield.\nPower Strength +15%\nShield Max -5%\n",
     "components": [
       {
         "name": "Set",
@@ -5996,7 +6048,7 @@
   {
     "name": "Locust Ash Helmet",
     "type": "Arcane Helmets",
-    "description": "Locust is an alternative Helmet Item for Ash.Arcane is a discontinued variant that increases maximum energy at the expense of lowering his movement speed.\nEnergy Max +20% (additive)\nMovement Speed -3% (multiplicative)\n",
+    "description": "Locust is an alternative Helmet Item for Ash.. Arcane is a discontinued variant that increases maximum energy at the expense of lowering his movement speed.\nEnergy Max +20% (additive)\nMovement Speed -3% (multiplicative)\n",
     "components": [
       {
         "name": "Set",
@@ -6008,7 +6060,7 @@
   {
     "name": "Avalon Excalibur Helmet",
     "type": "Arcane Helmets",
-    "description": "Avalon is an alternative Helmet Item for Excalibur. Arcane is a discontinued variant that increases maximum shield at the expense of lowering his maximum health.\nShield Max +25% (from base shields)\nHealth Max -5% (from total health)\n",
+    "description": "Avalon is an alternative Helmet Item for Excalibur. . Arcane is a discontinued variant that increases maximum shield at the expense of lowering his maximum health.\nShield Max +25% (from base shields)\nHealth Max -5% (from total health)\n",
     "components": [
       {
         "name": "Set",
@@ -6020,7 +6072,7 @@
   {
     "name": "Flux Nova Helmet",
     "type": "Arcane Helmets",
-    "description": "Flux is an alternative Helmet Item for Nova. Arcane is a discontinued variant that increases the duration of Nova's Aim Glide and Wall Latch at the expense of lowering her maximum health.\nAim Glide and Wall Latch Duration +10%\nMax Health -5%\n",
+    "description": "Flux is an alternative Helmet Item for Nova. . Arcane is a discontinued variant that increases the duration of Nova's Aim Glide and Wall Latch at the expense of lowering her maximum health.\nAim Glide and Wall Latch Duration +10%\nMax Health -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6032,7 +6084,7 @@
   {
     "name": "Aura Trinity Helmet",
     "type": "Arcane Helmets",
-    "description": "Aura is an alternative Helmet Item for Trinity.Arcane is a discontinued variant that increases power duration at the expense of lowering her maximum health.\nPower duration +25%\nHealth Max -5% (Applies after all other bonuses)\n",
+    "description": "Aura is an alternative Helmet Item for Trinity.. Arcane is a discontinued variant that increases power duration at the expense of lowering her maximum health.\nPower duration +25%\nHealth Max -5% (Applies after all other bonuses)\n",
     "components": [
       {
         "name": "Set",
@@ -6044,7 +6096,7 @@
   {
     "name": "Gambit Vauban Helmet",
     "type": "Arcane Helmets",
-    "description": "Gambit is an alternative Helmet Item for Vauban. Arcane is a discontinued variant that increases maximum stamina at the expense of lowering power duration.\nIncreases Velocity of Parkour Maneuvers +?%\nPower Duration -10%\n",
+    "description": "Gambit is an alternative Helmet Item for Vauban. . Arcane is a discontinued variant that increases maximum stamina at the expense of lowering power duration.\nIncreases Velocity of Parkour Maneuvers +?%\nPower Duration -10%\n",
     "components": [
       {
         "name": "Set",
@@ -6056,7 +6108,7 @@
   {
     "name": "Storm Volt Helmet",
     "type": "Arcane Helmets",
-    "description": "Storm is an alternative Helmet Item for Volt.Arcane is a discontinued variant that increases Power Strength at the expense of lowering the duration of his Aim Glide and Wall Latch.\nPower Strength +10%\nDuration of Aim Glide and Wall Latch -5%\n",
+    "description": "Storm is an alternative Helmet Item for Volt.. Arcane is a discontinued variant that increases Power Strength at the expense of lowering the duration of his Aim Glide and Wall Latch.\nPower Strength +10%\nDuration of Aim Glide and Wall Latch -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6068,7 +6120,7 @@
   {
     "name": "Esprit Vauban Helmet",
     "type": "Arcane Helmets",
-    "description": "Esprit is an alternative Helmet Item for Vauban.Arcane is a discontinued variant that increases maximum energy at the expense of lowering his maximum shield.\n Energy Max +10% (Applies to Vauban's base power)\n Shield Max -10% (Applies after all other bonuses)\n",
+    "description": "Esprit is an alternative Helmet Item for Vauban.. Arcane is a discontinued variant that increases maximum energy at the expense of lowering his maximum shield.\n Energy Max +10% (Applies to Vauban's base power)\n Shield Max -10% (Applies after all other bonuses)\n",
     "components": [
       {
         "name": "Set",
@@ -6080,7 +6132,7 @@
   {
     "name": "Scorpion Ash Helmet",
     "type": "Arcane Helmets",
-    "description": "Scorpion is an alternative Helmet Item for Ash. Arcane is a discontinued variant that increases duration of Aim Glide and Wall Latch at the expense of lowering his power efficiency.\nGlide &amp; Latch duration +?%\nPower Efficiency -5% (multiplicative)\n",
+    "description": "Scorpion is an alternative Helmet Item for Ash. . Arcane is a discontinued variant that increases duration of Aim Glide and Wall Latch at the expense of lowering his power efficiency.\nGlide &amp; Latch duration +?%\nPower Efficiency -5% (multiplicative)\n",
     "components": [
       {
         "name": "Set",
@@ -6092,7 +6144,7 @@
   {
     "name": "Phoenix Ember Helmet",
     "type": "Arcane Helmets",
-    "description": "Phoenix is an alternative Helmet Item for Ember. Arcane is a discontinued variant that increases maximum energy at the expense of lowering her maximum shield.\nEnergy Max +25%\nShield Max -5%\n",
+    "description": "Phoenix is an alternative Helmet Item for Ember. . Arcane is a discontinued variant that increases maximum energy at the expense of lowering her maximum shield.\nEnergy Max +25%\nShield Max -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6104,7 +6156,7 @@
   {
     "name": "Reverb Banshee Helmet",
     "type": "Arcane Helmets",
-    "description": "Reverb is an alternative Helmet Item for Banshee. Arcane is a discontinued variant that increases maximum energy at the expense of lowering her maximum health.\nEnergy Max +10% (Applies to Banshee's base Energy)\nHealth Max -5% (Applies after all other bonuses)\n",
+    "description": "Reverb is an alternative Helmet Item for Banshee. . Arcane is a discontinued variant that increases maximum energy at the expense of lowering her maximum health.\nEnergy Max +10% (Applies to Banshee's base Energy)\nHealth Max -5% (Applies after all other bonuses)\n",
     "components": [
       {
         "name": "Set",
@@ -6116,7 +6168,7 @@
   {
     "name": "Vespa Nyx Helmet",
     "type": "Arcane Helmets",
-    "description": "Vespa is an alternative Helmet Item for Nyx. Arcane is a discontinued variant that increases power efficiency at the expense of lowering her armor.\nPower Efficiency +15%\nArmor -5%\n",
+    "description": "Vespa is an alternative Helmet Item for Nyx. . Arcane is a discontinued variant that increases power efficiency at the expense of lowering her armor.\nPower Efficiency +15%\nArmor -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6128,7 +6180,7 @@
   {
     "name": "Hemlock Saryn Helmet",
     "type": "Arcane Helmets",
-    "description": "Hemlock is an alternative Helmet Item for Saryn. Arcane is a discontinued variant that increases movement speed at the expense of lowering her maximum health.\nMovement Speed +10%\nHealth Max -5% (Applies after all other bonuses)\n",
+    "description": "Hemlock is an alternative Helmet Item for Saryn. . Arcane is a discontinued variant that increases movement speed at the expense of lowering her maximum health.\nMovement Speed +10%\nHealth Max -5% (Applies after all other bonuses)\n",
     "components": [
       {
         "name": "Set",
@@ -6140,7 +6192,7 @@
   {
     "name": "Pulse Volt Helmet",
     "type": "Arcane Helmets",
-    "description": "Pulse is an alternative Helmet Item for Volt. Arcane is a discontinued variant that increases power duration at the expense of lowering his maximum shield.\nPower Duration +10%\nShield Max -5%\n",
+    "description": "Pulse is an alternative Helmet Item for Volt. . Arcane is a discontinued variant that increases power duration at the expense of lowering his maximum shield.\nPower Duration +10%\nShield Max -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6152,7 +6204,7 @@
   {
     "name": "Coil Mag Helmet",
     "type": "Arcane Helmets",
-    "description": "Coil is an alternative Helmet Item for Mag. Arcane is a discontinued variant that increases power range at the expense of lowering her maximum shield.\nPower Range +25%\nShield Max -5% \n",
+    "description": "Coil is an alternative Helmet Item for Mag. . Arcane is a discontinued variant that increases power range at the expense of lowering her maximum shield.\nPower Range +25%\nShield Max -5% \n",
     "components": [
       {
         "name": "Set",
@@ -6164,7 +6216,7 @@
   {
     "name": "Meridian Trinity Helmet",
     "type": "Arcane Helmets",
-    "description": "Meridian is an alternative Helmet Item for Trinity. Arcane is a discontinued variant that increases maximum shield at the expense of lowering her power efficiency.\nShield Max +15%\nPower Efficiency -5%\n",
+    "description": "Meridian is an alternative Helmet Item for Trinity. . Arcane is a discontinued variant that increases maximum shield at the expense of lowering her power efficiency.\nShield Max +15%\nPower Efficiency -5%\n",
     "components": [
       {
         "name": "Set",
@@ -6176,7 +6228,7 @@
   {
     "name": "Gauss Mag Helmet",
     "type": "Arcane Helmets",
-    "description": "Gauss is an alternative Helmet Item for Mag. Arcane is a discontinued variant that increases maximum energy at the expense of lowering her movement speed.\nEnergy Max +25\nMovement Speed -3%\n",
+    "description": "Gauss is an alternative Helmet Item for Mag. . Arcane is a discontinued variant that increases maximum energy at the expense of lowering her movement speed.\nEnergy Max +25\nMovement Speed -3%\n",
     "components": [
       {
         "name": "Set",
@@ -6188,7 +6240,7 @@
   {
     "name": "Backdraft Ember Helmet",
     "type": "Arcane Helmets",
-    "description": "Backdraft is an alternative Helmet Item for Ember. Arcane is a discontinued variant that increases maximum health at the expense of lowering her movement speed.\nHealth Max +15% Base Health\nMovement Speed -3%\n",
+    "description": "Backdraft is an alternative Helmet Item for Ember. . Arcane is a discontinued variant that increases maximum health at the expense of lowering her movement speed.\nHealth Max +15% Base Health\nMovement Speed -3%\n",
     "components": [
       {
         "name": "Set",
@@ -6811,7 +6863,7 @@
   {
     "name": "Volt Prime",
     "type": "Prime",
-    "description": "Release Date: March 24th, 2015Volt Prime is the primed variant of the Volt Warframe featuring more powerful stats: possessing a higher energy capacity and armor, as well as an additional  polarity.",
+    "description": "Release Date: March 24th, 2015. Volt Prime is the primed variant of the Volt Warframe featuring more powerful stats: possessing a higher energy capacity and armor, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -7010,7 +7062,7 @@
   {
     "name": "Odonata Prime",
     "type": "Prime",
-    "description": "Release Date: March 24th, 2015Comparisons:",
+    "description": "Release Date: March 24th, 2015. Comparisons:",
     "components": [
       {
         "name": "Blueprint",
@@ -7394,7 +7446,7 @@
   {
     "name": "Ash Prime",
     "type": "Prime",
-    "description": "Release Date: July 7, 2015Ash Prime is the primed variant of the Ash Warframe featuring more powerful stats, possessing a higher shield capacity, armor and sprint speed, as well as an additional  polarity.",
+    "description": "Release Date: July 7, 2015. Ash Prime is the primed variant of the Ash Warframe featuring more powerful stats, possessing a higher shield capacity, armor and sprint speed, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -7996,8 +8048,8 @@
   },
   {
     "name": "Trinity Prime",
-    "type": "Warframe",
-    "description": "Release Date: October 6th, 2015Trinity Prime is the primed variant of the Trinity Warframe featuring more powerful stats: possessing a higher shield capacity and sprint speed, as well as having an additional  and  polarity.",
+    "type": "Prime",
+    "description": "Release Date: October 6th, 2015. Trinity Prime is the primed variant of the Trinity Warframe featuring more powerful stats: possessing a higher shield capacity and sprint speed, as well as having an additional  and  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -8064,7 +8116,7 @@
   },
   {
     "name": "Dual Kamas Prime",
-    "type": "Melee",
+    "type": "Prime",
     "description": "The Dual Kamas Prime are the Primed versions of the Dual Kamas, featuring higher damage as well as improvements to most stats.",
     "components": [
       {
@@ -8122,7 +8174,7 @@
   },
   {
     "name": "Kavasa Prime Collar",
-    "type": "Kubrow",
+    "type": "Prime",
     "description": "The Kavasa Prime Collar is a Prime collar of Orokin design that can be equipped on a player's Kubrow. It records their genetic memory and DNA, allowing them to be reconstructed in an Incubator, just like the Taichen Collar. Equipping the collar grants +10 Health, +10 Shields, and +100 Armor to a kubrow. Health bonus is modified by DNA Stability.",
     "components": [
       {
@@ -8621,9 +8673,49 @@
     "description": "The Dera Vandal is the Vandal version of the Dera assault rifle, offered as a possible reward to players who participated in the Operation: Tubemen of Regor Event, had Nef Anyo been victorious on PC or XB1. Its blueprint and components can also occur as Invasion rewards.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
       }
     ]
   },
@@ -8633,9 +8725,49 @@
     "description": "The Karak Wraith is the Wraith variant of the Karak assault rifle, offered as a reward for players who participated in the Operation: Tubemen of Regor Event with Alad V victorious. Its blueprint and components can also occur as Invasion rewards.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
       }
     ]
   },
@@ -8842,11 +8974,26 @@
   {
     "name": "Nezha",
     "type": "Warframes",
-    "description": "Release Date: December 16, 2015.Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.",
+    "description": "Release Date: December 16, 2015.. Nezha invokes sacred fire and blazing weaponry to invigorate friends, ignite foes and insure himself from damage.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blueprint",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -10285,7 +10432,27 @@
     "description": "The Strun Wraith is the first Wraith weapon, which was made available as a reward for the Survival Weekend Event. It is a modified version of the Strun shotgun, featuring improved stats and firing characteristics. ",
     "components": [
       {
+        "name": "Barrel",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
         "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Stock",
         "ducats": 0,
         "droplocations": []
       }
@@ -10372,7 +10539,7 @@
   {
     "name": "Saryn Prime",
     "type": "Prime",
-    "description": "Release Date: February 16th, 2016Saryn Prime is the primed variant of the Saryn Warframe featuring higher armor, sprint speed, and power values, as well as an additional  polarity.",
+    "description": "Release Date: February 16th, 2016. Saryn Prime is the primed variant of the Saryn Warframe featuring higher armor, sprint speed, and power values, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -10531,8 +10698,28 @@
     "description": "The Sheev is a close range dagger weapon of Grineer design that serves as a backup in the event that a Grineer is disarmed by any means. It offers high  Slash damage and status, but has a slow overall attack speed. The tip of the blade glows with charged plasma, which allows the weapon to deal  Heat procs on slam attacks.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blade",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Heatsink",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Hilt",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -10776,7 +10963,27 @@
     "description": "The Snipetron Vandal is the Vandal version of the Snipetron, first awarded as a special-edition reward for killing 20 Informers in the Informant Event and can be found as a Sortie Reward. The Snipetron Vandal has better characteristics than the regular Snipetron in magazine size and reload speed, but sacrifices  Impact and  Slash damages in order to boost its  Puncture damage.",
     "components": [
       {
+        "name": "Barrel",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
         "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Stock",
         "ducats": 0,
         "droplocations": []
       }
@@ -10800,8 +11007,23 @@
     "description": "The Xiphos is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Xiphos is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a sentry gun. The Xiphos landed in Update 18.5.",
     "components": [
       {
-        "name": "Set",
+        "name": "Avionics",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Engines",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Fuselage",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -10812,8 +11034,23 @@
     "description": "The Mantis is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Mantis is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a Med Tower resembling a Life Support Capsule that heals for 100 Health upon each activation, with each Med Tower providing up to 20 healing charges that can be activated by any player. It landed in Update 17.5.",
     "components": [
       {
-        "name": "Set",
+        "name": "Avionics",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Engines",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Fuselage",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -10824,8 +11061,23 @@
     "description": "The Scimitar is a Landing Craft, which can serve as an alternative transportation choice to the Liset. If the Scimitar is the selected Landing Craft, using an Air Support Charge will have Ordis deploy a Carpet Bomb ability. The Scimitar landed in Update 18.0.",
     "components": [
       {
-        "name": "Set",
+        "name": "Avionics",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Engines",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Fuselage",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -10949,7 +11201,7 @@
   {
     "name": "Vauban Prime",
     "type": "Prime",
-    "description": "Release Date: May 17th, 2016Vauban Prime is the Prime variant of the Vauban Warframe featuring higher shields and armor values, as well as an additional  polarity.",
+    "description": "Release Date: May 17th, 2016. Vauban Prime is the Prime variant of the Vauban Warframe featuring higher shields and armor values, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -11008,7 +11260,7 @@
   },
   {
     "name": "Fragor Prime",
-    "type": "Melee",
+    "type": "Prime",
     "description": "Fragor Prime is the Prime variant of the Fragor.",
     "components": [
       {
@@ -11054,7 +11306,7 @@
   },
   {
     "name": "Akstiletto Prime",
-    "type": "Pistol",
+    "type": "Prime",
     "description": "Akstiletto Prime is the Prime variant of the Akstiletto.",
     "components": [
       {
@@ -11114,8 +11366,50 @@
     "description": "The Imperator Vandal is the Vandal form of the Imperator heavy machine gun for the Archwing flight system, offered as a reward for attaining 15 (10 for PS4/XB1) Battle Points in the Operation Eyes of Blight event. ",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Fomorian",
+            "rarity": "Sabotage"
+          },
+          {
+            "name": "Alert",
+            "rarity": "Alerts"
+          }
+        ]
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Fomorian",
+            "rarity": "Sabotage"
+          },
+          {
+            "name": "Alert",
+            "rarity": "Alerts"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Fomorian",
+            "rarity": "Sabotage"
+          },
+          {
+            "name": "Alert",
+            "rarity": "Alerts"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11373,8 +11667,36 @@
     "description": "The Kaszas is an Archwing scythe released in Update 17.5.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blade",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Red",
+            "rarity": "Veil"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Steel",
+            "rarity": "Meridian"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11385,9 +11707,51 @@
     "description": "The Velocitus is an Archwing Gauss-gun that deals heavy charged shot damage. It is the first Archwing weapon to have base  Magnetic damage. ",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Cephalon",
+            "rarity": "Suda"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Steel",
+            "rarity": "Meridian"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Red",
+            "rarity": "Veil"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
       }
     ]
   },
@@ -11397,9 +11761,51 @@
     "description": "The Fluctus is an Archwing primary weapon which fires a wave of energy. It was released in Update 15.7.2.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Cephalon",
+            "rarity": "Suda"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Limbs",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Red",
+            "rarity": "Veil"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Steel",
+            "rarity": "Meridian"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
       }
     ]
   },
@@ -11409,8 +11815,36 @@
     "description": "The Dual Decurion are twin rifles exclusive to the Archwing flight system.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Arbiters of",
+            "rarity": "Hexis"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Cephalon",
+            "rarity": "Suda"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11421,9 +11855,59 @@
     "description": "The Phaedra is a large-caliber Archwing rifle that shares design aesthetics and mechanics to the Soma. It was released in Update 17.5.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Arbiters of",
+            "rarity": "Hexis"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Mar",
+            "rarity": "Mars"
+          },
+          {
+            "name": ", Syrtis",
+            "rarity": "(Exterminate)"
+          },
+          {
+            "name": "The Perrin",
+            "rarity": "Sequence"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "New",
+            "rarity": "Loka"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
       }
     ]
   },
@@ -11433,8 +11917,50 @@
     "description": "The Centaur is an Archwing based melee that also acts as a shield, which shares its own basic six-hit combo with Rathbone, but also possesses its own six-hit combo when used in quick melee (primary weapon equipped).",
     "components": [
       {
-        "name": "Set",
+        "name": "Aegis",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Arbiters of",
+            "rarity": "Hexis"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "The Perrin",
+            "rarity": "Sequence"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "New",
+            "rarity": "Loka"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11445,8 +11971,36 @@
     "description": "The Onorix is a heavy axe designed for use with the Archwing flight system.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blade",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "New",
+            "rarity": "Loka"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "The Perrin",
+            "rarity": "Sequence"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11457,8 +12011,50 @@
     "description": "This weapon deals primarily  Puncture damage.",
     "components": [
       {
-        "name": "Set",
+        "name": "Blade",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "New",
+            "rarity": "Loka"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Guard",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Steel",
+            "rarity": "Meridian"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Red",
+            "rarity": "Veil"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -11469,9 +12065,51 @@
     "description": "This weapon deals primarily  Slash damage by a small margin",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Arbiters of",
+            "rarity": "Hexis"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Cephalon",
+            "rarity": "Suda"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "The Perrin",
+            "rarity": "Sequence"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
       }
     ]
   },
@@ -12890,9 +13528,51 @@
     "description": "The Corvas flak cannon is a heavy shotgun designed for exclusive use with the Archwing flight system, introduced in Update 15.0. It can be rapidly fired to saturate an area with pellets, or charged to release a more powerful scattershot.  ",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Arbiters of",
+            "rarity": "Hexis"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Cephalon",
+            "rarity": "Suda"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Steel",
+            "rarity": "Meridian"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
       }
     ]
   },
@@ -12902,8 +13582,36 @@
     "description": "A heavy Hammer exclusive to Archwing use, the Rathbone primarily deals  Impact damage, which is ideal for taking down Corpus shields. This weapon shares its own basic six combo with Centaur.",
     "components": [
       {
-        "name": "Set",
+        "name": "Handle",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Red",
+            "rarity": "Veil"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Head",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "New",
+            "rarity": "Loka"
+          },
+          {
+            "name": "Offerin",
+            "rarity": "Offering"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
@@ -12914,9 +13622,49 @@
     "description": "The Latron Wraith is the Wraith version of the Latron semi-automatic rifle, which was featured as a reward for players who extracted 3000 Cryotic in a single mission during Operation Cryotic Front and can be found as an Invasion reward.",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrel",
         "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": [
+          {
+            "name": "Invasion",
+            "rarity": "Invasions"
+          }
+        ]
       }
     ]
   },
@@ -13003,16 +13751,36 @@
     "description": "The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. ",
     "components": [
       {
-        "name": "Set",
+        "name": "Barrels",
         "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Link",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receivers",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": null,
         "droplocations": []
       }
     ]
   },
   {
     "name": "Nekros Prime",
-    "type": "Warframe",
-    "description": "Release Date: August 23rd, 2016Nekros Prime is the Prime variant of the Nekros Warframe featuring higher shields and power values, as well as an additional  polarity.",
+    "type": "Prime",
+    "description": "Release Date: August 23rd, 2016. Nekros Prime is the Prime variant of the Nekros Warframe featuring higher shields and power values, as well as an additional  polarity.",
     "components": [
       {
         "name": "Blueprint",
@@ -13067,7 +13835,7 @@
   },
   {
     "name": "Tigris Prime",
-    "type": "Shotgun",
+    "type": "Prime",
     "description": "The Tigris Prime is the primed variant of the Tigris shotgun. ",
     "components": [
       {
@@ -13119,7 +13887,7 @@
   },
   {
     "name": "Galatine Prime",
-    "type": "Melee",
+    "type": "Prime",
     "description": "Galatine Prime is the primed variant of the Galatine heavy sword. ",
     "components": [
       {
@@ -13460,7 +14228,22 @@
     "description": "The Amesha is a support-type Archwing that sacrifices offensive power in exchange for area-of-effect defensive abilities that can buff and heal allies and weaken enemies. ",
     "components": [
       {
+        "name": "Harness",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
         "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Wings",
         "ducats": 0,
         "droplocations": []
       }
@@ -13472,7 +14255,22 @@
     "description": "The Elytron is an offensive-type Archwing specializing in area bombardment, capable of dealing massive amounts of damage against multiple enemies with its selection of missiles, and boasting high durability among Archwings.",
     "components": [
       {
+        "name": "Harness",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
         "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Wings",
         "ducats": 0,
         "droplocations": []
       }
@@ -13484,7 +14282,22 @@
     "description": "The Itzal is a stealth and support Archwing utilizing technologies that can hide it from enemy attention while it attacks with powerful disruptive abilities, sacrificing durability for a high amount of energy capacity.",
     "components": [
       {
+        "name": "Harness",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
         "name": "Set",
+        "ducats": null,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Wings",
         "ducats": 0,
         "droplocations": []
       }
@@ -13943,7 +14756,7 @@
   },
   {
     "name": "Cernos Prime",
-    "type": "Blueprint",
+    "type": "Prime",
     "description": "The Cernos Prime is an ancient Orokin bow that serves as an upgrade of the Cernos, featuring improved stats as well as the ability to fire multiple arrows at once.",
     "components": [
       {
@@ -14005,24 +14818,94 @@
   },
   {
     "name": "Valkyr Prime",
-    "type": "Blueprint",
-    "description": "Release date: November 22nd, 2016Valkyr Prime is the Prime variant of the Valkyr Warframe featuring higher armor and power values, as well as an additional Madurai Pol polarity.",
+    "type": "Prime",
+    "description": "Release date: November 22nd, 2016. Valkyr Prime is the Prime variant of the Valkyr Warframe featuring higher armor and power values, as well as an additional Madurai Pol polarity.",
     "components": [
       {
+        "name": "Blueprint",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Meso S3",
+            "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Chassis",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Axi V5",
+            "rarity": "Rare"
+          }
+        ]
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Meso C2",
+            "rarity": "Uncommon"
+          }
+        ]
+      },
+      {
         "name": "Set",
-        "ducats": 0,
+        "ducats": 260,
         "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Meso V3",
+            "rarity": "Rare"
+          }
+        ]
       }
     ]
   },
   {
     "name": "Venka Prime",
-    "type": "Blueprint",
+    "type": "Prime",
     "description": "The Venka Prime are ancient Orokin claws that serve as an upgrade of the Venka. Apart from having higher base damage and slightly faster attack speed, the Venka Prime also has an improved melee combo multiplier.",
     "components": [
       {
+        "name": "Blades",
+        "ducats": 100,
+        "droplocations": [
+          {
+            "name": "Axi V5",
+            "rarity": "Common"
+          }
+        ]
+      },
+      {
+        "name": "Blueprint",
+        "ducats": 45,
+        "droplocations": [
+          {
+            "name": "Neo N4",
+            "rarity": "Uncommon"
+          }
+        ]
+      },
+      {
+        "name": "Gauntlet",
+        "ducats": 15,
+        "droplocations": [
+          {
+            "name": "Neo V4",
+            "rarity": "Rare"
+          }
+        ]
+      },
+      {
         "name": "Set",
-        "ducats": 0,
+        "ducats": 160,
         "droplocations": []
       }
     ]
