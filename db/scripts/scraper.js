@@ -1,4 +1,8 @@
 const request = require("request-promise")
+const cheerio = require('cheerio')
+const minify = require('imagemin')
+const minifyPng = require('imagemin-pngquant')
+const chalk = require('chalk')
 const queue = require("async-delay-queue")
 const fs = require('fs');
 const baseUrl = "https://api.warframe.market/v1"
@@ -11,6 +15,9 @@ class Scraper {
     this.scraped = []
   }
 
+  /**
+   * Gather List of items and run through each of them
+   */
   async getItems() {
     const map = await request.get(baseUrl + "/items")
     const items = JSON.parse(map).payload.items.en
@@ -25,6 +32,9 @@ class Scraper {
     fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
   }
 
+  /**
+   * Actual data scraping
+   */
   async getItemData(url, mult) {
     const targetUrl = baseUrl + '/items/' + url.replace('’', '%E2%80%99')
     let item
@@ -45,10 +55,26 @@ class Scraper {
         parsed.ranks = this.getItemMaxRank(itemSet)
         parsed.description = this.getItemDescription(itemSet)
         parsed.components = this.getItemComponents(itemSet)
+        this.saveItemImage(itemSet, parsed.name)
         this.scraped.push(parsed)
-        console.log(`> Added [${parsed.components.map(item => item.name).join(', ')}]`)
+        console.log(`:: [${parsed.components.map(item => item.name).join(', ')}]`)
       }
     }
+  }
+
+  /**
+   * Check if an item with including this name has already been scraped.
+   * Warframe.market stores all components as individual objects whereas
+   * we store them in the item's component array
+   */
+  isAdded(itemname, dataset) {
+    itemname = itemname.toLowerCase();
+    for (let i = 0; i < dataset.length; i++) {
+      if (itemname.replace(/_/g, ' ').includes(dataset[i].name.toLowerCase())) {
+        return true
+      }
+    }
+    return false
   }
 
   /**
@@ -73,7 +99,7 @@ class Scraper {
       }
       name = matched.join("").replace(/\s+$/g,'')
     })
-    console.log(`\n-- ${name}`)
+    console.log(`\n:: ${name}`)
     return name
   }
 
@@ -105,7 +131,7 @@ class Scraper {
     if (result) {
       result = result.replace(/([^a-z]|^)([a-z])(?=[a-z]{2})/g, (_, g1, g2) => g1 + g2.toUpperCase())
     } else {
-      console.log(`WARN: Could not find item type for ${itemSet[0].en.item_name} -> assigning 'Misc'`)
+      console.log(`:: ${chalk.yellow('WARN')}: Could not find item type for ${itemSet[0].en.item_name} -> assigning 'Misc'`)
       result = 'Misc'
     }
     return result
@@ -177,14 +203,56 @@ class Scraper {
     return descriptions[0]
   }
 
-  isAdded(itemname, dataset) {
-    itemname = itemname.toLowerCase();
-    for (let i = 0; i < dataset.length; i++) {
-      if (itemname.replace(/_/g, ' ').includes(dataset[i].name.toLowerCase())) {
-        return true
-      }
+  /**
+   * Save item image by scraping the wikia page. Then minify and save in /assets/
+   * We detect the link to the item image through HTML scraping.
+   */
+  async saveItemImage(itemSet, itemName) {
+    const url = itemSet[0].en.wiki_link
+    const path = './assets/img/warframe/items/' // relative to cwd
+    const html = await request(url)
+    const $ = cheerio.load(html)
+    let image = $('#mw-content-text aside img').first()
+    let imageUrl = image.attr('data-src') || image.attr('src')
+
+    // Some images are in a floatright el, not in an aside box (e.g. scimitar)
+    if (!imageUrl) {
+      image = $("#mw-content-text .floatright img").first()
+      imageUrl = image.attr('data-src') || image.attr('src')
     }
-    return false
+
+    // Exception handling
+    if (!imageUrl) {
+      const exceptions = require('./exceptions.js')
+      exceptions.forEach(exception => {
+        if (new RegExp("\\b" + exception.name + "\\b").test(itemName.toLowerCase())) {
+          imageUrl = exception.url
+        }
+      })
+    }
+
+    // Still no Image URL? -> Print warning to have it looked up
+    if (!imageUrl) {
+      return console.log(`:: ${chalk.yellow('WARN')}: Could not find image for ${itemName}`)
+    }
+
+    // Modify URL to get full size version
+    imageUrl = imageUrl.split('.png')[0] + '.png'
+
+    // Save image in /assets/
+    request.head(imageUrl, (err, res, body) => {
+      request(imageUrl).pipe(fs.createWriteStream(path + itemName.toLowerCase().replace(/ /g, '-') + ".png"))
+        .on('close', () => {
+          minify([path + itemName.toLowerCase().replace(/ /g, '-') + ".png"], path, {
+            plugins: [
+              minifyPng({
+                quality: '20-40'
+              })
+            ]
+          })
+          console.log(":: Saved minified image of " + itemName)
+        })
+    })
   }
 }
 module.exports = new Scraper()
