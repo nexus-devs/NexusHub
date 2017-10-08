@@ -8,7 +8,7 @@ class Tween {
   tweenData(newData, oldData, onUpdate) {
     const tween = new TWEEN.Tween(oldData)
       .easing(TWEEN.Easing.Quadratic.Out)
-      .to(newData, 600)
+      .to(newData, 500)
       .onUpdate(onUpdate)
       .onComplete(() => {
         tween.done = true

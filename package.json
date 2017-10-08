@@ -12,8 +12,8 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.4.22",
-    "blitz-js-core": "^0.4.12",
+    "blitz-js": "^0.5.0",
+    "blitz-js-core": "^0.5.0",
     "chalk": "^2.1.0",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.11.0",
@@ -26,6 +26,6 @@
   "devDependencies": {
     "blitz-js-query": "^0.2.3",
     "chai": "^4.1.2",
-    "mocha": "^3.5.3"
+    "mocha": "^4.0.1"
   }
 }
