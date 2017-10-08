@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const request = require("request-promise")
 const cheerio = require('cheerio')
 const minify = require('imagemin')
@@ -6,7 +5,7 @@ const minifyPng = require('imagemin-pngquant')
 const chalk = require('chalk')
 const queue = require("async-delay-queue")
 const fs = require('fs')
-const base = require('../data/base.js')
+const base = require('../data/additional.json')
 const baseUrl = "https://api.warframe.market/v1"
 const timeout = (fn, s) => {
   queue.delay(fn, 'push', 50)
@@ -33,8 +32,8 @@ class Scraper {
     }
 
     // Merge with base data (non-scraped) and write to disk
-    //const data = _.merge(base, this.scraped)
-    fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
+    const data = this.merge(base, this.scraped)
+    fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(data, null, 2), "utf-8")
   }
 
   /**
@@ -257,6 +256,34 @@ class Scraper {
           })
         })
     })
+  }
+
+  /**
+   * Merge existing data with scraped one
+   */
+  merge(base, scraped) {
+    let result = []
+
+    // First merge existing data with scraped
+    base.forEach((item, i) => {
+      let index = scraped.findIndex(d => d.name === item.name)
+
+      if (index > -1) {
+        base[i] = Object.assign(item, scraped[index])
+      }
+    })
+    result = result.concat(base)
+
+    // Then add items that aren't included in base
+    scraped.forEach(item => {
+      let index = base.findIndex(d => d.name === item.name)
+
+      if (index < 0) {
+        result.push(item)
+      }
+    })
+
+    return result
   }
 }
 module.exports = new Scraper()

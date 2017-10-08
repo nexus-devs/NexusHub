@@ -1,5 +1,305 @@
 [
   {
+    "name": "Aklex Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Link",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Helios Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Carapace",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Cerebrum",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Euphona Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Banshee Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Silva & Aegis Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Hilt",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Guard",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Sybaris Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Oberon Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Hydroid Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Nami Skyla Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
+    "name": "Ballistica Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "String",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Lower Limb",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Upper Limb",
+        "ducats": 0,
+        "droplocations": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "droplocations": []
+      }
+    ]
+  },
+  {
     "name": "Akbronco Prime",
     "type": "Prime",
     "description": "The Akbronco Prime lowers  Impact damage to increase  Slash damage, while gaining increased firing rate, critical damage, status chance and magazine size. The Akbronco Prime was added into the game in Update 12.4.",
