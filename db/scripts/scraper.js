@@ -1,10 +1,12 @@
+const _ = require('lodash')
 const request = require("request-promise")
 const cheerio = require('cheerio')
 const minify = require('imagemin')
 const minifyPng = require('imagemin-pngquant')
 const chalk = require('chalk')
 const queue = require("async-delay-queue")
-const fs = require('fs');
+const fs = require('fs')
+const base = require('../data/base.js')
 const baseUrl = "https://api.warframe.market/v1"
 const timeout = (fn, s) => {
   queue.delay(fn, 'push', 50)
@@ -29,6 +31,9 @@ class Scraper {
       await this.getItemData(url, i)
       console.log(`Fetched item data for ${item.item_name}`)
     }
+
+    // Merge with base data (non-scraped) and write to disk
+    //const data = _.merge(base, this.scraped)
     fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(this.scraped, null, 2), "utf-8")
   }
 
@@ -250,7 +255,6 @@ class Scraper {
               })
             ]
           })
-          console.log(":: Saved minified image of " + itemName)
         })
     })
   }
