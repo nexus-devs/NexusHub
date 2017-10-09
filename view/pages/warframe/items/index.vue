@@ -196,7 +196,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
-  @include gradient-background-dg(#596570, $colorBackgroundLight);
+  @include gradient-background-dg(#596570, $colorBackground);
   padding: 116px 0 60px;
 
   @media (max-width: $breakpoint-m) {

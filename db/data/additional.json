@@ -6,17 +6,17 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Link",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -27,27 +27,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Carapace",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Cerebrum",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Systems",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -58,27 +58,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Barrel",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Receiver",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Stock",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -89,27 +89,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Chassis",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Neuroptics",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Systems",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -120,27 +120,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Blade",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Hilt",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Guard",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -151,27 +151,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Barrel",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Receiver",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Stock",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -182,27 +182,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Chassis",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Neuroptics",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Systems",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -213,27 +213,27 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Chassis",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Neuroptics",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Systems",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -244,22 +244,22 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Blade",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Handle",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   },
@@ -270,32 +270,32 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "String",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Receiver",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Lower Limb",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Upper Limb",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       },
       {
         "name": "Set",
         "ducats": 0,
-        "droplocations": []
+        "drop": []
       }
     ]
   }
