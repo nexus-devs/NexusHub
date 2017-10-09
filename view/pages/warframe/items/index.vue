@@ -176,7 +176,7 @@ export default {
     this.listen()
   },
   asyncData({ store, route: { params: { item }}}) {
-    return store.dispatch('fetchItemData', item.replace(/-/g, ' '))
+    return store.dispatch('fetchItemData', item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
   methods: {
     async listen() {
