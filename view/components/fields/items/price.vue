@@ -114,6 +114,8 @@ export default {
 .row {
   @include shadow-1;
   @include ie;
+  position: relative;
+  overflow: hidden;
   border-radius: 2px;
   padding: 0;
 

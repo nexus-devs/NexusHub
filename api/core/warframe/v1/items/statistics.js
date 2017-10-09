@@ -67,7 +67,7 @@ class Statistics extends Endpoint {
         reason: 'Item doesn\'t exist.',
       }
       this.cache(response, 60)
-      res.status(404).send(response)
+      return res.status(404).send(response)
     }
 
     // Generate valid Query from input
