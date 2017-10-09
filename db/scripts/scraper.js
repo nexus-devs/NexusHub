@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const request = require("request-promise")
 const cheerio = require('cheerio')
 const minify = require('imagemin')
@@ -5,34 +6,58 @@ const minifyPng = require('imagemin-pngquant')
 const chalk = require('chalk')
 const queue = require("async-delay-queue")
 const fs = require('fs')
-const base = require('../data/additional.json')
-const baseUrl = "https://api.warframe.market/v1"
-const timeout = (fn, s) => {
-  queue.delay(fn, 'push', 50)
-}
+const additional = require('../data/additional.json')
+const dropChancesBaseUrl = 'https://raw.githubusercontent.com/WFCD/warframe-drop-data/gh-pages/'
+const marketBaseUrl = "https://api.warframe.market/v1"
+const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 
 class Scraper {
   constructor() {
     this.scraped = []
+    this.doFetchMarketData = true
   }
 
   /**
    * Gather List of items and run through each of them
    */
   async getItems() {
-    const map = await request.get(baseUrl + "/items")
-    const items = JSON.parse(map).payload.items.en
+    const dropChances = JSON.parse(await request.get(dropChancesBaseUrl + 'data/all.json'))
+    const marketData = JSON.parse(await request.get(marketBaseUrl + "/items"))
+    const items = marketData.payload.items.en
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i]
-      const url = item.url_name
+    // Only scrape the warframe.market API if we specify we it to. This takes a
+    // few minutes, so it's recommended to disable it while developing
+    if (this.doFetchMarketData) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+        const url = item.url_name
 
-      await this.getItemData(url, i)
-      console.log(`Fetched item data for ${item.item_name}`)
+        await this.getItemData(url, i)
+      }
+
+      // Save scraped data separately so we can lazily load it when we don't wanna refetch all data
+      fs.writeFileSync(__dirname + '/../data/scraped.json', JSON.stringify(this.scraped, null, 2), 'utf-8')
     }
 
-    // Merge with base data (non-scraped) and write to disk
-    const data = this.merge(base, this.scraped)
+    // Take pre-scraped data instead
+    else {
+      this.scraped = require('../data/scraped.json')
+    }
+
+    // Merge with base data (non-scraped)
+    const data = this.merge(additional, this.scraped)
+
+    // Get drop chances for each component
+    data.forEach((item, i) => {
+      item.components.forEach((component, j) => {
+        data[i].components[j].drop = this.findDropLocations(`${item.name} ${component.name}`, dropChances)
+        if (!data[i].components[j].drop.length) {
+          console.log(`:: ${chalk.yellow('WARN')}: Could not find drop chances for ${item.name} ${component.name}`)
+        }
+      })
+    })
+
+    // Write to disk
     fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(data, null, 2), "utf-8")
   }
 
@@ -40,7 +65,7 @@ class Scraper {
    * Actual data scraping
    */
   async getItemData(url, mult) {
-    const targetUrl = baseUrl + '/items/' + url.replace('’', '%E2%80%99')
+    const targetUrl = marketBaseUrl + '/items/' + url.replace('’', '%E2%80%99')
     let item
 
     try {
@@ -58,7 +83,7 @@ class Scraper {
         parsed.type = this.getItemType(itemSet)
         parsed.ranks = this.getItemMaxRank(itemSet)
         parsed.description = this.getItemDescription(itemSet)
-        parsed.components = this.getItemComponents(itemSet)
+        parsed.components = this.getItemComponents(itemSet, parsed.name)
         this.saveItemImage(itemSet, parsed.name)
         this.scraped.push(parsed)
         console.log(`:: [${parsed.components.map(item => item.name).join(', ')}]`)
@@ -141,48 +166,92 @@ class Scraper {
     return result
   }
 
-  getItemComponents(itemSet) {
-    let components = [{
-      name: 'Set',
-      ducats: 0,
-      droplocations: []
-    }]
-    let relics = []
+  getItemComponents(itemSet, itemName) {
+    let components = []
 
     itemSet.forEach(item => {
+      let componentName = item.en.item_name.replace(itemName, '')
+      componentName = componentName.startsWith(' ') ? componentName.slice(1) : componentName
 
-      // Only add further components if the current one is a set, otherwise
-      // there'll be quite a few duplicates
-      if (item.en.item_name.toLowerCase().includes(' set')) {
-        itemSet.forEach(item => {
-          let partname = item.en.item_name
-          let part = partname.split(' ')
-          if (part[part.length - 1].toLowerCase() !== 'set') {
-            let relics = []
-            for (let a = 0; a < item.en.drop.length; a++) {
-              let rarity = item.en.drop[a].name.split(" ")
-              let relic = item.en.drop[a].name.slice(0, item.en.drop[a].name.length - rarity[rarity.length - 1].length - 1)
-              relics.push({
-                name: relic,
-                rarity: rarity[rarity.length - 1]
-              })
-            }
-            components.push({
-              name: part[part.length - 1],
-              ducats: item.ducats || 0,
-              droplocations: relics
-            })
-            // Add ducats to Set
-            components[0].ducats += item.ducats
-          }
-        })
-      }
+      components.push({
+        name: componentName ? componentName : 'Set',
+        ducats: item.ducats || 0,
+        drop: []
+      })
     })
+
+    // Add ducats to Set
+    const set = components.findIndex(c => c.name.toLowerCase() === 'set')
+    components.forEach((c, i) => {
+      components[set].ducats += i !== set ? c.ducats : 0
+    })
+
     return components.sort((a, b) => {
       if (a.name > b.name) return 1
       if (a.name < b.name) return -1
       return 0
     })
+  }
+
+  /**
+   * Take drop locations and chances from the official drop chance tables
+   */
+  findDropLocations(component, dropChances) {
+    /** drop location schema
+     * { location, rarity, chance }
+     */
+    let result = []
+    let dropLocations = []
+    this.findDropRecursive(component, dropChances, dropLocations, '')
+
+    // The find function returns an array of mentions with their respective paths.
+    // So because I'm lazy and don't want to directly implement it into the
+    // recursion, we'll gather the info "around" the found key here.
+    dropLocations.forEach(location => {
+      const path = location.path.replace(/\[/g, '').replace(/\]/g, ' ').split(' ')
+      const dropData = dropChances[path[0]][path[1]]
+      const drop = {
+        location: '',
+        type: path[0].replace(/([a-z](?=[A-Z]))/g, '$1 '), // Regex transforms camelCase to normal words
+        rarity: location.drop.rarity,
+        chance: location.drop.chance * 0.01
+      }
+      // Capitalize drop type
+      drop.type = drop.type[0].toUpperCase() + drop.type.slice(1)
+
+      // First few Properties of the first object form the drop location name
+      for (let prop in dropData) {
+        if (typeof dropData[prop] === 'string' && prop !== '_id') {
+          drop.location += dropData[prop] + ' '
+        }
+      }
+
+      // Remove trailing space from location
+      drop.location = drop.location.slice(0, -1)
+      result.push(drop)
+    })
+    return result
+  }
+
+  /**
+   * Helper function for recursive object detection
+   */
+  findDropRecursive(target, child, locations, path) {
+    if (typeof child === 'object') {
+      for (let prop in child) {
+        const nextPath = `${path}[${prop}]`
+        const found = this.findDropRecursive(target, child[prop], locations, nextPath)
+        found ? locations.push({
+          path: nextPath,
+          drop: child
+        }) : 0
+      }
+    }
+
+    // String ? check if it's the component we want
+    else if (typeof child === 'string') {
+      return child === target ? child : null
+    }
   }
 
   getItemMaxRank(itemSet) {
@@ -208,54 +277,61 @@ class Scraper {
   }
 
   /**
-   * Save item image by scraping the wikia page. Then minify and save in /assets/
+   * Get item image by scraping the wikia page. Then minify and save in /assets/
    * We detect the link to the item image through HTML scraping.
    */
   async saveItemImage(itemSet, itemName) {
     const url = itemSet[0].en.wiki_link
     const path = './assets/img/warframe/items/' // relative to cwd
-    const html = await request(url)
-    const $ = cheerio.load(html)
-    let image = $('#mw-content-text aside img').first()
-    let imageUrl = image.attr('data-src') || image.attr('src')
 
-    // Some images are in a floatright el, not in an aside box (e.g. scimitar)
-    if (!imageUrl) {
-      image = $("#mw-content-text .floatright img").first()
-      imageUrl = image.attr('data-src') || image.attr('src')
-    }
+    // The wikia isn't exactly reliable, so we might get a bunch of connection issues here
+    try {
+      const html = await request(url)
+      const $ = cheerio.load(html)
+      let image = $('#mw-content-text aside img').first()
+      let imageUrl = image.attr('data-src') || image.attr('src')
 
-    // Exception handling
-    if (!imageUrl) {
-      const exceptions = require('./exceptions.js')
-      exceptions.forEach(exception => {
-        if (new RegExp("\\b" + exception.name + "\\b").test(itemName.toLowerCase())) {
-          imageUrl = exception.url
-        }
+      // Some images are in a floatright el, not in an aside box (e.g. scimitar)
+      if (!imageUrl) {
+        image = $("#mw-content-text .floatright img").first()
+        imageUrl = image.attr('data-src') || image.attr('src')
+      }
+
+      // Exception handling
+      if (!imageUrl) {
+        const exceptions = require('./exceptions.js')
+        exceptions.forEach(exception => {
+          if (new RegExp("\\b" + exception.name + "\\b").test(itemName.toLowerCase())) {
+            imageUrl = exception.url
+          }
+        })
+      }
+
+      // Still no Image URL? -> Print warning to have it looked up
+      if (!imageUrl) {
+        return console.log(`:: ${chalk.yellow('WARN')}: Could not find image for ${itemName}`)
+      }
+
+      // Modify URL to get full size version
+      imageUrl = imageUrl.split('.png')[0] + '.png'
+
+      // Save image in /assets/
+      request.head(imageUrl, (err, res, body) => {
+        request(imageUrl).pipe(fs.createWriteStream(path + itemName.toLowerCase().replace(/ /g, '-') + ".png"))
+          .on('close', () => {
+            minify([path + itemName.toLowerCase().replace(/ /g, '-') + ".png"], path, {
+              plugins: [
+                minifyPng({
+                  quality: '20-40'
+                })
+              ]
+            })
+          })
       })
     }
 
-    // Still no Image URL? -> Print warning to have it looked up
-    if (!imageUrl) {
-      return console.log(`:: ${chalk.yellow('WARN')}: Could not find image for ${itemName}`)
-    }
-
-    // Modify URL to get full size version
-    imageUrl = imageUrl.split('.png')[0] + '.png'
-
-    // Save image in /assets/
-    request.head(imageUrl, (err, res, body) => {
-      request(imageUrl).pipe(fs.createWriteStream(path + itemName.toLowerCase().replace(/ /g, '-') + ".png"))
-        .on('close', () => {
-          minify([path + itemName.toLowerCase().replace(/ /g, '-') + ".png"], path, {
-            plugins: [
-              minifyPng({
-                quality: '20-40'
-              })
-            ]
-          })
-        })
-    })
+    // 404, timeouts, etc
+    catch (err) {}
   }
 
   /**

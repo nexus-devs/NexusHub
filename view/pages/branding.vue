@@ -110,10 +110,10 @@
           <div class="col-b color">
             <div class="primary-shade grey">
               <span>Primary Shade</span>
-              <span>#414a52</span>
+              <span>#4e5862</span>
             </div>
             <div class="sub-shade grey-shade">
-              <span>#384047</span>
+              <span>#414952</span>
             </div>
           </div>
           <div class="col-b color">
@@ -122,7 +122,7 @@
               <span>#20242a</span>
             </div>
             <div class="sub-shade dark-shade">
-              <span>#171a20</span>
+              <span>#181a20</span>
             </div>
           </div>
         </div>
