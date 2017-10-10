@@ -31,10 +31,10 @@ class Search extends Endpoint {
         reason: `Query term must be at least 2 characters. Received ${query.length}.`
       })
     }
-    if (limit > 20) {
+    if (limit > 20 || limit < 2) {
       return res.status(400).send({
         error: 'Bad input.',
-        reason: `Limit must not be higher than 20 results. Received ${limit}.`
+        reason: `Limit must not be higher than 20 or lower than 2. Received ${limit}.`
       })
     }
 
