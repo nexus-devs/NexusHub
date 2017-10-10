@@ -101,7 +101,7 @@ class Request extends Endpoint {
     })
 
     await this.db.collection('items').updateOne({
-      name: new RegExp('^' + data.title + '$', 'i')
+      name: new RegExp('^' + data.name + '$', 'i')
     }, {
       $set: {
         prices,
