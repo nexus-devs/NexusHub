@@ -1,4 +1,4 @@
-const config = require('./config/local.js')
+const config = require('./config/blitz.config.js')
 const mongo = require('./hooks/mongo')
 const db = require('./hooks/db')
 const Core = require('blitz-js-core')
