@@ -43,19 +43,25 @@ class Statistics extends Endpoint {
    */
   async main(req, res) {
     const item = req.params.item
-    const timestart = req.query.timestart
-    const timeend = req.query.timeend
     const intervals = req.query.intervals
+    let timestart = req.query.timestart
+    let timeend = req.query.timeend
 
-    // Check if params are valid
-    if (timestart < timeend) res.status(400).send({
-      error: 'Bad input.',
-      reason: 'Invalid time frame. Please make sure that timestart is greater than timeend.'
-    })
-    if (intervals <= 0) res.status(400).send({
-      error: 'Bad input.',
-      reason: 'Intervals must be greater than 0'
-    })
+    // Switch time range if specified the wrong way around
+    if (timestart < timeend) {
+      timestart = req.query.timeend
+      timeend = req.query.timestart
+    }
+
+    // Verify Interval size
+    if (intervals <= 0) {
+      const response = {
+        error: 'Bad input.',
+        reason: 'Intervals must be greater than 0'
+      }
+      this.cache(response)
+      return res.status(400).send(response)
+    }
 
     // Get item from db
     let itemResult = await this.db.collection('items').findOne({
