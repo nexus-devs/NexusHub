@@ -25,8 +25,8 @@ export default {
 
         // Add URL params based on state
         if (time.modified) {
-          query.timestart = time.focus.start.time.unix()
-          query.timeend = time.focus.end.time.unix()
+          query.timestart = time.focus.start.time.valueOf()
+          query.timeend = time.focus.end.time.valueOf()
         }
         if (rank.selected !== 'Any Rank') {
           query.rank = rank.selected

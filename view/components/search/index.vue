@@ -44,8 +44,10 @@
       animation: moveUp 0.7s forwards;
       animation-delay: 0.15s;
 
-      @media (max-width: $breakpoint-s) {
-        img {
+      img {
+        margin-right: 5px;
+
+        @media (max-width: $breakpoint-s) {
           display: none;
         }
       }
