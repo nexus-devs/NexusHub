@@ -111,21 +111,21 @@ const store = {
 
       // Focus Range
       if (route.query.timestart) {
-        commit('setTimeFocusStart', moment.unix(route.query.timestart))
+        commit('setTimeFocusStart', moment.unix(route.query.timestart * 0.001))
         commit('setTimeModified', true)
       }
       if (route.query.timeend) {
-        commit('setTimeFocusEnd', moment.unix(route.query.timeend))
+        commit('setTimeFocusEnd', moment.unix(route.query.timeend * 0.001))
         commit('setTimeModified', true)
       }
 
       // Compare Range
       if (route.query.comparestart) {
-        commit('setTimeCompareStart', moment.unix(route.query.comparestart))
+        commit('setTimeCompareStart', moment.unix(route.query.comparestart * 0.001))
         commit('setTimeModified', true)
       }
       if (route.query.compareend) {
-        commit('setTimeCompareEnd', moment.unix(route.query.compareend))
+        commit('setTimeCompareEnd', moment.unix(route.query.compareend * 0.001))
         commit('setTimeModified', true)
       }
     }
