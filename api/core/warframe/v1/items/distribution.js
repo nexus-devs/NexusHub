@@ -17,23 +17,27 @@ class Distribution extends Endpoint {
    */
   async main(req, res) {
     let items = await this.db.collection('items').find({}).toArray()
+    let results = []
 
     // Remove unnecessary data
     items.forEach(item => {
-      delete item.type
-      delete item.prices
-      delete item._id
-      delete item.category
-      delete item.ranks
+      let result
 
+      // Supply/Demand has been calculated before
       if (item.distribution) {
-        item.components = item.distribution
-        delete item.distribution
-      } else {
+        result = {
+          name: item.name,
+          components: item.distribution
+        }
+      }
+
+      // No Supply/Demand calculation occured before => use default values
+      else {
         let components = []
+
         item.components.forEach(comp => {
           components.push({
-            name: comp,
+            name: comp.name,
             supply: {
               count: 0,
               percentage: 0.5
@@ -44,23 +48,17 @@ class Distribution extends Endpoint {
             }
           })
         })
-        item.components = components
-        item.components.length === 0 ? item.components.push({
-          name: "Set",
-          supply: {
-            count: 0,
-            percentage: 0.5
-          },
-          demand: {
-            count: 0,
-            percentage: 0.5
-          }
-        }) : null
+
+        result = {
+          name: item.name,
+          components
+        }
       }
+      results.push(result)
     })
 
-    this.cache(items, 60)
-    res.send(items)
+    this.cache(results, 60)
+    res.send(results)
   }
 }
 
