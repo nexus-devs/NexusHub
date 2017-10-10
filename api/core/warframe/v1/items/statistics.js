@@ -77,10 +77,10 @@ class Statistics extends Endpoint {
     }
 
     // Generate valid Query from input
-    let query = this.generateQuery(item, timestart, timeend)
+    let { query, projection } = this.generateQuery(item, timestart, timeend)
 
     // Get requests from mongodb
-    let requests = await this.db.collection('requests').find(query).toArray()
+    let requests = await this.db.collection('requests').find(query, projection).toArray()
     let stats = this.getStatistics(requests, query, intervals, itemResult)
 
     // Send to client and cache
@@ -100,7 +100,12 @@ class Statistics extends Endpoint {
         $lte: new Date(timestart)
       }
     }
-    return query
+    let projection = {
+      _id: 0,
+      type: 0,
+      region: 0
+    }
+    return { query, projection }
   }
 
 

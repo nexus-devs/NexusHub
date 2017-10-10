@@ -21,10 +21,11 @@ class Request extends Endpoint {
   async main(req, res) {
     const request = req.body
 
-    // Modify request
+    // Convert date to actual timestamp so Mongo can treat it as such
     request.createdAt = new Date(request.createdAt)
 
-    // Publish and save request on db
+    // Publish and save request on db. We also make sure to publish the request
+    // with its raw message first, but then remove it for storage
     this.publish(_.cloneDeep(request), '/warframe/v1/requests')
     delete request.subMessage
     delete request.rawMessage
@@ -70,17 +71,31 @@ class Request extends Endpoint {
     data.components.forEach(component => {
       let price = {
         name: component.name,
-        avg: component.avg,
-        median: component.median,
-        min: component.min,
-        max: component.max
+        selling: {
+          avg: component.selling.avg,
+          median: component.selling.median,
+          min: component.selling.min,
+          max: component.selling.max
+        },
+        buying: {
+          avg: component.buying.avg,
+          median: component.buying.median,
+          min: component.buying.min,
+          max: component.buying.max
+        },
+        combined: {
+          avg: component.combined.avg,
+          median: component.combined.median,
+          min: component.combined.min,
+          max: component.combined.max
+        }
       }
       prices.push(price)
 
       let dist = {
         name: component.name,
-        supply: component.supply,
-        demand: component.demand
+        supply: component.selling.offers,
+        demand: component.buying.offers
       }
       distribution.push(dist)
     })

@@ -17,42 +17,49 @@ class Prices extends Endpoint {
    */
   async main(req, res) {
     let items = await this.db.collection('items').find({}).toArray()
+    let results = []
 
     // Remove unnecessary data
     items.forEach(item => {
-      delete item.type
-      delete item.distribution
-      delete item._id
-      delete item.category
-      delete item.ranks
+      let result
 
+      // Stats have been calculated before
       if (item.prices) {
-        item.components = item.prices
-        delete item.prices
-      } else {
+        result = {
+          name: item.name,
+          components: item.prices
+        }
+      }
+
+      // No stats have been created yet
+      else {
         let components = []
-        item.components.forEach(comp => {
-          components.push({
-            name: comp,
-            avg: null,
-            median: null,
-            min: null,
-            max: null
-          })
-        })
-        item.components = components
-        item.components.length === 0 ? item.components.push({
-          name: "Set",
+        let defaultValues = {
           avg: null,
           median: null,
           min: null,
           max: null
-        }) : null
+        }
+
+        item.components.forEach(comp => {
+          components.push({
+            name: comp.name,
+            selling: defaultValues,
+            buying: defaultValues,
+            combined: defaultValues
+          })
+        })
+
+        result = {
+          name: item.name,
+          components
+        }
       }
+      results.push(result)
     })
 
-    this.cache(items, 60)
-    res.send(items)
+    this.cache(results, 60)
+    res.send(results)
   }
 }
 

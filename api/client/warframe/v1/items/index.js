@@ -8,6 +8,7 @@ class List extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.description = "Get a list of all items."
+    this.schema.url = "/warframe/v1/items"
   }
 
 
