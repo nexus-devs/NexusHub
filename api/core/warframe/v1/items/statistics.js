@@ -28,7 +28,12 @@ class Statistics extends Endpoint {
         name: 'intervals',
         default: 14,
         description: 'Intervals to split the time in.'
-      }
+      },
+      {
+        name: 'region',
+        default: '.*',
+        description: 'Region to select requests from.'
+      },
     ]
     this.schema.limit = {
       disable: false,
@@ -44,6 +49,7 @@ class Statistics extends Endpoint {
   async main(req, res) {
     const item = req.params.item
     const intervals = req.query.intervals
+    const region = req.query.region
     let timestart = req.query.timestart
     let timeend = req.query.timeend
 
@@ -77,7 +83,7 @@ class Statistics extends Endpoint {
     }
 
     // Generate valid Query from input
-    let { query, projection } = this.generateQuery(item, timestart, timeend)
+    let { query, projection } = this.generateQuery(item, region, timestart, timeend)
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query, projection).toArray()
@@ -92,13 +98,14 @@ class Statistics extends Endpoint {
   /**
    * Generate query from given params
    */
-  generateQuery(item, timestart, timeend) {
+  generateQuery(item, region, timestart, timeend) {
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
         $gte: new Date(timeend),
         $lte: new Date(timestart)
-      }
+      },
+      region: new RegExp('^' + region + '$', 'i'),
     }
     let projection = {
       _id: 0,
