@@ -14,7 +14,7 @@ const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 class Scraper {
   constructor() {
     this.scraped = []
-    this.doFetchMarketData = true
+    this.doFetchMarketData = false
   }
 
   /**
@@ -45,17 +45,13 @@ class Scraper {
     }
 
     // Merge with base data (non-scraped)
-    const data = this.merge(additional, this.scraped)
+    let data = this.merge(additional, this.scraped)
 
     // Get drop chances for each component
-    data.forEach((item, i) => {
-      item.components.forEach((component, j) => {
-        data[i].components[j].drop = this.findDropLocations(`${item.name} ${component.name}`, dropChances)
-        if (!data[i].components[j].drop.length) {
-          console.log(`:: ${chalk.yellow('WARN')}: Could not find drop chances for ${item.name} ${component.name}`)
-        }
-      })
-    })
+    this.applyDropChances(data, dropChances)
+
+    // Drop chances may hold relic information that we don't have scraped
+    data = data.concat(this.backfillRelics(data, dropChances))
 
     // Write to disk
     fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(data, null, 2), "utf-8")
@@ -193,15 +189,64 @@ class Scraper {
     })
   }
 
+  getItemMaxRank(itemSet) {
+    let ranks = []
+
+    itemSet.forEach(item => {
+      if (item.tags.includes('mod')) {
+        ranks.push(item.mod_max_rank)
+      }
+    })
+    return ranks[0]
+  }
+
+  getItemDescription(itemSet) {
+    let descriptions = []
+
+    itemSet.forEach(item => {
+      if (!(item.tags.includes('prime') && item.tags.includes('parts'))) {
+        descriptions.push(item.en.description.replace('</p><p>', '. ').replace(/<[^>]*>/g, ''))
+      }
+    })
+    return descriptions[0]
+  }
+
+  /**
+   * Apply drop chances to each component in given dataset
+   */
+  applyDropChances(data, dropChances) {
+    data.forEach((item, i) => {
+      item.components.forEach((component, j) => {
+
+        // Multi-component items
+        if (item.components.length > 1 && component.name !== 'Set') {
+          data[i].components[j].drop = this.findDropLocations(`${item.name} ${component.name}`, dropChances)
+          if (!data[i].components[j].drop.length) {
+            console.log(`:: ${chalk.yellow('WARN')}: Could not find drop chances for ${item.name} ${component.name}`)
+          }
+        }
+
+        // Single component items
+        if (item.components.length <= 1) {
+          data[i].components[j].drop = this.findDropLocations(item.name.replace(' Intact', ' Relic')
+                                                                       .replace(' Exceptional', ' Relic')
+                                                                       .replace(' Flawless', ' Relic')
+                                                                       .replace(' Radiant', ' Relic'), dropChances)
+          if (!data[i].components[j].drop.length) {
+            console.log(`:: ${chalk.yellow('WARN')}: Could not find drop chances for ${item.name} ${component.name}`)
+          }
+        }
+      })
+    })
+  }
+
   /**
    * Take drop locations and chances from the official drop chance tables
    */
   findDropLocations(component, dropChances) {
-    /** drop location schema
-     * { location, rarity, chance }
-     */
     let result = []
     let dropLocations = []
+
     this.findDropRecursive(component, dropChances, dropLocations, '')
 
     // The find function returns an array of mentions with their respective paths.
@@ -250,30 +295,46 @@ class Scraper {
 
     // String ? check if it's the component we want
     else if (typeof child === 'string') {
-      return child === target ? child : null
+      return child === target || child === target + ' Blueprint' ? child : null
     }
   }
 
-  getItemMaxRank(itemSet) {
-    let ranks = []
+  /**
+   * The drop chances may contain more relics than we got through scraping, so
+   * we should backfill those as well
+   */
+  backfillRelics(items, dropChances) {
+    const results = []
 
-    itemSet.forEach(item => {
-      if (item.tags.includes('mod')) {
-        ranks.push(item.mod_max_rank)
-      }
+    // First pass, gather relics unless duplicates
+    items.forEach(item => {
+      item.components.forEach(component => {
+        component.drop.forEach(drop => {
+          if (drop.type === 'Relics' &&
+              !results.find(r => r.name === drop.location) &&
+              !items.find(i => i.name.includes(drop.location.replace(/\s(\w+)$/, '').slice(0, -1)))) {
+            results.push({
+              name: drop.location,
+              type: 'Void Relic',
+              description: 'Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.',
+              components: [
+                {
+                  name: 'Set',
+                  ducats: 0,
+                  drop: []
+                }
+              ]
+            })
+          }
+        })
+      })
     })
-    return ranks[0]
-  }
 
-  getItemDescription(itemSet) {
-    let descriptions = []
+    // Second pass, get drop locations for relics themselves
+    this.applyDropChances(results, dropChances)
 
-    itemSet.forEach(item => {
-      if (!(item.tags.includes('prime') && item.tags.includes('parts'))) {
-        descriptions.push(item.en.description.replace('</p><p>', '. ').replace(/<[^>]*>/g, ''))
-      }
-    })
-    return descriptions[0]
+    // Merge with original
+    return results
   }
 
   /**
