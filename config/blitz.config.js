@@ -1,6 +1,6 @@
 module.exports = {
   blitz: {
-    logLevel: 'info',
+    logLevel: 'monitor',
     environment: 'development'
   },
   auth: {
