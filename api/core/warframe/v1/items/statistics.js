@@ -31,7 +31,7 @@ class Statistics extends Endpoint {
       },
       {
         name: 'region',
-        default: '.*',
+        default: '',
         description: 'Region to select requests from.'
       },
     ]
@@ -99,14 +99,19 @@ class Statistics extends Endpoint {
    * Generate query from given params
    */
   generateQuery(item, region, timestart, timeend) {
+    // Search query object
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
         $gte: new Date(timeend),
-        $lte: new Date(timestart)
+        $lte: new Date(timestart),
       },
-      region: new RegExp('^' + region + '$', 'i'),
     }
+    if (region) {
+      query.region = region
+    }
+
+    // Limit keys that need to be returned
     let projection = {
       _id: 0,
       type: 0,
