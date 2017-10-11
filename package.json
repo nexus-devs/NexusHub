@@ -12,15 +12,15 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.2",
-    "blitz-js-core": "^0.5.0",
+    "blitz-js": "^0.5.3",
+    "blitz-js-core": "^0.5.1",
     "chalk": "^2.1.0",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.11.0",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.0.1",
     "keyboardjs": "^2.3.4",
-    "moment": "^2.18.1",
+    "moment": "^2.19.0",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {
