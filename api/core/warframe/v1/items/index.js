@@ -31,7 +31,8 @@ class List extends Endpoint {
       let data = {
         name: item.name,
         type: item.type,
-        description: item.description
+        description: item.description,
+        components: item.components
       }
 
       // Price data from default time range on statistics endpoint
