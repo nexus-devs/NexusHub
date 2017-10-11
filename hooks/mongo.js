@@ -14,13 +14,18 @@ module.exports = {
 
       // Player profiles
       mongoVerifySingleIndex(db, 'players', {
-        'name': 1
+        name: 1
       })
 
       // Item stats accumulation
       mongoVerifySingleIndex(db, 'requests', {
-        'item': 1,
-        'createdAt': 1
+        item: 1,
+        createdAt: 1
+      })
+      mongoVerifySingleIndex(db, 'requests', {
+        item: 1,
+        createdAt: 1,
+        region: 1
       })
     })
   }
