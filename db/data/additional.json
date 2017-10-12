@@ -1,5 +1,4113 @@
 [
   {
+    "name": "Ash Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ember Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Frost Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loki Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Mag Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Nova Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Nyx Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rhino Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Saryn Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Trinity Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vauban Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Volt Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Boar Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Boltor Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Braton Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Burston Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Latron Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Paris Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Grip",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "String",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Upper Limb",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Lower Limb",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Soma Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vectis Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Akbronco Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Link",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Akstiletto Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Link",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bronco Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hikou Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Pouch",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stars",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lex Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sicarus Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Spira Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Pouch",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vasto Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ankyros Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Gauntlet",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bo Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Ornament",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Dakra Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Dual Kamas Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fang Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fragor Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Head",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Glaive Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Disc",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Nikana Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Hilt",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Orthos Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reaper Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Scindo Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Carrier Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Cerebrum",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Carapace",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Wyrm Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Cerebrum",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Carapace",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Kavasa Prime Collar",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Band",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Buckle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Odonata Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Harness",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Wings",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Scorpion Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Locust Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Reverb Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Chorus Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Phoenix Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Backdraft Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Avalon Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Pendragon Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Aurora Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Squall Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Essence Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Swindle Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Coil Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Gauss Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Flux Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Menticide Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Vespa Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Thrak Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Vanguard Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Hemlock Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Chlora Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Aura Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Meridian Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Esprit Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Gambit Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Storm Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Pulse Helmet",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prisma Skana",
+    "type": "Prisma",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prisma Dual Cleavers",
+    "type": "Prisma",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prisma Gorgon",
+    "type": "Prisma",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prisma Grakata",
+    "type": "Prisma",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prisma Veritux",
+    "type": "Prisma",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Acceleration",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Aegis",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Agility",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Arachne",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Avenger",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Awakening",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Barrier",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Consequence",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Deflection",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Energize",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Eruption",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Fury",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Grace",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Guardian",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Healing",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Ice",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Momentum",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Nullifier",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Phantasm",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Precision",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Rage",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Resistance",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Strike",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Tempo",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Trickery",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Ultimatum",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Velocity",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Victory",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Arcane Warmth",
+    "type": "Arcane",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Smeeta Kavat",
+    "type": "Kavat",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Adarza Kavat",
+    "type": "Kavat",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Life Strike",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Quickening",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Corrupt Charge",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Blind Rage",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Vengeful Revenant",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fleeting Expertise",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Narrow Minded",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Overextended",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Transient Fortitude",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Critical Delay",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Heavy Caliber",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Vile Precision",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Tainted Mag",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vile Acceleration",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Depleted Reload",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Burdened Magazine",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Vicious Spread",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Tainted Shell",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Frail Momentum",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Critical Deceleration",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Anemic Agility",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Creeping Bullseye",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Hollow Point",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Magnum Force",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Tainted Clip",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Spoiled Strike",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Power Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Coaction Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cunning Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Speed Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Endurance Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Agility Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stealth Drift",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Body Count",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Focused Defense",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Blood Rush",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Weeping Wounds",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Maiming Strike",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Argon Scope",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Bladed Rounds",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Catalyzer Link",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Guided Ordnance",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Spring-Loaded Chamber",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shrapnel Shot",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Laser Sight",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Repeater Clip",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Nano-Applicator",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Narrow Barrel",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Hydraulic Crosshairs",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Embedded Catalyzer",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Sharpened Bullets",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Targeting Subsystem",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Pressurized Magazine",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Primed Continuity",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Flow",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Vigor",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Fury",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Pressure Point",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Reach",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Point Blank",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Ravage",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Morphic Transformer",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Pistol Gambit",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Heavy Trauma",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Target Cracker",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Fast Hands",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Heated Charge",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Bane of Infested",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Rifle Ammo Mutation",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Pistol Mutation",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Slip Magazine",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Shotgun Ammo Mutation",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 10
+  },
+  {
+    "name": "Primed Ammo Stock",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Tempo Royale",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shred",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Buzz Kill",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Primed Chamber",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "High Voltage",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Rime Rounds",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Thermite Rounds",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Jolt",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Piercing Caliber",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Fanged Fusillade",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Shell Shock",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Voltaic Strike",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Malignant Force",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Sweeping Serration",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Frigid Blast",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Volcanic Edge",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Virulent Scourge",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Vicious Frost",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Frostbite",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Auger Strike",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Collision Force",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Magma Chamber",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pistol Pestilence",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Toxic Barrage",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Aviator",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 3
+  },
+  {
+    "name": "Bore",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Breach Loader",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Pummel",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Crash Course",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Full Contact",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Searing Steel",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Maim",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ],
+    "ranks": 5
+  },
+  {
+    "name": "Vaykor Hek",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vaykor Marelok",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Telos Boltor",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Telos Akbolto",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Synoid Simulor",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Synoid Gammacor",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Secura Penta",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Secura Dual Cestra",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rakta Cernos",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rakta Ballistica",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sancti Tigris",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sancti Castanas",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Mara Detron",
+    "type": "Special",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cyngas",
+    "type": "Special",
+    "components": [
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Crimson Dervish",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Crushing Ruin",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cleaving Whirlwind",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Final Harbinger",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Decisive Judgement",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Tranquil Cleave",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Blind Justice",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "High Noon",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Swirling Tiger",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rending Crane",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Iron Phoenix",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Astral Twilight",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Defiled Snapdragon",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vulpine Mask",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shimmering Blight",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Crossing Snakes",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bleeding Willow",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Atlantis Vulcan",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Eleventh Storm",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Four Riders",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stalking Fan",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pointed Wind",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Gnashing Payara",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Spinning Needle",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Flailing Branch",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vermilion Storm",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Brutal Tide",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Gleaming Talon",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Gaia's Tragedy",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Seismic Palm",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Coiling Viper",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Malicious Raptor",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Clashing Forest",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reaping Spiral",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Homing Fang",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Gemini Cross",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Grim Fury",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fateful Truth",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sinking Talon",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sundering Weave",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Burning Wasp",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fracturing Wind",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rising Steel",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Nekros Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Galatine Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Tigris Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Telos Boltace",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Synoid Heliocor",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sancti Magistar",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Secura Lecta",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rakta Dark Dagger",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vaykor Sydon",
+    "type": "Syndicate",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Legendary Core",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Orvius",
+    "type": "Special",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Disc",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sovereign Outcast",
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Valkyr Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cernos Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Grip",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "String",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Upper Limb",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Lower Limb",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Venka Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blades",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Gauntlet",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
     "name": "Aklex Prime",
     "type": "Prime",
     "components": [
@@ -13,6 +4121,28 @@
         "ducats": 0,
         "drop": []
       },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Machete Wraith",
+    "type": "Special",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vulkar Wraith",
+    "type": "Special",
+    "components": [
       {
         "name": "Set",
         "ducats": 0,
@@ -71,6 +4201,11 @@
         "drop": []
       },
       {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
         "name": "Set",
         "ducats": 0,
         "drop": []
@@ -101,6 +4236,3066 @@
         "ducats": 0,
         "drop": []
       },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Animal Instinct",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bite",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Dig",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hastened Deflection",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Howl",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ferocity",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Link Armor",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hunt",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Link Health",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loyal Companion",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Maul",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pack Leader",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neutralize",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shelter",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Brief Respite",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Link Shields",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Protect",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stalk",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Dead Eye",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loot Detector",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rifle Scavenger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sprint Boost",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Energy Siphon",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Retrieve",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Enemy Sense",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Flow",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Intensify",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Savagery",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rejuvenation",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Medi-Pet Kit",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sniper Scavenger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Enemy Radar",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Armored Agility",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Continuity",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Scavenge",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Corrosive Projection",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Infested Impedance",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pistol Scavenger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shotgun Scavenger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Steel Charge",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Constitution",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fast Deflection",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Handspring",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Flame Repellent",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Heavy Impact",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rifle Amp",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Maglev",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Speed Holster",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Antitoxin",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rage",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Diamond Skin",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Retribution",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lightning Rod",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Insulation",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Streamlined Form",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Quick Thinking",
+    "ranks": 12,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Undying Will",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reflex Guard",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ammo Drum",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Streamline",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Master Thief",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bane of Infested",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Agile Aim",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Continuous Misery",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rapid Resilience",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bane of Grineer",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rush",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hellfire",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Comet Rounds",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stretch",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Magazine Warp",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Eagle Eye",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vigor",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Point Strike",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rupture",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lucky Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fast Hands",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Piercing Hit",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sinister Reach",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Cryo Rounds",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Terminal Velocity",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Berserker",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Condition Overload",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Enduring Strike",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ripper Rounds",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Bane of Corpus",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stormbringer",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Recover",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Jagged Edge",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sawtooth Clip",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Melee Prowess",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Enduring Affliction",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Speed Trigger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Power Throw",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Focus Energy",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Relentless Combination",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vital Sense",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reflex Coil",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Smite Grineer",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Energy Channel",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "True Steel",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fury",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Heavy Trauma",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Killing Blow",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Parry",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Molten Impact",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pressure Point",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Quick Return",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Blind Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rebound",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Smite Corpus",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "True Punishment",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Barrel Diffusion",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Convulsion",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Expel Corpus",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rending Strike",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Smite Infested",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Expel Grineer",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hawk Eye",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Gunslinger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Whirlwind",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hornet Strike",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hydraulic Barrel",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lethal Momentum",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meteor Munitions",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pistol Ammo Mutation",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Deep Freeze",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Expel Infested",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Heated Charge",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Perpetual Agony",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Quickdraw",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ruinous Extension",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Slip Magazine",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lethal Torrent",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Suppress",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reflex Draw",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Night Stalker",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pistol Gambit",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stunning Speed",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Razor Shot",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Trick Mag",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Scorch",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bounty Hunter",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Spry Sights",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Chilling Grasp",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sure Shot",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Blunderbuss",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Accelerated Blast",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Charged Shell",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cleanse Infested",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Double-Barrel Drift",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Kill Switch",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Contagious Spread",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loose Chamber",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fatal Acceleration",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Chilling Reload",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Crash Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Flak Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hell's Chamber",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lingering Torment",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Momentary Pause",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shredder",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Scattering Inferno",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shotgun Ammo Mutation",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Seeking Force",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shred Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shotgun Savvy",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Tactical Pump",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Silent Battery",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Redirection",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shock Absorbers",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sure Footed",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vitality",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Apex Predator",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Firestorm",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hush",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Metal Auger",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Primed Bane of Grineer",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Rifle Aptitude",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Serrated Rounds",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Split Chamber",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Twitch",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Wildfire",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Dispatch Overdrive",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fever Strike",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Guardian Derision",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lasting Sting",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "North Wind",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Second Wind",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Air Recon",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Calculated Victory",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Eject Magazine",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Heavy Warhead",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ice Storm",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loose Magazine",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "No Return",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Razor Munitions",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Secondary Wind",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Steady Hands",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ammo Stock",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Broad Eye",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cleanse Corpus",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Flechette",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hydraulic Chamber",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Loaded Capacity",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Prize Kill",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Seeking Fury",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shotgun Spazz",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Snap Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Unleashed",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "EMP Aura",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Physique",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shield Disruption",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stand United",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Equilibrium",
+    "ranks": 15,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Fortitude",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Intruder",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Natural Talent",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Provoked",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reflection",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Steel Fiber",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Thief's Wit",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Warm Coat",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Bane of Corpus",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Combustion Beam",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cryo Rounds",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Hammer Shot",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Infected Clip",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Serration",
+    "ranks": 15,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Stabilizer",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Vanquished Prey",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Drifting Contact",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Finishing Touch",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Healing Return",
+    "ranks": 10,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Organ Shatter",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Reach",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shocking Touch",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Sundering Strike",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Concussion Rounds",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Full Capacity",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Impaler Munitions",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Pathogen Rounds",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Recuperate",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Seeker",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Strafing Slide",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Target Cracker",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Blaze",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Cleanse Grineer",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Disruptor",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Incendiary Coat",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lock and Load",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Point Blank",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Ravage",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Shell Compression",
+    "ranks": 5,
+    "type": "Mods",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Soft Hands",
+    "ranks": 3,
+    "type": "Mods",
+    "components": [
       {
         "name": "Set",
         "ducats": 0,
