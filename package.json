@@ -12,7 +12,7 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.4",
+    "blitz-js": "^0.5.5",
     "blitz-js-core": "^0.5.1",
     "chalk": "^2.1.0",
     "cheerio": "^1.0.0-rc.2",
