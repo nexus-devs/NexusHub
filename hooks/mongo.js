@@ -25,7 +25,8 @@ module.exports = {
       mongoVerifySingleIndex(db, 'requests', {
         item: 1,
         createdAt: 1,
-        region: 1
+        region: 1,
+        rank: 1,
       })
     })
   }
