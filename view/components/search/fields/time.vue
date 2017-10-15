@@ -111,21 +111,21 @@ const store = {
 
       // Focus Range
       if (route.query.timestart) {
-        commit('setTimeFocusStart', moment.unix(route.query.timestart * 0.001))
+        commit('setTimeFocusStart', moment(new Date(parseInt(route.query.timestart))))
         commit('setTimeModified', true)
       }
       if (route.query.timeend) {
-        commit('setTimeFocusEnd', moment.unix(route.query.timeend * 0.001))
+        commit('setTimeFocusEnd', moment(new Date(parseInt(route.query.timeend))))
         commit('setTimeModified', true)
       }
 
       // Compare Range
       if (route.query.comparestart) {
-        commit('setTimeCompareStart', moment.unix(route.query.comparestart * 0.001))
+        commit('setTimeCompareStart', moment(new Date(parseInt(route.query.comparestart))))
         commit('setTimeModified', true)
       }
       if (route.query.compareend) {
-        commit('setTimeCompareEnd', moment.unix(route.query.compareend * 0.001))
+        commit('setTimeCompareEnd', moment(new Date(parseInt(route.query.compareend))))
         commit('setTimeModified', true)
       }
     }
@@ -206,8 +206,8 @@ export default {
         this.$router.replace({
           path: this.$route.path,
           query: Object.assign(query, {
-            timestart: time.focus.start.time.unix(),
-            timeend: time.focus.end.time.unix()
+            timestart: time.focus.start.time.unix() * 1000,
+            timeend: time.focus.end.time.unix() * 1000
           })
         })
       }
