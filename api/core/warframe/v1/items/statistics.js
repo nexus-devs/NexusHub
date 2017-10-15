@@ -34,6 +34,11 @@ class Statistics extends Endpoint {
         default: '',
         description: 'Region to select requests from.'
       },
+      {
+        name: 'rank',
+        default: null,
+        description: 'Specified item rank in request'
+      }
     ]
     this.schema.limit = {
       disable: false,
@@ -50,6 +55,7 @@ class Statistics extends Endpoint {
     const item = req.params.item
     const intervals = req.query.intervals
     const region = req.query.region
+    const rank = req.query.rank
     let timestart = req.query.timestart
     let timeend = req.query.timeend
 
@@ -82,15 +88,15 @@ class Statistics extends Endpoint {
       return res.status(404).send(response)
     }
 
-    // Generate valid Query from input
-    let { query, projection } = this.generateQuery(item, region, timestart, timeend)
+    // Generate db query from input
+    let { query, projection } = this.generateQuery(item, region, rank, timestart, timeend)
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query, projection).toArray()
     let stats = this.getStatistics(requests, query, intervals, itemResult)
 
     // Send to client and cache
-    this.cache(stats, 86400)
+    this.cache(stats, 1)
     res.send(stats)
   }
 
@@ -98,7 +104,7 @@ class Statistics extends Endpoint {
   /**
    * Generate query from given params
    */
-  generateQuery(item, region, timestart, timeend) {
+  generateQuery(item, region, rank, timestart, timeend) {
     // Search query object
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
@@ -109,6 +115,9 @@ class Statistics extends Endpoint {
     }
     if (region) {
       query.region = region
+    }
+    if (rank !== null) {
+      query.rank = rank
     }
 
     // Limit keys that need to be returned
