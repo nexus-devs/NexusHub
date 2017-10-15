@@ -148,8 +148,8 @@ export default {
     margin-right: calc(262px + 5vw);
     transform: translateX(calc(262px + 5vw));
 
-    & > .g-ct {
-      padding: 0 96px;
+    .g-ct {
+      padding: 0 96px !important;
     }
   }
 }
