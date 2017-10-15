@@ -206,8 +206,8 @@ export default {
         this.$router.replace({
           path: this.$route.path,
           query: Object.assign(query, {
-            timestart: time.focus.start.time.unix() * 1000,
-            timeend: time.focus.end.time.unix() * 1000
+            timestart: time.focus.start.time.valueOf(),
+            timeend: time.focus.end.time.valueOf()
           })
         })
       }
