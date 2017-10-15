@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sparkline">
     <svg :width="width" :height="height">
       <g>
         <path class="line" :d="paths.line" />

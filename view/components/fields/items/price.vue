@@ -34,7 +34,8 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="chartData(component)" :ceil="chartCeil(component)" class="sparkline"></sparkline>
+        <sparkline :data="chartData(component)" :ceil="chartCeil(component)"></sparkline>
+        <sparkline :data="chartData(comparison)" :ceil="chartCeil(component)" class="sparkline-comparison"></sparkline>
       </div>
     </div>
   </div>
@@ -198,13 +199,40 @@ export default {
         }
       }
     }
+    // Right col
     &:last-of-type {
       position: relative;
       @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
 
       .sparkline {
-        width: 100%;
-        height: 100%;
+        position: absolute;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        // 2 * 20px for padding
+        width: calc(100% - 2 * 20px);
+        height: calc(100% - 2 * 20px);
+      }
+      .sparkline-comparison {
+        /deep/ {
+          .blur {
+            display: none;
+          }
+          svg {
+            .line {
+              stroke: $colorFontSubtle;
+              stroke-width: 1px;
+              stroke-dasharray: 2;
+            }
+            text {
+              display: none;
+            }
+            .pointer {
+              display: none;
+            }
+          }
+        }
       }
     }
   }
