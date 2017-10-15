@@ -10,11 +10,14 @@
               :y="getLabelPosition(d).y">
           {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
+        <text>{{animatedCeil}}</text>
       </g>
     </svg>
     <div class="blur">
       <svg id="blur">
-        <path class="line" :d="paths.line" />
+        <g>
+          <path class="line" :d="paths.line" />
+        </g>
       </svg>
     </div>
   </div>
@@ -25,6 +28,8 @@
 <script>
 import * as d3 from 'd3'
 import Tween from './_tween.js'
+import _ from 'lodash'
+const downScaleFactor = 0.66
 
 export default {
   props: ['data', 'margin', 'ceil'],
@@ -57,10 +62,11 @@ export default {
   },
   watch: {
     data(newData, oldData) {
+      this.initialize(newData)
       Tween.adjustData(this, newData, oldData)
     },
     ceil(newData, oldData) {
-      Tween.adjustCeil(this, newData, oldData)
+      Tween.adjustCeil(this, newData, oldData, this.avg)
     }
   },
   methods: {
@@ -80,16 +86,30 @@ export default {
 
     // Positioning for text labels
     getLabelPosition(d) {
+      const deltaAvg = d.y ? Math.abs(d.y - this.avg) : d.y
+      const y = d.y > this.avg ? d.y - downScaleFactor * deltaAvg : d.y + downScaleFactor * deltaAvg
       return {
         x: this.scaled.x(d.x) + 5,
-        y: this.scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
+        y: this.scaled.y(y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
       }
     },
 
     // Set graph scaling
-    initialize() {
+    initialize(newData) {
+      let data = newData || this.data // handle new data if passed
       this.scaled.x = d3.scaleLinear().range([0, this.width])
       this.scaled.y = d3.scaleLinear().range([this.height, 0])
+
+      // Sorted Data for median calculation
+      this.avg = {
+        value: 0,
+        count: 0
+      }
+      data.forEach(d => {
+        this.avg.value += d ? d : 0
+        this.avg.count += d ? 1 : 0
+      })
+      this.avg = this.avg.value / this.avg.count
     },
 
     // Update graph render view
@@ -99,8 +119,9 @@ export default {
       this.points = []
 
       for (let d of this.animatedData) {
+        const deltaAvg = d.y ? Math.abs(d.y - this.avg) : d.y // remove a percentage of the value beyond the median
         const x = this.scaled.x(d.x)
-        const y = this.scaled.y(d.y)
+        const y = this.scaled.y(d.y > this.avg ? d.y - downScaleFactor * deltaAvg : d.y + downScaleFactor * deltaAvg)
 
         this.points.push({ x, y })
 
@@ -133,21 +154,20 @@ export default {
 .blur {
   filter: blur(20px);
 }
-text {
-  font-size: 0.9em;
-  fill: $colorFontSubtle;
-}
-.pointer {
-  fill: $colorSubtle;
-  stroke: $colorSubtle;
-  stroke-width: 1px;
-}
-.line {
-  stroke: $colorPrimary;
-  stroke-width: 2px;
-  fill: none;
-}
-.area {
-  fill: none;
+svg {
+  text {
+    font-size: 0.9em;
+    fill: $colorFontSubtle;
+  }
+  .pointer {
+    fill: $colorSubtle;
+    stroke: $colorSubtle;
+    stroke-width: 1px;
+  }
+  .line {
+    stroke: $colorPrimary;
+    stroke-width: 2px;
+    fill: none;
+  }
 }
 </style>
