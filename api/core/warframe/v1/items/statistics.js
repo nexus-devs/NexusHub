@@ -357,7 +357,7 @@ class Statistics extends Endpoint {
    */
   calculateMedian(obj) {
     obj.requests.sort((a, b) =>  a.price - b.price)
-    const requests = obj.requests.slice(obj.offers.count - obj.offers.hasValue, obj.requests.length)
+    const requests = obj.requests.slice(obj.requests.length - obj.offers.hasValue, obj.requests.length)
 
     // Simple median calculation
     if (requests.length) {
