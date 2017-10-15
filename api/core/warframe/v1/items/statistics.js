@@ -34,6 +34,11 @@ class Statistics extends Endpoint {
         default: '',
         description: 'Region to select requests from.'
       },
+      {
+        name: 'rank',
+        default: 0,
+        description: 'Rank to select requests from.'
+      },
     ]
     this.schema.limit = {
       disable: false,
@@ -50,6 +55,7 @@ class Statistics extends Endpoint {
     const item = req.params.item
     const intervals = req.query.intervals
     const region = req.query.region
+    const rank = req.query.rank
     let timestart = req.query.timestart
     let timeend = req.query.timeend
 
@@ -83,7 +89,7 @@ class Statistics extends Endpoint {
     }
 
     // Generate valid Query from input
-    let { query, projection } = this.generateQuery(item, region, timestart, timeend)
+    let { query, projection } = this.generateQuery(item, region, rank, timestart, timeend)
 
     // Get requests from mongodb
     let requests = await this.db.collection('requests').find(query, projection).toArray()
@@ -98,7 +104,7 @@ class Statistics extends Endpoint {
   /**
    * Generate query from given params
    */
-  generateQuery(item, region, timestart, timeend) {
+  generateQuery(item, region, rank, timestart, timeend) {
     // Search query object
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
@@ -106,6 +112,7 @@ class Statistics extends Endpoint {
         $gte: new Date(timeend),
         $lte: new Date(timestart),
       },
+      rank: rank,
     }
     if (region) {
       query.region = region
