@@ -1,6 +1,7 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const Statistics = require(__dirname + '/../items/statistics.js')
 const _ = require('lodash')
+const moment = require('moment')
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values
@@ -38,9 +39,8 @@ class Request extends Endpoint {
         item: request.item
       },
       query: {
-        component: '',
-        timestart: new Date().getTime(),
-        timeend: new Date(new Date().setDate(new Date().getDate() - 7)).getTime(),
+        timestart: moment().endOf('day').valueOf(),
+        timeend: moment().subtract(7, 'days').startOf('day').valueOf(),
         region: '',
         rank: null,
         intervals: 14
