@@ -41,6 +41,8 @@ class Request extends Endpoint {
         component: '',
         timestart: new Date().getTime(),
         timeend: new Date(new Date().setDate(new Date().getDate() - 7)).getTime(),
+        region: '',
+        rank: null,
         intervals: 14
       }
     }
