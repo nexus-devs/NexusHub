@@ -210,11 +210,15 @@ export default {
         right: auto;
         top: auto;
         bottom: auto;
+        z-index: 1;
+
         // 2 * 20px for padding
         width: calc(100% - 2 * 20px);
         height: calc(100% - 2 * 20px);
       }
       .sparkline-comparison {
+        z-index: 0;
+
         /deep/ {
           .blur {
             display: none;
