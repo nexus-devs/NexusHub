@@ -111,8 +111,7 @@ class Statistics extends Endpoint {
       createdAt: {
         $gte: new Date(timeend),
         $lte: new Date(timestart),
-      },
-      rank: rank,
+      }
     }
     if (region) {
       query.region = region
