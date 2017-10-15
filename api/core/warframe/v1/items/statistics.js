@@ -1,5 +1,6 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const _ = require('lodash')
+const moment = require('moment')
 
 /**
  * Provides detailed item statistics for specific item
@@ -13,14 +14,14 @@ class Statistics extends Endpoint {
       {
         name: 'timestart',
         default: () => {
-          return new Date().getTime() // current time
+          return moment().endOf('day').valueOf()
         },
         description: 'Returns data recorded between timestart and timeend.'
       },
       {
         name: 'timeend',
         default: () => {
-          return new Date(new Date().setDate(new Date().getDate() - 7)).getTime() // 1 week ago
+          return moment().subtract(7, 'days').startOf('day').valueOf()
         },
         description: 'Returns data recorded between timestart and timeend.'
       },
@@ -56,8 +57,8 @@ class Statistics extends Endpoint {
     const intervals = req.query.intervals
     const region = req.query.region
     const rank = req.query.rank
-    let timestart = req.query.timestart
-    let timeend = req.query.timeend
+    let timestart = moment(new Date(req.query.timestart))
+    let timeend = moment(new Date(req.query.timeend))
 
     // Switch time range if specified the wrong way around
     if (timestart < timeend) {
@@ -69,7 +70,7 @@ class Statistics extends Endpoint {
     if (intervals <= 0) {
       const response = {
         error: 'Bad input.',
-        reason: 'Intervals must be greater than 0'
+        reason: 'Intervals must be greater than 0.'
       }
       this.cache(response)
       return res.status(400).send(response)
@@ -88,16 +89,62 @@ class Statistics extends Endpoint {
       return res.status(404).send(response)
     }
 
-    // Generate db query from input
-    let { query, projection } = this.generateQuery(item, region, rank, timestart, timeend)
-
-    // Get requests from mongodb
-    let requests = await this.db.collection('requests').find(query, projection).toArray()
-    let stats = this.getStatistics(requests, query, intervals, itemResult)
+    // Get response data
+    let { requests, multiplier } = await this.getRequests(item, region, rank, timestart, timeend, intervals)
+    let stats = this.getStatistics(requests, timestart, timeend, intervals, itemResult, multiplier)
 
     // Send to client and cache
-    this.cache(stats, 1)
+    this.cache(stats, 86400)
     res.send(stats)
+  }
+
+
+  /**
+   * Get requests from the given parameters. If the timerange exceeds one week,
+   * we split up the queries into smaller blocks that reach throughout the
+   * timeframe but don't cover all requests. That means we'll need to extrapolate
+   * the missing data, but also achieve near constant query times
+   */
+  async getRequests(item, region, rank, timestart, timeend, intervals) {
+    const intervalCount = intervals > 14 ? 14 : intervals // no more than 14 queries
+    const intervalRange = timestart.diff(timeend)
+    let multiplier = 1
+
+    // Standard timerange, only one query
+    if (timestart.diff(timeend, 'days') < 8) {
+      const { query, projection } = this.generateQuery(item, region, rank, timestart, timeend)
+      const requests = await this.db.collection('requests').find(query, projection).toArray()
+      return { requests, multiplier }
+    }
+
+    // More than 1 week -> split query
+    else {
+      const intervalSize = intervalRange / intervals
+      const querySize = (1000 * 60 * 60 * 24 * 7) / intervals
+      let requests = []
+
+      for (let i = 0; i < intervals; i++) {
+        // query start point for this interval is the full range divided by
+        // number of intervals plus the percentage of the 'intervalSize leftover'
+        // as derived from the current interval number.
+        // The intervalSize leftover is the time we're skipping in each interval
+        // but since we wanna start at timestart and end at the timeend, we need
+        // to move the start of each query by a fraction of the leftover of
+        // each interval, so the query ends at the full time range end.
+        // For visualizing, compare the query time blocks with a flexbox grid
+        // that's taking its space with justify-content: space-between
+        // https://i-msdn.sec.s-msft.com/dynimg/IC682150.png
+        const queryEnd = timeend.valueOf() + Math.floor(i * intervalSize + ((i / intervals) * (intervalSize - querySize)))
+        const queryStart = queryEnd + querySize
+        const { query, projection } = this.generateQuery(item, region, rank, queryStart, queryEnd)
+
+        // Extrapolate data by simply duplicating the requests in the given timeframe
+        requests = requests.concat(await this.db.collection('requests').find(query, projection).toArray())
+        multiplier = Math.round(intervalSize / (queryStart - queryEnd))
+      }
+
+      return { requests, multiplier }
+    }
   }
 
 
@@ -147,7 +194,7 @@ class Statistics extends Endpoint {
    *      - Calculate avg/median/min/max for combined
    *      - Clean up unneeded fields (offer hasValues and median array)
    */
-  getStatistics(result, query, intervals, itemResult) {
+  getStatistics(result, timestart, timeend, intervals, itemResult, multiplier) {
 
     // Main document to return
     let doc = {
@@ -163,14 +210,10 @@ class Statistics extends Endpoint {
       components: []
     }
 
-    // Time window
-    let timestart = query.createdAt.$lte.getTime()
-    let timeend = query.createdAt.$gte.getTime()
-
     // Fill document with components and interval, then calculate stats
     this.createComponents(doc, itemResult, intervals)
     this.accumulate(timestart, timeend, intervals, result, doc)
-    this.calculate(doc)
+    this.calculate(doc, multiplier)
     return doc
   }
 
@@ -250,20 +293,20 @@ class Statistics extends Endpoint {
    * Also purges spoofed requests
    * Avg, median, min, max, offer count
    */
-  calculate(doc) {
+  calculate(doc, multiplier) {
     doc.components.forEach(component => {
-      this.calculateOfferType(component.selling, component)
-      this.calculateOfferType(component.buying, component)
+      this.calculateOfferType(component.selling, component, multiplier)
+      this.calculateOfferType(component.buying, component, multiplier)
 
       // Calculate combined data
-      this.calculateMedian(component.combined)
-      this.calculateAvg(component.combined)
+      this.calculateMedian(component.combined, multiplier)
+      this.calculateAvg(component.combined, multiplier)
       delete component.combined.requests
 
       // Calculate interval data for combined
       component.combined.intervals.forEach(interval => {
-        this.calculateMedian(interval)
-        this.calculateAvg(interval)
+        this.calculateMedian(interval, multiplier)
+        this.calculateAvg(interval, multiplier)
         delete interval.requests
       })
 
@@ -283,13 +326,13 @@ class Statistics extends Endpoint {
   /**
    * Calculate Statistics for buying/selling and add to combined
    */
-  calculateOfferType(type, component) {
+  calculateOfferType(type, component, multiplier) {
     type.intervals.forEach((interval, j) => {
       let users = {} // for spam check. Object is faster than Array lookup.
 
       // Sort requests by price and get median
       interval.offers.count = interval.requests.length
-      this.calculateMedian(interval)
+      this.calculateMedian(interval, multiplier)
       interval.offers.count = 0
       interval.offers.hasValue = 0
 
@@ -315,17 +358,21 @@ class Statistics extends Endpoint {
         }
       })
 
+      // Apply partitioned query multipliers
+      interval.offers.count = interval.offers.count * multiplier
+      interval.offers.hasValue = interval.offers.hasValue * multiplier
+
       // Calculate interval data and add to component/combined
       this.addToParent(type, interval)
       this.addToParent(component.combined.intervals[j], interval)
-      this.calculateAvg(interval)
+      this.calculateAvg(interval, multiplier)
       delete interval.requests
     })
 
     // Add accumulations to combined and calculate component data from intervals
     this.addToParent(component.combined, type)
-    this.calculateAvg(type)
-    this.calculateMedian(type)
+    this.calculateAvg(type, multiplier)
+    this.calculateMedian(type, multiplier)
     delete type.requests
   }
 
@@ -356,17 +403,17 @@ class Statistics extends Endpoint {
   /**
    * Calculates the average of a given interval
    */
-  calculateAvg(interval) {
-    interval.avg = interval.avg / interval.offers.hasValue
+  calculateAvg(interval, multiplier) {
+    interval.avg = interval.avg / interval.offers.hasValue * multiplier
   }
 
 
   /**
    * Calculates the median from a given interval with objects
    */
-  calculateMedian(obj) {
+  calculateMedian(obj, multiplier) {
     obj.requests.sort((a, b) =>  a.price - b.price)
-    const requests = obj.requests.slice(obj.requests.length - obj.offers.hasValue, obj.requests.length)
+    const requests = obj.requests.slice(obj.requests.length - obj.offers.hasValue / multiplier, obj.requests.length)
 
     // Simple median calculation
     if (requests.length) {
