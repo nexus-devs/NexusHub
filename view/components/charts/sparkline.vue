@@ -149,7 +149,7 @@ export default {
 }
 #blur {
   position: absolute;
-  top: 15px; // box margin
+  top: 0;
 }
 .blur {
   filter: blur(20px);
