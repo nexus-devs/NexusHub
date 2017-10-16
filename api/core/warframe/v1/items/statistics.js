@@ -61,9 +61,10 @@ class Statistics extends Endpoint {
     let timeend = moment(new Date(req.query.timeend))
 
     // Switch time range if specified the wrong way around
-    if (timestart < timeend) {
-      timestart = req.query.timeend
-      timeend = req.query.timestart
+    if (timestart.valueOf() < timeend.valueOf()) {
+      let helper = timestart
+      timestart = timeend
+      timeend = helper
     }
 
     // Verify Interval size
@@ -140,7 +141,7 @@ class Statistics extends Endpoint {
 
         // Extrapolate data by simply duplicating the requests in the given timeframe
         requests = requests.concat(await this.db.collection('requests').find(query, projection).toArray())
-        multiplier = Math.round(intervalSize / (queryStart - queryEnd))
+        multiplier = Math.ceil(intervalSize / (queryStart - queryEnd))
       }
 
       return { requests, multiplier }
