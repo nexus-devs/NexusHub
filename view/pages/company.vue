@@ -30,10 +30,14 @@
       <section class="who-we-are">
         <h2>Who we are</h2>
         <p>
-          We're a small group of passionate gamers from all over the world building
-          Nexus-Stats in our spare time. For just over a year now, we've been
-          comitted to provide the best possible data visualization to all of our
-          users and have been growing steadily since. We also like turtles.
+          We're a small group of passionate gamers from all over the world,
+          building Nexus-Stats in our spare time. <br>
+          Our journey started just over a year ago when we solved the lack of
+          transparency in Warframe's ingame economy with the use of
+          straightforward OCR. <br><br>
+          Since then, Nexus-Stats has evolved into a fully scalable framework
+          for every type of data imaginable, aiming to achieve the most useful
+          data visualizations for actual gamers.
         </p>
       </section>
     </div>
