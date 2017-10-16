@@ -115,6 +115,8 @@ export default {
 .row {
   @include shadow-1;
   @include ie;
+  display: flex;
+  min-width: 330px; // Fix for Edge ignoring parent width
   border-radius: 0px;
   padding: 0;
 
