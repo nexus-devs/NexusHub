@@ -32,9 +32,9 @@
         <p>
           We're a small group of passionate gamers from all over the world,
           building Nexus-Stats in our spare time. <br>
-          Our journey started just over a year ago when we solved the lack of
+          Our journey started just over a year ago when we tackled the lack of
           transparency in Warframe's ingame economy with the use of
-          straightforward OCR. <br><br>
+          straightforward Optical Character Recognition for the ingame tradechat. <br><br>
           Since then, Nexus-Stats has evolved into a fully scalable framework
           for every type of data imaginable, aiming to achieve the most useful
           data visualizations for actual gamers.
