@@ -62,7 +62,6 @@ export default {
   },
   watch: {
     data(newData, oldData) {
-      this.initialize(newData)
       Tween.adjustData(this, newData, oldData)
     },
     ceil(newData, oldData) {
@@ -86,30 +85,16 @@ export default {
 
     // Positioning for text labels
     getLabelPosition(d) {
-      const deltaAvg = d.y ? Math.abs(d.y - this.avg) : d.y
-      const y = d.y > this.avg ? d.y - downScaleFactor * deltaAvg : d.y + downScaleFactor * deltaAvg
       return {
         x: this.scaled.x(d.x) + 5,
-        y: this.scaled.y(y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
+        y: this.scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
       }
     },
 
     // Set graph scaling
     initialize(newData) {
-      let data = newData || this.data // handle new data if passed
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.y = d3.scaleLinear().range([this.height, 0])
-
-      // Sorted Data for median calculation
-      this.avg = {
-        value: 0,
-        count: 0
-      }
-      data.forEach(d => {
-        this.avg.value += d ? d : 0
-        this.avg.count += d ? 1 : 0
-      })
-      this.avg = this.avg.value / this.avg.count
+      this.scaled.y = d3.scaleLinear().range([this.height - 40, 40])
     },
 
     // Update graph render view
@@ -119,9 +104,8 @@ export default {
       this.points = []
 
       for (let d of this.animatedData) {
-        const deltaAvg = d.y ? Math.abs(d.y - this.avg) : d.y // remove a percentage of the value beyond the median
         const x = this.scaled.x(d.x)
-        const y = this.scaled.y(d.y > this.avg ? d.y - downScaleFactor * deltaAvg : d.y + downScaleFactor * deltaAvg)
+        const y = this.scaled.y(d.y)
 
         this.points.push({ x, y })
 
