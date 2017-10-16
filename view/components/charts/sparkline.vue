@@ -7,7 +7,8 @@
         <path class="pointer" :d="paths.pointer[0]"></path>
         <path class="pointer" :d="paths.pointer[1]"></path>
         <text v-for="(d, i) in animatedData" :x="getLabelPosition(d).x"
-              :y="getLabelPosition(d).y">
+              :y="getLabelPosition(d).y"
+              :class="{ 'align-left': d.alignLeft ? true : false }">
           {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
         <text>{{animatedCeil}}</text>
@@ -142,6 +143,11 @@ svg {
   text {
     font-size: 0.9em;
     fill: $colorFontSubtle;
+
+    // left of pointer if space is insufficient (determined in _normalize.js)
+    &.align-left {
+      transform: translateX(-40px);
+    }
   }
   .pointer {
     fill: $colorSubtle;
