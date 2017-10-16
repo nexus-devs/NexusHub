@@ -179,6 +179,8 @@ a {
 
   p {
     margin: auto;
+    margin-top: 20px;
+    text-align: left;
   }
   @media (max-width: $breakpoint-s) {
     text-align: left;
@@ -224,6 +226,7 @@ a {
 
   p {
     display: inline-block;
+    text-align: left;
   }
   .btn {
     display: inline-block;
