@@ -41,12 +41,15 @@
      }
    })
 
-   // Apply min/max values to data object
+   // Apply min/max values to data object and determine if they should be left
+   // or right of the pointer (will be managed by css class)
    if (!raw) {
-     let minObj = result.find(d => d.yRaw === min)
-     let maxObj = result.find(d => d.yRaw === max)
-     minObj.isMin = true
-     maxObj.isMax = true
+     let i = result.findIndex(d => d.yRaw === min)
+     let j = result.findIndex(d => d.yRaw === max)
+     result[i].isMin = true
+     result[i].alignLeft = i / result.length > 0.66 ? true : false
+     result[j].isMax = true
+     result[j].alignLeft = j / result.length > 0.66 ? true : false
 
      // Cleanup
      result.forEach(d => {
