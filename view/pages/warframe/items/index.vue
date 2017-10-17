@@ -138,15 +138,8 @@ export default {
     // Apply URL time query to state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
 
-    // Merge with state from SSR. Not doing this will result in discarding
-    // the prerendered data.
-    if (this.$store.state.items) {
-      store.state.item = _.merge(store.state.item, this.$store.state.items.item)
-      store.state.itemComparison = _.merge(store.state.itemComparison, this.$store.state.items.itemComparison)
-    }
-    if (!this.$store._actions.fetchItemData) {
-      this.$store.registerModule('items', store)
-    }
+    // Register st
+    this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
   },
   created() {
     this.$store.commit('setActiveGame', 'warframe')
