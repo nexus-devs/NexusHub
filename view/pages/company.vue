@@ -19,7 +19,6 @@
             <img src="/img/brand/nexus-stats-logo-bw.svg" alt="">
           </div>
         </div>
-
       </div>
       <svg viewBox="0 0 3920 240" preserveAspectRatio="xMidYMid meet">
         <path fill-rule="evenodd"
@@ -152,7 +151,7 @@ svg {
   min-width: 1920px;
   margin-top: 160px;
   fill: $colorBackgroundDark;
-  animation: goostuff 30s linear infinite;
+  animation: goostuff 60s linear infinite;
 }
 h1 {
   font-weight: 600;
@@ -193,7 +192,7 @@ a {
   }
 }
 .stats {
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
 
   .col-b {
