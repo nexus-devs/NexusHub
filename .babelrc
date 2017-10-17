@@ -1,0 +1,15 @@
+{
+  "presets": [
+    [ "env", {
+      "targets": {
+        "browsers": [">2%", "last 5 versions", "not ie <= 8"],
+        "modules": false
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "syntax-dynamic-import"
+  ],
+  "comments": false
+}
