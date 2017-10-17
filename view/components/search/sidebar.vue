@@ -193,6 +193,8 @@
         display: flex;
         align-items: center;
         text-align: left;
+        border-radius: 2px;
+        width: 100%;
         margin-left: -10px;
         margin-bottom: 8px;
         color: white;
@@ -200,6 +202,9 @@
         padding: 5px 15px;
         background: $colorBackgroundDarker;
 
+        &:before {
+          border-radius: 2px;
+        }
         &:hover {
           background: $colorBackgroundLight;
         }

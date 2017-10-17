@@ -46,7 +46,6 @@ export default {
   top: 0;
   left: 56px;
   width: calc(206px + 5vw);
-  z-index: -1;
   will-change: transform;
   @include ease-out(0.45s);
 

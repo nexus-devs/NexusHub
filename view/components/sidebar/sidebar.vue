@@ -10,7 +10,9 @@
       </div>
     </div>
     <div class="nav-lower" v-bind:class="{ dragged: deltaX || active }">
-      <div class="nav-lower-backdrop"></div>
+      <div class="nav-lower-backdrop">
+        <div class="nav-lower-backdrop-first-bg"></div>
+      </div>
       <slot></slot>
     </div>
   </v-touch>
@@ -172,13 +174,20 @@ nav {
     .nav-lower {
       height: 100vh;
       @include ease-out(0.45s);
-      @include gradient-background($colorBackgroundLight, $colorBackground);
       @include shadow-1;
 
       .nav-lower-backdrop {
         position: absolute;
         height: 100vh;
         width: 100%;
+        z-index: 1;
+        @include gradient-background($colorBackgroundLight, $colorBackground);
+
+        .nav-lower-backdrop-first-bg {
+          height: 56px;
+          width: 56px;
+          background: rgba(0, 5, 10, 0.4);
+        }
       }
     }
 
@@ -188,17 +197,14 @@ nav {
       }
     }
 
-
     .ico-wrapper {
       position: relative;
       padding: 8px;
-
-      &:nth-of-type(2) {
-        background: rgba(0, 5, 10, 0.4);
-      }
     }
 
     .ico-a-ie {
+      position: relative;
+      z-index: 1;
       @include ie(24);
       margin: 1px 0;
       position: relative;
