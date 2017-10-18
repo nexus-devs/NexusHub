@@ -140,8 +140,10 @@ export default {
     // Apply URL time query to state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
 
-    // Register st
-    this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
+    // Register store module if not already there
+    if (!this.$store._actions.fetchItemData) {
+      this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
+    }
   },
   created() {
     this.$store.commit('setActiveGame', 'warframe')
