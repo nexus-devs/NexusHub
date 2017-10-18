@@ -97,12 +97,14 @@ const store = {
       if (time.modified) {
         const focusStart = time.focus.start.time.valueOf()
         const focusEnd = time.focus.end.time.valueOf()
-        let query = `?timestart=${focusStart}&timeend=${focusEnd}`
+        const intervals = time.focus.start.time.diff(time.focus.end.time, 'days')
+        let query = `?timestart=${focusStart}&timeend=${focusEnd}&intervals=${intervals}`
 
         if (focusUrl.includes('?')) {
           query = query.replace('?', '&')
         }
         focusUrl += query
+        compareUrl += `&intervals=${intervals}`
       }
 
       // Perform API query for base data, focus range and comparison range
