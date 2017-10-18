@@ -3,8 +3,7 @@ const items = require('../db/data/items.json')
 
 class Hook {
   async verifyItemList() {
-    const url = blitz.config.client_worker ? blitz.config.client_worker.mongoURL : blitz.config.core_worker.mongoURL
-    const db = await mongodb.connect(url)
+    const db = await mongodb.connect('mongodb://localhost/warframe-nexus-core')
     items.forEach(item => {
       db.collection('items').update({
         name: item.name
