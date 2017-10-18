@@ -12,9 +12,9 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.9",
+    "blitz-js": "^0.5.10",
     "blitz-js-core": "^0.5.2",
-    "chalk": "^2.1.0",
+    "chalk": "^2.2.0",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.11.0",
     "imagemin": "^5.3.1",
@@ -29,7 +29,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "blitz-js-query": "^0.2.12",
+    "blitz-js-query": "^0.2.14",
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
   }
