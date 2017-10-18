@@ -23,7 +23,7 @@ blitz.use(new Core({
  * Client worker for simple read queries. We run this one separately to improve
  * accessibility to the processed data, in case core workers are busy.
  */
-blitz.hook('client_worker', mongo.verifyItemIndices)
+blitz.hook('client_worker', mongo.verifyItemList)
 blitz.use(new Core({
   endpointPath: __dirname + '/api/client',
   mongoURL: 'mongodb://localhost/warframe-nexus-core',
