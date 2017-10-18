@@ -30,7 +30,6 @@
 import * as d3 from 'd3'
 import Tween from './_tween.js'
 import _ from 'lodash'
-const downScaleFactor = 0.66
 
 export default {
   props: ['data', 'margin', 'ceil'],
@@ -64,6 +63,9 @@ export default {
   watch: {
     data(newData, oldData) {
       Tween.adjustData(this, newData, oldData)
+      if (newData.length !== oldData.length) {
+        this.onResize()
+      }
     },
     ceil(newData, oldData) {
       Tween.adjustCeil(this, newData, oldData, this.avg)
