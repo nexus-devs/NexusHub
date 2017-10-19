@@ -68,7 +68,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 nav {
-  position: fixed;
+  position: absolute;
   z-index: 1;
   width: 100%;
   display: flex;
