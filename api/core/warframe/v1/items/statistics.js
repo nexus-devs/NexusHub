@@ -452,7 +452,7 @@ class Statistics extends Endpoint {
   purgeExtremes(interval, request) {
     if (request.price !== null && interval.median !== null) {
       let percentToMedian = request.price / interval.median
-      return (percentToMedian > 2) || (percentToMedian < 0.66)
+      return percentToMedian > 2 || percentToMedian < 0.66 || request.price > 2000
     }
     return false
   }
