@@ -9,6 +9,10 @@
         </div>
       </div>
     </header>
+    <filters></filters>
+    <section class="g-ct">
+      <!-- placeholder -->
+    </section>
   </div>
 </template>
 
@@ -17,9 +21,10 @@
 <script>
 import _ from 'lodash'
 import subnav from 'src/components/ui/subnav.vue'
-import pricefield from 'src/components/fields/items/price.vue'
 import timefield from 'src/components/search/fields/time.vue'
 import rankfield from 'src/components/search/fields/rank.vue'
+import pricefield from 'src/components/items/price.vue'
+import filters from 'src/components/items/filters.vue'
 
 
 /**
@@ -128,7 +133,8 @@ export default {
   components: {
     subnav,
     pricefield,
-    timefield
+    timefield,
+    filters
   },
   beforeCreate() {
     // Fill store data if not already done
