@@ -20,9 +20,9 @@
 
 <script>
 import _ from 'lodash'
-import subnav from 'src/components/ui/subnav.vue'
 import timefield from 'src/components/search/fields/time.vue'
 import rankfield from 'src/components/search/fields/rank.vue'
+import subnav from 'src/components/items/subnav.vue'
 import pricefield from 'src/components/items/price.vue'
 import filters from 'src/components/items/filters.vue'
 
@@ -202,11 +202,12 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
-  @include gradient-background-dg(#596570, $colorBackground);
-  padding: 116px 0 60px;
+  @include gradient-background-dg(#647080, $colorBackground);
+  padding: 130px 0 80px;
+  @include shadow-2-inset;
 
   @media (max-width: $breakpoint-m) {
-    padding: 185px 0 50px;
+    padding: 165px 0 50px;
   }
   .price-container {
     display: flex;
