@@ -7,21 +7,21 @@ const chalk = require('chalk')
 const queue = require("async-delay-queue")
 const fs = require('fs')
 const additional = require('../data/additional.json')
-const dropChancesBaseUrl = 'https://raw.githubusercontent.com/WFCD/warframe-drop-data/gh-pages/'
+const dropChancesBaseUrl = 'https://raw.githubusercontent.com/WFCD/warframe-drop-data/gh-pages'
 const marketBaseUrl = "https://api.warframe.market/v1"
 const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 
 class Scraper {
   constructor() {
     this.scraped = []
-    this.doFetchMarketData = false
+    this.doFetchMarketData = true
   }
 
   /**
    * Gather List of items and run through each of them
    */
   async getItems() {
-    const dropChances = JSON.parse(await request.get(dropChancesBaseUrl + 'data/all.json'))
+    const dropChances = JSON.parse(await request.get(dropChancesBaseUrl + '/data/all.json'))
     const marketData = JSON.parse(await request.get(marketBaseUrl + "/items"))
     const items = marketData.payload.items.en
 
