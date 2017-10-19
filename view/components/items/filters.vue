@@ -5,32 +5,28 @@
         <div class="col-b">
           <h2>Offer Type</h2>
           <button type="button" v-for="d in types" :disabled="d.disabled"
-                  v-on:click="select('types', d)" :class="{ inactive: d.inactive }">
-            <div class="status-circle"></div>
+                  v-on:click="select('types', d)" :class="{ selected: d.selected }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Region</h2>
           <button type="button" v-for="d in regions" :disabled="d.disabled"
-                  v-on:click="select('regions', d)" :class="{ inactive: d.inactive }">
-            <div class="status-circle"></div>
+                  v-on:click="select('regions', d)" :class="{ selected: d.selected }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Platform</h2>
           <button type="button" v-for="d in platforms" :disabled="d.disabled"
-                  v-on:click="select('platforms', d)" :class="{ inactive: d.inactive }">
-            <div class="status-circle"></div>
+                  v-on:click="select('platforms', d)" :class="{ selected: d.selected }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Data Source</h2>
           <button type="button" v-for="d in sources" :disabled="d.disabled"
-                  v-on:click="select('sources', d)" :class="{ inactive: d.inactive }">
-            <div class="status-circle"></div>
+                  v-on:click="select('sources', d)" :class="{ selected: d.selected }">
             <span>{{ d.name }}</span>
           </button>
         </div>
@@ -50,18 +46,16 @@ export default {
       }],
 
       regions: [{
-        name: 'NA'
+        name: 'NA',
       }, {
         name: 'EU'
       }, {
         name: 'AS'
       }, {
         name: 'RU',
-        inactive: true,
         disabled: true
       }, {
         name: 'SA',
-        inactive: true,
         disabled: true
       }],
 
@@ -69,11 +63,9 @@ export default {
         name: 'PC'
       }, {
         name: 'PS4',
-        inactive: true,
         disabled: true
       }, {
         name: 'XB1',
-        inactive: true,
         disabled: true
       }],
 
@@ -81,7 +73,6 @@ export default {
         name: 'Trade Chat'
       }, {
         name: 'Warframe.market',
-        inactive: true,
         disabled: true
       }]
     }
@@ -91,22 +82,49 @@ export default {
     select(data, d) {
       let target = [].concat(this[data]) // Get rid of existing reference
       let i = target.findIndex(e => e.name === d.name)
-      target[i].inactive = target[i].inactive ? false : true
+      target[i].selected = target[i].selected ? false : true
 
       // If all targets disabled -> enable all
       let allInactive = true
       target.forEach(el => {
-        if (!el.inactive) {
+        if (!el.selected) {
           allInactive = false
         }
       })
       if (allInactive) {
         target.forEach(el => {
-          el.inactive =  el.disabled ? true : false
+          el.selected = el.disabled ? true : false
         })
       }
 
       this[data] = target // We need to reassign the variable for vue to re-render it
+    }
+  },
+
+  watch: {
+    types(oldData, newData) {
+      const selling = newData.find(d => d.name === 'Selling')
+      const buying = newData.find(d => d.name === 'Buying')
+
+      if (!selling.selected && !buying.selected) {
+        return this.$store.commit('setOfferType', 'combined')
+      }
+      if (!selling.selected) {
+        this.$store.commit('setOfferType', 'buying')
+      }
+      if (!buying.selected) {
+        this.$store.commit('setOfferType', 'selling')
+      }
+    },
+    regions(oldData, newData) {
+      const regions = []
+
+      newData.forEach(region => {
+        if (region.selected) {
+          regions.push(region.name)
+        }
+      })
+      console.log(regions)
     }
   }
 }
@@ -120,9 +138,10 @@ export default {
   background: $colorBackgroundDarker;
 
   .g-ct > .row > .col-b {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     margin-right: 20px;
+    flex-basis: auto;
 
     &:last-of-type {
       margin-right: 0;
@@ -131,13 +150,13 @@ export default {
   h2 {
     font-size: 0.9em;
     font-weight: 400;
-    margin-bottom: 5px;
+    margin-bottom: 7.5px;
   }
   button {
     margin-top: 5px;
     margin-right: 5px;
-    font-size: 0.9em;
-    background: $colorBackground;
+    font-size: 0.85em;
+    background: $colorBackgroundDark;
 
     &:disabled {
       background: $colorBackgroundDark;
@@ -146,14 +165,14 @@ export default {
 
       .status-circle {
         background: transparent;
-        border: 1px solid $colorFontSubtle;
+        border: 0.5px solid $colorFontSubtle;
       }
     }
-    &.inactive {
-      background: $colorBackgroundDark;
+    &.selected {
+      background: $colorBackground;
 
       .status-circle {
-        background: transparent;
+        background: white;
       }
     }
     .status-circle {

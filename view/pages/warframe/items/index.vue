@@ -79,6 +79,9 @@ const store = {
     },
     setItemComparison(state, item) {
       state.itemComparison = Object.assign(state.itemComparison, item)
+    },
+    setOfferType(state, type) {
+      state.selected.offerType = type.toLowerCase()
     }
   },
   actions: {
