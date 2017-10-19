@@ -50,7 +50,8 @@ export default {
       }, {
         name: 'EU'
       }, {
-        name: 'AS'
+        name: 'AS',
+        disabled: true
       }, {
         name: 'RU',
         disabled: true
