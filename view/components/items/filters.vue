@@ -83,20 +83,6 @@ export default {
       let target = [].concat(this[data]) // Get rid of existing reference
       let i = target.findIndex(e => e.name === d.name)
       target[i].selected = target[i].selected ? false : true
-
-      // If all targets disabled -> enable all
-      let allInactive = true
-      target.forEach(el => {
-        if (!el.selected) {
-          allInactive = false
-        }
-      })
-      if (allInactive) {
-        target.forEach(el => {
-          el.selected = el.disabled ? true : false
-        })
-      }
-
       this[data] = target // We need to reassign the variable for vue to re-render it
     }
   },
@@ -106,14 +92,14 @@ export default {
       const selling = newData.find(d => d.name === 'Selling')
       const buying = newData.find(d => d.name === 'Buying')
 
-      if (!selling.selected && !buying.selected) {
+      if ((selling.selected && buying.selected) || (!selling.selected && !buying.selected)) {
         return this.$store.commit('setOfferType', 'combined')
       }
-      if (!selling.selected) {
-        this.$store.commit('setOfferType', 'buying')
-      }
-      if (!buying.selected) {
+      if (selling.selected) {
         this.$store.commit('setOfferType', 'selling')
+      }
+      if (buying.selected) {
+        this.$store.commit('setOfferType', 'buying')
       }
     },
     regions(oldData, newData) {
@@ -150,7 +136,7 @@ export default {
   h2 {
     font-size: 0.9em;
     font-weight: 400;
-    margin-bottom: 7.5px;
+    margin-bottom: 5px;
   }
   button {
     margin-top: 5px;
