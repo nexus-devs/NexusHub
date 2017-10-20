@@ -8,8 +8,9 @@
           :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
         </div>
       </div>
+      <filters></filters>
     </header>
-    <filters></filters>
+
     <section class="g-ct">
       <!-- placeholder -->
     </section>
@@ -203,11 +204,10 @@ export default {
 
 header {
   @include gradient-background-dg(#647080, $colorBackground);
-  padding: 130px 0 80px;
-  @include shadow-2-inset;
+  padding: 130px 0 0px;
 
   @media (max-width: $breakpoint-m) {
-    padding: 165px 0 50px;
+    padding: 165px 0 0px;
   }
   .price-container {
     display: flex;

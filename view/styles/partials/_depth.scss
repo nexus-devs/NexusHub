@@ -1,6 +1,9 @@
 /**
  * Shadows
  */
+@mixin shadow-0() {
+ box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 1px 4px rgba(0,0,0,0.06);
+}
 @mixin shadow-1() {
   box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.16);
 }
