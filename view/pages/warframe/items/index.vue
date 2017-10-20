@@ -205,6 +205,8 @@ export default {
 header {
   @include gradient-background-dg(#647080, $colorBackground);
   padding: 130px 0 0px;
+  position: relative;
+  overflow: hidden;
 
   @media (max-width: $breakpoint-m) {
     padding: 165px 0 0px;

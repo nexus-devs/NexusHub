@@ -59,7 +59,7 @@ header {
     min-height: 100%;
     width: auto;
     height: auto;
-    opacity: 0.4;
+    opacity: 0.45;
     filter: blur(5px);
     background: $colorBackground;
     transform: translateX(-50%) translateY(-25%);

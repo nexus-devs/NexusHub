@@ -154,6 +154,7 @@ export default {
       background: transparent;
       color: $colorFontSubtle;
       cursor: auto;
+      box-shadow: none;
 
       .status-circle {
         background: transparent;
