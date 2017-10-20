@@ -14,6 +14,7 @@
     position: absolute;
     pointer-events: none;
     text-align: center;
+    z-index: 1;
     border-radius: 2px;
     font-size: 0.85em;
     font-weight: 400;
