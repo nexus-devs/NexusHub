@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   data() {
     return {
@@ -104,14 +106,40 @@ export default {
       }
     },
     regions(oldData, newData) {
+      const query = _.cloneDeep(this.$route.query)
       const regions = []
 
       newData.forEach(region => {
-        if (!region.inactive) {
+        if (!region.inactive && !region.disabled) {
           regions.push(region.name)
         }
       })
-      console.log(regions)
+
+      // Get number of inactive regions so we can figure out when all are
+      // selected or when they aren't
+      let inactive = 0
+      this.regions.forEach(region => {
+        inactive += region.inactive ? 1 : 0
+      })
+
+      // Some regions selected
+      if (regions.length && regions.length < this.regions.length) {
+        this.$router.replace({
+          path: this.$route.path,
+          query: Object.assign(query, {
+            region: regions.join(',')
+          })
+        })
+      }
+
+      // Either all or none selected
+      else if (regions.length === this.regions.length || !regions.length) {
+        delete query.region
+        this.$router.replace({
+          path: this.$route.path,
+          query
+        })
+      }
     }
   }
 }

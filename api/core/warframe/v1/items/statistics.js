@@ -44,7 +44,7 @@ class Statistics extends Endpoint {
     this.schema.limit = {
       disable: false,
       interval: 5000,
-      maxInInterval: 5
+      maxInInterval: 4
     }
   }
 
@@ -158,11 +158,13 @@ class Statistics extends Endpoint {
       item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
         $gte: new Date(timeend),
-        $lte: new Date(timestart),
-      },
+        $lte: new Date(timestart)
+      }
     }
+    // Region allows array to be passed, so turn that into regex, otherwise use
+    // raw string
     if (region) {
-      query.region = region
+      query.region = region.includes(',') ? new RegExp(region.split(',').join('|'), 'i') : region
     }
     if (rank !== null) {
       query.rank = rank
