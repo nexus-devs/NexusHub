@@ -71,7 +71,8 @@ const store = {
     itemComparison: _.cloneDeep(defaultItem),
     selected: {
       components: [],
-      offerType: 'combined'
+      offerType: 'combined',
+      regions: []
     }
   },
   mutations: {
@@ -81,15 +82,18 @@ const store = {
     setItemComparison(state, item) {
       state.itemComparison = Object.assign(state.itemComparison, item)
     },
-    setOfferType(state, type) {
+    setItemOfferType(state, type) {
       state.selected.offerType = type.toLowerCase()
+    },
+    setItemRegions(state, regions) {
+      state.selected.regions = regions
     }
   },
   actions: {
     async fetchItemData({ commit, rootState }, name) {
       const time = rootState.time
       const rank = rootState.rank
-      const region = rootState.route.query.region
+      const regions = rootState.items.selected.regions
       const compareStart = time.compare.start.time.valueOf()
       const compareEnd = time.compare.end.time.valueOf()
 
@@ -118,14 +122,14 @@ const store = {
       }
 
       // Add region param if present
-      if (region) {
-        let query = `?region=${region}`
+      if (regions.length) {
+        let query = `?region=${regions}`
 
         if (focusUrl.includes('?')) {
           query = query.replace('?', '&')
         }
-        focusUrl += focusUrl.includes('?') ? `&region=${region}` : `?region=${region}`
-        compareUrl += `&region=${region}`
+        focusUrl += focusUrl.includes('?') ? `&region=${regions}` : `?region=${regions}`
+        compareUrl += `&region=${regions}`
       }
 
       // Perform API query for base data, focus range and comparison range
@@ -159,13 +163,14 @@ export default {
       rankfield.beforeCreate[0].bind(this)()
     }
 
-    // Apply URL time query to state
-    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
-
     // Register store module if not already there
     if (!this.$store._actions.fetchItemData) {
       this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
     }
+
+    // Apply URL time query to state
+    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
+    this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
   },
   created() {
     this.$store.commit('setActiveGame', 'warframe')

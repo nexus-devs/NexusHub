@@ -96,13 +96,13 @@ export default {
       const buying = newData.find(d => d.name === 'Buying')
 
       if ((selling.inactive && buying.inactive) || (!selling.inactive && !buying.inactive)) {
-        return this.$store.commit('setOfferType', 'combined')
+        return this.$store.commit('setItemOfferType', 'combined')
       }
       if (selling.inactive) {
-        this.$store.commit('setOfferType', 'buying')
+        this.$store.commit('setItemOfferType', 'buying')
       }
       if (buying.inactive) {
-        this.$store.commit('setOfferType', 'selling')
+        this.$store.commit('setItemOfferType', 'selling')
       }
     },
     regions(oldData, newData) {
@@ -115,15 +115,18 @@ export default {
         }
       })
 
-      // Get number of inactive regions so we can figure out when all are
+      // Get number of disabled regions so we can figure out when all are
       // selected or when they aren't
-      let inactive = 0
+      let disabled = 0
       this.regions.forEach(region => {
-        inactive += region.inactive ? 1 : 0
+        disabled += region.disabled ? 1 : 0
       })
 
+      // Commit to store, then update URL (triggers data update)
+      this.$store.commit('setItemRegions', regions.length < this.regions.length - disabled ? regions : [])
+
       // Some regions selected
-      if (regions.length && regions.length < this.regions.length) {
+      if (regions.length && regions.length < this.regions.length - disabled) {
         this.$router.replace({
           path: this.$route.path,
           query: Object.assign(query, {
@@ -133,7 +136,7 @@ export default {
       }
 
       // Either all or none selected
-      else if (regions.length === this.regions.length || !regions.length) {
+      else {
         delete query.region
         this.$router.replace({
           path: this.$route.path,
