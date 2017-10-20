@@ -123,7 +123,7 @@ export default {
 .filters {
   margin-top: 80px;
   padding: 15px;
-  background: rgba(15, 20, 25, 0.35);
+  @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.35));
 
   @media (max-width: $breakpoint-m) {
     margin-top: 50px;
