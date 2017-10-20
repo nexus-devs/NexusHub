@@ -187,7 +187,7 @@ header {
 
       a {
         margin: 0 5px;
-        color: $colorFontSubtle !important;
+        color: $colorFontBody !important;
 
         &:hover {
           color: white !important;

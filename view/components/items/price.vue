@@ -109,14 +109,14 @@ export default {
 @import '~src/styles/partials/importer';
 
 .dummy {
-  width: 350px;
+  width: 340px;
 }
 
 .row {
   @include shadow-1;
   @include ie;
   display: flex;
-  min-width: 350px; // Fix for Edge ignoring parent width
+  min-width: 340px; // Fix for Edge ignoring parent width
   border-radius: 0px;
   padding: 0;
 
@@ -126,7 +126,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px;
+    padding: 22.5px;
     height: 125px;
     width: 125px;
 

@@ -5,28 +5,28 @@
         <div class="col-b">
           <h2>Offer Type</h2>
           <button type="button" v-for="d in types" :disabled="d.disabled"
-                  v-on:click="select('types', d)" :class="{ selected: d.selected }">
+                  v-on:click="select('types', d)" :class="{ inactive: d.inactive }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Region</h2>
           <button type="button" v-for="d in regions" :disabled="d.disabled"
-                  v-on:click="select('regions', d)" :class="{ selected: d.selected }">
+                  v-on:click="select('regions', d)" :class="{ inactive: d.inactive }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Platform</h2>
           <button type="button" v-for="d in platforms" :disabled="d.disabled"
-                  v-on:click="select('platforms', d)" :class="{ selected: d.selected }">
+                  v-on:click="select('platforms', d)" :class="{ inactive: d.inactive }">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Data Source</h2>
           <button type="button" v-for="d in sources" :disabled="d.disabled"
-                  v-on:click="select('sources', d)" :class="{ selected: d.selected }">
+                  v-on:click="select('sources', d)" :class="{ inactive: d.inactive }">
             <span>{{ d.name }}</span>
           </button>
         </div>
@@ -83,7 +83,7 @@ export default {
     select(data, d) {
       let target = [].concat(this[data]) // Get rid of existing reference
       let i = target.findIndex(e => e.name === d.name)
-      target[i].selected = target[i].selected ? false : true
+      target[i].inactive = target[i].inactive ? false : true
       this[data] = target // We need to reassign the variable for vue to re-render it
     }
   },
@@ -93,21 +93,21 @@ export default {
       const selling = newData.find(d => d.name === 'Selling')
       const buying = newData.find(d => d.name === 'Buying')
 
-      if ((selling.selected && buying.selected) || (!selling.selected && !buying.selected)) {
+      if ((selling.inactive && buying.inactive) || (!selling.inactive && !buying.inactive)) {
         return this.$store.commit('setOfferType', 'combined')
       }
-      if (selling.selected) {
-        this.$store.commit('setOfferType', 'selling')
-      }
-      if (buying.selected) {
+      if (selling.inactive) {
         this.$store.commit('setOfferType', 'buying')
+      }
+      if (buying.inactive) {
+        this.$store.commit('setOfferType', 'selling')
       }
     },
     regions(oldData, newData) {
       const regions = []
 
       newData.forEach(region => {
-        if (region.selected) {
+        if (!region.inactive) {
           regions.push(region.name)
         }
       })
@@ -121,9 +121,13 @@ export default {
 @import '~src/styles/partials/importer';
 
 .filters {
+  margin-top: 80px;
   padding: 15px;
-  background: $colorBackgroundDarker;
+  background: rgba(15, 20, 25, 0.35);
 
+  @media (max-width: $breakpoint-m) {
+    margin-top: 50px;
+  }
   .g-ct > .row > .col-b {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -143,10 +147,11 @@ export default {
     margin-top: 5px;
     margin-right: 5px;
     font-size: 0.85em;
-    background: $colorBackgroundDark;
+    background: $colorBackground;
+    @include shadow-0;
 
     &:disabled {
-      background: $colorBackgroundDark;
+      background: transparent;
       color: $colorFontSubtle;
       cursor: auto;
 
@@ -155,8 +160,8 @@ export default {
         border: 0.5px solid $colorFontSubtle;
       }
     }
-    &.selected {
-      background: $colorBackground;
+    &.inactive {
+      background: transparent;
 
       .status-circle {
         background: white;
