@@ -89,6 +89,7 @@ const store = {
     async fetchItemData({ commit, rootState }, name) {
       const time = rootState.time
       const rank = rootState.rank
+      const region = rootState.route.query.region
       const compareStart = time.compare.start.time.valueOf()
       const compareEnd = time.compare.end.time.valueOf()
 
@@ -114,6 +115,17 @@ const store = {
         }
         focusUrl += query
         compareUrl += `&intervals=${intervals}`
+      }
+
+      // Add region param if present
+      if (region) {
+        let query = `?region=${region}`
+
+        if (focusUrl.includes('?')) {
+          query = query.replace('?', '&')
+        }
+        focusUrl += focusUrl.includes('?') ? `&region=${region}` : `?region=${region}`
+        compareUrl += `&region=${region}`
       }
 
       // Perform API query for base data, focus range and comparison range
@@ -180,17 +192,17 @@ export default {
     }
   },
   beforeMount() {
-    this.listen()
+    // this.listen() // requires on-route change destructor
   },
   asyncData({ store, route: { params: { item }}}) {
     return store.dispatch('fetchItemData', item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
   methods: {
     async listen() {
-      const itemUrl = `/warframe/v1/items/${this.$route.params.item}/statistics`
+      const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
       this.$blitz.subscribe(itemUrl)
       this.$blitz.on(itemUrl, data => {
-        this.$store.commit('setItem', mergeItemData(this.$store.state.item.item, data))
+        this.$store.commit('setItem', mergeItemData(this.$store.state.items.item, data))
       })
     }
   }

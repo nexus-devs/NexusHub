@@ -13121,7 +13121,6 @@
         ]
       }
     ],
-    "ranks": 5,
     "description": "Bladed Rounds is an uncommon Rifle mod that increases Critical damage while aiming for a brief time upon a kill."
   },
   {
@@ -13163,7 +13162,6 @@
         ]
       }
     ],
-    "ranks": 5,
     "description": "Catalyzer Link is a common Rifle mod that increases Status chance while aiming for a brief time after casting an ability."
   },
   {
@@ -13866,6 +13864,12 @@
             "chance": 0.0025
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Tempo Royale",
             "type": "Mod Locations",
             "chance": null
@@ -14539,7 +14543,24 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": []
+        "drop": [
+          {
+            "location": "Collision Force",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Collision Force",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0833
+          }
+        ]
       }
     ],
     "ranks": 5,
@@ -14700,7 +14721,24 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": []
+        "drop": [
+          {
+            "location": "Pummel",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Pummel",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0833
+          }
+        ]
       }
     ],
     "ranks": 5,
@@ -14713,7 +14751,24 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": []
+        "drop": [
+          {
+            "location": "Crash Course",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Crash Course",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0833
+          }
+        ]
       }
     ],
     "ranks": 5,
@@ -14726,7 +14781,24 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": []
+        "drop": [
+          {
+            "location": "Full Contact",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Full Contact",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0833
+          }
+        ]
       }
     ],
     "ranks": 5,
@@ -14985,6 +15057,18 @@
             "chance": 0.005
           },
           {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
             "location": "Kuva Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -15033,6 +15117,12 @@
             "chance": null
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
             "location": "Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -15045,13 +15135,13 @@
             "chance": 0.0067
           },
           {
-            "location": "Frontier Seeker 3.00",
+            "location": "Drekar Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Drekar Seeker 3.00",
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -15289,6 +15379,12 @@
             "chance": 0.005
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
+          },
+          {
             "location": "Blind Justice",
             "type": "Mod Locations",
             "chance": null
@@ -15297,9 +15393,21 @@
             "location": "Blind Justice",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
           },
           {
             "location": "Shadow Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
+          },
+          {
+            "location": "Hunhow 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.3056
@@ -15309,18 +15417,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3636
-          },
-          {
-            "location": "Hunhow 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
-          },
-          {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
           }
         ]
       }
@@ -15413,16 +15509,16 @@
             "chance": 0.0752
           },
           {
-            "location": "Corpus Warden 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
             "location": "Kuva Scorch 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Corpus Warden 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           }
         ]
       }
@@ -15450,6 +15546,12 @@
           },
           {
             "location": "Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
+            "location": "Tusk Napalm 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -15497,7 +15599,13 @@
             "chance": 0.005
           },
           {
-            "location": "Arid Lancer 3.00",
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -15509,19 +15617,37 @@
             "chance": 0.005
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
           },
           {
-            "location": "Frontier Hellion 3.00",
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -15539,19 +15665,13 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -15661,6 +15781,12 @@
         "ducats": 0,
         "drop": [
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Legendary",
+            "chance": 0.0029
+          },
+          {
             "location": "Vulpine Mask",
             "type": "Mod Locations",
             "chance": null
@@ -15669,6 +15795,12 @@
             "location": "Vulpine Mask",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Fog Scrambus 4.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.25
           },
           {
             "location": "Sap Scrambus 4.00",
@@ -15687,12 +15819,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.25
-          },
-          {
-            "location": "Drekar Manic Bombard 40.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.0067
           },
           {
             "location": "Nul Comba 4.00",
@@ -15719,22 +15845,22 @@
             "chance": 0.25
           },
           {
-            "location": "Datalyst 4.00",
+            "location": "Drekar Manic Bombard 40.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.25
-          },
-          {
-            "location": "Fog Scrambus 4.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.25
+            "rarity": "Legendary",
+            "chance": 0.0067
           },
           {
             "location": "Manic Bombard 40.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
+          },
+          {
+            "location": "Datalyst 4.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ]
       }
@@ -15761,6 +15887,12 @@
             "chance": null
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -15773,7 +15905,7 @@
             "chance": 0.0737
           },
           {
-            "location": "Frontier Seeker 3.00",
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -15815,6 +15947,18 @@
             "chance": null
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
             "location": "Shock Draga 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -15833,19 +15977,13 @@
             "chance": 0.0067
           },
           {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.0067
-          },
-          {
             "location": "Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -15861,6 +15999,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.10529999999999999
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
           }
         ]
       }
@@ -15907,6 +16051,12 @@
         "ducats": 0,
         "drop": [
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
+          },
+          {
             "location": "Atlantis Vulcan",
             "type": "Mod Locations",
             "chance": null
@@ -15943,9 +16093,10 @@
         "ducats": 0,
         "drop": [
           {
-            "location": "Eleventh Storm",
-            "type": "Mod Locations",
-            "chance": null
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
           },
           {
             "location": "Eleventh Storm",
@@ -15953,7 +16104,12 @@
             "chance": null
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Eleventh Storm",
+            "type": "Mod Locations",
+            "chance": null
+          },
+          {
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -15965,7 +16121,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -16132,6 +16288,12 @@
         "name": "Set",
         "ducats": 0,
         "drop": [
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
           {
             "location": "Spinning Needle",
             "type": "Mod Locations",
@@ -16305,6 +16467,12 @@
             "chance": null
           },
           {
+            "location": "Fog Scrambus 4.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.25
+          },
+          {
             "location": "Sap Scrambus 4.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -16348,12 +16516,6 @@
           },
           {
             "location": "Datalyst 4.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.25
-          },
-          {
-            "location": "Fog Scrambus 4.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.25
@@ -16525,6 +16687,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -16562,6 +16730,12 @@
         "name": "Set",
         "ducats": 0,
         "drop": [
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
           {
             "location": "Homing Fang",
             "type": "Mod Locations",
@@ -16712,9 +16886,10 @@
         "ducats": 0,
         "drop": [
           {
-            "location": "Sundering Weave",
-            "type": "Mod Locations",
-            "chance": null
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
           },
           {
             "location": "Sundering Weave",
@@ -16722,16 +16897,9 @@
             "chance": null
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
+            "location": "Sundering Weave",
+            "type": "Mod Locations",
+            "chance": null
           },
           {
             "location": "Frontier Trooper 3.00",
@@ -16746,13 +16914,31 @@
             "chance": 0.1106
           },
           {
+            "location": "Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -16765,6 +16951,12 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -16842,13 +17034,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Juggernaut Behemoth 3.00",
+            "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Jack O'Naut 3.00",
+            "location": "Juggernaut Behemoth 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -18153,6 +18345,12 @@
         "ducats": 0,
         "drop": [
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
+          {
             "location": "Sovereign Outcast",
             "type": "Mod Locations",
             "chance": null
@@ -18161,6 +18359,12 @@
             "location": "Sovereign Outcast",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Tusk Heavy Gunner 10.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
           },
           {
             "location": "Kuva Heavy Gunner 10.00",
@@ -20876,6 +21080,18 @@
             "chance": 0.0101
           },
           {
+            "location": "Tusk Flameblade 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Tusk Predator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Kuva Flameblade 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -21002,6 +21218,12 @@
             "chance": 0.0101
           },
           {
+            "location": "Frontier Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -21032,13 +21254,7 @@
             "chance": 0.0101
           },
           {
-            "location": "Frontier Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
-            "location": "Arid Butcher 3.00",
+            "location": "Tusk Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -21057,6 +21273,12 @@
           },
           {
             "location": "Bailiff 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Arid Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -21248,6 +21470,12 @@
             "chance": null
           },
           {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0278
+          },
+          {
             "location": "Alad V 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -21267,12 +21495,6 @@
           },
           {
             "location": "Hunhow 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0278
-          },
-          {
-            "location": "Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0278
@@ -22223,6 +22445,12 @@
             "chance": null
           },
           {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0564
+          },
+          {
             "location": "Latcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -22235,19 +22463,19 @@
             "chance": 0.0737
           },
           {
-            "location": "Ambulas 80.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0564
-          },
-          {
-            "location": "Kuva Roller 3.00",
+            "location": "Tusk Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
             "location": "Roller Sentry 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -22415,6 +22643,18 @@
             "chance": 0.2529
           },
           {
+            "location": "Tusk Flameblade 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Predator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Kuva Flameblade 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -22493,6 +22733,12 @@
             "chance": null
           },
           {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
+          },
+          {
             "location": "Shadow Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -22524,12 +22770,6 @@
           },
           {
             "location": "Hunhow 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
-          },
-          {
-            "location": "Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.3056
@@ -22657,7 +22897,19 @@
             "chance": 0.0201
           },
           {
+            "location": "Tusk Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Chroma 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Tenno Specter 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2
@@ -22667,12 +22919,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
-          },
-          {
-            "location": "Tenno Specter 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2
           }
         ]
       }
@@ -22711,7 +22957,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Arid Lancer 3.00",
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -22735,19 +22987,7 @@
             "chance": 0.1106
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -22765,6 +23005,36 @@
             "chance": 0.1106
           },
           {
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Kuva Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Arid Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -22777,19 +23047,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -22820,6 +23084,12 @@
           },
           {
             "location": "Shield Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Tusk Shield Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -22909,6 +23179,12 @@
             "chance": 0.2529
           },
           {
+            "location": "Tusk Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Kuva Napalm 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -22988,6 +23264,18 @@
             "chance": null
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
             "location": "Shock Draga 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -23006,25 +23294,25 @@
             "chance": 0.0067
           },
           {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.0067
-          },
-          {
             "location": "Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -23492,6 +23780,12 @@
             "chance": 0.2529
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -23720,16 +24014,22 @@
             "chance": 0.005
           },
           {
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Frontier Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
             "location": "J3 Jordas Golem 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
-          },
-          {
-            "location": "Arid Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
           },
           {
             "location": "Drekar Lancer 3.00",
@@ -23750,19 +24050,7 @@
             "chance": 0.005
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
-            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -23772,6 +24060,36 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
+          },
+          {
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Kuva Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
           },
           {
             "location": "Arid Hellion 3.00",
@@ -23786,19 +24104,13 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -24556,6 +24868,12 @@
             "chance": 0.069
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
+          {
             "location": "Hellfire",
             "type": "Mod Locations",
             "chance": null
@@ -24564,6 +24882,12 @@
             "location": "Hellfire",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0564
           },
           {
             "location": "Latcher 3.00",
@@ -24578,19 +24902,19 @@
             "chance": 0.0737
           },
           {
-            "location": "Ambulas 80.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0564
-          },
-          {
-            "location": "Kuva Roller 3.00",
+            "location": "Tusk Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
             "location": "Roller Sentry 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -25053,6 +25377,18 @@
             "chance": 0.0442
           },
           {
+            "location": "Councilor Vay Hek 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
+            "location": "Raptor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Phorid 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -25069,12 +25405,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
-          },
-          {
-            "location": "Raptor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
           },
           {
             "location": "Nox 3.00",
@@ -25119,22 +25449,16 @@
             "chance": 0.1106
           },
           {
-            "location": "Councilor Vay Hek 100.00",
+            "location": "Raptor 5.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
+            "rarity": "Uncommon",
+            "chance": 0.1106
           },
           {
             "location": "Artificer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
-          },
-          {
-            "location": "Raptor 5.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
           }
         ]
       }
@@ -25647,6 +25971,12 @@
             "chance": null
           },
           {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
             "location": "J3 Jordas Golem 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -25654,12 +25984,6 @@
           },
           {
             "location": "The Sergeant 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
-          },
-          {
-            "location": "Ambulas 80.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -25906,16 +26230,16 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Guardsman 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Drekar Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Guardsman 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Napalm 3.00",
@@ -25930,10 +26254,16 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Corpus Warden 3.00",
+            "location": "Tusk Butcher 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Kuva Butcher 3.00",
@@ -25954,12 +26284,6 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Kuva Napalm 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Frontier Bailiff 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -25970,6 +26294,18 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Kuva Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Corpus Warden 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Recover The Orokin Archive",
@@ -26020,13 +26356,13 @@
             "chance": 0.7587999999999999
           },
           {
-            "location": "Juggernaut Behemoth 3.00",
+            "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Jack O'Naut 3.00",
+            "location": "Juggernaut Behemoth 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -26508,13 +26844,19 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Drekar Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Guardsman 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Drekar Butcher 3.00",
+            "location": "Tusk Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -26793,6 +27135,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.22219999999999998
           }
         ]
       }
@@ -27082,6 +27430,12 @@
             "chance": 0.0649
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
+          {
             "location": "Stormbringer",
             "type": "Mod Locations",
             "chance": null
@@ -27098,16 +27452,22 @@
             "chance": 0.1106
           },
           {
-            "location": "Lynx 3.00",
+            "location": "Tusk Ballista 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
-            "chance": 0.2211
+            "chance": 0.1106
           },
           {
             "location": "Kuva Ballista 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Lynx 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2211
           },
           {
             "location": "Sprag 3.00",
@@ -27189,6 +27549,12 @@
             "chance": null
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.7587999999999999
+          },
+          {
             "location": "Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -27201,13 +27567,13 @@
             "chance": 0.7587999999999999
           },
           {
-            "location": "Frontier Seeker 3.00",
+            "location": "Drekar Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.7587999999999999
           },
           {
-            "location": "Drekar Seeker 3.00",
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.7587999999999999
@@ -27249,6 +27615,30 @@
             "chance": null
           },
           {
+            "location": "Remech Osprey 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Sensor Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Frontier Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Frontier Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -27273,30 +27663,6 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Frontier Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Remech Osprey 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Drekar Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -27309,19 +27675,13 @@
             "chance": 0.3872
           },
           {
-            "location": "Sensor Regulator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Frontier Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Frontier Eviscerator 3.00",
+            "location": "Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -27345,7 +27705,19 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -27363,6 +27735,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Rathuum Broadcaster 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -27375,13 +27753,13 @@
             "chance": 0.2529
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Regulator 3.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -27567,13 +27945,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Juggernaut Behemoth 3.00",
+            "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Jack O'Naut 3.00",
+            "location": "Juggernaut Behemoth 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -28355,10 +28733,22 @@
             "chance": 0.0553
           },
           {
+            "location": "Frontier Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
+          },
+          {
+            "location": "Raptor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
           },
           {
             "location": "Grineer Manic 50.00",
@@ -28373,16 +28763,16 @@
             "chance": 0.1504
           },
           {
-            "location": "Raptor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Drekar Manic 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
+          },
+          {
+            "location": "Drekar Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
           },
           {
             "location": "Guardsman 3.00",
@@ -28391,16 +28781,10 @@
             "chance": 0.0369
           },
           {
-            "location": "Frontier Butcher 3.00",
+            "location": "Tusk Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
-            "location": "Drekar Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
+            "chance": 0.0553
           },
           {
             "location": "Raptor Ns 5.00",
@@ -28421,12 +28805,6 @@
             "chance": 0.1106
           },
           {
-            "location": "Arid Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
             "location": "Kuva Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -28445,6 +28823,18 @@
             "chance": 0.0553
           },
           {
+            "location": "Arid Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
+            "location": "Raptor 5.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Frontier Bailiff 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -28455,12 +28845,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
-          },
-          {
-            "location": "Raptor 5.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
           },
           {
             "location": "Recover The Orokin Archive",
@@ -28493,6 +28877,12 @@
             "chance": null
           },
           {
+            "location": "Moa 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -28505,13 +28895,13 @@
             "chance": 0.0553
           },
           {
-            "location": "Moa 3.00",
+            "location": "Denial Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Denial Bursa 3.00",
+            "location": "Drekar Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -28521,12 +28911,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0369
-          },
-          {
-            "location": "Drekar Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
           },
           {
             "location": "Ratel 3.00",
@@ -28545,6 +28929,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Tusk Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           },
           {
             "location": "Kuva Butcher 3.00",
@@ -28601,13 +28991,25 @@
             "chance": null
           },
           {
+            "location": "Moa 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0278
+          },
+          {
             "location": "Vay Hek Terra Frame 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
           },
           {
-            "location": "Moa 3.00",
+            "location": "Councilor Vay Hek 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -28649,22 +29051,10 @@
             "chance": 0.0278
           },
           {
-            "location": "Councilor Vay Hek 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Artificer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
-          },
-          {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0278
           }
         ]
       }
@@ -28721,16 +29111,40 @@
             "chance": 0.2529
           },
           {
+            "location": "Scavenger Drone 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
             "location": "Tyl Regor 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
           },
           {
-            "location": "Scavenger Drone 3.00",
+            "location": "Tusk Roller 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Heavy Gunner 10.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Hyena Pb 60.00",
@@ -28757,12 +29171,6 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Drekar Manic Bombard 40.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Kuva Heavy Gunner 10.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -28775,13 +29183,19 @@
             "chance": 0.2529
           },
           {
-            "location": "Kuva Roller 3.00",
+            "location": "Roller Sentry 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Roller Sentry 3.00",
+            "location": "Drekar Manic Bombard 40.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -28925,12 +29339,6 @@
             "chance": null
           },
           {
-            "location": "Attack Drone 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
             "location": "Remech Osprey 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -28938,6 +29346,12 @@
           },
           {
             "location": "Sensor Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -28973,6 +29387,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -29003,7 +29423,7 @@
             "chance": 0.0737
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Nightwatch Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -29015,7 +29435,7 @@
             "chance": 0.0737
           },
           {
-            "location": "Nightwatch Lancer 3.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -29063,7 +29483,13 @@
             "chance": 0.005
           },
           {
-            "location": "Arid Lancer 3.00",
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -29087,19 +29513,37 @@
             "chance": 0.005
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
           },
           {
-            "location": "Frontier Hellion 3.00",
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -29117,19 +29561,13 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -29165,6 +29603,18 @@
             "chance": 0.0442
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Councilor Vay Hek 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
             "location": "Phorid 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -29195,13 +29645,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Frontier Seeker 3.00",
+            "location": "Drekar Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Drekar Seeker 3.00",
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -29211,12 +29661,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
-          },
-          {
-            "location": "Councilor Vay Hek 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
           },
           {
             "location": "Artificer 100.00",
@@ -29423,7 +29867,7 @@
             "chance": null
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -29435,7 +29879,7 @@
             "chance": 0.3872
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -29683,6 +30127,12 @@
             "chance": 0.0013000000000000002
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Molten Impact",
             "type": "Mod Locations",
             "chance": null
@@ -29691,9 +30141,27 @@
             "location": "Molten Impact",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0564
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
           },
           {
             "location": "Vay Hek Terra Frame 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
+            "location": "Councilor Vay Hek 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
@@ -29703,12 +30171,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.22920000000000001
-          },
-          {
-            "location": "Ambulas 80.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0564
           },
           {
             "location": "Lt Lech Kril 100.00",
@@ -29741,22 +30203,10 @@
             "chance": 0.3056
           },
           {
-            "location": "Councilor Vay Hek 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
             "location": "Artificer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
-          },
-          {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
           },
           {
             "location": "Recover The Orokin Archive",
@@ -30173,10 +30623,28 @@
             "chance": 0.37939999999999996
           },
           {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
             "location": "Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Frontier Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Bailiff Defector 3.00",
@@ -30185,13 +30653,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Grineer Manic 50.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -30203,16 +30665,22 @@
             "chance": 0.3872
           },
           {
+            "location": "Infested Corpus 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
+            "location": "Grineer Manic 50.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "J3 Jordas Golem 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
-          },
-          {
-            "location": "Ambulas 80.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
           },
           {
             "location": "Commander 100.00",
@@ -30227,25 +30695,13 @@
             "chance": 0.2529
           },
           {
-            "location": "General Sargas Ruk 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Drekar Manic 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Guardsman 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Arid Lancer 3.00",
+            "location": "General Sargas Ruk 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -30281,6 +30737,12 @@
             "chance": 0.3872
           },
           {
+            "location": "Guardsman 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Sikula 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -30293,19 +30755,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -30317,16 +30767,16 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Toxic Crawler 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Mutalist Osprey 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Toxic Crawler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Jordas Golem 100.00",
@@ -30335,13 +30785,31 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Arid Hellion 3.00",
+            "location": "Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tusk Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tusk Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -30371,6 +30839,24 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Arid Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Nightwatch Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Frontier Bailiff 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -30378,12 +30864,6 @@
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Venin Mutalist 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -30401,16 +30881,10 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Nightwatch Reaver 3.00",
+            "location": "Venin Mutalist 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
-          },
-          {
-            "location": "Infested Grineer 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
           },
           {
             "location": "Recover The Orokin Archive",
@@ -30449,16 +30923,16 @@
             "chance": null
           },
           {
-            "location": "Corrupted Crewman 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3247
-          },
-          {
             "location": "Lephantis 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Corrupted Crewman 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3247
           }
         ]
       }
@@ -30873,6 +31347,12 @@
             "chance": null
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
             "location": "Vem Tabook 50.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -30903,13 +31383,13 @@
             "chance": 0.0067
           },
           {
-            "location": "Frontier Seeker 3.00",
+            "location": "Drekar Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Drekar Seeker 3.00",
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -31013,6 +31493,12 @@
             "chance": 0.0226
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Convulsion",
             "type": "Mod Locations",
             "chance": null
@@ -31021,6 +31507,18 @@
             "location": "Convulsion",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Remech Osprey 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Sensor Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
           },
           {
             "location": "Attack Drone 3.00",
@@ -31036,18 +31534,6 @@
           },
           {
             "location": "Juggernaut 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Remech Osprey 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Sensor Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -31071,13 +31557,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Juggernaut Behemoth 3.00",
+            "location": "Nemes 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Nemes 3.00",
+            "location": "Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -31089,13 +31575,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Juggernaut Behemoth 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Regulator 3.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -31164,6 +31650,12 @@
             "chance": 0.1106
           },
           {
+            "location": "Tusk Shield Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Kuva Shield Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -31200,7 +31692,19 @@
             "chance": 0.1106
           },
           {
-            "location": "Drekar Manic Bombard 40.00",
+            "location": "Tusk Heavy Gunner 10.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -31213,6 +31717,12 @@
           },
           {
             "location": "Kuva Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Drekar Manic Bombard 40.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -31302,7 +31812,7 @@
             "chance": 0.1128
           },
           {
-            "location": "Kuva Napalm 3.00",
+            "location": "Tusk Napalm 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -31312,6 +31822,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Kuva Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           }
         ]
       }
@@ -32034,6 +32550,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.22219999999999998
           }
         ]
       }
@@ -32411,6 +32933,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0714
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
           }
         ]
       }
@@ -32523,6 +33051,12 @@
             "chance": 0.069
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Heated Charge",
             "type": "Mod Locations",
             "chance": null
@@ -32545,6 +33079,24 @@
             "chance": 0.1106
           },
           {
+            "location": "Ambulas 80.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0564
+          },
+          {
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Frontier Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Alad V 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -32552,18 +33104,6 @@
           },
           {
             "location": "Mutalist Alad V 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Ambulas 80.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0564
-          },
-          {
-            "location": "Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -32587,19 +33127,37 @@
             "chance": 0.1106
           },
           {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Frontier Hellion 3.00",
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -32617,19 +33175,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
             "location": "Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -32881,6 +33433,24 @@
             "chance": null
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Crawler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Alad V 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -32923,18 +33493,6 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Crawler 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -32947,13 +33505,19 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -33297,19 +33861,13 @@
             "chance": null
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Frontier Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Frontier Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -33321,7 +33879,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Frontier Eviscerator 3.00",
+            "location": "Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -33345,7 +33903,19 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -33358,6 +33928,12 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -33413,6 +33989,18 @@
             "chance": null
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Shock Draga 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -33431,25 +34019,25 @@
             "chance": 0.1106
           },
           {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -34013,6 +34601,24 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Tusk Roller 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Flameblade 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Predator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Hyena Pb 60.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -34037,10 +34643,10 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Kuva Flameblade 3.00",
+            "location": "Roller Sentry 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.18969999999999998
           },
           {
             "location": "Kuva Roller 3.00",
@@ -34049,10 +34655,10 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Roller Sentry 3.00",
+            "location": "Kuva Flameblade 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
-            "chance": 0.18969999999999998
+            "chance": 0.2529
           },
           {
             "location": "Recover The Orokin Archive",
@@ -34213,6 +34819,12 @@
         "name": "Set",
         "ducats": 0,
         "drop": [
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
           {
             "location": "Chilling Grasp",
             "type": "Mod Locations",
@@ -34380,16 +34992,16 @@
             "chance": null
           },
           {
-            "location": "Jackal 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.7587999999999999
-          },
-          {
             "location": "Frontier Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Jackal 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.7587999999999999
           },
           {
             "location": "Heavy Gunner 3.00",
@@ -34422,16 +35034,16 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Arid Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Arid Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Corrupted Warden 3.00",
@@ -34538,6 +35150,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0625
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
           },
           {
             "location": "Charged Shell",
@@ -34848,6 +35466,12 @@
             "chance": 0.0564
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
+          {
             "location": "Contagious Spread",
             "type": "Mod Locations",
             "chance": null
@@ -34911,6 +35535,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
+          },
+          {
+            "location": "Eidolon Teralyst 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.22219999999999998
           }
         ]
       }
@@ -35343,7 +35973,13 @@
             "chance": null
           },
           {
-            "location": "Attack Drone 3.00",
+            "location": "Remech Osprey 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Sensor Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -35367,13 +36003,7 @@
             "chance": 0.2
           },
           {
-            "location": "Remech Osprey 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
-            "location": "Sensor Regulator 3.00",
+            "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -35403,13 +36033,13 @@
             "chance": 0.0101
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
           },
           {
-            "location": "Regulator 3.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -35439,19 +36069,13 @@
             "chance": null
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Frontier Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Frontier Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -35463,7 +36087,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Frontier Eviscerator 3.00",
+            "location": "Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -35481,7 +36105,19 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -35494,6 +36130,12 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -35983,7 +36625,19 @@
             "chance": 0.1106
           },
           {
-            "location": "Drekar Manic Bombard 40.00",
+            "location": "Tusk Heavy Gunner 10.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -35996,6 +36650,12 @@
           },
           {
             "location": "Kuva Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Drekar Manic Bombard 40.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -36067,6 +36727,18 @@
             "chance": 0.2529
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Brood Mother 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -36086,12 +36758,6 @@
           },
           {
             "location": "Darek Draga 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Elite Frontier Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -36121,13 +36787,19 @@
             "chance": 0.2529
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -36194,6 +36866,18 @@
           },
           {
             "location": "Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -36667,6 +37351,30 @@
             "chance": 0.37939999999999996
           },
           {
+            "location": "Remech Osprey 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Sensor Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Frontier Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -36691,24 +37399,6 @@
             "chance": 0.2529
           },
           {
-            "location": "Arid Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Tyl Regor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2581
-          },
-          {
-            "location": "Remech Osprey 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Drekar Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -36727,25 +37417,7 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Sensor Regulator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Frontier Heavy Gunner 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Frontier Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -36763,6 +37435,42 @@
             "chance": 0.2529
           },
           {
+            "location": "Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tyl Regor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2581
+          },
+          {
+            "location": "Tusk Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tusk Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tusk Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Kuva Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Arid Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -36770,12 +37478,6 @@
           },
           {
             "location": "Hellion 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -36793,16 +37495,16 @@
             "chance": 0.2529
           },
           {
-            "location": "Heavy Gunner 3.00",
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Regulator 3.00",
@@ -36811,13 +37513,13 @@
             "chance": 0.2529
           },
           {
-            "location": "Nightwatch Reaver 3.00",
+            "location": "Captain Vor 100.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
-            "location": "Captain Vor 100.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -37340,6 +38042,18 @@
             "chance": 0.0737
           },
           {
+            "location": "Tusk Flameblade 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Tusk Predator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Arid Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -37557,12 +38271,6 @@
             "chance": 0.2
           },
           {
-            "location": "Commander 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Shik Tal 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -37573,6 +38281,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
+          },
+          {
+            "location": "Commander 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           },
           {
             "location": "General Sargas Ruk 100.00",
@@ -37745,6 +38459,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
           },
           {
             "location": "Fever Strike",
@@ -38220,6 +38940,12 @@
             "chance": 0.0714
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "North Wind",
             "type": "Mod Locations",
             "chance": null
@@ -38228,6 +38954,12 @@
             "location": "North Wind",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Moa 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
           },
           {
             "location": "Butcher 3.00",
@@ -38236,16 +38968,16 @@
             "chance": 0.0553
           },
           {
+            "location": "Frontier Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
-          },
-          {
-            "location": "Moa 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
           },
           {
             "location": "Grineer Manic 50.00",
@@ -38272,12 +39004,6 @@
             "chance": 0.0369
           },
           {
-            "location": "Frontier Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
             "location": "Ratel 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -38288,6 +39014,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Tusk Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           },
           {
             "location": "Hyena Pb 60.00",
@@ -38314,12 +39046,6 @@
             "chance": 0.2211
           },
           {
-            "location": "Arid Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
             "location": "Kuva Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -38336,6 +39062,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
+          },
+          {
+            "location": "Arid Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
           },
           {
             "location": "Frontier Bailiff 3.00",
@@ -38776,6 +39508,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -39031,6 +39769,12 @@
             "chance": 0.0553
           },
           {
+            "location": "Tusk Napalm 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
             "location": "Kuva Napalm 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -39145,6 +39889,18 @@
             "chance": 0.0737
           },
           {
+            "location": "Tusk Flameblade 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Tusk Predator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Kuva Flameblade 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -39194,6 +39950,12 @@
           },
           {
             "location": "Tar Mutalist Moa 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Shield Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -39555,7 +40317,7 @@
             "chance": null
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -39567,7 +40329,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -39791,7 +40553,7 @@
             "chance": null
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -39803,7 +40565,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -40187,12 +40949,6 @@
             "chance": 0.2581
           },
           {
-            "location": "Tyl Regor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2581
-          },
-          {
             "location": "Crawler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -40203,6 +40959,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1936
+          },
+          {
+            "location": "Tyl Regor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2581
           }
         ]
       }
@@ -40283,6 +41045,12 @@
             "chance": 0.3872
           },
           {
+            "location": "Tusk Shield Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Kuva Shield Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -40331,7 +41099,19 @@
             "chance": 0.1518
           },
           {
-            "location": "Drekar Manic Bombard 40.00",
+            "location": "Tusk Heavy Gunner 10.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -40353,6 +41133,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1518
+          },
+          {
+            "location": "Drekar Manic Bombard 40.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Manic Bombard 40.00",
@@ -40395,6 +41181,12 @@
             "location": "Combustion Beam",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Fog Scrambus 4.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.25
           },
           {
             "location": "Sap Scrambus 4.00",
@@ -40452,12 +41244,6 @@
           },
           {
             "location": "Datalyst 4.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.25
-          },
-          {
-            "location": "Fog Scrambus 4.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.25
@@ -40597,6 +41383,12 @@
             "chance": 0.0649
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
+          },
+          {
             "location": "Cryo Rounds",
             "type": "Mod Locations",
             "chance": null
@@ -40608,6 +41400,12 @@
           },
           {
             "location": "Vay Hek Terra Frame 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
+            "location": "Councilor Vay Hek 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
@@ -40637,22 +41435,16 @@
             "chance": 0.0442
           },
           {
-            "location": "Tyl Regor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0752
-          },
-          {
             "location": "Shockwave Moa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Councilor Vay Hek 100.00",
+            "location": "Tyl Regor 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
-            "chance": 0.0442
+            "chance": 0.0752
           },
           {
             "location": "Artificer 100.00",
@@ -40723,6 +41515,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
           },
           {
             "location": "Infected Clip",
@@ -41221,16 +42019,16 @@
             "chance": 0.0737
           },
           {
-            "location": "Electric Crawler 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
             "location": "Nauseous Crawler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Electric Crawler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           },
           {
             "location": "Kuva Scorpion 3.00",
@@ -41572,6 +42370,12 @@
             "chance": 0.1518
           },
           {
+            "location": "Tusk Ballista 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Raptor Ns 5.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -41590,22 +42394,16 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Lynx 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Kuva Ballista 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
-            "location": "Arcane Boiler 3.00",
+            "location": "Lynx 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1518
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Sprag 3.00",
@@ -41618,6 +42416,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
+          },
+          {
+            "location": "Arcane Boiler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1518
           },
           {
             "location": "Raptor 5.00",
@@ -41650,16 +42454,16 @@
             "chance": null
           },
           {
-            "location": "Raptor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Volatile Runner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
+          },
+          {
+            "location": "Raptor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Crewman 3.00",
@@ -41674,7 +42478,7 @@
             "chance": 0.2529
           },
           {
-            "location": "Mutalist Osprey Carrier 3.00",
+            "location": "Eidolon Vomvalyst 30.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -41698,6 +42502,18 @@
             "chance": 0.37939999999999996
           },
           {
+            "location": "Orphid Husks 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Mutalist Osprey Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Grineer Power Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -41710,22 +42526,16 @@
             "chance": 0.2529
           },
           {
-            "location": "Orphid Husks 3.00",
+            "location": "Raptor 5.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Nightwatch Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
-          },
-          {
-            "location": "Raptor 5.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
           }
         ]
       }
@@ -42084,6 +42894,12 @@
             "chance": 0.0714
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Shocking Touch",
             "type": "Mod Locations",
             "chance": null
@@ -42092,6 +42908,18 @@
             "location": "Shocking Touch",
             "type": "Mod Locations",
             "chance": null
+          },
+          {
+            "location": "Frontier Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Frontier Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
           },
           {
             "location": "Tyl Regor 100.00",
@@ -42112,37 +42940,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Tyl Regor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0752
-          },
-          {
-            "location": "Frontier Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Drekar Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Frontier Eviscerator 3.00",
+            "location": "Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -42160,7 +42964,25 @@
             "chance": 0.1106
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tyl Regor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -42173,6 +42995,12 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -42238,16 +43066,16 @@
             "chance": null
           },
           {
-            "location": "Detron Crewman 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0564
-          },
-          {
             "location": "Volatile Runner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Detron Crewman 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0564
           },
           {
             "location": "Orphid Husks 3.00",
@@ -42324,6 +43152,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0201
           },
           {
             "location": "Pathogen Rounds",
@@ -42800,19 +43634,13 @@
             "chance": null
           },
           {
-            "location": "Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Frontier Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Frontier Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -42824,7 +43652,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Frontier Eviscerator 3.00",
+            "location": "Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -42842,7 +43670,19 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Eviscerator 3.00",
+            "location": "Arid Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Trooper 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Tusk Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -42855,6 +43695,12 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -42944,6 +43790,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0714
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0184
           },
           {
             "location": "Incendiary Coat",
@@ -44398,12 +45250,6 @@
             "chance": null
           },
           {
-            "location": "Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Frigate 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -44426,6 +45272,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
+          },
+          {
+            "location": "Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           }
         ]
       }
@@ -44458,7 +45310,19 @@
             "chance": null
           },
           {
+            "location": "Dargyn 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Mutalist Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2581
+          },
+          {
+            "location": "Cannon Battery 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
@@ -44471,18 +45335,6 @@
           },
           {
             "location": "Turret 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2581
-          },
-          {
-            "location": "Dargyn 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Cannon Battery 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
@@ -44543,13 +45395,13 @@
             "chance": 0.2581
           },
           {
-            "location": "Turret 3.00",
+            "location": "Cannon Battery 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
           },
           {
-            "location": "Cannon Battery 3.00",
+            "location": "Turret 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
@@ -44782,12 +45634,6 @@
             "chance": null
           },
           {
-            "location": "Attack Drone 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Dargyn 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -44798,6 +45644,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
+          },
+          {
+            "location": "Attack Drone 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           }
         ]
       }
@@ -44857,6 +45709,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.025099999999999997
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
           },
           {
             "location": "Combustion Rounds",
@@ -45373,6 +46231,18 @@
             "chance": 0.005
           },
           {
+            "location": "Tusk Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
+            "location": "Tusk Mortar Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
+          },
+          {
             "location": "Kuva Bombard 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -45499,6 +46369,18 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Ogma 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Ogma Elite 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Mutalist Toxic Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -45539,18 +46421,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
-          },
-          {
-            "location": "Ogma 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Ogma Elite 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
           }
         ]
       }
@@ -45583,16 +46453,16 @@
             "chance": 0.3872
           },
           {
-            "location": "Kuva Scorch 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
-          },
-          {
             "location": "Leaper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Kuva Scorch 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
           }
         ]
       }
@@ -45787,6 +46657,12 @@
             "type": "Mission Rewards",
             "rarity": "Common",
             "chance": 0.3872
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1265
           },
           {
             "location": "Polar Magazine",
@@ -46007,13 +46883,13 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Juggernaut Behemoth 3.00",
+            "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Jack O'Naut 3.00",
+            "location": "Juggernaut Behemoth 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -46056,6 +46932,12 @@
             "type": "Mission Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
           },
           {
             "location": "Poisonous Sting",
@@ -46110,28 +46992,28 @@
             "chance": null
           },
           {
-            "location": "Shield-Hellion Dargyn 20.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0201
-          },
-          {
             "location": "Ogma 25.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
           },
           {
-            "location": "Courier 30.00",
+            "location": "Ogma Elite 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Shield-Hellion Dargyn 20.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
           },
           {
-            "location": "Ogma Elite 25.00",
+            "location": "Courier 30.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
-            "chance": 0.0101
+            "chance": 0.0201
           }
         ]
       }
@@ -46400,6 +47282,18 @@
             "chance": 0.2529
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Denial Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -46419,12 +47313,6 @@
           },
           {
             "location": "Darek Draga 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Elite Frontier Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -46454,13 +47342,19 @@
             "chance": 0.2529
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -46514,12 +47408,6 @@
             "chance": 0.0564
           },
           {
-            "location": "Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
             "location": "Corvette 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -46536,6 +47424,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
           }
         ]
       }
@@ -46616,6 +47510,18 @@
             "chance": null
           },
           {
+            "location": "Dargyn Pilot 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
             "location": "Shock Draga 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
@@ -46634,25 +47540,25 @@
             "chance": 0.0067
           },
           {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.0067
-          },
-          {
             "location": "Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
             "location": "Kuva Elite Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.0067
+          },
+          {
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -46775,7 +47681,19 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Hellion Dargyn 12.50",
+            "location": "Tusk Shield Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Command Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -46791,6 +47709,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
+          },
+          {
+            "location": "Hellion Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           }
         ]
       }
@@ -46971,6 +47895,12 @@
             "chance": null
           },
           {
+            "location": "Lephantis 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2211
+          },
+          {
             "location": "Corrupted Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -46987,12 +47917,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
-          },
-          {
-            "location": "Lephantis 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2211
           }
         ]
       }
@@ -47073,13 +47997,31 @@
             "chance": 0.1106
           },
           {
-            "location": "Hellion Dargyn 12.50",
+            "location": "Tusk Shield Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Command Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
             "location": "Kuva Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Hellion Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -47157,13 +48099,13 @@
             "chance": null
           },
           {
-            "location": "Attack Drone 3.00",
+            "location": "Dargyn 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
           },
           {
-            "location": "Dargyn 3.00",
+            "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
@@ -47236,19 +48178,37 @@
             "chance": null
           },
           {
+            "location": "Tusk Shield Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Lancer Dreg 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
-            "location": "Attack Drone 3.00",
+            "location": "Tusk Command Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Hellion Dargyn 12.50",
+            "location": "Kuva Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -47260,7 +48220,7 @@
             "chance": 0.2529
           },
           {
-            "location": "Kuva Dargyn 12.50",
+            "location": "Hellion Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -47353,6 +48313,12 @@
             "chance": 0.1429
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
+          },
+          {
             "location": "Galvanized Blade",
             "type": "Mod Locations",
             "chance": null
@@ -47434,6 +48400,12 @@
             "chance": 0.0376
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
+          },
+          {
             "location": "Blazing Steel",
             "type": "Mod Locations",
             "chance": null
@@ -47486,6 +48458,12 @@
             "type": "Mission Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
           },
           {
             "location": "Glacial Edge",
@@ -47658,7 +48636,25 @@
             "chance": null
           },
           {
+            "location": "Dargyn 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Zeplen 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
             "location": "Mutalist Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1128
+          },
+          {
+            "location": "Cannon Battery 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1128
@@ -47668,24 +48664,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1128
-          },
-          {
-            "location": "Dargyn 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1128
-          },
-          {
-            "location": "Zeplen 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0752
           }
         ]
       }
@@ -47701,6 +48679,12 @@
         "name": "Set",
         "ducats": 0,
         "drop": [
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0276
+          },
           {
             "location": "Shattering Storm",
             "type": "Mod Locations",
@@ -47830,6 +48814,12 @@
             "chance": null
           },
           {
+            "location": "Zeplen 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
             "location": "Corvette 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -47840,12 +48830,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0564
-          },
-          {
-            "location": "Zeplen 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0752
           }
         ]
       }
@@ -48011,7 +48995,19 @@
             "chance": null
           },
           {
-            "location": "Hellion Dargyn 12.50",
+            "location": "Tusk Shield Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
+            "location": "Tusk Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
+            "location": "Tusk Command Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
@@ -48033,6 +49029,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
+          },
+          {
+            "location": "Hellion Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
           }
         ]
       }
@@ -48081,6 +49083,12 @@
             "chance": 0.025099999999999997
           },
           {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1265
+          },
+          {
             "location": "Venomous Clip",
             "type": "Mod Locations",
             "chance": null
@@ -48121,6 +49129,12 @@
             "type": "Mission Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1265
           },
           {
             "location": "Electrified Barrel",
@@ -50099,14 +51113,7 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": [
-          {
-            "location": "Madurai Lens Rare",
-            "type": "Sortie Rewards",
-            "rarity": "Rare",
-            "chance": 0.0233
-          }
-        ]
+        "drop": []
       }
     ]
   },
@@ -50118,14 +51125,7 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": [
-          {
-            "location": "Vazarin Lens Rare",
-            "type": "Sortie Rewards",
-            "rarity": "Rare",
-            "chance": 0.0233
-          }
-        ]
+        "drop": []
       }
     ]
   },
@@ -50137,14 +51137,7 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": [
-          {
-            "location": "Zenurik Lens Rare",
-            "type": "Sortie Rewards",
-            "rarity": "Rare",
-            "chance": 0.0233
-          }
-        ]
+        "drop": []
       }
     ]
   },
@@ -50156,14 +51149,7 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": [
-          {
-            "location": "Naramon Lens Rare",
-            "type": "Sortie Rewards",
-            "rarity": "Rare",
-            "chance": 0.0233
-          }
-        ]
+        "drop": []
       }
     ]
   },
@@ -50175,14 +51161,7 @@
       {
         "name": "Set",
         "ducats": 0,
-        "drop": [
-          {
-            "location": "Unairu Lens Rare",
-            "type": "Sortie Rewards",
-            "rarity": "Rare",
-            "chance": 0.0233
-          }
-        ]
+        "drop": []
       }
     ]
   },
@@ -53674,6 +54653,12 @@
             "chance": null
           },
           {
+            "location": "Stalker 50.00",
+            "type": "Enemy Blueprint Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Shadow Stalker 50.00",
             "type": "Enemy Blueprint Tables",
             "rarity": "Rare",
@@ -53681,12 +54666,6 @@
           },
           {
             "location": "Hunhow 50.00",
-            "type": "Enemy Blueprint Tables",
-            "rarity": "Rare",
-            "chance": 0.0201
-          },
-          {
-            "location": "Stalker 50.00",
             "type": "Enemy Blueprint Tables",
             "rarity": "Rare",
             "chance": 0.0201
@@ -54156,6 +55135,12 @@
             "chance": null
           },
           {
+            "location": "Frontier Seeker 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -54163,12 +55148,6 @@
           },
           {
             "location": "Arid Seeker 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Frontier Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -54187,6 +55166,12 @@
           },
           {
             "location": "Boiler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Tusk Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -56360,6 +57345,12 @@
             "type": "Mission Rewards",
             "rarity": "Rare",
             "chance": 0.0442
+          },
+          {
+            "location": "Plains of Eidolon Incursions",
+            "type": "Transient Rewards",
+            "rarity": "Rare",
+            "chance": 0.0101
           }
         ]
       }
