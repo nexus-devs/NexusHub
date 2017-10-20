@@ -158,10 +158,10 @@ export default {
           position: absolute;
           bottom: 0;
           background: red;
-          height: 66%;
+          height: 100%;
           width: 100%;
           z-index: 1;
-          @include gradient-background(transparent, $colorBackgroundLight);
+          @include gradient-background(rgba(15, 20, 25, 0.1), $colorBackgroundLight);
         }
       }
       .content {
