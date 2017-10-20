@@ -281,9 +281,10 @@ class Statistics extends Endpoint {
         // Add request to interval
         component.intervals[i].requests.push({
           user: request.user,
-          price: request.price
+          // Add hard upper limit here to avoid weird results with few offers
+          price: request.price < 2000 ? request.price : null
         })
-        if (request.price) {
+        if (request.price && request.price < 2000) {
           component.intervals[i].offers.hasValue++
         }
       }
@@ -454,7 +455,7 @@ class Statistics extends Endpoint {
   purgeExtremes(interval, request) {
     if (request.price !== null && interval.median !== null) {
       let percentToMedian = request.price / interval.median
-      return percentToMedian > 2 || percentToMedian < 0.66 || request.price > 2000
+      return percentToMedian > 2 || percentToMedian < 0.66
     }
     return false
   }
