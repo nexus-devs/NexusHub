@@ -226,7 +226,7 @@ header {
   overflow: hidden;
 
   @media (max-width: $breakpoint-m) {
-    padding: 165px 0 0px;
+    padding: 185px 0 0px;
   }
   .price-container {
     display: flex;
