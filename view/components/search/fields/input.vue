@@ -2,7 +2,7 @@
   <div class="col-b search">
     <div class="field">
       <label>Search</label><br />
-      <input type="text" placeholder="Items, Players.." :value="input" @input="input = $event.target.value"
+      <input type="text" placeholder="Try: Soma Prime, Maim..." :value="input" @input="input = $event.target.value"
        v-on:keyup="search" v-on:keyup.delete="search"
        v-on:keydown.tab.prevent="complete" v-on:keyup.enter="query" ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
