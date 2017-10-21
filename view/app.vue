@@ -18,11 +18,12 @@
 
 
 <script>
+import Vue from 'vue'
+import VueAnalytics from 'vue-analytics'
 import navigation from 'src/components/ui/nav.vue'
 import sidebar from 'src/components/sidebar/index.vue'
 import notification from 'src/components/ui/notification.vue'
 import bottom from 'src/components/ui/footer.vue'
-
 
 /**
  * Determine which game is currently being viewed
@@ -59,8 +60,16 @@ export default {
     }
   },
   mounted() {
+    // JS breakpoint to ensure correct content movement behaviour when sidebar
+    // is moved. (move content on $breakpoint-m, don't move it below)
     window.addEventListener('resize', () => this.updateBreakpoint())
     this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
+
+    // Google Analytics
+    Vue.use(VueAnalytics, {
+      id: 'UA-81233976-2',
+      checkDuplicatedScript: true
+    })
   },
   computed: {
     activeSidebar() {
