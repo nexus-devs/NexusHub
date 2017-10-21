@@ -2,12 +2,18 @@
   <div class="filters">
     <div class="g-ct">
       <div class="row">
-        <div class="col-b">
-          <h2>Offer Type</h2>
-          <button type="button" v-for="d in types" :disabled="d.disabled"
-                  v-on:click="select('types', d)" :class="{ inactive: d.inactive }">
-            <span>{{ d.name }}</span>
-          </button>
+        <div class="col-b row">
+          <div class="col inline-data" :class="{ inactive: types[0].inactive }" v-on:click="select('types', types[0])">
+            <h2>Selling</h2>
+            <span class="data">{{ supply.count }}</span>
+            <span class="diff" :class="{ 'inline-data-increase': demand.rawDiff > 0 }">{{ supply.diff }}</span>
+          </div>
+          <div class="col inline-data" :class="{ inactive: types[1].inactive }" v-on:click="select('types', types[1])">
+            <h2>Buying</h2>
+            <span class="data">{{ demand.count }}</span>
+            <span class="diff" :class="{ 'inline-data-increase': demand.rawDiff > 0 }">{{ demand.diff }}</span>
+          </div>
+          <div class="col"><!-- Dummy --></div>
         </div>
         <div class="col-b">
           <h2>Region</h2>
@@ -81,6 +87,31 @@ export default {
     }
   },
 
+  computed: {
+    supply() {
+      const focus = this.$store.state.items.item.supply.count
+      const comparison = this.$store.state.items.itemComparison.supply.count
+      const diff = ((focus - comparison) / comparison * 100).toFixed(2)
+
+      return {
+        count: focus > 999 ? `${(focus / 1000).toFixed(1)}K` : focus,
+        diff: diff > 0 ? `+${diff}%` : `${diff}%`,
+        rawDiff: diff
+      }
+    },
+    demand() {
+      const focus = this.$store.state.items.item.demand.count
+      const comparison = this.$store.state.items.itemComparison.demand.count
+      const diff = ((focus - comparison) / comparison * 100).toFixed(2)
+
+      return {
+        count: focus > 999 ? `${(focus / 1000).toFixed(1)}K` : focus,
+        diff: diff > 0 ? `+${diff}%` : `${diff}%`,
+        rawDiff: diff
+      }
+    }
+  },
+
   methods: {
     select(data, d) {
       let target = [].concat(this[data]) // Get rid of existing reference
@@ -148,7 +179,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
 .filters {
@@ -162,11 +193,21 @@ export default {
   .g-ct > .row > .col-b {
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-right: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
     flex-basis: auto;
+    border-right: 1px solid $colorSubtle;
 
     &:last-of-type {
       margin-right: 0;
+      border-right: none;
+    }
+    &:first-of-type {
+      margin-left: 0;
+    }
+    @media (max-width: $breakpoint-m) {
+      margin-left: 0;
+      border: none;
     }
   }
   h2 {
@@ -174,6 +215,37 @@ export default {
     font-weight: 400;
     margin-bottom: 5px;
   }
+  .inline-data {
+    @include ie;
+    flex-grow: 0;
+    border-radius: 2px;
+    padding-right: 15px;
+    margin: -9px 10px -10px -8px; // even out the ie() padding
+
+    &.inactive {
+      opacity: 0.5;
+    }
+    .data {
+      display: block;
+      font-size: 1.2em;
+      color: white;
+    }
+    .diff {
+      display: inline-block;
+      margin-top: -3px;
+      font-size: 0.9em;
+      color: $colorError;
+      letter-spacing: -0.5;
+
+      &.inline-data-increase {
+        color: $colorPrimary;
+      }
+    }
+    &:before {
+      border-radius: 2px;
+    }
+  }
+
   button {
     margin-top: 5px;
     margin-right: 5px;

@@ -2,7 +2,7 @@
   <div class="search-components g-ct">
     <h1>
       <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
-      <span>Search for item prices, player data and more.</span>
+      <span>Item Prices from the Trade Chat.</span>
     </h1>
     <div class="row">
       <searchfield></searchfield>
