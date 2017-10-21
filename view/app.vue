@@ -26,6 +26,14 @@ import notification from 'src/components/ui/notification.vue'
 import bottom from 'src/components/ui/footer.vue'
 
 /**
+ * Set up GA tracking
+ */
+Vue.use(VueAnalytics, {
+  id: 'UA-81233976-2',
+  checkDuplicatedScript: true
+})
+
+/**
  * Determine which game is currently being viewed
  * Useful for dynamic components like nav logo, notification listeners, etc
  */
@@ -39,7 +47,6 @@ const store = {
     }
   }
 }
-
 
 /**
  * Vue Component
@@ -64,12 +71,6 @@ export default {
     // is moved. (move content on $breakpoint-m, don't move it below)
     window.addEventListener('resize', () => this.updateBreakpoint())
     this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
-
-    // Google Analytics
-    Vue.use(VueAnalytics, {
-      id: 'UA-81233976-2',
-      checkDuplicatedScript: true
-    })
   },
   computed: {
     activeSidebar() {

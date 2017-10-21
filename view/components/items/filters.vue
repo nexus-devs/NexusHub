@@ -188,7 +188,7 @@ export default {
   @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.35));
 
   @media (max-width: $breakpoint-m) {
-    margin-top: 50px;
+    margin-top: 70px;
   }
   .g-ct > .row > .col-b {
     margin-top: 15px;
