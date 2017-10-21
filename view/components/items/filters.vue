@@ -232,7 +232,6 @@ export default {
     }
     .diff {
       display: inline-block;
-      margin-top: -3px;
       font-size: 0.8em;
       color: $colorError;
       letter-spacing: -0.5;
