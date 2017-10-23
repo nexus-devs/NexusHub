@@ -1,5 +1,9 @@
 <template>
   <div>
+    <navigation></navigation>
+    <sidebar>
+      <sidebar-search></sidebar-search>
+    </sidebar>
     <ui-header>
       <img slot="headline" src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
       <h1 slot="headline">BRAND</h1>
@@ -134,10 +138,16 @@
 
 
 <script>
+import sidebar from 'src/components/ui/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    navigation,
     'ui-header': uiheader
   }
 }

@@ -38,9 +38,6 @@ export default {
       if (this.$store.state.sidebar.activeId !== this.id) {
         this.$store.commit('setActivePanel', this.id)
       }
-    },
-    test(e) {
-      console.log(e)
     }
   }
 }

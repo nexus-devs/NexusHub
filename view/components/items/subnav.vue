@@ -18,7 +18,7 @@
     </div>
     <div class="time-container">
       <span>Comparing </span>
-      <timefield></timefield>
+      <timerange></timerange>
       <span>to <span>previous period</span></span>
     </div>
   </nav>
@@ -27,11 +27,11 @@
 
 
 <script>
-import timefield from 'src/components/search/fields/time.vue'
+import timerange from 'src/components/search/time.vue'
 
 export default {
   components: {
-    timefield
+    timerange
   },
 
   computed: {

@@ -1,19 +1,24 @@
 <template>
   <div>
-    <subnav></subnav>
-    <header>
-      <div class="g-ct">
-        <div class="price-container">
-          <pricefield v-for="(component, index) in components" :component="component"
-          :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
+    <navigation></navigation>
+    <sidebar>
+      <sidebar-search></sidebar-search>
+    </sidebar>
+    <app-content>
+      <subnav></subnav>
+      <header>
+        <div class="g-ct">
+          <div class="price-container">
+            <pricefield v-for="(component, index) in components" :component="component"
+            :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
+          </div>
         </div>
-      </div>
-      <filters></filters>
-    </header>
-
-    <section class="g-ct">
-      <!-- placeholder -->
-    </section>
+        <filters></filters>
+      </header>
+      <section class="g-ct">
+        <!-- placeholder -->
+      </section>
+    </app-content>
   </div>
 </template>
 
@@ -21,10 +26,14 @@
 
 <script>
 import _ from 'lodash'
-import timefield from 'src/components/search/fields/time.vue'
-import rankfield from 'src/components/search/fields/rank.vue'
+import appContent from 'src/app-content.vue'
+import sidebar from 'src/components/ui/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav.vue'
 import subnav from 'src/components/items/subnav.vue'
 import pricefield from 'src/components/items/price.vue'
+import time from 'src/components/search/time.vue'
+import rank from 'src/components/search/rank.vue'
 import filters from 'src/components/items/filters.vue'
 
 
@@ -151,29 +160,29 @@ const store = {
  */
 export default {
   components: {
+    'app-content': appContent,
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    navigation,
     subnav,
     pricefield,
-    timefield,
     filters
   },
   beforeCreate() {
-    // Fill store data if not already done
-    if (!this.$store.state.time || !this.$store.state.rank) {
-      timefield.beforeCreate[0].bind(this)()
-      rankfield.beforeCreate[0].bind(this)()
+    // Ensure store modules for time and rank are present
+    if (!this.$store._actions.applyTimeQuery || !this.$store.state.rank) {
+      time.beforeCreate[0].bind(this)()
+      rank.beforeCreate[0].bind(this)()
     }
 
-    // Register store module if not already there
+    // Register item store module if not already there
     if (!this.$store._actions.fetchItemData) {
       this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
     }
 
-    // Apply URL time query to state
+    // Apply URL query to vuex state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
     this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
-  },
-  created() {
-    this.$store.commit('setActiveGame', 'warframe')
   },
   computed: {
     item() {

@@ -28,7 +28,7 @@
 
 
 <script>
-import button from '../modules/button.vue' // to get the search function
+import button from './modules/button.vue' // to get the search function
 
 const store = {
   state: {

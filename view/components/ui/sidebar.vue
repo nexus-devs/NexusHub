@@ -21,7 +21,7 @@
 
 
 <script>
-import tooltip from './modules/tooltip.vue'
+import tooltip from './sidebar/modules/tooltip.vue'
 
 const store = {
   state: {
@@ -45,13 +45,23 @@ const store = {
     },
     incrementId(state) {
       state.id++
+    },
+    setId(state, num) {
+      state.id = num
     }
   }
 }
 
 export default {
   beforeCreate() {
-    this.$store.registerModule('sidebar', store)
+    if (!this.$store._mutations.toggleSidebar) {
+      this.$store.registerModule('sidebar', store)
+    }
+  },
+
+  // Reset counter for panels when we load a new sidebar on the next page
+  destroyed() {
+    this.$store.commit('setId', 0)
   },
 
   components: {
@@ -75,7 +85,7 @@ export default {
 
   methods: {
     toggle(expanded) {
-      this.$store.commit('toggleSidebar', expanded)
+      this.$store.commit('toggleSidebar', expanded, { preserveState: true })
     },
     move(e) {
       // Reset on end
