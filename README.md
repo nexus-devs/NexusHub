@@ -8,6 +8,10 @@ Nexus-Stats is an online service which provides insights on game economics and o
 
 <br>
 
+You can find the live version of this repo at [beta.nexus-stats.com](https://beta.nexus-stats.com)
+
+<br>
+
 ## API
 [Provisional docs](https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE)
 
