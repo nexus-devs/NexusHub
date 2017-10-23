@@ -116,8 +116,28 @@ export default {
     select(data, d) {
       let target = [].concat(this[data]) // Get rid of existing reference
       let i = target.findIndex(e => e.name === d.name)
-      target[i].inactive = target[i].inactive ? false : true
-      this[data] = target // We need to reassign the variable for vue to re-render it
+      let allActive = true
+
+      this[data].forEach(el => {
+        if (el.inactive && !el.disabled) {
+          allActive = false
+        }
+      })
+
+      // Labels are all active -> user wants to activate only the one they selected
+      if (allActive) {
+        for (let j = 0; j < target.length; j++) {
+          target[j].inactive = i === j ? false : true
+        }
+      }
+
+      // Others aren't all active -> user wants to reactive a certain label
+      else {
+        target[i].inactive = target[i].inactive ? false : true
+      }
+
+      // Now we need to reassign the variable for vue to re-render it
+      this[data] = target
     }
   },
 

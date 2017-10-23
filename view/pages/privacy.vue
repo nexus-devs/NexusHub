@@ -1,5 +1,9 @@
 <template>
 <div>
+  <navigation></navigation>
+  <sidebar>
+    <sidebar-search></sidebar-search>
+  </sidebar>
   <ui-header>
     <h1 slot="headline">Privacy Policy</h1>
   </ui-header>
@@ -204,10 +208,16 @@
 
 
 <script>
+import sidebar from 'src/components/ui/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    navigation,
     'ui-header': uiheader
   }
 }

@@ -1,5 +1,9 @@
 <template>
-  <div class="">
+  <div>
+    <navigation></navigation>
+    <sidebar>
+      <sidebar-search></sidebar-search>
+    </sidebar>
     <div class="company">
       <video playsinline autoplay muted loop class="background">
         <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
@@ -92,6 +96,22 @@
     </section>
   </div>
 </template>
+
+
+
+<script>
+import sidebar from 'src/components/ui/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav.vue'
+
+export default {
+  components: {
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    navigation,
+  }
+}
+</script>
 
 
 

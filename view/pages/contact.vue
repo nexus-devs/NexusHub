@@ -1,5 +1,9 @@
 <template>
   <div>
+    <navigation></navigation>
+    <sidebar>
+      <sidebar-search></sidebar-search>
+    </sidebar>
     <ui-header>
       <h1 slot="headline">Contact</h1>
       <p slot="description">Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
@@ -29,10 +33,16 @@
 
 
 <script>
+import sidebar from 'src/components/ui/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    navigation,
     'ui-header': uiheader
   }
 }

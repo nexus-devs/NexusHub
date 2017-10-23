@@ -2,7 +2,10 @@
   <nav class="row">
     <div class="col nav-l">
       <router-link to="/warframe" exact><img src="/img/nav/logo-font.svg" alt="Nexus-Stats Logo" class="ico-h-24"></router-link>
-      <router-link :to="{ path: `/${game}`}" class="game">{{ game }}</router-link>
+      <span class="sub">Beta</span>
+      <slot>
+        <!-- Page links will go here -->
+      </slot>
     </div>
     <div class="col nav-r">
       <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
@@ -15,16 +18,11 @@
 
 
 <script>
-import search from 'src/components/search/fields/input.vue'
-
 export default {
   computed: {
     game() {
       return this.$store.state.game.name
     }
-  },
-  components: {
-    search
   }
 }
 </script>
@@ -67,7 +65,7 @@ export default {
       }
     }
 
-    .game {
+    .sub {
       position: relative;
       top: 1px;
       vertical-align: middle;
@@ -79,23 +77,6 @@ export default {
 
       @media (max-width: $breakpoint-s) {
         display: none;
-      }
-    }
-
-    /deep/ .search {
-      display: inline-block;
-      vertical-align: middle;
-
-      label, br {
-        display: none;
-      }
-
-      input {
-        background: $colorBackgroundDarker;
-        padding: 5px 15px;
-        border-radius: 9999px;
-        font-size: 0.85em;
-        color: white;
       }
     }
   }
