@@ -55,7 +55,7 @@ const store = {
 export default {
   beforeCreate() {
     // Reset counters for panel id's when loading a new page
-    if (this.$store.state.sidebar) {
+    if (this.$store.state.sidebar && this.$store._mutations.toggleSidebar) {
       this.$store.commit('setId', 0)
     }
     if (!this.$store._mutations.toggleSidebar) {

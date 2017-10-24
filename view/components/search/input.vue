@@ -87,12 +87,12 @@ export default {
       if (!this.autocomplete.name.startsWith(this.input)) {
         this.autocomplete = {
           name: this.input,
-          type: ''
+          type: 'Any'
         }
         await this.fetchSuggestions(result)
       }
 
-      // Wait until user finished typing fast chain of chars
+      // Only fetch new data when user is done typing to reduce server load.
       else {
         this.inputQueryDelay = setTimeout(() => {
           this.fetchSuggestions(result)
@@ -106,7 +106,7 @@ export default {
           result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
           this.$store.commit('setSearchInput', {
             name: this.input,
-            type: 'Search'
+            type: 'Any'
           })
         }
         // Found suggestions
@@ -155,7 +155,7 @@ export default {
     },
 
     /**
-     * Visit link determined by user input
+     * Visit link set by user input
      */
     query() {
       const query = button.methods.search.bind(this)

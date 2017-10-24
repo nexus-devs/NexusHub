@@ -20,8 +20,14 @@ export default {
       const rank = this.$store.state.rank
 
       if (search.input.name && !search.done) {
-        let path = `/warframe/${search.input.type.toLowerCase()}/${search.input.name.toLowerCase()}`.replace(/-/g, '--').replace(/ /g, '-')
+        let path
         let query = {}
+
+        if (search.input.type === 'Any') {
+          path = `/warframe/search?query=${search.input.name}`
+        } else {
+          path = `/warframe/${search.input.type.toLowerCase()}/${search.input.name.toLowerCase()}`.replace(/-/g, '--').replace(/ /g, '-')
+        }
 
         // Add URL params based on state
         if (time.modified) {

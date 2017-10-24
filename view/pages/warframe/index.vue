@@ -171,6 +171,7 @@ header {
    input {
      padding-top: 10px;
      padding-bottom: 9px;
+     width: 80%;
    }
    .a-ie {
      margin-left:-10px;
