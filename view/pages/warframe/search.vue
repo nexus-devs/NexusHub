@@ -7,6 +7,13 @@
     <app-content>
       <ui-header>
         <search></search>
+        <div slot="sub" class="search-types">
+          <div class="g-ct">
+            <a class="active">All</a>
+            <a>Items</a>
+            <a>Players</a>
+          </div>
+        </div>
       </ui-header>
     </app-content>
   </div>
@@ -31,7 +38,6 @@ export default {
   },
   mounted() {
     console.log(this.$route.query)
-
   }
 }
 </script>
@@ -40,12 +46,42 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
+  padding: 30px 0 0 0 !important;
+
+  .search-types {
+    display: flex;
+    margin-top: 40px;
+    @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
+    width: 100%;
+
+    .g-ct {
+      display: flex;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    a {
+      cursor: pointer;
+      padding: 12px 25px;
+      color: $colorFontBody !important;
+
+      &.active {
+        color: white !important;
+        font-weight: 600;
+        border-bottom: 2px solid $colorPrimary;
+      }
+    }
+  }
+
   /deep/ {
+    .g-ct {
+      padding-bottom: 0 !important;
+    }
     .field {
       position: relative;
       padding: 15px;
       border-radius: 2px;
       background: $colorBackgroundDark;
+      @include shadow-0;
 
       label {
         font-size: 0.9em;
@@ -57,13 +93,11 @@ header {
         width: 100%;
         margin-top: 5px;
         color: white;
-        font-size: 1.1em;
       }
       .autocomplete {
         position: absolute;
         left: 15px;
         margin-top: 5px;
-        font-size: 1.1em;
       }
       .autocomplete-type {
         display: none;

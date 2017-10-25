@@ -5,9 +5,9 @@
       <sidebar-search></sidebar-search>
     </sidebar>
     <ui-header>
-      <img slot="headline" src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
-      <h1 slot="headline">BRAND</h1>
-      <p slot="description">
+      <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
+      <h1>BRAND</h1>
+      <p>
         Nexus-Stats is an agile, reactive brand that is always ready for action.
         Feel free to use the assets below when you need to reference our service.
       </p>
@@ -173,6 +173,7 @@ header {
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    font-weight: 100;
   }
 }
 

@@ -76,7 +76,7 @@ nav {
   align-items: center;
   box-sizing: border-box;
   padding: 10px 40px 10px 85px;
-  @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.4));
+  @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
 
   @media (max-width: $breakpoint-m) {
     margin-top: 56px;

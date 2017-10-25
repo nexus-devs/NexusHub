@@ -117,10 +117,14 @@ export default {
       let target = [].concat(this[data]) // Get rid of existing reference
       let i = target.findIndex(e => e.name === d.name)
       let allActive = true
+      let allInactive = true
 
       this[data].forEach(el => {
         if (el.inactive && !el.disabled) {
           allActive = false
+        }
+        if ((!el.inactive || el.disabled) && el.name !== target[i].name) {
+          allInactive = false
         }
       })
 
@@ -131,7 +135,14 @@ export default {
         }
       }
 
-      // Others aren't all active -> user wants to reactive a certain label
+      // All labels inactive -> select all
+      else if (allInactive) {
+        for (let j = 0; j < target.length; j++) {
+          target[j].inactive = false
+        }
+      }
+
+      // Some are active -> user wants to reactive a certain label
       else {
         target[i].inactive = target[i].inactive ? false : true
       }
@@ -205,7 +216,7 @@ export default {
 .filters {
   margin-top: 80px;
   padding: 15px;
-  @include gradient-background-dg(rgba(15, 20, 25, 0.3), rgba(15, 20, 25, 0.35));
+  @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
 
   @media (max-width: $breakpoint-m) {
     margin-top: 70px;
