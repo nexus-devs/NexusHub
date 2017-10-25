@@ -80,7 +80,7 @@ nav {
 
   @media (max-width: $breakpoint-m) {
     margin-top: 56px;
-    padding: 15px 40px 15px 25px;
+    padding: 10px 40px 10px 25px;
   }
 
   .item {

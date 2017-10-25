@@ -52,6 +52,12 @@ export default {
   beforeCreate() {
     this.$store.registerModule('search', store)
   },
+  created() {
+    // Apply input from state
+    if (this.$store.state.search.input.name) {
+      this.input = this.$store.state.search.input.name
+    }
+  },
   mounted() {
     this.$refs.input.focus()
   },
