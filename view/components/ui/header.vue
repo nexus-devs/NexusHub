@@ -1,10 +1,9 @@
 <template>
   <header>
     <div class="g-ct">
-      <slot name="headline"></slot>
-      <slot name="description"></slot>
       <slot></slot>
     </div>
+    <slot name="sub"></slot>
   </header>
 </template>
 
@@ -23,7 +22,9 @@ header {
   width: 100%;
   justify-content: flex-start;
   align-items: center;
-  background: $colorBackgroundDarker;
+  flex-direction: column;
+  @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+  @include shadow-1;
 
   .g-ct {
     z-index: 1;

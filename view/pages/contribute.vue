@@ -5,8 +5,8 @@
       <sidebar-search></sidebar-search>
     </sidebar>
     <ui-header>
-      <h1 slot="headline">Contribution Guidelines</h1>
-      <p slot="description">Help us shape the future of Nexus-Stats with your own ideas!</p>
+      <h1>Contribution Guidelines</h1>
+      <p>Help us shape the future of Nexus-Stats with your own ideas!</p>
     </ui-header>
     <div class="g-ct">
       <section>

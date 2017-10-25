@@ -5,7 +5,7 @@
     <sidebar-search></sidebar-search>
   </sidebar>
   <ui-header>
-    <h1 slot="headline">Privacy Policy</h1>
+    <h1>Privacy Policy</h1>
   </ui-header>
   <div class="g-ct">
     <section>

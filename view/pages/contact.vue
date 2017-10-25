@@ -5,8 +5,8 @@
       <sidebar-search></sidebar-search>
     </sidebar>
     <ui-header>
-      <h1 slot="headline">Contact</h1>
-      <p slot="description">Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
+      <h1>Contact</h1>
+      <p>Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
     </ui-header>
     <div class="g-ct">
       <section>
