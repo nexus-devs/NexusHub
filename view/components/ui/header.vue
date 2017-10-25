@@ -13,8 +13,6 @@
 @import '~src/styles/partials/importer';
 
 header {
-  position: relative;
-  overflow: hidden;
   padding: 30px 0;
   top: -56px;
   margin-bottom: -56px;
@@ -28,7 +26,6 @@ header {
 
   .g-ct {
     z-index: 1;
-    width: 100%;
     padding-top: 85px;
     padding-bottom: 70px; // for svg
   }

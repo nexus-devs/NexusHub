@@ -70,7 +70,7 @@
   footer {
     margin-top: auto;
     padding: 0 0 20px;
-    background: $colorBackgroundDarker;
+    background: $colorBackgroundDarkest;
 
     .row {
       padding: 10 0;
@@ -121,7 +121,7 @@
       z-index: 1;
       opacity: 1;
       will-change: transform;
-      background: $colorBackgroundDarker;
+      background: $colorBackgroundDarkest;
       padding: 0;
       padding-bottom: 60px;
       padding-right: 20px;
