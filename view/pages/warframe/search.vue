@@ -21,7 +21,8 @@
         <div class="g-ct">
           <div class="suggestion">
             <div class="suggestion-image">
-              <img src="" alt="">
+              <img src="/img/warframe/items/valkyr-prime.png" alt="">
+              <img src="/img/warframe/items/valkyr-prime.png" class="blur" alt="">
             </div>
             <div class="suggestion-data">
               <span>Some Item Name</span><br>
@@ -30,7 +31,8 @@
           </div>
           <div class="suggestion">
             <div class="suggestion-image">
-              <img src="" alt="">
+              <img src="/img/warframe/items/valkyr-prime.png" alt="">
+              <img src="/img/warframe/items/valkyr-prime.png" class="blur" alt="">
             </div>
             <div class="suggestion-data">
               <span>Some Item Name</span><br>
@@ -124,11 +126,11 @@ header {
       position: relative;
       padding: 15px;
       border-radius: 2px;
-      background: transparent;
+      border: 1px solid transparent;
       @include ease(0.35s);
 
       &:hover {
-        background: $colorBackgroundDark;
+        border: 1px solid $colorSubtle;
       }
 
       label {
@@ -141,7 +143,7 @@ header {
         width: 100%;
         margin-top: 5px;
         color: white;
-        font-weight: 1.1em;
+        font-size: 1.1em;
       }
       .autocomplete {
         position: absolute;
@@ -175,22 +177,39 @@ header {
   }
   .suggestion {
     @include ie;
+    @include field;
     display: inline-block;
-    background: $colorBackgroundDarker;
     border-radius: 2px;
     padding: 10px 20px;
     margin-right: 10px;
 
+    &:hover {
+      @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+    }
     &:before {
       border-radius: 2px;
     }
     .suggestion-image {
+      position: relative;
+      overflow: hidden;
       display: inline-block;
       vertical-align: middle;
       background: $colorBackgroundDark;
       width: 40px;
       height: 40px;
       margin-right: 20px;
+
+      img {
+        position: absolute;
+        top: 0;
+        max-width: 200%;
+        transform: translate(-25%, -10%);
+        z-index: 1;
+      }
+      .blur {
+        filter: blur(30px);
+        z-index: 0;
+      }
     }
     .suggestion-data {
       display: inline-block;
