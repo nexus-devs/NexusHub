@@ -5,31 +5,20 @@
       <sidebar-search></sidebar-search>
     </sidebar>
     <app-content>
-      <header>
-        <div class="g-ct">
-          <search></search>
-        </div>
-        <div class="search-types">
+      <ui-header>
+        <search></search>
+        <div slot="sub" class="search-types">
           <div class="g-ct">
             <a class="active">All</a>
             <a>Items</a>
             <a>Players</a>
           </div>
         </div>
-      </header>
+      </ui-header>
       <section class="relevant">
         <div class="g-ct">
-          <div class="suggestion">
-            <div class="suggestion-image">
-              <img src="/img/warframe/items/valkyr-prime.png" alt="">
-              <img src="/img/warframe/items/valkyr-prime.png" class="blur" alt="">
-            </div>
-            <div class="suggestion-data">
-              <span>Some Item Name</span><br>
-              <span>50p</span>
-            </div>
-          </div>
-          <div class="suggestion">
+          <h2>Most relevant</h2>
+          <div class="suggestion" v-for="i in [1, 2, 3]">
             <div class="suggestion-image">
               <img src="/img/warframe/items/valkyr-prime.png" alt="">
               <img src="/img/warframe/items/valkyr-prime.png" class="blur" alt="">
@@ -43,8 +32,18 @@
       </section>
       <section class="results">
         <div class="g-ct">
-          <div class="filters">
+          <div class="filter">
             <h2>Sort By</h2>
+            <div class="filter-tags">
+              <div class="tag" v-for="i in [1, 2, 3, 4, 5, 6, 7]">
+                <span>Price</span>
+                <img src="/img/ui/dropdown.svg" class="ico-16" alt="Ascending/Descending">
+              </div>
+            </div>
+            <div class="filter-view">
+              <img src="/img/ui/list-view.svg" class="ico-20 a-ie" alt="list">
+              <img src="/img/ui/card-view.svg" class="ico-20 a-ie" alt="cards">
+            </div>
           </div>
         </div>
       </section>
@@ -83,8 +82,8 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
-  padding-top: 80px;
-  @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 
   @media (max-width: $breakpoint-m) {
     padding-top: 110px;
@@ -95,7 +94,7 @@ header {
     justify-content: flex-start;
     margin-top: 60px;
     width: 100%;
-    @include gradient-background($color-bg-transparent-1, $color-bg-transparent-2);
+    background: $color-bg-transparent-1;
 
     @media (max-width: $breakpoint-m) {
       margin-top: 40px;
@@ -107,13 +106,24 @@ header {
       width: 100%;
     }
     a {
-      cursor: pointer;
+      @include ie;
       padding: 12px 25px;
       color: $colorFontBody !important;
+      border-radius: 0;
 
+      &:before {
+        border-radius: 0;
+      }
+      &:hover {
+        opacity: 1 !important;
+      }
       &.active {
         color: white !important;
-        border-bottom: 2px solid $colorPrimary;
+        padding-bottom: 2px;
+        @include gradient-background-dg($colorPrimary, $colorAccent);
+        background-position: left bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 2px ;
       }
     }
   }
@@ -124,7 +134,7 @@ header {
     }
     .field {
       position: relative;
-      padding: 15px;
+      padding: 12px;
       border-radius: 2px;
       border: 1px solid transparent;
       @include ease(0.35s);
@@ -164,14 +174,19 @@ header {
 }
 
 .relevant {
-  padding: 0 0 20px 0;
+  padding: 0 0 40px 0;
   position: relative;
   overflow-y: hidden;
 
+  h2 {
+    font-weight: 400;
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
   .g-ct {
     position: relative;
-    top: 32px; // hide scrollbar
-    padding-bottom: 32px; // hide scrollbar
+    top: 52px; // hide scrollbar
+    padding-bottom: 52px; // hide scrollbar
     overflow-x: scroll;
     white-space: nowrap;
   }
@@ -179,9 +194,8 @@ header {
     @include ie;
     @include field;
     display: inline-block;
-    border-radius: 2px;
     padding: 10px 20px;
-    margin-right: 10px;
+    margin-right: 15px;
 
     &:hover {
       @include gradient-background-dg($colorBackgroundLight, $colorBackground);
@@ -216,7 +230,9 @@ header {
       vertical-align: middle;
 
       span:first-of-type {
+        display: inline-block;
         color: white;
+        margin-bottom: -3px;
       }
     }
   }
@@ -225,11 +241,63 @@ header {
 .results {
   padding-top: 20px;
 
-  .filters {
+  .filter {
+    position: relative;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+
     h2 {
       font-size: 1em;
       font-weight: 400;
       display: inline-block;
+      padding-right: 20px;
+      margin-right: 20px;
+      margin-bottom: 20px; // for filter tag break
+      border-right: 1px solid $colorSubtle;
+
+      @media (max-width: $breakpoint-s) {
+        border-right: none;
+      }
+    }
+    .filter-tags {
+      margin-right: 100px; // break when view type is supposed to cause break
+
+      @media (max-width: $breakpoint-s) {
+        width: 100%;
+        margin-right: 0;
+      }
+      .tag {
+        @include ie;
+        display: inline-block;
+        padding: 5px 0 5px 15px;
+        background: $colorBackground;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        border-radius: 2px;
+
+        &:before {
+          border-radius: 2px;
+        }
+        &:hover {
+          background: $colorBackgroundLight;
+        }
+        span {
+          font-size: 0.9em;
+          color: white;
+        }
+      }
+    }
+    .filter-view {
+      position: absolute;
+      right: 0;
+      margin-top: -5px; // compensate for icon padding
+      padding-left: 20px;
+      border-left: 1px solid $colorSubtle;
+
+      @media (max-width: $breakpoint-s) {
+        border-left: none;
+      }
     }
   }
 }
