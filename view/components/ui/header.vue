@@ -14,14 +14,7 @@
 
 header {
   padding: 30px 0;
-  top: -56px;
-  margin-bottom: -56px;
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+  @include gradient-background-dg-tri(#596474, #5b6674, #434b57);
   @include shadow-1;
 
   .g-ct {

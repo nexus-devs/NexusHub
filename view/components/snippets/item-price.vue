@@ -6,7 +6,7 @@
     </div>
 
     <!-- Actual price field -->
-    <div v-else class="row">
+    <div v-else class="row item-price-snippet">
 
       <!-- left panel -->
       <div class="col">

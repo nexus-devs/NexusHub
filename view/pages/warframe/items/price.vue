@@ -9,8 +9,8 @@
       <header>
         <div class="g-ct">
           <div class="price-container">
-            <pricefield v-for="(component, index) in components" :component="component"
-            :key="component.name" :comparison="comparison[index]" :item="item"></pricefield>
+            <pricesnippet v-for="(component, index) in components" :component="component"
+            :key="component.name" :comparison="comparison[index]" :item="item"></pricesnippet>
           </div>
         </div>
         <filters></filters>
@@ -31,7 +31,7 @@ import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import navigation from 'src/components/ui/nav.vue'
 import subnav from 'src/components/items/subnav.vue'
-import pricefield from 'src/components/items/price.vue'
+import pricesnippet from 'src/components/snippets/item-price.vue'
 import time from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import filters from 'src/components/items/filters.vue'
@@ -165,7 +165,7 @@ export default {
     'sidebar-search': sidebarSearch,
     navigation,
     subnav,
-    pricefield,
+    pricesnippet,
     filters
   },
   beforeCreate() {
@@ -229,7 +229,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
-  @include gradient-background-dg(#647080, $colorBackground);
+  @include gradient-background-dg-tri(#596474, #5b6674, #434b57);
   padding: 130px 0 0px;
   position: relative;
   overflow: hidden;

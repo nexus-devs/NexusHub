@@ -71,7 +71,7 @@ export default {
   .app-content {
     @include ease-out(0.45s);
 
-    .g-ct {
+    & > .g-ct {
       @include ease-out(0.45s);
     }
   }
@@ -79,7 +79,7 @@ export default {
     margin-right: calc(262px + 5vw);
     transform: translateX(calc(262px + 5vw));
 
-    .g-ct {
+    & > .g-ct {
       padding: 0 96px !important;
     }
   }

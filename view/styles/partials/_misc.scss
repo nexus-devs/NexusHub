@@ -6,6 +6,10 @@
   background: transparent;
   background: linear-gradient(to bottom right, $top, $bot);
 }
+@mixin gradient-background-dg-tri($top, $mid, $bot) {
+  background: transparent;
+  background: linear-gradient(to bottom right, $top, $mid, $bot);
+}
 @mixin triangle-left($size, $color) {
   width: 0;
   height: 0;
