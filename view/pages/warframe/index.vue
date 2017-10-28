@@ -139,8 +139,6 @@ header {
    border-radius: 2px;
    padding: 15px;
    margin: 1px;
-   margin-top: 1px !important;
-   margin-bottom: 1px !important;
 
    .input-container, .button-container {
      display: inline-block;
