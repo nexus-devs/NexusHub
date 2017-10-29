@@ -45,11 +45,11 @@ export default {
 @import '~src/styles/modules/importer';
 
 #app {
-  background: $colorBackgroundDark;
-  color: $colorFontBody;
+  background: $color-bg-dark;
+  color: $color-font-body;
 
   input::placeholder {
-    color: $colorFontBody;
+    color: $color-font-body;
   }
   a {
     color: white;

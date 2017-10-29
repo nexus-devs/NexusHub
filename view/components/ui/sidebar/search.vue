@@ -87,7 +87,7 @@ export default {
   .field {
     border-radius: 2px;
     padding: 8px 15px;
-    background: $colorBackgroundDarker;
+    background: $color-bg-darker;
   }
   input {
     position: relative;
@@ -124,10 +124,10 @@ export default {
       @include ie(20);
       padding: 12px 10px;
       border-radius: 0;
-      @include gradient-background-dg($colorPrimary, $colorAccent);
+      @include gradient-background-dg($color-primary, $color-accent);
 
       &:hover {
-        @include gradient-background-dg($colorPrimary, $colorAccent);
+        @include gradient-background-dg($color-primary, $color-accent);
       }
       img {
         position: relative;
@@ -152,13 +152,13 @@ export default {
       padding-top: 20px;
     }
     &:hover {
-      background: $colorBackgroundDark;
+      background: $color-bg-dark;
     }
     .ico-36 {
       position: relative;
       overflow: hidden;
       text-align: center;
-      background: $colorBackgroundLight;
+      background: $color-bg-light;
       border-radius: 2px;
       margin-right: 10px;
 
@@ -203,7 +203,7 @@ export default {
 }
 
 /deep/ .time {
-  border-top: 1px solid $colorSubtleDark;
+  border-top: 1px solid $color-subtle-dark;
   margin-top: 30px;
   padding-top: 30px;
 
@@ -245,13 +245,13 @@ export default {
         color: white;
         font-size: 0.9em;
         padding: 5px 15px;
-        background: $colorBackgroundDarker;
+        background: $color-bg-darker;
 
         &:before {
           border-radius: 2px;
         }
         &:hover {
-          background: $colorBackgroundLight;
+          background: $color-bg-light;
         }
       }
     }
@@ -262,7 +262,7 @@ export default {
 /deep/ .col-b .field.active {
   .input {
     span:not(.selected) {
-      color: $colorFontBody;
+      color: $color-font-body;
     }
     img {
       transform: rotate(-180deg);
@@ -271,7 +271,7 @@ export default {
 }
 
 /deep/ .rank {
-  border-top: 1px solid $colorSubtleDark;
+  border-top: 1px solid $color-subtle-dark;
   margin-top: 20px;
   padding-top: 30px;
 
@@ -310,7 +310,7 @@ export default {
         cursor: pointer;
         font-size: 0.85em;
         margin: 3px;
-        background: $colorBackgroundDarker;
+        background: $color-bg-darker;
         @include ie();
         padding: 9px 15px;
         border-radius: 2px;

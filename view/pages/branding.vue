@@ -184,7 +184,7 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: $colorBackground;
+    background: $color-bg;
     @include field;
 
     .logo-download {
@@ -198,7 +198,7 @@ header {
 
       a {
         margin: 0 5px;
-        color: $colorFontBody !important;
+        color: $color-font-body !important;
 
         &:hover {
           color: white !important;
@@ -237,28 +237,28 @@ header {
       text-align: right;
     }
     .green {
-      background: $colorPrimary;
+      background: $color-primary;
     }
     .green-shade {
-      background: $colorPrimaryDark;
+      background: $color-primary-dark;
     }
     .blue {
-      background: $colorAccent;
+      background: $color-accent;
     }
     .blue-shade {
-      background: $colorAccentDark;
+      background: $color-accent-dark;
     }
     .grey {
-      background: $colorBackgroundLight;
+      background: $color-bg-light;
     }
     .grey-shade {
-      background: $colorBackground;
+      background: $color-bg;
     }
     .dark {
-      background: $colorBackgroundDark;
+      background: $color-bg-dark;
     }
     .dark-shade {
-      background: $colorBackgroundDarker;
+      background: $color-bg-darker;
     }
   }
 }
