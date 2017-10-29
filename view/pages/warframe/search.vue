@@ -170,7 +170,7 @@ export default {
 .search-input {
   position: relative;
   z-index: 1;
-  border-top: 1px solid $colorSubtleDark;
+  border-top: 1px solid $color-subtle-dark;
   @include shadow-1;
 
   @media (max-width: $breakpoint-m) {
@@ -195,7 +195,7 @@ export default {
       padding: 8px;
       max-width: 250px;
       border-radius: 2px;
-      background: $colorBackgroundDarker;
+      background: $color-bg-darker;
       @include ease(0.35s);
 
       @media (max-width: $breakpoint-m) {
@@ -245,7 +245,7 @@ export default {
   a {
     @include ie;
     padding: 15px 25px;
-    color: $colorFontBody !important;
+    color: $color-font-body !important;
     border-radius: 0;
 
     &:before {
@@ -256,7 +256,7 @@ export default {
     }
     &.active {
       color: white !important;
-      @include gradient-background-dg($colorPrimary, $colorAccent);
+      @include gradient-background-dg($color-primary, $color-accent);
       background-position: left bottom;
       background-repeat: no-repeat;
       background-size: 100% 2px;
@@ -273,7 +273,8 @@ export default {
 .snippets {
   padding: 0 0 60px 0;
   position: relative;
-  overflow-y: hidden;@include gradient-background-dg-tri(#596474, #5b6674, #434b57);
+  overflow-y: hidden;
+  background: $color-bg-darker;
 
   .g-ct {
     display: flex;
@@ -328,13 +329,13 @@ export default {
         margin-right: 10px;
         margin-bottom: 5px;
         border-radius: 2px;
-        border: 1px solid $colorSubtleDark;
+        border: 1px solid $color-subtle-dark;
 
         &:before {
           border-radius: 2px;
         }
         &:hover {
-          background: $colorBackgroundLight;
+          background: $color-bg-light;
           border: 1px solid transparent;
         }
         span {
@@ -349,7 +350,7 @@ export default {
         }
         &.active {
           border: 1px solid transparent;
-          background: $colorBackgroundLight;
+          background: $color-bg-light;
 
           img {
             opacity: 1;

@@ -70,11 +70,11 @@
   footer {
     margin-top: auto;
     padding: 0 0 20px;
-    background: $colorBackgroundDarkest;
+    background: $color-bg-darkest;
 
     .row {
       padding: 10 0;
-      border-bottom: 1px solid $colorSubtleDark;
+      border-bottom: 1px solid $color-subtle-dark;
     }
 
     .col-b {
@@ -108,7 +108,7 @@
       a {
         display: block;
         font-size: 0.9em;
-        color: $colorFontSubtle !important;
+        color: $color-font-subtle !important;
 
         &:hover {
           color: white !important;
@@ -121,7 +121,7 @@
       z-index: 1;
       opacity: 1;
       will-change: transform;
-      background: $colorBackgroundDarkest;
+      background: $color-bg-darkest;
       padding: 0;
       padding-bottom: 60px;
       padding-right: 20px;

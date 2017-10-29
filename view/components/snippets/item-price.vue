@@ -132,7 +132,7 @@ export default {
     width: 115px;
 
     &:first-of-type {
-      @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+      @include gradient-background-dg($color-bg-light, $color-bg);
 
       .background {
         position: absolute;
@@ -162,7 +162,7 @@ export default {
           height: 100%;
           width: 100%;
           z-index: 1;
-          @include gradient-background(rgba(15, 20, 25, 0.1), $colorBackgroundLight);
+          @include gradient-background(rgba(15, 20, 25, 0.1), $color-bg-light);
         }
       }
       .content {
@@ -190,14 +190,14 @@ export default {
       .increase {
         .content-data-main-diff {
           span {
-            color: $colorPrimary;
+            color: $color-primary;
           }
         }
       }
       .decrease {
         .content-data-main-diff {
           span {
-            color: $colorError;
+            color: $color-error;
           }
         }
       }
@@ -205,7 +205,7 @@ export default {
     // Right col
     &:last-of-type {
       position: relative;
-      @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
+      @include gradient-background-dg($color-bg-dark-subtle, $color-bg-dark);
 
       .sparkline {
         position: absolute;
@@ -228,7 +228,7 @@ export default {
           }
           svg {
             .line {
-              stroke: $colorFontSubtle;
+              stroke: $color-font-subtle;
               stroke-width: 1px;
               stroke-dasharray: 2;
             }

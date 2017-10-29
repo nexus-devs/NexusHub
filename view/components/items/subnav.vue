@@ -91,12 +91,12 @@ nav {
       position: relative;
       overflow: hidden;
       border-radius: 50%;
-      border: 1px solid $colorSubtle;
+      border: 1px solid $color-subtle;
       height: 30px;
       width: 30px;
       flex-grow: 1;
       margin-right: 10px;
-      background: $colorBackground;
+      background: $color-bg;
 
       img {
         max-height: 250%;
@@ -115,12 +115,12 @@ nav {
         margin-top: -5px;
         margin-right: 7px;
         font-size: 0.85em;
-        color: $colorFontSubtle;
+        color: $color-font-subtle;
         cursor: pointer;
         @include ease(0.3s);
 
         &.selected {
-          color: $colorFontBody;
+          color: $color-font-body;
         }
         &:hover {
           color: white;
@@ -162,7 +162,7 @@ nav {
     }
     .active {
       span:not(.selected) {
-        color: $colorFontBody;
+        color: $color-font-body;
       }
     }
     .timepicker {
@@ -195,13 +195,13 @@ nav {
           color: white;
           line-height: 1;
           border-radius: 2px;
-          background: $colorBackgroundDark;
+          background: $color-bg-dark;
           font-size: 0.9em;
           padding: 10px;
           min-width: 90px;
 
           &:hover {
-            background: $colorBackgroundLight;
+            background: $color-bg-light;
           }
           &:not(:last-of-type) {
             margin-right: 5px;
