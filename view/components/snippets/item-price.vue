@@ -72,7 +72,7 @@ export default {
       return component[offerType].median < comparison[offerType].median
     },
     offerType() {
-      return this.$store.state.items.selected.offerType
+      return this.$store.state.items ? this.$store.state.items.selected.offerType : 'combined'
     }
   },
   methods: {
@@ -109,14 +109,15 @@ export default {
 @import '~src/styles/partials/importer';
 
 .dummy {
-  width: 340px;
+  width: 320px;
 }
 
 .row {
   @include shadow-1;
   @include ie;
   display: flex;
-  min-width: 340px; // Fix for Edge ignoring parent width
+  min-width: 320px; // Fix for Edge ignoring parent width
+  max-width: 320px;
   border-radius: 0px;
   padding: 0;
 
@@ -127,8 +128,8 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 22.5px;
-    height: 125px;
-    width: 125px;
+    height: 115px;
+    width: 115px;
 
     &:first-of-type {
       @include gradient-background-dg($colorBackgroundLight, $colorBackground);
@@ -204,7 +205,7 @@ export default {
     // Right col
     &:last-of-type {
       position: relative;
-      @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
+      @include gradient-background-dg(#2a2f38, #22262e);
 
       .sparkline {
         position: absolute;
