@@ -6,14 +6,12 @@
     </sidebar>
     <app-content>
       <div class="search-input">
-        <search></search>
         <div class="g-ct">
+          <search></search>
           <div class="search-types">
-            <div class="g-ct">
-              <a class="active">All</a>
-              <a>Items</a>
-              <a>Players</a>
-            </div>
+            <a class="active">All</a>
+            <a>Items</a>
+            <a>Players</a>
           </div>
         </div>
       </div>
@@ -42,8 +40,12 @@
               </div>
             </div>
             <div class="filter-view">
-              <img src="/img/ui/list-view.svg" class="ico-20 a-ie" alt="list">
-              <img src="/img/ui/card-view.svg" class="ico-20 a-ie" alt="cards">
+              <div class="a-ie">
+                <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
+              </div>
+              <div class="a-ie">
+                <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
+              </div>
             </div>
           </div>
         </div>
@@ -85,20 +87,41 @@ export default {
 .search-input {
   position: relative;
   z-index: 1;
-  display: flex;
   border-top: 1px solid $colorSubtleDark;
   @include shadow-1;
+
+  @media (max-width: $breakpoint-m) {
+    margin-top: 56px;
+    border-top: none;
+  }
+
+  .g-ct {
+    display: flex;
+
+    @media (max-width: $breakpoint-s) {
+      // wrap category
+      display: block;
+      margin-top: 90px;
+    }
+  }
 
   /deep/ {
     .field {
       position: relative;
-      max-width: 300px;
-      margin: 8px 85px;
+      margin: 8px 0;
       padding: 8px;
-      border-radius: 9999px;
+      max-width: 250px;
+      border-radius: 2px;
       background: $colorBackgroundDarker;
       @include ease(0.35s);
 
+      @media (max-width: $breakpoint-m) {
+        margin: 16px 0;
+      }
+      @media (max-width: $breakpoint-s) {
+        margin: 10px 0;
+        max-width: 100%;
+      }
       label, br {
         display: none;
       }
@@ -127,24 +150,18 @@ export default {
 }
 
 .search-types {
-  display: none;
-  justify-content: flex-start;
-  margin-top: 60px;
-  width: 100%;
-  background: $color-bg-transparent-1;
+  display: flex;
+  align-items: flex-end;
+  align-content: flex-start;
 
-  @media (max-width: $breakpoint-m) {
-    margin-top: 40px;
-  }
   .g-ct {
     display: flex;
     padding-top: 0;
     padding-bottom: 0;
-    width: 100%;
   }
   a {
     @include ie;
-    padding: 12px 25px;
+    padding: 15px 25px;
     color: $colorFontBody !important;
     border-radius: 0;
 
@@ -156,11 +173,16 @@ export default {
     }
     &.active {
       color: white !important;
-      padding-bottom: 2px;
       @include gradient-background-dg($colorPrimary, $colorAccent);
       background-position: left bottom;
       background-repeat: no-repeat;
-      background-size: 100% 2px ;
+      background-size: 100% 2px;
+    }
+    @media (max-width: $breakpoint-m) {
+      padding: 22px;
+    }
+    @media (max-width: $breakpoint-m) {
+      padding: 12px 25px;
     }
   }
 }
@@ -273,6 +295,21 @@ export default {
           font-size: 0.9em;
           color: white;
         }
+        // Hide ascending/descending by default and adjust tag box size
+        img {
+          opacity: 0;
+          margin-right: -5px;
+          @include ease(0.25s);
+        }
+        &.active {
+          border: 1px solid transparent;
+          background: $colorBackgroundLight;
+
+          img {
+            opacity: 1;
+            margin-right: 0;
+          }
+        }
       }
     }
     .filter-view {
@@ -280,6 +317,10 @@ export default {
       right: 0;
       margin-top: -5px; // compensate for icon padding
       padding-left: 20px;
+
+      .a-ie {
+        display: inline-block;
+      }
     }
   }
 }
