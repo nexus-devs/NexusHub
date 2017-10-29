@@ -271,16 +271,15 @@ export default {
 }
 
 .snippets {
-  padding: 0 0 50px 0;
+  padding: 0 0 60px 0;
   position: relative;
-  overflow-y: hidden;
-  background: $colorBackgroundDarker;
+  overflow-y: hidden;@include gradient-background-dg-tri(#596474, #5b6674, #434b57);
 
   .g-ct {
     display: flex;
     position: relative;
-    top: 62px; // hide scrollbar
-    padding-bottom: 62px; // hide scrollbar
+    top: 72px; // hide scrollbar
+    padding-bottom: 72px; // hide scrollbar
     overflow-x: scroll;
     white-space: nowrap;
 

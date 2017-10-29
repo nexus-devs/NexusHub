@@ -205,7 +205,7 @@ export default {
     // Right col
     &:last-of-type {
       position: relative;
-      @include gradient-background-dg(#2a2f38, #22262e);
+      @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
 
       .sparkline {
         position: absolute;
