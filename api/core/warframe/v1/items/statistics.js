@@ -285,6 +285,7 @@ class Statistics extends Endpoint {
           price: request.price < 2000 ? request.price : null
         })
         if (request.price && request.price < 2000) {
+          component.intervals[i].avg += request.price
           component.intervals[i].offers.hasValue++
         }
       }
@@ -334,6 +335,11 @@ class Statistics extends Endpoint {
     type.intervals.forEach((interval, j) => {
       let users = {} // for spam check. Object is faster than Array lookup.
 
+      // Get the standard deviation
+      this.calculateAvg(interval, multiplier)
+      this.calculateDeviation(interval, multiplier)
+      interval.avg = 0 // Reset avg
+
       // Sort requests by price and get median
       interval.offers.count = interval.requests.length
       this.calculateMedian(interval, multiplier)
@@ -370,7 +376,11 @@ class Statistics extends Endpoint {
       this.addToParent(type, interval)
       this.addToParent(component.combined.intervals[j], interval)
       this.calculateAvg(interval, multiplier)
+
+      // Cleanup
       delete interval.requests
+      delete interval.deviation
+      delete interval.mean
     })
 
     // Add accumulations to combined and calculate component data from intervals
@@ -378,6 +388,25 @@ class Statistics extends Endpoint {
     this.calculateAvg(type, multiplier)
     this.calculateMedian(type, multiplier)
     delete type.requests
+  }
+
+
+  /**
+   * Calculate standard deviation
+   */
+  calculateDeviation(interval, multiplier) {
+    interval.deviation = 0
+
+    // each request ^2
+    interval.requests.forEach(request => {
+      let price = request.price
+      if (price)  interval.deviation += Math.pow(price - interval.avg, 2)
+    })
+
+    // Calculate standard deviation
+    interval.deviation = interval.deviation / interval.offers.hasValue * multiplier
+    interval.deviation = Math.sqrt(interval.deviation)
+    interval.mean = interval.avg
   }
 
 
@@ -453,10 +482,13 @@ class Statistics extends Endpoint {
    * Checks if a user goes extremes under/over the median
    */
   purgeExtremes(interval, request) {
-    if (request.price !== null && interval.median !== null) {
+    if (request.price !== null && interval.mean !== null) {
+      return request.price < (interval.mean - interval.deviation) || request.price > (interval.mean + interval.deviation)
+    }
+    /*if (request.price !== null && interval.median !== null) {
       let percentToMedian = request.price / interval.median
       return percentToMedian > 2 || percentToMedian < 0.66
-    }
+    }*/
     return false
   }
 }
