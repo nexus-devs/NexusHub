@@ -1,13 +1,9 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
-/**
- * Retrieves upstatus for all known bots
- */
 class Status extends Endpoint {
-
   constructor(api, db, url) {
     super(api, db, url)
-    this.schema.description = "Returns the status of all bots."
+    this.schema.description = "Retrieves upstatus for all known bots."
   }
 
   async main(req, res) {
