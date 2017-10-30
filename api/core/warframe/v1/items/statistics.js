@@ -347,12 +347,15 @@ class Statistics extends Endpoint {
       interval.offers.hasValue = 0
 
       // Purge, then calculate stats for interval
-      interval.requests.forEach((request, i) => {
+      for (let i = interval.requests.length - 1; i >= 0; i--) {
+        let request = interval.requests[i]
         let price = request.price
 
         // Purge invalid offers (duplicates or too high/low)
-        if (this.purgeSpam(users, request)) return
-        if (this.purgeExtremes(interval, request)) return
+        if (this.purgeSpam(users, request) || this.purgeExtremes(interval, request)) {
+          interval.requests.splice(i, 1)
+          continue
+        }
 
         // Add to offers
         interval.offers.count++
@@ -366,7 +369,7 @@ class Statistics extends Endpoint {
           if (price < interval.min || !interval.min) interval.min = price
           if (price > interval.max) interval.max = price
         }
-      })
+      }
 
       // Apply partitioned query multipliers
       interval.offers.count = interval.offers.count * multiplier
