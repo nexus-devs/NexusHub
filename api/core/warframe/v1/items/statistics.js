@@ -231,6 +231,11 @@ class Statistics extends Endpoint {
         median: null,
         min: null,
         max: null,
+        priceAccuracy: 0,
+        mathVariance: {
+          deviation: null,
+          mean: null,
+        },
         offers: {
           count: 0,
           percentage: 0,
@@ -306,13 +311,19 @@ class Statistics extends Endpoint {
       // Calculate combined data
       this.calculateMedian(component.combined, multiplier)
       this.calculateAvg(component.combined, multiplier)
+      this.calculateDeviation(component.combined, multiplier)
+      this.calculatePriceAccuracy(component.combined)
       delete component.combined.requests
+      delete component.combined.mathVariance
 
       // Calculate interval data for combined
       component.combined.intervals.forEach(interval => {
         this.calculateMedian(interval, multiplier)
         this.calculateAvg(interval, multiplier)
+        this.calculateDeviation(interval, multiplier)
+        this.calculatePriceAccuracy(interval)
         delete interval.requests
+        delete interval.mathVariance
       })
 
       // Add supply/demand to root object
@@ -379,18 +390,22 @@ class Statistics extends Endpoint {
       this.addToParent(type, interval)
       this.addToParent(component.combined.intervals[j], interval)
       this.calculateAvg(interval, multiplier)
+      this.calculateDeviation(interval, multiplier)
+      this.calculatePriceAccuracy(interval)
 
       // Cleanup
       delete interval.requests
-      delete interval.deviation
-      delete interval.mean
+      delete interval.mathVariance
     })
 
     // Add accumulations to combined and calculate component data from intervals
     this.addToParent(component.combined, type)
     this.calculateAvg(type, multiplier)
     this.calculateMedian(type, multiplier)
+    this.calculateDeviation(type, multiplier)
+    this.calculatePriceAccuracy(type)
     delete type.requests
+    delete type.mathVariance
   }
 
 
@@ -398,18 +413,26 @@ class Statistics extends Endpoint {
    * Calculate standard deviation
    */
   calculateDeviation(interval, multiplier) {
-    interval.deviation = 0
+    interval.mathVariance.deviation = 0
 
     // each request ^2
     interval.requests.forEach(request => {
       let price = request.price
-      if (price)  interval.deviation += Math.pow(price - interval.avg, 2)
+      if (price)  interval.mathVariance.deviation += Math.pow(price - interval.avg, 2)
     })
 
     // Calculate standard deviation
-    interval.deviation = interval.deviation / interval.offers.hasValue * multiplier
-    interval.deviation = Math.sqrt(interval.deviation)
-    interval.mean = interval.avg
+    interval.mathVariance.deviation = interval.mathVariance.deviation / interval.offers.hasValue * multiplier
+    interval.mathVariance.deviation = Math.sqrt(interval.mathVariance.deviation)
+    interval.mathVariance.mean = interval.avg
+  }
+
+
+  /**
+   * Calculate price accuracy
+   */
+  calculatePriceAccuracy(interval) {
+    interval.priceAccuracy = 1 - (interval.mathVariance.deviation / interval.avg)
   }
 
 
@@ -485,8 +508,9 @@ class Statistics extends Endpoint {
    * Checks if a user goes extremes under/over the median
    */
   purgeExtremes(interval, request) {
-    if (request.price !== null && interval.mean !== null) {
-      return request.price < (interval.mean - interval.deviation) || request.price > (interval.mean + interval.deviation)
+    if (request.price !== null && interval.mathVariance.mean !== null) {
+      return request.price < (interval.mathVariance.mean - interval.mathVariance.deviation)
+          || request.price > (interval.mathVariance.mean + interval.mathVariance.deviation)
     }
     /*if (request.price !== null && interval.median !== null) {
       let percentToMedian = request.price / interval.median
