@@ -147,7 +147,7 @@ nav {
 
   /deep/ {
     .nav-upper {
-      background: $colorBackgroundDarkest;
+      background: $color-bg-darkest;
 
       .ico-a-ie {
         margin: 0;
@@ -168,7 +168,7 @@ nav {
         top: 56px;
         height: 100vh;
         width: calc(206px + 5vw);
-        background: $colorBackgroundDark;
+        background: $color-bg-dark;
         will-change: transform;
         @include ease-out(0.45s);
         @include shadow-1;
@@ -190,7 +190,7 @@ nav {
         height: 100vh;
         width: 100%;
         z-index: 1;
-        @include gradient-background($colorBackgroundLight, $colorBackground);
+        @include gradient-background($color-bg-light, $color-bg);
 
         .nav-lower-backdrop-first-bg {
           height: 56px;

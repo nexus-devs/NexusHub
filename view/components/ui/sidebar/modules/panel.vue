@@ -62,11 +62,11 @@ export default {
   .panel-head {
     padding: 17px 35px;
     cursor: pointer;
-    border-top: 1px solid $colorSubtleDark;
+    border-top: 1px solid $color-subtle-dark;
     @include ease(0.3s);
 
     &:hover {
-      background: $colorBackgroundDarker;
+      background: $color-bg-darker;
     }
 
     h3 {
@@ -88,8 +88,8 @@ export default {
         font-size: 0.65em;
         padding: 5px;
         border-radius: 2px;
-        border: 1px solid $colorSubtle;
-        color: $colorFontSubtle;
+        border: 1px solid $color-subtle;
+        color: $color-font-subtle;
 
         @media (max-width: $breakpoint-s) {
           display: none;
@@ -103,7 +103,7 @@ export default {
 
     @media (max-width: $breakpoint-s) {
       &:hover {
-        background: $colorBackgroundDark;
+        background: $color-bg-dark;
       }
     }
   }

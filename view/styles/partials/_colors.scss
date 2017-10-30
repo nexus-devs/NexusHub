@@ -2,28 +2,29 @@
  * Color Codes
  * Shapes
 */
-$colorPrimary: #6ae974;
-$colorPrimaryDark: #58c761;
-$colorAccent: #3ad1d7;
-$colorAccentDark: #38b6b9;
-$colorError: #f85242;
-$colorBackgroundLight: #55606c;
-$colorBackground: #49525e;
-$colorBackgroundDark: #20242b;
-$colorBackgroundDarker: #1a1d23;
-$colorBackgroundDarkest: #131519;
+$color-primary: #6ae974;
+$color-primary-dark: #58c761;
+$color-accent: #3ad1d7;
+$color-accent-dark: #38b6b9;
+$color-error: #f85242;
+$color-bg-light: #55606c;
+$color-bg: #49525e;
+$color-bg-dark: #20242b;
+$color-bg-dark-subtle: #272d35;
+$color-bg-darker: #1a1d23;
+$color-bg-darkest: #131519;
 $color-bg-transparent-1: rgba(15, 20, 25, 0.3);
 $color-bg-transparent-2: rgba(15, 20, 25, 0.4);
-$colorSubtle: rgba(120, 132, 144, 0.4);
-$colorSubtleDark: rgba(62, 67, 72, 0.4);
+$color-subtle: rgba(120, 132, 144, 0.4);
+$color-subtle-dark: rgba(62, 67, 72, 0.4);
 
 /**
  * Color Codes
  * Fonts
 */
-$colorFontBody: #8a9ead;
-$colorFontSubtle: #66707a;
+$color-font-body: #8a9ead;
+$color-font-subtle: #66707a;
 
 html {
-  background: $colorBackgroundDark
+  background: $color-bg-dark
 }

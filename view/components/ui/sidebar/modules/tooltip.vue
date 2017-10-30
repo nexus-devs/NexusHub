@@ -23,7 +23,7 @@
     left: 45px;
     color: white;
     opacity: 0;
-    @include gradient-background-dg($colorPrimaryDark, $colorAccentDark);
+    @include gradient-background-dg($color-primary-dark, $color-accent-dark);
     @include shadow-2;
     @include ease(0.25s);
 
@@ -31,7 +31,7 @@
       position: absolute;
       top: 10px;
       left: -4px;
-      @include triangle-left(5px, $colorPrimaryDark);
+      @include triangle-left(5px, $color-primary-dark);
     }
 
     @media(max-width: $breakpoint-s) {

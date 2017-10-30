@@ -6,7 +6,7 @@
   width: 35px;
   height: 35px;
   flex-shrink: 0;
-  border: 3px solid $colorBackground;
+  border: 3px solid $color-bg;
   border-radius: 50%;
   margin-right: 20px;
 
@@ -16,14 +16,14 @@
     height: calc(100% + 40px);
     left: 19.5px;
     position: absolute;
-    border-right: 2.5px solid $colorBackground;
+    border-right: 2.5px solid $color-bg;
   }
   span {
     position: absolute;
     width: 35px;
     height: 35px;
     display: flex;
-    @include gradient-background-dg($colorPrimaryDark, $colorAccentDark);
+    @include gradient-background-dg($color-primary-dark, $color-accent-dark);
     border-radius: 50%;
     color: white;
     font-weight: 600;

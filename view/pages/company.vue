@@ -124,7 +124,7 @@ export default {
   top: -56px;
   padding-top: 50px;
   padding-bottom: 220px;
-  @include gradient-background-dg($colorPrimaryDark, $colorAccentDark);
+  @include gradient-background-dg($color-primary-dark, $color-accent-dark);
 
   @media (max-width: $breakpoint-m) {
     padding-top: 100px;
@@ -148,7 +148,7 @@ export default {
     opacity: 0.4;
     z-index: 0;
     filter: blur(7px);
-    background: $colorBackground;
+    background: $color-bg;
     transform: translateX(-50%) translateY(-25%);
   }
   .ico {
@@ -170,7 +170,7 @@ svg {
   width: calc(100vw + 300px);
   min-width: 1920px;
   margin-top: 160px;
-  fill: $colorBackgroundDark;
+  fill: $color-bg-dark;
   animation: goostuff 60s linear infinite;
 }
 h1 {
@@ -192,7 +192,7 @@ a {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  background: $colorBackgroundDark;
+  background: $color-bg-dark;
   padding-top: 80px;
   margin-bottom: 40px;
 
@@ -206,7 +206,7 @@ a {
   }
 }
 .stats-container {
-  background: $colorBackgroundDarker;
+  background: $color-bg-darker;
   section {
     padding: 100px 0;
   }
@@ -230,7 +230,7 @@ a {
     }
     .number {
       font-size: 2em;
-      color: $colorPrimary;
+      color: $color-primary;
       margin-top: 20px;
     }
     .label {

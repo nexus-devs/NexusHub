@@ -1,17 +1,13 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 const _ = require("lodash")
 
-/**
- * Provides basic item properties
- */
-class Base extends Endpoint {
 
+class Base extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.description = "Get item statistics between a specified time frame."
     this.schema.url = "/warframe/v1/items/:item"
   }
-
 
   /**
    * Main method which is called by EndpointHandler on request

@@ -72,7 +72,7 @@ export default {
       return component[offerType].median < comparison[offerType].median
     },
     offerType() {
-      return this.$store.state.items.selected.offerType
+      return this.$store.state.items ? this.$store.state.items.selected.offerType : 'combined'
     }
   },
   methods: {
@@ -109,14 +109,15 @@ export default {
 @import '~src/styles/partials/importer';
 
 .dummy {
-  width: 340px;
+  width: 320px;
 }
 
 .row {
   @include shadow-1;
   @include ie;
   display: flex;
-  min-width: 340px; // Fix for Edge ignoring parent width
+  min-width: 320px; // Fix for Edge ignoring parent width
+  max-width: 320px;
   border-radius: 0px;
   padding: 0;
 
@@ -127,11 +128,11 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 22.5px;
-    height: 125px;
-    width: 125px;
+    height: 115px;
+    width: 115px;
 
     &:first-of-type {
-      @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+      @include gradient-background-dg($color-bg-light, $color-bg);
 
       .background {
         position: absolute;
@@ -161,7 +162,7 @@ export default {
           height: 100%;
           width: 100%;
           z-index: 1;
-          @include gradient-background(rgba(15, 20, 25, 0.1), $colorBackgroundLight);
+          @include gradient-background(rgba(15, 20, 25, 0.1), $color-bg-light);
         }
       }
       .content {
@@ -189,14 +190,14 @@ export default {
       .increase {
         .content-data-main-diff {
           span {
-            color: $colorPrimary;
+            color: $color-primary;
           }
         }
       }
       .decrease {
         .content-data-main-diff {
           span {
-            color: $colorError;
+            color: $color-error;
           }
         }
       }
@@ -204,7 +205,7 @@ export default {
     // Right col
     &:last-of-type {
       position: relative;
-      @include gradient-background-dg($colorBackgroundDark, $colorBackgroundDarker);
+      @include gradient-background-dg($color-bg-dark-subtle, $color-bg-dark);
 
       .sparkline {
         position: absolute;
@@ -227,7 +228,7 @@ export default {
           }
           svg {
             .line {
-              stroke: $colorFontSubtle;
+              stroke: $color-font-subtle;
               stroke-width: 1px;
               stroke-dasharray: 2;
             }

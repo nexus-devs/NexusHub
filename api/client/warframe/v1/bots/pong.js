@@ -1,16 +1,13 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
 
-/**
- * Endpoint to receive ping responses from bots, including their status
- */
 class Pong extends Endpoint {
-
   constructor(api, db, url) {
     super(api, db, url)
 
     // Modify schema
     this.schema.method = "POST"
     this.schema.scope = "write_botping_warframe"
+    this.schema.description = 'Endpoint to receive ping responses from bots, including their status'
   }
 
   /**

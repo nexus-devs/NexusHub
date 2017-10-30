@@ -133,7 +133,7 @@ export default {
   z-index: 2;
   right: 0;
   bottom: 15vh;
-  background: $colorBackground;
+  background: $color-bg;
   padding: 15px 5px;
   transform: translateX(500px);
   transition-delay: 0.1s;
