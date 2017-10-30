@@ -15,18 +15,14 @@
           </div>
         </div>
       </div>
-      <section class="relevant">
+      <section class="snippets">
         <div class="g-ct">
-          <div class="suggestion" v-for="i in [1, 2]">
-            <div class="suggestion-image">
-              <img src="/img/warframe/items/valkyr-prime.png" alt="">
-              <img src="/img/warframe/items/valkyr-prime.png" class="blur" alt="">
-            </div>
-            <div class="suggestion-data">
-              <span>Some Item Name</span><br>
-              <span>50p</span>
-            </div>
-          </div>
+          <router-link v-for="snippet in snippets" :key="snippet.focus.name" :to="snippet.base.webUrl">
+            <price-snippet :component="snippet.focus.components.find(c => c.name === 'Set')"
+                           :comparison="snippet.compare.components.find(c => c.name === 'Set')"
+                           :item="snippet.base">
+            </price-snippet>
+          </router-link>
         </div>
       </section>
       <section class="results">
@@ -61,8 +57,65 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
+import time from 'src/components/search/time.vue'
 import navigation from 'src/components/ui/nav.vue'
-import uiheader from 'src/components/ui/header.vue'
+import priceSnippet from 'src/components/snippets/item-price.vue'
+
+/**
+ * Store module for search results
+ */
+const store = {
+  state: {
+    snippets: []
+  },
+  mutations: {
+    setSerpSnippets(state, snippets) {
+      state.snippets = snippets
+    }
+  },
+  actions: {
+    async fetchSerpSnippets({ commit, rootState }) {
+      const items = ['Valkyr Prime', 'Nova Prime']
+      const snippets = []
+
+      for (let i = 0; i < items.length; i++) {
+        const name = items[i]
+        const time = rootState.time
+        const compareStart = time.compare.start.time.valueOf()
+        const compareEnd = time.compare.end.time.valueOf()
+
+        // Specify Target URLs
+        let focusUrl = `/warframe/v1/items/${name}/statistics`
+        let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
+
+        // Get custom query which probably isn't cached
+        if (time.modified) {
+          const focusStart = time.focus.start.time.valueOf()
+          const focusEnd = time.focus.end.time.valueOf()
+          const intervals = time.focus.start.time.diff(time.focus.end.time, 'days')
+
+          focusUrl += `?timestart=${focusStart}&timeend=${focusEnd}&intervals=${intervals}`
+          compareUrl += `&intervals=${intervals}`
+        }
+
+        // Perform API query for base data, focus range and comparison range
+        const data = await Promise.all([
+          this.$blitz.get(focusUrl),
+          this.$blitz.get(compareUrl),
+          this.$blitz.get(`/warframe/v1/items/${name}`)
+        ])
+
+        snippets.push({
+          focus: data[0],
+          compare: data[1],
+          base: data[2]
+        })
+      }
+
+      commit('setSerpSnippets', snippets)
+    }
+  }
+}
 
 export default {
   components: {
@@ -71,10 +124,40 @@ export default {
     'sidebar-search': sidebarSearch,
     search,
     navigation,
-    'ui-header': uiheader
+    'price-snippet': priceSnippet
   },
-  mounted() {
-    console.log(this.$route.query)
+  computed: {
+    snippets() {
+      return this.$store.state.serp.snippets
+    }
+  },
+
+  // Ensure store modules for time and rank are present
+  beforeCreate() {
+    // Ensure that the time module is loaded
+    if (!this.$store._actions.applyTimeQuery) {
+      time.beforeCreate[0].bind(this)()
+    }
+
+    // Register item store module if not already there
+    if (!this.$store._actions.fetchSerpSnippets) {
+      this.$store.registerModule('serp', store, { preserveState: this.$store.state.serp ? true : false })
+    }
+
+    // Apply URL query to vuex state
+    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
+  },
+
+  // Fetch data for search results
+  asyncData({ store }) {
+    return store.dispatch('fetchSerpSnippets')
+  },
+
+  // Apply search input state to actual input
+  created() {
+    if (this.$store.state.search && this.$store.state.search.input.name) {
+      this.$store.commit('setSearchInput', this.$store.state.search.input.name)
+    }
   }
 }
 </script>
@@ -87,7 +170,7 @@ export default {
 .search-input {
   position: relative;
   z-index: 1;
-  border-top: 1px solid $colorSubtleDark;
+  border-top: 1px solid $color-subtle-dark;
   @include shadow-1;
 
   @media (max-width: $breakpoint-m) {
@@ -112,7 +195,7 @@ export default {
       padding: 8px;
       max-width: 250px;
       border-radius: 2px;
-      background: $colorBackgroundDarker;
+      background: $color-bg-darker;
       @include ease(0.35s);
 
       @media (max-width: $breakpoint-m) {
@@ -134,7 +217,7 @@ export default {
       }
       .autocomplete {
         position: absolute;
-        left: 13px;
+        left: 18px;
         top: 8px;
       }
       .autocomplete-type {
@@ -162,7 +245,7 @@ export default {
   a {
     @include ie;
     padding: 15px 25px;
-    color: $colorFontBody !important;
+    color: $color-font-body !important;
     border-radius: 0;
 
     &:before {
@@ -173,7 +256,7 @@ export default {
     }
     &.active {
       color: white !important;
-      @include gradient-background-dg($colorPrimary, $colorAccent);
+      @include gradient-background-dg($color-primary, $color-accent);
       background-position: left bottom;
       background-repeat: no-repeat;
       background-size: 100% 2px;
@@ -181,69 +264,33 @@ export default {
     @media (max-width: $breakpoint-m) {
       padding: 22px;
     }
-    @media (max-width: $breakpoint-m) {
+    @media (max-width: $breakpoint-s) {
       padding: 12px 25px;
     }
   }
 }
 
-.relevant {
-  padding: 0 0 50px 0;
+.snippets {
+  padding: 0 0 60px 0;
   position: relative;
   overflow-y: hidden;
-  background: $colorBackgroundDarker;
+  background: $color-bg-darker;
 
   .g-ct {
+    display: flex;
     position: relative;
-    top: 62px; // hide scrollbar
-    padding-bottom: 62px; // hide scrollbar
+    top: 72px; // hide scrollbar
+    padding-bottom: 72px; // hide scrollbar
     overflow-x: scroll;
     white-space: nowrap;
-  }
-  .suggestion {
-    @include ie;
-    @include field;
-    display: inline-block;
-    padding: 10px 20px;
-    margin-right: 15px;
-    border-radius: 2px;
 
-    &:hover {
-      @include gradient-background-dg($colorBackgroundLight, $colorBackground);
+    a:hover {
+      opacity: 1 !important;
     }
-    &:before {
-      border-radius: 2px;
-    }
-    .suggestion-image {
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: middle;
-      background: $colorBackgroundDark;
-      width: 40px;
-      height: 40px;
-      margin-right: 20px;
 
-      img {
-        position: absolute;
-        top: 0;
-        max-width: 200%;
-        transform: translate(-25%, -10%);
-        z-index: 1;
-      }
-      .blur {
-        filter: blur(30px);
-        z-index: 0;
-      }
-    }
-    .suggestion-data {
-      display: inline-block;
-      vertical-align: middle;
-
-      span:first-of-type {
-        display: inline-block;
-        color: white;
-        margin-bottom: -3px;
+    /deep/ {
+      .item-price-snippet {
+        margin-right: 40px;
       }
     }
   }
@@ -282,13 +329,13 @@ export default {
         margin-right: 10px;
         margin-bottom: 5px;
         border-radius: 2px;
-        border: 1px solid $colorSubtleDark;
+        border: 1px solid $color-subtle-dark;
 
         &:before {
           border-radius: 2px;
         }
         &:hover {
-          background: $colorBackgroundLight;
+          background: $color-bg-light;
           border: 1px solid transparent;
         }
         span {
@@ -303,7 +350,7 @@ export default {
         }
         &.active {
           border: 1px solid transparent;
-          background: $colorBackgroundLight;
+          background: $color-bg-light;
 
           img {
             opacity: 1;

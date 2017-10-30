@@ -227,7 +227,7 @@ export default {
     margin-right: 30px;
     margin-left: 30px;
     flex-basis: auto;
-    border-right: 1px solid $colorSubtle;
+    border-right: 1px solid $color-subtle;
 
     &:last-of-type {
       margin-right: 0;
@@ -264,11 +264,11 @@ export default {
     .diff {
       display: inline-block;
       font-size: 0.8em;
-      color: $colorError;
+      color: $color-error;
       letter-spacing: -0.5;
 
       &.inline-data-increase {
-        color: $colorPrimary;
+        color: $color-primary;
       }
     }
     &:before {
@@ -280,18 +280,18 @@ export default {
     margin-top: 5px;
     margin-right: 5px;
     font-size: 0.85em;
-    background: $colorBackground;
+    background: $color-bg;
     @include shadow-0;
 
     &:disabled {
       background: transparent;
-      color: $colorFontSubtle;
+      color: $color-font-subtle;
       cursor: auto;
       box-shadow: none;
 
       .status-circle {
         background: transparent;
-        border: 0.5px solid $colorFontSubtle;
+        border: 0.5px solid $color-font-subtle;
       }
     }
     &.inactive {

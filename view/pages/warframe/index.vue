@@ -67,7 +67,7 @@ header {
   min-height: 500px;
   width: 100%;
   align-items: center;
-  @include gradient-background-dg(#596570, $colorBackgroundLight);
+  @include gradient-background-dg(#596570, $color-bg-light);
 
   .background {
     position: absolute;
@@ -90,7 +90,7 @@ header {
     height: auto;
     opacity: 0.45;
     filter: blur(5px);
-    background: $colorBackground;
+    background: $color-bg;
     transform: translateX(-50%) translateY(-25%);
   }
 
@@ -135,7 +135,7 @@ header {
  // Search fields
  /deep/ .col-b .field {
    position: relative;
-   background: $colorBackgroundDark;
+   background: $color-bg-dark;
    border-radius: 2px;
    padding: 15px;
    margin: 1px;
@@ -198,7 +198,7 @@ header {
 
    @media (max-width: $breakpoint-s) {
      width: calc(100% - 2px);
-     background: $colorBackgroundDarker;
+     background: $color-bg-darker;
    }
 
    // Input Suggestions
@@ -208,13 +208,13 @@ header {
      @include ease-out(0.25s);
 
      &:hover {
-       background: $colorBackgroundDark;
+       background: $color-bg-dark;
      }
      .ico-36 {
        position: relative;
        overflow: hidden;
        text-align: center;
-       background: $colorBackgroundLight;
+       background: $color-bg-light;
        border-radius: 2px;
        margin-right: 10px;
 
@@ -254,7 +254,7 @@ header {
        font-size: 0.9em;
        margin: 7px 0;
        padding: 3px 10px;
-       border-left: 1px solid $colorSubtle;
+       border-left: 1px solid $color-subtle;
      }
    }
 
@@ -281,12 +281,12 @@ header {
          color: white;
          line-height: 1;
          border-radius: 2px;
-         background: $colorBackgroundDark;
+         background: $color-bg-dark;
          font-size: 0.9em;
          padding: 10px;
 
          &:hover {
-           background: $colorBackgroundLight;
+           background: $color-bg-light;
          }
          &:not(:last-of-type) {
            margin-right: 5px;
@@ -318,7 +318,7 @@ header {
      .ranks-head, .ranks-input {
        border-radius: 2px;
        padding: 10px 20px;
-       background: $colorBackgroundDark;
+       background: $color-bg-dark;
        width: calc(100% - 40px);
 
        h3 {
@@ -331,14 +331,14 @@ header {
            display: inline-block;
            vertical-align: middle;
            font-size: 0.9em;
-           color: $colorFontBody;
+           color: $color-font-body;
          }
        }
        input {
          max-width: calc(100% - 20px);
          text-align: center;
          font-size: 0.9em;
-         border-bottom: 1px solid $colorSubtle;
+         border-bottom: 1px solid $color-subtle;
        }
      }
      .suggestions {
@@ -352,7 +352,7 @@ header {
  /deep/ .col-b .field.active {
    .input {
      span:not(.selected) {
-       color: $colorFontBody;
+       color: $color-font-body;
      }
      img {
        transform: rotate(-180deg);

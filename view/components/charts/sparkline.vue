@@ -144,7 +144,7 @@ export default {
 svg {
   text {
     font-size: 0.9em;
-    fill: $colorFontSubtle;
+    fill: $color-font-subtle;
 
     // left of pointer if space is insufficient (determined in _normalize.js)
     &.align-left {
@@ -152,12 +152,12 @@ svg {
     }
   }
   .pointer {
-    fill: $colorSubtle;
-    stroke: $colorSubtle;
+    fill: $color-subtle;
+    stroke: $color-subtle;
     stroke-width: 1px;
   }
   .line {
-    stroke: $colorPrimary;
+    stroke: $color-primary;
     stroke-width: 2px;
     fill: none;
   }

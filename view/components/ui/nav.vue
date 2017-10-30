@@ -46,7 +46,7 @@ export default {
 
     @media (max-width: $breakpoint-m) {
       position: fixed;
-      background: $colorBackgroundDark;
+      background: $color-bg-dark;
       @include shadow-1;
     }
     @media (max-width: $breakpoint-s) {
@@ -72,7 +72,7 @@ export default {
       text-transform: uppercase;
       font-size: 0.75em;
       margin-left: -12px;
-      color: $colorFontBody !important;
+      color: $color-font-body !important;
       @include ease(0.3s);
 
       @media (max-width: $breakpoint-s) {
