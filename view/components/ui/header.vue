@@ -14,7 +14,7 @@
 
 header {
   padding: 30px 0;
-  @include gradient-background-dg-tri(#596474, #5b6674, #434b57);
+  @include gradient-background-dg-tri(#596474, #667382, #48515e);
   @include shadow-1;
 
   .g-ct {

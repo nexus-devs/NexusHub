@@ -9,26 +9,20 @@
         <div class="g-ct">
           <search></search>
           <div class="search-types">
-            <a class="active">All</a>
-            <a>Items</a>
-            <a>Players</a>
+              <a class="active">All</a>
+              <a>Prime</a>
+              <a>Archwing</a>
           </div>
         </div>
       </div>
-      <section class="snippets">
-        <div class="g-ct">
-          <router-link v-for="snippet in snippets" :key="snippet.focus.name" :to="snippet.base.webUrl">
-            <price-snippet :component="snippet.focus.components.find(c => c.name === 'Set')"
-                           :comparison="snippet.compare.components.find(c => c.name === 'Set')"
-                           :item="snippet.base">
-            </price-snippet>
-          </router-link>
-        </div>
-      </section>
       <section class="results">
         <div class="g-ct">
+          <h2>Search Results</h2>
+          <span>(334 matches)</span>
+
+          <!-- Filters -->
           <div class="filter">
-            <h2>Sort By</h2>
+            <h3>Sort By</h3>
             <div class="filter-tags">
               <div class="tag" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]">
                 <span>Price</span>
@@ -39,10 +33,40 @@
               <div class="a-ie">
                 <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
               </div>
-              <div class="a-ie">
+              <div class="a-ie active">
                 <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
               </div>
             </div>
+          </div>
+
+          <!-- Content -->
+          <div class="result-cards">
+            <router-link to="/warframe/items/valkyr-prime" v-for="i in new Array(20)" key="what" class="result col">
+              <img class="result-bg-img" src="/img/warframe/items/valkyr-prime.png" alt="">
+              <img class="result-bg-img blur" src="/img/warframe/items/valkyr-prime.png" alt="">
+              <div class="result-bg-shade"></div>
+              <div class="result-info">
+                <span class="result-title">Some item</span>
+                <div class="result-tags">
+                  <span>Prime</span>
+                  <span>Blade</span>
+                  <span>Kek</span>
+                </div>
+              </div>
+              <div class="result-data">
+                <div class="result-data-value">
+                  <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-16">
+                  <span>320p</span>
+                </div>
+                <div class="result-data-value">
+                  <img src="/img/warframe/items/ducats.svg" alt="Ducats" class="ico-16">
+                  <span>135 Ducats</span>
+                </div>
+              </div>
+            </router-link>
+          </div>
+          <div class="result-list">
+
           </div>
         </div>
       </section>
@@ -75,44 +99,7 @@ const store = {
   },
   actions: {
     async fetchSerpSnippets({ commit, rootState }) {
-      const items = ['Valkyr Prime', 'Nova Prime']
-      const snippets = []
 
-      for (let i = 0; i < items.length; i++) {
-        const name = items[i]
-        const time = rootState.time
-        const compareStart = time.compare.start.time.valueOf()
-        const compareEnd = time.compare.end.time.valueOf()
-
-        // Specify Target URLs
-        let focusUrl = `/warframe/v1/items/${name}/statistics`
-        let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
-
-        // Get custom query which probably isn't cached
-        if (time.modified) {
-          const focusStart = time.focus.start.time.valueOf()
-          const focusEnd = time.focus.end.time.valueOf()
-          const intervals = time.focus.start.time.diff(time.focus.end.time, 'days')
-
-          focusUrl += `?timestart=${focusStart}&timeend=${focusEnd}&intervals=${intervals}`
-          compareUrl += `&intervals=${intervals}`
-        }
-
-        // Perform API query for base data, focus range and comparison range
-        const data = await Promise.all([
-          this.$blitz.get(focusUrl),
-          this.$blitz.get(compareUrl),
-          this.$blitz.get(`/warframe/v1/items/${name}`)
-        ])
-
-        snippets.push({
-          focus: data[0],
-          compare: data[1],
-          base: data[2]
-        })
-      }
-
-      commit('setSerpSnippets', snippets)
     }
   }
 }
@@ -150,7 +137,7 @@ export default {
 
   // Fetch data for search results
   asyncData({ store }) {
-    return store.dispatch('fetchSerpSnippets')
+
   },
 
   // Apply search input state to actual input
@@ -233,6 +220,7 @@ export default {
 }
 
 .search-types {
+  position: relative;
   display: flex;
   align-items: flex-end;
   align-content: flex-start;
@@ -247,6 +235,8 @@ export default {
     padding: 15px 25px;
     color: $color-font-body !important;
     border-radius: 0;
+    font-size: 0.9em;
+    text-transform: uppercase;
 
     &:before {
       border-radius: 0;
@@ -270,66 +260,52 @@ export default {
   }
 }
 
-.snippets {
-  padding: 0 0 60px 0;
-  position: relative;
-  overflow-y: hidden;
-  background: $color-bg-darker;
-
-  .g-ct {
-    display: flex;
-    position: relative;
-    top: 72px; // hide scrollbar
-    padding-bottom: 72px; // hide scrollbar
-    overflow-x: scroll;
-    white-space: nowrap;
-
-    a:hover {
-      opacity: 1 !important;
-    }
-
-    /deep/ {
-      .item-price-snippet {
-        margin-right: 40px;
-      }
-    }
-  }
-}
-
 .results {
   padding-top: 20px;
 
+  h2 {
+    display: inline-block;
+    margin: 20px 10px 20px 0;
+    font-size: 1em;
+
+    & + span {
+      color: $color-font-subtle;
+      font-size: 0.9em;
+    }
+  }
   .filter {
     position: relative;
     display: flex;
     align-content: center;
     flex-wrap: wrap;
+    border-top: 1px solid $color-subtle-dark;
+    padding-top: 15px;
 
-    h2 {
-      font-size: 1em;
+    h3 {
+      font-size: 0.9em;
       font-weight: 400;
       display: inline-block;
       padding: 4px 20px 6px 0;
       margin-bottom: 10px; // for filter tag break
+      text-transform: uppercase;
     }
     .filter-tags {
       margin-right: 100px; // break when view type is supposed to cause break
 
       @media (max-width: $breakpoint-s) {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
         width: 100%;
         margin-right: 0;
       }
       .tag {
         @include ie;
         display: inline-block;
-        padding: 5px 0 5px 15px;
+        padding: 5px 0 3px 15px;
         margin-right: 10px;
         margin-bottom: 5px;
         border-radius: 2px;
         border: 1px solid $color-subtle-dark;
+        text-transform: uppercase;
+        font-size: 0.9em;
 
         &:before {
           border-radius: 2px;
@@ -367,6 +343,125 @@ export default {
 
       .a-ie {
         display: inline-block;
+        opacity: 0.4;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+      .active {
+        opacity: 1;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .result-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+
+    .result {
+      @include ie;
+      border-radius: 2px;
+      background: #292e38;
+      @include field;
+      position: relative;
+      overflow: hidden;
+      height: 140px;
+      width: 140px;
+      max-width: 180px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      flex-basis: auto;
+
+      @media (max-width: $breakpoint-s) {
+        max-width: none;
+      }
+      &:hover {
+        opacity: 1 !important; // <a> override
+        @include gradient-background-dg($color-bg-light, $color-bg);
+
+        .result-info, .result-bg-img {
+          filter: blur(4px);
+        }
+        .result-data {
+          opacity: 1;
+
+          .result-data-value {
+            transform: translateY(0);
+          }
+        }
+      }
+      &:before {
+        border-radius: 2px;
+      }
+      .result-bg-img {
+        position: absolute;
+        max-width: 100%;
+        opacity: 0.7;
+        left: 0;
+        top: 0;
+        @include ease(0.25s);
+      }
+      .blur {
+        filter: blur(60px);
+        z-index: -1;
+      }
+      .result-bg-shade {
+        position: absolute;
+        height: 80%;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        @include gradient-background(transparent, $color-bg);
+      }
+      .result-info {
+        position: absolute;
+        width: 100%;
+        bottom: 20px;
+        left: 20px;
+        @include ease(0.35s);
+
+        .result-title {
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 0.9em;
+        }
+        .result-tags {
+          font-size: 0.8em;
+
+          span {
+            margin-right: 5px;
+          }
+        }
+      }
+      .result-data {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        @include ease(0.35s);
+        @include gradient-background-dg(rgba(106, 233, 116, 0.5), rgba(51, 215, 221, 0.5));
+
+        .result-data-value {
+          width: 75%;
+          margin: 0 auto;
+          transform: translateY(30px);
+          @include ease(0.2s);
+
+          span {
+            margin-left: 5px;
+          }
+        }
       }
     }
   }
