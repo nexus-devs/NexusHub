@@ -229,7 +229,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 header {
-  @include gradient-background-dg-tri(#596474, #5b6674, #434b57);
+  @include gradient-background-dg-tri(#596474, #667382, #48515e);
   padding: 130px 0 0px;
   position: relative;
   overflow: hidden;
