@@ -124,17 +124,9 @@ class Search extends Endpoint {
 
      // Get median value from set and append image url
      items.forEach(item => {
-       let object = {
-         name: item.name,
-         category: 'items',
-         apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
-         webUrl: `/warframe/items/${item.name.split(" ").join("%20")}`,
-         imgUrl: `/img/warframe/items/${item.name.split(" ").join("-").toLowerCase()}.png`,
-       }
-       if (item.prices) {
-         object.keyData = item.prices.find(c => c.name === 'Set').median + 'p'
-       }
-       result.push(object)
+       result.push(Object.assign({
+         category: 'items'
+       }, item))
      })
      return result
    }
@@ -147,14 +139,9 @@ class Search extends Endpoint {
      let players = await this.find('players', query, limit)
 
      players.forEach(player => {
-       let object = {
-         name: player.name,
-         category: 'players',
-         webUrl: 'soon™',
-         imgUrl: `/img/warframe/players/${player.mastery.rank.name.split(" ").join("-").toLowerCase()}.png`,
-         keyData: `MR ${player.mastery.rank.number}`
-       }
-       result.push(object)
+       result.push(Object.assign({
+         category: 'players'
+       }, player))
      })
      return result
    }
