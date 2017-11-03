@@ -451,7 +451,7 @@ export default {
         width: 100%;
         opacity: 0;
         @include ease(0.35s);
-        @include gradient-background-dg(rgba(106, 233, 116, 0.5), rgba(51, 215, 221, 0.5));
+        @include gradient-background-dg(rgba(106, 233, 116, 0.7), rgba(51, 215, 221, 0.7));
 
         .result-data-value {
           width: 75%;

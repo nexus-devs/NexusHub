@@ -14,7 +14,7 @@ const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 class Scraper {
   constructor() {
     this.scraped = []
-    this.doFetchMarketData = true
+    this.doFetchMarketData = false
   }
 
   /**
@@ -52,6 +52,9 @@ class Scraper {
 
     // Drop chances may hold relic information that we don't have scraped
     data = data.concat(this.backfillRelics(data, dropChances))
+
+    // Add relevant links to each item
+    data = this.addURLs(data)
 
     // Write to disk
     fs.writeFileSync(__dirname + "/../data/items.json", JSON.stringify(data, null, 2), "utf-8")
@@ -418,6 +421,23 @@ class Scraper {
       if (index < 0) {
         result.push(item)
       }
+    })
+
+    return result
+  }
+
+  /**
+   * Add important URL links like images or web page location
+   */
+  addURLs(data) {
+    let result = []
+
+    data.forEach(item => {
+      result.push(Object.assign(item, {
+        apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
+        webUrl: `/warframe/items/${item.name.split(" ").join("-").toLowerCase()}`,
+        imgUrl: `/img/warframe/items/${item.name.split(" ").join("-").toLowerCase()}.png`,
+      }))
     })
 
     return result

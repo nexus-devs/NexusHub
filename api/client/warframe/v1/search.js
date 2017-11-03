@@ -40,6 +40,7 @@ class Search extends Endpoint {
      const fuzzy = req.query.fuzzy
      const category = req.query.category
 
+     // Validate Input
      if (query.length < 2) {
        return res.status(400).send({
          error: 'Bad input.',
@@ -52,6 +53,12 @@ class Search extends Endpoint {
          reason: `Limit must not be higher than 20 or lower than 2. Received ${limit}.`
        })
      }
+     if (fuzzy && !category) {
+       return res.status(400).send({
+         error: 'Bad input.',
+         reason:  'A category must be specified when performing fuzzy searches. E.g. /search?query=test&fuzzy=true&category=items'
+       })
+     }
 
      let result = fuzzy ? await this.fuzzySearch(query, category, limit) : await this.search(query, category, limit)
      this.cache(result, 60)
@@ -62,6 +69,7 @@ class Search extends Endpoint {
     * Fuzzy search a certain category.
     */
   async fuzzySearch(query, category, limit) {
+    let results = []
     let data = await this.db.collection(category).find().toArray()
     let fuse = new Fuse(data, {
       shouldSort: true,
@@ -75,7 +83,17 @@ class Search extends Endpoint {
       minMatchCharLength: 2,
       keys: ['name']
     })
-    return fuse.find(query)
+    let fused = fuse.search(query)
+
+    // Restructure result object, so the item values are on root level
+    fused.forEach(result => {
+      results.push(Object.assign({
+        _score: 1 - result.score,
+        _matches: result.matches
+      }, result.item))
+    })
+
+    return results.slice(0, limit !== 10 ? limit : -1)
   }
 
    /**
@@ -100,7 +118,7 @@ class Search extends Endpoint {
    /**
     * Find matching items, return median as key information
     */
-   async searchItems(query, category, limit) {
+   async searchItems(query, limit) {
      let result = []
      let items = await this.find('items', query, limit)
 
@@ -108,11 +126,10 @@ class Search extends Endpoint {
      items.forEach(item => {
        let object = {
          name: item.name,
-         type: 'Items',
+         category: 'items',
          apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
          webUrl: `/warframe/items/${item.name.split(" ").join("%20")}`,
          imgUrl: `/img/warframe/items/${item.name.split(" ").join("-").toLowerCase()}.png`,
-         keyData: ''
        }
        if (item.prices) {
          object.keyData = item.prices.find(c => c.name === 'Set').median + 'p'
@@ -132,8 +149,7 @@ class Search extends Endpoint {
      players.forEach(player => {
        let object = {
          name: player.name,
-         type: 'Players',
-         apiUrl: `/warframe/v1/players/${player.name}/profile`,
+         category: 'players',
          webUrl: 'soon™',
          imgUrl: `/img/warframe/players/${player.mastery.rank.name.split(" ").join("-").toLowerCase()}.png`,
          keyData: `MR ${player.mastery.rank.number}`
