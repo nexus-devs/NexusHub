@@ -362,6 +362,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
+    margin-right: -15px; // compensate for card right-margin
 
     .result {
       @include ie;
