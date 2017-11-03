@@ -103,7 +103,7 @@ export default {
       // Only run if timeout isn't after search is done
       if (!this.$store.state.search.done) {
         if (this.input.length > 1) {
-          result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=4`)
+          result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=3`)
           this.$store.commit('setSearchInput', {
             name: this.input,
             type: 'Any'
