@@ -1,4 +1,5 @@
 const Endpoint = require(blitz.config[blitz.id].endpointParent)
+const Fuse = require('fuse.js')
 
 class Search extends Endpoint {
   constructor(api, db, url) {
@@ -36,6 +37,8 @@ class Search extends Endpoint {
    async main(req, res) {
      const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
      const limit = req.query.limit
+     const fuzzy = req.query.fuzzy
+     const category = req.query.category
 
      if (query.length < 2) {
        return res.status(400).send({
@@ -50,26 +53,54 @@ class Search extends Endpoint {
        })
      }
 
-     let result = await this.search(query, limit)
+     let result = fuzzy ? await this.fuzzySearch(query, category, limit) : await this.search(query, category, limit)
      this.cache(result, 60)
      res.send(result)
    }
 
    /**
-    * Find all relevant data for possible queries. Official, non-user related
-    * data must be returned first
+    * Fuzzy search a certain category.
     */
-   async search(query, limit) {
-     limit = Math.floor(limit / 2)
-     let items = await this.searchItems(query, limit)
-     let players = await this.searchPlayers(query, limit)
+  async fuzzySearch(query, category, limit) {
+    let data = await this.db.collection(category).find().toArray()
+    let fuse = new Fuse(data, {
+      shouldSort: true,
+      findAllMatches: true,
+      includeScore: true,
+      includeMatches: true,
+      threshold: 0.6,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 2,
+      keys: ['name']
+    })
+    return fuse.find(query)
+  }
+
+   /**
+    * Find all relevant data for possible queries. Official, non-user related
+    * data must be returned first. Unlike the fuzzy search, we check for direct
+    * sequence matches anywhere in the target name.
+    */
+   async search(query, category, limit) {
+     let items = []
+     let players = []
+
+     if (!category || category.toLowerCase() === 'items') {
+       items = await this.searchItems(query, limit)
+     }
+     if (!category || category.toLowerCase() === 'players') {
+       players = await this.searchPlayers(query, limit)
+     }
+
      return items.concat(players)
    }
 
    /**
     * Find matching items, return median as key information
     */
-   async searchItems(query, limit) {
+   async searchItems(query, category, limit) {
      let result = []
      let items = await this.find('items', query, limit)
 
