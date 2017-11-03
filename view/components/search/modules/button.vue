@@ -26,7 +26,7 @@ export default {
         if (search.input.type === 'Any') {
           path = `/warframe/search?query=${search.input.name}`
         } else {
-          path = `/warframe/items/${search.input.name.toLowerCase()}`.replace(/-/g, '--').replace(/ /g, '-')
+          path = `/warframe/${search.input.category.toLowerCase()}/${search.input.name.toLowerCase()}`.replace(/-/g, '--').replace(/ /g, '-')
         }
 
         // Add URL params based on state
