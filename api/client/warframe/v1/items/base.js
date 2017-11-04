@@ -24,12 +24,7 @@ class Base extends Endpoint {
         type: doc.type,
         description: doc.description,
         components: doc.components,
-        webUrl: `/warframe/items/${doc.name.split(" ").join("%20")}`,
-        imgUrl: `/img/warframe/items/${doc.name.split(" ").join("-").toLowerCase()}.png`
       }
-      result.components.forEach(component => {
-        component.imgUrl = `/img/warframe/items/${component.name.split(" ").join("-").toLowerCase()}.png`
-      })
 
       this.cache(result, 60)
       res.send(result)

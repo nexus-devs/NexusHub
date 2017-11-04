@@ -24,6 +24,11 @@ class Search extends Endpoint {
         description: 'Enable fuzzy matching for searches. Must be limited to a single category.'
       },
       {
+        name: 'threshold',
+        default: 0.4,
+        description: 'Minimum matching percentage for fuzzy search.'
+      },
+      {
         name: 'category',
         default: '',
         description: 'Category to query results in.'
@@ -39,6 +44,7 @@ class Search extends Endpoint {
      const limit = req.query.limit
      const fuzzy = req.query.fuzzy
      const category = req.query.category
+     const threshold = 1 - req.query.treshold
 
      // Validate Input
      if (query.length < 2) {
@@ -60,7 +66,7 @@ class Search extends Endpoint {
        })
      }
 
-     let result = fuzzy ? await this.fuzzySearch(query, category, limit) : await this.search(query, category, limit)
+     let result = fuzzy ? await this.fuzzySearch(query, category, threshold, limit) : await this.search(query, category, limit)
      this.cache(result, 60)
      res.send(result)
    }
@@ -68,7 +74,7 @@ class Search extends Endpoint {
    /**
     * Fuzzy search a certain category.
     */
-  async fuzzySearch(query, category, limit) {
+  async fuzzySearch(query, category, threshold, limit) {
     let results = []
     let data = await this.db.collection(category).find().toArray()
     let fuse = new Fuse(data, {
@@ -76,7 +82,7 @@ class Search extends Endpoint {
       findAllMatches: true,
       includeScore: true,
       includeMatches: true,
-      threshold: 0.6,
+      threshold,
       location: 0,
       distance: 100,
       maxPatternLength: 32,
