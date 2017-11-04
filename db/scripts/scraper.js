@@ -435,7 +435,7 @@ class Scraper {
     data.forEach(item => {
       // Components
       item.components.forEach(component => {
-        component.imgUrl = `/img/warframe/items/${component.name.split(" ").join("-").toLowerCase()}.png`
+        component.imgUrl = `/img/warframe/items/${component.name === 'Set' ? item.name.split(" ").join("-").toLowerCase() : component.name.split(" ").join("-").toLowerCase()}.png`
       })
       // Item Root
       result.push(Object.assign(item, {
