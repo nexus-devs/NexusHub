@@ -433,6 +433,11 @@ class Scraper {
     let result = []
 
     data.forEach(item => {
+      // Components
+      item.components.forEach(component => {
+        component.imgUrl = `/img/warframe/items/${component.name.split(" ").join("-").toLowerCase()}.png`
+      })
+      // Item Root
       result.push(Object.assign(item, {
         apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
         webUrl: `/warframe/items/${item.name.split(" ").join("-").toLowerCase()}`,
