@@ -18,7 +18,7 @@
       <section class="results">
         <div class="g-ct">
           <h2>Search Results</h2>
-          <span>(334 matches)</span>
+          <span>({{ results.length }} matches)</span>
 
           <!-- Filters -->
           <div class="filter">
@@ -41,12 +41,12 @@
 
           <!-- Content -->
           <div class="result-cards">
-            <router-link to="/warframe/items/valkyr-prime" v-for="i in new Array(20)" key="what" class="result col">
-              <img class="result-bg-img" src="/img/warframe/items/valkyr-prime.png" alt="">
-              <img class="result-bg-img blur" src="/img/warframe/items/valkyr-prime.png" alt="">
+            <router-link :to="result.webUrl" v-for="result in results" key="name" class="result col" :class="{ set: result.set }">
+              <img class="result-bg-img" :src="result.imgUrl" :alt="result.name">
+              <img class="result-bg-img blur" :src="result.imgUrl" :alt="result.name">
               <div class="result-bg-shade"></div>
               <div class="result-info">
-                <span class="result-title">Some item</span>
+                <span class="result-title">{{ result.name }}</span>
                 <div class="result-tags">
                   <span>Prime</span>
                   <span>Blade</span>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="result-data-value">
                   <img src="/img/warframe/items/ducats.svg" alt="Ducats" class="ico-16">
-                  <span>135 Ducats</span>
+                  <span>{{ result.ducats }} Ducats</span>
                 </div>
               </div>
             </router-link>
@@ -90,16 +90,32 @@ import priceSnippet from 'src/components/snippets/item-price.vue'
  */
 const store = {
   state: {
-    snippets: []
+    results: []
   },
   mutations: {
-    setSerpSnippets(state, snippets) {
-      state.snippets = snippets
+    setSerpResults(state, results) {
+      state.results = results
     }
   },
   actions: {
-    async fetchSerpSnippets({ commit, rootState }) {
+    async fetchSerpResults({ commit, rootState }, input) {
+      const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.8`)
+      const players = [] // await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
+      const results = []
 
+      // Add each component to results
+      items.forEach(item => {
+        item.components.forEach(component => {
+          results.push(Object.assign(component, {
+            name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
+            imgUrl: item.components.length > 1 ? (component.name === 'Set' ? item.imgUrl : component.imgUrl) : item.imgUrl,
+            webUrl: item.webUrl,
+            set: component.name === 'Set' || item.components.length < 2
+          }))
+        })
+      })
+
+      commit('setSerpResults', results)
     }
   }
 }
@@ -114,8 +130,8 @@ export default {
     'price-snippet': priceSnippet
   },
   computed: {
-    snippets() {
-      return this.$store.state.serp.snippets
+    results() {
+      return this.$store.state.serp.results
     }
   },
 
@@ -127,7 +143,7 @@ export default {
     }
 
     // Register item store module if not already there
-    if (!this.$store._actions.fetchSerpSnippets) {
+    if (!this.$store._actions.fetchSerpResults) {
       this.$store.registerModule('serp', store, { preserveState: this.$store.state.serp ? true : false })
     }
 
@@ -137,14 +153,7 @@ export default {
 
   // Fetch data for search results
   asyncData({ store }) {
-
-  },
-
-  // Apply search input state to actual input
-  created() {
-    if (this.$store.state.search && this.$store.state.search.input.name) {
-      this.$store.commit('setSearchInput', this.$store.state.search.input.name)
-    }
+    return store.dispatch('fetchSerpResults', store.state.search ? store.state.search.input.name : store.state.route.query.query)
   }
 }
 </script>
@@ -262,6 +271,7 @@ export default {
 
 .results {
   padding-top: 20px;
+  margin-top: 10px;
 
   h2 {
     display: inline-block;
@@ -364,6 +374,13 @@ export default {
     margin-top: 40px;
     margin-right: -15px; // compensate for card right-margin
 
+    .result.set {
+      .result-bg-img {
+        width: auto;
+        max-width: 90%;
+        max-height: 100%;
+      }
+    }
     .result {
       @include ie;
       border-radius: 2px;
@@ -401,10 +418,11 @@ export default {
       }
       .result-bg-img {
         position: absolute;
-        max-width: 100%;
+        width: 60%;
         opacity: 0.7;
-        left: 0;
-        top: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         @include ease(0.25s);
       }
       .blur {
