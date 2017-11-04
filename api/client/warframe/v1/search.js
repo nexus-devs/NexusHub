@@ -44,7 +44,7 @@ class Search extends Endpoint {
      const limit = req.query.limit
      const fuzzy = req.query.fuzzy
      const category = req.query.category
-     const threshold = 1 - req.query.treshold
+     const threshold = 1 - req.query.threshold
 
      // Validate Input
      if (query.length < 2) {
