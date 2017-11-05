@@ -44,7 +44,7 @@ class Search extends Endpoint {
      const limit = req.query.limit
      const fuzzy = req.query.fuzzy
      const category = req.query.category
-     const threshold = (1 - req.query.threshold)
+     const threshold = 1 - req.query.threshold
 
      // Validate Input
      if (query.length < 2) {
@@ -82,7 +82,7 @@ class Search extends Endpoint {
       findAllMatches: true,
       includeScore: true,
       includeMatches: true,
-      threshold: 0.6,
+      threshold,
       location: 0,
       distance: 100,
       maxPatternLength: 32,
@@ -93,17 +93,13 @@ class Search extends Endpoint {
 
     // Restructure result object, so the item values are on root level
     fused.forEach(result => {
-      // Check for threshold. (Passing threshold to fuse leads to no results
-      // at all beyond 0.6)
-      if (1 - result.score > threshold) {
-        results.push(Object.assign({
-          _score: 1 - result.score,
-          _matches: result.matches
-        }, result.item))
-      }
+      results.push(Object.assign({
+        _score: 1 - result.score,
+        _matches: result.matches
+      }, result.item))
     })
 
-    return results.slice(0, limit !== 10 ? limit : -1)
+    return results
   }
 
    /**
