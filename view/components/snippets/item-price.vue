@@ -12,7 +12,7 @@
       <div class="col">
         <div class="background" :class="{ set: component.name === 'Set' }">
           <div class="background-overlay"></div>
-          <img :src="component.name === 'Set' ? item.imgUrl : component.imgUrl" :alt="`${item.name} ${component.name}`">
+          <img :src="component.imgUrl" :alt="`${item.name} ${component.name}`">
         </div>
 
         <!-- Content -->
