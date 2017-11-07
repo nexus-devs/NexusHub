@@ -41,29 +41,7 @@
 
           <!-- Content -->
           <div class="result-cards">
-            <router-link :to="result.webUrl" v-for="result in results" key="name" class="result col" :class="{ set: result.set }">
-              <img class="result-bg-img" :src="result.imgUrl" :alt="result.name">
-              <img class="result-bg-img blur" :src="result.imgUrl" :alt="result.name">
-              <div class="result-bg-shade"></div>
-              <div class="result-info">
-                <span class="result-title">{{ result.name }}</span>
-                <div class="result-tags">
-                  <span>Prime</span>
-                  <span>Blade</span>
-                  <span>Kek</span>
-                </div>
-              </div>
-              <div class="result-data">
-                <div class="result-data-value">
-                  <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-16">
-                  <span>320p</span>
-                </div>
-                <div class="result-data-value">
-                  <img src="/img/warframe/items/ducats.svg" alt="Ducats" class="ico-16">
-                  <span>{{ result.ducats }} Ducats</span>
-                </div>
-              </div>
-            </router-link>
+            <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
           </div>
           <div class="result-list">
 
@@ -83,7 +61,7 @@ import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
 import time from 'src/components/search/time.vue'
 import navigation from 'src/components/ui/nav.vue'
-import priceSnippet from 'src/components/snippets/item-price.vue'
+import itemSnippet from 'src/components/snippets/item-result.vue'
 
 /**
  * Store module for search results
@@ -99,21 +77,23 @@ const store = {
   },
   actions: {
     async fetchSerpResults({ commit, rootState }, input) {
-      const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.8`)
+      const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
       const players = [] // await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
       const results = []
 
       // Add each component to results
-      items.forEach(item => {
-        item.components.forEach(component => {
-          results.push(Object.assign(component, {
-            name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
-            imgUrl: item.components.length > 1 ? (component.name === 'Set' ? item.imgUrl : component.imgUrl) : item.imgUrl,
-            webUrl: item.webUrl,
-            set: component.name === 'Set' || item.components.length < 2
-          }))
+      if (items.statusCode !== 400) {
+        items.forEach(item => {
+          item.components.forEach(component => {
+            results.push(Object.assign(component, {
+              name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
+              imgUrl: item.components.length > 1 ? (component.name === 'Set' ? item.imgUrl : component.imgUrl) : item.imgUrl,
+              webUrl: item.webUrl,
+              set: component.name === 'Set' || item.components.length < 2
+            }))
+          })
         })
-      })
+      }
 
       commit('setSerpResults', results)
     }
@@ -127,7 +107,7 @@ export default {
     'sidebar-search': sidebarSearch,
     search,
     navigation,
-    'price-snippet': priceSnippet
+    'item-snippet': itemSnippet
   },
   computed: {
     results() {
@@ -152,8 +132,8 @@ export default {
   },
 
   // Fetch data for search results
-  asyncData({ store }) {
-    return store.dispatch('fetchSerpResults', store.state.search ? store.state.search.input.name : store.state.route.query.query)
+  asyncData({ store, route: { query: { query } } }) {
+    return store.dispatch('fetchSerpResults', query)
   }
 }
 </script>
@@ -373,116 +353,6 @@ export default {
     flex-wrap: wrap;
     margin-top: 40px;
     margin-right: -15px; // compensate for card right-margin
-
-    .result.set {
-      .result-bg-img {
-        width: auto;
-        max-width: 90%;
-        max-height: 100%;
-      }
-    }
-    .result {
-      @include ie;
-      border-radius: 2px;
-      background: #292e38;
-      @include field;
-      position: relative;
-      overflow: hidden;
-      height: 140px;
-      width: 140px;
-      max-width: 180px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      flex-basis: auto;
-
-      @media (max-width: $breakpoint-s) {
-        max-width: none;
-      }
-      &:hover {
-        opacity: 1 !important; // <a> override
-        @include gradient-background-dg($color-bg-light, $color-bg);
-
-        .result-info, .result-bg-img {
-          filter: blur(4px);
-        }
-        .result-data {
-          opacity: 1;
-
-          .result-data-value {
-            transform: translateY(0);
-          }
-        }
-      }
-      &:before {
-        border-radius: 2px;
-      }
-      .result-bg-img {
-        position: absolute;
-        width: 60%;
-        opacity: 0.7;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        @include ease(0.25s);
-      }
-      .blur {
-        filter: blur(60px);
-        z-index: -1;
-      }
-      .result-bg-shade {
-        position: absolute;
-        height: 80%;
-        width: 100%;
-        bottom: 0;
-        left: 0;
-        @include gradient-background(transparent, $color-bg);
-      }
-      .result-info {
-        position: absolute;
-        width: 100%;
-        bottom: 20px;
-        left: 20px;
-        @include ease(0.35s);
-
-        .result-title {
-          text-transform: uppercase;
-          font-weight: 600;
-          font-size: 0.9em;
-        }
-        .result-tags {
-          font-size: 0.8em;
-
-          span {
-            margin-right: 5px;
-          }
-        }
-      }
-      .result-data {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        opacity: 0;
-        @include ease(0.35s);
-        @include gradient-background-dg(rgba(106, 233, 116, 0.7), rgba(51, 215, 221, 0.7));
-
-        .result-data-value {
-          width: 75%;
-          margin: 0 auto;
-          transform: translateY(30px);
-          @include ease(0.2s);
-
-          span {
-            margin-left: 5px;
-          }
-        }
-      }
-    }
   }
 }
 </style>

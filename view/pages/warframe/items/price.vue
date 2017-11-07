@@ -168,6 +168,7 @@ export default {
     pricesnippet,
     filters
   },
+
   beforeCreate() {
     // Ensure store modules for time and rank are present
     if (!this.$store._actions.applyTimeQuery || !this.$store.state.rank) {
@@ -184,6 +185,7 @@ export default {
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
     this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
   },
+
   computed: {
     item() {
       return this.$store.state.items.item
@@ -205,12 +207,15 @@ export default {
       return this.$store.state.items.itemComparison.components
     }
   },
+
   beforeMount() {
     // this.listen() // requires on-route change destructor
   },
+
   asyncData({ store, route: { params: { item }}}) {
     return store.dispatch('fetchItemData', item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
+
   methods: {
     async listen() {
       const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
