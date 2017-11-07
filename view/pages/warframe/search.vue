@@ -41,10 +41,25 @@
 
           <!-- Content -->
           <div class="result-cards">
-            <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
+            <!-- <item-snippet v-for="result in results" key="name" :result="result"></item-snippet> -->
           </div>
           <div class="result-list">
-
+            <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
+              <div class="result-title col-b">
+                <div class="result-img">
+                  <img :src="result.imgUrl" :alt="result.name">
+                </div>
+                <span>{{ result.name }}</span>
+              </div>
+              <div class="result-data-value col">
+                <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
+                <span>300p</span>
+              </div>
+              <div class="result-data-value col">
+                <img src="/img/warframe/items/ducats.svg" alt="Platinum" class="ico-12">
+                <span>{{ result.ducats }} Ducats</span>
+              </div>
+            </router-link>
           </div>
         </div>
       </section>
@@ -353,6 +368,80 @@ export default {
     flex-wrap: wrap;
     margin-top: 40px;
     margin-right: -15px; // compensate for card right-margin
+  }
+  .result-list {
+    .result {
+      @include ie;
+      align-items: center;
+      border-radius: 0px;
+      padding: 10px 20px;
+      margin-bottom: 3px;
+      background: $color-bg-darker;
+
+      &:before {
+        border-radius: 0px;
+      }
+      .result-title {
+        display: flex;
+        align-items: center;
+      }
+      .result-img {
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        height: 40px;
+        width: 40px;
+        background: $color-bg-darkest;
+        border-radius: 2px;
+        margin-right: 20px;
+
+        img {
+          width: 100%;
+        }
+      }
+      .result-data-value {
+        min-width: 100px;
+        margin: 0 40px;
+        font-size: 0.9em;
+
+        &:last-of-type {
+          flex-grow: 0;
+          text-align: right;
+          margin-right: 0;
+        }
+      }
+      @media (max-width: $breakpoint-s) {
+        & {
+          justify-content: flex-start;
+          margin-bottom: 5px;
+        }
+        .result-title {
+          span {
+            position: relative;
+            top: -10px;
+          }
+        }
+        .result-img {
+          margin-right: 10px;
+          height: 50px;
+          width: 50px;
+        }
+        .result-data-value {
+          position: relative;
+          font-size: 0.85em;
+          top: -23px;
+          flex-grow: 0;
+          flex-basis: auto;
+          margin: 0 10px -20px 0;
+          text-align: left;
+          min-width: auto;
+        }
+        div:nth-of-type(2) {
+          margin-left: 60px;
+        }
+      }
+    }
   }
 }
 </style>
