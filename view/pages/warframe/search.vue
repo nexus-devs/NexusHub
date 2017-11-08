@@ -24,9 +24,10 @@
           <div class="filter">
             <h3>Sort By</h3>
             <div class="filter-tags">
-              <div class="tag" v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]">
-                <span>Price</span>
-                <img src="/img/ui/dropdown.svg" class="ico-16" alt="Ascending/Descending">
+              <div class="tag" v-for="filter in filters">
+                <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
+                <span>{{ filter.name }}</span>
+                <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
               </div>
             </div>
             <div class="filter-view">
@@ -51,13 +52,11 @@
                 </div>
                 <span>{{ result.name }}</span>
               </div>
-              <div class="result-data-value col">
-                <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
-                <span>300p</span>
-              </div>
-              <div class="result-data-value col">
-                <img src="/img/warframe/items/ducats.svg" alt="Platinum" class="ico-12">
-                <span>{{ result.ducats }} Ducats</span>
+              <div class="result-data-value col" v-for="filter in filters" v-if="filter.category === result.category">
+                <div v-if="result[filter.name]">
+                  <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
+                  <span>300p</span>
+                </div>
               </div>
             </router-link>
           </div>
@@ -102,7 +101,7 @@ const store = {
           item.components.forEach(component => {
             results.push(Object.assign(component, {
               name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
-              imgUrl: item.components.length > 1 ? (component.name === 'Set' ? item.imgUrl : component.imgUrl) : item.imgUrl,
+              category: 'items',
               webUrl: item.webUrl,
               set: component.name === 'Set' || item.components.length < 2
             }))
@@ -124,6 +123,33 @@ export default {
     navigation,
     'item-snippet': itemSnippet
   },
+
+  data() {
+    return {
+      filters: [{
+        name: 'price',
+        category: 'items',
+        icon: '/img/warframe/items/platinum.svg',
+        alt: 'Platinum',
+        unit: 'p',
+      }, {
+        name: 'ducats',
+        category: 'items',
+        icon: '/img/warframe/items/ducats.svg',
+        alt: 'Ducats',
+        unit: ' Ducats'
+      }, {
+        name: 'supply',
+        category: 'items',
+        unit: ''
+      }, {
+        name: 'demand',
+        category: 'items',
+        unit: ''
+      }]
+    }
+  },
+
   computed: {
     results() {
       return this.$store.state.serp.results
@@ -324,7 +350,7 @@ export default {
           color: white;
         }
         // Hide ascending/descending by default and adjust tag box size
-        img {
+        .asc-desc {
           opacity: 0;
           margin-right: -5px;
           @include ease(0.25s);
@@ -333,7 +359,7 @@ export default {
           border: 1px solid transparent;
           background: $color-bg-light;
 
-          img {
+          .asc-desc {
             opacity: 1;
             margin-right: 0;
           }
