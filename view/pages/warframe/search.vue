@@ -348,6 +348,7 @@ export default {
 
   .results-container {
     position: relative; // for position: absolute item list views
+    overflow-y: hidden;
   }
   h2 {
     display: inline-block;
