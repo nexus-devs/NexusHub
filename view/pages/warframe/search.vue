@@ -178,6 +178,11 @@ export default {
   mounted() {
     this.selectListView('cards')
   },
+  watch: {
+    $route() {
+      this.selectListView()
+    }
+  },
 
   // Fetch data for search results
   asyncData({ store, route: { query: { query } } }) {
@@ -187,8 +192,9 @@ export default {
   methods: {
     // Swap between list view types (cards/list)
     selectListView(type) {
-      this.list = type
-      if (type === 'cards') {
+      this.list = type || this.list
+
+      if (this.list === 'cards') {
         this.listHeight = this.$refs.cards.offsetHeight
       } else {
         this.listHeight = this.$refs.list.offsetHeight
