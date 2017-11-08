@@ -41,10 +41,10 @@
           </div>
 
           <!-- Content -->
-          <div class="result-cards">
+          <div class="result-cards list" :class="{ active: list === 'cards' }" v-on:click="list = 'cards'">
             <!-- <item-snippet v-for="result in results" key="name" :result="result"></item-snippet> -->
           </div>
-          <div class="result-list">
+          <div class="result-list list" :class="{ active: list === 'list' }" v-on:click="list = 'list')">
             <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
               <div class="result-title col-b">
                 <div class="result-img">
@@ -126,6 +126,7 @@ export default {
 
   data() {
     return {
+      list: 'list',
       filters: [{
         name: 'price',
         category: 'items',
