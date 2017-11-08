@@ -293,6 +293,7 @@ export default {
 .results {
   padding-top: 20px;
   margin-top: 10px;
+  margin-bottom: 0;
 
   h2 {
     display: inline-block;
