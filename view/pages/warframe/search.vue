@@ -83,11 +83,15 @@ import itemSnippet from 'src/components/snippets/item-result.vue'
  */
 const store = {
   state: {
+    list: 'cards',
     results: []
   },
   mutations: {
     setSerpResults(state, results) {
       state.results = results
+    },
+    setSerpListView(state, type) {
+      state.list = type
     }
   },
   actions: {
@@ -126,7 +130,6 @@ export default {
 
   data() {
     return {
-      list: 'cards',
       listHeight: 0,
       filters: [{
         name: 'price',
@@ -153,6 +156,9 @@ export default {
   },
 
   computed: {
+    list() {
+      return this.$store.state.serp.list
+    },
     results() {
       return this.$store.state.serp.results
     }
@@ -176,7 +182,7 @@ export default {
 
   // Set active view (required for generating parent height)
   mounted() {
-    this.selectListView('cards')
+    this.selectListView()
   },
   watch: {
     $route() {
@@ -192,7 +198,7 @@ export default {
   methods: {
     // Swap between list view types (cards/list)
     selectListView(type) {
-      this.list = type || this.list
+      this.$store.commit('setSerpListView', type || this.list)
 
       if (this.list === 'cards') {
         this.listHeight = this.$refs.cards.offsetHeight
