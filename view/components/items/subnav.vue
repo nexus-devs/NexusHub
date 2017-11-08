@@ -2,7 +2,7 @@
   <nav>
     <div class="item">
       <div class="item-img">
-        <img :src="item.imgUrl" alt="">
+        <img :src="item.components.find(c => c.name === 'Set').imgUrl" :alt="item.name">
       </div>
       <div class="item-info">
         <h1>{{ item.name }}</h1>
