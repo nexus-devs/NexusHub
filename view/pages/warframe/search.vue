@@ -15,8 +15,8 @@
           </div>
         </div>
       </div>
-      <section class="results">
-        <div class="g-ct">
+      <section class="results g-ct">
+        <div class="results-container">
           <h2>Search Results</h2>
           <span>({{ results.length }} matches)</span>
 
@@ -31,20 +31,20 @@
               </div>
             </div>
             <div class="filter-view">
-              <div class="a-ie">
+              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
                 <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
               </div>
-              <div class="a-ie active">
+              <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
                 <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
               </div>
             </div>
           </div>
 
           <!-- Content -->
-          <div class="result-cards list" :class="{ active: list === 'cards' }" v-on:click="list = 'cards'">
-            <!-- <item-snippet v-for="result in results" key="name" :result="result"></item-snippet> -->
+          <div class="result-cards list" :class="{ active: list === 'cards' }">
+            <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
           </div>
-          <div class="result-list list" :class="{ active: list === 'list' }" v-on:click="list = 'list')">
+          <div class="result-list list" :class="{ active: list === 'list' }">
             <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
               <div class="result-title col-b">
                 <div class="result-img">
@@ -108,7 +108,6 @@ const store = {
           })
         })
       }
-
       commit('setSerpResults', results)
     }
   }
@@ -176,6 +175,12 @@ export default {
   // Fetch data for search results
   asyncData({ store, route: { query: { query } } }) {
     return store.dispatch('fetchSerpResults', query)
+  },
+
+  methods: {
+    selectListView(type) {
+      this.list = type
+    }
   }
 }
 </script>
@@ -296,6 +301,9 @@ export default {
   margin-top: 10px;
   margin-bottom: 0;
 
+  .results-container {
+    position: relative; // for position: absolute item list views
+  }
   h2 {
     display: inline-block;
     margin: 20px 10px 20px 0;
@@ -391,6 +399,21 @@ export default {
       }
     }
   }
+
+  .list {
+    position: absolute;
+    width: 100%;
+    transform: scale(0.95);
+    opacity: 0;
+    @include ease(0.3s);
+
+    &.active {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  // List view types
   .result-cards {
     display: flex;
     flex-wrap: wrap;
@@ -398,6 +421,8 @@ export default {
     margin-right: -15px; // compensate for card right-margin
   }
   .result-list {
+    margin-top: 30px;
+
     .result {
       @include ie;
       align-items: center;
