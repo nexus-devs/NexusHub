@@ -408,7 +408,7 @@ export default {
         .asc-desc {
           opacity: 0;
           margin-right: -5px;
-          @include ease(0.25s);
+          @include ease(0.1s);
 
           &.ascending {
             transform: rotate(-180deg);
