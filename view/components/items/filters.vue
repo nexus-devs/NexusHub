@@ -6,7 +6,7 @@
           <div class="col inline-data" :class="{ inactive: types[0].inactive }" v-on:click="select('types', types[0])">
             <h2>Selling</h2>
             <span class="data">{{ supply.count }}</span>
-            <span class="diff" :class="{ 'inline-data-increase': demand.rawDiff > 0 }">{{ supply.diff }}</span>
+            <span class="diff" :class="{ 'inline-data-increase': supply.rawDiff > 0 }">{{ supply.diff }}</span>
           </div>
           <div class="col inline-data" :class="{ inactive: types[1].inactive }" v-on:click="select('types', types[1])">
             <h2>Buying</h2>
