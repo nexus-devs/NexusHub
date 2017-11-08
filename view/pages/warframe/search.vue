@@ -103,7 +103,7 @@ const store = {
       // Add each component to results
       if (items.statusCode !== 400) {
         items.forEach(item => {
-          item.components.forEach(component => {
+          item.components.reverse().forEach(component => {
             results.push(Object.assign(component, {
               name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
               category: 'items',
