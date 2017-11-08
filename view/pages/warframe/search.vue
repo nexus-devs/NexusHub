@@ -16,35 +16,36 @@
         </div>
       </div>
       <section class="results g-ct">
-        <div class="results-container">
-          <h2>Search Results</h2>
-          <span>({{ results.length }} matches)</span>
+        <h2>Search Results</h2>
+        <span>({{ results.length }} matches)</span>
 
-          <!-- Filters -->
-          <div class="filter">
-            <h3>Sort By</h3>
-            <div class="filter-tags">
-              <div class="tag" v-for="filter in filters">
-                <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
-                <span>{{ filter.name }}</span>
-                <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
-              </div>
-            </div>
-            <div class="filter-view">
-              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
-                <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
-              </div>
-              <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
-                <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
-              </div>
+        <!-- Filters -->
+        <div class="filter">
+          <h3>Sort By</h3>
+          <div class="filter-tags">
+            <div class="tag" v-for="filter in filters" v-on:click="selectFilterTag(filter)"
+                :class="{ active: filter.active, ascending: filter.ascending }">
+              <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
+              <span>{{ filter.name }}</span>
+              <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" :class="{ ascending: filter.ascending }" alt="Ascending/Descending">
             </div>
           </div>
+          <div class="filter-view">
+            <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
+              <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
+            </div>
+            <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
+              <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
+            </div>
+          </div>
+        </div>
 
-          <!-- Content -->
-          <div class="result-cards list" :class="{ active: list === 'cards' }">
+        <!-- Content -->
+        <div class="results-container" :style="{ height: `${listHeight}px` }">
+          <div class="result-cards list" ref="cards" :class="{ active: list === 'cards' }">
             <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
           </div>
-          <div class="result-list list" :class="{ active: list === 'list' }">
+          <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
             <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
               <div class="result-title col-b">
                 <div class="result-img">
@@ -125,7 +126,8 @@ export default {
 
   data() {
     return {
-      list: 'list',
+      list: 'cards',
+      listHeight: 0,
       filters: [{
         name: 'price',
         category: 'items',
@@ -172,14 +174,45 @@ export default {
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
   },
 
+  // Set active view (required for generating parent height)
+  mounted() {
+    this.selectListView('cards')
+  },
+
   // Fetch data for search results
   asyncData({ store, route: { query: { query } } }) {
     return store.dispatch('fetchSerpResults', query)
   },
 
   methods: {
+    // Swap between list view types (cards/list)
     selectListView(type) {
       this.list = type
+      if (type === 'cards') {
+        this.listHeight = this.$refs.cards.offsetHeight
+      } else {
+        this.listHeight = this.$refs.list.offsetHeight
+      }
+      this.listHeight += 120 // padding
+    },
+
+    // Select filters and adjust sorting. First click -> activate, descending;
+    // Second click -> activate, ascending; Third click -> deactivate
+    selectFilterTag(filter) {
+      const newFilters = [].concat(this.filters)
+      const target = newFilters.find(t => t.name === filter.name)
+
+      // Sort order selection logic
+      if (target.ascending) {
+        target.active = false
+        target.ascending = false
+      } else {
+        target.ascending = target.active ? true : false
+        target.active = true
+      }
+
+      // Overwrite original to trigger DOM update
+      this.filters = newFilters
     }
   }
 }
@@ -364,6 +397,10 @@ export default {
           opacity: 0;
           margin-right: -5px;
           @include ease(0.25s);
+
+          &.ascending {
+            transform: rotate(-180deg);
+          }
         }
         &.active {
           border: 1px solid transparent;
@@ -404,12 +441,15 @@ export default {
     position: absolute;
     width: 100%;
     transform: scale(0.95);
+    transform-origin: 50% 200px;
+    pointer-events: none;
     opacity: 0;
     @include ease(0.3s);
 
     &.active {
       transform: scale(1);
       opacity: 1;
+      pointer-events: all;
     }
   }
 
