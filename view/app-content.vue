@@ -4,20 +4,18 @@ adjust the main content (without nav or sidebar), for example when dragging out
 the sidebar. This also keeps our app.vue more clean.
 -->
 <template>
-  <div class="transition-wrapper">
-    <transition appear name="zoom">
-      <div>
-        <div class="app-content" :class="{ activeSidebar, deltaX }"
-             :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                    'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                    'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-            <slot>
-              <!-- page content goes here -->
-            </slot>
-        </div>
+  <transition appear name="zoom">
+    <div>
+      <div class="app-content" :class="{ activeSidebar, deltaX }"
+           :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                  'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                  'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+          <slot>
+            <!-- page content goes here -->
+          </slot>
       </div>
-    </transition>
-  </div>
+    </div>
+  </transition>
 </template>
 
 
@@ -84,10 +82,6 @@ export default {
   transform: scale(0.995);
   transform-origin: 50%;
   opacity: 0.5;
-}
-.transition-wrapper {
-  position: relative;
-  overflow: hidden;
 }
 
 @media (min-width: $breakpoint-m) {
