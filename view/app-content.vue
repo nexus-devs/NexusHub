@@ -4,16 +4,18 @@ adjust the main content (without nav or sidebar), for example when dragging out
 the sidebar. This also keeps our app.vue more clean.
 -->
 <template>
-  <transition appear name="zoom">
-    <div class="app-content" :class="{ activeSidebar, deltaX }"
-         :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-        <slot>
-          <!-- page content goes here -->
-        </slot>
-    </div>
-  </transition>
+  <div class="transition-wrapper">
+    <transition appear name="zoom">
+      <div class="app-content" :class="{ activeSidebar, deltaX }"
+           :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                  'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                  'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+          <slot>
+            <!-- page content goes here -->
+          </slot>
+      </div>
+    </transition>
+  </div>
 </template>
 
 
@@ -74,12 +76,16 @@ export default {
 }
 
 .zoom-enter-active {
-  transition: all 0.4s ease;
+  @include ease(0.45s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(0.99);
+  transform: scale(1.01);
   transform-origin: 50% 200px;
-  opacity: 0;
+  opacity: 0.33;
+}
+.transition-wrapper {
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: $breakpoint-m) {
