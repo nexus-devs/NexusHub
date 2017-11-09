@@ -234,7 +234,7 @@ a {
     }
     .number {
       font-size: 2em;
-      color: $color-primary;
+      color: white;
       margin-top: 20px;
     }
     .label {
