@@ -140,6 +140,10 @@ export default {
      * Change input to full suggestion with correct capitalization
      */
     complete(suggestion = {}) {
+      // Discard ongoing query suggestions
+      if (this.inputQueryDelay) {
+        clearTimeout(this.inputQueryDelay)
+      }
       if (suggestion.name) {
         this.input = suggestion.name
         this.$store.commit('setSearchInput', suggestion)
@@ -159,10 +163,6 @@ export default {
      */
     query() {
       const query = button.methods.search.bind(this)
-
-      if (this.inputQueryDelay) {
-        clearTimeout(this.inputQueryDelay)
-      }
       this.complete()
       query()
     }
