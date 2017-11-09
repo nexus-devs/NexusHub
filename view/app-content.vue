@@ -78,10 +78,10 @@ export default {
 }
 
 .zoom-enter-active {
-  @include ease-out(0.65s);
+  @include ease(0.35s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(1.01);
+  transform: scale(1.005);
   opacity: 0.5;
 }
 .transition-wrapper {
