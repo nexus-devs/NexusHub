@@ -490,7 +490,7 @@ export default {
       border-radius: 0px;
       padding: 10px 20px;
       margin-bottom: 3px;
-      background: $color-bg-darker;
+      border-bottom: 1px solid $color-subtle-dark;  
 
       &:before {
         border-radius: 0px;
