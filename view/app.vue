@@ -1,10 +1,8 @@
 <template>
   <div id='app'>
     <notification></notification>
-    <div class="app-view" >
-      <transition>
-        <router-view></router-view>
-      </transition>
+    <div class="app-view">
+      <router-view></router-view>
       <bottom></bottom>
     </div>
   </div>
