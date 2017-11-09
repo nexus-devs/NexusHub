@@ -4,28 +4,28 @@
     <sidebar>
       <sidebar-search></sidebar-search>
     </sidebar>
-    <app-content>
-      <header>
-        <div class="background">
-          <video playsinline autoplay muted loop>
-            <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
-          </video>
-        </div>
-        <div class="search-components g-ct">
-          <h1>
-            <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
-            <span>Item Prices from the Trade Chat.</span>
-          </h1>
-          <div class="row">
-            <search></search>
-            <timerange></timerange>
-            <rank>
-              <search-button></search-button>
-            </rank>
+      <app-content>
+        <header>
+          <div class="background">
+            <video playsinline autoplay muted loop>
+              <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
+            </video>
           </div>
-        </div>
-      </header>
-    </app-content>
+          <div class="search-components g-ct">
+            <h1>
+              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
+              <span>Item Prices from the Trade Chat.</span>
+            </h1>
+            <div class="row">
+              <search></search>
+              <timerange></timerange>
+              <rank>
+                <search-button></search-button>
+              </rank>
+            </div>
+          </div>
+        </header>
+      </app-content>
   </div>
 </template>
 

@@ -5,64 +5,72 @@
       <sidebar-search></sidebar-search>
     </sidebar>
     <app-content>
-      <div class="search-input">
-        <div class="g-ct">
-          <search></search>
-          <div class="search-types">
-              <a class="active">All</a>
-              <a>Prime</a>
-              <a>Archwing</a>
+      <div>
+        <div class="search-input">
+          <div class="g-ct">
+            <search></search>
+            <div class="search-types">
+                <a class="active">All</a>
+                <a>Prime</a>
+                <a>Archwing</a>
+            </div>
           </div>
         </div>
+        <section class="results g-ct">
+          <h2>Search Results</h2>
+          <span>({{ results.length }} matches)</span>
+
+          <!-- Filters -->
+          <div class="filter">
+            <h3>Sort By</h3>
+            <div class="filter-tags">
+              <div class="tag" v-for="filter in filters" v-on:click="selectFilterTag(filter)"
+                  :class="{ active: filter.active, ascending: filter.ascending }">
+                <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
+                <span>{{ filter.name }}</span>
+                <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" :class="{ ascending: filter.ascending }" alt="Ascending/Descending">
+              </div>
+            </div>
+            <div class="filter-view">
+              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
+                <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
+              </div>
+              <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
+                <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
+              </div>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="results-container" :style="{ height: `${listHeight}px` }">
+            <div class="result-cards list" ref="cards" :class="{ active: list === 'cards' }">
+              <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
+            </div>
+            <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
+              <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
+                <div class="result-title col-b">
+                  <div class="result-img">
+                    <img :src="result.imgUrl" :alt="result.name">
+                  </div>
+                  <span>{{ result.name }}</span>
+                </div>
+                <div class="result-data-value col" v-for="filter in filters" v-if="filter.category === result.category">
+                  <div v-if="result[filter.name]">
+                    <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
+                    <span>300p</span>
+                  </div>
+                </div>
+              </router-link>
+            </div>
+          </div>
+          <div class="add-items">
+            Think we missed an item?
+            <router-link to="/contact">Let us know</router-link> or
+            <router-link to="/contribute">add items yourself</router-link> if you
+            wanna help us support the project.
+          </div>
+        </section>
       </div>
-      <section class="results g-ct">
-        <h2>Search Results</h2>
-        <span>({{ results.length }} matches)</span>
-
-        <!-- Filters -->
-        <div class="filter">
-          <h3>Sort By</h3>
-          <div class="filter-tags">
-            <div class="tag" v-for="filter in filters" v-on:click="selectFilterTag(filter)"
-                :class="{ active: filter.active, ascending: filter.ascending }">
-              <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
-              <span>{{ filter.name }}</span>
-              <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" :class="{ ascending: filter.ascending }" alt="Ascending/Descending">
-            </div>
-          </div>
-          <div class="filter-view">
-            <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
-              <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
-            </div>
-            <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
-              <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
-            </div>
-          </div>
-        </div>
-
-        <!-- Content -->
-        <div class="results-container" :style="{ height: `${listHeight}px` }">
-          <div class="result-cards list" ref="cards" :class="{ active: list === 'cards' }">
-            <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
-          </div>
-          <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
-            <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
-              <div class="result-title col-b">
-                <div class="result-img">
-                  <img :src="result.imgUrl" :alt="result.name">
-                </div>
-                <span>{{ result.name }}</span>
-              </div>
-              <div class="result-data-value col" v-for="filter in filters" v-if="filter.category === result.category">
-                <div v-if="result[filter.name]">
-                  <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
-                  <span>300p</span>
-                </div>
-              </div>
-            </router-link>
-          </div>
-        </div>
-      </section>
     </app-content>
   </div>
 </template>
@@ -205,7 +213,7 @@ export default {
       } else {
         this.listHeight = this.$refs.list.offsetHeight
       }
-      this.listHeight += 120 // padding
+      this.listHeight += 40 // padding
     },
 
     // Select filters and adjust sorting. First click -> activate, descending;
@@ -548,6 +556,9 @@ export default {
         }
       }
     }
+  }
+  .add-items {
+    margin: 30px 0 100px;
   }
 }
 </style>

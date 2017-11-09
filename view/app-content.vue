@@ -4,31 +4,36 @@ adjust the main content (without nav or sidebar), for example when dragging out
 the sidebar. This also keeps our app.vue more clean.
 -->
 <template>
-  <div class="app-content" :class="{ activeSidebar, deltaX }"
-       :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-              'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-              'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-    <slot>
-      <!-- page content goes here -->
-    </slot>
-  </div>
+  <transition appear name="zoom">
+    <div class="app-content" :class="{ activeSidebar, deltaX }"
+         :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+        <slot>
+          <!-- page content goes here -->
+        </slot>
+    </div>
+  </transition>
 </template>
 
 
 
 <script>
+
 export default {
   data() {
     return {
       breakpoint: false
     }
   },
+
   mounted() {
     // JS breakpoint to ensure correct content movement behaviour when sidebar
     // is moved. (move content on $breakpoint-m, don't move it below)
     window.addEventListener('resize', () => this.updateBreakpoint())
     this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
   },
+
   computed: {
     activeSidebar() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
@@ -38,6 +43,7 @@ export default {
       return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
     }
   },
+
   methods: {
     // Check if we reached $breakpoint-m. If so, don't "squeeze" the app content on menu swipe
     updateBreakpoint() {
@@ -65,6 +71,15 @@ export default {
   & > .g-ct {
     will-change: padding;
   }
+}
+
+.zoom-enter-active {
+  transition: all 0.4s ease;
+}
+.zoom-enter, .zoom-leave-to {
+  transform: scale(0.99);
+  transform-origin: 50% 200px;
+  opacity: 0;
 }
 
 @media (min-width: $breakpoint-m) {
