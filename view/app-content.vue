@@ -6,13 +6,15 @@ the sidebar. This also keeps our app.vue more clean.
 <template>
   <div class="transition-wrapper">
     <transition appear name="zoom">
-      <div class="app-content" :class="{ activeSidebar, deltaX }"
-           :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                  'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                  'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-          <slot>
-            <!-- page content goes here -->
-          </slot>
+      <div>
+        <div class="app-content" :class="{ activeSidebar, deltaX }"
+             :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                    'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                    'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+            <slot>
+              <!-- page content goes here -->
+            </slot>
+        </div>
       </div>
     </transition>
   </div>
@@ -76,12 +78,11 @@ export default {
 }
 
 .zoom-enter-active {
-  @include ease(0.45s);
+  @include ease-out(0.85s);
 }
 .zoom-enter, .zoom-leave-to {
   transform: scale(1.01);
-  transform-origin: 50% 200px;
-  opacity: 0.33;
+  opacity: 0.5;
 }
 .transition-wrapper {
   position: relative;
