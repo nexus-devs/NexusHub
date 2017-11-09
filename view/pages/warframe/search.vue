@@ -486,12 +486,19 @@ export default {
 
     .result {
       @include ie;
+      @include field;
       align-items: center;
       border-radius: 0px;
       padding: 10px 20px;
-      margin-bottom: 3px;
-      border-bottom: 1px solid $color-subtle-dark;  
+      margin-bottom: 8px;
 
+      &:hover {
+        @include gradient-background-dg($color-bg-light, $color-bg);
+        opacity: 1 !important;
+      }
+      &:active {
+        transform: scale(0.995);
+      }
       &:before {
         border-radius: 0px;
       }
@@ -504,9 +511,9 @@ export default {
         align-items: center;
         position: relative;
         overflow: hidden;
-        height: 40px;
-        width: 40px;
-        background: $color-bg-darkest;
+        height: 38px;
+        width: 38px;
+        border: 1px solid $color-subtle;
         border-radius: 2px;
         margin-right: 20px;
 

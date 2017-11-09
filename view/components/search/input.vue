@@ -159,6 +159,10 @@ export default {
      */
     query() {
       const query = button.methods.search.bind(this)
+
+      if (this.inputQueryDelay) {
+        clearTimeout(this.inputQueryDelay)
+      }
       this.complete()
       query()
     }
