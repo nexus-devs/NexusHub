@@ -82,6 +82,7 @@ export default {
 }
 .zoom-enter, .zoom-leave-to {
   transform: scale(1.005);
+  transform-origin: 50% 200px;
   opacity: 0.5;
 }
 .transition-wrapper {
