@@ -165,11 +165,8 @@ export default {
      * Visit link set by user input
      */
     query() {
-      const query = button.methods.search.bind(this)
-
-
       this.complete()
-      query()
+      button.methods.search.bind(this)()
     }
   }
 }

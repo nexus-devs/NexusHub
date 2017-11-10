@@ -87,6 +87,12 @@ export default {
       this.$store.commit('toggleSidebar', expanded, { preserveState: true })
     },
     move(e) {
+      // Ignore when 'dragging' inputs for text selection. Check for direct
+      // target access and first level children.
+      if (e.target.tagName === 'INPUT' || e.target.getElementsByTagName("input").length) {
+        return this.reset()
+      }
+
       // Reset on end
       if (e.isFinal) {
         return this.reset()
