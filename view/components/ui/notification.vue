@@ -26,6 +26,8 @@
 
 
 <script>
+import registerModule from 'src/components/_registerModule.js'
+
 const store = {
   state: {
     active: false,
@@ -78,8 +80,10 @@ const store = {
 
 export default {
   beforeCreate() {
-    this.$store.registerModule('notifications', store)
+    registerModule('notifications', store, this.$store)
   },
+
+  storeModule: store,
 
   computed: {
     title() {
