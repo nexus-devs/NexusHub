@@ -26,6 +26,7 @@
 
 <script>
 import _ from 'lodash'
+import registerModule from 'src/components/_registerModule.js'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -170,21 +171,16 @@ export default {
   },
 
   beforeCreate() {
-    // Ensure store modules for time and rank are present
-    if (!this.$store._actions.applyTimeQuery || !this.$store.state.rank) {
-      time.beforeCreate[0].bind(this)()
-      rank.beforeCreate[0].bind(this)()
-    }
-
-    // Register item store module if not already there
-    if (!this.$store._actions.fetchItemData) {
-      this.$store.registerModule('items', store, { preserveState: this.$store.state.items ? true : false })
-    }
+    registerModule('time', time.storeModule, this.$store)
+    registerModule('rank', rank.storeModule, this.$store)
+    registerModule('items', store, this.$store, this.$store.state.items ? true : false)
 
     // Apply URL query to vuex state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
     this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
   },
+
+  storeModule: store,
 
   computed: {
     item() {
