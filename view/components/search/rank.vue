@@ -74,12 +74,16 @@ export default {
   beforeCreate() {
     this.$store.registerModule('rank', store)
   },
+
+  storeModule: store,
+
   data() {
     return {
       active: false,
       input: ''
     }
   },
+
   computed: {
     available() {
       return this.$store.state.rank.available
@@ -88,6 +92,7 @@ export default {
       return this.$store.state.rank.selected
     }
   },
+
   methods: {
     toggle() {
       this.active = !this.active

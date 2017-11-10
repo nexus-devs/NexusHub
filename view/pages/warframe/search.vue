@@ -57,7 +57,7 @@
                 <div class="result-data-value col" v-for="filter in filters" v-if="filter.category === result.category">
                   <div v-if="result[filter.name]">
                     <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
-                    <span>300p</span>
+                    <span>300p <!-- {{ resolve(filter)}} --></span>
                   </div>
                 </div>
               </router-link>
@@ -78,13 +78,14 @@
 
 
 <script>
+import registerModule from 'src/components/_registerModule.js'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
-import time from 'src/components/search/time.vue'
 import navigation from 'src/components/ui/nav.vue'
 import itemSnippet from 'src/components/snippets/item-result.vue'
+
 
 /**
  * Store module for search results
@@ -127,6 +128,21 @@ const store = {
 }
 
 export default {
+  // Ensure store modules for time and rank are present
+  beforeCreate() {
+    registerModule('serp', store, this.$store, this.$store.state.serp ? true : false)
+  },
+
+  // Set active view (required for generating parent height)
+  mounted() {
+    this.selectListView()
+  },
+  watch: {
+    $route() {
+      this.selectListView()
+    }
+  },
+
   components: {
     'app-content': appContent,
     sidebar,
@@ -135,6 +151,8 @@ export default {
     navigation,
     'item-snippet': itemSnippet
   },
+
+  storeModule: store,
 
   data() {
     return {
@@ -169,32 +187,6 @@ export default {
     },
     results() {
       return this.$store.state.serp.results
-    }
-  },
-
-  // Ensure store modules for time and rank are present
-  beforeCreate() {
-    // Ensure that the time module is loaded
-    if (!this.$store._actions.applyTimeQuery) {
-      time.beforeCreate[0].bind(this)()
-    }
-
-    // Register item store module if not already there
-    if (!this.$store._actions.fetchSerpResults) {
-      this.$store.registerModule('serp', store, { preserveState: this.$store.state.serp ? true : false })
-    }
-
-    // Apply URL query to vuex state
-    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
-  },
-
-  // Set active view (required for generating parent height)
-  mounted() {
-    this.selectListView()
-  },
-  watch: {
-    $route() {
-      this.selectListView()
     }
   },
 
@@ -233,6 +225,18 @@ export default {
 
       // Overwrite original to trigger DOM update
       this.filters = newFilters
+    },
+
+     // Helper function to access nested object keys
+     // Required for assigning data locations for filters
+    resolve(filter) {
+      let result = obj
+      let keys = filter.path.split('.')
+
+      keys.forEach(key => {
+        result = result[key]
+      })
+      return result
     }
   }
 }

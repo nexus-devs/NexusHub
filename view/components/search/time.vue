@@ -24,6 +24,7 @@
 <script>
 import _ from 'lodash'
 import moment from 'moment'
+import registerModule from 'src/components/_registerModule.js'
 
 const calendarOptions = {
   sameDay: '[Today]',
@@ -138,13 +139,15 @@ const store = {
  */
 export default {
   beforeCreate() {
-    if (!this.$store._actions.applyTimeQuery) {
-      this.$store.registerModule('time', store)
-    }
+    registerModule('time', store, this.$store)
   },
+
   created() {
     this.$store.dispatch('applyTimeQuery', this.$route)
   },
+
+  storeModule: store,
+
   data() {
     return {
       active: false,
@@ -161,6 +164,7 @@ export default {
       }]
     }
   },
+
   computed: {
     from() {
       let date = this.$store.state.time.focus.start
@@ -171,6 +175,7 @@ export default {
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
+
   methods: {
     toggle() {
       this.selected = 'start'

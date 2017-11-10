@@ -27,6 +27,7 @@
 
 
 <script>
+import registerModule from 'src/components/_registerModule.js'
 import button from './modules/button.vue' // to get the search function
 
 const store = {
@@ -49,11 +50,15 @@ const store = {
 
 export default {
   beforeCreate() {
-    this.$store.registerModule('search', store)
+    registerModule('search', store, this.$store)
   },
+
   mounted() {
     this.$refs.input.focus()
   },
+
+  storeModule: store,
+
   data() {
     return {
       input: '',
@@ -64,11 +69,13 @@ export default {
       suggestions: []
     }
   },
+
   computed: {
     autotype() {
       return this.autocomplete.type
     }
   },
+
   methods: {
     /**
      * Dynamically get fuzzy search results from search endpoint and save in store
@@ -140,10 +147,6 @@ export default {
      * Change input to full suggestion with correct capitalization
      */
     complete(suggestion = {}) {
-      // Discard ongoing query suggestions
-      if (this.inputQueryDelay) {
-        clearTimeout(this.inputQueryDelay)
-      }
       if (suggestion.name) {
         this.input = suggestion.name
         this.$store.commit('setSearchInput', suggestion)
@@ -163,6 +166,8 @@ export default {
      */
     query() {
       const query = button.methods.search.bind(this)
+
+
       this.complete()
       query()
     }
