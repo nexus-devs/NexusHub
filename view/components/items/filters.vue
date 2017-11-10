@@ -280,7 +280,7 @@ export default {
     margin-top: 5px;
     margin-right: 5px;
     font-size: 0.85em;
-    background: $color-bg;
+    background: $color-bg-light;
     @include shadow-0;
 
     &:disabled {
