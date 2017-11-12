@@ -1,7 +1,6 @@
 <template>
   <router-link :to="result.webUrl" class="result col" :class="{ set: result.set }">
     <img class="result-bg-img" :src="result.imgUrl" :alt="result.name">
-    <img class="result-bg-img blur" :src="result.imgUrl" :alt="result.name">
     <div class="result-bg-shade"></div>
     <div class="result-info">
       <h4 class="result-title">{{ result.name }}</h4>
@@ -95,13 +94,6 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     @include ease(0.25s);
-  }
-  .blur {
-    filter: blur(60px);
-    opacity: 0.5;
-    z-index: -1;
-    width: 800px;
-    height: 800px;
   }
   .result-bg-shade {
     position: absolute;
