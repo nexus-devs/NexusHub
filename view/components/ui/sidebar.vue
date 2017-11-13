@@ -23,43 +23,12 @@
 <script>
 import tooltip from './sidebar/modules/tooltip.vue'
 
-const store = {
-  state: {
-    active: false,
-    expanded: false,
-    id: 0,
-    activeId: 0,
-    deltaX: 0
-  },
-  mutations: {
-    toggleSidebar(state, expanded = false) {
-      state.expanded = expanded
-      state.active = !state.active
-      state.activeId = 0
-    },
-    setActivePanel(state, id) {
-      state.activeId = id
-    },
-    setSidebarDeltaX(state, pos) {
-      state.deltaX = pos
-    },
-    incrementId(state) {
-      state.id++
-    },
-    setId(state, num) {
-      state.id = num
-    }
-  }
-}
 
 export default {
+  // Reset counters for panel id's when loading a new page
   beforeCreate() {
-    // Reset counters for panel id's when loading a new page
     if (this.$store.state.sidebar && this.$store._mutations.toggleSidebar) {
       this.$store.commit('setId', 0)
-    }
-    if (!this.$store._mutations.toggleSidebar) {
-      this.$store.registerModule('sidebar', store)
     }
   },
 
@@ -84,7 +53,7 @@ export default {
 
   methods: {
     toggle(expanded) {
-      this.$store.commit('toggleSidebar', expanded, { preserveState: true })
+      this.$store.commit('toggleSidebar', expanded)
     },
     move(e) {
       // Ignore when 'dragging' inputs for text selection. Check for direct
@@ -117,6 +86,36 @@ export default {
         this.$store.commit('toggleSidebar', true)
       }
       this.$store.commit('setSidebarDeltaX', 0)
+    }
+  },
+
+  storeModule: {
+    name: 'sidebar',
+    state: {
+      active: false,
+      expanded: false,
+      id: 0,
+      activeId: 0,
+      deltaX: 0
+    },
+    mutations: {
+      toggleSidebar(state, expanded = false) {
+        state.expanded = expanded
+        state.active = !state.active
+        state.activeId = 0
+      },
+      setActivePanel(state, id) {
+        state.activeId = id
+      },
+      setSidebarDeltaX(state, pos) {
+        state.deltaX = pos
+      },
+      incrementId(state) {
+        state.id++
+      },
+      setId(state, num) {
+        state.id = num
+      }
     }
   }
 }

@@ -24,7 +24,6 @@
 <script>
 import _ from 'lodash'
 import moment from 'moment'
-import registerModule from 'src/components/_registerModule.js'
 
 const calendarOptions = {
   sameDay: '[Today]',
@@ -37,116 +36,10 @@ const calendarOptions = {
 const getDate = (date) => date instanceof moment ? { time: date, format: date.calendar(null, calendarOptions) } : date
 
 
-/**
- * Store module for time selections
- */
-const store = {
-  state: {
-    modified: false,
-    focus: {
-      start: {
-        time: moment().endOf('day'),
-      },
-      end: {
-        time: moment().subtract(7, 'days').startOf('day'),
-        format: '7 days ago'
-      }
-    },
-    compare: {
-      start: {
-        time: moment().subtract(8, 'days').endOf('day')
-      },
-      end: {
-        time: moment().subtract(14, 'days').startOf('day')
-      }
-    }
-  },
-  mutations: {
-
-    // Focus time range. Automatically adjust to "previous period" when changing
-    setTimeFocusStart(state, date) {
-      const focusStart = getDate(date)
-      const focusEnd = moment(state.focus.end.time)
-      const compareStart = moment(state.compare.start.time)
-
-      // Set new time range start and resize the comparison range by "moving"
-      // the compare end back or forth by as much as the focus start has been
-      // moved
-      const compareEnd = compareStart.subtract(focusStart.time.diff(focusEnd, 'days'), 'days')
-      state.focus.start = focusStart
-      state.compare.end = getDate(compareEnd)
-    },
-    setTimeFocusEnd(state,  date) {
-      const focusEnd = getDate(date)
-      const focusStart = moment(state.focus.start.time)
-      const compareStart = moment(focusEnd.time).subtract(1, 'days')
-
-      // Set new focus end and set the comparison start to be the day before.
-      // The new comparison end is the diff between the new focus end and start
-      // similar to the approach above.
-      const compareEnd = moment(compareStart.valueOf()).subtract(focusStart.diff(focusEnd.time, 'days'), 'days')
-      state.focus.end = focusEnd
-      state.compare.start = getDate(compareStart)
-      state.compare.end = getDate(compareEnd)
-    },
-
-
-    // Comparison range setters. Just apply the explicit value.
-    setTimeCompareStart(state, date) {
-      state.compare.start = getDate(date)
-    },
-    setTimeCompareEnd(state, date) {
-      state.compare.end = getDate(date)
-    },
-
-
-    // Determine wether or not the default time range was changed. This is
-    // important so we query the cached data (without query params) instead of
-    // performing a custom time range query.
-    setTimeModified(state, bool) {
-      state.modified = getDate(bool)
-    }
-  },
-  actions: {
-    applyTimeQuery({ commit }, route) {
-
-      // Focus Range
-      if (route.query.timestart) {
-        commit('setTimeFocusStart', moment(new Date(parseInt(route.query.timestart))))
-        commit('setTimeModified', true)
-      }
-      if (route.query.timeend) {
-        commit('setTimeFocusEnd', moment(new Date(parseInt(route.query.timeend))))
-        commit('setTimeModified', true)
-      }
-
-      // Compare Range
-      if (route.query.comparestart) {
-        commit('setTimeCompareStart', moment(new Date(parseInt(route.query.comparestart))))
-        commit('setTimeModified', true)
-      }
-      if (route.query.compareend) {
-        commit('setTimeCompareEnd', moment(new Date(parseInt(route.query.compareend))))
-        commit('setTimeModified', true)
-      }
-    }
-  }
-}
-
-
-/**
- * Vue Component
- */
 export default {
-  beforeCreate() {
-    registerModule('time', store, this.$store)
-  },
-
   created() {
     this.$store.dispatch('applyTimeQuery', this.$route)
   },
-
-  storeModule: store,
 
   data() {
     return {
@@ -247,6 +140,100 @@ export default {
         this.$store.commit('setTimeFocusEnd', focusStart)
       }
     }
-  }
+  },
+
+  storeModule: {
+    name: 'time',
+    state: {
+      modified: false,
+      focus: {
+        start: {
+          time: moment().endOf('day'),
+        },
+        end: {
+          time: moment().subtract(7, 'days').startOf('day'),
+          format: '7 days ago'
+        }
+      },
+      compare: {
+        start: {
+          time: moment().subtract(8, 'days').endOf('day')
+        },
+        end: {
+          time: moment().subtract(14, 'days').startOf('day')
+        }
+      }
+    },
+    mutations: {
+
+      // Focus time range. Automatically adjust to "previous period" when changing
+      setTimeFocusStart(state, date) {
+        const focusStart = getDate(date)
+        const focusEnd = moment(state.focus.end.time)
+        const compareStart = moment(state.compare.start.time)
+
+        // Set new time range start and resize the comparison range by "moving"
+        // the compare end back or forth by as much as the focus start has been
+        // moved
+        const compareEnd = compareStart.subtract(focusStart.time.diff(focusEnd, 'days'), 'days')
+        state.focus.start = focusStart
+        state.compare.end = getDate(compareEnd)
+      },
+      setTimeFocusEnd(state,  date) {
+        const focusEnd = getDate(date)
+        const focusStart = moment(state.focus.start.time)
+        const compareStart = moment(focusEnd.time).subtract(1, 'days')
+
+        // Set new focus end and set the comparison start to be the day before.
+        // The new comparison end is the diff between the new focus end and start
+        // similar to the approach above.
+        const compareEnd = moment(compareStart.valueOf()).subtract(focusStart.diff(focusEnd.time, 'days'), 'days')
+        state.focus.end = focusEnd
+        state.compare.start = getDate(compareStart)
+        state.compare.end = getDate(compareEnd)
+      },
+
+
+      // Comparison range setters. Just apply the explicit value.
+      setTimeCompareStart(state, date) {
+        state.compare.start = getDate(date)
+      },
+      setTimeCompareEnd(state, date) {
+        state.compare.end = getDate(date)
+      },
+
+
+      // Determine wether or not the default time range was changed. This is
+      // important so we query the cached data (without query params) instead of
+      // performing a custom time range query.
+      setTimeModified(state, bool) {
+        state.modified = getDate(bool)
+      }
+    },
+    actions: {
+      applyTimeQuery({ commit }, route) {
+
+        // Focus Range
+        if (route.query.timestart) {
+          commit('setTimeFocusStart', moment(new Date(parseInt(route.query.timestart))))
+          commit('setTimeModified', true)
+        }
+        if (route.query.timeend) {
+          commit('setTimeFocusEnd', moment(new Date(parseInt(route.query.timeend))))
+          commit('setTimeModified', true)
+        }
+
+        // Compare Range
+        if (route.query.comparestart) {
+          commit('setTimeCompareStart', moment(new Date(parseInt(route.query.comparestart))))
+          commit('setTimeModified', true)
+        }
+        if (route.query.compareend) {
+          commit('setTimeCompareEnd', moment(new Date(parseInt(route.query.compareend))))
+          commit('setTimeModified', true)
+        }
+      }
+    }
+  },
 }
 </script>

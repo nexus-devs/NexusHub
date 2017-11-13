@@ -41,6 +41,7 @@ import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 
+
 export default {
   components: {
     'app-content': appContent,

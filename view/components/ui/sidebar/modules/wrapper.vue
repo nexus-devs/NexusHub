@@ -8,6 +8,10 @@
 
 <script>
 export default {
+  // Increase id on each wrapper load. This way we can enumerate the number of
+  // sidebar tools. We also use this id as multiplier for vertical offsets for
+  // animations since there's no way to dynamically add however many tools we
+  // want otherwise. (without breaking your head at least)
   beforeCreate() {
     this.$store.commit('incrementId')
   },
