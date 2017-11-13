@@ -373,7 +373,7 @@ class Scraper {
 
       // Still no Image URL? -> Print warning to have it looked up
       if (!imageUrl) {
-        return console.log(`:: ${chalk.yellow('WARN')}: Could not find image for ${itemName}`)
+        imageUrl = `https://warframe.market/static/assets/${itemSet.icon}`
       }
 
       // Modify URL to get full size version
