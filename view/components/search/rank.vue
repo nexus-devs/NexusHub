@@ -40,43 +40,7 @@ for (let i = 0; i < 11; i++) {
 available.push('Any Rank')
 
 
-/**
- * Store Module which is hooked on beforeCreate
- */
-const store = {
-  state: {
-    available,
-    selected: 'Any Rank'
-  },
-  mutations: {
-    setSearchRank(state, rank) {
-      state.selected = rank
-    },
-    appendSearchRank(state) {
-      if (state.available[state.available.length - 1] !== state.available[0]) {
-        state.available.push(state.available[0])
-      }
-    },
-    shiftSearchRank(state) {
-      state.available.shift()
-    },
-    popSearchRank(state) {
-      state.available.pop()
-    }
-  }
-}
-
-
-/**
- * Vue Component
- */
 export default {
-  beforeCreate() {
-    this.$store.registerModule('rank', store)
-  },
-
-  storeModule: store,
-
   data() {
     return {
       active: false,
@@ -102,6 +66,30 @@ export default {
       this.$store.commit('setSearchRank', rank)
       this.toggle()
     }
-  }
+  },
+
+  storeModule: {
+    name: 'rank',
+    state: {
+      available,
+      selected: 'Any Rank'
+    },
+    mutations: {
+      setSearchRank(state, rank) {
+        state.selected = rank
+      },
+      appendSearchRank(state) {
+        if (state.available[state.available.length - 1] !== state.available[0]) {
+          state.available.push(state.available[0])
+        }
+      },
+      shiftSearchRank(state) {
+        state.available.shift()
+      },
+      popSearchRank(state) {
+        state.available.pop()
+      }
+    }
+  },
 }
 </script>

@@ -9,7 +9,7 @@
         </v-touch>
         <div class="col-b"></div>
         <div class="col-b">
-          <h4>Product</h4>
+          <h4>Project</h4>
           <router-link to="/open-source">Open Source</router-link>
           <router-link to="/branding">Branding</router-link>
         </div>

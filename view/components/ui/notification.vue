@@ -26,65 +26,7 @@
 
 
 <script>
-import registerModule from 'src/components/_registerModule.js'
-
-const store = {
-  state: {
-    active: false,
-    current: {
-      title: 'No Notifications',
-      content: 'Seems there\'s nothing new. We have dispatched a pigeon to deliver the latest news soon™'
-    },
-    selected: 0,
-    list: []
-  },
-  actions: {
-    nextNotification({ commit, state }) {
-      let list = state.list
-      let next = state.selected + 1
-      commit('selectNotification', next >= list.length ? 0 : next)
-    },
-    previousNotification({ commit, state }) {
-      let list = state.list
-      let previous = state.selected - 1
-      commit('selectNotification', previous < 0 ? list.length - 1 : previous)
-    },
-    displayNotification({ commit }) {
-      commit('selectNotification', 0)
-      commit('toggleNotification')
-      setTimeout(() => commit('toggleNotification'), 5000)
-    },
-    pushNotification({ commit, dispatch }, notification) {
-      commit('addNotification', notification)
-      dispatch('displayNotification')
-    }
-  },
-  mutations: {
-    selectNotification(state, index) {
-      let list = state.list
-      let current = list[index]
-
-      if (current) {
-        state.selected = index
-        state.current = current
-      }
-    },
-    addNotification(state, notification) {
-      state.list.unshift(notification)
-    },
-    toggleNotification(state) {
-      state.active = !state.active
-    }
-  }
-}
-
 export default {
-  beforeCreate() {
-    registerModule('notifications', store, this.$store)
-  },
-
-  storeModule: store,
-
   computed: {
     title() {
       return this.$store.state.notifications.current.title
@@ -122,6 +64,57 @@ export default {
     },
     previous() {
       this.$store.dispatch('previousNotification')
+    }
+  },
+
+  storeModule: {
+    name: 'notifications',
+    state: {
+      active: false,
+      current: {
+        title: 'No Notifications',
+        content: 'Seems there\'s nothing new. We have dispatched a pigeon to deliver the latest news soon™'
+      },
+      selected: 0,
+      list: []
+    },
+    actions: {
+      nextNotification({ commit, state }) {
+        let list = state.list
+        let next = state.selected + 1
+        commit('selectNotification', next >= list.length ? 0 : next)
+      },
+      previousNotification({ commit, state }) {
+        let list = state.list
+        let previous = state.selected - 1
+        commit('selectNotification', previous < 0 ? list.length - 1 : previous)
+      },
+      displayNotification({ commit }) {
+        commit('selectNotification', 0)
+        commit('toggleNotification')
+        setTimeout(() => commit('toggleNotification'), 5000)
+      },
+      pushNotification({ commit, dispatch }, notification) {
+        commit('addNotification', notification)
+        dispatch('displayNotification')
+      }
+    },
+    mutations: {
+      selectNotification(state, index) {
+        let list = state.list
+        let current = list[index]
+
+        if (current) {
+          state.selected = index
+          state.current = current
+        }
+      },
+      addNotification(state, notification) {
+        state.list.unshift(notification)
+      },
+      toggleNotification(state) {
+        state.active = !state.active
+      }
     }
   }
 }

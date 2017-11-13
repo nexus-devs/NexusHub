@@ -126,7 +126,7 @@ export default {
   position: relative;
   overflow: hidden;
   top: -56px;
-  padding-top: 80px;
+  padding-top: 40px;
   padding-bottom: 220px;
   @include gradient-background-dg($color-primary-dark, $color-accent-dark);
 

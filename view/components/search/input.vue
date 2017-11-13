@@ -27,37 +27,13 @@
 
 
 <script>
-import registerModule from 'src/components/_registerModule.js'
 import button from './modules/button.vue' // to get the search function
 
-const store = {
-  state: {
-    input: {
-      name: '',
-      type: ''
-    },
-    done: false
-  },
-  mutations: {
-    setSearchInput(state, input) {
-      state.input = input
-    },
-    setSearchDone(state, bool) {
-      state.done = bool
-    }
-  }
-}
 
 export default {
-  beforeCreate() {
-    registerModule('search', store, this.$store)
-  },
-
   mounted() {
     this.$refs.input.focus()
   },
-
-  storeModule: store,
 
   data() {
     return {
@@ -168,6 +144,25 @@ export default {
       this.complete()
       button.methods.search.bind(this)()
     }
-  }
+  },
+
+  storeModule: {
+    name: 'search',
+    state: {
+      input: {
+        name: '',
+        type: ''
+      },
+      done: false
+    },
+    mutations: {
+      setSearchInput(state, input) {
+        state.input = input
+      },
+      setSearchDone(state, bool) {
+        state.done = bool
+      }
+    }
+  },
 }
 </script>

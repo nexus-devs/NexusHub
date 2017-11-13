@@ -26,7 +26,6 @@
 
 <script>
 import _ from 'lodash'
-import registerModule from 'src/components/_registerModule.js'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -75,90 +74,7 @@ const defaultItem = {
   components: []
 }
 
-const store = {
-  state: {
-    item: _.cloneDeep(defaultItem),
-    itemComparison: _.cloneDeep(defaultItem),
-    selected: {
-      components: [],
-      offerType: 'combined',
-      regions: []
-    }
-  },
-  mutations: {
-    setItem(state, item) {
-      state.item = Object.assign(state.item, item)
-    },
-    setItemComparison(state, item) {
-      state.itemComparison = Object.assign(state.itemComparison, item)
-    },
-    setItemOfferType(state, type) {
-      state.selected.offerType = type.toLowerCase()
-    },
-    setItemRegions(state, regions) {
-      state.selected.regions = regions
-    }
-  },
-  actions: {
-    async fetchItemData({ commit, rootState }, name) {
-      const time = rootState.time
-      const rank = rootState.rank
-      const regions = rootState.items.selected.regions
-      const compareStart = time.compare.start.time.valueOf()
-      const compareEnd = time.compare.end.time.valueOf()
 
-      // Specify Target URLs
-      let focusUrl = `/warframe/v1/items/${name}/statistics`
-      let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
-
-      // Attach rank if specified
-      if (rank.selected !== 'Any Rank') {
-        focusUrl += `?rank=${rank.selected}`
-        compareUrl += `&rank=${rank.selected}`
-      }
-
-      // Get custom query which probably isn't cached
-      if (time.modified) {
-        const focusStart = time.focus.start.time.valueOf()
-        const focusEnd = time.focus.end.time.valueOf()
-        const intervals = time.focus.start.time.diff(time.focus.end.time, 'days')
-        let query = `?timestart=${focusStart}&timeend=${focusEnd}&intervals=${intervals}`
-
-        if (focusUrl.includes('?')) {
-          query = query.replace('?', '&')
-        }
-        focusUrl += query
-        compareUrl += `&intervals=${intervals}`
-      }
-
-      // Add region param if present
-      if (regions.length) {
-        let query = `?region=${regions}`
-
-        if (focusUrl.includes('?')) {
-          query = query.replace('?', '&')
-        }
-        focusUrl += focusUrl.includes('?') ? `&region=${regions}` : `?region=${regions}`
-        compareUrl += `&region=${regions}`
-      }
-
-      // Perform API query for base data, focus range and comparison range
-      const data = await Promise.all([
-        this.$blitz.get(`/warframe/v1/items/${name}`),
-        this.$blitz.get(focusUrl),
-        this.$blitz.get(compareUrl)
-      ])
-
-      commit('setItem', mergeItemData(data[0], data[1]))
-      commit('setItemComparison', mergeItemData(data[0], data[2]))
-    }
-  }
-}
-
-
-/**
- * Vue Component
- */
 export default {
   components: {
     'app-content': appContent,
@@ -170,17 +86,11 @@ export default {
     filters
   },
 
+  // Apply URL query to vuex state
   beforeCreate() {
-    registerModule('time', time.storeModule, this.$store)
-    registerModule('rank', rank.storeModule, this.$store)
-    registerModule('items', store, this.$store, this.$store.state.items ? true : false)
-
-    // Apply URL query to vuex state
     this.$store.dispatch('applyTimeQuery', this.$store.state.route)
     this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
   },
-
-  storeModule: store,
 
   computed: {
     item() {
@@ -219,6 +129,87 @@ export default {
       this.$blitz.on(itemUrl, data => {
         this.$store.commit('setItem', mergeItemData(this.$store.state.items.item, data))
       })
+    }
+  },
+
+  storeModule: {
+    name: 'items',
+    state: {
+      item: _.cloneDeep(defaultItem),
+      itemComparison: _.cloneDeep(defaultItem),
+      selected: {
+        components: [],
+        offerType: 'combined',
+        regions: []
+      }
+    },
+    mutations: {
+      setItem(state, item) {
+        state.item = Object.assign(state.item, item)
+      },
+      setItemComparison(state, item) {
+        state.itemComparison = Object.assign(state.itemComparison, item)
+      },
+      setItemOfferType(state, type) {
+        state.selected.offerType = type.toLowerCase()
+      },
+      setItemRegions(state, regions) {
+        state.selected.regions = regions
+      }
+    },
+    actions: {
+      async fetchItemData({ commit, rootState }, name) {
+        const time = rootState.time
+        const rank = rootState.rank
+        const regions = rootState.items.selected.regions
+        const compareStart = time.compare.start.time.valueOf()
+        const compareEnd = time.compare.end.time.valueOf()
+
+        // Specify Target URLs
+        let focusUrl = `/warframe/v1/items/${name}/statistics`
+        let compareUrl = `/warframe/v1/items/${name}/statistics?timestart=${compareStart}&timeend=${compareEnd}`
+
+        // Attach rank if specified
+        if (rank.selected !== 'Any Rank') {
+          focusUrl += `?rank=${rank.selected}`
+          compareUrl += `&rank=${rank.selected}`
+        }
+
+        // Get custom query which probably isn't cached
+        if (time.modified) {
+          const focusStart = time.focus.start.time.valueOf()
+          const focusEnd = time.focus.end.time.valueOf()
+          const intervals = time.focus.start.time.diff(time.focus.end.time, 'days')
+          let query = `?timestart=${focusStart}&timeend=${focusEnd}&intervals=${intervals}`
+
+          if (focusUrl.includes('?')) {
+            query = query.replace('?', '&')
+          }
+          focusUrl += query
+          compareUrl += `&intervals=${intervals}`
+        }
+
+        // Add region param if present
+        if (regions.length) {
+          let query = `?region=${regions}`
+
+          if (focusUrl.includes('?')) {
+            query = query.replace('?', '&')
+          }
+          focusUrl += focusUrl.includes('?') ? `&region=${regions}` : `?region=${regions}`
+          compareUrl += `&region=${regions}`
+        }
+
+        // Perform API query for base data, focus range and comparison range
+        const data = await Promise.all([
+          this.$blitz.get(`/warframe/v1/items/${name}`),
+          this.$blitz.get(focusUrl),
+          this.$blitz.get(compareUrl)
+        ])
+
+        commit('setItem', mergeItemData(data[0], data[1]))
+        commit('setItemComparison', mergeItemData(data[0], data[2]))
+      }
     }
   }
 }

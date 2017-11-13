@@ -78,7 +78,6 @@
 
 
 <script>
-import registerModule from 'src/components/_registerModule.js'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -87,52 +86,7 @@ import navigation from 'src/components/ui/nav.vue'
 import itemSnippet from 'src/components/snippets/item-result.vue'
 
 
-/**
- * Store module for search results
- */
-const store = {
-  state: {
-    list: 'cards',
-    results: []
-  },
-  mutations: {
-    setSerpResults(state, results) {
-      state.results = results
-    },
-    setSerpListView(state, type) {
-      state.list = type
-    }
-  },
-  actions: {
-    async fetchSerpResults({ commit, rootState }, input) {
-      const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
-      const players = [] // await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
-      const results = []
-
-      // Add each component to results
-      if (items.statusCode !== 400) {
-        items.forEach(item => {
-          item.components.reverse().forEach(component => {
-            results.push(Object.assign(component, {
-              name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
-              category: 'items',
-              webUrl: item.webUrl,
-              set: component.name === 'Set' || item.components.length < 2
-            }))
-          })
-        })
-      }
-      commit('setSerpResults', results)
-    }
-  }
-}
-
 export default {
-  // Ensure store modules for time and rank are present
-  beforeCreate() {
-    registerModule('serp', store, this.$store, this.$store.state.serp ? true : false)
-  },
-
   // Set active view (required for generating parent height)
   mounted() {
     this.selectListView()
@@ -152,7 +106,43 @@ export default {
     'item-snippet': itemSnippet
   },
 
-  storeModule: store,
+  storeModule: {
+    name: 'serp',
+    state: {
+      list: 'cards',
+      results: []
+    },
+    mutations: {
+      setSerpResults(state, results) {
+        state.results = results
+      },
+      setSerpListView(state, type) {
+        state.list = type
+      }
+    },
+    actions: {
+      async fetchSerpResults({ commit, rootState }, input) {
+        const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
+        const players = [] // await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
+        const results = []
+
+        // Add each component to results
+        if (items.statusCode !== 400) {
+          items.forEach(item => {
+            item.components.reverse().forEach(component => {
+              results.push(Object.assign(component, {
+                name: item.name + (item.components.length > 1 ? ' ' + component.name : ''),
+                category: 'items',
+                webUrl: item.webUrl,
+                set: component.name === 'Set' || item.components.length < 2
+              }))
+            })
+          })
+        }
+        commit('setSerpResults', results)
+      }
+    }
+  },
 
   data() {
     return {
