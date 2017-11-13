@@ -86,12 +86,6 @@ export default {
     filters
   },
 
-  // Apply URL query to vuex state
-  beforeCreate() {
-    this.$store.dispatch('applyTimeQuery', this.$store.state.route)
-    this.$store.commit('setItemRegions', this.$store.state.route.query.region || [])
-  },
-
   computed: {
     item() {
       return this.$store.state.items.item
@@ -118,8 +112,10 @@ export default {
     // this.listen() // requires on-route change destructor
   },
 
-  asyncData({ store, route: { params: { item }}}) {
-    return store.dispatch('fetchItemData', item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+  asyncData({ store, route }) {
+    store.dispatch('applyTimeQuery', route)
+    store.commit('setItemRegions', route.query.region || [])
+    return store.dispatch('fetchItemData', route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
 
   methods: {
