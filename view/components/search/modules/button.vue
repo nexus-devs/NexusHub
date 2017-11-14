@@ -26,7 +26,7 @@ export default {
         if (typeof input !== 'string') {
           path = input.webUrl
         } else {
-          path = `/warframe/search?query=${input.name}`
+          path = `/warframe/search?query=${input}`
         }
 
         // Add URL params based on state
