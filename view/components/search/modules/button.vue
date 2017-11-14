@@ -14,7 +14,8 @@
 <script>
 export default {
   methods: {
-    async search(input) {
+    async search() {
+      const input = this.$store.state.search.input
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 

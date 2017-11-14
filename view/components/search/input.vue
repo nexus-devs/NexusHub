@@ -46,10 +46,19 @@ export default {
     }
   },
 
+  storeModule: {
+    name: 'search',
+    state: {
+      input: ''
+    },
+    mutations: {
+      setSearchInput(state, input) {
+        state.input = input
+      }
+    }
+  },
+
   methods: {
-    /**
-     * Dynamically get fuzzy search results from search endpoint and save in store
-     */
     async search(event) {
       let result = []
       this.input = event.target.value
@@ -104,13 +113,15 @@ export default {
       if (suggestion.name) {
         this.input = suggestion
         this.autocomplete = suggestion
+        this.$store.commit('setSearchInput', suggestion)
         this.suggestions = []
       }
       // Take first suggestion in list
       else if (this.suggestions.length) {
-        let actual = this.suggestions[0]
-        this.input = actual
-        this.autocomplete = actual
+        let first = this.suggestions[0]
+        this.input = first
+        this.autocomplete = first
+        this.$store.commit('setSearchInput', first)
         this.suggestions = []
       }
     },
@@ -120,7 +131,7 @@ export default {
      */
     query() {
       this.complete()
-      button.methods.search.bind(this)(this.input)
+      button.methods.search.bind(this)()
     }
   }
 }
