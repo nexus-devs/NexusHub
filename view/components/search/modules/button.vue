@@ -19,7 +19,7 @@ export default {
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 
-      if (search.input.name && !search.done) {
+      if (search.input.name) {
         let path
         let query = {}
 
