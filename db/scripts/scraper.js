@@ -14,7 +14,7 @@ const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 class Scraper {
   constructor() {
     this.scraped = []
-    this.doFetchMarketData = false
+    this.doFetchMarketData = true
   }
 
   /**
@@ -373,11 +373,10 @@ class Scraper {
 
       // Still no Image URL? -> Print warning to have it looked up
       if (!imageUrl) {
-        imageUrl = `https://warframe.market/static/assets/${itemSet.icon}`
+        imageUrl = `https://warframe.market/static/assets/${itemSet[0].icon}`
+      } else {
+        imageUrl = imageUrl.split('.png')[0] + '.png' // Modify URL to get full size version
       }
-
-      // Modify URL to get full size version
-      imageUrl = imageUrl.split('.png')[0] + '.png'
 
       // Save image in /assets/
       request.head(imageUrl, (err, res, body) => {
