@@ -14,19 +14,19 @@
 <script>
 export default {
   methods: {
-    async search() {
-      const search = this.$store.state.search
+    async search(input) {
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 
-      if (search.input.name) {
+      if (input) {
         let path
         let query = {}
 
-        if (search.input.type === 'Any') {
-          path = `/warframe/search?query=${search.input.name}`
+        // If full object is passed, assume suggestion is taken and webUrl to be included
+        if (typeof input !== 'string') {
+          path = input.webUrl
         } else {
-          path = `/warframe/${search.input.category.toLowerCase()}/${search.input.name.toLowerCase()}`.replace(/-/g, '--').replace(/ /g, '-')
+          path = `/warframe/search?query=${input.name}`
         }
 
         // Add URL params based on state
@@ -44,13 +44,10 @@ export default {
           query
         })
 
-        // Toggle sidebar if open
+        // Close sidebar if open
         if (this.$store.state.sidebar.active) {
           this.$store.commit('toggleSidebar')
         }
-
-        // Remove input from state (prevents search without further input)
-        this.$store.commit('setSearchDone', true)
       }
     }
   }

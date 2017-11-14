@@ -2,10 +2,10 @@
   <div class="col-b search">
     <div class="field">
       <label>Search</label><br>
-      <input type="text" placeholder="Try: Soma Prime, Maim..." :value="input" @input="search"
+      <input type="text" placeholder="Try: Soma Prime, Maim..." :value="input.name || input" @input="search"
        v-on:keydown.tab.prevent="complete" v-on:keyup.enter="query" ref="input">
       <span class="autocomplete">{{ autocomplete.name }}</span>
-      <span class="autocomplete-type">{{ autotype }}</span>
+      <span class="autocomplete-type">{{ autocomplete.type }}</span>
       <slot></slot>
     </div>
     <div class="tools">
@@ -46,12 +46,6 @@ export default {
     }
   },
 
-  computed: {
-    autotype() {
-      return this.autocomplete.type
-    }
-  },
-
   methods: {
     /**
      * Dynamically get fuzzy search results from search endpoint and save in store
@@ -59,62 +53,45 @@ export default {
     async search(event) {
       let result = []
       this.input = event.target.value
-      this.$store.commit('setSearchDone', false)
-
-      // Clear existing timeout (no search suggestions while typing fast)
-      if (this.inputQueryDelay) {
-        clearTimeout(this.inputQueryDelay)
-      }
+      await this.fetchSuggestions()
 
       // Update if autocomplete doesn't match input in entered letters
       if (!this.autocomplete.name.startsWith(this.input)) {
         this.autocomplete = {
-          name: this.input,
+          name: '',
           type: 'Any'
         }
-        await this.fetchSuggestions(result)
-      }
-
-      // Only fetch new data when user is done typing to reduce server load.
-      else {
-        this.inputQueryDelay = setTimeout(() => {
-          this.fetchSuggestions(result)
-        }, 100)
       }
     },
-    async fetchSuggestions(result) {
+    async fetchSuggestions() {
+      let result = []
+
       // Only run if timeout isn't after search is done
-      if (!this.$store.state.search.done) {
-        if (this.input.length > 1) {
-          result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=3`)
-          this.$store.commit('setSearchInput', {
-            name: this.input,
-            type: 'Any'
-          })
+      if (this.input.length > 1) {
+        result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=3`)
+      }
+      // Found suggestions and input still matches result (may not if user types too fast)
+      let regex = new RegExp(`^${this.input}`, 'i')
+      if (result.length && result[0].name.replace(regex, this.input).startsWith(this.input)) {
+        this.autocomplete = {
+          name: result[0].name.replace(regex, this.input),
+          type: result[0].type
         }
-        // Found suggestions
-        if (result.length) {
-          let regex = new RegExp(`^${this.input}`, 'i')
-          this.autocomplete = {
-            name: result[0].name.replace(regex, this.input),
-            content: result[0].content
-          }
-          this.suggestions = result
+        this.suggestions = result
+      }
+      // No suggestion -> Suggest 'Any' for custom search
+      else {
+        this.autocomplete = {
+          name: '',
+          type: 'Any'
         }
-        // No suggestion -> Suggest 'Any' for custom search
-        else {
-          this.autocomplete = {
-            name: '',
-            type: 'Any'
-          }
-          this.suggestions = []
-        }
-        // Input cleared again
-        if (this.input.length < 1) {
-          this.autocomplete = {
-            name: '',
-            type: ''
-          }
+        this.suggestions = []
+      }
+      // Input cleared again
+      if (this.input.length < 1) {
+        this.autocomplete = {
+          name: '',
+          type: ''
         }
       }
     },
@@ -123,15 +100,16 @@ export default {
      * Change input to full suggestion with correct capitalization
      */
     complete(suggestion = {}) {
+      // Take directly passed suggestion (when selecting from suggestion list)
       if (suggestion.name) {
-        this.input = suggestion.name
-        this.$store.commit('setSearchInput', suggestion)
+        this.input = suggestion
         this.autocomplete = suggestion
         this.suggestions = []
-      } else if (this.suggestions.length) {
+      }
+      // Take first suggestion in list
+      else if (this.suggestions.length) {
         let actual = this.suggestions[0]
-        this.input = actual.name
-        this.$store.commit('setSearchInput', actual)
+        this.input = actual
         this.autocomplete = actual
         this.suggestions = []
       }
@@ -142,27 +120,8 @@ export default {
      */
     query() {
       this.complete()
-      button.methods.search.bind(this)()
+      button.methods.search.bind(this)(this.input)
     }
-  },
-
-  storeModule: {
-    name: 'search',
-    state: {
-      input: {
-        name: '',
-        type: ''
-      },
-      done: false
-    },
-    mutations: {
-      setSearchInput(state, input) {
-        state.input = input
-      },
-      setSearchDone(state, bool) {
-        state.done = bool
-      }
-    }
-  },
+  }
 }
 </script>
