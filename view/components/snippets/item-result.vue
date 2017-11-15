@@ -55,14 +55,25 @@ export default {
   position: relative;
   overflow: hidden;
   height: 140px;
-  width: 200px;
-  max-width: 240px;
+  width: calc(20% - 15px);
+  max-width: calc(20% - 15px);
+  box-sizing: border-box;
   margin-right: 15px;
   margin-bottom: 15px;
   flex-basis: auto;
 
+  @media (max-width: $breakpoint-m) {
+    width: calc(33% - 15px);
+    max-width: calc(33% - 15px);
+  }
   @media (max-width: $breakpoint-s) {
     max-width: none;
+    width: calc(50% - 15px);
+    max-width: calc(50% - 15px);
+  }
+  @media (max-width: $breakpoint-xs) {
+    width: 100%;
+    max-width: 100%;
   }
   &:hover {
     opacity: 1 !important; // <a> override
