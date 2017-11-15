@@ -473,7 +473,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
-    margin-right: -15px; // compensate for card right-margin
+    width: calc(100% + 15px); // compensate for card margin right
   }
   .result-list {
     margin-top: 30px;
