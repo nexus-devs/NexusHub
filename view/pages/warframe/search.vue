@@ -90,6 +90,7 @@ export default {
   // Set active view (required for generating parent height)
   mounted() {
     this.selectListView()
+    window.addEventListener('resize', this.onResize)
   },
   watch: {
     $route() {
@@ -186,16 +187,23 @@ export default {
   },
 
   methods: {
-    // Swap between list view types (cards/list)
-    selectListView(type) {
-      this.$store.commit('setSerpListView', type || this.list)
-
+    // Resize result container. We have to do this because the list/card view
+    // is positioned absolutely to enable smooth transitions while staying at
+    // the same place. The html tag height will be expanded without this when
+    // the smaller list is selected.
+    onResize() {
       if (this.list === 'cards') {
         this.listHeight = this.$refs.cards.offsetHeight
       } else {
         this.listHeight = this.$refs.list.offsetHeight
       }
       this.listHeight += 40 // padding
+    },
+
+    // Swap between list view types (cards/list)
+    selectListView(type) {
+      this.$store.commit('setSerpListView', type || this.list)
+      this.onResize()
     },
 
     // Select filters and adjust sorting. First click -> activate, descending;
