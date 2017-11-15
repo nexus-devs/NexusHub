@@ -32,11 +32,13 @@
               </div>
             </div>
             <div class="filter-view">
-              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
-                <img src="/img/ui/list-view.svg" class="ico-20" alt="list">
+              <div class="a-ie" :class="{ active: list === 'rows' }" v-on:click="selectListView('rows')">
+                <img src="/img/ui/list-view.svg" class="ico-20" alt="Rows">
+                <span>Rows</span>
               </div>
               <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
-                <img src="/img/ui/card-view.svg" class="ico-20" alt="cards">
+                <img src="/img/ui/card-view.svg" class="ico-20" alt="Cards">
+                <span>Cards</span>
               </div>
             </div>
           </div>
@@ -46,7 +48,7 @@
             <div class="result-cards list" ref="cards" :class="{ active: list === 'cards' }">
               <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
             </div>
-            <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
+            <div class="result-list list" ref="list" :class="{ active: list === 'rows' }">
               <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
                 <div class="result-title col-b">
                   <div class="result-img">
@@ -200,7 +202,7 @@ export default {
       this.listHeight += 40 // padding
     },
 
-    // Swap between list view types (cards/list)
+    // Swap between list view types (cards/rows)
     selectListView(type) {
       this.$store.commit('setSerpListView', type || this.list)
       this.onResize()
@@ -448,6 +450,11 @@ export default {
 
         &:hover {
           opacity: 0.8;
+        }
+        span {
+          text-transform: uppercase;
+          color: white;
+          font-size: 0.8em;
         }
       }
       .active {
