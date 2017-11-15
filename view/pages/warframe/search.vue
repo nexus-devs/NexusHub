@@ -94,6 +94,9 @@ export default {
     this.selectListView()
     window.addEventListener('resize', this.onResize)
   },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize)
+  },
   watch: {
     $route() {
       this.selectListView()
