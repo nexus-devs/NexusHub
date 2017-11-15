@@ -3,7 +3,7 @@
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
-    <button class="btn-outline" type="button">
+    <button type="button">
       Search
     </button>
   </div>
@@ -60,7 +60,7 @@ export default {
 <style lang="scss" scoped>
 .button-container {
   position: absolute;
-  right: 15px;
+  right: 20px;
 }
 .button-icon {
   display: none; // optional
