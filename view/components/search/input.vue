@@ -62,6 +62,7 @@ export default {
     async search(event) {
       let result = []
       this.input = event.target.value
+      this.$store.commit('setSearchInput', event.target.value)
       await this.fetchSuggestions()
 
       // Update if autocomplete doesn't match input in entered letters
