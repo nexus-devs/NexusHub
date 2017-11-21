@@ -32,23 +32,23 @@
               </div>
             </div>
             <div class="filter-view">
-              <div class="a-ie" :class="{ active: list === 'rows' }" v-on:click="selectListView('rows')">
-                <img src="/img/ui/list-view.svg" class="ico-20" alt="Rows">
-                <span>Rows</span>
+              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
+                <img src="/img/ui/list-view.svg" class="ico-20" alt="List">
+                <span>List</span>
               </div>
-              <div class="a-ie" :class="{ active: list === 'cards' }" v-on:click="selectListView('cards')">
-                <img src="/img/ui/card-view.svg" class="ico-20" alt="Cards">
-                <span>Cards</span>
+              <div class="a-ie" :class="{ active: list === 'grid' }" v-on:click="selectListView('grid')">
+                <img src="/img/ui/card-view.svg" class="ico-20" alt="Grid">
+                <span>Grid</span>
               </div>
             </div>
           </div>
 
           <!-- Content -->
           <div class="results-container" :style="{ height: `${listHeight}px` }">
-            <div class="result-cards list" ref="cards" :class="{ active: list === 'cards' }">
+            <div class="result-grid list" ref="grid" :class="{ active: list === 'grid' }">
               <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
             </div>
-            <div class="result-list list" ref="list" :class="{ active: list === 'rows' }">
+            <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
               <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
                 <div class="result-title col-b">
                   <div class="result-img">
@@ -115,7 +115,7 @@ export default {
   storeModule: {
     name: 'serp',
     state: {
-      list: 'cards',
+      list: 'grid',
       results: []
     },
     mutations: {
@@ -197,15 +197,15 @@ export default {
     // the same place. The html tag height will be expanded without this when
     // the smaller list is selected.
     onResize() {
-      if (this.list === 'cards') {
-        this.listHeight = this.$refs.cards.offsetHeight
+      if (this.list === 'grid') {
+        this.listHeight = this.$refs.grid.offsetHeight
       } else {
         this.listHeight = this.$refs.list.offsetHeight
       }
       this.listHeight += 40 // padding
     },
 
-    // Swap between list view types (cards/rows)
+    // Swap between list view types (grid/list)
     selectListView(type) {
       this.$store.commit('setSerpListView', type || this.list)
       this.onResize()
@@ -487,7 +487,7 @@ export default {
   }
 
   // List view types
-  .result-cards {
+  .result-grid {
     display: flex;
     flex-wrap: wrap;
     margin-top: 40px;
