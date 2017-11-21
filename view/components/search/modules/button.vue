@@ -1,12 +1,12 @@
 <template>
-  <div class="button-container" v-on:click.stop="search">
+  <a href="/warframe/search" class="button-container" v-on:click.stop.prevent="search">
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
     <button class="btn-outline" type="button">
       Search
     </button>
-  </div>
+  </a>
 </template>
 
 
