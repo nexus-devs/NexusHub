@@ -6,7 +6,7 @@ module.exports = {
    * Ensures mongodb indexes and creates missing ones
    */
   verifyItemIndices: () => {
-    mongodb.connect(blitz.config.core_worker.mongoUrl + "?socketTimeoutMS=0", function(err, db) {
+    mongodb.connect(blitz.config.core.mongoUrl, function(err, db) {
       if (err) throw err
 
       // TODO: Change item index to text
