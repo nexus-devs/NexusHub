@@ -5,7 +5,7 @@ module.exports = {
   },
   auth: {
     core: {
-      mongoURL: 'mongodb://localhost/warframe-nexus-auth'
+      mongoUrl: 'mongodb://127.0.0.1/warframe-nexus-auth'
     }
   },
   core: {
@@ -13,16 +13,14 @@ module.exports = {
   },
   view: {
     core: {
-      mongoURL: 'mongodb://localhost/warframe-nexus-view',
+      mongoUrl: 'mongodb://127.0.0.1/warframe-nexus-view',
       endpointPath: __dirname + '/../view/endpoints',
       sourcePath: __dirname + '/../view',
-      publicPath: __dirname + '/../assets'
+      publicPath: __dirname + '/../assets',
     },
     client: {
-      api: 'https://api.nexus-stats.com',
-      auth: 'https://auth.nexus-stats.com',
-      user_key: 'UaGcdduMzAdMmuML9Sk45epsaxjh74x1B97qdzYkgBfI9CDaZFoYAhu5YPA6w982',
-      user_secret: 'OHCufWlBHM4izpfBcZB3HYN2IqBrFpBk8Z1xjEhlQ6VeKLgQ0pX03TjQmHNoIYEI'
+      apiUrl: 'https://api.nexus-stats.com',
+      authUrl: 'https://auth.nexus-stats.com'
     }
   }
 }

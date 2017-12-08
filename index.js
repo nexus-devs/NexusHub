@@ -15,7 +15,7 @@ blitz.hook('core_worker', mongo.verifyItemIndices)
 blitz.hook('core_worker', db.verifyItemList)
 blitz.use(new Core({
   endpointPath: __dirname + '/api/core',
-  mongoURL: 'mongodb://localhost/warframe-nexus-core',
+  mongoUrl: 'mongodb://127.0.0.1/warframe-nexus-core',
   id: 'core_worker'
 }))
 
@@ -26,6 +26,6 @@ blitz.use(new Core({
 blitz.hook('client_worker', db.verifyItemList)
 blitz.use(new Core({
   endpointPath: __dirname + '/api/client',
-  mongoURL: 'mongodb://localhost/warframe-nexus-core',
+  mongoUrl: 'mongodb://127.0.0.1/warframe-nexus-core',
   id: 'client_worker'
 }))
