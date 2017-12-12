@@ -11139,7 +11139,80 @@
       {
         "name": "Blueprint",
         "ducats": 45,
-        "drop": [],
+        "drop": [
+          {
+            "location": "Lith F1 Intact",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.11
+          },
+          {
+            "location": "Lith F1 Exceptional",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.13
+          },
+          {
+            "location": "Lith F1 Flawless",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.17
+          },
+          {
+            "location": "Lith F1 Radiant",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Meso C2 Intact",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.11
+          },
+          {
+            "location": "Meso C2 Exceptional",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.13
+          },
+          {
+            "location": "Meso C2 Flawless",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.17
+          },
+          {
+            "location": "Meso C2 Radiant",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Meso S1 Intact",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.11
+          },
+          {
+            "location": "Meso S1 Exceptional",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.13
+          },
+          {
+            "location": "Meso S1 Flawless",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.17
+          },
+          {
+            "location": "Meso S1 Radiant",
+            "type": "Relics",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          }
+        ],
         "imgUrl": "/img/warframe/items/blueprint.png"
       },
       {
@@ -11861,7 +11934,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -11884,7 +11957,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -11907,7 +11980,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -11930,7 +12003,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -11953,7 +12026,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -11976,7 +12049,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -11999,13 +12072,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12028,7 +12101,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12051,13 +12124,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12080,7 +12153,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12103,7 +12176,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -12126,7 +12199,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12149,13 +12222,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12178,7 +12251,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -12200,13 +12273,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12229,7 +12302,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -12252,7 +12325,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12275,7 +12348,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -12298,7 +12371,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -12321,7 +12394,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12344,7 +12417,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -12366,13 +12439,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12395,7 +12468,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -12418,7 +12491,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12441,7 +12514,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -12464,7 +12537,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12487,7 +12560,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Jordas Verdict",
+            "location": "The Jordas Verdict",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
@@ -12510,13 +12583,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -12539,7 +12612,7 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0246
@@ -16136,16 +16209,16 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Bombard 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Legendary",
-            "chance": 0.005
-          },
-          {
             "location": "Knave Specter 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.060599999999999994
+          },
+          {
+            "location": "Kuva Bombard 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Legendary",
+            "chance": 0.005
           }
         ],
         "imgUrl": "/img/warframe/items/crimson-dervish.png"
@@ -16366,13 +16439,13 @@
             "chance": 0.0101
           },
           {
-            "location": "Grineer Warden 3.00",
+            "location": "Arid Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
           },
           {
-            "location": "Arid Heavy Gunner 3.00",
+            "location": "Grineer Warden 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -16488,12 +16561,6 @@
             "chance": null
           },
           {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
-          },
-          {
             "location": "Shadow Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -16510,6 +16577,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3636
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
           }
         ],
         "imgUrl": "/img/warframe/items/blind-justice.png"
@@ -16625,7 +16698,13 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/swirling-tiger.png"
@@ -16762,7 +16841,7 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -16774,7 +16853,7 @@
             "chance": 0.005
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -17057,7 +17136,13 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/shimmering-blight.png"
@@ -17130,7 +17215,7 @@
             "chance": 0.0067
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -17142,7 +17227,7 @@
             "chance": 0.10529999999999999
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -17262,7 +17347,7 @@
             "chance": null
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -17274,7 +17359,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -17283,7 +17368,13 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/eleventh-storm.png"
@@ -17896,6 +17987,12 @@
             "chance": null
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Crewman 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -17903,18 +18000,6 @@
           },
           {
             "location": "Corpus Power Carrier 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Eidolon Vomvalyst 30.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -17932,10 +18017,22 @@
             "chance": 0.0737
           },
           {
+            "location": "Mutalist Osprey Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Nightwatch Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -18033,7 +18130,13 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/gemini-cross.png"
@@ -18074,6 +18177,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -18136,7 +18245,13 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/sinking-talon.png"
@@ -18215,6 +18330,12 @@
             "chance": 0.1106
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -18222,12 +18343,6 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -18276,6 +18391,12 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
             "chance": 0.0737
           }
         ],
@@ -18319,6 +18440,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Carrion Charger 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -18334,7 +18461,13 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.09179999999999999
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.09
           }
         ],
         "imgUrl": "/img/warframe/items/fracturing-wind.png"
@@ -22735,12 +22868,6 @@
             "chance": null
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Frontier Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -22777,25 +22904,13 @@
             "chance": 0.0101
           },
           {
+            "location": "Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Tusk Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
-            "location": "Kuva Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
-            "location": "Kuva Drahk Master 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
-            "location": "Bailiff 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -22813,7 +22928,7 @@
             "chance": 0.2
           },
           {
-            "location": "Frontier Bailiff 3.00",
+            "location": "Kuva Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -22835,6 +22950,24 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2
+          },
+          {
+            "location": "Kuva Drahk Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Bailiff 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
+            "location": "Frontier Bailiff 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           }
         ],
         "imgUrl": "/img/warframe/items/flow.png"
@@ -22997,12 +23130,6 @@
             "chance": null
           },
           {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0278
-          },
-          {
             "location": "Alad V 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -23027,6 +23154,12 @@
             "chance": 0.0278
           },
           {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0278
+          },
+          {
             "location": "Captain Vor 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -23037,6 +23170,12 @@
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0184
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -24065,13 +24204,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Roller Sentry 3.00",
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Kuva Roller 3.00",
+            "location": "Roller Sentry 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -24341,12 +24480,6 @@
             "chance": null
           },
           {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
-          },
-          {
             "location": "Shadow Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -24365,6 +24498,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Hunhow 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
+          },
+          {
             "location": "Toxic Crawler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -24377,7 +24516,7 @@
             "chance": 0.0737
           },
           {
-            "location": "Hunhow 100.00",
+            "location": "Stalker 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.3056
@@ -24661,7 +24800,7 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -24673,7 +24812,7 @@
             "chance": 0.1106
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -24962,13 +25101,13 @@
             "chance": 0.0067
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -25408,6 +25547,12 @@
             "chance": 0.2529
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Denial Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -25415,18 +25560,6 @@
           },
           {
             "location": "Crewman 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Corpus Power Carrier 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Ratel 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -25444,13 +25577,13 @@
             "chance": 0.2529
           },
           {
-            "location": "Eidolon Vomvalyst 30.00",
+            "location": "Corpus Power Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Mutalist Osprey Carrier 3.00",
+            "location": "Ratel 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -25463,6 +25596,12 @@
           },
           {
             "location": "Hellion Power Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -25754,7 +25893,7 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -25766,7 +25905,7 @@
             "chance": 0.005
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -25788,6 +25927,12 @@
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0184
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -25992,16 +26137,16 @@
             "chance": 0.0201
           },
           {
-            "location": "Kuva Scorpion 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Chroma 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2
+          },
+          {
+            "location": "Kuva Scorpion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           },
           {
             "location": "Tenno Specter 3.00",
@@ -26614,13 +26759,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Roller Sentry 3.00",
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Kuva Roller 3.00",
+            "location": "Roller Sentry 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -27173,6 +27318,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -27743,13 +27894,13 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Grineer Warden 3.00",
+            "location": "Arid Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Heavy Gunner 3.00",
+            "location": "Grineer Warden 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -27943,12 +28094,6 @@
             "chance": null
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -27962,6 +28107,12 @@
           },
           {
             "location": "Drekar Manic 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -28009,6 +28160,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Drahk Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Kuva Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -28016,18 +28173,6 @@
           },
           {
             "location": "Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Frontier Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -28045,10 +28190,28 @@
             "chance": 0.37939999999999996
           },
           {
+            "location": "Frontier Bailiff 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Recover The Orokin Archive",
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0843
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -28101,6 +28264,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.7587999999999999
+          },
+          {
+            "location": "Carrion Charger 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Jack O'Naut 3.00",
@@ -28569,12 +28738,6 @@
             "chance": null
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -28594,6 +28757,12 @@
           },
           {
             "location": "Drekar Manic 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
+            "location": "Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -28623,6 +28792,18 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Kuva Hyekka Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Drahk Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Kuva Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -28636,18 +28817,6 @@
           },
           {
             "location": "Frontier Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Kuva Hyekka Master 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -29255,7 +29424,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Ballista 3.00",
+            "location": "Sprag 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Ven'Kra Tel 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -29267,13 +29442,7 @@
             "chance": 0.2211
           },
           {
-            "location": "Sprag 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Ven'Kra Tel 3.00",
+            "location": "Kuva Ballista 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -29536,18 +29705,6 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Kuva Trooper 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -29566,16 +29723,28 @@
             "chance": 0.2529
           },
           {
-            "location": "Regulator 3.00",
+            "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.18969999999999998
           },
           {
             "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
+          },
+          {
+            "location": "Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Kuva Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           }
         ],
         "imgUrl": "/img/warframe/items/melee-prowess.png"
@@ -29766,6 +29935,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Carrion Charger 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -29782,6 +29957,12 @@
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0843
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -30574,12 +30755,6 @@
             "chance": null
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
             "location": "Frontier Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -30611,6 +30786,12 @@
           },
           {
             "location": "Drekar Manic 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
+            "location": "Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -30652,7 +30833,25 @@
             "chance": 0.1106
           },
           {
+            "location": "Arid Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
             "location": "Kuva Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
+            "location": "Raptor 5.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -30670,25 +30869,7 @@
             "chance": 0.0553
           },
           {
-            "location": "Arid Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
-            "location": "Raptor 5.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Frontier Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
-            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -30734,12 +30915,6 @@
             "chance": 0.1106
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
             "location": "Bailiff Defector 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -30750,6 +30925,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
           },
           {
             "location": "Drekar Butcher 3.00",
@@ -30764,12 +30945,6 @@
             "chance": 0.0369
           },
           {
-            "location": "Ratel 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Isolator Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -30782,6 +30957,12 @@
             "chance": 0.1106
           },
           {
+            "location": "Ratel 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Tusk Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -30789,6 +30970,12 @@
           },
           {
             "location": "Kuva Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
+            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -30807,12 +30994,6 @@
           },
           {
             "location": "Frontier Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
-            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -30852,12 +31033,6 @@
             "chance": 0.0101
           },
           {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0278
-          },
-          {
             "location": "Vay Hek Terra Frame 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -30894,22 +31069,28 @@
             "chance": 0.0278
           },
           {
-            "location": "Ratel 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Hunhow 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0278
           },
           {
+            "location": "Ratel 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Artificer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0278
           }
         ],
         "imgUrl": "/img/warframe/items/energy-channel.png"
@@ -31042,12 +31223,6 @@
             "chance": 0.2529
           },
           {
-            "location": "Roller Sentry 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Drekar Manic Bombard 40.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -31064,6 +31239,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
+          },
+          {
+            "location": "Roller Sentry 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           }
         ],
         "imgUrl": "/img/warframe/items/true-steel.png"
@@ -31214,6 +31395,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -31250,18 +31437,6 @@
             "chance": 0.0737
           },
           {
-            "location": "Eidolon Vomvalyst 30.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Mutalist Osprey Carrier 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
             "location": "Grineer Power Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -31269,6 +31444,12 @@
           },
           {
             "location": "Hellion Power Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -31286,6 +31467,12 @@
             "chance": 0.0737
           },
           {
+            "location": "Carabus 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Nightwatch Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -31293,12 +31480,6 @@
           },
           {
             "location": "Regulator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -31410,7 +31591,7 @@
             "chance": 0.005
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -31422,7 +31603,7 @@
             "chance": 0.005
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.005
@@ -31742,7 +31923,7 @@
             "chance": null
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -31754,7 +31935,7 @@
             "chance": 0.3872
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.3872
@@ -32028,12 +32209,6 @@
             "chance": 0.0564
           },
           {
-            "location": "Stalker 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.3056
-          },
-          {
             "location": "Vay Hek Terra Frame 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -32086,6 +32261,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0442
+          },
+          {
+            "location": "Stalker 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.3056
           },
           {
             "location": "Recover The Orokin Archive",
@@ -32512,10 +32693,22 @@
             "chance": 0.3872
           },
           {
-            "location": "Butcher 3.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
+            "location": "Ancient Infested 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
+            "location": "Infested Grineer 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
           },
           {
             "location": "Frontier Lancer 3.00",
@@ -32534,24 +32727,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
-          },
-          {
-            "location": "Infested Grineer 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
-          },
-          {
-            "location": "Ancient Infested 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
-          },
-          {
-            "location": "Infested Corpus 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
           },
           {
             "location": "Grineer Manic 50.00",
@@ -32588,6 +32763,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Drekar Lancer 3.00",
@@ -32698,6 +32879,18 @@
             "chance": 0.37939999999999996
           },
           {
+            "location": "Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Arid Hellion 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
             "location": "Kuva Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -32708,6 +32901,24 @@
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Kuva Hyekka Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Nightwatch Reaver 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Drahk Master 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Kuva Drahk Master 3.00",
@@ -32722,19 +32933,7 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Hellion 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Hellion 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Nightwatch Reaver 3.00",
+            "location": "Venin Mutalist 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -32752,24 +32951,6 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Kuva Hyekka Master 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Drahk Master 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Venin Mutalist 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Recover The Orokin Archive",
             "type": "Key Rewards",
             "rarity": "Rare",
@@ -32780,6 +32961,18 @@
             "type": "Key Rewards",
             "rarity": "Rare",
             "chance": 0.0843
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -33438,13 +33631,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Attack Drone 3.00",
+            "location": "Charger 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Charger 3.00",
+            "location": "Attack Drone 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -33480,7 +33673,19 @@
             "chance": 0.0737
           },
           {
+            "location": "Carabus 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Regulator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Carrion Charger 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -33493,12 +33698,6 @@
           },
           {
             "location": "Juggernaut Behemoth 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -34364,6 +34563,12 @@
             "location": "Level 5 - 15 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
             "chance": 0.0737
           }
         ],
@@ -35140,7 +35345,7 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -35152,7 +35357,7 @@
             "chance": 0.1106
           },
           {
-            "location": "Hellion 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -35164,13 +35369,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Heavy Gunner 3.00",
+            "location": "Captain Vor 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Captain Vor 100.00",
+            "location": "Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -35430,16 +35635,16 @@
             "chance": 0.2529
           },
           {
-            "location": "Elite Frontier Lancer 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Crawler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Elite Frontier Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Alad V 100.00",
@@ -35502,13 +35707,13 @@
             "chance": 0.2529
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -35618,12 +35823,6 @@
             "chance": 0.1518
           },
           {
-            "location": "Grineer Warden 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
             "location": "Arid Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -35634,6 +35833,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1518
+          },
+          {
+            "location": "Grineer Warden 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Corrupted Warden 3.00",
@@ -35940,6 +36145,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -35947,12 +36158,6 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -36058,13 +36263,13 @@
             "chance": 0.1106
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -36674,13 +36879,13 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Roller Sentry 3.00",
+            "location": "Kuva Roller 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
           },
           {
-            "location": "Kuva Roller 3.00",
+            "location": "Roller Sentry 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -36764,6 +36969,12 @@
             "chance": 0.0645
           },
           {
+            "location": "Swift Deth",
+            "type": "Mod Locations",
+            "rarity": "Common",
+            "chance": 0.3872
+          },
+          {
             "location": "Sure Shot",
             "type": "Mod Locations",
             "rarity": "Rare",
@@ -36774,12 +36985,6 @@
             "type": "Mod Locations",
             "rarity": "Rare",
             "chance": 0.0564
-          },
-          {
-            "location": "Swift Deth",
-            "type": "Mod Locations",
-            "rarity": "Common",
-            "chance": 0.3872
           },
           {
             "location": "Swirling Tiger",
@@ -37083,10 +37288,10 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Grineer Warden 3.00",
+            "location": "Arid Butcher 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Arid Heavy Gunner 3.00",
@@ -37095,10 +37300,10 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Arid Butcher 3.00",
+            "location": "Grineer Warden 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
           },
           {
             "location": "Corrupted Warden 3.00",
@@ -38136,13 +38341,13 @@
             "chance": 0.0101
           },
           {
-            "location": "Regulator 3.00",
+            "location": "Carabus 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Regulator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0101
@@ -38230,6 +38435,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -38237,12 +38448,6 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -38941,16 +39146,28 @@
             "chance": 0.2529
           },
           {
+            "location": "Elite Arid Lancer 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Elite Arid Lancer 3.00",
-            "type": "Enemy Mod Tables",
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.2
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -39631,19 +39848,13 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Kuva Hellion 3.00",
+            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
             "location": "Arid Hellion 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -39661,13 +39872,19 @@
             "chance": 0.2529
           },
           {
-            "location": "Nightwatch Reaver 3.00",
+            "location": "Kuva Hellion 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
           },
           {
-            "location": "Heavy Gunner 3.00",
+            "location": "Carabus 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Nightwatch Reaver 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -39685,16 +39902,28 @@
             "chance": 0.2529
           },
           {
-            "location": "Carabus 3.00",
+            "location": "Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Recover The Orokin Archive",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1518
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -41196,12 +41425,6 @@
             "chance": 0.1106
           },
           {
-            "location": "Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
             "location": "Frontier Butcher 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -41232,19 +41455,25 @@
             "chance": 0.0553
           },
           {
+            "location": "Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
             "location": "Guardsman 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0369
           },
           {
-            "location": "Ratel 3.00",
+            "location": "Drover Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Drover Bursa 3.00",
+            "location": "Ratel 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -41280,7 +41509,19 @@
             "chance": 0.2211
           },
           {
+            "location": "Arid Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0442
+          },
+          {
             "location": "Kuva Butcher 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0553
+          },
+          {
+            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -41298,19 +41539,7 @@
             "chance": 0.0553
           },
           {
-            "location": "Arid Butcher 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0442
-          },
-          {
             "location": "Frontier Bailiff 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0553
-          },
-          {
-            "location": "Drahk Master 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0553
@@ -41757,6 +41986,12 @@
             "chance": null
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Crewman 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -41775,18 +42010,6 @@
             "chance": 0.0737
           },
           {
-            "location": "Eidolon Vomvalyst 30.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Mutalist Osprey Carrier 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
             "location": "Grineer Power Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -41794,6 +42017,12 @@
           },
           {
             "location": "Hellion Power Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
+            "location": "Mutalist Osprey Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -42660,7 +42889,7 @@
             "chance": null
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -42672,7 +42901,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -42912,7 +43141,7 @@
             "chance": null
           },
           {
-            "location": "Infested Grineer 100.00",
+            "location": "Infested Corpus 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -42924,7 +43153,7 @@
             "chance": 0.0752
           },
           {
-            "location": "Infested Corpus 100.00",
+            "location": "Infested Grineer 100.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
@@ -43310,16 +43539,16 @@
             "chance": null
           },
           {
-            "location": "Tyl Regor 100.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2581
-          },
-          {
             "location": "Crawler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Tyl Regor 100.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2581
           },
           {
             "location": "Nox 3.00",
@@ -43332,6 +43561,18 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -43498,6 +43739,12 @@
             "chance": 0.2529
           },
           {
+            "location": "Arcane Boiler 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1518
+          },
+          {
             "location": "Kuva Heavy Gunner 10.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -43508,12 +43755,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
-          },
-          {
-            "location": "Arcane Boiler 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1518
           },
           {
             "location": "Drekar Manic Bombard 40.00",
@@ -44824,16 +45065,10 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Kuva Ballista 3.00",
+            "location": "Arcane Boiler 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Lynx 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
+            "rarity": "Uncommon",
+            "chance": 0.1518
           },
           {
             "location": "Sprag 3.00",
@@ -44848,13 +45083,19 @@
             "chance": 0.2529
           },
           {
-            "location": "Arcane Boiler 3.00",
+            "location": "Lynx 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1518
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Raptor 5.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
+          },
+          {
+            "location": "Kuva Ballista 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
@@ -44888,6 +45129,12 @@
             "chance": null
           },
           {
+            "location": "Eidolon Vomvalyst 30.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Volatile Runner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -44912,12 +45159,6 @@
             "chance": 0.2529
           },
           {
-            "location": "Eidolon Vomvalyst 30.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Raptor Ns 5.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
@@ -44936,7 +45177,13 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Orphid Husks 3.00",
+            "location": "Grineer Power Carrier 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Hellion Power Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -44948,13 +45195,7 @@
             "chance": 0.2529
           },
           {
-            "location": "Grineer Power Carrier 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
-            "location": "Hellion Power Carrier 3.00",
+            "location": "Orphid Husks 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -45426,6 +45667,12 @@
             "chance": 0.1106
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
             "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -45433,12 +45680,6 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
-            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -46174,6 +46415,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Arid Eviscerator 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Kuva Trooper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -46181,12 +46428,6 @@
           },
           {
             "location": "Kuva Eviscerator 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.18969999999999998
-          },
-          {
-            "location": "Arid Eviscerator 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
@@ -46496,7 +46737,19 @@
             "location": "Level 5 - 15 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
+            "chance": 0.0752
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
             "chance": 0.0737
+          },
+          {
+            "location": "Level 5 - 15 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 5 - 15 Bounty",
@@ -46801,13 +47054,13 @@
             "chance": 0.2256
           },
           {
-            "location": "Grineer Warden 3.00",
+            "location": "Arid Heavy Gunner 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Arid Heavy Gunner 3.00",
+            "location": "Grineer Warden 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -47804,6 +48057,105 @@
     "imgUrl": "/img/warframe/items/ballistica-prime.png"
   },
   {
+    "name": "Mirage Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/blueprint.png"
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/chassis.png"
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/neuroptics.png"
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/systems.png"
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/mirage-prime.png"
+      }
+    ],
+    "apiUrl": "/warframe/v1/items/Mirage%20Prime",
+    "webUrl": "/warframe/items/mirage-prime",
+    "imgUrl": "/img/warframe/items/mirage-prime.png"
+  },
+  {
+    "name": "Kogake Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/blueprint.png"
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/blade.png"
+      },
+      {
+        "name": "Gauntlet",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/gauntlet.png"
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/kogake-prime.png"
+      }
+    ],
+    "apiUrl": "/warframe/v1/items/Kogake%20Prime",
+    "webUrl": "/warframe/items/kogake-prime",
+    "imgUrl": "/img/warframe/items/kogake-prime.png"
+  },
+  {
+    "name": "Akbolto Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/blueprint.png"
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/barrel.png"
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": [],
+        "imgUrl": "/img/warframe/items/akbolto-prime.png"
+      }
+    ],
+    "apiUrl": "/warframe/v1/items/Akbolto%20Prime",
+    "webUrl": "/warframe/items/akbolto-prime",
+    "imgUrl": "/img/warframe/items/akbolto-prime.png"
+  },
+  {
     "name": "Warrior",
     "type": "Mod",
     "ranks": 5,
@@ -48742,12 +49094,6 @@
             "chance": null
           },
           {
-            "location": "Tusk Shield Dargyn 12.50",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0201
-          },
-          {
             "location": "Tusk Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -48758,12 +49104,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
-          },
-          {
-            "location": "Ogma 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
           },
           {
             "location": "Kuva Dargyn 12.50",
@@ -48778,10 +49118,22 @@
             "chance": 0.0101
           },
           {
+            "location": "Tusk Shield Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
             "location": "Hellion Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
+          },
+          {
+            "location": "Ogma 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           }
         ],
         "imgUrl": "/img/warframe/items/system-reroute.png"
@@ -48835,13 +49187,13 @@
         "ducats": 0,
         "drop": [
           {
-            "location": " The Law Of Retribution",
+            "location": "The Law Of Retribution",
             "type": "Key Rewards",
             "rarity": "Legendary",
             "chance": 0.0029
           },
           {
-            "location": " The Law Of Retribution (Nightmare)",
+            "location": "The Law Of Retribution (Nightmare)",
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1429
@@ -49129,7 +49481,14 @@
       {
         "name": "Blueprint",
         "ducats": 0,
-        "drop": [],
+        "drop": [
+          {
+            "location": "Fomorian Sabotage",
+            "type": "Transient Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          }
+        ],
         "imgUrl": "/img/warframe/items/blueprint.png"
       },
       {
@@ -57429,7 +57788,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/meso-n5-intact.png"
@@ -58387,6 +58758,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -58920,7 +59303,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-c3-radiant.png"
@@ -59272,8 +59667,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-v6-radiant.png"
@@ -60386,8 +60793,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n5-flawless.png"
@@ -60930,7 +61349,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/neo-h1-exceptional.png"
@@ -61457,7 +61888,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s7-exceptional.png"
@@ -61847,6 +62290,18 @@
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -63008,6 +63463,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -63403,6 +63870,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -63793,6 +64272,18 @@
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -64331,7 +64822,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/meso-n5-exceptional.png"
@@ -64737,6 +65240,18 @@
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -65832,7 +66347,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/neo-h1-radiant.png"
@@ -66359,7 +66886,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s8-intact.png"
@@ -66711,8 +67250,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-v6-flawless.png"
@@ -67064,8 +67615,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n4-flawless.png"
@@ -67239,7 +67802,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/vigilante-armaments.png"
@@ -67364,7 +67939,7 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.02
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-vice.png"
@@ -67404,7 +67979,13 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/vigilante-pursuit.png"
@@ -67444,7 +68025,13 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/augur-accord.png"
@@ -67483,7 +68070,7 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/blueprint.png"
@@ -67496,7 +68083,7 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/left-gauntlet.png"
@@ -67509,7 +68096,7 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/right-gauntlet.png"
@@ -67624,7 +68211,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-aegis.png"
@@ -67729,7 +68328,13 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/vigilante-fervor.png"
@@ -68146,6 +68751,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -68294,18 +68911,6 @@
             "chance": 0.18969999999999998
           },
           {
-            "location": "Ogma 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
-            "location": "Ogma Elite 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
-          },
-          {
             "location": "Mutalist Toxic Carrier 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -68322,6 +68927,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Ogma Elite 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Frigate 3.00",
@@ -68346,6 +68957,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.18969999999999998
+          },
+          {
+            "location": "Ogma 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           }
         ],
         "imgUrl": "/img/warframe/items/cutting-edge.png"
@@ -68376,16 +68993,16 @@
             "chance": null
           },
           {
-            "location": "Scorch 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.3872
-          },
-          {
             "location": "Leaper 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Common",
             "chance": 0.37939999999999996
+          },
+          {
+            "location": "Scorch 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Common",
+            "chance": 0.3872
           },
           {
             "location": "Kuva Scorch 3.00",
@@ -68641,12 +69258,6 @@
             "chance": 0.1106
           },
           {
-            "location": "Tusk Shield Dargyn 12.50",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1106
-          },
-          {
             "location": "Tusk Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -68660,6 +69271,12 @@
           },
           {
             "location": "Kuva Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1106
+          },
+          {
+            "location": "Tusk Shield Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -68861,6 +69478,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1128
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -70425,13 +71048,37 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.1081
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/madurai-lens.png"
@@ -70454,13 +71101,37 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/zenurik-lens.png"
@@ -70483,13 +71154,37 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.1081
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/naramon-lens.png"
@@ -70512,13 +71207,37 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/unairu-lens.png"
@@ -71616,6 +72335,12 @@
             "chance": null
           },
           {
+            "location": "Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
+          },
+          {
             "location": "Frigate 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -71638,12 +72363,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
-          },
-          {
-            "location": "Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
           }
         ],
         "imgUrl": "/img/warframe/items/hollowed-bullets.png"
@@ -71825,16 +72544,16 @@
             "chance": null
           },
           {
-            "location": "Dargyn 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Mutalist Cannon Battery 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2581
+          },
+          {
+            "location": "Dargyn 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
           },
           {
             "location": "Cannon Battery 3.00",
@@ -71929,12 +72648,6 @@
             "chance": null
           },
           {
-            "location": "Stalker 50.00",
-            "type": "Enemy Blueprint Tables",
-            "rarity": "Rare",
-            "chance": 0.0201
-          },
-          {
             "location": "Shadow Stalker 50.00",
             "type": "Enemy Blueprint Tables",
             "rarity": "Rare",
@@ -71942,6 +72655,12 @@
           },
           {
             "location": "Hunhow 50.00",
+            "type": "Enemy Blueprint Tables",
+            "rarity": "Rare",
+            "chance": 0.0201
+          },
+          {
+            "location": "Stalker 50.00",
             "type": "Enemy Blueprint Tables",
             "rarity": "Rare",
             "chance": 0.0201
@@ -72327,13 +73046,13 @@
             "chance": 0.0737
           },
           {
-            "location": "Kuva Seeker 3.00",
+            "location": "Arcane Boiler 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
           },
           {
-            "location": "Arcane Boiler 3.00",
+            "location": "Kuva Seeker 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0737
@@ -73497,12 +74216,6 @@
             "chance": 0.37939999999999996
           },
           {
-            "location": "Tusk Shield Dargyn 12.50",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Tusk Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -73516,6 +74229,12 @@
           },
           {
             "location": "Kuva Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Shield Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -73752,6 +74471,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0564
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0752
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -85221,22 +85946,16 @@
             "chance": 0.1106
           },
           {
-            "location": "Level 20 - 40 Bounty",
+            "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.0816
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
-          },
-          {
-            "location": "Level 30 - 50 Bounty",
-            "type": "Cetus Bounty Rewards",
-            "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-resolve.png"
@@ -85292,13 +86011,37 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           },
           {
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.10960000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/vazarin-lens.png"
@@ -85451,7 +86194,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2297
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.17350000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.17
           }
         ],
         "imgUrl": "/img/warframe/items/augur-message.png"
@@ -85837,7 +86592,7 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.02
           }
         ],
         "imgUrl": "/img/warframe/items/vigilante-supplies.png"
@@ -87186,6 +87941,12 @@
             "chance": 0.18969999999999998
           },
           {
+            "location": "Carrion Charger 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.18969999999999998
+          },
+          {
             "location": "Jack O'Naut 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -87312,13 +88073,13 @@
             "chance": null
           },
           {
-            "location": "Ogma 25.00",
+            "location": "Ogma Elite 25.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
           },
           {
-            "location": "Ogma Elite 25.00",
+            "location": "Ogma 25.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
@@ -87358,12 +88119,6 @@
             "chance": null
           },
           {
-            "location": "Ogma 25.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0101
-          },
-          {
             "location": "Ogma Elite 25.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -87380,6 +88135,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0201
+          },
+          {
+            "location": "Ogma 25.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0101
           }
         ],
         "imgUrl": "/img/warframe/items/dual-rounds.png"
@@ -87674,6 +88435,12 @@
             "chance": 0.0564
           },
           {
+            "location": "Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Rare",
+            "chance": 0.0737
+          },
+          {
             "location": "Corvette 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -87690,12 +88457,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0564
-          },
-          {
-            "location": "Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Rare",
-            "chance": 0.0737
           }
         ],
         "imgUrl": "/img/warframe/items/furor.png"
@@ -87979,22 +88740,16 @@
             "chance": null
           },
           {
-            "location": "Tusk Shield Dargyn 12.50",
+            "location": "Lancer Dreg 3.00",
             "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
+            "rarity": "Common",
+            "chance": 0.37939999999999996
           },
           {
             "location": "Tusk Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
-          },
-          {
-            "location": "Lancer Dreg 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Common",
-            "chance": 0.37939999999999996
           },
           {
             "location": "Tusk Command Dargyn 12.50",
@@ -88004,6 +88759,12 @@
           },
           {
             "location": "Kuva Dargyn 12.50",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
+            "location": "Tusk Shield Dargyn 12.50",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -99383,6 +100144,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -101328,7 +102101,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-c3-flawless.png"
@@ -103217,8 +104002,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n4-exceptional.png"
@@ -103761,7 +104558,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s8-radiant.png"
@@ -105367,8 +106176,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-v6-intact.png"
@@ -105911,7 +106732,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s8-exceptional.png"
@@ -106476,7 +107309,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-g1-intact.png"
@@ -107009,7 +107854,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-g1-flawless.png"
@@ -107536,7 +108393,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/neo-h1-intact.png"
@@ -107966,6 +108835,18 @@
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -109854,6 +110735,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -110397,7 +111290,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s7-flawless.png"
@@ -110930,7 +111835,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-c3-intact.png"
@@ -111463,7 +112380,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-g1-radiant.png"
@@ -111990,7 +112919,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s8-flawless.png"
@@ -112380,6 +113321,18 @@
             "type": "Key Rewards",
             "rarity": "Uncommon",
             "chance": 0.1
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
           },
           {
             "location": "Level 10 - 30 Bounty",
@@ -113266,7 +114219,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-rush.png"
@@ -113618,8 +114583,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n5-radiant.png"
@@ -114146,7 +115123,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s7-radiant.png"
@@ -114498,8 +115487,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-v6-exceptional.png"
@@ -115048,7 +116049,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/meso-n5-flawless.png"
@@ -115416,8 +116429,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n5-exceptional.png"
@@ -115828,6 +116853,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -116212,8 +117249,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n4-intact.png"
@@ -117451,7 +118500,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/neo-h1-flawless.png"
@@ -117984,7 +119045,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-c3-exceptional.png"
@@ -118511,7 +119584,19 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/neo-s7-intact.png"
@@ -118879,8 +119964,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n5-intact.png"
@@ -119927,8 +121024,20 @@
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
+            "rarity": "Common",
+            "chance": 0.5
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.2529
+            "chance": 0.3247
+          },
+          {
+            "location": "Level 40 - 60 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.25
           }
         ],
         "imgUrl": "/img/warframe/items/axi-n4-radiant.png"
@@ -120461,7 +121570,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.2162
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16329999999999997
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.16
           }
         ],
         "imgUrl": "/img/warframe/items/meso-n5-radiant.png"
@@ -120994,7 +122115,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/meso-g1-exceptional.png"
@@ -121406,6 +122539,18 @@
             "location": "Level 10 - 30 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
+            "chance": 0.2
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.1549
+          },
+          {
+            "location": "Level 10 - 30 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
             "chance": 0.1518
           }
         ],
@@ -121735,7 +122880,7 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/twirling-spire.png"
@@ -121792,19 +122937,19 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.07
           },
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.07
           },
           {
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.07
           }
         ],
         "imgUrl": "/img/warframe/items/eidolon-lens-blueprint.png"
@@ -122101,7 +123246,7 @@
             "location": "Level 40 - 60 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0737
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/swooping-falcon.png"
@@ -122260,6 +123405,18 @@
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.1106
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.0816
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.08
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-might.png"
@@ -122370,12 +123527,6 @@
             "chance": 0.2529
           },
           {
-            "location": "Ratel 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.2529
-          },
-          {
             "location": "Isolator Bursa 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
@@ -122388,19 +123539,25 @@
             "chance": 0.2529
           },
           {
+            "location": "Ratel 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.2529
+          },
+          {
             "location": "Tusk Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Uncommon",
             "chance": 0.2529
@@ -122530,13 +123687,13 @@
             "chance": 0.0067
           },
           {
-            "location": "Kuva Elite Lancer 3.00",
+            "location": "Elite Arid Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
           },
           {
-            "location": "Elite Arid Lancer 3.00",
+            "location": "Kuva Elite Lancer 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
@@ -122718,6 +123875,12 @@
             "chance": null
           },
           {
+            "location": "Mutalist Cannon Battery 3.00",
+            "type": "Enemy Mod Tables",
+            "rarity": "Uncommon",
+            "chance": 0.1128
+          },
+          {
             "location": "Dargyn 3.00",
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
@@ -122728,12 +123891,6 @@
             "type": "Enemy Mod Tables",
             "rarity": "Rare",
             "chance": 0.0752
-          },
-          {
-            "location": "Mutalist Cannon Battery 3.00",
-            "type": "Enemy Mod Tables",
-            "rarity": "Uncommon",
-            "chance": 0.1128
           },
           {
             "location": "Cannon Battery 3.00",
@@ -125380,7 +126537,19 @@
             "location": "Level 20 - 40 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Uncommon",
-            "chance": 0.1518
+            "chance": 0.26030000000000003
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19390000000000002
+          },
+          {
+            "location": "Level 20 - 40 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Uncommon",
+            "chance": 0.19
           }
         ],
         "imgUrl": "/img/warframe/items/augur-pact.png"
@@ -125505,7 +126674,7 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.02
           }
         ],
         "imgUrl": "/img/warframe/items/vigilante-offense.png"
@@ -125540,6 +126709,12 @@
             "type": "Enemy Mod Tables",
             "rarity": "Legendary",
             "chance": 0.0067
+          },
+          {
+            "location": "Level 30 - 50 Bounty",
+            "type": "Cetus Bounty Rewards",
+            "rarity": "Rare",
+            "chance": 0.02
           }
         ],
         "imgUrl": "/img/warframe/items/gladiator-finesse.png"
@@ -125595,7 +126770,7 @@
             "location": "Level 30 - 50 Bounty",
             "type": "Cetus Bounty Rewards",
             "rarity": "Rare",
-            "chance": 0.0201
+            "chance": 0.02
           }
         ],
         "imgUrl": "/img/warframe/items/augur-secrets.png"

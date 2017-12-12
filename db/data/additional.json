@@ -7488,5 +7488,83 @@
         "drop": []
       }
     ]
+  },
+  {
+    "name": "Mirage Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Kogake Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Gauntlet",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Akbolto Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
   }
 ]

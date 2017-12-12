@@ -14,7 +14,7 @@ const timeout = (fn, s) => queue.delay(fn, 'push', 50)
 class Scraper {
   constructor() {
     this.scraped = []
-    this.doFetchMarketData = true
+    this.doFetchMarketData = false
   }
 
   /**
