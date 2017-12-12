@@ -7530,7 +7530,7 @@
         "drop": []
       },
       {
-        "name": "Blade",
+        "name": "Boot",
         "ducats": 0,
         "drop": []
       },
@@ -7557,6 +7557,16 @@
       },
       {
         "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Link",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
         "ducats": 0,
         "drop": []
       },
