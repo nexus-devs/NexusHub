@@ -7,7 +7,7 @@ module.exports = {
     environment: 'development'
   },
   core: {
-    endpointPath: __dirname + '/../api',
+    endpointPath: __dirname + '/../api/core-warframe',
     mongoUrl,
     mongoDb: 'nexus-core-warframe',
     hooks: [ wf.verifyIndices, wf.verifyItemList ]
@@ -15,13 +15,13 @@ module.exports = {
   auth: {
     core: {
       mongoUrl,
-      mongoDb: 'nexus-auth'
+      mongoDb: 'nexus-core-auth'
     }
   },
   view: {
     core: {
       mongoUrl,
-      mongoDb: 'nexus-view',
+      mongoDb: 'nexus-core-view',
       endpointPath: __dirname + '/../view/endpoints',
       sourcePath: __dirname + '/../view',
       publicPath: __dirname + '/../assets',
