@@ -1,5 +1,4 @@
-const mongo = require('../hooks/mongo')
-const db = require('../hooks/db')
+const wf = require('../hooks/warframe.js')
 const mongoUrl = 'mongodb://localhost/'
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
     endpointPath: __dirname + '/../api',
     mongoUrl,
     mongoDb: 'nexus-core-warframe',
-    hooks: [mongo.verifyItemIndices, db.verifyItemList]
+    hooks: [ wf.verifyIndices, wf.verifyItemList ]
   },
   auth: {
     core: {
