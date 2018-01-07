@@ -27,5 +27,5 @@ module.exports = {
       region: 1,
       rank: 1,
     })
-  })
+  }
 }
