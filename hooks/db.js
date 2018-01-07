@@ -6,7 +6,7 @@ class Hook {
     const url = blitz.config.core.mongoUrl
     const db = await mongodb.connect(url)
     items.forEach(item => {
-      db.collection('items').update({
+      db.db(blitz.config.core.mongoDb).collection('items').update({
         name: item.name
       }, {
         $set: item
