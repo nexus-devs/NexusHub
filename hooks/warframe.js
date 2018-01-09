@@ -2,12 +2,6 @@ const mongodb = require('mongodb').MongoClient
 const items = require('../db/data/items.json')
 
 class Hook {
-  /**
-   * Helper function to ensure indices
-   */
-  async mongoVerifySingleIndex(db, col, index) {
-    await db.db(blitz.config.core.mongoDb).collection(col).createIndex(index)
-  }
 
   /**
    * Add item list on startup
@@ -30,12 +24,15 @@ class Hook {
   async verifyIndices() {
     blitz.log.verbose("Core      | verifying warframe indices")
     const db = await mongodb.connect(blitz.config.core.mongoUrl)
+    const verify = async (db, col, index) => {
+      return db.db(blitz.config.core.mongoDb).collection(col).createIndex(index)
+    }
 
-    this.mongoVerifySingleIndex(db, 'requests', {
+    verify(db, 'requests', {
       item: 1,
       createdAt: 1
     })
-    this.mongoVerifySingleIndex(db, 'requests', {
+    verify(db, 'requests', {
       item: 1,
       createdAt: 1,
       region: 1,
