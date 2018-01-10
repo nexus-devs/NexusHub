@@ -19,6 +19,7 @@ class Hook {
         safe: false,
       })
     })
+    db.close()
   }
 
   async verifyIndices() {
@@ -38,6 +39,7 @@ class Hook {
       region: 1,
       rank: 1,
     })
+    db.close()
   }
 }
 
