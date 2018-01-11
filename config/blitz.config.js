@@ -10,7 +10,8 @@ module.exports = {
     endpointPath: __dirname + '/../api/core-warframe',
     mongoUrl,
     mongoDb: 'nexus-core-warframe',
-    hooks: [ wf.verifyIndices, wf.verifyItemList ]
+    hooks: [ wf.verifyIndices, wf.verifyItemList ],
+    id: 'warframe_core'
   },
   auth: {
     core: {

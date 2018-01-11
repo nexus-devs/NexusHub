@@ -7,10 +7,10 @@ class Hook {
    * Add item list on startup
    */
   async verifyItemList() {
-    const url = blitz.config.core.mongoUrl
+    const url = blitz.config.warframe_core.mongoUrl
     const db = await mongodb.connect(url)
     items.forEach(item => {
-      db.db(blitz.config.core.mongoDb).collection('items').update({
+      db.db(blitz.config.warframe_core.mongoDb).collection('items').update({
         name: item.name
       }, {
         $set: item
@@ -24,9 +24,9 @@ class Hook {
 
   async verifyIndices() {
     blitz.log.verbose("Core      | verifying warframe indices")
-    const db = await mongodb.connect(blitz.config.core.mongoUrl)
+    const db = await mongodb.connect(blitz.config.warframe_core.mongoUrl)
     const verify = async (db, col, index) => {
-      return db.db(blitz.config.core.mongoDb).collection(col).createIndex(index)
+      return db.db(blitz.config.warframe_core.mongoDb).collection(col).createIndex(index)
     }
 
     verify(db, 'requests', {
