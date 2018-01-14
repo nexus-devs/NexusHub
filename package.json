@@ -12,7 +12,7 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.37",
+    "blitz-js": "^0.5.40",
     "chalk": "^2.3.0",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.12.2",
@@ -28,7 +28,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "blitz-js-query": "^0.2.18",
+    "blitz-js-query": "^0.2.19",
     "chai": "^4.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.0.1",
