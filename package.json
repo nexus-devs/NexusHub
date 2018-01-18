@@ -12,7 +12,7 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.40",
+    "blitz-js": "^0.5.41",
     "chalk": "^2.3.0",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.12.2",
@@ -32,6 +32,6 @@
     "chai": "^4.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.0.1",
-    "mocha": "^4.1.0"
+    "mocha": "^5.0.0"
   }
 }
