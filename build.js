@@ -27,7 +27,6 @@ global.blitz = {
 
 // Call webpack build function
 async function build() {
-  const timer = new Date
   const clientConfig = require(blitz.config.view.webpack.clientConfig)
   const serverConfig = require(blitz.config.view.webpack.serverConfig)
 
@@ -36,6 +35,7 @@ async function build() {
   rm.sync(`${__dirname}/assets/client.*.css`)
 
   console.log('* Starting webpack build process. This might take a while...')
+  const timer = new Date
   const compiled = await util.promisify(webpack)([clientConfig, serverConfig])
 
   if (compiled.errors) {
