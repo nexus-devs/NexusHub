@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'production'
 const util = require('util')
 const webpack = require('webpack')
 const rm = require('rimraf')
