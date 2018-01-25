@@ -1,0 +1,21 @@
+workspace:
+  base: /drone
+  path: src/nexus-stats
+
+pipeline:
+  build:
+    image: 127.0.0.1:5000/drone-node
+    commands:
+      - npm install
+      - /bin/sh /build.sh
+  test:
+    image: 127.0.0.1:5000/drone-node
+    commands:
+      - /bin/sh /deploy.sh
+      - npm run test
+  stage:
+    image: 127.0.0.1:5000/drone-node
+    commands:
+      - git stash
+      - git checkout staging
+      - git stash pop
