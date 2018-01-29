@@ -4,18 +4,16 @@ workspace:
 
 pipeline:
   build:
-    image: 127.0.0.1:5000/drone-node
+    image: 127.0.0.1:5000/nexus-stats-dev
     commands:
       - npm install
-      - /bin/sh /build.sh
+      - npm run build
+  stage:
+    image: 127.0.0.1:5000/drone-staging
+    commands:
+      - /bin/sh /stage.sh
   test:
-    image: 127.0.0.1:5000/drone-node
+    image: 127.0.0.1:5000/drone-staging
     commands:
       - /bin/sh /deploy.sh
       - npm run test
-  stage:
-    image: 127.0.0.1:5000/drone-node
-    commands:
-      - git stash
-      - git checkout staging
-      - git stash pop
