@@ -11,7 +11,10 @@ pipeline:
   stage:
     image: 127.0.0.1:5000/drone-staging
     commands:
-      - /bin/sh /stage.sh
+      - /bin/sh /stage.sh /drone/src/nexus-stats development staging
+    secrets:
+      - nexus-ci-user
+      - nexus-ci-pass
   test:
     image: 127.0.0.1:5000/drone-staging
     commands:

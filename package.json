@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js",
-    "build": "node ./build.js",
-    "scrape": "node ./db/warframe/scripts/index.js"
+    "start": "node .",
+    "build": "node build",
+    "scrape": "node db/warframe/scripts/index.js"
   },
   "author": "",
   "license": "CC BY-NC 4.0",
