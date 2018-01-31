@@ -11,12 +11,12 @@ global.blitz = {
     },
     view: {
       webpack: {
-        clientConfig: `${__dirname}/node_modules/blitz-js-view/config/webpack/client.config.js`,
-        serverConfig: `${__dirname}/node_modules/blitz-js-view/config/webpack/server.config.js`
+        clientConfig: `${__dirname}/../node_modules/blitz-js-view/config/webpack/client.config.js`,
+        serverConfig: `${__dirname}/../node_modules/blitz-js-view/config/webpack/server.config.js`
       },
       core: {
-        publicPath: `${__dirname}/assets`,
-        sourcePath: `${__dirname}/view`
+        publicPath: `${__dirname}/../assets`,
+        sourcePath: `${__dirname}/../view`
       },
       client: {
         apiUrl: 'https://api.nexus-stats.com',
@@ -32,8 +32,8 @@ async function build() {
   const serverConfig = require(blitz.config.view.webpack.serverConfig)
 
   console.log('* Removing old builds...')
-  rm.sync(`${__dirname}/assets/*.bundle.*.js`)
-  rm.sync(`${__dirname}/assets/client.*.css`)
+  rm.sync(`${__dirname}/../assets/*.bundle.*.js`)
+  rm.sync(`${__dirname}/../assets/client.*.css`)
 
   console.log('* Starting webpack build process. This might take a while...')
   const timer = new Date
