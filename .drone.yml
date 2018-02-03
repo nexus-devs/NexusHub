@@ -20,3 +20,6 @@ pipeline:
     commands:
       - /bin/sh /deploy.sh
       - npm run test
+      - /bin/sh /undeploy.sh
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
