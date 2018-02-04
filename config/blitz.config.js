@@ -3,7 +3,7 @@ const mongoUrl = 'mongodb://localhost/'
 
 module.exports = {
   blitz: {
-    logLevel: 'monitor',
+    logLevel: 'silly',
     environment: 'development'
   },
   core: {
