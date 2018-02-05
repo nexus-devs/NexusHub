@@ -11,10 +11,10 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.43",
+    "blitz-js": "^0.5.44",
     "chalk": "^2.3.0",
     "cheerio": "^1.0.0-rc.2",
-    "d3": "^4.12.2",
+    "d3": "^4.13.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.20.1",

@@ -12,3 +12,4 @@
 /assets/*.bundle.js
 /assets/hot-update.*
 /assets/img/**.psd
+/assets/*ssr*.json
