@@ -6,6 +6,9 @@ module.exports = {
     logLevel: 'silly',
     environment: 'development'
   },
+  api: {
+    cacheExp: 1
+  },
   core: {
     endpointPath: __dirname + '/../api/core-warframe',
     mongoUrl,
