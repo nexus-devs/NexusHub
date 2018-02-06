@@ -76,12 +76,12 @@ export default {
 }
 
 .zoom-enter-active {
-  @include ease(0.25s);
+  @include ease(0.4s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(0.995);
+  transform: scale(0.997);
   transform-origin: 50%;
-  opacity: 0.5;
+  opacity: 0.75;
 }
 
 @media (min-width: $breakpoint-m) {

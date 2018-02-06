@@ -9,7 +9,9 @@
 
 # Webpack generated content
 /assets/client.css
-/assets/*.bundle.js
+/assets/dev-*.bundle.js
+/assets/vendor.bundle.js
+/assets/manifest.bundle.js
 /assets/hot-update.*
 /assets/img/**.psd
 /assets/*ssr*.json
