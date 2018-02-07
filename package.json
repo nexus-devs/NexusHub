@@ -28,7 +28,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "blitz-js-query": "^0.2.19",
-    "gitlog": "^3.1.1",
+    "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.0.1",
     "rimraf": "^2.6.2"
