@@ -46,8 +46,8 @@ export default {
     transform() {
       const open = this.$store.state.sidebar.active
       const deltaX = this.deltaX
-      const thing = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
-      return thing
+      const pos = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
+      return pos
     }
   },
 
@@ -82,7 +82,7 @@ export default {
         this.$store.commit('toggleSidebar')
       }
       // open
-      else if (!this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX > -285) {
+      else if (!this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX > -225) {
         this.$store.commit('toggleSidebar', true)
       }
       this.$store.commit('setSidebarDeltaX', 0)
