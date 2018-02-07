@@ -32,8 +32,6 @@
       </div>
       <div class="brands">
         <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
-        <a href="https://warframe.market" target="_blank"><img src="/img/footer/warframe-market.svg" class="ico-h-32" alt="Warframe Market"></a>
-      </div>
     </div>
   </footer>
 </template>
