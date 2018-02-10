@@ -32,6 +32,7 @@
       </div>
       <div class="brands">
         <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
+      </div>
     </div>
   </footer>
 </template>
