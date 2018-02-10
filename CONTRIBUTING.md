@@ -37,7 +37,7 @@ and help you to craft the change so that it is successfully accepted into the pr
 ## <a name="rules"></a> Coding Rules
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
-* All API endpoints **must be documented within the endpoint schema.**.
+* All API endpoints **must be documented within the endpoint schema**.
 * We follow the [Standard JS styleguide](https://standardjs.com/).
 
 <br>
