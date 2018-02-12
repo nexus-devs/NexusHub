@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node .",
     "build": "node build",
-    "scrape": "node db/warframe/scripts/index.js"
+    "scrape": "node db/warframe/scripts/index.js",
+    "changelogs": "node db/changelogs/scripts/generate.js"
   },
   "author": "",
   "license": "CC BY-NC 4.0",
