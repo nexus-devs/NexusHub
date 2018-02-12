@@ -8,6 +8,7 @@ pipeline:
     commands:
       - npm install
       - npm run build
+      - npm run changelogs
   stage:
     image: 127.0.0.1:5000/drone-staging
     commands:
