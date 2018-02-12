@@ -5,11 +5,6 @@ const promisify = util.promisify
 const exec = promisify(require('child_process').exec)
 const _ = require('lodash')
 
-/** DEBUG **/
-process.on('unhandledRejection', err => {
-  throw err
-})
-
 class Logger {
   constructor() {
     this.logs = require('../data/logs.json')
