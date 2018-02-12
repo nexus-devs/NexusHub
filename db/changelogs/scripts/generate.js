@@ -5,6 +5,11 @@ const promisify = util.promisify
 const exec = promisify(require('child_process').exec)
 const _ = require('lodash')
 
+/** DEBUG **/
+process.on('unhandledRejection', err => {
+  throw err
+})
+
 class Logger {
   constructor() {
     this.logs = require('../data/logs.json')
@@ -12,24 +17,12 @@ class Logger {
 
   async generate() {
     const commits = await this.getUnreleasedCommits()
-    const unreleased = []
+    const changes = []
 
     commits.forEach(commit => {
       console.log(commit)
       commit.subject = commit.subject.split(' -')
       console.log(commit.subject)
-      unreleased.push({
-        commit: {
-          title: commit.subject,
-          description: '',
-          url: '',
-          date: ''
-        },
-        author: {
-          name: '',
-          url: ''
-        }
-      })
     })
 
     return this.save(unreleased)
@@ -41,19 +34,20 @@ class Logger {
    */
   async getUnreleasedCommits() {
     this.latest = {
-      tag: {
-        id: (await exec('git rev-list --tags --max-count=1')).stdout,
-        name: (await exec(`git describe --tags ${lastTagID}`)).stdout.replace(/\n$/, '')
-      }
+      tag: {},
+      release: {}
     }
-    this.latest.release = this.logs.find(e => e.release.name === this.latest.tag.name).release
+    this.latest.tag.id = (await exec('git rev-list --tags --max-count=1')).stdout
+    this.latest.tag.name = (await exec(`git describe --tags ${this.latest.tag.id}`)).stdout
+    this.latest.release = this.logs.find(e => e.release.name === this.latest.tag.name)
+    this.latest.release = this.latest.release ? this.latest.release.release : null
 
     // Latest release not matched means there's a new tag, so we should assign
     // all previously 'unreleased' logs to that tag.
     if (!this.latest.release && this.logs[0]) {
       const unreleased = _.cloneDeep(this.logs[0])
-      this.logs[0].release = {
-        name: this.latest.tag.name,
+      this.logs[0].release = this.latest.release = {
+        name: this.latest.tag.name.replace(/\n$/, ''),
         id: this.latest.tag.id,
         date: unreleased.release.date
       }
@@ -61,7 +55,7 @@ class Logger {
 
     return await promisify(gitlog)({
       repo: `${__dirname}/../../../`,
-      since: new Date(this.latest.release.date || 0),
+      since: new Date(this.latest.release.date),
       fields: ['subject', 'body']
     })
   }
@@ -77,7 +71,7 @@ class Logger {
     else {
       this.logs.unshift(logs)
     }
-    return promisify(fs.writeFile)('../data/logs.json', JSON.stringify(this.logs, null, 2))
+    return promisify(fs.writeFile)(`${__dirname}/../data/logs.json`, JSON.stringify(this.logs, null, 2))
   }
 }
 
