@@ -1,6 +1,48 @@
 [
   {
     "release": {
+      "name": "unreleased",
+      "id": null,
+      "date": 1518399564697
+    },
+    "changes": {
+      "feat": {
+        "general": [
+          {
+            "commit": {
+              "subject": "test commit, please ignore",
+              "description": "- adds something\n- but doesn't really do anything",
+              "url": "https://github.com/nexus-devs/nexus-stats/commit/d99d21529fd79f89206e3f54c41894e9d0ee796f"
+            },
+            "issues": [
+              {
+                "id": "#46",
+                "url": "https://github.com/nexus-devs/nexus-stats/issues/46"
+              }
+            ],
+            "author": {
+              "name": "Kaptard",
+              "url": "https://github.com/Kaptard"
+            }
+          },
+          {
+            "commit": {
+              "subject": "add automatic changelog generator",
+              "description": "",
+              "url": "https://github.com/nexus-devs/nexus-stats/commit/b7b3a9cedc73c441100f8f71bc80a79b438fb0f4"
+            },
+            "issues": [],
+            "author": {
+              "name": "Kaptard",
+              "url": "https://github.com/Kaptard"
+            }
+          }
+        ]
+      }
+    }
+  },
+  {
+    "release": {
       "name": "v.1.0",
       "id": "48d926899e3928ca8756ae1f93da6d8f41c5b92f\n",
       "date": 1518322140000
