@@ -1,6 +1,9 @@
-[{
-  "release": {
-    "name": "unreleased",
-    "date": 1518322140000
+[
+  {
+    "release": {
+      "name": "v.1.0",
+      "id": "48d926899e3928ca8756ae1f93da6d8f41c5b92f\n",
+      "date": 1518322140000
+    }
   }
-}]
+]
