@@ -7,8 +7,8 @@
       <img src="/img/notifications/alert.svg" class="ico-28" alt="notification">
       <div class="message">
         <h3>
-            {{ title }}
-          </h3>
+          {{ title }}
+        </h3>
         <p>
           {{ content }}
         </p>
