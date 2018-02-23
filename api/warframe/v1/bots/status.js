@@ -1,4 +1,4 @@
-const Endpoint = require(blitz.config[blitz.id].endpointParent)
+const Endpoint = blitz.nodes.warframe.core.Endpoint
 
 class Status extends Endpoint {
   constructor(api, db, url) {

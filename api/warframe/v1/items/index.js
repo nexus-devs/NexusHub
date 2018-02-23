@@ -1,4 +1,4 @@
-const Endpoint = require(blitz.config[blitz.id].endpointParent)
+const Endpoint = blitz.nodes.warframe.core.Endpoint
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values

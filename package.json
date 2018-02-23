@@ -12,15 +12,15 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^0.5.44",
-    "chalk": "^2.3.0",
+    "blitz-js": "^1.0.0",
+    "chalk": "^2.3.1",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.13.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.20.1",
     "tween.js": "^16.6.0",
-    "vue-analytics": "^5.8.0"
+    "vue-analytics": "^5.9.0"
   },
   "devDependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -28,7 +28,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "blitz-js-query": "^0.2.19",
+    "blitz-js-query": "^0.3.1",
     "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.0.1",
