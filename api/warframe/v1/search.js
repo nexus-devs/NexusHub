@@ -1,12 +1,14 @@
-const Endpoint = require(blitz.config[blitz.id].endpointParent)
+const Endpoint = blitz.nodes.warframe.core.Endpoint
 const Fuse = require('fuse.js')
 
 class Search extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
     this.schema.description = 'Find the most relevant entries in the main collections for a given query'
-    this.schema.limit.maxInInterval = 60
-    this.schema.limit.interval = 10000
+    this.schema.limit = {
+      maxInInterval: 60,
+      interval: 10000
+    }
     this.schema.query = [{
         name: 'query',
         default: "",

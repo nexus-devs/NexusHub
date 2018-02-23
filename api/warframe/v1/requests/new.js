@@ -1,4 +1,4 @@
-const Endpoint = require(blitz.config[blitz.id].endpointParent)
+const Endpoint = blitz.nodes.warframe.core.Endpoint
 const Statistics = require(__dirname + '/../items/statistics.js')
 const _ = require('lodash')
 const moment = require('moment')

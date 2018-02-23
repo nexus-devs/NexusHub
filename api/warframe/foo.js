@@ -3,7 +3,11 @@ const Endpoint = blitz.nodes.warframe.core.Endpoint
 class Foo extends Endpoint {
   constructor(api, db, url) {
     super(api, db, url)
-    this.schema.description = "Simple testing method which returns 'bar'."
+    this.schema.query = [{
+      name: 'kek',
+      default: 'kekistan',
+      required: true
+    }]
   }
 
   async main(req, res) {
