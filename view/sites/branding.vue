@@ -9,7 +9,8 @@
         <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
         <h1>BRAND</h1>
         <p>
-          Nexus-Stats is an agile, reactive brand that is always ready for action.
+          Nexus-Stats is an agile, reactive brand that is always in motion, like
+          the real-time data that we're serving to gamers worldwide.
           Feel free to use the assets below when you need to reference our service.
         </p>
       </ui-header>
