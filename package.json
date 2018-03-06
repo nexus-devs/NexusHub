@@ -14,9 +14,9 @@
   "dependencies": {
     "blitz-js": "^1.0.2",
     "blitz-js-api": "^1.0.2",
-    "blitz-js-auth": "^1.0.3",
+    "blitz-js-auth": "^1.0.5",
     "blitz-js-core": "^1.0.3",
-    "blitz-js-view": "^1.0.2",
+    "blitz-js-view": "^1.0.4",
     "chalk": "^2.3.1",
     "cheerio": "^1.0.0-rc.2",
     "d3": "^4.13.0",
