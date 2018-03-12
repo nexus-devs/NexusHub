@@ -1,7 +1,7 @@
 # Contributing to Nexus-Stats
 
 We would love for you to contribute to Nexus-Stats and help us shape the future
-of the project! To make it as easy as possible for you, we have a few introduction
+of the project! To make it as easy as possible, we have a few introduction
 points for you below:
 
 <br>
