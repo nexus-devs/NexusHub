@@ -22,8 +22,13 @@ You can find the live version of this repo at [beta.nexus-stats.com](https://bet
 Want to file a bug, contribute some code, or improve documentation? Excellent!
 Read up on our [guidelines for contributing](/CONTRIBUTING.md) and then open an
 [issue](https://github.com/nexus-devs/nexus-stats/issues) regarding your
-concern. If you need an introduction to our code base, feel free to ask us on
-[Discord](https://discord.gg/AG8RPZ8)!
+concern.
+
+If you need an introduction to our code base, feel free to ask us on
+[Discord](https://discord.gg/AG8RPZ8)! We generally recommend going through
+the 'Getting started' tutorial for [blitz-js](https://github.com/nexus-devs/blitz-js)
+first. It's the framework that powers nearly everything on our webserver and
+web app.
 
 <br>
 
