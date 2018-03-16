@@ -9,6 +9,10 @@
   outline: none;
 }
 
+html {
+  background: $color-bg-dark
+}
+
 *::-webkit-scrollbar-track
 {
 	background-color: transparent;
