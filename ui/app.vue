@@ -24,6 +24,9 @@ export default {
     notification,
     bottom
   },
+  head: {
+    title: 'Nexus-Stats'
+  },
   mounted() {
     Vue.use(VueAnalytics, {
       id: 'UA-81233976-2',
@@ -38,9 +41,9 @@ export default {
 
 <style lang='scss'>
 @import '~src/styles/partials/importer';
+@import '~src/styles/modules/importer';
 @import '~src/styles/reset';
 @import '~src/styles/grid';
-@import '~src/styles/modules/importer';
 
 #app {
   background: $color-bg-dark;

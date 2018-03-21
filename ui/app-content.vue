@@ -76,7 +76,7 @@ export default {
 }
 
 .zoom-enter-active {
-  @include ease(0.4s);
+  @include ease(0.5s);
 }
 .zoom-enter, .zoom-leave-to {
   transform: scale(0.997);
