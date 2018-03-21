@@ -1,6 +1,6 @@
 [
   {
-    "name": "Ash Prime",
+    "name": "Zephyr Prime",
     "type": "Prime",
     "components": [
       {
@@ -20,6 +20,63 @@
       },
       {
         "name": "Systems",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Tiberon Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Receiver",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Stock",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Barrel",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Kronen Prime",
+    "type": "Prime",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Handle",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Blade",
         "ducats": 0,
         "drop": []
       },

@@ -938,32 +938,6 @@
     ]
   },
   {
-    "name": "Marathon",
-    "type": "Mod",
-    "ranks": 5,
-    "description": "Marathon increases the maximum Stamina of a Warframe. ",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
-    "name": "Quick Rest",
-    "type": "Mod",
-    "ranks": 5,
-    "description": "Quick Rest increases the Stamina recharge rate of Warframes.",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
     "name": "Sonic Fracture",
     "type": "Mod",
     "ranks": 3,
@@ -1373,7 +1347,7 @@
     ]
   },
   {
-    "name": "Wraith Twin Vipers",
+    "name": "Twin Vipers Wraith",
     "type": "Pistol",
     "description": "The Wraith Twin Vipers are the Wraith versions of the Twin Vipers that have higher damage and a slight boost to  Puncture damage, but lower  Slash with a higher critical chance. ",
     "components": [
@@ -4184,19 +4158,6 @@
     ]
   },
   {
-    "name": "Acrobat",
-    "type": "Mod",
-    "ranks": 5,
-    "description": "Acrobat reduces the stamina cost of wallrunning. ",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
     "name": "Coolant Leak",
     "type": "Mod",
     "description": "Coolant Leak allows a Sentinel to freeze and slow all enemies at close proximity in a similar manner to Freeze Damage.",
@@ -6187,6 +6148,19 @@
     ]
   },
   {
+    "name": "Armored Acrobatics",
+    "type": "Mod",
+    "ranks": 3,
+    "description": "Armored Acrobatics is a PvP-exclusive Warframe mod that reduces Mobility and increases Damage Resistance during Bullet Jump.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
     "name": "Primed Bane of Infested",
     "type": "Mod",
     "ranks": 10,
@@ -7531,10 +7505,10 @@
     ]
   },
   {
-    "name": "Divebomb Vortex",
+    "name": "Target Fixation",
     "type": "Mod",
     "ranks": 3,
-    "description": "Divebomb Vortex is a Warframe Augment Mod for Zephyr that makes Dive Bomb pull enemies within its radius towards the impact point.",
+    "description": "Target Fixation is a Warframe Augment Mod for Zephyr that increases Tail Wind's damage for every enemy hit while airborne.",
     "components": [
       {
         "name": "Set",
@@ -9050,7 +9024,7 @@
   {
     "name": "Speed Holster",
     "type": "Mod",
-    "ranks": 3,
+    "ranks": 5,
     "description": "Speed Holster is an Aura that increases weapon holstering and unholstering speed for all players in a squad.",
     "components": [
       {
@@ -10333,19 +10307,6 @@
     "name": "Valana Ayatan Sculpture",
     "type": "Ayatan",
     "description": "Ayatan Sculptures are ancient Orokin treasures powered by Endo that can be discovered across the system. There are two types available: the Sculptures themselvеs, and smaller Stars which can be inserted into the larger Sculptures to increase their value. These can be traded to Maroo at her Bazaar for varying amounts of Endo, or placed within the Orbiter as decorations.",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
-    "name": "Second Wind",
-    "type": "Mod",
-    "ranks": 5,
-    "description": "The Second Wind mod gives Stamina when an enemy is killed using Channeling, at the cost of Channeling efficiency.  ",
     "components": [
       {
         "name": "Set",
@@ -13111,10 +13072,10 @@
     ]
   },
   {
-    "name": "Shield Transference",
+    "name": "Counter Pulse",
     "type": "Mod",
     "ranks": 3,
-    "description": "Shield Transference is a Warframe Augment Mod for Mag's Shield Polarize that gives Mag Overshields equal to a percentage of enemy shields drained.",
+    "description": "Counter Pulse is a Warframe Augment Mod for Mag's Polarize that jams enemy weapons and disables Robotic enemies for a set duration.",
     "components": [
       {
         "name": "Set",
@@ -13557,19 +13518,6 @@
     "name": "Axi G1 Flawless",
     "type": "Void Relic",
     "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
-    "name": "Shield Flux",
-    "type": "Mod",
-    "ranks": 3,
-    "description": "Shield Flux converts a Warframe's Shield to Stamina continuously after Stamina is completely drained.",
     "components": [
       {
         "name": "Set",
@@ -15651,18 +15599,6 @@
     ]
   },
   {
-    "name": "Lith G! Flawless",
-    "type": "Void Relic",
-    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
-    "components": [
-      {
-        "name": "Set",
-        "ducats": 0,
-        "drop": []
-      }
-    ]
-  },
-  {
     "name": "Lith A2 Radiant",
     "type": "Void Relic",
     "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
@@ -16842,7 +16778,7 @@
     "name": "Sundering Weave",
     "type": "Mod",
     "ranks": 3,
-    "description": "Sundering Weave is the only available Stance mod for Machete-type weapons. It specializes in steady strikes combined with forward-striking finishers.",
+    "description": "It specializes in steady strikes combined with forward-striking finishers.",
     "components": [
       {
         "name": "Set",
@@ -18397,7 +18333,7 @@
     ]
   },
   {
-    "name": "Guided Ordinance",
+    "name": "Guided Ordnance",
     "type": "Mod",
     "ranks": 5,
     "description": "Guided Ordnance is an assault rifle mod that temporarily increases accuracy while aiming upon hitting an enemy.",
@@ -19678,27 +19614,27 @@
     "components": [
       {
         "name": "Barrel",
-        "ducats": 0,
+        "ducats": 45,
         "drop": []
       },
       {
         "name": "Blueprint",
-        "ducats": 0,
+        "ducats": 15,
         "drop": []
       },
       {
         "name": "Link",
-        "ducats": 0,
+        "ducats": 45,
         "drop": []
       },
       {
         "name": "Receiver",
-        "ducats": 0,
+        "ducats": 100,
         "drop": []
       },
       {
         "name": "Set",
-        "ducats": 0,
+        "ducats": 205,
         "drop": []
       }
     ]
@@ -19878,22 +19814,22 @@
     "components": [
       {
         "name": "Blueprint",
-        "ducats": 0,
+        "ducats": 45,
         "drop": []
       },
       {
         "name": "Boot",
-        "ducats": 0,
+        "ducats": 15,
         "drop": []
       },
       {
         "name": "Gauntlet",
-        "ducats": 0,
+        "ducats": 100,
         "drop": []
       },
       {
         "name": "Set",
-        "ducats": 0,
+        "ducats": 160,
         "drop": []
       }
     ]
@@ -20086,6 +20022,689 @@
     "components": [
       {
         "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith V2 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso V4 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso S1 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo S4 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso V4 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso V4 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso V4 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso S1 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo S4 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso S1 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith V2 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso S1 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith V2 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith V2 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo S4 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo S4 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lasting Covenant",
+    "type": "Mod",
+    "ranks": 3,
+    "description": "Lasting Covenant is a Warframe Augment Mod for Harrow that increases Covenant's critical chance buff duration each time an enemy is killed with a headshot.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Larva Burst",
+    "type": "Mod",
+    "ranks": 3,
+    "description": "Larva Burst is a Warframe Augment Mod for Nidus's Larva that allows the player to detonate Larva for Toxin b Toxin damage in a small AoE by reactivating the ability. This damage stacks for every enemy grabbed by the Larva.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Razorwing Blitz",
+    "type": "Mod",
+    "ranks": 3,
+    "description": "Razorwing Blitz is a Warframe Augment Mod for Titania's Razorwing ability that increases its flight speed and fire rate when using Spellbind, Tribute, or Lantern.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo E1 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo F1 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith G2 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso E1 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso F3 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi L1 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi S2 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith G2 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso E1 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso F3 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo F1 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso E1 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi L1 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso F3 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo F1 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo F1 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith G2 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi L1 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso E1 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo E1 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi S2 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Meso F3 Exceptional",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi L1 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo E1 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lith G2 Intact",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Neo E1 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi S2 Radiant",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Axi S2 Flawless",
+    "type": "Void Relic",
+    "description": "Void Relics are Orokin objects that can be opened to reveal valuable treasure enclosed within by completing Void Fissure missions. They are the principal means of acquiring Prime and Forma Blueprints.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Orokin Derelict Plaza Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Grineer Shipyards Manufactory Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Infested Ship Bridge Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Lua Nursery Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.</p",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Corpus Gas City Conduit Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Grineer Settlement Reactor Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Corpus Ice Planet Wreckage Scene",
+    "type": "Scene",
+    "description": "Captura is an image capture and editing tool that allows players to manipulate and compose scenarios for screenshots.",
+    "components": [
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      }
+    ]
+  },
+  {
+    "name": "Zephyr Prime",
+    "type": "Prime",
+    "description": "Release Date: March 20th, 2018. Zephyr Prime is the Primed variant of Zephyr.",
+    "components": [
+      {
+        "name": "Blueprint",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Chassis",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Neuroptics",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Set",
+        "ducats": 0,
+        "drop": []
+      },
+      {
+        "name": "Systems",
         "ducats": 0,
         "drop": []
       }
