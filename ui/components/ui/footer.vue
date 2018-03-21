@@ -32,6 +32,7 @@
       </div>
       <div class="brands">
         <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
+        <a href="https://github.com/nexus-devs" target="_blank"><img src="/img/footer/github.svg" class="ico-h-20 ico-github" alt="Github"></a>
       </div>
     </div>
   </footer>
@@ -161,13 +162,13 @@
           opacity: 1 !important;
         }
       }
+      .ico-github {
+        position: relative;
+        top: -2px;
+      }
 
       @media (max-width: $breakpoint-s) {
         margin-bottom: 0px;
-
-        img {
-          height: 28px;
-        }
       }
     }
   }
