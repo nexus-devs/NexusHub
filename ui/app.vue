@@ -25,7 +25,11 @@ export default {
     bottom
   },
   head: {
-    title: 'Nexus-Stats'
+    title: 'Nexus-Stats',
+    link: [
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto', as: 'font' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+    ]
   },
   mounted() {
     Vue.use(VueAnalytics, {
