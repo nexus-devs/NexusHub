@@ -27,8 +27,8 @@ export default {
   head: {
     title: 'Nexus-Stats',
     link: [
-      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto', as: 'font' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ]
   },
   mounted() {

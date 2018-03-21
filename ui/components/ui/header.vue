@@ -22,6 +22,9 @@ header {
     padding-top: 85px;
     padding-bottom: 70px; // for svg
   }
+  h1 {
+    font-weight: 300;
+  }
   p {
     color: white;
     font-weight: 400;
