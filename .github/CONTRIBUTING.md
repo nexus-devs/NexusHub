@@ -43,6 +43,7 @@ To ensure consistency throughout the source code, keep these rules in mind as yo
 <br>
 
 ## <a name="commit"></a> Commit Message Guidelines
+> This is adapted from [Angular's commit convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular).
 
 We have very precise rules over how our git commit messages can be formatted.  This leads to **more
 readable messages** that are easy to follow when looking through the project history. But we also use git commit messages to **generate our dynamic change logs**.
