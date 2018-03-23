@@ -24,6 +24,9 @@ Read up on our [guidelines for contributing](/.github/CONTRIBUTING.md) and then 
 [issue](https://github.com/nexus-devs/nexus-stats/issues) regarding your
 concern.
 
+Nexus-Stats is entirely developed by community members of the games we support,
+so if you wanna join our team as a regular contributor, you're more than welcome!
+
 If you need an introduction to our code base, feel free to ask us on
 [Discord](https://discord.gg/AG8RPZ8)! Though, we generally recommend going through
 the "Getting started" tutorial for [blitz-js](https://github.com/nexus-devs/blitz-js)
