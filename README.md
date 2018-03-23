@@ -20,7 +20,7 @@ You can find the live version of this repo at [beta.nexus-stats.com](https://bet
 
 ## Want to help?
 Want to file a bug, contribute some code, or improve documentation? Excellent!
-Read up on our [guidelines for contributing](/CONTRIBUTING.md) and then open an
+Read up on our [guidelines for contributing](/.github/CONTRIBUTING.md) and then open an
 [issue](https://github.com/nexus-devs/nexus-stats/issues) regarding your
 concern.
 
