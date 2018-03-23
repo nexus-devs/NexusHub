@@ -1,4 +1,4 @@
-[![Warframe-Nexus](/banner.png)](https://github.com/nexus-devs)
+[![Nexus-Stats](https://i.imgur.com/4U8qKVI.png)](https://github.com/nexus-devs)
 
 ##
 
