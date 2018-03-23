@@ -36,8 +36,8 @@ Browser: <!-- If your issue is related to the webapp -->
 - [ ] Edge version:
 
 For development issues:
-- Node version: <!-- run `node --version` -->
-- Platform:  <!-- Mac, Linux, Windows -->
+- Node version:
+- Operating System:
 
 ##
 
