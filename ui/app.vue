@@ -1,10 +1,12 @@
 <template>
   <div id='app'>
-    <notification></notification>
+    <navigation></navigation>
     <div class="app-view">
       <router-view></router-view>
       <bottom></bottom>
     </div>
+    <status></status>
+    <notification></notification>
   </div>
 </template>
 
@@ -14,6 +16,8 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import notification from 'src/components/ui/notification.vue'
+import navigation from 'src/components/ui/nav.vue'
+import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
 
 /**
@@ -22,6 +26,8 @@ import bottom from 'src/components/ui/footer.vue'
 export default {
   components: {
     notification,
+    navigation,
+    status,
     bottom
   },
   head: {
@@ -79,7 +85,9 @@ export default {
 // Sticky Footer
 .app-view {
   display: flex;
+  position: relative;
   flex-direction: column;
   min-height: 100vh;
+  top: 56px; // nav bar
 }
 </style>

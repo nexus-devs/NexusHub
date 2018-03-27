@@ -1,6 +1,5 @@
 <template>
   <div>
-    <navigation></navigation>
     <sidebar>
       <sidebar-search></sidebar-search>
     </sidebar>
@@ -144,7 +143,6 @@
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import navigation from 'src/components/ui/nav.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
@@ -152,7 +150,6 @@ export default {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,
-    navigation,
     'ui-header': uiheader
   }
 }

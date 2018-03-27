@@ -33,10 +33,11 @@ export default {
   @import "~src/styles/partials/importer";
 
   nav {
-    position: relative;
+    position: fixed;
     width: calc(100% - 50px);
     padding: 14px 25px;
     z-index: 2;
+    background: $color-bg-dark;
     align-items: center;
 
     a {
