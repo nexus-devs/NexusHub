@@ -78,7 +78,6 @@ export default {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,
-    navigation,
     subnav,
     pricesnippet,
     filters
