@@ -74,7 +74,7 @@
                   1,000,000
                 </div>
                 <div class="label">
-                  Processed ingame offers each month
+                  Processed offers each month
                 </div>
               </div>
             </div>
@@ -85,10 +85,13 @@
         <div class="g-ct">
           <h2>Help us shape Nexus-Stats!</h2>
           <p>
-            We currently don't have any open paid positions, but if you're as excited
-            about Nexus-Stats as we are, you can always work right on our source code through our
+            Nexus-Stats is entirely developed by community members of the games
+            we support, so if you wanna join our team as a regular contributor,
+            you're more than welcome! You can always work right on our code through our
             <a href="https://github.com/nexus-devs/nexus-stats" target="_blank">open source repositories</a>.
-            If that sounds fun to you, join our Discord Server and PM one of the devs!
+            If that sounds fun to you, check out the
+            <a href="https://github.com/nexus-devs/nexus-stats/blob/development/.github/CONTRIBUTING.md" target="_blank">contribution guide</a>
+            or join our Discord Server and send a PM our way!
           </p>
           <br>
           <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
@@ -122,7 +125,6 @@ export default {
 .company {
   position: relative;
   overflow: hidden;
-  top: -56px;
   padding-top: 40px;
   padding-bottom: 220px;
   @include gradient-background-dg($color-primary-dark, $color-accent-dark);
@@ -247,6 +249,7 @@ a {
   p {
     display: inline-block;
     text-align: left;
+    margin-top: 20px;
   }
   .btn {
     display: inline-block;
