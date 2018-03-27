@@ -16,7 +16,6 @@
         <div class="col-b">
           <h4>Developers</h4>
           <a href="https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE" target="_blank">API Documentation</a>
-          <router-link to="/contribute">Contribute</router-link>
         </div>
         <div class="col-b">
           <h4>Company</h4>
