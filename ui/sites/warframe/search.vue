@@ -1,6 +1,5 @@
 <template>
   <div class="search">
-    <navigation></navigation>
     <sidebar>
       <sidebar-search></sidebar-search>
     </sidebar>
@@ -84,7 +83,6 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
-import navigation from 'src/components/ui/nav.vue'
 import itemSnippet from 'src/components/snippets/item-result.vue'
 
 
@@ -108,7 +106,6 @@ export default {
     sidebar,
     'sidebar-search': sidebarSearch,
     search,
-    navigation,
     'item-snippet': itemSnippet
   },
 

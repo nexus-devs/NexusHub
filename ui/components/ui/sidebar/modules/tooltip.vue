@@ -24,7 +24,7 @@
     color: white;
     opacity: 0;
     @include gradient-background-dg($color-primary-dark, $color-accent-dark);
-    @include shadow-2;
+    @include shadow-3;
     @include ease(0.25s);
 
     .tooltip-pointer {

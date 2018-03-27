@@ -75,11 +75,11 @@ export default {
   }
 }
 
-.zoom-enter-active {
-  @include ease(0.5s);
+.zoom-enter-active, .fade-leave-active {
+  @include ease(0.45s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(0.997);
+  transform: translateY(5px);
   transform-origin: 50%;
   opacity: 0.75;
 }
