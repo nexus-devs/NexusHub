@@ -103,6 +103,8 @@
         margin-top: 5px;
         font-size: 0.9em;
         margin-bottom: 10px;
+        text-transform: none;
+        letter-spacing: normal;
       }
       a {
         display: block;
