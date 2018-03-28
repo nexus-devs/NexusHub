@@ -1,6 +1,6 @@
 <template>
   <div class="status" :class="{ offline }">
-    <img src="/img/ui/status-loading.svg" class="ico-h-24" alt="loading">
+    <img src="/img/ui/error-loading.svg" class="ico-h-24" alt="loading">
     <p>{{ offline ? 'Connecting to the Nexus-Stats API...' : 'Connected!' }}</p>
   </div>
 </template>
@@ -59,11 +59,11 @@ export default {
   width: calc(100% - 56px);
   text-transform: uppercase;
   font-size: 0.9em;
-  color: $color-font-subtle;
+  color: $color-font-error;
   z-index: 0;
   transform: translateY(-40px);
   transition-delay: 1s;
-  @include gradient-background-dg($color-bg-darker, $color-bg-darkest);
+  @include gradient-background-dg($color-error, $color-error-dark)
   @include shadow-1;
   @include ease(0.35s);
 
