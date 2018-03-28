@@ -72,6 +72,13 @@ export default {
   img {
     margin-right: 3px;
   }
+  @media (max-width: $breakpoint-m) {
+    left: 0;
+    width: 100%;
+  }
+  @media (max-width: $breakpoint-s) {
+    font-size: 0.8em;
+  }
 }
 
 .offline {
