@@ -202,6 +202,7 @@ a {
   p {
     margin: auto;
     margin-top: 20px;
+    border: none;
     text-align: left;
   }
   @media (max-width: $breakpoint-s) {
@@ -218,6 +219,11 @@ a {
   max-width: 800px;
   margin: auto;
 
+  p {
+    border: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
   .col-b {
     &:nth-of-type(2) {
       text-align: center;
@@ -250,6 +256,7 @@ a {
     display: inline-block;
     text-align: left;
     margin-top: 20px;
+    border: none;
   }
   .btn {
     display: inline-block;

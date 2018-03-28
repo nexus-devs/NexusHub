@@ -20,12 +20,14 @@
  * Sections
  */
 section {
-  padding: 100px 0;
-  border-bottom: 1px solid $color-subtle-dark;
-
+  padding: 70px 0;
+  
+  &:first-of-type {
+    margin-top: 40px;
+  }
   &:last-of-type {
     border-bottom: none;
-    margin-bottom: 120px;
+    margin-bottom: 60px;
   }
 }
 
