@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="g-ct">
+    <div class="container">
       <div class="row row-b">
         <v-touch class="col-b" v-on:pan="move">
             <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo"

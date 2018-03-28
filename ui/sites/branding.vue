@@ -13,7 +13,7 @@
           Feel free to use the assets below when you need to reference our service.
         </p>
       </ui-header>
-      <div class="g-ct">
+      <div class="container">
         <section>
             <h2>Nexus-Stats Logo</h2>
             <p>

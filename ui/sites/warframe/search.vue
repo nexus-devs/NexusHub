@@ -6,7 +6,7 @@
     <app-content>
       <div>
         <div class="search-input">
-          <div class="g-ct">
+          <div class="container">
             <search></search>
             <div class="search-types">
                 <a class="active">All</a>
@@ -15,7 +15,7 @@
             </div>
           </div>
         </div>
-        <section class="results g-ct">
+        <section class="results container">
           <h2>Search Results</h2>
           <span>({{ results.length }} matches)</span>
 
@@ -258,7 +258,7 @@ export default {
     border-top: none;
   }
 
-  .g-ct {
+  .container {
     display: flex;
 
     @media (max-width: $breakpoint-s) {
@@ -318,7 +318,7 @@ export default {
   align-items: flex-end;
   align-content: flex-start;
 
-  .g-ct {
+  .container {
     display: flex;
     padding-top: 0;
     padding-bottom: 0;

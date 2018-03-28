@@ -13,7 +13,7 @@
           to be!
         </p>
       </ui-header>
-      <div class="g-ct">
+      <div class="container">
         <section>
             <h2>Github</h2>
             <p>

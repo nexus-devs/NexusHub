@@ -79,13 +79,13 @@ export default {
     -ms-user-select: none;
     user-select: none;
   }
-  & > .g-ct {
+  & > .container {
     will-change: padding;
   }
 }
 
 .zoom-enter-active, .fade-leave-active {
-  @include ease(0.35s);
+  @include ease(0.3s);
 }
 .zoom-enter, .zoom-leave-to {
   transform: scale(1.005) translateY(3px);
@@ -97,7 +97,7 @@ export default {
   .app-content {
     @include ease-out(0.45s);
 
-    & > .g-ct {
+    & > .container {
       @include ease-out(0.45s);
     }
   }
@@ -105,7 +105,7 @@ export default {
     margin-right: calc(262px + 5vw);
     transform: translateX(calc(262px + 5vw));
 
-    & > .g-ct {
+    & > .container {
       padding: 0 96px !important;
     }
   }

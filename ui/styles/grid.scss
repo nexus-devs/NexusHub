@@ -3,7 +3,7 @@
  /**
  * Main content wrapper
  */
-.g-ct {
+.container {
   max-width: $max-width;
   padding: 0 96px 0 160px;
   margin: auto;
@@ -21,7 +21,7 @@
  */
 section {
   padding: 70px 0;
-  
+
   &:first-of-type {
     margin-top: 40px;
   }
@@ -111,7 +111,7 @@ section {
 * Media Queries
 */
 @media (max-width: $breakpoint-m) {
-  .g-ct {
+  .container {
     padding: 0 40px;
   }
 
@@ -174,7 +174,7 @@ section {
   }
 }
 @media (max-width: $breakpoint-xs) {
-  .g-ct {
+  .container {
     padding: 0 20px;
   }
 }

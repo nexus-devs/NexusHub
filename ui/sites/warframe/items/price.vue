@@ -6,7 +6,7 @@
     <app-content>
       <subnav></subnav>
       <header>
-        <div class="g-ct">
+        <div class="container">
           <div class="price-container">
             <pricesnippet v-for="(component, index) in components" :component="component"
             :key="component.name" :comparison="comparison[index]" :item="item"></pricesnippet>
@@ -14,7 +14,7 @@
         </div>
         <filters></filters>
       </header>
-      <section class="g-ct">
+      <section class="container">
         <!-- placeholder -->
       </section>
     </app-content>
