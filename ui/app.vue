@@ -87,7 +87,7 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 56px);
   top: 56px; // nav bar
 }
 </style>
