@@ -16,8 +16,10 @@ export default {
   },
 
   mounted() {
-    this.update()
-    this.listen()
+    setTimeout(() => {
+      this.update()
+      this.listen()
+    }, 5000)
   },
 
   methods: {
