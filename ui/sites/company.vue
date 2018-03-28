@@ -250,7 +250,7 @@ a {
 }
 .join {
   text-align: center;
-  padding: 20px 0;
+  padding: 60px 0;
 
   p {
     display: inline-block;
