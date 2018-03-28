@@ -4,18 +4,20 @@ adjust the main content (without nav or sidebar), for example when dragging out
 the sidebar. This also keeps our app.vue more clean.
 -->
 <template>
-  <transition appear name="zoom">
-    <div>
-      <div class="app-content" :class="{ activeSidebar, deltaX }"
-           :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                  'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                  'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-          <slot>
-            <!-- page content goes here -->
-          </slot>
+  <div class="app-container">
+    <transition appear name="zoom">
+      <div>
+        <div class="app-content" :class="{ activeSidebar, deltaX }"
+             :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                    'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                    'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
+            <slot>
+              <!-- page content goes here -->
+            </slot>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 
@@ -60,6 +62,13 @@ export default {
 <style lang="scss">
 @import '~src/styles/partials/importer';
 
+// Prevent page transition from clipping
+.app-container {
+  max-width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
 .app-content {
   will-change: transform;
 
@@ -76,10 +85,10 @@ export default {
 }
 
 .zoom-enter-active, .fade-leave-active {
-  @include ease(0.45s);
+  @include ease(0.35s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: translateY(5px);
+  transform: scale(1.005) translateY(3px);
   transform-origin: 50%;
   opacity: 0.75;
 }
