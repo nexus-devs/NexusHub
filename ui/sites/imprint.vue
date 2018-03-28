@@ -7,7 +7,7 @@
       <ui-header>
         <h1>Imprint</h1>
       </ui-header>
-      <div class="g-ct">
+      <div class="container">
         <section>
           <h2>Nexus-Stats</h2>
           <p>

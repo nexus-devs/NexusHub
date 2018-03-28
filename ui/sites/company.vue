@@ -8,7 +8,7 @@
         <video playsinline autoplay muted loop class="background">
           <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
         </video>
-        <div class="g-ct">
+        <div class="container">
           <div class="row">
             <div class="col-b">
               <h1>Making Game Data more Transparent with Nexus-Stats</h1>
@@ -29,7 +29,7 @@
                 d="M0.000,88.823 C0.000,88.823 190.856,-36.849 677.231,28.404 C1163.605,93.656 1234.110,90.001 1450.505,49.349 C1672.756,7.597 1734.942,-11.070 2000.909,8.264 C2266.876,27.598 2323.761,103.990 2759.407,72.711 C2999.824,55.449 3238.394,-10.264 3622.568,33.237 C4006.743,76.739 4015.362,114.602 4131.107,79.156 C4246.852,43.710 4037.526,359.499 4037.526,359.499 L7.388,374.000 L0.000,88.823 Z"/>
         </svg>
       </div>
-      <div class="g-ct">
+      <div class="container">
         <section class="who-we-are">
           <h2>Who we are</h2>
           <p>
@@ -46,7 +46,7 @@
       </div>
       <div class="stats-container">
         <section>
-          <div class="stats g-ct">
+          <div class="stats container">
             <h2>We're getting pretty popular</h2>
             <p>
               Our platform has been growing continously since day one, so it seems we're doing
@@ -82,7 +82,7 @@
         </section>
       </div>
       <section class="join">
-        <div class="g-ct">
+        <div class="container">
           <h2>Help us shape Nexus-Stats!</h2>
           <p>
             Nexus-Stats is entirely developed by community members of the games
@@ -135,7 +135,7 @@ export default {
   p {
     color: white !important;
   }
-  .g-ct {
+  .container {
     position: relative;
     z-index: 1;
     max-width: 1100px;

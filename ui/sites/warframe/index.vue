@@ -10,7 +10,7 @@
               <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
             </video>
           </div>
-          <div class="search-components g-ct">
+          <div class="search-components container">
             <h1>
               <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
               <span>Item Prices from the Trade Chat.</span>

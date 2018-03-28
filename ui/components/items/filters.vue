@@ -1,6 +1,6 @@
 <template>
   <div class="filters">
-    <div class="g-ct">
+    <div class="container">
       <div class="row">
         <div class="col-b row">
           <div class="col inline-data" :class="{ inactive: types[0].inactive }" v-on:click="select('types', types[0])">
@@ -225,7 +225,7 @@ export default {
   @media (max-width: $breakpoint-m) {
     margin-top: 70px;
   }
-  .g-ct > .row > .col-b {
+  .container > .row > .col-b {
     margin-top: 15px;
     margin-bottom: 15px;
     margin-right: 30px;

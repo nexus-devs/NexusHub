@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="g-ct">
+    <div class="container">
       <slot></slot>
     </div>
     <slot name="sub"></slot>
@@ -17,7 +17,7 @@ header {
   @include gradient-background-dg-tri(#596474, #667382, #48515e);
   @include shadow-1;
 
-  .g-ct {
+  .container {
     z-index: 1;
     padding-top: 85px;
     padding-bottom: 70px; // for svg

@@ -8,7 +8,7 @@
         <h1>Contact</h1>
         <p>Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
       </ui-header>
-      <div class="g-ct">
+      <div class="container">
         <section>
             <h2>Discord</h2>
             <p>

@@ -7,7 +7,7 @@
     <ui-header>
       <h1>Privacy Policy</h1>
     </ui-header>
-    <div class="g-ct">
+    <div class="container">
       <section>
         <h2>NexusStats</h2>
         <div id='ppHeader'>warframenexus.com Privacy Policy</div>
