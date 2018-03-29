@@ -89,9 +89,9 @@
             we support, so if you wanna join our team as a regular contributor,
             you're more than welcome! You can always work right on our code through our
             <a href="https://github.com/nexus-devs/nexus-stats" target="_blank">open source repositories</a>.
-            If that sounds fun to you, check out the
+            <br><br>If that sounds fun to you, check out the
             <a href="https://github.com/nexus-devs/nexus-stats/blob/development/.github/CONTRIBUTING.md" target="_blank">contribution guide</a>
-            or join our Discord Server and send a PM our way!
+            or join us on Discord and send a PM our way!
           </p>
           <br>
           <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
@@ -126,11 +126,11 @@ export default {
   position: relative;
   overflow: hidden;
   padding-top: 40px;
-  padding-bottom: 220px;
+  padding-bottom: 200px;
   @include gradient-background-dg($color-primary-dark, $color-accent-dark);
 
   @media (max-width: $breakpoint-m) {
-    padding-top: 100px;
+    padding-top: 0px;
   }
   p {
     color: white !important;
@@ -255,7 +255,7 @@ a {
   p {
     display: inline-block;
     text-align: left;
-    margin-top: 20px;
+    margin: 20 0;
     border: none;
   }
   .btn {
