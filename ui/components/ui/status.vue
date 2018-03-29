@@ -24,10 +24,11 @@ export default {
 
   methods: {
     update() {
-      this.$store.commit('setStatus', this.$blitz.connection.client.connected)
+      this.$store.commit('setApiStatus', this.$blitz.connection.client.connected)
     },
     listen() {
-      setInterval(this.update, 1000)
+      this.$blitz.on('connect', () => this.$store.commit('setApiStatus', true))
+      this.$blitz.on('disconnect', () => this.$store.commit('setApiStatus', false))
     }
   },
 
@@ -37,7 +38,7 @@ export default {
       online: true
     },
     mutations: {
-      setStatus(state, online) {
+      setApiStatus(state, online) {
         state.online = online
       }
     }
