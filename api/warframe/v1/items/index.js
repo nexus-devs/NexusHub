@@ -1,4 +1,4 @@
-const Endpoint = blitz.nodes.warframe.core.Endpoint
+const Endpoint = cubic.nodes.warframe.core.Endpoint
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values

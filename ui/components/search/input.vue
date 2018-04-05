@@ -78,7 +78,7 @@ export default {
 
       // Only run if timeout isn't after search is done
       if (this.input.length > 1) {
-        result = await this.$blitz.get(`/warframe/v1/search?query=${this.input}&limit=3`)
+        result = await this.$cubic.get(`/warframe/v1/search?query=${this.input}&limit=3`)
       }
       // Found suggestions and input still matches result (may not if user types too fast)
       let regex = new RegExp(`^${this.input}`, 'i')

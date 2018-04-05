@@ -125,8 +125,8 @@ export default {
     },
     actions: {
       async fetchSerpResults({ commit, rootState }, input) {
-        const items = await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
-        const players = [] // await this.$blitz.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
+        const items = await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
+        const players = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
         const results = []
 
         // Add each component to results

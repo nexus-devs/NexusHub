@@ -1,4 +1,4 @@
-const Endpoint = blitz.nodes.warframe.core.Endpoint
+const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Fuse = require('fuse.js')
 
 class Search extends Endpoint {

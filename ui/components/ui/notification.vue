@@ -59,7 +59,7 @@ export default {
 
   methods: {
     listen() {
-      this.$blitz.subscribe('/notifications', notification => {
+      this.$cubic.subscribe('/notifications', notification => {
         if (notification.game === this.$store.state.game.name || notification.game === 'global') {
           this.$store.dispatch('pushNotification', notification.message)
         }

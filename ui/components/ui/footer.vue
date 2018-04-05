@@ -26,7 +26,6 @@
           <h4>Resources</h4>
           <router-link to="/privacy">Privacy Policy</router-link>
           <router-link to="/imprint">Imprint</router-link>
-          <a href="/sitemap.txt">Sitemap</a>
         </div>
       </div>
       <div class="brands">

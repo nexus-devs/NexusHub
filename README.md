@@ -29,7 +29,7 @@ so if you wanna join our team as a regular contributor, you're more than welcome
 
 If you need an introduction to our code base, feel free to ask us on
 [Discord](https://discord.gg/AG8RPZ8)! Though, we generally recommend going through
-the "Getting started" tutorial for [blitz-js](https://github.com/nexus-devs/blitz-js)
+the "Getting started" tutorial for [Cubic](https://github.com/nexus-devs/cubic)
 first. It's the framework that powers nearly everything on our webserver and
 web app.
 

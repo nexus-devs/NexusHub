@@ -91,7 +91,7 @@ Resolves #145, #123
 ### Type
 Must be one of the following:
 
-* **build**: Changes that affect the build system or external dependencies (example scopes: webpack, blitz, vue, npm)
+* **build**: Changes that affect the build system or external dependencies (example scopes: webpack, cubic, vue, npm)
 * **ci**: Changes to our CI configuration files and scripts (example scopes: drone, scripts)
 * **docs**: Documentation only changes
 * **feat**: A new feature (example scopes: api, ui)

@@ -6,6 +6,7 @@ const minifyPng = require('imagemin-pngquant')
 const chalk = require('chalk')
 const queue = require("async-delay-queue")
 const fs = require('fs')
+const Progress = require('progress')
 const additional = require('../config/additional.json')
 const exceptions = require('../config/exceptions.json')
 const dropChancesBaseUrl = 'https://raw.githubusercontent.com/WFCD/warframe-drop-data/gh-pages'
@@ -29,11 +30,20 @@ class Scraper {
     // Only scrape the warframe.market API if we specify we it to. This takes a
     // few minutes, so it's recommended to disable it while developing
     if (this.doFetchMarketData) {
+      console.log('Fetching items from warframe.market...')
+      const progress = new Progress('[:bar]', {
+        total: items.length,
+        width: 40,
+        complete: '█',
+        incomplete: ' '
+      })
+
       for (let i = 0; i < items.length; i++) {
         const item = items[i]
         const url = item.url_name
 
         await this.getItemData(url, i)
+        progress.tick()
       }
 
       // Save scraped data separately so we can lazily load it when we don't wanna refetch all data
@@ -86,7 +96,6 @@ class Scraper {
         parsed.components = this.getItemComponents(itemSet, parsed.name)
         this.saveItemImage(itemSet, parsed.name)
         this.scraped.push(parsed)
-        console.log(`:: [${parsed.components.map(item => item.name).join(', ')}]`)
       }
     }
   }
@@ -128,7 +137,6 @@ class Scraper {
       }
       name = matched.join("").replace(/\s+$/g,'')
     })
-    console.log(`\n:: ${name}`)
     return name
   }
 
@@ -219,6 +227,14 @@ class Scraper {
    * Apply drop chances to each component in given dataset
    */
   applyDropChances(data, dropChances) {
+    console.log('\nFetching items from warframe.market...')
+    const progress = new Progress('[:bar]', {
+      total: data.length,
+      width: 40,
+      complete: '█',
+      incomplete: ' '
+    })
+
     data.forEach((item, i) => {
       item.components.forEach((component, j) => {
 
@@ -241,6 +257,7 @@ class Scraper {
           }
         }
       })
+      progress.tick()
     })
   }
 
