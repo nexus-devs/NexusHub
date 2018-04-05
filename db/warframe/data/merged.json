@@ -53683,22 +53683,22 @@
     "imgUrl": "/img/warframe/items/rift-strike.png"
   },
   {
-    "name": "Vulcan Blitz",
+    "name": "Vulcan cubic",
     "type": "Mod",
     "ranks": 5,
-    "description": "Vulcan Blitz is a Jat Kittag-exclusive mod that causes enemies killed by the Jat Kittag to explode, dealing a flat amount of  Blast damage plus a percentage of the enemy's maximum health in an area of effect.",
+    "description": "Vulcan cubic is a Jat Kittag-exclusive mod that causes enemies killed by the Jat Kittag to explode, dealing a flat amount of  Blast damage plus a percentage of the enemy's maximum health in an area of effect.",
     "components": [
       {
         "name": "Set",
         "ducats": 0,
         "drop": [
           {
-            "location": "Vulcan Blitz",
+            "location": "Vulcan cubic",
             "type": "Mod Locations",
             "chance": null
           },
           {
-            "location": "Vulcan Blitz",
+            "location": "Vulcan cubic",
             "type": "Mod Locations",
             "chance": null
           },
@@ -53715,12 +53715,12 @@
             "chance": 0.11109999999999999
           }
         ],
-        "imgUrl": "/img/warframe/items/vulcan-blitz.png"
+        "imgUrl": "/img/warframe/items/vulcan-cubic.png"
       }
     ],
-    "apiUrl": "/warframe/v1/items/Vulcan%20Blitz",
-    "webUrl": "/warframe/items/vulcan-blitz",
-    "imgUrl": "/img/warframe/items/vulcan-blitz.png"
+    "apiUrl": "/warframe/v1/items/Vulcan%20cubic",
+    "webUrl": "/warframe/items/vulcan-cubic",
+    "imgUrl": "/img/warframe/items/vulcan-cubic.png"
   },
   {
     "name": "Fomorian Accelerant",
@@ -106526,21 +106526,21 @@
     "imgUrl": "/img/warframe/items/larva-burst.png"
   },
   {
-    "name": "Razorwing Blitz",
+    "name": "Razorwing cubic",
     "type": "Mod",
     "ranks": 3,
-    "description": "Razorwing Blitz is a Warframe Augment Mod for Titania's Razorwing ability that increases its flight speed and fire rate when using Spellbind, Tribute, or Lantern.",
+    "description": "Razorwing cubic is a Warframe Augment Mod for Titania's Razorwing ability that increases its flight speed and fire rate when using Spellbind, Tribute, or Lantern.",
     "components": [
       {
         "name": "Set",
         "ducats": 0,
         "drop": [],
-        "imgUrl": "/img/warframe/items/razorwing-blitz.png"
+        "imgUrl": "/img/warframe/items/razorwing-cubic.png"
       }
     ],
-    "apiUrl": "/warframe/v1/items/Razorwing%20Blitz",
-    "webUrl": "/warframe/items/razorwing-blitz",
-    "imgUrl": "/img/warframe/items/razorwing-blitz.png"
+    "apiUrl": "/warframe/v1/items/Razorwing%20cubic",
+    "webUrl": "/warframe/items/razorwing-cubic",
+    "imgUrl": "/img/warframe/items/razorwing-cubic.png"
   },
   {
     "name": "Neo E1 Intact",

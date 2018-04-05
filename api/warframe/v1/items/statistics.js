@@ -1,4 +1,4 @@
-const Endpoint = blitz.nodes.warframe.core.Endpoint
+const Endpoint = cubic.nodes.warframe.core.Endpoint
 const _ = require('lodash')
 const moment = require('moment')
 

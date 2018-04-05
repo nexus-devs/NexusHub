@@ -12,19 +12,19 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "blitz-js": "^1.0.5",
-    "blitz-js-api": "^1.0.5",
-    "blitz-js-auth": "^1.0.7",
-    "blitz-js-core": "^1.0.6",
-    "blitz-js-view": "^1.0.7",
     "chalk": "^2.3.2",
     "cheerio": "^1.0.0-rc.2",
+    "cubic": "^1.0.2",
+    "cubic-api": "^1.0.0",
+    "cubic-auth": "^1.0.0",
+    "cubic-core": "^1.0.1",
+    "cubic-ui": "^1.0.1",
     "d3": "^4.13.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
-    "moment": "^2.21.0",
+    "moment": "^2.22.0",
     "tween.js": "^16.6.0",
-    "vue-analytics": "^5.9.1"
+    "vue-analytics": "^5.10.2"
   },
   "devDependencies": {
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
@@ -32,10 +32,11 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "blitz-js-query": "^1.0.2",
+    "cubic-client": "^1.0.0",
     "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.1.0",
+    "progress": "^2.0.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2"
   }

@@ -24,11 +24,11 @@ export default {
 
   methods: {
     update() {
-      this.$store.commit('setApiStatus', this.$blitz.connection.client.connected)
+      this.$store.commit('setApiStatus', this.$cubic.connection.client.connected)
     },
     listen() {
-      this.$blitz.on('connect', () => this.$store.commit('setApiStatus', true))
-      this.$blitz.on('disconnect', () => this.$store.commit('setApiStatus', false))
+      this.$cubic.on('connect', () => this.$store.commit('setApiStatus', true))
+      this.$cubic.on('disconnect', () => this.$store.commit('setApiStatus', false))
     }
   },
 

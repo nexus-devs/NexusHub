@@ -1100,10 +1100,10 @@
     ]
   },
   {
-    "name": "Vulcan Blitz",
+    "name": "Vulcan cubic",
     "type": "Mod",
     "ranks": 5,
-    "description": "Vulcan Blitz is a Jat Kittag-exclusive mod that causes enemies killed by the Jat Kittag to explode, dealing a flat amount of  Blast damage plus a percentage of the enemy's maximum health in an area of effect.",
+    "description": "Vulcan cubic is a Jat Kittag-exclusive mod that causes enemies killed by the Jat Kittag to explode, dealing a flat amount of  Blast damage plus a percentage of the enemy's maximum health in an area of effect.",
     "components": [
       {
         "name": "Set",
@@ -20246,10 +20246,10 @@
     ]
   },
   {
-    "name": "Razorwing Blitz",
+    "name": "Razorwing cubic",
     "type": "Mod",
     "ranks": 3,
-    "description": "Razorwing Blitz is a Warframe Augment Mod for Titania's Razorwing ability that increases its flight speed and fire rate when using Spellbind, Tribute, or Lantern.",
+    "description": "Razorwing cubic is a Warframe Augment Mod for Titania's Razorwing ability that increases its flight speed and fire rate when using Spellbind, Tribute, or Lantern.",
     "components": [
       {
         "name": "Set",

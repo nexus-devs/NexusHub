@@ -1,4 +1,4 @@
-const Endpoint = blitz.nodes.warframe.core.Endpoint
+const Endpoint = cubic.nodes.warframe.core.Endpoint
 
 class Status extends Endpoint {
   constructor(api, db, url) {

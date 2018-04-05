@@ -5,16 +5,16 @@ const rm = require('rimraf')
 const gitlog = require('gitlog')
 
 
-// Imitate blitz config object for pulling default webpack config
-global.blitz = {
+// Imitate cubic config object for pulling default webpack config
+global.cubic = {
   config: {
     local: {
       environment: 'production'
     },
     view: {
       webpack: {
-        clientConfig: `${__dirname}/../node_modules/blitz-js-view/config/webpack/client.config.js`,
-        serverConfig: `${__dirname}/../node_modules/blitz-js-view/config/webpack/server.config.js`
+        clientConfig: `${__dirname}/../node_modules/cubic-ui/config/webpack/client.config.js`,
+        serverConfig: `${__dirname}/../node_modules/cubic-ui/config/webpack/server.config.js`
       },
       core: {
         publicPath: `${__dirname}/../assets`,
@@ -34,8 +34,8 @@ async function build() {
     repo: __dirname + '/../',
     number: 1
   })
-  const clientConfig = require(blitz.config.view.webpack.clientConfig)
-  const serverConfig = require(blitz.config.view.webpack.serverConfig)
+  const clientConfig = require(cubic.config.view.webpack.clientConfig)
+  const serverConfig = require(cubic.config.view.webpack.serverConfig)
 
   // Only rebuild webpack if files in view folder or dependencies have changed
   let changed = false

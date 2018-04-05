@@ -118,8 +118,8 @@ export default {
   methods: {
     async listen() {
       const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
-      this.$blitz.subscribe(itemUrl)
-      this.$blitz.on(itemUrl, data => {
+      this.$cubic.subscribe(itemUrl)
+      this.$cubic.on(itemUrl, data => {
         this.$store.commit('setItem', mergeItemData(this.$store.state.items.item, data))
       })
     }
@@ -195,9 +195,9 @@ export default {
 
         // Perform API query for base data, focus range and comparison range
         const data = await Promise.all([
-          this.$blitz.get(`/warframe/v1/items/${name}`),
-          this.$blitz.get(focusUrl),
-          this.$blitz.get(compareUrl)
+          this.$cubic.get(`/warframe/v1/items/${name}`),
+          this.$cubic.get(focusUrl),
+          this.$cubic.get(compareUrl)
         ])
 
         commit('setItem', mergeItemData(data[0], data[1]))
