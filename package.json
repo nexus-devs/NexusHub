@@ -18,7 +18,7 @@
     "cubic-api": "^1.0.0",
     "cubic-auth": "^1.0.0",
     "cubic-core": "^1.0.1",
-    "cubic-ui": "^1.0.1",
+    "cubic-ui": "^1.0.2",
     "d3": "^4.13.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",

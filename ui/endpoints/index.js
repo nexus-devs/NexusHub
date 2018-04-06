@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.view.core.Endpoint
+const Endpoint = cubic.nodes.ui.core.Endpoint
 
 class Index extends Endpoint {
   constructor(api, db, url) {
