@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.view.core.Endpoint
+const Endpoint = cubic.nodes.ui.core.Endpoint
 
 /**
  * Contains multi-purpose functions for child-methods and provides default values

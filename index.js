@@ -1,13 +1,13 @@
-const Cubic = require('cubic')
+const Cubic = require('../../cubic/cubic')
 const Api = require('cubic-api')
 const Core = require('cubic-core')
 const Auth = require('cubic-auth')
-const View = require('cubic-ui')
+const View = require('../../cubic/cubic-ui')
 const wfhooks = require('./hooks/warframe.js')
 const config = {
   cubic: require('./config/cubic/cubic'),
   auth: require('./config/cubic/auth.js'),
-  view: require('./config/cubic/view.js'),
+  ui: require('./config/cubic/view.js'),
   warframe: require('./config/cubic/warframe.js')
 }
 const cubic = new Cubic(config.cubic)
@@ -20,7 +20,7 @@ cubic.use(new Auth(config.auth))
 /**
  * View server for providing the web client
  */
-cubic.use(new View(config.view))
+cubic.use(new View(config.ui))
 
 /**
  * Warframe API setup

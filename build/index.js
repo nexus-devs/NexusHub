@@ -11,7 +11,7 @@ global.cubic = {
     local: {
       environment: 'production'
     },
-    view: {
+    ui: {
       webpack: {
         clientConfig: `${__dirname}/../node_modules/cubic-ui/config/webpack/client.config.js`,
         serverConfig: `${__dirname}/../node_modules/cubic-ui/config/webpack/server.config.js`
@@ -34,8 +34,8 @@ async function build() {
     repo: __dirname + '/../',
     number: 1
   })
-  const clientConfig = require(cubic.config.view.webpack.clientConfig)
-  const serverConfig = require(cubic.config.view.webpack.serverConfig)
+  const clientConfig = require(cubic.config.ui.webpack.clientConfig)
+  const serverConfig = require(cubic.config.ui.webpack.serverConfig)
 
   // Only rebuild webpack if files in view folder or dependencies have changed
   let changed = false
