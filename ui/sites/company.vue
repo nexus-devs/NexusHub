@@ -172,7 +172,7 @@ svg {
   left: 0;
   width: calc(100vw + 300px);
   min-width: 1920px;
-  margin-top: 160px;
+  margin-top: 150px;
   fill: $color-bg-dark;
   animation: goostuff 60s linear infinite;
 }
