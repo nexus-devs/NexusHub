@@ -1,8 +1,8 @@
-const Cubic = require('../../cubic/cubic')
+const Cubic = require('cubic')
 const Api = require('cubic-api')
 const Core = require('cubic-core')
 const Auth = require('cubic-auth')
-const View = require('../../cubic/cubic-ui')
+const View = require('cubic-ui')
 const wfhooks = require('./hooks/warframe.js')
 const config = {
   cubic: require('./config/cubic/cubic'),
