@@ -33,11 +33,11 @@
 <script>
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
 import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 
 export default {

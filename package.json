@@ -5,19 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build": "node build",
-    "scrape": "node db/warframe/scripts/index.js",
-    "changelogs": "node db/changelogs/scripts/generate.js"
+    "build": "node build/webpack.js",
+    "test": "mocha --exit -s 30000 --timeout 30000",
+    "scrape": "node build/warframe/index.js",
+    "changelogs": "node build/changelogs/index.js"
   },
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "chalk": "^2.3.2",
     "cheerio": "^1.0.0-rc.2",
-    "cubic": "^1.0.3",
+    "cubic": "^1.0.4",
     "cubic-api": "^1.0.0",
     "cubic-auth": "^1.0.0",
-    "cubic-core": "^1.0.1",
+    "cubic-core": "^1.0.2",
     "cubic-ui": "^1.0.2",
     "d3": "^5.0.0",
     "fuse.js": "^3.2.0",
@@ -27,15 +28,11 @@
     "vue-analytics": "^5.10.2"
   },
   "devDependencies": {
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "cubic-client": "^1.0.0",
+    "cubic-client": "^1.0.1",
     "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.1.0",
+    "mocha": "^5.0.5",
     "progress": "^2.0.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2"

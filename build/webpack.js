@@ -23,7 +23,9 @@ global.cubic = {
       client: {
         apiUrl: 'https://api.nexus-stats.com',
         authUrl: 'https://auth.nexus-stats.com'
-      }
+      },
+      sourcePath: `${process.cwd()}/ui`,
+      sitesPath: `${process.cwd()}/ui/sites`
     }
   }
 }
@@ -34,13 +36,14 @@ async function build() {
     repo: __dirname + '/../',
     number: 1
   })
+  process.on('unhandledRejection', console.log)
   const clientConfig = require(cubic.config.ui.webpack.clientConfig)
   const serverConfig = require(cubic.config.ui.webpack.serverConfig)
 
   // Only rebuild webpack if files in view folder or dependencies have changed
   let changed = false
   changes[0].files.forEach(file => {
-    if (file.includes('view/') || file.includes('package.json')) {
+    if (file.includes('ui/') || file.includes('package.json')) {
       changed = true
     }
   })

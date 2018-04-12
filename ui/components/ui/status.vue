@@ -1,5 +1,5 @@
 <template>
-  <div class="status" :class="{ offline }">
+  <div class="status" :class="{ offline, sidebarVisible }">
     <img src="/img/ui/error-loading.svg" class="ico-h-24" alt="loading">
     <p>{{ offline ? 'Connecting to the Nexus-Stats API...' : 'Connected!' }}</p>
   </div>
@@ -12,6 +12,9 @@ export default {
   computed: {
     offline() {
       return !this.$store.state.api.online
+    },
+    sidebarVisible() {
+      return !this.$store.state.sidebar.hidden
     }
   },
 
@@ -57,9 +60,8 @@ export default {
   justify-content: center;
   align-items: center;
   top: 56px;
-  left: 56px;
   padding: 5px 0;
-  width: calc(100% - 56px);
+  width: 100%;
   text-transform: uppercase;
   font-size: 0.9em;
   color: $color-font-error;
@@ -70,6 +72,10 @@ export default {
   @include shadow-1;
   @include ease(0.35s);
 
+  &.sidebarVisible {
+    left: 56px;
+    width: calc(100% - 56px);
+  }
   img {
     margin-right: 3px;
   }

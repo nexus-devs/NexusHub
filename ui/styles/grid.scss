@@ -5,7 +5,7 @@
  */
 .container {
   max-width: $max-width;
-  padding: 0 96px 0 160px;
+  padding: 0 96px;
   margin: auto;
 
   @media(max-width: $breakpoint-m) {
@@ -21,6 +21,7 @@
  */
 section {
   padding: 70px 0;
+  border-bottom: 1px solid rgba(62,67,72,.4);
 
   &:first-of-type {
     margin-top: 40px;

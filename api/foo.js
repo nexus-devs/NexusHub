@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = cubic.nodes.main.core.Endpoint
 
 class Foo extends Endpoint {
   constructor(api, db, url) {
