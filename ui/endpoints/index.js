@@ -1,13 +1,13 @@
 const Endpoint = cubic.nodes.ui.core.Endpoint
 
 class Index extends Endpoint {
-  constructor(api, db, url) {
+  constructor (api, db, url) {
     super(api, db, url)
-    this.schema.url = "/"
+    this.schema.url = '/'
   }
 
-  async main(req, res) {
-    res.redirect("/warframe")
+  async main (req, res) {
+    res.redirect('/warframe')
   }
 }
 

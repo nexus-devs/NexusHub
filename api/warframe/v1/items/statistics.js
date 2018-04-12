@@ -6,7 +6,7 @@ const moment = require('moment')
  * Provides detailed item statistics for specific item
  */
 class Statistics extends Endpoint {
-  constructor(api, db, url) {
+  constructor (api, db, url) {
     super(api, db, url)
     this.schema.description = 'Get item statistics between a specified time frame.'
     this.schema.url = '/warframe/v1/items/:item/statistics'
@@ -48,11 +48,10 @@ class Statistics extends Endpoint {
     }
   }
 
-
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(req, res) {
+  async main (req, res) {
     const item = req.params.item
     const intervals = req.query.intervals
     const region = req.query.region
@@ -84,7 +83,7 @@ class Statistics extends Endpoint {
     if (!itemResult) {
       let response = {
         error: 'Could not find data for ' + item + '.',
-        reason: 'Item doesn\'t exist.',
+        reason: 'Item doesn\'t exist.'
       }
       this.cache(response, 60)
       return res.status(404).send(response)
@@ -99,14 +98,13 @@ class Statistics extends Endpoint {
     res.send(stats)
   }
 
-
   /**
    * Get requests from the given parameters. If the timerange exceeds one week,
    * we split up the queries into smaller blocks that reach throughout the
    * timeframe but don't cover all requests. That means we'll need to extrapolate
    * the missing data, but also achieve near constant query times
    */
-  async getRequests(item, region, rank, timestart, timeend, intervals) {
+  async getRequests (item, region, rank, timestart, timeend, intervals) {
     const intervalCount = intervals > 14 ? 14 : intervals // no more than 14 queries
     const intervalRange = timestart.diff(timeend)
     let multiplier = 1
@@ -124,7 +122,7 @@ class Statistics extends Endpoint {
       const querySize = (1000 * 60 * 60 * 24 * 7) / intervals
       let requests = []
 
-      for (let i = 0; i < intervals; i++) {
+      for (let i = 0; i < intervalCount; i++) {
         // query start point for this interval is the full range divided by
         // number of intervals plus the percentage of the 'intervalSize leftover'
         // as derived from the current interval number.
@@ -148,11 +146,10 @@ class Statistics extends Endpoint {
     }
   }
 
-
   /**
    * Generate query from given params
    */
-  generateQuery(item, region, rank, timestart, timeend) {
+  generateQuery (item, region, rank, timestart, timeend) {
     // Search query object
     let query = {
       item: new RegExp('^' + item + '$', 'i'),
@@ -179,7 +176,6 @@ class Statistics extends Endpoint {
     return { query, projection }
   }
 
-
   /**
    * Wrapper method for the statistics calculation
    *
@@ -197,8 +193,7 @@ class Statistics extends Endpoint {
    *      - Calculate avg/median/min/max for combined
    *      - Clean up unneeded fields (offer hasValues and median array)
    */
-  getStatistics(result, timestart, timeend, intervals, itemResult, multiplier) {
-
+  getStatistics (result, timestart, timeend, intervals, itemResult, multiplier) {
     // Main document to return
     let doc = {
       name: itemResult.name,
@@ -220,11 +215,10 @@ class Statistics extends Endpoint {
     return doc
   }
 
-
   /**
    * Fills the document with all components and the intervals
    */
-  createComponents(doc, itemResult, intervals) {
+  createComponents (doc, itemResult, intervals) {
     itemResult.components.forEach(comp => {
       const data = {
         avg: null,
@@ -234,15 +228,15 @@ class Statistics extends Endpoint {
         priceAccuracy: 0,
         mathVariance: {
           deviation: null,
-          mean: null,
+          mean: null
         },
         offers: {
           count: 0,
           percentage: 0,
-          hasValue: 0,
+          hasValue: 0
         },
         intervals: [],
-        requests: [],
+        requests: []
       }
       let component = {
         name: comp.name,
@@ -266,11 +260,10 @@ class Statistics extends Endpoint {
     })
   }
 
-
   /**
    * Accumulates data from requests and add it into intervals
    */
-  accumulate(timestart, timeend, intervals, result, doc) {
+  accumulate (timestart, timeend, intervals, result, doc) {
     let intervalSize = (timestart - timeend) / intervals
 
     result.forEach(request => {
@@ -297,13 +290,12 @@ class Statistics extends Endpoint {
     })
   }
 
-
   /**
    * Processes each interval and components main parts
    * Also purges spoofed requests
    * Avg, median, min, max, offer count
    */
-  calculate(doc, multiplier) {
+  calculate (doc, multiplier) {
     doc.components.forEach(component => {
       this.calculateOfferType(component.selling, component, multiplier)
       this.calculateOfferType(component.buying, component, multiplier)
@@ -338,11 +330,10 @@ class Statistics extends Endpoint {
     doc.demand.percentage = doc.demand.count / offers
   }
 
-
   /**
    * Calculate Statistics for buying/selling and add to combined
    */
-  calculateOfferType(type, component, multiplier) {
+  calculateOfferType (type, component, multiplier) {
     type.intervals.forEach((interval, j) => {
       let users = {} // for spam check. Object is faster than Array lookup.
 
@@ -408,17 +399,16 @@ class Statistics extends Endpoint {
     delete type.mathVariance
   }
 
-
   /**
    * Calculate standard deviation
    */
-  calculateDeviation(interval, multiplier) {
+  calculateDeviation (interval, multiplier) {
     interval.mathVariance.deviation = 0
 
     // each request ^2
     interval.requests.forEach(request => {
       let price = request.price
-      if (price)  interval.mathVariance.deviation += Math.pow(price - interval.avg, 2)
+      if (price) interval.mathVariance.deviation += Math.pow(price - interval.avg, 2)
     })
 
     // Calculate standard deviation
@@ -427,70 +417,62 @@ class Statistics extends Endpoint {
     interval.mathVariance.mean = interval.avg
   }
 
-
   /**
    * Calculate price accuracy
    */
-  calculatePriceAccuracy(interval) {
+  calculatePriceAccuracy (interval) {
     interval.priceAccuracy = 1 - (interval.mathVariance.deviation / interval.avg)
   }
-
 
   /**
    * Calculate percentages for a given interval
    */
-  calculatePercentages(interval, parent) {
+  calculatePercentages (interval, parent) {
     interval.offers.percentage = interval.offers.count / parent.offers.count
   }
-
 
   /**
    * Adds everything to the parent component
    */
-  addToParent(parent, child) {
+  addToParent (parent, child) {
     parent.avg += child.avg
     parent.offers.count += child.offers.count
     parent.offers.hasValue += child.offers.hasValue
 
-    if (child.min && (child.min < parent.min) || !parent.min) parent.min = child.min
+    if ((child.min && (child.min < parent.min)) || !parent.min) parent.min = child.min
     if (child.max > parent.max) parent.max = child.max
 
     parent.requests = parent.requests.concat(child.requests)
   }
 
-
   /**
    * Calculates the average of a given interval
    */
-  calculateAvg(interval, multiplier) {
+  calculateAvg (interval, multiplier) {
     interval.avg = interval.avg / interval.offers.hasValue * multiplier
   }
-
 
   /**
    * Calculates the median from a given interval with objects
    */
-  calculateMedian(obj, multiplier) {
-    obj.requests.sort((a, b) =>  a.price - b.price)
+  calculateMedian (obj, multiplier) {
+    obj.requests.sort((a, b) => a.price - b.price)
     const requests = obj.requests.slice(obj.requests.length - obj.offers.hasValue / multiplier, obj.requests.length)
 
     // Simple median calculation
     if (requests.length) {
       if (requests.length % 2 !== 0) {
         obj.median = requests[Math.floor(requests.length / 2)].price
-      }
-      else {
+      } else {
         obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
       }
     }
   }
 
-
   /**
    * Checks if a user made multiple requests in the interval
    */
-  purgeSpam(users, request) {
-
+  purgeSpam (users, request) {
     // User already made a request
     if (users[request.user]) {
       return true
@@ -503,19 +485,18 @@ class Statistics extends Endpoint {
     }
   }
 
-
   /**
    * Checks if a user goes extremes under/over the median
    */
-  purgeExtremes(interval, request) {
+  purgeExtremes (interval, request) {
     if (request.price !== null && interval.mathVariance.mean !== null) {
-      return request.price < (interval.mathVariance.mean - interval.mathVariance.deviation)
-          || request.price > (interval.mathVariance.mean + interval.mathVariance.deviation)
+      return request.price < (interval.mathVariance.mean - interval.mathVariance.deviation) ||
+          request.price > (interval.mathVariance.mean + interval.mathVariance.deviation)
     }
-    /*if (request.price !== null && interval.median !== null) {
+    /* if (request.price !== null && interval.median !== null) {
       let percentToMedian = request.price / interval.median
       return percentToMedian > 2 || percentToMedian < 0.66
-    }*/
+    } */
     return false
   }
 }

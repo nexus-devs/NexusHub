@@ -1,6 +1,6 @@
 module.exports = {
   api: {
-    group: 'main',
+    group: 'main'
   },
   core: {
     endpointPath: `${process.cwd()}/api/`,

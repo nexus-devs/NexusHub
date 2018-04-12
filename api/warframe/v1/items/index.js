@@ -4,11 +4,10 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
  * Contains multi-purpose functions for child-methods and provides default values
  */
 class List extends Endpoint {
-
-  constructor(api, db, url) {
+  constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = "Get a list of all items."
-    this.schema.url = "/warframe/v1/items"
+    this.schema.description = 'Get a list of all items.'
+    this.schema.url = '/warframe/v1/items'
     this.schema.query = [
       {
         name: 'data',
@@ -18,11 +17,10 @@ class List extends Endpoint {
     ]
   }
 
-
   /**
    * Main method which is called by EndpointHandler on request
    */
-  async main(req, res) {
+  async main (req, res) {
     let items = await this.db.collection('items').find({}).toArray()
     let targetData = req.query.data
     let result = []

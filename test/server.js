@@ -51,7 +51,6 @@ before(async () => {
   cubic.use(new Core(config.warframe.core))
 })
 
-
 /**
  * Test for properly connecting to cubic-api node.
  */

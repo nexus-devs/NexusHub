@@ -1,20 +1,18 @@
-const _ = require('lodash')
-const request = require("request-promise")
+const request = require('request-promise')
 const cheerio = require('cheerio')
 const minify = require('imagemin')
 const minifyPng = require('imagemin-pngquant')
 const chalk = require('chalk')
-const queue = require("async-delay-queue")
+const queue = require('async-delay-queue')
 const fs = require('fs')
 const Progress = require('progress')
 const additional = require('../config/additional.json')
 const exceptions = require('../config/exceptions.json')
 const dropChancesBaseUrl = 'https://raw.githubusercontent.com/WFCD/warframe-drop-data/gh-pages'
-const marketBaseUrl = "https://api.warframe.market/v1"
-const timeout = (fn, s) => queue.delay(fn, 'push', 50)
+const marketBaseUrl = 'https://api.warframe.market/v1'
 
 class Scraper {
-  constructor() {
+  constructor () {
     this.scraped = []
     this.doFetchMarketData = true
   }
@@ -22,9 +20,9 @@ class Scraper {
   /**
    * Gather List of items and run through each of them
    */
-  async getItems() {
+  async getItems () {
     const dropChances = JSON.parse(await request.get(dropChancesBaseUrl + '/data/all.json'))
-    const marketData = JSON.parse(await request.get(marketBaseUrl + "/items"))
+    const marketData = JSON.parse(await request.get(marketBaseUrl + '/items'))
     const items = marketData.payload.items.en
 
     // Only scrape the warframe.market API if we specify we it to. This takes a
@@ -47,7 +45,7 @@ class Scraper {
       }
 
       // Save scraped data separately so we can lazily load it when we don't wanna refetch all data
-      fs.writeFileSync(__dirname + '/../data/scraped.json', JSON.stringify(this.scraped, null, 2), 'utf-8')
+      fs.writeFileSync(`${__dirname}/../data/scraped.json`, JSON.stringify(this.scraped, null, 2), 'utf-8')
     }
 
     // Take pre-scraped data instead
@@ -68,13 +66,13 @@ class Scraper {
     data = this.addURLs(data)
 
     // Write to disk
-    fs.writeFileSync(__dirname + "/../data/merged.json", JSON.stringify(data, null, 2), "utf-8")
+    fs.writeFileSync(`${__dirname}/../data/merged.json`, JSON.stringify(data, null, 2), 'utf-8')
   }
 
   /**
    * Actual data scraping
    */
-  async getItemData(url, mult) {
+  async getItemData (url, mult) {
     const targetUrl = marketBaseUrl + '/items/' + url.replace('’', '%E2%80%99')
     let item
 
@@ -105,8 +103,8 @@ class Scraper {
    * Warframe.market stores all components as individual objects whereas
    * we store them in the item's component array
    */
-  isAdded(itemname, dataset) {
-    itemname = itemname.toLowerCase();
+  isAdded (itemname, dataset) {
+    itemname = itemname.toLowerCase()
     for (let i = 0; i < dataset.length; i++) {
       if (itemname.replace(/_/g, ' ').includes(dataset[i].name.toLowerCase())) {
         return true
@@ -119,7 +117,7 @@ class Scraper {
    * Find item name by checking for consistent string among all components
    * Nikana Blade, Nikana Hilt, Nikana Blueprint -> Nikana
    */
-  getItemName(itemSet) {
+  getItemName (itemSet) {
     let name = itemSet[0].en.item_name
     let names = []
 
@@ -135,7 +133,7 @@ class Scraper {
           break
         }
       }
-      name = matched.join("").replace(/\s+$/g,'')
+      name = matched.join('').replace(/\s+$/g, '')
     })
     return name
   }
@@ -144,7 +142,7 @@ class Scraper {
    * Retrieve intersection of elements in each component's tag array.
    * [prime, blade], [prime, hilt], [prime, blueprint] -> [prime]
    */
-  getItemType(itemSet) {
+  getItemType (itemSet) {
     let tags = itemSet[0].tags
     let name = itemSet[0].en.item_name.toLowerCase()
 
@@ -174,7 +172,7 @@ class Scraper {
     return result
   }
 
-  getItemComponents(itemSet, itemName) {
+  getItemComponents (itemSet, itemName) {
     let components = []
 
     itemSet.forEach(item => {
@@ -182,7 +180,7 @@ class Scraper {
       componentName = componentName.startsWith(' ') ? componentName.slice(1) : componentName
 
       components.push({
-        name: componentName ? componentName : 'Set',
+        name: componentName || 'Set',
         ducats: item.ducats || 0,
         drop: []
       })
@@ -201,7 +199,7 @@ class Scraper {
     })
   }
 
-  getItemMaxRank(itemSet) {
+  getItemMaxRank (itemSet) {
     let ranks = []
 
     itemSet.forEach(item => {
@@ -212,7 +210,7 @@ class Scraper {
     return ranks[0]
   }
 
-  getItemDescription(itemSet) {
+  getItemDescription (itemSet) {
     let descriptions = []
 
     itemSet.forEach(item => {
@@ -226,7 +224,7 @@ class Scraper {
   /**
    * Apply drop chances to each component in given dataset
    */
-  applyDropChances(data, dropChances) {
+  applyDropChances (data, dropChances) {
     console.log('\nFetching items from warframe.market...')
     const progress = new Progress('[:bar]', {
       total: data.length,
@@ -237,7 +235,6 @@ class Scraper {
 
     data.forEach((item, i) => {
       item.components.forEach((component, j) => {
-
         // Multi-component items
         if (item.components.length > 1 && component.name !== 'Set') {
           data[i].components[j].drop = this.findDropLocations(`${item.name} ${component.name}`, dropChances)
@@ -249,9 +246,9 @@ class Scraper {
         // Single component items
         if (item.components.length <= 1) {
           data[i].components[j].drop = this.findDropLocations(item.name.replace(' Intact', ' Relic')
-                                                                       .replace(' Exceptional', ' Relic')
-                                                                       .replace(' Flawless', ' Relic')
-                                                                       .replace(' Radiant', ' Relic'), dropChances)
+            .replace(' Exceptional', ' Relic')
+            .replace(' Flawless', ' Relic')
+            .replace(' Radiant', ' Relic'), dropChances)
           if (!data[i].components[j].drop.length) {
             console.log(`:: ${chalk.yellow('WARN')}: Could not find drop chances for ${item.name} ${component.name}`)
           }
@@ -264,7 +261,7 @@ class Scraper {
   /**
    * Take drop locations and chances from the official drop chance tables
    */
-  findDropLocations(component, dropChances) {
+  findDropLocations (component, dropChances) {
     let result = []
     let dropLocations = []
 
@@ -302,15 +299,12 @@ class Scraper {
   /**
    * Helper function for recursive object detection
    */
-  findDropRecursive(target, child, locations, path) {
+  findDropRecursive (target, child, locations, path) {
     if (typeof child === 'object') {
       for (let prop in child) {
         const nextPath = `${path}[${prop}]`
         const found = this.findDropRecursive(target, child[prop], locations, nextPath)
-        found ? locations.push({
-          path: nextPath,
-          drop: child
-        }) : 0
+        if (found) locations.push({ path: nextPath, drop: child })
       }
     }
 
@@ -324,7 +318,7 @@ class Scraper {
    * The drop chances may contain more relics than we got through scraping, so
    * we should backfill those as well
    */
-  backfillRelics(items, dropChances) {
+  backfillRelics (items, dropChances) {
     const results = []
 
     // First pass, gather relics unless duplicates
@@ -362,7 +356,7 @@ class Scraper {
    * Get item image by scraping the wikia page. Then minify and save in /assets/
    * We detect the link to the item image through HTML scraping.
    */
-  async saveItemImage(itemSet, itemName) {
+  async saveItemImage (itemSet, itemName) {
     const url = itemSet[0].en.wiki_link
     const path = './assets/img/warframe/items/' // relative to cwd
 
@@ -375,14 +369,14 @@ class Scraper {
 
       // Some images are in a floatright el, not in an aside box (e.g. scimitar)
       if (!imageUrl) {
-        image = $("#mw-content-text .floatright img").first()
+        image = $('#mw-content-text .floatright img').first()
         imageUrl = image.attr('data-src') || image.attr('src')
       }
 
       // Exception handling
       if (!imageUrl) {
         exceptions.forEach(exception => {
-          if (new RegExp("\\b" + exception.name + "\\b").test(itemName.toLowerCase())) {
+          if (new RegExp('\\b' + exception.name + '\\b').test(itemName.toLowerCase())) {
             imageUrl = exception.url
           }
         })
@@ -397,9 +391,12 @@ class Scraper {
 
       // Save image in /assets/
       request.head(imageUrl, (err, res, body) => {
-        request(imageUrl).pipe(fs.createWriteStream(path + itemName.toLowerCase().replace(/ /g, '-') + ".png"))
+        if (err) {
+          return
+        }
+        request(imageUrl).pipe(fs.createWriteStream(path + itemName.toLowerCase().replace(/ /g, '-') + '.png'))
           .on('close', () => {
-            minify([path + itemName.toLowerCase().replace(/ /g, '-') + ".png"], path, {
+            minify([path + itemName.toLowerCase().replace(/ /g, '-') + '.png'], path, {
               plugins: [
                 minifyPng({
                   quality: '20-40'
@@ -417,7 +414,7 @@ class Scraper {
   /**
    * Merge existing data with scraped one
    */
-  merge(base, scraped) {
+  merge (base, scraped) {
     let result = []
 
     // First merge existing data with scraped
@@ -445,19 +442,19 @@ class Scraper {
   /**
    * Add important URL links like images or web page location
    */
-  addURLs(data) {
+  addURLs (data) {
     let result = []
 
     data.forEach(item => {
       // Components
       item.components.forEach(component => {
-        component.imgUrl = `/img/warframe/items/${component.name === 'Set' ? item.name.split(" ").join("-").toLowerCase() : component.name.split(" ").join("-").toLowerCase()}.png`
+        component.imgUrl = `/img/warframe/items/${component.name === 'Set' ? item.name.split(' ').join('-').toLowerCase() : component.name.split(' ').join('-').toLowerCase()}.png`
       })
       // Item Root
       result.push(Object.assign(item, {
-        apiUrl: `/warframe/v1/items/${item.name.split(" ").join("%20")}`,
-        webUrl: `/warframe/items/${item.name.split(" ").join("-").toLowerCase()}`,
-        imgUrl: `/img/warframe/items/${item.name.split(" ").join("-").toLowerCase()}.png`,
+        apiUrl: `/warframe/v1/items/${item.name.split(' ').join('%20')}`,
+        webUrl: `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`,
+        imgUrl: `/img/warframe/items/${item.name.split(' ').join('-').toLowerCase()}.png`
       }))
     })
 

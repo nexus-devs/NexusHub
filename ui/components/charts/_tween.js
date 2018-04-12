@@ -5,7 +5,7 @@ class Tween {
   /**
    * Animate data changes by transitioning values from old to new value
    */
-  tweenData(newData, oldData, onUpdate) {
+  tweenData (newData, oldData, onUpdate) {
     const tween = new TWEEN.Tween(oldData)
       .easing(TWEEN.Easing.Quadratic.Out)
       .to(newData, 500)
@@ -16,7 +16,7 @@ class Tween {
       .start()
 
     // Function which updates the transFitioning value on each tick
-    function animate(time) {
+    function animate (time) {
       tween.update(time)
 
       // Ensure we don't keep calling this once we're done
@@ -31,19 +31,19 @@ class Tween {
   /**
    * Functions which ease transitions between prop value cahnges
    */
-  adjustData(vm, newData, oldData) {
-    this.tweenData(normalize(newData, true), normalize(oldData, true), function() {
+  adjustData (vm, newData, oldData) {
+    this.tweenData(normalize(newData, true), normalize(oldData, true), function () {
       vm.animatedData = normalize(this)
       vm.update()
     })
   }
-  adjustCeil(vm, newData, oldData) {
-    this.tweenData({ d: newData }, { d: oldData }, function() {
+  adjustCeil (vm, newData, oldData) {
+    this.tweenData({ d: newData }, { d: oldData }, function () {
       vm.animatedCeil = this.d
       vm.update()
     })
   }
 }
 
-const tween = new Tween
+const tween = new Tween()
 export default tween
