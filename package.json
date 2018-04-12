@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node .",
     "build": "node build/webpack.js",
+    "lint": "eslint --ignore-path .gitignore .",
     "test": "mocha --exit -s 30000 --timeout 30000",
     "scrape": "node build/warframe/index.js",
     "changelogs": "node build/changelogs/index.js"
@@ -29,6 +30,12 @@
   },
   "devDependencies": {
     "cubic-client": "^1.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.1.0",

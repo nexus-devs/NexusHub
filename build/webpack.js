@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const rm = require('rimraf')
 const gitlog = require('gitlog')
 
-
 // Imitate cubic config object for pulling default webpack config
 global.cubic = {
   config: {
@@ -31,9 +30,9 @@ global.cubic = {
 }
 
 // Call webpack build function
-async function build() {
+async function build () {
   const changes = await util.promisify(gitlog)({
-    repo: __dirname + '/../',
+    repo: `${__dirname}/../`,
     number: 1
   })
   process.on('unhandledRejection', console.log)
@@ -58,13 +57,13 @@ async function build() {
 
   // Trigger webpack build
   console.log('* Starting webpack build process. This might take a while...')
-  const timer = new Date
+  const timer = new Date()
   const compiled = await util.promisify(webpack)([clientConfig, serverConfig])
 
   if (compiled.errors) {
     throw compiled.errors
   } else {
-    console.log(`> Webpack build successful (${new Date - timer}ms)`)
+    console.log(`> Webpack build successful (${new Date() - timer}ms)`)
   }
 }
 build()

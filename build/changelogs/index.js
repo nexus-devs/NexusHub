@@ -6,12 +6,12 @@ const exec = promisify(require('child_process').exec)
 const _ = require('lodash')
 
 class Logger {
-  constructor() {
+  constructor () {
     this.logs = require('../data/logs.json')
     this.types = ['feat', 'fix', 'perf']
   }
 
-  async generate() {
+  async generate () {
     const commits = await this.getUnreleasedCommits()
     const changes = {}
 
@@ -46,12 +46,12 @@ class Logger {
   /**
    * Get proper change format from a specified commit
    */
-  getChange(commit, issues) {
+  getChange (commit, issues) {
     return {
       commit: {
         subject: commit.subject,
         description: commit.body,
-        url: `https://github.com/nexus-devs/nexus-stats/commit/${commit.hash}`,
+        url: `https://github.com/nexus-devs/nexus-stats/commit/${commit.hash}`
       },
       issues,
       author: {
@@ -64,15 +64,17 @@ class Logger {
   /**
    * Find related issues in commit footer
    */
-  getIssues(footer) {
+  getIssues (footer) {
     let issues = []
 
     if (footer) {
       footer.match(/[0-9]*/g).forEach(num => {
-        if (num) issues.push({
-          id: `#${num}`,
-          url: `https://github.com/nexus-devs/nexus-stats/issues/${num}`
-        })
+        if (num) {
+          issues.push({
+            id: `#${num}`,
+            url: `https://github.com/nexus-devs/nexus-stats/issues/${num}`
+          })
+        }
       })
     }
     return issues
@@ -82,7 +84,7 @@ class Logger {
    * Get all commits since last git tag. Also assigns unreleased changes to
    * previously untracked commits.
    */
-  async getUnreleasedCommits() {
+  async getUnreleasedCommits () {
     this.latest = {
       tag: {},
       release: {}
@@ -103,7 +105,7 @@ class Logger {
       }
     }
 
-    return await promisify(gitlog)({
+    return promisify(gitlog)({
       repo: `${__dirname}/../../../`,
       since: new Date(this.latest.release.date),
       fields: ['hash', 'subject', 'body', 'authorName', 'authorDate']
@@ -113,7 +115,7 @@ class Logger {
   /**
    * Save formatted unreleased changes to this.logs and save to file
    */
-  async save(changes) {
+  async save (changes) {
     let unreleased = {
       release: {
         name: 'unreleased',
@@ -133,6 +135,5 @@ class Logger {
   }
 }
 
-
-const logger = new Logger
+const logger = new Logger()
 logger.generate()

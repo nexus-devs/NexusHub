@@ -1,4 +1,4 @@
-const scraper = require("./scraper.js")
+const scraper = require('./scraper.js')
 
 process.on('uncaughtExeption', err => {
   console.log(err)

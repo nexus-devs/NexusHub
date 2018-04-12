@@ -1,0 +1,10 @@
+extends: "standard"
+globals:
+  cubic: true
+  describe: true
+  it: true
+  before: true
+  after: true
+  requestAnimationFrame: true
+rules:
+  brace-style: 'off'

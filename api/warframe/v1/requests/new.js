@@ -1,5 +1,5 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
-const Statistics = require(__dirname + '/../items/statistics.js')
+const Statistics = require(`${__dirname}/../items/statistics.js`)
 const _ = require('lodash')
 const moment = require('moment')
 
@@ -7,8 +7,7 @@ const moment = require('moment')
  * Contains multi-purpose functions for child-methods and provides default values
  */
 class Request extends Endpoint {
-
-  constructor(api, db, url) {
+  constructor (api, db, url) {
     super(api, db, url)
 
     // Modify schema
@@ -19,7 +18,7 @@ class Request extends Endpoint {
   /**
    * Main method which is called by MethoHandler on request
    */
-  async main(req, res) {
+  async main (req, res) {
     const request = req.body
 
     // Convert date to actual timestamp so Mongo can treat it as such
@@ -48,7 +47,7 @@ class Request extends Endpoint {
     }
     let data = await new Promise(resolve => {
       let _res = {
-        send(data) {
+        send (data) {
           resolve(data)
         }
       }
@@ -58,15 +57,14 @@ class Request extends Endpoint {
 
     // Publish and save resulting statistics
     this.publish(data, '/warframe/v1/items/' + request.item + '/statistics')
-    data.components ? this.saveStats(data) : null
+    if (data.components) this.saveStats(data)
     res.send('Request processed. (' + JSON.stringify(request) + ')')
   }
-
 
   /**
    * Save prices/demand in local db for use by other endpoints
    */
-  async saveStats(data) {
+  async saveStats (data) {
     let prices = []
     let distribution = []
 
