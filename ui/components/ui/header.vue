@@ -29,10 +29,5 @@ header {
     color: white;
     font-weight: 400;
   }
-  @media (max-width: $breakpoint-m) {
-    top: 0;
-    padding-top: 60px;
-    margin-bottom: 0;
-  }
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
   <div>
     <sidebar>
-      <sidebar-search></sidebar-search>
     </sidebar>
     <app-content>
       <ui-header>
@@ -149,7 +148,6 @@ export default {
   components: {
     'app-content': appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
     'ui-header': uiheader
   }
 }

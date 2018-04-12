@@ -1,7 +1,6 @@
 <template>
   <div>
     <sidebar>
-      <sidebar-search></sidebar-search>
     </sidebar>
     <app-content>
       <ui-header>
@@ -36,14 +35,12 @@
 <script>
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
     'ui-header': uiheader
   }
 }

@@ -9,7 +9,7 @@
         <tooltip>Tools</tooltip>
       </div>
     </div>
-    <div class="nav-lower" v-bind:class="{ dragged: deltaX || active }">
+    <div class="nav-lower" v-bind:class="{ dragged: deltaX || active, hidden }">
       <div class="nav-lower-backdrop">
         <div class="nav-lower-backdrop-first-bg"></div>
       </div>
@@ -25,11 +25,16 @@ import tooltip from './sidebar/modules/tooltip.vue'
 
 
 export default {
-  // Reset counters for panel id's when loading a new page
   beforeCreate() {
+    // Reset counters for panel id's when loading a new page
+    // These id's also act as mulitpliers for the `top: x px` distance of
+    // expanded sections.
     if (this.$store.state.sidebar && this.$store._mutations.toggleSidebar) {
       this.$store.commit('setId', 0)
     }
+
+    // Hide sidebar if no tools were passed, otherwise show.
+    this.$slots.default ? this.$store.commit('showSidebar') : this.$store.commit('hideSidebar')
   },
 
   components: {
@@ -48,6 +53,9 @@ export default {
       const deltaX = this.deltaX
       const pos = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
       return pos
+    },
+    hidden() {
+      return this.$store.state.sidebar.hidden
     }
   },
 
@@ -94,21 +102,34 @@ export default {
     state: {
       active: false,
       expanded: false,
+      hidden: true,
       id: 0,
       activeId: 0,
       deltaX: 0
     },
     mutations: {
       toggleSidebar(state, expanded = false) {
-        state.expanded = expanded
-        state.active = !state.active
-        state.activeId = 0
+        if (!state.hidden) {
+          state.expanded = expanded
+          state.active = !state.active
+          state.activeId = 0
+        }
+      },
+      hideSidebar(state) {
+        state.expanded = false
+        state.active = false
+        state.hidden = true
+      },
+      showSidebar(state) {
+        state.hidden = false
       },
       setActivePanel(state, id) {
         state.activeId = id
       },
       setSidebarDeltaX(state, pos) {
-        state.deltaX = pos
+        if (!state.hidden) {
+          state.deltaX = pos
+        }
       },
       incrementId(state) {
         state.id++
@@ -190,6 +211,9 @@ nav {
       @include ease-out(0.45s);
       @include shadow-1;
 
+      &.hidden {
+        opacity: 0;
+      }
       .nav-lower-backdrop {
         position: absolute;
         height: 100vh;

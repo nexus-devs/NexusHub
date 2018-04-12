@@ -18,7 +18,17 @@ h1 {
   }
 }
 
-h2, h3, h4, h5, h6 {
+h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+
+  & + p {
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+}
+
+h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 1.1em;
 
@@ -28,11 +38,8 @@ h2, h3, h4, h5, h6 {
   }
 
   & + p {
-    position: relative;
-    top: -1px; // compensate for border
     padding-top: 20px;
     margin-top: 10px;
-    border-top: 0.5px solid $color-subtle;
   }
 }
 

@@ -1,7 +1,6 @@
 <template>
   <div>
     <sidebar>
-      <sidebar-search></sidebar-search>
     </sidebar>
     <app-content>
       <div class="company">
@@ -106,13 +105,11 @@
 <script>
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
   }
 }
 </script>

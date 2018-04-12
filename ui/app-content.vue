@@ -7,7 +7,7 @@ the sidebar. This also keeps our app.vue more clean.
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div class="app-content" :class="{ activeSidebar, deltaX }"
+        <div class="app-content" :class="{ activeSidebar, visibleSidebar, deltaX }"
              :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
                     'margin-right': `calc(${deltaX + 262}px + 5vw)`,
                     'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
@@ -41,6 +41,9 @@ export default {
   computed: {
     activeSidebar() {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
+    },
+    visibleSidebar() {
+      return this.$store.state.sidebar ? !this.$store.state.sidebar.hidden : false
     },
     // Horizontal position for content when swiping out the sidebar
     deltaX() {
@@ -82,6 +85,11 @@ export default {
   & > .container {
     will-change: padding;
   }
+}
+
+// Compensate for sidebar width so the page content would stay "centered"
+.visibleSidebar .container {
+  padding-left: 160px;
 }
 
 .zoom-enter-active, .fade-leave-active {
