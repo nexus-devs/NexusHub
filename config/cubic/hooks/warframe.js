@@ -1,5 +1,5 @@
 const mongodb = require('mongodb').MongoClient
-const items = require('../db/warframe/data/merged.json')
+const items = require(`${process.cwd()}/build/warframe/data/merged.json`)
 
 class Hook {
 

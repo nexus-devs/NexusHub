@@ -18,7 +18,7 @@ const config = {
   main: require('../config/cubic/main.js'),
   warframe: require('../config/cubic/warframe.js')
 }
-//config.cubic.logLevel = 'silent'
+config.cubic.logLevel = 'silent'
 
 // Use different database URLs for CI (because docker)
 if (ci) {
