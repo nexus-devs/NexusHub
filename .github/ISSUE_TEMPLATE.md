@@ -5,12 +5,21 @@
 - [ ] Documentation issue or request
 
 
+<br>
+
+
 **Current behavior**
 <!-- Describe how the issue manifests. -->
 
 
+<br>
+
+
 **Expected behavior**
 <!-- Describe what the desired behavior would be. -->
+
+
+<br>
 
 
 **Minimal reproduction of the problem**
@@ -20,6 +29,9 @@ minimal demo repository.
 If this is a feature request, please describe the scenario in which a user
 would use this feature.
 -->
+
+
+<br>
 
 
 **Environment**
