@@ -38,7 +38,7 @@ and help you to craft the change so that it is successfully accepted into the pr
 To ensure consistency throughout the source code, keep these rules in mind as you are working:
 
 * All API endpoints **must be documented within the endpoint schema**.
-* We follow the [Standard JS styleguide](https://standardjs.com/).
+* We follow the [Standard JS styleguide](https://standardjs.com/). Your linter should be able to pick this up automatically.
 
 <br>
 
