@@ -159,6 +159,18 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+      transform: scale3d(1.15,1.15,1.15);
+  }
+  100% {
+      transform: scaleX(1);
+  }
+}
+
 .notification {
   position: fixed;
   overflow: hidden;
@@ -275,6 +287,10 @@ export default {
   pointer-events: none;
   @include gradient-background-dg($color-primary, $color-accent);
   @include ease(0.25s);
+  animation-name: pulse;
+  animation-timing-function: ease;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
 
   &.unread {
     transform: scale(1);
