@@ -8,7 +8,7 @@ async function build () {
   // Only keep one build at a time. This way files are always there for
   // production builds and test units.
   console.log('* Removing old builds...')
-  rm.sync(`${__dirname}/../assets/bundles/*`)
+  rm.sync(`${process.cwd()}/assets/bundles/*`)
 
   // Trigger webpack build
   console.log('* Starting webpack build process. This might take a while...')

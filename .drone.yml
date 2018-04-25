@@ -11,13 +11,10 @@ pipeline:
     image: node
     commands:
       - npm test
-  webpack:
-    image: node
-    commands:
-      - npm run build
   test - production:
     image: node
     commands:
+      - npm run build
       - npm test --production
   stage:
     image: node
