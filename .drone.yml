@@ -3,7 +3,6 @@ pipeline:
     image: node
     commands:
       - npm install
-      - npm run build
   lint:
     image: node
     commands:
@@ -12,6 +11,10 @@ pipeline:
     image: node
     commands:
       - npm test
+  webpack:
+    image: node
+    commands:
+      - npm run build
   test - production:
     image: node
     commands:
