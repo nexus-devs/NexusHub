@@ -3,36 +3,36 @@
     <div class="container">
       <div class="row">
         <div class="col-b row">
-          <div class="col inline-data" :class="{ inactive: types[0].inactive }" v-on:click="select('types', types[0])">
+          <div :class="{ inactive: types[0].inactive }" class="col inline-data" @click="select('types', types[0])">
             <h2>Selling</h2>
             <span class="data">{{ supply.count }}</span>
-            <span class="diff" :class="{ 'inline-data-increase': supply.rawDiff > 0 }">{{ supply.diff }}</span>
+            <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
           </div>
-          <div class="col inline-data" :class="{ inactive: types[1].inactive }" v-on:click="select('types', types[1])">
+          <div :class="{ inactive: types[1].inactive }" class="col inline-data" @click="select('types', types[1])">
             <h2>Buying</h2>
             <span class="data">{{ demand.count }}</span>
-            <span class="diff" :class="{ 'inline-data-increase': demand.rawDiff > 0 }">{{ demand.diff }}</span>
+            <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
           </div>
           <div class="col"><!-- Dummy --></div>
         </div>
         <div class="col-b">
           <h2>Region</h2>
-          <button type="button" v-for="d in regions" :disabled="d.disabled"
-                  v-on:click="select('regions', d)" :class="{ inactive: d.inactive }">
+          <button v-for="d in regions" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+                  type="button" @click="select('regions', d)">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Platform</h2>
-          <button type="button" v-for="d in platforms" :disabled="d.disabled"
-                  v-on:click="select('platforms', d)" :class="{ inactive: d.inactive }">
+          <button v-for="d in platforms" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+                  type="button" @click="select('platforms', d)">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
           <h2>Data Source</h2>
-          <button type="button" v-for="d in sources" :disabled="d.disabled"
-                  v-on:click="select('sources', d)" :class="{ inactive: d.inactive }">
+          <button v-for="d in sources" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+                  type="button" @click="select('sources', d)">
             <span>{{ d.name }}</span>
           </button>
         </div>
@@ -47,7 +47,7 @@
 import _ from 'lodash'
 
 export default {
-  data() {
+  data () {
     return {
       types: [{
         name: 'Selling'
@@ -56,7 +56,7 @@ export default {
       }],
 
       regions: [{
-        name: 'NA',
+        name: 'NA'
       }, {
         name: 'EU'
       }, {
@@ -90,7 +90,7 @@ export default {
   },
 
   computed: {
-    supply() {
+    supply () {
       const focus = this.$store.state.items.item.supply.count
       const comparison = this.$store.state.items.itemComparison.supply.count
       const diff = ((focus - comparison) / comparison * 100).toFixed(2)
@@ -101,7 +101,7 @@ export default {
         rawDiff: diff
       }
     },
-    demand() {
+    demand () {
       const focus = this.$store.state.items.item.demand.count
       const comparison = this.$store.state.items.itemComparison.demand.count
       const diff = ((focus - comparison) / comparison * 100).toFixed(2)
@@ -114,48 +114,8 @@ export default {
     }
   },
 
-  methods: {
-    select(data, d) {
-      let target = [].concat(this[data]) // Get rid of existing reference
-      let i = target.findIndex(e => e.name === d.name)
-      let allActive = true
-      let allInactive = true
-
-      this[data].forEach(el => {
-        if (el.inactive && !el.disabled) {
-          allActive = false
-        }
-        if ((!el.inactive || el.disabled) && el.name !== target[i].name) {
-          allInactive = false
-        }
-      })
-
-      // Labels are all active -> user wants to activate only the one they selected
-      if (allActive) {
-        for (let j = 0; j < target.length; j++) {
-          target[j].inactive = i === j ? false : true
-        }
-      }
-
-      // All labels inactive -> select all
-      else if (allInactive) {
-        for (let j = 0; j < target.length; j++) {
-          target[j].inactive = false
-        }
-      }
-
-      // Some are active -> user wants to reactive a certain label
-      else {
-        target[i].inactive = target[i].inactive ? false : true
-      }
-
-      // Now we need to reassign the variable for vue to re-render it
-      this[data] = target
-    }
-  },
-
   watch: {
-    types(oldData, newData) {
+    types (oldData, newData) {
       const selling = newData.find(d => d.name === 'Selling')
       const buying = newData.find(d => d.name === 'Buying')
 
@@ -169,7 +129,7 @@ export default {
         this.$store.commit('setItemOfferType', 'selling')
       }
     },
-    regions(oldData, newData) {
+    regions (oldData, newData) {
       const query = _.cloneDeep(this.$route.query)
       const regions = []
 
@@ -207,6 +167,46 @@ export default {
           query
         })
       }
+    }
+  },
+
+  methods: {
+    select (data, d) {
+      const target = [].concat(this[data]) // Get rid of existing reference
+      const i = target.findIndex(e => e.name === d.name)
+      let allActive = true
+      let allInactive = true
+
+      this[data].forEach(el => {
+        if (el.inactive && !el.disabled) {
+          allActive = false
+        }
+        if ((!el.inactive || el.disabled) && el.name !== target[i].name) {
+          allInactive = false
+        }
+      })
+
+      // Labels are all active -> user wants to activate only the one they selected
+      if (allActive) {
+        for (let j = 0; j < target.length; j++) {
+          target[j].inactive = i !== j
+        }
+      }
+
+      // All labels inactive -> select all
+      else if (allInactive) {
+        for (let j = 0; j < target.length; j++) {
+          target[j].inactive = false
+        }
+      }
+
+      // Some are active -> user wants to reactive a certain label
+      else {
+        target[i].inactive = !target[i].inactive
+      }
+
+      // Now we need to reassign the variable for vue to re-render it
+      this[data] = target
     }
   }
 }

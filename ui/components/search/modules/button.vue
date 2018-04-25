@@ -1,5 +1,5 @@
 <template>
-  <a href="/warframe/search" class="button-container" v-on:click.stop.prevent="search">
+  <a href="/warframe/search" class="button-container" @click.stop.prevent="search">
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
@@ -14,14 +14,14 @@
 <script>
 export default {
   methods: {
-    async search() {
+    async search () {
       const input = this.$store.state.search.input
       const time = this.$store.state.time
       const rank = this.$store.state.rank
 
       if (input) {
         let path
-        let query = {}
+        const query = {}
 
         // If full object is passed, assume suggestion is taken and webUrl to be included
         if (typeof input !== 'string') {

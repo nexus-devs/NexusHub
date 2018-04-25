@@ -1,7 +1,7 @@
 <template>
   <div class="notification-container">
-    <div class="notification" :class="{ active, hide }" v-on:mouseover="markRead" v-on:click.right.prevent="deactivate">
-      <div class="navigation a-ie" v-on:click="next">
+    <div :class="{ active, hide }" class="notification" @mouseover="markRead" @click.right.prevent="deactivate">
+      <div class="navigation a-ie" @click="next">
         <img src="/img/notifications/arrow-left.svg" class="ico-24" alt="next">
       </div>
       <img src="/img/notifications/alert.svg" class="ico-28" alt="notification">
@@ -10,17 +10,17 @@
           {{ title }}
         </h3>
         <p>
-          {{ content }}
+          {{ body }}
         </p>
       </div>
-      <div class="navigation a-ie" v-on:click="previous">
+      <div class="navigation a-ie" @click="previous">
         <img src="/img/notifications/arrow-right.svg" class="ico-24" alt="previous">
       </div>
     </div>
-    <div class="hint a-ie" :class="{ unread }" v-on:click="activate">
+    <div :class="{ unread }" class="hint a-ie" @click="activate">
       <img src="/img/notifications/hint.svg" class="ico-20" alt="Show Notifications">
     </div>
-    <div class="unread-bubble" :class="{ unread }" v-on:click.right.prevent="markRead">
+    <div :class="{ unread }" class="unread-bubble" @click.right.prevent="markRead">
       {{ unread }}
     </div>
   </div>
@@ -33,56 +33,53 @@ let toggleTimeout
 
 export default {
   computed: {
-    title() {
+    title () {
       return this.$store.state.notifications.current.title
     },
-    content() {
-      return this.$store.state.notifications.current.content
+    body () {
+      return this.$store.state.notifications.current.body
     },
-    unread() {
+    unread () {
       return this.$store.state.notifications.unread
     },
-    active() {
+    active () {
       return this.$store.state.notifications.active
     },
-    hide() {
+    hide () {
       return this.$store.state.notifications.hide
     }
   },
 
-  /**
-   * Listen to notifications as soon as we load on the client
-   */
-  mounted() {
+  mounted () {
     this.listen()
   },
 
   methods: {
-    listen() {
+    listen () {
       this.$cubic.subscribe('/notifications', notification => {
         if (notification.game === this.$store.state.game.name || notification.game === 'global') {
           this.$store.dispatch('pushNotification', notification.message)
         }
       })
     },
-    activate() {
+    activate () {
       if (this.$store.state.notifications.hide) {
         this.$store.commit('toggleNotificationHiddenState')
       }
       this.$store.dispatch('displayNotification')
     },
-    deactivate() {
+    deactivate () {
       this.$store.commit('toggleNotification')
       clearTimeout(toggleTimeout)
       this.$store.commit('toggleNotificationHiddenState')
     },
-    next() {
+    next () {
       this.$store.dispatch('nextNotification')
     },
-    previous() {
+    previous () {
       this.$store.dispatch('previousNotification')
     },
-    markRead() {
+    markRead () {
       if (this.$store.state.notifications.unread) {
         this.$store.commit('resetUnread')
       }
@@ -96,58 +93,58 @@ export default {
       hide: false,
       current: {
         title: 'No Notifications',
-        content: 'Seems there\'s nothing new. We have dispatched a pigeon to deliver the latest news soon™'
+        body: 'Seems there\'s nothing new. We have dispatched a pigeon to deliver the latest news soon™'
       },
       selected: 0,
       unread: 0,
       list: []
     },
     actions: {
-      nextNotification({ commit, state }) {
-        let list = state.list
-        let next = state.selected + 1
+      nextNotification ({ commit, state }) {
+        const list = state.list
+        const next = state.selected + 1
         commit('selectNotification', next >= list.length ? 0 : next)
       },
-      previousNotification({ commit, state }) {
-        let list = state.list
-        let previous = state.selected - 1
+      previousNotification ({ commit, state }) {
+        const list = state.list
+        const previous = state.selected - 1
         commit('selectNotification', previous < 0 ? list.length - 1 : previous)
       },
-      displayNotification({ commit }) {
+      displayNotification ({ commit }) {
         clearTimeout(toggleTimeout)
         commit('selectNotification', 0)
         commit('toggleNotification')
         toggleTimeout = setTimeout(() => commit('toggleNotification'), 5000)
       },
-      pushNotification({ commit, dispatch }, notification) {
+      pushNotification ({ commit, dispatch }, notification) {
         commit('addNotification', notification)
         commit('incrementUnread')
         dispatch('displayNotification')
       }
     },
     mutations: {
-      selectNotification(state, index) {
-        let list = state.list
-        let current = list[index]
+      selectNotification (state, index) {
+        const list = state.list
+        const current = list[index]
 
         if (current) {
           state.selected = index
           state.current = current
         }
       },
-      addNotification(state, notification) {
+      addNotification (state, notification) {
         state.list.unshift(notification)
       },
-      incrementUnread(state) {
+      incrementUnread (state) {
         state.unread++
       },
-      resetUnread(state) {
+      resetUnread (state) {
         state.unread = 0
       },
-      toggleNotification(state) {
+      toggleNotification (state) {
         state.active = !state.active
       },
-      toggleNotificationHiddenState(state) {
+      toggleNotificationHiddenState (state) {
         state.hide = !state.hide
       }
     }
@@ -158,18 +155,6 @@ export default {
 
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
-
-@keyframes pulse {
-  0% {
-    transform: scaleX(1);
-  }
-  50% {
-      transform: scale3d(1.15,1.15,1.15);
-  }
-  100% {
-      transform: scaleX(1);
-  }
-}
 
 .notification {
   position: fixed;
@@ -296,6 +281,18 @@ export default {
     transform: scale(1);
     opacity: 1;
     pointer-events: all;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+      transform: scale3d(1.15,1.15,1.15);
+  }
+  100% {
+      transform: scaleX(1);
   }
 }
 </style>

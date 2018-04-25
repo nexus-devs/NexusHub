@@ -1,7 +1,6 @@
 <template>
   <div>
-    <sidebar>
-    </sidebar>
+    <sidebar/>
     <app-content>
       <ui-header>
         <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
@@ -14,77 +13,77 @@
       </ui-header>
       <div class="container">
         <section>
-            <h2>Nexus-Stats Logo</h2>
-            <p>
-              Please do not edit, distort, recolor, or otherwise repurpose the Nexus-Stats logo.
-            </p>
-            <div class="row row-margin">
-              <div class="col logo">
-                <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-color.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-color.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo">
-                <img src="/img/brand/nexus-stats-logo-typeface-bw.svg" alt="Black/White Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-bw.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-bw.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo">
-                <img src="/img/brand/nexus-stats-logo-typeface-b.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-b.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-b.png" download>.png</a>
-                </div>
+          <h2>Nexus-Stats Logo</h2>
+          <p>
+            Please do not edit, distort, recolor, or otherwise repurpose the Nexus-Stats logo.
+          </p>
+          <div class="row row-margin">
+            <div class="col logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-color.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-color.png" download>.png</a>
               </div>
             </div>
-            <div class="row row-margin">
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-color.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-color.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-color.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-color.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-color.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-bw.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-bw.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
-                </div>
-              </div>
-              <div class="col logo-alt">
-                <img src="/img/brand/nexus-stats-logo-typeface-v-b.svg" alt="Full Color Nexus-Stats Logo">
-                <div class="logo-download">
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-b.svg" download>.svg</a>
-                  <a href="/img/brand/nexus-stats-logo-typeface-v-b.png" download>.png</a>
-                </div>
+            <div class="col logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-bw.png" download>.png</a>
               </div>
             </div>
+            <div class="col logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-b.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-b.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-b.png" download>.png</a>
+              </div>
+            </div>
+          </div>
+          <div class="row row-margin">
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-color.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-color.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-color.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-v-color.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-v-color.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-v-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-v-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-b.svg" alt="Full Color Nexus-Stats Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexus-stats-logo-typeface-v-b.svg" download>.svg</a>
+                <a href="/img/brand/nexus-stats-logo-typeface-v-b.png" download>.png</a>
+              </div>
+            </div>
+          </div>
         </section>
         <section>
           <h2>Nexus-Stats Colors</h2>
@@ -141,7 +140,6 @@
 <script>
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <span class="back a-ie" v-on:click.stop="back">
+  <span class="back a-ie" @click.stop="back">
     <img src="/img/ui/back.svg" class="ico-20" alt="Back">
     Back
   </span>
@@ -10,10 +10,7 @@
 <script>
 export default {
   methods: {
-    back() {
-      if (!this.$store.state.sidebar.expanded) {
-        this.$store.commit('toggleSidebar')
-      }
+    back () {
       this.$store.commit('setActivePanel', 0)
     }
   }

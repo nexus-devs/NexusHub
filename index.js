@@ -25,14 +25,14 @@ cubic.use(new Ui(config.ui))
 
 /**
  * Main API setup. Used for 'global' endpoints not specific to any game.
+ * Core nodes of other games will still connect to this API server though.
  */
 cubic.use(new Api(config.main.api))
 cubic.use(new Core(config.main.core))
 
 /**
- * Warframe API setup
+ * Warframe Core node
  */
 cubic.hook('warframe.core', wfhooks.verifyIndices)
 cubic.hook('warframe.core', wfhooks.verifyItemList)
-cubic.use(new Api(config.warframe.api))
 cubic.use(new Core(config.warframe.core))

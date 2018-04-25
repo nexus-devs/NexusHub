@@ -21,7 +21,7 @@ function normalize (arr, raw) {
 
     // No raw request specified -> retrieve full object by default
     else {
-      let val = {
+      const val = {
         x,
         y,
         yRaw: y, // original value, required to assign min properly
@@ -43,8 +43,8 @@ function normalize (arr, raw) {
   // Apply min/max values to data object and determine if they should be left
   // or right of the pointer (will be managed by css class)
   if (!raw) {
-    let i = result.findIndex(d => d.yRaw === min)
-    let j = result.findIndex(d => d.yRaw === max)
+    const i = result.findIndex(d => d.yRaw === min)
+    const j = result.findIndex(d => d.yRaw === max)
     result[i].isMin = true
     result[i].alignLeft = i / result.length > 0.66
     result[j].isMax = true

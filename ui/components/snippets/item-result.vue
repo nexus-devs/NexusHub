@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="result.webUrl" class="result col" :class="{ set: result.set }">
-    <img class="result-bg-img" :src="result.imgUrl" :alt="result.name">
-    <div class="result-bg-shade"></div>
+  <router-link :to="result.webUrl" :class="{ set: result.set }" class="result col">
+    <img :src="result.imgUrl" :alt="result.name" class="result-bg-img">
+    <div class="result-bg-shade"/>
     <div class="result-info">
       <h4 class="result-title">{{ result.name }}</h4>
       <div class="result-data-value">
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="result-data">
-      <h4 class='result-data-value'>{{ result.name }}</h4>
+      <h4 class="result-data-value">{{ result.name }}</h4>
       <div class="result-data-value">
         <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-16">
         <span>320p</span>

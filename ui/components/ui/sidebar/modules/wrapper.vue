@@ -1,6 +1,6 @@
 <template>
-  <div class="ico-wrapper" v-bind:class="{ active, inactive }" v-on:mousedown="toggle">
-    <slot></slot>
+  <div :class="{ active, inactive }" class="ico-wrapper" @mousedown="toggle">
+    <slot/>
   </div>
 </template>
 
@@ -8,15 +8,8 @@
 
 <script>
 export default {
-  // Increase id on each wrapper load. This way we can enumerate the number of
-  // sidebar tools. We also use this id as multiplier for vertical offsets for
-  // animations since there's no way to dynamically add however many tools we
-  // want otherwise. (without breaking your head at least)
-  beforeCreate() {
-    this.$store.commit('incrementId')
-  },
 
-  data() {
+  data () {
     return {
       // Unique id for panel received at create
       id: this.$store.state.sidebar.id
@@ -25,17 +18,24 @@ export default {
 
   computed: {
     // Check if the selected panel is this one
-    active() {
+    active () {
       return this.$store.state.sidebar.activeId === this.id
     },
     // Id > 0 -> another panel is selected, and it's not this one
-    inactive() {
+    inactive () {
       return this.$store.state.sidebar.activeId && !this.active
     }
   },
+  // Increase id on each wrapper load. This way we can enumerate the number of
+  // sidebar tools. We also use this id as multiplier for vertical offsets for
+  // animations since there's no way to dynamically add however many tools we
+  // want otherwise. (without breaking your head at least)
+  beforeCreate () {
+    this.$store.commit('incrementId')
+  },
 
   methods: {
-    toggle() {
+    toggle () {
       if (!this.$store.state.sidebar.active) {
         this.$store.commit('toggleSidebar')
       }

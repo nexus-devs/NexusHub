@@ -1,5 +1,5 @@
 <template>
-  <div class="status" :class="{ offline, sidebarVisible }">
+  <div :class="{ offline, sidebarVisible }" class="status">
     <img src="/img/ui/error-loading.svg" class="ico-h-24" alt="loading">
     <p>{{ offline ? 'Connecting to the Nexus-Stats API...' : 'Connected!' }}</p>
   </div>
@@ -10,26 +10,26 @@
 <script>
 export default {
   computed: {
-    offline() {
+    offline () {
       return !this.$store.state.api.online
     },
-    sidebarVisible() {
+    sidebarVisible () {
       return !this.$store.state.sidebar.hidden
     }
   },
 
-  mounted() {
+  mounted () {
     setTimeout(() => {
       this.update()
       this.listen()
-    }, 2500)
+    }, 7500)
   },
 
   methods: {
-    update() {
+    update () {
       this.$store.commit('setApiStatus', this.$cubic.connection.client.connected)
     },
-    listen() {
+    listen () {
       this.$cubic.on('connect', () => this.$store.commit('setApiStatus', true))
       this.$cubic.on('disconnect', () => this.$store.commit('setApiStatus', false))
     }
@@ -41,7 +41,7 @@ export default {
       online: true
     },
     mutations: {
-      setApiStatus(state, online) {
+      setApiStatus (state, online) {
         state.online = online
       }
     }

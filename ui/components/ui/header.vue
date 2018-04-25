@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="container">
-      <slot></slot>
+      <slot/>
     </div>
-    <slot name="sub"></slot>
+    <slot name="sub"/>
   </header>
 </template>
 

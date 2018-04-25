@@ -8,10 +8,4 @@
 /docker
 
 # Webpack generated content
-/assets/client.css
-/assets/dev-*.bundle.js
-/assets/vendor.bundle.js
-/assets/manifest.bundle.js
-/assets/hot-update.*
-/assets/img/**.psd
-/assets/*ssr*.json
+/assets/bundles/

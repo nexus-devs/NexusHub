@@ -1,18 +1,18 @@
 <template>
   <div>
     <sidebar>
-      <sidebar-search></sidebar-search>
+      <sidebar-search/>
     </sidebar>
     <app-content>
-      <subnav></subnav>
+      <subnav/>
       <header>
         <div class="container">
           <div class="price-container">
             <pricesnippet v-for="(component, index) in components" :component="component"
-            :key="component.name" :comparison="comparison[index]" :item="item"></pricesnippet>
+                          :key="component.name" :comparison="comparison[index]" :item="item"/>
           </div>
         </div>
-        <filters></filters>
+        <filters/>
       </header>
       <section class="container">
         <!-- placeholder -->
@@ -30,8 +30,6 @@ import sidebar from 'src/components/ui/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import subnav from 'src/components/items/subnav.vue'
 import pricesnippet from 'src/components/snippets/item-price.vue'
-import time from 'src/components/search/time.vue'
-import rank from 'src/components/search/rank.vue'
 import filters from 'src/components/items/filters.vue'
 
 
@@ -43,9 +41,9 @@ const mergeItemData = (item, data) => {
 
   // Item 'Set' should be first in list
   // > -1 -> set exists, > 0 -> not the first in array already
-  let index = merged.components.findIndex(c => c.name === 'Set')
+  const index = merged.components.findIndex(c => c.name === 'Set')
   if (index > 0) {
-    let set = merged.components.splice(index, 1)[0]
+    const set = merged.components.splice(index, 1)[0]
     merged.components.unshift(set)
   }
   return merged
@@ -84,10 +82,11 @@ export default {
   },
 
   computed: {
-    item() {
+    item () {
       return this.$store.state.items.item
     },
-    components() {
+
+    components () {
       const components = this.$store.state.items.item.components
       const modded = [].concat(components)
       const offset = components.length % 3
@@ -100,23 +99,23 @@ export default {
       }
       return modded
     },
-    comparison() {
+    comparison () {
       return this.$store.state.items.itemComparison.components
     }
   },
 
-  beforeMount() {
+  beforeMount () {
     // this.listen() // requires on-route change destructor
   },
 
-  asyncData({ store, route }) {
+  asyncData ({ store, route }) {
     store.dispatch('applyTimeQuery', route)
     store.commit('setItemRegions', route.query.region || [])
     return store.dispatch('fetchItemData', route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
 
   methods: {
-    async listen() {
+    async listen () {
       const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
       this.$cubic.subscribe(itemUrl)
       this.$cubic.on(itemUrl, data => {
@@ -137,21 +136,21 @@ export default {
       }
     },
     mutations: {
-      setItem(state, item) {
+      setItem (state, item) {
         state.item = Object.assign(state.item, item)
       },
-      setItemComparison(state, item) {
+      setItemComparison (state, item) {
         state.itemComparison = Object.assign(state.itemComparison, item)
       },
-      setItemOfferType(state, type) {
+      setItemOfferType (state, type) {
         state.selected.offerType = type.toLowerCase()
       },
-      setItemRegions(state, regions) {
+      setItemRegions (state, regions) {
         state.selected.regions = regions
       }
     },
     actions: {
-      async fetchItemData({ commit, rootState }, name) {
+      async fetchItemData ({ commit, rootState }, name) {
         const time = rootState.time
         const rank = rootState.rank
         const regions = rootState.items.selected.regions
@@ -184,11 +183,6 @@ export default {
 
         // Add region param if present
         if (regions.length) {
-          let query = `?region=${regions}`
-
-          if (focusUrl.includes('?')) {
-            query = query.replace('?', '&')
-          }
           focusUrl += focusUrl.includes('?') ? `&region=${regions}` : `?region=${regions}`
           compareUrl += `&region=${regions}`
         }
@@ -219,9 +213,6 @@ header {
   position: relative;
   overflow: hidden;
 
-  @media (max-width: $breakpoint-m) {
-    padding: 185px 0 0px;
-  }
   .price-container {
     display: flex;
     flex-wrap: wrap;

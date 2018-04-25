@@ -2,22 +2,22 @@
   <div class="sparkline">
     <svg :width="width" :height="height">
       <g>
-        <path class="line" :d="paths.line" />
-        <path class="selector" :d="paths.selector" />
-        <path class="pointer" :d="paths.pointer[0]"></path>
-        <path class="pointer" :d="paths.pointer[1]"></path>
-        <text v-for="(d, i) in animatedData" :x="getLabelPosition(d).x"
+        <path :d="paths.line" class="line" />
+        <path :d="paths.selector" class="selector" />
+        <path :d="paths.pointer[0]" class="pointer"/>
+        <path :d="paths.pointer[1]" class="pointer"/>
+        <text v-for="(d, i) in animatedData" :key="animatedData[i]" :x="getLabelPosition(d).x"
               :y="getLabelPosition(d).y"
               :class="{ 'align-left': d.alignLeft ? true : false }">
           {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}
         </text>
-        <text>{{animatedCeil}}</text>
+        <text>{{ animatedCeil }}</text>
       </g>
     </svg>
     <div class="blur">
       <svg id="blur">
         <g>
-          <path class="line" :d="paths.line" />
+          <path :d="paths.line" class="line" />
         </g>
       </svg>
     </div>
@@ -29,11 +29,10 @@
 <script>
 import * as d3 from 'd3'
 import Tween from './_tween.js'
-import _ from 'lodash'
 
 export default {
   props: ['data', 'margin', 'ceil'],
-  data() {
+  data () {
     return {
       width: 0,
       height: 0,
@@ -41,40 +40,40 @@ export default {
       max: 0,
       paths: {
         line: '',
-        pointer: [],
+        pointer: []
       },
       lastHoverPoint: {},
       scaled: {
         x: null,
-        y: null,
+        y: null
       },
       animatedData: [],
       animatedCeil: 0,
-      points: [],
+      points: []
     }
   },
-  mounted() {
-    window.addEventListener('resize', this.onResize)
-    this.onResize()
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onResize)
-  },
   watch: {
-    data(newData, oldData) {
+    data (newData, oldData) {
       Tween.adjustData(this, newData, oldData)
       if (newData.length !== oldData.length) {
         this.onResize()
       }
     },
-    ceil(newData, oldData) {
+    ceil (newData, oldData) {
       Tween.adjustCeil(this, newData, oldData, this.avg)
     }
+  },
+  mounted () {
+    window.addEventListener('resize', this.onResize)
+    this.onResize()
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
   },
   methods: {
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
-    onResize() {
+    onResize () {
       this.width = this.$el.offsetWidth
       this.height = this.$el.offsetHeight
       this.initialize()
@@ -87,7 +86,7 @@ export default {
     createMaxPointer: d3.area().x(d => d.x).y0(d => d.y - 20).y1(d => d.y),
 
     // Positioning for text labels
-    getLabelPosition(d) {
+    getLabelPosition (d) {
       return {
         x: this.scaled.x(d.x) + 5,
         y: this.scaled.y(d.y) + (d.isMin ? 20 : 0 || d.isMax ? -10 : 0)
@@ -95,18 +94,18 @@ export default {
     },
 
     // Set graph scaling
-    initialize(newData) {
+    initialize (newData) {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
       this.scaled.y = d3.scaleLinear().range([this.height - 40, 40])
     },
 
     // Update graph render view
-    update() {
+    update () {
       this.scaled.x.domain(d3.extent(this.data, (y, x) => x))
       this.scaled.y.domain([0, this.animatedCeil])
       this.points = []
 
-      for (let d of this.animatedData) {
+      for (const d of this.animatedData) {
         const x = this.scaled.x(d.x)
         const y = this.scaled.y(d.y)
 

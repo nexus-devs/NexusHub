@@ -1,7 +1,6 @@
 <template>
   <div>
-    <sidebar>
-    </sidebar>
+    <sidebar/>
     <app-content>
       <ui-header>
         <h1>Imprint</h1>

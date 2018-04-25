@@ -1,47 +1,64 @@
 {
   "name": "Nexus-Stats",
-  "version": "2.0.0",
+  "version": "0.0.0-development",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build": "node build/webpack.js",
-    "lint": "eslint --ignore-path .gitignore .",
-    "test": "mocha --exit -s 30000 --timeout 30000",
+    "build": "node build/webpack/run.js",
+    "lint": "eslint . --ext .js,.vue",
+    "test": "mocha --exit -s 30000 --timeout 30000 test/smoke/server.js test/smoke/main.js test/smoke/warframe.js",
     "scrape": "node build/warframe/index.js",
-    "changelogs": "node build/changelogs/index.js"
+    "publish": "semantic-release pre && semantic-release post",
+    "changelogs": "node build/changelogs/index.js",
+    "semantic-release": "semantic-release"
   },
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "chalk": "^2.3.2",
+    "chalk": "^2.4.0",
     "cheerio": "^1.0.0-rc.2",
-    "cubic": "^1.0.5",
-    "cubic-api": "^1.0.0",
-    "cubic-auth": "^1.0.1",
-    "cubic-core": "^1.0.2",
-    "cubic-ui": "^1.0.2",
-    "d3": "^5.0.0",
+    "cubic": "1.1.0",
+    "cubic-api": "1.0.10",
+    "cubic-auth": "1.0.3",
+    "cubic-core": "1.0.3",
+    "cubic-defaults": "^1.0.1",
+    "cubic-loader": "^1.1.1",
+    "cubic-ui": "^1.2.4",
+    "d3": "^5.1.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
-    "moment": "^2.22.0",
+    "moment": "^2.22.1",
     "tween.js": "^16.6.0",
     "vue-analytics": "^5.10.2"
   },
   "devDependencies": {
-    "cubic-client": "^1.0.1",
+    "babel-eslint": "^8.2.3",
+    "better-assert": "^1.0.2",
+    "cubic-client": "^1.0.4",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
+    "eslint-config-vue": "^2.0.2",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.5.0",
     "gitlog": "^3.1.2",
     "imagemin": "^5.3.1",
     "imagemin-pngquant": "^5.1.0",
-    "mocha": "^5.0.5",
+    "last-release-git": "0.0.3",
+    "mocha": "^5.1.1",
     "progress": "^2.0.0",
     "request-promise": "^4.2.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.1.7"
+  },
+  "release": {
+    "getLastRelease": "last-release-git"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nexus-devs/nexus-stats.git"
   }
 }

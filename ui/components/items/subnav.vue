@@ -6,9 +6,8 @@
       </div>
       <div class="item-info">
         <h1>{{ item.name }}</h1>
-        <span v-for="component in item.components"
-              :class="{ selected: components.find(c => c.name === component.name) }"
-              v-on:click="">
+        <span v-for="component in item.components" :key="component"
+              :class="{ selected: components.find(c => c.name === component.name) }">
           {{ component.name }}
         </span>
       </div>
@@ -18,7 +17,7 @@
     </div>
     <div class="time-container">
       <span>Comparing </span>
-      <timerange></timerange>
+      <timerange/>
       <span>to <span>previous period</span></span>
     </div>
   </nav>
@@ -35,10 +34,10 @@ export default {
   },
 
   computed: {
-    item() {
+    item () {
       return this.$store.state.items.item
     },
-    components() {
+    components () {
       const selected = this.$store.state.items.selected.components
       if (selected.length) {
         return selected
@@ -49,7 +48,7 @@ export default {
   },
 
   methods: {
-    selectTag(e) {
+    selectTag (e) {
       const tag = e.srcElement.outerText
 
       if (this.components.includes(tag)) {
@@ -79,7 +78,6 @@ nav {
   @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
 
   @media (max-width: $breakpoint-m) {
-    margin-top: 56px;
     padding: 10px 40px 10px 25px;
   }
 
