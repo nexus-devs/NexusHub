@@ -38,7 +38,7 @@ if (ci) {
 
 // Bundle webpack before starting cubic if we're in production
 if (prod) {
-  config.ui.webpack = { skipBuild: true }
+  config.ui.webpack.skipBuild = true
 }
 
 /**
