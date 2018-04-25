@@ -2,12 +2,12 @@
   <footer>
     <div class="container">
       <div class="row row-b">
-        <v-touch class="col-b" v-on:pan="move">
-            <img src="/img/footer/nexus-logo.svg" alt="Nexus-Stats" class="ico-h-28 logo"
-              v-bind:style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }">
-            <img src="/img/memes/goose.png" class="ico-48 goose">
+        <v-touch class="col-b" @pan="move">
+          <img :style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }" src="/img/footer/nexus-logo.svg" alt="Nexus-Stats"
+               class="ico-h-28 logo">
+          <img src="/img/memes/goose.png" class="ico-48 goose">
         </v-touch>
-        <div class="col-b"></div>
+        <div class="col-b"/>
         <div class="col-b">
           <h4>Project</h4>
           <router-link to="/open-source">Open Source</router-link>
@@ -39,25 +39,25 @@
 
 
 <script>
-  export default {
-    data() {
-      return {
-        position: [0, 0]
-      }
-    },
+export default {
+  data () {
+    return {
+      position: [0, 0]
+    }
+  },
 
-    methods: {
-      move(e) {
-        if (e.isFinal) {
-          return this.$store.dispatch('pushNotification', {
-            title: '( ͡° ͜ʖ ͡°)',
-            content: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
-          })
-        }
-        this.position = [e.deltaX, e.deltaY]
+  methods: {
+    move (e) {
+      if (e.isFinal) {
+        return this.$store.dispatch('pushNotification', {
+          title: '( ͡° ͜ʖ ͡°)',
+          body: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
+        })
       }
+      this.position = [e.deltaX, e.deltaY]
     }
   }
+}
 </script>
 
 

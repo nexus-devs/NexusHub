@@ -7,13 +7,13 @@ the sidebar. This also keeps our app.vue more clean.
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div class="app-content" :class="{ activeSidebar, visibleSidebar, deltaX }"
-             :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                    'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                    'transition-duration': deltaX ? '0s' : '0.45s'} : {}">
-            <slot>
-              <!-- page content goes here -->
-            </slot>
+        <div :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
+                                              'margin-right': `calc(${deltaX + 262}px + 5vw)`,
+                                              'transition-duration': deltaX ? '0s' : '0.45s'} : {}" :class="{ activeSidebar, visibleSidebar, deltaX }"
+             class="app-content">
+          <slot>
+            <!-- page content goes here -->
+          </slot>
         </div>
       </div>
     </transition>
@@ -25,36 +25,36 @@ the sidebar. This also keeps our app.vue more clean.
 <script>
 
 export default {
-  data() {
+  data () {
     return {
       breakpoint: false
     }
   },
 
-  mounted() {
-    // JS breakpoint to ensure correct content movement behaviour when sidebar
-    // is moved. (move content on $breakpoint-m, don't move it below)
-    window.addEventListener('resize', () => this.updateBreakpoint())
-    this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
-  },
-
   computed: {
-    activeSidebar() {
+    activeSidebar () {
       return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
     },
-    visibleSidebar() {
+    visibleSidebar () {
       return this.$store.state.sidebar ? !this.$store.state.sidebar.hidden : false
     },
     // Horizontal position for content when swiping out the sidebar
-    deltaX() {
+    deltaX () {
       return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
     }
   },
 
+  mounted () {
+    // JS breakpoint to ensure correct content movement behaviour when sidebar
+    // is moved. (move content on $breakpoint-m, don't move it below)
+    window.addEventListener('resize', () => this.updateBreakpoint())
+    this.breakpoint = document.documentElement.clientWidth > 1150
+  },
+
   methods: {
     // Check if we reached $breakpoint-m. If so, don't "squeeze" the app content on menu swipe
-    updateBreakpoint() {
-      this.breakpoint = document.documentElement.clientWidth > 1150 ? true : false
+    updateBreakpoint () {
+      this.breakpoint = document.documentElement.clientWidth > 1150
     }
   }
 }
@@ -87,11 +87,6 @@ export default {
   }
 }
 
-// Compensate for sidebar width so the page content would stay "centered"
-.visibleSidebar .container {
-  padding-left: 160px;
-}
-
 .zoom-enter-active, .fade-leave-active {
   @include ease(0.3s);
 }
@@ -102,6 +97,9 @@ export default {
 }
 
 @media (min-width: $breakpoint-m) {
+  .container {
+    padding-left: 160px;
+  }
   .app-content {
     @include ease-out(0.45s);
 

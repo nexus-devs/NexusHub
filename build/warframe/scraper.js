@@ -33,7 +33,7 @@ class Scraper {
         total: items.length,
         width: 40,
         complete: '█',
-        incomplete: ' '
+        incomplete: '.'
       })
 
       for (let i = 0; i < items.length; i++) {
@@ -276,7 +276,6 @@ class Scraper {
       const drop = {
         location: '',
         type: path[0].replace(/([a-z](?=[A-Z]))/g, '$1 '), // Regex transforms camelCase to normal words
-        rarity: location.drop.rarity,
         chance: location.drop.chance * 0.01
       }
       // Capitalize drop type

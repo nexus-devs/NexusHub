@@ -1,30 +1,30 @@
 <template>
   <div>
     <sidebar>
-      <sidebar-search></sidebar-search>
+      <sidebar-search/>
     </sidebar>
-      <app-content>
-        <header>
-          <div class="background">
-            <video playsinline autoplay muted loop>
-              <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
-            </video>
+    <app-content>
+      <header>
+        <div class="background">
+          <video playsinline autoplay muted loop>
+            <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
+          </video>
+        </div>
+        <div class="search-components container">
+          <h1>
+            <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
+            <span>Item Prices from the Trade Chat.</span>
+          </h1>
+          <div class="row">
+            <search/>
+            <timerange/>
+            <rank>
+              <search-button/>
+            </rank>
           </div>
-          <div class="search-components container">
-            <h1>
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
-              <span>Item Prices from the Trade Chat.</span>
-            </h1>
-            <div class="row">
-              <search></search>
-              <timerange></timerange>
-              <rank>
-                <search-button></search-button>
-              </rank>
-            </div>
-          </div>
-        </header>
-      </app-content>
+        </div>
+      </header>
+    </app-content>
   </div>
 </template>
 
@@ -94,9 +94,6 @@ header {
 
   .search-components {
     width: 100%;
-  }
-  @media (max-width: $breakpoint-m) {
-    padding-top: 40px;
   }
 
   /**
@@ -188,7 +185,7 @@ header {
  /deep/ .col-b .tools {
    position: absolute;
    border-radius: 2px;
-   background: rgba(27, 32, 37, 0.7);
+   background: rgba(27, 32, 37, 0.75);
    width: calc(33.33% - 2px);
    margin-top: -1px;
    margin-left: 1px;
@@ -203,10 +200,10 @@ header {
    .suggestion {
      padding: 15px;
      cursor: pointer;
-     @include ease-out(0.25s);
+     @include ease(0.1s);
 
      &:hover {
-       background: $color-bg-dark;
+       background: $color-bg-darker;
      }
      .ico-36 {
        position: relative;
@@ -306,6 +303,7 @@ header {
      text-align: center;
      opacity: 0;
      pointer-events: none;
+     background: $color-bg-dark;
      @include ease(0.15s);
 
      &.active {

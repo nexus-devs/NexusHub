@@ -1,0 +1,12 @@
+extends:
+  - plugin:vue/recommended
+  - vue
+globals:
+  cubic: true
+parserOptions:
+  parser: babel-eslint
+rules:
+  no-multiple-empty-lines: off
+  vue/max-attributes-per-line: off
+  vue/require-prop-types: off
+  brace-style: off

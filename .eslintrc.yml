@@ -1,4 +1,4 @@
-extends: "standard"
+extends: standard
 globals:
   cubic: true
   describe: true
@@ -7,4 +7,5 @@ globals:
   after: true
   requestAnimationFrame: true
 rules:
-  brace-style: 'off'
+  brace-style: off
+  valid-typeof: off

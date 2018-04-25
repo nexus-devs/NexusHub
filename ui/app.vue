@@ -1,12 +1,12 @@
 <template>
-  <div id='app'>
-    <navigation></navigation>
+  <div id="app">
+    <navigation/>
     <div class="app-view">
-      <router-view></router-view>
-      <bottom></bottom>
+      <router-view/>
+      <bottom/>
     </div>
-    <status></status>
-    <notification></notification>
+    <status/>
+    <notification/>
   </div>
 </template>
 
@@ -37,7 +37,7 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ]
   },
-  mounted() {
+  mounted () {
     Vue.use(VueAnalytics, {
       id: 'UA-81233976-2',
       checkDuplicatedScript: true,

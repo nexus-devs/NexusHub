@@ -1,10 +1,10 @@
 <template>
-  <div class="progress" :style="{
+  <div :style="{
     'width': percent+'%',
     'height': height,
     'background-color': canSuccess? color : failedColor,
     'opacity': show ? 1 : 0
-  }"></div>
+  }" class="progress"/>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
       duration: 1500,
       height: '0.125em',
       color: '#ffca2b',
-      failedColor: '#ff0000',
+      failedColor: '#ff0000'
     }
   },
 
@@ -41,7 +41,7 @@ export default {
       }, 100)
       return this
     },
-    throttle() {
+    throttle () {
       this._timer = setInterval(() => {
         this.increase(this._cut * Math.random() * 0.1)
         if (this.percent > 85) {

@@ -9,10 +9,28 @@ const moment = require('moment')
 class Request extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-
-    // Modify schema
     this.schema.method = 'POST'
     this.schema.scope = 'write_requests_warframe'
+    this.schema.url = '/warframe/v1/requests'
+    this.schema.request = {
+      body: {
+        user: '[DE]Glen',
+        offer: 'Buying',
+        item: 'Ammo Drum',
+        component: 'Set',
+        price: 900,
+        rank: 0,
+        count: 1,
+        index: 0,
+        message: 'Hello, I\'m Glen and I\'d like to buy Ammo Drum for 900p. I won\'t ban you, promise.',
+        createdAt: new Date()
+      }
+    }
+    this.schema.response = String
+    this.schema.pubsub = {
+      url: '/warframe/v1/items/ammo%20drum/statistics',
+      body: new Statistics().schema.response
+    }
   }
 
   /**

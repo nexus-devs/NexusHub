@@ -1,9 +1,10 @@
 const Endpoint = cubic.nodes.main.core.Endpoint
 
-class Foo extends Endpoint {
+class Index extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.url = '/'
+    this.schema.response = String
   }
 
   async main (req, res) {
@@ -11,4 +12,4 @@ class Foo extends Endpoint {
   }
 }
 
-module.exports = Foo
+module.exports = Index

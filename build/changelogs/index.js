@@ -7,7 +7,7 @@ const _ = require('lodash')
 
 class Logger {
   constructor () {
-    this.logs = require('../data/logs.json')
+    this.logs = require('./data/logs.json')
     this.types = ['feat', 'fix', 'perf']
   }
 

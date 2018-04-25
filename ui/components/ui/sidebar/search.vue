@@ -1,23 +1,23 @@
 <template>
   <wrapper>
     <div class="ico-a-ie">
-      <img src="/img/sidebar/search.svg" alt="" class='ico-20'>
+      <img src="/img/sidebar/search.svg" alt="" class="ico-20">
     </div>
     <tooltip>Search</tooltip>
     <panel>
       <div class="panel-head">
         <h3>Search</h3>
         <span class="shortcut">SHIFT + F</span>
-        <back></back>
+        <back/>
       </div>
       <div class="panel-body">
         <search>
           <div class="button-wrapper">
-            <searchbutton></searchbutton>
+            <searchbutton/>
           </div>
         </search>
-        <timerange></timerange>
-        <rank></rank>
+        <timerange/>
+        <rank/>
       </div>
     </panel>
   </wrapper>
@@ -39,7 +39,7 @@ import searchbutton from 'src/components/search/modules/button.vue'
 let shortcut
 try {
   shortcut = require('keyboardjs')
-} catch(err) {}
+} catch (err) {}
 
 
 export default {
@@ -53,12 +53,12 @@ export default {
     rank,
     searchbutton
   },
-  data() {
+  data () {
     return {
       id: this.$store.state.sidebar.id + 1 // required before wrapper which increments id
     }
   },
-  mounted() {
+  mounted () {
     shortcut.bind('shift + f', () => {
       if (!this.$store.state.sidebar.active) {
         this.$store.commit('toggleSidebar')

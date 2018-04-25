@@ -1,7 +1,6 @@
 <template>
   <div>
-    <sidebar>
-    </sidebar>
+    <sidebar/>
     <app-content>
       <ui-header>
         <h1>Open-Source</h1>
@@ -14,21 +13,21 @@
       </ui-header>
       <div class="container">
         <section>
-            <h2>Github</h2>
-            <p>
-              Explore our source code or report any bugs you find here. If you're
-              bored, we always welcome contributions!
-            </p>
-            <a href="http://github.com/nexus-devs/nexus-stats" target="_blank">www.github.com/nexus-devs/nexus-stats</a>
+          <h2>Github</h2>
+          <p>
+            Explore our source code or report any bugs you find here. If you're
+            bored, we always welcome contributions!
+          </p>
+          <a href="http://github.com/nexus-devs/nexus-stats" target="_blank">www.github.com/nexus-devs/nexus-stats</a>
         </section>
         <section>
-            <h2>Contributing</h2>
-            <p>
-              If there's anything about Nexus-Stats that you'd like to change,
-              you can actually just do it. To keep everything organized, please
-              see our <router-link to="/contribute">contribution guidelines</router-link>
-              first.
-            </p>
+          <h2>Contributing</h2>
+          <p>
+            If there's anything about Nexus-Stats that you'd like to change,
+            you can actually just do it. To keep everything organized, please
+            see our <router-link to="/contribute">contribution guidelines</router-link>
+            first.
+          </p>
         </section>
         <section>
           <h2>Responsible Disclosure</h2>

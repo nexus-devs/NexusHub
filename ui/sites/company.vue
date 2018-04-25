@@ -1,7 +1,6 @@
 <template>
   <div>
-    <sidebar>
-    </sidebar>
+    <sidebar/>
     <app-content>
       <div class="company">
         <video playsinline autoplay muted loop class="background">
@@ -10,7 +9,7 @@
         <div class="container">
           <div class="row">
             <div class="col-b">
-              <h1>Making Game Data more Transparent with Nexus-Stats</h1>
+              <h1>Making Game Data more transparent with Nexus-Stats.</h1>
               <p>
                 The best decisions in gaming are made on data. Whether it's about buying
                 that item we always wanted, or finding ways to improve our playstyle.
@@ -109,7 +108,7 @@ import sidebar from 'src/components/ui/sidebar.vue'
 export default {
   components: {
     'app-content': appContent,
-    sidebar,
+    sidebar
   }
 }
 </script>
@@ -175,7 +174,7 @@ svg {
 }
 h1 {
   font-weight: 600;
-  max-width: 500px;
+  max-width: 600px;
   line-height: 1.2;
   margin-top: 150px;
   margin-bottom: 15px;

@@ -20,7 +20,7 @@
 <script>
 export default {
   computed: {
-    game() {
+    game () {
       return this.$store.state.game.name
     }
   }

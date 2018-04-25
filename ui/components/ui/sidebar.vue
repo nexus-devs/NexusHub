@@ -1,19 +1,19 @@
 <template>
-  <v-touch tag="nav" ref="touch" v-on:pan="move" v-bind:class="{ active }">
-    <div class="nav-upper" v-on:click="toggle(true)">
+  <v-touch ref="touch" :class="{ active }" tag="nav" @pan="move">
+    <div class="nav-upper" @click="toggle(true)">
       <div class="ico-wrapper">
-        <div class="panel-backdrop" v-bind:style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }"></div>
+        <div :style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }" class="panel-backdrop"/>
         <div class="ico-a-ie">
-          <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class='ico-20'>
+          <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class="ico-20">
         </div>
         <tooltip>Tools</tooltip>
       </div>
     </div>
-    <div class="nav-lower" v-bind:class="{ dragged: deltaX || active, hidden }">
+    <div :class="{ dragged: deltaX || active, hidden }" class="nav-lower">
       <div class="nav-lower-backdrop">
-        <div class="nav-lower-backdrop-first-bg"></div>
+        <div class="nav-lower-backdrop-first-bg"/>
       </div>
-      <slot></slot>
+      <slot/>
     </div>
   </v-touch>
 </template>
@@ -25,7 +25,29 @@ import tooltip from './sidebar/modules/tooltip.vue'
 
 
 export default {
-  beforeCreate() {
+
+  components: {
+    tooltip
+  },
+
+  computed: {
+    active () {
+      return this.$store.state.sidebar.active
+    },
+    deltaX () {
+      return this.$store.state.sidebar.deltaX
+    },
+    transform () {
+      const open = this.$store.state.sidebar.active
+      const deltaX = this.deltaX
+      const pos = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
+      return pos
+    },
+    hidden () {
+      return this.$store.state.sidebar.hidden
+    }
+  },
+  beforeCreate () {
     // Reset counters for panel id's when loading a new page
     // These id's also act as mulitpliers for the `top: x px` distance of
     // expanded sections.
@@ -37,39 +59,11 @@ export default {
     this.$slots.default ? this.$store.commit('showSidebar') : this.$store.commit('hideSidebar')
   },
 
-  components: {
-    tooltip
-  },
-
-  computed: {
-    active() {
-      return this.$store.state.sidebar.active
-    },
-    deltaX() {
-      return this.$store.state.sidebar.deltaX
-    },
-    transform() {
-      const open = this.$store.state.sidebar.active
-      const deltaX = this.deltaX
-      const pos = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
-      return pos
-    },
-    hidden() {
-      return this.$store.state.sidebar.hidden
-    }
-  },
-
   methods: {
-    toggle(expanded) {
+    toggle (expanded) {
       this.$store.commit('toggleSidebar', expanded)
     },
-    move(e) {
-      // Ignore when 'dragging' inputs for text selection. Check for direct
-      // target access and first level children.
-      if (e.target.tagName === 'INPUT' || e.target.getElementsByTagName("input").length) {
-        return this.reset()
-      }
-
+    move (e) {
       // Reset on end
       if (e.isFinal) {
         return this.reset()
@@ -84,14 +78,14 @@ export default {
         }
       }
     },
-    reset() {
+    reset () {
       // close
       if (this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX < -75) {
         this.$store.commit('toggleSidebar')
       }
       // open
       else if (!this.$store.state.sidebar.active && this.$store.state.sidebar.deltaX > -225) {
-        this.$store.commit('toggleSidebar', true)
+        this.$store.commit('toggleSidebar')
       }
       this.$store.commit('setSidebarDeltaX', 0)
     }
@@ -101,40 +95,37 @@ export default {
     name: 'sidebar',
     state: {
       active: false,
-      expanded: false,
       hidden: true,
       id: 0,
       activeId: 0,
       deltaX: 0
     },
     mutations: {
-      toggleSidebar(state, expanded = false) {
+      toggleSidebar (state, expanded = false) {
         if (!state.hidden) {
-          state.expanded = expanded
           state.active = !state.active
           state.activeId = 0
         }
       },
-      hideSidebar(state) {
-        state.expanded = false
+      hideSidebar (state) {
         state.active = false
         state.hidden = true
       },
-      showSidebar(state) {
+      showSidebar (state) {
         state.hidden = false
       },
-      setActivePanel(state, id) {
+      setActivePanel (state, id) {
         state.activeId = id
       },
-      setSidebarDeltaX(state, pos) {
+      setSidebarDeltaX (state, pos) {
         if (!state.hidden) {
           state.deltaX = pos
         }
       },
-      incrementId(state) {
+      incrementId (state) {
         state.id++
       },
-      setId(state, num) {
+      setId (state, num) {
         state.id = num
       }
     }

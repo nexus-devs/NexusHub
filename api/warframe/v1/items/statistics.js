@@ -46,6 +46,33 @@ class Statistics extends Endpoint {
       interval: 5000,
       maxInInterval: 4
     }
+    this.schema.request = '/warframe/v1/items/nikana%20prime/statistics'
+    const offers = {
+      count: Number,
+      hasValue: Number,
+      percentage: Number
+    }
+    const price = {
+      avg: Number,
+      median: Number,
+      min: Number,
+      max: Number,
+      accuracy: Number,
+      offers
+    }
+    const prices = _.cloneDeep(price)
+    prices.intervals = [ _.cloneDeep(price) ]
+    this.schema.response = {
+      name: 'Nikana Prime',
+      supply: offers,
+      demand: offers,
+      components: [{
+        name: String,
+        buying: prices,
+        selling: prices,
+        combined: prices
+      }]
+    }
   }
 
   /**
@@ -225,7 +252,7 @@ class Statistics extends Endpoint {
         median: null,
         min: null,
         max: null,
-        priceAccuracy: 0,
+        accuracy: 0,
         mathVariance: {
           deviation: null,
           mean: null
@@ -421,7 +448,7 @@ class Statistics extends Endpoint {
    * Calculate price accuracy
    */
   calculatePriceAccuracy (interval) {
-    interval.priceAccuracy = 1 - (interval.mathVariance.deviation / interval.avg)
+    interval.accuracy = 1 - (interval.mathVariance.deviation / interval.avg)
   }
 
   /**

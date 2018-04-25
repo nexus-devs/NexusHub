@@ -1,17 +1,17 @@
 <template>
   <div class="col-b time">
-    <div class="field" v-bind:class="{ active }">
-      <label>Time</label><br />
-      <div class="input a-ie" v-on:click="toggle">
-        <span v-bind:class="{ selected: selected === 'start' }">{{ from }}</span> -
-        <span v-bind:class="{ selected: selected === 'end' }">{{ to }}</span>
+    <div :class="{ active }" class="field">
+      <label>Time</label><br >
+      <div class="input a-ie" @click="toggle">
+        <span :class="{ selected: selected === 'start' }">{{ from }}</span> -
+        <span :class="{ selected: selected === 'end' }">{{ to }}</span>
         <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
       </div>
-      <slot></slot>
+      <slot/>
     </div>
-    <div class="tools timepicker" v-bind:class="{ active }">
+    <div :class="{ active }" class="tools timepicker">
       <div class="suggestions row">
-        <div class="col a-ie" v-for="suggestion in suggestions" v-on:click="select(suggestion)">
+        <div v-for="suggestion in suggestions" :key="suggestion" class="col a-ie" @click="select(suggestion)">
           {{ suggestion.format }}
         </div>
       </div>
@@ -37,11 +37,8 @@ const getDate = (date) => date instanceof moment ? { time: date, format: date.ca
 
 
 export default {
-  created() {
-    this.$store.dispatch('applyTimeQuery', this.$route)
-  },
 
-  data() {
+  data () {
     return {
       active: false,
       selected: 'start',
@@ -59,22 +56,25 @@ export default {
   },
 
   computed: {
-    from() {
-      let date = this.$store.state.time.focus.start
+    from () {
+      const date = this.$store.state.time.focus.start
       return date.format || date.time.calendar(null, calendarOptions)
     },
-    to() {
-      let date = this.$store.state.time.focus.end
+    to () {
+      const date = this.$store.state.time.focus.end
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
+  created () {
+    this.$store.dispatch('applyTimeQuery', this.$route)
+  },
 
   methods: {
-    toggle() {
+    toggle () {
       this.selected = 'start'
       this.active = !this.active
     },
-    select(date) {
+    select (date) {
       const time = this.$store.state.time
 
       // Modify start of time range
@@ -131,7 +131,7 @@ export default {
     },
 
     // Ensure picked time range makes sense (switch dates if necessary)
-    validate() {
+    validate () {
       const focusStart = this.$store.state.time.focus.start
       const focusEnd = this.$store.state.time.focus.end
 
@@ -148,7 +148,7 @@ export default {
       modified: false,
       focus: {
         start: {
-          time: moment().endOf('day'),
+          time: moment().endOf('day')
         },
         end: {
           time: moment().subtract(7, 'days').startOf('day'),
@@ -167,7 +167,7 @@ export default {
     mutations: {
 
       // Focus time range. Automatically adjust to "previous period" when changing
-      setTimeFocusStart(state, date) {
+      setTimeFocusStart (state, date) {
         const focusStart = getDate(date)
         const focusEnd = moment(state.focus.end.time)
         const compareStart = moment(state.compare.start.time)
@@ -179,7 +179,7 @@ export default {
         state.focus.start = focusStart
         state.compare.end = getDate(compareEnd)
       },
-      setTimeFocusEnd(state,  date) {
+      setTimeFocusEnd (state, date) {
         const focusEnd = getDate(date)
         const focusStart = moment(state.focus.start.time)
         const compareStart = moment(focusEnd.time).subtract(1, 'days')
@@ -195,10 +195,10 @@ export default {
 
 
       // Comparison range setters. Just apply the explicit value.
-      setTimeCompareStart(state, date) {
+      setTimeCompareStart (state, date) {
         state.compare.start = getDate(date)
       },
-      setTimeCompareEnd(state, date) {
+      setTimeCompareEnd (state, date) {
         state.compare.end = getDate(date)
       },
 
@@ -206,13 +206,12 @@ export default {
       // Determine wether or not the default time range was changed. This is
       // important so we query the cached data (without query params) instead of
       // performing a custom time range query.
-      setTimeModified(state, bool) {
+      setTimeModified (state, bool) {
         state.modified = getDate(bool)
       }
     },
     actions: {
-      applyTimeQuery({ commit }, route) {
-
+      applyTimeQuery ({ commit }, route) {
         // Focus Range
         if (route.query.timestart) {
           commit('setTimeFocusStart', moment(new Date(parseInt(route.query.timestart))))
@@ -234,6 +233,6 @@ export default {
         }
       }
     }
-  },
+  }
 }
 </script>

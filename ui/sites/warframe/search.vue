@@ -1,17 +1,17 @@
 <template>
   <div class="search">
     <sidebar>
-      <sidebar-search></sidebar-search>
+      <sidebar-search/>
     </sidebar>
     <app-content>
       <div>
         <div class="search-input">
           <div class="container">
-            <search></search>
+            <search/>
             <div class="search-types">
-                <a class="active">All</a>
-                <a>Prime</a>
-                <a>Archwing</a>
+              <a class="active">All</a>
+              <a>Prime</a>
+              <a>Archwing</a>
             </div>
           </div>
         </div>
@@ -23,19 +23,18 @@
           <div class="filter">
             <h3>Sort By</h3>
             <div class="filter-tags">
-              <div class="tag" v-for="filter in filters" v-on:click="selectFilterTag(filter)"
-                  :class="{ active: filter.active, ascending: filter.ascending }">
-                <img :src="filter.icon" class="ico-12" :alt="filter.alt" v-if="filter.icon">
+              <div v-for="filter in filters" :key="filter" :class="{ active: filter.active, ascending: filter.ascending }" class="tag" @click="selectFilterTag(filter)">
+                <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                 <span>{{ filter.name }}</span>
-                <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" :class="{ ascending: filter.ascending }" alt="Ascending/Descending">
+                <img :class="{ ascending: filter.ascending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
               </div>
             </div>
             <div class="filter-view">
-              <div class="a-ie" :class="{ active: list === 'list' }" v-on:click="selectListView('list')">
+              <div :class="{ active: list === 'list' }" class="a-ie" @click="selectListView('list')">
                 <img src="/img/ui/list-view.svg" class="ico-20" alt="List">
                 <span>List</span>
               </div>
-              <div class="a-ie" :class="{ active: list === 'grid' }" v-on:click="selectListView('grid')">
+              <div :class="{ active: list === 'grid' }" class="a-ie" @click="selectListView('grid')">
                 <img src="/img/ui/card-view.svg" class="ico-20" alt="Grid">
                 <span>Grid</span>
               </div>
@@ -43,19 +42,19 @@
           </div>
 
           <!-- Content -->
-          <div class="results-container" :style="{ height: `${listHeight}px` }">
-            <div class="result-grid list" ref="grid" :class="{ active: list === 'grid' }">
-              <item-snippet v-for="result in results" key="name" :result="result"></item-snippet>
+          <div :style="{ height: `${listHeight}px` }" class="results-container">
+            <div ref="grid" :class="{ active: list === 'grid' }" class="result-grid list">
+              <item-snippet v-for="result in results" :key="result" :result="result"/>
             </div>
-            <div class="result-list list" ref="list" :class="{ active: list === 'list' }">
-              <router-link :to="result.webUrl" class="result row" v-for="result in results" key="name">
+            <div ref="list" :class="{ active: list === 'list' }" class="result-list list">
+              <router-link v-for="result in results" :key="result" :to="result.webUrl" class="result row">
                 <div class="result-title col-b">
                   <div class="result-img">
                     <img :src="result.imgUrl" :alt="result.name">
                   </div>
                   <span>{{ result.name }}</span>
                 </div>
-                <div class="result-data-value col" v-for="filter in filters" v-if="filter.category === result.category">
+                <div v-for="filter in filters" v-if="filter.category === result.category" :key="filter" class="result-data-value col">
                   <div v-if="result[filter.name]">
                     <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
                     <span>300p <!-- {{ resolve(filter)}} --></span>
@@ -87,26 +86,61 @@ import itemSnippet from 'src/components/snippets/item-result.vue'
 
 
 export default {
-  // Set active view (required for generating parent height)
-  mounted() {
-    this.selectListView()
-    window.addEventListener('resize', this.onResize)
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.onResize)
-  },
-  watch: {
-    $route() {
-      this.selectListView()
-    }
-  },
-
   components: {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,
     search,
     'item-snippet': itemSnippet
+  },
+
+  data () {
+    return {
+      listHeight: 0,
+      filters: [{
+        name: 'price',
+        category: 'items',
+        icon: '/img/warframe/items/platinum.svg',
+        alt: 'Platinum',
+        unit: 'p'
+      }, {
+        name: 'ducats',
+        category: 'items',
+        icon: '/img/warframe/items/ducats.svg',
+        alt: 'Ducats',
+        unit: ' Ducats'
+      }, {
+        name: 'supply',
+        category: 'items',
+        unit: ''
+      }, {
+        name: 'demand',
+        category: 'items',
+        unit: ''
+      }]
+    }
+  },
+
+  computed: {
+    list () {
+      return this.$store.state.serp.list
+    },
+    results () {
+      return this.$store.state.serp.results
+    }
+  },
+  watch: {
+    $route () {
+      this.selectListView()
+    }
+  },
+  // Set active view (required for generating parent height)
+  mounted () {
+    this.selectListView()
+    window.addEventListener('resize', this.onResize)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
   },
 
   storeModule: {
@@ -116,17 +150,17 @@ export default {
       results: []
     },
     mutations: {
-      setSerpResults(state, results) {
+      setSerpResults (state, results) {
         state.results = results
       },
-      setSerpListView(state, type) {
+      setSerpListView (state, type) {
         state.list = type
       }
     },
     actions: {
-      async fetchSerpResults({ commit, rootState }, input) {
+      async fetchSerpResults ({ commit, rootState }, input) {
         const items = await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.6`)
-        const players = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
+        // const players = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
         const results = []
 
         // Add each component to results
@@ -147,44 +181,8 @@ export default {
     }
   },
 
-  data() {
-    return {
-      listHeight: 0,
-      filters: [{
-        name: 'price',
-        category: 'items',
-        icon: '/img/warframe/items/platinum.svg',
-        alt: 'Platinum',
-        unit: 'p',
-      }, {
-        name: 'ducats',
-        category: 'items',
-        icon: '/img/warframe/items/ducats.svg',
-        alt: 'Ducats',
-        unit: ' Ducats'
-      }, {
-        name: 'supply',
-        category: 'items',
-        unit: ''
-      }, {
-        name: 'demand',
-        category: 'items',
-        unit: ''
-      }]
-    }
-  },
-
-  computed: {
-    list() {
-      return this.$store.state.serp.list
-    },
-    results() {
-      return this.$store.state.serp.results
-    }
-  },
-
   // Fetch data for search results
-  asyncData({ store, route: { query: { query } } }) {
+  asyncData ({ store, route: { query: { query }}}) {
     return store.dispatch('fetchSerpResults', query)
   },
 
@@ -193,7 +191,7 @@ export default {
     // is positioned absolutely to enable smooth transitions while staying at
     // the same place. The html tag height will be expanded without this when
     // the smaller list is selected.
-    onResize() {
+    onResize () {
       if (this.list === 'grid') {
         this.listHeight = this.$refs.grid.offsetHeight
       } else {
@@ -203,14 +201,14 @@ export default {
     },
 
     // Swap between list view types (grid/list)
-    selectListView(type) {
+    selectListView (type) {
       this.$store.commit('setSerpListView', type || this.list)
       this.onResize()
     },
 
     // Select filters and adjust sorting. First click -> activate, descending;
     // Second click -> activate, ascending; Third click -> deactivate
-    selectFilterTag(filter) {
+    selectFilterTag (filter) {
       const newFilters = [].concat(this.filters)
       const target = newFilters.find(t => t.name === filter.name)
 
@@ -219,7 +217,7 @@ export default {
         target.active = false
         target.ascending = false
       } else {
-        target.ascending = target.active ? true : false
+        target.ascending = !!target.active
         target.active = true
       }
 
@@ -227,11 +225,11 @@ export default {
       this.filters = newFilters
     },
 
-     // Helper function to access nested object keys
-     // Required for assigning data locations for filters
-    resolve(filter) {
-      let result = obj
-      let keys = filter.path.split('.')
+    // Helper function to access nested object keys
+    // Required for assigning data locations for filters
+    resolve (filter) {
+      let result = filter
+      const keys = filter.path.split('.')
 
       keys.forEach(key => {
         result = result[key]

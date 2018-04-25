@@ -1,10 +1,31 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 
-class Base extends Endpoint {
+class Item extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.description = 'Get item statistics between a specified time frame.'
     this.schema.url = '/warframe/v1/items/:item'
+    this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }
+    this.schema.response = {
+      name: 'Nikana Prime',
+      type: 'Prime',
+      description: String,
+      components: [{
+        name: String,
+        ducats: Number,
+        drop: [{
+          location: String,
+          type: {
+            _type: String,
+            _description: 'Type of the drop. (Relics, Enemies, Missions)'
+          },
+          chance: Number
+        }],
+        imgUrl: String
+      }],
+      imgUrl: '/img/warframe/items/nikana-prime.png',
+      webUrl: '/warframe/items/nikana-prime'
+    }
   }
 
   /**
@@ -21,9 +42,10 @@ class Base extends Endpoint {
         name: doc.name,
         type: doc.type,
         description: doc.description,
-        components: doc.components
+        components: doc.components,
+        imgUrl: doc.imgUrl,
+        webUrl: doc.webUrl
       }
-
       this.cache(result, 60)
       res.send(result)
     } else {
@@ -37,4 +59,4 @@ class Base extends Endpoint {
   }
 }
 
-module.exports = Base
+module.exports = Item

@@ -1,29 +1,43 @@
-workspace:
-  base: /drone
-  path: src/nexus-stats
-
 pipeline:
   build:
-    image: 127.0.0.1:5000/nexus-stats-dev
+    image: node
     commands:
       - npm install
-      - npm run build
-      - npm run changelogs
+  lint:
+    image: node
+    commands:
+      - npm run lint
+  test - development:
+    image: node
+    commands:
+      - npm test
+  test - production:
+    image: node
+    commands:
+      - npm test --production
   stage:
-    image: 127.0.0.1:5000/drone-staging
+    image: node
     commands:
-      - /bin/sh /stage.sh /drone/src/nexus-stats development staging
-    secrets:
-      - nexus-ci-user
-      - nexus-ci-pass
-  test:
-    image: 127.0.0.1:5000/drone-staging
+      - git merge -s recursive -X theirs staging
+    when:
+      branch: development
+  deploy:
+    image: node
     commands:
-      - /bin/sh /deploy.sh
-      - npm run test
-      - /bin/sh /undeploy.sh
-    volumes:
-      - //var/run/docker.sock:/var/run/docker.sock
+      - echo "We're not quite there yet 😉"
+    when:
+      branch: staging
+  release:
+    image: node
+    commands:
+      - git fetch --tags --quiet origin
+      - npm run publish
+    secrets: [ gh_token ]
+    when:
+      branch: master
 
-branches:
-  - development
+services:
+  mongodb:
+    image: mongo
+  redis:
+    image: redis

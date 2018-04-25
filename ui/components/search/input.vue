@@ -2,20 +2,20 @@
   <div class="col-b search">
     <div class="field">
       <label>Search</label><br>
-      <input type="text" placeholder="Try: Soma Prime, Maim..." :value="input.name || input" @input="search"
-       v-on:keydown.tab.prevent="complete" v-on:keyup.enter="query" ref="input">
+      <input ref="input" :value="input.name || input" type="text" placeholder="Try: Soma Prime, Maim..."
+             @input="search" @keydown.tab.prevent="complete" @keyup.enter="query">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autocomplete.type }}</span>
-      <slot></slot>
+      <slot/>
     </div>
     <div class="tools">
-      <div class="suggestion" v-for="suggestion in suggestions" v-on:click="complete(suggestion)">
+      <div v-for="suggestion in suggestions" :key="suggestion" class="suggestion" @click="complete(suggestion)">
         <div class="ico-36">
           <img :src="suggestion.imgUrl" :alt="suggestion.name">
           <img :src="suggestion.imgUrl" :alt="suggestion.name" class="backdrop">
         </div>
         <div class="suggestion-main">
-          <span class='suggestion-name'>{{ suggestion.name }}</span>
+          <span class="suggestion-name">{{ suggestion.name }}</span>
           <span class="suggestion-type">{{ suggestion.type }}</span>
         </div>
         <span class="suggestion-data">{{ suggestion.keyData }}</span>
@@ -31,11 +31,8 @@ import button from './modules/button.vue' // to get the search function
 
 
 export default {
-  mounted() {
-    this.$refs.input.focus()
-  },
 
-  data() {
+  data () {
     return {
       input: '',
       autocomplete: {
@@ -45,6 +42,9 @@ export default {
       suggestions: []
     }
   },
+  mounted () {
+    this.$refs.input.focus()
+  },
 
   storeModule: {
     name: 'search',
@@ -52,15 +52,14 @@ export default {
       input: ''
     },
     mutations: {
-      setSearchInput(state, input) {
+      setSearchInput (state, input) {
         state.input = input
       }
     }
   },
 
   methods: {
-    async search(event) {
-      let result = []
+    async search (event) {
       this.input = event.target.value
       this.$store.commit('setSearchInput', event.target.value)
       await this.fetchSuggestions()
@@ -73,7 +72,7 @@ export default {
         }
       }
     },
-    async fetchSuggestions() {
+    async fetchSuggestions () {
       let result = []
 
       // Only run if timeout isn't after search is done
@@ -81,7 +80,7 @@ export default {
         result = await this.$cubic.get(`/warframe/v1/search?query=${this.input}&limit=3`)
       }
       // Found suggestions and input still matches result (may not if user types too fast)
-      let regex = new RegExp(`^${this.input}`, 'i')
+      const regex = new RegExp(`^${this.input}`, 'i')
       if (result.length && result[0].name.replace(regex, this.input).startsWith(this.input)) {
         this.autocomplete = {
           name: result[0].name.replace(regex, this.input),
@@ -109,7 +108,7 @@ export default {
     /**
      * Change input to full suggestion with correct capitalization
      */
-    complete(suggestion = {}) {
+    complete (suggestion = {}) {
       // Take directly passed suggestion (when selecting from suggestion list)
       if (suggestion.name) {
         this.input = suggestion
@@ -119,7 +118,7 @@ export default {
       }
       // Take first suggestion in list
       else if (this.suggestions.length) {
-        let first = this.suggestions[0]
+        const first = this.suggestions[0]
         this.input = first
         this.autocomplete = first
         this.$store.commit('setSearchInput', first)
@@ -130,7 +129,7 @@ export default {
     /**
      * Visit link set by user input
      */
-    query() {
+    query () {
       this.complete()
       button.methods.search.bind(this)()
     }

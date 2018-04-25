@@ -1,22 +1,20 @@
 <template>
   <div>
     <!-- Dummy for flexbox. We might add ads here -->
-    <div v-if="component.isDummy" class="dummy">
-
-    </div>
+    <div v-if="component.isDummy" class="dummy"/>
 
     <!-- Actual price field -->
     <div v-else class="row item-price-snippet">
 
       <!-- left panel -->
       <div class="col">
-        <div class="background" :class="{ set: component.name === 'Set' }">
-          <div class="background-overlay"></div>
+        <div :class="{ set: component.name === 'Set' }" class="background">
+          <div class="background-overlay"/>
           <img :src="component.imgUrl" :alt="`${item.name} ${component.name}`">
         </div>
 
         <!-- Content -->
-        <div class="content" :class="{ increase, decrease }">
+        <div :class="{ increase, decrease }" class="content">
           <h3>{{ component.name === 'Set' ? item.name : component.name }}</h3>
 
           <!-- Actual data -->
@@ -34,8 +32,8 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="chartData(component)" :ceil="chartCeil(component)"></sparkline>
-        <sparkline :data="chartData(comparison)" :ceil="chartCeil(component)" class="sparkline-comparison"></sparkline>
+        <sparkline :data="chartData(component)" :ceil="chartCeil(component)"/>
+        <sparkline :data="chartData(comparison)" :ceil="chartCeil(component)" class="sparkline-comparison"/>
       </div>
     </div>
   </div>
@@ -47,36 +45,36 @@
 import sparkline from 'src/components/charts/sparkline.vue'
 
 export default {
-  props: ['component', 'comparison', 'item'],
   components: {
     sparkline
   },
+  props: ['component', 'comparison', 'item'],
   computed: {
-    diff() {
+    diff () {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
       const percentage = ((component[offerType].median - comparison[offerType].median) / comparison[offerType].median * 100).toFixed(2)
       return { percentage: percentage > 0 ? `+${percentage}%` : `${percentage}%` }
     },
-    increase() {
+    increase () {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
       return component[offerType].median > comparison[offerType].median
     },
-    decrease() {
+    decrease () {
       const comparison = this.comparison
       const component = this.component
       const offerType = this.offerType
       return component[offerType].median < comparison[offerType].median
     },
-    offerType() {
+    offerType () {
       return this.$store.state.items ? this.$store.state.items.selected.offerType : 'combined'
     }
   },
   methods: {
-    chartData(component) {
+    chartData (component) {
       const offerType = this.offerType
       const data = []
 
@@ -85,7 +83,7 @@ export default {
       })
       return data
     },
-    chartCeil(component) {
+    chartCeil (component) {
       const offerType = this.offerType
       let max = Number.NEGATIVE_INFINITY
       let min = Number.POSITIVE_INFINITY

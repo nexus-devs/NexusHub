@@ -34,8 +34,20 @@ class Search extends Endpoint {
       name: 'category',
       default: '',
       description: 'Category to query results in.'
-    }
-    ]
+    }]
+    this.schema.request = { url: '/warframe/v1/search?query=nik' }
+    this.schema.response = [{
+      category: String,
+      name: String,
+      type: String,
+      description: String,
+      apiUrl: {
+        _type: String,
+        _description: 'It is recommended to get more detailed data from this link.'
+      },
+      webUrl: String,
+      imgUrl: String
+    }]
   }
 
   /**
@@ -133,6 +145,8 @@ class Search extends Endpoint {
 
     // Get median value from set and append image url
     items.forEach(item => {
+      delete item._id
+      delete item.components
       result.push(Object.assign({
         category: 'items'
       }, item))
@@ -148,6 +162,7 @@ class Search extends Endpoint {
     let players = await this.find('players', query, limit)
 
     players.forEach(player => {
+      delete player._id
       result.push(Object.assign({
         category: 'players'
       }, player))
