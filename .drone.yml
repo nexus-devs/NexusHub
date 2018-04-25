@@ -1,4 +1,6 @@
 pipeline:
+
+  # All
   build:
     image: node
     commands:
@@ -7,32 +9,46 @@ pipeline:
     image: node
     commands:
       - npm run lint
+
+  # Development
   test - development:
     image: node
     commands:
       - npm test
+    when:
+      branch: development
+  stage:
+    image: node
+    commands:
+      - git fetch --all
+      - git checkout staging
+      - git merge -s recursive -X theirs origin/development
+      - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
+    secrets: [ nexus_ci_token ]
+    when:
+      branch: development
+
+  # Staging
   test - production:
     image: node
     commands:
       - npm run build
       - npm test --production
-  stage:
-    image: node
-    commands:
-      - git merge -s recursive -X theirs staging
     when:
-      branch: development
+      branch: staging
   deploy:
     image: node
     commands:
       - echo "We're not quite there yet 😉"
     when:
       branch: staging
+
+  # Final release to production
   release:
     image: node
     commands:
       - git fetch --tags --quiet origin
-      - npm run publish
+      - npm run release
     secrets: [ gh_token ]
     when:
       branch: master
