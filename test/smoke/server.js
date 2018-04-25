@@ -5,7 +5,6 @@ const Core = require('cubic-core')
 const Ui = require('cubic-ui')
 const request = require('request-promise')
 const Client = require('cubic-client')
-const webpack = require(`${process.cwd()}/build/webpack/index.js`)
 
 // Config
 const wfhooks = require(`${process.cwd()}/config/cubic/hooks/warframe.js`)
@@ -61,10 +60,6 @@ async function getIndex () {
  * Load up cubic api to connect to and auth node to authenticate at.
  */
 before(async function () {
-  if (prod) {
-    await webpack(true)
-  }
-
   const cubic = new Cubic(config.cubic)
   await cubic.use(new Auth(config.auth))
   await cubic.use(new Ui(config.ui))

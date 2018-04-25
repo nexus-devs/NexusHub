@@ -3,6 +3,7 @@ pipeline:
     image: node
     commands:
       - npm install
+      - npm run build
   lint:
     image: node
     commands:

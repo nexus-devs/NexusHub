@@ -4,14 +4,14 @@ const rm = require('rimraf')
 const ci = process.env.DRONE
 
 // Call webpack build function
-async function build (test) {
+async function build () {
   // Only keep one build at a time. This way files are always there for
   // production builds and test units.
-  if (!test) console.log('* Removing old builds...')
+  console.log('* Removing old builds...')
   rm.sync(`${__dirname}/../assets/bundles/*`)
 
   // Trigger webpack build
-  if (!test) console.log('* Starting webpack build process. This might take a while...')
+  console.log('* Starting webpack build process. This might take a while...')
   const timer = new Date()
 
   // Load up Cubic to generate routes config file
@@ -52,15 +52,11 @@ async function build (test) {
       if (err || stats.hasErrors()) {
         return reject(err || stats.toJson().errors)
       }
-      if (!test) console.log(`> Webpack build successful (${new Date() - timer}ms)`)
+      console.log(`> Webpack build successful (${new Date() - timer}ms)`)
       resolve()
     })
   })
-  if (!test) process.exit()
-
-  // Reset cubic global
-  cubic.nodes.ui.api.server.http.server.close()
-  delete global.cubic
+  process.exit()
 }
 
-module.exports = build
+build()
