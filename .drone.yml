@@ -24,6 +24,7 @@ pipeline:
       - git checkout staging
       - git merge -s recursive -X theirs origin/development
       - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
+        # ^ suppress output to /dev/null to keep secrets hidden
     secrets: [ nexus_ci_token ]
     when:
       branch: development
