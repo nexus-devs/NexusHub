@@ -15,6 +15,7 @@
 <script>
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
+import VueTouch from 'vue-touch-hotfix'
 import notification from 'src/components/ui/notification.vue'
 import navigation from 'src/components/ui/nav.vue'
 import status from 'src/components/ui/status.vue'
@@ -36,6 +37,9 @@ export default {
       { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ]
+  },
+  beforeCreate () {
+    Vue.use(VueTouch)
   },
   mounted () {
     Vue.use(VueAnalytics, {

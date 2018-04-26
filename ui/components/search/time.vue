@@ -11,7 +11,7 @@
     </div>
     <div :class="{ active }" class="tools timepicker">
       <div class="suggestions row">
-        <div v-for="suggestion in suggestions" :key="suggestion" class="col a-ie" @click="select(suggestion)">
+        <div v-for="suggestion in suggestions" :key="suggestion.format" class="col a-ie" @click="select(suggestion)">
           {{ suggestion.format }}
         </div>
       </div>
