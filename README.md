@@ -3,9 +3,11 @@
 ##
 
  [![GitHub release](https://img.shields.io/github/release/nexus-devs/nexus-stats.svg)]()
- [![Discord](https://img.shields.io/discord/195582152849620992.svg?logo=discord)](https://discord.gg/AG8RPZ8)
  [![build](https://ci.nexus-stats.com/api/badges/nexus-devs/nexus-stats/status.svg)](https://ci.nexus-stats.com/nexus-devs/nexus-stats)
  [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+ [![Discord](https://img.shields.io/discord/195582152849620992.svg?logo=discord)](https://discord.gg/AG8RPZ8)
+ 
+ <br>
 
 Nexus-Stats is an online service which provides insights on game economics and other ingame data with the use of cutting edge technology. This repo contains the application logic for our servers, including all statistics calculations. For data-tracking via OCR, please see [nexus-sentry](https://github.com/nexus-devs/nexus-sentry).
 
