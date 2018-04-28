@@ -16,7 +16,7 @@ pipeline:
     commands:
       - npm test
     when:
-      branch: development
+      branch: [development, greenkeeper/*]
   stage:
     image: node
     commands:
@@ -42,7 +42,7 @@ pipeline:
     commands:
       - echo "We're not quite there yet 😉"
     when:
-      branch: staging
+      branch: [staging, greenkeeper/*]
 
   # Final release to production
   release:
