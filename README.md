@@ -2,8 +2,6 @@
 
 ##
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/nexus-devs/nexus-stats.svg)](https://greenkeeper.io/)
-
  [![GitHub release](https://img.shields.io/github/release/nexus-devs/nexus-stats.svg)]()
  [![build](https://ci.nexus-stats.com/api/badges/nexus-devs/nexus-stats/status.svg)](https://ci.nexus-stats.com/nexus-devs/nexus-stats)
  [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
