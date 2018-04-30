@@ -6,7 +6,7 @@
       </div>
       <div class="item-info">
         <h1>{{ item.name }}</h1>
-        <span v-for="component in item.components" :key="component"
+        <span v-for="component in item.components" :key="component.name"
               :class="{ selected: components.find(c => c.name === component.name) }">
           {{ component.name }}
         </span>
@@ -39,6 +39,7 @@ export default {
     },
     components () {
       const selected = this.$store.state.items.selected.components
+
       if (selected.length) {
         return selected
       } else {
@@ -107,6 +108,7 @@ nav {
       h1 {
         font-size: 1em;
         font-weight: 400;
+        font-family: 'Roboto', sans-serif;
       }
       span {
         display: inline-block;
@@ -199,7 +201,7 @@ nav {
           min-width: 90px;
 
           &:hover {
-            background: $color-bg-light;
+            background: $color-bg-lighter;
           }
           &:not(:last-of-type) {
             margin-right: 5px;

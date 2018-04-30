@@ -5,6 +5,10 @@
   transition-timing-function: ease;
   transition-duration: $timing;
 }
+@mixin ease-wubble($timing) {
+  transition-timing-function: cubic-bezier(0.17, 0.88, 0.32, 1.27);
+  transition-duration: $timing;
+}
 @mixin ease-out($timing) {
   transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
   transition-duration: $timing;

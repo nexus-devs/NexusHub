@@ -9,8 +9,8 @@ the sidebar. This also keeps our app.vue more clean.
       <div>
         <div :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
                                               'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                                              'transition-duration': deltaX ? '0s' : '0.45s'} : {}" :class="{ activeSidebar, visibleSidebar, deltaX }"
-             class="app-content">
+                                              'transition-duration': deltaX ? '0s' : '0.45s'} : {}"
+             :class="{ activeSidebar, visibleSidebar, deltaX }" class="app-content">
           <slot>
             <!-- page content goes here -->
           </slot>
@@ -97,9 +97,6 @@ export default {
 }
 
 @media (min-width: $breakpoint-m) {
-  .container {
-    padding-left: 160px;
-  }
   .app-content {
     @include ease-out(0.45s);
 

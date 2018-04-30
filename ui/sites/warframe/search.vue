@@ -47,14 +47,14 @@
               <item-snippet v-for="result in results" :key="result" :result="result"/>
             </div>
             <div ref="list" :class="{ active: list === 'list' }" class="result-list list">
-              <router-link v-for="result in results" :key="result" :to="result.webUrl" class="result row">
+              <router-link v-for="result in results" :key="result.name" :to="result.webUrl" class="result row">
                 <div class="result-title col-b">
                   <div class="result-img">
                     <img :src="result.imgUrl" :alt="result.name">
                   </div>
                   <span>{{ result.name }}</span>
                 </div>
-                <div v-for="filter in filters" v-if="filter.category === result.category" :key="filter" class="result-data-value col">
+                <div v-for="filter in filters" v-if="filter.category === result.category" :key="filter.name" class="result-data-value col">
                   <div v-if="result[filter.name]">
                     <img src="/img/warframe/items/platinum.svg" alt="Platinum" class="ico-12">
                     <span>300p <!-- {{ resolve(filter)}} --></span>
@@ -79,7 +79,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import search from 'src/components/search/input.vue'
 import itemSnippet from 'src/components/snippets/item-result.vue'
@@ -252,7 +252,6 @@ export default {
   @include shadow-1;
 
   @media (max-width: $breakpoint-m) {
-    margin-top: 56px;
     border-top: none;
   }
 
@@ -408,7 +407,7 @@ export default {
           border-radius: 2px;
         }
         &:hover {
-          background: $color-bg-light;
+          background: $color-bg-lighter;
           border: 1px solid transparent;
         }
         span {
@@ -427,7 +426,7 @@ export default {
         }
         &.active {
           border: 1px solid transparent;
-          background: $color-bg-light;
+          background: $color-bg-lighter;
 
           .asc-desc {
             opacity: 1;
@@ -498,9 +497,11 @@ export default {
       border-radius: 0px;
       padding: 10px 20px;
       margin-bottom: 8px;
+      background: $color-bg;
+      @include ease(0.1s);
 
       &:hover {
-        @include gradient-background-dg($color-bg-light, $color-bg);
+        background: $color-bg-light;
         opacity: 1 !important;
       }
       &:active {

@@ -11,13 +11,17 @@
   box-shadow: 0 3px 6px rgba(0,0,0,0.04), 0 3px 6px rgba(0,0,0,0.14);
 }
 @mixin shadow-3() {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.20), 0 6px 6px rgba(0,0,0,0.20);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.20), 0 6px 12px rgba(0,0,0,0.20);
 }
 @mixin shadow-4() {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.12);
 }
 @mixin shadow-5() {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+// Softer shadows, more like shades
+@mixin shade-1() {
+  box-shadow: 0 12px 16px rgba(0,0,0,0.04), 0 5px 7px rgba(0,0,0,0.16);
 }
 // Inset
 @mixin shadow-1-inset() {

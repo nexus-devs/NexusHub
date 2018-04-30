@@ -6,7 +6,7 @@
     <tooltip>Search</tooltip>
     <panel>
       <div class="panel-head">
-        <h3>Search</h3>
+        <span>Search</span>
         <span class="shortcut">SHIFT + F</span>
         <back/>
       </div>
@@ -36,7 +36,7 @@ import rank from 'src/components/search/rank.vue'
 import searchbutton from 'src/components/search/modules/button.vue'
 
 // Client-side-only requirements
-let shortcut
+let shortcut, listener
 try {
   shortcut = require('keyboardjs')
 } catch (err) {}
@@ -59,16 +59,38 @@ export default {
     }
   },
   mounted () {
-    shortcut.bind('shift + f', () => {
+    listener = shortcut.bind('shift + f', () => {
+      // Open sidebar if not already open
       if (!this.$store.state.sidebar.active) {
+        this.$store.commit('showSidebar')
         this.$store.commit('toggleSidebar')
+
+        // Get ready to type right away
+        this.$el.querySelector('input').focus()
+
+        // Reset shortcut entering value into input field
+        setTimeout(() => {
+          this.$el.querySelector('input').value = ''
+        }, 50)
       }
-      if (this.id === this.$store.state.sidebar.activeId) {
+
+      // Hide sidebar if panel is already open
+      else if (this.id === this.$store.state.sidebar.activeId) {
         this.$store.commit('toggleSidebar')
+        this.$el.querySelector('input').blur()
+
+        // Sidebar not visible by default
+        if (!this.$store.state.sidebar.keepVisible) {
+          this.$store.commit('hideSidebar')
+        }
       }
       this.$store.commit('setActivePanel', this.id)
-      this.$children[0].$children[1].$children[1].$children[0].$refs.input.focus()
     })
+  },
+  // Prevent multiple registrations when loading pages with the same sidebar
+  // module.
+  beforeDestroy () {
+    shortcut.unbind('shift + f', listener)
   }
 }
 </script>
@@ -158,7 +180,7 @@ export default {
       position: relative;
       overflow: hidden;
       text-align: center;
-      background: $color-bg-light;
+      background: $color-bg-lighter;
       border-radius: 2px;
       margin-right: 10px;
 
@@ -251,7 +273,7 @@ export default {
           border-radius: 2px;
         }
         &:hover {
-          background: $color-bg-light;
+          background: $color-bg-lighter;
         }
       }
     }

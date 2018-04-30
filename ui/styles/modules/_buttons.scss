@@ -1,24 +1,28 @@
 .btn, button {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   color: white;
   border-radius: 2px !important;
-  @include ie(32);
   @include gradient-background-dg($color-primary, $color-accent);
+  @include ease-wubble(0.25s);
+  @include shadow-1;
+  cursor: pointer;
   padding: 6px 18px !important;
   font-weight: 400;
-  flex: 0;
 
-  &::before {
-    border-radius: 2px;
-  }
   &::-moz-focus-inner {
     border: 0;
   }
-  &:focus {
-    outline: none;
-  }
   &:hover {
-    @include gradient-background-dg($color-primary, $color-accent);
+    transform: translateY(-2px);
+    @include shade-1;
+  }
+  &:active {
+    transform: scale(0.98) translateY(-2px);
+  }
+  &:disabled {
+    &:hover {
+      transform: none;
+    }
   }
 }
 

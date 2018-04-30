@@ -1,6 +1,8 @@
 <template>
   <div>
-    <sidebar/>
+    <sidebar>
+      <sidebar-search/>
+    </sidebar>
     <app-content>
       <div class="company">
         <video playsinline autoplay muted loop class="background">
@@ -103,12 +105,14 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     'app-content': appContent,
-    sidebar
+    sidebar,
+    'sidebar-search': sidebarSearch
   }
 }
 </script>
@@ -123,7 +127,7 @@ export default {
   overflow: hidden;
   padding-top: 40px;
   padding-bottom: 200px;
-  @include gradient-background-dg($color-primary-dark, $color-accent-dark);
+  @include gradient-background-dg($color-primary, $color-accent);
 
   @media (max-width: $breakpoint-m) {
     padding-top: 0px;

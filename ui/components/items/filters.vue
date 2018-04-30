@@ -4,34 +4,34 @@
       <div class="row">
         <div class="col-b row">
           <div :class="{ inactive: types[0].inactive }" class="col inline-data" @click="select('types', types[0])">
-            <h2>Selling</h2>
+            <label>Selling</label>
             <span class="data">{{ supply.count }}</span>
             <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
           </div>
           <div :class="{ inactive: types[1].inactive }" class="col inline-data" @click="select('types', types[1])">
-            <h2>Buying</h2>
+            <label>Buying</label>
             <span class="data">{{ demand.count }}</span>
             <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
           </div>
           <div class="col"><!-- Dummy --></div>
         </div>
         <div class="col-b">
-          <h2>Region</h2>
-          <button v-for="d in regions" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+          <label>Region</label>
+          <button v-for="d in regions" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
                   type="button" @click="select('regions', d)">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
-          <h2>Platform</h2>
-          <button v-for="d in platforms" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+          <label>Platform</label>
+          <button v-for="d in platforms" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
                   type="button" @click="select('platforms', d)">
             <span>{{ d.name }}</span>
           </button>
         </div>
         <div class="col-b">
-          <h2>Data Source</h2>
-          <button v-for="d in sources" :key="d" :disabled="d.disabled" :class="{ inactive: d.inactive }"
+          <label>Data Source</label>
+          <button v-for="d in sources" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
                   type="button" @click="select('sources', d)">
             <span>{{ d.name }}</span>
           </button>
@@ -245,9 +245,11 @@ export default {
       border: none;
     }
   }
-  h2 {
+  label {
+    display: block;
     font-size: 0.9em;
     font-weight: 400;
+    color: white;
     margin-bottom: 5px;
   }
   .inline-data {
@@ -284,7 +286,7 @@ export default {
     margin-top: 5px;
     margin-right: 5px;
     font-size: 0.85em;
-    background: $color-bg-light;
+    background: $color-bg-lighter;
     @include shadow-0;
 
     &:disabled {

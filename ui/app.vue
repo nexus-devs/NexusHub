@@ -68,10 +68,7 @@ export default {
   }
   a {
     color: white;
-    @include ease(0.3s);
-    &:hover {
-      opacity: 0.8;
-    }
+    @include ease(0.2s);
   }
   h1,
   h2,

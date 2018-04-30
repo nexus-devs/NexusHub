@@ -5,11 +5,7 @@
     </sidebar>
     <app-content>
       <header>
-        <div class="background">
-          <video playsinline autoplay muted loop>
-            <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
-          </video>
-        </div>
+        <div class="background"/>
         <div class="search-components container">
           <h1>
             <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
@@ -32,7 +28,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import search from 'src/components/search/input.vue'
 import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
@@ -61,22 +57,23 @@ export default {
 header {
   position: relative;
   display: flex;
-  height: 45vh;
+  height: 50vh;
   min-height: 500px;
   width: 100%;
   align-items: center;
-  @include gradient-background-dg(#596570, $color-bg-light);
+  @include gradient-background-dg($color-bg-light, $color-bg-lighter);
 
   .background {
     position: absolute;
     overflow: hidden;
-    top: 25%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-25%);
+    background: url('/img/warframe/index-blob.svg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
   }
   video {
     position:absolute;
@@ -92,14 +89,12 @@ header {
     transform: translateX(-50%) translateY(-25%);
   }
 
-  .search-components {
-    width: 100%;
-  }
-
   /**
    * Search bar
    */
  .search-components {
+   width: 100%;
+
    h1 {
      font-size: 1.4em;
      transform: translateY(50px);
@@ -134,13 +129,14 @@ header {
    border-radius: 2px;
    padding: 15px;
    margin: 1px;
+   @include shadow-1;
 
    .input-container, .button-container {
      display: inline-block;
      vertical-align: middle;
    }
    .button-container {
-     margin-top: 5px;
+     margin-top: 7px;
      margin-left: 10px;
      float:right;
    }
@@ -209,7 +205,7 @@ header {
        position: relative;
        overflow: hidden;
        text-align: center;
-       background: $color-bg-light;
+       background: $color-bg-lighter;
        border-radius: 2px;
        margin-right: 10px;
 
@@ -281,7 +277,7 @@ header {
          padding: 10px;
 
          &:hover {
-           background: $color-bg-light;
+           background: $color-bg-lighter;
          }
          &:not(:last-of-type) {
            margin-right: 5px;
@@ -296,7 +292,7 @@ header {
    // Rank selection
    &.ranks {
      top: 50%;
-     transform: scale(0.8) translateY(-50%);
+     transform: scale(0.9) translateY(-50%);
      transform-origin: 50% 20%;
      max-width: 150px;
      color: white;
@@ -305,6 +301,7 @@ header {
      pointer-events: none;
      background: $color-bg-dark;
      @include ease(0.15s);
+     @include shadow-1;
 
      &.active {
        opacity: 1;
@@ -376,6 +373,17 @@ header {
   }
   to {
     transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scale3d(1.15,1.15,1.15);
+  }
+  100% {
+    transform: scaleX(1);
   }
 }
 </style>

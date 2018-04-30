@@ -130,7 +130,7 @@ export default {
     width: 115px;
 
     &:first-of-type {
-      @include gradient-background-dg($color-bg-light, $color-bg);
+      @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
       .background {
         position: absolute;
@@ -160,7 +160,7 @@ export default {
           height: 100%;
           width: 100%;
           z-index: 1;
-          @include gradient-background(rgba(15, 20, 25, 0.1), $color-bg-light);
+          @include gradient-background(rgba(15, 20, 25, 0.1), $color-bg-lighter);
         }
       }
       .content {
@@ -170,6 +170,9 @@ export default {
 
         h3 {
           font-weight: 400;
+          font-family: 'Roboto', sans-serif;
+          font-size: 0.95em;
+          letter-spacing: 0;
           text-transform: uppercase;
         }
         .content-data {

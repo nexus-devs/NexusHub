@@ -52,6 +52,7 @@ export default {
   border-radius: 2px;
   background: #292e38;
   @include field;
+  background: $color-bg;
   position: relative;
   overflow: hidden;
   height: 140px;
@@ -77,7 +78,7 @@ export default {
   }
   &:hover {
     opacity: 1 !important; // <a> override
-    @include gradient-background-dg($color-bg-light, $color-bg);
+    @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
     .result-info, .result-bg-img {
       filter: blur(4px);
