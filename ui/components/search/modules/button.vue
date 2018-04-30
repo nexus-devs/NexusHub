@@ -3,7 +3,7 @@
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
-    <button class="btn-outline" type="button">
+    <button type="button">
       Search
     </button>
   </a>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <sidebar/>
+    <sidebar>
+      <sidebar-search/>
+    </sidebar>
     <app-content>
       <ui-header>
         <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
@@ -139,13 +141,15 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
+    'sidebar-search': sidebarSearch,
     'ui-header': uiheader
   }
 }
@@ -171,6 +175,8 @@ header {
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
     font-weight: 100;
   }
 }
@@ -223,7 +229,7 @@ header {
     overflow: hidden;
     color: white;
     border-radius: 2px;
-    @include shadow-1;
+    @include shade-1;
 
     .primary-shade {
       display: flex;
@@ -247,7 +253,7 @@ header {
       background: $color-accent-dark;
     }
     .grey {
-      background: $color-bg-light;
+      background: $color-bg-lighter;
     }
     .grey-shade {
       background: $color-bg;

@@ -67,7 +67,7 @@ export default {
 
   footer {
     margin-top: auto;
-    padding: 0 0 20px;
+    padding: 10px 0 20px;
     background: $color-bg-darkest;
 
     .row {

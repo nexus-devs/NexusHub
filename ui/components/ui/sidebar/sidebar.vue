@@ -1,6 +1,6 @@
 <template>
   <v-touch ref="touch" :class="{ active }" tag="nav" @pan="move">
-    <div class="nav-upper" @click="toggle(true)">
+    <div class="nav-upper" @click="toggle()">
       <div class="ico-wrapper">
         <div :style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }" class="panel-backdrop"/>
         <div class="ico-a-ie">
@@ -21,7 +21,7 @@
 
 
 <script>
-import tooltip from './sidebar/modules/tooltip.vue'
+import tooltip from './modules/tooltip.vue'
 
 
 export default {
@@ -54,19 +54,32 @@ export default {
     if (this.$store.state.sidebar && this.$store._mutations.toggleSidebar) {
       this.$store.commit('setId', 0)
     }
-
-    // Hide sidebar if no tools were passed, otherwise show.
-    this.$slots.default ? this.$store.commit('showSidebar') : this.$store.commit('hideSidebar')
   },
 
   methods: {
-    toggle (expanded) {
-      this.$store.commit('toggleSidebar', expanded)
+    toggle () {
+      // Make sidebar-bar visible, not panels
+      if (this.hidden) {
+        this.$store.commit('showSidebar')
+      }
+      else if (!this.$store.state.sidebar.keepVisible && !this.hidden) {
+        this.$store.commit('hideSidebar')
+      }
+
+      // Full toggle with panels
+      this.$store.commit('toggleSidebar')
     },
     move (e) {
+      // Make visible if hidden by default (hide again on e.isFinal)
+      if (this.hidden) {
+        this.$store.commit('showSidebar')
+      }
       // Reset on end
       if (e.isFinal) {
-        return this.reset()
+        this.reset()
+        if (!this.$store.state.sidebar.active && !this.$store.state.sidebar.keepVisible) {
+          this.$store.commit('hideSidebar')
+        }
       }
       // Horizontal only
       if (e.eventType <= 4) {
@@ -96,12 +109,13 @@ export default {
     state: {
       active: false,
       hidden: true,
+      keepVisible: false,
       id: 0,
       activeId: 0,
       deltaX: 0
     },
     mutations: {
-      toggleSidebar (state, expanded = false) {
+      toggleSidebar (state) {
         if (!state.hidden) {
           state.active = !state.active
           state.activeId = 0
@@ -113,6 +127,9 @@ export default {
       },
       showSidebar (state) {
         state.hidden = false
+      },
+      keepSidebarVisible (state, bool) {
+        state.keepVisible = bool
       },
       setActivePanel (state, id) {
         state.activeId = id
@@ -204,13 +221,14 @@ nav {
 
       &.hidden {
         opacity: 0;
+        pointer-events: none;
       }
       .nav-lower-backdrop {
         position: absolute;
         height: 100vh;
         width: 100%;
         z-index: 1;
-        @include gradient-background($color-bg-light, $color-bg);
+        @include gradient-background($color-bg-lighter, $color-bg-light);
 
         .nav-lower-backdrop-first-bg {
           height: 56px;

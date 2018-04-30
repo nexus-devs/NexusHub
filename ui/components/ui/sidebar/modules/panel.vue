@@ -69,11 +69,10 @@ export default {
       background: $color-bg-darker;
     }
 
-    h3 {
+    span {
       display: inline-block;
       vertical-align: middle;
-      font-size: 1em;
-      font-weight: 400;
+      color: white;
 
       // Shortcut
       & ~ span {

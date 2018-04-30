@@ -26,7 +26,7 @@
 <script>
 import _ from 'lodash'
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import subnav from 'src/components/items/subnav.vue'
 import pricesnippet from 'src/components/snippets/item-price.vue'
@@ -102,6 +102,16 @@ export default {
     comparison () {
       return this.$store.state.items.itemComparison.components
     }
+  },
+
+  beforeCreate () {
+    this.$store.commit('showSidebar')
+    this.$store.commit('keepSidebarVisible', true)
+  },
+
+  beforeDestroy () {
+    this.$store.commit('hideSidebar')
+    this.$store.commit('keepSidebarVisible', false)
   },
 
   beforeMount () {

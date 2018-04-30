@@ -6,7 +6,7 @@
         <path :d="paths.selector" class="selector" />
         <path :d="paths.pointer[0]" class="pointer"/>
         <path :d="paths.pointer[1]" class="pointer"/>
-        <text v-for="(d, i) in animatedData" :key="animatedData[i]" :x="getLabelPosition(d).x"
+        <text v-for="(d, i) in animatedData" :key="d.x" :x="getLabelPosition(d).x"
               :y="getLabelPosition(d).y"
               :class="{ 'align-left': d.alignLeft ? true : false }">
           {{ data[i] && (d.isMax || d.isMin) ? data[i] + 'p' : '' }}

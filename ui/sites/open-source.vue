@@ -1,6 +1,8 @@
 <template>
   <div>
-    <sidebar/>
+    <sidebar>
+      <sidebar-search/>
+    </sidebar>
     <app-content>
       <ui-header>
         <h1>Open-Source</h1>
@@ -48,13 +50,15 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
+    'sidebar-search': sidebarSearch,
     'ui-header': uiheader
   }
 }
