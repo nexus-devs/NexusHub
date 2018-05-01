@@ -1,3 +1,5 @@
+const prod = process.env.NODE_ENV === 'production'
+
 module.exports = {
-  logLevel: 'info'
+  logLevel: prod ? 'monitor' : 'verbose'
 }
