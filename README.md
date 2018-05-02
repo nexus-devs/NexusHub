@@ -39,5 +39,19 @@ web app.
 
 <br>
 
+## Quickstart
+Make sure you have Docker installed first - we recommend following the
+[installation instructions](https://github.com/nexus-devs/docker) in our docker
+repo. Once installed, locate this repo and run:
+```sh
+sudo bash docker.sh --dev
+```
+This will automatically install and run all required services. Feel free to
+grab a coffee while waiting for the first install, it'll probably take a few
+minutes. Once done, check out `localhost:3000` and start hacking! You're gonna
+find all API endpoints in `/api` while all sites and UI elements are in `/ui`.
+
+<br>
+
 ## License
 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
