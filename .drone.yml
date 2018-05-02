@@ -20,10 +20,6 @@ pipeline:
   stage:
     image: node
     commands:
-      - git config user.email "devs@nexus-stats.com"
-      - git config user.name "nexus-ci"
-      - git add -A
-      - "git commit -m 'ci: Prepare for staging'"
       - git fetch --all
       - git checkout staging
       - git merge -s recursive -X theirs origin/development
