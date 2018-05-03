@@ -1,6 +1,8 @@
+const prod = process.env.NODE_ENV === 'production'
+const group = process.env.NEXUS_TARGET_NODE.split('-')[0]
+
 // Use some adaptions when inside docker, especially database connections.
-if (process.env.DOCKER) {
-  const prod = process.env.NODE_ENV === 'production'
+if (process.env.DOCKER && (prod ? group === 'auth' : true)) {
   const fs = require('fs')
   const certPrivate = fs.readFileSync(`/run/secrets/nexus-private-key`, 'utf-8')
   const certPublic = fs.readFileSync(`/run/secrets/nexus-public-key`, 'utf-8')
