@@ -6,8 +6,7 @@ if (process.env.DOCKER) {
   const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').replace(/(\n|\r)+$/, '')
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
-
-  module.exports = {
+  const config = {
     api: {
       redisUrl,
       certPublic
@@ -26,6 +25,13 @@ if (process.env.DOCKER) {
       authUrl: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030'
     }
   }
+  if (prod) {
+    config.core.apiUrl = 'http://ui_api:3000'
+    config.core.authUrl = 'http://auth_api:3030'
+    config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').replace(/(\n|\r)+$/, '')
+    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').replace(/(\n|\r)+$/, '')
+  }
+  module.exports = config
 }
 
 // Normal environment should be fine with default config.
