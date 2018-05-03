@@ -351,6 +351,9 @@ header {
      span:not(.selected) {
        color: $color-font-body;
      }
+     .selected {
+       color: $color-primary;
+     }
      img {
        transform: rotate(-180deg);
      }
