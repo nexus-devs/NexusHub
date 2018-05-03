@@ -14,25 +14,56 @@ const config = {
 const cubic = new Cubic(config.cubic)
 
 /**
- * Auth server for verifying users
+ * Load every node into a single controller when in dev mode.
  */
-cubic.use(new Auth(config.auth))
+if (!(process.env.DOCKER && process.env.NODE_ENV === 'production')) {
+  // Auth server for verifying users
+  cubic.use(new Auth(config.auth))
+
+  // View server for providing the web client
+  cubic.use(new Ui(config.ui))
+
+  // Main API setup. Used for 'global' endpoints not specific to any game.
+  // Core nodes of other games will still connect to this API server though.
+  cubic.use(new Api(config.main.api))
+  cubic.use(new Core(config.main.core))
+
+  // Warframe Core node
+  cubic.hook('warframe.core', wfhooks.verifyIndices)
+  cubic.hook('warframe.core', wfhooks.verifyItemList)
+  cubic.use(new Core(config.warframe.core))
+}
 
 /**
- * View server for providing the web client
+ * Docker production deployments will only spawn a single node per container.
+ * This way we can scale things exactly as needed. The node to be spawned is
+ * set in the NEXUS_TARGET_NODE environment variable.
  */
-cubic.use(new Ui(config.ui))
+else {
+  const target = process.env.NEXUS_TARGET_NODE
 
-/**
- * Main API setup. Used for 'global' endpoints not specific to any game.
- * Core nodes of other games will still connect to this API server though.
- */
-cubic.use(new Api(config.main.api))
-cubic.use(new Core(config.main.core))
+  // Target looks like auth-api, ui-core, etc, with the group first, node second
+  const group = target.split('-')[0]
+  const node = target.split('-')[1]
 
-/**
- * Warframe Core node
- */
-cubic.hook('warframe.core', wfhooks.verifyIndices)
-cubic.hook('warframe.core', wfhooks.verifyItemList)
-cubic.use(new Core(config.warframe.core))
+  // Disable the other node that we don't need
+  config[group][node === 'api' ? 'core' : 'api'].disable = true
+
+  // Load single node
+  if (group === 'auth') {
+    cubic.use(new Auth(config))
+  }
+  else if (group === 'ui') {
+    cubic.use(new Ui(config))
+  }
+  else {
+    const Node = node === 'api' ? Api : Core
+
+    // Hooks
+    if (group === 'warframe' && node === 'core') {
+      cubic.hook('warframe.core', wfhooks.verifyIndices)
+      cubic.hook('warframe.core', wfhooks.verifyItemList)
+    }
+    cubic.use(new Node(config))
+  }
+}

@@ -7,10 +7,10 @@
       <header>
         <div class="background"/>
         <div class="search-components container">
-          <h1>
+          <div class="headline">
             <img src="/img/brand/nexus-stats-logo-bw.svg" alt="nexus-stats" class="ico-32">
-            <span>Item Prices from the Trade Chat.</span>
-          </h1>
+            <h1>Item Prices from the Trade Chat.</h1>
+          </div>
           <div class="row">
             <search/>
             <timerange/>
@@ -95,12 +95,16 @@ header {
  .search-components {
    width: 100%;
 
-   h1 {
-     font-size: 1.4em;
+   .headline {
      transform: translateY(50px);
      animation: moveUp 0.7s forwards;
      animation-delay: 0.15s;
 
+     h1 {
+       display: inline-block;
+       vertical-align: middle;
+       font-size: 1.5em;
+     }
      img {
        margin-right: 5px;
 
