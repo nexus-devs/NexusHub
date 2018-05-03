@@ -1,6 +1,8 @@
+const prod = process.env.NODE_ENV === 'production'
+const group = process.env.NEXUS_TARGET_NODE.split('-')[0]
+
 // Use some adaptions when inside docker, especially database connections.
-if (process.env.DOCKER) {
-  const prod = process.env.NODE_ENV === 'production'
+if (process.env.DOCKER && (prod ? group === 'warframe' : true)) {
   const fs = require('fs')
   const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').replace(/(\n|\r)+$/, '')
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
