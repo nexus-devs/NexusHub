@@ -9,6 +9,7 @@ if (process.env.DOCKER && (prod ? group === 'warframe' : true)) {
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
   const config = {
+    api: {},
     core: {
       mongoUrl,
       mongoDb: 'nexus-warframe',
