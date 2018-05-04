@@ -1,5 +1,6 @@
 const prod = process.env.NODE_ENV === 'production'
-const group = process.env.NEXUS_TARGET_NODE.split('-')[0]
+const node = process.env.NEXUS_TARGET_NODE
+const group = node ? node.split('-')[0] : null // auth-core, ui-core, etc, take first word before dash
 
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && (prod ? group === 'main' : true)) {
