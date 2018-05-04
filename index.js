@@ -51,10 +51,10 @@ else {
 
   // Load single node
   if (group === 'auth') {
-    cubic.use(new Auth(config))
+    cubic.use(new Auth(config.auth))
   }
   else if (group === 'ui') {
-    cubic.use(new Ui(config))
+    cubic.use(new Ui(config.ui))
   }
   else {
     const Node = node === 'api' ? Api : Core
@@ -64,6 +64,6 @@ else {
       cubic.hook('warframe.core', wfhooks.verifyIndices)
       cubic.hook('warframe.core', wfhooks.verifyItemList)
     }
-    cubic.use(new Node(config))
+    cubic.use(new Node(config[group][node]))
   }
 }
