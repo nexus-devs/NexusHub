@@ -16,28 +16,28 @@
   "author": "",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "chalk": "^2.4.0",
+    "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
     "cubic": "1.1.1",
     "cubic-api": "1.0.10",
     "cubic-auth": "1.1.0",
-    "cubic-core": "1.0.3",
+    "cubic-core": "1.0.4",
     "cubic-defaults": "^1.0.7",
-    "cubic-loader": "^1.1.1",
-    "cubic-ui": "^1.4.3",
+    "cubic-loader": "1.1.1",
+    "cubic-ui": "1.4.4",
     "d3": "^5.1.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.1",
     "tween.js": "^16.6.0",
-    "vue-analytics": "^5.10.3"
+    "vue-analytics": "^5.10.4"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "better-assert": "^1.0.2",
-    "cubic-client": "^1.0.4",
+    "cubic-client": "1.0.5",
     "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard": "^12.0.0-alpha.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
@@ -52,7 +52,7 @@
     "progress": "^2.0.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.1.7"
+    "semantic-release": "^15.2.0"
   },
   "release": {
     "getLastRelease": "last-release-git"
