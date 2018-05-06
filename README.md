@@ -44,7 +44,7 @@ Make sure you have Docker installed first - we recommend following the
 [installation instructions](https://github.com/nexus-devs/docker) in our docker
 repo. Once installed, locate this repo and run:
 ```sh
-sudo bash docker.sh --dev
+sudo bash docker.sh
 ```
 This will automatically install and run all required services. Feel free to
 grab a coffee while waiting for the first install, it'll probably take a few

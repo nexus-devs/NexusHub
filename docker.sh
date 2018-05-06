@@ -10,4 +10,4 @@ devpath="$(echo $devpath | sed -e 's/^\/mnt\//\//')"
 if [ ! -d "./docker" ]; then
   git clone https://github.com/nexus-devs/docker
 fi
-bash -c "cd ./docker && exec bash deploy.sh $@ $devpath"
+bash -c "cd ./docker && exec bash deploy.sh --dev $devpath"
