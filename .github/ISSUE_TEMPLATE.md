@@ -1,6 +1,6 @@
 **I'm submitting a...**
 <!-- Check one of the following options with "x" -->
-- [ ] Bug report  <!-- Please search GitHub for a similar issue or PR before submitting -->
+- [ ] Bug report
 - [ ] Feature request
 - [ ] Documentation issue or request
 
