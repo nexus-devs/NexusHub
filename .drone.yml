@@ -36,12 +36,15 @@ pipeline:
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
-      - git fetch --all
       - sed -i '/\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
+      - git stash
+      - git fetch origin
+      - git checkout development
+      - git checkout staging
+      - git merge -s recursive -X theirs development
+      - git stash apply
       - git add -A
       - git commit -m "Add staging builds"
-      - git checkout staging
-      - git merge -s recursive -X theirs origin/development
       - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
         # ^ suppress output to /dev/null to keep secrets hidden
     secrets: [ nexus_ci_token ]
