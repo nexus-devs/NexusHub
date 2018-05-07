@@ -1,16 +1,19 @@
 pipeline:
-
-  # All
   build:
     image: node
     commands:
       - npm install
+    when:
+      branch: [ development, greenkeeper/*, staging ]
+
+  # Smoke tests
   lint:
     image: node
     commands:
       - npm run lint
+    when:
+      branch: [ development, greenkeeper/* ]
 
-  # Smoke tests
   test - development:
     image: node
     commands:
@@ -34,7 +37,7 @@ pipeline:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
       - git fetch --all
-      - sed '#/assets/bundles/#d' .gitignore # Keep webpack builds
+      - sed -i '/\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
       - git add -A
       - git commit -m "Add staging builds"
       - git checkout staging
