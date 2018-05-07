@@ -24,6 +24,7 @@ async function build () {
   const redisUrl = 'redis://redis'
   const mongoUrl = 'mongodb://mongodb'
   const config = {
+    api: { disable: true },
     webpack: {
       skipBuild: true,
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
@@ -35,13 +36,13 @@ async function build () {
     }
   }
   await cubic.use(new Ui(ci ? {
-    api: { redisUrl },
+    api: { redisUrl, disable: true },
     core: { redisUrl, mongoUrl },
-    webpack: config.webpack
+    webpack: config.webpack,
+    client: config.client
   } : config))
 
   // Generate routes config file
-  await cubic.nodes.ui.core.client.api.connections()
   await cubic.nodes.ui.core.webpackServer.registerEndpoints()
   const client = require(cubic.config.ui.webpack.clientConfig)
   const server = require(cubic.config.ui.webpack.serverConfig)
