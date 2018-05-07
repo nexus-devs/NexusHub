@@ -10,17 +10,33 @@ pipeline:
     commands:
       - npm run lint
 
-  # Development
+  # Smoke tests
   test - development:
     image: node
     commands:
       - npm test
+      - rm -rf assets/bundles # Remove dev bundles
     when:
-      branch: [development, greenkeeper/*]
+      branch: [ development, greenkeeper/* ]
+
+  test - production:
+    image: node
+    commands:
+      - npm run build
+      - npm test --production
+    when:
+      branch: [ development, greenkeeper/* ]
+
+  # Add to staging branch
   stage:
     image: node
     commands:
+      - git config --global user.email "apps@nexus-stats.com"
+      - git config --global user.name "nexus-ci"
       - git fetch --all
+      - sed '#/assets/bundles/#d' .gitignore # Keep webpack builds
+      - git add -A
+      - git commit -m "Add staging builds"
       - git checkout staging
       - git merge -s recursive -X theirs origin/development
       - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
@@ -29,20 +45,13 @@ pipeline:
     when:
       branch: development
 
-  # Staging
-  test - production:
-    image: node
-    commands:
-      - npm run build
-      - npm test --production
-    when:
-      branch: staging
+  # Deploy on staging server
   deploy:
     image: node
     commands:
       - echo "We're not quite there yet 😉"
     when:
-      branch: [staging, greenkeeper/*]
+      branch: staging
 
   # Final release to production
   release:

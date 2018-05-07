@@ -33,6 +33,7 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     config.core.authUrl = 'http://auth_api:3030'
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').replace(/(\n|\r)+$/, '')
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').replace(/(\n|\r)+$/, '')
+    config.webpack.skipBuild = true
   }
   module.exports = config
 }
