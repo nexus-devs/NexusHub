@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build": "node build/webpack.js",
+    "build": "node build/webpack/webpack.js",
     "lint": "eslint . --ext .js,.vue",
     "test": "mocha --exit -s 120000 --timeout 120000 test/smoke/server.js test/smoke/main.js test/smoke/warframe.js",
     "scrape": "node build/warframe/index.js",
     "release": "semantic-release pre && semantic-release post",
     "changelogs": "node build/changelogs/index.js",
-    "semantic-release": "semantic-release"
+    "toggle-webpack": "node build/webpack/toggle.js"
   },
   "author": "",
   "license": "CC BY-NC 4.0",

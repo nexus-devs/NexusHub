@@ -6,10 +6,13 @@ const Ui = require('cubic-ui')
 const request = require('request-promise')
 const Client = require('cubic-client')
 
-// Config
+/**
+ * Configuration
+ */
 const wfhooks = require(`${process.cwd()}/config/cubic/hooks/warframe.js`)
 const redisUrl = 'redis://redis'
 const mongoUrl = 'mongodb://mongodb'
+const webpack = require(`${process.cwd()}/.webpack.json`).enable
 const ci = process.env.DRONE
 const prod = process.env.NODE_ENV === 'production'
 const config = {
@@ -21,7 +24,9 @@ const config = {
 }
 config.cubic.logLevel = 'silent'
 
-// Use different database URLs for CI (because docker)
+/**
+ * Use different database URLs for CI (because docker)
+ */
 if (ci) {
   config.auth.api = { redisUrl }
   config.auth.core.redisUrl = redisUrl
@@ -36,13 +41,15 @@ if (ci) {
   config.warframe.core.mongoUrl = mongoUrl
 }
 
-// Bundle webpack before starting cubic if we're in production
+/**
+ * Bundle webpack before starting cubic if we're in production.
+ */
 if (prod) {
   config.ui.webpack.skipBuild = true
 }
 
 /**
- * Helper function to resolve as soon as UI server responds with rendered UI
+ * Helper function to resolve as soon as UI server responds with rendered UI.
  */
 async function getIndex () {
   return new Promise(async resolve => {
@@ -62,12 +69,16 @@ async function getIndex () {
 before(async function () {
   const cubic = new Cubic(config.cubic)
   await cubic.use(new Auth(config.auth))
-  await cubic.use(new Ui(config.ui))
   await cubic.use(new Api(config.main.api))
   await cubic.use(new Core(config.main.core))
   cubic.hook('warframe.core', wfhooks.verifyIndices)
   cubic.hook('warframe.core', wfhooks.verifyItemList)
   await cubic.use(new Core(config.warframe.core))
+
+  // Prevent dev-webpack-build if changes aren't necessary.
+  if (webpack) {
+    await cubic.use(new Ui(config.ui))
+  }
 })
 
 /**
@@ -79,7 +90,10 @@ describe('Server', function () {
     await client.connections()
   })
 
-  it('should load up UI node', async function () {
-    await getIndex()
-  })
+  // Skip UI tests if no changes were present
+  if (webpack) {
+    it('should load up UI node', async function () {
+      await getIndex()
+    })
+  }
 })

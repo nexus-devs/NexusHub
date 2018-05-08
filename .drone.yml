@@ -3,8 +3,9 @@ pipeline:
     image: node
     commands:
       - npm install
+      - npm run toggle-webpack
     when:
-      branch: [ development, greenkeeper/*, staging ]
+      branch: [ development, greenkeeper/* ]
 
   # Smoke tests
   lint:
@@ -18,7 +19,6 @@ pipeline:
     image: node
     commands:
       - npm test
-      - rm -rf assets/bundles # Remove dev bundles
     when:
       branch: [ development, greenkeeper/* ]
 
@@ -37,19 +37,18 @@ pipeline:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
       - sed -i '/\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
-      - git stash
       - git fetch origin
       - git checkout development
-      - git checkout staging
-      - git merge -s recursive -X theirs development
-      - git stash apply
       - git add -A
       - git commit -m "Add staging builds"
+      - git checkout staging
+      - git merge -s recursive -X theirs development
       - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
         # ^ suppress output to /dev/null to keep secrets hidden
     secrets: [ nexus_ci_token ]
     when:
       branch: development
+      event: [ push ]
 
   # Deploy on staging server
   deploy:
@@ -68,6 +67,7 @@ pipeline:
     secrets: [ gh_token ]
     when:
       branch: master
+      event: [ push ]
 
 services:
   mongodb:
