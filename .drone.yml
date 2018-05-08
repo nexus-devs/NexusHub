@@ -38,6 +38,8 @@ pipeline:
       - git config --global user.name "nexus-ci"
       - sed -i '/\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
       - git fetch origin
+      - git add -A
+      - git commit -m "Add staging builds"
       - git checkout development
       - git add -A
       - git commit -m "Add staging builds"
@@ -51,10 +53,24 @@ pipeline:
       event: [ push ]
 
   # Deploy on staging server
-  deploy:
-    image: node
+  docker:
+    image: alpine/git
     commands:
-      - echo "We're not quite there yet 😉"
+      - mkdir -p docker
+      - cd docker
+      - git init
+      - git remote add origin https://github.com/nexus-devs/docker.git
+      - git fetch --all
+      - git checkout master
+    when:
+      branch: staging
+  deploy:
+    image: plugins/docker
+    repo: nexusstats/nexus-stats
+    dockerfile: docker/app/prod/Dockerfile
+    context: docker/app/prod/
+    no_cache: true
+    secrets: [ docker_username, docker_password ]
     when:
       branch: staging
 
@@ -72,5 +88,9 @@ pipeline:
 services:
   mongodb:
     image: mongo
+    when:
+      branch: [ development, greenkeeper/* ]
   redis:
     image: redis
+    when:
+      branch: [ development, greenkeeper/* ]
