@@ -25,7 +25,7 @@ pipeline:
   test - production:
     image: node
     commands:
-      - npm run build
+      - npm run build -- staging
       - npm test --production
     when:
       branch: [ development, greenkeeper/* ]
@@ -64,17 +64,20 @@ pipeline:
       - git checkout master
     when:
       branch: staging
-  deploy:
+  stage:
     image: plugins/docker
-    repo: nexusstats/nexus-stats
     dockerfile: docker/app/prod/Dockerfile
     context: docker/app/prod/
+    repo: nexusstats/nexus-stats
+    tags: staging
     no_cache: true
     secrets: [ docker_username, docker_password ]
     when:
       branch: staging
 
   # Final release to production
+  # TODO: Rebuild webpack without staging flag, push to repo, then build
+  # nexus-stats:latest tag from that. Also add changelog and release generation.
   release:
     image: node
     commands:

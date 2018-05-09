@@ -1,8 +1,9 @@
 process.env.NODE_ENV = 'production'
+process.env.NEXUS_STAGING = process.argv.includes('staging')
 const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/.webpack.json`).enable
+const config = require(`${process.cwd()}/config/cubic/ui.js`)
 const rm = require('rimraf')
-const ci = process.env.DRONE
 
 /**
  * Bundle webpack for production. This will imitate a cubic-ui node to auto-
@@ -33,26 +34,7 @@ async function build () {
    * as routes.
    */
   const Ui = require('cubic-ui')
-  const redisUrl = 'redis://redis'
-  const mongoUrl = 'mongodb://mongodb'
-  const config = {
-    api: { disable: true },
-    webpack: {
-      skipBuild: true,
-      clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
-      serverConfig: `${process.cwd()}/config/webpack/server.config.js`
-    },
-    client: {
-      apiUrl: 'https://api.nexus-stats.com',
-      authUrl: 'https://auth.nexus-stats.com'
-    }
-  }
-  await cubic.use(new Ui(ci ? {
-    api: { redisUrl, disable: true },
-    core: { redisUrl, mongoUrl },
-    webpack: config.webpack,
-    client: config.client
-  } : config))
+  await cubic.use(new Ui(config))
 
   /**
    * Trigger endpoint mapping which will also create the custom routes.
