@@ -1,5 +1,6 @@
 const prod = process.env.NODE_ENV === 'production'
 const node = process.env.NEXUS_TARGET_NODE
+const staging = process.env.NEXUS_STAGING
 const group = node ? node.split('-')[0] : null // auth-core, ui-core, etc, take first word before dash
 
 // Use some adaptions when inside docker, especially database connections.
@@ -22,10 +23,6 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
       serverConfig: `${process.cwd()}/config/webpack/server.config.js`
-    },
-    client: {
-      apiUrl: prod ? 'https://api.nexus-stats.com' : 'http://localhost:3003',
-      authUrl: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030'
     }
   }
   if (prod) {
@@ -33,6 +30,10 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     config.core.authUrl = 'http://auth_api:3030'
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').replace(/(\n|\r)+$/, '')
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').replace(/(\n|\r)+$/, '')
+    config.client = {
+      apiUrl: staging ? 'https://api.nexus-stats.io' : 'https://api.nexus-stats.com',
+      authUrl: staging ? 'https://auth.nexus-stats.io' : 'https://api.nexus-stats.com'
+    }
     config.webpack.skipBuild = true
   }
   module.exports = config
