@@ -9,7 +9,7 @@
 
  <br>
 
-Nexus-Stats is an online service which provides insights on game economics and other ingame data with the use of cutting edge technology. This repo contains the application logic for our servers, including all statistics calculations. For data-tracking via OCR, please see [nexus-sentry](https://github.com/nexus-devs/nexus-sentry).
+Nexus-Stats is an online service which provides insights on game economics and other ingame data. We pride ourselves on the freedom that we take to gather our data - If it's there, we'll find some way to extract it. This repo contains the application logic for our servers, including all statistics calculations. For data-tracking via OCR, please see [nexus-sentry](https://github.com/nexus-devs/nexus-sentry).
 
 <br>
 
