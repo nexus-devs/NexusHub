@@ -1,4 +1,4 @@
-[![Nexus-Stats](/.github/banner.png)](https://github.com/nexus-devs)
+[![Nexus-Stats](/.github/banner.svg)](https://github.com/nexus-devs)
 
 ##
 
