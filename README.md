@@ -1,4 +1,4 @@
-[![Nexus-Stats](/banner.png)](https://github.com/nexus-devs)
+[![Nexus-Stats](/.github/banner.png)](https://github.com/nexus-devs)
 
 ##
 
@@ -50,6 +50,25 @@ This will automatically install and run all required services. Feel free to
 grab a coffee while waiting for the first install, it'll probably take a few
 minutes. Once done, check out `localhost:3000` and start hacking! You're gonna
 find all API endpoints in `/api` while all sites and UI elements are in `/ui`.
+
+<br>
+
+##
+
+<br>
+
+<div style="text-align:center">
+<img src ="/.github/blobob.gif" height="300" />
+
+<br>
+<br>
+
+Like what we do? Leave a star to make this little robot happy ❤️
+</div>
+
+<br>
+
+##
 
 <br>
 
