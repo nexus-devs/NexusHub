@@ -52,26 +52,25 @@ minutes. Once done, check out `localhost:3000` and start hacking! You're gonna
 find all API endpoints in `/api` while all sites and UI elements are in `/ui`.
 
 <br>
-
-##
-
 <br>
-
-<div style="text-align:center">
-<img src ="/.github/blobob.gif" height="300" />
-
-<br>
-<br>
-
-Like what we do? Leave a star to make this little robot happy ❤️
-</div>
-
 <br>
 
 ##
 
 <br>
+<br>
+<br>
 
+<p align="center">
+<img src ="/.github/blobob.gif" height="250" alt="Blobob needs stars to survive. Not kidding." />
+
+<br>
+<br>
+
+<p align="center">Like what we do? Leave a star to make this little robot happy ❤️</p>
+</p>
+
+<br>
 
 ## License
 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
