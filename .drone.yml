@@ -72,6 +72,7 @@ pipeline:
     secrets: [ docker_username, docker_password ]
     when:
       branch: staging
+      event: [ push ]
 
   # Final release to production
   # TODO: Rebuild webpack without staging flag, push to repo, then build
