@@ -5,7 +5,7 @@ const group = node ? node.split('-')[0] : null // auth-core, ui-core, etc, take 
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && (prod ? group === 'warframe' : true)) {
   const fs = require('fs')
-  const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').replace(/(\n|\r)+$/, '')
+  const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
   const config = {
@@ -22,8 +22,8 @@ if (process.env.DOCKER && (prod ? group === 'warframe' : true)) {
   if (prod) {
     config.core.apiUrl = 'http://main_api:3003'
     config.core.authUrl = 'http://auth_api:3030'
-    config.core.userKey = fs.readFileSync('/run/secrets/nexus-warframe-key', 'utf-8').replace(/(\n|\r)+$/, '')
-    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-warframe-secret', 'utf-8').replace(/(\n|\r)+$/, '')
+    config.core.userKey = fs.readFileSync('/run/secrets/nexus-warframe-key', 'utf-8').trim()
+    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-warframe-secret', 'utf-8').trim()
   }
   module.exports = config
 }

@@ -7,7 +7,7 @@ const group = node ? node.split('-')[0] : null // auth-core, ui-core, etc, take 
 if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
   const fs = require('fs')
   const certPublic = fs.readFileSync(`/run/secrets/nexus-public-key`, 'utf-8')
-  const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').replace(/(\n|\r)+$/, '')
+  const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
   const config = {
@@ -28,8 +28,8 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
   if (prod) {
     config.core.apiUrl = 'http://ui_api:3000'
     config.core.authUrl = 'http://auth_api:3030'
-    config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').replace(/(\n|\r)+$/, '')
-    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').replace(/(\n|\r)+$/, '')
+    config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').trim()
+    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').trim()
     config.client = {
       apiUrl: staging ? 'https://api.nexus-stats.io' : 'https://api.nexus-stats.com',
       authUrl: staging ? 'https://auth.nexus-stats.io' : 'https://api.nexus-stats.com'
