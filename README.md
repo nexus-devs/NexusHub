@@ -62,7 +62,7 @@ find all API endpoints in `/api` while all sites and UI elements are in `/ui`.
 <br>
 
 <p align="center">
-<img src ="/.github/blobob.gif" height="225" alt="Blobob needs stars to survive. Not kidding." />
+<img src ="/.github/blobob.gif" height="200" alt="Blobob needs stars to survive. Not kidding." />
 
 <br>
 <br>
