@@ -24,7 +24,7 @@
     "cubic-core": "1.0.4",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.1.1",
-    "cubic-ui": "1.4.4",
+    "cubic-ui": "1.4.5",
     "d3": "^5.4.0",
     "fuse.js": "^3.2.0",
     "keyboardjs": "^2.4.1",
