@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'production'
+process.env.NEXUS_TARGET_NODE = 'ui-core'
 process.env.NEXUS_STAGING = process.argv.includes('staging')
 const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/.webpack.json`).enable
