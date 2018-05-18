@@ -1,0 +1,4 @@
+# This will only do something on the staging builds when this file gets renamed
+# to robots.txt.
+User-agent: *
+Disallow: /
