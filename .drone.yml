@@ -36,7 +36,12 @@ pipeline:
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
+
+      # Modify files as needed for staging build
       - sed -i '/\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
+      - mv assets/.robots.txt assets/robots.txt # Make search engines ignore the staging site
+
+      # Push changes from above and from dev branch
       - git fetch origin
       - git add -A
       - git commit -m "Add staging builds"
@@ -62,7 +67,7 @@ pipeline:
       - git checkout master
     when:
       branch: staging
-  stage:
+  publish:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
     context: docker/app/prod/
