@@ -11,7 +11,7 @@
 export default {
   computed: {
     offline () {
-      return !this.$store.state.api.online
+      return this.$store.state.api.offline
     },
     sidebarVisible () {
       return !this.$store.state.sidebar.hidden
@@ -27,7 +27,7 @@ export default {
 
   methods: {
     update () {
-      this.$store.commit('setApiStatus', this.$cubic.connection.client.connected)
+      this.$store.commit('setApiStatus', !this.$cubic.connection.client.connected)
     },
     listen () {
       this.$cubic.on('connect', () => this.$store.commit('setApiStatus', true))
@@ -38,11 +38,11 @@ export default {
   storeModule: {
     name: 'api',
     state: {
-      online: true
+      offline: false
     },
     mutations: {
-      setApiStatus (state, online) {
-        state.online = online
+      setApiStatus (state, status) {
+        state.offline = status
       }
     }
   }
@@ -59,7 +59,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 56px;
+  top: 0;
   padding: 5px 0;
   width: 100%;
   text-transform: uppercase;
@@ -89,6 +89,6 @@ export default {
 }
 
 .offline {
-  transform: translateY(0);
+  transform: translateY(56px);
 }
 </style>
