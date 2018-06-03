@@ -1,4 +1,14 @@
 #!/bin/bash
+
+# Restart if already running
+if [ "$(docker service ls | grep nexus_dev)" ]; then
+  docker service scale nexus_dev=0
+  docker service scale nexus_dev=1
+  docker service logs nexus_dev -f --raw
+  echo 'restart'
+  exit
+fi
+
 # Bind current directory to docker container
 devpath="$( cd "$(dirname "$0")" ; pwd -P )"'/'
 
