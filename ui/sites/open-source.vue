@@ -37,8 +37,9 @@
             If you find any critical vulnerabilities, please send us a private
             mail instead of opening issues on Github. We can't offer you bounties
             like the big guys, but we'll never forget your help for helping us
-            make this platform secure.
+            make this platform more secure.
           </p>
+          <br>
           <a href="mailto:devs@nexus-stats.com?Subject=System%20Vulnerability%20Inquiry">devs@nexus-stats.com</a>
         </section>
       </div>

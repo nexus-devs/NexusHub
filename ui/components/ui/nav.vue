@@ -39,6 +39,7 @@ export default {
     z-index: 2;
     background: $color-bg-dark;
     align-items: center;
+    @include shadow-1;
 
     a {
       margin: 0 15px;

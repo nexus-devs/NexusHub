@@ -27,7 +27,7 @@ class Search extends Endpoint {
     },
     {
       name: 'threshold',
-      default: 0.4,
+      default: 0.75,
       description: 'Minimum matching percentage for fuzzy search.'
     },
     {
@@ -39,8 +39,6 @@ class Search extends Endpoint {
     this.schema.response = [{
       category: String,
       name: String,
-      type: String,
-      description: String,
       apiUrl: {
         _type: String,
         _description: 'It is recommended to get more detailed data from this link.'
@@ -68,10 +66,10 @@ class Search extends Endpoint {
         reason: `Query term must be at least 2 characters. Received ${query.length}.`
       })
     }
-    if (limit > 20 || limit < 2) {
+    if (limit > 20) {
       return res.status(400).send({
         error: 'Bad input.',
-        reason: `Limit must not be higher than 20 or lower than 2. Received ${limit}.`
+        reason: `Limit must not be higher than 20. Received ${limit}.`
       })
     }
     if (fuzzy && !category) {
@@ -90,13 +88,13 @@ class Search extends Endpoint {
    * Fuzzy search a certain category.
    */
   async fuzzySearch (query, category, threshold, limit) {
+    let collection = category.toLowerCase() === 'items' ? 'items' : 'players'
     let results = []
-    let data = await this.db.collection(category).find().toArray()
+    let data = await this.db.collection(collection).find().toArray()
+
     let fuse = new Fuse(data, {
       shouldSort: true,
       findAllMatches: true,
-      includeScore: true,
-      includeMatches: true,
       threshold,
       location: 0,
       distance: 100,
@@ -106,13 +104,18 @@ class Search extends Endpoint {
     })
     let fused = fuse.search(query)
 
-    // Restructure result object, so the item values are on root level
-    fused.forEach(result => {
-      results.push(Object.assign({
-        _score: 1 - result.score,
-        _matches: result.matches
-      }, result.item))
-    })
+    // Reduce output size. This format should be parallel to the /items endpoint
+    for (let result of fused) {
+      delete result._id
+      delete result.uniqueName
+
+      if (result.components) {
+        for (let component of result.components) {
+          delete component.drop
+        }
+      }
+      results.push(result)
+    }
 
     return results
   }

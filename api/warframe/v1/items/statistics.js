@@ -42,7 +42,6 @@ class Statistics extends Endpoint {
       }
     ]
     this.schema.limit = {
-      disable: false,
       interval: 5000,
       maxInInterval: 4
     }

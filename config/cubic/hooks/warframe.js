@@ -1,5 +1,8 @@
+const fs = require('fs-extra')
 const mongodb = require('mongodb').MongoClient
-const items = require(`${process.cwd()}/build/warframe/data/merged.json`)
+const Items = require('warframe-items')
+const items = new Items()
+const _ = require('lodash')
 
 class Hook {
   /**
@@ -8,17 +11,90 @@ class Hook {
   async verifyItemList () {
     const url = cubic.config.warframe.core.mongoUrl
     const db = await mongodb.connect(url)
-    items.forEach(item => {
-      db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
-        name: item.name
-      }, {
-        $set: item
-      }, {
-        upsert: true,
-        safe: false
-      })
-    })
+
+    for (let item of items) {
+      if (item.tradable) {
+        const stored = await db.db(cubic.config.warframe.core.mongoDb).collection('items').findOne({
+          uniqueName: item.uniqueName
+        })
+
+        this.addItemSet(item)
+        this.addItemUrl(item)
+        if (!stored) {
+          this.addEconomyData(item)
+          this.copyImage(item)
+        }
+        delete item.imageName
+
+        await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
+          uniqueName: item.uniqueName
+        }, {
+          $set: _.mergeWith(stored, item, (a, b) => _.isArray(a) ? a.concat(b) : undefined)
+        })
+      }
+    }
     db.close()
+  }
+
+  /**
+   * Add item set as separate component, makes things easier to work with.
+   */
+  addItemSet (item) {
+    const set = { name: 'Set' }
+
+    if (item.drops) set.drops = item.drops
+    if (item.components && item.name.includes('Prime')) {
+      let ducats = 0
+
+      for (let component of item.components) {
+        ducats += component.ducats
+      }
+      set.ducats = ducats
+    }
+    item.components = [set]
+  }
+
+  /**
+   * Useful links, especially necessary on list view where only limited amounts
+   * of data are displayed.
+   */
+  addItemUrl (item) {
+    item.apiUrl = `/warframe/v1/items/${encodeURIComponent(item.name)}`
+    item.webUrl = `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`
+    item.imgUrl = `/img/warframe/items/${item.imageName}`
+
+    for (let component of item.components) {
+      component.apiUrl = `/warframe/v1/items/${encodeURIComponent(item.name)}`
+      component.webUrl = `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`
+      component.imgUrl = component.name === 'Set' ? item.imgUrl : `/img/warframe/items/${component.name.split(' ').join('-').toLowerCase()}.png`
+    }
+  }
+
+  /**
+   * Add economy data defaults
+   */
+  addEconomyData (item) {
+    const economyData = {
+      median: null,
+      min: null,
+      max: null,
+      offers: 0
+    }
+    for (let component of item.components) {
+      component.selling = component.buying = economyData
+    }
+  }
+
+  /**
+   * The warframe-items package comes with pre-rendered images
+   */
+  async copyImage (item) {
+    const original = `${process.cwd()}/node_modules/warframe-items/data/img/${item.imageName}`
+    const target = `${process.cwd()}/assets${item.imgUrl}`
+
+    if (!await fs.pathExists(target)) {
+      await fs.copy(original, target)
+    }
   }
 
   async verifyIndices () {

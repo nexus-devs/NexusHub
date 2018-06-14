@@ -22,7 +22,7 @@ import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
 
 /**
- * Vue Component
+ * Main application wrapper. Anything 'global' goes here.
  */
 export default {
   components: {
@@ -38,7 +38,21 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ]
   },
+  computed: {
+    route () {
+      return this.$route
+    }
+  },
+  watch: {
+    // Apply query params to state if applicable.
+    route () {
+      this.$store.dispatch('applyTimeQuery', this.$route)
+      this.$store.dispatch('applyInputQuery', this.$route)
+    }
+  },
   beforeCreate () {
+    this.$store.dispatch('applyTimeQuery', this.$route)
+    this.$store.dispatch('applyInputQuery', this.$route)
     Vue.use(VueTouch)
   },
   mounted () {

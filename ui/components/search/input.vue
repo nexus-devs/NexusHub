@@ -29,7 +29,6 @@
 <script>
 import button from './modules/button.vue' // to get the search function
 
-
 export default {
 
   data () {
@@ -55,6 +54,13 @@ export default {
       setSearchInput (state, input) {
         state.input = input
       }
+    },
+    actions: {
+      applyInputQuery ({ commit }, route) {
+        if (route.query.input) {
+          commit('setSearchInput', route.query.input)
+        }
+      }
     }
   },
 
@@ -62,15 +68,15 @@ export default {
     async search (event) {
       this.input = event.target.value
       this.$store.commit('setSearchInput', event.target.value)
-      await this.fetchSuggestions()
 
       // Update if autocomplete doesn't match input in entered letters
-      if (!this.autocomplete.name.startsWith(this.input)) {
+      if (!this.autocomplete.name.startsWith(event.target.value)) {
         this.autocomplete = {
           name: '',
           type: 'Any'
         }
       }
+      await this.fetchSuggestions()
     },
     async fetchSuggestions () {
       let result = []
