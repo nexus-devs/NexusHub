@@ -82,7 +82,7 @@ export default {
      * we need for the view to render the new height first.
      */
     results () {
-      setTimeout(() => this.onResize(), 1)
+      setTimeout(() => this.onResize(), 75)
     }
   },
 
@@ -186,11 +186,10 @@ export default {
 @import '~src/styles/partials/importer';
 
 .list-enter-active, .list-leave-active {
-  transition: all 1s;
+  transition: all 0s;
 }
 .list-enter, .list-leave-to {
   opacity: 0;
-  transform: translateY(30px);
 }
 
 .results-container {
