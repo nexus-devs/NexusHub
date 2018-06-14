@@ -83,51 +83,27 @@ class Request extends Endpoint {
    * Save prices/demand in local db for use by other endpoints
    */
   async saveStats (data) {
-    let prices = []
-    let distribution = []
+    let item = await this.db.collection('items').findOne({ name: data.name })
 
-    data.components.forEach(component => {
-      let price = {
-        name: component.name,
+    for (let component of item.components) {
+      let componentStats = data.components.find(c => c.name === component.name)
+      component = Object.assign(component, {
         selling: {
-          avg: component.selling.avg,
-          median: component.selling.median,
-          min: component.selling.min,
-          max: component.selling.max
+          median: componentStats.selling.median,
+          min: componentStats.selling.min,
+          max: componentStats.selling.max,
+          offers: componentStats.selling.offers.count
         },
         buying: {
-          avg: component.buying.avg,
-          median: component.buying.median,
-          min: component.buying.min,
-          max: component.buying.max
-        },
-        combined: {
-          avg: component.combined.avg,
-          median: component.combined.median,
-          min: component.combined.min,
-          max: component.combined.max
+          median: componentStats.buying.median,
+          min: componentStats.buying.min,
+          max: componentStats.buying.max,
+          offers: componentStats.buying.offers.count
         }
-      }
-      prices.push(price)
+      })
+    }
 
-      let dist = {
-        name: component.name,
-        supply: component.selling.offers,
-        demand: component.buying.offers
-      }
-      distribution.push(dist)
-    })
-
-    await this.db.collection('items').updateOne({
-      name: new RegExp('^' + data.name + '$', 'i')
-    }, {
-      $set: {
-        prices,
-        distribution
-      }
-    }, {
-      upsert: true
-    })
+    await this.db.collection('items').updateOne({ name: data.name }, item)
   }
 }
 

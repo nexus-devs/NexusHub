@@ -30,7 +30,7 @@ if (!(process.env.DOCKER && process.env.NODE_ENV === 'production')) {
 
   // Warframe Core node
   cubic.hook('warframe.core', wfhooks.verifyIndices)
-  cubic.hook('warframe.core', wfhooks.verifyItemList)
+  cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
   cubic.use(new Core(config.warframe.core))
 }
 

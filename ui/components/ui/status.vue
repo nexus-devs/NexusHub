@@ -22,7 +22,7 @@ export default {
     setTimeout(() => {
       this.update()
       this.listen()
-    }, 7500)
+    }, 2500)
   },
 
   methods: {

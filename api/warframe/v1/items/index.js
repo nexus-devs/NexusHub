@@ -1,17 +1,29 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 
 /**
- * Contains multi-purpose functions for child-methods and provides default values
+ * Provide list of all items with their fundamental data.
  */
 class List extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.description = 'Get a list of all items.'
     this.schema.url = '/warframe/v1/items'
+    const economyData = {
+      median: Number,
+      min: Number,
+      max: Number,
+      offers: Number
+    }
     this.schema.response = [{
       name: String,
       type: String,
-      components: [ String ],
+      components: [{
+        name: String,
+        ducats: Number,
+        selling: economyData,
+        buying: economyData,
+        imgUrl: String
+      }],
       apiUrl: String,
       webUrl: String,
       imgUrl: String
@@ -26,15 +38,14 @@ class List extends Endpoint {
     let result = []
 
     items.forEach(item => {
-      let data = {
+      result.push({
         name: item.name,
         type: item.type,
-        components: item.components.map(c => c.name),
+        components: item.components,
         apiUrl: item.apiUrl,
         webUrl: item.webUrl,
         imgUrl: item.imgUrl
-      }
-      result.push(data)
+      })
     })
 
     this.cache(result, 60)

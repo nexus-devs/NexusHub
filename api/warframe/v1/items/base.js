@@ -6,21 +6,21 @@ class Item extends Endpoint {
     this.schema.description = 'Get item statistics between a specified time frame.'
     this.schema.url = '/warframe/v1/items/:item'
     this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }
+    const economyData = {
+      median: Number,
+      min: Number,
+      max: Number,
+      offers: Number
+    }
     this.schema.response = {
       name: 'Nikana Prime',
-      type: 'Prime',
+      type: String,
       description: String,
       components: [{
         name: String,
         ducats: Number,
-        drop: [{
-          location: String,
-          type: {
-            _type: String,
-            _description: 'Type of the drop. (Relics, Enemies, Missions)'
-          },
-          chance: Number
-        }],
+        selling: economyData,
+        buying: economyData,
         imgUrl: String
       }],
       imgUrl: '/img/warframe/items/nikana-prime.png',
@@ -32,22 +32,15 @@ class Item extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const item = req.params.item
+    const name = req.params.item
 
-    let doc = await this.db.collection('items').findOne({
-      name: new RegExp('^' + item + '$', 'i')
+    let item = await this.db.collection('items').findOne({
+      name: new RegExp('^' + name + '$', 'i')
     })
-    if (doc) {
-      let result = {
-        name: doc.name,
-        type: doc.type,
-        description: doc.description,
-        components: doc.components,
-        imgUrl: doc.imgUrl,
-        webUrl: doc.webUrl
-      }
-      this.cache(result, 60)
-      res.send(result)
+    if (item) {
+      delete item._id
+      this.cache(item, 60)
+      res.send(item)
     } else {
       let response = {
         error: 'Not found.',

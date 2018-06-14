@@ -2,10 +2,9 @@
 
 # Restart if already running
 if [ "$(docker service ls | grep nexus_dev)" ]; then
-  docker service scale nexus_dev=0
-  docker service scale nexus_dev=1
-  docker service logs nexus_dev -f --raw
-  echo 'restart'
+  docker service scale nexus_dev=0 --detach=true
+  docker service scale nexus_dev=1 --detach=true
+  docker service logs nexus_dev -f --raw --tail 0
   exit
 fi
 

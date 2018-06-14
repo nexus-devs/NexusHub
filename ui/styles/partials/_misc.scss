@@ -7,6 +7,12 @@
 @mixin gradient-background-dg-tri($top, $mid, $bot) {
   background: linear-gradient(to bottom right, $top, $mid, $bot);
 }
+@mixin gradient-border-bottom($top, $bot) {
+  @include gradient-background-dg($top, $bot);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 2px;
+}
 @mixin triangle-left($size, $color) {
   width: 0;
   height: 0;

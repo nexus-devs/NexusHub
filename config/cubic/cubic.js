@@ -4,5 +4,5 @@ const docker = process.env.DOCKER
 module.exports = {
   logLevel: prod ? 'monitor' : 'info',
   skipAuthCheck: prod && docker,
-  throwErrors: !docker
+  throwErrors: !prod
 }
