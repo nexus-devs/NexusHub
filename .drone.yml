@@ -55,7 +55,8 @@ pipeline:
       branch: development
       event: [ push ]
 
-  # Deploy on staging server
+  # Build nexus-stats:staging image and push to dockerhub. Dockerhub will then
+  # trigger a webhook on the staging server to redeploy.
   docker:
     image: alpine/git
     commands:
@@ -67,12 +68,22 @@ pipeline:
       - git checkout master
     when:
       branch: staging
-  publish:
+  publish - prod-image:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
     context: docker/app/prod/
     repo: nexusstats/nexus-stats
     tags: staging
+    no_cache: true
+    secrets: [ docker_username, docker_password ]
+    when:
+      branch: staging
+      event: [ push ]
+  publish - dev-image:
+    image: plugins/docker
+    dockerfile: docker/app/dev/Dockerfile
+    context: docker/app/dev/
+    repo: nexusstats/nexus-stats-dev
     no_cache: true
     secrets: [ docker_username, docker_password ]
     when:
