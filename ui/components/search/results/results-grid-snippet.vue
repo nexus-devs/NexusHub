@@ -70,9 +70,8 @@ a {
      @include shadow-3;
 
      p {
-       opacity: 1;
-       transform: translateY(0);
-       text-shadow: 0px 6px 20px rgba(0, 0, 0, 0.9),0.53px 1.848px 5px rgba(0, 0, 0, 0.79);
+       opacity: 1 !important;
+       transform: translateY(0) !important;
      }
      .result-img-shade {
        height: 125%;
@@ -84,6 +83,7 @@ a {
   }
   &:active {
     transform: scale(0.98) translateY(-5px);
+    @include shadow-2;
   }
 }
 
@@ -166,6 +166,7 @@ a {
       width: calc(100% - 30px);
       opacity: 0;
       transform: translateY(5px);
+      text-shadow: 0px 6px 20px rgba(0, 0, 0, 0.9),0.53px 1.848px 5px rgba(0, 0, 0, 0.79);
       @include ease(0.35s);
     }
   }
