@@ -30,7 +30,9 @@ class Hook {
           await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
             uniqueName: item.uniqueName
           }, {
-            $set: _.merge(stored, item)
+            $set: _.merge(stored || {}, item)
+          }, {
+            upsert: true
           })
         }
       }
@@ -85,18 +87,30 @@ class Hook {
    * Add economy data defaults
    */
   addEconomyData (item, stored) {
-    const economyData = {
-      median: null,
-      min: null,
-      max: null,
-      offers: 0
-    }
+    function r(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
     for (let component of item.components) {
-      const storedComponent = stored.components.find(c => c.name === component.name)
-      if (storedComponent.selling && storedComponent.buying) {
-        continue
+      const current = {
+        median: r(20, 300),
+        min: r(5, 20),
+        max: r(300, 500),
+        offers: r(500, 8000)
       }
-      component.selling = component.buying = economyData
+      const previous = {
+        median: r(20, 300),
+        min: r(5, 20),
+        max: r(300, 500),
+        offers: r(500, 8000)
+      }
+      if (stored) {
+        const storedComponent = stored.components.find(c => c.name === component.name)
+        if (storedComponent && storedComponent.selling && storedComponent.buying) {
+          continue
+        }
+      }
+      // component.selling = component.buying = economyData
+      component.selling = component.buying = { current, previous }
     }
   }
 
