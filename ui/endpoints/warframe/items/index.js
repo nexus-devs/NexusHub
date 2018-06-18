@@ -6,8 +6,8 @@ const Endpoint = cubic.nodes.ui.core.Endpoint
 class Index extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.url = '/warframe/items/:item'
-    this.schema.view = '/sites/warframe/items/index.vue'
+    this.schema.url = '/warframe/items/:item/price'
+    this.schema.view = '/sites/warframe/items/price.vue'
   }
 }
 

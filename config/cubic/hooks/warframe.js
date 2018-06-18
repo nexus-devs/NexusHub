@@ -20,17 +20,19 @@ class Hook {
 
         this.addItemSet(item)
         this.addItemUrl(item)
+        this.addEconomyData(item, stored)
         if (!stored) {
-          this.addEconomyData(item)
           this.copyImage(item)
         }
         delete item.imageName
 
-        await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
-          uniqueName: item.uniqueName
-        }, {
-          $set: _.mergeWith(stored, item, (a, b) => _.isArray(a) ? a.concat(b) : undefined)
-        })
+        if (!_.isEqual(stored, item)) {
+          await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
+            uniqueName: item.uniqueName
+          }, {
+            $set: _.merge(stored, item)
+          })
+        }
       }
     }
     db.close()
@@ -51,7 +53,11 @@ class Hook {
       }
       set.ducats = ducats
     }
-    item.components = [set]
+    if (item.components) {
+      item.components.unshift(set)
+    } else {
+      item.components = [set]
+    }
   }
 
   /**
@@ -68,12 +74,17 @@ class Hook {
       component.webUrl = `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`
       component.imgUrl = component.name === 'Set' ? item.imgUrl : `/img/warframe/items/${component.name.split(' ').join('-').toLowerCase()}.png`
     }
+    if (item.abilities) {
+      for (let ability of item.abilities) {
+        ability.imgUrl = '/img/placeholder.svg'
+      }
+    }
   }
 
   /**
    * Add economy data defaults
    */
-  addEconomyData (item) {
+  addEconomyData (item, stored) {
     const economyData = {
       median: null,
       min: null,
@@ -81,6 +92,10 @@ class Hook {
       offers: 0
     }
     for (let component of item.components) {
+      const storedComponent = stored.components.find(c => c.name === component.name)
+      if (storedComponent.selling && storedComponent.buying) {
+        continue
+      }
       component.selling = component.buying = economyData
     }
   }

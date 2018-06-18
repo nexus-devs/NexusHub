@@ -8,7 +8,7 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.16);
 }
 @mixin shadow-2() {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.04), 0 3px 6px rgba(0,0,0,0.14);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.14), 0 3px 6px rgba(0,0,0,0.14);
 }
 @mixin shadow-3() {
   box-shadow: 0 10px 30px rgba(0,0,0,0.20), 0 6px 12px rgba(0,0,0,0.20);

@@ -13,7 +13,7 @@
     "changelogs": "node build/changelogs/index.js",
     "toggle-webpack": "node build/webpack/toggle.js"
   },
-  "author": "",
+  "author": "Kaptard",
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "cubic": "1.1.1",

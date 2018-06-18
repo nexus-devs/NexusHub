@@ -10,5 +10,5 @@
  @mixin field() {
    border-radius: 2px;
    @include gradient-background-dg($color-bg-lighter, $color-bg-light);
-   @include shade-1;
+   @include shadow-2;
  }
