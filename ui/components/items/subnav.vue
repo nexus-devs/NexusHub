@@ -7,13 +7,11 @@
       <div class="item-info">
         <h1>{{ item.name }}</h1>
         <span v-for="component in item.components" :key="component.name"
-              :class="{ selected: components.find(c => c.name === component.name) }">
+              :class="{ selected: selected === component.name }"
+              @click="selectTag">
           {{ component.name }}
         </span>
       </div>
-    </div>
-    <div class="item-links">
-      <!-- pseudo sub page links go here -->
     </div>
     <div class="time-container">
       <span>Comparing </span>
@@ -37,26 +35,15 @@ export default {
     item () {
       return this.$store.state.items.item
     },
-    components () {
-      const selected = this.$store.state.items.selected.components
-
-      if (selected.length) {
-        return selected
-      } else {
-        return this.$store.state.items.item.components
-      }
+    selected () {
+      return this.$store.state.items.selected.component
     }
   },
 
   methods: {
     selectTag (e) {
       const tag = e.srcElement.outerText
-
-      if (this.components.includes(tag)) {
-        this.components.splice(this.components.indexOf(tag), 1)
-      } else {
-        this.components.push(tag)
-      }
+      this.$store.commit('setItemComponent', tag)
     }
   }
 }
@@ -87,6 +74,7 @@ nav {
     align-items: center;
 
     .item-img {
+      display: flex;
       position: relative;
       overflow: hidden;
       border-radius: 50%;
@@ -98,9 +86,9 @@ nav {
       background: $color-bg;
 
       img {
-        max-height: 250%;
-        max-width: 250%;
-        transform: translateX(-10%) translateY(-5%);
+        max-height: 150%;
+        max-width: 150%;
+        margin-left: -25%;
       }
     }
 
@@ -115,12 +103,12 @@ nav {
         margin-top: -5px;
         margin-right: 7px;
         font-size: 0.85em;
-        color: $color-font-subtle;
+        color: $color-font-body;
         cursor: pointer;
         @include ease(0.3s);
 
         &.selected {
-          color: $color-font-body;
+          color: white;
         }
         &:hover {
           color: white;

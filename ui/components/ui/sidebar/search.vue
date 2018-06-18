@@ -180,7 +180,7 @@ export default {
       position: relative;
       overflow: hidden;
       text-align: center;
-      background: $color-bg-lighter;
+      background: $color-bg;
       border-radius: 2px;
       margin-right: 10px;
 
