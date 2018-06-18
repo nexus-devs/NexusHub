@@ -6,7 +6,7 @@
       </div>
       <div class="item-info">
         <h1>{{ item.name }}</h1>
-        <span v-for="component in item.components" :key="component.name"
+        <span v-for="component in item.components" v-if="item.components.length > 1" :key="component.name"
               :class="{ selected: selected === component.name }"
               @click="selectTag">
           {{ component.name }}
@@ -63,6 +63,7 @@ nav {
   align-items: center;
   box-sizing: border-box;
   padding: 10px 40px 10px 85px;
+  min-height: 56px;
   @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
 
   @media (max-width: $breakpoint-m) {

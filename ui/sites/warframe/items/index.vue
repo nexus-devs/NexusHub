@@ -18,6 +18,7 @@
               <div class="item-profile-data-info">
                 <h1>{{ item.name }}</h1>
                 <span v-for="tag in item.tags" :key="tag">{{ tag }}</span>
+                <span v-if="item.components.length > 1">{{ component.name }}</span>
               </div>
               <div class="item-profile-data-lower">
                 <div v-if="item.abilities" class="item-profile-data-abilities item-data-wrapper">
@@ -28,14 +29,19 @@
                 <div class="item-profile-data-price item-data-wrapper">
                   <div class="item-data">
                     <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-16">
-                    <span class="item-data-price">{{ price }}p</span>
+                    <span class="item-data-price">
+                      {{ priceCurrent }}p
+                    </span>
+                    <span :class="{ negative: priceDiff.percentage < 0 }" class="item-data-price-diff">
+                      {{ priceDiff.percentage > 0 ? '+' : '' }}{{ priceDiff.percentage }}%
+                    </span>
                   </div>
                 </div>
                 <div v-if="component.ducats" class="item-profile-data-ducats item-data-wrapper">
                   <div class="item-data">
                     <img src="/img/warframe/ui/ducats.svg" alt="Ducats per Platinum" class="ico-h-16">
                     <span>{{ component.ducats }} Ducats</span>
-                    <span class="ducats">{{ (component.ducats / price).toFixed(2) }}</span>
+                    <span class="ducats">{{ (component.ducats / priceCurrent).toFixed(2) }}</span>
                     <span>Ducats/Plat</span>
                   </div>
                 </div>
@@ -81,8 +87,18 @@ export default {
       const component = item.components.find(c => c.name === selected)
       return component
     },
-    price () {
-      return (this.component.selling.median + this.component.buying.median) / 2
+    priceCurrent () {
+      return Math.round((this.component.selling.current.median + this.component.buying.current.median) / 2)
+    },
+    pricePrevious () {
+      return Math.round((this.component.selling.previous.median + this.component.buying.previous.median) / 2)
+    },
+    priceDiff () {
+      const value = this.priceCurrent - this.pricePrevious
+      return {
+        value,
+        percentage: (value / this.pricePrevious * 100).toFixed(2)
+      }
     }
   },
 
@@ -213,8 +229,8 @@ header {
       margin-top: 5px;
     }
     span {
-      display: inline-block;
-      margin-top: -5px;
+      position: relative;
+      top: -5px;
       color: white;
     }
     span:after {
@@ -226,7 +242,7 @@ header {
   }
   .item-profile-data-lower {
     display: flex;
-    margin-top: 22px;
+    margin-top: 18px;
   }
   .item-data {
     display: inline-block;
@@ -249,11 +265,17 @@ header {
     }
   }
   .item-data-wrapper {
-    margin-right: 15px;
+    margin-right: 5px;
   }
   .item-profile-data-price, .item-profile-data-ducats {
     img {
       padding: 3.5px;
+    }
+    span.negative {
+      color: $color-error;
+    }
+    .item-data-price-diff {
+      color: $color-primary;
     }
   }
   .ducats {

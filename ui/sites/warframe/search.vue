@@ -134,13 +134,13 @@ export default {
         category: 'items',
         unit: ' Sellers',
         hidden: true,
-        path: 'selling.offers'
+        path: 'selling.current.offers'
       }, {
         name: 'Demand',
         category: 'items',
         unit: ' Buyers',
         hidden: true,
-        path: 'buying.offers'
+        path: 'buying.current.offers'
       }],
 
       // Keep track of activated filters separately in the order in which they
@@ -236,7 +236,7 @@ export default {
                 webUrl: item.webUrl,
                 category: item.category,
                 rarity: item.rarity,
-                price: Math.round((component.selling.median + component.buying.median) / 2),
+                price: Math.round((component.selling.current.median + component.buying.current.median) / 2),
                 results: 'items',
                 description: description.join(' ')
               }))
