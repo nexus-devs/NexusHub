@@ -5,7 +5,7 @@ pipeline:
       - npm install
       - npm run toggle-webpack
     when:
-      branch: [ development, greenkeeper/* ]
+      branch: [ development, feat/*, fix/*, greenkeeper/* ]
 
   # Smoke tests
   lint:
@@ -13,14 +13,14 @@ pipeline:
     commands:
       - npm run lint
     when:
-      branch: [ development, greenkeeper/* ]
+      branch: [ development, feat/*, fix/*, greenkeeper/* ]
 
   test - development:
     image: node
     commands:
       - npm test
     when:
-      branch: [ development, greenkeeper/* ]
+      branch: [ development, feat/*, fix/*, greenkeeper/* ]
 
   test - production:
     image: node
@@ -28,7 +28,7 @@ pipeline:
       - npm run build -- staging
       - npm test --production
     when:
-      branch: [ development, greenkeeper/* ]
+      branch: [ development, feat/*, fix/*, greenkeeper/* ]
 
   # Add to staging branch
   stage:
@@ -68,6 +68,7 @@ pipeline:
       - git checkout master
     when:
       branch: staging
+
   publish - prod-image:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
@@ -79,6 +80,7 @@ pipeline:
     when:
       branch: staging
       event: [ push ]
+
   publish - dev-image:
     image: plugins/docker
     dockerfile: docker/app/dev/Dockerfile
