@@ -41,6 +41,11 @@ header {
     animation-timing-function: ease-in-out;
     animation-duration: 35s;
     animation-iteration-count: infinite;
+
+    @media (max-width: $breakpoint-s) {
+      width: 150%;
+      height: 150%;
+    }
   }
 }
 

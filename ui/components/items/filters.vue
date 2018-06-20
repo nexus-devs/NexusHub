@@ -220,7 +220,7 @@ export default {
 .filters {
   margin-top: 80px;
   padding: 15px;
-  @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
+  background: $color-bg-transparent;
 
   @media (max-width: $breakpoint-m) {
     margin-top: 70px;

@@ -64,10 +64,18 @@ nav {
   box-sizing: border-box;
   padding: 10px 40px 10px 85px;
   min-height: 56px;
-  @include gradient-background-dg($color-bg-transparent-1, $color-bg-transparent-2);
+  background: $color-bg-transparent;
 
   @media (max-width: $breakpoint-m) {
     padding: 10px 40px 10px 25px;
+  }
+
+  /**
+   * This subnav just becomes useless noise on mobile. Time ranges would have
+   * to be hidden anyways and the components are too small to tap reliably.
+   */
+  @media (max-width: $breakpoint-s) {
+    display: none;
   }
 
   .item {
@@ -130,10 +138,6 @@ nav {
     span span {
       color: white;
       margin-left: 5px;
-    }
-
-    @media (max-width: $breakpoint-s) {
-      display: none;
     }
   }
 

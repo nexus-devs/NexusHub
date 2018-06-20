@@ -5,7 +5,11 @@
     </sidebar>
     <app-content>
       <subnav/>
-      <ui-header/>
+      <ui-header class="header-bg">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img-blur">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img">
+        <div class="item-img-shade"/>
+      </ui-header>
       <header>
         <div class="container">
           <div class="item-profile">
@@ -50,8 +54,15 @@
           </div>
         </div>
       </header>
-      <section class="container">
-        <!-- placeholder -->
+      <nav class="subnav">
+        <div class="container">
+          <router-link :to="itemUrl">Overview</router-link>
+          <router-link :to="`${itemUrl}/prices`">Prices</router-link>
+          <router-link :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
+        </div>
+      </nav>
+      <section>
+
       </section>
     </app-content>
   </div>
@@ -80,6 +91,9 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    itemUrl () {
+      return `/warframe/items/${this.item.name.replace(/ /g, '-').toLowerCase()}`
     },
     component () {
       const item = this.$store.state.items.item
@@ -178,14 +192,85 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-header {
-  padding: 0;
-  box-shadow: none;
-}
+/**
+ * Header background. Item image will be visible here on mobile.
+ */
+ .header-bg {
+   padding: 130 0;
+   box-shadow: none;
+
+   img {
+     position: absolute;
+     bottom: -40%;
+     left: 20%;
+     max-height: 150%;
+
+     @media (max-width: $breakpoint-s) {
+       right: 0;
+       max-height: 90%;
+       bottom: 0;
+     }
+   }
+   .item-img {
+     display: none;
+     border-radius: 999px;
+
+     @media (max-width: $breakpoint-s) {
+       display: block;
+     }
+   }
+   .item-img-shade {
+     position: absolute;
+     z-index: 0;
+     height: 90%;
+     width: 100%;
+     bottom: 0;
+     left: 0;
+     @include gradient-background(transparent, $color-bg-transparent-light);
+
+     @media (max-width: $breakpoint-s) {
+      @include gradient-background(transparent, $color-bg);
+     }
+   }
+   .item-img-blur {
+     position: absolute;
+     z-index: 0;
+     top: 75%;
+     left: -50%;
+     max-height: 100%;
+     max-width: 150%;
+     height: 100%;
+     width: 150%;
+     filter: blur(120px) brightness(110%);
+
+     @media (max-width: $breakpoint-s) {
+       left: auto;
+       right: -66%;
+       top: 0;
+       max-height: 200%;
+       max-width: 200%;
+       height: 200%;
+       width: 200%;
+     }
+   }
+
+   @media (max-width: $breakpoint-s) {
+     padding: 150 0;
+     will-change: padding;
+   }
+   /deep/ .container {
+     padding: 0;
+   }
+ }
+
+/**
+ * Item header data
+ */
 .item-profile {
+  display: flex;
   position: relative;
   top: -80px;
-  display: flex;
+  margin-bottom: -80px;
 }
 .item-profile-img {
   display: flex;
@@ -193,8 +278,8 @@ header {
   align-items: center;
   position: relative;
   overflow: hidden;
-  height: 140px;
-  width: 140px;
+  height: 135px;
+  flex: 0 0 135px;
   background: $color-bg;
   margin-right: 25px;
   @include shadow-1;
@@ -203,7 +288,7 @@ header {
     position: relative;
     z-index: 1;
     max-height: 70%;
-    border-radius: 128px;
+    border-radius: 999px;
   }
   .item-profile-img-blur {
     position: absolute;
@@ -222,6 +307,9 @@ header {
     left: 0;
     @include gradient-background(transparent, $color-bg);
   }
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
 }
 .item-profile-data {
   .item-profile-data-info {
@@ -239,16 +327,28 @@ header {
     span:last-of-type:after {
       content: ''
     }
+
+    @media (max-width: $breakpoint-s) {
+      margin-top: -5px;
+    }
   }
   .item-profile-data-lower {
     display: flex;
-    margin-top: 18px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+    margin-top: 15px;
+
+    @media (max-width: $breakpoint-s) {
+      margin-top: 30px;
+    }
   }
   .item-data {
     display: inline-block;
     padding: 8px;
     background: $color-bg;
     margin-right: 6px;
+    margin-bottom: 8px;
 
     span {
       color: white;
@@ -263,9 +363,6 @@ header {
     span:last-of-type {
       border-right: none;
     }
-  }
-  .item-data-wrapper {
-    margin-right: 5px;
   }
   .item-profile-data-price, .item-profile-data-ducats {
     img {
@@ -286,6 +383,40 @@ header {
   .ducats ~ span {
     padding-left: 0 !important;
     color: $color-font-body;
+  }
+}
+
+/**
+ * Sub-page nav
+ */
+.subnav {
+  margin-top: 40px;
+  border-top: 1px solid $color-subtle-dark;
+  @include shadow-1;
+
+  a {
+    @include ie;
+    display: inline-block;
+    padding: 17.5px 20px;
+    margin-right: 5px;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    border-bottom: 1px solid transparent;
+
+    &:before {
+      border-radius: 0;
+    }
+  }
+  a.router-link-active {
+    @include gradient-border-bottom($color-primary, $color-accent);
+
+    &:hover {
+      @include gradient-border-bottom($color-primary, $color-accent);
+    }
+  }
+  @media (max-width: $breakpoint-s) {
+    margin-top: 20px;
   }
 }
 </style>
