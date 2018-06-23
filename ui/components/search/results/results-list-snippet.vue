@@ -57,7 +57,6 @@ a {
   border-radius: 2px;
   padding: 10px 20px;
   margin-bottom: 8px;
-  background: $color-bg;
   @include ease(0.05s);
 
   &:hover {

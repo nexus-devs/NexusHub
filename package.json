@@ -30,7 +30,7 @@
     "moment": "^2.22.2",
     "tween.js": "^16.6.0",
     "vue-analytics": "^5.12.2",
-    "warframe-items": "1.13.2"
+    "warframe-items": "1.19.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

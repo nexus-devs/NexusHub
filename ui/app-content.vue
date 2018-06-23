@@ -73,8 +73,6 @@ export default {
 }
 
 .app-content {
-  will-change: transform;
-
   // Disable accidental text selection on sidebar touch
   &.deltaX {
     -webkit-user-select: none;
@@ -88,11 +86,11 @@ export default {
 }
 
 .zoom-enter-active, .fade-leave-active {
-  @include ease(0.3s);
+  @include ease(0.4s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(1.005) translateY(3px);
-  transform-origin: 50%;
+  transform: scale(1.010);
+  transform-origin: center;
   opacity: 0.75;
 }
 
