@@ -47,11 +47,11 @@ class Hook {
     const set = { name: 'Set' }
 
     if (item.drops) set.drops = item.drops
-    if (item.components && item.name.includes('Prime')) {
+    if (item.components && item.components[0].ducats) {
       let ducats = 0
 
       for (let component of item.components) {
-        ducats += component.ducats
+        ducats += component.ducats ? component.ducats : 0
       }
       set.ducats = ducats
     }

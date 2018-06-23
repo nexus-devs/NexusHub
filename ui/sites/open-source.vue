@@ -8,9 +8,8 @@
         <h1>Open-Source</h1>
         <p>
           Nexus-Stats is completely open source. That means you  can see exactly
-          how the data we're displaying is gathered, but even more importantly: If
-          you know how to program, you can shape this platform however you want it
-          to be!
+          how the data we're displaying is gathered, but even more importantly: you
+          can shape this platform however you want it to be!
         </p>
       </ui-header>
       <div class="container">

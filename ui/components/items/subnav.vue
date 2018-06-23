@@ -55,8 +55,8 @@ export default {
 @import '~src/styles/partials/importer';
 
 nav {
-  position: absolute;
-  z-index: 1;
+  position: fixed;
+  z-index: 3;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -65,6 +65,7 @@ nav {
   padding: 10px 40px 10px 85px;
   min-height: 56px;
   background: $color-bg-transparent;
+  backdrop-filter: blur(10px);
 
   @media (max-width: $breakpoint-m) {
     padding: 10px 40px 10px 25px;
@@ -173,7 +174,7 @@ nav {
       }
       .suggestions {
         padding: 10px 15px;
-        background: rgba(15, 20, 25, 0.35);
+        background: $color-bg-transparent;
         border-radius: 2px;
         margin-top: 15px;
 

@@ -36,7 +36,7 @@ export default {
     position: fixed;
     width: calc(100% - 50px);
     padding: 14px 25px;
-    z-index: 2;
+    z-index: 3;
     background: $color-bg-dark;
     align-items: center;
     @include shadow-1;
