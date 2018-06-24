@@ -14,6 +14,9 @@
             <div v-for="notification in unread" :key="notification.title" class="notification">
               <h4>{{ notification.title }}</h4>
               <p>{{ notification.body }}</p>
+              <div v-if="notification.buttons" class="footer">
+                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">{{ button.text }}</button>
+              </div>
               <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20" @click="dismiss(notification)">
             </div>
           </div>
@@ -45,7 +48,9 @@ export default {
 
   watch: {
     unread () {
-      this.visible = true
+      if (this.unread.length) {
+        this.visible = true
+      }
     }
   },
 
@@ -169,6 +174,7 @@ export default {
 
   p {
     padding-top: 0;
+    margin-top: 3px;
   }
   .dismiss {
     position: absolute;
@@ -176,6 +182,25 @@ export default {
     right: 15px;
     @include ie;
     padding: 8px;
+  }
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.footer /deep/ button {
+  @include gradient-background-dg(transparent, transparent);
+  border: 1px solid $color-subtle;
+  margin-right: 10px;
+  font-size: 0.9em;
+  @include ie;
+  @include shadow-0;
+  @include ease(0.25s);
+  border-radius: 9999px !important;
+
+  &:hover {
+    @include gradient-background-dg($color-primary, $color-accent);
   }
 }
 
