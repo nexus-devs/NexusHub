@@ -49,10 +49,27 @@ export default {
   methods: {
     move (e) {
       if (e.isFinal) {
-        return this.$store.commit('addNotification', {
-          title: 'A goose approaches. 🦆',
-          body: 'Which path will you take?'
-        })
+        const response = () => {
+          this.$store.commit('addNotification', {
+            title: 'Your deeds have been noted.',
+            body: 'The goose does not forget.'
+          })
+          this.$store.commit('removeNotification', {
+            title: 'A goose approaches.'
+          })
+        }
+
+        setTimeout(() => this.$store.commit('addNotification', {
+          title: 'A goose approaches.',
+          body: 'Which path will you take?',
+          buttons: [{
+            text: 'Embrace the goose',
+            fn: response
+          }, {
+            text: 'Punch it',
+            fn: response
+          }]
+        }), 500)
       }
       this.position = [e.deltaX, e.deltaY]
     }
