@@ -49,9 +49,9 @@ export default {
   methods: {
     move (e) {
       if (e.isFinal) {
-        return this.$store.dispatch('pushNotification', {
-          title: '( ͡° ͜ʖ ͡°)',
-          body: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
+        return this.$store.commit('addNotification', {
+          title: 'A goose approaches. 🦆',
+          body: 'Which path will you take?'
         })
       }
       this.position = [e.deltaX, e.deltaY]

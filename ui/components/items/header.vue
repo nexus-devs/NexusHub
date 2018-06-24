@@ -188,12 +188,12 @@ export default {
  * Header background. Item image will be visible here on mobile.
  */
  .header-bg {
-   padding: 130 0;
+   padding: 135 0;
    box-shadow: none;
    z-index: 0;
 
    /deep/ .background {
-     z-index: 2;
+     display: none;
    }
    img {
      position: absolute;
@@ -222,7 +222,6 @@ export default {
      width: 100%;
      bottom: 0;
      left: 0;
-     @include gradient-background(transparent, $color-bg-transparent-light);
 
      @media (max-width: $breakpoint-s) {
        height: 70%;
@@ -251,10 +250,6 @@ export default {
      }
    }
 
-   @media (max-width: $breakpoint-s) {
-     padding: 150 0;
-     will-change: padding;
-   }
    /deep/ .container {
      padding: 0;
    }

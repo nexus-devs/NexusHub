@@ -6,7 +6,6 @@
       <bottom/>
     </div>
     <status/>
-    <notification/>
   </div>
 </template>
 
@@ -16,7 +15,6 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
-import notification from 'src/components/ui/notification.vue'
 import navigation from 'src/components/ui/nav.vue'
 import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
@@ -26,7 +24,6 @@ import bottom from 'src/components/ui/footer.vue'
  */
 export default {
   components: {
-    notification,
     navigation,
     status,
     bottom

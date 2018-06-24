@@ -66,13 +66,6 @@ export default {
   beforeCreate () {
     Vue.use(VueObserveVisibility)
     Vue.use(VueAffix)
-    this.$store.commit('showSidebar')
-    this.$store.commit('keepSidebarVisible', true)
-  },
-
-  beforeDestroy () {
-    this.$store.commit('hideSidebar')
-    this.$store.commit('keepSidebarVisible', false)
   },
 
   beforeMount () {
