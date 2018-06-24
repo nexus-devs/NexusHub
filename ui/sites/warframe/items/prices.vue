@@ -28,18 +28,8 @@ export default {
     'item-header': itemheader
   },
 
-  beforeCreate () {
-    this.$store.commit('showSidebar')
-    this.$store.commit('keepSidebarVisible', true)
-  },
-
   beforeMount () {
     // this.subscribe() // requires on-route change destructor
-  },
-
-  beforeDestroy () {
-    this.$store.commit('hideSidebar')
-    this.$store.commit('keepSidebarVisible', false)
   },
 
   asyncData ({ store, route }) {
