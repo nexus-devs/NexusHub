@@ -2,7 +2,7 @@
   <footer>
     <div class="container">
       <div class="row row-b">
-        <v-touch class="col-b" @pan="move">
+        <v-touch class="col-b goosetainer" @pan="move">
           <img :style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }" src="/img/footer/nexus-logo.svg" alt="Nexus-Stats"
                class="ico-h-28 logo">
           <img src="/img/memes/goose.png" class="ico-48 goose">
@@ -126,7 +126,7 @@ export default {
       padding-bottom: 60px;
       padding-right: 20px;
 
-      @media(max-width: $breakpoint-s) {
+      @media (max-width: $breakpoint-s) {
         margin-top: 10px;
         padding-bottom: 0;
       }
@@ -139,8 +139,14 @@ export default {
       z-index: 0;
       border-radius: 60px;
 
-      @media (max-width: $breakpoint-s) {
+      @media (max-width: $breakpoint-m) {
         display: none;
+      }
+    }
+
+    .goosetainer {
+      @media(max-width: $breakpoint-m) {
+        pointer-events: none;
       }
     }
 

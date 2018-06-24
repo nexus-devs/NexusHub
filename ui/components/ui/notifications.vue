@@ -93,6 +93,10 @@ export default {
 .notifications {
   position: relative;
   z-index: 1;
+
+  @media (max-width: $breakpoint-s) {
+    position: static;
+  }
 }
 
 .nav-ico {
@@ -117,6 +121,10 @@ export default {
     opacity: 1;
     pointer-events: all;
   }
+  @media (max-width: $breakpoint-s) {
+    margin-top: 7px;
+    width: 100vw;
+  }
 }
 
 .no-notifcations {
@@ -133,6 +141,9 @@ export default {
 
   &.visible {
     pointer-events: all;
+  }
+  @media (max-width: $breakpoint-s) {
+    display: none;
   }
 }
 
@@ -171,8 +182,8 @@ export default {
 .unread-bubble {
   position: absolute;
   z-index: 1;
-  top: 9px;
-  right: 9px;
+  top: 7px;
+  right: 5px;
   font-size: 0.85em;
   color: white;
   height: 11px;
@@ -185,13 +196,17 @@ export default {
   @include ease(0.25s);
   animation-name: pulse;
   animation-timing-function: ease;
-  animation-duration: 1.75s;
+  animation-duration: 1.5s;
   animation-iteration-count: infinite;
 
   &.unread {
     transform: scale(1);
     opacity: 1;
     pointer-events: all;
+  }
+  @media (max-width: $breakpoint-s) {
+    right: 30px;
+    top: 13px;
   }
 }
 
