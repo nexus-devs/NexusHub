@@ -1,6 +1,8 @@
 <template>
   <header>
-    <div class="background"/>
+    <div class="background-container">
+      <div class="background"/>
+    </div>
     <div class="container">
       <slot/>
     </div>
@@ -13,7 +15,6 @@
 
 header {
   position: relative;
-  overflow: hidden;
   @include gradient-background-dg($color-bg-light, $color-bg-lighter);
   @include shade-1;
 
@@ -30,9 +31,13 @@ header {
     color: white;
     font-weight: 400;
   }
-  .background {
+  .background-container {
     position: absolute;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .background {
     background: url('/img/ui/header-blobs.svg');
     background-size: cover;
     width: 100%;

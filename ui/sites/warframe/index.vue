@@ -5,7 +5,9 @@
     </sidebar>
     <app-content>
       <header>
-        <div class="background"/>
+        <div class="background-container">
+          <div class="background"/>
+        </div>
         <div class="search-components container">
           <h1>Item Prices from the Trade Chat.</h1>
           <div class="row">
@@ -17,6 +19,9 @@
           </div>
         </div>
       </header>
+      <section>
+        kek
+      </section>
     </app-content>
   </div>
 </template>
@@ -60,9 +65,13 @@ header {
   align-items: center;
   @include gradient-background-dg($color-bg-light, $color-bg-lighter);
 
-  .background {
+  .background-container {
     position: absolute;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .background {
     background: url('/img/warframe/index-blob.svg');
     background-size: cover;
     width: 100%;
@@ -236,7 +245,6 @@ header {
        font-size: 0.9em;
        margin: 7px 0;
        padding: 3px 10px;
-       border-left: 1px solid $color-subtle;
      }
    }
 

@@ -23,9 +23,7 @@
 <script>
 import tooltip from './modules/tooltip.vue'
 
-
 export default {
-
   components: {
     tooltip
   },
@@ -47,6 +45,7 @@ export default {
       return this.$store.state.sidebar.hidden
     }
   },
+
   beforeCreate () {
     // Reset counters for panel id's when loading a new page
     // These id's also act as mulitpliers for the `top: x px` distance of

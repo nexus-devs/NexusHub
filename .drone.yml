@@ -68,6 +68,7 @@ pipeline:
       - git checkout master
     when:
       branch: staging
+
   publish - prod-image:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
@@ -79,6 +80,7 @@ pipeline:
     when:
       branch: staging
       event: [ push ]
+
   publish - dev-image:
     image: plugins/docker
     dockerfile: docker/app/dev/Dockerfile
