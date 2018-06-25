@@ -188,12 +188,13 @@ export default {
  * Header background. Item image will be visible here on mobile.
  */
  .header-bg {
+   overflow: hidden;
    padding: 135 0;
    box-shadow: none;
    z-index: 0;
 
-   /deep/ .background {
-     display: none;
+   /deep/ .background-container {
+     top: 0;
    }
    img {
      position: absolute;
@@ -231,6 +232,7 @@ export default {
    .item-img-blur {
      position: absolute;
      z-index: 0;
+     opacity: 0.35;
      top: 75%;
      left: -50%;
      max-height: 100%;

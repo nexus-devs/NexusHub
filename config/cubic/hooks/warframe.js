@@ -121,9 +121,11 @@ class Hook {
     const original = `${process.cwd()}/node_modules/warframe-items/data/img/${item.imageName}`
     const target = `${process.cwd()}/assets${item.imgUrl}`
 
-    if (!await fs.pathExists(target)) {
-      await fs.copy(original, target)
-    }
+    try {
+      if (!await fs.pathExists(target)) {
+        await fs.copy(original, target)
+      }
+    } catch (err) {}
   }
 
   async verifyIndices () {
