@@ -1,0 +1,98 @@
+<template>
+  <div class="realtime-user">
+    <div class="profile">
+      <div class="profile-img">
+        <img src="/img/warframe/items/vauban-prime.png" alt="Username">
+        <img src="/img/warframe/items/vauban-prime.png" class="blur">
+      </div>
+      <span class="username">Theroxbeans</span>
+      <p>Selling <span>Neuroptics</span> for <span>25p</span></p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~src/styles/partials/importer';
+
+.realtime-user {
+  @include ie;
+  @include field;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color-bg;
+  height: 168px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  width: 25%;
+  flex-basis: auto;
+
+  &:before {
+    border-radius: 2px;
+  }
+  @media (max-width: $breakpoint-m) {
+    width: inherit;
+    margin-right: 0;
+    height: auto;
+    padding: 10 20px;
+  }
+}
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+
+  .profile-img {
+    position: relative;
+    overflow: hidden;
+    width: 52px;
+    height: 52px;
+    border-radius: 80px;
+    margin-bottom: 10px;
+    background: $color-bg-dark;
+    border: 2px solid $color-font-subtle;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: -40%;
+    max-height: 120%;
+    z-index: 1;
+  }
+  .blur {
+    filter: blur(20px);
+    z-index: 0;
+  }
+  p {
+    color: $color-font-body;
+
+    span {
+      color: white;
+    }
+  }
+  @media (max-width: $breakpoint-m) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+
+    .profile-img {
+      display: none;
+    }
+    .username {
+      margin-right: 20px;
+    }
+    p {
+      margin-left: auto;
+    }
+  }
+}
+</style>

@@ -1,6 +1,5 @@
 <template>
   <div class="item-header">
-    <subnav/>
     <ui-header class="header-bg">
       <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img-blur">
       <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img">
@@ -17,19 +16,16 @@
           <div class="item-profile-data">
             <div class="item-profile-data-info">
               <h1>{{ item.name }}</h1>
-              <span v-for="tag in item.tags" :key="tag">{{ tag }}</span>
-              <span v-if="item.components.length > 1">{{ component.name }}</span>
+              <span v-for="component in item.components" v-if="item.components.length > 1" :key="component.name"
+                    :class="{ selected: selectedComponent === component.name }"
+                    @click="selectComponent">
+                {{ component.name }}
+              </span>
+              <span v-for="tag in item.tags" v-else :key="tag" class="selected">
+                {{ tag }}
+              </span>
             </div>
             <div class="item-profile-data-lower">
-              <!-- Disabled abilities. We currently lack data and images on them
-                   anyway. Besides they make prime frame profiles quite noisy. -->
-              <!--
-              <div v-if="item.abilities" class="item-profile-data-abilities item-data-wrapper">
-                <div v-for="ability in item.abilities" :key="ability.name" class="item-data">
-                  <img :src="ability.imgUrl" :alt="ability.name" class="ico-h-20">
-                </div>
-              </div>
-              -->
               <div class="item-profile-data-price item-data-wrapper">
                 <div class="item-data">
                   <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-16">
@@ -54,10 +50,12 @@
         </div>
       </div>
     </header>
-    <nav class="subnav">
+    <nav ref="subnav" class="subnav">
       <div class="container">
+        <div :style="navPosition" class="subnav-active-highlight"/>
         <router-link :to="itemUrl" exact>Overview</router-link>
         <router-link :to="`${itemUrl}/prices`">Prices</router-link>
+        <router-link :to="`${itemUrl}/trade`">Trade</router-link>
         <router-link :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
       </div>
     </nav>
@@ -67,13 +65,17 @@
 
 
 <script>
-import subnav from 'src/components/items/subnav.vue'
 import header from 'src/components/ui/header.vue'
 
 export default {
   components: {
-    subnav,
     'ui-header': header
+  },
+
+  data () {
+    return {
+      navPosition: {}
+    }
   },
 
   computed: {
@@ -88,6 +90,9 @@ export default {
       const selected = this.$store.state.items.selected.component
       const component = item.components.find(c => c.name === selected)
       return component
+    },
+    selectedComponent () {
+      return this.$store.state.items.selected.component
     },
     priceCurrent () {
       return Math.round((this.component.selling.current.median + this.component.buying.current.median) / 2)
@@ -104,76 +109,28 @@ export default {
     }
   },
 
-  beforeMount () {
-    // this.subscribe() // requires on-route change destructor
-  },
-
-  beforeDestroy () {
-    this.unsubscribe()
-  },
-
-  methods: {
-    async subscribe () {
-      const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
-      this.$cubic.subscribe(itemUrl, data => {
-        this.$store.commit('setItem', data)
-      })
-    },
-    async unsubscribe () {
-      const itemUrl = `/warframe/v1/items/${this.$store.state.items.item.name}/statistics`
-      this.$cubic.unsubscribe(itemUrl)
+  watch: {
+    $route () {
+      setTimeout(() => this.updateNavPosition(), 1)
     }
   },
 
-  storeModule: {
-    name: 'items',
-    state: {
-      item: { name: '' },
-      selected: {
-        component: 'Set',
-        offerType: 'combined',
-        regions: []
-      },
-      patchlogs: {
-        current: 0,
-        active: []
-      }
+  mounted () {
+    this.updateNavPosition()
+  },
+
+  methods: {
+    selectComponent (e) {
+      const tag = e.srcElement.outerText
+      this.$store.commit('setItemComponent', tag)
     },
-
-    mutations: {
-      setItem (state, item) {
-        item.tags = []
-        item.tags.push(item.category)
-        item.tags.push(item.name.includes(' Prime') ? 'Prime' : item.type)
-        state.item = item
-      },
-      setItemComponent (state, component) {
-        state.selected.component = component
-      },
-      setItemOfferType (state, type) {
-        state.selected.offerType = type.toLowerCase()
-      },
-      setItemRegions (state, regions) {
-        state.selected.regions = regions
-      },
-      addItemPatchlog (state, patchlog) {
-        state.patchlogs.current = state.item.patchlogs.findIndex(p => p.name === patchlog.name)
-      },
-      removeItemPatchlog (state, patchlog) {
-        const i = state.patchlogs.active.find(p => p.name === patchlog.name)
-
-        if (i) {
-          state.patchlogs.active.slice(i, 1)
-          state.patchlogs.current = state.item.patchlogs.findIndex(p => p.name === patchlog.name)
-        }
+    updateNavPosition () {
+      const active = this.$refs.subnav.getElementsByClassName('router-link-active')[0]
+      const styles = {
+        left: active.offsetLeft + 'px',
+        width: active.offsetWidth + 'px'
       }
-    },
-
-    actions: {
-      async fetchItemData ({ commit, rootState }, name) {
-        commit('setItem', await this.$cubic.get(`/warframe/v1/items/${name}`))
-        commit('setItemComponent', 'Set')
-      }
+      this.navPosition = styles
     }
   }
 }
@@ -189,12 +146,15 @@ export default {
  */
  .header-bg {
    overflow: hidden;
-   padding: 135 0;
+   padding: 115 0;
    box-shadow: none;
    z-index: 0;
 
    /deep/ .background-container {
      top: 0;
+   }
+   @media (max-width: $breakpoint-s) {
+     padding: 150 0;
    }
    img {
      position: absolute;
@@ -313,6 +273,9 @@ export default {
     span {
       position: relative;
       top: -5px;
+      cursor: pointer;
+    }
+    span.selected {
       color: white;
     }
     span:after {
@@ -370,7 +333,7 @@ export default {
     }
   }
   .ducats {
-    color: #EEBE62 !important;
+    color: $color-primary !important;
     border-right: none !important;
     padding-right: 0 !important;
   }
@@ -396,21 +359,25 @@ export default {
     border-radius: 0px;
     text-transform: uppercase;
     font-size: 0.9em;
-    border-bottom: 1px solid transparent;
 
     &:before {
       border-radius: 0;
     }
   }
-  a.router-link-active {
-    @include gradient-border-bottom($color-primary, $color-accent);
-
-    &:hover {
-      @include gradient-border-bottom($color-primary, $color-accent);
-    }
+  .container {
+    position: relative;
   }
   @media (max-width: $breakpoint-s) {
     margin-top: 20px;
   }
+}
+.subnav-active-highlight {
+  position: absolute;
+  bottom: 0;
+  width: 20px;
+  height: 2px;
+  border-radius: 4px;
+  @include gradient-background-dg($color-primary, $color-accent);
+  @include ease(0.25s);
 }
 </style>

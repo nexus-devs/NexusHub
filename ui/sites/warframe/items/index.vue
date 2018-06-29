@@ -26,14 +26,6 @@ export default {
     sidebar,
     'sidebar-search': sidebarSearch,
     'item-header': itemheader
-  },
-
-  beforeMount () {
-    // this.subscribe() // requires on-route change destructor
-  },
-
-  asyncData ({ store, route }) {
-    return store.dispatch('fetchItemData', route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   }
 }
 </script>
