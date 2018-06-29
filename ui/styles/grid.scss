@@ -20,8 +20,9 @@
  * Sections
  */
 section {
-  padding: 90px 0;
+  padding: 60px 0;
   border-bottom: 1px solid rgba(62,67,72,.4);
+  width: 100%;
 
   &:first-of-type {
     margin-top: 40px;
@@ -59,11 +60,11 @@ section {
 
 .row-pad {
   @extend .row;
-  margin: 0 -30px;
+  margin: 0 -20px;
 
   & > * {
     padding: 15px;
-    margin: 30px;
+    margin: 20px;
   }
 }
 
