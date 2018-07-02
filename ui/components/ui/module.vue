@@ -71,7 +71,6 @@ export default {
 
   a {
     text-transform: uppercase;
-    color: $color-font-body !important;
     margin-left: auto;
     @include ie;
 

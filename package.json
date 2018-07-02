@@ -17,10 +17,10 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "cubic": "1.1.1",
-    "cubic-api": "1.0.12",
+    "cubic-api": "1.1.0",
     "cubic-auth": "1.1.0",
-    "cubic-client": "1.0.7",
-    "cubic-core": "1.0.6",
+    "cubic-client": "1.0.8",
+    "cubic-core": "1.1.0",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.1.1",
     "cubic-ui": "1.4.5",
@@ -29,11 +29,12 @@
     "fuse.js": "^3.2.1",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
+    "requestretry": "^1.13.0",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.2.4",
     "vue-analytics": "^5.12.2",
     "vue-observe-visibility": "^0.4.1",
-    "warframe-items": "1.24.0"
+    "warframe-items": "1.27.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
@@ -48,8 +49,8 @@
     "eslint-plugin-vue": "^4.5.0",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.6.0",
-    "webpack": "^4.12.2"
+    "semantic-release": "^15.6.1",
+    "webpack": "^4.14.0"
   },
   "release": {
     "getLastRelease": "last-release-git"

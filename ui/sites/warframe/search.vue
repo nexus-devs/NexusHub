@@ -187,7 +187,6 @@ export default {
         const items = await dispatch('sanitizeSerpResults', { itemData, B })
         const players = []
         const results = items.concat(players)
-
         commit('setSerpResults', results)
         commit('setSerpOriginalResults', results)
         dispatch('applySerpFilters')

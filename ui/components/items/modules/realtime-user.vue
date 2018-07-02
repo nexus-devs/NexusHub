@@ -3,11 +3,11 @@
     <div class="profile">
       <div class="profile-img">
         <img src="/img/warframe/items/vauban-prime.png" alt="Username">
-        <img src="/img/warframe/items/vauban-prime.png" class="blur">
       </div>
       <span class="username">Theroxbeans</span>
       <p>Selling <span>Neuroptics</span> for <span>25p</span></p>
     </div>
+    <img src="/img/warframe/items/vauban-prime.png" class="background blur">
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
   @include ie;
   @include field;
   position: relative;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,10 +41,15 @@ export default {
     width: inherit;
     margin-right: 0;
     height: auto;
-    padding: 10 20px;
+    padding: 10px 20px;
+  }
+  @media (max-width: $breakpoint-s) {
+    padding: 15px 20px;
   }
 }
 .profile {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,12 +59,10 @@ export default {
   .profile-img {
     position: relative;
     overflow: hidden;
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     border-radius: 80px;
     margin-bottom: 10px;
-    background: $color-bg-dark;
-    border: 2px solid $color-font-subtle;
   }
   img {
     position: absolute;
@@ -67,12 +71,9 @@ export default {
     max-height: 120%;
     z-index: 1;
   }
-  .blur {
-    filter: blur(20px);
-    z-index: 0;
-  }
   p {
     color: $color-font-body;
+    font-size: 0.9em;
 
     span {
       color: white;
@@ -93,6 +94,16 @@ export default {
     p {
       margin-left: auto;
     }
+  }
+}
+.background {
+  position: absolute;
+  left: 0;
+  filter: blur(60px);
+  opacity: 0.33;
+
+  @media (max-width: $breakpoint-m) {
+    display: none;
   }
 }
 </style>
