@@ -5,7 +5,7 @@
         <h2>Economy</h2>
       </div>
     </section>
-    <section>
+    <section v-if="patchlogs">
       <div class="container">
         <h2>Recent Changes</h2>
         <div class="row-pad patchlogs">
@@ -30,7 +30,13 @@ export default {
 
   computed: {
     patchlogs () {
-      return this.$store.state.items.item.patchlogs.slice(0, 3)
+      const item = this.$store.state.items.item
+
+      if (item.patchlogs) {
+        return item.patchlogs.slice(0, 3)
+      } else {
+        return null
+      }
     }
   },
 
@@ -63,7 +69,6 @@ export default {
       max-width: none;
     }
     .body {
-      max-height: 100px;
       text-overflow: ellipsis;
       overflow: hidden;
     }

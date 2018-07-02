@@ -1,15 +1,22 @@
 <template>
-  <section>
-    <div class="container">
-      <h2>Latest Traders</h2>
-      <div class="realtime">
-        <realtime-traders/>
-        <div class="realtime-users row">
-          <realtime-user v-for="n in 6" class="realtime-user col-b"/>
+  <div class="trade">
+    <section>
+      <div class="container">
+        <h2>Latest Offers</h2>
+        <div class="realtime">
+          <realtime-traders/>
+          <div class="realtime-users row">
+            <realtime-user v-for="n in 6" class="realtime-user col-b"/>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+    <section>
+      <div class="container">
+        <h2>Active Offers</h2>
+      </div>
+    </section>
+  </div>
 </template>
 
 

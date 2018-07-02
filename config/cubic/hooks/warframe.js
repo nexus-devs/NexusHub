@@ -1,4 +1,3 @@
-const fs = require('fs-extra')
 const mongodb = require('mongodb').MongoClient
 const Items = require('warframe-items')
 const items = new Items()
@@ -21,10 +20,6 @@ class Hook {
         this.addItemSet(item)
         this.addItemUrl(item)
         this.addEconomyData(item, stored)
-        if (!stored) {
-          this.copyImage(item)
-        }
-        delete item.imageName
 
         if (!_.isEqual(stored, item)) {
           await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
@@ -74,22 +69,24 @@ class Hook {
     for (let component of item.components) {
       component.apiUrl = `/warframe/v1/items/${encodeURIComponent(item.name)}`
       component.webUrl = `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`
-      component.imgUrl = component.name === 'Set' ? item.imgUrl : `/img/warframe/items/${component.name.split(' ').join('-').toLowerCase()}.png`
+      component.imgUrl = component.imageName ? `/img/warframe/items/${component.imageName}` : item.imgUrl
+      delete component.imageName
     }
     if (item.abilities) {
       for (let ability of item.abilities) {
         ability.imgUrl = '/img/placeholder.svg'
       }
     }
+    delete item.imageName
   }
 
   /**
    * Add economy data defaults
    */
   addEconomyData (item, stored) {
-    function r(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+    function r (min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min
+    }
     for (let component of item.components) {
       const current = {
         median: r(20, 300),
@@ -115,19 +112,8 @@ class Hook {
   }
 
   /**
-   * The warframe-items package comes with pre-rendered images
+   * Ensure database indices are set up correctly
    */
-  async copyImage (item) {
-    const original = `${process.cwd()}/node_modules/warframe-items/data/img/${item.imageName}`
-    const target = `${process.cwd()}/assets${item.imgUrl}`
-
-    try {
-      if (!await fs.pathExists(target)) {
-        await fs.copy(original, target)
-      }
-    } catch (err) {}
-  }
-
   async verifyIndices () {
     cubic.log.verbose('Core      | verifying warframe indices')
     const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl)
