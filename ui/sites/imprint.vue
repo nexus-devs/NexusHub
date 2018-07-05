@@ -9,7 +9,7 @@
       </ui-header>
       <div class="container">
         <section>
-          <h2>Nexus-Stats</h2>
+          <h2>NexusHub</h2>
           <p>
             Kilian Volb <br>
             Schillerstr. 13 <br>
@@ -19,7 +19,7 @@
         </section>
         <section>
           <h2>Contact</h2>
-          <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20Nexus-Stats">contact@nexus-stats.com</a>
+          <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub">contact@nexus-stats.com</a>
         </section>
       </div>
     </app-content>

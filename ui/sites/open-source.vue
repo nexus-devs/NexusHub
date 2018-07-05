@@ -7,7 +7,7 @@
       <ui-header>
         <h1>Open-Source</h1>
         <p>
-          Nexus-Stats is completely open source. That means you  can see exactly
+          NexusHub is completely open source. That means you  can see exactly
           how the data we're displaying is gathered, but even more importantly: you
           can shape this platform however you want it to be!
         </p>
@@ -24,7 +24,7 @@
         <section>
           <h2>Contributing</h2>
           <p>
-            If there's anything about Nexus-Stats that you'd like to change,
+            If there's anything about NexusHub that you'd like to change,
             you can actually just do it. To keep everything organized, please
             see our <router-link to="/contribute">contribution guidelines</router-link>
             first.

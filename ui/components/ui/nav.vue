@@ -1,7 +1,7 @@
 <template>
-  <nav class="row">
+  <nav class="nav-main row">
     <div class="col nav-l">
-      <router-link to="/warframe" exact><img src="/img/nav/logo-font.svg" alt="Nexus-Stats Logo" class="ico-h-24"></router-link>
+      <router-link to="/warframe" exact><img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-24"></router-link>
       <!-- <span class="sub">{{ game }}</span> -->
       <slot>
         <!-- Page links will go here -->
@@ -62,7 +62,8 @@ export default {
   nav {
     position: fixed;
     width: calc(100% - 50px);
-    padding: 6.5px 25px;
+    padding: 0 25px;
+    height: 56px;
     z-index: 4;
     background: $color-bg-dark;
     align-items: center;

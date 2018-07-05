@@ -13,7 +13,7 @@
     </section>
     <section>
       <div class="container">
-        <h2>Active Offers</h2>
+        <h2>Active Listings</h2>
       </div>
     </section>
   </div>

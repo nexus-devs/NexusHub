@@ -37,7 +37,11 @@
       </div>
     </template>
     <template slot="footer">
-      <a :href="patchlog.url" target="_blank">
+      <router-link v-if="overview" :to="`${itemName}/patchlogs`">
+        Full Changes
+        <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
+      </router-link>
+      <a v-else :href="patchlog.url" target="_blank">
         Full Patch Notes
         <img src="/img/ui/arrow-right.svg" alt="View full patch notes">
       </a>
@@ -56,12 +60,13 @@ export default {
     module
   },
 
-  props: ['patchlog'],
+  props: ['patchlog', 'overview'],
 
   data () {
     return {
       visible: false,
-      seen: false
+      seen: false,
+      itemName: this.$route.params.item
     }
   },
 
@@ -89,7 +94,6 @@ export default {
 @import '~src/styles/partials/importer';
 
 .patchlog {
-  @include field;
   margin: 30px 0;
 }
 </style>

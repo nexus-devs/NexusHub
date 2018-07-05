@@ -91,6 +91,7 @@ export default {
     this.onResize()
     window.addEventListener('resize', this.onResize)
   },
+
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
   },

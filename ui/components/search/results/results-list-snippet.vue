@@ -75,6 +75,9 @@ a {
 .result {
   @include ease(0.5s);
 
+  .row {
+    justify-content: space-between;
+  }
   .result-title {
     position: relative;
     display: flex;

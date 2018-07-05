@@ -167,10 +167,10 @@ export default {
 }
 
 .notification {
+  @include field;
   position: relative;
   margin: 20px;
   padding: 20px;
-  background: $color-bg;
 
   p {
     padding-top: 0;
