@@ -1,7 +1,7 @@
 <template>
   <div :class="{ offline, sidebarVisible }" class="status">
     <img src="/img/ui/error-loading.svg" class="ico-h-24" alt="loading">
-    <p>{{ offline ? 'Connecting to the Nexus-Stats API...' : 'Connected!' }}</p>
+    <p>{{ offline ? 'Connecting to the NexusHub API...' : 'Connected!' }}</p>
   </div>
 </template>
 

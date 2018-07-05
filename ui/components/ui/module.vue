@@ -43,7 +43,7 @@ export default {
   img {
     margin-top: 20px;
     width: 100%;
-    max-width: 700px;
+    max-width: 650px;
     max-height: 50vh;
     border-radius: 2px;
   }
@@ -57,8 +57,11 @@ export default {
     margin-left: 15px;
     color: white;
   }
+  p, span {
+    color: white;
+  }
   li, p, span {
-    max-width: 600px;
+    max-width: 650px;
   }
 }
 
@@ -70,16 +73,17 @@ export default {
   font-size: 0.85em;
 
   a {
+    display: flex;
+    align-items: center;
     text-transform: uppercase;
     margin-left: auto;
     @include ie;
+    padding: 5px 10px;
 
     &:hover {
       color: white !important;
     }
     img {
-      display: inline-block;
-      vertical-align: middle;
       height: 20px;
       margin-top: -3px;
       margin-left: -2px;

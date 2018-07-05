@@ -1,7 +1,7 @@
 .btn, button {
   -webkit-tap-highlight-color: transparent;
   color: white;
-  border-radius: 2px !important;
+  border-radius: 999px !important;
   @include gradient-background-dg($color-primary, $color-accent);
   @include ease-wubble(0.25s);
   @include shadow-1;
@@ -13,11 +13,10 @@
     border: 0;
   }
   &:hover {
-    transform: translateY(-2px);
     @include shade-1;
   }
   &:active {
-    transform: scale(0.98) translateY(-2px);
+    transform: scale(0.98);
   }
   &:disabled {
     &:hover {

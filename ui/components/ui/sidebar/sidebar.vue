@@ -227,7 +227,7 @@ nav {
         height: 100vh;
         width: 100%;
         z-index: 1;
-        @include gradient-background($color-bg-lighter, $color-bg-light);
+        @include gradient-background(#667382, $color-bg-light);
 
         .nav-lower-backdrop-first-bg {
           height: 56px;

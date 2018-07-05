@@ -15,7 +15,7 @@
 
 header {
   position: relative;
-  @include gradient-background-dg($color-bg-light, $color-bg-lighter);
+  @include gradient-background-dg($color-bg-lighter, $color-bg-light);
   @include shade-1;
 
   .container {

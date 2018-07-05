@@ -25,27 +25,6 @@
                 {{ tag }}
               </span>
             </div>
-            <div class="item-profile-data-lower">
-              <div class="item-profile-data-price item-data-wrapper">
-                <div class="item-data">
-                  <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-16">
-                  <span class="item-data-price">
-                    {{ priceCurrent }}p
-                  </span>
-                  <span :class="{ negative: priceDiff.percentage < 0 }" class="item-data-price-diff">
-                    {{ priceDiff.percentage > 0 ? '+' : '' }}{{ priceDiff.percentage }}%
-                  </span>
-                </div>
-              </div>
-              <div v-if="component.ducats" class="item-profile-data-ducats item-data-wrapper">
-                <div class="item-data">
-                  <img src="/img/warframe/ui/ducats.svg" alt="Ducats per Platinum" class="ico-h-16">
-                  <span>{{ component.ducats }} Ducats</span>
-                  <span class="ducats">{{ (component.ducats / priceCurrent).toFixed(2) }}</span>
-                  <span>Ducats/Plat</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -56,7 +35,7 @@
         <router-link :to="itemUrl" exact>Overview</router-link>
         <router-link :to="`${itemUrl}/prices`">Prices</router-link>
         <router-link :to="`${itemUrl}/trade`">Trade</router-link>
-        <router-link :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
+        <router-link v-if="item.patchlogs" :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
       </div>
     </nav>
   </div>
@@ -93,19 +72,6 @@ export default {
     },
     selectedComponent () {
       return this.$store.state.items.selected.component
-    },
-    priceCurrent () {
-      return Math.round((this.component.selling.current.median + this.component.buying.current.median) / 2)
-    },
-    pricePrevious () {
-      return Math.round((this.component.selling.previous.median + this.component.buying.previous.median) / 2)
-    },
-    priceDiff () {
-      const value = this.priceCurrent - this.pricePrevious
-      return {
-        value,
-        percentage: (value / this.pricePrevious * 100).toFixed(2)
-      }
     }
   },
 
@@ -117,6 +83,11 @@ export default {
 
   mounted () {
     this.updateNavPosition()
+    window.addEventListener('resize', this.updateNavPosition)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateNavPosition)
   },
 
   methods: {
@@ -126,11 +97,13 @@ export default {
     },
     updateNavPosition () {
       const active = this.$refs.subnav.getElementsByClassName('router-link-active')[0]
-      const styles = {
-        left: active.offsetLeft + 'px',
-        width: active.offsetWidth + 'px'
+      if (active) {
+        const styles = {
+          left: active.offsetLeft + 'px',
+          width: active.offsetWidth + 'px'
+        }
+        this.navPosition = styles
       }
-      this.navPosition = styles
     }
   }
 }
@@ -192,13 +165,7 @@ export default {
    .item-img-blur {
      position: absolute;
      z-index: 0;
-     opacity: 0.35;
-     top: 75%;
-     left: -50%;
-     max-height: 100%;
-     max-width: 150%;
-     height: 100%;
-     width: 150%;
+     opacity: 0;
      filter: blur(60px) brightness(1.1) contrast(0.5);
 
      @media (max-width: $breakpoint-s) {
@@ -209,6 +176,7 @@ export default {
        max-width: 200%;
        height: 200%;
        width: 200%;
+       opacity: 0.75;
      }
    }
 
@@ -273,10 +241,12 @@ export default {
     span {
       position: relative;
       top: -5px;
+      color: white;
+      opacity: 0.5;
       cursor: pointer;
     }
     span.selected {
-      color: white;
+      opacity: 1;
     }
     span:after {
       content: ' /\00a0'
@@ -288,58 +258,6 @@ export default {
     @media (max-width: $breakpoint-s) {
       margin-top: -5px;
     }
-  }
-  .item-profile-data-lower {
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    overflow: hidden;
-    margin-top: 15px;
-
-    @media (max-width: $breakpoint-s) {
-      margin-top: 30px;
-    }
-  }
-  .item-data {
-    display: inline-block;
-    padding: 8px;
-    background: $color-bg;
-    margin-right: 6px;
-    margin-bottom: 8px;
-
-    span {
-      color: white;
-      font-size: 0.85em;
-      padding-right: 8px;
-      border-right: 1px solid $color-subtle;
-    }
-    // Every span after first
-    span:nth-of-type(1) ~ span {
-      padding-left: 5px;
-    }
-    span:last-of-type {
-      border-right: none;
-    }
-  }
-  .item-profile-data-price, .item-profile-data-ducats {
-    img {
-      padding: 3.5px;
-    }
-    span.negative {
-      color: $color-error;
-    }
-    .item-data-price-diff {
-      color: $color-primary;
-    }
-  }
-  .ducats {
-    color: $color-primary !important;
-    border-right: none !important;
-    padding-right: 0 !important;
-  }
-  .ducats ~ span {
-    padding-left: 0 !important;
-    color: $color-font-body;
   }
 }
 
@@ -358,7 +276,8 @@ export default {
     margin-right: 5px;
     border-radius: 0px;
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: 0.875em;
+    letter-spacing: 0.5;
 
     &:before {
       border-radius: 0;

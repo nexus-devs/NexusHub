@@ -9,7 +9,7 @@
           <div class="background"/>
         </div>
         <div class="search-components container">
-          <h1>Item Prices from the Trade Chat.</h1>
+          <h1>Find trades from the Trade Chat.</h1>
           <div class="row">
             <search/>
             <timerange/>
@@ -63,7 +63,7 @@ header {
   min-height: 500px;
   width: 100%;
   align-items: center;
-  @include gradient-background-dg($color-bg-light, $color-bg-lighter);
+  @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
   .background-container {
     position: absolute;
@@ -136,7 +136,7 @@ header {
      vertical-align: middle;
    }
    .button-container {
-     margin-top: 7px;
+     margin-top: 5px;
      margin-left: 10px;
      float:right;
    }
@@ -205,7 +205,6 @@ header {
        position: relative;
        overflow: hidden;
        text-align: center;
-       background: $color-bg-lighter;
        border-radius: 2px;
        margin-right: 10px;
 
@@ -214,13 +213,6 @@ header {
          left: -50%;
          max-width: 200%;
          z-index: 1;
-       }
-
-       .backdrop {
-         position: relative;
-         top: -50px;
-         z-index: 0;
-         filter: blur(15px);
        }
      }
      .suggestion-main {

@@ -5,37 +5,37 @@
     </sidebar>
     <app-content>
       <ui-header>
-        <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="Nexus-Stats">
+        <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="NexusHub">
         <h1>BRAND</h1>
         <p>
-          Nexus-Stats is an agile, reactive brand that is always in motion, like
+          NexusHub is an agile, reactive brand that is always in motion, like
           the real-time data that we're serving to gamers worldwide.
           Feel free to use the assets below when you need to reference our service.
         </p>
       </ui-header>
       <div class="container">
         <section>
-          <h2>Nexus-Stats Logo</h2>
+          <h2>NexusHub Logo</h2>
           <p>
-            Please do not edit, distort, recolor, or otherwise repurpose the Nexus-Stats logo.
+            Please do not edit, distort, recolor, or otherwise repurpose the NexusHub logo.
           </p>
           <div class="row row-margin">
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-color.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-bw.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-b.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-b.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-b.png" download>.png</a>
@@ -44,42 +44,42 @@
           </div>
           <div class="row row-margin">
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-color.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-color.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-v-color.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-v-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-v-bw.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-v-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-b.svg" alt="Full Color Nexus-Stats Logo">
+              <img src="/img/brand/nexus-stats-logo-typeface-v-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexus-stats-logo-typeface-v-b.svg" download>.svg</a>
                 <a href="/img/brand/nexus-stats-logo-typeface-v-b.png" download>.png</a>
@@ -88,7 +88,7 @@
           </div>
         </section>
         <section>
-          <h2>Nexus-Stats Colors</h2>
+          <h2>NexusHub Colors</h2>
           <p>
             Keep in mind that each color in our palette comes in two shades for
             different scenarios.
@@ -188,7 +188,6 @@ header {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: $color-bg;
     @include field;
 
     .logo-download {
@@ -244,13 +243,13 @@ header {
       background: $color-primary;
     }
     .green-shade {
-      background: $color-primary-dark;
+      background: $color-primary-subtle;
     }
     .blue {
       background: $color-accent;
     }
     .blue-shade {
-      background: $color-accent-dark;
+      background: $color-accent-subtle;
     }
     .grey {
       background: $color-bg-lighter;

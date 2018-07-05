@@ -2,19 +2,25 @@
   <div class="realtime-user">
     <div class="profile">
       <div class="profile-img">
-        <img src="/img/warframe/items/vauban-prime.png" alt="Username">
+        <img src="/img/warframe/items/generic-warframe-prime-helmet.png" alt="Username">
       </div>
       <span class="username">Theroxbeans</span>
       <p>Selling <span>Neuroptics</span> for <span>25p</span></p>
     </div>
-    <img src="/img/warframe/items/vauban-prime.png" class="background blur">
+    <img src="/img/warframe/items/generic-warframe-prime-helmet.png" class="background blur">
   </div>
 </template>
+
+
+
 
 <script>
 export default {
 }
 </script>
+
+
+
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -28,7 +34,7 @@ export default {
   justify-content: center;
   align-items: center;
   background: $color-bg;
-  height: 168px;
+  height: 150px;
   margin-right: 15px;
   margin-bottom: 10px;
   width: 25%;
@@ -59,8 +65,8 @@ export default {
   .profile-img {
     position: relative;
     overflow: hidden;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 80px;
     margin-bottom: 10px;
   }
@@ -70,6 +76,9 @@ export default {
     left: -40%;
     max-height: 120%;
     z-index: 1;
+  }
+  .username {
+    font-family: 'Circular', sans-serif;
   }
   p {
     color: $color-font-body;
@@ -101,6 +110,16 @@ export default {
   left: 0;
   filter: blur(60px);
   opacity: 0.33;
+
+  @media (max-width: $breakpoint-m) {
+    display: none;
+  }
+}
+time {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 0.9em;
 
   @media (max-width: $breakpoint-m) {
     display: none;

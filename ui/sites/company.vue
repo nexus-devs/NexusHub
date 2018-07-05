@@ -5,49 +5,37 @@
     </sidebar>
     <app-content>
       <div class="company">
-        <video playsinline autoplay muted loop class="background">
-          <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
-        </video>
         <div class="container">
-          <div class="row">
-            <div class="col-b">
-              <h1>Making Game Data more transparent with Nexus-Stats.</h1>
-              <p>
-                The best decisions in gaming are made on data. Whether it's about buying
-                that item we always wanted, or finding ways to improve our playstyle.
-                Nexus-Stats is about bringing that data to you, regardless if you're a
-                mighty pro gamer or a casual in it for the fun.
-              </p>
-            </div>
-            <div class="col-b ico">
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="">
-            </div>
-          </div>
-        </div>
-        <svg viewBox="0 0 3920 240" preserveAspectRatio="xMidYMid meet">
-          <path fill-rule="evenodd"
-                d="M0.000,88.823 C0.000,88.823 190.856,-36.849 677.231,28.404 C1163.605,93.656 1234.110,90.001 1450.505,49.349 C1672.756,7.597 1734.942,-11.070 2000.909,8.264 C2266.876,27.598 2323.761,103.990 2759.407,72.711 C2999.824,55.449 3238.394,-10.264 3622.568,33.237 C4006.743,76.739 4015.362,114.602 4131.107,79.156 C4246.852,43.710 4037.526,359.499 4037.526,359.499 L7.388,374.000 L0.000,88.823 Z"/>
-        </svg>
-      </div>
-      <div class="container">
-        <section class="who-we-are">
-          <h2>Who we are</h2>
+          <h1>Making Games more transparent with NexusHub.</h1>
           <p>
-            We're a small group of passionate gamers from all over the world,
-            building Nexus-Stats in our spare time. <br>
-            Our journey started just over a year ago when we tackled the lack of
-            transparency in Warframe's ingame economy with the use of
-            Optical Character Recognition for the ingame tradechat. <br><br>
-            Since then, Nexus-Stats has evolved into a fully scalable framework
-            for every type of data imaginable, aiming to achieve the most useful
-            data visualizations for actual gamers.
+            The best decisions in gaming are made on data. Whether it's about buying
+            that item we always wanted, or finding ways to improve our playstyle.
+            NexusHub is about bringing that data to you, regardless if you're a
+            mighty pro gamer or a casual in it for the fun.
           </p>
+        </div>
+        <img src="/img/company/blob.svg" class="blob">
+      </div>
+      <div class="who-we-are-container container">
+        <section class="who-we-are">
+          <div>
+            <h2>Who we are</h2>
+            <p>
+              We're a small group of gamers from all over the world,
+              building Nexus-Stats in our spare time. Starting out as
+              just some casual players who made a bot to monitor
+              Warframe's trade chat, we have grown into a diverse community of open source
+              developers. And everyone's goal still remains to simply make games more
+              accessible for everyone.
+            </p>
+          </div>
         </section>
       </div>
       <div class="stats-container">
+        <img src="/img/ui/header-blobs.svg" class="stats-blob">
         <section>
           <div class="stats container">
-            <h2>We're getting pretty popular</h2>
+            <h2>People ❤️ NexusHub</h2>
             <p>
               Our platform has been growing continously since day one, so it seems we're doing
               things right.
@@ -83,20 +71,21 @@
       </div>
       <section class="join">
         <div class="container">
-          <h2>Help us shape Nexus-Stats!</h2>
+          <h2>Wanna help us build NexusHub?</h2>
           <p>
-            Nexus-Stats is entirely developed by community members of the games
-            we support, so if you wanna join our team as a regular contributor,
-            you're more than welcome! You can always work right on our code through our
-            <a href="https://github.com/nexus-devs/nexus-stats" target="_blank">open source repositories</a>.
-            <br><br>If that sounds fun to you, check out the
-            <a href="https://github.com/nexus-devs/nexus-stats/blob/development/.github/CONTRIBUTING.md" target="_blank">contribution guide</a>
-            or join us on Discord and send a PM our way!
+            NexusHub is entirely developed by community members of the games
+            we support, so if you wanna make some awesome feature for the
+            platform, we'd happily have you join our team.
           </p>
+          <span>Sounds fun to you? Hit us up on Discord!</span>
           <br>
           <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
         </div>
       </section>
+      <div class="cute-fluff">
+        <img src="/img/company/bottom-blob.svg" class="bottom-blob">
+        <img src="/img/company/blobot.svg" alt="Blobot" class="blobot">
+      </div>
     </app-content>
   </div>
 </template>
@@ -127,52 +116,34 @@ export default {
   overflow: hidden;
   padding-top: 40px;
   padding-bottom: 200px;
-  @include gradient-background-dg($color-primary, $color-accent);
+  @include gradient-background-dg($color-primary-subtle, $color-accent-subtle);
 
+  .container {
+    position: relative;
+    top: -30px;
+    left: -200px;
+    padding-left: 300px;
+
+    @media (max-width: $breakpoint-m) {
+      left: 0;
+      padding-left: 42px;
+    }
+  }
   @media (max-width: $breakpoint-m) {
     padding-top: 0px;
   }
   p {
     color: white !important;
-  }
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-  }
-  .background {
-    position:absolute;
-    top: 25%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    opacity: 0.4;
-    z-index: 0;
-    filter: blur(7px);
-    background: $color-bg;
-    transform: translateX(-50%) translateY(-25%);
-  }
-  .ico {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 120px;
-
-    img {
-      height: 96px;
-      animation: hover 15s infinite;
-    }
+    max-width: 600px;
   }
 }
-svg {
+.blob {
   position: absolute;
   z-index: 1;
   left: 0;
-  width: calc(100vw + 300px);
+  bottom: -30px;
+  width: calc(100vw + 100px);
   min-width: 1920px;
-  margin-top: 150px;
   fill: $color-bg-dark;
   animation: goostuff 60s linear infinite;
 }
@@ -183,8 +154,11 @@ h1 {
   margin-top: 150px;
   margin-bottom: 15px;
 }
-p {
-  font-size: 1.05em;
+h2 {
+  font-size: 1.6em;
+}
+p, span {
+  font-size: 1.1em;
   max-width: 800px;
 }
 a {
@@ -192,49 +166,50 @@ a {
 }
 .who-we-are {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  text-align: center;
   background: $color-bg-dark;
-  padding-top: 80px;
   margin-bottom: 40px;
 
-  p {
-    margin: auto;
-    margin-top: 20px;
-    border: none;
-    text-align: left;
+  h2 {
+    text-align: center;
   }
-  @media (max-width: $breakpoint-s) {
-    text-align: left;
+  p {
+    margin-top: 20px;
+    max-width: 800px;
   }
 }
 .stats-container {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 20px;
   background: $color-bg-darker;
-  section {
-    padding: 100px 0;
-  }
+}
+.stats-blob {
+  position: absolute;
+  min-width: 1800px;
+  opacity: 0.5;
 }
 .stats {
   max-width: 800px;
   margin: auto;
+  text-align: center;
 
   p {
     border: none;
     padding: 0;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
   .col-b {
     &:nth-of-type(2) {
-      text-align: center;
       @media (max-width: $breakpoint-s) {
-        text-align: left;
+        margin-top: 20px;
       }
     }
     &:nth-of-type(3) {
-      text-align: right;
       @media (max-width: $breakpoint-s) {
-        text-align: left;
+        margin-top: 20px;
+        text-align: center;
       }
     }
     .number {
@@ -243,20 +218,27 @@ a {
       margin-top: 20px;
     }
     .label {
-      margin-top: -5px;
+      margin-top: 5px;
       color: white;
     }
   }
 }
 .join {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding: 60px 0;
+  padding: 100px 0 120px;
 
   p {
     display: inline-block;
     text-align: left;
     margin: 20 0;
     border: none;
+  }
+  span {
+    display: block;
+    max-width: none;
+    margin-top: 10px;
   }
   .btn {
     display: inline-block;
@@ -266,13 +248,37 @@ a {
     text-align: left;
   }
 }
+.cute-fluff {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  top: -325px;
+  margin-bottom: -345px;
+  z-index: 0;
+
+  .bottom-blob {
+    position: absolute;
+    opacity: 0.4;
+    top: 150px;
+    left: -100px; // blob isn't optically centered
+    width: 2200px;
+    min-width: calc(100vw + 300px);
+    animation: goostuff 30s linear infinite;
+  }
+  .blobot {
+    position: relative;
+    top: 220px;
+    max-height: 225px;
+  }
+}
 
 @keyframes goostuff {
     0% {
       transform: translateX(0);
     }
     50% {
-      transform: translateX(-300px);
+      transform: translateX(-100px);
     }
     100% {
       transform: translateX(0);
