@@ -31,8 +31,8 @@ export default {
   head: {
     title: 'NexusHub',
     link: [
-      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:400', as: 'font' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:400' }
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ]
   },
   computed: {
