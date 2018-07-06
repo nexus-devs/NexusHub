@@ -69,6 +69,33 @@
           <span>{{ item.power }}</span>
         </div>
       </div>
+      <div v-if="item.criticalChance" class="item-data row">
+        <div class="col">
+          <span>Crit Chance</span>
+        </div>
+        <div class="col-2">
+          <span>{{ Math.round(item.criticalChance * 100) }}%</span>
+        </div>
+      </div>
+      <div v-if="item.procChance" class="item-data row">
+        <div class="col">
+          <span>Status Chance</span>
+        </div>
+        <div class="col-2">
+          <span>{{ Math.round(item.procChance * 100) }}%</span>
+        </div>
+      </div>
+      <div v-for="(damage, type) in item.damageTypes" v-if="item.damageTypes" :key="type" class="item-data row">
+        <div class="col">
+          <span>{{ type.replace(/\b\w/g, l => l.toUpperCase()) }}</span>
+        </div>
+        <div class="col-2">
+          <span>
+            <img :src="`/img/warframe/ui/${type}.png`" class="ico-h-12" :alt="type">
+            {{ damage }}
+          </span>
+        </div>
+      </div>
       <div v-if="item.vaulted" class="item-data row">
         <div class="col">
           <span>Vaulted</span>
@@ -148,6 +175,7 @@ export default {
   }
   img {
     padding: 3.5px;
+    margin-right: 2px;
   }
   span.negative {
     color: $color-error;

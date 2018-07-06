@@ -2,16 +2,17 @@
   <module>
     <template slot="header">
       <h3>Drop Rates</h3>
-      <span>{{ component.name }}</span>
+      <span>{{ component.name === 'Set' ? item.components[item.components.length - 1].name : component.name }}</span>
     </template>
     <template slot="body">
       <div v-for="drop in drops" :key="drop.location" class="drop">
-        <router-link :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`">
+        <router-link v-if="drop.location.match(/(Intact|Exceptional|Flawless|Radiant)/)"
+                     :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`">
           <img :src="`/img/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}.png`" alt="">
         </router-link>
         <h4 class="location">{{ drop.location }}</h4>
         <span class="rarity">{{ drop.rarity }} -
-        <span class="chance">{{ drop.chance * 100 }}%</span></span>
+        <span class="chance">{{ (drop.chance * 100).toFixed(2) }}%</span></span>
       </div>
     </template>
     <template slot="footer">
@@ -45,11 +46,17 @@ export default {
     },
     drops () {
       let drops = []
+      const components = this.item.components
 
       if (this.component.drops) {
         drops = this.component.drops.slice(0, 4)
       } else {
-        drops = this.item.components[this.item.components.length - 1].drops.slice(0, 4)
+        for (const component of components) {
+          if (component.drops) {
+            drops = component.drops.slice(0, 4)
+            break
+          }
+        }
       }
       return drops.sort((a, b) => {
         if (a.chance > b.chance) {
@@ -85,7 +92,7 @@ export default {
   align-items: center;
   text-align: center;
   width: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   padding-bottom: 10px;
 
   &:nth-of-type(2n - 1) {
