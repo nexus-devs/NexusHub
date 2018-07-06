@@ -209,8 +209,11 @@ export default {
               // Convert damage type indicators to img tags
               // <DT_FREEZING> <DT_HEAT> etc
               if (word.includes('<DT_')) {
-                word = word.match(/\_(.*?)\>/)[1]
-                word = `<img src="/img/warframe/ui/${word.toLowerCase()}.png"/>`
+                word = word.match(/\_(.*?)\>/)[1].toLowerCase()
+                if (word === 'freeze') word = 'cold'
+                if (word === 'fire') word = 'heat'
+                if (word === 'explosion') word = 'blast'
+                word = `<img src="/img/warframe/ui/${word}.png" class="ico-h-16" style="margin-top: -3px;"/>`
               }
               description[i] = word
             }
