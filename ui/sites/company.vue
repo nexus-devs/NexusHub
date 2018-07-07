@@ -43,7 +43,7 @@
             <div class="row">
               <div class="col-b">
                 <div class="number">
-                  200,000
+                  {{ users }}
                 </div>
                 <div class="label">
                   Monthly Users
@@ -51,7 +51,7 @@
               </div>
               <div class="col-b">
                 <div class="number">
-                  4,000,000
+                  {{ views }}
                 </div>
                 <div class="label">
                   Monthly Page Views
@@ -59,7 +59,7 @@
               </div>
               <div class="col-b">
                 <div class="number">
-                  1,000,000
+                  {{ offers }}
                 </div>
                 <div class="label">
                   Processed offers each month
@@ -96,12 +96,51 @@
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+const parseNum = (num) => (Math.round(num / 1000) * 1000)
+  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch
+  },
+
+  computed: {
+    users () {
+      return parseNum(this.$store.state.analytics.users)
+    },
+    views () {
+      return parseNum(this.$store.state.analytics.views)
+    },
+    offers () {
+      return parseNum(this.$store.state.analytics.offers)
+    }
+  },
+
+  async asyncData () {
+    this.$store.commit('setAnalyticsUsers', await this.$cubic.get('/analytics/v1/ga/users'))
+    this.$store.commit('setAnalyticsViews', await this.$cubic.get('/analytics/v1/ga/views'))
+    this.$store.commit('setAnalyticsOffers', await this.$cubic.get('/warframe/v1/analytics/offers'))
+  },
+
+  storeModule: {
+    name: 'analytics',
+    state: {
+      users: null,
+      views: null
+    },
+    mutations: {
+      setAnalyticsUsers (state, users) {
+        state.users = users
+      },
+      setAnalyticsViews (state, views) {
+        state.views = views
+      },
+      setAnalyticsOffers (state, offers) {
+        state.offers = offers
+      }
+    }
   }
 }
 </script>
