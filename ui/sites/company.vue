@@ -119,9 +119,16 @@ export default {
   },
 
   async asyncData () {
-    this.$store.commit('setAnalyticsUsers', await this.$cubic.get('/analytics/v1/ga/users'))
-    this.$store.commit('setAnalyticsViews', await this.$cubic.get('/analytics/v1/ga/views'))
-    this.$store.commit('setAnalyticsOffers', await this.$cubic.get('/warframe/v1/analytics/offers'))
+    let users, views, offers
+
+    await Promise.all([
+      this.$cubic.get('/analytics/v1/ga/users').then(data => { users = data }),
+      this.$cubic.get('/analytics/v1/ga/views').then(data => { views = data }),
+      this.$cubic.get('/warframe/v1/analytics/offers').then(data => { offers = data })
+    ])
+    this.$store.commit('setAnalyticsUsers', users)
+    this.$store.commit('setAnalyticsViews', views)
+    this.$store.commit('setAnalyticsOffers', offers)
   },
 
   storeModule: {
