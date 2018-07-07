@@ -25,7 +25,7 @@
               building Nexus-Stats in our spare time. Starting out as
               just some casual players who made a bot to monitor
               Warframe's trade chat, we have grown into a diverse community of open source
-              developers. And everyone's goal still remains to simply make games more
+              developers, persisting in our mission to simply make games more
               accessible for everyone.
             </p>
           </div>
@@ -186,9 +186,9 @@ export default {
 .blob {
   position: absolute;
   z-index: 1;
-  left: 0;
+  left: -50px;
   bottom: -30px;
-  width: calc(100vw + 100px);
+  width: calc(100vw + 150px);
   min-width: 1920px;
   fill: $color-bg-dark;
   animation: goostuff 60s linear infinite;
