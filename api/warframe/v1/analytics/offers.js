@@ -15,6 +15,7 @@ class Index extends Endpoint {
       }
     }).count()
     res.json(offers || 1100000) // Placeholder data if in dev build without offers
+    this.cache(offers || 1100000, 60 * 60)
   }
 }
 

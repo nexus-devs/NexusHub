@@ -18,7 +18,7 @@ class Index extends Endpoint {
     try {
       const auth = new google.auth.JWT(options.email, options.key, null, ['https://www.googleapis.com/auth/analytics.readonly'])
       await auth.authorize()
-      const users = await analytics.data.ga.get({
+      const ga = await analytics.data.ga.get({
         auth,
         ids: options.ids,
         metrics: 'ga:30dayUsers',
@@ -26,7 +26,9 @@ class Index extends Endpoint {
         'end-date': 'today',
         dimensions: 'ga:date'
       })
-      res.send(users.data.totalsForAllResults['ga:30dayUsers'])
+      const users = ga.data.totalsForAllResults['ga:30dayUsers']
+      res.send(users)
+      this.cache(users, 60 * 60)
     } catch (err) {
       res.send(250000) // Placeholder if auth fails (which it would on dev builds)
     }
