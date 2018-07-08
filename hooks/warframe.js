@@ -5,6 +5,25 @@ const _ = require('lodash')
 
 class Hook {
   /**
+   * Ensure database indices are set up correctly
+   */
+  async verifyIndices () {
+    cubic.log.verbose('Core      | verifying warframe indices')
+    const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl)
+    const verify = async (db, col, index) => {
+      return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
+    }
+
+    verify(db, 'offers', {
+      item: 1
+    })
+    verify(db, 'items', {
+      name: 1
+    })
+    db.close()
+  }
+
+  /**
    * Add item list on startup
    */
   async verifyItemList () {
@@ -109,29 +128,6 @@ class Hook {
       // component.selling = component.buying = economyData
       component.selling = component.buying = { current, previous }
     }
-  }
-
-  /**
-   * Ensure database indices are set up correctly
-   */
-  async verifyIndices () {
-    cubic.log.verbose('Core      | verifying warframe indices')
-    const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl)
-    const verify = async (db, col, index) => {
-      return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
-    }
-
-    verify(db, 'requests', {
-      item: 1,
-      createdAt: 1
-    })
-    verify(db, 'requests', {
-      item: 1,
-      createdAt: 1,
-      region: 1,
-      rank: 1
-    })
-    db.close()
   }
 }
 
