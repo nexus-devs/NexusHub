@@ -5,15 +5,24 @@
         <h2>Latest Offers</h2>
         <div class="realtime">
           <realtime-traders/>
-          <div class="realtime-users row">
-            <realtime-user v-for="n in 6" class="realtime-user col-b"/>
-          </div>
+          <transition-group name="realtime" class="realtime-users row">
+            <realtime-user v-for="(order, n) in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : n" :order="order" class="realtime-user col-b"/>
+          </transition-group>
         </div>
       </div>
     </section>
     <section>
       <div class="container">
         <h2>Active Listings</h2>
+        <div v-if="listings.length">
+          <div v-for="order in listings" :key="order._id">
+            {{ order }}
+          </div>
+        </div>
+        <div v-else>
+          Sorry, nobody wants to trade {{ item.name }}s right now. There might be
+          offers later! But maybe this item just sucks ¯\_(ツ)_/¯
+        </div>
       </div>
     </section>
   </div>
@@ -23,12 +32,56 @@
 
 <script>
 import realtimeTraders from 'src/components/items/modules/realtime-traders.vue'
-import realtimeUser from 'src/components/items/modules/realtime-user.vue'
+import realtimeUser from 'src/components/items/modules/realtime-order.vue'
+
+async function init () {
+  const item = this.$store.state.route.params.item.split('-').join(' ')
+  this.$store.commit('setTradeListings', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
+}
 
 export default {
   components: {
     'realtime-traders': realtimeTraders,
     'realtime-user': realtimeUser
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    },
+    listings () {
+      return this.$store.state.trade.listings
+    }
+  },
+
+  // Client-sided loads won't trigger asyncData due to how we switch sub
+  // pages on items, so we'll do it here manually. The `mount` life cycle hook
+  // only triggers client-sided.
+  async beforeMount () {
+    await init.bind(this)()
+    this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
+      this.$store.commit('setTradeListings', orders)
+    })
+  },
+
+  beforeDestroy () {
+    this.$cubic.unsubscribe(`/warframe/v1/orders?item=${this.item.name}`)
+  },
+
+  async asyncData () {
+    await init.bind(this)()
+  },
+
+  storeModule: {
+    name: 'trade',
+    state: {
+      listings: []
+    },
+    mutations: {
+      setTradeListings (state, listings) {
+        state.listings = listings.reverse()
+      }
+    }
   }
 }
 </script>
@@ -53,6 +106,7 @@ h2 {
 }
 .realtime-users {
   position: relative;
+  overflow: hidden;
   display: inline-flex;
   flex-wrap: wrap;
   vertical-align: top;

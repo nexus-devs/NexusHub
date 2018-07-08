@@ -1,13 +1,20 @@
 <template>
   <div class="realtime-user">
-    <div class="profile">
-      <div class="profile-img">
-        <img src="/img/warframe/items/generic-warframe-prime-helmet.png" alt="Username">
+    <div class="realtime-user-wrapper">
+      <div v-if="order" class="profile">
+        <div class="profile-img">
+          <img :src="item.components.find(c => c.name === order.component).imgUrl" alt="Username">
+        </div>
+        <span class="username">{{ order.user }}</span>
+        <p>
+          {{ order.offer }}
+          <span>{{ order.component }}</span>
+          for
+          <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
+        </p>
       </div>
-      <span class="username">Theroxbeans</span>
-      <p>Selling <span>Neuroptics</span> for <span>25p</span></p>
+      <img v-if="order" :src="item.components.find(c => c.name === order.component).imgUrl" class="background blur">
     </div>
-    <img src="/img/warframe/items/generic-warframe-prime-helmet.png" class="background blur">
   </div>
 </template>
 
@@ -16,6 +23,13 @@
 
 <script>
 export default {
+  props: ['order'],
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    }
+  }
 }
 </script>
 
@@ -26,25 +40,35 @@ export default {
 @import '~src/styles/partials/importer';
 
 .realtime-user {
-  @include ie;
-  @include field;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: $color-bg;
-  height: 150px;
-  margin-right: 15px;
-  margin-bottom: 10px;
-  width: 25%;
+  width: 33%;
   flex-basis: auto;
+  @include ease(0.5s);
+
+  &:nth-of-type(n + 7) {
+    display: none; // Prevent clipping when new element is added (i.e. exceeds 6 elements)
+  }
+  @media (max-width: $breakpoint-m) {
+    width: inherit;
+  }
+}
+.realtime-user-wrapper {
+  @include ie; // Don't put this in parent because we want different animation
+               // timings for new offers
+ @include field;
+ position: relative;
+ overflow: hidden;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background: $color-bg;
+ height: 150px;
+ margin-right: 15px;
+  margin-bottom: 10px;
 
   &:before {
     border-radius: 2px;
   }
   @media (max-width: $breakpoint-m) {
-    width: inherit;
     margin-right: 0;
     height: auto;
     padding: 10px 20px;

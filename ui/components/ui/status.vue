@@ -42,7 +42,6 @@ export default {
     },
     mutations: {
       setApiStatus (state, status) {
-        console.log('status', status)
         state.offline = status
       }
     }
