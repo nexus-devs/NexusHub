@@ -3,10 +3,11 @@
     <section>
       <div class="container">
         <h2>Latest Offers</h2>
+        <span>Tracking all Regions, PC only</span>
         <div class="realtime">
           <realtime-traders/>
           <transition-group name="realtime" class="realtime-users row">
-            <realtime-user v-for="(order, n) in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : n" :order="order" class="realtime-user col-b"/>
+            <realtime-user v-for="(order, n) in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
           </transition-group>
         </div>
       </div>
@@ -54,6 +55,18 @@ export default {
     }
   },
 
+  watch: {
+    async $route (to, from) {
+      if (to.params.item !== from.params.item) {
+        this.$cubic.unsubscribe(`/warframe/v1/orders?item=${this.item.name}`)
+        await init.bind(this)()
+        this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
+          this.$store.commit('setTradeListings', orders)
+        })
+      }
+    }
+  },
+
   // Client-sided loads won't trigger asyncData due to how we switch sub
   // pages on items, so we'll do it here manually. The `mount` life cycle hook
   // only triggers client-sided.
@@ -92,6 +105,11 @@ export default {
 @import '~src/styles/partials/importer';
 
 h2 {
+  margin-bottom: 20px;
+}
+h2 + span {
+  display: inline-block;
+  margin-top: -20px;
   margin-bottom: 20px;
 }
 .module {
