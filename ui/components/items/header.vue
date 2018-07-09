@@ -76,7 +76,7 @@ export default {
   },
 
   watch: {
-    $route () {
+    $route (to, from) {
       setTimeout(() => this.updateNavPosition(), 1)
     }
   },

@@ -13,7 +13,7 @@
           <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
         </p>
       </div>
-      <img v-if="order" :src="item.components.find(c => c.name === order.component).imgUrl" class="background blur">
+      <img v-if="order" :src="item.components.find(c => c.name === order.component) ? item.components.find(c => c.name === order.component).imgUrl : null" class="background blur">
     </div>
   </div>
 </template>
@@ -54,15 +54,15 @@ export default {
 .realtime-user-wrapper {
   @include ie; // Don't put this in parent because we want different animation
                // timings for new offers
- @include field;
- position: relative;
- overflow: hidden;
- display: flex;
- justify-content: center;
- align-items: center;
- background: $color-bg;
- height: 150px;
- margin-right: 15px;
+  @include field;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color-bg;
+  height: 150px;
+  margin-right: 15px;
   margin-bottom: 10px;
 
   &:before {
@@ -71,6 +71,7 @@ export default {
   @media (max-width: $breakpoint-m) {
     margin-right: 0;
     height: auto;
+    min-height: 28px;
     padding: 10px 20px;
   }
   @media (max-width: $breakpoint-s) {

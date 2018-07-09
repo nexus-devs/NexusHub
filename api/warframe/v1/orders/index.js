@@ -47,6 +47,7 @@ class Index extends Endpoint {
     if (discard.length) {
       for (let discarded of discard) {
         this.db.collection('orders').removeOne({ _id: discarded._id })
+        delete discarded._id
       }
       this.db.collection('orderHistory').insertMany(discard)
     }

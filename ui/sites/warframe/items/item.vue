@@ -46,6 +46,20 @@ export default {
     overview
   },
 
+  // For some reason URL changes for the main item isn't enough to trigger the
+  // asyncData hook. If somebody actually understands this, a clean fix would
+  // be welcome.
+  watch: {
+    $route (to, from) {
+      if (to.params.item !== from.params.item) {
+        // Fetch new item's data
+        this.$store.dispatch('fetchItemData', this.$route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+        // Stay on current sub page for new item
+        this.$router.push({ path: to.params.item + from.path.split(from.params.item)[1] })
+      }
+    }
+  },
+
   asyncData ({ store, route }) {
     return store.dispatch('fetchItemData', route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },
