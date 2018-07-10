@@ -5,7 +5,7 @@ class User extends Endpoint {
     super(api, db, url)
     this.schema.method = 'POST'
     // this.schema.scope = 'write_requests_warframe' // DEBUG uncomment this if you see this.
-    this.schema.url = '/warframe/v1/orders'
+    this.schema.url = '/warframe/v1/users'
     this.schema.request = {
       body: {
         name: 'MoiD_Glitch'
