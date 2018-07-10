@@ -3,7 +3,7 @@
     <div class="realtime-user-wrapper">
       <div v-if="order" class="profile">
         <div class="profile-img">
-          <img :src="item.components.find(c => c.name === order.component).imgUrl" alt="Username">
+          <img :src="getComponentImgUrl(item, order.component)" alt="Username">
         </div>
         <span class="username">{{ order.user }}</span>
         <p>
@@ -13,7 +13,7 @@
           <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
         </p>
       </div>
-      <img v-if="order" :src="item.components.find(c => c.name === order.component) ? item.components.find(c => c.name === order.component).imgUrl : null" class="background blur">
+      <img v-if="order" :src="getComponentImgUrl(item, order.component)" class="background blur">
     </div>
   </div>
 </template>
@@ -28,6 +28,13 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    }
+  },
+
+  methods: {
+    getComponentImgUrl (item, component) {
+      const c = item.components.find(c => c.name === component)
+      return c ? c.imgUrl : null
     }
   }
 }

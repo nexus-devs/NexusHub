@@ -120,7 +120,7 @@ class WFM {
           })
 
           if (found) {
-            const user = client.get(`/warframe/v1/users/${order.user}`)
+            const user = await client.get(`/warframe/v1/users/${order.user}`)
             const online = found.user.status !== 'offline'
 
             if (user.online !== online) {

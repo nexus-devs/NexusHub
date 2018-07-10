@@ -18,7 +18,6 @@ client.subscribe('/warframe/v1/requests', req => {
       price: req.price,
       rank: req.rank,
       quantity: req.count,
-      message: req.rawMessage,
       source: 'Trade Chat'
     })
   } catch (err) {
