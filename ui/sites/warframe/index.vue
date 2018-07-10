@@ -9,7 +9,7 @@
           <div class="background"/>
         </div>
         <div class="search-components container">
-          <h1>Find trades from the Trade Chat.</h1>
+          <h1>Unifying Warframe's Marketplace.</h1>
           <div class="row">
             <search/>
             <timerange/>

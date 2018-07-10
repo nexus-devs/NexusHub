@@ -14,7 +14,7 @@ class Hook {
       return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
     }
 
-    verify(db, 'offers', {
+    verify(db, 'orders', {
       item: 1
     })
     verify(db, 'items', {

@@ -17,7 +17,7 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "cubic": "1.1.1",
-    "cubic-api": "^1.1.1",
+    "cubic-api": "^1.1.2",
     "cubic-auth": "1.1.0",
     "cubic-client": "1.0.8",
     "cubic-core": "1.1.0",
@@ -35,12 +35,13 @@
     "vue-affix": "^0.2.4",
     "vue-analytics": "^5.12.2",
     "vue-observe-visibility": "^0.4.1",
-    "warframe-items": "1.28.0"
+    "warframe-items": "1.28.0",
+    "ws": "^5.2.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.5",
     "better-assert": "^1.0.2",
-    "eslint": "^5.0.1",
+    "eslint": "^5.1.0",
     "eslint-config-standard": "^12.0.0-alpha.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-import": "^2.13.0",

@@ -10,6 +10,10 @@ class Index extends Endpoint {
         name: 'item',
         description: 'Item to reduce orders by.',
         required: true
+      }, {
+        name: 'all',
+        description: 'Return all active orders. Won\'t work for public API users.',
+        default: false
       }
     ]
     this.schema.response = []
@@ -23,9 +27,14 @@ class Index extends Endpoint {
    */
   async main (req, res) {
     const item = req.query.item
-    const { result, discard } = await this.filter(item)
-    res.send(result)
-    this.discard(discard)
+
+    if (req.query.all /** && req.user.scp.includes('write_root') **/) {
+      res.send(await this.getAll())
+    } else {
+      const { result, discard } = await this.filter(item)
+      res.send(result)
+      this.discard(discard)
+    }
   }
 
   async filter (item) {
@@ -38,6 +47,8 @@ class Index extends Endpoint {
       if (offer.source === 'Trade Chat') {
         const discarded = new Date() - discardAfter > offer.createdAt
         discarded ? discard.push(offer) : result.push(offer)
+      } else {
+        result.push(offer)
       }
     }
     return { result, discard }
@@ -46,11 +57,15 @@ class Index extends Endpoint {
   async discard (discard) {
     if (discard.length) {
       for (let discarded of discard) {
-        this.db.collection('orders').removeOne({ _id: discarded._id })
+        await this.db.collection('orders').removeOne({ _id: discarded._id })
         delete discarded._id
       }
-      this.db.collection('orderHistory').insertMany(discard)
+      await this.db.collection('orderHistory').insertMany(discard)
     }
+  }
+
+  async getAll () {
+    return this.db.collection('orders').find({}, { user: 1, offer: 1, item: 1, component: 1 }).toArray()
   }
 }
 
