@@ -46,8 +46,8 @@ class Orders extends Endpoint {
    * Filter by outdated trade chat offers or online status on trading sites
    */
   async filter (item, offline) {
-    const orders = await this.db.collection('orders').find({ item: new RegExp(item, 'i') }).toArray()
-    const discardAfter = (1000 * 60 * 3) + ((3000 - orders.length) * 10)
+    const orders = await this.db.collection('orders').find({ item: new RegExp(`^${item}$`, 'i') }).toArray()
+    const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
     const discard = []
     const online = []
     const all = []
@@ -62,6 +62,8 @@ class Orders extends Endpoint {
     }
 
     for (let order of all) {
+      delete order.apiName
+
       if (order.source !== 'Trade Chat') {
         const user = await this.db.collection('users').findOne({ name: order.user })
         order.online = user.online
@@ -91,7 +93,21 @@ class Orders extends Endpoint {
    * requests that are required.
    */
   async getAll () {
-    return this.db.collection('orders').find({}, { user: 1, offer: 1, item: 1, component: 1 }).toArray()
+    const orders = await this.db.collection('orders').find().toArray()
+
+    // Reduce output size. TODO: This should be done through query projections,
+    // but for some reason it just doesn't work.
+    for (let order of orders) {
+      order = {
+        user: order.user,
+        item: order.item,
+        apiName: order.apiName,
+        offer: order.offer,
+        source: order.source,
+        createdAt: order.createdAt
+      }
+    }
+    return orders
   }
 }
 

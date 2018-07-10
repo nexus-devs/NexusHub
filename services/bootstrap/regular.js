@@ -1,5 +1,5 @@
-const Api = require('../../../../cubic/cubic-api')
-const Core = require('../../../../cubic/cubic-core')
+const Api = require('cubic-api')
+const Core = require('cubic-core')
 const Auth = require('cubic-auth')
 const Ui = require('cubic-ui')
 const wfhooks = require('../../hooks/warframe.js')
@@ -12,7 +12,7 @@ const config = {
 
 module.exports = async function () {
   // Auth server for verifying users
-  cubic.use(new Auth(config.auth))
+  await cubic.use(new Auth(config.auth))
 
   // View server for providing the web client
   cubic.use(new Ui(config.ui))
