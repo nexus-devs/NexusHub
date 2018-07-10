@@ -2,8 +2,8 @@
   <div class="trade">
     <section>
       <div class="container">
-        <h2>Latest Offers</h2>
-        <span>Tracking all Regions, PC only</span>
+        <h2>Realtime Orders</h2>
+        <span>Tracking all regions from the trade chat and warframe.market. PC only.</span>
         <div class="realtime">
           <realtime-traders/>
           <transition-group name="realtime" class="realtime-users row">
@@ -110,7 +110,7 @@ h2 {
 h2 + span {
   display: inline-block;
   margin-top: -20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .module {
   display: inline-flex;
