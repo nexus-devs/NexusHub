@@ -3,7 +3,7 @@
     <section>
       <div class="container">
         <h2>Realtime Orders</h2>
-        <span>Tracking all regions from the trade chat and warframe.market. PC only.</span>
+        <span>Tracking all regions from the trade chat and warframe.market.</span>
         <div class="realtime">
           <realtime-traders/>
           <transition-group name="realtime" class="realtime-users row">

@@ -25,6 +25,14 @@
                 {{ tag }}
               </span>
             </div>
+            <div class="item-profile-lower">
+              <router-link :to="`${itemUrl}/trade`">
+                <button class="buy">Buy {{ item.name }}</button>
+              </router-link>
+              <router-link :to="`${itemUrl}/trade`">
+                <button class="sell">Sell</button>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -233,6 +241,7 @@ export default {
     display: none;
   }
 }
+
 .item-profile-data {
   .item-profile-data-info {
     h1 {
@@ -258,6 +267,29 @@ export default {
     @media (max-width: $breakpoint-s) {
       margin-top: -5px;
     }
+  }
+}
+
+.item-profile-lower {
+  margin-top: 18px;
+
+  button {
+    font-size: 0.85em;
+    text-transform: uppercase;
+    margin-right: 10px;
+    background: none;
+    border: 1px solid $color-subtle;
+    box-shadow: none;
+    color: $color-font-subtle;
+    @include ease(0.2s);
+
+    &:hover {
+      color: white;
+      border-color: white;
+    }
+  }
+  .sell {
+
   }
 }
 
