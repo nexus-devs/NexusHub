@@ -20,6 +20,11 @@ class User extends Endpoint {
   async main (req, res) {
     const user = req.body
 
+    await this.addUser(user)
+    res.send('ok')
+  }
+
+  async addUser (user) {
     await this.db.collection('users').update({
       name: user.name
     }, {
@@ -27,7 +32,6 @@ class User extends Endpoint {
     }, {
       upsert: true
     })
-    res.send('ok')
   }
 }
 

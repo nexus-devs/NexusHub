@@ -1,7 +1,7 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Orders = require('./index.js')
 
-class Request extends Endpoint {
+class Order extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.method = 'DELETE'
@@ -34,8 +34,9 @@ class Request extends Endpoint {
     await orders.discard(request.discard)
     const { result } = await orders.filter(item)
     orders.publish(result)
+    orders.cache(result, 1000 * 60 * 5)
     res.send('removed!')
   }
 }
 
-module.exports = Request
+module.exports = Order

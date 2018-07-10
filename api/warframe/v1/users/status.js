@@ -4,6 +4,7 @@ class Status extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.method = 'POST'
+    this.schema.url = '/warframe/v1/users/:name/status'
     // this.schema.scope = 'write_requests_warframe' // DEBUG uncomment this if you see this.
     this.schema.request = {
       body: {
@@ -18,14 +19,13 @@ class Status extends Endpoint {
    * Main method which is called by MethoHandler on request
    */
   async main (req, res) {
-    const user = req.body
+    const name = req.params.name
+    const { online } = req.body
 
     await this.db.collection('users').update({
-      name: user.name
+      name
     }, {
-      $set: {
-        status: user.status === 'offline' ? 'offline' : 'online'
-      }
+      $set: { online }
     }, {
       upsert: true
     })
