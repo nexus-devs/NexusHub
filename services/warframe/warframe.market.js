@@ -4,7 +4,9 @@ const ws = new WebSocket('wss://warframe.market/socket')
 const Client = require('cubic-client')
 const client = new Client({
   api_url: prod ? 'https://api.nexus-stats.com' : 'http://localhost:3003',
-  auth_url: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030'
+  auth_url: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030',
+  user_key: prod ? undefined : cubic.config.warframe.core.userKey,
+  user_secret: prod ? undefined : cubic.config.warframe.core.userSecret
 })
 const request = require('requestretry').defaults({ fullResponse: false })
 
@@ -21,7 +23,7 @@ class WFM {
     await this.initItems()
     await this.updateOrders()
     setInterval(this.initItems, 1000 * 60)
-    setInterval(this.updateOrders, 1000 * 60)
+    setInterval(this.updateOrders, 1000 * 300)
   }
 
   initWs () {
@@ -113,7 +115,7 @@ class WFM {
           const found = wfmOrders.find(o => {
             const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
             const matchesUser = o.user.ingame_name === order.user
-            const notAweekAgo = new Date() - order.createdAt < 1000 * 60 * 60 * 24 * 7
+            const notAweekAgo = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 7
             return matchesOffer && matchesUser && notAweekAgo
           })
 

@@ -3,7 +3,7 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 class Index extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = 'Returns all open orders for a speciified item component.'
+    this.schema.description = 'Returns all open orders for a specified item component.'
     this.schema.url = '/warframe/v1/orders'
     this.schema.query = [
       {
@@ -21,8 +21,8 @@ class Index extends Endpoint {
 
   /**
    * Find all orders, check which ones are still valid (if trade chat orders)
-   * and remove those that aren't. Removed orders are put into the offerHistory
-   * collection instead. Offers from other sources are managed through websocket
+   * and remove those that aren't. Removed orders are put into the orderHistory
+   * collection instead. Orders from other sources are managed through websocket
    * listeners.
    */
   async main (req, res) {
@@ -43,12 +43,18 @@ class Index extends Endpoint {
     const discard = []
     const result = []
 
-    for (let offer of orders) {
-      if (offer.source === 'Trade Chat') {
-        const discarded = new Date() - discardAfter > offer.createdAt
-        discarded ? discard.push(offer) : result.push(offer)
+    for (let order of orders) {
+      if (order.source === 'Trade Chat') {
+        const discarded = new Date() - discardAfter > order.createdAt
+        discarded ? discard.push(order) : result.push(order)
       } else {
-        result.push(offer)
+        result.push(order)
+      }
+    }
+
+    for (let order of result) {
+      if (order.source !== 'Trade Chat') {
+        result.status = await (this.db.collection('users').findOne({ name: order.user })).status
       }
     }
     return { result, discard }

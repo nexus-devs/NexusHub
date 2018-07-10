@@ -281,11 +281,10 @@ export default {
     border: 1px solid $color-subtle;
     box-shadow: none;
     color: $color-font-subtle;
-    @include ease(0.2s);
+    @include ie;
 
     &:hover {
       color: white;
-      border-color: white;
     }
   }
   .sell {
