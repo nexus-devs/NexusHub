@@ -23,7 +23,7 @@ class WFM {
     await this.initItems()
     await this.updateOrders()
     setInterval(this.initItems, 1000 * 60)
-    setInterval(this.updateOrders, 1000 * 300)
+    setInterval(this.updateOrders, 1000 * 60 * 5)
   }
 
   initWs () {
@@ -120,10 +120,12 @@ class WFM {
           })
 
           if (found) {
-            client.post('/warframe/v1/users/status', {
-              name: order.user,
-              status: found.user.status
-            })
+            const user = client.get(`/warframe/v1/users/${order.user}`)
+            const online = found.user.status !== 'offline'
+
+            if (user.online !== online) {
+              client.post(`/warframe/v1/users/${order.user}/status`, { online })
+            }
           } else {
             discard.push(order)
           }
@@ -131,9 +133,11 @@ class WFM {
       }
 
       // Remove old orders
-      const itemName = orders.find(i => i.apiName === item).item
-      await client.delete('/warframe/v1/orders', { item: itemName, discard })
-      discard = []
+      if (discard.length) {
+        const itemName = orders.find(i => i.apiName === item).item
+        await client.delete('/warframe/v1/orders', { item: itemName, discard })
+        discard = []
+      }
     }
   }
 }

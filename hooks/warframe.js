@@ -20,6 +20,9 @@ class Hook {
     verify(db, 'items', {
       name: 1
     })
+    verify(db, 'users', {
+      name: 1
+    })
     db.close()
   }
 

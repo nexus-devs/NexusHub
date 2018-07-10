@@ -1,6 +1,6 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 
-class Index extends Endpoint {
+class Orders extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.description = 'Returns all open orders for a specified item component.'
@@ -13,6 +13,10 @@ class Index extends Endpoint {
       }, {
         name: 'all',
         description: 'Return all active orders. Won\'t work for public API users.',
+        default: false
+      }, {
+        name: 'offline',
+        description: 'Whether offline users should be included.',
         default: false
       }
     ]
@@ -27,39 +31,51 @@ class Index extends Endpoint {
    */
   async main (req, res) {
     const item = req.query.item
+    const offline = req.query.offline
 
     if (req.query.all /** && req.user.scp.includes('write_root') **/) {
       res.send(await this.getAll())
     } else {
-      const { result, discard } = await this.filter(item)
+      const { result, discard } = await this.filter(item, offline)
       res.send(result)
       this.discard(discard)
     }
   }
 
-  async filter (item) {
+  /**
+   * Filter by outdated trade chat offers or online status on trading sites
+   */
+  async filter (item, offline) {
     const orders = await this.db.collection('orders').find({ item: new RegExp(item, 'i') }).toArray()
     const discardAfter = (1000 * 60 * 3) + ((3000 - orders.length) * 10)
     const discard = []
-    const result = []
+    const online = []
+    const all = []
 
     for (let order of orders) {
       if (order.source === 'Trade Chat') {
         const discarded = new Date() - discardAfter > order.createdAt
-        discarded ? discard.push(order) : result.push(order)
+        discarded ? discard.push(order) : all.push(order)
       } else {
-        result.push(order)
+        all.push(order)
       }
     }
 
-    for (let order of result) {
+    for (let order of all) {
       if (order.source !== 'Trade Chat') {
-        result.status = await (this.db.collection('users').findOne({ name: order.user })).status
+        const user = await this.db.collection('users').findOne({ name: order.user })
+        order.online = user.online
+      }
+      if ((!offline && order.online) || order.source === 'Trade Chat') {
+        online.push(order)
       }
     }
-    return { result, discard }
+    return { result: offline ? all : online, discard }
   }
 
+  /**
+   * Discard filtered results
+   */
   async discard (discard) {
     if (discard.length) {
       for (let discarded of discard) {
@@ -70,9 +86,13 @@ class Index extends Endpoint {
     }
   }
 
+  /**
+   * Admin method required for the warframe.market scraper to reduce number of
+   * requests that are required.
+   */
   async getAll () {
     return this.db.collection('orders').find({}, { user: 1, offer: 1, item: 1, component: 1 }).toArray()
   }
 }
 
-module.exports = Index
+module.exports = Orders

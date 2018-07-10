@@ -1,8 +1,9 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Orders = require('./index.js')
+const User = require('../users/new.js')
 const _ = require('lodash')
 
-class Request extends Endpoint {
+class Order extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.method = 'POST'
@@ -41,6 +42,13 @@ class Request extends Endpoint {
     this.db.collection('orders').insertOne(request)
     res.send('added!')
 
+    // Create user if they don't already exist
+    const user = new User(this.api, this.db, `warframe/v1/users/${request.user}`)
+    await user.addUser({
+      name: request.user,
+      online: true
+    })
+
     // Update offer list
     const item = request.item
     const orders = new Orders(this.api, this.db, `/warframe/v1/orders?item=${item}`)
@@ -51,4 +59,4 @@ class Request extends Endpoint {
   }
 }
 
-module.exports = Request
+module.exports = Order

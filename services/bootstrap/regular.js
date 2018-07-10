@@ -1,5 +1,5 @@
-const Api = require('cubic-api')
-const Core = require('cubic-core')
+const Api = require('../../../../cubic/cubic-api')
+const Core = require('../../../../cubic/cubic-core')
 const Auth = require('cubic-auth')
 const Ui = require('cubic-ui')
 const wfhooks = require('../../hooks/warframe.js')
@@ -28,6 +28,8 @@ module.exports = async function () {
   await cubic.use(new Api(config.main.api))
 
   // Load services
-  require('../../services/warframe/tradechat.js')
-  require('../../services/warframe/warframe.market.js')
+  setTimeout(() => {
+    require('../../services/warframe/tradechat.js')
+    require('../../services/warframe/warframe.market.js')
+  }, 1000 * 10)
 }

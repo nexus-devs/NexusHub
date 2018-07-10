@@ -1,7 +1,9 @@
 <template>
   <nav class="nav-main row">
     <div class="col nav-l">
-      <router-link to="/warframe" exact><img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-24"></router-link>
+      <router-link to="/warframe" exact>
+        <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
+      </router-link>
       <!-- <span class="sub">{{ game }}</span> -->
       <slot>
         <!-- Page links will go here -->
@@ -73,7 +75,9 @@ export default {
       margin: 0 15px;
       font-size: 0.9em;
     }
-
+    .logo {
+      height: 22px;
+    }
     @media (max-width: $breakpoint-m) {
       position: fixed;
       background: $color-bg-dark;
