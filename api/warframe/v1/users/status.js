@@ -5,7 +5,7 @@ class Status extends Endpoint {
     super(api, db, url)
     this.schema.method = 'POST'
     this.schema.url = '/warframe/v1/users/:name/status'
-    // this.schema.scope = 'write_requests_warframe' // DEBUG uncomment this if you see this.
+    this.schema.scope = 'write_users_warframe'
     this.schema.request = {
       body: {
         name: 'MoiD_Glitch',

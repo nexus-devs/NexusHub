@@ -6,7 +6,10 @@ const Client = require('cubic-client')
 const client = new Client({
   api_url: 'https://api.nexus-stats.com'
 })
-const local = new Client()
+const local = new Client({
+  user_key: cubic.config.warframe.core.userKey,
+  user_secret: cubic.config.warframe.core.userSecret
+})
 
 client.subscribe('/warframe/v1/requests', req => {
   try {

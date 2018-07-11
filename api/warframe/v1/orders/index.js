@@ -39,6 +39,7 @@ class Orders extends Endpoint {
       const { result, discard } = await this.filter(item, offline)
       res.send(result)
       this.discard(discard)
+      this.cache(result, 1000 * 60 * 10)
     }
   }
 
@@ -84,7 +85,6 @@ class Orders extends Endpoint {
         await this.db.collection('orders').removeOne({ _id: discarded._id })
         delete discarded._id
       }
-      await this.db.collection('orderHistory').insertMany(discard)
     }
   }
 

@@ -5,7 +5,7 @@ class Order extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.method = 'DELETE'
-    // this.schema.scope = 'write_requests_warframe' // DEBUG uncomment this if you see this.
+    this.schema.scope = 'write_orders_warframe'
     this.schema.url = '/warframe/v1/orders'
     this.schema.request = {
       body: {
