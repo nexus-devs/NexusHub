@@ -17,6 +17,7 @@ class User extends Endpoint {
     const name = req.params.name
     const user = await this.db.collection('users').findOne({ name })
     res.send(user)
+    this.cache(user, 1000 * 60)
   }
 }
 

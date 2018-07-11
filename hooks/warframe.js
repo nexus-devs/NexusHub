@@ -17,6 +17,10 @@ class Hook {
     verify(db, 'orders', {
       item: 1
     })
+    verify(db, 'orderHistory', {
+      item: 1,
+      createdAt: 1
+    })
     verify(db, 'items', {
       name: 1
     })

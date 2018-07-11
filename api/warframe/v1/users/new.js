@@ -4,7 +4,7 @@ class User extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.method = 'POST'
-    // this.schema.scope = 'write_requests_warframe' // DEBUG uncomment this if you see this.
+    this.schema.scope = 'write_users_warframe'
     this.schema.url = '/warframe/v1/users'
     this.schema.request = {
       body: {
