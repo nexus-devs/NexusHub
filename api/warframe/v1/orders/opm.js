@@ -51,7 +51,8 @@ class Opm extends Endpoint {
       intervals.push(quantity)
     }
 
-    return { total: orders.length, intervals }
+    const total = intervals.slice(0, 5).reduce((a, b) => a + b) // last 5 minutes
+    return { total, intervals }
   }
 }
 

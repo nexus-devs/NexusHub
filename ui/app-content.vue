@@ -7,10 +7,7 @@ the sidebar. This also keeps our app.vue more clean.
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                                              'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                                              'transition-duration': deltaX ? '0s' : '0.45s'} : {}"
-             :class="{ activeSidebar, visibleSidebar, deltaX }" class="app-content">
+        <div class="app-content">
           <slot>
             <!-- page content goes here -->
           </slot>
@@ -19,46 +16,6 @@ the sidebar. This also keeps our app.vue more clean.
     </transition>
   </div>
 </template>
-
-
-
-<script>
-
-export default {
-  data () {
-    return {
-      breakpoint: false
-    }
-  },
-
-  computed: {
-    activeSidebar () {
-      return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
-    },
-    visibleSidebar () {
-      return this.$store.state.sidebar ? !this.$store.state.sidebar.hidden : false
-    },
-    // Horizontal position for content when swiping out the sidebar
-    deltaX () {
-      return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
-    }
-  },
-
-  mounted () {
-    // JS breakpoint to ensure correct content movement behaviour when sidebar
-    // is moved. (move content on $breakpoint-m, don't move it below)
-    window.addEventListener('resize', () => this.updateBreakpoint())
-    this.breakpoint = document.documentElement.clientWidth > 1150
-  },
-
-  methods: {
-    // Check if we reached $breakpoint-m. If so, don't "squeeze" the app content on menu swipe
-    updateBreakpoint () {
-      this.breakpoint = document.documentElement.clientWidth > 1150
-    }
-  }
-}
-</script>
 
 
 
@@ -90,7 +47,7 @@ export default {
 }
 .zoom-enter, .zoom-leave-to {
   transform: scale(1.010);
-  transform-origin: center;
+  transform-origin: top;
   opacity: 0.75;
 }
 

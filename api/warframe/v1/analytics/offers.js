@@ -8,10 +8,9 @@ class Index extends Endpoint {
   }
 
   async main (req, res) {
-    const offers = await this.db.collection('requests').find({
+    const offers = await this.db.collection('orderHistory').find({
       createdAt: {
-        $gte: new Date() - 1000 * 60 * 60 * 24 * 30,
-        $lte: new Date()
+        $gte: new Date(new Date() - 1000 * 60 * 60 * 24 * 30)
       }
     }).count()
     res.json(offers || 1100000) // Placeholder data if in dev build without offers
