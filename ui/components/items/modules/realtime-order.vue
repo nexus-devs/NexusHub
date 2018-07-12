@@ -3,7 +3,7 @@
     <div class="realtime-user-wrapper">
       <div v-if="order" class="profile">
         <div class="profile-img">
-          <img :src="getComponentImgUrl(item, order.component)" alt="Username">
+          <img :src="component.imgUrl" alt="Username">
         </div>
         <span class="username">{{ order.user }}</span>
         <p>
@@ -12,8 +12,11 @@
           for
           <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
         </p>
+        <div v-if="priceDiff" class="diff">
+          <span :class="{ negative: order.offer === 'Selling' ? priceDiff >= 0 : priceDiff <= 0 }">{{ priceDiff > 0 ? '+' : '' }}{{ priceDiff }}%</span>
+        </div>
       </div>
-      <img v-if="order" :src="getComponentImgUrl(item, order.component)" class="background blur">
+      <img v-if="order" :src="component.imgUrl" class="background blur">
     </div>
   </div>
 </template>
@@ -28,13 +31,19 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
-    }
-  },
+    },
+    component () {
+      return this.item.components.find(c => c.name === this.order.component)
+    },
+    priceDiff () {
+      const type = this.order.offer.toLowerCase()
+      const value = this.order.price - this.component[type].current.median
 
-  methods: {
-    getComponentImgUrl (item, component) {
-      const c = item.components.find(c => c.name === component)
-      return c ? c.imgUrl : null
+      if (this.order.price) {
+        return (value / this.component[type].current.median * 100).toFixed(2)
+      } else {
+        return null
+      }
     }
   }
 }
@@ -113,11 +122,28 @@ export default {
     font-family: 'Circular', sans-serif;
   }
   p {
+    display: inline-block;
     color: $color-font-body;
     font-size: 0.9em;
 
     span {
       color: white;
+    }
+  }
+  .diff {
+    font-size: 0.85em;
+    color: $color-font-body;
+    display: inline-block;
+    margin-top: 2px;
+
+    span {
+      color: $color-primary;
+    }
+    span.negative {
+      color: $color-error;
+    }
+    @media (max-width: $breakpoint-m) {
+      margin-left: 10px;
     }
   }
   @media (max-width: $breakpoint-m) {

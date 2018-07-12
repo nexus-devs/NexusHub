@@ -39,7 +39,6 @@
     </header>
     <nav ref="subnav" class="subnav">
       <div class="container">
-        <div :style="navPosition" class="subnav-active-highlight"/>
         <router-link :to="itemUrl" exact>Overview</router-link>
         <router-link :to="`${itemUrl}/prices`">Prices</router-link>
         <router-link :to="`${itemUrl}/trade`">Trade</router-link>
@@ -57,12 +56,6 @@ import header from 'src/components/ui/header.vue'
 export default {
   components: {
     'ui-header': header
-  },
-
-  data () {
-    return {
-      navPosition: {}
-    }
   },
 
   computed: {
@@ -83,34 +76,61 @@ export default {
     }
   },
 
-  watch: {
-    $route (to, from) {
-      setTimeout(() => this.updateNavPosition(), 1)
-    }
-  },
-
-  mounted () {
-    this.updateNavPosition()
-    window.addEventListener('resize', this.updateNavPosition)
-  },
-
-  beforeDestroy () {
-    window.removeEventListener('resize', this.updateNavPosition)
+  async asyncData ({ store, route }) {
+    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
+    const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
+    store.commit('setItem', itemData)
   },
 
   methods: {
     selectComponent (e) {
       const tag = e.srcElement.outerText
       this.$store.commit('setItemComponent', tag)
+    }
+  },
+
+  storeModule: {
+    name: 'items',
+    state: {
+      item: { name: '' },
+      test: false,
+      selected: {
+        component: 'Set',
+        offerType: 'combined',
+        regions: []
+      },
+      patchlogs: {
+        current: 0,
+        active: []
+      }
     },
-    updateNavPosition () {
-      const active = this.$refs.subnav.getElementsByClassName('router-link-active')[0]
-      if (active) {
-        const styles = {
-          left: active.offsetLeft + 'px',
-          width: active.offsetWidth + 'px'
+
+    mutations: {
+      setItem (state, item) {
+        item.tags = []
+        item.tags.push(item.category)
+        item.tags.push(item.name.includes(' Prime') ? 'Prime' : item.type)
+        state.item = item
+      },
+      setItemComponent (state, component) {
+        state.selected.component = component.trim()
+      },
+      setItemOfferType (state, type) {
+        state.selected.offerType = type.toLowerCase()
+      },
+      setItemRegions (state, regions) {
+        state.selected.regions = regions
+      },
+      addItemPatchlog (state, patchlog) {
+        state.patchlogs.current = state.item.patchlogs.findIndex(p => p.name === patchlog.name)
+      },
+      removeItemPatchlog (state, patchlog) {
+        const i = state.patchlogs.active.find(p => p.name === patchlog.name)
+
+        if (i) {
+          state.patchlogs.active.slice(i, 1)
+          state.patchlogs.current = state.item.patchlogs.findIndex(p => p.name === patchlog.name)
         }
-        this.navPosition = styles
       }
     }
   }
@@ -309,6 +329,7 @@ export default {
     text-transform: uppercase;
     font-size: 0.875em;
     letter-spacing: 0.5;
+    border-bottom: 2px solid transparent;
 
     &:before {
       border-radius: 0;
@@ -320,14 +341,8 @@ export default {
   @media (max-width: $breakpoint-s) {
     margin-top: 20px;
   }
-}
-.subnav-active-highlight {
-  position: absolute;
-  bottom: 0;
-  width: 20px;
-  height: 2px;
-  border-radius: 4px;
-  @include gradient-background-dg($color-primary, $color-accent);
-  @include ease(0.25s);
+  .router-link-active {
+    border-bottom: 2px solid rgba(255,255,255,0.66);
+  }
 }
 </style>

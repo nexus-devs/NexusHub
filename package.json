@@ -23,7 +23,7 @@
     "cubic-core": "1.1.0",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.1.1",
-    "cubic-ui": "1.4.5",
+    "cubic-ui": "1.4.7",
     "d3": "^5.5.0",
     "fs-extra": "^6.0.1",
     "fuse.js": "^3.2.1",
@@ -35,11 +35,12 @@
     "vue-affix": "^0.2.4",
     "vue-analytics": "^5.12.2",
     "vue-observe-visibility": "^0.4.1",
+    "vue-tween-number": "^0.2.0",
     "warframe-items": "1.28.0",
-    "ws": "^5.2.1"
+    "ws": "^5.2.2"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.5",
+    "babel-eslint": "^8.2.6",
     "better-assert": "^1.0.2",
     "eslint": "^5.1.0",
     "eslint-config-standard": "^12.0.0-alpha.0",
@@ -51,8 +52,8 @@
     "eslint-plugin-vue": "^4.5.0",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.6.3",
-    "webpack": "^4.15.1"
+    "semantic-release": "^15.7.1",
+    "webpack": "^4.16.0"
   },
   "release": {
     "getLastRelease": "last-release-git"

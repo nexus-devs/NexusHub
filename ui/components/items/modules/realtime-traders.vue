@@ -3,7 +3,7 @@
     <template slot="header">
       <span class="title">Active Traders right now</span>
       <br>
-      <span class="active-number">32</span>
+      <tween-num :value="total" :duration="1000" easing="easeInOutQuad" class="active-number"/>
       <br>
       <span class="offers-per-minute">Offers per minute</span>
     </template>
@@ -25,10 +25,65 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import tweenNum from 'vue-tween-number'
+let updateInterval
 
 export default {
   components: {
-    module
+    module,
+    'tween-num': tweenNum
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    },
+    total () {
+      return this.$store.state.opm.total
+    },
+    intervals () {
+      return this.$store.state.opm.intervals
+    }
+  },
+
+  beforeMount () {
+    this.$cubic.subscribe(`/warframe/v1/orders/opm?item=${this.item.name}`, opm => {
+      this.$store.commit('setOpmTotal', opm.total)
+      this.$store.commit('setOpmIntervals', opm.intervals)
+    })
+    updateInterval = setInterval(async () => {
+      const { total, intervals } = await this.$cubic.get(`/warframe/v1/orders/opm?item=${this.item.name}`)
+      this.$store.commit('setOpmTotal', total)
+      this.$store.commit('setOpmIntervals', intervals)
+    }, 1000 * 60)
+  },
+
+  beforeDestroy () {
+    this.$cubic.unsubscribe(`/warframe/v1/orders/opm?item=${this.item.name}`)
+    clearInterval(updateInterval)
+  },
+
+  async asyncData ({ route }) {
+    const item = route.params.item.split('-').join(' ')
+    const { total, intervals } = await this.$cubic.get(`/warframe/v1/orders/opm?item=${item}`)
+    this.$store.commit('setOpmTotal', total)
+    this.$store.commit('setOpmIntervals', intervals)
+  },
+
+  storeModule: {
+    name: 'opm',
+    state: {
+      total: 0,
+      intervals: []
+    },
+    mutations: {
+      setOpmTotal (state, total) {
+        state.total = total
+      },
+      setOpmIntervals (state, intervals) {
+        state.intervals = intervals
+      }
+    }
   }
 }
 </script>

@@ -35,11 +35,6 @@
 import realtimeTraders from 'src/components/items/modules/realtime-traders.vue'
 import realtimeUser from 'src/components/items/modules/realtime-order.vue'
 
-async function init () {
-  const item = this.$store.state.route.params.item.split('-').join(' ')
-  this.$store.commit('setTradeListings', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
-}
-
 export default {
   components: {
     'realtime-traders': realtimeTraders,
@@ -51,29 +46,30 @@ export default {
       return this.$store.state.items.item
     },
     listings () {
-      return this.$store.state.trade.listings
+      return this.$store.state.orders.listings
     }
   },
 
   watch: {
     async $route (to, from) {
       if (to.params.item !== from.params.item) {
+        // Before route change
         this.$cubic.unsubscribe(`/warframe/v1/orders?item=${this.item.name}`)
-        await init.bind(this)()
-        this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
-          this.$store.commit('setTradeListings', orders)
-        })
+
+        // After route change
+        setTimeout(async () => {
+          await init.bind(this)()
+          this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
+            this.$store.commit('setOrders', orders)
+          })
+        }, 100)
       }
     }
   },
 
-  // Client-sided loads won't trigger asyncData due to how we switch sub
-  // pages on items, so we'll do it here manually. The `mount` life cycle hook
-  // only triggers client-sided.
-  async beforeMount () {
-    await init.bind(this)()
+  beforeCreate () {
     this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
-      this.$store.commit('setTradeListings', orders)
+      this.$store.commit('setOrders', orders)
     })
   },
 
@@ -86,12 +82,12 @@ export default {
   },
 
   storeModule: {
-    name: 'trade',
+    name: 'orders',
     state: {
       listings: []
     },
     mutations: {
-      setTradeListings (state, listings) {
+      setOrders (state, listings) {
         state.listings = listings.reverse()
       }
     }

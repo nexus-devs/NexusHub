@@ -1,26 +1,32 @@
 <template>
-  <div class="overview">
-    <section>
-      <div class="container">
-        <h2>Item Overview</h2>
-        <div class="row-pad">
-          <div class="column col-b">
-            <description/>
-            <build-requirements v-if="item.components.length > 1"/>
+  <div>
+    <sidebar>
+      <sidebar-search/>
+    </sidebar>
+    <item-header/>
+    <app-content>
+      <section>
+        <div class="container">
+          <h2>Item Overview</h2>
+          <div class="row-pad">
+            <div class="column col-b">
+              <description/>
+              <build-requirements v-if="item.components.length > 1"/>
+            </div>
+            <stats class="col-b"/>
+            <drops v-if="drops" class="col-b"/>
           </div>
-          <stats class="col-b"/>
-          <drops v-if="drops" class="col-b"/>
         </div>
-      </div>
-    </section>
-    <section v-if="patchlogs">
-      <div class="container">
-        <h2>Recent Changes</h2>
-        <div class="row-pad patchlogs">
-          <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+      </section>
+      <section v-if="patchlogs">
+        <div class="container">
+          <h2>Recent Changes</h2>
+          <div class="row-pad patchlogs">
+            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </app-content>
   </div>
 </template>
 
@@ -28,6 +34,10 @@
 
 <script>
 import Vue from 'vue'
+import appContent from 'src/app-content.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import itemheader from 'src/components/items/header.vue'
 import patchlog from 'src/components/items/modules/patchlog.vue'
 import VueObserveVisibility from 'vue-observe-visibility'
 import description from 'src/components/items/modules/description.vue'
@@ -37,6 +47,10 @@ import drops from 'src/components/items/modules/drops.vue'
 
 export default {
   components: {
+    'app-content': appContent,
+    sidebar,
+    'sidebar-search': sidebarSearch,
+    'item-header': itemheader,
     patchlog,
     description,
     'build-requirements': buildRequirements,
@@ -72,6 +86,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
+
+/deep/ {
+  .zoom-enter-active, .fade-leave-active {
+    @include ease(0.45s);
+  }
+  .zoom-enter, .zoom-leave-to {
+    transform: translateY(10px);
+    transform-origin: top;
+    opacity: 0.75;
+  }
+}
 
 h2 {
   margin-bottom: 20px;

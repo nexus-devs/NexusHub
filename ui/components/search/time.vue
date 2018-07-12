@@ -24,6 +24,15 @@
 <script>
 import _ from 'lodash'
 import moment from 'moment'
+let ssr = false
+
+// We wouldn't wanna register some store components server-sided because moment
+// can't just be picked up client-sided when the state is preserved.
+try {
+  document
+} catch (err) {
+  ssr = true
+}
 
 const calendarOptions = {
   sameDay: '[Today]',
@@ -37,7 +46,6 @@ const getDate = (date) => date instanceof moment ? { time: date, format: date.ca
 
 
 export default {
-
   data () {
     return {
       active: false,
@@ -65,6 +73,7 @@ export default {
       return date.format || date.time.calendar(null, calendarOptions)
     }
   },
+
   created () {
     this.$store.dispatch('applyTimeQuery', this.$route)
   },
@@ -144,6 +153,7 @@ export default {
 
   storeModule: {
     name: 'time',
+    reregister: true,
     state: {
       modified: false,
       focus: {
