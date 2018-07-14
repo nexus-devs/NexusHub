@@ -52,17 +52,23 @@ class Order extends Endpoint {
       online: true
     })
 
-    // Update OPM
+    // Update OPM for this item
     const opm = new Opm(this.api, this.db, `/warframe/v1/orders/opm?item=${item}`)
     const opmData = await opm.filter(item)
     opm.publish(opmData)
-    opm.cache(opmData, 1000 * 60)
+    opm.cache(opmData, 60)
+
+    // Update OPM for all items
+    const opmAll = new Opm(this.api, this.db, `/warframe/v1/orders/opm`)
+    const opmDataAll = await opm.filter()
+    opmAll.publish(opmDataAll)
+    opmAll.cache(opmDataAll, 60)
 
     // Update offer list
     const orders = new Orders(this.api, this.db, `/warframe/v1/orders?item=${item}`)
     const { result, discard } = await orders.filter(item)
     orders.publish(result)
-    orders.cache(result, 1000 * 60 * 10)
+    orders.cache(result, 60 * 10)
     orders.discard(discard)
   }
 }

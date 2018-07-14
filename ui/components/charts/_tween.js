@@ -31,15 +31,13 @@ class Tween {
   /**
    * Functions which ease transitions between prop value cahnges
    */
-  adjustData (vm, newData, oldData) {
-    this.tweenData(normalize(newData, true), normalize(oldData, true), function () {
-      vm.animatedData = normalize(this)
-      vm.update()
-    })
-  }
-  adjustCeil (vm, newData, oldData) {
-    this.tweenData({ d: newData }, { d: oldData }, function () {
-      vm.animatedCeil = this.d
+  adjustData (vm, newData, oldData, doNormalize) {
+    // Animate data
+    const nData = doNormalize ? normalize(newData, true) : newData
+    const oData = doNormalize ? normalize(oldData, true) : oldData
+
+    this.tweenData(nData, oData, function () {
+      vm.animatedData = normalize(this, null, !doNormalize)
       vm.update()
     })
   }

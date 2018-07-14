@@ -105,6 +105,7 @@ export default {
       this.scaled.y.domain([0, this.animatedCeil])
       this.points = []
 
+      // Transform raw data into scaled data to fit into the graph
       for (const d of this.animatedData) {
         const x = this.scaled.x(d.x)
         const y = this.scaled.y(d.y)

@@ -37,7 +37,7 @@ export default {
         }
 
         // View generated URL
-        this.$router.replace(path)
+        this.$router.push(path)
 
         // Close sidebar if open
         if (this.$store.state.sidebar.active) {

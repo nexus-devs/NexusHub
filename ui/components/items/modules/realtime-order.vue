@@ -12,7 +12,7 @@
           for
           <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
         </p>
-        <div v-if="priceDiff" class="diff">
+        <div v-if="false" class="diff">
           <span :class="{ negative: order.offer === 'Selling' ? priceDiff >= 0 : priceDiff <= 0 }">{{ priceDiff > 0 ? '+' : '' }}{{ priceDiff }}%</span>
         </div>
       </div>
