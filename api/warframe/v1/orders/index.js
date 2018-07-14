@@ -39,7 +39,7 @@ class Orders extends Endpoint {
       const { result, discard } = await this.filter(item, offline)
       res.send(result)
       this.discard(discard)
-      this.cache(result, 1000 * 60 * 10)
+      this.cache(result, 60 * 10)
     }
   }
 

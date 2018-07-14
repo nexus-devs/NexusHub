@@ -26,10 +26,10 @@
               </span>
             </div>
             <div class="item-profile-lower">
-              <router-link :to="`${itemUrl}/trade`">
+              <router-link :to="`${itemUrl}/trading`">
                 <button class="buy">Buy {{ item.name }}</button>
               </router-link>
-              <router-link :to="`${itemUrl}/trade`">
+              <router-link :to="`${itemUrl}/trading`">
                 <button class="sell">Sell</button>
               </router-link>
             </div>
@@ -41,7 +41,7 @@
       <div class="container">
         <router-link :to="itemUrl" exact>Overview</router-link>
         <router-link :to="`${itemUrl}/prices`">Prices</router-link>
-        <router-link :to="`${itemUrl}/trade`">Trade</router-link>
+        <router-link :to="`${itemUrl}/trading`">Trade</router-link>
         <router-link v-if="item.patchlogs" :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
       </div>
     </nav>

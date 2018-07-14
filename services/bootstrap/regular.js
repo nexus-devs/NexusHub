@@ -12,24 +12,24 @@ const config = {
 
 module.exports = async function () {
   // Auth server for verifying users
-  await cubic.use(new Auth(config.auth))
+  cubic.use(new Auth(config.auth))
 
   // View server for providing the web client
   cubic.use(new Ui(config.ui))
 
+  // Main API setup. Used for 'global' endpoints not specific to any game.
+  // Core nodes of other games will still connect to this API server though.
+  cubic.use(new Core(config.main.core))
+  cubic.use(new Api(config.main.api))
+
   // Warframe Core node
   cubic.hook('warframe.core', wfhooks.verifyIndices)
   cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
-  await cubic.use(new Core(config.warframe.core))
-
-  // Main API setup. Used for 'global' endpoints not specific to any game.
-  // Core nodes of other games will still connect to this API server though.
-  await cubic.use(new Core(config.main.core))
-  await cubic.use(new Api(config.main.api))
+  cubic.use(new Core(config.warframe.core))
 
   // Load services
   setTimeout(() => {
     require('../../services/warframe/tradechat.js')
     require('../../services/warframe/warframe.market.js')
-  }, 1000 * 10)
+  }, 1000 * 20)
 }

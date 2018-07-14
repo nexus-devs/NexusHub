@@ -1,7 +1,7 @@
 /**
  * Helper function for charts to normalize null values
  */
-function normalize (arr, raw) {
+function normalize (arr, raw, skip) {
   const result = []
   let min = Number.POSITIVE_INFINITY
   let max = Number.NEGATIVE_INFINITY
@@ -12,7 +12,7 @@ function normalize (arr, raw) {
     if (raw) {
       let val = y
 
-      if (!y) {
+      if (y === null && !skip) {
         const n = findNearestNeighbours(arr, x)
         val = (n[0] + n[1]) / 2
       }
@@ -32,7 +32,7 @@ function normalize (arr, raw) {
       max = y > max ? y : max
 
       // Normalize null value from nearest neighbours
-      if (!val.y) {
+      if (val.y === null && !skip) {
         const n = findNearestNeighbours(arr, x)
         val.y = (n[0] + n[1]) / 2
       }

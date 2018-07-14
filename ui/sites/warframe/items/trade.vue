@@ -10,9 +10,9 @@
           <h2>Realtime Orders</h2>
           <span>Tracking all regions from the trade chat and warframe.market.</span>
           <div class="realtime">
-            <realtime-traders/>
+            <opm/>
             <transition-group name="realtime" class="realtime-users row">
-              <realtime-user v-for="(order, n) in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+              <realtime-user v-for="order in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
             </transition-group>
           </div>
         </div>
@@ -27,7 +27,7 @@
           </div>
           <div v-else>
             Sorry, nobody wants to trade {{ item.name }}s right now. There might be
-            offers later! But maybe this item just sucks ¯\_(ツ)_/¯
+            offers later! But maybe this item just isn't that good ¯\_(ツ)_/¯
           </div>
         </div>
       </section>
@@ -42,7 +42,7 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
-import realtimeTraders from 'src/components/items/modules/realtime-traders.vue'
+import opm from 'src/components/items/modules/opm.vue'
 import realtimeUser from 'src/components/items/modules/realtime-order.vue'
 
 export default {
@@ -51,7 +51,7 @@ export default {
     sidebar,
     'sidebar-search': sidebarSearch,
     'item-header': itemheader,
-    'realtime-traders': realtimeTraders,
+    opm,
     'realtime-user': realtimeUser
   },
 
@@ -61,6 +61,14 @@ export default {
     },
     listings () {
       return this.$store.state.orders.listings
+    }
+  },
+
+  // This component won't get destroyed when switching items directly, so we have
+  // to unsub from the trade listeners for the previous item like this.
+  watch: {
+    item (to, from) {
+      this.$cubic.unsubscribe(`/warframe/v1/orders?item=${from.name}`)
     }
   },
 
