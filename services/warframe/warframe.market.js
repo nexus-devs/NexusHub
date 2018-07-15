@@ -86,7 +86,6 @@ class WFM {
   }
 
   async initItems () {
-    await client.connections()
     try {
       this.items = await client.get('/warframe/v1/items')
     } catch (err) {
