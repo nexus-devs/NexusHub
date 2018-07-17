@@ -1,6 +1,5 @@
 const mongodb = require('mongodb').MongoClient
 const Items = require('warframe-items')
-const items = new Items()
 const _ = require('lodash')
 
 class Hook {
@@ -39,6 +38,7 @@ class Hook {
   async verifyItemList () {
     const url = cubic.config.warframe.core.mongoUrl
     const db = await mongodb.connect(url)
+    const items = new Items()
 
     for (let item of items) {
       if (item.tradable) {

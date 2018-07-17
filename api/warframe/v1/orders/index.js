@@ -93,20 +93,10 @@ class Orders extends Endpoint {
    * requests that are required.
    */
   async getAll () {
-    const orders = await this.db.collection('orders').find().toArray()
+    const orders = await this.db.collection('orders').find({}, {
+      component: 0
+    }).toArray()
 
-    // Reduce output size. TODO: This should be done through query projections,
-    // but for some reason it just doesn't work.
-    for (let order of orders) {
-      order = {
-        user: order.user,
-        item: order.item,
-        apiName: order.apiName,
-        offer: order.offer,
-        source: order.source,
-        createdAt: order.createdAt
-      }
-    }
     return orders
   }
 }

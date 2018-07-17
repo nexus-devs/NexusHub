@@ -28,6 +28,7 @@
           Trade Chat - {{ opm.sources.tradeChat }}% <br>
           Warframe.market - {{ opm.sources.wfm }}%
         </div>
+        TODO: Add most traded items to the right of this box - link to item page.
       </section>
     </app-content>
   </div>
