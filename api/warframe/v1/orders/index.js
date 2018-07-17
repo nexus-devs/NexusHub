@@ -67,7 +67,7 @@ class Orders extends Endpoint {
 
       if (order.source !== 'Trade Chat') {
         const user = await this.db.collection('users').findOne({ name: order.user })
-        order.online = user.online
+        order.online = user ? user.online : false
       }
       if ((!offline && order.online) || order.source === 'Trade Chat') {
         online.push(order)
