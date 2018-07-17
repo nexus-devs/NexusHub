@@ -57,8 +57,7 @@ else {
     },
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
-      serverConfig: `${process.cwd()}/config/webpack/server.config.js`,
-      skipBuild: true
+      serverConfig: `${process.cwd()}/config/webpack/server.config.js`
     }
   }
 }
