@@ -1,7 +1,7 @@
 const prod = process.NODE_ENV === 'production'
 const WebSocket = require('ws')
 const Client = require('cubic-client')
-global.testnigger = new Client({
+const client = new Client({
   api_url: prod ? 'https://api.nexus-stats.com' : 'http://localhost:3003',
   auth_url: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030',
   user_key: prod ? undefined : cubic.config.warframe.core.userKey,
@@ -74,7 +74,7 @@ class WFM {
 
       if (matchedItem && matchedComponent) {
         try {
-          testnigger.post('/warframe/v1/orders', {
+          client.post('/warframe/v1/orders', {
             user: order.user.ingame_name,
             offer: order.order_type === 'sell' ? 'Selling' : 'Buying',
             item: matchedItem,
@@ -97,7 +97,7 @@ class WFM {
    */
   async initItems () {
     try {
-      this.items = await testnigger.get('/warframe/v1/items')
+      this.items = await client.get('/warframe/v1/items')
     } catch (err) {
       setTimeout(this.initItems, 1000 * 30)
     }
@@ -107,7 +107,7 @@ class WFM {
    * Discard old offers and change user's online status
    */
   async updateOrders () {
-    const orders = await testnigger.get('/warframe/v1/orders?item=a&all=true')
+    const orders = await client.get('/warframe/v1/orders?item=a&all=true')
     const items = []
 
     // Aggregate all users so we only need to fetch their profile once
@@ -135,11 +135,11 @@ class WFM {
           // Update user's status if the order is still active. Offline orders
           // are hidden by default.
           if (found) {
-            const user = await testnigger.get(`/warframe/v1/users/${order.user}`)
+            const user = await client.get(`/warframe/v1/users/${order.user}`)
             const online = found.user.status !== 'offline'
 
             if (user.online !== online) {
-              testnigger.post(`/warframe/v1/users/${order.user}/status`, { online })
+              client.post(`/warframe/v1/users/${order.user}/status`, { online })
             }
           } else {
             discard.push(order)
@@ -150,7 +150,7 @@ class WFM {
       // Remove old orders
       if (discard.length) {
         const itemName = orders.find(i => i.apiName === item).item
-        await testnigger.delete('/warframe/v1/orders', { item: itemName, discard })
+        await client.delete('/warframe/v1/orders', { item: itemName, discard })
       }
     }
   }
