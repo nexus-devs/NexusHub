@@ -35,7 +35,7 @@ class Order extends Endpoint {
     const { result } = await orders.filter(item)
     orders.publish(result)
     orders.cache(result, 60 * 5)
-    res.send('removed!')
+    res.send('deleted!')
   }
 }
 
