@@ -166,7 +166,7 @@ export default {
 .background {
   position: absolute;
   left: 0;
-  filter: blur(60px);
+  filter: blur(60px) grayscale(0.5);
   opacity: 0.33;
 
   @media (max-width: $breakpoint-m) {

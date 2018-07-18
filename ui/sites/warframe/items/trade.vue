@@ -17,6 +17,14 @@
           </div>
         </div>
       </section>
+      <section class="component-section">
+        <div class="container">
+          <h2>Components</h2>
+          <div class="row components">
+            <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
+          </div>
+        </div>
+      </section>
       <section>
         <div class="container">
           <h2>Active Listings</h2>
@@ -44,6 +52,7 @@ import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
 import opm from 'src/components/items/modules/opm.vue'
 import realtimeUser from 'src/components/items/modules/realtime-order.vue'
+import component from 'src/components/items/modules/component.vue'
 
 export default {
   components: {
@@ -52,7 +61,8 @@ export default {
     'sidebar-search': sidebarSearch,
     'item-header': itemheader,
     opm,
-    'realtime-user': realtimeUser
+    'realtime-user': realtimeUser,
+    comp: component
   },
 
   computed: {
@@ -61,6 +71,16 @@ export default {
     },
     listings () {
       return this.$store.state.orders.listings
+    },
+    components () {
+      const components = []
+
+      for (const component of this.$store.state.items.item.components) {
+        if (component.tradable || component.name === 'Set') {
+          components.push(component)
+        }
+      }
+      return components
     }
   },
 
@@ -74,8 +94,23 @@ export default {
 
   beforeMount () {
     this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
+      const components = this.$store.state.orders.components
       this.$store.commit('setOrders', orders)
+
+      if (components.length) {
+        this.$store.commit('setOrderComponents', components)
+      } else {
+        this.$store.commit('setOrderComponents', this.item.components.map(c => c.name))
+      }
     })
+
+    // Set active components
+    const components = this.$store.state.orders.components
+    if (components.length) {
+      this.$store.commit('setOrderComponents', components)
+    } else {
+      this.$store.commit('setOrderComponents', this.item.components.map(c => c.name))
+    }
   },
 
   beforeDestroy () {
@@ -90,11 +125,35 @@ export default {
   storeModule: {
     name: 'orders',
     state: {
-      listings: []
+      all: [],
+      listings: [],
+      components: []
     },
     mutations: {
-      setOrders (state, listings) {
+      setOrders (state, orders) {
+        const listings = []
+        state.all = orders.reverse()
+
+        for (const order in orders) {
+          if (state.components.includes(order.component)) {
+            listings.push(order)
+          }
+        }
         state.listings = listings.reverse()
+      },
+      setOrderComponents (state, components) {
+        state.components = components
+
+        // Update listings
+        const listings = []
+        const orders = state.all
+
+        for (const order of orders) {
+          if (state.components.includes(order.component)) {
+            listings.push(order)
+          }
+        }
+        state.listings = listings
       }
     }
   }
@@ -115,6 +174,14 @@ export default {
     transform-origin: top;
     opacity: 0.75;
   }
+}
+
+.component-section {
+  border-bottom: none;
+  padding-bottom: 20px;
+}
+.components {
+  margin-left: -25px; // compnesate for padding
 }
 
 h2 {

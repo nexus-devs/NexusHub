@@ -16,11 +16,13 @@
           <div class="item-profile-data">
             <div class="item-profile-data-info">
               <h1>{{ item.name }}</h1>
-              <span v-for="component in item.components" v-if="item.components.length > 1" :key="component.name"
-                    :class="{ selected: selectedComponent === component.name }"
-                    @click="selectComponent">
-                {{ component.name }}
-              </span>
+              <div v-if="item.components.length > 1">
+                <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
+                      :class="{ selected: selectedComponent === component.name }"
+                      @click="selectComponent">
+                  {{ component.name }}
+                </span>
+              </div>
               <span v-for="tag in item.tags" v-else :key="tag" class="selected">
                 {{ tag }}
               </span>
@@ -342,7 +344,7 @@ export default {
     margin-top: 20px;
   }
   .router-link-active {
-    border-bottom: 2px solid rgba(255,255,255,0.66);
+    border-bottom: 2px solid #39E591;
   }
 }
 </style>
