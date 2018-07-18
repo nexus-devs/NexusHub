@@ -17,17 +17,12 @@
           </div>
         </div>
       </section>
-      <section class="component-section">
-        <div class="container">
-          <h2>Components</h2>
-          <div class="row components">
-            <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
-          </div>
-        </div>
-      </section>
       <section>
         <div class="container">
           <h2>Active Listings</h2>
+          <div class="row components">
+            <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
+          </div>
           <div v-if="listings.length">
             <div v-for="order in listings" :key="order._id">
               {{ order }}
@@ -176,12 +171,9 @@ export default {
   }
 }
 
-.component-section {
-  border-bottom: none;
-  padding-bottom: 20px;
-}
 .components {
   margin-left: -25px; // compnesate for padding
+  margin-bottom: 50px;
 }
 
 h2 {

@@ -1,4 +1,5 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
+const { ObjectId } = require('mongodb')
 
 class Orders extends Endpoint {
   constructor (api, db, url) {
@@ -82,7 +83,7 @@ class Orders extends Endpoint {
   async discard (discard) {
     if (discard.length) {
       for (let discarded of discard) {
-        await this.db.collection('orders').removeOne({ _id: discarded._id })
+        await this.db.collection('orders').deleteOne({ _id: new ObjectId(discarded._id) })
         delete discarded._id
       }
     }

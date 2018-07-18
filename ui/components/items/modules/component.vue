@@ -57,7 +57,7 @@ export default {
   @include ie;
   margin-right: 10px;
   padding: 5px 30px 5px 20px;
-  opacity: 0.5;
+  opacity: 0.66;
 
   &:last-of-type {
     margin-right: 0;
