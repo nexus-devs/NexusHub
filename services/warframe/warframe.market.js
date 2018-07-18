@@ -128,7 +128,7 @@ class WFM {
           const found = wfmOrders.find(o => {
             const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
             const matchesUser = o.user.ingame_name === order.user
-            const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 3
+            const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 1
             return matchesOffer && matchesUser && notExpired
           })
 

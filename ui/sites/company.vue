@@ -62,7 +62,7 @@
                   {{ offers }}
                 </div>
                 <div class="label">
-                  Processed offers each month
+                  Processed orders each month
                 </div>
               </div>
             </div>
