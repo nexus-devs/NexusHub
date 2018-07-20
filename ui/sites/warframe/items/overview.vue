@@ -127,7 +127,7 @@ h2 {
     max-width: 33%;
 
     img {
-      max-height: 250px;
+      max-height: 200px;
     }
     @media (max-width: $breakpoint-m) {
       max-width: calc(50% - 20px);
@@ -138,7 +138,11 @@ h2 {
     .body {
       text-overflow: ellipsis;
       overflow: hidden;
-      max-height: 50px;
+      max-height: 100px;
+      margin-bottom: auto;
+    }
+    .footer {
+      margin-top: 0;
     }
   }
 }

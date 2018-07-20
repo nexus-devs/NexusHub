@@ -182,7 +182,7 @@ export default {
 
         // No new events in the meantime -> perform query
         const B = input.includes('🅱')
-        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.75`)
+        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input.replace(/🅱️/g, 'b')}&fuzzy=true&category=items&threshold=0.75`)
         // const playerData = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
         const items = await dispatch('sanitizeSerpResults', { itemData, B })
         const players = []

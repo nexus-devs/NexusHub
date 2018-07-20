@@ -27,6 +27,7 @@ the sidebar. This also keeps our app.vue more clean.
   max-width: 100vw;
   position: relative;
   overflow: hidden;
+  @include ease(0.15s);
 }
 
 .app-content {

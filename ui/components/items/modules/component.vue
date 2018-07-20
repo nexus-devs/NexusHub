@@ -55,15 +55,20 @@ export default {
 
 .component {
   @include ie;
+  @include field;
   margin-right: 10px;
-  padding: 5px 30px 5px 20px;
-  opacity: 0.66;
+  padding: 8px 20px;
+  border-left: 2px solid transparent;
+  max-width: 400px;
 
   &:last-of-type {
     margin-right: 0;
   }
+  &:before {
+    border-radius: 2px;
+  }
   &.active {
-    opacity: 1;
+    border-left: 2px solid #39E591;
   }
   @media (max-width: $breakpoint-m) {
     display: flex;
@@ -87,8 +92,6 @@ export default {
   height: 50px;
   width: 50px;
   margin-right: 5px;
-  background: $color-bg;
-  border-radius: 100px;
 
   img {
     max-height: 70%;
@@ -99,6 +102,8 @@ export default {
   vertical-align: middle;
 }
 span {
+  display: inline-block;
+  margin-top: -2px;
   font-size: 0.9em;
   color: $color-font-body;
 }

@@ -3,12 +3,12 @@
     <sidebar>
       <sidebar-search/>
     </sidebar>
+    <order-popup/>
     <item-header/>
     <app-content>
       <section>
         <div class="container">
           <h2>Realtime Orders</h2>
-          <span>Tracking all regions from the trade chat and warframe.market.</span>
           <div class="realtime">
             <opm/>
             <transition-group name="realtime" class="realtime-users row">
@@ -18,15 +18,13 @@
         </div>
       </section>
       <section>
-        <div class="container">
+        <div class="container listings">
           <h2>Active Listings</h2>
           <div class="row components">
             <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
           </div>
           <div v-if="listings.length">
-            <div v-for="order in listings" :key="order._id">
-              {{ order }}
-            </div>
+            <order v-for="order in listings" :key="order._id" :order="order"/>
           </div>
           <div v-else>
             Sorry, nobody wants to trade {{ item.name }}s right now. There might be
@@ -46,8 +44,10 @@ import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
 import opm from 'src/components/items/modules/opm.vue'
-import realtimeUser from 'src/components/items/modules/realtime-order.vue'
 import component from 'src/components/items/modules/component.vue'
+import order from 'src/components/items/modules/order.vue'
+import orderPopup from 'src/components/items/modules/order-popup.vue'
+import orderRealtime from 'src/components/items/modules/order-realtime.vue'
 
 export default {
   components: {
@@ -56,8 +56,10 @@ export default {
     'sidebar-search': sidebarSearch,
     'item-header': itemheader,
     opm,
-    'realtime-user': realtimeUser,
-    comp: component
+    'realtime-user': orderRealtime,
+    comp: component,
+    order,
+    'order-popup': orderPopup
   },
 
   computed: {
@@ -84,6 +86,7 @@ export default {
   watch: {
     item (to, from) {
       this.$cubic.unsubscribe(`/warframe/v1/orders?item=${from.name}`)
+      this.$store.commit('setOrderComponents', [])
     }
   },
 
@@ -94,18 +97,8 @@ export default {
 
       if (components.length) {
         this.$store.commit('setOrderComponents', components)
-      } else {
-        this.$store.commit('setOrderComponents', this.item.components.map(c => c.name))
       }
     })
-
-    // Set active components
-    const components = this.$store.state.orders.components
-    if (components.length) {
-      this.$store.commit('setOrderComponents', components)
-    } else {
-      this.$store.commit('setOrderComponents', this.item.components.map(c => c.name))
-    }
   },
 
   beforeDestroy () {
@@ -122,15 +115,17 @@ export default {
     state: {
       all: [],
       listings: [],
-      components: []
+      components: [],
+      type: '',
+      selected: {}
     },
     mutations: {
       setOrders (state, orders) {
         const listings = []
         state.all = orders.reverse()
 
-        for (const order in orders) {
-          if (state.components.includes(order.component)) {
+        for (const order of orders) {
+          if (!state.components.length || state.components.includes(order.component)) {
             listings.push(order)
           }
         }
@@ -143,12 +138,17 @@ export default {
         const listings = []
         const orders = state.all
 
+        // Filter by active components. No active components selects everything.
+        // (default)
         for (const order of orders) {
-          if (state.components.includes(order.component)) {
+          if (!state.components.length || state.components.includes(order.component)) {
             listings.push(order)
           }
         }
         state.listings = listings
+      },
+      selectOrder (state, order) {
+        state.selected = order
       }
     }
   }
@@ -171,11 +171,6 @@ export default {
   }
 }
 
-.components {
-  margin-left: -25px; // compnesate for padding
-  margin-bottom: 50px;
-}
-
 h2 {
   margin-bottom: 20px;
 }
@@ -186,6 +181,7 @@ h2 + span {
 }
 .module {
   display: inline-flex;
+  z-index: 1;
 }
 .realtime {
   display: flex;
@@ -200,13 +196,17 @@ h2 + span {
   display: inline-flex;
   flex-wrap: wrap;
   vertical-align: top;
-  margin-left: 30px;
-  margin-bottom: -10px;
+  margin-left: 10px;
+  margin-right: -5px;
+  margin-bottom: -15px;
   width: 100%;
 
   @media (max-width: $breakpoint-s) {
     margin-left: 0;
     margin-top: 20px;
   }
+}
+.components {
+  margin-bottom: 40px;
 }
 </style>

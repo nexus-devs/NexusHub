@@ -86,6 +86,9 @@ export default {
     font-size: 0.9em;
   }
 }
+/deep/ .body {
+  margin: auto;
+}
 .drop {
   display: inline-flex;
   flex-direction: column;

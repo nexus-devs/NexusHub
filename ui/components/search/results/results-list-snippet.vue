@@ -61,7 +61,6 @@ a {
 
   &:hover {
     opacity: 1 !important;
-    background: $color-bg;
     transform: scale(0.995);
   }
   &:active {

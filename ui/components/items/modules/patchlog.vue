@@ -8,7 +8,7 @@
     <template slot="header">
       <h3>{{ patchlog.name }}</h3>
       <time :datetime="patchlog.date">{{ moment(new Date(patchlog.date)).format('MMMM Do YYYY') }}</time>
-      <img v-if="(visible || seen) && patchlog.imgUrl" :src="patchlog.imgUrl" :alt="patchlog.name">
+      <img v-if="(visible || seen) && patchlog.imgUrl" :src="patchlog.imgUrl" :alt="patchlog.name" onerror="this.style.display='none'">
     </template>
     <template slot="body">
       <div v-if="patchlog.additions">
