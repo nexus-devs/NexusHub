@@ -60,6 +60,7 @@ a {
   @include field;
   padding: 0;
   box-sizing: border-box;
+  background: $color-bg;
   @include ease-wubble(0.75s);
 
   &:hover {

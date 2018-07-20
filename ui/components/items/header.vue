@@ -144,6 +144,10 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+.item-header {
+  @include ease(0.15s);
+}
+
 /**
  * Header background. Item image will be visible here on mobile.
  */
@@ -232,8 +236,8 @@ export default {
   overflow: hidden;
   height: 135px;
   flex: 0 0 135px;
-  background: $color-bg;
   margin-right: 25px;
+  @include gradient-background-dg(#323947, $color-bg);
   @include shadow-1;
 
   img {

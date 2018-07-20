@@ -42,7 +42,7 @@
    top: 0;
    opacity: 0;
    border-radius: 1000px;
-   background: rgba(230,240,250,0.2);
+   background: rgba(200,225,250,0.2);
    @include ease(0.15s);
 }
 
@@ -50,7 +50,7 @@
     &:before {
       @include ease(0.8s);
     }
-    background: rgba(220,235,255,0.1);
+    background: rgba(200,225,255,0.1);
     @include ease(0.3s);
 
     @media (max-width: $breakpoint-s) {
