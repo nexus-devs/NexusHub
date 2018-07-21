@@ -39,7 +39,10 @@ export default {
       return this.$store.state.items.item
     },
     component () {
-      return this.item.components.find(c => c.name === this.order.component)
+      return this.item.components.find(c => c.name === this.order.component) || {
+        selling: { current: {}},
+        buying: { current: {}}
+      }
     },
     priceDiff () {
       const type = this.order.offer.toLowerCase()
@@ -93,7 +96,7 @@ export default {
   @include shadow-1;
 
   &:first-of-type {
-    @include gradient-background-dg(#3e4651, #404756)
+    @include gradient-background-dg(#404753, #404753)
     z-index: 1;
 
     .background {
@@ -120,7 +123,7 @@ export default {
         height: 100%;
         width: 100%;
         z-index: 1;
-        @include gradient-background(rgba(15, 20, 25, 0.1), #323942);
+        @include gradient-background(transparent, #38404c);
       }
     }
     .content {

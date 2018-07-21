@@ -25,7 +25,7 @@
             [{{ item.name }} {{ order.component }}]
             {{ order.price ? 'for' : '' }}
             {{ order.price ? `${order.price}p` : '' }}.
-            Found your offer at NexusHub.
+            {{ order.source === 'Warframe Market' ? '' : 'Found your offer at NexusHub.' }}
           </span>
         </div>
         <button @click="copy">
@@ -94,6 +94,8 @@ export default {
       this.$store.commit('selectOrder', {})
     },
     copy () {
+      // Small delay makes it feel more responsive, because it'll show up
+      // once the button is fully pressed rather than immediately.
       setTimeout(() => {
         const text = this.$refs.message.outerText
         const el = document.createElement('textarea')
@@ -107,8 +109,7 @@ export default {
         setTimeout(() => {
           this.copied = false
         }, 750)
-      }, 75) // Small delay makes it feel more responsive, because it'll show up
-             // once the button is fully pressed rather than immediately.
+      }, 75)
     }
   }
 }
@@ -134,21 +135,14 @@ export default {
 }
 .user {
   position: absolute;
-  margin-top: 45px;
-  margin-left: 70px;
+  margin-top: 30px;
+  margin-left: 40px;
 
   &:hover {
-    .tooltip {
+    & .tooltip {
       opacity: 1;
       transform: translateX(10px);
     }
-  }
-  .tooltip {
-    display: inline-block;
-    position: relative;
-    left: 30px;
-    top: -32px;
-    width: fit-content;
   }
   .user-image {
     height: 40px;
@@ -162,6 +156,13 @@ export default {
       height: 100%;
     }
   }
+}
+.tooltip {
+  display: inline-block;
+  position: absolute;
+  left: 30px;
+  top: 8px;
+  width: fit-content;
 }
 .item {
   position: relative;
