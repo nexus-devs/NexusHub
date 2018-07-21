@@ -12,7 +12,7 @@
           <div class="realtime">
             <opm/>
             <transition-group name="realtime" class="realtime-users row">
-              <realtime-user v-for="order in Array(6).fill(0).map((e, i) => listings[i])" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+              <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
             </transition-group>
           </div>
         </div>
@@ -49,6 +49,27 @@ import order from 'src/components/items/modules/order.vue'
 import orderPopup from 'src/components/items/modules/order-popup.vue'
 import orderRealtime from 'src/components/items/modules/order-realtime.vue'
 
+function filter (orders, components, offer = 'Selling', key = 'price') {
+  const result = []
+
+  for (const order of orders) {
+    if (!components.length || components.includes(order.component) &&
+        order.offer === offer) {
+      result.push(order)
+    }
+  }
+  return result.sort((a, b) => {
+    // Sort by component name (always)
+    const name = a.component.localeCompare(b.component)
+    if (name !== 0) {
+      return name
+    }
+
+    // Sort by key value (default is price)
+    return a[key] < b[key] ? -1 : 1
+  })
+}
+
 export default {
   components: {
     'app-content': appContent,
@@ -78,6 +99,11 @@ export default {
         }
       }
       return components
+    },
+    realtime () {
+      return Array(6).fill(0).map((e, i) => [].concat(this.listings).sort((a, b) => {
+        return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
+      })[i])
     }
   },
 
@@ -121,31 +147,12 @@ export default {
     },
     mutations: {
       setOrders (state, orders) {
-        const listings = []
-        state.all = orders.reverse()
-
-        for (const order of orders) {
-          if (!state.components.length || state.components.includes(order.component)) {
-            listings.push(order)
-          }
-        }
-        state.listings = listings.reverse()
+        state.all = orders
+        state.listings = filter(orders, state.components)
       },
       setOrderComponents (state, components) {
         state.components = components
-
-        // Update listings
-        const listings = []
-        const orders = state.all
-
-        // Filter by active components. No active components selects everything.
-        // (default)
-        for (const order of orders) {
-          if (!state.components.length || state.components.includes(order.component)) {
-            listings.push(order)
-          }
-        }
-        state.listings = listings
+        state.listings = filter(state.all, components)
       },
       selectOrder (state, order) {
         state.selected = order

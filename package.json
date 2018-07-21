@@ -52,7 +52,7 @@
     "eslint-plugin-vue": "^4.7.0",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.8.0",
+    "semantic-release": "^15.8.1",
     "webpack": "^4.16.1"
   },
   "release": {

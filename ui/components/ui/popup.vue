@@ -10,7 +10,6 @@
         <div class="body-content">
           <slot name="body"/>
         </div>
-
         <img src="/img/ui/popup-blob-bottom.svg" class="blob-bottom">
         <img src="/img/ui/popup-blob-top.svg" class="blob-top">
       </div>
@@ -58,12 +57,6 @@ export default {
     opacity: 1;
     transform: translateY(-20px);
   }
-  @media (max-width: $breakpoint-m) {
-    width: 80vw;
-  }
-  @media (max-width: $breakpoint-s) {
-    width: calc(100vw - 40px);
-  }
 }
 
 .blob-top {
@@ -86,7 +79,7 @@ export default {
   z-index: 3;
   width: 100%;
   height: 100%;
-  background: rgba(25,28,34,0.62);
+  background: rgba(31,34,42,0.62);
 }
 
 .popup-content {
@@ -115,9 +108,19 @@ export default {
     overflow: hidden;
     padding: 30px;
     background: $color-bg-dark;
+
+    @media (max-width: $breakpoint-s) {
+      padding: 30px 0px;
+    }
   }
   .body-content {
     z-index: 1;
+  }
+  @media (max-width: $breakpoint-m) {
+    min-width: 70vw;
+  }
+  @media (max-width: $breakpoint-s) {
+    min-width: 90vw;
   }
 }
 </style>

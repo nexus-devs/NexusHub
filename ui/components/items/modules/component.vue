@@ -95,6 +95,7 @@ export default {
 
   img {
     max-height: 70%;
+    border-radius: 60px;
   }
 }
 .data {
