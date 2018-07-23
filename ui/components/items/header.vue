@@ -29,10 +29,10 @@
             </div>
             <div class="item-profile-lower">
               <router-link :to="`${itemUrl}/trading`">
-                <button class="buy">Buy {{ item.name }}</button>
+                <button class="btn-outline buy">Buy {{ item.name }}</button>
               </router-link>
               <router-link :to="`${itemUrl}/trading`">
-                <button class="sell">Sell</button>
+                <button class="btn-outline sell">Sell</button>
               </router-link>
             </div>
           </div>
@@ -156,9 +156,16 @@ export default {
    padding: 115 0;
    box-shadow: none;
    z-index: 0;
+   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
    /deep/ .background-container {
      top: 0;
+   }
+   /deep/ .blobs {
+     display: none;
+   }
+   /deep/ .container {
+     position: static;
    }
    @media (max-width: $breakpoint-s) {
      padding: 150 0;
@@ -270,6 +277,8 @@ export default {
 
 .item-profile-data {
   .item-profile-data-info {
+    white-space: nowrap;
+
     h1 {
       margin-top: 5px;
     }
@@ -298,24 +307,6 @@ export default {
 
 .item-profile-lower {
   margin-top: 18px;
-
-  button {
-    font-size: 0.85em;
-    text-transform: uppercase;
-    margin-right: 10px;
-    background: none;
-    border: 1px solid $color-subtle;
-    box-shadow: none;
-    color: $color-font-subtle;
-    @include ie;
-
-    &:hover {
-      color: white;
-    }
-  }
-  .sell {
-
-  }
 }
 
 /**
@@ -335,10 +326,13 @@ export default {
     text-transform: uppercase;
     font-size: 0.875em;
     letter-spacing: 0.5;
-    border-bottom: 2px solid transparent;
 
     &:before {
       border-radius: 0;
+    }
+    @media (max-width: $breakpoint-s) {
+      color: $color-font-body !important;
+      padding: 15px 20px ;
     }
   }
   .container {
@@ -348,7 +342,7 @@ export default {
     margin-top: 20px;
   }
   .router-link-active {
-    border-bottom: 2px solid #39E591;
+    color: #39E591 !important;
   }
 }
 </style>

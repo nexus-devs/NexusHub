@@ -18,12 +18,16 @@
       {{ order.rank }} / {{ item.fusionLimit }}
     </div>
     <div class="col">
+      <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
       {{ order.quantity }}x
     </div>
     <div class="col price">
       <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-      {{ order.price ? `${order.price}p` : 'any offer' }}
-      <button>{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
+      <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
+      <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff(order) >= 0 : priceDiff(order) <= 0 }" class="diff">
+        {{ priceDiff(order) > 0 ? '+' : '' }}{{ priceDiff(order) }}%
+      </span>
+      <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
     </div>
   </div>
 </template>
@@ -52,6 +56,16 @@ export default {
   methods: {
     select () {
       this.$store.commit('selectOrder', this.order)
+    },
+    priceDiff (order) {
+      const type = order.offer.toLowerCase()
+      const value = order.price - this.component[type].current.median
+
+      if (order.price) {
+        return (value / this.component[type].current.median * 100).toFixed(2)
+      } else {
+        return null
+      }
     }
   }
 }
@@ -67,10 +81,12 @@ export default {
   align-items: center;
   width: 100%;
   margin-bottom: 10px;
+  @include ease(0.5s);
 
   div {
     color: white;
     margin: 0 10px;
+    font-size: 0.9em;
 
     &:first-of-type {
       margin-left: 0;
@@ -93,6 +109,9 @@ export default {
     max-height: 60%;
     border-radius: 60px;
   }
+  @media (max-width: $breakpoint-xs) {
+    display: none;
+  }
 }
 
 .item {
@@ -101,12 +120,12 @@ export default {
 
   .component {
     color: white;
-    font-family: 'Circular'
+    font-family: 'Circular';
+    font-size: 1.1em;
   }
   span:nth-of-type(2) {
     display: inline-block;
     margin-top: -2px;
-    font-size: 0.9em;
     color: $color-font-body;
   }
   @media (max-width: $breakpoint-s) {
@@ -126,13 +145,13 @@ export default {
     position: absolute;
     left: 30px;
     top: 5px;
+    font-size: 1em;
     width: fit-content;
 
     @media (min-width: $breakpoint-s) {
       opacity: 1;
       background: transparent;
       box-shadow: none;
-      font-size: 0.9em;
       left: 17px;
 
       /deep/ .tooltip-pointer {
@@ -161,16 +180,24 @@ export default {
   justify-content: flex-end;
   align-items: center;
 
+  .diff {
+    margin-left: 10px;
+    margin-top: 2px;
+    font-size: 0.9em;
+    color: $color-primary;
+  }
+  .negative {
+    color: $color-error;
+  }
   img {
     margin-right: 4px;
   }
   button {
     margin-left: 40px;
     margin-right: 10px;
-    background: transparent;
-    border: 1px solid $color-subtle;
-    box-shadow: none;
-    font-size: 0.9em;
+    color: white;
+    text-transform: none;
+    font-size: 1em;
 
     &:active {
       background: rgba(200,225,255,0.1)

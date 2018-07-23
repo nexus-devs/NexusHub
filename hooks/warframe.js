@@ -118,15 +118,15 @@ class Hook {
     }
     for (let component of item.components) {
       const current = {
-        median: r(20, 300),
-        min: r(5, 20),
-        max: r(300, 500),
+        median: r(5, 30),
+        min: r(2, 5),
+        max: r(30, 50),
         offers: r(500, 8000)
       }
       const previous = {
-        median: r(20, 300),
-        min: r(5, 20),
-        max: r(300, 500),
+        median: r(5, 30),
+        min: r(2, 5),
+        max: r(30, 50),
         offers: r(500, 8000)
       }
       if (stored) {

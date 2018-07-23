@@ -2,7 +2,7 @@
   <div class="row item-price-snippet" @click="select">
 
     <!-- left panel -->
-    <div class="col">
+    <div v-if="order && component" class="col">
       <div :class="{ set: component.name === 'Set' }" class="background">
         <div class="background-overlay"/>
         <img :src="component.imgUrl" :alt="`${item.name} ${component.name}`">
@@ -21,7 +21,7 @@
     </div>
 
     <!-- right panel -->
-    <div class="col">
+    <div v-if="order && component" class="col">
       <h4>{{ order.user }}</h4>
       <span>{{ order.offer }} {{ order.component }}</span>
     </div>
@@ -39,19 +39,27 @@ export default {
       return this.$store.state.items.item
     },
     component () {
-      return this.item.components.find(c => c.name === this.order.component) || {
-        selling: { current: {}},
-        buying: { current: {}}
+      if (this.order) {
+        return this.item.components.find(c => c.name === this.order.component) || {
+          selling: { current: {}},
+          buying: { current: {}}
+        }
+      } else {
+        return {}
       }
     },
     priceDiff () {
-      const type = this.order.offer.toLowerCase()
-      const value = this.order.price - this.component[type].current.median
+      if (this.order) {
+        const type = this.order.offer.toLowerCase()
+        const value = this.order.price - this.component[type].current.median
 
-      if (this.order.price) {
-        return (value / this.component[type].current.median * 100).toFixed(2)
+        if (this.order.price) {
+          return (value / this.component[type].current.median * 100).toFixed(2)
+        } else {
+          return null
+        }
       } else {
-        return null
+        return {}
       }
     }
   },
@@ -76,11 +84,18 @@ export default {
   padding: 0;
   margin-left: 15px;
   margin-bottom: 15px;
-  @include ease(0.5s)
+  max-width: 330px;
+  min-width: 260px;
+  min-height: 160px;
+  @include ease(0.5s);
 
-  &:nth-of-type(n + 7) {
+  &:nth-of-type(n + 5) {
     opacity: 0;
     position: absolute;
+  }
+  @media (max-width: $breakpoint-m) {
+    min-height: inherit;
+    min-width: inherit;
   }
 }
 
@@ -91,12 +106,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 22.5px;
-  width: 100px;
+  padding: 10px;
+  width: 90px;
   @include shadow-1;
 
   &:first-of-type {
-    @include gradient-background-dg(#404753, #404753)
+    @include gradient-background-dg(#353d49, $color-bg)
     z-index: 1;
 
     .background {
@@ -109,11 +124,11 @@ export default {
 
       &.set {
         img {
-          height: 60%;
+          height: 50%;
         }
       }
       img {
-        height: 45%;
+        height: 35%;
         border-radius: 999px;
       }
       .background-overlay {
@@ -123,7 +138,7 @@ export default {
         height: 100%;
         width: 100%;
         z-index: 1;
-        @include gradient-background(transparent, #38404c);
+        @include gradient-background(transparent, #353d49);
       }
     }
     .content {
@@ -152,7 +167,7 @@ export default {
   // Right col
   &:last-of-type {
     position: relative;
-    @include gradient-background-dg($color-bg, #252a33);
+    @include gradient-background-dg(#272c35, #232830);
     text-align: center;
 
     span {

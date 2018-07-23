@@ -17,7 +17,12 @@
       </div>
       <div class="data">
         <h3>{{ item.name }} {{ order.component }}</h3>
-        <span class="price">{{ order.price ? `${order.price}p` : 'any offer' }}</span>
+        <span class="price">
+          {{ order.price ? `${order.price}p` : 'any offer' }}
+          <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff >= 0 : priceDiff <= 0 }">
+            {{ priceDiff > 0 ? '+' : '' }}{{ priceDiff }}%
+          </span>
+        </span>
         <div class="message">
           <span ref="message">
             <span>/w {{ order.user }}</span> Hi {{ user }},
@@ -75,7 +80,7 @@ export default {
       const full = this.order.user
 
       if (full) {
-        const noXX = full.replace(/(XXX|XX)/ig, '')
+        const noXX = full.replace(/(XXX|XX)/ig, '').replace(/(.)\1{2,}/g, '$1$1')
         const noDigits = noXX.replace(/\d+$/g, '')
         const noCamelCase = noDigits.replace(/([a-z](?=[A-Z]))/g, '$1 ').replace(/(-|_)/g, ' ')
 
@@ -85,6 +90,20 @@ export default {
           }
         }
         return noDigits
+      }
+    },
+    priceDiff () {
+      if (this.order) {
+        const type = this.order.offer.toLowerCase()
+        const value = this.order.price - this.component[type].current.median
+
+        if (this.order.price) {
+          return (value / this.component[type].current.median * 100).toFixed(2)
+        } else {
+          return null
+        }
+      } else {
+        return {}
       }
     }
   },
@@ -188,6 +207,16 @@ export default {
     padding: 0 60px 20px;
     color: white;
     border-bottom: 1px solid $color-subtle-dark;
+
+    span {
+      font-size: 0.9em;
+      color: $color-primary;
+      margin-left: 3px;
+
+      &.negative {
+        color: $color-error;
+      }
+    }
   }
   .message {
     padding-top: 10px;

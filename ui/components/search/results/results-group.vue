@@ -198,6 +198,7 @@ export default {
   overflow: hidden;
   @include ease-out(0.35s); // When results block gets resized
 }
+
 h2 {
   position: relative;
   z-index: 1;
@@ -212,6 +213,7 @@ h2 {
     font-size: 0.9em;
   }
 }
+
 .filter {
   position: relative;
   display: flex;
@@ -236,18 +238,15 @@ h2 {
     }
     .tag {
       @include ie;
+      border-radius: 999px;
       display: inline-block;
       padding: 5px 0 3px 15px;
       margin-right: 10px;
       margin-bottom: 5px;
-      border-radius: 2px;
       border: 1px solid $color-subtle-dark;
       text-transform: uppercase;
       font-size: 0.9em;
 
-      &:before {
-        border-radius: 2px;
-      }
       &:hover {
         background: none;
         border: 1px solid $color-subtle;
@@ -271,7 +270,7 @@ h2 {
       }
       &.active {
         border: 1px solid transparent;
-        background: $color-bg-lighter;
+        background: #39E591;
 
         .asc-desc {
           opacity: 1;
@@ -333,9 +332,11 @@ h2 {
   margin-top: 30px;
   width: calc(100% + 15px); // compensate for card margin right
 }
+
 .result-list {
   margin-top: 30px;
 }
+
 .add-items {
   margin: 30px 0 0px;
   font-size: 0.9em;

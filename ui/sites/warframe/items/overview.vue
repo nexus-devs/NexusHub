@@ -7,7 +7,7 @@
     <app-content>
       <section>
         <div class="container">
-          <h2>Item Overview</h2>
+          <h2 class="sub">Item Overview</h2>
           <div class="row-pad">
             <div class="column col-b">
               <description/>
@@ -20,7 +20,7 @@
       </section>
       <section v-if="patchlogs">
         <div class="container">
-          <h2>Recent Changes</h2>
+          <h2 class="sub">Recent Changes</h2>
           <div class="row-pad patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>
@@ -92,7 +92,7 @@ export default {
     @include ease(0.45s);
   }
   .zoom-enter, .zoom-leave-to {
-    transform: translateY(10px);
+    transform: translateY(7px);
     transform-origin: top;
     opacity: 0.75;
   }
@@ -104,28 +104,25 @@ h2 {
 
 .row-pad {
   /deep/ .module {
-    margin: 0 10px 20px;
+    margin-top: 0;
+    margin-bottom: 20px;
     padding: 0;
   }
 }
 
 .column {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin: 0;
-
-  @media (max-width: $breakpoint-s) {
-    margin-right: 20px;
-  }
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .patchlogs {
   justify-content: flex-start;
 
   /deep/ .patchlog {
-    max-width: 33%;
-
     img {
       max-height: 200px;
     }

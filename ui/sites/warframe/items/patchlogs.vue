@@ -8,7 +8,7 @@
       <section class="patchlogs">
         <div id="patchlogs-container" class="container">
           <div v-if="item.patchlogs" id="patchlogs" class="patchlogs">
-            <h2>Patchlog History</h2>
+            <h2 class="sub">Patchlog History</h2>
             <span>All patches and hotfixes affecting {{ item.name }}.</span>
             <patchlog v-for="patchlog in item.patchlogs" :key="patchlog.date" :patchlog="patchlog"/>
           </div>
@@ -84,7 +84,7 @@ export default {
     @include ease(0.45s);
   }
   .zoom-enter, .zoom-leave-to {
-    transform: translateY(10px);
+    transform: translateY(7px);
     transform-origin: top;
     opacity: 0.75;
   }
@@ -93,6 +93,9 @@ export default {
 h2 + span {
   display: block;
   margin-bottom: 20px;
+}
+/deep/ .patchlog {
+  margin-top: 20px;
 }
 .no-data {
   text-align: center;
