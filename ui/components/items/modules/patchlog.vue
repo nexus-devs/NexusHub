@@ -93,7 +93,4 @@ export default {
 <style lang="scss">
 @import '~src/styles/partials/importer';
 
-.patchlog {
-  margin: 30px 0;
-}
 </style>

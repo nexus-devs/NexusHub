@@ -123,7 +123,7 @@ export default {
       }
       a {
         display: block;
-        font-size: 0.9em;
+        font-size: 0.95em;
         color: $color-font-subtle !important;
 
         &:hover {

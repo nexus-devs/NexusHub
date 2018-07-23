@@ -6,25 +6,78 @@
     <order-popup/>
     <item-header/>
     <app-content>
+
+      <!-- Realtime Orders -->
       <section>
         <div class="container">
-          <h2>Realtime Orders</h2>
-          <div class="realtime">
-            <opm/>
-            <transition-group name="realtime" class="realtime-users row">
-              <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
-            </transition-group>
+          <div class="row-pad">
+            <div class="col-b-4">
+              <h2 class="sub">Realtime Orders</h2>
+              <div class="realtime">
+                <opm/>
+                <transition-group name="realtime" class="realtime-users row">
+                  <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                </transition-group>
+              </div>
+            </div>
+            <div class="col-b components-container">
+              <h2 class="sub">Components</h2>
+              <div>
+                <div class="row components">
+                  <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+
       </section>
+
+      <!-- Active Listings -->
       <section>
         <div class="container listings">
-          <h2>Active Listings</h2>
-          <div class="row components">
-            <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
+          <h2 class="sub">Open Trades</h2>
+
+          <!-- Filters -->
+          <div class="filter">
+            <div class="type">
+              <span :class="{ active: type === 'Selling' }" @click="setType('Selling')">Sellers</span>
+              <span :class="{ active: type === 'Buying' }" @click="setType('Buying')">Buyers</span>
+            </div>
+            <div class="filter-tags">
+              <span class="sort">Sort By</span>
+              <div class="filter-tag-row">
+                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag" @click="selectFilterTag(filter)">
+                  <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
+                  <span>{{ filter.name }}</span>
+                  <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- All Order s-->
           <div v-if="listings.length">
-            <order v-for="order in listings" :key="order._id" :order="order"/>
+            <div class="row labels">
+              <div class="col item">
+                Item
+              </div>
+              <div class="col">
+                User
+              </div>
+              <div v-if="item.fusionLimit" class="col">
+                Rank
+              </div>
+              <div class="col">
+                Quantity
+              </div>
+              <div class="col price">
+                <span>Price</span>
+              </div>
+            </div>
+            <transition-group>
+              <order v-for="order in listings" :key="order._id" :order="order"/>
+            </transition-group>
           </div>
           <div v-else>
             Sorry, nobody wants to trade {{ item.name }}s right now. There might be
@@ -49,12 +102,12 @@ import order from 'src/components/items/modules/order.vue'
 import orderPopup from 'src/components/items/modules/order-popup.vue'
 import orderRealtime from 'src/components/items/modules/order-realtime.vue'
 
-function filter (orders, components, offer = 'Selling', key = 'price') {
+function filter (orders, components, type = 'Selling', key = 'price') {
   const result = []
 
   for (const order of orders) {
-    if (!components.length || components.includes(order.component) &&
-        order.offer === offer) {
+    if ((!components.length || components.includes(order.component)) &&
+        order.offer === type) {
       result.push(order)
     }
   }
@@ -66,7 +119,11 @@ function filter (orders, components, offer = 'Selling', key = 'price') {
     }
 
     // Sort by key value (default is price)
-    return a[key] < b[key] ? -1 : 1
+    if (type === 'Selling') {
+      return a[key] < b[key] ? -1 : 1
+    } else {
+      return a[key] < b[key] ? 1 : -1
+    }
   })
 }
 
@@ -90,6 +147,11 @@ export default {
     listings () {
       return this.$store.state.orders.listings
     },
+    realtime () {
+      return Array(4).fill(0).map((e, i) => [].concat(this.listings).sort((a, b) => {
+        return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
+      })[i])
+    },
     components () {
       const components = []
 
@@ -100,10 +162,11 @@ export default {
       }
       return components
     },
-    realtime () {
-      return Array(6).fill(0).map((e, i) => [].concat(this.listings).sort((a, b) => {
-        return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-      })[i])
+    filters () {
+      return this.$store.state.orders.filters
+    },
+    type () {
+      return this.$store.state.orders.type || 'Selling'
     }
   },
 
@@ -131,6 +194,12 @@ export default {
     this.$cubic.unsubscribe(`/warframe/v1/orders?item=${this.item.name}`)
   },
 
+  methods: {
+    setType (type) {
+      this.$store.commit('setOrderType', type)
+    }
+  },
+
   async asyncData ({ route }) {
     const item = route.params.item.split('-').join(' ')
     this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
@@ -142,20 +211,51 @@ export default {
       all: [],
       listings: [],
       components: [],
-      type: '',
-      selected: {}
+      type: 'Selling',
+      selected: {},
+      filters: [{
+        name: 'Platinum',
+        category: 'items',
+        icon: '/img/warframe/ui/platinum.svg',
+        alt: 'Platinum',
+        unit: 'p',
+        path: 'price'
+      }, {
+        name: 'Ducats',
+        category: 'items',
+        icon: '/img/warframe/ui/ducats.svg',
+        alt: 'Ducats',
+        unit: ' Ducats',
+        path: 'ducats'
+      }, {
+        name: 'Supply',
+        category: 'items',
+        unit: ' Sellers',
+        hidden: true,
+        path: 'selling.current.offers'
+      }, {
+        name: 'Demand',
+        category: 'items',
+        unit: ' Buyers',
+        hidden: true,
+        path: 'buying.current.offers'
+      }]
     },
     mutations: {
       setOrders (state, orders) {
         state.all = orders
-        state.listings = filter(orders, state.components)
+        state.listings = filter(state.all, state.components, state.type)
       },
       setOrderComponents (state, components) {
         state.components = components
-        state.listings = filter(state.all, components)
+        state.listings = filter(state.all, state.components, state.type)
       },
       selectOrder (state, order) {
         state.selected = order
+      },
+      setOrderType (state, type) {
+        state.type = type
+        state.listings = filter(state.all, state.components, state.type)
       }
     }
   }
@@ -172,7 +272,7 @@ export default {
     @include ease(0.45s);
   }
   .zoom-enter, .zoom-leave-to {
-    transform: translateY(10px);
+    transform: translateY(7px);
     transform-origin: top;
     opacity: 0.75;
   }
@@ -186,6 +286,14 @@ h2 + span {
   margin-top: -20px;
   margin-bottom: 30px;
 }
+
+.row-pad {
+  .col-b, .col-b-4 {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
 .module {
   display: inline-flex;
   z-index: 1;
@@ -209,11 +317,149 @@ h2 + span {
   width: 100%;
 
   @media (max-width: $breakpoint-s) {
-    margin-left: 0;
     margin-top: 20px;
   }
 }
+
+.components-container {
+  @media (max-width: $breakpoint-m) {
+    margin-left: 0;
+    padding-left: 0;
+    padding-top: 40px !important;
+  }
+}
+
 .components {
+  flex-direction: column;
+  @include field;
+
+  @media (max-width: $breakpoint-m) {
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.type {
+  span {
+    display: inline-block;
+    @include ie;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.9em;
+    border-radius: 2px;
+    padding: 10px 15px;
+
+    &:first-of-type {
+      margin-right: 5px;
+    }
+    &:nth-of-type(2) {
+      margin-right: 20px;
+    }
+    &:before {
+      border-radius: 0;
+    }
+    &.active {
+      color: white;
+      background: rgba(200,225,255,0.1);
+    }
+  }
+}
+
+.filter {
+  position: relative;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
   margin-bottom: 40px;
+
+  .sort {
+    margin-left: 20px;
+    color: white;
+    margin-right: 15px;
+    text-transform: uppercase;
+    font-size: 0.85em;
+  }
+  .filter-tags {
+    display: flex;
+    align-items: center;
+    margin-right: 150px; // break when view type is supposed to cause break
+
+    @media (max-width: $breakpoint-s) {
+      width: 100%;
+    }
+    .filter-tags-row {
+      display: inline-block;
+      margin-right: 20px;
+      padding-right: 20px;
+    }
+    .tag {
+      @include ie;
+      border-radius: 999px;
+      display: inline-block;
+      padding: 5px 0 3px 15px;
+      margin-right: 10px;
+      margin-bottom: 5px;
+      border: 1px solid $color-subtle-dark;
+      text-transform: uppercase;
+      font-size: 0.9em;
+
+      &:hover {
+        background: none;
+        border: 1px solid $color-subtle;
+      }
+      &:active {
+        transform: scale(1);
+      }
+      span {
+        font-size: 0.9em;
+        color: white;
+      }
+      // Hide ascending/descending by default and adjust tag box size
+      .asc-desc {
+        opacity: 0;
+        margin-right: -5px;
+        @include ease(0.2s);
+
+        &.descending {
+          transform: rotate(-180deg);
+        }
+      }
+      &.active {
+        border: 1px solid transparent;
+        background: #39E591;
+
+        .asc-desc {
+          opacity: 1;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.labels {
+  text-transform: uppercase;
+  color: $color-font-subtle;
+  font-size: 0.85em;
+  padding: 10px 20px;
+  border-radius: 2px;
+  background: $color-bg-darker;
+
+  .item {
+    margin-right: 95px;
+  }
+  .price {
+    text-align: right;
+
+    span {
+      margin-right: 110px;
+    }
+  }
 }
 </style>

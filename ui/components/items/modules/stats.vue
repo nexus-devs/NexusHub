@@ -4,7 +4,7 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
-      <div v-if="priceDiff" class="item-data row">
+      <div v-if="priceDiff && component.tradable" class="item-data row">
         <div class="col">
           <span>Price</span>
         </div>
@@ -129,16 +129,22 @@ export default {
       return component
     },
     priceCurrent () {
-      return Math.round((this.component.selling.current.median + this.component.buying.current.median) / 2)
+      if (this.component) {
+        return Math.round((this.component.selling.current.median + this.component.buying.current.median) / 2)
+      }
     },
     pricePrevious () {
-      return Math.round((this.component.selling.previous.median + this.component.buying.previous.median) / 2)
+      if (this.component) {
+        return Math.round((this.component.selling.previous.median + this.component.buying.previous.median) / 2)
+      }
     },
     priceDiff () {
-      const value = this.priceCurrent - this.pricePrevious
-      return {
-        value,
-        percentage: (value / this.pricePrevious * 100).toFixed(2)
+      if (this.component) {
+        const value = this.priceCurrent - this.pricePrevious
+        return {
+          value,
+          percentage: (value / this.pricePrevious * 100).toFixed(2)
+        }
       }
     }
   }

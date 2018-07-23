@@ -1,8 +1,9 @@
 <template>
-  <div :class="{ active: active ? true : false }" class="component" @click="toggle">
+  <div :class="{ active: active ? true : false }" class="component col" @click="toggle">
     <div class="image-wrapper">
       <img :src="component.imgUrl" alt="component.name">
     </div>
+
     <div class="data">
       <h4>{{ component.name }}</h4>
       <span>{{ orders.length }} Orders</span>
@@ -55,28 +56,33 @@ export default {
 
 .component {
   @include ie;
-  @include field;
-  margin-right: 10px;
-  padding: 8px 20px;
   border-left: 2px solid transparent;
-  max-width: 400px;
+  border-radius: 2px;
+  border-bottom: 1px solid $color-subtle-dark;
+  padding: 8px;
 
   &:last-of-type {
-    margin-right: 0;
+    border-bottom: none;
   }
-  &:before {
+  &:before, &:hover {
     border-radius: 2px;
   }
   &.active {
     border-left: 2px solid #39E591;
   }
   @media (max-width: $breakpoint-m) {
+    @include field;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    margin-bottom: 10px;
+    border-bottom: none;
+    margin-right: 10px;
+    max-height: none;
 
+    &:last-of-type {
+      margin-right: 0;
+    }
     .image-wrapper {
       margin-bottom: 10px;
     }
@@ -99,11 +105,18 @@ export default {
   }
 }
 .data {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 65px);
   vertical-align: middle;
+
+  @media (max-width: $breakpoint-m) {
+    flex-direction: column;
+    margin-top: -15px;
+  }
 }
 span {
-  display: inline-block;
   margin-top: -2px;
   font-size: 0.9em;
   color: $color-font-body;

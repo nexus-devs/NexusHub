@@ -6,15 +6,21 @@
     <app-content>
       <div class="company">
         <div class="container">
-          <h1>Making Games more transparent with NexusHub.</h1>
-          <p>
-            The best decisions in gaming are made on data. Whether it's about buying
-            that item we always wanted, or finding ways to improve our playstyle.
-            NexusHub is about bringing that data to you, regardless if you're a
-            mighty pro gamer or a casual in it for the fun.
-          </p>
+          <img src="/img/company/header-blobs.svg" class="header-blobs">
+          <div class="box-top">
+            <h1>Making Games more transparent with NexusHub.</h1>
+          </div>
+          <div class="box-top-sub"/>
+          <div class="box-sub">
+            <h2>The best decisions in gaming are made on data</h2>
+            <p>
+              Whether it's about buying
+              that item we always wanted, or finding ways to improve our playstyle.
+              NexusHub is about bringing that data to you, regardless if you're a
+              mighty pro gamer or a casual in it for the fun.
+            </p>
+          </div>
         </div>
-        <img src="/img/company/blob.svg" class="blob">
       </div>
       <div class="who-we-are-container container">
         <section class="who-we-are">
@@ -23,7 +29,7 @@
             <p>
               We're a small group of gamers from all over the world,
               building Nexus-Stats in our spare time. Starting out as
-              just some casual players who made a bot to monitor
+              casual players who made a bot to monitor
               Warframe's trade chat, we have grown into a diverse community of open source
               developers, persisting in our mission to simply make games more
               accessible for everyone.
@@ -32,7 +38,6 @@
         </section>
       </div>
       <div class="stats-container">
-        <img src="/img/ui/header-blobs.svg" class="stats-blob">
         <section>
           <div class="stats container">
             <h2>People ❤️ NexusHub</h2>
@@ -83,7 +88,7 @@
         </div>
       </section>
       <div class="cute-fluff">
-        <img src="/img/company/bottom-blob.svg" class="bottom-blob">
+        <img src="/img/ui/header-blobs.svg" class="bottom-blob">
         <img src="/img/company/blobot.svg" alt="Blobot" class="blobot">
       </div>
     </app-content>
@@ -157,48 +162,108 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+section {
+  padding: 80px 0;
+}
+p {
+  color: $color-font-paragraph;
+}
 .company {
+  display: flex;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  padding-top: 40px;
+  padding-top: 200px;
   padding-bottom: 200px;
-  @include gradient-background-dg($color-primary-subtle, $color-accent-subtle);
+  background: $color-bg-darker;
 
-  .container {
+  .header-blobs {
+    position: absolute;
+    width: 110%;
+    left: -100px;
+    top: -100px;
+    min-width: 1920px;
+    fill: $color-subtle-dark !important;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+  }
+  .box-top {
     position: relative;
-    top: -30px;
-    left: -200px;
-    padding-left: 300px;
+    z-index: 1;
+    display: inline-block;
+    padding: 40px;
+    max-width: 300px;
+    border-radius: 2px;
+    animation: fadeinUp 0.7s forwards;
+    animation-delay: 0.15s;
+    opacity: 0;
+    @include shadow-2;
+    @include gradient-background-dg($color-primary-subtle, $color-accent-subtle);
+  }
+  .box-top-sub {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    top: 175px;
+    margin-left: -40px;
+    animation: fadeinUp 0.7s forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+    background: $color-bg-dark;
+    border-radius: 2px;
+  }
+  .box-sub {
+    position: relative;
+    font-size: 1em;
+    display: inline-block;
+    padding: 40px;
+    padding-left: 60px;
+    max-width: 500px;
+    left: -30px;
+    top: 65px;
+    background: $color-bg-dark;
+    border-radius: 2px;
+    animation: fadeinSide 1s forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+    @include shade-1;
 
-    @media (max-width: $breakpoint-m) {
-      left: 0;
-      padding-left: 42px;
+    h2 {
+      max-width: 400px;
     }
   }
-  @media (max-width: $breakpoint-m) {
-    padding-top: 0px;
-  }
   p {
-    color: white !important;
     max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
-}
-.blob {
-  position: absolute;
-  z-index: 1;
-  left: -50px;
-  bottom: -30px;
-  width: calc(100vw + 150px);
-  min-width: 1920px;
-  fill: $color-bg-dark;
-  animation: goostuff 60s linear infinite;
+  @media (max-width: $breakpoint-m) {
+    padding-top: 100px;
+    .container {
+      flex-direction: column;
+    }
+    .box-top {
+      max-width: 200px;
+    }
+    .box-sub {
+      padding-left: 40px;
+      padding-top: 70px;
+      margin-left: 50px;
+      margin-top: -110px;
+    }
+    h1 {
+      font-size: 1.6em;
+      margin: 20px 0;
+    }
+  }
 }
 h1 {
   font-weight: 600;
   max-width: 600px;
   line-height: 1.2;
-  margin-top: 150px;
-  margin-bottom: 15px;
+  margin: 60px 0;
 }
 h2 {
   font-size: 1.6em;
@@ -214,10 +279,9 @@ a {
   display: flex;
   justify-content: center;
   background: $color-bg-dark;
-  margin-bottom: 40px;
+  margin: 40px 0;
 
   h2 {
-    text-align: center;
   }
   p {
     margin-top: 20px;
@@ -259,7 +323,7 @@ a {
       }
     }
     .number {
-      font-size: 2em;
+      font-size: 1.8em;
       color: white;
       margin-top: 20px;
     }
@@ -273,7 +337,7 @@ a {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 100px 0 120px;
+  padding: 120px 0 120px;
 
   p {
     display: inline-block;
@@ -285,6 +349,7 @@ a {
     display: block;
     max-width: none;
     margin-top: 10px;
+    color: $color-font-paragraph;
   }
   .btn {
     display: inline-block;
@@ -299,46 +364,52 @@ a {
   position: relative;
   overflow: hidden;
   height: 400px;
-  top: -325px;
-  margin-bottom: -345px;
+  top: -250px;
+  margin-bottom: -300px;
   z-index: 0;
 
   .bottom-blob {
     position: absolute;
-    opacity: 0.4;
-    top: 150px;
+    top: -100px;
     left: -100px; // blob isn't optically centered
     width: 2200px;
     min-width: calc(100vw + 300px);
-    animation: goostuff 30s linear infinite;
   }
   .blobot {
     position: relative;
     top: 220px;
-    max-height: 225px;
+    max-height: 200px;
   }
 }
-
-@keyframes goostuff {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(-100px);
-    }
-    100% {
-      transform: translateX(0);
-    }
-}
-@keyframes hover {
-  0% {
+@keyframes fadeinUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes fadeinSide {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
   }
   50% {
-    transform: translateY(-20px);
+    transform: scale3d(1.15,1.15,1.15);
   }
   100% {
-    transform: translateY(0);
+    transform: scaleX(1);
   }
 }
 </style>

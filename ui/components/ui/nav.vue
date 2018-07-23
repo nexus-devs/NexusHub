@@ -11,7 +11,6 @@
     </div>
     <div class="col nav-r">
       <notifications/>
-      <img src="/img/nav/nav-more.svg" class="ctx ico-16 a-ie" alt="">
     </div>
   </nav>
 </template>
