@@ -316,8 +316,13 @@ h2 + span {
   margin-bottom: -15px;
   width: 100%;
 
+  @media (max-width: $breakpoint-m) {
+    flex-direction: column;
+    margin-left: 20px;
+  }
   @media (max-width: $breakpoint-s) {
     margin-top: 20px;
+    margin-left: 0;
   }
 }
 

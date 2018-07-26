@@ -128,7 +128,7 @@ export default {
     margin-top: -2px;
     color: $color-font-body;
   }
-  @media (max-width: $breakpoint-s) {
+  @media (max-width: $breakpoint-m) {
     margin-left: 5px !important;
 
     span:nth-of-type(2) {
@@ -148,7 +148,7 @@ export default {
     font-size: 1em;
     width: fit-content;
 
-    @media (min-width: $breakpoint-s) {
+    @media (min-width: $breakpoint-m) {
       opacity: 1;
       background: transparent;
       box-shadow: none;
@@ -157,6 +157,9 @@ export default {
       /deep/ .tooltip-pointer {
         display: none;
       }
+    }
+    @media (max-width: $breakpoint-m) {
+      transform: translateX(-10px);
     }
   }
   .user-image {
@@ -168,6 +171,12 @@ export default {
 
     img {
       height: 100%;
+    }
+  }
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
   @media (max-width: $breakpoint-s) {

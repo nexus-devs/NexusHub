@@ -94,8 +94,31 @@ export default {
     position: absolute;
   }
   @media (max-width: $breakpoint-m) {
+    flex-direction: row-reverse;
+    margin-left: 0;
     min-height: inherit;
     min-width: inherit;
+    max-width: inherit;
+    max-height: 70px;
+    width: 100%;
+
+    .content-data {
+      margin-top: 0 !important;
+    }
+    .content-data-main-value {
+      font-size: 1em !important;
+    }
+    img {
+      display: none;
+    }
+  }
+  @media (max-width: $breakpoint-m) {
+    .col {
+      width: 120px !important;
+    }
+  }
+  @media (max-width: $breakpoint-s) {
+    margin-bottom: 5px;
   }
 }
 
