@@ -258,6 +258,12 @@ p {
       margin: 20px 0;
     }
   }
+  @media (max-width: $breakpoint-s) {
+    .box-sub {
+      margin-left: 0;
+      margin-right: -50px;
+    }
+  }
 }
 h1 {
   font-weight: 600;

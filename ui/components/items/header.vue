@@ -29,10 +29,10 @@
             </div>
             <div class="item-profile-lower">
               <router-link :to="`${itemUrl}/trading`">
-                <button class="btn-outline buy">Buy {{ item.name }}</button>
+                <button class="btn-outline buy">Buyers</button>
               </router-link>
               <router-link :to="`${itemUrl}/trading`">
-                <button class="btn-outline sell">Sell</button>
+                <button class="btn-outline sell">Sellers</button>
               </router-link>
             </div>
           </div>
