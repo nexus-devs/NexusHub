@@ -1,6 +1,6 @@
 <template>
   <header>
-    <img src="/img/company/header-blobs.svg" class="blobs">
+    <img src="/img/ui/header-blobs-outline.svg" class="blobs">
     <div class="background-container">
       <div class="background"/>
     </div>
@@ -16,7 +16,6 @@
 
 header {
   position: relative;
-  overflow: hidden;
   background: $color-bg-darker;
 
   .blobs {
