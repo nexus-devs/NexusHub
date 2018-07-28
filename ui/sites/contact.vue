@@ -5,26 +5,22 @@
     </sidebar>
     <app-content>
       <ui-header>
-        <h1>Contact</h1>
+        <h1>Hey {{ user }}!</h1>
         <p>Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
+
+        <a href="https://discord.gg/TCxe6P4" target="_blank" class="comm discord">
+          <img src="/img/contact/discord.svg" alt="Discord">
+          <span>Discord</span>
+        </a>
+        <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub" class="comm mail">
+          <img src="/img/contact/mail.svg" alt="Mail">
+          <span>Good ol' Mail</span>
+        </a>
       </ui-header>
       <div class="container">
         <section>
-          <h2>Discord</h2>
-          <p>
-            The easiest way to reach us is through Discord. Just join our server
-            and PM one of the devs.
-          </p>
-          <div class="row">
-            <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
-          </div>
-        </section>
-        <section>
-          <h2>E-Mail</h2>
-          <p>
-            If you rather stick with traditional means of communication, you can also send us a mail!
-          </p>
-          <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub">contact@nexus-stats.com</a>
+          <img src="/img/ui/info.svg" alt="Information about Discord" class="ico-h-24">
+          <span>Discord is the superior <s>siege engine</s> way to talk to us.</span>
         </section>
       </div>
     </app-content>
@@ -45,6 +41,16 @@ export default {
     sidebar,
     'sidebar-search': sidebarSearch,
     'ui-header': uiheader
+  },
+
+  computed: {
+    user () {
+      if (this.$store.state.user) {
+        return this.$store.state.user.name
+      } else {
+        return 'there'
+      }
+    }
   }
 }
 </script>
@@ -54,13 +60,68 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-p {
-  font-size: 1.05em;
+/deep/ header .container {
+  text-align: center;
+  padding-bottom: 0;
+  padding-top: 200px;
+
+  h1 {
+    font-size: 2.6em;
+  }
+  p {
+    font-size: 1.1em;
+    margin: auto;
+  }
 }
-a {
-  margin-top: 15px;
+
+.comm {
+  @include ie;
+  @include field;
+  position: relative;
+  top: 40px;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 2px;
+  padding: 20px;
+  margin-top: 60px;
+  width: 100px;
+  height: 100px;
+  margin-left: 20px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+  &:before {
+    border-radius: 0;
+  }
+  img {
+    height: 50px;
+  }
+  span {
+    display: block;
+    color: white;
+  }
 }
-.btn {
-  white-space: nowrap;
+.discord {
+  background: #7289DA;
+
+  &:hover {
+    background: #7289DA;
+  }
+}
+.mail {
+  top: 35px;
+
+  img {
+    height: 40px;
+  }
+}
+
+section {
+  text-align: center;
+  margin-top: 40px;
+  color: white;
+  opacity: 0.5;
 }
 </style>
