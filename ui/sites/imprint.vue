@@ -6,20 +6,24 @@
     <app-content>
       <ui-header>
         <h1>Imprint</h1>
+        <p>
+          Huge shoutout to the German government for legally requiring me to dox myself!<br>
+          Seriously, what is wrong with you Germany?
+        </p>
       </ui-header>
       <div class="container">
         <section>
           <h2>NexusHub</h2>
-          <p>
+          <p class="data">
             Kilian Volb <br>
             Schillerstr. 13 <br>
             66497, Contwig <br>
             Germany
           </p>
-        </section>
-        <section>
-          <h2>Contact</h2>
-          <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub">contact@nexus-stats.com</a>
+          <p>I'd appreciate if you don't send me poop to this address. Thank you.</p>
+          <router-link to="/contact">
+            <button>Contact</button>
+          </router-link>
         </section>
       </div>
     </app-content>
@@ -49,10 +53,11 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-p {
-  font-size: 1.05em;
-}
 a {
-  margin-top: 15px;
+  display: inline-block;
+  margin-top: 30px;
+}
+.data {
+  color: white;
 }
 </style>

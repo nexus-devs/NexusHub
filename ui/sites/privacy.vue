@@ -5,203 +5,86 @@
     </sidebar>
     <app-content>
       <ui-header>
-        <h1>Privacy Policy</h1>
+        <h1>Things we do with your data. &nbsp; ( ͡° ͜ʖ ͡°)</h1>
       </ui-header>
+      <section class="intro">
+        <div class="container">
+          <h2>Before you start</h2>
+          <p>
+            We just wanna let you know that we truly believe in your right to
+            know how <b>all</b> data that we collect is being used. That's why
+            we sat down and tried to explain every single point of data as
+            humanly as possible - no lawyer talk!
+          </p>
+        </div>
+      </section>
       <div class="container">
         <section>
-          <h2>NexusStats</h2>
-          <div id="ppHeader">warframenexus.com Privacy Policy</div>
-          <div id="ppBody">
-            <div class="ppConsistencies">
-              <div>
-                <div class="quick-links text-center">Information Collection</div>
-              </div>
-              <div>
-                <div class="quick-links text-center">Information Usage</div>
-              </div>
-              <div>
-                <div class="quick-links text-center">Information Protection</div>
-              </div>
-              <div>
-                <div class="quick-links text-center">Cookie Usage</div>
-              </div>
-              <div>
-                <div class="quick-links text-center">3rd Party Disclosure</div>
-              </div>
-              <div>
-                <div class="quick-links text-center">3rd Party Links</div>
-              </div>
-              <div/>
-            </div>
-            <div style="clear:both;height:10px;"/>
-            <div class="ppConsistencies">
-              <div>
-                <div class="col-12 quick-links2 gen-text-center">Google AdSense</div>
-              </div>
-              <div>
-                <div class="col-12 quick-links2 gen-text-center">
-                  Fair Information Practices
-                </div>
-                <div class="col-12 gen-text-left gen-xs-text-center">Fair information<br> Practices</div>
-              </div>
-              <div>
-                <div class="col-12 quick-links2 gen-text-center coppa-pad">
-                  COPPA
-
-                </div>
-              </div>
-              <div>
-                <div class="col-12 quick-links2 quick4 gen-text-center caloppa-pad">
-                  CalOPPA
-
-                </div>
-              </div>
-              <div>
-                <div class="quick-links2 gen-text-center">Our Contact Information<br></div>
-              </div>
-            </div>
-            <div style="clear:both;height:10px;"/>
-            <div>This privacy policy has been compiled to better serve those who are concerned with how their 'Personally Identifiable Information' (PII) is being used online. PII, as described in US privacy law and information security, is information that can
-            be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context. Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise
-            handle your Personally Identifiable Information in accordance with our website.<br></div><span id="infoCo"/>
+          <h2>Meta Data</h2>
+          <p>
+            This data tells us <i>when</i> and <i>how</i> you interact with our
+            service. We use this data exclusively to figure out how our userbase
+            develops and to measure if people successfully get to where they
+            wanted in a reasonable time. This helps us greatly when we try to
+            determine if a feature is well-designed or needs an overhaul.
             <br>
-            <div><strong>What personal information do we collect from the people that visit our blog, website or app?</strong></div>
-            <br >
-            <div>We do not collect information from visitors of our site. or other details to help you with your experience.</div>
             <br>
-            <div><strong>When do we collect information?</strong></div>
-            <br >
-            <div>We collect information from you when you fill out a form or enter information on our site.</div>
-            <br>None <span id="infoUs"/>
+            To collect this type of data, we use
+            <a href="https://support.google.com/analytics/answer/6004245?hl=en" target="_blank">
+              Google Analytics
+            </a>
+            and our own analytics service which does not share the data with
+            anyone else.
+          </p>
+        </section>
+        <section>
+          <h2>Password Storage</h2>
+          <p>
+            We store all passwords using the bcrypt hashing algorithm with 8 salt rounds.
+            Tech talk aside - <a href="https://security.stackexchange.com/a/6415">it's pretty secure.</a>
+            This means that in case of a security breach, nobody will be able to
+            figure out your original password.
+          </p>
+        </section>
+        <section>
+          <h2>User data</h2>
+          <p>
+            Any usernames, emails or other data that needs to be
+            looked up on demand will have to remain stored in plaintext. So if
+            we ever do a whoopsie in our database setup and data starts leaking,
+            an attacker could combine this data to get some insights into who
+            you are.
             <br>
-            <div><strong>How do we use your information? </strong></div>
-            <br >
-            <div> We may use the information we collect from you when you register, make a purchase, sign up for our newsletter, respond to a survey or marketing communication, surf the website, or use certain other site features in the following ways:
-              <br>
-              <br>
-            </div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> To improve our website in order to better serve you.</div><span id="infoPro"/>
             <br>
-            <div><strong>How do we protect your information?</strong></div>
-            <br >
-            <div>We only provide articles and information. We never ask for credit card numbers.</div>
-            <div>We use regular Malware Scanning.
-              <br>
-              <br>
-            </div>
-            <div>Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit
-            information you supply is encrypted via Secure Socket Layer (SSL) technology. </div>
+            To combat this, we heavily suggest using a unique password for your
+            email account that is not shared with any other service. We also
+            recommend having a look at <a href="https://haveibeenpwned.com/">
+            haveibeenpwned</a> to see if your password has been leaked at
+            another service.
             <br>
-            <div>We implement a variety of security measures when a user places an order enters, submits, or accesses their information to maintain the safety of your personal information.</div>
             <br>
-            <div>All transactions are processed through a gateway provider and are not stored or processed on our servers.</div><span id="coUs"/>
-            <br>
-            <div><strong>Do we use 'cookies'?</strong></div>
-            <br >
-            <div>We do not use cookies for tracking purposes </div>
-            <div>
-              <br>You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You do this through your browser settings. Since browser is a little different, look at your browser's Help Menu to
-              learn the correct way to modify your cookies.
-              <br>
-            </div>
-            <br>
-            <div>If you turn cookies off, some features will be disabled. that make your site experience more efficient and may not function properly.</div>
-            <br>
-            <div>However, you will still be able to place orders .</div>
-            <br><span id="trDi"/>
-            <br>
-            <div><strong>Third-party disclosure</strong></div>
-            <br >
-            <div>We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information.</div><span id="trLi"/>
-            <br>
-            <div><strong>Third-party links</strong></div>
-            <br >
-            <div>We do not include or offer third-party products or services on our website.</div><span id="gooAd"/>
-            <br>
-            <div><strong>Google</strong></div>
-            <br >
-            <div>Google's advertising requirements can be summed up by Google's Advertising Principles. They are put in place to provide a positive experience for users. https://support.google.com/adwordspolicy/answer/1316548?hl=en
-              <br>
-              <br>
-            </div>
-            <div>We have not enabled Google AdSense on our site but we may do so in the future.</div><span id="calOppa"/>
-            <br>
-            <div><strong>California Online Privacy Protection Act</strong></div>
-            <br >
-            <div>CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy. The law's reach stretches well beyond California to require any person or company in the United States (and conceivably the
-            world) that operates websites collecting Personally Identifiable Information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected and those individuals or companies with
-            whom it is being shared. - See more at: http://consumercal.org/california-online-privacy-protection-act-caloppa/#sthash.0FdRbT51.dpuf
-              <br>
-            </div>
-            <div>
-              <br><strong>According to CalOPPA, we agree to the following:</strong>
-              <br>
-            </div>
-            <div>Users can visit our site anonymously.</div>
-            <div>Once this privacy policy is created, we will add a link to it on our home page or as a minimum, on the first significant page after entering our website.
-              <br>
-            </div>
-            <div>Our Privacy Policy link includes the word 'Privacy' and can be easily be found on the page specified above.</div>
-            <div>
-            <br>You will be notified of any Privacy Policy changes:</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> On our Privacy Policy Page
-              <br>
-            </div>
-            <div>Can change your personal information:</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> By logging in to your account</div>
-            <div>
-              <br><strong>How does our site handle Do Not Track signals?</strong>
-              <br>
-            </div>
-            <div>We honor Do Not Track signals and Do Not Track, plant cookies, or use advertising when a Do Not Track (DNT) browser mechanism is in place. </div>
-            <div>
-              <br><strong>Does our site allow third-party behavioral tracking?</strong>
-              <br>
-            </div>
-            <div>It's also important to note that we do not allow third-party behavioral tracking</div><span id="coppAct"/>
-            <br>
-            <div><strong>COPPA (Children Online Privacy Protection Act)</strong></div>
-            <br >
-            <div>When it comes to the collection of personal information from children under the age of 13 years old, the Children's Online Privacy Protection Act (COPPA) puts parents in control. The Federal Trade Commission, United States' consumer protection
-            agency, enforces the COPPA Rule, which spells out what operators of websites and online services must do to protect children's privacy and safety online.
-              <br>
-              <br>
-            </div>
-            <div>We do not specifically market to children under the age of 13 years old.</div><span id="ftcFip"/>
-            <br>
-            <div><strong>Fair Information Practices</strong></div>
-            <br >
-            <div>The Fair Information Practices Principles form the backbone of privacy law in the United States and the concepts they include have played a significant role in the development of data protection laws around the globe. Understanding the Fair Information
-            Practice Principles and how they should be implemented is critical to comply with the various privacy laws that protect personal information.
-              <br>
-              <br>
-            </div>
-            <div><strong>In order to be in line with Fair Information Practices we will take the following responsive action, should a data breach occur:</strong></div>
-            <div>We will notify the users via in-site notification</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Within 7 business days</div>
-            <div>
-              <br>We also agree to the Individual Redress Principle which requires that individuals have the right to legally pursue enforceable rights against data collectors and processors who fail to adhere to the law. This principle requires not only
-              that individuals have enforceable rights against data users, but also that individuals have recourse to courts or government agencies to investigate and/or prosecute non-compliance by data processors.</div><span id="canSpam"/>
-            <br>
-            <div><strong>CAN SPAM Act</strong></div>
-            <br >
-            <div>The CAN-SPAM Act is a law that sets the rules for commercial email, establishes requirements for commercial messages, gives recipients the right to have emails stopped from being sent to them, and spells out tough penalties for violations.
-              <br>
-              <br>
-            </div>
-            <div><strong>We collect your email address in order to:</strong></div>
-            <div>
-            <br><strong>To be in accordance with CANSPAM, we agree to the following:</strong></div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Not use false or misleading subjects or email addresses.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Identify the message as an advertisement in some reasonable way.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Include the physical address of our business or site headquarters.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Monitor third-party email marketing services for compliance, if one is used.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Honor opt-out/unsubscribe requests quickly.</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Allow users to unsubscribe by using the link at the bottom of each email.</div>
-            <div><strong><br>If at any time you would like to unsubscribe from receiving future emails, you can email us at</strong></div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>&bull;</strong> Follow the instructions at the bottom of each email.</div> and we will promptly remove you from <strong>ALL</strong> correspondence.</div>
+            Luckily, we don't force you to register with an email address. While this
+            is not recommended as it makes the password recovery process very
+            difficult, it also means that nobody will track down more of your
+            data in case of a security breach.
+          </p>
         </section>
       </div>
+      <section class="breach">
+        <div class="container">
+          <h2>Actions upon a security breach</h2>
+          <p>
+            Should somebody sneak into our systems and leak sensitive user
+            information, we'll make sure to prepare an announcement within 7 days
+            after the issue has been resolved.
+            <br>
+            <br>
+            If this ever happens, there's no need to freak out. No passwords will be leaked,
+            and we'll provide detailed instructions on how to avoid further
+            issues depending on the situation.
+          </p>
+        </div>
+      </section>
     </app-content>
   </div>
 </template>
@@ -229,10 +112,13 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-p {
-    font-size: 1.05em;
+.intro {
+  border-bottom: 1px solid $color-subtle-dark;
+}
+.breach {
+  border-top: 1px solid $color-subtle-dark;
 }
 a {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 </style>

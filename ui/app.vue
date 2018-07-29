@@ -43,12 +43,10 @@ export default {
   watch: {
     // Apply query params to state if applicable.
     route () {
-      this.$store.dispatch('applyTimeQuery', this.$route)
       this.$store.dispatch('applyInputQuery', this.$route)
     }
   },
   beforeCreate () {
-    this.$store.dispatch('applyTimeQuery', this.$route)
     this.$store.dispatch('applyInputQuery', this.$route)
     Vue.use(VueTouch)
   },
