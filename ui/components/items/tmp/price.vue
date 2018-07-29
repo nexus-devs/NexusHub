@@ -119,7 +119,6 @@ export default {
   },
 
   asyncData ({ store, route }) {
-    store.dispatch('applyTimeQuery', route)
     store.commit('setItemRegions', route.query.region || [])
     return store.dispatch('fetchItemData', route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
   },

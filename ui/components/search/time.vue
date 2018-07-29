@@ -24,15 +24,6 @@
 <script>
 import _ from 'lodash'
 import moment from 'moment'
-let ssr = false
-
-// We wouldn't wanna register some store components server-sided because moment
-// can't just be picked up client-sided when the state is preserved.
-try {
-  document
-} catch (err) {
-  ssr = true
-}
 
 const calendarOptions = {
   sameDay: '[Today]',
@@ -74,10 +65,6 @@ export default {
     }
   },
 
-  created () {
-    this.$store.dispatch('applyTimeQuery', this.$route)
-  },
-
   methods: {
     toggle () {
       this.selected = 'start'
@@ -105,18 +92,6 @@ export default {
       // Set modified if the default selection was changed
       if (time.focus.start.format !== 'Today' || time.focus.end.format !== '7 days ago') {
         this.$store.commit('setTimeModified', true)
-
-        // Add time query to URL, we can express the current state through a link
-        // The query params are automatically applied to store state on load/change
-        const query = _.cloneDeep(this.$route.query)
-
-        this.$router.replace({
-          path: this.$route.path,
-          query: Object.assign(query, {
-            timestart: time.focus.start.time.valueOf(),
-            timeend: time.focus.end.time.valueOf()
-          })
-        })
       }
 
       // Default format was re-selected, so ensure the '7 days ago' format
@@ -124,18 +99,6 @@ export default {
       else {
         this.$store.commit('setTimeModified', false)
         this.$store.state.time.focus.end.format = '7 days ago'
-
-        // Reset URL query
-        const query = _.cloneDeep(this.$route.query)
-        delete query.timestart
-        delete query.timeend
-        delete query.comparestart
-        delete query.compareend
-
-        this.$router.replace({
-          path: this.$route.path,
-          query
-        })
       }
     },
 
@@ -218,29 +181,6 @@ export default {
       // performing a custom time range query.
       setTimeModified (state, bool) {
         state.modified = getDate(bool)
-      }
-    },
-    actions: {
-      applyTimeQuery ({ commit }, route) {
-        // Focus Range
-        if (route.query.timestart) {
-          commit('setTimeFocusStart', moment(new Date(parseInt(route.query.timestart))))
-          commit('setTimeModified', true)
-        }
-        if (route.query.timeend) {
-          commit('setTimeFocusEnd', moment(new Date(parseInt(route.query.timeend))))
-          commit('setTimeModified', true)
-        }
-
-        // Compare Range
-        if (route.query.comparestart) {
-          commit('setTimeCompareStart', moment(new Date(parseInt(route.query.comparestart))))
-          commit('setTimeModified', true)
-        }
-        if (route.query.compareend) {
-          commit('setTimeCompareEnd', moment(new Date(parseInt(route.query.compareend))))
-          commit('setTimeModified', true)
-        }
       }
     }
   }

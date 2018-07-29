@@ -28,7 +28,7 @@
             <h2>Who we are</h2>
             <p>
               We're a small group of gamers from all over the world,
-              building Nexus-Stats in our spare time. Starting out as
+              building NexusHub in our spare time. Starting out as
               casual players who made a bot to monitor
               Warframe's trade chat, we have grown into a diverse community of open source
               developers, persisting in our mission to simply make games more
@@ -164,9 +164,6 @@ export default {
 
 section {
   padding: 80px 0;
-}
-p {
-  color: $color-font-paragraph;
 }
 .company {
   display: flex;

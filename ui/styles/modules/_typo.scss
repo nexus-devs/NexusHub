@@ -52,6 +52,9 @@ h2 {
     padding-top: 5px;
     margin-top: 5px;
   }
+  & + p + * {
+    margin-top: 60px;
+  }
 }
 
 h3, h4, h5, h6 {
@@ -77,6 +80,11 @@ p {
   max-width: 800px;
   line-height: 1.6;
   letter-spacing: 0.2;
+  font-size: 1.05em;
+
+  a {
+    color: #39E591 !important;
+  }
 }
 
 p + p {
@@ -85,4 +93,12 @@ p + p {
 
 s {
   text-decoration: line-through;
+}
+
+b {
+  font-weight: 600;
+  color: $color-font-paragraph;
+}
+i {
+  font-style: italic;
 }
