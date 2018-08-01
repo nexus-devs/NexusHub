@@ -2,18 +2,21 @@
   <module class="build-requirements">
     <template slot="header">
       <div class="title">
-        <h3>Build Requirements</h3>
+        <div>
+          <img src="/img/warframe/ui/build.svg" alt="Build Requirements" class="ico-h-24">
+          <h3>Build Requirements</h3>
+        </div>
         <span>{{ item.buildPrice }} Credits</span>
       </div>
     </template>
     <template slot="body">
       <div class="row">
         <div v-for="component in item.components" v-if="component.name !== 'Set'" :key="component.uniqueName" class="component col">
-          <div class="component-wrapper" @click="selectComponent">
+          <div class="component-wrapper" @click="selectComponent(component.name)">
             <img :src="component.imgUrl" :alt="component.name">
             <span v-if="component.itemCount > 1" class="count">x{{ component.itemCount }}</span>
-            <span class="tooltip">{{ component.name }}</span>
           </div>
+          <tooltip>{{ component.name }}</tooltip>
         </div>
       </div>
     </template>
@@ -30,10 +33,12 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 
 export default {
   components: {
-    module
+    module,
+    tooltip
   },
 
   computed: {
@@ -43,8 +48,7 @@ export default {
   },
 
   methods: {
-    selectComponent (e) {
-      const tag = e.srcElement.getElementsByClassName('tooltip')[0].outerText
+    selectComponent (tag) {
       this.$store.commit('setItemComponent', tag)
     }
   }
@@ -63,6 +67,7 @@ export default {
 
   span {
     font-size: 0.9em;
+    color: white;
   }
 }
 
@@ -86,9 +91,6 @@ export default {
     color: white;
     font-size: 0.85em;
   }
-  .tooltip {
-    display: none;
-  }
 }
 .component-wrapper {
   display: flex;
@@ -97,6 +99,17 @@ export default {
   height: 40px;
   width: 40px;
   @include ie;
+
+  &:hover {
+    & + .tooltip {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+  }
+  & + .tooltip {
+    white-space: nowrap;
+    margin-left: 10px;
+  }
 }
 
 </style>

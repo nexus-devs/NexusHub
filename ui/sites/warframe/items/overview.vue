@@ -66,7 +66,7 @@ export default {
       const item = this.$store.state.items.item
 
       if (item.patchlogs) {
-        return item.patchlogs.slice(0, 4)
+        return item.patchlogs.slice(0, 3)
       } else {
         return null
       }
@@ -98,6 +98,10 @@ export default {
   }
 }
 
+.app-content {
+  background: $color-bg-darker;
+}
+
 h2 {
   margin-bottom: 20px;
 }
@@ -124,7 +128,7 @@ h2 {
 
   /deep/ .patchlog {
     img {
-      max-height: 200px;
+      display: none;
     }
     @media (max-width: $breakpoint-m) {
       max-width: calc(50% - 20px);
@@ -132,14 +136,16 @@ h2 {
     @media (max-width: $breakpoint-s) {
       max-width: none;
     }
-    .body {
-      text-overflow: ellipsis;
-      overflow: hidden;
-      max-height: 100px;
-      margin-bottom: auto;
-    }
-    .footer {
-      margin-top: 0;
+    .header {
+      padding: 0;
+
+      h3 {
+        padding: 30px 35px 0;
+        color: white !important;
+      }
+      time {
+        padding: 0 35px;
+      }
     }
   }
 }

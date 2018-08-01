@@ -23,17 +23,13 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: 700;
 }
 section .container h2.sub {
+  font-family: 'Roboto';
+  font-weight: 400;
+  text-transform: uppercase;
   display: inline-block;
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  font-size: 1.15em;
-  @include gradient-border-bottom($color-primary, $color-accent);
-
-  & + * {
-    border-top: 1px solid $color-subtle-dark;
-    padding-top: 30px;
-    margin-top: -1px;
-  }
+  font-size: 0.85em;
+  letter-spacing: 0.5;
+  color: $color-font-body !important;
 }
 
 h1 {
@@ -83,7 +79,7 @@ p {
   font-size: 1.05em;
 
   a {
-    color: #39E591 !important;
+    color: $color-primary-subtle !important;
   }
 }
 

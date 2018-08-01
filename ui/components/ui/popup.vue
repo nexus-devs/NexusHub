@@ -45,17 +45,13 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: calc(100vh + 20px); // compensate for Y transform
+  height: calc(100vh + 10px); // compensate for Y transform
   @include ease(0.25s);
 
-  // Blur background
-  &.active ~ /deep/ .app-container, &.active ~ /deep/ .item-header {
-    filter: blur(2px);
-  }
   &.active {
     pointer-events: all;
     opacity: 1;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
 }
 
@@ -96,11 +92,12 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: $color-primary-subtle !important;
     text-transform: uppercase;
     font-size: 0.85em;
     color: white;
     letter-spacing: 0.2;
-    padding: 15px 30px;
+    padding: 12px 30px 10px;
     background: $color-bg;
   }
   .body {

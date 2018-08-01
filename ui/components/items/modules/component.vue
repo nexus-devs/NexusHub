@@ -58,7 +58,7 @@ export default {
   @include ie;
   border-left: 2px solid transparent;
   border-radius: 2px;
-  border-bottom: 1px solid $color-subtle-dark;
+  background: $color-bg;
   padding: 8px;
 
   &:last-of-type {
@@ -69,6 +69,7 @@ export default {
   }
   &.active {
     border-left: 2px solid #39E591;
+    background: #353d49;
   }
   @media (max-width: $breakpoint-m) {
     @include field;

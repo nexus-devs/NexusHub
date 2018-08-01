@@ -33,14 +33,14 @@
             <a href="https://support.google.com/analytics/answer/6004245?hl=en" target="_blank">
               Google Analytics
             </a>
-            and our own analytics service which does not share the data with
+            and our own analytics service which does not share data with
             anyone else.
           </p>
         </section>
         <section>
           <h2>Password Storage</h2>
           <p>
-            We store all passwords using the bcrypt hashing algorithm with 8 salt rounds.
+            We store all passwords using the bcrypt hash algorithm with 8 salt rounds.
             Tech talk aside - <a href="https://security.stackexchange.com/a/6415">it's pretty secure.</a>
             This means that in case of a security breach, nobody will be able to
             figure out your original password.

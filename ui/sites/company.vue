@@ -197,7 +197,7 @@ section {
     animation-delay: 0.15s;
     opacity: 0;
     @include shadow-2;
-    @include gradient-background-dg($color-primary-subtle, $color-accent-subtle);
+    @include gradient-background-dg(#59d680, $color-accent-subtle);
   }
   .box-top-sub {
     position: absolute;

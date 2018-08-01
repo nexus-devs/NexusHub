@@ -15,7 +15,7 @@
     border: 0;
   }
   &:hover {
-    @include shade-1;
+    @include shadow-2;
   }
   &:active {
     transform: scale(0.98);

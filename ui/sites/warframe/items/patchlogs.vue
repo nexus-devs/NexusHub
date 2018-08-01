@@ -9,7 +9,6 @@
         <div id="patchlogs-container" class="container">
           <div v-if="item.patchlogs" id="patchlogs" class="patchlogs">
             <h2 class="sub">Patchlog History</h2>
-            <span>All patches and hotfixes affecting {{ item.name }}.</span>
             <patchlog v-for="patchlog in item.patchlogs" :key="patchlog.date" :patchlog="patchlog"/>
           </div>
           <div v-else class="no-data">
@@ -96,6 +95,7 @@ h2 + span {
 }
 /deep/ .patchlog {
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 .no-data {
   text-align: center;

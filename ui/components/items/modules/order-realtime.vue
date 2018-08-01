@@ -134,7 +134,7 @@ export default {
   @include shadow-1;
 
   &:first-of-type {
-    @include gradient-background-dg(#353d49, $color-bg)
+    @include gradient-background-dg(#3c4451, $color-bg)
     z-index: 1;
 
     .background {
@@ -161,7 +161,7 @@ export default {
         height: 100%;
         width: 100%;
         z-index: 1;
-        @include gradient-background(transparent, #353d49);
+        @include gradient-background(transparent, #3c4451);
       }
     }
     .content {

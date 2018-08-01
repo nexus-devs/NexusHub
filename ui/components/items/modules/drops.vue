@@ -1,7 +1,10 @@
 <template>
   <module>
     <template slot="header">
-      <h3>Drop Rates</h3>
+      <div>
+        <img src="/img/warframe/ui/drops.svg" alt="Drops" class="ico-h-24">
+        <h3>Drop Rates</h3>
+      </div>
       <span>{{ component.name === 'Set' ? item.components[item.components.length - 1].name : component.name }}</span>
     </template>
     <template slot="body">
@@ -84,6 +87,7 @@ export default {
 
   span {
     font-size: 0.9em;
+    color: white;
   }
 }
 /deep/ .body {
@@ -118,6 +122,7 @@ export default {
   }
   a {
     @include ie;
+    background: rgba(255,255,255,0.04);
     display: flex;
     justify-content: center;
     height: 48px;
