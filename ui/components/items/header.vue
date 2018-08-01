@@ -200,7 +200,7 @@ export default {
 
      @media (max-width: $breakpoint-s) {
        height: 70%;
-      @include gradient-background(transparent, $color-bg);
+       @include gradient-background(transparent, $color-bg);
      }
    }
    .item-img-blur {
@@ -313,7 +313,7 @@ export default {
  * Sub-page nav
  */
 .subnav {
-  margin-top: 40px;
+  margin-top: 25px;
   border-top: 1px solid $color-subtle-dark;
   @include shadow-1;
 
@@ -342,7 +342,7 @@ export default {
     margin-top: 20px;
   }
   .router-link-active {
-    color: #39E591 !important;
+    border-bottom: 2px solid $color-primary-subtle;
   }
 }
 </style>

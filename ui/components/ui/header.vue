@@ -33,8 +33,8 @@ header {
   .container {
     position: relative;
     z-index: 1;
-    padding-top: 160px;
-    padding-bottom: 160px;
+    padding-top: 180px;
+    padding-bottom: 180px;
     // padding-left will be affected by open sidebar, so don't use shortcut
   }
   h1 {

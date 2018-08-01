@@ -214,31 +214,20 @@ export default {
       type: 'Selling',
       selected: {},
       filters: [{
-        name: 'Platinum',
+        name: 'Price',
         category: 'items',
         icon: '/img/warframe/ui/platinum.svg',
-        alt: 'Platinum',
         unit: 'p',
         path: 'price'
       }, {
-        name: 'Ducats',
-        category: 'items',
-        icon: '/img/warframe/ui/ducats.svg',
-        alt: 'Ducats',
-        unit: ' Ducats',
-        path: 'ducats'
+        name: 'Quantity',
+        icon: '/img/warframe/ui/quantity.svg',
+        unit: '',
+        path: 'quantity'
       }, {
-        name: 'Supply',
-        category: 'items',
-        unit: ' Sellers',
+        name: 'Rank',
         hidden: true,
-        path: 'selling.current.offers'
-      }, {
-        name: 'Demand',
-        category: 'items',
-        unit: ' Buyers',
-        hidden: true,
-        path: 'buying.current.offers'
+        path: 'rank'
       }]
     },
     mutations: {

@@ -1,7 +1,10 @@
 <template>
   <popup :class="{ active: order && order.user }" class="order-popup">
     <template slot="header">
-      You are {{ order.offer === 'Selling' ? 'buying' : 'selling' }}
+      <div>
+        <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
+        You are {{ order.offer === 'Selling' ? 'buying' : 'selling' }}
+      </div>
     </template>
     <template slot="body">
       <div class="image-wrapper">

@@ -90,7 +90,19 @@ export default {
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+.module {
+  max-width: 650px;
+
+  .header {
+    img {
+      margin-top: 20px;
+      width: 100%;
+      max-height: 50vh;
+      border-radius: 2px;
+    }
+  }
+}
 </style>

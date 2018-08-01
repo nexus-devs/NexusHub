@@ -12,10 +12,14 @@
   </div>
 </template>
 
+
+
 <script>
 export default {
 }
 </script>
+
+
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -31,26 +35,32 @@ export default {
 }
 
 .header {
-  padding: 25px 30px;
-  border-bottom: 1px solid $color-subtle-dark;
-  padding-bottom: 20px;
+  padding: 30px 35px 0;
 
+  h2, h3 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.85em !important;
+    letter-spacing: 0.5;
+    color: $color-primary-subtle !important;
+    text-transform: uppercase;
+  }
   time {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.85em;
     margin-top: 2px;
   }
   img {
-    margin-top: 20px;
-    width: 100%;
-    max-width: 650px;
-    max-height: 50vh;
-    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  span {
+    display: block;
   }
 }
 
 .body {
-  padding: 30px;
+  padding: 25px 35px;
 
   li {
     margin-top: 8px;
@@ -59,6 +69,7 @@ export default {
   }
   p, span {
     color: white;
+    font-size: 0.95em;
   }
   li, p, span {
     max-width: 650px;
@@ -67,18 +78,18 @@ export default {
 
 .footer {
   display: flex;
-  padding: 4px 10px;
+  padding: 8px 25px;
   margin-top: auto;
-  border-top: 1px solid $color-subtle-dark;
-  font-size: 0.85em;
+  background: $color-bg;
+  font-size: 0.75em;
 
   a {
     display: flex;
     align-items: center;
     text-transform: uppercase;
-    margin-left: auto;
     @include ie;
     padding: 5px 10px;
+    letter-spacing: 0.5;
 
     &:hover {
       color: white !important;

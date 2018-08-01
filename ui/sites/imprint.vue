@@ -7,7 +7,7 @@
       <ui-header>
         <h1>Imprint</h1>
         <p>
-          Huge shoutout to the German government for legally requiring me to dox myself!<br>
+          Huge shoutouts to the German government for legally requiring me to dox myself!<br>
           Seriously, what is wrong with you Germany?
         </p>
       </ui-header>

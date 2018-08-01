@@ -1,10 +1,9 @@
 <template>
   <module>
     <template slot="header">
-      <span class="title">Active Traders right now</span>
-      <br>
+      <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
+      <h3 class="title">Traders right now</h3>
       <tween-num :value="opm.active" :duration="1000" easing="easeInOutQuad" class="active-number"/>
-      <br>
       <span class="offers-per-minute">Offers per minute</span>
     </template>
     <template slot="body">
@@ -128,7 +127,7 @@ export default {
   display: inline-block;
   color: white;
   font-size: 2em;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .offers-per-minute {
   display: inline-block;
@@ -150,12 +149,12 @@ export default {
   }
   &:nth-of-type(1) {
     div {
-      background: $color-primary;
+      background: $color-primary-subtle;
     }
   }
   &:nth-of-type(2) {
     div {
-      background: $color-accent;
+      background: #50A88E;
     }
   }
   &:last-of-type {
@@ -177,10 +176,10 @@ export default {
     will-change: width;
 
     &:nth-of-type(1) {
-      background: $color-primary;
+      background: $color-primary-subtle;
     }
     &:nth-of-type(2) {
-      background: $color-accent;
+      background: #50A88E;
     }
   }
 }
