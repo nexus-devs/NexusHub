@@ -26,8 +26,6 @@ class Opm extends Endpoint {
 
   async filter (item) {
     const queryStart = new Date() - 1000 * 60 * 25
-    const queryEnd = new Date()
-    const queryTotal = queryEnd - queryStart
     const query = item ? {
       item: new RegExp('^' + item + '$', 'i'),
       createdAt: {
@@ -39,10 +37,22 @@ class Opm extends Endpoint {
       }
     }
     const orders = await this.db.collection('orderHistory').find(query).toArray()
-    const intervals = []
+    const { intervals, sources } = this.getIntervals(orders)
+    const mostTraded = item ? null : this.getMostTraded(orders)
+    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1
 
-    // Divide orders into n intervals for bar chart, also get source distribution
-    // for the last 5 minutes.
+    return Object.assign({ active, intervals: intervals.reverse(), sources },
+      !item ? { mostTraded } : {})
+  }
+
+  /**
+   * Get intervals for bar chart
+   */
+  getIntervals (orders) {
+    const queryStart = new Date() - 1000 * 60 * 25
+    const queryEnd = new Date()
+    const queryTotal = queryEnd - queryStart
+    const intervals = []
     const n = 25
     let tradeChat = 0
     let wfm = 0
@@ -78,8 +88,29 @@ class Opm extends Endpoint {
       wfm: 0.5
     }
 
-    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1
-    return { active, intervals: intervals.reverse(), sources }
+    return { intervals, sources }
+  }
+
+  /**
+   * Get most traded items if no item is specified
+   */
+  getMostTraded (orders) {
+    const items = []
+
+    for (let order of orders) {
+      const i = items.findIndex(o => o.item === order.item)
+
+      if (i < 0) {
+        items.push({
+          item: order.item,
+          amount: 1
+        })
+      } else {
+        items[i].amount++
+      }
+    }
+    items.sort((a, b) => a.amount < b.amount ? 1 : -1)
+    return items.slice(0, 6)
   }
 }
 

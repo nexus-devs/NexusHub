@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <!-- All Order s-->
+          <!-- All Orders-->
           <div v-if="listings.length">
             <div class="row labels">
               <div class="col item">

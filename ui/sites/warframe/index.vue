@@ -28,11 +28,12 @@
               <h2 class="sub">Realtime Orders</h2>
               <div class="realtime">
                 <opm/>
-                <!--
-                <transition-group name="realtime" class="realtime-users row">
-                  <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                <transition-group class="most-traded row">
+                  <div v-for="order in opm.mostTraded" :key="order.item" class="realtime-user col-b">
+                    {{ order.item }}<br>
+                    {{ order.amount }}
+                  </div>
                 </transition-group>
-                -->
               </div>
             </div>
             <div class="col-b components-container">
@@ -67,6 +68,12 @@ export default {
     rank,
     'search-button': searchButton,
     opm
+  },
+
+  computed: {
+    opm () {
+      return this.$store.state.opm.all
+    }
   }
 }
 </script>
@@ -407,6 +414,15 @@ header {
  * Actual site content
  */
 .realtime {
+  display: inline-flex;
   margin-top: 20px;
+}
+.most-traded {
+  display: inline-flex;
+  margin-left: 20px;
+
+  @media (max-width: $breakpoint-s) {
+    margin-left: 0;
+  }
 }
 </style>
