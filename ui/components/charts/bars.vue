@@ -91,7 +91,7 @@ export default {
       for (const data of this.animatedData) {
         const x = this.scaled.x(data.x)
         const y = this.scaled.y(data.y)
-        this.points.push({ x, y })
+        this.points.push({ x, y: y > 0 ? y : 0 })
       }
     }
   }

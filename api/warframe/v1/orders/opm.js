@@ -1,4 +1,5 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
+const moment = require('moment')
 
 /**
  * Orders per minute. This data is used for the 'active traders' chart.
@@ -46,9 +47,9 @@ class Opm extends Endpoint {
     let tradeChat = 0
     let wfm = 0
 
-    for (let i = 1; i <= n; i++) {
-      const intervalStart = queryEnd - (queryTotal / n) * i
-      const intervalEnd = queryEnd - (queryTotal / n) * (i - 1)
+    for (let i = 2; i <= n; i++) {
+      const intervalStart = moment(queryEnd - (queryTotal / n) * i).endOf('minute').valueOf()
+      const intervalEnd = moment(queryEnd - (queryTotal / n) * (i - 1)).endOf('minute').valueOf()
       let quantity = 0
 
       for (let order of orders) {
@@ -77,7 +78,7 @@ class Opm extends Endpoint {
       wfm: 0.5
     }
 
-    const active = intervals.slice(0, 5).reduce((a, b) => a + b) // last 5 minutes
+    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1
     return { active, intervals: intervals.reverse(), sources }
   }
 }

@@ -85,7 +85,7 @@ export default {
   margin-left: 15px;
   margin-bottom: 15px;
   max-width: 330px;
-  min-width: 260px;
+  min-width: 240px;
   min-height: 160px;
   @include ease(0.5s);
 
