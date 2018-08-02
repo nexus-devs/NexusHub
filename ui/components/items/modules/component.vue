@@ -69,7 +69,7 @@ export default {
   }
   &.active {
     border-left: 2px solid #39E591;
-    background: #353d49;
+    background: #3c4451;
   }
   @media (max-width: $breakpoint-m) {
     @include field;

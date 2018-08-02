@@ -27,6 +27,8 @@
       <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff(order) >= 0 : priceDiff(order) <= 0 }" class="diff">
         {{ priceDiff(order) > 0 ? '+' : '' }}{{ priceDiff(order) }}%
       </span>
+    </div>
+    <div class="col buy">
       <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
     </div>
   </div>
@@ -185,10 +187,6 @@ export default {
 }
 
 .price {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
   .diff {
     margin-left: 10px;
     margin-top: 2px;
@@ -199,8 +197,15 @@ export default {
     color: $color-error;
   }
   img {
-    margin-right: 4px;
+    margin-right: 2px;
   }
+}
+
+.buy {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   button {
     margin-left: 40px;
     margin-right: 10px;
