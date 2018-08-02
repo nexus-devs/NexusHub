@@ -29,10 +29,22 @@
               <div class="realtime">
                 <opm/>
                 <transition-group class="most-traded row">
-                  <div v-for="order in opm.mostTraded" :key="order.item" class="realtime-user col-b">
-                    {{ order.item }}<br>
-                    {{ order.amount }}
-                  </div>
+                  <module v-for="order in opm.mostTraded" :key="order.item" class="item col">
+                    <template slot="header">
+                      <div class="img-container">
+                        <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
+                          <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
+                        </object>
+                      </div>
+                      <h3>{{ order.item }}</h3>
+                    </template>
+                    <template slot="body">
+                      <span>{{ order.amount }} Orders</span>
+                    </template>
+                    <template slot="footer">
+                      <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`">View Traders</router-link>
+                    </template>
+                  </module>
                 </transition-group>
               </div>
             </div>
@@ -57,6 +69,7 @@ import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import opm from 'src/components/items/modules/opm-global.vue'
+import module from 'src/components/ui/module.vue'
 
 export default {
   components: {
@@ -67,7 +80,8 @@ export default {
     timerange,
     rank,
     'search-button': searchButton,
-    opm
+    opm,
+    module
   },
 
   computed: {
@@ -413,16 +427,66 @@ header {
 /**
  * Actual site content
  */
+section {
+  padding: 40px 0;
+}
 .realtime {
   display: inline-flex;
   margin-top: 20px;
-}
-.most-traded {
-  display: inline-flex;
-  margin-left: 20px;
 
   @media (max-width: $breakpoint-s) {
+    flex-direction: column;
+  }
+}
+.most-traded {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  margin-right: -15px;
+  margin-bottom: -15px;
+
+  .item {
+    min-width: 200px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    @include ease(0.5s);
+
+    &:nth-of-type(n + 7) {
+      display: none;
+    }
+    /deep/ .header {
+      padding: 20px 20px 0;
+
+      .img-container {
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        margin-right: 5px;
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        background: $color-bg;
+
+        img, object {
+          position: relative;
+          max-height: 80%;
+        }
+      }
+    }
+    /deep/ .body {
+      padding: 20px 25px;
+    }
+    /deep/ .footer {
+      padding: 10px 20px;
+    }
+  }
+  @media (max-width: $breakpoint-s) {
     margin-left: 0;
+    margin-top: 20px;
   }
 }
 </style>

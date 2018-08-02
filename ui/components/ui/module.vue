@@ -82,6 +82,7 @@ export default {
   margin-top: auto;
   background: $color-bg;
   font-size: 0.75em;
+  border-radius: 2px;
 
   a {
     display: flex;

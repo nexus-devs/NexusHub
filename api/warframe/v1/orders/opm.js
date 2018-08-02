@@ -100,13 +100,15 @@ class Opm extends Endpoint {
     for (let order of orders) {
       const i = items.findIndex(o => o.item === order.item)
 
-      if (i < 0) {
-        items.push({
-          item: order.item,
-          amount: 1
-        })
-      } else {
-        items[i].amount++
+      if (new Date(order.createdAt) < new Date() - 1000 * 60 * 5) {
+        if (i < 0) {
+          items.push({
+            item: order.item,
+            amount: 1
+          })
+        } else {
+          items[i].amount++
+        }
       }
     }
     items.sort((a, b) => a.amount < b.amount ? 1 : -1)

@@ -71,8 +71,9 @@
                 Quantity
               </div>
               <div class="col price">
-                <span>Price</span>
+                Price
               </div>
+              <div class="col"/>
             </div>
             <transition-group>
               <order v-for="order in listings" :key="order._id" :order="order"/>
@@ -448,11 +449,8 @@ h2 + span {
     margin-right: 95px;
   }
   .price {
-    text-align: right;
-
-    span {
-      margin-right: 110px;
-    }
+    position: relative;
+    left: 10px;
   }
 }
 </style>
