@@ -30,7 +30,6 @@
             </div>
           </div>
         </div>
-
       </section>
 
       <!-- Active Listings -->
@@ -96,7 +95,7 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
-import opm from 'src/components/items/modules/opm.vue'
+import opm from 'src/components/items/modules/opm-item.vue'
 import component from 'src/components/items/modules/component.vue'
 import order from 'src/components/items/modules/order.vue'
 import orderPopup from 'src/components/items/modules/order-popup.vue'

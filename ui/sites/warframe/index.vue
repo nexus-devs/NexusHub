@@ -19,17 +19,26 @@
           </div>
         </div>
       </header>
+
+      <!-- Realtime Orders -->
       <section>
         <div class="container">
-          Realtime traders right now (placeholder)<br>
-          <tween-num :value="opm.active" :duration="1000" easing="easeInOutQuad" class="active-number"/>
-          <br>
-          <br>
-          Trade Chat - {{ opm.sources.tradeChat }}% <br>
-          Warframe.market - {{ opm.sources.wfm }}%
-          <br>
-          <br>
-          TODO: Add most traded items to the right of this box - link to item page.
+          <div class="row-pad">
+            <div class="col-b-4">
+              <h2 class="sub">Realtime Orders</h2>
+              <div class="realtime">
+                <opm/>
+                <!--
+                <transition-group name="realtime" class="realtime-users row">
+                  <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                </transition-group>
+                -->
+              </div>
+            </div>
+            <div class="col-b components-container">
+              <h2 class="sub">Something else</h2>
+            </div>
+          </div>
         </div>
       </section>
     </app-content>
@@ -46,8 +55,7 @@ import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import tweenNum from 'vue-tween-number'
-let updateInterval
+import opm from 'src/components/items/modules/opm-global.vue'
 
 export default {
   components: {
@@ -58,65 +66,7 @@ export default {
     timerange,
     rank,
     'search-button': searchButton,
-    tweenNum
-  },
-
-  // DEBUG: Everything below will be put into its own component eventually.
-
-  computed: {
-    opm () {
-      return this.$store.state.opm.all
-    }
-  },
-
-  beforeMount () {
-    this.$cubic.subscribe(`/warframe/v1/orders/opm`, opm => {
-      this.$store.commit('setOpmAll', opm)
-    })
-    updateInterval = setInterval(async () => {
-      const opm = await this.$cubic.get(`/warframe/v1/orders/opm`)
-      this.$store.commit('setOpmAll', opm)
-    }, 1000 * 60)
-  },
-
-  beforeDestroy () {
-    this.$cubic.unsubscribe(`/warframe/v1/orders/opm`)
-    clearInterval(updateInterval)
-  },
-
-  async asyncData () {
-    const opm = await this.$cubic.get('/warframe/v1/orders/opm')
-    this.$store.commit('setOpmAll', opm)
-  },
-
-  storeModule: {
-    name: 'opm',
-    state: {
-      all: {
-        total: 0,
-        intervals: [],
-        sources: {
-          wfm: 0.5,
-          tradeChat: 0.5
-        }
-      },
-      item: {
-        total: 0,
-        intervals: [],
-        sources: {
-          wfm: 0.5,
-          tradeChat: 0.5
-        }
-      }
-    },
-    mutations: {
-      setOpmAll (state, opm) {
-        state.all = opm
-      },
-      setOpmItem (state, opm) {
-        state.item = opm
-      }
-    }
+    opm
   }
 }
 </script>
@@ -449,5 +399,14 @@ header {
   100% {
     transform: scaleX(1);
   }
+}
+
+
+
+/**
+ * Actual site content
+ */
+.realtime {
+  margin-top: 20px;
 }
 </style>

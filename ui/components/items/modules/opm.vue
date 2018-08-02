@@ -1,5 +1,5 @@
 <template>
-  <module>
+  <module v-if="opm">
     <template slot="header">
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3 class="title">Traders right now</h3>
@@ -34,7 +34,6 @@
 import module from 'src/components/ui/module.vue'
 import bars from 'src/components/charts/bars.vue'
 import tweenNum from 'vue-tween-number'
-let updateInterval
 
 export default {
   components: {
@@ -43,72 +42,7 @@ export default {
     bars
   },
 
-  computed: {
-    item () {
-      return this.$store.state.items.item
-    },
-    opm () {
-      return this.$store.state.opm.item
-    }
-  },
-
-  watch: {
-    item (to, from) {
-      this.$cubic.unsubscribe(`/warframe/v1/orders/opm?item=${from.name}`)
-      clearInterval(updateInterval)
-    }
-  },
-
-  beforeMount () {
-    this.$cubic.subscribe(`/warframe/v1/orders/opm?item=${this.item.name}`, opm => {
-      this.$store.commit('setOpmItem', opm)
-    })
-    updateInterval = setInterval(async () => {
-      const opm = await this.$cubic.get(`/warframe/v1/orders/opm?item=${this.item.name}`)
-      this.$store.commit('setOpmItem', opm)
-    }, 1000 * 60)
-  },
-
-  beforeDestroy () {
-    this.$cubic.unsubscribe(`/warframe/v1/orders/opm?item=${this.item.name}`)
-    clearInterval(updateInterval)
-  },
-
-  async asyncData ({ route }) {
-    const item = route.params.item.split('-').join(' ')
-    const opm = await this.$cubic.get(`/warframe/v1/orders/opm?item=${item}`)
-    this.$store.commit('setOpmItem', opm)
-  },
-
-  storeModule: {
-    name: 'opm',
-    state: {
-      all: {
-        total: 0,
-        intervals: [],
-        sources: {
-          wfm: 0.5,
-          tradeChat: 0.5
-        }
-      },
-      item: {
-        total: 0,
-        intervals: [],
-        sources: {
-          wfm: 0.5,
-          tradeChat: 0.5
-        }
-      }
-    },
-    mutations: {
-      setOpmAll (state, opm) {
-        state.all = opm
-      },
-      setOpmItem (state, opm) {
-        state.item = opm
-      }
-    }
-  }
+  props: ['opm']
 }
 </script>
 

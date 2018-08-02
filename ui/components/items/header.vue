@@ -207,7 +207,6 @@ export default {
      position: absolute;
      z-index: 0;
      opacity: 0;
-     filter: blur(60px) brightness(1.1) contrast(0.5);
 
      @media (max-width: $breakpoint-s) {
        left: auto;
@@ -218,6 +217,7 @@ export default {
        height: 200%;
        width: 200%;
        opacity: 0.75;
+       filter: blur(60px) brightness(1.1) contrast(0.5);
      }
    }
 
