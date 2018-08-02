@@ -48,7 +48,8 @@ export default {
         sources: {
           wfm: 0.5,
           tradeChat: 0.5
-        }
+        },
+        mostTraded: []
       },
       item: {
         total: 0,
