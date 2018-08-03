@@ -25,26 +25,31 @@
         <div class="container">
           <div class="row-pad">
             <div class="col-b-4">
-              <h2 class="sub">Realtime Orders</h2>
+              <h2 class="sub">Market Overview</h2>
               <div class="realtime">
                 <opm/>
                 <transition-group class="most-traded row">
-                  <module v-for="order in opm.mostTraded" :key="order.item" class="item col">
-                    <template slot="header">
-                      <div class="img-container">
-                        <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
-                          <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
-                        </object>
-                      </div>
-                      <h3>{{ order.item }}</h3>
-                    </template>
-                    <template slot="body">
-                      <span>{{ order.amount }} Orders</span>
-                    </template>
-                    <template slot="footer">
-                      <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`">View Traders</router-link>
-                    </template>
-                  </module>
+                  <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" v-for="order in opm.mostTraded" :key="order.item" class="item col">
+                    <module>
+                      <template slot="header">
+                        <div class="img-container">
+                          <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
+                            <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
+                          </object>
+                        </div>
+                        <h3>{{ order.item }}</h3>
+                      </template>
+                      <template slot="body">
+                        <span>{{ order.amount }} Orders</span>
+                      </template>
+                      <template slot="footer">
+                        <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`">
+                          View Traders
+                          <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
+                        </router-link>
+                      </template>
+                    </module>
+                  </router-link>
                 </transition-group>
               </div>
             </div>
@@ -447,12 +452,21 @@ section {
   margin-bottom: -15px;
 
   .item {
-    min-width: 200px;
+    @include ie();
+    padding: 0;
+    border-radius: 2px;
+    flex-basis: 33%;
     margin-right: 15px;
     margin-bottom: 15px;
     @include ease(0.5s);
 
-    &:nth-of-type(n + 7) {
+    &:hover {
+      @include gradient-background-dg(#3c4451, #353d49);
+    }
+    &:before {
+      border-radius: 2px;
+    }
+    &:nth-of-type(n + 5) {
       display: none;
     }
     /deep/ .header {
@@ -481,7 +495,7 @@ section {
       padding: 20px 25px;
     }
     /deep/ .footer {
-      padding: 10px 20px;
+      padding: 6px 20px;
     }
   }
   @media (max-width: $breakpoint-s) {

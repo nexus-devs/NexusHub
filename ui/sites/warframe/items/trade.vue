@@ -258,7 +258,7 @@ export default {
 
 /deep/ {
   .zoom-enter-active, .fade-leave-active {
-    @include ease(0.45s);
+    @include ease(0.4s);
   }
   .zoom-enter, .zoom-leave-to {
     transform: translateY(7px);
@@ -280,12 +280,15 @@ h2 + span {
   .col-b, .col-b-4 {
     padding-top: 0;
     margin-top: 0;
+
+    @media (max-width: $breakpoint-m) {
+      padding-right: 0 !important;
+    }
   }
 }
 
 .module {
   display: inline-flex;
-  z-index: 1;
 }
 .realtime {
   display: flex;
@@ -300,15 +303,11 @@ h2 + span {
   display: inline-flex;
   flex-wrap: wrap;
   vertical-align: top;
-  margin-left: 10px;
-  margin-right: -5px;
+  margin-left: 20px;
+  margin-right: -15px;
   margin-bottom: -15px;
   width: 100%;
 
-  @media (max-width: $breakpoint-m) {
-    flex-direction: column;
-    margin-left: 20px;
-  }
   @media (max-width: $breakpoint-s) {
     margin-top: 20px;
     margin-left: 0;

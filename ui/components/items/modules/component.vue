@@ -59,7 +59,7 @@ export default {
   border-left: 2px solid transparent;
   border-radius: 2px;
   background: $color-bg;
-  padding: 8px;
+  padding: 6px 8px;
 
   &:last-of-type {
     border-bottom: none;
