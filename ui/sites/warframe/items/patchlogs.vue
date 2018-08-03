@@ -80,7 +80,7 @@ export default {
 
 /deep/ {
   .zoom-enter-active, .fade-leave-active {
-    @include ease(0.45s);
+    @include ease(0.4s);
   }
   .zoom-enter, .zoom-leave-to {
     transform: translateY(7px);

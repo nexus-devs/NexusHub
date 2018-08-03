@@ -112,7 +112,7 @@ class Opm extends Endpoint {
       }
     }
     items.sort((a, b) => a.amount < b.amount ? 1 : -1)
-    return items.slice(0, 6)
+    return items.slice(0, 4)
   }
 }
 
