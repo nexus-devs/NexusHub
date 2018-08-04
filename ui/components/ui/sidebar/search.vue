@@ -89,7 +89,7 @@ export default {
       this.$store.commit('setActivePanel', this.id)
     })
   },
-  
+
   // Prevent multiple registrations when loading pages with the same sidebar
   // module.
   beforeDestroy () {
