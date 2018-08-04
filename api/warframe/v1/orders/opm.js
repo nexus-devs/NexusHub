@@ -39,7 +39,7 @@ class Opm extends Endpoint {
     const orders = await this.db.collection('orderHistory').find(query).toArray()
     const { intervals, sources } = this.getIntervals(orders)
     const mostTraded = item ? null : this.getMostTraded(orders)
-    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1
+    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1 || orders.length
 
     return Object.assign({ active, intervals: intervals.reverse(), sources },
       !item ? { mostTraded } : {})
@@ -100,7 +100,7 @@ class Opm extends Endpoint {
     for (let order of orders) {
       const i = items.findIndex(o => o.item === order.item)
 
-      if (new Date(order.createdAt) < new Date() - 1000 * 60 * 5) {
+      if (new Date(order.createdAt) > new Date() - 1000 * 60 * 5) {
         if (i < 0) {
           items.push({
             item: order.item,
