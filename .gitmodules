@@ -1,0 +1,4 @@
+[submodule "docker"]
+	path = docker
+	url = https://github.com/nexus-devs/docker
+	branch = master
