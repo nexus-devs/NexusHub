@@ -1,3 +1,4 @@
 assets
 node_modules
 ui/*.js
+docker
