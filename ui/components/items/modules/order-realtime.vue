@@ -109,6 +109,9 @@ export default {
       }
     }
   }
+  /deep/ .body {
+    padding: 30px 25px;
+  }
   .main-value + span {
     color: $color-primary;
     font-size: 0.85em;

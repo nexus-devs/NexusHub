@@ -193,14 +193,16 @@ export default {
    .item-img-shade {
      position: absolute;
      z-index: 0;
-     height: 90%;
+     opacity: 0.2;
+     height: 60%;
      width: 100%;
      bottom: 0;
      left: 0;
+     @include gradient-background(transparent, $color-bg);
 
      @media (max-width: $breakpoint-s) {
        height: 70%;
-       @include gradient-background(transparent, $color-bg);
+       opacity: 1;
      }
    }
    .item-img-blur {
@@ -283,14 +285,19 @@ export default {
       margin-top: 5px;
     }
     span {
+      @include ie;
       position: relative;
       top: -5px;
+      margin-left: -20px;
       color: white;
-      opacity: 0.5;
       cursor: pointer;
+
+      &:first-of-type {
+        margin-left: -7px; // padding
+      }
     }
     span.selected {
-      opacity: 1;
+      color: $color-primary-subtle;
     }
     span:after {
       content: ' /\00a0'

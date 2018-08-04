@@ -29,7 +29,7 @@
               <div class="realtime">
                 <opm/>
                 <transition-group class="most-traded row">
-                  <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" v-for="order in opm.mostTraded" :key="order.item" class="item col">
+                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col">
                     <module>
                       <template slot="header">
                         <div class="img-container">
@@ -445,6 +445,7 @@ section {
 }
 .most-traded {
   position: relative;
+  overflow: hidden;
   display: inline-flex;
   flex-wrap: wrap;
   margin-left: 20px;
@@ -458,7 +459,7 @@ section {
     flex-basis: 33%;
     margin-right: 15px;
     margin-bottom: 15px;
-    @include ease(0.5s);
+    transition-duration: 0.5s !important;
 
     &:hover {
       @include gradient-background-dg(#3c4451, #353d49);
