@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ active: active ? true : false }" class="component col" @click="toggle">
+  <div :class="{ active: active ? true : false }" class="component col" @click="select">
     <div class="image-wrapper">
       <img :src="component.imgUrl" alt="component.name">
     </div>
@@ -23,26 +23,13 @@ export default {
       return this.$store.state.orders.all.filter(o => o.component === this.component.name)
     },
     active () {
-      return this.$store.state.orders.components.includes(this.component.name)
+      return this.$store.state.items.selected.component === this.component.name
     }
   },
 
   methods: {
-    toggle () {
-      const components = this.$store.state.orders.components
-      let override = []
-      const included = components.includes(this.component.name)
-
-      if (included) {
-        for (const component of components) {
-          if (component !== this.component.name) {
-            override.push(component)
-          }
-        }
-      } else {
-        override = override.concat(components).concat([this.component.name])
-      }
-      this.$store.commit('setOrderComponents', override)
+    select () {
+      this.$store.commit('setItemComponent', this.component.name)
     }
   }
 }
@@ -59,7 +46,7 @@ export default {
   border-left: 2px solid transparent;
   border-radius: 2px;
   background: $color-bg;
-  padding: 6px 8px;
+  padding: 8px;
 
   &:last-of-type {
     border-bottom: none;

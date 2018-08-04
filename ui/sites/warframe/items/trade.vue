@@ -101,13 +101,13 @@ import component from 'src/components/items/modules/component.vue'
 import order from 'src/components/items/modules/order.vue'
 import orderPopup from 'src/components/items/modules/order-popup.vue'
 import orderRealtime from 'src/components/items/modules/order-realtime.vue'
+let selectedComponent = 'Set'
 
-function filter (orders, components, type = 'Selling', key = 'price') {
+function filter (orders, type = 'Selling', key = 'price') {
   const result = []
 
   for (const order of orders) {
-    if ((!components.length || components.includes(order.component)) &&
-        order.offer === type) {
+    if (selectedComponent === order.component && order.offer === type) {
       result.push(order)
     }
   }
@@ -162,6 +162,9 @@ export default {
       }
       return components
     },
+    selectedComponent () {
+      return this.$store.state.items.selected.component
+    },
     filters () {
       return this.$store.state.orders.filters
     },
@@ -175,18 +178,16 @@ export default {
   watch: {
     item (to, from) {
       this.$cubic.unsubscribe(`/warframe/v1/orders?item=${from.name}`)
-      this.$store.commit('setOrderComponents', [])
+    },
+    selectedComponent (to) {
+      selectedComponent = to
+      this.$store.commit('setOrders', this.$store.state.orders.all)
     }
   },
 
   beforeMount () {
     this.$cubic.subscribe(`/warframe/v1/orders?item=${this.item.name}`, orders => {
-      const components = this.$store.state.orders.components
       this.$store.commit('setOrders', orders)
-
-      if (components.length) {
-        this.$store.commit('setOrderComponents', components)
-      }
     })
   },
 
@@ -210,9 +211,8 @@ export default {
     state: {
       all: [],
       listings: [],
-      components: [],
-      type: 'Selling',
       selected: {},
+      type: 'Selling',
       filters: [{
         name: 'Price',
         category: 'items',
@@ -233,18 +233,14 @@ export default {
     mutations: {
       setOrders (state, orders) {
         state.all = orders
-        state.listings = filter(state.all, state.components, state.type)
-      },
-      setOrderComponents (state, components) {
-        state.components = components
-        state.listings = filter(state.all, state.components, state.type)
+        state.listings = filter(state.all, state.type)
       },
       selectOrder (state, order) {
         state.selected = order
       },
       setOrderType (state, type) {
         state.type = type
-        state.listings = filter(state.all, state.components, state.type)
+        state.listings = filter(state.all, state.type)
       }
     }
   }

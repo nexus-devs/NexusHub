@@ -30,19 +30,19 @@
     "googleapis": "^32.0.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
-    "requestretry": "^2.0.0",
+    "requestretry": "^2.0.2",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.2.4",
     "vue-analytics": "^5.12.3",
     "vue-observe-visibility": "^0.4.1",
     "vue-tween-number": "^0.2.0",
-    "warframe-items": "1.28.0",
+    "warframe-items": "1.29.0",
     "ws": "^6.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "better-assert": "^1.0.2",
-    "eslint": "^5.2.0",
+    "eslint": "^5.3.0",
     "eslint-config-standard": "^12.0.0-alpha.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-import": "^2.13.0",
@@ -52,8 +52,8 @@
     "eslint-plugin-vue": "^4.7.1",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.9.2",
-    "webpack": "^4.16.3"
+    "semantic-release": "^15.9.3",
+    "webpack": "^4.16.4"
   },
   "release": {
     "getLastRelease": "last-release-git"
