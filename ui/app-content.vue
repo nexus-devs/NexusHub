@@ -7,10 +7,7 @@ the sidebar. This also keeps our app.vue more clean.
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div :style="breakpoint && deltaX ? { transform: [`translate(calc(${deltaX + 262}px + 5vw), 0px)`],
-                                              'margin-right': `calc(${deltaX + 262}px + 5vw)`,
-                                              'transition-duration': deltaX ? '0s' : '0.45s'} : {}"
-             :class="{ activeSidebar, visibleSidebar, deltaX }" class="app-content">
+        <div class="app-content">
           <slot>
             <!-- page content goes here -->
           </slot>
@@ -22,46 +19,6 @@ the sidebar. This also keeps our app.vue more clean.
 
 
 
-<script>
-
-export default {
-  data () {
-    return {
-      breakpoint: false
-    }
-  },
-
-  computed: {
-    activeSidebar () {
-      return this.$store.state.sidebar ? this.$store.state.sidebar.active : false
-    },
-    visibleSidebar () {
-      return this.$store.state.sidebar ? !this.$store.state.sidebar.hidden : false
-    },
-    // Horizontal position for content when swiping out the sidebar
-    deltaX () {
-      return this.$store.state.sidebar ? this.$store.state.sidebar.deltaX : 0
-    }
-  },
-
-  mounted () {
-    // JS breakpoint to ensure correct content movement behaviour when sidebar
-    // is moved. (move content on $breakpoint-m, don't move it below)
-    window.addEventListener('resize', () => this.updateBreakpoint())
-    this.breakpoint = document.documentElement.clientWidth > 1150
-  },
-
-  methods: {
-    // Check if we reached $breakpoint-m. If so, don't "squeeze" the app content on menu swipe
-    updateBreakpoint () {
-      this.breakpoint = document.documentElement.clientWidth > 1150
-    }
-  }
-}
-</script>
-
-
-
 <style lang="scss">
 @import '~src/styles/partials/importer';
 
@@ -70,11 +27,10 @@ export default {
   max-width: 100vw;
   position: relative;
   overflow: hidden;
+  @include ease(0.15s);
 }
 
 .app-content {
-  will-change: transform;
-
   // Disable accidental text selection on sidebar touch
   &.deltaX {
     -webkit-user-select: none;
@@ -88,11 +44,11 @@ export default {
 }
 
 .zoom-enter-active, .fade-leave-active {
-  @include ease(0.3s);
+  @include ease(0.4s);
 }
 .zoom-enter, .zoom-leave-to {
-  transform: scale(1.005) translateY(3px);
-  transform-origin: 50%;
+  transform: scale(1.010);
+  transform-origin: top;
   opacity: 0.75;
 }
 

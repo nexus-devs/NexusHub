@@ -23,9 +23,7 @@
 <script>
 import tooltip from './modules/tooltip.vue'
 
-
 export default {
-
   components: {
     tooltip
   },
@@ -47,6 +45,7 @@ export default {
       return this.$store.state.sidebar.hidden
     }
   },
+
   beforeCreate () {
     // Reset counters for panel id's when loading a new page
     // These id's also act as mulitpliers for the `top: x px` distance of
@@ -159,7 +158,7 @@ nav {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 3;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -228,7 +227,7 @@ nav {
         height: 100vh;
         width: 100%;
         z-index: 1;
-        @include gradient-background($color-bg-lighter, $color-bg-light);
+        @include gradient-background(#7a8899, $color-bg-light);
 
         .nav-lower-backdrop-first-bg {
           height: 56px;

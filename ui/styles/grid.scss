@@ -20,15 +20,16 @@
  * Sections
  */
 section {
-  padding: 90px 0;
+  padding: 60px 0;
   border-bottom: 1px solid rgba(62,67,72,.4);
+  width: 100%;
 
   &:first-of-type {
-    margin-top: 40px;
+    margin-top: 10px;
   }
   &:last-of-type {
     border-bottom: none;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
 }
 
@@ -38,7 +39,6 @@ section {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 }
 
 .row-margin {
@@ -59,11 +59,19 @@ section {
 
 .row-pad {
   @extend .row;
-  margin: 0 -30px;
 
   & > * {
     padding: 15px;
-    margin: 30px;
+    margin: 10px;
+
+    &:first-of-type {
+      margin-left: 0;
+      padding-left: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+      padding-right: 0;
+    }
   }
 }
 
@@ -75,7 +83,7 @@ section {
   flex-basis: #{$size + %};
 }
 // .col-1, .col-2...
-@for $i from 0 through 8 {
+@for $i from 0 through 4 {
   .col-#{$i},
   .col-b-#{$i} {
     @include column(#{$i});
@@ -113,7 +121,7 @@ section {
 */
 @media (max-width: $breakpoint-m) {
   .container {
-    padding: 0 40px;
+    padding: 0 35px;
   }
 
   .row, .row-margin {
@@ -121,7 +129,7 @@ section {
   }
 
   .row-pad *[class*="col-b"] {
-    flex-basis: calc(50% - 40px);
+    flex-basis: calc(50% - 10px);
   }
 
   .row-margin *[class*="col-b"] {
@@ -130,6 +138,7 @@ section {
 
     &:nth-child(odd) {
       margin-left: 0;
+      padding-right: 0;
     }
   }
 
@@ -170,7 +179,6 @@ section {
   }
 
   .row-pad *[class*="col-b"] {
-    margin: 15px 30px;
     flex-basis: calc(100%);
   }
 }

@@ -57,12 +57,10 @@ a {
   border-radius: 2px;
   padding: 10px 20px;
   margin-bottom: 8px;
-  background: $color-bg;
   @include ease(0.05s);
 
   &:hover {
     opacity: 1 !important;
-    background: $color-bg;
     transform: scale(0.995);
   }
   &:active {
@@ -76,6 +74,9 @@ a {
 .result {
   @include ease(0.5s);
 
+  .row {
+    justify-content: space-between;
+  }
   .result-title {
     position: relative;
     display: flex;

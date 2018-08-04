@@ -9,6 +9,6 @@
 
  @mixin field() {
    border-radius: 2px;
-   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
-   @include shade-1;
+   @include gradient-background-dg(#3c4451, #353d49);
+   @include shadow-1;
  }

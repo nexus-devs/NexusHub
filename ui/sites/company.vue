@@ -5,49 +5,42 @@
     </sidebar>
     <app-content>
       <div class="company">
-        <video playsinline autoplay muted loop class="background">
-          <source src="https://giant.gfycat.com/IckyEssentialHamadryad.webm" type="video/webm">
-        </video>
         <div class="container">
-          <div class="row">
-            <div class="col-b">
-              <h1>Making Game Data more transparent with Nexus-Stats.</h1>
-              <p>
-                The best decisions in gaming are made on data. Whether it's about buying
-                that item we always wanted, or finding ways to improve our playstyle.
-                Nexus-Stats is about bringing that data to you, regardless if you're a
-                mighty pro gamer or a casual in it for the fun.
-              </p>
-            </div>
-            <div class="col-b ico">
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="">
-            </div>
+          <img src="/img/company/header-blobs.svg" class="header-blobs">
+          <div class="box-top">
+            <h1>Making Games more transparent with NexusHub.</h1>
+          </div>
+          <div class="box-top-sub"/>
+          <div class="box-sub">
+            <h2>The best decisions in gaming are made on data</h2>
+            <p>
+              Whether it's about buying
+              that item we always wanted, or finding ways to improve our playstyle.
+              NexusHub is about bringing that data to you, regardless if you're a
+              mighty pro gamer or a casual in it for the fun.
+            </p>
           </div>
         </div>
-        <svg viewBox="0 0 3920 240" preserveAspectRatio="xMidYMid meet">
-          <path fill-rule="evenodd"
-                d="M0.000,88.823 C0.000,88.823 190.856,-36.849 677.231,28.404 C1163.605,93.656 1234.110,90.001 1450.505,49.349 C1672.756,7.597 1734.942,-11.070 2000.909,8.264 C2266.876,27.598 2323.761,103.990 2759.407,72.711 C2999.824,55.449 3238.394,-10.264 3622.568,33.237 C4006.743,76.739 4015.362,114.602 4131.107,79.156 C4246.852,43.710 4037.526,359.499 4037.526,359.499 L7.388,374.000 L0.000,88.823 Z"/>
-        </svg>
       </div>
-      <div class="container">
+      <div class="who-we-are-container container">
         <section class="who-we-are">
-          <h2>Who we are</h2>
-          <p>
-            We're a small group of passionate gamers from all over the world,
-            building Nexus-Stats in our spare time. <br>
-            Our journey started just over a year ago when we tackled the lack of
-            transparency in Warframe's ingame economy with the use of
-            Optical Character Recognition for the ingame tradechat. <br><br>
-            Since then, Nexus-Stats has evolved into a fully scalable framework
-            for every type of data imaginable, aiming to achieve the most useful
-            data visualizations for actual gamers.
-          </p>
+          <div>
+            <h2>Who we are</h2>
+            <p>
+              We're a small group of gamers from all over the world,
+              building NexusHub in our spare time. Starting out as
+              casual players who made a bot to monitor
+              Warframe's trade chat, we have grown into a diverse community of open source
+              developers, persisting in our mission to simply make games more
+              accessible for everyone.
+            </p>
+          </div>
         </section>
       </div>
       <div class="stats-container">
         <section>
           <div class="stats container">
-            <h2>We're getting pretty popular</h2>
+            <h2>People ❤️ NexusHub</h2>
             <p>
               Our platform has been growing continously since day one, so it seems we're doing
               things right.
@@ -55,7 +48,7 @@
             <div class="row">
               <div class="col-b">
                 <div class="number">
-                  200,000
+                  {{ users }}
                 </div>
                 <div class="label">
                   Monthly Users
@@ -63,7 +56,7 @@
               </div>
               <div class="col-b">
                 <div class="number">
-                  4,000,000
+                  {{ views }}
                 </div>
                 <div class="label">
                   Monthly Page Views
@@ -71,10 +64,10 @@
               </div>
               <div class="col-b">
                 <div class="number">
-                  1,000,000
+                  {{ offers }}
                 </div>
                 <div class="label">
-                  Processed offers each month
+                  Processed orders each month
                 </div>
               </div>
             </div>
@@ -83,20 +76,21 @@
       </div>
       <section class="join">
         <div class="container">
-          <h2>Help us shape Nexus-Stats!</h2>
+          <h2>Wanna help us build NexusHub?</h2>
           <p>
-            Nexus-Stats is entirely developed by community members of the games
-            we support, so if you wanna join our team as a regular contributor,
-            you're more than welcome! You can always work right on our code through our
-            <a href="https://github.com/nexus-devs/nexus-stats" target="_blank">open source repositories</a>.
-            <br><br>If that sounds fun to you, check out the
-            <a href="https://github.com/nexus-devs/nexus-stats/blob/development/.github/CONTRIBUTING.md" target="_blank">contribution guide</a>
-            or join us on Discord and send a PM our way!
+            NexusHub is entirely developed by community members of the games
+            we support, so if you wanna make some awesome feature for the
+            platform, we'd happily have you join our team.
           </p>
+          <span>Sounds fun to you? Hit us up on Discord!</span>
           <br>
           <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">Join us on Discord</a>
         </div>
       </section>
+      <div class="cute-fluff">
+        <img src="/img/ui/header-blobs.svg" class="bottom-blob">
+        <img src="/img/company/blobot.svg" alt="Blobot" class="blobot">
+      </div>
     </app-content>
   </div>
 </template>
@@ -107,12 +101,58 @@
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+const parseNum = (num) => (Math.round(num / 1000) * 1000)
+  .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 export default {
   components: {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch
+  },
+
+  computed: {
+    users () {
+      return parseNum(this.$store.state.analytics.users)
+    },
+    views () {
+      return parseNum(this.$store.state.analytics.views)
+    },
+    offers () {
+      return parseNum(this.$store.state.analytics.offers)
+    }
+  },
+
+  async asyncData () {
+    let users, views, offers
+
+    await Promise.all([
+      this.$cubic.get('/analytics/v1/ga/users').then(data => { users = data }),
+      this.$cubic.get('/analytics/v1/ga/views').then(data => { views = data }),
+      this.$cubic.get('/warframe/v1/analytics/offers').then(data => { offers = data })
+    ])
+    this.$store.commit('setAnalyticsUsers', users)
+    this.$store.commit('setAnalyticsViews', views)
+    this.$store.commit('setAnalyticsOffers', offers)
+  },
+
+  storeModule: {
+    name: 'analytics',
+    state: {
+      users: null,
+      views: null
+    },
+    mutations: {
+      setAnalyticsUsers (state, users) {
+        state.users = users
+      },
+      setAnalyticsViews (state, views) {
+        state.views = views
+      },
+      setAnalyticsOffers (state, offers) {
+        state.offers = offers
+      }
+    }
   }
 }
 </script>
@@ -122,69 +162,117 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+section {
+  padding: 80px 0;
+}
 .company {
+  display: flex;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  padding-top: 40px;
+  padding-top: 200px;
   padding-bottom: 200px;
-  @include gradient-background-dg($color-primary, $color-accent);
+  background: $color-bg-darker;
 
-  @media (max-width: $breakpoint-m) {
-    padding-top: 0px;
+  .header-blobs {
+    position: absolute;
+    width: 110%;
+    left: -100px;
+    top: -100px;
+    min-width: 1920px;
+    fill: $color-subtle-dark !important;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
   }
-  p {
-    color: white !important;
-  }
-  .container {
+  .box-top {
     position: relative;
     z-index: 1;
-    max-width: 1100px;
+    display: inline-block;
+    padding: 40px;
+    max-width: 300px;
+    border-radius: 2px;
+    animation: fadeinUp 0.7s forwards;
+    animation-delay: 0.15s;
+    opacity: 0;
+    @include shadow-2;
+    @include gradient-background-dg(#59d680, $color-accent-subtle);
   }
-  .background {
-    position:absolute;
-    top: 25%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    opacity: 0.4;
-    z-index: 0;
-    filter: blur(7px);
-    background: $color-bg;
-    transform: translateX(-50%) translateY(-25%);
+  .box-top-sub {
+    position: absolute;
+    height: 250px;
+    width: 250px;
+    top: 175px;
+    margin-left: -40px;
+    animation: fadeinUp 0.7s forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+    background: $color-bg-dark;
+    border-radius: 2px;
   }
-  .ico {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 120px;
+  .box-sub {
+    position: relative;
+    font-size: 1em;
+    display: inline-block;
+    padding: 40px;
+    padding-left: 60px;
+    max-width: 500px;
+    left: -30px;
+    top: 65px;
+    background: $color-bg-dark;
+    border-radius: 2px;
+    animation: fadeinSide 1s forwards;
+    animation-delay: 0.4s;
+    opacity: 0;
+    @include shade-1;
 
-    img {
-      height: 96px;
-      animation: hover 15s infinite;
+    h2 {
+      max-width: 400px;
     }
   }
-}
-svg {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  width: calc(100vw + 300px);
-  min-width: 1920px;
-  margin-top: 150px;
-  fill: $color-bg-dark;
-  animation: goostuff 60s linear infinite;
+  p {
+    max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: $breakpoint-m) {
+    padding-top: 100px;
+    .container {
+      flex-direction: column;
+    }
+    .box-top {
+      max-width: 200px;
+    }
+    .box-sub {
+      padding-left: 40px;
+      padding-top: 70px;
+      margin-left: 50px;
+      margin-top: -110px;
+    }
+    h1 {
+      font-size: 1.6em;
+      margin: 20px 0;
+    }
+  }
+  @media (max-width: $breakpoint-s) {
+    .box-sub {
+      margin-left: 0;
+      margin-right: -50px;
+    }
+  }
 }
 h1 {
   font-weight: 600;
   max-width: 600px;
   line-height: 1.2;
-  margin-top: 150px;
-  margin-bottom: 15px;
+  margin: 60px 0;
 }
-p {
-  font-size: 1.05em;
+h2 {
+  font-size: 1.6em;
+}
+p, span {
+  font-size: 1.1em;
   max-width: 800px;
 }
 a {
@@ -192,71 +280,79 @@ a {
 }
 .who-we-are {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  text-align: center;
   background: $color-bg-dark;
-  padding-top: 80px;
-  margin-bottom: 40px;
+  margin: 40px 0;
 
-  p {
-    margin: auto;
-    margin-top: 20px;
-    border: none;
-    text-align: left;
+  h2 {
   }
-  @media (max-width: $breakpoint-s) {
-    text-align: left;
+  p {
+    margin-top: 20px;
+    max-width: 800px;
   }
 }
 .stats-container {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0 20px;
   background: $color-bg-darker;
-  section {
-    padding: 100px 0;
-  }
+}
+.stats-blob {
+  position: absolute;
+  min-width: 1800px;
+  opacity: 0.5;
 }
 .stats {
   max-width: 800px;
   margin: auto;
+  text-align: center;
 
   p {
     border: none;
     padding: 0;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
   .col-b {
     &:nth-of-type(2) {
-      text-align: center;
       @media (max-width: $breakpoint-s) {
-        text-align: left;
+        margin-top: 20px;
       }
     }
     &:nth-of-type(3) {
-      text-align: right;
       @media (max-width: $breakpoint-s) {
-        text-align: left;
+        margin-top: 20px;
+        text-align: center;
       }
     }
     .number {
-      font-size: 2em;
+      font-size: 1.8em;
       color: white;
       margin-top: 20px;
     }
     .label {
-      margin-top: -5px;
+      margin-top: 5px;
       color: white;
     }
   }
 }
 .join {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding: 60px 0;
+  padding: 120px 0 120px;
 
   p {
     display: inline-block;
     text-align: left;
     margin: 20 0;
     border: none;
+  }
+  span {
+    display: block;
+    max-width: none;
+    margin-top: 10px;
+    color: $color-font-paragraph;
   }
   .btn {
     display: inline-block;
@@ -266,27 +362,57 @@ a {
     text-align: left;
   }
 }
+.cute-fluff {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  top: -250px;
+  margin-bottom: -300px;
+  z-index: 0;
 
-@keyframes goostuff {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(-300px);
-    }
-    100% {
-      transform: translateX(0);
-    }
+  .bottom-blob {
+    position: absolute;
+    top: -100px;
+    left: -100px; // blob isn't optically centered
+    width: 2200px;
+    min-width: calc(100vw + 300px);
+  }
+  .blobot {
+    position: relative;
+    top: 220px;
+    max-height: 200px;
+  }
 }
-@keyframes hover {
-  0% {
+@keyframes fadeinUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes fadeinSide {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
   }
   50% {
-    transform: translateY(-20px);
+    transform: scale3d(1.15,1.15,1.15);
   }
   100% {
-    transform: translateY(0);
+    transform: scaleX(1);
   }
 }
 </style>

@@ -1,7 +1,9 @@
 .btn, button {
+  position :relative;
+  z-index: 1;
   -webkit-tap-highlight-color: transparent;
   color: white;
-  border-radius: 2px !important;
+  border-radius: 999px !important;
   @include gradient-background-dg($color-primary, $color-accent);
   @include ease-wubble(0.25s);
   @include shadow-1;
@@ -13,16 +15,29 @@
     border: 0;
   }
   &:hover {
-    transform: translateY(-2px);
-    @include shade-1;
+    @include shadow-2;
   }
   &:active {
-    transform: scale(0.98) translateY(-2px);
+    transform: scale(0.98);
   }
   &:disabled {
     &:hover {
       transform: none;
     }
+  }
+  &:after {
+    position: absolute;
+    z-index: -1;
+    top: 20%;
+    left: 10%;
+    border-radius: 999px;
+    filter: blur(10px);
+    opacity: 0.12;
+    width: 85%;
+    height: 100%;
+    @include shadow-1;
+    @include gradient-background-dg($color-primary, $color-accent)
+    content: '';
   }
 }
 
@@ -31,16 +46,23 @@
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1.5px solid $color-primary;
-  border-image-source: linear-gradient(to bottom right, $color-primary, $color-accent);
-  border-image-slice: 1;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  margin-right: 10px;
+  background: none;
+  border: 1px solid $color-subtle;
+  box-shadow: none;
+  color: $color-font-subtle;
+  @include ie;
 
-  &:hover{
-    @include gradient-background-dg($color-primary, $color-accent);
+  &:hover {
+    color: white;
+    box-shadow: none;
   }
-
   &::before {
-    border-radius: 2px !important;
+    border-radius: 999px;
+  }
+  &:after {
+    display: none;
   }
 }

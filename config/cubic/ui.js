@@ -13,7 +13,11 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
   const config = {
     api: {
       redisUrl,
-      certPublic
+      certPublic,
+      limit: {
+        interval: 5000,
+        maxInInterval: 100
+      }
     },
     core: {
       mongoUrl,
@@ -42,6 +46,12 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
 // Normal environment should be fine with default config.
 else {
   module.exports = {
+    api: {
+      limit: {
+        interval: 5000,
+        maxInInterval: 100
+      }
+    },
     core: {
       mongoDb: 'nexus-ui'
     },

@@ -148,11 +148,17 @@ class Search extends Endpoint {
 
     // Get median value from set and append image url
     items.forEach(item => {
-      delete item._id
-      delete item.components
-      result.push(Object.assign({
-        category: 'items'
-      }, item))
+      const set = item.components.find(c => c.name === 'Set')
+
+      result.push({
+        name: item.name,
+        type: item.type,
+        category: 'Items',
+        keyData: (set.selling && set.buying) ? (set.selling.current.median + set.buying.current.median) / 2 + 'p' : item.ducats + 'Ducats',
+        imgUrl: item.imgUrl,
+        apiUrl: item.apiUrl,
+        webUrl: item.webUrl
+      })
     })
     return result
   }

@@ -2,9 +2,9 @@
   <footer>
     <div class="container">
       <div class="row row-b">
-        <v-touch class="col-b" @pan="move">
-          <img :style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }" src="/img/footer/nexus-logo.svg" alt="Nexus-Stats"
-               class="ico-h-28 logo">
+        <v-touch class="col-b goosetainer" @pan="move">
+          <img :style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }" src="/img/brand/nexushub-logo-typeface-bw.svg" alt="NexusHub"
+               class="ico-h-24 logo">
           <img src="/img/memes/goose.png" class="ico-48 goose">
         </v-touch>
         <div class="col-b"/>
@@ -30,7 +30,7 @@
       </div>
       <div class="brands">
         <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
-        <a href="https://github.com/nexus-devs/nexus-stats" target="_blank"><img src="/img/footer/github.svg" class="ico-h-20 ico-github" alt="Nexus-Stats on Github"></a>
+        <a href="https://github.com/nexus-devs/nexus-stats" target="_blank"><img src="/img/footer/github.svg" class="ico-h-20 ico-github" alt="NexusHub on Github"></a>
       </div>
     </div>
   </footer>
@@ -49,10 +49,27 @@ export default {
   methods: {
     move (e) {
       if (e.isFinal) {
-        return this.$store.dispatch('pushNotification', {
-          title: '( ͡° ͜ʖ ͡°)',
-          body: 'UGJ6ciBvbnB4IGZiYmEgc2JlIHpiZXI\ngZ2IgcGJ6ci4= 💗'
-        })
+        const response = () => {
+          this.$store.commit('addNotification', {
+            title: 'Your deeds have been noted.',
+            body: 'The goose does not forget.'
+          })
+          this.$store.commit('removeNotification', {
+            title: 'A goose approaches.'
+          })
+        }
+
+        setTimeout(() => this.$store.commit('addNotification', {
+          title: 'A goose approaches.',
+          body: 'Which path will you take?',
+          buttons: [{
+            text: 'Embrace the goose',
+            fn: response
+          }, {
+            text: 'Punch it',
+            fn: response
+          }]
+        }), 500)
       }
       this.position = [e.deltaX, e.deltaY]
     }
@@ -100,14 +117,13 @@ export default {
       }
       h4 {
         margin-top: 5px;
-        font-size: 0.9em;
         margin-bottom: 10px;
         text-transform: none;
         letter-spacing: normal;
       }
       a {
         display: block;
-        font-size: 0.9em;
+        font-size: 0.95em;
         color: $color-font-subtle !important;
 
         &:hover {
@@ -126,7 +142,7 @@ export default {
       padding-bottom: 60px;
       padding-right: 20px;
 
-      @media(max-width: $breakpoint-s) {
+      @media (max-width: $breakpoint-s) {
         margin-top: 10px;
         padding-bottom: 0;
       }
@@ -139,8 +155,14 @@ export default {
       z-index: 0;
       border-radius: 60px;
 
-      @media (max-width: $breakpoint-s) {
+      @media (max-width: $breakpoint-m) {
         display: none;
+      }
+    }
+
+    .goosetainer {
+      @media(max-width: $breakpoint-m) {
+        pointer-events: none;
       }
     }
 
