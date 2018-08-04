@@ -1,7 +1,7 @@
 <template>
   <div :class="{ offline, sidebarVisible }" class="status">
-    <img src="/img/ui/error-loading.svg" class="ico-h-24" alt="loading">
-    <p>{{ offline ? 'Connecting to the Nexus-Stats API...' : 'Connected!' }}</p>
+    <img src="/img/ui/status-loading.svg" class="ico-h-24" alt="loading">
+    <p>{{ offline ? 'Connecting to the NexusHub API...' : 'Connected!' }}</p>
   </div>
 </template>
 
@@ -30,8 +30,8 @@ export default {
       this.$store.commit('setApiStatus', !this.$cubic.connection.client.connected)
     },
     listen () {
-      this.$cubic.on('connect', () => this.$store.commit('setApiStatus', true))
-      this.$cubic.on('disconnect', () => this.$store.commit('setApiStatus', false))
+      this.$cubic.on('connect', () => this.$store.commit('setApiStatus', false))
+      this.$cubic.on('disconnect', () => this.$store.commit('setApiStatus', true))
     }
   },
 
@@ -64,11 +64,11 @@ export default {
   width: 100%;
   text-transform: uppercase;
   font-size: 0.9em;
-  color: $color-font-error;
-  z-index: 0;
+  color: $color-font-body;
+  z-index: 1;
   transform: translateY(-40px);
   transition-delay: 1s;
-  @include gradient-background-dg($color-error, $color-error-dark)
+  background: $color-bg-darkest;
   @include shadow-1;
   @include ease(0.35s);
 

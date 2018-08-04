@@ -10,13 +10,25 @@
   line-height: 1.4;
 }
 
+span, input {
+  letter-spacing: 0.2;
+}
+
 a, a > span {
   font-weight: 400;
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Circular';
+  font-family: 'Circular', sans-serif;
   font-weight: 700;
+}
+section .container h2.sub {
+  font-family: 'Roboto';
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.5;
+  color: $color-font-body !important;
 }
 
 h1 {
@@ -35,6 +47,9 @@ h2 {
     padding-top: 5px;
     margin-top: 5px;
   }
+  & + p + * {
+    margin-top: 60px;
+  }
 }
 
 h3, h4, h5, h6 {
@@ -52,11 +67,33 @@ h3, h4, h5, h6 {
   }
 }
 
+h4, h5, h6 {
+  font-size: 1em;
+}
+
 p {
   max-width: 800px;
   line-height: 1.6;
+  letter-spacing: 0.2;
+  font-size: 1.05em;
+
+  a {
+    color: $color-primary-subtle !important;
+  }
 }
 
 p + p {
   margin-top: 10px;
+}
+
+s {
+  text-decoration: line-through;
+}
+
+b {
+  font-weight: 600;
+  color: $color-font-paragraph;
+}
+i {
+  font-style: italic;
 }

@@ -1,6 +1,9 @@
 <template>
   <header>
-    <div class="background"/>
+    <img src="/img/ui/header-blobs-outline.svg" class="blobs">
+    <div class="background-container">
+      <div class="background"/>
+    </div>
     <div class="container">
       <slot/>
     </div>
@@ -13,14 +16,25 @@
 
 header {
   position: relative;
-  overflow: hidden;
-  @include gradient-background-dg($color-bg-light, $color-bg-lighter);
-  @include shade-1;
+  background: $color-bg-darker;
 
+  .blobs {
+    position: absolute;
+    width: 110%;
+    left: -100px;
+    top: -100px;
+    min-width: 1920px;
+    fill: $color-subtle-dark !important;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+  }
   .container {
+    position: relative;
     z-index: 1;
-    padding-top: 130px;
-    padding-bottom: 130px;
+    padding-top: 180px;
+    padding-bottom: 180px;
     // padding-left will be affected by open sidebar, so don't use shortcut
   }
   h1 {
@@ -30,17 +44,11 @@ header {
     color: white;
     font-weight: 400;
   }
-  .background {
+  .background-container {
     position: absolute;
     overflow: hidden;
-    background: url('/img/ui/header-blobs.svg');
-    background-size: cover;
     width: 100%;
     height: 100%;
-    animation-name: pulse;
-    animation-timing-function: ease-in-out;
-    animation-duration: 35s;
-    animation-iteration-count: infinite;
   }
 }
 

@@ -16,38 +16,33 @@ export default {
   methods: {
     async search () {
       const input = this.$store.state.search.input
-      const time = this.$store.state.time
-      const rank = this.$store.state.rank
 
       if (input) {
         let path
-        const query = {}
 
         // If full object is passed, assume suggestion is taken and webUrl to be included
         if (typeof input !== 'string') {
-          path = input.webUrl
+          const route = this.$route.path
+          const item = this.$route.params.item
+
+          // Stay on current sub-page if we're on an item page
+          if (this.$route.fullPath.startsWith('/warframe/items/')) {
+            path = `${input.webUrl}${route.split(item)[1]}`
+            path = path.endsWith('//') ? path.slice(0, -1) : path
+          } else {
+            path = input.webUrl
+          }
         } else {
           path = `/warframe/search?input=${input}`
         }
 
-        // Add URL params based on state
-        if (time.modified) {
-          query.timestart = time.focus.start.time.valueOf()
-          query.timeend = time.focus.end.time.valueOf()
-        }
-        if (rank.selected !== 'Any Rank') {
-          query.rank = rank.selected
-        }
-
         // View generated URL
-        this.$router.push({
-          path,
-          query
-        })
+        this.$router.push(path)
 
         // Close sidebar if open
         if (this.$store.state.sidebar.active) {
           this.$store.commit('toggleSidebar')
+          this.$store.commit('hideSidebar')
         }
       }
     }

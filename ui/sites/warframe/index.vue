@@ -5,9 +5,11 @@
     </sidebar>
     <app-content>
       <header>
-        <div class="background"/>
+        <div class="background-container">
+          <div class="background"/>
+        </div>
         <div class="search-components container">
-          <h1>Item Prices from the Trade Chat.</h1>
+          <h1>Unifying Warframe's Marketplace.</h1>
           <div class="row">
             <search/>
             <timerange/>
@@ -17,6 +19,46 @@
           </div>
         </div>
       </header>
+
+      <!-- Realtime Orders -->
+      <section>
+        <div class="container">
+          <div class="row-pad">
+            <div class="col-b-4">
+              <h2 class="sub">Market Overview</h2>
+              <div class="realtime">
+                <opm/>
+                <transition-group class="most-traded row">
+                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col">
+                    <module>
+                      <template slot="header">
+                        <div class="img-container">
+                          <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
+                            <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
+                          </object>
+                        </div>
+                        <h3>{{ order.item }}</h3>
+                      </template>
+                      <template slot="body">
+                        <span>{{ order.amount }} Orders</span>
+                      </template>
+                      <template slot="footer">
+                        <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`">
+                          View Traders
+                          <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
+                        </router-link>
+                      </template>
+                    </module>
+                  </router-link>
+                </transition-group>
+              </div>
+            </div>
+            <div class="col-b components-container">
+              <h2 class="sub">Something else</h2>
+            </div>
+          </div>
+        </div>
+      </section>
     </app-content>
   </div>
 </template>
@@ -31,7 +73,8 @@ import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-
+import opm from 'src/components/items/modules/opm-global.vue'
+import module from 'src/components/ui/module.vue'
 
 export default {
   components: {
@@ -41,7 +84,15 @@ export default {
     search,
     timerange,
     rank,
-    'search-button': searchButton
+    'search-button': searchButton,
+    opm,
+    module
+  },
+
+  computed: {
+    opm () {
+      return this.$store.state.opm.all
+    }
   }
 }
 </script>
@@ -58,11 +109,15 @@ header {
   min-height: 500px;
   width: 100%;
   align-items: center;
-  @include gradient-background-dg($color-bg-light, $color-bg-lighter);
+  @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
-  .background {
+  .background-container {
     position: absolute;
     overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .background {
     background: url('/img/warframe/index-blob.svg');
     background-size: cover;
     width: 100%;
@@ -127,7 +182,7 @@ header {
      vertical-align: middle;
    }
    .button-container {
-     margin-top: 7px;
+     margin-top: 5px;
      margin-left: 10px;
      float:right;
    }
@@ -196,7 +251,6 @@ header {
        position: relative;
        overflow: hidden;
        text-align: center;
-       background: $color-bg-lighter;
        border-radius: 2px;
        margin-right: 10px;
 
@@ -205,13 +259,6 @@ header {
          left: -50%;
          max-width: 200%;
          z-index: 1;
-       }
-
-       .backdrop {
-         position: relative;
-         top: -50px;
-         z-index: 0;
-         filter: blur(15px);
        }
      }
      .suggestion-main {
@@ -236,7 +283,6 @@ header {
        font-size: 0.9em;
        margin: 7px 0;
        padding: 3px 10px;
-       border-left: 1px solid $color-subtle;
      }
    }
 
@@ -378,6 +424,84 @@ header {
   }
   100% {
     transform: scaleX(1);
+  }
+}
+
+
+
+/**
+ * Actual site content
+ */
+section {
+  padding: 40px 0;
+}
+.realtime {
+  display: inline-flex;
+  margin-top: 20px;
+
+  @media (max-width: $breakpoint-s) {
+    flex-direction: column;
+  }
+}
+.most-traded {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+  margin-right: -15px;
+  margin-bottom: -15px;
+
+  .item {
+    @include ie();
+    padding: 0;
+    border-radius: 2px;
+    flex-basis: 33%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    transition-duration: 0.5s !important;
+
+    &:hover {
+      @include gradient-background-dg(#3c4451, #353d49);
+    }
+    &:before {
+      border-radius: 2px;
+    }
+    &:nth-of-type(n + 5) {
+      display: none;
+    }
+    /deep/ .header {
+      padding: 20px 20px 0;
+
+      .img-container {
+        position: relative;
+        overflow: hidden;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        margin-right: 5px;
+        height: 40px;
+        width: 40px;
+        border-radius: 40px;
+        background: $color-bg;
+
+        img, object {
+          position: relative;
+          max-height: 80%;
+        }
+      }
+    }
+    /deep/ .body {
+      padding: 20px 25px;
+    }
+    /deep/ .footer {
+      padding: 6px 20px;
+    }
+  }
+  @media (max-width: $breakpoint-s) {
+    margin-left: 0;
+    margin-top: 20px;
   }
 }
 </style>

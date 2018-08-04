@@ -6,7 +6,6 @@
       <bottom/>
     </div>
     <status/>
-    <notification/>
   </div>
 </template>
 
@@ -16,7 +15,6 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
-import notification from 'src/components/ui/notification.vue'
 import navigation from 'src/components/ui/nav.vue'
 import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
@@ -26,13 +24,12 @@ import bottom from 'src/components/ui/footer.vue'
  */
 export default {
   components: {
-    notification,
     navigation,
     status,
     bottom
   },
   head: {
-    title: 'Nexus-Stats',
+    title: 'NexusHub',
     link: [
       { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
@@ -46,12 +43,10 @@ export default {
   watch: {
     // Apply query params to state if applicable.
     route () {
-      this.$store.dispatch('applyTimeQuery', this.$route)
       this.$store.dispatch('applyInputQuery', this.$route)
     }
   },
   beforeCreate () {
-    this.$store.dispatch('applyTimeQuery', this.$route)
     this.$store.dispatch('applyInputQuery', this.$route)
     Vue.use(VueTouch)
   },

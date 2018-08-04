@@ -5,7 +5,7 @@
       <input ref="input" :value="input.name || input" type="text" placeholder="Try: Soma Prime, Maim..."
              @input="search" @keydown.tab.prevent="complete" @keyup.enter="query">
       <span class="autocomplete">{{ autocomplete.name }}</span>
-      <span class="autocomplete-type">{{ autocomplete.type }}</span>
+      <span class="autocomplete-type">{{ autocomplete.category }}</span>
       <slot/>
     </div>
     <div class="tools">
@@ -73,7 +73,7 @@ export default {
       if (!this.autocomplete.name.startsWith(event.target.value)) {
         this.autocomplete = {
           name: '',
-          type: 'Any'
+          category: 'Any'
         }
       }
       await this.fetchSuggestions()
@@ -85,20 +85,22 @@ export default {
       if (this.input.length > 1) {
         result = await this.$cubic.get(`/warframe/v1/search?query=${this.input}&limit=3`)
       }
+
       // Found suggestions and input still matches result (may not if user types too fast)
       const regex = new RegExp(`^${this.input}`, 'i')
       if (result.length && result[0].name.replace(regex, this.input).startsWith(this.input)) {
         this.autocomplete = {
           name: result[0].name.replace(regex, this.input),
-          type: result[0].type
+          category: result[0].category
         }
         this.suggestions = result
       }
+
       // No suggestion -> Suggest 'Any' for custom search
       else {
         this.autocomplete = {
           name: '',
-          type: 'Any'
+          category: 'Any'
         }
         this.suggestions = []
       }
@@ -106,7 +108,7 @@ export default {
       if (this.input.length < 1) {
         this.autocomplete = {
           name: '',
-          type: ''
+          category: ''
         }
       }
     },

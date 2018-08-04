@@ -53,11 +53,13 @@ export default {
     rank,
     searchbutton
   },
+
   data () {
     return {
       id: this.$store.state.sidebar.id + 1 // required before wrapper which increments id
     }
   },
+
   mounted () {
     listener = shortcut.bind('shift + f', () => {
       // Open sidebar if not already open
@@ -87,6 +89,7 @@ export default {
       this.$store.commit('setActivePanel', this.id)
     })
   },
+  
   // Prevent multiple registrations when loading pages with the same sidebar
   // module.
   beforeDestroy () {
@@ -180,7 +183,7 @@ export default {
       position: relative;
       overflow: hidden;
       text-align: center;
-      background: $color-bg-lighter;
+      background: $color-bg;
       border-radius: 2px;
       margin-right: 10px;
 

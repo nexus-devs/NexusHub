@@ -3,26 +3,28 @@
  * Shapes
 */
 $color-primary: #39e56f;
-$color-primary-dark: #29ad52;
+$color-primary-subtle: #68d891;
 $color-accent: #15ced6;
-$color-accent-dark: #11acb2;
+$color-accent-subtle: #11acb2;
+$color-positive: #39e56f;
 $color-error: #f85242;
 $color-error-dark: #d44d5a;
-$color-bg-lighter: #667382;
-$color-bg-light: #596474;
-$color-bg: #2c323c;
+$color-bg-lighter: #8794a7;
+$color-bg-light: #596477;
+$color-bg: #2c323d;
 $color-bg-dark: #20242b;
-$color-bg-darker: #1a1d23;
-$color-bg-darkest: #131519;
-$color-bg-transparent-1: rgba(15, 20, 25, 0.3);
-$color-bg-transparent-2: rgba(15, 20, 25, 0.4);
+$color-bg-darker: #16191e;
+$color-bg-darkest: #101217;
+$color-bg-transparent: rgba(70, 78, 90, 0.75);
+$color-bg-transparent-light: rgba(90, 100, 112, 0.2);
 $color-subtle: rgba(120, 132, 144, 0.4);
-$color-subtle-dark: rgba(62, 67, 72, 0.4);
+$color-subtle-dark: rgba(60, 70, 80, 0.4);
 
 /**
  * Color Codes
  * Fonts
 */
-$color-font-body: #91a1ad;
+$color-font-paragraph: #bbc1cc;
+$color-font-body: #949caa;
 $color-font-error: #ffd9c4;
 $color-font-subtle: #66707a;

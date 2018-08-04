@@ -45,7 +45,6 @@
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import search from 'src/components/search/input.vue'
 import resultsGroup from 'src/components/search/results/results-group.vue'
 let ongoing = setTimeout(() => {})
 
@@ -54,7 +53,6 @@ export default {
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,
-    search,
     'results-group': resultsGroup
   },
 
@@ -91,6 +89,24 @@ export default {
     await store.dispatch('fetchSerpResults', input)
   },
 
+  methods: {
+    async search (event) {
+      this.$store.commit('setSearchInput', event.target.value)
+
+      // Wait for 200ms before performing request. If new characters are typed
+      // within those 200ms, then cancel all old requests to reduce unnecessary
+      // bandwidth usage.
+      clearTimeout(ongoing)
+      ongoing = setTimeout(() => {
+        this.$store.dispatch('fetchSerpResults', event.target.value)
+        window.history.pushState({}, null, `/warframe/search?input=${event.target.value}`)
+      }, 200)
+    },
+    toggleFilters () {
+      this.filtersExpanded = !this.filtersExpanded
+    }
+  },
+
   storeModule: {
     name: 'serp',
     state: {
@@ -118,13 +134,13 @@ export default {
         category: 'items',
         unit: ' Sellers',
         hidden: true,
-        path: 'selling.offers'
+        path: 'selling.current.offers'
       }, {
         name: 'Demand',
         category: 'items',
         unit: ' Buyers',
         hidden: true,
-        path: 'buying.offers'
+        path: 'buying.current.offers'
       }],
 
       // Keep track of activated filters separately in the order in which they
@@ -163,13 +179,14 @@ export default {
         if (input.length < 2) {
           return
         }
+
         // No new events in the meantime -> perform query
-        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=items&threshold=0.75`)
+        const B = input.includes('🅱')
+        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input.replace(/🅱️/g, 'b')}&fuzzy=true&category=items&threshold=0.75`)
         // const playerData = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
-        const items = await dispatch('sanitizeSerpResults', itemData)
+        const items = await dispatch('sanitizeSerpResults', { itemData, B })
         const players = []
         const results = items.concat(players)
-
         commit('setSerpResults', results)
         commit('setSerpOriginalResults', results)
         dispatch('applySerpFilters')
@@ -178,7 +195,7 @@ export default {
       /**
        * Apply some adjustments for more sensible usage on the UI
        */
-      sanitizeSerpResults (context, itemData) {
+      sanitizeSerpResults (context, { itemData, B }) {
         const items = []
 
         // Add each component to results
@@ -192,8 +209,11 @@ export default {
               // Convert damage type indicators to img tags
               // <DT_FREEZING> <DT_HEAT> etc
               if (word.includes('<DT_')) {
-                word = word.match(/\_(.*?)\>/)[1]
-                word = `<img src="/img/warframe/ui/${word.toLowerCase()}.png"/>`
+                word = word.match(/\_(.*?)\>/)[1].toLowerCase()
+                if (word === 'freeze') word = 'cold'
+                if (word === 'fire') word = 'heat'
+                if (word === 'explosion') word = 'blast'
+                word = `<img src="/img/warframe/ui/${word}.png" class="ico-h-16" style="margin-top: -3px;"/>`
               }
               description[i] = word
             }
@@ -204,12 +224,21 @@ export default {
               if (items.find(i => i.name === item.name)) {
                 continue
               }
+
+              // Display set data, but not as component
+              let name = item.name.replace('Set', '')
+
+              // Important stuff. Already way past the deadline, so fuck it,
+              // let's add some shitty memes.
+              name = B ? item.name.toLowerCase().replace(/\b\w/g, l => '🅱') : name
+
+              // Add modified item.
               items.push(Object.assign(component, {
-                name: item.name.replace('Set', ''),
+                name,
                 webUrl: item.webUrl,
                 category: item.category,
                 rarity: item.rarity,
-                price: Math.round((component.selling.median + component.buying.median) / 2),
+                price: Math.round((component.selling.current.median + component.buying.current.median) / 2),
                 results: 'items',
                 description: description.join(' ')
               }))
@@ -282,24 +311,6 @@ export default {
         })
         commit('setSerpResults', results)
       }
-    }
-  },
-
-  methods: {
-    async search (event) {
-      this.$store.commit('setSearchInput', event.target.value)
-
-      // Wait for 200ms before performing request. If new characters are typed
-      // within those 200ms, then cancel all old requests to reduce unnecessary
-      // bandwidth usage.
-      clearTimeout(ongoing)
-      ongoing = setTimeout(() => {
-        this.$store.dispatch('fetchSerpResults', event.target.value)
-        window.history.pushState({}, null, `/warframe/search?input=${event.target.value}`)
-      }, 200)
-    },
-    toggleFilters () {
-      this.filtersExpanded = !this.filtersExpanded
     }
   }
 }

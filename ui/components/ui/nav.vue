@@ -1,16 +1,16 @@
 <template>
-  <nav class="row">
+  <nav class="nav-main row">
     <div class="col nav-l">
-      <router-link to="/warframe" exact><img src="/img/nav/logo-font.svg" alt="Nexus-Stats Logo" class="ico-h-24"></router-link>
-      <span class="sub">Beta</span>
+      <router-link to="/warframe" exact>
+        <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
+      </router-link>
+      <!-- <span class="sub">{{ game }}</span> -->
       <slot>
         <!-- Page links will go here -->
       </slot>
     </div>
     <div class="col nav-r">
-      <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
-      <a href="#"><img src="/img/placeholder.svg" alt="" class="ico-20"><span>placeholder</span></a>
-      <img src="/img/nav/nav-more.svg" class="ctx ico-16 a-ie" alt="">
+      <notifications/>
     </div>
   </nav>
 </template>
@@ -18,10 +18,38 @@
 
 
 <script>
+import notifications from 'src/components/ui/notifications.vue'
+
 export default {
+  components: {
+    notifications
+  },
+
   computed: {
     game () {
       return this.$store.state.game.name
+    }
+  },
+
+  watch: {
+    $route (to, from) {
+      this.$store.commit('setActiveGame', to.fullPath.split('/')[1])
+    }
+  },
+
+  beforeCreate () {
+    this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
+  },
+
+  storeModule: {
+    name: 'game',
+    state: {
+      name: ''
+    },
+    mutations: {
+      setActiveGame (state, game) {
+        state.name = game
+      }
     }
   }
 }
@@ -35,8 +63,9 @@ export default {
   nav {
     position: fixed;
     width: calc(100% - 50px);
-    padding: 14px 25px;
-    z-index: 2;
+    padding: 0 25px;
+    height: 56px;
+    z-index: 4;
     background: $color-bg-dark;
     align-items: center;
     @include shadow-1;
@@ -45,14 +74,13 @@ export default {
       margin: 0 15px;
       font-size: 0.9em;
     }
-
+    .logo {
+      height: 22px;
+    }
     @media (max-width: $breakpoint-m) {
       position: fixed;
       background: $color-bg-dark;
       @include shadow-1;
-    }
-    @media (max-width: $breakpoint-s) {
-      padding: 13.5px 25px;
     }
   }
   .nav-l {

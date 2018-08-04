@@ -3,3 +3,4 @@
 /out/
 /docker
 /assets/bundles/
+/config/ga/*private.pem

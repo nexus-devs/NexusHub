@@ -59,8 +59,8 @@ a {
   @include ie;
   @include field;
   padding: 0;
-  background: $color-bg;
   box-sizing: border-box;
+  background: $color-bg;
   @include ease-wubble(0.75s);
 
   &:hover {
