@@ -6,7 +6,7 @@ pipeline:
       - npm run toggle-webpack
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]
 
   # Smoke tests
   lint:
@@ -15,7 +15,7 @@ pipeline:
       - npm run lint
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]
 
   test - development:
     image: node
@@ -23,7 +23,7 @@ pipeline:
       - npm test
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]
 
   test - production:
     image: node
@@ -32,7 +32,7 @@ pipeline:
       - npm test --production
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]
 
   # Add to staging branch
   stage:
@@ -69,7 +69,7 @@ pipeline:
       - git init
       - git remote add origin https://github.com/nexus-devs/docker.git
       - git fetch --all
-      - git checkout master
+      - git checkout production
     when:
       branch: staging
 
@@ -106,7 +106,7 @@ pipeline:
       - npm run release
     secrets: [ gh_token ]
     when:
-      branch: master
+      branch: production
       event: [ push ]
 
 services:
@@ -114,9 +114,9 @@ services:
     image: mongo
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]
   redis:
     image: redis
     when:
       branch:
-        exclude: [ master, staging ]
+        exclude: [ production, staging ]

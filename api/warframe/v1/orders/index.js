@@ -21,7 +21,18 @@ class Orders extends Endpoint {
         default: false
       }
     ]
-    this.schema.response = []
+    this.schema.request = { url: '/warframe/v1/orders?item=Nikana%20Prime' }
+    this.schema.response = [{
+      _id: String,
+      user: String,
+      offer: String,
+      item: String,
+      component: String,
+      price: Number,
+      quantity: Number,
+      source: String,
+      createdAt: String
+    }]
   }
 
   /**
@@ -34,7 +45,7 @@ class Orders extends Endpoint {
     const item = req.query.item
     const offline = req.query.offline
 
-    if (req.query.all /** && req.user.scp.includes('write_root') **/) {
+    if (req.query.all && req.user.scp.includes('write_root')) {
       res.send(await this.getAll())
     } else {
       const { result, discard } = await this.filter(item, offline)

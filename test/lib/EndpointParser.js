@@ -9,7 +9,7 @@ const assert = (condition, key, expected) => {
   try {
     Assert(condition())
   } catch (err) {
-    throw new Error(`at { ${key} }: ${expected} (${err.message})`)
+    throw new Error(`Assertion error at { ${key} }: ${expected}`)
   }
 }
 
@@ -33,7 +33,7 @@ class EndpointParser {
       return this.traverseResponse(response, endpoint.response, 'response')
     } catch (err) {
       this.debug = this.debug.replace('√', '') // avoid checkmark on whitespace
-      console.log('\n\nLooks like an error occurred 🙁. Here\'s the object trace that did pass:\n', this.debug)
+      console.log(`\n\n${err.message}:`, this.debug, '\n')
       throw err.message
     }
   }

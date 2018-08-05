@@ -13,7 +13,7 @@ class Index extends Endpoint {
         $gte: new Date(new Date() - 1000 * 60 * 60 * 24 * 30)
       }
     }).count()
-    res.json(offers || 1100000) // Placeholder data if in dev build without offers
+    res.send(offers || 1100000) // Placeholder data if in dev build without offers
     this.cache(offers || 1100000, 60 * 60)
   }
 }

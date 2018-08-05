@@ -129,7 +129,7 @@ export default {
     await Promise.all([
       this.$cubic.get('/analytics/v1/ga/users').then(data => { users = data }),
       this.$cubic.get('/analytics/v1/ga/views').then(data => { views = data }),
-      this.$cubic.get('/warframe/v1/analytics/offers').then(data => { offers = data })
+      this.$cubic.get('/warframe/v1/analytics/orders').then(data => { offers = data })
     ])
     this.$store.commit('setAnalyticsUsers', users)
     this.$store.commit('setAnalyticsViews', views)
