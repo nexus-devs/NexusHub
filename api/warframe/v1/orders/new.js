@@ -14,7 +14,7 @@ class Order extends Endpoint {
       body: {
         user: '[DE]Glen',
         offer: 'Buying',
-        item: 'Ammo Drum',
+        item: 'Nikana Prime',
         component: 'Set',
         price: 900,
         rank: 0,
@@ -31,9 +31,6 @@ class Order extends Endpoint {
     }
   }
 
-  /**
-   * Main method which is called by MethoHandler on request
-   */
   async main (req, res) {
     const request = req.body
     const item = request.item
