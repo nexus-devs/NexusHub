@@ -14,9 +14,6 @@ class User extends Endpoint {
     this.schema.response = 'ok'
   }
 
-  /**
-   * Main method which is called by MethoHandler on request
-   */
   async main (req, res) {
     const user = req.body
 

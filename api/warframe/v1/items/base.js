@@ -19,8 +19,8 @@ class Item extends Endpoint {
       components: [{
         name: String,
         ducats: Number,
-        selling: economyData,
-        buying: economyData,
+        selling: { current: economyData, previous: economyData },
+        buying: { current: economyData, previous: economyData },
         imgUrl: String
       }],
       imgUrl: '/img/warframe/items/nikana-prime.png',

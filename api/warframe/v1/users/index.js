@@ -4,6 +4,9 @@ class User extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.url = '/warframe/v1/users/:name'
+    this.schema.request = {
+      url: '/warframe/v1/users/[DE]Glen'
+    }
     this.schema.response = {
       name: String,
       online: Boolean

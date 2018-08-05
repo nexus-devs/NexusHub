@@ -92,7 +92,7 @@
         </div>
         <div class="col-2">
           <span>
-            <img :src="`/img/warframe/ui/${type}.png`" class="ico-h-12" :alt="type">
+            <img :src="`/img/warframe/ui/${type}.png`" :alt="type" class="ico-h-12">
             {{ damage }}
           </span>
         </div>
