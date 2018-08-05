@@ -14,7 +14,14 @@ class Opm extends Endpoint {
         description: 'Item to reduce orders by. If no item is specified, the data for all items is returned.'
       }
     ]
-    this.schema.response = []
+    this.schema.response = {
+      active: Number,
+      intervals: [ Number ],
+      sources: {
+        tradeChat: Number,
+        wfm: Number
+      }
+    }
   }
 
   async main (req, res) {

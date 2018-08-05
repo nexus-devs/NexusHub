@@ -30,7 +30,7 @@ const calendarOptions = {
   nextWeek: 'dddd',
   lastDay: '[Yesterday]',
   lastWeek: '[Last] dddd',
-  sameElse: 'DD/MM/YYYY'
+  sameElse: 'L'
 }
 const getDate = (date) => date instanceof moment ? { time: date, format: date.calendar(null, calendarOptions) } : date
 

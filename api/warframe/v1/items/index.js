@@ -19,9 +19,10 @@ class List extends Endpoint {
       type: String,
       components: [{
         name: String,
-        ducats: Number,
-        selling: economyData,
-        buying: economyData,
+        selling: { current: economyData, previous: economyData },
+        buying: { current: economyData, previous: economyData },
+        apiUrl: String,
+        webUrl: String,
         imgUrl: String
       }],
       apiUrl: String,
