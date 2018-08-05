@@ -26,7 +26,7 @@ class Index extends Endpoint {
         'end-date': 'today',
         dimensions: 'ga:date'
       })
-      const views = ga.data.totalsForAllResults['ga:pageviews']
+      const views = parseInt(ga.data.totalsForAllResults['ga:pageviews'])
       res.send(views)
       this.cache(views, 60 * 60)
     } catch (err) {

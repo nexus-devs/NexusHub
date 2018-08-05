@@ -9,19 +9,11 @@ class Order extends Endpoint {
     this.schema.url = '/warframe/v1/orders'
     this.schema.request = {
       body: {
-        user: '[DE]Glen',
-        offer: 'Buying',
-        item: 'Ammo Drum',
-        component: 'Set',
-        price: 900,
-        rank: 0,
-        quantity: 1,
-        message: 'Hello, I\'m Glen and I\'d like to buy Ammo Drum for 900p. I won\'t ban you, promise.',
-        source: 'Trade Chat',
-        createdAt: new Date()
+        item: 'nikana_prime_set',
+        discard: [{ _id: '5b62bb90c1778d2b40f0c995' }]
       }
     }
-    this.schema.response = 'removed!'
+    this.schema.response = 'deleted!'
   }
 
   /**
