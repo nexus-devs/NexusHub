@@ -61,19 +61,7 @@ pipeline:
 
   # Build nexus-stats:staging image and push to dockerhub. Dockerhub will then
   # trigger a webhook on the staging server to redeploy.
-  docker:
-    image: alpine/git
-    commands:
-      - mkdir -p docker
-      - cd docker
-      - git init
-      - git remote add origin https://github.com/nexus-devs/docker.git
-      - git fetch --all
-      - git checkout production
-    when:
-      branch: staging
-
-  publish - prod-image:
+  publish - prod:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
     context: docker/app/prod/
@@ -85,7 +73,7 @@ pipeline:
       branch: staging
       event: [ push ]
 
-  publish - dev-image:
+  publish - dev:
     image: plugins/docker
     dockerfile: docker/app/dev/Dockerfile
     context: docker/app/dev/
