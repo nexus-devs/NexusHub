@@ -5,6 +5,10 @@ const Cubic = require('cubic')
 const cubic = new Cubic(config.cubic)
 cubic.init()
 
+/**
+ * Load cubic nodes separately so they can run in their own docker container or
+ * launch them in a single controller in dev mode.
+ */
 if (process.env.DOCKER && process.env.NODE_ENV === 'production') {
   docker()
 }
