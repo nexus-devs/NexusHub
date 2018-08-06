@@ -11,21 +11,32 @@
 const gitlog = require('gitlog')
 const util = require('util')
 const fs = require('fs')
+const config = require(`${process.cwd()}/config/webpack/build.json`)
 
 async function toggle () {
-  const changes = await util.promisify(gitlog)({
+  const commits = await util.promisify(gitlog)({
     repo: process.cwd(),
-    number: 1
+    number: 50
   })
   let changed = false
-  changes[0].files.forEach(file => {
-    if (file.includes('ui/') || file.includes('package.json') || file.includes('ui.js')) {
-      changed = true
+
+  for (let commit of commits) {
+    if (commit.abbrevHash === config.lastBuild || changed) {
+      break
     }
-  })
-  fs.writeFileSync(`${process.cwd()}/.webpack.json`, JSON.stringify({
-    enable: changed
-  }))
+
+    for (let file of commit.files) {
+      if (file.includes('ui/') || file.includes('package.json') || file.includes('ui.js')) {
+        changed = true
+        break
+      }
+    }
+  }
+
+  fs.writeFileSync(`${process.cwd()}/config/webpack/build.json`, JSON.stringify({
+    enable: changed,
+    lastBuild: commits[0].abbrevHash
+  }, null, 2))
   console.log(changed ? '* Found relevant changes, webpack enabled.' : '* Nothing changed, don\'t rebuild webpack.')
 }
 
