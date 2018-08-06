@@ -28,7 +28,6 @@ async function toggle () {
     for (let file of commit.files) {
       if (file.includes('ui/') || file.includes('package.json') || file.includes('ui.js')) {
         changed = true
-        break
       }
     }
   }
