@@ -3,7 +3,11 @@ pipeline:
     image: node
     commands:
       - npm install
+      - git checkout staging
       - npm run toggle-webpack
+      - git stash
+      - git checkout "$CI_BRANCH"
+      - git stash pop
     when:
       branch:
         exclude: [ production, staging ]

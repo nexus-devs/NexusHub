@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'production'
 process.env.NEXUS_TARGET_NODE = 'ui-core'
 process.env.NEXUS_STAGING = process.argv.includes('staging')
 const webpack = require('webpack')
-const enabled = require(`${process.cwd()}/.webpack.json`).enable
+const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
 const rm = require('rimraf')
 
@@ -61,4 +61,6 @@ async function build () {
 
 if (enabled) {
   build()
+} else {
+  console.log('* No webpack rebuild required.')
 }
