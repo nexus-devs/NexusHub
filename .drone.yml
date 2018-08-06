@@ -2,12 +2,14 @@ pipeline:
   build:
     image: node
     commands:
+      # Install node_modules
       - npm install
-      - git checkout staging
+
+      # Determine if webpack needs a rebuild.
+      - git fetch origin
+      - git checkout origin/staging config/webpack/build.json
       - npm run toggle-webpack
-      - git stash
-      - git checkout "$CI_BRANCH"
-      - git stash pop
+      - npm run build -- staging
     when:
       branch:
         exclude: [ production, staging ]
@@ -32,7 +34,6 @@ pipeline:
   test - production:
     image: node
     commands:
-      - npm run build -- staging
       - npm test --production
     when:
       branch:
@@ -50,7 +51,6 @@ pipeline:
       - mv assets/.robots.txt assets/robots.txt # Make search engines ignore the staging site
 
       # Push changes from above and from dev branch
-      - git fetch origin
       - git add -A
       - git commit -m "Add staging builds"
       - git checkout development
@@ -65,7 +65,7 @@ pipeline:
 
   # Build nexus-stats:staging image and push to dockerhub. Dockerhub will then
   # trigger a webhook on the staging server to redeploy.
-  publish - prod:
+  publish - staging:
     image: plugins/docker
     dockerfile: docker/app/prod/Dockerfile.staging
     context: docker/app/prod/
@@ -77,7 +77,7 @@ pipeline:
       branch: staging
       event: [ push ]
 
-  publish - dev:
+  publish - development:
     image: plugins/docker
     dockerfile: docker/app/dev/Dockerfile
     context: docker/app/dev/
