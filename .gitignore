@@ -1,5 +1,5 @@
 /node_modules/
 .idea/
 /out/
-/assets/bundles/
 /config/ga/*private.pem
+/assets/bundles/
