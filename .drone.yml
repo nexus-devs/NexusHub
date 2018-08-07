@@ -54,11 +54,7 @@ pipeline:
       # Push changes from above and from dev branch
       - git add -A
       - git commit -m "Add staging builds"
-      - git checkout development
-      - git checkout staging
-      - git merge -s recursive -X theirs development
-      - git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
-        # ^ suppress output to /dev/null to keep secrets hidden
+      - bash build/stage.sh
     secrets: [ nexus_ci_token ]
     when:
       branch: development
