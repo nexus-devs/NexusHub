@@ -35,8 +35,8 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').trim()
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').trim()
     config.client = {
-      apiUrl: staging ? 'https://api.nexushub.io' : 'https://api.nexus-stats.com',
-      authUrl: staging ? 'https://auth.nexushub.io' : 'https://api.nexus-stats.com'
+      apiUrl: staging ? 'https://api.staging.nexushub.co' : 'https://api.nexushub.co',
+      authUrl: staging ? 'https://auth.staging.nexushub.co' : 'https://auth.nexushub.co'
     }
     config.webpack.skipBuild = true
   }
