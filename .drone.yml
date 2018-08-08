@@ -15,6 +15,14 @@ pipeline:
       branch:
         exclude: [ production, staging ]
 
+  sitemap:
+    image: node
+    commands:
+      npm run sitemap
+    when:
+      branch:
+        exclude: [ production, staging ]
+
   # Smoke tests
   lint:
     image: node
