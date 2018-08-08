@@ -11,7 +11,8 @@
     "scrape": "node build/warframe/index.js",
     "release": "semantic-release pre && semantic-release post",
     "changelogs": "node build/changelogs/index.js",
-    "toggle-webpack": "node build/webpack/toggle.js"
+    "toggle-webpack": "node build/webpack/toggle.js",
+    "sitemap": "node build/sitemap.js"
   },
   "author": "Kaptard",
   "license": "CC BY-NC 4.0",
