@@ -34,7 +34,7 @@ module.exports = async function () {
     // Warframe Hooks
     if (group === 'warframe' && node === 'core') {
       cubic.hook('warframe.core', wfhooks.verifyIndices)
-      cubic.hook('warframe.core', wfhooks.verifyItemList)
+      cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
 
       // Order trackers
       setTimeout(() => {
