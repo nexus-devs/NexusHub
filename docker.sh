@@ -1,4 +1,5 @@
 #!/bin/bash
+git submodule update --init --recursive
 
 # Restart if already running
 if [ "$(docker service ls | grep nexus_dev)" ]; then
