@@ -2,10 +2,10 @@ const prod = process.NODE_ENV === 'production'
 const WebSocket = require('ws')
 const Client = require('cubic-client')
 const client = new Client({
-  api_url: prod ? 'https://api.nexus-stats.com' : 'http://localhost:3003',
-  auth_url: prod ? 'https://auth.nexus-stats.com' : 'http://localhost:3030',
-  user_key: prod ? undefined : cubic.config.warframe.core.userKey,
-  user_secret: prod ? undefined : cubic.config.warframe.core.userSecret
+  api_url: prod ? 'http://main_api:3003' : 'http://localhost:3003',
+  auth_url: prod ? 'http://auth_api:3030' : 'http://localhost:3030',
+  user_key: cubic.config.warframe.core.userKey,
+  user_secret: cubic.config.warframe.core.userSecret
 })
 const request = require('requestretry').defaults({ fullResponse: false })
 
