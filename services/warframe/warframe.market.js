@@ -1,4 +1,4 @@
-const prod = process.NODE_ENV === 'production'
+const prod = process.env.NODE_ENV === 'production'
 const WebSocket = require('ws')
 const Client = require('cubic-client')
 const client = new Client({
