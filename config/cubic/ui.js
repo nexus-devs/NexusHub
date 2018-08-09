@@ -3,9 +3,7 @@ const node = process.env.NEXUS_TARGET_NODE
 const staging = process.env.NEXUS_STAGING
 const group = node ? node.split('-')[0] : null // auth-core, ui-core, etc, take first word before dash
 
-/**
- * Use some adaptions when inside docker, especially database connections.
- */
+// Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
   const fs = require('fs')
   const certPublic = fs.readFileSync(`/run/secrets/nexus-public-key`, 'utf-8')
@@ -45,9 +43,7 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
   module.exports = config
 }
 
-/**
- * Normal environment should be fine with default config.
- */
+// Normal environment should be fine with default config.
 else {
   module.exports = {
     api: {
