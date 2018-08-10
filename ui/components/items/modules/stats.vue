@@ -169,7 +169,7 @@ export default {
   }
   span {
     color: white;
-    font-size: 0.85em !important;
+    font-size: 0.9em !important;
     padding-right: 8px;
     border-right: 1px solid $color-subtle;
   }
