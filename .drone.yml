@@ -13,7 +13,7 @@ pipeline:
       - npm run build -- staging
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   sitemap:
     image: node
@@ -21,7 +21,7 @@ pipeline:
       npm run sitemap
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   # Smoke tests
   lint:
@@ -30,7 +30,7 @@ pipeline:
       - npm run lint
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   test - development:
     image: node
@@ -38,7 +38,7 @@ pipeline:
       - npm test
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   test - production:
     image: node
@@ -46,7 +46,7 @@ pipeline:
       - npm test --production
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   # Add to staging branch
   stage:
@@ -111,9 +111,9 @@ services:
     image: mongo
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
   redis:
     image: redis
     when:
       branch:
-        exclude: [ production, staging ]
+        exclude: [ production, staging, greenkeeper/* ]
