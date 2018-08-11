@@ -1,5 +1,5 @@
 <template>
-  <module v-if="opm">
+  <module v-if="opm" class="opm">
     <template slot="header">
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3 class="title">Traders right now</h3>
@@ -53,6 +53,7 @@ export default {
 
 .module {
   width: fit-content;
+  z-index: 1;
 }
 .title {
   color: white;
