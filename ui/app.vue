@@ -29,7 +29,8 @@ export default {
     bottom
   },
   head: {
-    title: 'NexusHub',
+    /* eslint no-undef: "off" */
+    title: 'NexusHub' + ($STAGING ? ' [staging]' : ($PRODUCTION ? '' : ' [dev]')),
     link: [
       { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }

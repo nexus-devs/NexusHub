@@ -38,7 +38,9 @@ module.exports = {
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       '$apiUrl': JSON.stringify(cubic.config.ui.client.apiUrl),
-      '$authUrl': JSON.stringify(cubic.config.ui.client.authUrl)
+      '$authUrl': JSON.stringify(cubic.config.ui.client.authUrl),
+      '$PRODUCTION': process.env.NODE_ENV === 'production',
+      '$STAGING': JSON.stringify(process.env.NEXUS_STAGING)
     })
   ])
 }
