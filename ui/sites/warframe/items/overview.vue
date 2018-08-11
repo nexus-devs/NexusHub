@@ -38,12 +38,12 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
-import patchlog from 'src/components/items/modules/patchlog.vue'
+import patchlog from 'src/components/items/patchlog.vue'
 import VueObserveVisibility from 'vue-observe-visibility'
-import description from 'src/components/items/modules/description.vue'
-import buildRequirements from 'src/components/items/modules/build-requirements.vue'
-import stats from 'src/components/items/modules/stats.vue'
-import drops from 'src/components/items/modules/drops.vue'
+import description from 'src/components/items/description.vue'
+import buildRequirements from 'src/components/items/build-requirements.vue'
+import stats from 'src/components/items/stats.vue'
+import drops from 'src/components/items/drops.vue'
 
 export default {
   components: {

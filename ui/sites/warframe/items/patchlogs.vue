@@ -38,7 +38,7 @@ import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemheader from 'src/components/items/header.vue'
 import VueObserveVisibility from 'vue-observe-visibility'
 import VueAffix from 'vue-affix'
-import patchlog from 'src/components/items/modules/patchlog.vue'
+import patchlog from 'src/components/items/patchlog.vue'
 import moment from 'moment'
 
 export default {

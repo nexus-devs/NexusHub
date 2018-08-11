@@ -5,7 +5,7 @@
 
 
 <script>
-import opm from 'src/components/items/modules/opm.vue'
+import opm from 'src/components/items/opm.vue'
 let updateInterval
 
 export default {

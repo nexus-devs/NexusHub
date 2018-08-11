@@ -73,7 +73,7 @@ import timerange from 'src/components/search/time.vue'
 import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import opm from 'src/components/items/modules/opm-global.vue'
+import opm from 'src/components/items/opm-global.vue'
 import module from 'src/components/ui/module.vue'
 
 export default {
