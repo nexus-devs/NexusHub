@@ -107,7 +107,8 @@ function filter (orders, type = 'Selling', key = 'price') {
   const result = []
 
   for (const order of orders) {
-    if (selectedComponent === order.component && order.offer === type) {
+    if ((selectedComponent === order.component || selectedComponent === 'Set') &&
+        order.offer === type) {
       result.push(order)
     }
   }
