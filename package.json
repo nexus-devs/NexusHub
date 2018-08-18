@@ -33,7 +33,7 @@
     "moment": "^2.22.2",
     "requestretry": "^2.0.2",
     "tween.js": "^16.6.0",
-    "vue-affix": "^0.2.4",
+    "vue-affix": "^0.3.0",
     "vue-analytics": "^5.12.3",
     "vue-observe-visibility": "^0.4.1",
     "vue-tween-number": "^0.2.0",
