@@ -11,7 +11,7 @@
       <section>
         <div class="container">
           <div class="row-pad">
-            <div class="col-b-4">
+            <div class="col-b-4 realtime-container">
               <h2 class="sub">Realtime Orders</h2>
               <div class="realtime">
                 <opm/>
@@ -284,6 +284,13 @@ h2 + span {
   }
 }
 
+.realtime-container {
+  @media (max-width: $breakpoint-m) {
+    width: 100%;
+    flex-basis: 100%;
+  }
+}
+
 .module {
   display: inline-flex;
 }
@@ -316,6 +323,9 @@ h2 + span {
     margin-left: 0;
     padding-left: 0;
     padding-top: 40px !important;
+  }
+  @media (max-width: $breakpoint-s) {
+    display: none;
   }
 }
 
