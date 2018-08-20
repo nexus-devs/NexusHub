@@ -137,6 +137,8 @@ export default {
         }
         this.$router.push(this.suggestions[0].webUrl)
         this.suggestions = []
+      } else {
+        this.$router.push(`/warframe/search?input=${this.input}`)
       }
     },
 
@@ -145,7 +147,6 @@ export default {
      */
     query () {
       this.complete()
-      button.methods.search.bind(this)()
     }
   }
 }

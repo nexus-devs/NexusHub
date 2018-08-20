@@ -38,12 +38,6 @@ export default {
 
         // View generated URL
         this.$router.push(path)
-
-        // Close sidebar if open
-        if (this.$store.state.sidebar.active) {
-          this.$store.commit('toggleSidebar')
-          this.$store.commit('hideSidebar')
-        }
       }
     }
   }
