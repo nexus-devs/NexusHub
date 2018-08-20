@@ -337,10 +337,6 @@ export default {
     &:before {
       border-radius: 0;
     }
-    @media (max-width: $breakpoint-s) {
-      color: $color-font-body !important;
-      padding: 15px 20px ;
-    }
   }
   .container {
     position: relative;
