@@ -149,6 +149,10 @@ nav {
   background: $color-bg-darker;
   padding: 6px 12px;
 
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
+
   label, br {
     display: none;
   }
