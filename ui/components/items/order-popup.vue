@@ -30,9 +30,7 @@
           <span ref="message">
             <span>/w {{ order.user }}</span> Hi {{ user }},
             I'd like to {{ order.offer === 'Selling' ? 'buy' : 'sell' }}
-            [{{ item.name }} {{ order.component }}]
-            {{ order.price ? 'for' : '' }}
-            {{ order.price ? `${order.price}p` : '' }}.
+            [{{ item.name }} {{ order.component }}]{{ order.price ? ' for ' : '' }}{{ order.price ? `${order.price}p` : '' }}.
             {{ order.source === 'Warframe Market' ? '' : 'Found your offer at NexusHub.' }}
           </span>
         </div>
