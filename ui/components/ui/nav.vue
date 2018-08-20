@@ -1,15 +1,16 @@
 <template>
-  <nav class="nav-main row">
-    <div class="col nav-l">
+  <nav class="row">
+    <div class="nav-l">
       <router-link to="/warframe" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
       <!-- <span class="sub">{{ game }}</span> -->
+      <search :placeholder="'Search item...'"/>
       <slot>
         <!-- Page links will go here -->
       </slot>
     </div>
-    <div class="col nav-r">
+    <div class="nav-r">
       <notifications/>
     </div>
   </nav>
@@ -19,10 +20,12 @@
 
 <script>
 import notifications from 'src/components/ui/notifications.vue'
+import search from 'src/components/search/input.vue'
 
 export default {
   components: {
-    notifications
+    notifications,
+    search
   },
 
   computed: {
@@ -58,81 +61,190 @@ export default {
 
 
 <style lang="scss" scoped>
-  @import "~src/styles/partials/importer";
+@import "~src/styles/partials/importer";
 
-  nav {
+nav {
+  position: fixed;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+  padding: 0 25px;
+  height: 56px;
+  z-index: 4;
+  background: $color-bg-dark;
+  align-items: center;
+  @include shadow-1;
+
+  a {
+    margin: 0 15px;
+    font-size: 0.9em;
+  }
+  .logo {
+    height: 22px;
+  }
+  @media (max-width: $breakpoint-m) {
     position: fixed;
-    width: calc(100% - 50px);
-    padding: 0 25px;
-    height: 56px;
-    z-index: 4;
     background: $color-bg-dark;
-    align-items: center;
     @include shadow-1;
-
-    a {
-      margin: 0 15px;
-      font-size: 0.9em;
-    }
-    .logo {
-      height: 22px;
-    }
-    @media (max-width: $breakpoint-m) {
-      position: fixed;
-      background: $color-bg-dark;
-      @include shadow-1;
-    }
   }
-  .nav-l {
-    a:first-of-type {
-      margin-left: 60px;
-
-      @media (max-width: $breakpoint-s) {
-        margin-left: 50px;
-        img {
-          margin-top: 1px;
-        }
-      }
-    }
-
-    .sub {
-      position: relative;
-      top: 1px;
-      vertical-align: middle;
-      text-transform: uppercase;
-      font-size: 0.75em;
-      margin-left: -12px;
-      color: $color-font-body !important;
-      @include ease(0.3s);
-
-      @media (max-width: $breakpoint-s) {
-        display: none;
-      }
-    }
-  }
-  .nav-r {
-    text-align: right;
+}
+.nav-l {
+  a:first-of-type {
+    margin-left: 60px;
 
     @media (max-width: $breakpoint-s) {
-      a span {
-        display: none;
-      }
-    }
-
-    @media (max-width: $breakpoint-xs) {
-      a img {
-        display: none;
+      margin-left: 50px;
+      img {
+        margin-top: 1px;
       }
     }
   }
 
-  // Context icon for mobile
-  .ctx {
+  .sub {
+    position: relative;
+    top: 1px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    margin-left: -12px;
+    color: $color-font-body !important;
+    @include ease(0.3s);
+
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
+  }
+}
+.nav-r {
+  text-align: right;
+
+  @media (max-width: $breakpoint-s) {
+    a span {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    a img {
+      display: none;
+    }
+  }
+}
+
+// Context icon for mobile
+.ctx {
+  display: none;
+  float: right;
+
+  @media (max-width: $breakpoint-xs) {
+    display: block;
+  }
+}
+
+/deep/ .search {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0.9em;
+  border-radius: 3px;
+  background: $color-bg-darker;
+  padding: 6px 12px;
+
+  label, br {
     display: none;
-    float: right;
+  }
 
-    @media (max-width: $breakpoint-xs) {
-      display: block;
+  input {
+    position: relative;
+    min-width: 200px;
+    color: white;
+    z-index: 1;
+
+    &::placeholder {
+      color: $color-font-subtle !important;
     }
   }
+
+  .autocomplete {
+    position: absolute;
+    left: 12px;
+    top: -1px;
+    margin-top: 7px;
+    z-index: 0;
+  }
+  .autocomplete-type {
+    position: absolute;
+    right: 10px;
+    top: -1px;
+    padding: 7px 10px;
+  }
+
+  .tools {
+    position: absolute;
+    border-radius: 2px;
+    background: $color-bg-dark;
+    left: 0;
+    width: 100%;
+    margin-top: 6px;
+    z-index: 2;
+    @include shadow-1;
+
+    @media (max-width: $breakpoint-s) {
+      width: calc(100% - 2px);
+      background: $color-bg-darker;
+    }
+
+    // Input Suggestions
+    .suggestion {
+      padding: 10px 12px;
+      cursor: pointer;
+      @include ease(0.1s);
+      border-top: 1px solid $color-subtle-dark;
+
+      &:hover {
+        background: $color-bg-darker;
+      }
+      .ico-36 {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 2px;
+        margin-right: 20px;
+        margin-left: 10px;
+        height: 24px;
+        width: 24px;
+
+        img {
+          position: relative;
+          left: -50%;
+          max-width: 200%;
+          z-index: 1;
+        }
+      }
+      .suggestion-main {
+        display: inline-block;
+        vertical-align: middle;
+
+        .suggestion-name, .suggestion-type {
+          display: block;
+        }
+        .suggestion-name {
+          color: white;
+        }
+        .suggestion-type {
+          margin-top: -3px;
+          font-size: 0.9em;
+          opacity: 0.8;
+        }
+      }
+      .suggestion-data {
+        display: inline-block;
+        vertical-align: middle;
+        float: right;
+        font-size: 0.9em;
+        margin: 7px 0;
+        padding: 3px 10px;
+      }
+    }
+  }
+}
 </style>
