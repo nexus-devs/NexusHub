@@ -9,7 +9,7 @@
         <tooltip>Tools</tooltip>
       </div>
     </div>
-    <div :class="{ dragged: deltaX || active }" class="nav-lower">
+    <div :class="{ dragged: deltaX || active, hidden }" class="nav-lower">
       <div class="nav-lower-backdrop">
         <div class="nav-lower-backdrop-first-bg"/>
       </div>
@@ -40,6 +40,9 @@ export default {
       const deltaX = this.deltaX
       const pos = `translate(${open || deltaX ? `${deltaX}px` : `calc(${deltaX - 320}px - 5vw)`}, 0)`
       return pos
+    },
+    hidden () {
+      return this.$store.state.sidebar.hidden
     }
   },
 
@@ -54,12 +57,28 @@ export default {
 
   methods: {
     toggle () {
+      // Make sidebar-bar visible, not panels
+      if (this.hidden) {
+        this.$store.commit('showSidebar')
+      }
+      else if (!this.$store.state.sidebar.keepVisible && !this.hidden) {
+        this.$store.commit('hideSidebar')
+      }
+
+      // Full toggle with panels
       this.$store.commit('toggleSidebar')
     },
     move (e) {
+      // Make visible if hidden by default (hide again on e.isFinal)
+      if (this.hidden) {
+        this.$store.commit('showSidebar')
+      }
       // Reset on end
       if (e.isFinal) {
         this.reset()
+        if (!this.$store.state.sidebar.active && !this.$store.state.sidebar.keepVisible) {
+          this.$store.commit('hideSidebar')
+        }
       }
       // Horizontal only
       if (e.eventType <= 4) {
@@ -88,6 +107,7 @@ export default {
     name: 'sidebar',
     state: {
       active: false,
+      hidden: true,
       keepVisible: false,
       id: 0,
       activeId: 0,
@@ -95,8 +115,17 @@ export default {
     },
     mutations: {
       toggleSidebar (state) {
-        state.active = !state.active
-        state.activeId = 0
+        if (!state.hidden) {
+          state.active = !state.active
+          state.activeId = 0
+        }
+      },
+      hideSidebar (state) {
+        state.active = false
+        state.hidden = true
+      },
+      showSidebar (state) {
+        state.hidden = false
       },
       keepSidebarVisible (state, bool) {
         state.keepVisible = bool
@@ -105,7 +134,9 @@ export default {
         state.activeId = id
       },
       setSidebarDeltaX (state, pos) {
-        state.deltaX = pos
+        if (!state.hidden) {
+          state.deltaX = pos
+        }
       },
       incrementId (state) {
         state.id++
@@ -187,17 +218,21 @@ nav {
       @include ease-out(0.45s);
       @include shadow-1;
 
+      &.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
       .nav-lower-backdrop {
         position: absolute;
         height: 100vh;
         width: 100%;
         z-index: 1;
-        background: $color-bg;
+        @include gradient-background(#7a8899, $color-bg-light);
 
         .nav-lower-backdrop-first-bg {
           height: 56px;
           width: 56px;
-          background: rgba(0, 5, 10, 0.3);
+          background: rgba(0, 5, 10, 0.4);
         }
       }
     }

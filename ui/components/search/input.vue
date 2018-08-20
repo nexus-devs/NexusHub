@@ -2,7 +2,7 @@
   <div class="col-b search">
     <div class="field">
       <label>Search</label><br>
-      <input ref="input" :value="input.name || input" type="text" placeholder="Try: Soma Prime, Maim..."
+      <input ref="input" :placeholder="placeholder || 'Try: Soma Prime, Maim...'" :value="input.name || input" type="text"
              @input="search" @keydown.tab.prevent="complete" @keyup.enter="query">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autocomplete.category }}</span>
@@ -30,6 +30,7 @@
 import button from './modules/button.vue' // to get the search function
 
 export default {
+  props: ['placeholder'],
 
   data () {
     return {
@@ -119,17 +120,22 @@ export default {
     complete (suggestion = {}) {
       // Take directly passed suggestion (when selecting from suggestion list)
       if (suggestion.name) {
-        this.input = suggestion
-        this.autocomplete = suggestion
-        this.$store.commit('setSearchInput', suggestion)
+        this.input = ''
+        this.autocomplete = {
+          name: '',
+          category: ''
+        }
+        this.$router.push(suggestion.webUrl)
         this.suggestions = []
       }
       // Take first suggestion in list
       else if (this.suggestions.length) {
-        const first = this.suggestions[0]
-        this.input = first
-        this.autocomplete = first
-        this.$store.commit('setSearchInput', first)
+        this.input = ''
+        this.autocomplete = {
+          name: '',
+          category: ''
+        }
+        this.$router.push(this.suggestions[0].webUrl)
         this.suggestions = []
       }
     },
