@@ -51,7 +51,7 @@ class Hook {
         this.addEconomyData(item, stored)
 
         if (!_.isEqual(stored, item)) {
-          await db.db(cubic.config.warframe.core.mongoDb).collection('items').update({
+          await db.db(cubic.config.warframe.core.mongoDb).collection('items').updateMany({
             uniqueName: item.uniqueName
           }, {
             $set: _.merge(stored || {}, item)

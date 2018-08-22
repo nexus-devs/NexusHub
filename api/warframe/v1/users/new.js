@@ -22,7 +22,7 @@ class User extends Endpoint {
   }
 
   async addUser (user) {
-    await this.db.collection('users').update({
+    await this.db.collection('users').updateMany({
       name: user.name
     }, {
       $set: user
