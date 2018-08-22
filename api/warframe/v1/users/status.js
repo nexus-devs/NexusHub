@@ -22,7 +22,7 @@ class Status extends Endpoint {
     const name = req.params.name
     const { online } = req.body
 
-    await this.db.collection('users').update({
+    await this.db.collection('users').updateMany({
       name
     }, {
       $set: { online }
