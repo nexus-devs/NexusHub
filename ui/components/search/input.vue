@@ -140,6 +140,10 @@ export default {
       } else {
         this.$router.push(`/warframe/search?input=${this.input}`)
       }
+      // Hide sidebar if entered from there
+      if (this.$store.state.sidebar.active) {
+        this.$store.commit('hideSidebar')
+      }
     },
 
     /**
