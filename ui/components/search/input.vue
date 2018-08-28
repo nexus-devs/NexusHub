@@ -27,8 +27,6 @@
 
 
 <script>
-import button from './modules/button.vue' // to get the search function
-
 export default {
   props: ['placeholder'],
 
