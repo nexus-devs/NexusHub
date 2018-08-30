@@ -206,7 +206,7 @@ h2 {
   margin: 20px 5px 0px 0;
   padding-bottom: 10px;
   font-size: 1em;
-  @include gradient-border-bottom($color-primary, $color-accent);
+  border-bottom: 2px solid #39E591;
 
   & + span {
     color: $color-font-subtle;
@@ -270,7 +270,7 @@ h2 {
       }
       &.active {
         border: 1px solid transparent;
-        background: #39E591;
+        background: $color-bg;
 
         .asc-desc {
           opacity: 1;
