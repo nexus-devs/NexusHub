@@ -323,11 +323,6 @@ export default {
 h2 {
   margin-bottom: 20px;
 }
-h2 + span {
-  display: inline-block;
-  margin-top: -20px;
-  margin-bottom: 30px;
-}
 
 .row-pad {
   .col-b, .col-b-4 {
@@ -401,8 +396,10 @@ h2 + span {
 }
 
 .type {
+  padding-bottom: 10px;
   margin-bottom: 20px;
   width: 100%;
+  border-bottom: 1px solid $color-subtle-dark;
 
   span {
     &:first-of-type {
