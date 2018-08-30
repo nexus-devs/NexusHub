@@ -116,6 +116,9 @@ export default {
   img {
     height: 40px;
   }
+  &:hover {
+    @include field;
+  }
 }
 
 section {

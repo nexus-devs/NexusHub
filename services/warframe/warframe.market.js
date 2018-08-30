@@ -30,6 +30,8 @@ class WFM {
    */
   initWs () {
     this.ws = new WebSocket('wss://warframe.market/socket')
+    this.ws.on('error', console.error)
+    this.ws.on('close', () => this.initWs())
     this.ws.on('open', () => {
       this.ws.send(JSON.stringify({ type: '@WS/SUBSCRIBE/MOST_RECENT' }))
     })
@@ -40,8 +42,6 @@ class WFM {
         this.postOrder(data.payload.order)
       }
     })
-    this.ws.on('error', console.error)
-    this.ws.on('close', () => this.initWs())
   }
 
   /**

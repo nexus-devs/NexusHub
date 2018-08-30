@@ -1,5 +1,6 @@
 <template>
   <module @click.native="select">
+    {{ order }}
     <template slot="header">
       <div>
         <div class="img-container">
