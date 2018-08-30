@@ -125,7 +125,7 @@ function filter (orders, type = 'Selling', filters = []) {
   const getSortingValue = result => {
     const filter = filters.find(f => f.active)
     const res = resolve(filter, result)
-    return filter.descending ? res : -1 * res
+    return filter.descending ? -1 * res : res
   }
 
 
