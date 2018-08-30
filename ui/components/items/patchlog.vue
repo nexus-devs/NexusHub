@@ -7,7 +7,7 @@
   }" :class="{ visible }" class="patchlog">
     <template slot="header">
       <h3>{{ patchlog.name }}</h3>
-      <time :datetime="patchlog.date">{{ moment(new Date(patchlog.date)).format('MMMM Do YYYY') }}</time>
+      <time :datetime="patchlog.date">{{ overview ? moment (new Date(patchlog.date)).fromNow() : moment(new Date(patchlog.date)).format('MMMM Do YYYY') }}</time>
       <img v-if="(visible || seen) && patchlog.imgUrl" :src="patchlog.imgUrl" :alt="patchlog.name" onerror="this.style.display='none'">
     </template>
     <template slot="body">
@@ -37,13 +37,9 @@
       </div>
     </template>
     <template slot="footer">
-      <router-link v-if="overview" :to="`${itemName}/patchlogs`">
-        Full Changes
-        <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
-      </router-link>
-      <a v-else :href="patchlog.url" target="_blank">
+      <a :href="patchlog.url" target="_blank">
         Full Patch Notes
-        <img src="/img/ui/arrow-right.svg" alt="View full patch notes">
+        <img src="/img/ui/arrow-right.svg" class="ico-h-20" alt="View full patch notes">
       </a>
     </template>
   </module>

@@ -24,6 +24,9 @@
           <div class="row-pad patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>
+          <router-link :to="`${$route.params.item}/patchlogs`" class="btn-subtle">
+            View all patch logs
+          </router-link>
         </div>
       </section>
     </app-content>
@@ -127,9 +130,6 @@ h2 {
   justify-content: flex-start;
 
   /deep/ .patchlog {
-    img {
-      display: none;
-    }
     @media (max-width: $breakpoint-m) {
       max-width: calc(50% - 20px);
     }
@@ -141,10 +141,12 @@ h2 {
 
       h3 {
         padding: 30px 35px 0;
-        color: white !important;
       }
       time {
         padding: 0 35px;
+      }
+      img {
+        display: none;
       }
     }
   }

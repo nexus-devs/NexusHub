@@ -16,7 +16,7 @@
               <div class="realtime">
                 <opm/>
                 <transition-group name="realtime" class="realtime-users row">
-                  <realtime-user v-for="order in realtime" :key="order ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                  <realtime-user v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
                 </transition-group>
               </div>
             </div>
@@ -40,17 +40,19 @@
           <!-- Filters -->
           <div class="filter">
             <div class="type">
-              <span :class="{ active: type === 'Selling' }" @click="setType('Selling')">Sellers</span>
-              <span :class="{ active: type === 'Buying' }" @click="setType('Buying')">Buyers</span>
+              <span :class="{ active: type === 'Selling' }" class="btn-subtle" @click="setType('Selling')">Sellers</span>
+              <span :class="{ active: type === 'Buying' }" class="btn-subtle" @click="setType('Buying')">Buyers</span>
             </div>
             <div class="filter-tags">
-              <span class="sort">Sort By</span>
               <div class="filter-tag-row">
+                <!-- Filters -->
                 <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag" @click="selectFilterTag(filter)">
                   <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                   <span>{{ filter.name }}</span>
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
                 </div>
+                <!-- Components -->
+                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="tag component"/>
               </div>
             </div>
           </div>
@@ -61,27 +63,26 @@
               <div class="col item">
                 Item
               </div>
-              <div class="col">
+              <div class="col user">
                 User
               </div>
               <div v-if="item.fusionLimit" class="col">
                 Rank
               </div>
-              <div class="col">
+              <div class="col quantity">
                 Quantity
               </div>
               <div class="col price">
                 Price
               </div>
-              <div class="col"/>
+              <div class="col whitespace"/>
             </div>
             <transition-group>
               <order v-for="order in listings" :key="order._id" :order="order"/>
             </transition-group>
           </div>
           <div v-else>
-            Sorry, nobody wants to trade {{ item.name }}s right now. There might be
-            offers later! But maybe this item just isn't that good ¯\_(ツ)_/¯
+            No orders found.
           </div>
         </div>
       </section>
@@ -103,31 +104,58 @@ import orderPopup from 'src/components/items/order-popup.vue'
 import orderRealtime from 'src/components/items/order-realtime.vue'
 let selectedComponent = 'Set'
 
-function filter (orders, type = 'Selling', key = 'price') {
+/**
+ * Trader sorting logic
+ */
+function filter (orders, type = 'Selling', filters = []) {
   const result = []
+  const resolve = (filter, result) => {
+    filter.path.split('.').forEach(key => { result = result[key] })
+    return result
+  }
 
+  // Filter by component first
   for (const order of orders) {
     if ((selectedComponent === order.component || selectedComponent === 'Set') &&
         order.offer === type) {
       result.push(order)
     }
   }
+
+  const getSortingValue = result => {
+    const filter = filters.find(f => f.active)
+    const res = resolve(filter, result)
+    return filter.descending ? res : -1 * res
+  }
+
+
   return result.sort((a, b) => {
-    // Sort by component name (always)
+    // Keep sorted by component
     const name = a.component.localeCompare(b.component)
     if (name !== 0) {
       return name
     }
 
-    // Sort by key value (default is price)
-    if (type === 'Selling') {
-      return a[key] < b[key] ? -1 : 1
-    } else {
-      return a[key] < b[key] ? 1 : -1
+    // Sort by selected filter
+    const aVal = getSortingValue(a)
+    const bVal = getSortingValue(b)
+
+    if (bVal === null) {
+      return -1
     }
+    if (aVal > bVal) {
+      return 1
+    }
+    if (aVal < bVal) {
+      return -1
+    }
+    return 0
   })
 }
 
+/**
+ * Actual vue component.
+ */
 export default {
   components: {
     'app-content': appContent,
@@ -149,9 +177,9 @@ export default {
       return this.$store.state.orders.listings
     },
     realtime () {
-      return Array(4).fill(0).map((e, i) => [].concat(this.listings).sort((a, b) => {
+      return Array(4).fill().map((e, i) => [].concat(this.listings).sort((a, b) => {
         return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
-      })[i])
+      })[i] || {})
     },
     components () {
       const components = []
@@ -199,6 +227,28 @@ export default {
   methods: {
     setType (type) {
       this.$store.commit('setOrderType', type)
+    },
+    selectFilterTag (filter) {
+      const filters = [].concat(this.$store.state.orders.filters)
+      const target = filters.find(f => f.name === filter.name)
+
+      // Only allow one filter at once.
+      for (const f of filters) {
+        if (f.name !== target.name && f.active) {
+          f.active = false
+          f.descending = false
+        }
+      }
+
+      // Sort order selection logic
+      if (target.descending) {
+        target.descending = false
+      } else {
+        target.descending = target.active
+        target.active = true
+      }
+      // Overwrite original to trigger DOM update
+      this.$store.commit('setOrderFilters', filters)
     }
   },
 
@@ -219,7 +269,9 @@ export default {
         category: 'items',
         icon: '/img/warframe/ui/platinum.svg',
         unit: 'p',
-        path: 'price'
+        path: 'price',
+        active: true,
+        descending: false
       }, {
         name: 'Quantity',
         icon: '/img/warframe/ui/quantity.svg',
@@ -234,14 +286,18 @@ export default {
     mutations: {
       setOrders (state, orders) {
         state.all = orders
-        state.listings = filter(state.all, state.type)
+        state.listings = filter(state.all, state.type, state.filters)
       },
       selectOrder (state, order) {
         state.selected = order
       },
       setOrderType (state, type) {
         state.type = type
-        state.listings = filter(state.all, state.type)
+        state.listings = filter(state.all, state.type, state.filters)
+      },
+      setOrderFilters (state, filters) {
+        state.filters = filters
+        state.listings = filter(state.all, state.type, state.filters)
       }
     }
   }
@@ -345,27 +401,15 @@ h2 + span {
 }
 
 .type {
-  span {
-    display: inline-block;
-    @include ie;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-size: 0.9em;
-    border-radius: 2px;
-    padding: 10px 15px;
+  margin-bottom: 20px;
+  width: 100%;
 
+  span {
     &:first-of-type {
       margin-right: 5px;
     }
     &:nth-of-type(2) {
       margin-right: 20px;
-    }
-    &:before {
-      border-radius: 0;
-    }
-    &.active {
-      color: white;
-      background: rgba(200,225,255,0.1);
     }
   }
 }
@@ -376,38 +420,56 @@ h2 + span {
   align-content: center;
   flex-wrap: wrap;
   padding-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
-  .sort {
-    margin-left: 20px;
-    color: white;
-    margin-right: 15px;
-    text-transform: uppercase;
-    font-size: 0.85em;
-  }
   .filter-tags {
     display: flex;
     align-items: center;
-    margin-right: 150px; // break when view type is supposed to cause break
 
-    @media (max-width: $breakpoint-s) {
-      width: 100%;
-    }
     .filter-tags-row {
       display: inline-block;
       margin-right: 20px;
       padding-right: 20px;
     }
+    /deep/ .tag.component {
+      position: relative;
+      top: -1px; // dunno why, but it's just 1px lower than other tags
+                 // may god forgive my hacky code.
+      padding: 0 16px 0 8px;
+      margin-bottom: 10px;
+      background: transparent;
+      text-align: left;
+
+      h4 {
+        font-family: 'Roboto';
+        font-size: 0.9em;
+        font-weight: 400;
+      }
+      span {
+        display: none;
+      }
+      .image-wrapper {
+        height: 29px;
+        width: 32px;
+        margin-right: 0;
+        margin-bottom: 0 !important;
+      }
+      .data {
+        margin-top: 0;
+        flex-direction: row;
+      }
+    }
     .tag {
       @include ie;
       border-radius: 999px;
       display: inline-block;
-      padding: 5px 0 3px 15px;
+      padding: 4px 0 4px 16px;
       margin-right: 10px;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       border: 1px solid $color-subtle-dark;
       text-transform: uppercase;
       font-size: 0.9em;
+      @include shadow-0;
 
       &:hover {
         background: none;
@@ -432,12 +494,15 @@ h2 + span {
       }
       &.active {
         border: 1px solid transparent;
-        background: #39E591;
+        background: $color-subtle;
 
         .asc-desc {
           opacity: 1;
           margin-right: 0;
         }
+      }
+      @media (max-width: $breakpoint-m) {
+        margin-bottom: 15px;
       }
     }
   }
@@ -457,6 +522,16 @@ h2 + span {
   .price {
     position: relative;
     left: 10px;
+  }
+  .user {
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
+  }
+  .whitespace {
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
   }
 }
 </style>

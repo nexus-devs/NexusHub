@@ -176,10 +176,7 @@ nav {
     z-index: 0;
   }
   .autocomplete-type {
-    position: absolute;
-    right: 10px;
-    top: -1px;
-    padding: 7px 10px;
+    display: none;
   }
 
   .tools {

@@ -67,6 +67,7 @@ export default {
     border-bottom: none;
     margin-right: 10px;
     max-height: none;
+    padding: 4px;
 
     &:last-of-type {
       margin-right: 0;

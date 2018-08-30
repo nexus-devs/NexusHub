@@ -217,5 +217,8 @@ export default {
       background: rgba(200,225,255,0.1)
     }
   }
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
 }
 </style>

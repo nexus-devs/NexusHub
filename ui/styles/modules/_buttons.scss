@@ -41,6 +41,24 @@
   }
 }
 
+.btn-subtle {
+  display: inline-block;
+  @include ie;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 2px;
+  padding: 10px 15px;
+  
+  &:before {
+    border-radius: 0;
+  }
+  &.active {
+    color: white;
+    background: rgba(200,225,255,0.1);
+  }
+}
+
 .btn-round {
   border-radius: 1000px !important;
 }
