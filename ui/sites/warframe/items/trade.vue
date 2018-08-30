@@ -491,7 +491,7 @@ h2 {
       }
       &.active {
         border: 1px solid transparent;
-        background: $color-subtle;
+        background: $color-bg;
 
         .asc-desc {
           opacity: 1;
