@@ -59,7 +59,8 @@ class Orders extends Endpoint {
    * Filter by outdated trade chat offers or online status on trading sites
    */
   async filter (item, offline) {
-    const orders = await this.db.collection('orders').find({ item: new RegExp(`^${item}$`, 'i') }).toArray()
+    const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
+    const orders = await this.db.collection('orders').find({ item: title(item) }).toArray()
     const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
     const discard = []
     const online = []
