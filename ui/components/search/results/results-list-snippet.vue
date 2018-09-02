@@ -4,7 +4,7 @@
       <img :src="result.imgUrl" class="result-img-blur">
       <div class="result-title col-b">
         <div class="result-img">
-          <img :src="result.imgUrl" :class="{ mod: result.category === 'Mods' }" :alt="result.name">
+          <img :src="result.imgUrl" :class="{ mod: result.imgUrl.includes('jpeg') }" :alt="result.name">
         </div>
         <span>{{ result.name }}</span>
       </div>

@@ -3,7 +3,7 @@
     <router-link :to="result.webUrl" :class="{ set: result.set }">
       <div class="result-img">
         <div class="result-img-shade"/>
-        <img :src="result.imgUrl" :class="{ mod: result.category === 'Mods' }" :alt="result.name">
+        <img :src="result.imgUrl" :class="{ mod: result.imgUrl.includes('jpeg') }" :alt="result.name">
         <img :src="result.imgUrl" class="result-img-blur">
         <p v-html="result.description"/>
       </div>
