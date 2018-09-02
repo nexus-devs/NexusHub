@@ -1,4 +1,5 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Item extends Endpoint {
   constructor (api, db, url) {
@@ -32,11 +33,9 @@ class Item extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const name = req.params.item
+    const name = title(req.params.item)
+    let item = await this.db.collection('items').findOne({ name })
 
-    let item = await this.db.collection('items').findOne({
-      name: new RegExp('^' + name + '$', 'i')
-    })
     if (item) {
       delete item._id
       this.cache(item, 60)

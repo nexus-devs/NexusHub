@@ -1,5 +1,6 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const { ObjectId } = require('mongodb')
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Orders extends Endpoint {
   constructor (api, db, url) {
@@ -59,7 +60,6 @@ class Orders extends Endpoint {
    * Filter by outdated trade chat offers or online status on trading sites
    */
   async filter (item, offline) {
-    const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
     const orders = await this.db.collection('orders').find({ item: title(item) }).toArray()
     const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
     const discard = []
@@ -76,8 +76,6 @@ class Orders extends Endpoint {
     }
 
     for (let order of all) {
-      delete order.apiName
-
       if (order.source !== 'Trade Chat') {
         const user = await this.db.collection('users').findOne({ name: order.user })
         order.online = user ? user.online : false
@@ -106,10 +104,7 @@ class Orders extends Endpoint {
    * requests that are required.
    */
   async getAll () {
-    const orders = await this.db.collection('orders').find({}, {
-      component: 0
-    }).toArray()
-
+    const orders = await this.db.collection('orders').find().project({ component: 0 }).toArray()
     return orders
   }
 }

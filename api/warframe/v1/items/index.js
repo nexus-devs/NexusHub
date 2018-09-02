@@ -35,13 +35,19 @@ class List extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    let items = await this.db.collection('items').find({}).toArray()
+    let items = await this.db.collection('items').find().project({
+      _id: 0,
+      name: 1,
+      components: 1,
+      imgUrl: 1,
+      apiUrl: 1,
+      webUrl: 1
+    }).toArray()
     let result = []
 
     items.forEach(item => {
       result.push({
         name: item.name,
-        type: item.type,
         components: item.components,
         apiUrl: item.apiUrl,
         webUrl: item.webUrl,

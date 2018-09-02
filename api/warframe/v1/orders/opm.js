@@ -1,5 +1,6 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const moment = require('moment')
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 /**
  * Orders per minute. This data is used for the 'active traders' chart.
@@ -34,7 +35,7 @@ class Opm extends Endpoint {
   async filter (item) {
     const queryStart = new Date() - 1000 * 60 * 25
     const query = item ? {
-      item: new RegExp('^' + item + '$', 'i'),
+      item: title(item),
       createdAt: {
         $gte: new Date(queryStart)
       }
@@ -70,7 +71,6 @@ class Opm extends Endpoint {
       let quantity = 0
 
       for (let order of orders) {
-        // TODO add list of most traded items if all items are selected
         if (order.createdAt < intervalEnd && order.createdAt > intervalStart) {
           quantity++
 
