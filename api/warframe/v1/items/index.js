@@ -16,7 +16,6 @@ class List extends Endpoint {
     }
     this.schema.response = [{
       name: String,
-      type: String,
       components: [{
         name: String,
         selling: { current: economyData, previous: economyData },

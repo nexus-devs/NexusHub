@@ -21,23 +21,12 @@ class Search extends Endpoint {
       description: 'Number of results to limit search to. Min. 2, Max. 20 for non-fuzzy queries.'
     },
     {
-      name: 'fuzzy',
-      default: false,
-      description: 'Enable fuzzy matching for searches. Must be limited to a single category.'
-    },
-    {
       name: 'threshold',
       default: 0.75,
       description: 'Minimum matching percentage for fuzzy search.'
-    },
-    {
-      name: 'category',
-      default: '',
-      description: 'Category to query results in.'
     }]
     this.schema.request = { url: '/warframe/v1/search?query=nik' }
     this.schema.response = [{
-      category: String,
       name: String,
       apiUrl: {
         _type: String,
@@ -55,7 +44,6 @@ class Search extends Endpoint {
     /* eslint no-useless-escape: "off" */
     const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
     const limit = req.query.limit
-    const fuzzy = req.query.fuzzy
     const threshold = 1 - req.query.threshold
 
     // Validate Input
@@ -72,17 +60,16 @@ class Search extends Endpoint {
       })
     }
 
-    let result = fuzzy ? await this.fuzzySearch(query, threshold, limit) : await this.search(query, limit)
+    let result = await this.search(query, threshold, limit)
     this.cache(result, 60)
     res.send(result)
   }
 
   /**
-   * Fuzzy search a certain category.
    * Retrieves a list of all names first, fuzzy matches them and gets the full
    * objects afterwards.
    */
-  async fuzzySearch (query, threshold, limit) {
+  async search (query, threshold, limit) {
     const data = await this.db.collection('items').find().project({ _id: 0, name: 1 }).toArray()
     const fuse = new Fuse(data, {
       shouldSort: true,
@@ -112,42 +99,6 @@ class Search extends Endpoint {
     for (let item of items) {
       result.push(full.find(i => i.name === item))
     }
-
-    return result
-  }
-
-  /**
-   * Find all relevant data for possible queries. Official, non-user related
-   * data must be returned first. Unlike the fuzzy search, we check for direct
-   * sequence matches anywhere in the target name.
-   */
-  async search (query, limit) {
-    const result = []
-    const items = await this.db.collection('items').find({
-      name: new RegExp(`^${query}`, 'i')
-    }).project({
-      _id: 0,
-      name: 1,
-      type: 1,
-      components: 1,
-      imgUrl: 1,
-      apiUrl: 1,
-      webUrl: 1
-    }).limit(limit).toArray()
-
-    // Get median value from set and append image url
-    items.forEach(item => {
-      const set = item.components.find(c => c.name === 'Set')
-
-      result.push({
-        name: item.name,
-        type: item.type,
-        keyData: (set.selling && set.buying) ? (set.selling.current.median + set.buying.current.median) / 2 + 'p' : item.ducats + 'Ducats',
-        imgUrl: item.imgUrl,
-        apiUrl: item.apiUrl,
-        webUrl: item.webUrl
-      })
-    })
 
     return result
   }
