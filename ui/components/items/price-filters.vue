@@ -1,40 +1,31 @@
 <template>
   <div class="filters">
-    <div class="container">
-      <div class="row">
-        <div class="col-b row">
-          <div :class="{ inactive: types[0].inactive }" class="col inline-data" @click="select('types', types[0])">
-            <label>Selling</label>
-            <span class="data">{{ supply.count }}</span>
-            <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
-          </div>
-          <div :class="{ inactive: types[1].inactive }" class="col inline-data" @click="select('types', types[1])">
-            <label>Buying</label>
-            <span class="data">{{ demand.count }}</span>
-            <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
-          </div>
-          <div class="col"><!-- Dummy --></div>
+    <div class="row">
+      <div class="col-b row">
+        <div :class="{ inactive: types[0].inactive }" class="col inline-data" @click="select('types', types[0])">
+          <label>Selling</label>
+          <span class="data">{{ supply.count }}</span>
+          <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
         </div>
-        <div class="col-b">
-          <label>Region</label>
-          <button v-for="d in regions" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
-                  type="button" @click="select('regions', d)">
-            <span>{{ d.name }}</span>
-          </button>
+        <div :class="{ inactive: types[1].inactive }" class="col inline-data" @click="select('types', types[1])">
+          <label>Buying</label>
+          <span class="data">{{ demand.count }}</span>
+          <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
         </div>
-        <div class="col-b">
-          <label>Platform</label>
-          <button v-for="d in platforms" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
-                  type="button" @click="select('platforms', d)">
-            <span>{{ d.name }}</span>
-          </button>
+        <div class="col"><!-- Dummy --></div>
+      </div>
+      <div class="col-b">
+        <label>Platform</label>
+        <div v-for="d in platforms" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
+             type="button" @click="select('platforms', d)">
+          <span>{{ d.name }}</span>
         </div>
-        <div class="col-b">
-          <label>Data Source</label>
-          <button v-for="d in sources" :key="d.name" :disabled="d.disabled" :class="{ inactive: d.inactive }"
-                  type="button" @click="select('sources', d)">
-            <span>{{ d.name }}</span>
-          </button>
+      </div>
+      <div class="col-b">
+        <label>Data Source</label>
+        <div v-for="d in sources" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
+             type="button" @click="select('sources', d)">
+          <span>{{ d.name }}</span>
         </div>
       </div>
     </div>
@@ -55,21 +46,6 @@ export default {
         name: 'Buying'
       }],
 
-      regions: [{
-        name: 'NA'
-      }, {
-        name: 'EU'
-      }, {
-        name: 'AS',
-        disabled: true
-      }, {
-        name: 'RU',
-        disabled: true
-      }, {
-        name: 'SA',
-        disabled: true
-      }],
-
       platforms: [{
         name: 'PC'
       }, {
@@ -83,31 +59,32 @@ export default {
       sources: [{
         name: 'Trade Chat'
       }, {
-        name: 'Warframe.market',
-        disabled: true
+        name: 'Warframe.market'
       }]
     }
   },
 
   computed: {
     supply () {
-      const focus = this.$store.state.items.item.supply.count
-      const comparison = this.$store.state.items.itemComparison.supply.count
-      const diff = ((focus - comparison) / comparison * 100).toFixed(2)
+      const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
+      const current = set.selling.current.offers
+      const previous = set.selling.previous.offers
+      const diff = ((current - previous) / previous * 100).toFixed(2)
 
       return {
-        count: focus > 999 ? `${(focus / 1000).toFixed(1)}K` : focus,
+        count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
         diff: diff > 0 ? `+${diff}%` : `${diff}%`,
         rawDiff: diff
       }
     },
     demand () {
-      const focus = this.$store.state.items.item.demand.count
-      const comparison = this.$store.state.items.itemComparison.demand.count
-      const diff = ((focus - comparison) / comparison * 100).toFixed(2)
+      const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
+      const current = set.buying.current.offers
+      const previous = set.buying.previous.offers
+      const diff = ((current - previous) / previous * 100).toFixed(2)
 
       return {
-        count: focus > 999 ? `${(focus / 1000).toFixed(1)}K` : focus,
+        count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
         diff: diff > 0 ? `+${diff}%` : `${diff}%`,
         rawDiff: diff
       }
@@ -189,7 +166,7 @@ export default {
       // Labels are all active -> user wants to activate only the one they selected
       if (allActive) {
         for (let j = 0; j < target.length; j++) {
-          target[j].inactive = i !== j
+          target[j].inactive = i === j
         }
       }
 
@@ -218,36 +195,28 @@ export default {
 @import '~src/styles/partials/importer';
 
 .filters {
-  margin-top: 80px;
-  padding: 15px;
-  background: $color-bg-transparent;
+  margin-top: 20px;
 
-  @media (max-width: $breakpoint-m) {
-    margin-top: 70px;
-  }
-  .container > .row > .col-b {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-right: 30px;
-    margin-left: 30px;
+  .col-b {
+    flex-grow: 0;
     flex-basis: auto;
-    border-right: 1px solid $color-subtle;
+    margin-bottom: 40px;
 
-    &:last-of-type {
-      margin-right: 0;
-      border-right: none;
-    }
-    &:first-of-type {
-      margin-left: 0;
-    }
-    @media (max-width: $breakpoint-m) {
-      margin-left: 0;
-      border: none;
+    &:not(:last-of-type) {
+      @media (min-width: $breakpoint-s) {
+        padding-right: 40px;
+        margin-right: 40px;
+        border-right: 1px solid $color-subtle-dark;
+      }
+      @media (max-width: $breakpoint-s) {
+        width: 100%;
+      }
     }
   }
+
   label {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-weight: 400;
     color: white;
     margin-bottom: 5px;
@@ -256,16 +225,20 @@ export default {
     @include ie;
     flex-grow: 0;
     border-radius: 2px;
-    padding-right: 15px;
-    margin: -9px 10px -10px -8px; // even out the ie() padding
+    padding: 12px 15px;
+    margin-right: 10px;
+    background: rgba(200,225,255,0.1);
+    @include shadow-0;
 
     &.inactive {
       opacity: 0.5;
+      background: transparent;
     }
     .data {
       display: block;
       font-size: 1.2em;
       color: white;
+      margin-bottom: 5px;
     }
     .diff {
       display: inline-block;
@@ -282,29 +255,34 @@ export default {
     }
   }
 
-  button {
+  .btn-subtle {
     margin-top: 5px;
     margin-right: 5px;
-    font-size: 0.85em;
-    background: $color-bg-lighter;
+    font-size: 0.85em !important;
     @include shadow-0;
 
-    &:disabled {
+    &:not(.active) {
       background: transparent;
+      color: white;
+
+      &:hover {
+        background: rgba(200,225,255,0.1)
+      }
+      .status-circle {
+        background: white;
+      }
+    }
+    &.disabled {
       color: $color-font-subtle;
       cursor: auto;
+      pointer-events: none;
       box-shadow: none;
+      background: transparent;
+      opacity: 0.5;
 
       .status-circle {
         background: transparent;
         border: 0.5px solid $color-font-subtle;
-      }
-    }
-    &.inactive {
-      background: transparent;
-
-      .status-circle {
-        background: white;
       }
     }
     .status-circle {

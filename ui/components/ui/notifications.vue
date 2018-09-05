@@ -202,6 +202,9 @@ export default {
   &:hover {
     @include gradient-background-dg($color-primary, $color-accent);
   }
+  &:after {
+    display: none;
+  }
 }
 
 .unread-bubble {

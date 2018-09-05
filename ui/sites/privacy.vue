@@ -40,10 +40,12 @@
         <section>
           <h2>Password Storage</h2>
           <p>
-            We store all passwords using the bcrypt hash algorithm with 8 salt rounds.
+            We store all passwords using the bcrypt hash algorithm with 15 salt rounds.
             Tech talk aside - <a href="https://security.stackexchange.com/a/6415">it's pretty secure.</a>
-            This means that in case of a security breach, nobody will be able to
-            figure out your original password.
+            This means that in case of a security breach, it'll be as hard as
+            possible for attackers to get your actual password. That doesn't
+            mean it's <i>impossible</i> to crack the password however, so
+            make sure you have a unique password with reasonable complexity.
           </p>
         </section>
         <section>
