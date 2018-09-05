@@ -20,11 +20,11 @@
           <!-- Actual data -->
           <div class="content-data">
             <span class="content-data-main-value">
-              {{ component[offerType].median ? component[offerType].median + 'p' : 'No Data' }}
+              {{ current.median ? current.median + 'p' : 'No Data' }}
             </span>
             <span class="content-data-main-diff">
-              {{ comparison[offerType].median ? comparison[offerType].median + 'p' : 'No Data' }}
-              <span>{{ comparison[offerType].median ? `(${diff.percentage})` : '' }}</span>
+              {{ previous.median ? previous.median + 'p' : 'No Data' }}
+              <span>{{ previous.median ? `(${diff})` : '' }}</span>
             </span>
           </div>
         </div>
@@ -32,8 +32,8 @@
 
       <!-- right panel -->
       <div class="col">
-        <sparkline :data="chartData(component)" :ceil="chartCeil(component)"/>
-        <sparkline :data="chartData(comparison)" :ceil="chartCeil(component)" class="sparkline-comparison"/>
+        <sparkline :data="chartData(current)" :ceil="chartCeil(current)"/>
+        <sparkline :data="chartData(previous)" :ceil="chartCeil(current)" class="sparkline-previous"/>
       </div>
     </div>
   </div>
@@ -48,47 +48,54 @@ export default {
   components: {
     sparkline
   },
-  props: ['component', 'comparison', 'item'],
+
+  props: ['component'],
+
   computed: {
+    item () {
+      return this.$store.state.items.item
+    },
+    current () {
+      return this.component[this.offerType].current
+    },
+    previous () {
+      return this.component[this.offerType].previous
+    },
     diff () {
-      const comparison = this.comparison
-      const component = this.component
-      const offerType = this.offerType
-      const percentage = ((component[offerType].median - comparison[offerType].median) / comparison[offerType].median * 100).toFixed(2)
-      return { percentage: percentage > 0 ? `+${percentage}%` : `${percentage}%` }
+      const previous = this.previous
+      const current = this.current
+      const percentage = ((current.median - previous.median) / previous.median * 100).toFixed(2)
+      return percentage > 0 ? `+${percentage}%` : `${percentage}%`
     },
     increase () {
-      const comparison = this.comparison
-      const component = this.component
-      const offerType = this.offerType
-      return component[offerType].median > comparison[offerType].median
+      const previous = this.previous
+      const current = this.current
+      return current.median > previous.median
     },
     decrease () {
-      const comparison = this.comparison
-      const component = this.component
-      const offerType = this.offerType
-      return component[offerType].median < comparison[offerType].median
+      const previous = this.component.previous
+      const current = this.current
+      return current.median < previous.median
     },
     offerType () {
-      return this.$store.state.items ? this.$store.state.items.selected.offerType : 'combined'
+      return this.$store.state.items.selected.offerType
     }
   },
-  methods: {
-    chartData (component) {
-      const offerType = this.offerType
-      const data = []
 
-      component[offerType].intervals.forEach(interval => {
+  methods: {
+    chartData (data) {
+      const result = []
+
+      data.intervals.forEach(interval => {
         data.push(interval.median)
       })
-      return data
+      return result
     },
-    chartCeil (component) {
-      const offerType = this.offerType
+    chartCeil (data) {
       let max = Number.NEGATIVE_INFINITY
       let min = Number.POSITIVE_INFINITY
 
-      component[offerType].intervals.forEach(interval => {
+      data.intervals.forEach(interval => {
         max = interval.median > max ? interval.median : max
         min = interval.median && interval.median < min ? interval.median : min
       })
