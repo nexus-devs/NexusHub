@@ -8,6 +8,23 @@ class Prices extends Endpoint {
     super(api, db, url)
     this.schema.description = 'Get item statistics between now and a specified time range.'
     this.schema.url = '/warframe/v1/items/:item/prices'
+    this.schema.query = [
+      {
+        name: 'timerange',
+        default: 7,
+        description: 'Time range from now in the past, in days.'
+      },
+      {
+        name: 'intervals',
+        default: 14,
+        description: 'Intervals to split the time in.'
+      },
+      {
+        name: 'region',
+        default: '',
+        description: 'Region to select requests from.'
+      }
+    ]
   }
 
   /**
