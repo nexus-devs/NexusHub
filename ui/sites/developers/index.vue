@@ -37,7 +37,7 @@
           <router-link to="/developers/contributing" class="btn-outline">
             Contributing Guides
           </router-link>
-          <router-link to="/developers/contact" class="btn-outline">
+          <router-link to="/contact" class="btn-outline">
             Contact
           </router-link>
         </div>
@@ -52,12 +52,14 @@
 import navigation from 'src/components/ui/nav.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     navigation,
     'app-content': appContent,
-    sidebar
+    sidebar,
+    'sidebar-search': sidebarSearch
   }
 }
 </script>
@@ -69,6 +71,9 @@ export default {
 
 section:first-of-type {
   padding: 100px 0;
+  background-size: 450px;
+  background-repeat: repeat;
+  background-image: url('/img/developers/circuit-board.svg');
 
   h1 {
     max-width: 750px;

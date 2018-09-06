@@ -45,7 +45,6 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('applyInputQuery', this.$route)
     Vue.use(VueTouch)
   },
   mounted () {
