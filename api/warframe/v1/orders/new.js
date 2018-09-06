@@ -2,7 +2,6 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
-const _ = require('lodash')
 
 class Order extends Endpoint {
   constructor (api, db, url) {
@@ -25,10 +24,6 @@ class Order extends Endpoint {
       }
     }
     this.schema.response = 'added!'
-    this.schema.pubsub = {
-      url: '/warframe/v1/orders',
-      body: this.schema.request
-    }
   }
 
   async main (req, res) {
@@ -37,7 +32,6 @@ class Order extends Endpoint {
 
     // Process offer
     request.createdAt = new Date()
-    this.publish(_.cloneDeep(request), '/warframe/v1/orders')
     await this.db.collection('orders').insertOne(request)
     await this.db.collection('orderHistory').insertOne(request)
     res.send('added!')
