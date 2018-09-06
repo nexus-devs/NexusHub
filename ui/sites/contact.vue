@@ -64,6 +64,8 @@ export default {
   text-align: center;
   padding-bottom: 0;
   padding-top: 200px;
+  position: relative;
+  left: -2vw; // For some reason the content just doesn't look centered.
 
   h1 {
     font-size: 2.6em;
@@ -126,5 +128,7 @@ section {
   margin-top: 40px;
   color: white;
   opacity: 0.5;
+  position: relative;
+  left: -2vw; // For some reason the content just doesn't look centered.
 }
 </style>
