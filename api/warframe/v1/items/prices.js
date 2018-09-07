@@ -111,7 +111,7 @@ class Prices extends Endpoint {
    * Main function: fetches item prices
    */
   async getPrices (doc, timeNow, timerange, item) {
-    // Get either pre-saved prices, or generate them if they don't exist
+    // Get either pre-saved day prices, or generate them if they don't exist
     for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = timeNow.subtract(i, 'days').startOf('day')
       let cursorResult = await this.db.collection('items_presaves').findOne({
@@ -124,7 +124,6 @@ class Prices extends Endpoint {
         // Transfer from pre-saved day
         cursorResult.components.forEach(preComp => {
           let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
-          // TODO: do this more prettier
           if (i < timerange) {
             // Current week
             comp.buying.current.days[i] = preComp.buying
@@ -137,6 +136,37 @@ class Prices extends Endpoint {
             comp.selling.previous.days[previousDay] = preComp.selling
             comp.combined.previous.days[previousDay] = preComp.combined
           }
+        })
+      }
+    }
+
+    // Get either pre-saved hour prices for the current day, or generate them if they don't exist
+    const startOfDay = timeNow.startOf('day')
+    for (let i = 0; startOfDay.add(i, 'hours').isBefore(timeNow.startOf('hour')); i++) {
+      const hourCursor = startOfDay.add(i, 'hours')
+      let cursorResult = await this.db.collection('items_presaves').findOne({
+        name: new RegExp('^' + item + '$', 'i'),
+        createdAt: hourCursor
+      })
+      if (!cursorResult) {
+
+      } else {
+        // Transfer from pre-saved hour
+        cursorResult.components.forEach(preComp => {
+          let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+          // TODO: Put this in own function / make prettier
+          comp.buying.current.days[0].median += preComp.buying.median
+          comp.buying.current.days[0].offers += preComp.buying.offers
+          if (preComp.buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = preComp.buying.min
+          if (preComp.buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = preComp.buying.max
+          comp.selling.current.days[0].median += preComp.selling.median
+          comp.selling.current.days[0].offers += preComp.selling.offers
+          if (preComp.selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = preComp.selling.min
+          if (preComp.selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = preComp.selling.max
+          comp.combined.current.days[0].median += preComp.combined.median
+          comp.combined.current.days[0].offers += preComp.combined.offers
+          if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
+          if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
         })
       }
     }
