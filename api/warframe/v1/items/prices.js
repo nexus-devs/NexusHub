@@ -1,4 +1,5 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
+const moment = require('moment')
 
 /**
  * Provides detailed item statistics for specific item
@@ -31,6 +32,35 @@ class Prices extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
+    const item = req.params.item
+    const intervals = req.query.intervals
+    const region = req.query.region
+    const timerange = req.query.timerange
+    const timeNow = moment()
+
+    // Verify Interval size
+    if (intervals <= 0) {
+      const response = {
+        error: 'Bad input.',
+        reason: 'Intervals must be greater than 0.'
+      }
+      this.cache(response)
+      return res.status(400).send(response)
+    }
+
+    // Get item from db
+    let itemResult = await this.db.collection('items').findOne({
+      name: new RegExp('^' + item + '$', 'i')
+    })
+    if (!itemResult) {
+      let response = {
+        error: 'Could not find data for ' + item + '.',
+        reason: 'Item doesn\'t exist.'
+      }
+      this.cache(response, 60)
+      return res.status(404).send(response)
+    }
+
     res.send({ 'yo': 'ya' })
   }
 }
