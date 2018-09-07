@@ -13,8 +13,8 @@
         <div class="container">
           <h1>
             Build awesome tools that reach thousands of gamers with
-            <router-link to="/developers/api/warframe/orders">trading data</router-link>,
-            <router-link to="/developers/api/warframe/items/item">item data</router-link>, and
+            <router-link to="/developers/api/Warframe-Orders/Orders">trading data</router-link>,
+            <router-link to="/developers/api/Warframe-Items/base">item data</router-link>, and
             <router-link to="/developers/api/">anything else on this platform</router-link>.
           </h1>
           <p>
@@ -37,9 +37,9 @@
           <router-link to="/developers/contributing" class="btn-outline">
             Contributing Guides
           </router-link>
-          <router-link to="/contact" class="btn-outline">
-            Contact
-          </router-link>
+          <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn-outline">
+            Join us on Discord
+          </a>
         </div>
       </section>
     </app-content>

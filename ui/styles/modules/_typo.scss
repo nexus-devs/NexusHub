@@ -94,6 +94,31 @@ b {
   font-weight: 600;
   color: $color-font-paragraph;
 }
+
 i {
   font-style: italic;
+}
+
+code {
+  font-family: 'Consolas', Monospace;
+  padding: 15px;
+  border-radius: 2px;
+  background: $color-bg-darker;
+
+  span {
+    font-family: 'Consolas', Monospace;
+  }
+}
+
+.hljs-string {
+  color: $color-primary-subtle;
+}
+.hljs-number {
+  color: #4286f4;
+}
+.hljs-keyword {
+  color: $color-accent;
+}
+.hljs-built_in {
+  color: #4286f4
 }

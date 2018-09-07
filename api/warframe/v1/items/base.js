@@ -4,7 +4,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 class Item extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = 'Get item statistics between a specified time frame.'
+    this.schema.description = 'Get data for a specific item with all its default attributes.'
     this.schema.url = '/warframe/v1/items/:item'
     this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }
     const economyData = {
@@ -14,7 +14,8 @@ class Item extends Endpoint {
       offers: Number
     }
     this.schema.response = {
-      name: 'Nikana Prime',
+      uniqueName: String,
+      name: String,
       type: String,
       description: String,
       components: [{
@@ -24,8 +25,10 @@ class Item extends Endpoint {
         buying: { current: economyData, previous: economyData },
         imgUrl: String
       }],
-      imgUrl: '/img/warframe/items/nikana-prime.png',
-      webUrl: '/warframe/items/nikana-prime'
+      wikiaUrl: String,
+      apiUrl: String,
+      imgUrl: String,
+      webUrl: String
     }
   }
 

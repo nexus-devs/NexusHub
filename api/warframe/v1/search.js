@@ -4,7 +4,7 @@ const Fuse = require('fuse.js')
 class Search extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = 'Find the most relevant entries in the main collections for a given query'
+    this.schema.description = 'Find fuzzy matched items based on the given input string.'
     this.schema.limit = {
       maxInInterval: 60,
       interval: 10000

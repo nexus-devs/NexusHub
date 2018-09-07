@@ -17,12 +17,12 @@ class Notification extends Endpoint {
     }
     this.schema.response = {
       game: {
-        _value: 'warframe',
+        _value: String,
         _description: 'Limit notifications to this viewed game on the web-client. Use "global" for site-wide notifications.'
       },
       message: {
-        title: 'Example Notification',
-        body: 'This is where something important happens.'
+        title: String,
+        body: String
       }
     }
     this.schema.pubsub = {
