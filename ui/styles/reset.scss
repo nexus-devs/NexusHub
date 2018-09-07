@@ -31,3 +31,9 @@ html {
   border-radius: 2px;
 	background-color: rgba(77, 82, 87, 0.7);
 }
+
+pre > code {
+    white-space: pre-wrap;
+    margin-top: -1.00em;
+    display: block;
+}

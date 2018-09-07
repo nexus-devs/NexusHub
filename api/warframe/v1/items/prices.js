@@ -13,16 +13,12 @@ class Statistics extends Endpoint {
     this.schema.query = [
       {
         name: 'timestart',
-        default: () => {
-          return moment().endOf('day').valueOf()
-        },
+        default: () => moment().endOf('day').valueOf(),
         description: 'Returns data recorded between timestart and timeend.'
       },
       {
         name: 'timeend',
-        default: () => {
-          return moment().subtract(7, 'days').startOf('day').valueOf()
-        },
+        default: () => moment().subtract(7, 'days').startOf('day').valueOf(),
         description: 'Returns data recorded between timestart and timeend.'
       },
       {
@@ -62,7 +58,7 @@ class Statistics extends Endpoint {
     const prices = _.cloneDeep(price)
     prices.intervals = [ _.cloneDeep(price) ]
     this.schema.response = {
-      name: 'Nikana Prime',
+      name: String,
       supply: offers,
       demand: offers,
       components: [{

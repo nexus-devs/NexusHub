@@ -32,7 +32,8 @@ class Orders extends Endpoint {
       price: Number,
       quantity: Number,
       source: String,
-      createdAt: String
+      createdAt: String,
+      online: Boolean
     }]
   }
 

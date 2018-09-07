@@ -2,6 +2,13 @@ const Endpoint = cubic.nodes.main.core.Endpoint
 const path = require('path')
 const fs = require('fs')
 const endpoints = []
+const replacer = (key, value) => {
+  // if we get a function, give us the code for that function
+  if (typeof value === 'function') {
+    return value.toString()
+  }
+  return value
+}
 
 // Ensure there are Endpoint classes for each node
 if (!cubic.nodes.warframe) {
@@ -32,6 +39,7 @@ function getEndpointTree (filepath) {
     endpoint.name = path.basename(filepath).replace('.js', '')
     let route = path.resolve(filepath).replace(path.resolve(cubic.config.main.core.endpointPath), '')
       .replace(/\\/g, '/').replace('.js', '')
+    endpoint.sourceUrl = `https://github.com/nexus-devs/nexus-stats/blob/development/api${route}.js`
     endpoint.route = endpoint.url ? endpoint.url : route
     endpoints.push(endpoint)
   }
@@ -46,8 +54,9 @@ class Endpoints extends Endpoint {
   }
 
   async main (req, res) {
-    this.cache(endpoints)
-    res.send(endpoints)
+    const data = JSON.stringify(endpoints, replacer)
+    this.cache(data)
+    res.send(data)
   }
 }
 

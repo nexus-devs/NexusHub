@@ -3,6 +3,7 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 class Status extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
+    this.schema.description = 'Sets the online status of a user.'
     this.schema.method = 'POST'
     this.schema.url = '/warframe/v1/users/:name/status'
     this.schema.scope = 'write_users_warframe'
@@ -12,7 +13,7 @@ class Status extends Endpoint {
         status: 'online'
       }
     }
-    this.schema.response = 'ok'
+    this.schema.response = String
   }
 
   /**

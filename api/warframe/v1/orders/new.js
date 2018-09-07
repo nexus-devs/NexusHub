@@ -6,6 +6,7 @@ const User = require('../users/new.js')
 class Order extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
+    this.schema.description = 'Stores a new order to the database.'
     this.schema.method = 'POST'
     this.schema.scope = 'write_orders_warframe'
     this.schema.url = '/warframe/v1/orders'
@@ -23,7 +24,7 @@ class Order extends Endpoint {
         createdAt: new Date()
       }
     }
-    this.schema.response = 'added!'
+    this.schema.response = String
   }
 
   async main (req, res) {
