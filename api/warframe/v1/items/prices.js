@@ -47,7 +47,7 @@ class Prices extends Endpoint {
     }
 
     let doc = this.generateDocument(itemResult, timerange)
-    this.getPrices(timeNow, timerange, item)
+    this.getPrices(doc, timeNow, timerange, item)
 
     res.send(doc)
   }
@@ -110,9 +110,9 @@ class Prices extends Endpoint {
   /**
    * Main function: fetches item prices
    */
-  async getPrices (timeNow, timerange, item) {
+  async getPrices (doc, timeNow, timerange, item) {
     // Get either pre-saved prices, or generate them if they don't exist
-    for (let i = 1; i <= timerange * 2; i++) {
+    for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = timeNow.subtract(i, 'days').startOf('day')
       let cursorResult = await this.db.collection('items_presaves').findOne({
         name: new RegExp('^' + item + '$', 'i'),
@@ -121,7 +121,23 @@ class Prices extends Endpoint {
       if (!cursorResult) {
 
       } else {
-
+        // Transfer from pre-saved day
+        cursorResult.components.forEach(preComp => {
+          let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+          // TODO: do this more prettier
+          if (i < timerange) {
+            // Current week
+            comp.buying.current.days[i] = preComp.buying
+            comp.selling.current.days[i] = preComp.selling
+            comp.combined.current.days[i] = preComp.combined
+          } else {
+            // Previous week
+            const previousDay = i % timerange
+            comp.buying.previous.days[previousDay] = preComp.buying
+            comp.selling.previous.days[previousDay] = preComp.selling
+            comp.combined.previous.days[previousDay] = preComp.combined
+          }
+        })
       }
     }
   }
