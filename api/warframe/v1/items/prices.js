@@ -45,7 +45,7 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
-    this.getPrices()
+    this.getPrices(timeNow, timerange, item)
 
     res.send({ 'yo': 'ya' })
   }
@@ -53,10 +53,14 @@ class Prices extends Endpoint {
   /**
    * Main function: fetches item prices
    */
-  async getPrices () {
+  async getPrices (timeNow, timerange, item) {
     // Get either pre-saved prices, or generate them if they don't exist
     for (let i = 1; i <= timerange; i++) {
       const dayCursor = timeNow.subtract(i, 'days').startOf('day')
+      let cursorResult = await this.db.collection('items_presaves').findOne({
+        name: new RegExp('^' + item + '$', 'i'),
+        createdAt: dayCursor
+      })
     }
   }
 }
