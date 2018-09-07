@@ -61,7 +61,19 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
+    this.getPrices()
+
     res.send({ 'yo': 'ya' })
+  }
+
+  /**
+   * Main function: fetches item prices
+   */
+  async getPrices () {
+    // Get either pre-saved prices, or generate them if they don't exist
+    for (let i = 1; i <= timerange; i++) {
+      const dayCursor = timeNow.subtract(i, 'days').startOf('day')
+    }
   }
 }
 
