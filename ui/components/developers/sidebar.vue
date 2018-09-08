@@ -2,10 +2,10 @@
   <nav>
     <div class="links">
       <h3>Connecting</h3>
-      <router-link to="/developers/api/dong" exact>Client packages</router-link>
-      <router-link to="/developers/api/dong" exact>HTTP</router-link>
-      <router-link to="/developers/api" exact>Socket.io</router-link>
-      <router-link to="/developers/api/dong" exact>Authentication</router-link>
+      <router-link to="/developers/api/clients" exact>Client packages</router-link>
+      <router-link to="/developers/api/http" exact>HTTP</router-link>
+      <router-link to="/developers/api/socket.io" exact>Socket.io</router-link>
+      <router-link to="/developers/api/authentication" exact>Authentication</router-link>
 
       <div v-for="group in groups" :key="group.name">
         <h3>{{ group.name }}</h3>
@@ -22,6 +22,7 @@
 
 
 <script>
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 const reviver = (key, value) => {
   if (typeof key === 'string' && key.indexOf('function ') === 0) {
     const functionTemplate = `(${value})`
@@ -36,7 +37,41 @@ export default {
       return this.$store.state.docs.endpoints
     },
     groups () {
-      return this.$store.state.docs.groups
+      if (this.$store.state.docs.groups.length) {
+        return this.$store.state.docs.groups
+      }
+      const groups = [{ group: 'general', name: 'General', endpoints: [] }]
+
+      for (const endpoint of this.endpoints) {
+        const split = endpoint.route.split('/')
+
+        // Sub group?
+        if (split.length > 2) {
+          const group = split[1]
+          const name = title(`${split[1]}${split.length > 3 ? ` / ${split[3]}` : ''}`)
+          const saved = groups.find(g => g.name === name)
+
+          // Change some endpoint data
+          endpoint.name = endpoint.name === 'index' ? name.split(' / ')[1].toLowerCase() : endpoint.name
+          endpoint.group = name
+
+          if (saved) {
+            saved.endpoints.push(endpoint)
+          } else {
+            groups.push({
+              group,
+              name,
+              endpoints: [endpoint]
+            })
+          }
+        }
+        // Main group
+        else {
+          groups.find(g => g.group === 'general').endpoints.push(endpoint)
+        }
+      }
+      this.$store.commit('setDocsGroups', groups)
+      return groups
     }
   },
 

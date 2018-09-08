@@ -110,6 +110,10 @@ code {
   }
 }
 
+pre {
+  margin-bottom: -20px; // For some reason there's whitespace here which is neither padding nor margin
+}
+
 .hljs-string {
   color: $color-primary-subtle;
 }
@@ -121,4 +125,7 @@ code {
 }
 .hljs-built_in {
   color: #4286f4
+}
+.hljs-comment {
+  opacity: 0.4;
 }
