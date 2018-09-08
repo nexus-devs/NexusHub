@@ -12,68 +12,74 @@
       <div class="content-wrapper">
         <sidebar-nav/>
         <section>
-          <div class="flex">
-            <h1>
-              {{ endpoint.group || 'General' }} -
-              {{ endpoint.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) }}
-            </h1>
-            <a :href="endpoint.sourceUrl" target="_blank" class="source">
-              <img src="/img/developers/github.svg" class="ico-20" alt="Source Code on Github">
-              <span>View source code.</span>
-            </a>
-          </div>
+          <!-- Manual Documentation -->
+          <slot v-if="!endpoint"/>
 
-          <!-- Basic Info -->
-          <a :href="`https://api.nexushub.co${endpoint.route}`" target="_blank" class="btn-subtle active route">
-            <div class="verb">{{ endpoint.method }}</div>
-            {{ endpoint.route }}
-          </a>
-          <div class="btn-subtle active">
-            Cache: {{ endpoint.cache ? endpoint.cache.duration : 60 }}s
-          </div>
-          <div class="btn-subtle active">
-            Rate Limit: {{ endpoint.limit ? endpoint.limit.maxInInterval : 20 }}
-            requests per
-            {{ endpoint.limit ? endpoint.limit.interval / 1000 : 5 }}s
-          </div>
-          <div class="btn-subtle active">
-            Authorization: {{ endpoint.scope || 'none' }}
-          </div>
-          <p v-if="endpoint.description" class="description">
-            {{ endpoint.description }}
-          </p>
-
-          <!-- Request/Response -->
-          <div v-if="endpoint.method !== 'GET'" class="sub-section">
-            <h2>Request Format</h2>
-            <pre v-highlightjs="stringify(endpoint.request)">
-              <code class="javascript"/>
-            </pre>
-          </div>
-          <div v-if="endpoint.response || example" class="sub-section">
+          <!-- Auto-generated endpoint -->
+          <div v-else>
             <div class="flex">
-              <h2>Response Format</h2>
-              <div v-if="!endpoint.scope && endpoint.response" class="btn-outline" @click="toggleExample">
-                Live Example
-              </div>
+              <h1>
+                {{ endpoint.group || 'General' }} -
+                {{ endpoint.name.toLowerCase().replace(/\b\w/g, l => l.toUpperCase()) }}
+              </h1>
+              <a :href="endpoint.sourceUrl" target="_blank" class="source">
+                <img src="/img/developers/github.svg" class="ico-20" alt="Source Code on Github">
+                <span>View source code.</span>
+              </a>
             </div>
-            <pre v-highlightjs="stringify(example) || stringify(endpoint.response)">
-              <code class="javascript"/>
-            </pre>
-          </div>
 
-          <!-- Params -->
-          <div v-if="endpoint.query.length" class="sub-section">
-            <h2>Query Params</h2>
-            <div v-for="query in endpoint.query" :key="query.name">
-              <h3>{{ query.name }}</h3>
-              <p v-if="query.description">{{ query.description }}</p>
-              <div v-if="query.default">
-                <h4>Default</h4>
-                <pre v-highlightjs="typeof query.default === 'string' && (query.default.startsWith('function') || query.default.startsWith('() => '))
-                ? query.default : stringify(query.default)">
-                  <code class="javascript"/>
-                </pre>
+            <!-- Basic Info -->
+            <a :href="`https://api.nexushub.co${endpoint.route}`" target="_blank" class="btn-subtle active route">
+              <div class="verb">{{ endpoint.method }}</div>
+              {{ endpoint.route }}
+            </a>
+            <div class="btn-subtle active">
+              Cache: {{ endpoint.cache ? endpoint.cache.duration : 60 }}s
+            </div>
+            <div class="btn-subtle active">
+              Rate Limit: {{ endpoint.limit ? endpoint.limit.maxInInterval : 20 }}
+              requests per
+              {{ endpoint.limit ? endpoint.limit.interval / 1000 : 5 }}s
+            </div>
+            <div class="btn-subtle active">
+              Authorization: {{ endpoint.scope || 'none' }}
+            </div>
+            <p v-if="endpoint.description" class="description">
+              {{ endpoint.description }}
+            </p>
+
+            <!-- Request/Response -->
+            <div v-if="endpoint.method !== 'GET'" class="sub-section">
+              <h2>Request Format</h2>
+              <pre v-highlightjs="stringify(endpoint.request)">
+                <code class="javascript"/>
+              </pre>
+            </div>
+            <div v-if="endpoint.response || example" class="sub-section">
+              <div class="flex">
+                <h2>Response Format</h2>
+                <div v-if="!endpoint.scope && endpoint.response" class="btn-outline" @click="toggleExample">
+                  Live Example
+                </div>
+              </div>
+              <pre v-highlightjs="stringify(example) || stringify(endpoint.response)">
+                <code class="javascript"/>
+              </pre>
+            </div>
+
+            <!-- Params -->
+            <div v-if="endpoint.query.length" class="sub-section">
+              <h2>Query Params</h2>
+              <div v-for="query in endpoint.query" :key="query.name">
+                <h3>{{ query.name }}</h3>
+                <p v-if="query.description">{{ query.description }}</p>
+                <div v-if="query.default">
+                  <h4>Default</h4>
+                  <pre v-highlightjs="typeof query.default === 'string' && (query.default.startsWith('function') || query.default.startsWith('() => '))
+                  ? query.default : stringify(query.default)">
+                    <code class="javascript"/>
+                  </pre>
+                </div>
               </div>
             </div>
           </div>
@@ -167,18 +173,14 @@ export default {
       if (group && groups) {
         return groups.find(g => g.name === group.replace(/\-/g, ' / '))
           .endpoints.find(e => e.name === name)
-      } else {
-        return {
-          name: ''
-        }
       }
     }
   },
 
   watch: {
     $route () {
-      // Toggle example right away if no response i=s given
-      if (!this.endpoint.response) {
+      // Toggle example right away if no response is given
+      if (this.endpoint && !this.endpoint.response) {
         this.toggleExample()
       }
     }
@@ -190,7 +192,7 @@ export default {
 
   created () {
     // Toggle example right away if no response i=s given
-    if (!this.endpoint.response) {
+    if (this.endpoint && !this.endpoint.response) {
       this.toggleExample()
     }
   },
@@ -227,6 +229,10 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
+/deep/ .zoom-enter-active, .fade-leave-active {
+  transition: none;
+  transform: scale(1);
+}
 .content-wrapper {
   display: flex;
   width: 100%;
