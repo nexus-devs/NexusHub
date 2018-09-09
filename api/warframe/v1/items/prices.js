@@ -47,7 +47,7 @@ class Prices extends Endpoint {
     }
 
     let doc = this.generateDocument(itemResult, timerange)
-    this.getPrices(doc, now, timerange, item)
+    this.getPrices(doc, now, timerange, itemResult)
 
     res.send(doc)
   }
@@ -55,21 +55,21 @@ class Prices extends Endpoint {
   /**
    * Generates the response document
    */
-  generateDocument (itemResult, timerange) {
+  generateDocument (item, timerange) {
     let doc = { // Main document
-      name: itemResult.name,
+      name: item.name,
       components: []
     }
 
-    this.generateComponents(doc, itemResult, timerange)
+    this.generateComponents(doc, item, timerange)
     return doc
   }
 
   /**
    * Generates the components to a corresponding item
    */
-  generateComponents (doc, itemResult, timerange) {
-    itemResult.components.forEach(comp => {
+  generateComponents (doc, item, timerange) {
+    item.components.forEach(comp => {
       const data = {
         median: null,
         min: null,
@@ -115,7 +115,7 @@ class Prices extends Endpoint {
     for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = now.clone().subtract(i, 'days').startOf('day')
       let cursorResult = await this.db.collection('items_presaves').findOne({
-        name: new RegExp('^' + item + '$', 'i'),
+        name: item.name,
         createdAt: dayCursor
       })
       if (!cursorResult) {
@@ -145,7 +145,7 @@ class Prices extends Endpoint {
     for (let i = 0; startOfDay.clone().add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
       const hourCursor = startOfDay.clone().add(i, 'hours')
       let cursorResult = await this.db.collection('items_presaves').findOne({
-        name: new RegExp('^' + item + '$', 'i'),
+        name: item.name,
         createdAt: hourCursor
       })
       if (!cursorResult) {
@@ -172,7 +172,7 @@ class Prices extends Endpoint {
     }
 
     let test = await this.db.collection('orderHistory').aggregate([
-      { $match: { 'createdAt': { $gte: now.clone().startOf('hour') } } },
+      { $match: { 'item': item.name, 'createdAt': { $gte: now.clone().startOf('hour').toDate() } } },
       { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
     ]).toArray()
     console.log(test)
