@@ -17,7 +17,7 @@
     <h4>Setting up the Client</h4>
     <pre v-highlightjs>
       <code class="javascript">const Nexus = require('nexushub-client')
-const nexus = new Client({
+const nexus = new Nexus({
   user_key,
   user_secret
 })
@@ -70,31 +70,4 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.content-wrapper {
-  display: flex;
-  width: 100%;
-  height: calc(100vh - 100px - 56px);
-  min-height: 500px;
-
-  section {
-    overflow-y: auto;
-    padding: 70px 80px;
-    margin: 0;
-
-    h2 {
-      margin-top: 60px;
-      margin-bottom: 10px;
-    }
-    h4 {
-      font-family: 'Roboto';
-      font-size: 0.85em;
-      font-weight: 400;
-      letter-spacing: 0.2;
-      margin-top: 15px;
-    }
-    pre + p {
-      margin-bottom: 60px;
-    }
-  }
-}
 </style>
