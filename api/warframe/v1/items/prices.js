@@ -171,6 +171,16 @@ class Prices extends Endpoint {
       }
     }
 
+    // Get median for the last 24 hours
+    const medianQuery = {
+      item: item.name,
+      createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
+      price: { $ne: null }
+    }
+    const count = await this.db.collection('orderHistory').find(medianQuery).count()
+    const medianOffer = await this.db.collection('orderHistory').find(medianQuery).sort({ 'price': 1 }).skip(count / 2 - 1).limit(1).toArray()
+    const median = medianOffer[0].price
+
     let test = await this.db.collection('orderHistory').aggregate([
       { $match: { 'item': item.name, 'createdAt': { $gte: now.clone().startOf('hour').toDate() } } },
       { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
