@@ -31,7 +31,7 @@ class Prices extends Endpoint {
     const item = req.params.item
     const region = req.query.region
     const timerange = req.query.timerange
-    const timeNow = moment()
+    const now = moment()
 
     // Get item from db
     let itemResult = await this.db.collection('items').findOne({
@@ -47,7 +47,7 @@ class Prices extends Endpoint {
     }
 
     let doc = this.generateDocument(itemResult, timerange)
-    this.getPrices(doc, timeNow, timerange, item)
+    this.getPrices(doc, now, timerange, item)
 
     res.send(doc)
   }
@@ -110,10 +110,10 @@ class Prices extends Endpoint {
   /**
    * Main function: fetches item prices
    */
-  async getPrices (doc, timeNow, timerange, item) {
+  async getPrices (doc, now, timerange, item) {
     // Get either pre-saved day prices, or generate them if they don't exist
     for (let i = 1; i < timerange * 2; i++) {
-      const dayCursor = timeNow.subtract(i, 'days').startOf('day')
+      const dayCursor = moment(now).subtract(i, 'days').startOf('day')
       let cursorResult = await this.db.collection('items_presaves').findOne({
         name: new RegExp('^' + item + '$', 'i'),
         createdAt: dayCursor
@@ -141,9 +141,9 @@ class Prices extends Endpoint {
     }
 
     // Get either pre-saved hour prices for the current day, or generate them if they don't exist
-    const startOfDay = timeNow.startOf('day')
-    for (let i = 0; startOfDay.add(i, 'hours').isBefore(timeNow.startOf('hour')); i++) {
-      const hourCursor = startOfDay.add(i, 'hours')
+    const startOfDay = moment(now).startOf('day')
+    for (let i = 0; moment(startOfDay).add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
+      const hourCursor = moment(startOfDay).add(i, 'hours')
       let cursorResult = await this.db.collection('items_presaves').findOne({
         name: new RegExp('^' + item + '$', 'i'),
         createdAt: hourCursor
@@ -170,6 +170,12 @@ class Prices extends Endpoint {
         })
       }
     }
+
+    let test = await this.db.collection('orderHistory').aggregate([
+      { $match: { 'createdAt': { $gte: moment(now).startOf('hour') } } },
+      { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+    ]).toArray()
+    console.log(test)
   }
 }
 
