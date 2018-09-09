@@ -233,7 +233,7 @@ export default {
   transition: none;
   transform: scale(1);
 }
-.content-wrapper {
+/deep/ .content-wrapper {
   display: flex;
   width: 100%;
   height: calc(100vh - 100px - 56px);
@@ -322,6 +322,9 @@ export default {
     }
     code {
       max-width: 770px;
+    }
+    pre + p {
+      margin-bottom: 60px;
     }
   }
 }

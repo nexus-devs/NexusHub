@@ -2,7 +2,7 @@
   <nav>
     <div class="links">
       <h3>Connecting</h3>
-      <router-link to="/developers/api/clients" exact>Client packages</router-link>
+      <router-link to="/developers/api" exact>Client packages</router-link>
       <router-link to="/developers/api/http" exact>HTTP</router-link>
       <router-link to="/developers/api/socket.io" exact>Socket.io</router-link>
       <router-link to="/developers/api/authentication" exact>Authentication</router-link>
@@ -112,7 +112,7 @@ nav {
   @include shadow-1;
 
   .links {
-    margin-top: 20px;
+    margin-top: 40px;
     margin-left: 85px;
     margin-right: 20px;
     margin-bottom: 50px;
