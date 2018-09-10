@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navigation/>
     <sidebar>
       <sidebar-search/>
     </sidebar>
@@ -49,6 +50,7 @@
 
 
 <script>
+import navigation from 'src/components/ui/nav/warframe/general.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -56,6 +58,7 @@ import uiheader from 'src/components/ui/header.vue'
 
 export default {
   components: {
+    navigation,
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,
