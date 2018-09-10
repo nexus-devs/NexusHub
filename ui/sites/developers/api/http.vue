@@ -10,9 +10,27 @@
     <h2>Authentication</h2>
     <p>
       For requests that require authentication, put your access token in the
-      <b>authorization</b> header as <b>"Bearer &lt;your_token&gt;"</b>.
-      <br>
-      For more information on how to get this token, check out the
+      <code>Authorization</code> header as <code>"Bearer &lt;your_token&gt;"</code>.
+    </p>
+    <br>
+    <h4>Authenticated request example (Node.js)</h4>
+    <pre v-highlightjs>
+      <code class="javascript">const request = require('request-promise')
+
+// Set it as default, so we don't have to do it on every single request.
+request.defaults({
+  baseUrl: 'https://api.nexushub.co'
+  headers: {
+    Authorization: 'Bearer &lt;access_token&gt;'
+  }
+})
+
+const secretUserData = await request.get('/super/secret/userdata')
+</code>
+    </pre>
+
+    <p>
+      For more information on how to get an access token, check out the
       <router-link to="/developers/api/authentication">authentication guide</router-link>.
     </p>
   </docs>

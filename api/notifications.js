@@ -16,10 +16,7 @@ class Notification extends Endpoint {
       }
     }
     this.schema.response = {
-      game: {
-        _value: String,
-        _description: 'Limit notifications to this viewed game on the web-client. Use "global" for site-wide notifications.'
-      },
+      game: String,
       message: {
         title: String,
         body: String
