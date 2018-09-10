@@ -21,6 +21,7 @@ class Order extends Endpoint {
         quantity: 1,
         message: 'Hello, I\'m Glen and I\'d like to buy Ammo Drum for 900p. I won\'t ban you, promise.',
         source: 'Trade Chat',
+        online: true,
         createdAt: new Date()
       }
     }
