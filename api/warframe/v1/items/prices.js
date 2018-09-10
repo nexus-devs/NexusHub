@@ -47,7 +47,7 @@ class Prices extends Endpoint {
     }
 
     let doc = this.generateDocument(itemResult, timerange)
-    this.getPrices(doc, now, timerange, itemResult)
+    await this.getPrices(doc, now, timerange, itemResult)
 
     res.send(doc)
   }
@@ -122,7 +122,7 @@ class Prices extends Endpoint {
 
       } else {
         // Transfer from pre-saved day
-        cursorResult.components.forEach(preComp => {
+        for (let preComp of cursorResult.components) {
           let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
           if (i < timerange) {
             // Current week
@@ -136,7 +136,7 @@ class Prices extends Endpoint {
             comp.selling.previous.days[previousDay] = preComp.selling
             comp.combined.previous.days[previousDay] = preComp.combined
           }
-        })
+        }
       }
     }
 
@@ -152,7 +152,7 @@ class Prices extends Endpoint {
 
       } else {
         // Transfer from pre-saved hour
-        cursorResult.components.forEach(preComp => {
+        for (let preComp of cursorResult.components) {
           let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
           // TODO: Put this in own function / make prettier
           comp.buying.current.days[0].median += preComp.buying.median
@@ -167,24 +167,53 @@ class Prices extends Endpoint {
           comp.combined.current.days[0].offers += preComp.combined.offers
           if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
           if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
-        })
+        }
       }
     }
 
-    // Get median for the last 24 hours
-    const medianQuery = {
-      item: item.name,
-      createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
-      price: { $ne: null }
-    }
-    const median = await this.getMedian(medianQuery)
-    const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
-    const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
+    // Gets current hour results
+    for (let comp of doc.components) {
+      // Get median for the last 24 hours
+      const medianQuery = {
+        item: item.name,
+        component: comp.name,
+        createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
+        price: { $ne: null }
+      }
+      const median = await this.getMedian(medianQuery)
+      const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
+      const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
-    let test = await this.db.collection('orderHistory').aggregate([
-      { $match: { 'item': item.name, 'createdAt': { $gte: now.clone().startOf('hour').toDate() } } },
-      { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
-    ]).toArray()
+      let aggregation = await this.db.collection('orderHistory').aggregate([
+        { $match: { item: item.name, component: comp.name, createdAt: { $gte: now.clone().startOf('hour').toDate() } } },
+        { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+      ]).toArray()
+
+      comp.combined.current.days[0].median += median
+      comp.buying.current.days[0].median += medianBuying
+      comp.selling.current.days[0].median += medianSelling
+
+      // TODO: for the love of god, put this in a function
+      let buying = _.find(aggregation, x => x._id === 'Buying')
+      if (buying) {
+        if (buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = buying.min
+        if (buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = buying.max
+        comp.buying.offers += buying.offers
+        if (buying.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = buying.min
+        if (buying.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = buying.max
+        comp.combined.offers += buying.offers
+      }
+
+      let selling = _.find(aggregation, x => x._id === 'Selling')
+      if (selling) {
+        if (selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = selling.min
+        if (selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = selling.max
+        comp.selling.current.days[0].offers += selling.offers
+        if (selling.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = selling.min
+        if (selling.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = selling.max
+        comp.combined.current.days[0].offers += selling.offers
+      }
+    }
   }
 
   // Gets the median from a given query
