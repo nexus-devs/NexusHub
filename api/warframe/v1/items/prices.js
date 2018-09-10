@@ -177,15 +177,24 @@ class Prices extends Endpoint {
       createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
       price: { $ne: null }
     }
-    const count = await this.db.collection('orderHistory').find(medianQuery).count()
-    const medianOffer = await this.db.collection('orderHistory').find(medianQuery).sort({ 'price': 1 }).skip(count / 2 - 1).limit(1).toArray()
-    const median = medianOffer[0].price
+    const median = await this.getMedian(medianQuery)
+    const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
+    const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
     let test = await this.db.collection('orderHistory').aggregate([
       { $match: { 'item': item.name, 'createdAt': { $gte: now.clone().startOf('hour').toDate() } } },
       { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
     ]).toArray()
-    console.log(test)
+  }
+
+  // Gets the median from a given query
+  async getMedian (query) {
+    const count = await this.db.collection('orderHistory').find(query).count()
+    if (count === 0) return null
+    else {
+      const medianOffer = await this.db.collection('orderHistory').find(query).sort({'price': 1}).skip(count / 2 - 1).limit(1).toArray()
+      return medianOffer[0].price
+    }
   }
 }
 
