@@ -40,7 +40,7 @@ const nexus = new Nexus({
       <code class="javascript">const res = await nexus.post('/post', someObject) // Returns the object</code>
     </pre>
 
-    <h4>Subscribe example</h4>
+    <h4>Pub/Sub example</h4>
     <pre v-highlightjs>
       <code class="javascript">nexus.subscribe('/warframe/v1/orders/opm', opm => {
   console.log(opm) // Logs orders per minute every time a new order comes in.

@@ -23,6 +23,10 @@ class Opm extends Endpoint {
         wfm: Number
       }
     }
+    this.schema.pubsub = {
+      url: '/warframe/v1/orders/opm',
+      response: this.schema.response
+    }
   }
 
   async main (req, res) {

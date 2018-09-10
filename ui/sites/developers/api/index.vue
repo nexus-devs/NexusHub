@@ -33,6 +33,9 @@
               <div class="verb">{{ endpoint.method }}</div>
               {{ endpoint.route }}
             </a>
+            <div v-if="endpoint.pubsub" class="btn-subtle active">
+              Pub/Sub ✔
+            </div>
             <div class="btn-subtle active">
               Cache: {{ endpoint.cache ? endpoint.cache.duration : 60 }}s
             </div>

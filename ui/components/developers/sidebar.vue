@@ -4,7 +4,7 @@
       <h3>Connecting</h3>
       <router-link to="/developers/api" exact>Client packages</router-link>
       <router-link to="/developers/api/http" exact>HTTP</router-link>
-      <router-link to="/developers/api/socket.io" exact>Socket.io</router-link>
+      <router-link to="/developers/api/sockets" exact>Socket.io</router-link>
       <router-link to="/developers/api/authentication" exact>Authentication</router-link>
 
       <div v-for="group in groups" :key="group.name">
