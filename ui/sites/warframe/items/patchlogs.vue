@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navigation/>
     <sidebar>
       <sidebar-search/>
     </sidebar>
@@ -32,6 +33,7 @@
 
 <script>
 import Vue from 'vue'
+import navigation from 'src/components/ui/nav/warframe/items.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -43,6 +45,7 @@ import moment from 'moment'
 
 export default {
   components: {
+    navigation,
     'app-content': appContent,
     sidebar,
     'sidebar-search': sidebarSearch,

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <navigation>
-      <router-link to="/developers" class="sub">Developers</router-link>
-      <router-link to="/developers/api">API Docs</router-link>
-      <router-link to="/developers/api">Contributing</router-link>
-    </navigation>
+    <navigation/>
     <sidebar>
       <sidebar-search/>
     </sidebar>
@@ -96,7 +92,7 @@
 
 <script>
 import Vue from 'vue'
-import navigation from 'src/components/ui/nav.vue'
+import navigation from 'src/components/ui/nav/developers.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
