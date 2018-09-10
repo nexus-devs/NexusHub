@@ -3,6 +3,7 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 class User extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
+    this.schema.description = 'Adds a new user to the database.'
     this.schema.method = 'POST'
     this.schema.scope = 'write_users_warframe'
     this.schema.url = '/warframe/v1/users'
@@ -11,7 +12,7 @@ class User extends Endpoint {
         name: 'MoiD_Glitch'
       }
     }
-    this.schema.response = 'ok'
+    this.schema.response = String
   }
 
   async main (req, res) {

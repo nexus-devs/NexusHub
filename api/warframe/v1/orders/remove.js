@@ -4,6 +4,7 @@ const Orders = require('./index.js')
 class Order extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
+    this.schema.description = 'Removes an array of orders from the database. Requires the order\'s id.'
     this.schema.method = 'DELETE'
     this.schema.scope = 'write_orders_warframe'
     this.schema.url = '/warframe/v1/orders'
@@ -13,7 +14,7 @@ class Order extends Endpoint {
         discard: [{ _id: '5b62bb90c1778d2b40f0c995' }]
       }
     }
-    this.schema.response = 'deleted!'
+    this.schema.response = String
   }
 
   /**

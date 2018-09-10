@@ -6,7 +6,7 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 class List extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = 'Get a list of all items.'
+    this.schema.description = 'Get a list of all items with their basic attributes.'
     this.schema.url = '/warframe/v1/items'
     const economyData = {
       median: Number,
