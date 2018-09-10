@@ -4,8 +4,6 @@
       <router-link to="/warframe" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
-      <!-- <span class="sub">{{ game }}</span> -->
-      <search :placeholder="'Search item...'"/>
       <slot>
         <!-- Page links will go here -->
       </slot>
@@ -20,12 +18,10 @@
 
 <script>
 import notifications from 'src/components/ui/notifications.vue'
-import search from 'src/components/search/input.vue'
 
 export default {
   components: {
-    notifications,
-    search
+    notifications
   },
 
   computed: {
@@ -69,6 +65,7 @@ nav {
   width: calc(100% - 50px);
   padding: 0 25px;
   height: 56px;
+  top: 0;
   z-index: 4;
   background: $color-bg-dark;
   align-items: center;
@@ -77,6 +74,10 @@ nav {
   a {
     margin: 0 15px;
     font-size: 0.9em;
+
+    &:nth-of-type(3) {
+      margin-left: 25px;
+    }
   }
   .logo {
     height: 22px;

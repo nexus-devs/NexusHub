@@ -94,6 +94,43 @@ b {
   font-weight: 600;
   color: $color-font-paragraph;
 }
+
 i {
   font-style: italic;
+}
+
+code {
+  font-family: 'Consolas', Monospace;
+  padding: 15px;
+  border-radius: 2px;
+  background: $color-bg-darker;
+  font-size: 0.9em;
+
+  span {
+    font-family: 'Consolas', Monospace;
+  }
+}
+
+p code {
+  padding: 4px;
+}
+
+pre {
+  margin-bottom: -20px; // For some reason there's whitespace here which is neither padding nor margin
+}
+
+.hljs-string {
+  color: $color-primary-subtle;
+}
+.hljs-number {
+  color: #4286f4;
+}
+.hljs-keyword {
+  color: #c678dd;
+}
+.hljs-built_in {
+  color: #4286f4
+}
+.hljs-comment {
+  opacity: 0.4;
 }

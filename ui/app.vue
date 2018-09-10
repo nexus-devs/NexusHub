@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <navigation/>
     <div class="app-view">
       <router-view/>
       <bottom/>
@@ -15,7 +14,6 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
-import navigation from 'src/components/ui/nav.vue'
 import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
 
@@ -24,7 +22,6 @@ import bottom from 'src/components/ui/footer.vue'
  */
 export default {
   components: {
-    navigation,
     status,
     bottom
   },
@@ -48,7 +45,6 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('applyInputQuery', this.$route)
     Vue.use(VueTouch)
   },
   mounted () {
