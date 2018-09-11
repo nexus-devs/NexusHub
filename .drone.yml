@@ -8,7 +8,7 @@ pipeline:
       # Determine if webpack needs a rebuild.
       - git fetch origin
       - git checkout origin/staging config/webpack/build.json
-      - git checkout development
+      - git checkout $DRONE_BRANCH
       - npm run toggle-webpack
       - npm run build -- staging
     when:
