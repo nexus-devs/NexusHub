@@ -18,7 +18,8 @@ You can find the live version of this repo at [staging.nexushub.co](https://stag
 <br>
 
 ## API
-[Provisional docs](https://drive.google.com/open?id=16rbyQAG1cgQhwfFfXcHqn-o8txZ5dAZBf4hzr3VeJJE)
+[Beta docs](https://staging.nexushub.co/developers)<br>
+[API client](https://github.com/nexus-devs/nexushub-client)
 
 <br>
 
