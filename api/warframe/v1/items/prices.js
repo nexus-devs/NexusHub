@@ -161,22 +161,22 @@ class Prices extends Endpoint {
           if (buying) {
             if (buying.min < comp.buying.min || !comp.buying.min) comp.buying.min = buying.min
             if (buying.max > comp.buying.max || !comp.buying.max) comp.buying.max = buying.max
-            comp.buying.offers = buying.offers
+            comp.buying.offers += buying.offers
             comp.buying.median = medianBuying
             if (buying.min < comp.combined.min || !comp.combined.min) comp.combined.min = buying.min
             if (buying.max > comp.combined.max || !comp.combined.max) comp.combined.max = buying.max
-            comp.combined.offers = buying.offers
+            comp.combined.offers += buying.offers
           }
 
           let selling = _.find(aggregation, x => x._id === 'Selling')
           if (selling) {
             if (selling.min < comp.selling.min || !comp.selling.min) comp.selling.min = selling.min
             if (selling.max > comp.selling.max || !comp.selling.max) comp.selling.max = selling.max
-            comp.selling.offers = selling.offers
+            comp.selling.offers += selling.offers
             comp.selling.median = medianSelling
             if (selling.min < comp.combined.min || !comp.combined.min) comp.combined.min = selling.min
             if (selling.max > comp.combined.max || !comp.combined.max) comp.combined.max = selling.max
-            comp.combined.offers = selling.offers
+            comp.combined.offers += selling.offers
           }
         }
 
