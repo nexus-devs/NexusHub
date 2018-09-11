@@ -1,22 +1,17 @@
 #!/bin/sh
-# Stash builds from dev branch and go to staging
+# Commit builds from dev branch and go to staging
 webpack="$(cat config/webpack/build.json | grep '\"enable\": true')"
-git stash
-git clean -f -d
-git checkout staging
+git add -A
+git commit -m "Add staging builds"
 
 # If new builds were added - Remove all old ones and pop the stash. Otherwise,
 # just pop the stash.
-if [ webpack = true ]; then
-  echo '* New webpack builds found - Remove old builds.'
-  rm -rf assets/bundles/*
-  git stash pop
+if [ -z webpack ]; then
+  echo '* New webpack builds found - Override staging.'
+  git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' --force development:staging 2>/dev/null
 else
-  echo '* No new webpack builds - Just apply changes from dev branch.'
-  git stash pop
+  git checkout development
+  git checkout staging
+  git merge -s recursive -X theirs development
+  git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
 fi
-
-git add .
-git commit -m "Auto-merge development with staging."
-git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
-# ^ suppress output to /dev/null to keep secrets hidden

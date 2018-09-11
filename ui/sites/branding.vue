@@ -92,7 +92,7 @@
           <h2>NexusHub Colors</h2>
           <p>
             Keep in mind that each color in our palette comes in two shades for
-            different scenarios.
+            different situations.
           </p>
           <div class="row row-margin">
             <div class="col-b color">
