@@ -1,4 +1,4 @@
-[![Nexus-Stats](/.github/banner.svg)](https://github.com/nexus-devs)
+[![NexusHub](/.github/banner.svg)](https://github.com/nexus-devs)
 
 ##
 
@@ -9,7 +9,7 @@
 
  <br>
 
-Nexus-Stats is an online service which provides insights on game economics and other ingame data. We pride ourselves on the freedom that we take to gather our data - If it's there, we'll find some way to extract it. This repo contains the application logic for our servers, including all statistics calculations. For data-tracking via OCR, please see [nexus-sentry](https://github.com/nexus-devs/nexus-sentry).
+NexusHub is an online service which provides insights on game economics and other ingame data. We pride ourselves on the freedom that we take to gather our data - If it's there, we'll find some way to extract it. This repo contains the application logic for our servers, including all statistics calculations. For data-tracking via OCR, please see [nexus-sentry](https://github.com/nexus-devs/nexus-sentry).
 
 <br>
 
@@ -28,7 +28,7 @@ Read up on our [guidelines for contributing](/.github/CONTRIBUTING.md) and then 
 [issue](https://github.com/nexus-devs/nexus-stats/issues) regarding your
 concern.
 
-Nexus-Stats is entirely developed by community members of the games we support,
+NexusHub is entirely developed by community members of the games we support,
 so if you wanna join our team as a regular contributor, you're more than welcome!
 
 If you need an introduction to our code base, feel free to ask us on
