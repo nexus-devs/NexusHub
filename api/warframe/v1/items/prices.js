@@ -114,16 +114,16 @@ class Prices extends Endpoint {
     // Get either pre-saved day prices, or generate them if they don't exist
     for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = now.clone().subtract(i, 'days').startOf('day')
-      let cursorResult = await this.db.collection('items_presaves').findOne({
+      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
         name: item.name,
-        createdAt: dayCursor
+        createdAt: dayCursor.toDate()
       })
       if (!cursorResult) {
 
       } else {
         // Transfer from pre-saved day
         for (let preComp of cursorResult.components) {
-          let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+          let comp = _.find(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
           if (i < timerange) {
             // Current week
             comp.buying.current.days[i] = preComp.buying
@@ -144,30 +144,75 @@ class Prices extends Endpoint {
     const startOfDay = now.clone().startOf('day')
     for (let i = 0; startOfDay.clone().add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
       const hourCursor = startOfDay.clone().add(i, 'hours')
-      let cursorResult = await this.db.collection('items_presaves').findOne({
+      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
         name: item.name,
-        createdAt: hourCursor
+        createdAt: hourCursor.toDate()
       })
-      if (!cursorResult) {
 
-      } else {
-        // Transfer from pre-saved hour
-        for (let preComp of cursorResult.components) {
-          let comp = _.filter(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
-          // TODO: Put this in own function / make prettier
-          comp.buying.current.days[0].median += preComp.buying.median
-          comp.buying.current.days[0].offers += preComp.buying.offers
-          if (preComp.buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = preComp.buying.min
-          if (preComp.buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = preComp.buying.max
-          comp.selling.current.days[0].median += preComp.selling.median
-          comp.selling.current.days[0].offers += preComp.selling.offers
-          if (preComp.selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = preComp.selling.min
-          if (preComp.selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = preComp.selling.max
-          comp.combined.current.days[0].median += preComp.combined.median
-          comp.combined.current.days[0].offers += preComp.combined.offers
-          if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
-          if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
+      if (!cursorResult) {
+        cursorResult = { name: item.name, components: [], createdAt: hourCursor.toDate() }
+
+        // Aggregate and save into block
+        for (let c of doc.components) {
+          const data = {
+            min: null,
+            max: null,
+            offers: null
+          }
+          const position = cursorResult.components.push({
+            name: c.name,
+            buying: _.cloneDeep(data),
+            selling: _.cloneDeep(data),
+            combined: _.cloneDeep(data)
+          })
+
+          const comp = cursorResult.components[position - 1]
+
+          // TODO: Add purging
+          let aggregation = await this.db.collection('orderHistory').aggregate([
+            { $match: { item: item.name, component: c.name, createdAt: { $gte: hourCursor.toDate(), $lt: hourCursor.clone().add(1, 'hours').toDate() } } },
+            { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+          ]).toArray()
+
+          // TODO: for the love of god, put this in a function
+          let buying = _.find(aggregation, x => x._id === 'Buying')
+          if (buying) {
+            if (buying.min < comp.buying.min || !comp.buying.min) comp.buying.min = buying.min
+            if (buying.max > comp.buying.max || !comp.buying.max) comp.buying.max = buying.max
+            comp.buying.offers += buying.offers
+            if (buying.min < comp.combined.min || !comp.combined.min) comp.combined.min = buying.min
+            if (buying.max > comp.combined.max || !comp.combined.max) comp.combined.max = buying.max
+            comp.combined.offers += buying.offers
+          }
+
+          let selling = _.find(aggregation, x => x._id === 'Selling')
+          if (selling) {
+            if (selling.min < comp.selling.min || !comp.selling.min) comp.selling.min = selling.min
+            if (selling.max > comp.selling.max || !comp.selling.max) comp.selling.max = selling.max
+            comp.selling.offers += selling.offers
+            if (selling.min < comp.combined.min || !comp.combined.min) comp.combined.min = selling.min
+            if (selling.max > comp.combined.max || !comp.combined.max) comp.combined.max = selling.max
+            comp.combined.offers += selling.offers
+          }
         }
+
+        await this.db.collection('orderHistorySaves').insertOne(cursorResult)
+      }
+
+      // Transfer from pre-saved hour
+      // No median here, it gets set on the current hour requests later
+      for (let preComp of cursorResult.components) {
+        let comp = _.find(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+        // TODO: Put this in own function / make prettier
+        comp.buying.current.days[0].offers += preComp.buying.offers
+        if (preComp.buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = preComp.buying.min
+        if (preComp.buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = preComp.buying.max
+        comp.selling.current.days[0].offers += preComp.selling.offers
+        if (preComp.selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = preComp.selling.min
+        if (preComp.selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = preComp.selling.max
+        comp.combined.current.days[0].offers += preComp.combined.offers
+        if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
+        if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
       }
     }
 
@@ -184,6 +229,7 @@ class Prices extends Endpoint {
       const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
       const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
+      // TODO: Add purging
       let aggregation = await this.db.collection('orderHistory').aggregate([
         { $match: { item: item.name, component: comp.name, createdAt: { $gte: now.clone().startOf('hour').toDate() } } },
         { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
@@ -198,10 +244,10 @@ class Prices extends Endpoint {
       if (buying) {
         if (buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = buying.min
         if (buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = buying.max
-        comp.buying.offers += buying.offers
+        comp.buying.current.days[0].offers += buying.offers
         if (buying.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = buying.min
         if (buying.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = buying.max
-        comp.combined.offers += buying.offers
+        comp.combined.current.days[0].offers += buying.offers
       }
 
       let selling = _.find(aggregation, x => x._id === 'Selling')
