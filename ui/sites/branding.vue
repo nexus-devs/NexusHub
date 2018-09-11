@@ -97,7 +97,7 @@
           <div class="row row-margin">
             <div class="col-b color">
               <div class="primary-shade green">
-                <span>Primary Shade</span>
+                <span/>
                 <span>#6ae974</span>
               </div>
               <div class="sub-shade green-shade">
@@ -106,7 +106,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade blue">
-                <span>Primary Shade</span>
+                <span/>
                 <span>#3ad1d7</span>
               </div>
               <div class="sub-shade blue-shade">
@@ -115,7 +115,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade grey">
-                <span>Primary Shade</span>
+                <span/>
                 <span>#4e5862</span>
               </div>
               <div class="sub-shade grey-shade">
@@ -124,7 +124,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade dark">
-                <span>Primary Shade</span>
+                <span/>
                 <span>#20242a</span>
               </div>
               <div class="sub-shade dark-shade">

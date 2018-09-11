@@ -60,8 +60,6 @@ pipeline:
       - mv assets/.robots.txt assets/robots.txt # Make search engines ignore the staging site
 
       # Push changes from above and from dev branch
-      - git add -A
-      - git commit -m "Add staging builds"
       - bash build/stage.sh
     secrets: [ nexus_ci_token ]
     when:
