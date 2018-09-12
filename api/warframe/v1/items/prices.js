@@ -15,11 +15,6 @@ class Prices extends Endpoint {
         name: 'timerange',
         default: 7,
         description: 'Time range from now in the past, in days.'
-      },
-      {
-        name: 'region',
-        default: '',
-        description: 'Region to select requests from.'
       }
     ]
   }
@@ -29,7 +24,6 @@ class Prices extends Endpoint {
    */
   async main (req, res) {
     const item = req.params.item
-    const region = req.query.region
     const timerange = req.query.timerange
     const now = moment()
 
