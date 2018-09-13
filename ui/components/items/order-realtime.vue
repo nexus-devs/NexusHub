@@ -8,7 +8,7 @@
         </div>
         <h3>{{ component.name }}</h3>
       </div>
-      <span>{{ order.user }}</span>
+      <h3 class="user">{{ order.user }}</h3>
     </template>
     <template slot="body">
       <span>{{ order.offer }} for</span>
@@ -101,10 +101,10 @@ export default {
     align-items: center;
     justify-content: space-between;
 
-    span {
-      font-size: 0.9em;
-      margin-top: -3px;
-
+    .user {
+      font-size: 0.9em !important;
+      color: white !important;
+      text-transform: none;
       @media (max-width: $breakpoint-m) {
         display: none;
       }
