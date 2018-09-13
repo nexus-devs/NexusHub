@@ -156,6 +156,9 @@ export default {
       box-shadow: none;
       left: 17px;
 
+      /deep/ span {
+        font-family: 'Circular';
+      }
       /deep/ .tooltip-pointer {
         display: none;
       }
