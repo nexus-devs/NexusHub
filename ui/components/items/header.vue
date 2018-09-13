@@ -291,13 +291,14 @@ export default {
       margin-left: -20px;
       color: white;
       cursor: pointer;
+      opacity: 0.6;
 
       &:first-of-type {
         margin-left: -7px; // padding
       }
     }
     span.selected {
-      color: $color-primary-subtle;
+      opacity: 1;
     }
     span:after {
       content: ' /\00a0'
