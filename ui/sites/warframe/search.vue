@@ -53,10 +53,10 @@ let ongoing = setTimeout(() => {})
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
-    'results-group': resultsGroup
+    sidebarSearch,
+    resultsGroup
   },
 
   data () {

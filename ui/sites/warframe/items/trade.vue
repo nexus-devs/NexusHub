@@ -17,7 +17,7 @@
               <div class="realtime">
                 <opm/>
                 <transition-group name="realtime" class="realtime-users row">
-                  <realtime-user v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                  <order-realtime v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
                 </transition-group>
               </div>
             </div>
@@ -98,7 +98,7 @@ import navigation from 'src/components/ui/nav/warframe/items.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemheader from 'src/components/items/header.vue'
+import itemHeader from 'src/components/items/header.vue'
 import opm from 'src/components/items/opm-item.vue'
 import component from 'src/components/items/component.vue'
 import order from 'src/components/items/order.vue'
@@ -161,15 +161,15 @@ function filter (orders, type = 'Selling', filters = []) {
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
-    'item-header': itemheader,
+    sidebarSearch,
+    itemHeader,
     opm,
-    'realtime-user': orderRealtime,
+    orderRealtime,
     comp: component,
     order,
-    'order-popup': orderPopup
+    orderPopup
   },
 
   computed: {

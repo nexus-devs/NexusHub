@@ -32,6 +32,13 @@ export default {
   @media (max-width: $breakpoint-s) {
     width: 100% !important;
   }
+  &.a-ie {
+    padding: 0;
+
+    &:before {
+      border-radius: 2px;
+    }
+  }
 }
 
 .header {

@@ -110,10 +110,10 @@ const replacer = (key, value) => {
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
-    'sidebar-nav': sidebarNav
+    sidebarSearch,
+    sidebarNav
   },
 
   data () {

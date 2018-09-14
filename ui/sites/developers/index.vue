@@ -1,10 +1,6 @@
 <template>
   <div>
-    <navigation>
-      <router-link to="/developers" class="sub">Developers</router-link>
-      <router-link to="/developers/api">API Docs</router-link>
-      <router-link to="/developers/api">Contributing</router-link>
-    </navigation>
+    <navigation/>
     <sidebar>
       <sidebar-search/>
     </sidebar>
@@ -13,7 +9,7 @@
         <div class="container">
           <h1>
             Build awesome tools that reach thousands of gamers with
-            <router-link to="/developers/api/Warframe-Orders/Orders">trading data</router-link>,
+            <router-link to="/developers/api/Warframe-Orders/orders">trading data</router-link>,
             <router-link to="/developers/api/Warframe-Items/base">item data</router-link>, and
             <router-link to="/developers/api">anything else on this platform</router-link>.
           </h1>
@@ -49,7 +45,7 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav.vue'
+import navigation from 'src/components/ui/nav/developers.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
