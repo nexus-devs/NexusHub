@@ -37,7 +37,7 @@ import navigation from 'src/components/ui/nav/warframe/items.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemheader from 'src/components/items/header.vue'
+import itemHeader from 'src/components/items/header.vue'
 import VueObserveVisibility from 'vue-observe-visibility'
 import VueAffix from 'vue-affix'
 import patchlog from 'src/components/items/patchlog.vue'
@@ -46,10 +46,10 @@ import moment from 'moment'
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
-    'item-header': itemheader,
+    sidebarSearch,
+    itemHeader,
     patchlog
   },
 

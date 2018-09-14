@@ -5,44 +5,100 @@
       <sidebar-search/>
     </sidebar>
     <app-content>
-      <ui-header>
-        <h1>Open-Source</h1>
-        <p>
-          NexusHub is completely open source. That means you  can see exactly
-          how the data we're displaying is gathered, but even more importantly: you
-          can shape this platform however you want it to be!
-        </p>
-      </ui-header>
-      <div class="container">
-        <section>
-          <h2>Github</h2>
-          <p>
-            Explore our source code or report any bugs you find here. If you're
-            bored, we always welcome contributions!
-          </p>
-          <a href="http://github.com/nexus-devs/nexus-stats" target="_blank">www.github.com/nexus-devs/nexus-stats</a>
-        </section>
-        <section>
-          <h2>Contributing</h2>
-          <p>
-            If there's anything about NexusHub that you'd like to change,
-            you can actually just do it. To keep everything organized, please
-            see our <router-link to="/contribute">contribution guidelines</router-link>
-            first.
-          </p>
-        </section>
-        <section>
-          <h2>Responsible Disclosure</h2>
-          <p>
-            If you find any critical vulnerabilities, please send us a private
-            mail instead of opening issues on Github. We can't offer you bounties
-            like the big guys, but we'll never forget your help for helping us
-            make this platform more secure.
-          </p>
-          <br>
-          <a href="mailto:devs@nexus-stats.com?Subject=System%20Vulnerability%20Inquiry">devs@nexus-stats.com</a>
-        </section>
-      </div>
+      <section>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h1>
+                Building a platform <br>that matters
+              </h1>
+              <p>
+                NexusHub is an open source project completely
+                powered by its community, so anyone is welcome to
+                build their own vision of this platform for any game they like.
+                All while getting the full revenue for what you've built in return!
+              </p>
+              <p class="typer">
+                <span>Want to</span>
+                <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']"/>
+              </p>
+              <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">
+                Join us on Discord
+              </a>
+            </div>
+            <div class="col img-col">
+              <img src="/img/open-source/coding.svg" class="codez" alt="">
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <section>
+        <div class="container repos">
+          <h2>Here's some stuff that we've built so far.</h2>
+          <div class="row-margin">
+            <a href="https://github.com/nexus-devs/NexusHub" target="_blank" class="col-b">
+              <module class="a-ie">
+                <template slot="header">
+                  <img src="/img/brand/nexushub-logo-bw.svg" class="ico-h-32" alt="NexusHub">
+                  <h3>NexusHub</h3>
+                </template>
+                <template slot="body">
+                  <p>Economy Analytics and Game Data for Warframe.</p>
+                </template>
+              </module>
+            </a>
+
+            <a href="https://github.com/cubic-js/cubic" target="_blank" class="col-b">
+              <module class="a-ie">
+                <template slot="header">
+                  <img src="/img/open-source/cubic.svg" class="ico-h-32" alt="NexusHub">
+                  <h3>Cubic</h3>
+                </template>
+                <template slot="body">
+                  <p>Fully Modular Javascript App Platform.</p>
+                </template>
+              </module>
+            </a>
+
+            <a href="https://github.com/nexus-devs/beholder" target="_blank" class="col-b">
+              <module class="a-ie">
+                <template slot="header">
+                  <img src="/img/open-source/beholder.svg" class="ico-h-32" alt="NexusHub">
+                  <h3>Beholder</h3>
+                </template>
+                <template slot="body">
+                  <p>Layout detection framework for DirectX11 applications.</p>
+                </template>
+              </module>
+            </a>
+
+            <a href="https://github.com/WFCD/warframe-items" target="_blank" class="col-b">
+              <module class="a-ie">
+                <template slot="header">
+                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="NexusHub">
+                  <h3>warframe-items</h3>
+                </template>
+                <template slot="body">
+                  <p>Complete collection of data for every item in Warframe.</p>
+                </template>
+              </module>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="container contribute">
+          <h2>Want to contribute?</h2>
+          <p>Check out these examples on how to build a feature on NeuxsHub.</p>
+          <router-link to="/developers/contributing" class="btn-outline">
+            Building an API endpoint
+          </router-link>
+          <router-link to="/developers/contributing" class="btn-outline">
+            Building an UI component
+          </router-link>
+        </div>
+      </section>
     </app-content>
   </div>
 </template>
@@ -50,32 +106,124 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/general.vue'
+import navigation from 'src/components/ui/nav.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import uiheader from 'src/components/ui/header.vue'
+import module from 'src/components/ui/module.vue'
+let VueTyper
+try {
+  window
+  VueTyper = require('vue-typer').VueTyper
+} catch (err) {
+  // SSR - don't load
+}
 
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
-    'ui-header': uiheader
+    sidebarSearch,
+    VueTyper,
+    module
   }
 }
 </script>
 
 
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-p {
-  font-size: 1.05em;
+section:first-of-type {
+  padding: 100px 0;
+  background-size: 450px;
+  background-repeat: repeat;
+  background-image: url('/img/developers/circuit-board.svg');
+
+  h1 {
+    font-size: 2.8em;
+
+    a {
+      color: $color-primary-subtle !important;
+      font-family: 'Circular';
+    }
+  }
+  p {
+    margin: 20px 0 10px;
+    font-size: 1.15em;
+    color: white;
+    max-width: 600px;
+  }
 }
-a {
-  margin-top: 15px;
+
+.typer {
+  span {
+    font-family: 'Consolas', monospace;
+    font-size: 1.1em;
+  }
+}
+/deep/ .vue-typer {
+  margin-left: 5px;
+
+  span {
+    font-family: 'Consolas', monospace;
+    color: white !important;
+  }
+  .custom.char {
+    &.selected {
+      background: #4286f4;
+    }
+  }
+  .custom.caret {
+    background: white;
+  }
+}
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+}
+.btn-outline {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 15px;
+}
+.img-col {
+  text-align: center;
+
+  @media (max-width: $breakpoint-m) {
+    display: none;
+  }
+}
+.codez {
+  height: 300px;
+  margin-top: 25px;
+}
+
+/**
+ * Open source repos
+ */
+.repos {
+  padding: 20px 0;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+/deep/ .module {
+  min-width: 225px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  h3 {
+    margin-top: 10px;
+    font-size: 1em !important;
+  }
 }
 </style>

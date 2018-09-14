@@ -109,9 +109,9 @@ const parseNum = (num) => (Math.round(num / 1000) * 1000)
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch
+    sidebarSearch
   },
 
   computed: {

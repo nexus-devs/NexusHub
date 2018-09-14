@@ -81,13 +81,13 @@ import module from 'src/components/ui/module.vue'
 export default {
   components: {
     navigation,
-    'app-content': appContent,
+    appContent,
     sidebar,
-    'sidebar-search': sidebarSearch,
+    sidebarSearch,
     search,
     timerange,
     rank,
-    'search-button': searchButton,
+    searchButton,
     opm,
     module
   },
