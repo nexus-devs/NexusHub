@@ -90,12 +90,15 @@
       <section>
         <div class="container contribute">
           <h2>Want to contribute?</h2>
-          <p>Check out these examples on how to build a feature on NeuxsHub.</p>
+          <p>
+            We made some easy guides which teach you how to build a
+            feature like the <a @click="demoNotifications">notification box.</a>
+          </p>
           <router-link to="/developers/contributing" class="btn-outline">
             Building an API endpoint
           </router-link>
           <router-link to="/developers/contributing" class="btn-outline">
-            Building an UI component
+            Building a UI component
           </router-link>
         </div>
       </section>
@@ -106,7 +109,7 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav.vue'
+import navigation from 'src/components/ui/nav/general.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
@@ -127,6 +130,15 @@ export default {
     sidebarSearch,
     VueTyper,
     module
+  },
+
+  methods: {
+    demoNotifications () {
+      this.$store.commit('addNotification', {
+        title: 'This notification box..',
+        body: '..to be precise.'
+      })
+    }
   }
 }
 </script>
@@ -224,6 +236,30 @@ section:first-of-type {
   h3 {
     margin-top: 10px;
     font-size: 1em !important;
+  }
+}
+
+.contribute {
+  padding-top: 20px;
+
+  .btn-outline {
+    border-radius: 2px;
+    border: none;
+    padding: 20px 20px 18px;
+    font-family: 'Circular';
+
+    &:first-of-type {
+      background: #4286f4;
+    }
+    &:nth-of-type(2) {
+      background: $color-primary-subtle;
+    }
+    &:before {
+      border-radius: 2px;
+    }
+  }
+  p a {
+    cursor: pointer;
   }
 }
 </style>
