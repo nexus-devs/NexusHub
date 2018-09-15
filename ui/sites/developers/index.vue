@@ -11,12 +11,12 @@
             Build awesome tools that reach thousands of gamers with
             <router-link to="/developers/api/Warframe-Orders/orders">trading data</router-link>,
             <router-link to="/developers/api/Warframe-Items/base">item data</router-link>, and
-            <router-link to="/developers/api">anything else on this platform</router-link>.
+            <router-link to="/developers/api/General/foo">anything else on this platform</router-link>.
           </h1>
           <p>
             These pages are made to help you build up your tools with data from NexusHub.
           </p>
-          <router-link to="/developers/api" class="btn-outline">
+          <router-link to="/developers/api/General/foo" class="btn-outline">
             API Docs
           </router-link>
         </div>

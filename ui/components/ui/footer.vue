@@ -16,7 +16,7 @@
         <div class="col-b">
           <h4>Developers</h4>
           <router-link to="/developers">Developer Hub</router-link>
-          <router-link to="/developers/api">API Docs</router-link>
+          <router-link to="/developers/api/General/foo">API Docs</router-link>
         </div>
         <div class="col-b">
           <h4>Company</h4>
