@@ -6,13 +6,10 @@
         <div class="ico-a-ie">
           <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class="ico-20">
         </div>
-        <tooltip>Tools</tooltip>
       </div>
     </div>
     <div :class="{ dragged: deltaX || active, hidden }" class="nav-lower">
-      <div class="nav-lower-backdrop">
-        <div class="nav-lower-backdrop-first-bg"/>
-      </div>
+      <div class="nav-lower-backdrop"/>
       <slot/>
     </div>
   </v-touch>
@@ -204,11 +201,31 @@ nav {
         background: $color-bg-dark;
         will-change: transform;
         @include ease-out(0.45s);
-        @include shadow-1;
+        @include shade-1;
 
         @media (max-width: $breakpoint-s) {
           transform: translateX(calc(-320px - 5vw));
           width: calc(250px + 5vw);
+        }
+      }
+      &:hover {
+        & ~ .nav-lower.hidden {
+          opacity: 1 !important;
+
+          .ico-a-ie {
+            background: rgba(200,225,255,0.1);
+          }
+          .tooltip {
+            opacity: 1;
+            background: transparent;
+            box-shadow: none;
+            transition-delay: 0s;
+
+            .tooltip-pointer {
+              opacity: 0;
+              transition-delay: 0s;
+            }
+          }
         }
       }
     }
@@ -216,24 +233,30 @@ nav {
     .nav-lower {
       height: 100vh;
       @include ease-out(0.45s);
-      @include shadow-1;
 
       &.hidden {
         opacity: 0;
         pointer-events: none;
+
+        .tooltip {
+          @include ease(0s);
+          transition-delay: 1s;
+
+          .tooltip-pointer {
+            transition-delay: 1s;
+          }
+        }
+      }
+      &.dragged {
+        .nav-lower-backdrop {
+          background: $color-bg;
+        }
       }
       .nav-lower-backdrop {
         position: absolute;
         height: 100vh;
         width: 100%;
         z-index: 1;
-        @include gradient-background(#7a8899, $color-bg-light);
-
-        .nav-lower-backdrop-first-bg {
-          height: 56px;
-          width: 56px;
-          background: rgba(0, 5, 10, 0.4);
-        }
       }
     }
 
