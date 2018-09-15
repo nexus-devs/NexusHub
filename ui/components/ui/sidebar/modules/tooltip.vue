@@ -24,7 +24,7 @@
     color: white;
     opacity: 0;
     white-space: nowrap;
-    @include gradient-background-dg($color-primary, $color-accent);
+    background: #00E88C;
     @include shadow-3;
     @include ease(0.25s);
 
