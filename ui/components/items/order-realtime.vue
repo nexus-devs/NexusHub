@@ -15,9 +15,6 @@
       <span class="main-value">
         {{ order.price ? `${order.price}p` : 'any offer' }}
       </span>
-      <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff >= 0 : priceDiff <= 0 }">
-        {{ priceDiff > 0 ? '+' : '' }}{{ priceDiff }}%
-      </span>
     </template>
   </module>
 </template>
@@ -47,20 +44,6 @@ export default {
       } else {
         return {}
       }
-    },
-    priceDiff () {
-      if (this.order) {
-        const type = this.order.offer.toLowerCase()
-        const value = this.order.price - this.component[type].current.median
-
-        if (this.order.price) {
-          return (value / this.component[type].current.median * 100).toFixed(2)
-        } else {
-          return null
-        }
-      } else {
-        return {}
-      }
     }
   },
 
@@ -81,7 +64,7 @@ export default {
   @include ie;
   border-radius: 2px;
   padding: 0;
-  flex-basis: 33%;
+  flex-basis: 25%;
   margin-right: 15px;
   margin-bottom: 15px;
   @include ease(0.5s);
@@ -92,7 +75,7 @@ export default {
   &:before {
     border-radius: 2px;
   }
-  &:nth-of-type(n + 5) {
+  &:nth-of-type(n + 7) {
     display: none;
   }
   /deep/ .header {
@@ -113,19 +96,11 @@ export default {
   /deep/ .body {
     padding: 30px 25px;
   }
-  .main-value + span {
-    color: $color-primary;
-    font-size: 0.85em;
-
-    &.negative {
-      color: $color-error;
-    }
-  }
   @media (max-width: $breakpoint-m) {
     margin-right: 10px;
   }
   @media (max-width: $breakpoint-s) {
-    &:nth-of-type(even) {
+    &:nth-of-type(3n) {
       margin-right: 0;
     }
   }
