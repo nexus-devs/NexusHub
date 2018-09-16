@@ -85,7 +85,7 @@ export default {
 
 .footer {
   display: flex;
-  padding: 6px 25px;
+  padding: 4px 25px;
   margin-top: auto;
   background: $color-bg;
   font-size: 0.75em !important;
@@ -93,6 +93,7 @@ export default {
 
   a {
     display: flex;
+    margin-left: auto;
     align-items: center;
     text-transform: uppercase;
     @include ie;

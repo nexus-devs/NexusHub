@@ -104,7 +104,7 @@ export default {
   overflow: hidden;
   height: 60px;
   width: 80px;
-  background: rgba(225,240,255, 0.05);
+  background: rgba(35,40,45, 0.15);
   border-right: 1px solid $color-subtle;
 
   img {

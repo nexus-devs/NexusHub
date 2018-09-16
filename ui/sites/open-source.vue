@@ -249,7 +249,7 @@ section:first-of-type {
     font-family: 'Circular';
 
     &:first-of-type {
-      background: #4286f4;
+      background: $color-accent-subtle;
     }
     &:nth-of-type(2) {
       background: $color-primary-subtle;

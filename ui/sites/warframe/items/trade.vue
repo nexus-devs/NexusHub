@@ -365,7 +365,7 @@ h2 {
 }
 
 .type {
-  padding-bottom: 10px;
+  padding-bottom: 15px;
   margin-bottom: 20px;
   width: 100%;
   border-bottom: 1px solid $color-subtle-dark;
@@ -412,7 +412,15 @@ h2 {
         font-weight: 400;
       }
       span {
-        display: none;
+        position: relative;
+        top: 1px;
+        margin-left: 5px;
+        padding: 2px 10px;
+        border-radius: 50px;
+        font-size: 0.8em;
+        color: white;
+        background: $color-bg;
+        @include ease(0.25s);
       }
       .image-wrapper {
         height: 29px;

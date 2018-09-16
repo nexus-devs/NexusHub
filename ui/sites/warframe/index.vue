@@ -498,9 +498,6 @@ section {
     /deep/ .body {
       padding: 20px 25px;
     }
-    /deep/ .footer {
-      padding: 6px 20px;
-    }
   }
   @media (max-width: $breakpoint-s) {
     margin-left: 0;
