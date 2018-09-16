@@ -85,10 +85,10 @@ export default {
 
 .footer {
   display: flex;
-  padding: 8px 25px;
+  padding: 6px 25px;
   margin-top: auto;
   background: $color-bg;
-  font-size: 0.75em;
+  font-size: 0.75em !important;
   border-radius: 2px;
 
   a {

@@ -364,32 +364,6 @@ h2 {
   }
 }
 
-.components-container {
-  @media (max-width: $breakpoint-m) {
-    margin-left: 0;
-    padding-left: 0;
-    padding-top: 40px !important;
-  }
-  @media (max-width: $breakpoint-s) {
-    display: none;
-  }
-}
-
-.components {
-  flex-direction: column;
-  @include field;
-
-  @media (max-width: $breakpoint-m) {
-    flex-direction: row;
-    background: none;
-    box-shadow: none;
-
-    &:hover {
-      background: none;
-    }
-  }
-}
-
 .type {
   padding-bottom: 10px;
   margin-bottom: 20px;

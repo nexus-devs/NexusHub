@@ -72,7 +72,6 @@ export default {
 }
 .distribution-label {
   display: inline-block;
-  font-size: 0.8em;
   margin-right: 4px;
   margin-bottom: 5px;
 
