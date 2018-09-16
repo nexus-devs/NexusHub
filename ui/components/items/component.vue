@@ -6,7 +6,7 @@
 
     <div class="data">
       <h4>{{ component.name }}</h4>
-      <span>{{ orders.length }} Orders</span>
+      <span>{{ orders.length }}</span>
     </div>
   </div>
 </template>
