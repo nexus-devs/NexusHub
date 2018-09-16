@@ -69,6 +69,9 @@ export default {
   margin-bottom: 15px;
   @include ease(0.5s);
 
+  @media (max-width: $breakpoint-m) {
+    flex-basis: 33%;
+  }
   &:hover {
     @include gradient-background-dg(#3c4451, #353d49);
   }
@@ -77,6 +80,11 @@ export default {
   }
   &:nth-of-type(n + 7) {
     display: none;
+  }
+  &:nth-of-type(n + 5) {
+    @media (max-width: $breakpoint-m) {
+      display: none;
+    }
   }
   /deep/ .header {
     padding: 20px 20px 0;
@@ -88,6 +96,7 @@ export default {
       font-size: 0.9em !important;
       color: white !important;
       text-transform: none;
+
       @media (max-width: $breakpoint-m) {
         display: none;
       }
@@ -95,14 +104,6 @@ export default {
   }
   /deep/ .body {
     padding: 30px 25px;
-  }
-  @media (max-width: $breakpoint-m) {
-    margin-right: 10px;
-  }
-  @media (max-width: $breakpoint-s) {
-    &:nth-of-type(3n) {
-      margin-right: 0;
-    }
   }
 }
 
