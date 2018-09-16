@@ -5,69 +5,18 @@ const moment = require('moment')
 /**
  * Provides detailed item statistics for specific item
  */
-class Statistics extends Endpoint {
+class Prices extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
-    this.schema.description = 'Get item statistics between a specified time frame.'
-    this.schema.url = '/warframe/v1/items/:item/statistics'
+    this.schema.description = 'Get item statistics between now and a specified time range.'
+    this.schema.url = '/warframe/v1/items/:item/prices'
     this.schema.query = [
       {
-        name: 'timestart',
-        default: () => moment().endOf('day').valueOf(),
-        description: 'Returns data recorded between timestart and timeend.'
-      },
-      {
-        name: 'timeend',
-        default: () => moment().subtract(7, 'days').startOf('day').valueOf(),
-        description: 'Returns data recorded between timestart and timeend.'
-      },
-      {
-        name: 'intervals',
-        default: 14,
-        description: 'Intervals to split the time in.'
-      },
-      {
-        name: 'region',
-        default: '',
-        description: 'Region to select requests from.'
-      },
-      {
-        name: 'rank',
-        default: null,
-        description: 'Specified item rank in request'
+        name: 'timerange',
+        default: 7,
+        description: 'Time range from now in the past, in days.'
       }
     ]
-    this.schema.limit = {
-      interval: 5000,
-      maxInInterval: 4
-    }
-    this.schema.request = '/warframe/v1/items/nikana%20prime/statistics'
-    const offers = {
-      count: Number,
-      hasValue: Number,
-      percentage: Number
-    }
-    const price = {
-      avg: Number,
-      median: Number,
-      min: Number,
-      max: Number,
-      accuracy: Number,
-      offers
-    }
-    const prices = _.cloneDeep(price)
-    prices.intervals = [ _.cloneDeep(price) ]
-    this.schema.response = {
-      name: String,
-      supply: offers,
-      demand: offers,
-      components: [{
-        name: String,
-        buying: prices,
-        selling: prices,
-        combined: prices
-      }]
-    }
   }
 
   /**
@@ -75,28 +24,8 @@ class Statistics extends Endpoint {
    */
   async main (req, res) {
     const item = req.params.item
-    const intervals = req.query.intervals
-    const region = req.query.region
-    const rank = req.query.rank
-    let timestart = moment(new Date(req.query.timestart))
-    let timeend = moment(new Date(req.query.timeend))
-
-    // Switch time range if specified the wrong way around
-    if (timestart.valueOf() < timeend.valueOf()) {
-      let helper = timestart
-      timestart = timeend
-      timeend = helper
-    }
-
-    // Verify Interval size
-    if (intervals <= 0) {
-      const response = {
-        error: 'Bad input.',
-        reason: 'Intervals must be greater than 0.'
-      }
-      this.cache(response)
-      return res.status(400).send(response)
-    }
+    const timerange = req.query.timerange
+    const now = moment()
 
     // Get item from db
     let itemResult = await this.db.collection('items').findOne({
@@ -111,170 +40,60 @@ class Statistics extends Endpoint {
       return res.status(404).send(response)
     }
 
-    // Get response data
-    let { requests, multiplier } = await this.getRequests(item, region, rank, timestart, timeend, intervals)
-    let stats = this.getStatistics(requests, timestart, timeend, intervals, itemResult, multiplier)
+    let doc = this.generateDocument(itemResult, timerange)
+    await this.getPrices(doc, now, timerange, itemResult)
 
-    // Send to client and cache
-    this.cache(stats, 86400)
-    res.send(stats)
+    res.send(doc)
   }
 
   /**
-   * Get requests from the given parameters. If the timerange exceeds one week,
-   * we split up the queries into smaller blocks that reach throughout the
-   * timeframe but don't cover all requests. That means we'll need to extrapolate
-   * the missing data, but also achieve near constant query times
+   * Generates the response document
    */
-  async getRequests (item, region, rank, timestart, timeend, intervals) {
-    const intervalCount = intervals > 14 ? 14 : intervals // no more than 14 queries
-    const intervalRange = timestart.diff(timeend)
-    let multiplier = 1
-
-    // Standard timerange, only one query
-    if (timestart.diff(timeend, 'days') < 8) {
-      const { query, projection } = this.generateQuery(item, region, rank, timestart, timeend)
-      const requests = await this.db.collection('requests').find(query, projection).toArray()
-      return { requests, multiplier }
-    }
-
-    // More than 1 week -> split query
-    else {
-      const intervalSize = intervalRange / intervals
-      const querySize = (1000 * 60 * 60 * 24 * 7) / intervals
-      let requests = []
-
-      for (let i = 0; i < intervalCount; i++) {
-        // query start point for this interval is the full range divided by
-        // number of intervals plus the percentage of the 'intervalSize leftover'
-        // as derived from the current interval number.
-        // The intervalSize leftover is the time we're skipping in each interval
-        // but since we wanna start at timestart and end at the timeend, we need
-        // to move the start of each query by a fraction of the leftover of
-        // each interval, so the query ends at the full time range end.
-        // For visualizing, compare the query time blocks with a flexbox grid
-        // that's taking its space with justify-content: space-between
-        // https://i-msdn.sec.s-msft.com/dynimg/IC682150.png
-        const queryEnd = timeend.valueOf() + Math.floor(i * intervalSize + ((i / intervals) * (intervalSize - querySize)))
-        const queryStart = queryEnd + querySize
-        const { query, projection } = this.generateQuery(item, region, rank, queryStart, queryEnd)
-
-        // Extrapolate data by simply duplicating the requests in the given timeframe
-        requests = requests.concat(await this.db.collection('requests').find(query, projection).toArray())
-        multiplier = Math.ceil(intervalSize / (queryStart - queryEnd))
-      }
-
-      return { requests, multiplier }
-    }
-  }
-
-  /**
-   * Generate query from given params
-   */
-  generateQuery (item, region, rank, timestart, timeend) {
-    // Search query object
-    let query = {
-      item: new RegExp('^' + item + '$', 'i'),
-      createdAt: {
-        $gte: new Date(timeend),
-        $lte: new Date(timestart)
-      }
-    }
-    // Region allows array to be passed, so turn that into regex, otherwise use
-    // raw string
-    if (region) {
-      query.region = region.includes(',') ? new RegExp(region.split(',').join('|'), 'i') : region
-    }
-    if (rank !== null) {
-      query.rank = rank
-    }
-
-    // Limit keys that need to be returned
-    let projection = {
-      _id: 0,
-      type: 0,
-      region: 0
-    }
-    return { query, projection }
-  }
-
-  /**
-   * Wrapper method for the statistics calculation
-   *
-   * Stage 1: Accumulate
-   *      - Create all components and intervals based on the item list
-   *      - Sort all requests into the corresponding intervals
-   *
-   * Stage 2: Process main parts (buying/selling only)
-   *      - Purges the intervals
-   *      - Calculate avg/median/min/max
-   *      - Add to combined
-   *
-   * Stage 3: Process remainder and clean up
-   *      - Calculate percentages for everything
-   *      - Calculate avg/median/min/max for combined
-   *      - Clean up unneeded fields (offer hasValues and median array)
-   */
-  getStatistics (result, timestart, timeend, intervals, itemResult, multiplier) {
-    // Main document to return
-    let doc = {
-      name: itemResult.name,
-      supply: {
-        count: 0,
-        hasValue: 0
-      },
-      demand: {
-        count: 0,
-        hasValue: 0
-      },
+  generateDocument (item, timerange) {
+    let doc = { // Main document
+      name: item.name,
       components: []
     }
 
-    // Fill document with components and interval, then calculate stats
-    this.createComponents(doc, itemResult, intervals)
-    this.accumulate(timestart, timeend, intervals, result, doc)
-    this.calculate(doc, multiplier)
+    this.generateComponents(doc, item, timerange)
     return doc
   }
 
   /**
-   * Fills the document with all components and the intervals
+   * Generates the components to a corresponding item
    */
-  createComponents (doc, itemResult, intervals) {
-    itemResult.components.forEach(comp => {
+  generateComponents (doc, item, timerange) {
+    item.components.forEach(comp => {
       const data = {
-        avg: null,
         median: null,
         min: null,
         max: null,
-        accuracy: 0,
-        mathVariance: {
-          deviation: null,
-          mean: null
-        },
-        offers: {
-          count: 0,
-          percentage: 0,
-          hasValue: 0
-        },
-        intervals: [],
-        requests: []
+        offers: null,
+        days: []
+      }
+      const dataSection = {
+        current: _.cloneDeep(data),
+        previous: _.cloneDeep(data)
       }
       let component = {
         name: comp.name,
-        buying: _.cloneDeep(data),
-        selling: _.cloneDeep(data),
-        combined: _.cloneDeep(data)
+        buying: _.cloneDeep(dataSection),
+        selling: _.cloneDeep(dataSection),
+        combined: _.cloneDeep(dataSection)
       }
 
       // Fill component with intervals
-      const interval = _.cloneDeep(data)
-      delete interval.intervals
+      const day = _.cloneDeep(data)
+      delete day.days
 
-      for (let i = 0; i < intervals; i++) {
-        component.buying.intervals.push(_.cloneDeep(interval))
-        component.selling.intervals.push(_.cloneDeep(interval))
-        component.combined.intervals.push(_.cloneDeep(interval))
+      // TODO: Maybe put day pushing into own function?
+      for (let i = 0; i < timerange; i++) {
+        component.buying.current.days.push(_.cloneDeep(day))
+        component.buying.previous.days.push(_.cloneDeep(day))
+        component.selling.current.days.push(_.cloneDeep(day))
+        component.selling.previous.days.push(_.cloneDeep(day))
+        component.combined.current.days.push(_.cloneDeep(day))
+        component.combined.previous.days.push(_.cloneDeep(day))
       }
 
       // Add to result
@@ -283,244 +102,257 @@ class Statistics extends Endpoint {
   }
 
   /**
-   * Accumulates data from requests and add it into intervals
+   * Main function: fetches item prices
    */
-  accumulate (timestart, timeend, intervals, result, doc) {
-    let intervalSize = (timestart - timeend) / intervals
+  async getPrices (doc, now, timerange, item) {
+    // Get either pre-saved day prices, or generate them if they don't exist
+    for (let i = 1; i < timerange * 2; i++) {
+      const dayCursor = now.clone().subtract(i, 'days').startOf('day')
+      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
+        name: item.name,
+        type: 'day',
+        createdAt: dayCursor.toDate()
+      })
+      if (!cursorResult) {
+        cursorResult = { name: item.name, type: 'day', components: [], createdAt: dayCursor.toDate() }
 
-    result.forEach(request => {
-      let componentIndex = doc.components.findIndex(comp => comp.name === request.component)
+        // Aggregate and save into block
+        for (let c of doc.components) {
+          const data = {
+            median: null,
+            min: null,
+            max: null,
+            offers: null
+          }
+          const position = cursorResult.components.push({
+            name: c.name,
+            buying: _.cloneDeep(data),
+            selling: _.cloneDeep(data),
+            combined: _.cloneDeep(data)
+          })
 
-      if (componentIndex > -1) {
-        let component = doc.components[componentIndex][request.offer.toLowerCase()]
+          const comp = cursorResult.components[position - 1]
 
-        // Determine which interval the request is in
-        let i = Math.floor((request.createdAt.getTime() - timeend) / intervalSize)
-        if (i >= intervals) i = intervals - 1
+          const medianQuery = {
+            item: item.name,
+            component: c.name,
+            createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() },
+            price: { $ne: null }
+          }
+          const median = await this.getMedian(medianQuery)
+          const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
+          const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
+          comp.combined.median = median
 
-        // Add request to interval
-        component.intervals[i].requests.push({
-          user: request.user,
-          // Add hard upper limit here to avoid weird results with few offers
-          price: request.price < 2000 ? request.price : null
+          let aggregation = await this.db.collection('orderHistory').aggregate([
+            { $match: {
+              item: item.name,
+              component: c.name,
+              createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() },
+              price: { $gte: median * 0.3, $lte: median * 3 }
+            } },
+            { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+          ]).toArray()
+
+          // TODO: for the love of god, put this in a function
+          let buying = _.find(aggregation, x => x._id === 'Buying')
+          if (buying) {
+            if (buying.min < comp.buying.min || !comp.buying.min) comp.buying.min = buying.min
+            if (buying.max > comp.buying.max || !comp.buying.max) comp.buying.max = buying.max
+            comp.buying.offers += buying.offers
+            comp.buying.median = medianBuying
+            if (buying.min < comp.combined.min || !comp.combined.min) comp.combined.min = buying.min
+            if (buying.max > comp.combined.max || !comp.combined.max) comp.combined.max = buying.max
+            comp.combined.offers += buying.offers
+          }
+
+          let selling = _.find(aggregation, x => x._id === 'Selling')
+          if (selling) {
+            if (selling.min < comp.selling.min || !comp.selling.min) comp.selling.min = selling.min
+            if (selling.max > comp.selling.max || !comp.selling.max) comp.selling.max = selling.max
+            comp.selling.offers += selling.offers
+            comp.selling.median = medianSelling
+            if (selling.min < comp.combined.min || !comp.combined.min) comp.combined.min = selling.min
+            if (selling.max > comp.combined.max || !comp.combined.max) comp.combined.max = selling.max
+            comp.combined.offers += selling.offers
+          }
+        }
+
+        // Delete all pre-saved hours and save day
+        await this.db.collection('orderHistorySaves').insertOne(cursorResult)
+        this.db.collection('orderHistorySaves').remove({
+          type: 'hour',
+          createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() }
         })
-        if (request.price && request.price < 2000) {
-          component.intervals[i].avg += request.price
-          component.intervals[i].offers.hasValue++
+      }
+
+      // Transfer from pre-saved day
+      for (let preComp of cursorResult.components) {
+        let comp = _.find(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+        if (i < timerange) {
+          // Current week
+          comp.buying.current.days[i] = preComp.buying
+          comp.selling.current.days[i] = preComp.selling
+          comp.combined.current.days[i] = preComp.combined
+        } else {
+          // Previous week
+          const previousDay = i % timerange
+          comp.buying.previous.days[previousDay] = preComp.buying
+          comp.selling.previous.days[previousDay] = preComp.selling
+          comp.combined.previous.days[previousDay] = preComp.combined
         }
       }
-    })
-  }
+    }
 
-  /**
-   * Processes each interval and components main parts
-   * Also purges spoofed requests
-   * Avg, median, min, max, offer count
-   */
-  calculate (doc, multiplier) {
-    doc.components.forEach(component => {
-      this.calculateOfferType(component.selling, component, multiplier)
-      this.calculateOfferType(component.buying, component, multiplier)
-
-      // Calculate combined data
-      this.calculateMedian(component.combined, multiplier)
-      this.calculateAvg(component.combined, multiplier)
-      this.calculateDeviation(component.combined, multiplier)
-      this.calculatePriceAccuracy(component.combined)
-      delete component.combined.requests
-      delete component.combined.mathVariance
-
-      // Calculate interval data for combined
-      component.combined.intervals.forEach(interval => {
-        this.calculateMedian(interval, multiplier)
-        this.calculateAvg(interval, multiplier)
-        this.calculateDeviation(interval, multiplier)
-        this.calculatePriceAccuracy(interval)
-        delete interval.requests
-        delete interval.mathVariance
+    // Get either pre-saved hour prices for the current day, or generate them if they don't exist
+    const startOfDay = now.clone().startOf('day')
+    for (let i = 0; startOfDay.clone().add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
+      const hourCursor = startOfDay.clone().add(i, 'hours')
+      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
+        name: item.name,
+        type: 'hour',
+        createdAt: hourCursor.toDate()
       })
 
-      // Add supply/demand to root object
-      doc.supply.count += component.selling.offers.count
-      doc.supply.hasValue += component.selling.offers.hasValue
-      doc.demand.count += component.buying.offers.count
-      doc.demand.hasValue += component.buying.offers.hasValue
-    })
+      if (!cursorResult) {
+        cursorResult = { name: item.name, type: 'hour', components: [], createdAt: hourCursor.toDate() }
 
-    const offers = doc.supply.count + doc.demand.count
-    doc.supply.percentage = doc.supply.count / offers
-    doc.demand.percentage = doc.demand.count / offers
-  }
+        // Aggregate and save into block
+        for (let c of doc.components) {
+          const data = {
+            min: null,
+            max: null,
+            offers: null
+          }
+          const position = cursorResult.components.push({
+            name: c.name,
+            buying: _.cloneDeep(data),
+            selling: _.cloneDeep(data),
+            combined: _.cloneDeep(data)
+          })
 
-  /**
-   * Calculate Statistics for buying/selling and add to combined
-   */
-  calculateOfferType (type, component, multiplier) {
-    type.intervals.forEach((interval, j) => {
-      let users = {} // for spam check. Object is faster than Array lookup.
+          const comp = cursorResult.components[position - 1]
 
-      // Get the standard deviation
-      this.calculateAvg(interval, multiplier)
-      this.calculateDeviation(interval, multiplier)
-      interval.avg = 0 // Reset avg
+          // Get median for the last 24 hours
+          const medianQuery = {
+            item: item.name,
+            component: comp.name,
+            createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
+            price: { $ne: null }
+          }
+          const median = await this.getMedian(medianQuery)
 
-      // Sort requests by price and get median
-      interval.offers.count = interval.requests.length
-      this.calculateMedian(interval, multiplier)
-      interval.offers.count = 0
-      interval.offers.hasValue = 0
+          let aggregation = await this.db.collection('orderHistory').aggregate([
+            { $match: {
+              item: item.name,
+              component: c.name,
+              createdAt: { $gte: hourCursor.toDate(), $lt: hourCursor.clone().add(1, 'hours').toDate() },
+              price: { $gte: median * 0.3, $lte: median * 3 }
+            } },
+            { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+          ]).toArray()
 
-      // Purge, then calculate stats for interval
-      for (let i = interval.requests.length - 1; i >= 0; i--) {
-        let request = interval.requests[i]
-        let price = request.price
+          // TODO: for the love of god, put this in a function
+          let buying = _.find(aggregation, x => x._id === 'Buying')
+          if (buying) {
+            if (buying.min < comp.buying.min || !comp.buying.min) comp.buying.min = buying.min
+            if (buying.max > comp.buying.max || !comp.buying.max) comp.buying.max = buying.max
+            comp.buying.offers = buying.offers
+            if (buying.min < comp.combined.min || !comp.combined.min) comp.combined.min = buying.min
+            if (buying.max > comp.combined.max || !comp.combined.max) comp.combined.max = buying.max
+            comp.combined.offers = buying.offers
+          }
 
-        // Purge invalid offers (duplicates or too high/low)
-        if (this.purgeSpam(users, request) || this.purgeExtremes(interval, request)) {
-          interval.requests.splice(i, 1)
-          continue
+          let selling = _.find(aggregation, x => x._id === 'Selling')
+          if (selling) {
+            if (selling.min < comp.selling.min || !comp.selling.min) comp.selling.min = selling.min
+            if (selling.max > comp.selling.max || !comp.selling.max) comp.selling.max = selling.max
+            comp.selling.offers = selling.offers
+            if (selling.min < comp.combined.min || !comp.combined.min) comp.combined.min = selling.min
+            if (selling.max > comp.combined.max || !comp.combined.max) comp.combined.max = selling.max
+            comp.combined.offers = selling.offers
+          }
         }
 
-        // Add to offers
-        interval.offers.count++
-
-        // Update accumulations with purged results
-        if (price) {
-          interval.avg += price
-          interval.offers.hasValue++
-
-          // New min/max?
-          if (price < interval.min || !interval.min) interval.min = price
-          if (price > interval.max) interval.max = price
-        }
+        await this.db.collection('orderHistorySaves').insertOne(cursorResult)
       }
 
-      // Apply partitioned query multipliers
-      interval.offers.count = interval.offers.count * multiplier
-      interval.offers.hasValue = interval.offers.hasValue * multiplier
+      // Transfer from pre-saved hour
+      // No median here, it gets set on the current hour requests later
+      for (let preComp of cursorResult.components) {
+        let comp = _.find(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
+        // TODO: Put this in own function / make prettier
+        comp.buying.current.days[0].offers += preComp.buying.offers
+        if (preComp.buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = preComp.buying.min
+        if (preComp.buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = preComp.buying.max
+        comp.selling.current.days[0].offers += preComp.selling.offers
+        if (preComp.selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = preComp.selling.min
+        if (preComp.selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = preComp.selling.max
+        comp.combined.current.days[0].offers += preComp.combined.offers
+        if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
+        if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
+      }
+    }
 
-      // Calculate interval data and add to component/combined
-      this.addToParent(type, interval)
-      this.addToParent(component.combined.intervals[j], interval)
-      this.calculateAvg(interval, multiplier)
-      this.calculateDeviation(interval, multiplier)
-      this.calculatePriceAccuracy(interval)
+    // Gets current hour results
+    for (let comp of doc.components) {
+      // Get median for the last 24 hours
+      const medianQuery = {
+        item: item.name,
+        component: comp.name,
+        createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
+        price: { $ne: null }
+      }
+      const median = await this.getMedian(medianQuery)
+      const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
+      const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
-      // Cleanup
-      delete interval.requests
-      delete interval.mathVariance
-    })
+      let aggregation = await this.db.collection('orderHistory').aggregate([
+        { $match: {
+          item: item.name,
+          component: comp.name,
+          createdAt: { $gte: now.clone().startOf('hour').toDate() },
+          price: { $gte: median * 0.3, $lte: median * 3 }
+        } },
+        { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+      ]).toArray()
 
-    // Add accumulations to combined and calculate component data from intervals
-    this.addToParent(component.combined, type)
-    this.calculateAvg(type, multiplier)
-    this.calculateMedian(type, multiplier)
-    this.calculateDeviation(type, multiplier)
-    this.calculatePriceAccuracy(type)
-    delete type.requests
-    delete type.mathVariance
-  }
+      comp.combined.current.days[0].median += median
+      comp.buying.current.days[0].median += medianBuying
+      comp.selling.current.days[0].median += medianSelling
 
-  /**
-   * Calculate standard deviation
-   */
-  calculateDeviation (interval, multiplier) {
-    interval.mathVariance.deviation = 0
+      // TODO: for the love of god, put this in a function
+      let buying = _.find(aggregation, x => x._id === 'Buying')
+      if (buying) {
+        if (buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = buying.min
+        if (buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = buying.max
+        comp.buying.current.days[0].offers += buying.offers
+        if (buying.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = buying.min
+        if (buying.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = buying.max
+        comp.combined.current.days[0].offers += buying.offers
+      }
 
-    // each request ^2
-    interval.requests.forEach(request => {
-      let price = request.price
-      if (price) interval.mathVariance.deviation += Math.pow(price - interval.avg, 2)
-    })
-
-    // Calculate standard deviation
-    interval.mathVariance.deviation = interval.mathVariance.deviation / interval.offers.hasValue * multiplier
-    interval.mathVariance.deviation = Math.sqrt(interval.mathVariance.deviation)
-    interval.mathVariance.mean = interval.avg
-  }
-
-  /**
-   * Calculate price accuracy
-   */
-  calculatePriceAccuracy (interval) {
-    interval.accuracy = 1 - (interval.mathVariance.deviation / interval.avg)
-  }
-
-  /**
-   * Calculate percentages for a given interval
-   */
-  calculatePercentages (interval, parent) {
-    interval.offers.percentage = interval.offers.count / parent.offers.count
-  }
-
-  /**
-   * Adds everything to the parent component
-   */
-  addToParent (parent, child) {
-    parent.avg += child.avg
-    parent.offers.count += child.offers.count
-    parent.offers.hasValue += child.offers.hasValue
-
-    if ((child.min && (child.min < parent.min)) || !parent.min) parent.min = child.min
-    if (child.max > parent.max) parent.max = child.max
-
-    parent.requests = parent.requests.concat(child.requests)
-  }
-
-  /**
-   * Calculates the average of a given interval
-   */
-  calculateAvg (interval, multiplier) {
-    interval.avg = interval.avg / interval.offers.hasValue * multiplier
-  }
-
-  /**
-   * Calculates the median from a given interval with objects
-   */
-  calculateMedian (obj, multiplier) {
-    obj.requests.sort((a, b) => a.price - b.price)
-    const requests = obj.requests.slice(obj.requests.length - obj.offers.hasValue / multiplier, obj.requests.length)
-
-    // Simple median calculation
-    if (requests.length) {
-      if (requests.length % 2 !== 0) {
-        obj.median = requests[Math.floor(requests.length / 2)].price
-      } else {
-        obj.median = (requests[requests.length / 2 - 1].price + requests[requests.length / 2].price) / 2
+      let selling = _.find(aggregation, x => x._id === 'Selling')
+      if (selling) {
+        if (selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = selling.min
+        if (selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = selling.max
+        comp.selling.current.days[0].offers += selling.offers
+        if (selling.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = selling.min
+        if (selling.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = selling.max
+        comp.combined.current.days[0].offers += selling.offers
       }
     }
   }
 
-  /**
-   * Checks if a user made multiple requests in the interval
-   */
-  purgeSpam (users, request) {
-    // User already made a request
-    if (users[request.user]) {
-      return true
-    }
-
-    // User didn't make a request
+  // Gets the median from a given query
+  async getMedian (query) {
+    const count = await this.db.collection('orderHistory').find(query).count()
+    if (count === 0) return null
     else {
-      users[request.user] = 1
-      return false
+      const medianOffer = await this.db.collection('orderHistory').find(query).sort({'price': 1}).skip(count / 2 - 1).limit(1).toArray()
+      return medianOffer[0].price
     }
-  }
-
-  /**
-   * Checks if a user goes extremes under/over the median
-   */
-  purgeExtremes (interval, request) {
-    if (request.price !== null && interval.mathVariance.mean !== null) {
-      return request.price < (interval.mathVariance.mean - interval.mathVariance.deviation) ||
-          request.price > (interval.mathVariance.mean + interval.mathVariance.deviation)
-    }
-    /* if (request.price !== null && interval.median !== null) {
-      let percentToMedian = request.price / interval.median
-      return percentToMedian > 2 || percentToMedian < 0.66
-    } */
-    return false
   }
 }
 
-module.exports = Statistics
+module.exports = Prices
