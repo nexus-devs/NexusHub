@@ -119,7 +119,7 @@ export default {
   }
 }
 .bars {
-  margin: 20px 0;
+  margin: 20px 0 0;
   width: 215px;
   height: 80px;
 }

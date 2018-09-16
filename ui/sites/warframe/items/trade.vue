@@ -21,14 +21,6 @@
                 </transition-group>
               </div>
             </div>
-            <div class="col-b components-container">
-              <h2 class="sub">Components</h2>
-              <div>
-                <div class="row components">
-                  <comp v-for="component in components" :key="component.uniqueName" :component="component" class="col"/>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -180,7 +172,7 @@ export default {
       return this.$store.state.orders.listings
     },
     realtime () {
-      return Array(4).fill().map((e, i) => [].concat(this.listings).sort((a, b) => {
+      return Array(6).fill().map((e, i) => [].concat(this.listings).sort((a, b) => {
         return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
       })[i] || {})
     },
