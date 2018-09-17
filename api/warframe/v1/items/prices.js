@@ -144,15 +144,7 @@ class Prices extends Endpoint {
           const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
           comp.combined.median = median
 
-          let aggregation = await this.db.collection('orderHistory').aggregate([
-            { $match: {
-              item: item.name,
-              component: c.name,
-              createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() },
-              price: { $gte: median * 0.3, $lte: median * 3 }
-            } },
-            { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
-          ]).toArray()
+          const aggregation = await this.aggregate(item, c, median, dayCursor, dayCursor.clone().add(1, 'days'))
 
           // TODO: for the love of god, put this in a function
           let buying = _.find(aggregation, x => x._id === 'Buying')
@@ -242,15 +234,7 @@ class Prices extends Endpoint {
           }
           const median = await this.getMedian(medianQuery)
 
-          let aggregation = await this.db.collection('orderHistory').aggregate([
-            { $match: {
-              item: item.name,
-              component: c.name,
-              createdAt: { $gte: hourCursor.toDate(), $lt: hourCursor.clone().add(1, 'hours').toDate() },
-              price: { $gte: median * 0.3, $lte: median * 3 }
-            } },
-            { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
-          ]).toArray()
+          const aggregation = await this.aggregate(item, c, median, hourCursor, hourCursor.clone().add(1, 'hours'))
 
           // TODO: for the love of god, put this in a function
           let buying = _.find(aggregation, x => x._id === 'Buying')
@@ -307,15 +291,7 @@ class Prices extends Endpoint {
       const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
       const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
-      let aggregation = await this.db.collection('orderHistory').aggregate([
-        { $match: {
-          item: item.name,
-          component: comp.name,
-          createdAt: { $gte: now.clone().startOf('hour').toDate() },
-          price: { $gte: median * 0.3, $lte: median * 3 }
-        } },
-        { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
-      ]).toArray()
+      const aggregation = await this.aggregate(item, comp, median, now.clone().startOf('hour'), now)
 
       comp.combined.current.days[0].median += median
       comp.buying.current.days[0].median += medianBuying
@@ -352,6 +328,19 @@ class Prices extends Endpoint {
       const medianOffer = await this.db.collection('orderHistory').find(query).sort({'price': 1}).skip(count / 2 - 1).limit(1).toArray()
       return medianOffer[0].price
     }
+  }
+
+  // Aggregates orders into offer amount, min and max
+  async aggregate (item, component, median, start, end) {
+    return this.db.collection('orderHistory').aggregate([
+      { $match: {
+        item: item.name,
+        component: component.name,
+        createdAt: { $gte: start.toDate(), $lt: end.toDate() },
+        price: { $gte: median * 0.3, $lte: median * 3 }
+      } },
+      { $group: { _id: '$offer', offers: { $sum: 1 }, min: { $min: '$price' }, max: { $max: '$price' } } }
+    ]).toArray()
   }
 }
 
