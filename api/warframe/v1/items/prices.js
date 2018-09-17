@@ -223,16 +223,9 @@ class Prices extends Endpoint {
       // No median here, it gets set on the current hour requests later
       for (let preComp of cursorResult.components) {
         let comp = _.find(doc.components, x => x.name === preComp.name) // Get corresponding component in doc
-        // TODO: Put this in own function / make prettier
-        comp.buying.current.days[0].offers += preComp.buying.offers
-        if (preComp.buying.min < comp.buying.current.days[0].min || !comp.buying.current.days[0].min) comp.buying.current.days[0].min = preComp.buying.min
-        if (preComp.buying.max > comp.buying.current.days[0].max || !comp.buying.current.days[0].max) comp.buying.current.days[0].max = preComp.buying.max
-        comp.selling.current.days[0].offers += preComp.selling.offers
-        if (preComp.selling.min < comp.selling.current.days[0].min || !comp.selling.current.days[0].min) comp.selling.current.days[0].min = preComp.selling.min
-        if (preComp.selling.max > comp.selling.current.days[0].max || !comp.selling.current.days[0].max) comp.selling.current.days[0].max = preComp.selling.max
-        comp.combined.current.days[0].offers += preComp.combined.offers
-        if (preComp.combined.min < comp.combined.current.days[0].min || !comp.combined.current.days[0].min) comp.combined.current.days[0].min = preComp.combined.min
-        if (preComp.combined.max > comp.combined.current.days[0].max || !comp.combined.current.days[0].max) comp.combined.current.days[0].max = preComp.combined.max
+        this.transferToComponent(preComp.buying, comp.buying.current.days[0])
+        this.transferToComponent(preComp.selling, comp.selling.current.days[0])
+        this.transferToComponent(preComp.combined, comp.combined.current.days[0])
       }
     }
 
