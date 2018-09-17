@@ -133,15 +133,7 @@ class Prices extends Endpoint {
 
           const comp = cursorResult.components[position - 1]
 
-          const medianQuery = {
-            item: item.name,
-            component: c.name,
-            createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() },
-            price: { $ne: null }
-          }
-          const median = await this.getMedian(medianQuery)
-          const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
-          const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
+          const { median, medianBuying, medianSelling } = await this.getMedians(item, c, dayCursor, dayCursor.clone().add(1, 'days'))
           comp.combined.median = median
           comp.buying.median = medianBuying
           comp.selling.median = medianSelling
@@ -205,13 +197,7 @@ class Prices extends Endpoint {
           const comp = cursorResult.components[position - 1]
 
           // Get median for the last 24 hours
-          const medianQuery = {
-            item: item.name,
-            component: comp.name,
-            createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
-            price: { $ne: null }
-          }
-          const median = await this.getMedian(medianQuery)
+          const { median } = await this.getMedians(item, comp, now.clone().subtract(24, 'hours'), now)
 
           await this.aggregate(item, c, median, hourCursor, hourCursor.clone().add(1, 'hours'))
         }
@@ -232,15 +218,7 @@ class Prices extends Endpoint {
     // Gets current hour results
     for (let comp of doc.components) {
       // Get median for the last 24 hours
-      const medianQuery = {
-        item: item.name,
-        component: comp.name,
-        createdAt: { $gte: now.clone().subtract(24, 'hours').toDate() },
-        price: { $ne: null }
-      }
-      const median = await this.getMedian(medianQuery)
-      const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
-      const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
+      const { median, medianBuying, medianSelling } = await this.getMedians(item, comp, now.clone().subtract(24, 'hours'), now)
 
       await this.aggregate(item, comp, median, now.clone().startOf('hour'), now, true)
 
@@ -250,8 +228,23 @@ class Prices extends Endpoint {
     }
   }
 
+  // Gets combined, buying and selling median
+  async getMedians (item, component, start, end) {
+    const query = {
+      item: item.name,
+      component: component.name,
+      createdAt: { $gte: start.toDate(), $lt: end.toDate() },
+      price: { $ne: null }
+    }
+
+    const median = await this.getMedianFromQuery(query)
+    const medianBuying = await this.getMedianFromQuery(Object.assign({ offer: 'Buying' }, query))
+    const medianSelling = await this.getMedianFromQuery(Object.assign({ offer: 'Selling' }, query))
+    return { median, medianBuying, medianSelling }
+  }
+
   // Gets the median from a given query
-  async getMedian (query) {
+  async getMedianFromQuery (query) {
     const count = await this.db.collection('orderHistory').find(query).count()
     if (count === 0) return null
     else {
