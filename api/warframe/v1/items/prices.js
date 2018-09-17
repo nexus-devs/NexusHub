@@ -249,7 +249,7 @@ class Prices extends Endpoint {
       const medianBuying = await this.getMedian(Object.assign({ offer: 'Buying' }, medianQuery))
       const medianSelling = await this.getMedian(Object.assign({ offer: 'Selling' }, medianQuery))
 
-      const aggregation = await this.aggregate(item, comp, median, now.clone().startOf('hour'), now, true)
+      await this.aggregate(item, comp, median, now.clone().startOf('hour'), now, true)
 
       comp.combined.current.days[0].median += median
       comp.buying.current.days[0].median += medianBuying
