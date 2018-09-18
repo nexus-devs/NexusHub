@@ -138,7 +138,7 @@ class Prices extends Endpoint {
           comp.buying.median = medianBuying
           comp.selling.median = medianSelling
 
-          await this.aggregate(item, c, median, dayCursor, dayCursor.clone().add(1, 'days'))
+          await this.aggregate(item, comp, median, dayCursor, dayCursor.clone().add(1, 'days'))
         }
 
         // Delete all pre-saved hours and save day
@@ -199,7 +199,7 @@ class Prices extends Endpoint {
           // Get median for the last 24 hours
           const { median } = await this.getMedians(item, comp, now.clone().subtract(24, 'hours'), now)
 
-          await this.aggregate(item, c, median, hourCursor, hourCursor.clone().add(1, 'hours'))
+          await this.aggregate(item, comp, median, hourCursor, hourCursor.clone().add(1, 'hours'))
         }
 
         await this.db.collection('orderPresaves').insertOne(cursorResult)
