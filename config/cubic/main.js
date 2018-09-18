@@ -20,7 +20,7 @@ if (process.env.DOCKER && (prod ? group === 'main' : true)) {
       mongoDb: 'nexus-main',
       redisUrl,
       endpointPath: `${process.cwd()}/api/`,
-      endpointPathExclude: /\/warframe/,
+      endpointPathExclude: /(\/warframe|\/lib)/,
       group: 'main'
     }
   }
@@ -41,7 +41,7 @@ else {
     },
     core: {
       endpointPath: `${process.cwd()}/api/`,
-      endpointPathExclude: /\/warframe/,
+      endpointPathExclude: /(\/warframe|\/lib)/,
       mongoDb: 'nexus-main',
       group: 'main'
     }

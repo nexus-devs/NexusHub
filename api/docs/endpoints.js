@@ -34,6 +34,9 @@ function getEndpointTree (filepath) {
   else {
     let Endpoint = require(filepath.replace('//', '/'))
     let endpoint = new Endpoint().schema
+    if (!endpoint) {
+      return
+    }
 
     // Routes
     endpoint.name = path.basename(filepath).replace('.js', '')

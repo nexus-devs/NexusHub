@@ -50,7 +50,7 @@
             <!-- Request/Response -->
             <div v-if="endpoint.method !== 'GET'" class="sub-section">
               <h2>Request Format</h2>
-              <pre v-highlightjs="stringify(endpoint.request)">
+              <pre v-highlightjs="stringify(endpoint.request.body)">
                 <code class="javascript"/>
               </pre>
             </div>
