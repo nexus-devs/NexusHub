@@ -108,11 +108,8 @@ class Prices extends Endpoint {
     // Get either pre-saved day prices, or generate them if they don't exist
     for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = now.clone().subtract(i, 'days').startOf('day')
-      let cursorResult = await this.db.collection('orderPresaves').findOne({
-        name: item.name,
-        scope: 'day',
-        createdAt: dayCursor.toDate()
-      })
+      let cursorResult = await this.getPresave(item.name, 'day', dayCursor)
+
       if (!cursorResult) {
         cursorResult = { name: item.name, scope: 'day', components: [], createdAt: dayCursor.toDate() }
 
@@ -171,11 +168,7 @@ class Prices extends Endpoint {
     const startOfDay = now.clone().startOf('day')
     for (let i = 0; startOfDay.clone().add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
       const hourCursor = startOfDay.clone().add(i, 'hours')
-      let cursorResult = await this.db.collection('orderPresaves').findOne({
-        name: item.name,
-        scope: 'hour',
-        createdAt: hourCursor.toDate()
-      })
+      let cursorResult = await this.getPresave(item.name, 'hour', hourCursor)
 
       if (!cursorResult) {
         cursorResult = { name: item.name, scope: 'hour', components: [], createdAt: hourCursor.toDate() }
@@ -226,6 +219,11 @@ class Prices extends Endpoint {
       comp.buying.current.days[0].median += medianBuying
       comp.selling.current.days[0].median += medianSelling
     }
+  }
+
+  // Gets a pre-save from a given item name and scope
+  async getPresave (name, scope, date) {
+    this.db.collection('orderPresaves').findOne({ name, scope, createdAt: date.toDate() })
   }
 
   // Gets combined, buying and selling median
