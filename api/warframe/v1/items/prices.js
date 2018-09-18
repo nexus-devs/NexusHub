@@ -108,7 +108,7 @@ class Prices extends Endpoint {
     // Get either pre-saved day prices, or generate them if they don't exist
     for (let i = 1; i < timerange * 2; i++) {
       const dayCursor = now.clone().subtract(i, 'days').startOf('day')
-      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
+      let cursorResult = await this.db.collection('orderPresaves').findOne({
         name: item.name,
         scope: 'day',
         createdAt: dayCursor.toDate()
@@ -142,8 +142,8 @@ class Prices extends Endpoint {
         }
 
         // Delete all pre-saved hours and save day
-        await this.db.collection('orderHistorySaves').insertOne(cursorResult)
-        this.db.collection('orderHistorySaves').remove({
+        await this.db.collection('orderPresaves').insertOne(cursorResult)
+        this.db.collection('orderPresaves').remove({
           scope: 'hour',
           createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() }
         })
@@ -171,7 +171,7 @@ class Prices extends Endpoint {
     const startOfDay = now.clone().startOf('day')
     for (let i = 0; startOfDay.clone().add(i, 'hours').isBefore(moment(now).startOf('hour')); i++) {
       const hourCursor = startOfDay.clone().add(i, 'hours')
-      let cursorResult = await this.db.collection('orderHistorySaves').findOne({
+      let cursorResult = await this.db.collection('orderPresaves').findOne({
         name: item.name,
         scope: 'hour',
         createdAt: hourCursor.toDate()
@@ -202,7 +202,7 @@ class Prices extends Endpoint {
           await this.aggregate(item, c, median, hourCursor, hourCursor.clone().add(1, 'hours'))
         }
 
-        await this.db.collection('orderHistorySaves').insertOne(cursorResult)
+        await this.db.collection('orderPresaves').insertOne(cursorResult)
       }
 
       // Transfer from pre-saved hour
