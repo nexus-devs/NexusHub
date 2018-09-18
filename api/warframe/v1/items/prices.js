@@ -110,11 +110,11 @@ class Prices extends Endpoint {
       const dayCursor = now.clone().subtract(i, 'days').startOf('day')
       let cursorResult = await this.db.collection('orderHistorySaves').findOne({
         name: item.name,
-        type: 'day',
+        scope: 'day',
         createdAt: dayCursor.toDate()
       })
       if (!cursorResult) {
-        cursorResult = { name: item.name, type: 'day', components: [], createdAt: dayCursor.toDate() }
+        cursorResult = { name: item.name, scope: 'day', components: [], createdAt: dayCursor.toDate() }
 
         // Aggregate and save into block
         for (let c of doc.components) {
@@ -144,7 +144,7 @@ class Prices extends Endpoint {
         // Delete all pre-saved hours and save day
         await this.db.collection('orderHistorySaves').insertOne(cursorResult)
         this.db.collection('orderHistorySaves').remove({
-          type: 'hour',
+          scope: 'hour',
           createdAt: { $gte: dayCursor.toDate(), $lt: dayCursor.clone().add(1, 'days').toDate() }
         })
       }
@@ -173,12 +173,12 @@ class Prices extends Endpoint {
       const hourCursor = startOfDay.clone().add(i, 'hours')
       let cursorResult = await this.db.collection('orderHistorySaves').findOne({
         name: item.name,
-        type: 'hour',
+        scope: 'hour',
         createdAt: hourCursor.toDate()
       })
 
       if (!cursorResult) {
-        cursorResult = { name: item.name, type: 'hour', components: [], createdAt: hourCursor.toDate() }
+        cursorResult = { name: item.name, scope: 'hour', components: [], createdAt: hourCursor.toDate() }
 
         // Aggregate and save into block
         for (let c of doc.components) {
