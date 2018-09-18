@@ -115,20 +115,7 @@ class Prices extends Endpoint {
 
         // Aggregate and save into block
         for (let c of doc.components) {
-          const data = {
-            median: null,
-            min: null,
-            max: null,
-            offers: null
-          }
-          const position = cursorResult.components.push({
-            name: c.name,
-            buying: _.cloneDeep(data),
-            selling: _.cloneDeep(data),
-            combined: _.cloneDeep(data)
-          })
-
-          const comp = cursorResult.components[position - 1]
+          const comp = this.addEmptyComponentToPresave(cursorResult, c.name)
 
           const { median, medianBuying, medianSelling } = await this.getMedians(item, c, dayCursor, dayCursor.clone().add(1, 'days'))
           comp.combined.median = median
@@ -175,19 +162,7 @@ class Prices extends Endpoint {
 
         // Aggregate and save into block
         for (let c of doc.components) {
-          const data = {
-            min: null,
-            max: null,
-            offers: null
-          }
-          const position = cursorResult.components.push({
-            name: c.name,
-            buying: _.cloneDeep(data),
-            selling: _.cloneDeep(data),
-            combined: _.cloneDeep(data)
-          })
-
-          const comp = cursorResult.components[position - 1]
+          const comp = this.addEmptyComponentToPresave(cursorResult, c.name)
 
           // Get median for the last 24 hours
           const { median } = await this.getMedians(item, comp, now.clone().subtract(24, 'hours'), now)
@@ -224,6 +199,14 @@ class Prices extends Endpoint {
   // Gets a pre-save from a given item name and scope
   async getPresave (name, scope, date) {
     this.db.collection('orderPresaves').findOne({ name, scope, createdAt: date.toDate() })
+  }
+
+  // Adds an empty component to a pre-save document and returns it
+  addEmptyComponentToPresave (document, name) {
+    const data = { median: null, min: null, max: null, offers: null }
+    const position = document.components.push({ name, buying: _.cloneDeep(data), selling: _.cloneDeep(data), combined: _.cloneDeep(data) })
+
+    return document.components[position - 1]
   }
 
   // Gets combined, buying and selling median
