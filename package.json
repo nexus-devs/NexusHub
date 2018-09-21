@@ -32,7 +32,7 @@
     "jsonfn": "^0.31.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
-    "requestretry": "^2.0.2",
+    "requestretry": "^3.0.0",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.4.0",
     "vue-analytics": "^5.16.0",
