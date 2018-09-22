@@ -15,6 +15,7 @@ class List extends Endpoint {
       offers: Number
     }
     this.schema.response = [{
+      uniqueName: String,
       name: String,
       components: [{
         name: String,
@@ -46,6 +47,7 @@ class List extends Endpoint {
 
     items.forEach(item => {
       result.push({
+        uniqueName: item.uniqueName,
         name: item.name,
         components: item.components,
         apiUrl: item.apiUrl,
