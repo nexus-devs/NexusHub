@@ -37,6 +37,7 @@ class List extends Endpoint {
   async main (req, res) {
     let items = await this.db.collection('items').find().project({
       _id: 0,
+      uniqueName: 1,
       name: 1,
       components: 1,
       imgUrl: 1,
