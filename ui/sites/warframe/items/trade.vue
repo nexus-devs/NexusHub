@@ -168,11 +168,14 @@ export default {
     item () {
       return this.$store.state.items.item
     },
+    all () {
+      return this.$store.state.orders.all
+    },
     listings () {
       return this.$store.state.orders.listings
     },
     realtime () {
-      return Array(6).fill().map((e, i) => [].concat(this.listings).sort((a, b) => {
+      return Array(6).fill().map((e, i) => [].concat(this.all).sort((a, b) => {
         return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
       })[i] || {})
     },
