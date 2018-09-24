@@ -1,5 +1,4 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
-const Aggregate = require(`${process.cwd()}/api/lib/aggregator.js`)
 
 class Activity extends Endpoint {
   constructor (api, db, url) {

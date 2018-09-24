@@ -12,7 +12,7 @@ class List extends Endpoint {
       median: Number,
       min: Number,
       max: Number,
-      offers: Number
+      orders: Number
     }
     this.schema.response = [{
       uniqueName: String,
@@ -37,6 +37,7 @@ class List extends Endpoint {
   async main (req, res) {
     let items = await this.db.collection('items').find().project({
       _id: 0,
+      uniqueName: 1,
       name: 1,
       components: 1,
       imgUrl: 1,
@@ -47,7 +48,7 @@ class List extends Endpoint {
 
     items.forEach(item => {
       result.push({
-        unqiueName: item.uniqueName,
+        uniqueName: item.uniqueName,
         name: item.name,
         components: item.components,
         apiUrl: item.apiUrl,

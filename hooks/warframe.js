@@ -129,7 +129,7 @@ class Hook {
         median: null,
         min: null,
         max: null,
-        offers: null
+        orders: null
       }
 
       // Skip if data is already present

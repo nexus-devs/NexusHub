@@ -17,6 +17,26 @@ class Prices extends Endpoint {
         description: 'Time range from now in the past, in days.'
       }
     ]
+    this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
+    const economyData = {
+      median: Number,
+      min: Number,
+      max: Number,
+      orders: Number
+    }
+    this.schema.response = {
+      name: String,
+      components: [{
+        prices: {
+          selling: { current: economyData, previous: economyData },
+          buying: { current: economyData, previous: economyData }
+        }
+      }]
+    }
+    this.schema.pubsub = {
+      url: '/warframe/v1/items/:item/prices',
+      response: this.schema.response
+    }
   }
 
   /**
