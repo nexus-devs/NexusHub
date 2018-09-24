@@ -73,6 +73,7 @@ export default {
     margin-top: 8px;
     margin-left: 15px;
     color: white;
+    margin-bottom: 20px;
   }
   p, span {
     color: white;

@@ -2,6 +2,7 @@ const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
+const Prices = require('../items/prices.js')
 
 class Order extends Endpoint {
   constructor (api, db, url) {
@@ -31,12 +32,13 @@ class Order extends Endpoint {
   async main (req, res) {
     const request = req.body
     const item = request.item
+    const _res = { send () {} }
+    _res.status = () => res
 
     // Process offer
     request.createdAt = new Date()
+    await this.db.collection('activeOrders').insertOne(request)
     await this.db.collection('orders').insertOne(request)
-    await this.db.collection('orderHistory').insertOne(request)
-    res.send('added!')
 
     // Create user if they don't already exist
     const user = new User(this.api, this.db, `/warframe/v1/users/${request.user}`)
@@ -63,6 +65,17 @@ class Order extends Endpoint {
     orders.publish(result)
     orders.cache(result, 60 * 10)
     orders.discard(discard)
+
+    // Update prices
+    const prices = new Prices(this.api, this.db, `warframe/v1/items/${item}/prices`)
+    const stored = await this.db.collection('items').findOne({ name: item })
+    if (stored) {
+      const priceData = await prices.get(item, 7, stored)
+      // prices.cache(priceData, 60 * 60 * 24)
+      prices.store(item, priceData, stored)
+    }
+
+    res.send('added!')
   }
 }
 

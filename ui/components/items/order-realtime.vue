@@ -15,6 +15,7 @@
       <span class="main-value">
         {{ order.price ? `${order.price}p` : 'any offer' }}
       </span>
+      <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
     </template>
   </module>
 </template>
@@ -23,10 +24,12 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import priceDiff from 'src/components/items/price-diff.vue'
 
 export default {
   components: {
-    module
+    module,
+    priceDiff
   },
 
   props: ['order'],
@@ -34,6 +37,12 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    median () {
+      if (this.order.offer) {
+        const type = this.order.offer.toLowerCase()
+        return this.component.prices[type].current.median
+      }
     },
     component () {
       if (this.order) {
@@ -91,6 +100,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    white-space: nowrap;
 
     .user {
       font-size: 0.9em !important;

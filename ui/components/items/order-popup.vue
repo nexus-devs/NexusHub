@@ -1,10 +1,10 @@
 <template>
   <popup :class="{ active: order && order.user }" class="order-popup">
     <template slot="header">
-      <div>
+      <h4>
         <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
         You are {{ order.offer === 'Selling' ? 'buying' : 'selling' }}
-      </div>
+      </h4>
     </template>
     <template slot="body">
       <div class="image-wrapper">
@@ -22,9 +22,7 @@
         <h3>{{ item.name }} {{ order.component }}</h3>
         <span class="price">
           {{ order.price ? `${order.price}p` : 'any offer' }}
-          <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff >= 0 : priceDiff <= 0 }">
-            {{ priceDiff > 0 ? '+' : '' }}{{ priceDiff }}%
-          </span>
+          <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
         </span>
         <div class="message">
           <span ref="message">
@@ -51,11 +49,13 @@
 <script>
 import popup from 'src/components/ui/popup.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
+import priceDiff from 'src/components/items/price-diff.vue'
 
 export default {
   components: {
     tooltip,
-    popup
+    popup,
+    priceDiff
   },
 
   data () {
@@ -74,6 +74,12 @@ export default {
     component () {
       return this.item.components.find(c => c.name === this.order.component) || {}
     },
+    median () {
+      if (this.order.offer) {
+        const type = this.order.offer.toLowerCase()
+        return this.component.prices[type].current.median
+      }
+    },
     // Short username for more authentic message and less characters to avoid
     // character limit. This will remove numbers at the end and only take the
     // first word long word if camel-cased
@@ -91,20 +97,6 @@ export default {
           }
         }
         return noDigits
-      }
-    },
-    priceDiff () {
-      if (this.order) {
-        const type = this.order.offer.toLowerCase()
-        const value = this.order.price - this.component[type].current.median
-
-        if (this.order.price) {
-          return (value / this.component[type].current.median * 100).toFixed(2)
-        } else {
-          return null
-        }
-      } else {
-        return {}
       }
     }
   },
@@ -208,16 +200,6 @@ export default {
     padding: 0 60px 20px;
     color: white;
     border-bottom: 1px solid $color-subtle-dark;
-
-    span {
-      font-size: 0.9em;
-      color: $color-primary;
-      margin-left: 3px;
-
-      &.negative {
-        color: $color-error;
-      }
-    }
   }
   .message {
     padding-top: 10px;

@@ -22,7 +22,8 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     core: {
       mongoUrl,
       mongoDb: 'nexus-ui',
-      redisUrl
+      redisUrl,
+      publicPath: `${process.cwd()}/ui/assets`
     },
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
@@ -53,7 +54,8 @@ else {
       }
     },
     core: {
-      mongoDb: 'nexus-ui'
+      mongoDb: 'nexus-ui',
+      publicPath: `${process.cwd()}/ui/assets`
     },
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,

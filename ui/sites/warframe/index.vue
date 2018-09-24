@@ -41,13 +41,7 @@
                         <h3>{{ order.item }}</h3>
                       </template>
                       <template slot="body">
-                        <span>{{ order.amount }} Orders</span>
-                      </template>
-                      <template slot="footer">
-                        <router-link :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`">
-                          View Traders
-                          <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
-                        </router-link>
+                        <span>{{ order.amount }} Orders for {{ order.item }}</span>
                       </template>
                     </module>
                   </router-link>
@@ -496,7 +490,7 @@ section {
       }
     }
     /deep/ .body {
-      padding: 20px 25px;
+      padding: 30px 25px;
     }
   }
   @media (max-width: $breakpoint-s) {

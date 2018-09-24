@@ -239,9 +239,10 @@ nav {
         }
       }
       .suggestion-data {
+        position: absolute;
         display: inline-block;
         vertical-align: middle;
-        float: right;
+        right: 0;
         font-size: 0.9em;
         margin: 7px 0;
         padding: 3px 10px;

@@ -175,6 +175,7 @@ export default {
   p {
     padding-top: 0;
     margin-top: 3px;
+    font-size: 1em;
   }
   .dismiss {
     position: absolute;

@@ -24,9 +24,7 @@
     <div class="col price">
       <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
       <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
-      <span v-if="order.price" :class="{ negative: order.offer === 'Selling' ? priceDiff(order) >= 0 : priceDiff(order) <= 0 }" class="diff">
-        {{ priceDiff(order) > 0 ? '+' : '' }}{{ priceDiff(order) }}%
-      </span>
+      <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
     </div>
     <div class="col buy">
       <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
@@ -38,10 +36,12 @@
 
 <script>
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
+import priceDiff from 'src/components/items/price-diff.vue'
 
 export default {
   components: {
-    tooltip
+    tooltip,
+    priceDiff
   },
 
   props: ['order'],
@@ -52,6 +52,12 @@ export default {
     },
     component () {
       return this.item.components.find(c => c.name === this.order.component) || {}
+    },
+    median () {
+      if (this.order.offer) {
+        const type = this.order.offer.toLowerCase()
+        return this.component.prices[type].current.median
+      }
     }
   },
 
@@ -61,13 +67,9 @@ export default {
     },
     priceDiff (order) {
       const type = order.offer.toLowerCase()
-      const value = order.price - this.component[type].current.median
-
-      if (order.price) {
-        return (value / this.component[type].current.median * 100).toFixed(2)
-      } else {
-        return null
-      }
+      const median = this.component.prices[type].current.median
+      const value = order.price - median
+      return value
     }
   }
 }
@@ -190,18 +192,13 @@ export default {
 }
 
 .price {
-  .diff {
-    margin-left: 10px;
-    margin-top: 2px;
-    font-size: 0.9em;
-    color: $color-primary;
-  }
-  .negative {
-    color: $color-error;
-  }
   img {
     margin-right: 2px;
   }
+}
+
+/deep/ .price-diff {
+  font-size: 1em !important;
 }
 
 .buy {

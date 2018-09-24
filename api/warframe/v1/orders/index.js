@@ -65,7 +65,7 @@ class Orders extends Endpoint {
    * Filter by outdated trade chat offers or online status on trading sites
    */
   async filter (item, offline) {
-    const orders = await this.db.collection('orders').find({ item: title(item) }).toArray()
+    const orders = await this.db.collection('activeOrders').find({ item: title(item) }).toArray()
     const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
     const discard = []
     const online = []
@@ -98,7 +98,7 @@ class Orders extends Endpoint {
   async discard (discard) {
     if (discard.length) {
       for (let discarded of discard) {
-        await this.db.collection('orders').deleteOne({ _id: new ObjectId(discarded._id) })
+        await this.db.collection('activeOrders').deleteOne({ _id: new ObjectId(discarded._id) })
         delete discarded._id
       }
     }
@@ -109,7 +109,7 @@ class Orders extends Endpoint {
    * requests that are required.
    */
   async getAll () {
-    const orders = await this.db.collection('orders').find().project({ component: 0 }).toArray()
+    const orders = await this.db.collection('activeOrders').find().project({ component: 0 }).toArray()
     return orders
   }
 }

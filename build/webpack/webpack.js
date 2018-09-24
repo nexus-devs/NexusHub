@@ -26,7 +26,7 @@ async function build () {
    * production builds and test units.
    */
   console.log('* Removing old builds...')
-  rm.sync(`${process.cwd()}/assets/bundles/*`)
+  rm.sync(`${process.cwd()}/ui/assets/bundles/*`)
 
   /**
    * We should now have a clear bundle history and actual commit to the build.

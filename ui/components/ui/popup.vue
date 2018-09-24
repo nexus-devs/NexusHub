@@ -92,13 +92,15 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $color-primary-subtle !important;
-    text-transform: uppercase;
-    font-size: 0.85em;
-    color: white;
-    letter-spacing: 0.2;
     padding: 12px 30px 10px;
     background: $color-bg;
+
+    h3, h4, h5 {
+      color: $color-primary-subtle !important;
+      text-transform: uppercase;
+      font-size: 0.85em;
+      letter-spacing: 0.2;
+    }
   }
   .body {
     position: relative;

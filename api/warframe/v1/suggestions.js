@@ -84,7 +84,9 @@ class Search extends Endpoint {
       result.push({
         name: item.name,
         type: item.type,
-        keyData: (set.selling && set.buying) ? (set.selling.current.median + set.buying.current.median) / 2 + 'p' : item.ducats + 'Ducats',
+        keyData: (set.prices.selling && set.prices.buying)
+          ? Math.round((set.prices.selling.current.median + set.prices.buying.current.median) / 2) + 'p'
+          : set.ducats + ' Ducats',
         imgUrl: item.imgUrl,
         apiUrl: item.apiUrl,
         webUrl: item.webUrl

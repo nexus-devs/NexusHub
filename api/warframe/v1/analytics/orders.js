@@ -8,7 +8,7 @@ class Index extends Endpoint {
   }
 
   async main (req, res) {
-    const offers = await this.db.collection('orderHistory').find({
+    const offers = await this.db.collection('orders').find({
       createdAt: {
         $gte: new Date(new Date() - 1000 * 60 * 60 * 24 * 30)
       }

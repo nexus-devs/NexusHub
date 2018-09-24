@@ -48,7 +48,7 @@ class Opm extends Endpoint {
         $gte: new Date(queryStart)
       }
     }
-    const orders = await this.db.collection('orderHistory').find(query).toArray()
+    const orders = await this.db.collection('orders').find(query).toArray()
     const { intervals, sources } = this.getIntervals(orders)
     const mostTraded = item ? null : this.getMostTraded(orders)
     const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1 || orders.length

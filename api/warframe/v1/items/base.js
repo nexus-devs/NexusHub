@@ -21,8 +21,10 @@ class Item extends Endpoint {
       components: [{
         name: String,
         ducats: Number,
-        selling: { current: economyData, previous: economyData },
-        buying: { current: economyData, previous: economyData },
+        prices: {
+          selling: { current: economyData, previous: economyData },
+          buying: { current: economyData, previous: economyData }
+        },
         imgUrl: String
       }],
       wikiaUrl: String,

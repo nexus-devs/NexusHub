@@ -15,13 +15,14 @@ class List extends Endpoint {
       offers: Number
     }
     this.schema.response = [{
+      uniqueName: String,
       name: String,
       components: [{
         name: String,
-        selling: { current: economyData, previous: economyData },
-        buying: { current: economyData, previous: economyData },
-        apiUrl: String,
-        webUrl: String,
+        prices: {
+          selling: { current: economyData, previous: economyData },
+          buying: { current: economyData, previous: economyData }
+        },
         imgUrl: String
       }],
       apiUrl: String,
@@ -46,6 +47,7 @@ class List extends Endpoint {
 
     items.forEach(item => {
       result.push({
+        unqiueName: item.uniqueName,
         name: item.name,
         components: item.components,
         apiUrl: item.apiUrl,
