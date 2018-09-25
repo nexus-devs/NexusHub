@@ -1,5 +1,7 @@
 <template>
-  <module>
+  <module v-if="priceCurrent || component.ducats || item.masteryReq || item.health
+    || item.shield || item.armor || item.power || item.criticalChance || item.procChance
+  || item.damageTypes || item.vaulted">
     <template slot="header">
       <img src="/img/warframe/ui/stats.svg" alt="Statistics" class="ico-h-20">
       <h3>Item Stats</h3>

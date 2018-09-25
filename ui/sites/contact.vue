@@ -31,7 +31,7 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/general.vue'
+import navigation from 'src/components/ui/nav/general.vue'
 import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'

@@ -13,7 +13,8 @@ class Activity extends Endpoint {
   }
 
   async main (req, res) {
-    res.send('lul')
+    const item = req.query.item
+    
   }
 }
 

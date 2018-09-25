@@ -95,7 +95,6 @@ export default {
     name: 'items',
     state: {
       item: { name: '' },
-      test: false,
       selected: {
         component: 'Set',
         offerType: 'combined',

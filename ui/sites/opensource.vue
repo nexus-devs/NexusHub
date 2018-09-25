@@ -20,7 +20,9 @@
               </p>
               <p class="typer">
                 <span>Want to</span>
-                <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']"/>
+                <no-ssr>
+                  <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']"/>
+                </no-ssr>
               </p>
               <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">
                 Join us on Discord
@@ -114,12 +116,11 @@ import appContent from 'src/app-content.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import module from 'src/components/ui/module.vue'
-let VueTyper
-try {
-  window
-  VueTyper = require('vue-typer').VueTyper
-} catch (err) {
-  // SSR - don't load
+import noSsr from 'vue-no-ssr'
+if (process.browser) {
+  var vueTyper = require('vue-typer').VueTyper
+} else {
+  vueTyper = {}
 }
 
 export default {
@@ -128,7 +129,8 @@ export default {
     appContent,
     sidebar,
     sidebarSearch,
-    VueTyper,
+    vueTyper,
+    noSsr,
     module
   },
 
@@ -174,6 +176,10 @@ section:first-of-type {
   span {
     font-family: 'Consolas', monospace;
     font-size: 1.1em;
+
+    /deep/ span {
+      vertical-align: baseline;
+    }
   }
 }
 /deep/ .vue-typer {
@@ -217,7 +223,8 @@ section:first-of-type {
  * Open source repos
  */
 .repos {
-  padding: 20px 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   h2 {
     margin-bottom: 20px;

@@ -9,7 +9,7 @@
       <section>
         <div class="container">
           <h2 class="sub">Item Overview</h2>
-          <div class="row-pad">
+          <div class="row-pad main">
             <div class="column col-b">
               <description/>
               <build-requirements v-if="item.components.length > 1"/>
@@ -117,6 +117,11 @@ h2 {
     margin-top: 0;
     margin-bottom: 20px;
     padding: 0;
+  }
+  @media (min-width: $breakpoint-m) {
+    .col-b {
+      max-width: 450px;
+    }
   }
 }
 

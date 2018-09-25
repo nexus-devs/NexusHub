@@ -82,6 +82,10 @@ export default {
     }
   },
 
+  beforeCreate () {
+    this.$store.dispatch('applyInputQuery', this.$route)
+  },
+
   beforeDestroy () {
     for (let i = 0; i < this.$store.state.serp.activeFilters.length; i++) {
       this.$store.commit('popSerpActiveFilter')
@@ -137,13 +141,13 @@ export default {
         category: 'items',
         unit: ' Sellers',
         hidden: true,
-        path: 'selling.current.offers'
+        path: 'prices.selling.current.orders'
       }, {
         name: 'Demand',
         category: 'items',
         unit: ' Buyers',
         hidden: true,
-        path: 'buying.current.offers'
+        path: 'prices.buying.current.orders'
       }],
 
       // Keep track of activated filters separately in the order in which they
@@ -241,7 +245,7 @@ export default {
                 webUrl: item.webUrl,
                 category: item.category,
                 rarity: item.rarity,
-                price: Math.round((component.selling.current.median + component.buying.current.median) / 2),
+                price: Math.round((component.prices.selling.current.median + component.prices.buying.current.median) / 2),
                 results: 'items',
                 description: description.join(' ')
               }))
