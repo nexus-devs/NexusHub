@@ -71,7 +71,7 @@ class Order extends Endpoint {
     const stored = await this.db.collection('items').findOne({ name: item })
     if (stored) {
       const priceData = await prices.get(item, 7, stored)
-      // prices.cache(priceData, 60 * 60 * 24)
+      prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)
     }
 

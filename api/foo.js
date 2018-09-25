@@ -9,6 +9,7 @@ class Foo extends Endpoint {
 
   async main (req, res) {
     res.send('bar')
+    this.cache('bar', 60 * 60)
   }
 }
 

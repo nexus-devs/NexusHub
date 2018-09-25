@@ -59,7 +59,7 @@ class Endpoints extends Endpoint {
   async main (req, res) {
     const data = JSON.stringify(endpoints, replacer)
     this.cache(data)
-    res.send(data)
+    res.send(data, 60)
   }
 }
 
