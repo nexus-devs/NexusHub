@@ -67,8 +67,8 @@ export default {
   computed: {
     supply () {
       const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
-      const current = set.selling.current.offers
-      const previous = set.selling.previous.offers
+      const current = set.prices.selling.current.orders
+      const previous = set.prices.selling.previous.orders
       const diff = ((current - previous) / previous * 100).toFixed(2)
 
       return {
@@ -79,8 +79,8 @@ export default {
     },
     demand () {
       const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
-      const current = set.buying.current.offers
-      const previous = set.buying.previous.offers
+      const current = set.prices.buying.current.orders
+      const previous = set.prices.buying.previous.orders
       const diff = ((current - previous) / previous * 100).toFixed(2)
 
       return {

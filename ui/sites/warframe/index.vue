@@ -29,7 +29,7 @@
               <h2 class="sub">Market Overview</h2>
               <div class="realtime">
                 <opm/>
-                <transition-group class="most-traded row">
+                <div class="most-traded row">
                   <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col">
                     <module>
                       <template slot="header">
@@ -45,7 +45,7 @@
                       </template>
                     </module>
                   </router-link>
-                </transition-group>
+                </div>
               </div>
             </div>
             <div class="col-b components-container">
@@ -490,7 +490,7 @@ section {
       }
     }
     /deep/ .body {
-      padding: 30px 25px;
+      padding: 35px 25px;
     }
   }
   @media (max-width: $breakpoint-s) {

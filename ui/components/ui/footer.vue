@@ -10,7 +10,7 @@
         <div class="col-b"/>
         <div class="col-b">
           <h4>Project</h4>
-          <router-link to="/open-source">Open Source</router-link>
+          <router-link to="/opensource">Open Source</router-link>
           <router-link to="/branding">Branding</router-link>
         </div>
         <div class="col-b">

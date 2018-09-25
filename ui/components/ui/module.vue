@@ -100,6 +100,8 @@ export default {
     @include ie;
     padding: 5px 10px;
     letter-spacing: 0.5;
+    position: relative;
+    left: 10px;
 
     &:hover {
       color: white !important;

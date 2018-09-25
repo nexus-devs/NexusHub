@@ -8,7 +8,7 @@
       <span>{{ component.name === 'Set' ? item.components[item.components.length - 1].name : component.name }}</span>
     </template>
     <template slot="body">
-      <div v-for="drop in drops" :key="drop.location" class="drop">
+      <div v-for="(drop, i) in drops" :key="drop.location + i" class="drop">
         <router-link v-if="drop.location.match(/(Intact|Exceptional|Flawless|Radiant)/)"
                      :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`">
           <img :src="`/img/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}.png`" alt="">

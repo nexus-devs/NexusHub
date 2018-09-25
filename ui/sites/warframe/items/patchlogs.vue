@@ -10,7 +10,7 @@
         <div id="patchlogs-container" class="container">
           <div v-if="item.patchlogs" id="patchlogs" class="patchlogs">
             <h2 class="sub">Patchlog History</h2>
-            <patchlog v-for="patchlog in item.patchlogs" :key="patchlog.date" :patchlog="patchlog"/>
+            <patchlog v-for="patchlog in item.patchlogs" :key=" patchlog.name + patchlog.date" :patchlog="patchlog"/>
           </div>
           <div v-else class="no-data">
             No patchlogs found :(
