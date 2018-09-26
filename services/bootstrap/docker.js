@@ -35,13 +35,13 @@ module.exports = async function () {
     if (group === 'warframe' && node === 'core') {
       cubic.hook('warframe.core', wfhooks.verifyIndices)
       cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
-
-      // Order trackers
-      setTimeout(() => {
-        if (!prod) require('../../services/warframe/tradechat.js')
-        require('../../services/warframe/warframe.market.js')
-      }, 1000 * 20)
     }
-    cubic.use(new Node(config[group][node]))
+    await cubic.use(new Node(config[group][node]))
+
+    // Order listeners
+    if (group === 'warframe' && node === 'core') {
+      if (!prod) require('../../services/warframe/tradechat.js')
+      require('../../services/warframe/warframe.market.js')
+    }
   }
 }

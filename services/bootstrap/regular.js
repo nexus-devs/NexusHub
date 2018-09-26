@@ -25,11 +25,9 @@ module.exports = async function () {
   // Warframe Core node
   cubic.hook('warframe.core', wfhooks.verifyIndices)
   cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
-  cubic.use(new Core(config.warframe.core))
+  await cubic.use(new Core(config.warframe.core))
 
   // Load services
-  setTimeout(() => {
-    require('../../services/warframe/tradechat.js')
-    require('../../services/warframe/warframe.market.js')
-  }, 1000 * 20)
+  require('../../services/warframe/tradechat.js')
+  require('../../services/warframe/warframe.market.js')
 }
