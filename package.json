@@ -28,7 +28,7 @@
     "d3": "^5.7.0",
     "fs-extra": "^7.0.0",
     "fuse.js": "^3.2.1",
-    "googleapis": "^33.0.0",
+    "googleapis": "^34.0.0",
     "jsonfn": "^0.31.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
