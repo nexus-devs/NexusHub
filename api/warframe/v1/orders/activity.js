@@ -18,13 +18,7 @@ class Activity extends Endpoint {
         description: 'Days from now to the last order.'
       }
     ]
-    this.schema.response = [{
-      day: {
-        name: String,
-        number: Number
-      },
-      hours: [ Number ]
-    }]
+    this.schema.response = []
   }
 
   /**
@@ -34,7 +28,8 @@ class Activity extends Endpoint {
     const item = req.query.item ? title(req.query.item) : ''
     const timerange = req.query.timerange + 1
     const data = await this.get(item, timerange)
-    // TODO put some cache here
+
+    this.cache(data, 60 * 60 * 24)
     res.send(data)
   }
 
@@ -82,12 +77,12 @@ class Activity extends Endpoint {
         }
         result.push({ day: day.day, hours })
       }
-    }
 
-    // Sort by day
-    result.sort((a, b) => {
-      return a.day.number > b.day.number ? 1 : -1
-    })
+      // Sort by day
+      result.sort((a, b) => {
+        return a.day.number > b.day.number ? 1 : -1
+      })
+    }
 
     return result
   }

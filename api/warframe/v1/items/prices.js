@@ -14,7 +14,7 @@ class Prices extends Endpoint {
       {
         name: 'timerange',
         default: 7,
-        description: 'Time range from now in the past, in days.'
+        description: 'Days from now to the last order.'
       }
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
@@ -74,7 +74,7 @@ class Prices extends Endpoint {
     for (const component of item.components) {
       if (!component.tradable) continue
 
-      const query = { name: `${name} ${component.name}` }
+      const query = { name: `${name} ${component.name} Prices` }
       const params = { item: name, component: component.name }
       currentParallel.push(aggregator.get('orders', query, [0, timerange], aggregate, params))
       previousParallel.push(aggregator.get('orders', query, [timerange, timerange * 2], aggregate, params))
@@ -103,9 +103,8 @@ class Prices extends Endpoint {
 
     for (const component of item.components) {
       if (!component.tradable) continue
-
-      const targetCurrent = current.find(c => c.name === `${item.name} ${component.name}`)
-      const targetPrevious = previous.find(c => c.name === `${item.name} ${component.name}`)
+      const targetCurrent = current.find(c => c.name === `${item.name} ${component.name} Prices`)
+      const targetPrevious = previous.find(c => c.name === `${item.name} ${component.name} Prices`)
       const buying = {
         current: aggregator.reduce(targetCurrent, 'buying', schema),
         previous: aggregator.reduce(targetPrevious, 'buying', schema)

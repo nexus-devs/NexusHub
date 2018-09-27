@@ -73,21 +73,18 @@ export default {
   @include ie;
   border-radius: 2px;
   padding: 0;
-  flex-basis: 25%;
+  flex-basis: 33%;
   margin-right: 15px;
   margin-bottom: 15px;
   @include ease(0.5s);
 
-  @media (max-width: $breakpoint-m) {
-    flex-basis: 33%;
-  }
   &:hover {
     @include gradient-background-dg(#3c4451, #353d49);
   }
   &:before {
     border-radius: 2px;
   }
-  &:nth-of-type(n + 7) {
+  &:nth-of-type(n + 5) {
     display: none;
   }
   &:nth-of-type(n + 5) {

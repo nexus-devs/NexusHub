@@ -48,8 +48,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-b components-container">
-              <h2 class="sub">Something else</h2>
+            <div class="col-b">
+              <h2 class="sub">Busy Hours</h2>
+              <activity/>
             </div>
           </div>
         </div>
@@ -70,6 +71,7 @@ import rank from 'src/components/search/rank.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import opm from 'src/components/items/opm-global.vue'
+import activity from 'src/components/items/activity.vue'
 import module from 'src/components/ui/module.vue'
 
 export default {
@@ -83,12 +85,16 @@ export default {
     rank,
     searchButton,
     opm,
+    activity,
     module
   },
 
   computed: {
     opm () {
       return this.$store.state.opm.all
+    },
+    activity () {
+      return this.$store.state.busyhours.data
     }
   }
 }
@@ -201,8 +207,7 @@ header {
      }
    }
    input {
-     padding-top: 10px;
-     padding-bottom: 9px;
+     padding: 10px 0;
      width: 80%;
    }
    .a-ie {
@@ -497,5 +502,9 @@ section {
     margin-left: 0;
     margin-top: 20px;
   }
+}
+
+.activity {
+  margin-top: 20px;
 }
 </style>

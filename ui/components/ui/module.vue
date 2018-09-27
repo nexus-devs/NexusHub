@@ -9,13 +9,19 @@
     <div class="footer">
       <slot name="footer"/>
     </div>
+    <progressbar ref="progress"/>
   </div>
 </template>
 
 
 
 <script>
+import progressbar from 'src/components/progress.vue'
+
 export default {
+  components: {
+    progressbar
+  }
 }
 </script>
 
@@ -25,6 +31,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 .module {
+  position: relative;
   @include field;
   display: flex;
   flex-direction: column;
@@ -112,5 +119,11 @@ export default {
       margin-left: -2px;
     }
   }
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
 }
 </style>

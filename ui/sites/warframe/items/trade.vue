@@ -21,6 +21,10 @@
                 </transition-group>
               </div>
             </div>
+            <div class="col-b">
+              <h2 class="sub">Busy Hours</h2>
+              <activity :item="item.name"/>
+            </div>
           </div>
         </div>
       </section>
@@ -96,6 +100,7 @@ import component from 'src/components/items/component.vue'
 import order from 'src/components/items/order.vue'
 import orderPopup from 'src/components/items/order-popup.vue'
 import orderRealtime from 'src/components/items/order-realtime.vue'
+import activity from 'src/components/items/activity.vue'
 let selectedComponent = 'Set'
 
 /**
@@ -161,7 +166,8 @@ export default {
     orderRealtime,
     comp: component,
     order,
-    orderPopup
+    orderPopup,
+    activity
   },
 
   computed: {
@@ -175,7 +181,7 @@ export default {
       return this.$store.state.orders.listings
     },
     realtime () {
-      return Array(6).fill().map((e, i) => [].concat(this.all).sort((a, b) => {
+      return Array(4).fill().map((e, i) => [].concat(this.all).sort((a, b) => {
         return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
       })[i] || {})
     },

@@ -45,6 +45,7 @@ class Aggregator {
     // Store newly calculated aggregation and remove old hourly data.
     const additional = additionalDays.before.concat(additionalDays.after)
       .concat(additionalHours.before).concat(additionalHours.after)
+
     await this.cleanup(additional, collection, timerange, now)
 
     // Parse into more usable shape for users, rather than what we need for
@@ -94,7 +95,7 @@ class Aggregator {
 
     // Get data before covered range
     if (timeCovered[0] <= range) {
-      for (let i = 0; i < range - timeCovered[0]; i++) {
+      for (let i = 0; i < timeCovered[0]; i++) {
         parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional.before, i))
       }
     }
