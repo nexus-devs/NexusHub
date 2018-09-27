@@ -9,11 +9,11 @@
         <h1>Hey {{ user }}!</h1>
         <p>Wanna talk with us, or just feeling lonely? Hit us up on one of the channels below!</p>
 
-        <a href="https://discord.gg/TCxe6P4" target="_blank" class="comm discord">
+        <a href="https://discord.gg/TCxe6P4" target="_blank" class="interactive comm discord">
           <img src="/img/contact/discord.svg" alt="Discord">
           <span>Discord</span>
         </a>
-        <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub" class="comm mail">
+        <a href="mailto:contact@nexus-stats.com?Subject=Regarding%20NexusHub" class="interactive comm mail">
           <img src="/img/contact/mail.svg" alt="Mail">
           <span>Good ol' Mail</span>
         </a>
@@ -80,7 +80,6 @@ export default {
 }
 
 .comm {
-  @include ie;
   @include field;
   position: relative;
   top: 40px;

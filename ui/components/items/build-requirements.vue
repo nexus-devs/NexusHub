@@ -12,7 +12,7 @@
     <template slot="body">
       <div class="row">
         <div v-for="component in item.components" v-if="component.name !== 'Set'" :key="component.uniqueName" class="component col">
-          <div class="component-wrapper" @click="selectComponent(component.name)">
+          <div class="component-wrapper interactive" @click="selectComponent(component.name)">
             <img :src="component.imgUrl" :alt="component.name">
             <span v-if="component.itemCount > 1" class="count">x{{ component.itemCount }}</span>
           </div>
@@ -98,7 +98,6 @@ export default {
   align-items: center;
   height: 40px;
   width: 40px;
-  @include ie;
 
   &:hover {
     & + .tooltip {

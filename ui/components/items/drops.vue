@@ -10,7 +10,8 @@
     <template slot="body">
       <div v-for="(drop, i) in drops" :key="drop.location + i" class="drop">
         <router-link v-if="drop.location.match(/(Intact|Exceptional|Flawless|Radiant)/)"
-                     :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`">
+                     :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`"
+                     class="interactive">
           <img :src="`/img/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}.png`" alt="">
         </router-link>
         <h4 class="location">{{ drop.location }}</h4>
@@ -121,7 +122,6 @@ export default {
     font-size: 0.9em;
   }
   a {
-    @include ie;
     background: rgba(255,255,255,0.04);
     display: flex;
     justify-content: center;

@@ -1,5 +1,5 @@
 <template>
-  <module @click.native="select">
+  <module class="interactive" @click.native="select">
     {{ order }}
     <template slot="header">
       <div>
@@ -8,7 +8,6 @@
         </div>
         <h3>{{ component.name }}</h3>
       </div>
-      <h3 class="user">{{ order.user }}</h3>
     </template>
     <template slot="body">
       <span>{{ order.offer }} for</span>
@@ -70,17 +69,11 @@ export default {
 @import '~src/styles/partials/importer';
 
 .module {
-  @include ie;
-  border-radius: 2px;
-  padding: 0;
   flex-basis: 33%;
   margin-right: 15px;
   margin-bottom: 15px;
   @include ease(0.5s);
 
-  &:hover {
-    @include gradient-background-dg(#3c4451, #353d49);
-  }
   &:before {
     border-radius: 2px;
   }
@@ -97,11 +90,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    white-space: nowrap;
 
+    .order {
+      margin-left: 5px;
+    }
     .user {
       font-size: 0.9em !important;
-      color: white !important;
       text-transform: none;
 
       @media (max-width: $breakpoint-m) {

@@ -11,4 +11,8 @@
    border-radius: 2px;
    @include gradient-background-dg(#3d4450, #363d48);
    @include shadow-1;
+
+   &:hover {
+     @include gradient-background-dg(#3d4450, #363d48);
+   }
  }

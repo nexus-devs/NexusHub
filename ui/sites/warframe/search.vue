@@ -14,7 +14,7 @@
             </div>
           </div>
           <div class="search-filters">
-            <div class="search-filters-label" @click="toggleFilters">
+            <div class="search-filters-label interactive" @click="toggleFilters">
               <img src="/img/ui/filter.svg" alt="Filter" class="ico-h-20">
               <span>Filters</span>
             </div>
@@ -381,7 +381,6 @@ export default {
 
   .search-filters {
     .search-filters-label {
-      @include ie;
       display: flex;
       align-items: center;
       text-transform: uppercase;

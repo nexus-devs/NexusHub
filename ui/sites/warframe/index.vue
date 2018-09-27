@@ -24,13 +24,13 @@
       <!-- Realtime Orders -->
       <section>
         <div class="container">
-          <div class="row-pad">
+          <div class="row-margin overview">
             <div class="col-b-4">
               <h2 class="sub">Market Overview</h2>
               <div class="realtime">
                 <opm/>
                 <div class="most-traded row">
-                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col">
+                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col interactive">
                     <module>
                       <template slot="header">
                         <div class="img-container">
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-b">
+            <div class="col-b activity-data">
               <h2 class="sub">Busy Hours</h2>
               <activity/>
             </div>
@@ -130,19 +130,6 @@ header {
     animation-duration: 35s;
     animation-iteration-count: infinite;
   }
-  video {
-    position:absolute;
-    top: 25%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    opacity: 0.45;
-    filter: blur(5px);
-    background: $color-bg;
-    transform: translateX(-50%) translateY(-25%);
-  }
 
   /**
    * Search bar
@@ -210,7 +197,7 @@ header {
      padding: 10px 0;
      width: 80%;
    }
-   .a-ie {
+   .interactive {
      margin-left:-10px;
    }
    .autocomplete {
@@ -439,7 +426,6 @@ section {
 }
 .realtime {
   display: inline-flex;
-  margin-top: 20px;
 
   @media (max-width: $breakpoint-s) {
     flex-direction: column;
@@ -455,7 +441,6 @@ section {
   margin-bottom: -15px;
 
   .item {
-    @include ie();
     padding: 0;
     border-radius: 2px;
     flex-basis: 33%;
@@ -504,7 +489,19 @@ section {
   }
 }
 
-.activity {
-  margin-top: 20px;
+.overview {
+  margin: -20px;
+
+  & > *[class*="col-b"] {
+    margin: 20px;
+  }
+}
+
+.activity-data {
+  @media (max-width: $breakpoint-m) {
+    flex-basis: 100%;
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 </style>

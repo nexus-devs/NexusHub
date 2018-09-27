@@ -85,7 +85,7 @@ export default {
   }
 }
 
-.a-ie {
+.interactive {
   @include ie();
 }
 

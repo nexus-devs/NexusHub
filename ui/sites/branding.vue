@@ -20,7 +20,7 @@
           <p>
             Please do not edit, distort, recolor, or otherwise repurpose the NexusHub logo.
           </p>
-          <div class="row row-margin">
+          <div class="row-margin">
             <div class="col logo">
               <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
@@ -94,7 +94,7 @@
             Keep in mind that each color in our palette comes in two shades for
             different situations.
           </p>
-          <div class="row row-margin">
+          <div class="row-margin">
             <div class="col-b color">
               <div class="primary-shade green">
                 <span/>
@@ -184,7 +184,12 @@ header {
   }
 }
 
-.row {
+.row-margin {
+  margin: -5px;
+
+  .col, .col-b {
+    margin: 5px;
+  }
   .col {
     position: relative;
     display: flex;

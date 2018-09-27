@@ -39,7 +39,7 @@ export default {
   @media (max-width: $breakpoint-s) {
     width: 100% !important;
   }
-  &.a-ie {
+  &.interactive {
     padding: 0;
 
     &:before {

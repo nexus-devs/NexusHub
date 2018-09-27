@@ -1,5 +1,5 @@
 <template>
-  <span class="back a-ie" @click.stop="back">
+  <span class="back interactive" @click.stop="back">
     <img src="/img/ui/back.svg" class="ico-20" alt="Back">
     Back
   </span>

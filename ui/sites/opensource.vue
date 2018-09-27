@@ -40,7 +40,7 @@
           <h2>Here's some stuff that we've built so far.</h2>
           <div class="row-margin">
             <a href="https://github.com/nexus-devs/NexusHub" target="_blank" class="col-b">
-              <module class="a-ie">
+              <module class="interactive">
                 <template slot="header">
                   <img src="/img/brand/nexushub-logo-bw.svg" class="ico-h-32" alt="NexusHub">
                   <h3>NexusHub</h3>
@@ -52,7 +52,7 @@
             </a>
 
             <a href="https://github.com/cubic-js/cubic" target="_blank" class="col-b">
-              <module class="a-ie">
+              <module class="interactive">
                 <template slot="header">
                   <img src="/img/open-source/cubic.svg" class="ico-h-32" alt="NexusHub">
                   <h3>Cubic</h3>
@@ -64,7 +64,7 @@
             </a>
 
             <a href="https://github.com/nexus-devs/beholder" target="_blank" class="col-b">
-              <module class="a-ie">
+              <module class="interactive">
                 <template slot="header">
                   <img src="/img/open-source/beholder.svg" class="ico-h-32" alt="NexusHub">
                   <h3>Beholder</h3>
@@ -76,7 +76,7 @@
             </a>
 
             <a href="https://github.com/WFCD/warframe-items" target="_blank" class="col-b">
-              <module class="a-ie">
+              <module class="interactive">
                 <template slot="header">
                   <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="NexusHub">
                   <h3>warframe-items</h3>

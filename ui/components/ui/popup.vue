@@ -4,7 +4,7 @@
     <div class="popup-content">
       <div class="header">
         <slot name="header"/>
-        <img src="/img/ui/close.svg" class="ico-h-20 a-ie" alt="Close" @click="close">
+        <img src="/img/ui/close.svg" class="ico-h-20 interactive" alt="Close" @click="close">
       </div>
       <div class="body">
         <div class="body-content">

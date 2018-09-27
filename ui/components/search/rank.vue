@@ -3,7 +3,7 @@
     <div class="field">
       <div class="input-container">
         <label>Rank</label><br >
-        <div class="input a-ie" @click="toggle">
+        <div class="input interactive" @click="toggle">
           <span>{{ selected }}</span>
           <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
         </div>

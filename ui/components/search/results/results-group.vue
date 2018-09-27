@@ -7,7 +7,7 @@
     <div class="filter">
       <div class="filter-tags">
         <div class="filter-tag-row">
-          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag" @click="selectFilterTag(filter)">
+          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
             <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
             <span>{{ filter.name }}</span>
             <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
@@ -15,11 +15,11 @@
         </div>
       </div>
       <div class="filter-view">
-        <div :class="{ active: listType === 'list' }" class="a-ie" @click="selectListView('list')">
+        <div :class="{ active: listType === 'list' }" class="interactive" @click="selectListView('list')">
           <img src="/img/ui/list-view.svg" class="ico-20" alt="List">
           <span>List</span>
         </div>
-        <div :class="{ active: listType === 'grid' }" class="a-ie" @click="selectListView('grid')">
+        <div :class="{ active: listType === 'grid' }" class="interactive" @click="selectListView('grid')">
           <img src="/img/ui/card-view.svg" class="ico-20" alt="Grid">
           <span>Grid</span>
         </div>
@@ -237,7 +237,6 @@ h2 {
       padding-right: 20px;
     }
     .tag {
-      @include ie;
       border-radius: 999px;
       display: inline-block;
       padding: 5px 0 3px 15px;
@@ -285,7 +284,7 @@ h2 {
     margin-top: -5px; // compensate for icon padding
     padding-left: 20px;
 
-    .a-ie {
+    .interactive {
       display: inline-block;
       opacity: 0.4;
 

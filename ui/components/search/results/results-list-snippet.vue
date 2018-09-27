@@ -1,6 +1,6 @@
 <template>
   <div class="result">
-    <router-link :to="result.webUrl" class="row">
+    <router-link :to="result.webUrl" class="row interactive">
       <img :src="result.imgUrl" class="result-img-blur">
       <div class="result-title col-b">
         <div class="result-img">
@@ -51,7 +51,6 @@ a {
   position: relative;
   overflow: hidden;
   width: 100%;
-  @include ie;
   @include field;
   align-items: center;
   border-radius: 2px;

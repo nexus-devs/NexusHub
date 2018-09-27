@@ -4,7 +4,7 @@
     <div v-if="component.isDummy" class="dummy"/>
 
     <!-- Actual price field -->
-    <div v-else class="row item-price-snippet">
+    <div v-else class="row item-price-snippet interactive">
 
       <!-- left panel -->
       <div class="col">
@@ -119,7 +119,6 @@ export default {
 
 .row {
   @include shadow-1;
-  @include ie;
   display: flex;
   min-width: 320px; // Fix for Edge ignoring parent width
   max-width: 320px;

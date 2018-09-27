@@ -2,7 +2,7 @@
   <div class="col-b time">
     <div :class="{ active }" class="field">
       <label>Time</label><br >
-      <div class="input a-ie" @click="toggle">
+      <div class="input interactive" @click="toggle">
         <span :class="{ selected: selected === 'start' }">{{ from }}</span> -
         <span :class="{ selected: selected === 'end' }">{{ to }}</span>
         <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
@@ -11,7 +11,7 @@
     </div>
     <div :class="{ active }" class="tools timepicker">
       <div class="suggestions row">
-        <div v-for="suggestion in suggestions" :key="suggestion.format" class="col a-ie" @click="select(suggestion)">
+        <div v-for="suggestion in suggestions" :key="suggestion.format" class="col interactive" @click="select(suggestion)">
           {{ suggestion.format }}
         </div>
       </div>

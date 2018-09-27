@@ -28,11 +28,11 @@
     "d3": "^5.7.0",
     "fs-extra": "^7.0.0",
     "fuse.js": "^3.2.1",
-    "googleapis": "^33.0.0",
+    "googleapis": "^34.0.0",
     "jsonfn": "^0.31.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
-    "requestretry": "^3.0.0",
+    "requestretry": "^3.0.1",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.4.0",
     "vue-analytics": "^5.16.0",
@@ -41,11 +41,11 @@
     "vue-observe-visibility": "^0.4.1",
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
-    "warframe-items": "1.46.0",
+    "warframe-items": "1.64.0",
     "ws": "^6.0.0"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.1",
     "better-assert": "^1.0.2",
     "eslint": "^5.6.0",
     "eslint-config-standard": "^12.0.0",
@@ -60,7 +60,7 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
     "semantic-release": "^15.9.16",
-    "webpack": "^4.20.0"
+    "webpack": "^4.20.2"
   },
   "release": {
     "getLastRelease": "last-release-git"

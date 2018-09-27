@@ -1,6 +1,6 @@
 <template>
   <div class="module-time">
-    <div class="a-ie" @click="toggle">
+    <div class="interactive" @click="toggle">
       <span>Last {{ days }} days</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
@@ -44,7 +44,7 @@ export default {
   font-size: 1.1em;
   color: white;
 }
-.a-ie {
+.interactive {
   padding: 6px 10px;
 }
 .dropdown {
@@ -52,6 +52,7 @@ export default {
   top: 0;
   padding: 5px 0;
   background: $color-bg;
+  @include ease(0.15s);
   @include shade-1;
 
   .body {
@@ -73,7 +74,8 @@ export default {
   &:not(.active) {
     pointer-events: none;
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateY(-5px);
+    transform-origin: top;
     @include ease(0.15s);
   }
 }

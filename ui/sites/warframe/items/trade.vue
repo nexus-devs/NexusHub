@@ -11,7 +11,7 @@
       <!-- Realtime Orders -->
       <section>
         <div class="container">
-          <div class="row-pad">
+          <div class="row-margin overview">
             <div class="col-b-4 realtime-container">
               <h2 class="sub">Realtime Orders</h2>
               <div class="realtime">
@@ -21,7 +21,7 @@
                 </transition-group>
               </div>
             </div>
-            <div class="col-b">
+            <div class="col-b activity-data">
               <h2 class="sub">Busy Hours</h2>
               <activity :item="item.name"/>
             </div>
@@ -43,7 +43,7 @@
             <div class="filter-tags">
               <div class="filter-tag-row">
                 <!-- Filters -->
-                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag" @click="selectFilterTag(filter)">
+                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
                   <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                   <span>{{ filter.name }}</span>
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
@@ -324,31 +324,14 @@ export default {
   }
 }
 
-h2 {
-  margin-bottom: 20px;
-}
+.overview {
+  margin: -20px;
 
-.row-pad {
-  .col-b, .col-b-4 {
-    padding-top: 0;
-    margin-top: 0;
-
-    @media (max-width: $breakpoint-m) {
-      padding-right: 0 !important;
-    }
+  & > *[class*="col-b"] {
+    margin: 20px;
   }
 }
 
-.realtime-container {
-  @media (max-width: $breakpoint-m) {
-    width: 100%;
-    flex-basis: 100%;
-  }
-}
-
-.module {
-  display: inline-flex;
-}
 .realtime {
   display: flex;
 
@@ -370,6 +353,14 @@ h2 {
   @media (max-width: $breakpoint-s) {
     margin-top: 20px;
     margin-left: 0;
+  }
+}
+
+.activity-data {
+  @media (max-width: $breakpoint-m) {
+    flex-basis: 100%;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 
@@ -443,7 +434,6 @@ h2 {
       }
     }
     .tag {
-      @include ie;
       border-radius: 999px;
       display: inline-block;
       padding: 4px 0 4px 16px;
@@ -454,6 +444,9 @@ h2 {
       font-size: 0.9em;
       @include shadow-0;
 
+      &:before {
+        border-radius: 999px;
+      }
       &:hover {
         background: none;
         border: 1px solid $color-subtle;

@@ -9,8 +9,8 @@
       <section>
         <div class="container">
           <h2 class="sub">Item Overview</h2>
-          <div class="row-pad main">
-            <div class="column col-b">
+          <div class="row-margin main">
+            <div class="col-b column">
               <description/>
               <build-requirements v-if="item.components.length > 1"/>
             </div>
@@ -22,7 +22,7 @@
       <section v-if="patchlogs">
         <div class="container">
           <h2 class="sub">Recent Changes</h2>
-          <div class="row-pad patchlogs">
+          <div class="row-margin patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>
           <router-link :to="`${$route.params.item}/patchlogs`" class="btn-subtle">
@@ -108,30 +108,18 @@ export default {
   background: $color-bg-darker;
 }
 
-h2 {
-  margin-bottom: 20px;
-}
-
-.row-pad {
-  /deep/ .module {
-    margin-top: 0;
-    margin-bottom: 20px;
-    padding: 0;
-  }
-  @media (min-width: $breakpoint-m) {
-    .col-b {
-      max-width: 450px;
-    }
-  }
-}
-
 .column {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
+
+  & > *:first-of-type {
+    margin-bottom: 20px;
+  }
+}
+
+.module {
+  max-width: 450px;
 }
 
 .patchlogs {
@@ -158,5 +146,8 @@ h2 {
       }
     }
   }
+}
+.btn-subtle {
+  margin-top: 20px;
 }
 </style>

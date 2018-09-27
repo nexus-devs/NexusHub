@@ -1,6 +1,6 @@
 <template>
   <wrapper>
-    <div class="ico-a-ie">
+    <div class="ico-interactive">
       <img src="/img/sidebar/search.svg" alt="" class="ico-20">
     </div>
     <tooltip>Search</tooltip>
@@ -146,7 +146,6 @@ export default {
       position: relative;
       left: 18px;
       top: -4px;
-      @include ie(20);
       padding: 12px 10px;
       border-radius: 0;
       @include gradient-background-dg($color-primary, $color-accent);

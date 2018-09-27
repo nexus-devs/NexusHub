@@ -18,12 +18,12 @@
               <h1>{{ item.name }}</h1>
               <div v-if="item.components.length > 1">
                 <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
-                      :class="{ selected: selectedComponent === component.name }"
+                      :class="{ selected: selectedComponent === component.name }" class="interactive"
                       @click="selectComponent">
                   {{ component.name }}
                 </span>
               </div>
-              <span v-for="tag in item.tags" v-else :key="tag" class="selected">
+              <span v-for="tag in item.tags" v-else :key="tag" class="selected interactive">
                 {{ tag }}
               </span>
             </div>
@@ -41,10 +41,10 @@
     </header>
     <nav ref="subnav" class="subnav">
       <div class="container">
-        <router-link :to="itemUrl" exact>Overview</router-link>
-        <router-link :to="`${itemUrl}/prices`">Prices</router-link>
+        <router-link :to="itemUrl" exact class="interactive">Overview</router-link>
+        <router-link :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
         <router-link :to="`${itemUrl}/trading`">Trade</router-link>
-        <router-link v-if="item.patchlogs" :to="`${itemUrl}/patchlogs`">Patchlogs</router-link>
+        <router-link v-if="item.patchlogs" :to="`${itemUrl}/patchlogs`" class="interactive">Patchlogs</router-link>
       </div>
     </nav>
   </div>
@@ -284,12 +284,10 @@ export default {
       margin-top: 5px;
     }
     span {
-      @include ie;
       position: relative;
       top: -5px;
       margin-left: -20px;
       color: white;
-      cursor: pointer;
       opacity: 0.6;
 
       &:first-of-type {
@@ -325,7 +323,6 @@ export default {
   @include shadow-1;
 
   a {
-    @include ie;
     display: inline-block;
     padding: 17.5px 20px;
     margin-right: 5px;

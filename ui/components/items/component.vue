@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ active: active ? true : false }" class="component col" @click="select">
+  <div :class="{ active: active ? true : false }" class="component col interactive" @click="select">
     <div class="image-wrapper">
       <img :src="component.imgUrl" alt="component.name">
     </div>
@@ -42,7 +42,6 @@ export default {
 @import '~src/styles/partials/importer';
 
 .component {
-  @include ie;
   border-left: 2px solid transparent;
   border-radius: 2px;
   background: $color-bg;

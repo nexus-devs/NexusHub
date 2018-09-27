@@ -3,7 +3,7 @@
     <div class="nav-upper" @click="toggle()">
       <div class="ico-wrapper">
         <div :style="{ transform: [transform], 'transition-duration': deltaX ? '0s' : '0.45s' }" class="panel-backdrop"/>
-        <div class="ico-a-ie">
+        <div class="ico-interactive">
           <img src="/img/nav/side-nav.svg" alt="Sidebar Navigation" class="ico-20">
         </div>
       </div>
@@ -179,7 +179,7 @@ nav {
     .nav-upper {
       background: $color-bg-darkest;
 
-      .ico-a-ie {
+      .ico-interactive {
         margin: 0;
         left: -1px;
 
@@ -212,7 +212,7 @@ nav {
         & ~ .nav-lower.hidden {
           opacity: 1 !important;
 
-          .ico-a-ie {
+          .ico-interactive {
             background: rgba(200,225,255,0.1);
           }
           .tooltip {
@@ -271,7 +271,7 @@ nav {
       padding: 8px;
     }
 
-    .ico-a-ie {
+    .ico-interactive {
       position: relative;
       z-index: 1;
       @include ie(24);

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="notifications">
-      <div class="nav-ico" @click="toggle">
+      <div class="nav-ico interactive" @click="toggle">
         <img src="/img/ui/notifications.svg" alt="Notifications" class="ico-h-20">
       </div>
       <div :class="{ unread: unread.length }" class="unread-bubble"/>
@@ -17,7 +17,7 @@
               <div v-if="notification.buttons" class="footer">
                 <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">{{ button.text }}</button>
               </div>
-              <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20" @click="dismiss(notification)">
+              <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
             </div>
           </div>
           <div v-else class="no-notifcations">
@@ -106,7 +106,6 @@ export default {
 
 .nav-ico {
   display: inline-block;
-  @include ie();
 }
 
 .notification-container {
@@ -181,7 +180,6 @@ export default {
     position: absolute;
     top: 15px;
     right: 15px;
-    @include ie;
     padding: 8px;
   }
 }
@@ -195,7 +193,6 @@ export default {
   border: 1px solid $color-subtle;
   margin-right: 10px;
   font-size: 0.9em;
-  @include ie;
   @include shadow-0;
   @include ease(0.25s);
   border-radius: 9999px !important;

@@ -181,6 +181,8 @@ export default {
 @import '~src/styles/partials/importer';
 
 .module {
+  display: inline-flex;
+
   /deep/ .header {
     .btn-subtle {
       padding: 6px 8px;

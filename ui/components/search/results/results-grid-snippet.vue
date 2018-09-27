@@ -1,6 +1,6 @@
 <template>
   <div class="result col">
-    <router-link :to="result.webUrl" :class="{ set: result.set }">
+    <router-link :to="result.webUrl" :class="{ set: result.set }" class="interactive">
       <div class="result-img">
         <div class="result-img-shade"/>
         <img :src="result.imgUrl" :class="{ mod: result.imgUrl.includes('jpeg') }" :alt="result.name">
@@ -56,7 +56,6 @@ export default {
 
 a {
   display: block;
-  @include ie;
   @include field;
   padding: 0;
   box-sizing: border-box;

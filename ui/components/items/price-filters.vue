@@ -2,12 +2,12 @@
   <div class="filters">
     <div class="row">
       <div class="col-b row">
-        <div :class="{ inactive: types[0].inactive }" class="col inline-data" @click="select('types', types[0])">
+        <div :class="{ inactive: types[0].inactive }" class="col inline-data interactive" @click="select('types', types[0])">
           <label>Selling</label>
           <span class="data">{{ supply.count }}</span>
           <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
         </div>
-        <div :class="{ inactive: types[1].inactive }" class="col inline-data" @click="select('types', types[1])">
+        <div :class="{ inactive: types[1].inactive }" class="col inline-data interactive" @click="select('types', types[1])">
           <label>Buying</label>
           <span class="data">{{ demand.count }}</span>
           <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
@@ -222,7 +222,6 @@ export default {
     margin-bottom: 5px;
   }
   .inline-data {
-    @include ie;
     flex-grow: 0;
     border-radius: 2px;
     padding: 12px 15px;
