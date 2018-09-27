@@ -30,7 +30,7 @@ class Aggregator {
     // This simply switches the values so the first value is where we start and
     // the second value is how many days ago we'll stop.
     timerange = timerange[0] > timerange[1] ? [timerange[1], timerange[0]] : timerange
-    const now = moment().subtract(timerange[0], 'days')
+    const now = moment.utc().subtract(timerange[0], 'days')
     const parallel = [
       this.getDaily(collection, query, timerange, aggregateFn, params, now),
       this.getHourly(collection, query, timerange, aggregateFn, params, now)
@@ -43,12 +43,15 @@ class Aggregator {
     const { hours, additionalHours } = await parallel[1]
 
     // Store newly calculated aggregation and remove old hourly data.
-    const additional = additionalDays.concat(additionalHours)
+    const additional = additionalDays.before.concat(additionalDays.after)
+      .concat(additionalHours.before).concat(additionalHours.after)
     await this.cleanup(additional, collection, timerange, now)
 
     // Parse into more usable shape for users, rather than what we need for
     // the database.
-    const all = days.concat(additionalDays).concat(hours).concat(additionalHours)
+    const all = additionalDays.before.concat(days).concat(additionalDays.after)
+      .concat(additionalHours.before).concat(hours).concat(additionalHours.after)
+
     return this.parse(all, query)
   }
 
@@ -70,7 +73,7 @@ class Aggregator {
       const { existing: hours, additional: additionalHours } = await this.getData(collection, query, hoursTimerange, aggregateFn, params, now, 'hour')
       return { hours, additionalHours }
     } else {
-      return { hours: [], additionalHours: [] }
+      return { hours: [], additionalHours: { before: [], after: [] } }
     }
   }
 
@@ -82,12 +85,23 @@ class Aggregator {
     const past = timerange[0] > 0
     const end = now.clone().subtract(timerange[1], scope + 's').startOf(scope)
     const timeCovered = await this.getTimeCovered(collection, query, now, end, scope)
-    const existing = await this.getExisting(collection, query, timeCovered, end, scope)
-    const additional = []
+    const existing = timeCovered[1] > 0 ? await this.getExisting(collection, query, timeCovered, end, scope) : []
+    const additional = {
+      before: [],
+      after: []
+    }
     const parallel = []
 
-    for (let i = timeCovered + 1; past || scope === 'hour' ? i <= range : i < range; i++) {
-      parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional, i))
+    // Get data before covered range
+    if (timeCovered[0] <= range) {
+      for (let i = 0; i < range - timeCovered[0]; i++) {
+        parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional.before, i))
+      }
+    }
+
+    // Get data after covered range
+    for (let i = timeCovered[1] + 1; past || scope === 'hour' ? i <= range : i < range; i++) {
+      parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional.after, i))
     }
     await Promise.all(parallel)
 
@@ -99,22 +113,30 @@ class Aggregator {
    * aggregating new data.
    */
   async getTimeCovered (collection, query, start, end, scope) {
-    const latestAggregation = (await this.db.collection(collection + 'Aggregation').find({
+    const find = async (order) => (await this.db.collection(collection + 'Aggregation').find({
       ...{
         createdAt: { $gte: end.toDate(), $lte: start.toDate() },
         scope
       },
       ...query
     }).sort({
-      createdAt: -1
+      createdAt: order
     }).limit(1).toArray())[0]
+    const oldestAggregation = await find(1)
+    const latestAggregation = oldestAggregation ? await find(-1) : null // Don't find nothing twice
 
-    if (latestAggregation) {
-      const latestDate = new Date(latestAggregation.createdAt)
-      return moment(latestDate).endOf(scope).diff(end, scope + 's')
-    } else {
-      return 0
+    // -1 because the algorithm will go with result[1] + 1 until timerange.
+    // So with no time being covered, we'll want to start from 0.
+    const result = [0, -1]
+
+    if (oldestAggregation) {
+      result[0] = moment(oldestAggregation.createdAt).endOf(scope).diff(end, scope + 's')
     }
+    if (latestAggregation) {
+      result[1] = moment(latestAggregation.createdAt).endOf(scope).diff(end, scope + 's')
+    }
+
+    return result
   }
 
   /**
@@ -124,8 +146,8 @@ class Aggregator {
     return this.db.collection(collection + 'Aggregation').find({
       ...{
         createdAt: {
-          $gte: end.toDate(),
-          $lte: end.clone().add(covered, scope + 's').endOf(scope).toDate()
+          $gte: end.clone().add(covered[0], scope + 's').endOf(scope).toDate(),
+          $lte: end.clone().add(covered[1], scope + 's').endOf(scope).toDate()
         },
         scope
       },
@@ -212,7 +234,7 @@ class Aggregator {
     // Aggregate all Groups
     for (const entry of all) {
       for (const group of entry.data) {
-        const id = group._id.toLowerCase()
+        const id = typeof group._id === 'string' ? group._id.toLowerCase() : group._id.toString()
         const target = groups.find(g => g.id === id)
 
         if (target) {
@@ -308,7 +330,7 @@ class Aggregator {
    * to the parent object.
    */
   getIntervalByGroup (i, group, schema) {
-    const data = i.find(e => e._id ? e._id.toLowerCase() === group : false)
+    const data = i.find(e => e._id ? e._id === group : false)
 
     if (data) {
       delete data._id
