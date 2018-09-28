@@ -212,9 +212,6 @@ nav {
         & ~ .nav-lower.hidden {
           opacity: 1 !important;
 
-          .ico-interactive {
-            background: rgba(200,225,255,0.1);
-          }
           .tooltip {
             opacity: 1;
             background: transparent;
