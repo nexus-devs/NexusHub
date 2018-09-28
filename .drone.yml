@@ -53,7 +53,8 @@ pipeline:
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
-
+      - git checkout development
+      
       # Modify files as needed for staging build
       - sed -i '/\\/ui\\/assets\\/bundles\\//d' .gitignore # Keep webpack builds
       - mv ui/assets/.robots.txt ui/assets/robots.txt # Make search engines ignore the staging site
