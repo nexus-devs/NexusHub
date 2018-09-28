@@ -1,8 +1,13 @@
 #!/bin/bash
 git submodule update --init --recursive
+git submodule foreach --recursive git pull origin master
+
+# Ensure dependencies are installed
+bash ./docker/install.sh
 
 # Restart if already running
 if [ "$(docker service ls | grep nexus_dev)" ]; then
+  docker rm $(docker ps -a -q) &>/dev/null
   docker service scale nexus_dev=0 --detach=true
   docker service scale nexus_dev=1 --detach=true
   docker service logs nexus_dev -f --raw --tail 0

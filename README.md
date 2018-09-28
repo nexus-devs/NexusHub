@@ -51,6 +51,12 @@ This will automatically install and run all required services. Feel free to
 grab a coffee while waiting for the first install, it'll probably take a few
 minutes. Once done, check out `localhost:3000` and start hacking! You're gonna
 find all API endpoints in `/api` while all sites and UI elements are in `/ui`.
+<br>
+<br>
+To stop the service again, just run
+```
+docker stack rm nexus
+```
 
 <br>
 <br>

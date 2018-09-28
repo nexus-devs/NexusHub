@@ -48,38 +48,60 @@ class Hook {
    */
   async verifyItemList () {
     const url = cubic.config.warframe.core.mongoUrl
-    const db = await mongodb.connect(url)
+    const mongo = await mongodb.connect(url)
+    const db = mongo.db(cubic.config.warframe.core.mongoDb)
     const items = new Items()
+    const storedItems = await db.collection('items').find().toArray()
+    const parallel = []
 
     for (let item of items) {
       if (item.tradable) {
-        const stored = await db.db(cubic.config.warframe.core.mongoDb).collection('items').findOne({
-          uniqueName: item.uniqueName
-        })
+        const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
 
+        parallel.push(this.separatePatchlogs(item, db))
         this.addItemSet(item)
         this.addItemUrl(item)
         this.addEconomyData(item, stored)
 
         if (!_.isEqual(stored, item)) {
-          await db.db(cubic.config.warframe.core.mongoDb).collection('items').updateMany({
+          parallel.push(db.collection('items').updateMany({
             uniqueName: item.uniqueName
           }, {
             $set: _.merge(stored || {}, item)
           }, {
             upsert: true
-          })
+          }))
         }
       }
     }
-    db.close()
+
+    await Promise.all(parallel)
+    mongo.close()
+  }
+
+  /**
+   * Remove patchlogs from items and put them in a separate database so we won't
+   * waste as much traffic.
+   */
+  async separatePatchlogs (item, db) {
+    if (!item.patchlogs) return
+
+    const patchlogs = [].concat(item.patchlogs)
+    delete item.patchlogs
+
+    for (const patchlog of patchlogs) {
+      patchlog.item = item.name
+    }
+    await db.collection('patchlogs').insertMany(patchlogs)
   }
 
   /**
    * Add item set as separate component, makes things easier to work with.
    */
   addItemSet (item) {
-    const set = { name: 'Set' }
+    const set = {
+      name: 'Set'
+    }
 
     set.uniqueName = item.uniqueName
     if (item.tradable) set.tradable = true
