@@ -89,6 +89,8 @@
           </div>
         </div>
       </section>
+
+      <!--
       <section>
         <div class="container contribute">
           <h2>Want to contribute?</h2>
@@ -104,6 +106,7 @@
           </router-link>
         </div>
       </section>
+    -->
     </app-content>
   </div>
 </template>
