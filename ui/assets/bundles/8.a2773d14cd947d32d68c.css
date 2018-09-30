@@ -1,0 +1,385 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.title[data-v-6f7a9378] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title span[data-v-6f7a9378] {
+    font-size: 0.9em;
+    color: white;
+}
+.component[data-v-6f7a9378] {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-right: 1px solid rgba(60, 70, 80, 0.4);
+  padding: 0 5px;
+}
+.component[data-v-6f7a9378]:last-of-type {
+    border-right: none;
+}
+.component img[data-v-6f7a9378] {
+    max-height: 40px;
+}
+.component .count[data-v-6f7a9378] {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    color: white;
+    font-size: 0.85em;
+}
+.component-wrapper[data-v-6f7a9378] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+}
+.component-wrapper:hover + .tooltip[data-v-6f7a9378] {
+    opacity: 1;
+    transform: translateX(5px);
+}
+.component-wrapper + .tooltip[data-v-6f7a9378] {
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.item-data[data-v-aaaf43ea] {
+  border-bottom: 1px solid rgba(60, 70, 80, 0.4);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.item-data[data-v-aaaf43ea]:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.item-data span[data-v-aaaf43ea] {
+    color: white;
+    font-size: 0.9em !important;
+    padding-right: 8px;
+    border-right: 1px solid rgba(120, 132, 144, 0.4);
+}
+.item-data span:nth-of-type(1) ~ span[data-v-aaaf43ea] {
+    padding-left: 5px;
+}
+.item-data span[data-v-aaaf43ea]:last-of-type {
+    border-right: none;
+}
+.item-data img[data-v-aaaf43ea] {
+    padding: 3.5px;
+    margin-right: 2px;
+}
+.item-data span.negative[data-v-aaaf43ea] {
+    color: #f85242;
+}
+.item-data .data-price-diff[data-v-aaaf43ea] {
+    color: #39e56f;
+}
+.ducats[data-v-aaaf43ea] {
+  color: #39e56f !important;
+  border-right: none !important;
+  padding-right: 0 !important;
+}
+.ducats ~ span[data-v-aaaf43ea] {
+  padding-left: 0 !important;
+  color: #a1a9b7;
+}
+.col:first-of-type span[data-v-aaaf43ea] {
+  font-size: 0.9em;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+[data-v-39c7a90d] .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+[data-v-39c7a90d] .header span {
+    font-size: 0.9em;
+    color: white;
+}
+[data-v-39c7a90d] .body {
+  margin: auto;
+}
+.drop[data-v-39c7a90d] {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
+.drop[data-v-39c7a90d]:nth-of-type(2n - 1) {
+    width: calc(50% - 20px);
+    padding-right: 20px;
+}
+.drop[data-v-39c7a90d]:nth-of-type(1n + 2) {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.drop .location[data-v-39c7a90d] {
+    font-size: 0.9em;
+}
+.drop .chance[data-v-39c7a90d] {
+    margin-top: 3px;
+}
+.drop .rarity[data-v-39c7a90d] {
+    color: #a1a9b7;
+    font-size: 0.9em;
+}
+.drop a[data-v-39c7a90d] {
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    justify-content: center;
+    height: 48px;
+    width: 48px;
+}
+.drop img[data-v-39c7a90d] {
+    height: 48px;
+    filter: grayscale(0.3);
+    transition-timing-function: ease;
+    transition-duration: 0.25s;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+[data-v-0b1a645c] .zoom-enter-active,[data-v-0b1a645c] .fade-leave-active {
+  transition-timing-function: ease;
+  transition-duration: 0.4s;
+}
+[data-v-0b1a645c] .zoom-enter,[data-v-0b1a645c] .zoom-leave-to {
+  transform: translateY(7px);
+  transform-origin: top;
+  opacity: 0.75;
+}
+.app-content[data-v-0b1a645c] {
+  background: #16191e;
+}
+.row-margin[data-v-0b1a645c] {
+  justify-content: flex-start;
+}
+.column[data-v-0b1a645c] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+}
+.column > *[data-v-0b1a645c]:first-of-type {
+    margin-bottom: 20px;
+}
+.module[data-v-0b1a645c] {
+  max-width: 450px;
+}
+.patchlogs[data-v-0b1a645c] {
+  justify-content: flex-start;
+}
+@media (max-width: 75em) {
+.patchlogs[data-v-0b1a645c] .patchlog {
+      max-width: calc(50% - 20px);
+}
+}
+@media (max-width: 40em) {
+.patchlogs[data-v-0b1a645c] .patchlog {
+      max-width: none;
+}
+}
+.patchlogs[data-v-0b1a645c] .patchlog .header {
+    padding: 0;
+}
+.patchlogs[data-v-0b1a645c] .patchlog .header h3 {
+      padding: 30px 35px 0;
+}
+.patchlogs[data-v-0b1a645c] .patchlog .header time {
+      padding: 0 35px;
+}
+.patchlogs[data-v-0b1a645c] .patchlog .header img {
+      display: none;
+}
+.btn-subtle[data-v-0b1a645c] {
+  margin-top: 20px;
+}
+
