@@ -108,10 +108,15 @@ export default {
   background: $color-bg-darker;
 }
 
+.row-margin {
+  justify-content: flex-start;
+}
+
 .column {
   position: relative;
   display: flex;
   flex-direction: column;
+  flex-grow: 0;
 
   & > *:first-of-type {
     margin-bottom: 20px;
