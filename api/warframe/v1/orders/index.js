@@ -12,14 +12,6 @@ class Orders extends Endpoint {
         name: 'item',
         description: 'Item to reduce orders by.',
         required: true
-      }, {
-        name: 'all',
-        description: 'Return all active orders. Won\'t work for public API users.',
-        default: false
-      }, {
-        name: 'offline',
-        description: 'Whether offline users should be included.',
-        default: false
       }
     ]
     this.schema.request = { url: '/warframe/v1/orders?item=Nikana%20Prime' }
@@ -50,15 +42,11 @@ class Orders extends Endpoint {
   async main (req, res) {
     const item = req.query.item
     const offline = req.query.offline
+    const { result, discard } = await this.filter(item, offline)
 
-    if (req.query.all && req.user.scp.includes('write_root')) {
-      res.send(await this.getAll())
-    } else {
-      const { result, discard } = await this.filter(item, offline)
-      res.send(result)
-      this.discard(discard)
-      this.cache(result, 60 * 60 * 24)
-    }
+    res.send(result)
+    this.discard(discard)
+    this.cache(result, 60 * 60 * 24)
   }
 
   /**
@@ -67,29 +55,32 @@ class Orders extends Endpoint {
   async filter (item, offline) {
     const orders = await this.db.collection('activeOrders').find({ item: title(item) }).toArray()
     const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
+    const usercheck = []
     const discard = []
-    const online = []
-    const all = []
+    const result = []
 
+    // Clear chat orders directly, store active users in array so we can query
+    // them all at once later on and compare.
     for (let order of orders) {
       if (order.source === 'Trade Chat') {
         const discarded = new Date() - discardAfter > order.createdAt
-        discarded ? discard.push(order) : all.push(order)
+        discarded ? discard.push(new ObjectId(order._id)) : result.push(order)
       } else {
-        all.push(order)
+        if (!usercheck.includes(order.user)) usercheck.push(order.user)
       }
     }
 
-    for (let order of all) {
+    // Second pass, get users and remove offline orders
+    const users = await this.db.collection('users').find({ name: { $in: usercheck } }).toArray()
+
+    for (let order of orders) {
       if (order.source !== 'Trade Chat') {
-        const user = await this.db.collection('users').findOne({ name: order.user })
-        order.online = user ? user.online : false
-      }
-      if ((!offline && order.online) || order.source === 'Trade Chat') {
-        online.push(order)
+        const user = users.find(u => u.name === order.user)
+        if (user && user.online) result.push(order)
       }
     }
-    return { result: offline ? all : online, discard }
+
+    return { result, discard }
   }
 
   /**
@@ -97,20 +88,8 @@ class Orders extends Endpoint {
    */
   async discard (discard) {
     if (discard.length) {
-      for (let discarded of discard) {
-        await this.db.collection('activeOrders').deleteOne({ _id: new ObjectId(discarded._id) })
-        delete discarded._id
-      }
+      await this.db.collection('activeOrders').remove({ _id: { $in: discard } })
     }
-  }
-
-  /**
-   * Admin method required for the warframe.market scraper to reduce number of
-   * requests that are required.
-   */
-  async getAll () {
-    const orders = await this.db.collection('activeOrders').find().project({ component: 0 }).toArray()
-    return orders
   }
 }
 

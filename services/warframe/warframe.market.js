@@ -7,7 +7,6 @@ const client = new Client({
   user_key: cubic.config.warframe.core.userKey,
   user_secret: cubic.config.warframe.core.userSecret
 })
-const request = require('requestretry').defaults({ fullResponse: false })
 
 /**
  * Get item offers from warframe.market in realtime, similar to the trade chat.
@@ -22,7 +21,7 @@ class WFM {
     await this.initItems()
     await this.updateOrders()
     setInterval(this.initItems, 1000 * 60)
-    setInterval(this.updateOrders, 1000 * 60 * 5)
+    setInterval(this.updateOrders, 1000 * 60 * 3)
   }
 
   /**
@@ -83,7 +82,7 @@ class WFM {
             rank: order.mod_rank,
             quantity: order.quantity,
             source: 'Warframe Market',
-            apiName: order.item.url_name
+            wfmName: order.item.url_name
           })
         } catch (err) {
           // just try again later, these are usually issues when bootstrapping
@@ -107,52 +106,9 @@ class WFM {
    * Discard old offers and change user's online status
    */
   async updateOrders () {
-    const orders = await client.get('/warframe/v1/orders?item=a&all=true')
-    const items = []
-
-    // Aggregate all users so we only need to fetch their profile once
-    for (let order of orders) {
-      if (order.source === 'Warframe Market') {
-        if (!items.find(i => i === order.apiName)) items.push(order.apiName)
-      }
-    }
-
-    // Gather old orders, update user's online status
-    for (let item of items) {
-      const WfmOrders = await request(`https://api.warframe.market/v1/items/${item}/orders`)
-      const wfmOrders = JSON.parse(WfmOrders).payload.orders
-      const discard = []
-
-      for (let order of orders) {
-        if (order.apiName === item && order.source === 'Warframe Market') {
-          const found = wfmOrders.find(o => {
-            const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
-            const matchesUser = o.user.ingame_name === order.user
-            const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 3
-            return matchesOffer && matchesUser && notExpired
-          })
-
-          // Update user's status if the order is still active. Offline orders
-          // are hidden by default.
-          if (found) {
-            const user = await client.get(`/warframe/v1/users/${order.user}`)
-            const online = found.user.status !== 'offline'
-
-            if (user && user.online !== online) {
-              client.post(`/warframe/v1/users/${order.user}/status`, { online })
-            }
-          } else {
-            discard.push({ _id: order._id })
-          }
-        }
-      }
-
-      // Remove old orders
-      if (discard.length) {
-        const itemName = orders.find(i => i.apiName === item).item
-        await client.delete('/warframe/v1/orders', { item: itemName, discard })
-      }
-    }
+    // .emit() instead of .get() so it won't get the queue stuck. The cleaning
+    // task may take very long.
+    client.emit('GET', '/warframe/v1/orders/clearExternal')
   }
 }
 
