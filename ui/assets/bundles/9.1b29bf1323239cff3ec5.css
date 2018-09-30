@@ -1,0 +1,109 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+[data-v-b158d4e2] .zoom-enter-active,[data-v-b158d4e2] .fade-leave-active {
+  transition-timing-function: ease;
+  transition-duration: 0.4s;
+}
+[data-v-b158d4e2] .zoom-enter,[data-v-b158d4e2] .zoom-leave-to {
+  transform: translateY(7px);
+  transform-origin: top;
+  opacity: 0.75;
+}
+h2 + span[data-v-b158d4e2] {
+  display: block;
+  margin-bottom: 20px;
+}
+[data-v-b158d4e2] .patchlog {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.no-data[data-v-b158d4e2] {
+  text-align: center;
+  color: white;
+}
+.timeline-wrapper[data-v-b158d4e2], .patchlogs[data-v-b158d4e2] {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (max-width: 40em) {
+.patchlogs[data-v-b158d4e2] {
+    display: block;
+}
+}
+.timeline-wrapper[data-v-b158d4e2] {
+  width: 200px;
+  transform: translateY(100px);
+  transition-timing-function: ease;
+  transition-duration: 0.45s;
+}
+.timeline-wrapper span[data-v-b158d4e2] {
+    margin-left: 80px;
+    font-size: 0.9em;
+}
+@media (max-width: 40em) {
+.timeline-wrapper[data-v-b158d4e2] {
+      display: none;
+}
+}
+.timeline[data-v-b158d4e2] {
+  position: relative;
+  padding: 10px 20px;
+  margin: 10px 80px;
+  margin-right: 0;
+  border-left: 1px solid rgba(120, 132, 144, 0.4);
+  height: 150px;
+  color: white;
+}
+.timeline .timeline-slider[data-v-b158d4e2] {
+    position: absolute;
+    left: -3px;
+    height: 20%;
+    width: 5px;
+    border-radius: 2px;
+    background: #596477;
+    transition-timing-function: ease;
+    transition-duration: 0.1s;
+}
+.timeline span[data-v-b158d4e2] {
+    display: inline-block;
+    margin-left: 0;
+    margin-top: 6px;
+    transition-timing-function: ease;
+    transition-duration: 0.1s;
+}
+
