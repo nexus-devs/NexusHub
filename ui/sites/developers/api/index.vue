@@ -70,7 +70,7 @@
             <div v-if="endpoint.query.length" class="sub-section">
               <h2>Query Params</h2>
               <div v-for="query in endpoint.query" :key="query.name">
-                <h3>{{ query.name }}</h3>
+                <h3>{{ query.name }}{{ query.required ? ' (required)' : '' }}</h3>
                 <p v-if="query.description">{{ query.description }}</p>
                 <div v-if="query.default">
                   <h4>Default</h4>
