@@ -60,6 +60,9 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+.build-requirements {
+  white-space: nowrap;
+}
 .title {
   display: flex;
   justify-content: space-between;
@@ -67,6 +70,7 @@ export default {
 
   span {
     font-size: 0.9em;
+    margin-left: 20px;
     color: white;
   }
 }
