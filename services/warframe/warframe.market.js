@@ -52,6 +52,8 @@ class WFM {
       let matchedComponent
 
       for (let item of this.items) {
+        if (!item.tradable) continue
+
         const name = item.name.split(' ')
         const orderName = order.item.en.item_name.split(' ')
 
