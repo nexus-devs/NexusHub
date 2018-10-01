@@ -46,20 +46,27 @@ class Activity extends Endpoint {
 
     // Get every hour per day
     for (let i = 0; i < data.days.length; i++) {
-      if (!data.days[i].length) continue
+      const now = moment.utc().subtract(i + 1, 'days')
+      const time = {
+        number: now.isoWeekday(),
+        name: now.format('dddd')
+      }
+      const day = days[i % 7]
 
+      // No activity - add empty
+      if (!data.days[i].length) {
+        if (!day) {
+          days[i % 7] = { day: time, hours: [] }
+        }
+        continue
+      }
+
+      // Does have activity
       for (const hour of data.days[i]) {
-        const day = days[i % 7]
-
         if (day) {
           day.hours.push(hour)
         } else {
-          const now = moment.utc().subtract(i + 1, 'days')
-          const day = {
-            number: now.isoWeekday(),
-            name: now.format('dddd')
-          }
-          days[i % 7] = { day, hours: [hour] }
+          days[i % 7] = { day: time, hours: [hour] }
         }
       }
     }
