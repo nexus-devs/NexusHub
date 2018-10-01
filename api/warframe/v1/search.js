@@ -17,7 +17,7 @@ class Search extends Endpoint {
     },
     {
       name: 'limit',
-      default: 10,
+      default: 12,
       description: 'Number of results to limit search to. Min. 2, Max. 20 for non-fuzzy queries.'
     },
     {
