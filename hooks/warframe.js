@@ -60,7 +60,7 @@ class Hook {
       parallel.push(this.separatePatchlogs(item, db))
       this.addItemSet(item)
       this.addItemUrl(item)
-      this.addEconomyData(item, stored)
+      if (item.tradable) this.addEconomyData(item, stored)
 
       if (!_.isEqual(stored, item)) {
         parallel.push(db.collection('items').updateMany({
