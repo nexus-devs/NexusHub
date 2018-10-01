@@ -42,8 +42,8 @@
     <nav ref="subnav" class="subnav">
       <div class="container">
         <router-link :to="itemUrl" exact class="interactive">Overview</router-link>
-        <router-link :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
-        <router-link :to="`${itemUrl}/trading`">Trade</router-link>
+        <router-link v-if="item.tradable" :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
+        <router-link v-if="item.tradable" :to="`${itemUrl}/trading`">Trade</router-link>
         <router-link v-if="item.patchlogs" :to="`${itemUrl}/patchlogs`" class="interactive">Patchlogs</router-link>
       </div>
     </nav>

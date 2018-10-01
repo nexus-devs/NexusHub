@@ -55,23 +55,21 @@ class Hook {
     const parallel = []
 
     for (let item of items) {
-      if (item.tradable) {
-        const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
+      const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
 
-        parallel.push(this.separatePatchlogs(item, db))
-        this.addItemSet(item)
-        this.addItemUrl(item)
-        this.addEconomyData(item, stored)
+      parallel.push(this.separatePatchlogs(item, db))
+      this.addItemSet(item)
+      this.addItemUrl(item)
+      this.addEconomyData(item, stored)
 
-        if (!_.isEqual(stored, item)) {
-          parallel.push(db.collection('items').updateMany({
-            uniqueName: item.uniqueName
-          }, {
-            $set: _.merge(stored || {}, item)
-          }, {
-            upsert: true
-          }))
-        }
+      if (!_.isEqual(stored, item)) {
+        parallel.push(db.collection('items').updateMany({
+          uniqueName: item.uniqueName
+        }, {
+          $set: _.merge(stored || {}, item)
+        }, {
+          upsert: true
+        }))
       }
     }
 

@@ -39,7 +39,7 @@ async function generate () {
     sitemap.push(`https://nexushub.co${item.webUrl}`)
     if (item.tradable) sitemap.push(`https://nexushub.co${item.webUrl}/prices`)
     if (item.tradable) sitemap.push(`https://nexushub.co${item.webUrl}/trading`)
-    sitemap.push(`https://nexushub.co${item.webUrl}/patchlogs`)
+    if (item.patchlogs) sitemap.push(`https://nexushub.co${item.webUrl}/patchlogs`)
   }
 
   // Save to file
