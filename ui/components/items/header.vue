@@ -23,11 +23,11 @@
                   {{ component.name }}
                 </span>
               </div>
-              <span v-for="tag in item.tags" v-else :key="tag" class="selected interactive">
+              <span v-for="(tag, i) in item.tags" v-else :key="tag + i" class="selected interactive">
                 {{ tag }}
               </span>
             </div>
-            <div class="item-profile-lower">
+            <div v-if="item.tradable" class="item-profile-lower">
               <router-link :to="`${itemUrl}/trading`">
                 <button class="btn-outline buy">Buyers</button>
               </router-link>
@@ -245,6 +245,7 @@ export default {
   height: 135px;
   flex: 0 0 135px;
   margin-right: 25px;
+  border-radius: 2px;
   @include gradient-background-dg(#323947, $color-bg);
   @include shadow-1;
 
@@ -257,9 +258,9 @@ export default {
   .item-profile-img-blur {
     position: absolute;
     z-index: 0;
-    top: 0;
-    left: 0;
-    max-height: 80%;
+    top: -50%;
+    left: -50%;
+    min-height: 200%;
     filter: blur(60px);
   }
   .item-profile-img-shade {

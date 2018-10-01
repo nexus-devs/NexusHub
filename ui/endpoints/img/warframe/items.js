@@ -11,6 +11,9 @@ class Index extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.url = '/img/warframe/items/:item'
+    this.schema.limit = {
+      disable: true
+    }
   }
 
   async main (req, res) {
