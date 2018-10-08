@@ -8,21 +8,11 @@ class List extends Endpoint {
     super(api, db, url)
     this.schema.description = 'Get a list of all items with their basic attributes.'
     this.schema.url = '/warframe/v1/items'
-    const economyData = {
-      median: Number,
-      min: Number,
-      max: Number,
-      orders: Number
-    }
     this.schema.response = [{
       uniqueName: String,
       name: String,
       components: [{
         name: String,
-        prices: {
-          selling: { current: economyData, previous: economyData },
-          buying: { current: economyData, previous: economyData }
-        },
         imgUrl: String
       }],
       apiUrl: String,
