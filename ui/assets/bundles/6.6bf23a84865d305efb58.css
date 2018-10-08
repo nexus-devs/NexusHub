@@ -1,0 +1,554 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.module[data-v-af3ba590] {
+  position: relative;
+  border-radius: 2px;
+  background: linear-gradient(to bottom right, #3d4450, #363d48);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 15px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+.module[data-v-af3ba590]:hover {
+    background: linear-gradient(to bottom right, #3d4450, #363d48);
+}
+@media (max-width: 40em) {
+.module[data-v-af3ba590] {
+      width: 100% !important;
+}
+}
+.module.interactive[data-v-af3ba590] {
+    padding: 0;
+}
+.module.interactive[data-v-af3ba590]:before {
+      border-radius: 2px;
+}
+.header[data-v-af3ba590] {
+  padding: 30px 35px 0;
+}
+.header h2[data-v-af3ba590], .header h3[data-v-af3ba590] {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.85em !important;
+    letter-spacing: 0.5;
+    color: #68d891 !important;
+    text-transform: uppercase;
+}
+.header time[data-v-af3ba590] {
+    display: block;
+    font-size: 0.85em;
+    margin-top: 2px;
+}
+.header img[data-v-af3ba590] {
+    display: inline-block;
+    vertical-align: middle;
+}
+.header span[data-v-af3ba590] {
+    display: block;
+}
+.body[data-v-af3ba590] {
+  padding: 25px 35px;
+}
+.body li[data-v-af3ba590] {
+    margin-top: 8px;
+    margin-left: 15px;
+    color: white;
+    margin-bottom: 20px;
+}
+.body p[data-v-af3ba590], .body span[data-v-af3ba590] {
+    color: white;
+    font-size: 0.95em;
+}
+.body li[data-v-af3ba590], .body p[data-v-af3ba590], .body span[data-v-af3ba590] {
+    max-width: 650px;
+}
+.footer[data-v-af3ba590] {
+  display: flex;
+  padding: 4px 25px;
+  margin-top: auto;
+  background: #2d323b;
+  font-size: 0.75em !important;
+  border-radius: 2px;
+}
+.footer a[data-v-af3ba590] {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    text-transform: uppercase;
+    transform: scale(1);
+    padding: 9.33333;
+    cursor: pointer;
+    border-radius: 1000px;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    transition-timing-function: ease;
+    transition-duration: 0.2s;
+    padding: 5px 10px;
+    letter-spacing: 0.5;
+    position: relative;
+    left: 10px;
+}
+.footer a[data-v-af3ba590]::before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      border-radius: 1000px;
+      background: rgba(200, 225, 250, 0.2);
+      transition-timing-function: ease;
+      transition-duration: 0.15s;
+}
+.footer a[data-v-af3ba590]:hover {
+      background: rgba(200, 225, 255, 0.1);
+      transition-timing-function: ease;
+      transition-duration: 0.3s;
+}
+.footer a[data-v-af3ba590]:hover:before {
+        transition-timing-function: ease;
+        transition-duration: 0.8s;
+}
+@media (max-width: 40em) {
+.footer a[data-v-af3ba590]:hover {
+          background: transparent;
+}
+}
+.footer a[data-v-af3ba590]:active {
+      transition-timing-function: ease;
+      transition-duration: 0.2s;
+      transform: scale(0.97);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.footer a[data-v-af3ba590]:active:before {
+        opacity: 1;
+        transition-timing-function: ease;
+        transition-duration: 0.1s;
+}
+.footer a.interactive-nz[data-v-af3ba590] {
+      transform: scale(1) !important;
+}
+.footer a[data-v-af3ba590]:hover {
+      color: white !important;
+}
+.footer a img[data-v-af3ba590] {
+      height: 20px;
+      margin-top: -3px;
+      margin-left: -2px;
+}
+.progress[data-v-af3ba590] {
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.bars[data-v-649ae31d] {
+  position: relative;
+  left: -1px;
+  max-width: 95%;
+  min-height: 80px;
+}
+.bars .bar[data-v-649ae31d] {
+    fill: rgba(225, 240, 255, 0.2);
+}
+.bars .cap[data-v-649ae31d] {
+    fill: rgba(255, 255, 255, 0.8);
+}
+.bars .tooltip[data-v-649ae31d] {
+    opacity: 0;
+    z-index: 1;
+}
+.bars .tooltip text[data-v-649ae31d] {
+      fill: white;
+}
+.bars .tooltip .title[data-v-649ae31d] {
+      font-size: 0.85em;
+}
+.bars .tooltip .num[data-v-649ae31d] {
+      font-size: 1.2em;
+}
+.bars .tooltip rect[data-v-649ae31d] {
+      fill: #2d323b;
+}
+.bars .bar-wrapper[data-v-649ae31d] {
+    z-index: 0;
+}
+.bars .bar-wrapper:hover + .tooltip[data-v-649ae31d] {
+      opacity: 1;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.module[data-v-edf46e26] {
+  width: fit-content;
+  z-index: 1;
+}
+.title[data-v-edf46e26] {
+  color: white;
+}
+.active-number[data-v-edf46e26] {
+  display: inline-block;
+  color: white;
+  font-size: 2em;
+  margin-top: 8px;
+}
+.offers-per-minute[data-v-edf46e26] {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: -15px;
+  font-size: 0.8em;
+}
+.distribution-label[data-v-edf46e26] {
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 5px;
+}
+.distribution-label div[data-v-edf46e26] {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 8px;
+}
+.distribution-label:nth-of-type(1) div[data-v-edf46e26] {
+    background: #68d891;
+}
+.distribution-label:nth-of-type(2) div[data-v-edf46e26] {
+    background: #50A88E;
+}
+.distribution-label[data-v-edf46e26]:last-of-type {
+    margin-right: 0;
+}
+.distribution-bar[data-v-edf46e26] {
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+.distribution-bar div[data-v-edf46e26] {
+    display: inline-block;
+    height: 2px;
+    width: 50%;
+    border-right: 1px solid #2d323b;
+    transition-timing-function: ease;
+    transition-duration: 0.55s;
+    will-change: width;
+}
+.distribution-bar div[data-v-edf46e26]:nth-of-type(1) {
+      background: #68d891;
+}
+.distribution-bar div[data-v-edf46e26]:nth-of-type(2) {
+      background: #50A88E;
+}
+.bars[data-v-edf46e26] {
+  margin: 20px 0;
+  width: 215px;
+  height: 80px;
+}
+[data-v-edf46e26] .footer {
+  padding: 10px 30px 15px;
+  margin-top: 0;
+  font-size: 1em;
+  color: white;
+}
+[data-v-edf46e26] .body {
+  overflow: visible;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: auto;
+}
+.distribution[data-v-edf46e26] {
+  width: 100%;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.module-time[data-v-4427fc99] {
+  position: relative;
+  font-size: 1.1em;
+  color: white;
+}
+.interactive[data-v-4427fc99] {
+  padding: 6px 10px;
+}
+.dropdown[data-v-4427fc99] {
+  position: absolute;
+  top: 0;
+  padding: 5px 0;
+  background: #2d323b;
+  transition-timing-function: ease;
+  transition-duration: 0.15s;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.05), 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.dropdown .body[data-v-4427fc99] {
+    display: flex;
+    flex-direction: column;
+}
+.dropdown .body span[data-v-4427fc99] {
+      cursor: pointer;
+      padding: 10px 15px;
+      transition-timing-function: ease;
+      transition-duration: 0.15s;
+}
+.dropdown .body span[data-v-4427fc99]:hover {
+      background: rgba(0, 0, 0, 0.15);
+}
+.dropdown .body span[data-v-4427fc99]:not(.active) {
+      opacity: 0.5;
+}
+.dropdown[data-v-4427fc99]:not(.active) {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transform-origin: top;
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.module[data-v-23a07c9e] {
+  display: inline-flex;
+}
+.module[data-v-23a07c9e] .header .btn-subtle {
+    padding: 6px 8px;
+    text-transform: none;
+    margin-top: -4px;
+    float: right;
+    border-radius: 42px;
+}
+.day[data-v-23a07c9e] {
+  display: flex;
+  flex-direction: column;
+  width: 28px;
+}
+.day span[data-v-23a07c9e] {
+    font-size: 0.8em;
+    margin-top: 8px;
+}
+.hour[data-v-23a07c9e] {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background: #68d891;
+}
+.hour.inactive[data-v-23a07c9e] {
+    background: transparent;
+}
+.tooltip[data-v-23a07c9e] {
+  position: absolute;
+  white-space: nowrap;
+  margin-left: 28px;
+  opacity: 0;
+  background: #2d323b;
+  border-radius: 2px;
+  padding: 10px 12px;
+  pointer-events: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 15px 15px rgba(0, 0, 0, 0.05);
+}
+.tooltip .num[data-v-23a07c9e] {
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 3px 0;
+}
+.hour-wrapper[data-v-23a07c9e] {
+  padding: 2px;
+  height: 9px;
+}
+.hour-wrapper:hover .hour[data-v-23a07c9e] {
+    position: relative;
+    opacity: 1 !important;
+}
+.hour-wrapper:hover .tooltip[data-v-23a07c9e] {
+    z-index: 5;
+    opacity: 1;
+}
+.label[data-v-23a07c9e] {
+  color: #a1a9b7 !important;
+}
+.daytime[data-v-23a07c9e] {
+  text-align: right;
+}
+.daytime span[data-v-23a07c9e] {
+    display: inline-block;
+    font-size: 0.8em;
+    margin-left: 7px;
+    margin-top: 2.5px;
+}
+
