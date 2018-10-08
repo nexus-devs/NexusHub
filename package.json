@@ -7,7 +7,7 @@
     "start": "node .",
     "build": "node build/webpack/webpack.js",
     "lint": "eslint . --ext .js,.vue",
-    "test": "mocha --exit -s 120000 --timeout 120000 test/smoke/server.js test/smoke/main.js test/smoke/warframe.js",
+    "test": "mocha --exit -s 60000 --timeout 60000 test/smoke/server.js test/smoke/main.js test/smoke/warframe.js",
     "scrape": "node build/warframe/index.js",
     "release": "semantic-release pre && semantic-release post",
     "changelogs": "node build/changelogs/index.js",

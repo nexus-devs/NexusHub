@@ -18,7 +18,7 @@ const config = {
   main: require(`${process.cwd()}/config/cubic/main.js`),
   warframe: require(`${process.cwd()}/config/cubic/warframe.js`)
 }
-config.cubic.logLevel = 'verbose'
+config.cubic.logLevel = 'silent'
 
 /**
  * Use different database URLs for CI (because docker)
