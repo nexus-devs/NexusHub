@@ -23,8 +23,8 @@ if (process.env.DOCKER && (prod ? group === 'auth' : true)) {
     certPrivate
   }
   if (prod) {
-    config.core.apiUrl = 'http://auth_api:3030'
-    config.core.authUrl = 'http://auth_api:3030'
+    config.core.apiUrl = 'ws://auth_api:3030/ws'
+    config.core.authUrl = 'ws://auth_api:3030/ws'
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-auth-key', 'utf-8').trim()
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-auth-secret', 'utf-8').trim()
   }

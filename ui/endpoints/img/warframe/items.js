@@ -1,5 +1,4 @@
 const Endpoint = cubic.nodes.ui.core.Endpoint
-const request = require('requestretry').defaults({ fullResponse: false })
 
 /**
  * Helper endpoint to get item images from the warframe-items repo on Github.
@@ -18,11 +17,7 @@ class Index extends Endpoint {
 
   async main (req, res) {
     const item = req.params.item
-    const image = await request({
-      url: `https://raw.githubusercontent.com/WFCD/warframe-items/development/data/img/${item}`,
-      encoding: null
-    })
-    res.send(image)
+    res.redirect(`https://raw.githubusercontent.com/WFCD/warframe-items/development/data/img/${item}`)
   }
 }
 

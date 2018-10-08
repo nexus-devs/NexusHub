@@ -17,7 +17,8 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
       limit: {
         interval: 5000,
         maxInInterval: 100
-      }
+      },
+      publicPath: `${process.cwd()}/ui/assets`
     },
     core: {
       mongoUrl,
@@ -31,13 +32,13 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     }
   }
   if (prod) {
-    config.core.apiUrl = 'http://ui_api:3000'
-    config.core.authUrl = 'http://auth_api:3030'
+    config.core.apiUrl = 'ws://ui_api:3000/ws'
+    config.core.authUrl = 'ws://auth_api:3030/ws'
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').trim()
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').trim()
     config.client = {
-      apiUrl: staging ? 'https://api.staging.nexushub.co' : 'https://api.nexushub.co',
-      authUrl: staging ? 'https://auth.staging.nexushub.co' : 'https://auth.nexushub.co'
+      apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
+      authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     }
     config.webpack.skipBuild = true
   }
@@ -51,7 +52,8 @@ else {
       limit: {
         interval: 5000,
         maxInInterval: 100
-      }
+      },
+      publicPath: `${process.cwd()}/ui/assets`
     },
     core: {
       mongoDb: 'nexus-ui',

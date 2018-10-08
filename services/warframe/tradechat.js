@@ -7,8 +7,8 @@ const client = new Client({
   api_url: 'https://api.nexus-stats.com'
 })
 const local = new Client({
-  user_key: cubic.config.warframe.core.userKey,
-  user_secret: cubic.config.warframe.core.userSecret
+  user_key: 'nexus-warframe-bot',
+  user_secret: 'dev-only'
 })
 
 client.subscribe('/warframe/v1/requests', req => {

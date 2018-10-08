@@ -3,6 +3,8 @@ const Core = require('cubic-core')
 const Auth = require('cubic-auth')
 const Ui = require('cubic-ui')
 const wfhooks = require('../../hooks/warframe.js')
+const mongodb = require('mongodb').MongoClient
+const bcrypt = require('bcryptjs')
 const config = {
   auth: require('../../config/cubic/auth.js'),
   ui: require('../../config/cubic/ui.js'),
@@ -26,6 +28,24 @@ module.exports = async function () {
   cubic.hook('warframe.core', wfhooks.verifyIndices)
   cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
   await cubic.use(new Core(config.warframe.core))
+
+  // Generate service users (Remember this file only runs in dev environments)
+  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl)
+  const db = mongo.db('nexus-auth')
+  await db.collection('users').updateOne({
+    user_key: 'nexus-warframe-bot'
+  }, {
+    $set: {
+      user_id: 'nexus-warframe-bot',
+      user_key: 'nexus-warframe-bot',
+      user_secret: await bcrypt.hash('dev-only', 1),
+      last_ip: [],
+      scope: 'write_orders_warframe',
+      refresh_token: null
+    }
+  }, {
+    upsert: true
+  })
 
   // Load services
   require('../../services/warframe/tradechat.js')

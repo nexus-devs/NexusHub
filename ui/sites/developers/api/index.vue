@@ -235,7 +235,7 @@ export default {
 /deep/ .content-wrapper {
   display: flex;
   width: 100%;
-  height: calc(100vh - 100px - 56px);
+  height: calc(100vh - 56px);
   min-height: 500px;
 
   section {

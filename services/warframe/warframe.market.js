@@ -2,10 +2,10 @@ const prod = process.env.NODE_ENV === 'production'
 const WebSocket = require('ws')
 const Client = require('cubic-client')
 const client = new Client({
-  api_url: prod ? 'http://main_api:3003' : 'http://localhost:3003',
-  auth_url: prod ? 'http://auth_api:3030' : 'http://localhost:3030',
-  user_key: cubic.config.warframe.core.userKey,
-  user_secret: cubic.config.warframe.core.userSecret
+  api_url: prod ? 'ws://main_api:3003/ws' : 'ws://localhost:3003/ws',
+  auth_url: prod ? 'ws://auth_api:3030/ws' : 'ws://localhost:3030/ws',
+  user_key: 'nexus-warframe-bot',
+  user_secret: 'dev-only'
 })
 
 /**
@@ -29,8 +29,8 @@ class WFM {
    */
   initWs () {
     this.ws = new WebSocket('wss://warframe.market/socket')
-    this.ws.on('error', console.error)
     this.ws.on('close', () => this.initWs())
+    this.ws.on('error', () => this.initWs())
     this.ws.on('open', () => {
       this.ws.send(JSON.stringify({ type: '@WS/SUBSCRIBE/MOST_RECENT' }))
     })
@@ -52,8 +52,7 @@ class WFM {
       let matchedComponent
 
       for (let item of this.items) {
-        if (!item.tradable) continue
-
+        if (!item.components.find(c => c.name === 'Set').tradable) continue
         const name = item.name.split(' ')
         const orderName = order.item.en.item_name.split(' ')
 
@@ -108,9 +107,7 @@ class WFM {
    * Discard old offers and change user's online status
    */
   async updateOrders () {
-    // .emit() instead of .get() so it won't get the queue stuck. The cleaning
-    // task may take very long.
-    client.emit('GET', '/warframe/v1/orders/clearExternal')
+    client.get('/warframe/v1/orders/clearExternal')
   }
 }
 
