@@ -107,7 +107,11 @@ class WFM {
    * Discard old offers and change user's online status
    */
   async updateOrders () {
-    client.get('/warframe/v1/orders/clearExternal')
+    try {
+      client.get('/warframe/v1/orders/clearExternal')
+    } catch (err) {
+      // just try again later, these are usually issues when bootstrapping
+    }
   }
 }
 
