@@ -1,6 +1,6 @@
-process.env.NODE_ENV = 'production'
-process.env.NEXUS_TARGET_NODE = 'ui-core'
 const staging = process.argv.includes('staging')
+process.env.NODE_ENV = 'production'
+process.env.NEXUS_STAGING = staging // Required for some differences in the build.
 const webpack = require('webpack')
 const rm = require('rimraf')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
@@ -11,8 +11,8 @@ if (process.env.DRONE) {
   config.core.redisUrl = 'redis://redis'
   config.webpack.skipBuild = true
   config.client = {
-    apiUrl: staging ? 'https://api.staging.nexushub.co' : 'https://api.nexushub.co',
-    authUrl: staging ? 'https://auth.staging.nexushub.co' : 'https://auth.nexushub.co'
+    apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
+    authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
   }
 }
 
