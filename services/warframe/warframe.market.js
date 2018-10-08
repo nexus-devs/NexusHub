@@ -1,11 +1,18 @@
 const prod = process.env.NODE_ENV === 'production'
+const docker = process.env.DOCKER
+const fs = require('fs')
+let key, secret
+if (prod && docker) {
+  key = fs.readFileSync('/run/secrets/nexus-warframe-bot-key', 'utf-8').trim()
+  secret = fs.readFileSync('/run/secrets/nexus-warframe-bot-secret', 'utf-8').trim()
+}
 const WebSocket = require('ws')
 const Client = require('cubic-client')
 const client = new Client({
-  api_url: prod ? 'ws://main_api:3003/ws' : 'ws://localhost:3003/ws',
-  auth_url: prod ? 'ws://auth_api:3030/ws' : 'ws://localhost:3030/ws',
-  user_key: 'nexus-warframe-bot',
-  user_secret: 'dev-only'
+  api_url: prod && docker ? 'ws://main_api:3003/ws' : 'ws://localhost:3003/ws',
+  auth_url: prod && docker ? 'ws://auth_api:3030/ws' : 'ws://localhost:3030/ws',
+  user_key: key || 'nexus-warframe-bot',
+  user_secret: secret || 'dev-only'
 })
 
 /**

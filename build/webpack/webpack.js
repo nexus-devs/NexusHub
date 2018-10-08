@@ -1,6 +1,6 @@
 const staging = process.argv.includes('staging')
 process.env.NODE_ENV = 'production'
-process.env.NEXUS_STAGING = staging // Required for some differences in the build.
+if (staging) process.env.NEXUS_STAGING = true
 const webpack = require('webpack')
 const rm = require('rimraf')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
