@@ -117,6 +117,7 @@ export default {
   display: flex;
   flex-direction: column;
   flex-grow: 0;
+  min-width: 400px;
 
   & > *:first-of-type {
     margin-bottom: 20px;

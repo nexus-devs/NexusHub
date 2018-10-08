@@ -8,7 +8,7 @@
       <p>{{ item.description }}</p>
     </template>
     <template slot="footer">
-      <a :href="item.wikiaUrl" target="_blank">
+      <a v-if="item.wikiaUrl" :href="item.wikiaUrl" target="_blank">
         View on Wikia
         <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
       </a>
@@ -37,6 +37,5 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
 
 </style>

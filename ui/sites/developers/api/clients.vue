@@ -5,7 +5,7 @@
       The easiest way to connect to our API is always gonna be our own client
       packages. They provide a simple interface for every endpoint, while also
       dealing with rate limits and authentication automatically. Support is
-      currently limited to Node.
+      currently limited to Node.js.
     </p>
 
     <h2>Setup - Node.js</h2>

@@ -1,9 +1,11 @@
 <template>
   <div class="bars">
     <svg ref="bars" :width="width + 200" :height="height + 5">
-      <g v-for="(d, i) in points" :key="i" class="bar-wrapper">
-        <rect :height="d.y" :width="barWidth" :x="d.x" :y="height - d.y + 6" class="bar"/>
-        <rect :height="2" :width="barWidth" :x="d.x" :y="height - d.y + 2" class="cap"/>
+      <g v-for="(d, i) in points" :key="`bar-${i}`">
+        <g class="bar-wrapper">
+          <rect :height="d.y" :width="barWidth" :x="d.x" :y="height - d.y + 6" class="bar"/>
+          <rect :height="2" :width="barWidth" :x="d.x" :y="height - d.y + 2" class="cap"/>
+        </g>
         <g class="tooltip">
           <rect :x="d.x + 12" height="60px" width="120px"/>
           <text :x="d.x + 20" y="22px" class="title">{{ data.length - i }} mins ago</text>
@@ -117,8 +119,6 @@ export default {
   }
   .tooltip {
     opacity: 0;
-    transform: scale(0.95);
-    @include ease(0.15s);
     z-index: 1;
 
     text {
@@ -131,15 +131,14 @@ export default {
       font-size: 1.2em;
     }
     rect {
-      fill: $color-bg-light;
+      fill: $color-bg;
     }
   }
   .bar-wrapper {
-    &:hover {
-      .tooltip {
-        opacity: 1;
-        transform: scale(1);
-      }
+    z-index: 0;
+
+    &:hover + .tooltip {
+      opacity: 1;
     }
   }
 }

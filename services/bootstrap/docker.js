@@ -3,7 +3,6 @@ const Core = require('cubic-core')
 const Auth = require('cubic-auth')
 const Ui = require('cubic-ui')
 const wfhooks = require('../../hooks/warframe.js')
-const prod = process.env.NODE_ENV === 'production'
 const config = {
   auth: require('../../config/cubic/auth.js'),
   ui: require('../../config/cubic/ui.js'),
@@ -40,7 +39,6 @@ module.exports = async function () {
 
     // Order listeners
     if (group === 'warframe' && node === 'core') {
-      if (!prod) require('../../services/warframe/tradechat.js')
       require('../../services/warframe/warframe.market.js')
     }
   }

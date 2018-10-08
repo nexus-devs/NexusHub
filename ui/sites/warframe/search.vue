@@ -189,8 +189,7 @@ export default {
 
         // No new events in the meantime -> perform query
         const B = input.includes('🅱')
-        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input.replace(/🅱️/g, 'b')}&fuzzy=true&category=items&threshold=0.75`)
-        // const playerData = [] // await this.$cubic.get(`/warframe/v1/search?query=${input}&fuzzy=true&category=players`)
+        const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input.replace(/🅱️/g, 'b')}`)
         const items = await dispatch('sanitizeSerpResults', { itemData, B })
         const players = []
         const results = items.concat(players)
@@ -225,31 +224,28 @@ export default {
               description[i] = word
             }
 
-            // Limit result to 10 elements
-            if (items.length < 10 && component.name === 'Set') {
-              // Prevent duplicates
-              if (items.find(i => i.name === item.name)) {
-                continue
-              }
-
-              // Display set data, but not as component
-              let name = item.name.replace('Set', '')
-
-              // Important stuff. Already way past the deadline, so fuck it,
-              // let's add some shitty memes.
-              name = B ? item.name.toLowerCase().replace(/\b\w/g, l => '🅱') : name
-
-              // Add modified item.
-              items.push(Object.assign(component, {
-                name,
-                webUrl: item.webUrl,
-                category: item.category,
-                rarity: item.rarity,
-                price: Math.round((component.prices.selling.current.median + component.prices.buying.current.median) / 2),
-                results: 'items',
-                description: description.join(' ')
-              }))
+            // Prevent duplicates
+            if (items.find(i => i.name === item.name)) {
+              continue
             }
+
+            // Display set data, but not as component
+            let name = item.name.replace('Set', '')
+
+            // Important stuff. Already way past the deadline, so fuck it,
+            // let's add some shitty memes.
+            name = B ? item.name.toLowerCase().replace(/\b\w/g, l => '🅱') : name
+
+            // Add modified item.
+            items.push(Object.assign(component, {
+              name,
+              webUrl: item.webUrl,
+              category: item.category,
+              rarity: item.rarity,
+              price: Math.round((component.prices.selling.current.median + component.prices.buying.current.median) / 2),
+              results: 'items',
+              description: description.join(' ')
+            }))
           }
         }
         return items

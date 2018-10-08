@@ -15,8 +15,8 @@ before(async function () {
   // Prime database with at least one test order
   const Client = require('cubic-client')
   let client = new Client({
-    user_key: cubic.config.main.core.userKey,
-    user_secret: cubic.config.main.core.userSecret
+    user_key: 'test',
+    user_secret: 'test'
   })
   const endpoints = cubic.nodes.warframe.core.client.endpointController.endpoints
   const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')

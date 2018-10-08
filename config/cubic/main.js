@@ -25,8 +25,8 @@ if (process.env.DOCKER && (prod ? group === 'main' : true)) {
     }
   }
   if (prod) {
-    config.core.apiUrl = 'http://main_api:3003'
-    config.core.authUrl = 'http://auth_api:3030'
+    config.core.apiUrl = 'ws://main_api:3003/ws'
+    config.core.authUrl = 'ws://auth_api:3030/ws'
     config.core.userKey = fs.readFileSync('/run/secrets/nexus-main-key', 'utf-8').trim()
     config.core.userSecret = fs.readFileSync('/run/secrets/nexus-main-secret', 'utf-8').trim()
   }

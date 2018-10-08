@@ -113,7 +113,7 @@ export default {
     max-height: 60%;
     border-radius: 60px;
   }
-  @media (max-width: $breakpoint-xs) {
+  @media (max-width: $breakpoint-s) {
     display: none;
   }
 }
@@ -132,8 +132,8 @@ export default {
     margin-top: -2px;
     color: $color-font-body;
   }
-  @media (max-width: $breakpoint-m) {
-    margin-left: 5px !important;
+  @media (max-width: $breakpoint-s) {
+    padding: 15px;
 
     span:nth-of-type(2) {
       display: none;
@@ -194,6 +194,9 @@ export default {
 .price {
   img {
     margin-right: 2px;
+  }
+  @media (max-width: $breakpoint-s) {
+    white-space: nowrap;
   }
 }
 
