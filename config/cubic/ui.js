@@ -32,10 +32,12 @@ if (process.env.DOCKER && (prod ? group === 'ui' : true)) {
     }
   }
   if (prod) {
+    const userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').trim()
+    const userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').trim()
     config.core.apiUrl = 'ws://ui_api:3000/ws'
     config.core.authUrl = 'ws://auth_api:3030/ws'
-    config.core.userKey = fs.readFileSync('/run/secrets/nexus-ui-key', 'utf-8').trim()
-    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-ui-secret', 'utf-8').trim()
+    config.core.userKey = config.api.userKey = userKey
+    config.core.userSecret = config.api.userSecret = userSecret
     config.client = {
       apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'

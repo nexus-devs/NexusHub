@@ -23,10 +23,12 @@ if (process.env.DOCKER && (prod ? group === 'auth' : true)) {
     certPrivate
   }
   if (prod) {
+    const userKey = fs.readFileSync('/run/secrets/nexus-auth-key', 'utf-8').trim()
+    const userSecret = fs.readFileSync('/run/secrets/nexus-auth-secret', 'utf-8').trim()
     config.core.apiUrl = 'ws://auth_api:3030/ws'
     config.core.authUrl = 'ws://auth_api:3030/ws'
-    config.core.userKey = fs.readFileSync('/run/secrets/nexus-auth-key', 'utf-8').trim()
-    config.core.userSecret = fs.readFileSync('/run/secrets/nexus-auth-secret', 'utf-8').trim()
+    config.core.userKey = config.api.userKey = userKey
+    config.core.userSecret = config.api.userSecret = userSecret
   }
   module.exports = config
 }
