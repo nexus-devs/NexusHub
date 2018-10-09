@@ -16,9 +16,9 @@ export default {
   },
 
   mounted () {
-    setTimeout(() => {
+    setInterval(() => {
       this.update()
-    }, 2500)
+    }, 5000)
   },
 
   methods: {

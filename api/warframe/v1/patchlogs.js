@@ -29,11 +29,11 @@ class Patchlogs extends Endpoint {
         this.cache(response, 60)
         return res.status(404).send(response)
       }
-      const logs = patchlogs.getItemChanges(Item)
+      const logs = patchlogs.getItemChanges(Item).slice(0, 3)
       this.cache(logs, 60)
       res.send(logs)
     } else {
-      const logs = patchlogs.posts
+      const logs = patchlogs.posts.slice(0, 3)
       this.cache(logs, 60)
       res.send(logs)
     }

@@ -55,6 +55,16 @@
           </div>
         </div>
       </section>
+
+      <!-- Patch logs -->
+      <section>
+        <div class="container">
+          <h2 class="sub">Patchlogs</h2>
+          <div class="row-margin patchlogs">
+            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+          </div>
+        </div>
+      </section>
     </app-content>
   </div>
 </template>
@@ -73,6 +83,7 @@ import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import opm from 'src/components/items/opm-global.vue'
 import activity from 'src/components/items/activity.vue'
 import module from 'src/components/ui/module.vue'
+import patchlog from 'src/components/items/patchlog.vue'
 
 export default {
   components: {
@@ -86,7 +97,8 @@ export default {
     searchButton,
     opm,
     activity,
-    module
+    module,
+    patchlog
   },
 
   computed: {
@@ -95,6 +107,25 @@ export default {
     },
     activity () {
       return this.$store.state.busyhours.data
+    },
+    patchlogs () {
+      return this.$store.state.warframe.patchlogs
+    }
+  },
+
+  async asyncData () {
+    this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
+  },
+
+  storeModule: {
+    name: 'warframe',
+    state: {
+      patchlogs: []
+    },
+    mutations: {
+      setWarframePatchlogs (state, patchlogs) {
+        state.patchlogs = patchlogs
+      }
     }
   }
 }
@@ -421,9 +452,6 @@ header {
 /**
  * Actual site content
  */
-section {
-  padding: 40px 0;
-}
 .realtime {
   display: inline-flex;
 
@@ -502,6 +530,24 @@ section {
     flex-basis: 100%;
     margin-left: 0;
     padding-left: 0;
+  }
+}
+
+.patchlogs {
+  justify-content: flex-start;
+
+  /deep/ .patchlog {
+    @media (max-width: $breakpoint-m) {
+      max-width: calc(50% - 20px);
+    }
+    @media (max-width: $breakpoint-s) {
+      max-width: none;
+    }
+    .header {
+      img {
+        display: none;
+      }
+    }
   }
 }
 </style>

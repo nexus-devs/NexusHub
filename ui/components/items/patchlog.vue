@@ -14,7 +14,7 @@
       <div v-if="patchlog.additions">
         <h4>Additions</h4>
         <ul>
-          <li v-for="(log, i) in patchlog.additions.split('\n')" v-if="log" :key="log + i">
+          <li v-for="(log, i) in patchlog.additions.split('\n').slice(0, 2)" v-if="log" :key="log + i">
             <p>{{ log }}</p>
           </li>
         </ul>
@@ -22,7 +22,7 @@
       <div v-if="patchlog.changes">
         <h4>Changes</h4>
         <ul>
-          <li v-for="(log, i) in patchlog.changes.split('\n')" v-if="log" :key="log + i">
+          <li v-for="(log, i) in patchlog.changes.split('\n').slice(0, 2)" v-if="log" :key="log + i">
             <p>{{ log }}</p>
           </li>
         </ul>
@@ -30,7 +30,7 @@
       <div v-if="patchlog.fixes">
         <h4>Fixes</h4>
         <ul>
-          <li v-for="(log, i) in patchlog.fixes.split('\n')" v-if="log" :key="log + i">
+          <li v-for="(log, i) in patchlog.fixes.split('\n').slice(0, 2)" v-if="log" :key="log + i">
             <p>{{ log }}</p>
           </li>
         </ul>
@@ -99,6 +99,12 @@ export default {
       max-height: 50vh;
       border-radius: 2px;
     }
+  }
+  h4 {
+    font-size: 0.9em;
+  }
+  p {
+    line-height: 1.4;
   }
 }
 </style>

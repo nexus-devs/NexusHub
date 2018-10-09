@@ -19,7 +19,7 @@
           </div>
         </div>
       </section>
-      <section v-if="patchlogs">
+      <section v-if="patchlogs && patchlogs.length">
         <div class="container">
           <h2 class="sub">Recent Changes</h2>
           <div class="row-margin patchlogs">
