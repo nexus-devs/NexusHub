@@ -82,6 +82,7 @@ export default {
   async asyncData ({ store, route }) {
     const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
     const itemData = await this.$cubic.get(`/warframe/v1/items/${title(item)}`)
+    itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${title(item)}`)
     store.commit('setItem', itemData)
   },
 

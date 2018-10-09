@@ -78,19 +78,10 @@ class Hook {
   }
 
   /**
-   * Remove patchlogs from items and put them in a separate database so we won't
-   * waste as much traffic.
+   * Remove patchlogs from items. We'll query them separately to reduce traffic.
    */
   async separatePatchlogs (item, db) {
-    if (!item.patchlogs) return
-
-    const patchlogs = [].concat(item.patchlogs)
     delete item.patchlogs
-
-    for (const patchlog of patchlogs) {
-      patchlog.item = item.name
-    }
-    await db.collection('patchlogs').insertMany(patchlogs)
   }
 
   /**
