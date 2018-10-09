@@ -123,7 +123,7 @@ export default {
   height: 80px;
 }
 /deep/ .footer {
-  padding: 10px 30px 15px;
+  padding: 10px 30px 15px !important;
   margin-top: 0;
   font-size: 1em;
   color: white;
