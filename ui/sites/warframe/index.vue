@@ -25,6 +25,10 @@
       <section>
         <div class="container">
           <div class="row-margin overview">
+            <div class="col-b activity-data">
+              <h2 class="sub">Busy Hours</h2>
+              <activity/>
+            </div>
             <div class="col-b-4">
               <h2 class="sub">Market Overview</h2>
               <div class="realtime">
@@ -47,10 +51,6 @@
                   </router-link>
                 </div>
               </div>
-            </div>
-            <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity/>
             </div>
           </div>
         </div>
