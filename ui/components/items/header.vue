@@ -54,6 +54,7 @@
 
 <script>
 import header from 'src/components/ui/header.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -80,7 +81,7 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
-    const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
+    const itemData = await this.$cubic.get(`/warframe/v1/items/${title(item)}`)
     store.commit('setItem', itemData)
   },
 

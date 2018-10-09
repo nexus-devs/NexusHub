@@ -3,6 +3,7 @@ const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
 const Prices = require('../items/prices.js')
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
   constructor (api, db, url) {
@@ -31,7 +32,7 @@ class Order extends Endpoint {
 
   async main (req, res) {
     const request = req.body
-    const item = request.item
+    const item = title(request.item)
     const _res = { send () {} }
     _res.status = () => res
 
@@ -63,7 +64,7 @@ class Order extends Endpoint {
     const orders = new Orders(this.api, this.db, `/warframe/v1/orders?item=${item}`)
     const { result, discard } = await orders.filter(item)
     orders.publish(result)
-    orders.cache(result, 60 * 10)
+    orders.cache(result, 60 * 5)
     orders.discard(discard)
 
     // Update prices
