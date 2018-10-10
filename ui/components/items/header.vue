@@ -80,10 +80,14 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
-    const itemData = await this.$cubic.get(`/warframe/v1/items/${title(item)}`)
-    itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${title(item)}`)
-    store.commit('setItem', itemData)
+    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+
+    // Only fetch item data if we actually have a new item
+    if (title(store.state.items.item.name) !== item) {
+      const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
+      itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${itemData.name}`)
+      store.commit('setItem', itemData)
+    }
   },
 
   methods: {
@@ -96,7 +100,7 @@ export default {
   storeModule: {
     name: 'items',
     state: {
-      item: { name: '' },
+      item: { name: '', patchlogs: [] },
       selected: {
         component: 'Set',
         offerType: 'combined',
@@ -123,6 +127,9 @@ export default {
       },
       setItemRegions (state, regions) {
         state.selected.regions = regions
+      },
+      setItemPatchlogs (state, patchlogs) {
+        state.item.patchlogs = patchlogs
       },
       addItemPatchlog (state, patchlog) {
         state.patchlogs.current = state.item.patchlogs.findIndex(p => p.name === patchlog.name)

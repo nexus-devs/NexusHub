@@ -65,6 +65,11 @@ export default {
     }
   },
 
+  async asyncData () {
+    const item = this.$store.state.items.item.name
+    this.$store.commit('setItemPatchlogs', await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}&limit=0`))
+  },
+
   beforeMount () {
     Vue.use(VueAffix)
     Vue.use(VueObserveVisibility)

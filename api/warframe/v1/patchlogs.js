@@ -12,7 +12,7 @@ class Patchlogs extends Endpoint {
       description: 'Items to reduce patchlogs by. If no item is specified, all patchlogs are returned'
     }, {
       name: 'limit',
-      description: 'Number of patchlogs to return per chunk.',
+      description: 'Number of patchlogs to return per chunk. Setting this to 0 will return everything up to the end.',
       default: 3
     }, {
       name: 'skip',
@@ -54,11 +54,11 @@ class Patchlogs extends Endpoint {
         this.cache(response, 60)
         return res.status(404).send(response)
       }
-      const logs = patchlogs.getItemChanges(Item).slice(skip, limit)
+      const logs = patchlogs.getItemChanges(Item).slice(skip, limit || -1)
       this.cache(logs, 60)
       res.send(logs)
     } else {
-      const logs = patchlogs.posts.slice(skip, limit)
+      const logs = patchlogs.posts.slice(skip, limit || -1)
       this.cache(logs, 60)
       res.send(logs)
     }
