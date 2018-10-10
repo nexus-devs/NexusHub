@@ -120,7 +120,7 @@ export default {
 .bars {
   margin: 20px 0;
   width: 215px;
-  height: 80px;
+  height: 95px;
 }
 /deep/ .footer {
   padding: 10px 30px !important;

@@ -23,13 +23,13 @@ html {
 {
 	width: 8px;
   height: 8px;
-	background-color: $color-bg-dark;
+	background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb
 {
   border-radius: 2px;
-	background-color: rgba(77, 82, 87, 0.7);
+	background-color: rgba(77, 84, 94, 1);
 }
 
 pre > code {

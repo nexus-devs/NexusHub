@@ -24,7 +24,7 @@
     color: white;
     opacity: 0;
     white-space: nowrap;
-    background: #00E88C;
+    background: $color-primary-subtle;
     @include shadow-3;
     @include ease(0.25s);
 
@@ -32,7 +32,7 @@
       position: absolute;
       top: 10px;
       left: -4px;
-      @include triangle-left(5px, $color-primary);
+      @include triangle-left(5px, $color-primary-subtle);
     }
 
     @media(max-width: $breakpoint-s) {
