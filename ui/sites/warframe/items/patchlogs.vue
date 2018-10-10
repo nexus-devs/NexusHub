@@ -15,7 +15,7 @@
           <div v-else class="no-data">
             No patchlogs found :(
           </div>
-          <affix v-if="item.patchlogs" :offset="{ top: 150, bottom: 80 }" relative-element-selector="#patchlogs-container" class="timeline-wrapper">
+          <affix v-if="item.patchlogs[patchlogs.current]" :offset="{ top: 150, bottom: 80 }" relative-element-selector="#patchlogs-container" class="timeline-wrapper">
             <span>{{ moment(new Date(item.patchlogs[patchlogs.current].date)).fromNow() }}</span>
             <div class="timeline">
               <div :style="{ transform: [progress] }" class="timeline-slider"/>
