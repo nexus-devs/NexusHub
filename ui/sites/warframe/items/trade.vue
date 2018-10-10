@@ -12,10 +12,6 @@
       <section>
         <div class="container">
           <div class="row-margin overview">
-            <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity :item="item.name"/>
-            </div>
             <div class="col-b-4 realtime-container">
               <h2 class="sub">Realtime Orders</h2>
               <div class="realtime">
@@ -24,6 +20,10 @@
                   <order-realtime v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
                 </transition-group>
               </div>
+            </div>
+            <div class="col-b activity-data">
+              <h2 class="sub">Busy Hours</h2>
+              <activity :item="item.name"/>
             </div>
           </div>
         </div>
