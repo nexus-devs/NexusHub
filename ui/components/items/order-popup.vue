@@ -75,7 +75,7 @@ export default {
       return this.item.components.find(c => c.name === this.order.component) || {}
     },
     median () {
-      if (this.order.offer) {
+      if (this.order.offer && this.component.prices) {
         const type = this.order.offer.toLowerCase()
         return this.component.prices[type].current.median
       }

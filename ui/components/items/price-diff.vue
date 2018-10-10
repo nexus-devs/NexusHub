@@ -1,5 +1,5 @@
 <template>
-  <div v-if="value" class="price-diff">
+  <div v-if="value && diff" class="price-diff">
     <div :class="{ negative: type === 'Selling' ? diff.value > 0 : diff.value <= 0 }" class="value">
       {{ diff.text }}
     </div>
