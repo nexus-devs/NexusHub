@@ -45,7 +45,9 @@
                         <h3>{{ order.item }}</h3>
                       </template>
                       <template slot="body">
-                        <span>{{ order.amount }} Orders for {{ order.item }}</span>
+                        <span class="highlight">{{ order.amount }}</span>
+                        <br>
+                        <span class="sub"> Orders for {{ order.item }}</span>
                       </template>
                     </module>
                   </router-link>
@@ -59,7 +61,7 @@
       <!-- Patch logs -->
       <section>
         <div class="container">
-          <h2 class="sub">Patchlogs</h2>
+          <h2 class="sub">Warframe Patchlogs</h2>
           <div class="row-margin patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>
@@ -508,7 +510,18 @@ header {
       }
     }
     /deep/ .body {
-      padding: 35px 25px;
+      padding: 0 25px 5px;
+      margin-top: 20px;
+
+      .highlight {
+        font-size: 1.4em;
+      }
+      .sub {
+        display: inline-block;
+        margin-top: 1px;
+        font-size: 0.85em;
+        color: $color-font-body;
+      }
     }
   }
   @media (max-width: $breakpoint-s) {
@@ -537,16 +550,13 @@ header {
   justify-content: flex-start;
 
   /deep/ .patchlog {
+    width: 33%;
+
     @media (max-width: $breakpoint-m) {
       max-width: calc(50% - 20px);
     }
     @media (max-width: $breakpoint-s) {
       max-width: none;
-    }
-    .header {
-      img {
-        display: none;
-      }
     }
   }
 }

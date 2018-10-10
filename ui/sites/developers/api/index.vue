@@ -72,7 +72,7 @@
               <div v-for="query in endpoint.query" :key="query.name">
                 <h3>{{ query.name }}{{ query.required ? ' (required)' : '' }}</h3>
                 <p v-if="query.description">{{ query.description }}</p>
-                <div v-if="query.default">
+                <div v-if="query.default !== undefined">
                   <h4>Default</h4>
                   <pre v-highlightjs="typeof query.default === 'string' && (query.default.startsWith('function') || query.default.startsWith('() => '))
                   ? query.default : stringify(query.default)">

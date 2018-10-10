@@ -10,11 +10,12 @@
       </div>
     </template>
     <template slot="body">
-      <span>{{ order.offer }} for</span>
-      <span class="main-value">
-        {{ order.price ? `${order.price}p` : 'any offer' }}
-      </span>
+      <span class="highlight">{{ order.price }}p</span>
       <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
+      <br>
+      <span class="sub">
+        {{ order.offer === 'Selling' ? 'Sold' : 'Bought' }} by {{ order.user }}
+      </span>
     </template>
   </module>
 </template>
@@ -104,7 +105,21 @@ export default {
     }
   }
   /deep/ .body {
-    padding: 30px 25px;
+    padding: 0 25px 5px;
+    margin-top: 20px;
+
+    .highlight {
+      font-size: 1.4em;
+    }
+    .sub {
+      display: inline-block;
+      margin-top: 1px;
+      font-size: 0.85em;
+      color: $color-font-body;
+    }
+    .price-diff {
+      font-size: 0.9em;
+    }
   }
 }
 

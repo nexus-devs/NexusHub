@@ -74,13 +74,17 @@ export default {
 }
 
 .body {
-  padding: 25px 35px;
+  margin: 25px 0;
+  padding: 0 35px;
 
   li {
-    margin-top: 8px;
+    margin-top: 15px;
     margin-left: 15px;
     color: white;
     margin-bottom: 20px;
+  }
+  p {
+    padding-top: 0px;
   }
   p, span {
     color: white;

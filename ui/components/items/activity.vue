@@ -235,7 +235,7 @@ export default {
 
 // Wrapper to make it easier to hover over data
 .hour-wrapper {
-  padding: 2px;
+  padding: 3px;
   height: 9px;
 
   &:hover {
