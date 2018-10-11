@@ -39,7 +39,7 @@
     "vue-observe-visibility": "^0.4.3",
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
-    "warframe-items": "1.67.0",
+    "warframe-items": "1.68.0",
     "warframe-patchlogs": "1.54.0",
     "ws": "^6.1.0"
   },
