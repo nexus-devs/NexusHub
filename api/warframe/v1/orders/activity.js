@@ -18,7 +18,13 @@ class Activity extends Endpoint {
         description: 'Days from now to the last order.'
       }
     ]
-    this.schema.response = []
+    this.schema.response = [{
+      day: {
+        number: Number,
+        name: String
+      },
+      hours: [ Number ]
+    }]
   }
 
   /**
