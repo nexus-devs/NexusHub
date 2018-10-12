@@ -38,6 +38,7 @@ class Order extends Endpoint {
 
     // Process offer
     request.createdAt = new Date()
+    this.publish(request)
     await this.db.collection('activeOrders').insertOne(request)
     await this.db.collection('orders').insertOne(request)
 
