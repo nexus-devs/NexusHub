@@ -4,25 +4,17 @@
  */
 const Client = require('cubic-client')
 const client = new Client({
-  api_url: 'https://api.nexus-stats.com'
+  api_url: 'wss://api.staging.nexushub.co/ws',
+  auth_url: 'wss://auth.staging.nexushub.co/ws'
 })
 const local = new Client({
   user_key: 'nexus-warframe-bot',
   user_secret: 'dev-only'
 })
 
-client.subscribe('/warframe/v1/requests', req => {
+client.subscribe('/warframe/v1/orders', req => {
   try {
-    local.post('/warframe/v1/orders', {
-      user: req.user,
-      offer: req.offer,
-      item: req.item,
-      component: req.component,
-      price: req.price,
-      rank: req.rank,
-      quantity: req.count,
-      source: 'Trade Chat'
-    })
+    local.post('/warframe/v1/orders', req)
   } catch (err) {
     // just try again later, these are usually issues when bootstrapping
   }
