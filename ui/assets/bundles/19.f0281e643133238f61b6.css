@@ -1,0 +1,178 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+nav[data-v-b83e907a] {
+  position: fixed;
+  justify-content: space-between;
+  width: calc(100% - 50px);
+  padding: 0 25px;
+  height: 56px;
+  top: 0;
+  z-index: 4;
+  background: #21232a;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 15px 15px rgba(0, 0, 0, 0.05);
+}
+nav a[data-v-b83e907a] {
+    margin: 0 15px;
+    font-size: 0.9em;
+}
+nav a[data-v-b83e907a]:nth-of-type(3) {
+      margin-left: 25px;
+}
+nav .logo[data-v-b83e907a] {
+    height: 22px;
+}
+@media (max-width: 75em) {
+nav[data-v-b83e907a] {
+      position: fixed;
+      background: #21232a;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 15px 15px rgba(0, 0, 0, 0.05);
+}
+}
+.nav-l a[data-v-b83e907a]:first-of-type {
+  margin-left: 60px;
+}
+@media (max-width: 40em) {
+.nav-l a[data-v-b83e907a]:first-of-type {
+      margin-left: 50px;
+}
+.nav-l a:first-of-type img[data-v-b83e907a] {
+        margin-top: 1px;
+}
+}
+.nav-l .sub[data-v-b83e907a] {
+  position: relative;
+  top: 1px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  margin-left: -12px;
+  color: #a1a9b7 !important;
+  transition-timing-function: ease;
+  transition-duration: 0.3s;
+}
+@media (max-width: 40em) {
+.nav-l .sub[data-v-b83e907a] {
+      display: none;
+}
+}
+.nav-r[data-v-b83e907a] {
+  text-align: right;
+}
+@media (max-width: 40em) {
+.nav-r a span[data-v-b83e907a] {
+      display: none;
+}
+}
+@media (max-width: 25em) {
+.nav-r a img[data-v-b83e907a] {
+      display: none;
+}
+}
+.ctx[data-v-b83e907a] {
+  display: none;
+  float: right;
+}
+@media (max-width: 25em) {
+.ctx[data-v-b83e907a] {
+      display: block;
+}
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+section[data-v-686810be]:first-of-type {
+  padding: 100px 0;
+  background-size: 450px;
+  background-repeat: repeat;
+  background-image: url("/img/developers/circuit-board.svg");
+}
+section:first-of-type h1[data-v-686810be] {
+    max-width: 750px;
+}
+section:first-of-type h1 a[data-v-686810be] {
+      color: #68d891 !important;
+      font-family: 'Circular';
+}
+section:first-of-type p[data-v-686810be] {
+    margin: 30px 0 10px;
+}
+.sign-deal-with-the-devil-kappa123 p[data-v-686810be] {
+  margin: 20px 0 10px;
+}
+.btn-outline[data-v-686810be] {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 15px;
+}
+
