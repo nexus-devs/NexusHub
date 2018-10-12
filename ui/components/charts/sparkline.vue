@@ -32,6 +32,7 @@ import Tween from './_tween.js'
 
 export default {
   props: ['data', 'margin', 'ceil'],
+
   data () {
     return {
       width: 0,
@@ -52,6 +53,7 @@ export default {
       points: []
     }
   },
+
   watch: {
     data (newData, oldData) {
       Tween.adjustData(this, newData, oldData)
@@ -63,13 +65,16 @@ export default {
       Tween.adjustCeil(this, newData, oldData, this.avg)
     }
   },
+
   mounted () {
     window.addEventListener('resize', this.onResize)
     this.onResize()
   },
+
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
   },
+
   methods: {
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.

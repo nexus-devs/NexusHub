@@ -9,9 +9,12 @@
       <section>
         <div class="container">
           <h2 class="sub">{{ item.name }} Prices</h2>
+
+          <div class="row-margin">
+            <price v-for="component in components" v-if="component.tradable" :key="component.name"
+                   :component="component" class="col-b"/>
+          </div>
           <filters/>
-          <price v-for="component in components" :key="component.name"
-                 :component="component"/>
         </div>
       </section>
     </app-content>

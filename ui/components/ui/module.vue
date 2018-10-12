@@ -68,6 +68,24 @@ export default {
     display: inline-block;
     vertical-align: middle;
   }
+  .img {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background: $color-bg;
+
+    img, object {
+      position: relative;
+      max-height: 80%;
+    }
+  }
   span {
     display: block;
   }

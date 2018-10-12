@@ -33,7 +33,7 @@
                   <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col interactive">
                     <module>
                       <template slot="header">
-                        <div class="img-container">
+                        <div class="img">
                           <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
                             <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
                           </object>
@@ -489,25 +489,6 @@ header {
     }
     /deep/ .header {
       padding: 20px 20px 0;
-
-      .img-container {
-        position: relative;
-        overflow: hidden;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        vertical-align: middle;
-        margin-right: 5px;
-        height: 40px;
-        width: 40px;
-        border-radius: 40px;
-        background: $color-bg;
-
-        img, object {
-          position: relative;
-          max-height: 80%;
-        }
-      }
     }
     /deep/ .body {
       padding: 0 25px 5px;

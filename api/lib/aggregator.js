@@ -331,7 +331,7 @@ class Aggregator {
    * to the parent object.
    */
   getIntervalByGroup (i, group, schema) {
-    const data = i.find(e => e._id ? e._id === group : false)
+    const data = i.find(e => e._id ? e._id.toLowerCase() === group : false)
 
     if (data) {
       delete data._id

@@ -1,6 +1,7 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const Aggregator = require(`${process.cwd()}/api/lib/aggregator.js`)
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
+const _ = require('lodash')
 
 /**
  * Provides detailed item statistics for specific item
@@ -100,7 +101,6 @@ class Prices extends Endpoint {
       max: 'max',
       median: 'avg'
     }
-
     for (const component of item.components) {
       if (!component.tradable) continue
       const targetCurrent = current.find(c => c.name === `${item.name} ${component.name} Prices`)
@@ -121,7 +121,6 @@ class Prices extends Endpoint {
         }
       })
     }
-
     return res
   }
 
@@ -196,7 +195,7 @@ class Prices extends Endpoint {
    * Apply new data to item list
    */
   async store (name, data, stored) {
-    const modified = { ...{}, ...data }
+    const modified = _.cloneDeep(data)
 
     // Remove days/hours since we won't need that on the list.
     for (const component of modified.components) {

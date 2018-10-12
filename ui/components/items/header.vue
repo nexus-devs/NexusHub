@@ -164,7 +164,7 @@ export default {
    padding: 115 0;
    box-shadow: none;
    z-index: 0;
-   background: $color-bg-lighter;
+   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
    /deep/ .background-container {
      top: 0;
