@@ -3,14 +3,14 @@
     {{ order }}
     <template slot="header">
       <div>
-        <div class="img-container">
+        <div class="img">
           <img :src="component.imgUrl" :alt="order.item">
         </div>
         <h3>{{ component.name }}</h3>
       </div>
     </template>
     <template slot="body">
-      <span class="highlight">{{ order.price }}p</span>
+      <span class="highlight">{{ order.price ? `${order.price}p` : 'Any offer' }}</span>
       <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
       <br>
       <span class="sub">
@@ -120,25 +120,6 @@ export default {
     .price-diff {
       font-size: 0.9em;
     }
-  }
-}
-
-.img-container {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  margin-right: 5px;
-  height: 40px;
-  width: 40px;
-  border-radius: 40px;
-  background: $color-bg;
-
-  img {
-    position: relative;
-    max-height: 80%;
   }
 }
 </style>
