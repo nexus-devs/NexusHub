@@ -33,8 +33,24 @@ class Order extends Endpoint {
   async main (req, res) {
     const request = req.body
     const item = title(request.item)
+    const stored = await this.db.collection('items').findOne({ name: item })
     const _res = { send () {} }
     _res.status = () => res
+
+    // Item not found or price is ridiculous
+    if (!stored) {
+      return res.send(`Rejected. (${request.item} not found)`)
+    }
+    const component = stored.components.find(c => c.name === request.component)
+    if (!component) {
+      return res.send(`Rejected. (${request.component} is not a component)`)
+    }
+    const plat = component.prices[request.offer.toLowerCase()].current.median
+    const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
+
+    if (isRidiculous) {
+      return res.send('Rejected. (Ridiculous price)')
+    }
 
     // Process offer
     request.createdAt = new Date()
@@ -70,12 +86,9 @@ class Order extends Endpoint {
 
     // Update prices
     const prices = new Prices(this.api, this.db, `warframe/v1/items/${item}/prices`)
-    const stored = await this.db.collection('items').findOne({ name: item })
-    if (stored) {
-      const priceData = await prices.get(item, 7, stored)
-      prices.cache(priceData, 60 * 60 * 24)
-      prices.store(item, priceData, stored)
-    }
+    const priceData = await prices.get(item, 7, stored)
+    prices.cache(priceData, 60 * 60 * 24)
+    prices.store(item, priceData, stored)
 
     res.send('added!')
   }
