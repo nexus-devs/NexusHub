@@ -53,7 +53,8 @@ export default {
       return this.$store.state.items.selected.offerType
     },
     data () {
-      const current = this.current
+      // const current = this.current
+      return null
     }
   }
 }
