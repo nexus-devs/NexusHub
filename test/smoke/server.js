@@ -52,7 +52,7 @@ before(async function () {
 describe('Server', function () {
   it('should load up API node', async function () {
     const client = new Client()
-    await client.connecting
+    await client.connecting()
   })
   it('should store Warframe items before tests.', async function () {
     await wfhooks.verifyItemList()

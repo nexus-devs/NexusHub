@@ -1,15 +1,11 @@
 const Client = require('cubic-client')
 const client = new Client({
   user_key: 'test',
-  user_secret: 'test'
-})
-// Send empty schema, otherwise the API responds with 503 instead of 404
-client.connecting.then(() => {
-  client.connection.client.send(JSON.stringify({
-    action: 'SCHEMA',
+  user_secret: 'test',
+  schema: {
     endpoints: [{}],
     maxPending: 0
-  }))
+  }
 })
 const chalk = require('chalk')
 const Assert = require('assert')
