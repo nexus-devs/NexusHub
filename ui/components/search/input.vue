@@ -9,7 +9,7 @@
       <slot/>
     </div>
     <div class="tools">
-      <div v-for="suggestion in suggestions" :key="suggestion.name" class="suggestion" @click="complete(suggestion)">
+      <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="complete(suggestion)">
         <div class="ico-36">
           <img :src="suggestion.imgUrl" :alt="suggestion.name">
           <img :src="suggestion.imgUrl" :alt="suggestion.name" class="backdrop">

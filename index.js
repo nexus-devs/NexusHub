@@ -2,8 +2,7 @@ const docker = require('./services/bootstrap/docker.js')
 const regular = require('./services/bootstrap/regular.js')
 const config = { cubic: require('./config/cubic/cubic') }
 const Cubic = require('cubic')
-const cubic = new Cubic(config.cubic)
-cubic.init()
+new Cubic(config.cubic)
 
 /**
  * Load cubic nodes separately so they can run in their own docker container or

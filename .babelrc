@@ -9,7 +9,8 @@
   ],
   "plugins": [
     "transform-runtime",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    "transform-object-rest-spread"
   ],
   "comments": false,
   "compact": false

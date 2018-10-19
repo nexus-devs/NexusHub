@@ -257,7 +257,7 @@ export default {
   },
 
   async asyncData ({ route }) {
-    const item = route.params.item.split('-').join(' ')
+    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
     this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
