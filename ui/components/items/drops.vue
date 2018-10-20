@@ -93,6 +93,7 @@ export default {
 }
 /deep/ .body {
   margin: auto;
+  padding: 20px 25px;
 }
 .drop {
   display: inline-flex;

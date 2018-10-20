@@ -16,6 +16,11 @@
           <div class="item-profile-data">
             <div class="item-profile-data-info">
               <h1>{{ item.name }}</h1>
+              <div v-if="item.vaulted" class="vaulted">
+                <img src="/img/warframe/ui/vaulted.svg" class="ico-h-24 interactive" alt="Vaulted">
+                <tooltip>Vaulted</tooltip>
+              </div>
+              <br>
               <div v-if="item.components.length > 1">
                 <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
                       :class="{ selected: selectedComponent === component.name }" class="interactive"
@@ -53,12 +58,14 @@
 
 
 <script>
-import header from 'src/components/ui/header.vue'
+import uiHeader from 'src/components/ui/header.vue'
+import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
-    'ui-header': header
+    uiHeader,
+    tooltip
   },
 
   computed: {
@@ -291,6 +298,8 @@ export default {
     white-space: nowrap;
 
     h1 {
+      display: inline-block;
+      vertical-align: middle;
       margin-top: 5px;
     }
     span {
@@ -353,6 +362,24 @@ export default {
   }
   .router-link-active {
     border-bottom: 2px solid $color-primary-subtle;
+  }
+}
+
+.vaulted {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-left: 5px;
+
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      transform: translateX(5px);
+    }
+  }
+  .tooltip {
+    top: 5px;
+    left: 35px;
   }
 }
 </style>

@@ -75,6 +75,10 @@ export default {
   }
 }
 
+.row {
+  flex-wrap: nowrap;
+}
+
 .component {
   display: flex;
   justify-content: center;

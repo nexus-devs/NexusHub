@@ -11,7 +11,7 @@
     </template>
     <template slot="body">
       <span class="highlight">{{ order.price ? `${order.price}p` : 'Any offer' }}</span>
-      <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
+      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
       <br>
       <span class="sub">
         {{ order.offer === 'Selling' ? 'Sold' : 'Bought' }} by {{ order.user }}

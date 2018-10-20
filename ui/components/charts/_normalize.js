@@ -45,10 +45,14 @@ function normalize (arr, raw, skip) {
   if (!raw) {
     const i = result.findIndex(d => d.yRaw === min)
     const j = result.findIndex(d => d.yRaw === max)
-    result[i].isMin = true
-    result[i].alignLeft = i / result.length > 0.66
-    result[j].isMax = true
-    result[j].alignLeft = j / result.length > 0.66
+    if (result[i]) {
+      result[i].isMin = true
+      result[i].alignLeft = i / result.length > 0.66
+    }
+    if (result[j]) {
+      result[j].isMax = true
+      result[j].alignLeft = j / result.length > 0.66
+    }
 
     // Cleanup
     result.forEach(d => {

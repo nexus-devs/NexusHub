@@ -47,6 +47,6 @@ module.exports = async function () {
   })
 
   // Load services
-  require('../../services/warframe/tradechat.js')
+  setTimeout(() => require('../../services/warframe/tradechat.js'), 10000)
   // require('../../services/warframe/warframe.market.js')
 }

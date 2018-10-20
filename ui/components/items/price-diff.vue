@@ -1,22 +1,22 @@
 <template>
-  <div v-if="value && diff" class="price-diff">
-    <div :class="{ negative: type === 'Selling' ? diff.value > 0 : diff.value <= 0 }" class="value">
+  <div v-if="previous && diff" class="price-diff">
+    <div :class="{ negative: type.toLowerCase() === 'selling' ? diff.value > 0 : diff.value <= 0 }" class="value">
       {{ diff.text }}
     </div>
     <div class="tooltip">
-      median: {{ base }}{{ unit }}
+      {{ base || 'median' }} {{ current }}{{ unit }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['type', 'base', 'value', 'unit'],
+  props: ['type', 'current', 'previous', 'unit', 'base'],
 
   computed: {
     diff () {
-      if (this.base && this.value) {
-        const diff = this.value - this.base
+      if (this.current && this.previous) {
+        const diff = this.previous - this.current
         return {
           value: diff,
           text: `${diff > 0 ? '+' : ''}${diff}${this.unit}`

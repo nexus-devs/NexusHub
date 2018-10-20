@@ -16,6 +16,9 @@ class Prices extends Endpoint {
         name: 'timerange',
         default: 7,
         description: 'Days from now to the last order.'
+      }, {
+        name: 'component',
+        description: 'Item component to limit prices by.'
       }
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
@@ -34,10 +37,6 @@ class Prices extends Endpoint {
         }
       }]
     }
-    this.schema.pubsub = {
-      url: '/warframe/v1/items/:item/prices',
-      response: this.schema.response
-    }
   }
 
   /**
@@ -46,6 +45,7 @@ class Prices extends Endpoint {
   async main (req, res) {
     const name = title(req.params.item)
     const timerange = req.query.timerange
+    const component = req.query.component
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
       let response = {
@@ -56,23 +56,23 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const data = await this.get(name, timerange, item)
+    const data = await this.get(name, timerange, item, component)
     this.store(name, data, item)
     this.cache(data, 60 * 60 * 24)
-    this.publish(data)
     res.send(data)
   }
 
   /**
    * Processing entrypoint.
    */
-  async get (name, timerange, item) {
+  async get (name, timerange, item, componentName) {
     const aggregator = new Aggregator(this.db)
     const currentParallel = []
     const previousParallel = []
     const aggregate = this.aggregate.bind(this)
 
     for (const component of item.components) {
+      if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) continue
       if (!component.tradable) continue
 
       const query = { name: `${name} ${component.name} Prices` }
@@ -82,7 +82,7 @@ class Prices extends Endpoint {
     }
     const current = await Promise.all(currentParallel)
     const previous = await Promise.all(previousParallel)
-    const data = this.parse(item, current, previous, aggregator)
+    const data = this.parse(item, componentName, current, previous, aggregator)
 
     return data
   }
@@ -90,7 +90,7 @@ class Prices extends Endpoint {
   /**
    * Parse data into final response format.
    */
-  parse (item, current, previous, aggregator) {
+  parse (item, componentName, current, previous, aggregator) {
     const res = {
       name: item.name,
       components: []
@@ -102,6 +102,7 @@ class Prices extends Endpoint {
       median: 'avg'
     }
     for (const component of item.components) {
+      if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) continue
       if (!component.tradable) continue
       const targetCurrent = current.find(c => c.name === `${item.name} ${component.name} Prices`)
       const targetPrevious = previous.find(c => c.name === `${item.name} ${component.name} Prices`)

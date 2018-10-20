@@ -195,7 +195,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 .filters {
-  margin-top: 20px;
+  margin-top: 60px;
 
   .col-b {
     flex-grow: 0;

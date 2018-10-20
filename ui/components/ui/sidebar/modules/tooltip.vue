@@ -16,7 +16,7 @@
     text-align: center;
     z-index: 1;
     border-radius: 2px;
-    font-size: 0.85em;
+    font-size: 0.9em;
     font-weight: 400;
     padding: 4px 15px;
     top: 14px;
@@ -24,7 +24,7 @@
     color: white;
     opacity: 0;
     white-space: nowrap;
-    background: $color-primary-subtle;
+    background: black;
     @include shadow-3;
     @include ease(0.25s);
 
@@ -32,7 +32,7 @@
       position: absolute;
       top: 10px;
       left: -4px;
-      @include triangle-left(5px, $color-primary-subtle);
+      @include triangle-left(5px, black);
     }
 
     @media(max-width: $breakpoint-s) {

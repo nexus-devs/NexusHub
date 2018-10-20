@@ -22,14 +22,14 @@
         <h3>{{ item.name }} {{ order.component }}</h3>
         <span class="price">
           {{ order.price ? `${order.price}p` : 'any offer' }}
-          <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
+          <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
         </span>
         <div class="message">
           <span ref="message">
             <span>/w {{ order.user }}</span> Hi {{ user }},
             I'd like to {{ order.offer === 'Selling' ? 'buy' : 'sell' }}
             [{{ item.name }} {{ order.component }}]{{ order.price ? ' for ' : '' }}{{ order.price ? `${order.price}p` : '' }}.
-            {{ order.source === 'Warframe Market' ? '' : 'Found your offer at NexusHub.' }}
+            {{ order.source === 'Warframe Market' ? '' : 'Found your offer on NexusHub.' }}
           </span>
         </div>
         <button @click="copy">

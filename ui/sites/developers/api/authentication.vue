@@ -108,7 +108,7 @@
     <h2>Further documentation</h2>
     <p>
       For detailed docs, including some fancy visualized model, check out the
-      <a href="https://github.com/cubic-js/cubic-auth">official Github repo</a>.
+      <a href="https://github.com/cubic-js/cubic/tree/development/packages/auth">official Github repo</a>.
     </p>
   </docs>
 </template>
