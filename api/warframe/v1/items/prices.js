@@ -46,6 +46,8 @@ class Prices extends Endpoint {
     const name = title(req.params.item)
     const timerange = req.query.timerange
     const component = req.query.component
+    const source = req.query.source
+    const platform = req.query.platform
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
       let response = {
@@ -56,16 +58,16 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const data = await this.get(name, timerange, item, component)
+    const data = await this.get(name, timerange, item, component, source, platform)
     this.store(name, data, item)
-    this.cache(data, 60 * 60 * 24)
+    this.cache(data, 60 * 60)
     res.send(data)
   }
 
   /**
    * Processing entrypoint.
    */
-  async get (name, timerange, item, componentName) {
+  async get (name, timerange, item, componentName, source, platform) {
     const aggregator = new Aggregator(this.db)
     const currentParallel = []
     const previousParallel = []
@@ -77,6 +79,14 @@ class Prices extends Endpoint {
 
       const query = { name: `${name} ${component.name} Prices` }
       const params = { item: name, component: component.name }
+      if (source) {
+        query.source = source
+        params.source = source
+      }
+      if (platform) {
+        query.platform = platform
+        params.platform = platform
+      }
       currentParallel.push(aggregator.get('orders', query, [0, timerange], aggregate, params))
       previousParallel.push(aggregator.get('orders', query, [timerange, timerange * 2], aggregate, params))
     }
@@ -130,13 +140,13 @@ class Prices extends Endpoint {
    */
   async aggregate (start, end, params) {
     const { combined, buying, selling } = await this.getMedians(start, end, params)
-    const { item, component } = params
     const result = await this.db.collection('orders').aggregate([
       { $match: {
-        item,
-        component,
-        createdAt: { $gte: start.toDate(), $lte: end.toDate() },
-        price: { $gte: combined * 0.3, $lte: combined * 3 }
+        ...{
+          createdAt: { $gte: start.toDate(), $lte: end.toDate() },
+          price: { $gte: combined * 0.3, $lte: combined * 3 }
+        },
+        ...params
       } },
       { $group: {
         _id: '$offer',

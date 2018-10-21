@@ -20,7 +20,7 @@ class Aggregator {
    * Checks if the collection contains data for every day until now.
    * Quick rundown on params, since they're not necessarily obvious:
    * collection: Collection to query in. We'll use collection + 'Aggregation' to save compiled data
-   * query: query object to identify target documents.
+   * query: query object to identify pre-aggregated documents by.
    * timerange: array of [firstDay, lastDay] as integers. If firstDay is > 0, we won't calculate hours.
    * aggregateFn: Aggregation function which is run within every day/hour that's not calculated yet. Returned data will be stored.
    * params: Aggregation function parameters as object.
