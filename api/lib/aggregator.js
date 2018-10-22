@@ -9,7 +9,7 @@ const _ = require('lodash')
  * saved date.
  *
  * You will also have to ensure the following compound index for `${collection}Aggregation`:
- * { ...query, { createdAt: 1, scope: 1 } }
+ * { ...query, ...{ createdAt: 1, scope: 1 } }
  */
 class Aggregator {
   constructor (db) {
@@ -19,10 +19,11 @@ class Aggregator {
   /**
    * Checks if the collection contains data for every day until now.
    * Quick rundown on params, since they're not necessarily obvious:
+   *
    * collection: Collection to query in. We'll use collection + 'Aggregation' to save compiled data
    * query: query object to identify pre-aggregated documents by.
    * timerange: array of [firstDay, lastDay] as integers. If firstDay is > 0, we won't calculate hours.
-   * aggregateFn: Aggregation function which is run within every day/hour that's not calculated yet. Returned data will be stored.
+   * aggregateFn: Aggregation function which is run for every day/hour that's not calculated yet. Returned data will be stored.
    * params: Aggregation function parameters as object.
    */
   async get (collection, query, timerange, aggregateFn, params) {
@@ -267,9 +268,18 @@ class Aggregator {
   }
 
   /**
-   * EXPERIMENTAL: Retrieves parsed values for certain aggregation groups by
-   * min/max/avg/sum. I'm not sure if this actually makes sense for many
-   * endpoints, but who knows, it's there now and we need it for prices.
+   * Retrieves min/max/avg/sum values for every key of the entirety of all
+   * returned aggregations. This makes it super easy to get some "overview"
+   * data from all days combined.
+   *
+   * `schema` should describe how to parse each key, for example:
+   * { orders: 'sum', median: 'avg', min: 'min', max: 'max' }
+   * This gets us the sum of all orders, average of all medians, the minimum
+   * of all min values and the maximum of all max values.
+   *
+   * As you might see, this allows for a great deal of flexibility, with queries
+   * that get you the least orders at any day through { orders: 'min' }, or even
+   * something like getting the highest minimum value through { min: 'max' }
    */
   reduce (full, group, schema) {
     const res = {}
@@ -341,6 +351,10 @@ class Aggregator {
     }
   }
 
+  /**
+   * Generates 'empty' values for the keys specified in the schema, when no other
+   * value could be generated.
+   */
   generateDefault (schema) {
     const res = {}
 
