@@ -11,7 +11,7 @@
       <span class="highlight">{{ current }}p</span>
       <price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously"/>
       <div class="graphs">
-        <sparkline :data="data.current" :compare="data.previous"/>
+        <sparkline :data="data.current" :compare="data.previous" :component="component.name"/>
         <sparkline :data="data.previous" class="sparkline-previous"/>
       </div>
       <div class="more">
@@ -132,21 +132,19 @@ export default {
 
   watch: {
     async timerange (to, from) {
-      let url = `${this.item.apiUrl}/prices`
-      url += `?component=${this.component.name}`
-      url += to !== 7 ? `&timerange=${to}` : ''
       this.$refs.price.$refs.progress.start()
-      const data = await this.$cubic.get(url)
+      await this.$store.dispatch('fetchPricesComponent', this.component.name)
       this.$refs.price.$refs.progress.finish()
-      this.$store.commit('setPricesComponent', data.components[0])
     }
   },
 
   methods: {
     setTimerange (timerange) {
-      this.$store.commit('setPricesTimerange', {
+      this.$store.commit('setPricesAttributes', {
         component: this.component.name,
-        timerange
+        attributes: {
+          timerange
+        }
       })
     }
   }
@@ -159,6 +157,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 .price {
+  min-width: 275px;
   @media (min-width: $breakpoint-m) {
     min-width: calc(25% - 20px);
   }
@@ -239,6 +238,7 @@ export default {
 .more {
   text-align: center;
   padding-bottom: 20px;
+  margin-top: -10px;
 
   .btn-subtle {
     font-size: 0.75em;

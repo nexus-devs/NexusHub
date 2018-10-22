@@ -31,6 +31,7 @@ class Prices extends Endpoint {
     this.schema.response = {
       name: String,
       components: [{
+        name: String,
         prices: {
           selling: { current: economyData, previous: economyData },
           buying: { current: economyData, previous: economyData }
@@ -80,11 +81,11 @@ class Prices extends Endpoint {
       const query = { name: `${name} ${component.name} Prices` }
       const params = { item: name, component: component.name }
       if (source) {
-        query.source = source
+        query.name += ` ${source}`
         params.source = source
       }
       if (platform) {
-        query.platform = platform
+        query.name += ` ${platform}`
         params.platform = platform
       }
       currentParallel.push(aggregator.get('orders', query, [0, timerange], aggregate, params))
@@ -92,7 +93,7 @@ class Prices extends Endpoint {
     }
     const current = await Promise.all(currentParallel)
     const previous = await Promise.all(previousParallel)
-    const data = this.parse(item, componentName, current, previous, aggregator)
+    const data = this.parse(item, componentName, source, platform, current, previous, aggregator)
 
     return data
   }
@@ -100,7 +101,7 @@ class Prices extends Endpoint {
   /**
    * Parse data into final response format.
    */
-  parse (item, componentName, current, previous, aggregator) {
+  parse (item, componentName, source, platform, current, previous, aggregator) {
     const res = {
       name: item.name,
       components: []
@@ -114,8 +115,12 @@ class Prices extends Endpoint {
     for (const component of item.components) {
       if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) continue
       if (!component.tradable) continue
-      const targetCurrent = current.find(c => c.name === `${item.name} ${component.name} Prices`)
-      const targetPrevious = previous.find(c => c.name === `${item.name} ${component.name} Prices`)
+
+      let query = `${item.name} ${component.name} Prices`
+      if (source) query += ` ${source}`
+      if (platform) query += ` ${platform}`
+      const targetCurrent = current.find(c => c.name === query)
+      const targetPrevious = previous.find(c => c.name === query)
       const buying = {
         current: aggregator.reduce(targetCurrent, 'buying', schema),
         previous: aggregator.reduce(targetPrevious, 'buying', schema)

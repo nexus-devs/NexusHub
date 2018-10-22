@@ -132,9 +132,6 @@ export default {
       setItemOfferType (state, type) {
         state.selected.offerType = type.toLowerCase()
       },
-      setItemRegions (state, regions) {
-        state.selected.regions = regions
-      },
       setItemPatchlogs (state, patchlogs) {
         state.item.patchlogs = patchlogs
       },

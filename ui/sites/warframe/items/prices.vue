@@ -9,11 +9,11 @@
       <section>
         <div class="container">
           <h2 class="sub">{{ item.name }} Prices</h2>
+          <filters/>
           <div class="row-margin">
             <price v-for="component in components" v-if="component.tradable" :key="component.name"
                    :component="component" class="col"/>
           </div>
-          <filters/>
         </div>
       </section>
     </app-content>
@@ -60,6 +60,7 @@ export default {
 
   async asyncData ({ route }) {
     const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
+    this.$store.commit('setPricesItem', item)
     this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
   },
 
@@ -72,6 +73,7 @@ export default {
   storeModule: {
     name: 'prices',
     state: {
+      item: '',
       components: []
     },
     mutations: {
@@ -83,13 +85,31 @@ export default {
         }
         state.components = components
       },
-      setPricesComponent (state, component) {
-        const i = state.components.findIndex(c => c.name === component.name)
-        state.components[i].prices = component.prices
+      setPricesItem (state, item) {
+        state.item = item
       },
-      setPricesTimerange (state, data) {
-        const i = state.components.findIndex(c => c.name === data.component)
-        state.components[i].timerange = data.timerange
+      setPricesAttributes (state, data) {
+        const component = state.components.find(c => c.name === data.component)
+        Object.assign(component, data.attributes)
+      }
+    },
+    actions: {
+      // Fetch prices for an individual component based on its attributes
+      async fetchPricesComponent ({ state, commit }, component) {
+        const params = new URLSearchParams(`component=${component}`)
+        const stored = state.components.find(c => c.name === component)
+
+        for (const param of ['timerange', 'source', 'platform']) {
+          if (stored[param]) {
+            if (param === 'timerange' && stored[param] === 7) continue
+            params.append(param, stored[param])
+          }
+        }
+        const prices = await this.$cubic.get(`/warframe/v1/items/${state.item}/prices?${params}`)
+        commit('setPricesAttributes', {
+          component: stored.name,
+          attributes: { prices: prices.components[0].prices }
+        })
       }
     }
   }

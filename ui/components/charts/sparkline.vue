@@ -13,13 +13,16 @@
           <rect :x="scaled.x(d.x)" class="hover"/>
           <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.y)" r="4"/>
           <g class="tooltip">
-            <rect :x="scaled.x(d.x) + 12" height="65px" width="120px"/>
+            <rect :x="scaled.x(d.x) + 12" :height="orders && data[i] ? '87px' : '65px'" width="120px"/>
             <text :x="scaled.x(d.x) + 20" y="22px" class="title">
               {{ data.length - i }} days ago
             </text>
-            <text :x="scaled.x(d.x) + 20" y="48px" class="num">
-              {{ data[i] ? `${data[i]}p` : 'No orders' }}
+            <text :x="scaled.x(d.x) + 20" y="50px" class="num">
+              {{ data[i] ? `${data[i]}p` : '' }}
               {{ diff(i) && data[i] && compare[i] ? diff(i) : '' }}
+            </text>
+            <text v-if="orders" :x="scaled.x(d.x) + 20" :y="data[i] ? '75px' : '48px'" class="sub">
+              {{ orders[i] }} Orders
             </text>
           </g>
         </g>
@@ -35,7 +38,7 @@ import * as d3 from 'd3'
 import Tween from './_tween.js'
 
 export default {
-  props: ['data', 'margin', 'ceil', 'compare'],
+  props: ['data', 'margin', 'ceil', 'compare', 'component'],
 
   data () {
     return {
@@ -54,6 +57,28 @@ export default {
       },
       animatedData: [],
       points: []
+    }
+  },
+
+  computed: {
+    offerType () {
+      return this.$store.state.items.selected.offerType
+    },
+    orders () {
+      if (!this.component) return
+      const component = this.$store.state.prices.components.find(c => c.name === this.component)
+
+      if (this.offerType === 'combined') {
+        const buying = component.prices.buying
+        const selling = component.prices.selling
+        const merge = (b, i, period) => {
+          const s = selling[period].days[i]
+          return b.orders + s.orders
+        }
+        return buying.current.days ? buying.current.days.map((b, i) => merge(b, i, 'current')) : []
+      } else {
+        return component.prices[this.offerType.toLowerCase()].current.days.map(d => d.orders)
+      }
     }
   },
 
@@ -191,6 +216,9 @@ svg {
   }
   .num {
     font-size: 1.1em;
+  }
+  .sub {
+    fill: $color-font-body;
   }
 }
 </style>
