@@ -16,7 +16,7 @@ class Order extends Endpoint {
    */
   async main (req, res) {
     const orders = await this.db.collection('activeOrders').find({
-      wfmName: { $exists: true }
+      source: 'Warframe Market'
     }).project({
       _id: 1,
       offer: 1,
@@ -32,29 +32,40 @@ class Order extends Endpoint {
     const items = []
 
     for (const order of orders) {
-      if (!items.find(i => i === order.wfmName)) items.push(order.wfmName)
+      const item = items.find(i => i.name === order.wfmName)
+      if (!item) {
+        items.push({
+          name: order.wfmName,
+          orders: [ order ]
+        })
+      } else {
+        item.orders.push(order)
+      }
     }
 
     // Get listings for all items, then set new online status and remove old orders
     for (const item of items) {
-      const WfmOrders = await request(`https://api.warframe.market/v1/items/${item}/orders`)
+      const WfmOrders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
       const wfmOrders = JSON.parse(WfmOrders).payload.orders
-      const itemOrders = orders.filter(o => o.wfmName === item)
 
-      for (const order of itemOrders) {
+      for (const order of item.orders) {
+        let online
+
         const open = wfmOrders.find(o => {
           const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
           const matchesUser = o.user.ingame_name === order.user
           const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 3
-          return matchesOffer && matchesUser && notExpired
+          online = o.user.status === 'ingame'
+          return matchesOffer && matchesUser && online && notExpired
         })
 
         // Update user status if the order is still open, otherwise discard
         if (open) {
-          const online = open.user.status !== 'offline'
-          const queued = setOnline.find(u => u === order.user) || setOffline.find(u => u === order.user)
-          online && !queued ? setOnline.push(order.user) : setOffline.push(order.user)
+          const queued = setOnline.find(u => u === order.user)
+          if (!queued) setOnline.push(order.user)
         } else {
+          const queued = setOffline.find(u => u === order.user)
+          if (!queued && !online) setOffline.push(order.user)
           discard.push(new ObjectId(order._id))
         }
       }
