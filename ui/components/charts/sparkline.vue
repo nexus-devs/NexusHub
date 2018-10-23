@@ -15,7 +15,7 @@
           <g class="tooltip">
             <rect :x="scaled.x(d.x) + 12" :height="orders && data[i] ? '87px' : '65px'" width="120px"/>
             <text :x="scaled.x(d.x) + 20" y="22px" class="title">
-              {{ data.length - i }} days ago
+              {{ data.length - i - 1 === 0 ? 'Today' : `${data.length - i - 1} days ago` }}
             </text>
             <text :x="scaled.x(d.x) + 20" y="50px" class="num">
               {{ data[i] ? `${data[i]}p` : '' }}

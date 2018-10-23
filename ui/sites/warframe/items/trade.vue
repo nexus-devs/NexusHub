@@ -102,6 +102,7 @@ import orderPopup from 'src/components/items/order-popup.vue'
 import orderRealtime from 'src/components/items/order-realtime.vue'
 import activity from 'src/components/items/activity.vue'
 let selectedComponent = 'Set'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 /**
  * Trader sorting logic
@@ -257,7 +258,7 @@ export default {
   },
 
   async asyncData ({ route }) {
-    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
+    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
     this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
