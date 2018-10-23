@@ -26,15 +26,15 @@
       </div>
       <div class="col-b">
         <label>Platform</label>
-        <div v-for="d in platforms" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
-             type="button" @click="select('platforms', d)">
+        <div v-for="d in platform" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
+             type="button" @click="select('platform', d)">
           <span>{{ d.name }}</span>
         </div>
       </div>
       <div class="col-b">
         <label>Data Source</label>
-        <div v-for="d in sources" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
-             type="button" @click="select('sources', d)">
+        <div v-for="d in source" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
+             type="button" @click="select('source', d)">
           <span>{{ d.name }}</span>
         </div>
       </div>
@@ -63,6 +63,38 @@ function getOrders (type, store) {
   }
 }
 
+function fetchPrices (data, attr, store) {
+  if (data.filter(d => !d.inactive).length === 1) {
+    const value = data.find(d => !d.inactive).name
+
+    // Fetch new data based on existing filters. Unlike buying/selling,
+    // these aren't in the output by default, so we have to fetch them
+    // additionally.
+    for (const component of store.state.prices.components) {
+      const attributes = {}
+      attributes[attr] = value
+      store.commit('setPricesAttributes', {
+        component: component.name,
+        attributes
+      })
+      store.dispatch('fetchPricesComponent', component.name)
+    }
+  }
+
+  // Reset if all are selected
+  else {
+    for (const component of store.state.prices.components) {
+      const attributes = {}
+      attributes[attr] = false
+      store.commit('setPricesAttributes', {
+        component: component.name,
+        attributes
+      })
+      store.dispatch('fetchPricesComponent', component.name)
+    }
+  }
+}
+
 export default {
   components: {
     indicator
@@ -76,17 +108,15 @@ export default {
         name: 'Buying'
       }],
 
-      platforms: [{
+      platform: [{
         name: 'PC'
       }, {
-        name: 'PS4',
-        disabled: true
+        name: 'PS4'
       }, {
-        name: 'XB1',
-        disabled: true
+        name: 'XB1'
       }],
 
-      sources: [{
+      source: [{
         name: 'Trade Chat'
       }, {
         name: 'Warframe Market'
@@ -121,32 +151,12 @@ export default {
       }
     },
 
-    sources (oldData, newData) {
-      if (newData.filter(d => !d.inactive).length === 1) {
-        const source = newData.find(d => !d.inactive).name
+    source (oldData, newData) {
+      fetchPrices(newData, 'source', this.$store)
+    },
 
-        // Fetch new data based on existing filters. Unlike buying/selling,
-        // these aren't in the output by default, so we have to fetch them
-        // additionally.
-        for (const component of this.$store.state.prices.components) {
-          this.$store.commit('setPricesAttributes', {
-            component: component.name,
-            attributes: { source }
-          })
-          this.$store.dispatch('fetchPricesComponent', component.name)
-        }
-      }
-
-      // Reset if all are selected
-      else {
-        for (const component of this.$store.state.prices.components) {
-          this.$store.commit('setPricesAttributes', {
-            component: component.name,
-            attributes: { source: false }
-          })
-          this.$store.dispatch('fetchPricesComponent', component.name)
-        }
-      }
+    platform (oldData, newData) {
+      fetchPrices(newData, 'platform', this.$store)
     }
   },
 
@@ -165,6 +175,14 @@ export default {
           allInactive = false
         }
       })
+
+      // Only select one or all platforms at a time
+      if (data === 'platform') {
+        for (const filter of target) {
+          filter.inactive = true
+        }
+        allActive = false
+      }
 
       // Labels are all active -> user wants to activate only the one they selected
       if (allActive) {

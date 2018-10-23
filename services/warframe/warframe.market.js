@@ -90,6 +90,7 @@ class WFM {
             rank: order.mod_rank,
             quantity: order.quantity,
             source: 'Warframe Market',
+            platform: order.platform.toUpperCase(),
             wfmName: order.item.url_name
           })
         } catch (err) {
