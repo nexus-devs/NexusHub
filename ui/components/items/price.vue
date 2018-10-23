@@ -27,7 +27,7 @@
               {{ component.prices.buying.current.orders }}
             </span>
             <span :class="{ negative: orderDiff < 0 }" class="diff">
-              ( <indicator :diff="orderDiff.buying"/> {{ orderDiff.buying }} )
+              ( <indicator :diff="orderDiff.buying"/> {{ Math.abs(orderDiff.buying) }} )
             </span>
           </div>
         </div>
@@ -38,7 +38,7 @@
               {{ component.prices.selling.current.orders }}
             </span>
             <span class="diff">
-              ( <indicator :diff="orderDiff.selling"/> {{ orderDiff.selling }} )
+              ( <indicator :diff="orderDiff.selling"/> {{ Math.abs(orderDiff.selling) }} )
             </span>
           </div>
         </div>
