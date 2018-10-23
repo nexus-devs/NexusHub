@@ -1,5 +1,5 @@
 <template>
-  <svg :class="{ negative: diff < 0, reverse }" height="10px" width="7px" overflow="visible" class="indicator">
+  <svg :class="{ negative: diff < 0, positive: diff > 0, reverse }" height="10px" width="7px" overflow="visible" class="indicator">
     <path :transform="`translate(${x}, ${y})`" :d="diff < 0 ? negative : positive"/>
   </svg>
 </template>
@@ -29,7 +29,7 @@ export default {
   transform: scale(1.15);
 
   path {
-    fill: $color-primary-subtle;
+    fill: $color-font-body;
   }
 
   &.negative {
@@ -39,14 +39,20 @@ export default {
       fill: $color-error;
     }
   }
-  &.reverse {
+  &.positive {
     path {
-      fill: $color-error;
+      fill: $color-primary-subtle;
     }
-
+  }
+  &.reverse {
     &.negative {
       path {
         fill: $color-primary-subtle;
+      }
+    }
+    &.positive {
+      path {
+        fill: $color-error;
       }
     }
   }
