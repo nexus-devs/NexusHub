@@ -22,14 +22,14 @@
         <h3>{{ item.name }} {{ order.component }}</h3>
         <span class="price">
           {{ order.price ? `${order.price}p` : 'any offer' }}
-          <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
+          <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
         </span>
         <div class="message">
           <span ref="message">
             <span>/w {{ order.user }}</span> Hi {{ user }},
             I'd like to {{ order.offer === 'Selling' ? 'buy' : 'sell' }}
             [{{ item.name }} {{ order.component }}]{{ order.price ? ' for ' : '' }}{{ order.price ? `${order.price}p` : '' }}.
-            {{ order.source === 'Warframe Market' ? '' : 'Found your offer at NexusHub.' }}
+            {{ order.source === 'Warframe Market' ? '' : 'Found your offer on NexusHub.' }}
           </span>
         </div>
         <button @click="copy">
@@ -50,6 +50,7 @@
 import popup from 'src/components/ui/popup.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 import priceDiff from 'src/components/items/price-diff.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -93,10 +94,10 @@ export default {
 
         for (const word of noCamelCase.split(' ')) {
           if (noCamelCase.split(' ').length > 1 && word.length > 4) {
-            return word
+            return title(word)
           }
         }
-        return noDigits
+        return title(noDigits)
       }
     }
   },
@@ -232,7 +233,7 @@ export default {
     @include shadow-2;
   }
   .copy-confirm {
-    color: $color-primary;
+    color: $color-primary-subtle;
     font-size: 0.9em;
     margin-top: 3px;
     transform: translateY(-5px);

@@ -61,7 +61,7 @@
       <!-- Patch logs -->
       <section>
         <div class="container">
-          <h2 class="sub">Warframe Patchlogs</h2>
+          <h2 class="sub">Latest Patchlogs</h2>
           <div class="row-margin patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>

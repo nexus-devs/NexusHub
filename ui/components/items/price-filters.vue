@@ -4,13 +4,23 @@
       <div class="col-b row">
         <div :class="{ inactive: types[0].inactive }" class="col inline-data interactive" @click="select('types', types[0])">
           <label>Selling</label>
-          <span class="data">{{ supply.count }}</span>
-          <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
+          <span class="data">
+            {{ supply.count }}
+          </span>
+          <span :class="{ 'inline-data-increase': supply.diff > 0 }" class="diff">
+            <indicator :diff="supply.diff"/>
+            {{ supply.diff }}%
+          </span>
         </div>
         <div :class="{ inactive: types[1].inactive }" class="col inline-data interactive" @click="select('types', types[1])">
           <label>Buying</label>
-          <span class="data">{{ demand.count }}</span>
-          <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
+          <span class="data">
+            {{ demand.count }}
+          </span>
+          <span :class="{ 'inline-data-increase': demand.diff > 0 }" class="diff">
+            <indicator :diff="demand.diff"/>
+            {{ demand.diff }}%
+          </span>
         </div>
         <div class="col"><!-- Dummy --></div>
       </div>
@@ -35,9 +45,29 @@
 
 
 <script>
-import _ from 'lodash'
+import indicator from 'src/components/charts/indicator.vue'
+
+function getOrders (type, store) {
+  let current = 0
+  let previous = 0
+
+  for (const component of store.state.prices.components) {
+    current += component.prices[type].current.orders
+    previous += component.prices[type].previous.orders
+  }
+  const diff = ((current - previous) / previous * 100).toFixed(2)
+
+  return {
+    count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
+    diff
+  }
+}
 
 export default {
+  components: {
+    indicator
+  },
+
   data () {
     return {
       types: [{
@@ -59,35 +89,17 @@ export default {
       sources: [{
         name: 'Trade Chat'
       }, {
-        name: 'Warframe.market'
+        name: 'Warframe Market'
       }]
     }
   },
 
   computed: {
     supply () {
-      const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
-      const current = set.prices.selling.current.orders
-      const previous = set.prices.selling.previous.orders
-      const diff = ((current - previous) / previous * 100).toFixed(2)
-
-      return {
-        count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
-        diff: diff > 0 ? `+${diff}%` : `${diff}%`,
-        rawDiff: diff
-      }
+      return getOrders('selling', this.$store)
     },
     demand () {
-      const set = this.$store.state.items.item.components.find(c => c.name === 'Set')
-      const current = set.prices.buying.current.orders
-      const previous = set.prices.buying.previous.orders
-      const diff = ((current - previous) / previous * 100).toFixed(2)
-
-      return {
-        count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
-        diff: diff > 0 ? `+${diff}%` : `${diff}%`,
-        rawDiff: diff
-      }
+      return getOrders('buying', this.$store)
     }
   },
 
@@ -96,6 +108,8 @@ export default {
       const selling = newData.find(d => d.name === 'Selling')
       const buying = newData.find(d => d.name === 'Buying')
 
+      // Switch to order type in store. Price charts then use that key to get
+      // the target data from the default price output.
       if ((selling.inactive && buying.inactive) || (!selling.inactive && !buying.inactive)) {
         return this.$store.commit('setItemOfferType', 'combined')
       }
@@ -106,43 +120,32 @@ export default {
         this.$store.commit('setItemOfferType', 'selling')
       }
     },
-    regions (oldData, newData) {
-      const query = _.cloneDeep(this.$route.query)
-      const regions = []
 
-      newData.forEach(region => {
-        if (!region.inactive && !region.disabled) {
-          regions.push(region.name)
-        }
-      })
+    sources (oldData, newData) {
+      if (newData.filter(d => !d.inactive).length === 1) {
+        const source = newData.find(d => !d.inactive).name
 
-      // Get number of disabled regions so we can figure out when all are
-      // selected or when they aren't
-      let disabled = 0
-      this.regions.forEach(region => {
-        disabled += region.disabled ? 1 : 0
-      })
-
-      // Commit to store, then update URL (triggers data update)
-      this.$store.commit('setItemRegions', regions.length < this.regions.length - disabled ? regions : [])
-
-      // Some regions selected
-      if (regions.length && regions.length < this.regions.length - disabled) {
-        this.$router.replace({
-          path: this.$route.path,
-          query: Object.assign(query, {
-            region: regions.join(',')
+        // Fetch new data based on existing filters. Unlike buying/selling,
+        // these aren't in the output by default, so we have to fetch them
+        // additionally.
+        for (const component of this.$store.state.prices.components) {
+          this.$store.commit('setPricesAttributes', {
+            component: component.name,
+            attributes: { source }
           })
-        })
+          this.$store.dispatch('fetchPricesComponent', component.name)
+        }
       }
 
-      // Either all or none selected
+      // Reset if all are selected
       else {
-        delete query.region
-        this.$router.replace({
-          path: this.$route.path,
-          query
-        })
+        for (const component of this.$store.state.prices.components) {
+          this.$store.commit('setPricesAttributes', {
+            component: component.name,
+            attributes: { source: false }
+          })
+          this.$store.dispatch('fetchPricesComponent', component.name)
+        }
       }
     }
   },
@@ -195,8 +198,6 @@ export default {
 @import '~src/styles/partials/importer';
 
 .filters {
-  margin-top: 20px;
-
   .col-b {
     flex-grow: 0;
     flex-basis: auto;
@@ -241,12 +242,16 @@ export default {
     }
     .diff {
       display: inline-block;
+      white-space: nowrap;
       font-size: 0.8em;
       color: $color-error;
       letter-spacing: -0.5;
 
       &.inline-data-increase {
-        color: $color-primary;
+        color: $color-primary-subtle;
+      }
+      .indicator {
+        transform: scale(1);
       }
     }
     &:before {

@@ -137,7 +137,7 @@ ws.on('message', payload => {
     <p>
       If you need an overview for a full setup with automated authentication and
       error handling, check out our implementation for
-      <a href="https://github.com/cubic-js/cubic-client">cubic-client</a>.
+      <a href="https://github.com/cubic-js/cubic/tree/development/packages/client">cubic-client</a>.
     </p>
   </docs>
 </template>

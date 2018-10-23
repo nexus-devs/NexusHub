@@ -17,7 +17,7 @@
             {{ priceCurrent }}p
           </span>
           <span :class="{ negative: priceDiff.percentage < 0 }" class="data-price-diff">
-            {{ priceDiff.percentage > 0 ? '+' : '' }}{{ priceDiff.percentage }}%
+            <indicator :diff="priceDiff.percentage"/> {{ Math.abs(priceDiff.percentage) }}%
           </span>
         </div>
       </div>
@@ -115,10 +115,12 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import indicator from 'src/components/charts/indicator.vue'
 
 export default {
   components: {
-    module
+    module,
+    indicator
   },
 
   computed: {
@@ -190,11 +192,11 @@ export default {
     color: $color-error;
   }
   .data-price-diff {
-    color: $color-positive;
+    color: $color-primary-subtle;
   }
 }
 .ducats {
-  color: $color-primary !important;
+  color: $color-primary-subtle !important;
   border-right: none !important;
   padding-right: 0 !important;
 }
