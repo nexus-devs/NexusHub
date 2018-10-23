@@ -1,5 +1,8 @@
 <!-- PULL REQUEST TEMPLATE -->
 <!-- (Update "[ ]" to "[x]" to check a box) -->
+<!-- Make sure you have a convincing reason for adding this feature (to avoid
+  wasting your time, it's best to open a suggestion issue first and wait for
+  approval before working on it) -->
 
 **What kind of change does this PR introduce?** (check at least one)
 
@@ -17,11 +20,5 @@
 
 If yes, please describe the impact and migration path for existing applications:
 
-**If adding a *new feature*, the PR's description includes:**
-- [ ] A convincing reason for adding this feature (to avoid wasting your time,
-  it's best to open a suggestion issue first and wait for approval before
-  working on it)
-
 **Description:**
-
-General description of your PR.
+<!-- General description of your PR. -->
