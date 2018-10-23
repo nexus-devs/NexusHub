@@ -1,6 +1,6 @@
 <template>
   <div v-if="previous" class="price-diff">
-    <div :class="{ negative: type.toLowerCase() === 'selling' ? diff >= 0 : diff < 0 }" class="value">
+    <div :class="{ negative: type.toLowerCase() === 'selling' ? diff > 0 : diff < 0, positive: type.toLowerCase() === 'selling' ? diff < 0 : diff > 0 }" class="value">
       <indicator :diff="diff" :reverse="type.toLowerCase() === 'selling'"/>
       {{ Math.abs(diff) }}{{ unit }}
     </div>
@@ -49,7 +49,7 @@ export default {
 }
 
 .value {
-  color: $color-primary-subtle;
+  color: $color-font-body;
   @include ease(0.15s);
   padding: 10px;
   margin-bottom: -5px;
@@ -58,6 +58,9 @@ export default {
 
   &.negative {
     color: $color-error;
+  }
+  &.positive {
+    color: $color-primary-subtle;
   }
   &:hover {
     opacity: 0;
