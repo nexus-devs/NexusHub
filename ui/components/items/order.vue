@@ -24,7 +24,7 @@
     <div class="col price">
       <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
       <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
-      <price-diff :type="order.offer" :base="median" :value="order.price" unit="p"/>
+      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
     </div>
     <div class="col buy">
       <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>

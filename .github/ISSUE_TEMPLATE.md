@@ -1,5 +1,5 @@
 **I'm submitting a...**
-<!-- Check one of the following options with "x" -->
+<!-- (Update "[ ]" to "[x]" to check a box) -->
 - [ ] Bug report
 - [ ] Feature request
 - [ ] Documentation issue or request
@@ -37,7 +37,7 @@ would use this feature.
 **Environment**
 <!-- You can leave these unchecked for feature requests unless necessary -->
 
-Browser: <!-- If your issue is related to the webapp -->
+Browser: <!-- If your issue is related to the web-app -->
 - [ ] Chrome (desktop) version:
 - [ ] Chrome (Android) version:
 - [ ] Chrome (iOS) version:

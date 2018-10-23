@@ -12,7 +12,7 @@
       <section>
         <div class="container">
           <div class="row-margin overview">
-            <div class="col-b-4 realtime-container">
+            <div class="col-b-3 realtime-container">
               <h2 class="sub">Realtime Orders</h2>
               <div class="realtime">
                 <opm/>

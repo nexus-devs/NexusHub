@@ -16,6 +16,9 @@ class Prices extends Endpoint {
         name: 'timerange',
         default: 7,
         description: 'Days from now to the last order.'
+      }, {
+        name: 'component',
+        description: 'Item component to limit prices by.'
       }
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
@@ -28,15 +31,12 @@ class Prices extends Endpoint {
     this.schema.response = {
       name: String,
       components: [{
+        name: String,
         prices: {
           selling: { current: economyData, previous: economyData },
           buying: { current: economyData, previous: economyData }
         }
       }]
-    }
-    this.schema.pubsub = {
-      url: '/warframe/v1/items/:item/prices',
-      response: this.schema.response
     }
   }
 
@@ -46,6 +46,9 @@ class Prices extends Endpoint {
   async main (req, res) {
     const name = title(req.params.item)
     const timerange = req.query.timerange
+    const component = req.query.component
+    const source = req.query.source
+    const platform = req.query.platform
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
       let response = {
@@ -56,33 +59,41 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const data = await this.get(name, timerange, item)
+    const data = await this.get(name, timerange, item, component, source, platform)
     this.store(name, data, item)
-    this.cache(data, 60 * 60 * 24)
-    this.publish(data)
+    this.cache(data, 60 * 60)
     res.send(data)
   }
 
   /**
    * Processing entrypoint.
    */
-  async get (name, timerange, item) {
+  async get (name, timerange, item, componentName, source, platform) {
     const aggregator = new Aggregator(this.db)
     const currentParallel = []
     const previousParallel = []
     const aggregate = this.aggregate.bind(this)
 
     for (const component of item.components) {
+      if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) continue
       if (!component.tradable) continue
 
       const query = { name: `${name} ${component.name} Prices` }
       const params = { item: name, component: component.name }
+      if (source) {
+        query.name += ` ${source}`
+        params.source = source
+      }
+      if (platform) {
+        query.name += ` ${platform}`
+        params.platform = platform
+      }
       currentParallel.push(aggregator.get('orders', query, [0, timerange], aggregate, params))
       previousParallel.push(aggregator.get('orders', query, [timerange, timerange * 2], aggregate, params))
     }
     const current = await Promise.all(currentParallel)
     const previous = await Promise.all(previousParallel)
-    const data = this.parse(item, current, previous, aggregator)
+    const data = this.parse(item, componentName, source, platform, current, previous, aggregator)
 
     return data
   }
@@ -90,7 +101,7 @@ class Prices extends Endpoint {
   /**
    * Parse data into final response format.
    */
-  parse (item, current, previous, aggregator) {
+  parse (item, componentName, source, platform, current, previous, aggregator) {
     const res = {
       name: item.name,
       components: []
@@ -102,9 +113,14 @@ class Prices extends Endpoint {
       median: 'avg'
     }
     for (const component of item.components) {
+      if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) continue
       if (!component.tradable) continue
-      const targetCurrent = current.find(c => c.name === `${item.name} ${component.name} Prices`)
-      const targetPrevious = previous.find(c => c.name === `${item.name} ${component.name} Prices`)
+
+      let query = `${item.name} ${component.name} Prices`
+      if (source) query += ` ${source}`
+      if (platform) query += ` ${platform}`
+      const targetCurrent = current.find(c => c.name === query)
+      const targetPrevious = previous.find(c => c.name === query)
       const buying = {
         current: aggregator.reduce(targetCurrent, 'buying', schema),
         previous: aggregator.reduce(targetPrevious, 'buying', schema)
@@ -129,13 +145,13 @@ class Prices extends Endpoint {
    */
   async aggregate (start, end, params) {
     const { combined, buying, selling } = await this.getMedians(start, end, params)
-    const { item, component } = params
     const result = await this.db.collection('orders').aggregate([
       { $match: {
-        item,
-        component,
-        createdAt: { $gte: start.toDate(), $lte: end.toDate() },
-        price: { $gte: combined * 0.3, $lte: combined * 3 }
+        ...{
+          createdAt: { $gte: start.toDate(), $lte: end.toDate() },
+          price: { $gte: combined * 0.3, $lte: combined * 3 }
+        },
+        ...params
       } },
       { $group: {
         _id: '$offer',

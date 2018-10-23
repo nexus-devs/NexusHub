@@ -35,15 +35,6 @@ class Patchlogs extends Endpoint {
     const skip = req.query.skip
     const limit = req.query.limit
 
-    // Refuse if limit is too high
-    if (limit > 10) {
-      return res.status(401).send({
-        error: 'Bad input.',
-        reason: 'The `limit` param must be no higher than 10.'
-      })
-    }
-
-    // Get Patchlogs
     if (item) {
       const Item = await this.db.collection('items').findOne({ name: title(item) })
       if (!Item) {

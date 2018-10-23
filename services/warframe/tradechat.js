@@ -19,3 +19,7 @@ client.subscribe('/warframe/v1/orders', req => {
     // just try again later, these are usually issues when bootstrapping
   }
 })
+
+setInterval(() => {
+  local.get('/warframe/v1/orders/clearExternal')
+}, 1000 * 60 * 3)

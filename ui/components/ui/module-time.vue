@@ -68,7 +68,7 @@ export default {
       background: rgba(0,0,0,0.15);
     }
     span:not(.active) {
-      opacity: 0.5;
+      color: $color-font-body;
     }
   }
   &:not(.active) {

@@ -194,6 +194,10 @@ export default {
   }
 }
 
+.row {
+  flex-wrap: nowrap;
+}
+
 .day {
   display: flex;
   flex-direction: column;
