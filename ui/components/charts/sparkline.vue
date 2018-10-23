@@ -131,7 +131,7 @@ export default {
     update () {
       const yPane = d3.extent(this.data, (y, x) => y)
       this.scaled.x.domain(d3.extent(this.data, (y, x) => x))
-      this.scaled.y.domain(yPane)
+      this.scaled.y.domain(this.ceil ? [yPane[0], this.ceil] : yPane)
       this.points = []
 
       // Transform raw data into scaled data to fit into the graph

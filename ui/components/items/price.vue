@@ -12,7 +12,7 @@
       <price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously"/>
       <div class="graphs">
         <sparkline :data="data.current" :compare="data.previous" :component="component.name"/>
-        <sparkline :data="data.previous" class="sparkline-previous"/>
+        <sparkline :data="data.previous" :ceil="ceil" class="sparkline-previous"/>
       </div>
       <div class="more">
         <div class="btn-subtle active">
@@ -27,7 +27,7 @@
               {{ component.prices.buying.current.orders }}
             </span>
             <span :class="{ negative: orderDiff < 0 }" class="diff">
-              ( {{ orderDiff.buying > 0 ? '+' : '' }}{{ orderDiff.buying }} )
+              ( <indicator :diff="orderDiff.buying"/> {{ orderDiff.buying }} )
             </span>
           </div>
         </div>
@@ -38,7 +38,7 @@
               {{ component.prices.selling.current.orders }}
             </span>
             <span class="diff">
-              ( {{ orderDiff.selling > 0 ? '+' : '' }}{{ orderDiff.selling }} )
+              ( <indicator :diff="orderDiff.selling"/> {{ orderDiff.selling }} )
             </span>
           </div>
         </div>
@@ -57,13 +57,15 @@ import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 import priceDiff from 'src/components/items/price-diff.vue'
 import sparkline from 'src/components/charts/sparkline.vue'
+import indicator from 'src/components/charts/indicator.vue'
 
 export default {
   components: {
     module,
     moduleTime,
     priceDiff,
-    sparkline
+    sparkline,
+    indicator
   },
 
   props: ['component'],
@@ -124,6 +126,9 @@ export default {
           previous: this.component.prices[this.offerType].previous.days.map(d => Math.round(d.median))
         }
       }
+    },
+    ceil () {
+      return Math.max(...this.data.current)
     },
     timerange () {
       return this.priceComponent.timerange
@@ -233,6 +238,10 @@ export default {
 
 .diff {
   color: $color-font-body !important;
+
+  /deep/ .indicator path {
+    fill: $color-font-body;
+  }
 }
 
 .more {
