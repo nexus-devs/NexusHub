@@ -19,8 +19,13 @@
             </text>
             <text :x="scaled.x(d.x) + 20" y="50px" class="num">
               {{ data[i] ? `${data[i]}p` : '' }}
-              {{ diff(i) && data[i] && compare[i] ? diff(i) : '' }}
             </text>
+            <g v-if="diff(i) && data[i] && compare[i]" :transform="`translate(${scaled.x(d.x)}, 50)`">
+              <indicator :x="73" :diff="diff(i)" y="-9"/>
+              <text :x="85" :class="{ negative: diff(i) < 0 }" class="price" y="0px">
+                {{ Math.abs(diff(i)) }}p
+              </text>
+            </g>
             <text v-if="orders" :x="scaled.x(d.x) + 20" :y="data[i] ? '75px' : '48px'" class="sub">
               {{ orders[i] }} Orders
             </text>
@@ -36,8 +41,13 @@
 <script>
 import * as d3 from 'd3'
 import Tween from './_tween.js'
+import indicator from './indicator.vue'
 
 export default {
+  components: {
+    indicator
+  },
+
   props: ['data', 'margin', 'ceil', 'compare', 'component'],
 
   data () {
@@ -219,6 +229,14 @@ svg {
   }
   .sub {
     fill: $color-font-body;
+  }
+  .price {
+    fill: $color-primary-subtle;
+    text-anchor: start;
+
+    &.negative {
+      fill: $color-error;
+    }
   }
 }
 </style>

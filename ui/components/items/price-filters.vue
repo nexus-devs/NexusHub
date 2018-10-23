@@ -4,13 +4,23 @@
       <div class="col-b row">
         <div :class="{ inactive: types[0].inactive }" class="col inline-data interactive" @click="select('types', types[0])">
           <label>Selling</label>
-          <span class="data">{{ supply.count }}</span>
-          <span :class="{ 'inline-data-increase': supply.rawDiff > 0 }" class="diff">{{ supply.diff }}</span>
+          <span class="data">
+            {{ supply.count }}
+          </span>
+          <span :class="{ 'inline-data-increase': supply.diff > 0 }" class="diff">
+            <indicator :diff="supply.diff"/>
+            {{ supply.diff }}%
+          </span>
         </div>
         <div :class="{ inactive: types[1].inactive }" class="col inline-data interactive" @click="select('types', types[1])">
           <label>Buying</label>
-          <span class="data">{{ demand.count }}</span>
-          <span :class="{ 'inline-data-increase': demand.rawDiff > 0 }" class="diff">{{ demand.diff }}</span>
+          <span class="data">
+            {{ demand.count }}
+          </span>
+          <span :class="{ 'inline-data-increase': demand.diff > 0 }" class="diff">
+            <indicator :diff="demand.diff"/>
+            {{ demand.diff }}%
+          </span>
         </div>
         <div class="col"><!-- Dummy --></div>
       </div>
@@ -35,6 +45,8 @@
 
 
 <script>
+import indicator from 'src/components/charts/indicator.vue'
+
 function getOrders (type, store) {
   let current = 0
   let previous = 0
@@ -47,12 +59,15 @@ function getOrders (type, store) {
 
   return {
     count: current > 999 ? `${(current / 1000).toFixed(1)}K` : current,
-    diff: diff > 0 ? `+${diff}%` : `${diff}%`,
-    rawDiff: diff
+    diff
   }
 }
 
 export default {
+  components: {
+    indicator
+  },
+
   data () {
     return {
       types: [{
@@ -227,12 +242,16 @@ export default {
     }
     .diff {
       display: inline-block;
+      white-space: nowrap;
       font-size: 0.8em;
       color: $color-error;
       letter-spacing: -0.5;
 
       &.inline-data-increase {
-        color: $color-primary;
+        color: $color-primary-subtle;
+      }
+      .indicator {
+        transform: scale(1);
       }
     }
     &:before {

@@ -50,6 +50,7 @@
 import popup from 'src/components/ui/popup.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 import priceDiff from 'src/components/items/price-diff.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -93,10 +94,10 @@ export default {
 
         for (const word of noCamelCase.split(' ')) {
           if (noCamelCase.split(' ').length > 1 && word.length > 4) {
-            return word
+            return title(word)
           }
         }
-        return noDigits
+        return title(noDigits)
       }
     }
   },

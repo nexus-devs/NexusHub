@@ -1,7 +1,8 @@
 <template>
-  <div v-if="previous && diff" class="price-diff">
-    <div :class="{ negative: type.toLowerCase() === 'selling' ? diff.value > 0 : diff.value <= 0 }" class="value">
-      {{ diff.text }}
+  <div v-if="previous" class="price-diff">
+    <div :class="{ negative: type.toLowerCase() === 'selling' ? diff >= 0 : diff < 0 }" class="value">
+      <indicator :diff="diff" :reverse="type.toLowerCase() === 'selling'"/>
+      {{ Math.abs(diff) }}{{ unit }}
     </div>
     <div class="tooltip">
       {{ base || 'median' }} {{ current }}{{ unit }}
@@ -9,18 +10,22 @@
   </div>
 </template>
 
+
+
 <script>
+import indicator from 'src/components/charts/indicator.vue'
+
 export default {
+  components: {
+    indicator
+  },
+
   props: ['type', 'current', 'previous', 'unit', 'base'],
 
   computed: {
     diff () {
       if (this.current && this.previous) {
-        const diff = this.previous - this.current
-        return {
-          value: diff,
-          text: `${diff > 0 ? '+' : ''}${diff}${this.unit}`
-        }
+        return this.previous - this.current
       } else {
         return null
       }
@@ -28,6 +33,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -42,11 +49,12 @@ export default {
 }
 
 .value {
-  color: $color-primary;
+  color: $color-primary-subtle;
   @include ease(0.15s);
   padding: 10px;
   margin-bottom: -5px;
   margin-top: -5px;
+  margin-left: 5px;
 
   &.negative {
     color: $color-error;
