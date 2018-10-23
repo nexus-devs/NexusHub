@@ -233,7 +233,7 @@ export default {
     @include shadow-2;
   }
   .copy-confirm {
-    color: $color-primary;
+    color: $color-primary-subtle;
     font-size: 0.9em;
     margin-top: 3px;
     transform: translateY(-5px);
