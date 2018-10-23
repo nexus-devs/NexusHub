@@ -17,7 +17,7 @@
   "author": "Kaptard",
   "license": "CC BY-NC 4.0",
   "dependencies": {
-    "cubic": "2.1.0",
+    "cubic": "2.1.1",
     "cubic-api": "2.0.5",
     "cubic-auth": "2.0.1",
     "cubic-client": "2.0.2",
