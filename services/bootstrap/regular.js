@@ -40,7 +40,7 @@ module.exports = async function () {
       user_key: 'nexus-warframe-bot',
       user_secret: await bcrypt.hash('dev-only', 1),
       last_ip: [],
-      scope: 'write_orders_warframe'
+      scope: 'write_orders_warframe ignore_rate_limit'
     }
   }, {
     upsert: true

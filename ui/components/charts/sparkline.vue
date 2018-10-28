@@ -7,7 +7,7 @@
         </g>
       </svg>
     </div>
-    <div class="tooltip-container">
+    <div v-if="interactive !== false" class="tooltip-container">
       <svg :width="width + 200" :height="height">
         <g v-for="(d, i) in animatedData" :key="d.x" class="point">
           <rect :x="scaled.x(d.x)" class="hover"/>
@@ -48,7 +48,7 @@ export default {
     indicator
   },
 
-  props: ['data', 'margin', 'ceil', 'compare', 'component'],
+  props: ['data', 'ceil', 'compare', 'component', 'interactive', 'curve'],
 
   data () {
     return {
@@ -125,7 +125,9 @@ export default {
       Tween.adjustData(this, this.data, this.data, true)
     },
 
-    createLine: d3.line().x(d => d.x).y(d => d.y).curve(d3.curveMonotoneX),
+    createLine (points) {
+      return d3.line().x(d => d.x).y(d => d.y).curve(d3[this.curve || 'curveMonotoneX'])(points)
+    },
 
     // Update graph render
     update () {
@@ -159,20 +161,12 @@ export default {
 .sparkline {
   position: relative;
 }
-#filters {
-  position: absolute;
-}
-.blur {
-  filter: blur(25px);
-  position: absolute;
-  top: 0;
-}
 .graph {
   position: relative;
   z-index: 1;
 }
 
-.line, .blur {
+.line {
   pointer-events: none; // Make tooltips accessible
 }
 

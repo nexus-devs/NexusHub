@@ -19,6 +19,12 @@ class Prices extends Endpoint {
       }, {
         name: 'component',
         description: 'Item component to limit prices by.'
+      }, {
+        name: 'source',
+        description: '"Trade Chat" or "Warframe Market".'
+      }, {
+        name: 'platform',
+        description: '"PC, PS4 or XB1."'
       }
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
@@ -88,8 +94,8 @@ class Prices extends Endpoint {
         query.name += ` ${platform}`
         params.platform = platform
       }
-      currentParallel.push(aggregator.get('orders', query, [0, timerange], aggregate, params))
-      previousParallel.push(aggregator.get('orders', query, [timerange, timerange * 2], aggregate, params))
+      currentParallel.push(aggregator.get('orders', query, [0, timerange - 1], aggregate, params))
+      previousParallel.push(aggregator.get('orders', query, [timerange, timerange * 2 - 1], aggregate, params))
     }
     const current = await Promise.all(currentParallel)
     const previous = await Promise.all(previousParallel)
