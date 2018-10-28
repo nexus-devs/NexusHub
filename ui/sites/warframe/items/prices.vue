@@ -34,6 +34,7 @@ import itemHeader from 'src/components/items/header.vue'
 import filters from 'src/components/items/price-filters.vue'
 import price from 'src/components/items/price.vue'
 import priceDetailed from 'src/components/items/price-detailed.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -89,7 +90,7 @@ export default {
   },
 
   async asyncData ({ route }) {
-    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
+    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
     this.$store.commit('setPricesItem', item)
     this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
   },

@@ -41,6 +41,7 @@ export default {
 
 .module-time {
   position: relative;
+  z-index: 2;
   font-size: 1.1em;
   color: white;
 }

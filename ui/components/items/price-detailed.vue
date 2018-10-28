@@ -29,7 +29,7 @@
 
     <!-- Right panel -->
     <div v-if="active" class="selection">
-      <div v-if="selected.user" class="active">
+      <div v-if="selected.user && selected.component === detailed.component && selected.item === detailed.item" class="active">
         <time :datetime="selected.createdAt">
           {{ Math.floor((new Date() - new Date(selected.createdAt)) / (1000 * 60 * 60)) }} hours ago
         </time>

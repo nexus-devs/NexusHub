@@ -2,24 +2,36 @@
   <div class="userprices">
     <div class="axis">
       <div class="x">
-        
+        <div class="axis"/>
+        <div class="labels">
+          <span v-for="label in axis.x" :key="label">
+            {{ label }}:00
+          </span>
+        </div>
       </div>
       <div class="y">
-
+        <div class="axis"/>
+        <div class="labels">
+          <span v-for="label in axis.y" :key="label">
+            {{ label }}p
+          </span>
+        </div>
       </div>
     </div>
-    <sparkline :data="sparklineData" :interactive="false" curve="curveBasis"/>
-    <div :style="{ width, height }" class="points">
-      <div v-for="(order, i) in userData" :key="i" :style="{ left: scaled.x(Date.parse(order.createdAt)), top: scaled.y(order.price) }"
-           :class="{ active: selected.user === order.user }" class="point-wrapper">
-        <div class="point"/>
-        <div class="info" @click="select(order)">
-          <div class="img-wrapper interactive">
-            <img :alt="order.user" src="/img/ui/placeholder.png">
-          </div>
-          <div class="data">
-            <span>{{ order.user }}</span>
-            <span class="price">{{ order.price }}p</span>
+    <div class="graphs">
+      <sparkline :data="sparklineData" :interactive="false" curve="curveBasis"/>
+      <div :style="{ width, height }" class="points">
+        <div v-for="(order, i) in userData" :key="i" :style="{ left: scaled.x(Date.parse(order.createdAt)), top: scaled.y(order.price) }"
+             :class="{ active: selected.user === order.user }" class="point-wrapper">
+          <div class="point"/>
+          <div class="info" @click="select(order)">
+            <div class="img-wrapper interactive">
+              <img :alt="order.user" src="/img/ui/placeholder.png">
+            </div>
+            <div class="data">
+              <span>{{ order.user }}</span>
+              <span class="price">{{ order.price }}p</span>
+            </div>
           </div>
         </div>
       </div>
@@ -90,6 +102,24 @@ export default {
     },
     selected () {
       return this.$store.state.prices.selected
+    },
+    axis () {
+      const yPane = d3.extent(this.data.map(o => o.price), y => y)
+      const y = []
+      y.push(yPane[1])
+      y.push(Math.round(yPane[0] + (yPane[1] - yPane[0]) / 2))
+      y.push(yPane[0])
+
+      const now = new Date().getHours()
+      const hour = (h) => now - h
+      const hoursAgo = (h) => h < 0 ? 24 + h : h
+      const start = hoursAgo(hour(22))
+      const x = [start]
+      x.push(hoursAgo(hour(15)))
+      x.push(hoursAgo(hour(8)))
+      x.push(now)
+
+      return { x, y }
     }
   },
 
@@ -117,7 +147,7 @@ export default {
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
     onResize () {
-      this.width = this.$el.offsetWidth
+      this.width = this.$el.offsetWidth - 50
       this.height = this.$el.offsetHeight
       this.initialize()
       Tween.adjustData(this, this.data, this.data)
@@ -161,6 +191,7 @@ export default {
   display: flex;
   flex: 1;
 }
+
 .sparkline {
   flex: 1;
 
@@ -168,10 +199,21 @@ export default {
     stroke: $color-subtle;
   }
 }
+
+.graphs {
+  position: absolute;
+  display: flex;
+  left: 40px;
+  top: 0;
+  flex: 1;
+  height: 100%;
+  width: calc(100% - 40px);
+}
+
 .points {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   z-index: 1;
 
   .point {
@@ -242,5 +284,61 @@ export default {
       }
     }
   }
+}
+
+.axis {
+  background: $color-subtle;
+}
+.x {
+  position: absolute;
+  bottom: 0;
+  left: 35px;
+  width: calc(100% - 35px);
+
+  .axis {
+    width: 100%;
+    height: 1.25px;
+    border-radius: 1px
+  }
+  .labels {
+    display: flex;
+    justify-content: space-between;
+
+    span:first-of-type {
+      margin-left: 40px;
+    }
+  }
+}
+.y {
+  position: absolute;
+  height: 100%;
+
+  .axis {
+    position: absolute;
+    bottom: 20px;
+    left: 34px;
+    width: 1.25px;
+    height: calc(100% - 25px);
+    border-radius: 1px
+  }
+  .labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 10px;
+    height: calc(100% - 20px);
+
+    span:first-of-type {
+      margin-top: 20px;
+    }
+    span:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+}
+.labels {
+  color: $color-font-subtle;
+  font-size: 0.9em;
 }
 </style>
