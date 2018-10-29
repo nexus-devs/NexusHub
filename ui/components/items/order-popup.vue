@@ -241,6 +241,7 @@ export default {
 
   .btn-outline {
     @include gradient-background-dg($color-accent, $color-accent-subtle)
+    border: none;
 
     &:after {
       @include gradient-background-dg($color-accent, $color-accent-subtle)
