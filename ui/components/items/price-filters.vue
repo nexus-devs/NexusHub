@@ -93,6 +93,15 @@ function fetchPrices (data, attr, store) {
       store.dispatch('fetchPricesComponent', component.name)
     }
   }
+
+  // Get detailed graph if selected
+  const detailed = store.state.prices.detailed
+  if (detailed.data.length) {
+    store.dispatch('fetchPricesDetailed', {
+      item: detailed.item,
+      component: detailed.component
+    })
+  }
 }
 
 export default {

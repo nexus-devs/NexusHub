@@ -47,7 +47,7 @@ class Activity extends Endpoint {
     const aggregate = this.aggregate.bind(this)
     const query = { name: `${item || 'all'} Activity` }
     const params = { item }
-    const data = await aggregator.get('orders', query, [1, timerange + 1], aggregate, params)
+    const data = await aggregator.get('orders', query, [1, timerange], aggregate, params)
     const days = new Array(7)
 
     // Get every hour per day

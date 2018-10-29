@@ -9,10 +9,10 @@
 
  @mixin field() {
    border-radius: 2px;
-   @include gradient-background-dg(#424956, #363d48);
+   @include gradient-background-dg(#424955, #363d46);
    @include shadow-1;
 
    &:hover {
-     @include gradient-background-dg(#424956, #363d48);
+     @include gradient-background-dg(#424955, #363d46);
    }
  }

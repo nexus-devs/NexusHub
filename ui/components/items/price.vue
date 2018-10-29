@@ -15,7 +15,7 @@
         <sparkline :data="data.previous" :ceil="ceil" class="sparkline-previous"/>
       </div>
       <div class="more">
-        <div class="btn-subtle active">
+        <div class="btn-subtle active" @click="fetchDetailed">
           View Full Data
         </div>
       </div>
@@ -82,7 +82,9 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.current.median + prices.buying.current.median) / 2)
+        const s = prices.selling.current.median
+        const b = prices.buying.current.median
+        return Math.round((s + b) / (s && b ? 2 : 1))
       }
       return prices[this.offerType].current.median
     },
@@ -90,7 +92,9 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.previous.median + prices.buying.previous.median) / 2)
+        const s = prices.selling.previous.median
+        const b = prices.buying.previous.median
+        return Math.round((s + b) / (s && b ? 2 : 1))
       }
       return prices[this.offerType].previous.median
     },
@@ -114,7 +118,7 @@ export default {
         const selling = this.priceComponent.prices.selling
         const merge = (b, i, period) => {
           const s = selling[period].days[i]
-          return Math.round((b.median + s.median) / 2)
+          return Math.round((b.median + s.median) / (b.median && s.median ? 2 : 1))
         }
         return {
           current: buying.current.days ? buying.current.days.map((b, i) => merge(b, i, 'current')) : [],
@@ -150,6 +154,12 @@ export default {
         attributes: {
           timerange
         }
+      })
+    },
+    fetchDetailed () {
+      this.$store.dispatch('fetchPricesDetailed', {
+        item: this.item.name,
+        component: this.component.name
       })
     }
   }

@@ -28,10 +28,10 @@
 
     <!-- Content -->
     <div :style="{ height: `${listHeight}px` }" class="results-container">
-      <transition-group id="results-grid" :class="{ active: listType === 'grid' }" name="list" class="result-grid list">
+      <transition-group ref="grid" :class="{ active: listType === 'grid' }" name="list" class="result-grid list">
         <item-grid v-for="result in results" :key="result.name" :result="result" :filters="filters" :selection="selection"/>
       </transition-group>
-      <transition-group id="results-list" :class="{ active: listType === 'list' }" name="list" class="result-list list">
+      <transition-group ref="list" :class="{ active: listType === 'list' }" name="list" class="result-list list">
         <item-list v-for="result in results" :key="result.name" :result="result" :filters="filters" class="result row"/>
       </transition-group>
     </div>
@@ -105,9 +105,9 @@ export default {
      */
     onResize () {
       if (this.listType === 'grid') {
-        this.listHeight = document.getElementById('results-grid').offsetHeight
+        this.listHeight = this.$refs.grid.$el.offsetHeight
       } else {
-        this.listHeight = document.getElementById('results-list').offsetHeight
+        this.listHeight = this.$refs.list.$el.offsetHeight
       }
       this.listHeight += 40 // padding
     },

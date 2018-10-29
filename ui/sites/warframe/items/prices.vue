@@ -10,9 +10,12 @@
         <div class="container">
           <h2 class="sub">{{ item.name }} Prices</h2>
           <filters/>
-          <div class="row-margin">
-            <price v-for="component in components" v-if="component.tradable" :key="component.name"
-                   :component="component" class="col"/>
+          <div :style="{ height: `${height}px` }" class="prices-wrapper">
+            <price-detailed ref="detailed"/>
+            <div ref="prices" class="prices row-margin">
+              <price v-for="component in components" v-if="component.tradable" :key="component.name"
+                     :component="component" class="col"/>
+            </div>
           </div>
         </div>
       </section>
@@ -30,6 +33,8 @@ import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import itemHeader from 'src/components/items/header.vue'
 import filters from 'src/components/items/price-filters.vue'
 import price from 'src/components/items/price.vue'
+import priceDetailed from 'src/components/items/price-detailed.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -39,7 +44,14 @@ export default {
     sidebarSearch,
     itemHeader,
     filters,
-    price
+    price,
+    priceDetailed
+  },
+
+  data () {
+    return {
+      height: 0
+    }
   },
 
   computed: {
@@ -55,11 +67,36 @@ export default {
         components.push({ ...base[i], ...prices[i] })
       }
       return components
+    },
+    detailed () {
+      return this.$store.state.prices.detailed
+    },
+    selected () {
+      return this.$store.state.prices.selected
     }
   },
 
+  watch: {
+    detailed () {
+      setTimeout(() => this.onResize(), 1) // Wait for module to update first
+    },
+    selected () {
+      this.onResize()
+    }
+  },
+
+  // Set active view (required for generating parent height)
+  mounted () {
+    this.onResize()
+    window.addEventListener('resize', this.onResize)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
+  },
+
   async asyncData ({ route }) {
-    const item = route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')
+    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
     this.$store.commit('setPricesItem', item)
     this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
   },
@@ -67,6 +104,19 @@ export default {
   methods: {
     setTimerange (days) {
       this.$store.commit('setActivityTimerange', days)
+    },
+    /**
+     * Resize price container. We have to do this because the default/detailed view
+     * is positioned absolutely to enable smooth transitions while staying at
+     * the same place. The html tag height will be expanded without this when
+     * the smaller list is selected.
+     */
+    onResize () {
+      if (this.detailed.data.length && this.detailed.item === this.item.name) {
+        this.height = this.$refs.detailed.$el.offsetHeight
+      } else {
+        this.height = this.$refs.prices.offsetHeight
+      }
     }
   },
 
@@ -74,7 +124,13 @@ export default {
     name: 'prices',
     state: {
       item: '',
-      components: []
+      components: [],
+      detailed: {
+        item: '',
+        component: '',
+        data: []
+      },
+      selected: {}
     },
     mutations: {
       setPrices (state, prices) {
@@ -91,6 +147,12 @@ export default {
       setPricesAttributes (state, data) {
         const component = state.components.find(c => c.name === data.component)
         Object.assign(component, data.attributes)
+      },
+      setPricesDetailed (state, data) {
+        state.detailed = data
+      },
+      setPricesDetailedOrder (state, order) {
+        state.selected = order
       }
     },
     actions: {
@@ -105,11 +167,27 @@ export default {
             params.append(param, stored[param])
           }
         }
-        const prices = await this.$cubic.get(`/warframe/v1/items/${state.item}/prices?${params}`)
+        const decoded = params.toString().replace(/\+/g, ' ')
+        const prices = await this.$cubic.get(`/warframe/v1/items/${state.item}/prices?${decoded}`)
         commit('setPricesAttributes', {
           component: stored.name,
           attributes: { prices: prices.components[0].prices }
         })
+      },
+
+      async fetchPricesDetailed ({ state, commit }, { item, component }) {
+        const params = new URLSearchParams(`item=${item}&component=${component}`)
+        const stored = state.components.find(c => c.name === component)
+
+        for (const param of ['timerange', 'source', 'platform']) {
+          if (stored[param]) {
+            if (param === 'timerange' && stored[param] === 7) continue
+            params.append(param, stored[param])
+          }
+        }
+        const decoded = params.toString().replace(/\+/g, ' ')
+        const data = await this.$cubic.get(`/warframe/v1/orders/history?${decoded}`)
+        commit('setPricesDetailed', { item, component, data })
       }
     }
   }
@@ -134,5 +212,25 @@ export default {
 
 .app-content {
   background: $color-bg-darker;
+}
+
+.prices-wrapper {
+  position: relative;
+  @include ease-out(0.35s);
+}
+
+.prices {
+  position: absolute;
+  width: 100%;
+  @include ease(0.3s);
+}
+
+.price-detailed {
+  position: absolute;
+
+  &.active + .prices {
+    opacity: 0;
+    transform: scale(0.95);
+  }
 }
 </style>

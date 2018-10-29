@@ -31,10 +31,10 @@ class Aggregator {
     // This simply switches the values so the first value is where we start and
     // the second value is how many days ago we'll stop.
     timerange = timerange[0] > timerange[1] ? [timerange[1], timerange[0]] : timerange
-    const now = moment.utc().subtract(timerange[0], 'days')
+    const start = moment.utc().subtract(timerange[0], 'days')
     const parallel = [
-      this.getDaily(collection, query, timerange, aggregateFn, params, now),
-      this.getHourly(collection, query, timerange, aggregateFn, params, now)
+      this.getDaily(collection, query, timerange, aggregateFn, params, start),
+      this.getHourly(collection, query, timerange, aggregateFn, params, start)
     ]
     await Promise.all(parallel)
 
@@ -47,7 +47,7 @@ class Aggregator {
     const additional = additionalDays.before.concat(additionalDays.after)
       .concat(additionalHours.before).concat(additionalHours.after)
 
-    await this.cleanup(additional, collection, timerange, now)
+    await this.cleanup(additional, collection, timerange, start)
 
     // Parse into more usable shape for users, rather than what we need for
     // the database.
@@ -68,11 +68,11 @@ class Aggregator {
   /**
    * Calculate hours, but only if we're not starting in the past.
    */
-  async getHourly (collection, query, timerange, aggregateFn, params, now) {
+  async getHourly (collection, query, timerange, aggregateFn, params, start) {
     if (timerange[0] === 0) {
-      const hoursEnd = now.clone().startOf('day')
-      const hoursTimerange = [0, now.clone().diff(hoursEnd, 'hours')]
-      const { existing: hours, additional: additionalHours } = await this.getData(collection, query, hoursTimerange, aggregateFn, params, now, 'hour')
+      const hoursEnd = start.clone().startOf('day')
+      const hoursTimerange = [0, start.clone().diff(hoursEnd, 'hours')]
+      const { existing: hours, additional: additionalHours } = await this.getData(collection, query, hoursTimerange, aggregateFn, params, start, 'hour')
       return { hours, additionalHours }
     } else {
       return { hours: [], additionalHours: { before: [], after: [] } }
@@ -82,11 +82,11 @@ class Aggregator {
   /**
    * Wrapper function that gets data for given time scope
    */
-  async getData (collection, query, timerange, aggregateFn, params, now, scope) {
-    const range = timerange[1] - timerange[0]
+  async getData (collection, query, timerange, aggregateFn, params, start, scope) {
     const past = timerange[0] > 0
-    const end = now.clone().subtract(timerange[1], scope + 's').startOf(scope)
-    const timeCovered = await this.getTimeCovered(collection, query, now, end, scope)
+    const range = timerange[1] - timerange[0]
+    const end = start.clone().subtract(range, scope + 's').startOf(scope)
+    const timeCovered = await this.getTimeCovered(collection, query, start, end, scope)
     const existing = timeCovered[1] > 0 ? await this.getExisting(collection, query, timeCovered, end, scope) : []
     const additional = {
       before: [],
@@ -101,7 +101,8 @@ class Aggregator {
       }
     }
 
-    // Get data after covered range
+    // Get data after covered range. i <= range when the scope is an hour because
+    // we'll always want to recalculate the current hour.
     for (let i = timeCovered[1] + 1; past || scope === 'hour' ? i <= range : i < range; i++) {
       parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional.after, i))
     }
@@ -111,8 +112,8 @@ class Aggregator {
   }
 
   /**
-   * Get the latest aggregation, so we know from which point in time to start
-   * aggregating new data.
+   * Get the oldest to latest aggregations, so we know from which point in time
+   * to start aggregating new data.
    */
   async getTimeCovered (collection, query, start, end, scope) {
     const find = async (order) => (await this.db.collection(collection + 'Aggregation').find({
@@ -148,7 +149,7 @@ class Aggregator {
     return this.db.collection(collection + 'Aggregation').find({
       ...{
         createdAt: {
-          $gte: end.clone().add(covered[0], scope + 's').endOf(scope).toDate(),
+          $gte: end.clone().add(covered[0], scope + 's').startOf(scope).toDate(),
           $lte: end.clone().add(covered[1], scope + 's').endOf(scope).toDate()
         },
         scope
@@ -318,7 +319,7 @@ class Aggregator {
       const val = schema[key]
 
       if (val === 'sum') {
-        day[key] = _.sumBy(hours, h => h[key])
+        day[key] = _.sumBy(hours.filter(h => h[key]), h => h[key])
       }
       else if (val === 'min') {
         const min = _.minBy(hours, h => h[key])
@@ -329,7 +330,7 @@ class Aggregator {
         day[key] = max ? max[key] : null
       }
       else if (val === 'avg') {
-        day[key] = Math.round(_.meanBy(hours, h => h[key]))
+        day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key]))
       }
     }
 

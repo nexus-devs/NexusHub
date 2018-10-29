@@ -24,8 +24,7 @@ class Orders extends Endpoint {
       price: Number,
       quantity: Number,
       source: String,
-      createdAt: String,
-      online: Boolean
+      createdAt: String
     }]
     this.schema.pubsub = {
       url: '/warframe/v1/orders',
