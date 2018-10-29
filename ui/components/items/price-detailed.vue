@@ -152,6 +152,27 @@ export default {
     transform: scale(1);
     pointer-events: all;
   }
+  @media (max-width: $breakpoint-m) {
+    flex-wrap: wrap;
+    box-shadow: none;
+
+    .selection {
+      border-left: 0;
+      border-top: 10px solid $color-bg-dark;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: $breakpoint-s) {
+    .item {
+      width: 100%;
+      border-bottom: 10px solid $color-bg-dark;
+
+      .overview {
+        padding: 20px 0;
+      }
+    }
+  }
 }
 .item {
   @include field;
@@ -208,6 +229,7 @@ export default {
   display: flex;
   padding: 25px 40px;
   flex: 1;
+  min-height: 400px;
 }
 
 .selection {

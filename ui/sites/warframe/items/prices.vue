@@ -70,11 +70,17 @@ export default {
     },
     detailed () {
       return this.$store.state.prices.detailed
+    },
+    selected () {
+      return this.$store.state.prices.selected
     }
   },
 
   watch: {
     detailed () {
+      setTimeout(() => this.onResize(), 1) // Wait for module to update first
+    },
+    selected () {
       this.onResize()
     }
   },
