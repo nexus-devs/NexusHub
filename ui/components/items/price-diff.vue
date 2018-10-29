@@ -4,7 +4,7 @@
       <indicator :diff="diff" :reverse="type.toLowerCase() === 'selling'"/>
       {{ Math.abs(diff) }}{{ unit }}
     </div>
-    <div class="tooltip">
+    <div v-if="current" class="tooltip">
       {{ base || 'median' }} {{ current }}{{ unit }}
     </div>
   </div>

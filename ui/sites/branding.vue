@@ -6,7 +6,7 @@
     </sidebar>
     <app-content>
       <ui-header>
-        <img src="/img/brand/nexus-stats-typeface-bw.svg" alt="NexusHub">
+        <img src="/img/brand/nexushub-typeface-bw.svg" alt="NexusHub">
         <h1>BRAND</h1>
         <p>
           NexusHub is an agile, reactive brand that is always in motion, like
@@ -22,68 +22,68 @@
           </p>
           <div class="row-margin">
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-color.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-color.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-color.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-bw.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexus-stats-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-b.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-b.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-b.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-b.png" download>.png</a>
               </div>
             </div>
           </div>
           <div class="row row-margin">
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-color.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-color.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-color.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-color.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-v-color.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-v-color.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-v-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-color.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-color.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-bw.svg" alt="Black/White NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-bw.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-bw.svg" alt="Black/White NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-v-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-v-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-v-bw.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-bw.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-b.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-b.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-b.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-b.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-b.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
-              <img src="/img/brand/nexus-stats-logo-typeface-v-b.svg" alt="Full Color NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-v-b.svg" alt="Full Color NexusHub Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexus-stats-logo-typeface-v-b.svg" download>.svg</a>
-                <a href="/img/brand/nexus-stats-logo-typeface-v-b.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-b.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-b.png" download>.png</a>
               </div>
             </div>
           </div>
@@ -98,37 +98,37 @@
             <div class="col-b color">
               <div class="primary-shade green">
                 <span/>
-                <span>#6ae974</span>
+                <span>#39e56f</span>
               </div>
               <div class="sub-shade green-shade">
-                <span>#58c761</span>
+                <span>#68d891</span>
               </div>
             </div>
             <div class="col-b color">
               <div class="primary-shade blue">
                 <span/>
-                <span>#3ad1d7</span>
+                <span>#15ced6</span>
               </div>
               <div class="sub-shade blue-shade">
-                <span>#38b6b9</span>
+                <span>#11acb2</span>
               </div>
             </div>
             <div class="col-b color">
               <div class="primary-shade grey">
                 <span/>
-                <span>#4e5862</span>
+                <span>#8b97a8</span>
               </div>
               <div class="sub-shade grey-shade">
-                <span>#414952</span>
+                <span>#2d323b</span>
               </div>
             </div>
             <div class="col-b color">
               <div class="primary-shade dark">
                 <span/>
-                <span>#20242a</span>
+                <span>#21232a</span>
               </div>
               <div class="sub-shade dark-shade">
-                <span>#181a20</span>
+                <span>#101115</span>
               </div>
             </div>
           </div>
@@ -221,14 +221,14 @@ header {
     padding: 50px 50px;
 
     img {
-      height: 48px;
+      height: 42px;
     }
   }
   .logo-alt {
     padding: 40px 30px;
 
     img {
-      height: 44px;
+      height: 40px;
     }
   }
   .color {
