@@ -22,12 +22,23 @@ class History extends Endpoint {
         description: '"PC, PS4 or XB1."'
       }
     ]
+    this.schema.request = {
+      url: '/warframe/v1/orders/history?item=Nikana%20Prime&component=Blade'
+    }
+    this.schema.response = [{
+      user: String,
+      offer: String,
+      item: String,
+      component: String,
+      price: Number,
+      createdAt: String
+    }]
   }
 
   async main (req, res) {
     const item = title(req.query.item)
     const component = title(req.query.component)
-    const source = title(req.query.source)
+    const source = req.query.source
     const platform = req.query.platform
     const result = await this.get(item, component, source, platform)
 
