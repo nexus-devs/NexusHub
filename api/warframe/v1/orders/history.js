@@ -1,7 +1,7 @@
 const Endpoint = cubic.nodes.warframe.core.Endpoint
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
-class Orders extends Endpoint {
+class History extends Endpoint {
   constructor (api, db, url) {
     super(api, db, url)
     this.schema.description = 'Returns all priced orders from the last 24h, including closed ones, for a specified item component.'
@@ -27,8 +27,15 @@ class Orders extends Endpoint {
   async main (req, res) {
     const item = title(req.query.item)
     const component = title(req.query.component)
-    const source = req.query.source
+    const source = title(req.query.source)
     const platform = req.query.platform
+    const result = await this.get(item, component, source, platform)
+
+    this.cache(result, 60 * 60)
+    res.send(result)
+  }
+
+  async get (item, component, source, platform) {
     const query = {
       item,
       component,
@@ -49,9 +56,10 @@ class Orders extends Endpoint {
       createdAt: 1
     }).toArray()
     const priced = orders.filter(o => o.price)
+    const result = priced.filter((o, i) => priced.findIndex(u => u.user === o.user) === i)
 
-    res.send(priced.filter((o, i) => priced.findIndex(u => u.user === o.user) === i))
+    return result
   }
 }
 
-module.exports = Orders
+module.exports = History
