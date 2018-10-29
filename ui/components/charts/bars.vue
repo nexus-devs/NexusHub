@@ -80,6 +80,7 @@ export default {
     // Update graph render view
     update () {
       const yPane = d3.extent(this.data, (y, x) => y).reverse()
+      yPane[1] = 0 // absolute scale instead of relative scale
 
       // Every value would be 100% if the min/max is both 0, so we fix that here
       if (yPane[0] === 0) {
