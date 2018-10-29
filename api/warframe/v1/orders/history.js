@@ -23,7 +23,7 @@ class History extends Endpoint {
       }
     ]
     this.schema.request = {
-      url: '/warframe/v1/orders/history?item=Nikana%20Prime&component=Blade'
+      url: '/warframe/v1/orders/history?item=Nikana%20Prime&component=Set'
     }
     this.schema.response = [{
       user: String,
