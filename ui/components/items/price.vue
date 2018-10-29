@@ -82,7 +82,9 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.current.median + prices.buying.current.median) / 2)
+        const s = prices.selling.current.median
+        const b = prices.buying.current.median
+        return Math.round((s + b) / (s && b ? 2 : 1))
       }
       return prices[this.offerType].current.median
     },
@@ -90,7 +92,9 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.previous.median + prices.buying.previous.median) / 2)
+        const s = prices.selling.previous.median
+        const b = prices.buying.previous.median
+        return Math.round((s + b) / (s && b ? 2 : 1))
       }
       return prices[this.offerType].previous.median
     },
