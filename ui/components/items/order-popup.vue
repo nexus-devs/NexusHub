@@ -32,12 +32,12 @@
             {{ order.source === 'Warframe Market' ? '' : 'Found your offer on NexusHub.' }}
           </span>
         </div>
-        <button v-if="order.source === 'Trade Chat'" @click="copy">
-          Copy to Clipboard
-        </button>
-        <a v-else :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" class="btn-outline">
+        <a v-if="order.source === 'Warframe Market'" target="_blank" class="btn-outline">
           Buy on warframe.market
         </a>
+        <button v-else :href="`https://warframe.market/items/${order.wfmName}`" @click="copy">
+          Copy to Clipboard
+        </button>
         <div :class="{ active: copied }" class="copy-confirm">
           Copied!
         </div>
