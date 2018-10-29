@@ -229,7 +229,7 @@ export default {
   display: flex;
   padding: 25px 40px;
   flex: 1;
-  min-height: 400px;
+  min-height: 300px;
 }
 
 .selection {
