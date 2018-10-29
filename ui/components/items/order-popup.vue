@@ -238,6 +238,15 @@ export default {
     text-transform: none;
     @include shadow-2;
   }
+
+  .btn-outline {
+    @include gradient-background-dg($color-accent, $color-accent-subtle)
+
+    &:after {
+      @include gradient-background-dg($color-accent, $color-accent-subtle)
+    }
+  }
+
   .copy-confirm {
     color: $color-primary-subtle;
     font-size: 0.9em;
