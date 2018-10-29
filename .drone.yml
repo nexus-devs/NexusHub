@@ -19,8 +19,7 @@ pipeline:
     commands:
       npm run sitemap
     when:
-      branch:
-        exclude: [ production, staging, greenkeeper/* ]
+      branch: development
 
   # Smoke tests
   lint:
