@@ -67,7 +67,7 @@ class Prices extends Endpoint {
 
     const data = await this.get(name, timerange, item, component, source, platform)
     this.store(name, data, item)
-    this.cache(data, 60 * 60)
+    // this.cache(data, 60 * 60)
     res.send(data)
   }
 

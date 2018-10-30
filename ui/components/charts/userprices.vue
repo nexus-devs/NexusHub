@@ -5,7 +5,7 @@
         <div class="axis"/>
         <div class="labels">
           <span v-for="label in axis.x" :key="label">
-            {{ label }}:00
+            {{ typeof label === 'number' ? `${label}:00` : 'now' }}
           </span>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default {
       const x = [start]
       x.push(hoursAgo(hour(15)))
       x.push(hoursAgo(hour(8)))
-      x.push(now)
+      x.push('now')
 
       return { x, y }
     }

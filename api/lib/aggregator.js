@@ -87,6 +87,7 @@ class Aggregator {
     const range = timerange[1] - timerange[0]
     const end = start.clone().subtract(range, scope + 's').startOf(scope)
     const timeCovered = await this.getTimeCovered(collection, query, start, end, scope)
+    if (scope === 'hour' && timeCovered[1] === range) timeCovered[1]-- // Always recalculate current hour
     const existing = timeCovered[1] > 0 ? await this.getExisting(collection, query, timeCovered, end, scope) : []
     const additional = {
       before: [],
@@ -187,11 +188,26 @@ class Aggregator {
         scope: 'hours',
         createdAt: { $lte: end.toDate() }
       })
-      // Remove last (current) hour, so we always force that one to update.
-      if (additional[additional.length - 1].scope === 'hours') {
-        additional.pop()
+      let currentHour
+      if (additional[additional.length - 1].scope === 'hour') {
+        currentHour = additional.pop()
       }
-      await this.db.collection(collection + 'Aggregation').insertMany(additional)
+
+      // Additional might be down to zero if only the last hour was new
+      if (additional.length) {
+        await this.db.collection(collection + 'Aggregation').insertMany(additional)
+      }
+
+      // Upsert current hour since it'll always get recalculated.
+      if (currentHour) {
+        await this.db.collection(collection + 'Aggregation').updateOne({
+          createdAt: currentHour.createdAt
+        }, {
+          $set: currentHour
+        }, {
+          upsert: true
+        })
+      }
     }
   }
 
@@ -319,7 +335,7 @@ class Aggregator {
       const val = schema[key]
 
       if (val === 'sum') {
-        day[key] = _.sumBy(hours.filter(h => h[key]), h => h[key])
+        day[key] = _.sumBy(hours, h => h[key])
       }
       else if (val === 'min') {
         const min = _.minBy(hours, h => h[key])

@@ -4,7 +4,7 @@
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3 class="title">Traders right now</h3>
       <tween-num :value="opm.active" :duration="1000" easing="easeInOutQuad" class="active-number"/>
-      <span class="offers-per-minute">Offers per minute</span>
+      <span class="offers-per-minute">Offers per 5 minutes</span>
     </template>
     <template slot="body">
       <bars :data="opm.intervals"/>
