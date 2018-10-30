@@ -70,6 +70,14 @@ export default {
     this.$store.commit('setItemPatchlogs', await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}&limit=0`))
   },
 
+  // Redirect to overview if this site has no content. (May happen when
+  // switching between items as they'll stay on their current sub page)
+  created () {
+    if (!this.item.patchlogs || (this.item.patchlogs && !this.item.patchlogs.length)) {
+      this.$router.replace(this.$route.fullPath.replace('/patchlogs', '/'))
+    }
+  },
+
   beforeMount () {
     Vue.use(VueAffix)
     Vue.use(VueObserveVisibility)

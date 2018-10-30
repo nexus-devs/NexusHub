@@ -37,13 +37,17 @@
           <!-- Filters -->
           <div class="filter">
             <div class="type">
-              <span :class="{ active: type === 'Selling' }" class="btn-subtle" @click="setType('Selling')">Sellers</span>
-              <span :class="{ active: type === 'Buying' }" class="btn-subtle" @click="setType('Buying')">Buyers</span>
+              <span :class="{ active: type === 'Selling' }" class="btn-subtle" @click="setType('Selling')">
+                Sellers <span>{{ count.selling }}</span>
+              </span>
+              <span :class="{ active: type === 'Buying' }" class="btn-subtle" @click="setType('Buying')">
+                Buyers  <span>{{ count.buying }}</span>
+              </span>
             </div>
             <div class="filter-tags">
               <div class="filter-tag-row">
                 <!-- Filters -->
-                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
+                <div v-for="filter in filters" v-if="listings.find(o => o[filter.path])" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
                   <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                   <span>{{ filter.name }}</span>
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
@@ -63,16 +67,16 @@
               <div class="col user">
                 User
               </div>
-              <div v-if="item.fusionLimit" class="col">
+              <div v-if="item.fusionLimit" class="col" @click="selectFilterTag(filters.find(f => f.name === 'Rank'))">
                 Rank
               </div>
-              <div class="col quantity">
+              <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
                 Quantity
               </div>
-              <div class="col price">
+              <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
                 Price
               </div>
-              <div class="col whitespace"/>
+              <div class="col interactive whitespace"/>
             </div>
             <transition-group>
               <order v-for="order in listings" :key="order._id" :order="order"/>
@@ -181,6 +185,12 @@ export default {
     listings () {
       return this.$store.state.orders.listings
     },
+    count () {
+      return {
+        buying: this.all.filter(o => o.offer === 'Buying').length,
+        selling: this.all.filter(o => o.offer === 'Selling').length
+      }
+    },
     realtime () {
       return Array(4).fill().map((e, i) => [].concat(this.all).sort((a, b) => {
         return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1
@@ -227,6 +237,14 @@ export default {
 
   beforeDestroy () {
     this.$cubic.unsubscribe(`/warframe/v1/orders?item=${this.item.name}`)
+  },
+
+  // Redirect to overview if this site has no content. (May happen when
+  // switching between items as they'll stay on their current sub page)
+  created () {
+    if (!this.item.tradable) {
+      this.$router.replace(this.$route.fullPath.replace('/prices', '/'))
+    }
   },
 
   methods: {
@@ -371,12 +389,24 @@ export default {
   width: 100%;
   border-bottom: 1px solid $color-subtle-dark;
 
-  span {
+  & > span {
+    display: inline-flex;
+    align-items: center;
+
     &:first-of-type {
       margin-right: 5px;
     }
     &:nth-of-type(2) {
       margin-right: 20px;
+    }
+
+    // Order count
+    span {
+      font-size: 0.85em;
+      margin-left: 10px;
+      padding: 2px 10px;
+      background: $color-subtle-dark;
+      border-radius: 9999px;
     }
   }
 }
@@ -493,6 +523,14 @@ export default {
   border-radius: 2px;
   background: $color-bg-darker;
 
+  .interactive {
+    padding: 0;
+    background: transparent;
+
+    &:before {
+      background: transparent;
+    }
+  }
   .item {
     margin-right: 95px;
   }

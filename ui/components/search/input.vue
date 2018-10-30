@@ -3,7 +3,7 @@
     <div class="field">
       <label>Search</label><br>
       <input ref="input" :placeholder="placeholder || 'Try: Soma Prime, Maim...'" :value="input.name || input" type="text"
-             @input="search" @keydown.tab.prevent="complete" @keyup.enter="query">
+             @input="search" @keydown.tab.prevent="complete" @keyup.enter="complete">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autocomplete.category }}</span>
       <slot/>
@@ -123,7 +123,7 @@ export default {
           name: '',
           category: ''
         }
-        this.$router.push(suggestion.webUrl)
+        this.query(suggestion.webUrl)
         this.suggestions = []
       }
       // Take first suggestion in list
@@ -133,7 +133,7 @@ export default {
           name: '',
           category: ''
         }
-        this.$router.push(this.suggestions[0].webUrl)
+        this.query(this.suggestions[0].webUrl)
         this.suggestions = []
       } else {
         this.$router.push(`/warframe/search?input=${this.input}`)
@@ -145,10 +145,22 @@ export default {
     },
 
     /**
-     * Visit link set by user input
+     * Get to new page. If we're on a item sub-page, we'll stay there when
+     * switching as well.
      */
-    query () {
-      this.complete()
+    query (url) {
+      let path
+      const route = this.$route.path
+      const item = this.$route.params.item
+
+      if (this.$route.fullPath.startsWith('/warframe/items/')) {
+        path = `${url}${route.split(item)[1]}`
+        path = path.endsWith('//') ? path.slice(0, -1) : path
+      } else {
+        path = url
+      }
+
+      this.$router.push(path)
     }
   }
 }

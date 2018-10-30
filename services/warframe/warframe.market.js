@@ -28,7 +28,7 @@ class WFM {
     await this.initItems()
     await this.updateOrders()
     setInterval(this.initItems, 1000 * 60)
-    setInterval(this.updateOrders, 1000 * 60 * 3)
+    setInterval(this.updateOrders, 1000 * 60 * 5)
   }
 
   /**

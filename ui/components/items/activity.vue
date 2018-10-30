@@ -44,6 +44,7 @@
 <script>
 import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
@@ -97,7 +98,7 @@ export default {
 
   watch: {
     async timerange (to, from) {
-      const item = this.$route.params.item ? this.$route.params.item.replace(/-/g, ' ') : null
+      const item = this.$route.params.item ? title(this.$route.params.item.replace(/-/g, ' ')) : null
       let url = '/warframe/v1/orders/activity'
       url += item ? `?item=${item}` : ''
       url += to !== 30 ? `${url.includes('?') ? '&' : '?'}timerange=${to}` : ''
@@ -109,7 +110,7 @@ export default {
   },
 
   async asyncData ({ route }) {
-    const item = route.params.item ? route.params.item.replace(/-/g, ' ') : null
+    const item = route.params.item ? title(route.params.item.replace(/-/g, ' ')) : null
     const data = await this.$cubic.get(`/warframe/v1/orders/activity${item ? `?item=${item}` : ''}`)
     this.$store.commit('setActivityData', data)
   },

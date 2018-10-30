@@ -91,6 +91,14 @@ export default {
     window.addEventListener('resize', this.onResize)
   },
 
+  // Redirect to overview if this site has no content. (May happen when
+  // switching between items as they'll stay on their current sub page)
+  created () {
+    if (!this.item.tradable) {
+      this.$router.replace(this.$route.fullPath.replace('/prices', '/'))
+    }
+  },
+
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
   },
