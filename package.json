@@ -20,7 +20,7 @@
     "cubic": "2.1.1",
     "cubic-api": "2.0.5",
     "cubic-auth": "2.0.2",
-    "cubic-client": "2.0.2",
+    "cubic-client": "2.0.3",
     "cubic-core": "2.0.3",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.2.1",
@@ -30,7 +30,7 @@
     "googleapis": "^34.0.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
-    "requestretry": "^3.0.1",
+    "requestretry": "^3.0.2",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.4.0",
     "vue-analytics": "^5.16.0",
@@ -39,14 +39,14 @@
     "vue-observe-visibility": "^0.4.3",
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
-    "warframe-items": "1.110.0",
+    "warframe-items": "1.111.0",
     "warframe-patchlogs": "1.58.0",
     "ws": "^6.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "eslint": "^5.7.0",
+    "eslint": "^5.8.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-vue": "^2.0.2",
     "eslint-plugin-import": "^2.14.0",
@@ -58,8 +58,8 @@
     "mocha": "^5.2.0",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.10.5",
-    "webpack": "^4.22.0"
+    "semantic-release": "^15.10.6",
+    "webpack": "^4.23.1"
   },
   "release": {
     "getLastRelease": "last-release-git"
