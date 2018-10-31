@@ -79,7 +79,7 @@
               <div class="col interactive whitespace"/>
             </div>
             <transition-group>
-              <order v-if="!isDuplicate(order)" v-for="order in listings" :key="order._id" :order="order"/>
+              <order v-for="order in listings" v-if="!isDuplicate(order)" :key="order._id" :order="order"/>
             </transition-group>
           </div>
           <div v-else>
