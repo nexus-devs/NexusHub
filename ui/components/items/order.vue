@@ -2,6 +2,7 @@
   <div class="order row" @click="select">
     <div class="image-wrapper">
       <img :src="component.imgUrl" :alt="component.name">
+      <img :src="component.imgUrl" :alt="component.name" class="blur">
     </div>
     <div class="item col">
       <span class="component">{{ component.name }}</span>
@@ -110,8 +111,17 @@ export default {
   border-right: 1px solid $color-subtle;
 
   img {
+    position: relative;
+    z-index: 1;
     max-height: 60%;
     border-radius: 60px;
+  }
+  .blur {
+    position: absolute;
+    z-index: 0;
+    height: 150px;
+    width: 150px;
+    filter: blur(40px);
   }
   @media (max-width: $breakpoint-s) {
     display: none;

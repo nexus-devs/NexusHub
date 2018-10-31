@@ -79,7 +79,7 @@
               <div class="col interactive whitespace"/>
             </div>
             <transition-group>
-              <order v-for="order in listings" :key="order._id" :order="order"/>
+              <order v-if="!isDuplicate(order)" v-for="order in listings" :key="order._id" :order="order"/>
             </transition-group>
           </div>
           <div v-else>
@@ -272,6 +272,9 @@ export default {
       }
       // Overwrite original to trigger DOM update
       this.$store.commit('setOrderFilters', filters)
+    },
+    isDuplicate (p) {
+      return this.listings.filter(o => o.user === p.user && o.item === p.item && o.component === p.component).length > 1
     }
   },
 
