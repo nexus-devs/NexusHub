@@ -10,7 +10,7 @@
           <div class="background"/>
         </div>
         <div class="search-components container">
-          <h1>Unifying Warframe's Marketplace.</h1>
+          <h1>Warframe's most comprehensive database.</h1>
           <div class="row">
             <search/>
             <timerange/>

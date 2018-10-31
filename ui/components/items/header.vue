@@ -48,7 +48,10 @@
       <div class="container">
         <router-link :to="itemUrl" exact class="interactive">Overview</router-link>
         <router-link v-if="item.tradable" :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
-        <router-link v-if="item.tradable" :to="`${itemUrl}/trading`">Trade</router-link>
+        <router-link v-if="item.tradable" :to="`${itemUrl}/trading`">
+          Trade
+          <span>{{ item.activeOrders }}</span>
+        </router-link>
         <router-link v-if="item.patchlogs && item.patchlogs.length" :to="`${itemUrl}/patchlogs`" class="interactive">Patchlogs</router-link>
       </div>
     </nav>
@@ -93,6 +96,10 @@ export default {
     if (title(store.state.items.item.name) !== item) {
       const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
       itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${itemData.name}`)
+
+      if (itemData.tradable) {
+        itemData.activeOrders = (await this.$cubic.get(`/warframe/v1/orders?item=${item}`)).length
+      }
       store.commit('setItem', itemData)
     }
   },
@@ -339,7 +346,8 @@ export default {
   @include shadow-1;
 
   a {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 17.5px 20px;
     margin-right: 5px;
     border-radius: 0px;
@@ -349,6 +357,13 @@ export default {
 
     &:before {
       border-radius: 0;
+    }
+    span {
+      padding: 4px 8px;
+      margin-left: 5px;
+      font-size: 0.9em;
+      background: $color-bg;
+      border-radius: 99px;
     }
   }
   .container {
