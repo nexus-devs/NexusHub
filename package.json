@@ -19,7 +19,7 @@
   "dependencies": {
     "cubic": "2.1.3",
     "cubic-api": "2.0.5",
-    "cubic-auth": "2.0.2",
+    "cubic-auth": "2.0.3",
     "cubic-client": "2.0.3",
     "cubic-core": "2.0.3",
     "cubic-defaults": "^1.0.7",
