@@ -350,7 +350,7 @@ export default {
     align-items: center;
     padding: 17.5px 20px;
     margin-right: 5px;
-    border-radius: 0px;
+    border-radius: 2px;
     text-transform: uppercase;
     font-size: 0.875em;
     letter-spacing: 0.5;

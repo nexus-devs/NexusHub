@@ -9,7 +9,6 @@
     "lint": "eslint . --ext .js,.vue",
     "test": "mocha --exit -s 60000 --timeout 60000 test/smoke/server.js test/smoke/main.js test/smoke/warframe.js",
     "scrape": "node build/warframe/index.js",
-    "release": "semantic-release pre && semantic-release post",
     "changelogs": "node build/changelogs/index.js",
     "toggle-webpack": "node build/webpack/toggle.js",
     "sitemap": "node build/sitemap.js"

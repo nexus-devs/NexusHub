@@ -21,7 +21,7 @@
       <div class="container">
         <section>
           <img src="/img/ui/info.svg" alt="Information about Discord" class="ico-h-24">
-          <span>Please note: Discord is the superior <s>siege engine</s> way to talk to us.</span>
+          <span>Please note: Discord is the superior <s>siege engine</s> method of communication.</span>
         </section>
       </div>
     </app-content>

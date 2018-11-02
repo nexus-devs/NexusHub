@@ -1,10 +1,15 @@
 pipeline:
+  install:
+    image: node
+    commands:
+      - npm install
+    when:
+      branch:
+        exclude: [ production, staging, greenkeeper/* ]
+
   build:
     image: node
     commands:
-      # Install node_modules
-      - npm install
-
       # Determine if webpack needs a rebuild.
       - git fetch origin
       - git checkout origin/staging config/webpack/build.json
@@ -12,7 +17,7 @@ pipeline:
       - npm run build -- staging
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/* ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   sitemap:
     image: node
@@ -21,6 +26,15 @@ pipeline:
     when:
       branch: development
 
+  # Rebuild for production up here so we can run tests afterwards.
+  prepare - production:
+    image: node
+    commands:
+      - rm ui/assets/robots.txt # Allow search engines to scrape
+      - npm run build # Rebuild webpack without staging config
+    when:
+      branch: rc/*
+
   # Smoke tests
   lint:
     image: node
@@ -28,7 +42,7 @@ pipeline:
       - npm run lint
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/* ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   test - development:
     image: node
@@ -36,7 +50,7 @@ pipeline:
       - npm test
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/* ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   test - production:
     image: node
@@ -47,7 +61,7 @@ pipeline:
         exclude: [ production, staging, greenkeeper/* ]
 
   # Add to staging branch
-  stage:
+  push - staging:
     image: node
     commands:
       - git config --global user.email "apps@nexus-stats.com"
@@ -60,10 +74,25 @@ pipeline:
       - mv ui/assets/.robots.txt ui/assets/robots.txt # Make search engines ignore the staging site
 
       # Push changes from above and from dev branch
-      - bash build/stage.sh
+      - bash build/git/push-staging.sh
     secrets: [ nexus_ci_token ]
     when:
       branch: development
+      event: [ push ]
+
+  # Push production preparations to release candidate
+  push - production:
+    image: node
+    commands:
+      - git config --global user.email "apps@nexus-stats.com"
+      - git config --global user.name "nexus-ci"
+      - git checkout $${DRONE_BRANCH}
+
+      # Push changes to production if last commit contains "release: "
+      - bash build/git/push-production.sh
+    secrets: [ nexus_ci_token ]
+    when:
+      branch: rc/*
       event: [ push ]
 
   # Build nexus-stats:staging image and push to dockerhub. Dockerhub will then
@@ -91,15 +120,13 @@ pipeline:
       branch: staging
       event: [ push ]
 
-  # Final release to production
-  # TODO: Rebuild webpack without staging flag, push to repo, then build
-  # nexus-stats:latest tag from that. Also add changelog and release generation.
-  release:
-    image: node
-    commands:
-      - git fetch --tags --quiet origin
-      - npm run release
-    secrets: [ gh_token ]
+  publish - production:
+    image: plugins/docker
+    dockerfile: docker/app/prod/Dockerfile.prod
+    context: docker/app/prod/
+    repo: nexusstats/nexus-stats
+    no_cache: true
+    secrets: [ docker_username, docker_password ]
     when:
       branch: production
       event: [ push ]
@@ -109,9 +136,9 @@ services:
     image: mongo
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/* ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]
   redis:
     image: redis
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/* ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]

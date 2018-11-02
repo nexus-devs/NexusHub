@@ -1,7 +1,7 @@
 #!/bin/sh
 # Commit builds from dev branch and go to staging
 git add -A
-git commit -m "Add staging builds"
+git commit -m "ci: Add staging builds"
 git checkout staging
 git checkout development -- /config/webpack/build.json
 
@@ -10,11 +10,11 @@ git checkout development -- /config/webpack/build.json
 if cat config/webpack/build.json | grep -q '\"enable\": true'; then
   echo '* New webpack builds found - Override staging.'
   git reset --hard development
-  git merge -m "Merge development with staging." -s ours origin/staging
+  git merge -m "ci: Merge development with staging." -s ours origin/staging
 else
   echo '* No new webpack builds - Just merge.'
   git merge -s recursive -X theirs development
 fi
 
-git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/nexus-stats' staging 2>/dev/null
+git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
 # ^ 2>/dev/null to suppress output which would contain the secret token
