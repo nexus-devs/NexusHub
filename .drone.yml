@@ -136,9 +136,9 @@ services:
     image: mongo
     when:
       branch:
-        exclude: [ production, staging, rc/*, greenkeeper/* ]
+        exclude: [ production, staging, greenkeeper/* ]
   redis:
     image: redis
     when:
       branch:
-        exclude: [ production, staging, rc/*, greenkeeper/* ]
+        exclude: [ production, staging, greenkeeper/* ]
