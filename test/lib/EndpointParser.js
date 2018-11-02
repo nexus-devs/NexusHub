@@ -21,6 +21,10 @@ const assert = (condition, key, expected) => {
  * Performs tests based on endpoint's schemas
  */
 class EndpointParser {
+  constructor () {
+    this.client = client
+  }
+
   async verifyEndpoint (endpoint) {
     const request = this.getRequest(endpoint)
 

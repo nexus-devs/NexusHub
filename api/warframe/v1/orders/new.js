@@ -23,9 +23,7 @@ class Order extends Endpoint {
         rank: 0,
         quantity: 1,
         message: 'Hello, I\'m Glen and I\'d like to buy Ammo Drum for 900p. I won\'t ban you, promise.',
-        source: 'Trade Chat',
-        online: true,
-        createdAt: new Date()
+        source: 'Trade Chat'
       }
     }
     this.schema.response = String
@@ -44,17 +42,17 @@ class Order extends Endpoint {
 
     // Item not found or price is ridiculous
     if (!stored) {
-      return res.send(`Rejected. (${request.item} not found)`)
+      return res.status(422).send(`Rejected. (${request.item} not found)`)
     }
     const component = stored.components.find(c => c.name === request.component)
     if (!component) {
-      return res.send(`Rejected. (${request.component} is not a component)`)
+      return res.status(422).send(`Rejected. (${request.component} is not a component)`)
     }
     const plat = component.prices[request.offer.toLowerCase()].current.median
     const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
 
     if (isRidiculous) {
-      return res.send('Rejected. (Ridiculous price)')
+      return res.status(422).send('Rejected. (Ridiculous price)')
     }
 
     // Process offer

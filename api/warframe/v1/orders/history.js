@@ -66,6 +66,7 @@ class History extends Endpoint {
       price: 1,
       createdAt: 1
     }).toArray()
+
     const priced = orders.filter(o => o.price)
     const result = priced.filter((o, i) => priced.findIndex(u => u.user === o.user) === i)
 
