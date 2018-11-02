@@ -13,24 +13,18 @@ before(async function () {
   await awaitCubic
 
   // Prime database with at least one test order
-  const Client = require('cubic-client')
-  let client = new Client({
-    user_key: 'test',
-    user_secret: 'test'
-  })
-  const endpoints = cubic.nodes.warframe.core.client.endpointController.endpoints
-  const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
-  await client.post(postOrder.route, postOrder.request.body)
-
-  // Load parser here so the API client has access to cubic's root credentials
   const parser = require('../lib/EndpointParser.js')
+  const endpoints = cubic.nodes.warframe.core.client.endpointController.endpoints
 
   describe('Warframe API endpoints', function () {
+    it('should prime database with test order', async function () {
+      const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
+      await parser.client.post(postOrder.route, postOrder.request.body)
+    })
     for (let endpoint of endpoints) {
       it(`should return the specified response for ${endpoint.method} ${endpoint.route}`, async function () {
         await parser.verifyEndpoint(endpoint)
       })
     }
-    client = null
   })
 })

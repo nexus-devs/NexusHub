@@ -54,7 +54,4 @@ describe('Server', function () {
     const client = new Client()
     await client.connecting()
   })
-  it('should store Warframe items before tests.', async function () {
-    await wfhooks.verifyItemList()
-  })
 })
