@@ -66,7 +66,7 @@ export default {
 }
 .offers-per-minute {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: -15px;
   font-size: 0.8em;
 }
