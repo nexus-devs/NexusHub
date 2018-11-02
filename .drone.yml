@@ -11,7 +11,7 @@ pipeline:
     image: node
     commands:
       # Determine if webpack needs a rebuild.
-      - git fetch origin
+      - git fetch origin staging
       - git checkout origin/staging config/webpack/build.json
       - npm run toggle-webpack
       - npm run build -- staging
@@ -86,6 +86,7 @@ pipeline:
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
+      - git fetch origin production
       - git checkout $${DRONE_BRANCH}
 
       # Push changes to production if last commit contains "release: "
