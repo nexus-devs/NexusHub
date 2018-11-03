@@ -6,10 +6,6 @@ const Cubic = require('cubic')
 // eslint-disable-next-line no-new
 new Cubic(config.cubic)
 
-// Don't throw on errors.
-process.on('unhandledRejection', console.error)
-process.on('uncaughtException', console.error)
-
 /**
  * Load cubic nodes separately so they can run in their own docker container or
  * launch them in a single controller in dev mode.
@@ -18,5 +14,9 @@ if (process.env.DOCKER && process.env.NODE_ENV === 'production') {
   docker()
 }
 else {
+  process.removeAllListeners('unhandledRejection')
+  process.removeAllListeners('uncaughtException')
+  process.on('unhandledRejection', console.error)
+  process.on('uncaughtException', console.error)
   regular()
 }
