@@ -17,9 +17,9 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "cubic": "2.1.3",
-    "cubic-api": "2.0.5",
+    "cubic-api": "2.0.6",
     "cubic-auth": "2.0.3",
-    "cubic-client": "2.0.3",
+    "cubic-client": "2.0.4",
     "cubic-core": "2.0.3",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.2.1",
