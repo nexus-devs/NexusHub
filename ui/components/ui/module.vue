@@ -144,7 +144,9 @@ export default {
 }
 
 .progress {
-  position: absolute;
+  // Set to important because the main progress bar overrides it back to fixed
+  // when compiling for production, due to some weird bug.
+  position: absolute !important;
   top: 0;
   border-radius: 2px;
 }
