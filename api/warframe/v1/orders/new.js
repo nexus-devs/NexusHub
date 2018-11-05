@@ -3,7 +3,6 @@ const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
 const Prices = require('../items/prices.js')
-const Detailed = require('./history.js')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
@@ -60,7 +59,6 @@ class Order extends Endpoint {
     this.publish(request)
     await this.db.collection('activeOrders').insertOne(request)
     await this.db.collection('orders').insertOne(request)
-    const opm = new Opm(this.api, this.db, `/warframe/v1/orders/opm?item=${item}`)
 
     // Create user if they don't already exist
     runParallel(async () => {
@@ -76,20 +74,11 @@ class Order extends Endpoint {
     // Update OPM for this item
     runParallel(async () => {
       const t0 = new Date()
+      const opm = new Opm(this.api, this.db, `/warframe/v1/orders/opm?item=${item}`)
       const opmData = await opm.filter(item)
-      console.log('opm-item: ', new Date() - t0)
+      console.log('opm: ', new Date() - t0)
       opm.publish(opmData)
       opm.cache(opmData, 60)
-    })
-
-    // Update OPM for all items
-    runParallel(async () => {
-      const t0 = new Date()
-      const opmAll = new Opm(this.api, this.db, `/warframe/v1/orders/opm`)
-      const opmDataAll = await opm.filter()
-      console.log('opm-all: ', new Date() - t0)
-      opmAll.publish(opmDataAll)
-      opmAll.cache(opmDataAll, 60)
     })
 
     // Update offer list
@@ -111,15 +100,6 @@ class Order extends Endpoint {
       console.log('prices: ', new Date() - t0)
       prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)
-    })
-
-    // Update detailed price data
-    runParallel(async () => {
-      const t0 = new Date()
-      const detailed = new Detailed(this.api, this.db, `/warframe/v1/orders/history?item=${item}&component=${component.name}`)
-      const history = await detailed.get(item, component.name)
-      console.log('detailed: ', new Date() - t0)
-      detailed.cache(history, 60 * 60)
     })
 
     await Promise.all(parallel)

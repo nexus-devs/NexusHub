@@ -13,15 +13,20 @@ class Hook {
       return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
     }
 
+    // Order listings
     await verify(db, 'activeOrders', {
       item: 1
     })
+
+    // Prices
     await verify(db, 'orders', {
       item: 1,
       component: 1,
       createdAt: 1,
       price: 1
     })
+
+    // OPM
     await verify(db, 'orders', {
       item: 1,
       createdAt: 1
@@ -29,14 +34,20 @@ class Hook {
     await verify(db, 'orders', {
       createdAt: 1
     })
+
+    // Aggregations
     await verify(db, 'ordersAggregation', {
       name: 1,
       createdAt: 1,
       scope: 1
     })
+
+    // Specific User
     await verify(db, 'items', {
       name: 1
     })
+
+    // Specific item
     await verify(db, 'users', {
       name: 1
     })

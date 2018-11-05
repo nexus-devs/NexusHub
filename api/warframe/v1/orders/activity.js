@@ -35,7 +35,7 @@ class Activity extends Endpoint {
     const timerange = req.query.timerange + 1
     const data = await this.get(item, timerange)
 
-    this.cache(data, 60 * 60 * 24)
+    this.cache(data, 60 * 60)
     res.send(data)
   }
 

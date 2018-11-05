@@ -37,9 +37,10 @@ module.exports = async function () {
     }
     await cubic.use(new Node(config[group][node]))
 
-    // Order listeners
+    // Warframe Services
     if (group === 'warframe' && node === 'core') {
       require('../../services/warframe/warframe.market.js')
+      require('../../services/warframe/opm.js')
     }
   }
 }

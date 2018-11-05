@@ -30,100 +30,81 @@ class Opm extends Endpoint {
   }
 
   async main (req, res) {
-    const item = req.query.item
+    const item = req.query.item ? title(req.query.item) : null
     const { active, intervals, sources } = await this.filter(item)
     res.send({ active, intervals, sources })
     this.cache({ active, intervals, sources }, 60)
   }
 
   async filter (item) {
-    const queryStart = new Date() - 1000 * 60 * 25
-    const query = item ? {
-      item: title(item),
-      createdAt: {
-        $gte: new Date(queryStart)
-      }
-    } : {
-      createdAt: {
-        $gte: new Date(queryStart)
-      }
+    const now = moment()
+    const queryStart = new Date(new Date() - 1000 * 60 * 25)
+    const query = {
+      ...{ createdAt: { $gte: queryStart } },
+      ...(item ? { item } : {})
     }
-    const orders = await this.db.collection('orders').find(query).toArray()
-    const { intervals, sources } = this.getIntervals(orders)
-    const mostTraded = item ? null : this.getMostTraded(orders)
-    const active = orders.reverse().findIndex(o => new Date(o.createdAt) < new Date() - 1000 * 60 * 5) + 1 || orders.length
-
-    return Object.assign({ active, intervals: intervals.reverse(), sources },
-      !item ? { mostTraded } : {})
-  }
-
-  /**
-   * Get intervals for bar chart
-   */
-  getIntervals (orders) {
-    const queryStart = new Date() - 1000 * 60 * 25
-    const queryEnd = new Date()
-    const queryTotal = queryEnd - queryStart
-    const intervals = []
-    const n = 25
-    let tradeChat = 0
-    let wfm = 0
-
-    for (let i = 2; i <= n; i++) {
-      const intervalStart = moment(queryEnd - (queryTotal / n) * i).endOf('minute').valueOf()
-      const intervalEnd = moment(queryEnd - (queryTotal / n) * (i - 1)).endOf('minute').valueOf()
-      let quantity = 0
-
-      for (let order of orders) {
-        if (order.createdAt < intervalEnd && order.createdAt > intervalStart) {
-          quantity++
-
-          if (i <= 5) {
-            if (order.source === 'Trade Chat') {
-              tradeChat++
-            } else {
-              wfm++
-            }
-          }
-        }
-      }
-      intervals.push(quantity)
+    const parallel = []
+    parallel.push(this.db.collection('orders').aggregate([
+      { $match: query },
+      { $group: {
+        _id: { $toDate: { $subtract: [
+          { $toLong: '$createdAt' },
+          { $mod: [{ $toLong: '$createdAt' }, 1000 * 60] }
+        ] } },
+        count: { $sum: 1 }
+      } }
+    ]).toArray())
+    parallel.push(this.db.collection('orders').aggregate([
+      { $match: query },
+      { $group: {
+        _id: '$source',
+        count: { $sum: 1 }
+      } }
+    ]).toArray())
+    if (!item) {
+      parallel.push(this.db.collection('orders').aggregate([
+        { $match: { createdAt: { $gte: new Date(new Date() - 1000 * 60 * 5) } } },
+        { $group: {
+          _id: '$item',
+          count: { $sum: 1 }
+        } },
+        { $sort: {
+          count: -1
+        } },
+        { $limit: 4 }
+      ]).toArray())
     }
+    await Promise.all(parallel)
 
-    // Get percentage for order sources
-    const sources = tradeChat || wfm ? {
-      tradeChat: tradeChat / (tradeChat + wfm),
-      wfm: wfm / (tradeChat + wfm)
+    const minutes = await parallel[0]
+    const distribution = await parallel[1]
+    const tc = distribution.find(e => e._id === 'Trade Chat')
+    const tradechat = tc ? tc.count : 0
+    const wfm = distribution.find(e => e._id === 'Warframe Market')
+    const wfmarket = wfm ? wfm.count : 0
+    const sources = wfmarket || tradechat ? {
+      tradeChat: tradechat / (tradechat + wfmarket),
+      wfm: wfmarket / (tradechat + wfmarket)
     } : {
       tradeChat: 0.5,
       wfm: 0.5
     }
+    const items = item ? null : await parallel[2]
+    const active = minutes.slice(0, 5).reduce((a, b) => a + b.count, 0)
+    const intervals = []
+    const mostTraded = []
 
-    return { intervals, sources }
-  }
-
-  /**
-   * Get most traded items if no item is specified
-   */
-  getMostTraded (orders) {
-    const items = []
-
-    for (let order of orders) {
-      const i = items.findIndex(o => o.item === order.item)
-
-      if (new Date(order.createdAt) > new Date() - 1000 * 60 * 5) {
-        if (i < 0) {
-          items.push({
-            item: order.item,
-            amount: 1
-          })
-        } else {
-          items[i].amount++
-        }
+    for (let i = 25; i; i--) {
+      const minute = minutes.find(m => now.diff(moment(m._id), 'minutes') === i)
+      intervals.push(minute ? minute.count : 0)
+    }
+    if (items) {
+      for (let item of items) {
+        mostTraded.push({ item: item._id, amount: item.count })
       }
     }
-    items.sort((a, b) => a.amount < b.amount ? 1 : -1)
-    return items.slice(0, 4)
+
+    return { active, sources, intervals, ...(mostTraded.length ? { mostTraded } : {}) }
   }
 }
 
