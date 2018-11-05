@@ -135,6 +135,7 @@ pipeline:
 services:
   mongodb:
     image: mongo
+    pull: true
     when:
       branch:
         exclude: [ production, staging, greenkeeper/* ]
