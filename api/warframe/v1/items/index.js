@@ -45,8 +45,8 @@ class List extends Endpoint {
           delete obj.previous.hours
           delete obj.previous.days
         }
-        clean(component.prices.buying)
-        clean(component.prices.selling)
+        if (component.prices && component.prices.buying) clean(component.prices.buying)
+        if (component.prices && component.prices.selling) clean(component.prices.selling)
       }
       result.push({
         uniqueName: item.uniqueName,
