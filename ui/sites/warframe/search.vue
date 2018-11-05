@@ -258,8 +258,12 @@ export default {
         const filters = state.activeFilters
         const results = [].concat(state.results)
         const resolve = (filter, result) => {
-          filter.path.split('.').forEach(key => { result = result[key] })
-          return result
+          try {
+            filter.path.split('.').forEach(key => { result = result[key] })
+            return result
+          } catch (err) {
+            return
+          }
         }
         const getSortingValue = result => {
           let ascending, res, missing

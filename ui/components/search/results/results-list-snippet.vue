@@ -33,10 +33,14 @@ export default {
       let result = this.result
       const keys = filter.path.split('.')
 
-      keys.forEach(key => {
-        result = result[key]
-      })
-      return result
+      try {
+        keys.forEach(key => {
+          result = result[key]
+        })
+        return result
+      } catch (err) {
+        return
+      }
     }
   }
 }
