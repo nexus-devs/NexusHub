@@ -86,6 +86,7 @@ export default {
           }, 200)
         })
       }, 500)
+
       return this
     },
     fail () {
