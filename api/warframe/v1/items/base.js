@@ -43,6 +43,18 @@ class Item extends Endpoint {
 
     if (item) {
       delete item._id
+
+      // Remove detailed price data to reduce traffic
+      for (const component of item.components) {
+        const clean = obj => {
+          delete obj.current.hours
+          delete obj.current.days
+          delete obj.previous.hours
+          delete obj.previous.days
+        }
+        if (component.prices && component.prices.buying) clean(component.prices.buying)
+        if (component.prices && component.prices.selling) clean(component.prices.selling)
+      }
       this.cache(item, 60)
       res.send(item)
     } else {

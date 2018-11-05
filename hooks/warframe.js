@@ -148,10 +148,17 @@ class Hook {
   addEconomyData (item, stored) {
     for (let component of item.components) {
       const economyData = {
-        median: null,
+        orders: 0,
         min: null,
         max: null,
-        orders: null
+        median: null
+      }
+      const fullData = {
+        ...economyData,
+        ...{
+          days: new Array(7).fill(economyData),
+          hours: []
+        }
       }
 
       // Skip if data is already present
@@ -163,8 +170,8 @@ class Hook {
       }
       component.prices = {}
       component.prices.selling = component.prices.buying = {
-        current: economyData,
-        previous: economyData
+        current: fullData,
+        previous: fullData
       }
     }
   }

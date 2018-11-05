@@ -37,6 +37,17 @@ class List extends Endpoint {
     let result = []
 
     items.forEach(item => {
+      // Remove detailed price data to reduce traffic
+      for (const component of item.components) {
+        const clean = obj => {
+          delete obj.current.hours
+          delete obj.current.days
+          delete obj.previous.hours
+          delete obj.previous.days
+        }
+        clean(component.prices.buying)
+        clean(component.prices.selling)
+      }
       result.push({
         uniqueName: item.uniqueName,
         name: item.name,

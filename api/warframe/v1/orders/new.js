@@ -62,31 +62,25 @@ class Order extends Endpoint {
 
     // Create user if they don't already exist
     runParallel(async () => {
-      const t0 = new Date()
       const user = new User(this.api, this.db, `/warframe/v1/users/${request.user}`)
       await user.addUser({
         name: request.user,
         online: true
       })
-      console.log('user: ', new Date() - t0)
     })
 
     // Update OPM for this item
     runParallel(async () => {
-      const t0 = new Date()
       const opm = new Opm(this.api, this.db, `/warframe/v1/orders/opm?item=${item}`)
       const opmData = await opm.filter(item)
-      console.log('opm: ', new Date() - t0)
       opm.publish(opmData)
       opm.cache(opmData, 60)
     })
 
     // Update offer list
     runParallel(async () => {
-      const t0 = new Date()
       const orders = new Orders(this.api, this.db, `/warframe/v1/orders?item=${item}`)
       const { result, discard } = await orders.filter(item)
-      console.log('orders: ', new Date() - t0)
       orders.publish(result)
       orders.cache(result, 60 * 3)
       orders.discard(discard)
@@ -94,10 +88,8 @@ class Order extends Endpoint {
 
     // Update prices
     runParallel(async () => {
-      const t0 = new Date()
       const prices = new Prices(this.api, this.db, `/warframe/v1/items/${item}/prices`)
-      const priceData = await prices.get(item, 7, stored)
-      console.log('prices: ', new Date() - t0)
+      const priceData = await prices.get(item, 7, stored, component.name)
       prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)
     })
