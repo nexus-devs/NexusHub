@@ -3,7 +3,7 @@
 git add -A
 git commit -m "ci: Add staging builds"
 git checkout staging
-git checkout development -- /config/webpack/build.json
+git checkout development -- config/webpack/build.json
 
 # If new builds were added - Remove all old ones and pop the stash. Otherwise,
 # just pop the stash.
@@ -13,6 +13,7 @@ if cat config/webpack/build.json | grep -q '\"enable\": true'; then
   git merge -m "ci: Merge development with staging." -s ours origin/staging
 else
   echo '* No new webpack builds - Just merge.'
+  git reset --hard HEAD # Reset webpack build.json
   git merge -s recursive -X theirs development
 fi
 
