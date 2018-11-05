@@ -161,7 +161,7 @@ export default {
     update () {
       const data = this.data.map(o => o.price)
       const yPane = d3.extent(data, (y, x) => y)
-      this.scaled.x.domain(d3.extent(this.data.map(d => Date.parse(d.createdAt)), y => y))
+      this.scaled.x.domain([new Date() - 1000 * 60 * 60 * 24, new Date().getTime()])
       this.scaled.y.domain(this.ceil ? [yPane[0], this.ceil] : yPane)
     },
 
