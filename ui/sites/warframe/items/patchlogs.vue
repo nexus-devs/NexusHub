@@ -15,14 +15,16 @@
           <div v-else class="no-data">
             No patchlogs found :(
           </div>
-          <affix v-if="item.patchlogs[patchlogs.current]" :offset="{ top: 150, bottom: 80 }" relative-element-selector="#patchlogs-container" class="timeline-wrapper">
-            <span>{{ moment(new Date(item.patchlogs[patchlogs.current].date)).fromNow() }}</span>
-            <div class="timeline">
-              <div :style="{ transform: [progress] }" class="timeline-slider"/>
-              <span :style="{ transform: [progress] }">{{ patchlogs.current }} / {{ item.patchlogs.length }}</span>
-            </div>
-            <span>{{ moment(new Date(item.patchlogs[item.patchlogs.length - 1].date)).fromNow() }}</span>
-          </affix>
+          <no-ssr>
+            <affix v-if="item.patchlogs[patchlogs.current]" :offset="{ top: 150, bottom: 80 }" relative-element-selector="#patchlogs-container" class="timeline-wrapper">
+              <span>{{ moment(new Date(item.patchlogs[patchlogs.current].date)).fromNow() }}</span>
+              <div class="timeline">
+                <div :style="{ transform: [progress] }" class="timeline-slider"/>
+                <span :style="{ transform: [progress] }">{{ patchlogs.current }} / {{ item.patchlogs.length }}</span>
+              </div>
+              <span>{{ moment(new Date(item.patchlogs[item.patchlogs.length - 1].date)).fromNow() }}</span>
+            </affix>
+          </no-ssr>
         </div>
       </section>
     </app-content>
@@ -42,6 +44,7 @@ import VueObserveVisibility from 'vue-observe-visibility'
 import VueAffix from 'vue-affix'
 import patchlog from 'src/components/items/patchlog.vue'
 import moment from 'moment'
+import noSsr from 'vue-no-ssr'
 
 export default {
   components: {
@@ -50,7 +53,8 @@ export default {
     sidebar,
     sidebarSearch,
     itemHeader,
-    patchlog
+    patchlog,
+    noSsr
   },
 
   computed: {
