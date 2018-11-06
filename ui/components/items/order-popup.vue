@@ -24,6 +24,13 @@
           {{ order.price ? `${order.price}p` : 'any offer' }}
           <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
         </span>
+        <br>
+        <span class="time">
+          {{ minutesAgo(order.createdAt) }}
+        </span>
+        <span v-if="order.message" class="message">
+          {{ order.message }}
+        </span>
         <div class="message">
           <span ref="message">
             <span>/w {{ order.user }}</span> Hi {{ user }},
@@ -53,6 +60,7 @@
 import popup from 'src/components/ui/popup.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 import priceDiff from 'src/components/items/price-diff.vue'
+import moment from 'moment'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
@@ -126,6 +134,9 @@ export default {
           this.copied = false
         }, 750)
       }, 75)
+    },
+    minutesAgo (date) {
+      return moment(date).fromNow()
     }
   }
 }
@@ -199,11 +210,16 @@ export default {
   margin-top: 15px;
   text-align: center;
 
+  span:last-of-type {
+    padding: 0 60px 20px;
+  }
   .price {
     display: inline-block;
-    padding: 0 60px 20px;
     color: white;
-    border-bottom: 1px solid $color-subtle-dark;
+  }
+  .time {
+    font-size: 0.9em;
+    color: $color-font-subtle;
   }
   .message {
     padding-top: 10px;

@@ -63,7 +63,12 @@ class Orders extends Endpoint {
     for (let order of orders) {
       if (order.source === 'Trade Chat') {
         const discarded = new Date() - discardAfter > order.createdAt
-        discarded ? discard.push(new ObjectId(order._id)) : result.push(order)
+        if (discarded) {
+          discard.push(new ObjectId(order._id))
+        } else {
+          const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
+          if (!exists) result.push(order)
+        }
       } else {
         if (!usercheck.includes(order.user)) usercheck.push(order.user)
       }
@@ -74,8 +79,9 @@ class Orders extends Endpoint {
 
     for (let order of orders) {
       if (order.source !== 'Trade Chat') {
+        const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
         const user = users.find(u => u.name === order.user)
-        if (user && user.online) result.push(order)
+        if (!exists && user && user.online) result.push(order)
       }
     }
 

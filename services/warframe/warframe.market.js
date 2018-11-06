@@ -43,6 +43,7 @@ class WFM {
     })
     this.ws.on('message', data => {
       data = JSON.parse(data)
+      console.log(data)
 
       if (data.type === '@WS/SUBSCRIPTIONS/MOST_RECENT/NEW_ORDER') {
         this.postOrder(data.payload.order)
