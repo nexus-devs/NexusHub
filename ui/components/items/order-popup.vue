@@ -28,7 +28,8 @@
         <span class="time">
           {{ minutesAgo(order.createdAt) }}
         </span>
-        <span v-if="order.message" class="message">
+        <br>
+        <span v-if="order.message" class="raw">
           {{ order.message }}
         </span>
         <div class="message">
@@ -211,15 +212,22 @@ export default {
   text-align: center;
 
   span:last-of-type {
-    padding: 0 60px 20px;
+    padding: 0 60px 10px;
   }
   .price {
     display: inline-block;
     color: white;
   }
   .time {
+    display: inline-block;
     font-size: 0.9em;
     color: $color-font-subtle;
+  }
+  .raw {
+    display: inline-block;
+    margin-top: 5px;
+    color: $color-font-subtle;
+    font-size: 0.9em;
   }
   .message {
     padding-top: 10px;

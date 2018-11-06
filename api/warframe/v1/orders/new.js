@@ -3,6 +3,7 @@ const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
 const Prices = require('../items/prices.js')
+const Cache = require(`${process.cwd()}/api/lib/cache.js`)
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
@@ -26,20 +27,25 @@ class Order extends Endpoint {
       }
     }
     this.schema.response = String
+    this.cache = new Cache()
   }
 
   async main (req, res) {
     const request = req.body
     const parallel = []
     const item = title(request.item)
-    const stored = await this.db.collection('items').findOne({ name: item })
     const _res = { send () {} }
     _res.status = () => res
     const runParallel = (fn) => {
       parallel.push(fn.bind(this)())
     }
 
-    // Item not found or price is ridiculous
+    // Filter order by criteria (No duplicates, no stupid price, etc)
+    if (this.cache.find(request)) {
+      return res.send('Rejected. (Duplicate post)')
+    }
+    this.cache.add(request)
+    const stored = await this.db.collection('items').findOne({ name: item })
     if (!stored) {
       return res.send(`Rejected. (${request.item} not found)`)
     }

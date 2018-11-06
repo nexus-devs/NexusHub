@@ -20,7 +20,7 @@
       </div>
     </template>
     <template slot="footer">
-      <router-link to="">
+      <router-link class="disabled" to="">
         Drop Locations
         <img src="/img/ui/arrow-right.svg" alt="View full patch notes" class="ico-20">
       </router-link>
