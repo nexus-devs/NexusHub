@@ -49,7 +49,7 @@
   font-size: 0.9em;
   border-radius: 2px;
   padding: 10px 15px;
-  
+
   &:before {
     border-radius: 0;
   }
@@ -83,4 +83,10 @@
   &:after {
     display: none;
   }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
 }

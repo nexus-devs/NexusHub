@@ -24,14 +24,14 @@
         </div>
         <div class="col"><!-- Dummy --></div>
       </div>
-      <div class="col-b">
+      <div class="col-b disabled">
         <label>Platform</label>
         <div v-for="d in platform" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
              type="button" @click="select('platform', d)">
           <span>{{ d.name }}</span>
         </div>
       </div>
-      <div class="col-b">
+      <div class="col-b disabled">
         <label>Data Source</label>
         <div v-for="d in source" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
              type="button" @click="select('source', d)">
