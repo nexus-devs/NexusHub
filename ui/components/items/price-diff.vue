@@ -50,7 +50,6 @@ export default {
 
 .value {
   color: $color-font-body;
-  @include ease(0.15s);
   padding: 10px;
   margin-bottom: -5px;
   margin-top: -5px;

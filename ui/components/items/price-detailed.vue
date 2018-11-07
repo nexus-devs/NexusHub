@@ -43,6 +43,7 @@
         <span class="num">
           {{ selected.price }}p
         </span>
+        <price-diff :current="current" :previous="selected.price" :type="selected.offer.toLowerCase()" unit="p" base="median"/>
       </div>
       <div v-else class="inactive">
         <div class="circle">
@@ -288,6 +289,9 @@ export default {
       display: inline-block;
       font-size: 1.3em;
       color: white;
+      margin-top: 15px;
+    }
+    .price-diff {
       margin-top: 15px;
     }
   }
