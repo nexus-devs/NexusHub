@@ -229,7 +229,6 @@ export default {
     top: -3px;
     left: -3px;
     white-space: nowrap;
-    @include ease(0.2s);
 
     .price {
       color: $color-primary-subtle;
@@ -243,9 +242,7 @@ export default {
       padding: 5px 15px;
       margin-left: 5px;
       font-size: 0.85em;
-      color: white;
-      transform: translateX(-5px);
-      @include ease(0.2s);
+      color: white
     }
     .img-wrapper {
       display: inline-block;
@@ -258,7 +255,7 @@ export default {
       border-radius: 32px;
       border: 2px solid $color-subtle;
       transform: scale(0.8);
-      @include ease(0.2s);
+      @include ease(0.15s);
       @include shadow-1;
 
       img {
@@ -278,9 +275,6 @@ export default {
       }
       .img-wrapper {
         transform: scale(1);
-      }
-      .data {
-        transform: translateX(0);
       }
     }
   }
