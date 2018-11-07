@@ -7,7 +7,6 @@ const Client = require('cubic-client')
 /**
  * Configuration
  */
-const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
 const redisUrl = 'redis://redis'
 const mongoUrl = 'mongodb://mongodb'
 const ci = process.env.DRONE
@@ -42,7 +41,6 @@ before(async function () {
   await cubic.use(new Auth(config.auth))
   await cubic.use(new Api(config.main.api))
   await cubic.use(new Core(config.main.core))
-  cubic.hook('warframe.core', wfhooks.verifyIndices)
   await cubic.use(new Core(config.warframe.core))
 })
 
