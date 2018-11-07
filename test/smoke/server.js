@@ -43,6 +43,7 @@ before(async function () {
   await cubic.use(new Api(config.main.api))
   await cubic.use(new Core(config.main.core))
   cubic.hook('warframe.core', wfhooks.verifyIndices)
+  cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
   await cubic.use(new Core(config.warframe.core))
 })
 
