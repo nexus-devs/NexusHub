@@ -1,10 +1,8 @@
 #!/bin/sh
-DRONE_BRANCH='rc/2.1.0-0'
 last_commit="$(git log --format=%B -n 1 HEAD)"
 release_pattern="release: "
 version_pattern="rc/"
 version="$(echo ${DRONE_BRANCH//$version_pattern/} | cut -f1 -d "-")"
-echo $version
 
 if [[ $last_commit =~ $release_pattern ]]; then
   echo "* Found release commit, pushing ${version} to staging.."
