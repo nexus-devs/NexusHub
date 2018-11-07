@@ -454,91 +454,93 @@ header {
 /**
  * Actual site content
  */
-.realtime {
-  display: inline-flex;
+ #app {
+   .realtime {
+     display: inline-flex;
 
-  @media (max-width: $breakpoint-s) {
-    flex-direction: column;
-  }
-}
-.most-traded {
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin-left: 20px;
-  margin-right: -15px;
-  margin-bottom: -15px;
+     @media (max-width: $breakpoint-s) {
+       flex-direction: column;
+     }
+   }
+   .most-traded {
+     position: relative;
+     overflow: hidden;
+     display: inline-flex;
+     flex-wrap: wrap;
+     margin-left: 20px;
+     margin-right: -15px;
+     margin-bottom: -15px;
 
-  .item {
-    padding: 0;
-    border-radius: 2px;
-    flex-basis: 33%;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    transition-duration: 0.5s !important;
+     .item {
+       padding: 0;
+       border-radius: 2px;
+       flex-basis: 33%;
+       margin-right: 15px;
+       margin-bottom: 15px;
+       transition-duration: 0.5s !important;
 
-    &:hover {
-      @include gradient-background-dg(#3c4451, #353d49);
-    }
-    &:before {
-      border-radius: 2px;
-    }
-    &:nth-of-type(n + 5) {
-      display: none;
-    }
-    /deep/ .header {
-      padding: 20px 20px 0;
-    }
-    /deep/ .body {
-      padding: 0 25px 5px;
-      margin-top: 20px;
+       &:hover {
+         @include gradient-background-dg(#3c4451, #353d49);
+       }
+       &:before {
+         border-radius: 2px;
+       }
+       &:nth-of-type(n + 5) {
+         display: none;
+       }
+       /deep/ .header {
+         padding: 20px 20px 0;
+       }
+       /deep/ .body {
+         padding: 0 25px 5px;
+         margin-top: 20px;
 
-      .highlight {
-        font-size: 1.3em;
-      }
-      .sub {
-        display: inline-block;
-        margin-top: 2px;
-        font-size: 0.85em;
-        color: $color-font-body;
-      }
-    }
-  }
-  @media (max-width: $breakpoint-s) {
-    margin-left: 0;
-    margin-top: 20px;
-  }
-}
+         .highlight {
+           font-size: 1.3em;
+         }
+         .sub {
+           display: inline-block;
+           margin-top: 2px;
+           font-size: 0.85em;
+           color: $color-font-body;
+         }
+       }
+     }
+     @media (max-width: $breakpoint-s) {
+       margin-left: 0;
+       margin-top: 20px;
+     }
+   }
 
-.overview {
-  margin: -20px;
+   .overview {
+     margin: -20px;
 
-  & > *[class*="col-b"] {
-    margin: 20px;
-  }
-}
+     & > *[class*="col-b"] {
+       margin: 20px;
+     }
+   }
 
-.activity-data {
-  @media (max-width: $breakpoint-m) {
-    flex-basis: 100%;
-    margin-left: 0;
-    padding-left: 0;
-  }
-}
+   .activity-data {
+     @media (max-width: $breakpoint-m) {
+       flex-basis: 100%;
+       margin-left: 0;
+       padding-left: 0;
+     }
+   }
 
-.patchlogs {
-  justify-content: flex-start;
+   .patchlogs {
+     justify-content: flex-start;
 
-  /deep/ .patchlog {
-    width: 33%;
+     /deep/ .patchlog {
+       width: 33%;
 
-    @media (max-width: $breakpoint-m) {
-      max-width: calc(50% - 20px);
-    }
-    @media (max-width: $breakpoint-s) {
-      max-width: none;
-    }
-  }
-}
+       @media (max-width: $breakpoint-m) {
+         max-width: calc(50% - 20px);
+       }
+       @media (max-width: $breakpoint-s) {
+         max-width: none;
+       }
+     }
+   }
+ }
 </style>
