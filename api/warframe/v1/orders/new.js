@@ -94,10 +94,31 @@ class Order extends Endpoint {
 
     // Update prices
     runParallel(async () => {
-      const prices = new Prices(this.api, this.db, `/warframe/v1/items/${item}/prices`)
+      const prices = new Prices(this.api, this.db, `/warframe/v1/items/${item}/prices?component=${component.name}`)
       const priceData = await prices.get(item, 7, stored, component.name)
       prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)
+
+      // Cache default prices for *all* items as well, so we can get them in a
+      // single request on the price page.
+      const full = {
+        item: stored.name,
+        components: []
+      }
+      for (const component of stored.components) {
+        const isNew = component.name === priceData.components[0].name
+
+        // Override new component, otherwise keep old stored data
+        if (isNew) {
+          full.components.push(priceData.components[0])
+        } else {
+          full.components.push({
+            name: component.name,
+            prices: component.prices
+          })
+        }
+      }
+      prices.cache(full, 60 * 60 * 24, null, `/warframe/v1/items/${item}/prices`)
     })
 
     await Promise.all(parallel)

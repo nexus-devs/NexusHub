@@ -23,7 +23,7 @@ class Prices extends Endpoint {
         description: '"Trade Chat" or "Warframe Market".'
       }, {
         name: 'platform',
-        description: '"PC, PS4 or XB1."'
+        description: 'PC, PS4 or XB1.'
       }
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
@@ -65,7 +65,7 @@ class Prices extends Endpoint {
     }
 
     const data = await this.get(name, timerange, item, component, source, platform)
-    this.store(name, data, item)
+    this.store(name, data)
     this.cache(data, 60 * 60)
     res.send(data)
   }
@@ -80,7 +80,7 @@ class Prices extends Endpoint {
     const aggregate = this.aggregate.bind(this)
     const get = async (component) => {
       const query = { name: `${name} ${component.name} Prices` }
-      const params = { item: name, component, stored: component }
+      const params = { item: name, component: component.name, stored: component }
       if (source) {
         query.name += ` ${source}`
         params.source = source
@@ -99,7 +99,7 @@ class Prices extends Endpoint {
     // performance improvement when you figure it out.
     if (componentName) {
       const component = item.components.find(c => c.name.toLowerCase() === componentName.toLowerCase())
-      if (component.tradable) {
+      if (component && component.tradable) {
         get(component)
       }
     } else {
@@ -110,7 +110,7 @@ class Prices extends Endpoint {
     }
     const current = await Promise.all(currentParallel)
     const previous = await Promise.all(previousParallel)
-    const data = this.parse(item, componentName, source, platform, current, previous, aggregator)
+    const data = this.parse(item, current, previous, aggregator)
 
     return data
   }
@@ -118,7 +118,7 @@ class Prices extends Endpoint {
   /**
    * Parse data into final response format.
    */
-  parse (item, componentName, source, platform, current, previous, aggregator) {
+  parse (item, current, previous, aggregator) {
     const res = {
       name: item.name,
       components: []
@@ -129,37 +129,22 @@ class Prices extends Endpoint {
       max: 'max',
       median: 'avg'
     }
-    for (const component of item.components) {
-      if (!component.tradable) continue
 
-      // Keep old price if we only calculated one component and this isn't the one.
-      if (componentName && component.name.toLowerCase() !== componentName.toLowerCase()) {
-        res.components.push({
-          name: component.name,
-          prices: component.prices
-        })
-      } else {
-        let query = `${item.name} ${component.name} Prices`
-        if (source) query += ` ${source}`
-        if (platform) query += ` ${platform}`
-        const targetCurrent = current.find(c => c.name === query)
-        const targetPrevious = previous.find(c => c.name === query)
-        const buying = {
-          current: aggregator.reduce(targetCurrent, 'buying', schema),
-          previous: aggregator.reduce(targetPrevious, 'buying', schema)
-        }
-        const selling = {
-          current: aggregator.reduce(targetCurrent, 'selling', schema),
-          previous: aggregator.reduce(targetPrevious, 'selling', schema)
-        }
-        res.components.push({
-          name: component.name,
-          prices: {
-            buying,
-            selling
-          }
-        })
+    for (const currentData of current) {
+      const previousData = previous.find(c => c.name === currentData.name)
+      const buying = {
+        current: aggregator.reduce(currentData, 'buying', schema),
+        previous: aggregator.reduce(previousData, 'buying', schema)
       }
+      const selling = {
+        current: aggregator.reduce(currentData, 'selling', schema),
+        previous: aggregator.reduce(previousData, 'selling', schema)
+      }
+      const name = currentData.name.replace(item.name + ' ', '')
+        .replace(' Prices', '')
+        .replace(' Trade Chat', '')
+        .replace(' Warframe Market', '')
+      res.components.push({ name, prices: { buying, selling } })
     }
     return res
   }
@@ -169,12 +154,18 @@ class Prices extends Endpoint {
    */
   async aggregate (start, end, params) {
     const median = this.getMedian(params.stored)
+    const query = {
+      item: params.item,
+      component: params.component
+    }
+    if (params.source) query.source = params.source
+    if (params.platform) query.platform = params.platform
     const result = await this.db.collection('orders').aggregate([
       { $match: {
         ...{
           createdAt: { $gte: start.toDate(), $lte: end.toDate() }
         },
-        ...params,
+        ...query,
         ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
       } },
       { $group: {
@@ -201,21 +192,17 @@ class Prices extends Endpoint {
   /**
    * Apply new data to item list
    */
-  async store (name, data, stored) {
-    for (const component of stored.components) {
-      const modifiedComponent = data.components.find(c => c.name === component.name)
-      if (modifiedComponent) {
-        component.prices = modifiedComponent.prices
-      }
+  async store (name, data) {
+    for (const component of data.components) {
+      await this.db.collection('items').update({
+        item: name,
+        'components.name': component.name
+      }, {
+        $set: {
+          'components.$.prices': component.prices
+        }
+      })
     }
-
-    await this.db.collection('items').update({
-      name
-    }, {
-      $set: {
-        components: stored.components
-      }
-    })
   }
 }
 

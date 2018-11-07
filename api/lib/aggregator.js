@@ -108,7 +108,6 @@ class Aggregator {
       parallel.push(this.getNonExisting(query, aggregateFn, params, scope, end, additional.after, i))
     }
     await Promise.all(parallel)
-
     return { existing, additional }
   }
 
