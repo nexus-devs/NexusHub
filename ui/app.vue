@@ -49,7 +49,7 @@ export default {
   },
   mounted () {
     Vue.use(VueAnalytics, {
-      id: 'UA-81233976-2',
+      id: 'UA-128905436-1',
       checkDuplicatedScript: true,
       router: this.$router
     })
