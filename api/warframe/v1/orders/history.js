@@ -42,7 +42,7 @@ class History extends Endpoint {
     const platform = req.query.platform
     const result = await this.get(item, component, source, platform)
 
-    this.cache(result, 60 * 60)
+    this.cache(result, 60)
     res.send(result)
   }
 
