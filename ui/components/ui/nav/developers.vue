@@ -6,7 +6,6 @@
       </router-link>
       <router-link to="/developers" class="sub">Developers</router-link>
       <router-link to="/developers/api">API Docs</router-link>
-      <router-link to="/developers/api">Contributing</router-link>
     </div>
     <div class="nav-r">
       <notifications/>

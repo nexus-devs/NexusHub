@@ -30,9 +30,6 @@
             integrate and maintain your idea on this site and serve it to millions of people,
             while <b>you</b> get the revenue in return.
           </p>
-          <router-link to="/developers/contributing" class="btn-outline">
-            Contributing Guides
-          </router-link>
           <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn-outline">
             Join us on Discord
           </a>
