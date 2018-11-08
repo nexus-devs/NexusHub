@@ -46,11 +46,11 @@
     "bundle.7.bf6fbee02445fc808e74.js",
     "bundle.8.95c9ef91e42a9b5ccccc.js",
     "bundle.9.3e369404ed3b616449a1.js",
-    "bundle.client.00c7fb3bf844fd25cced.js",
+    "bundle.client.412a7aa6fadfccd07094.js",
     "client.4fdefc3ec9d419b8e731.css"
   ],
   "initial": [
-    "bundle.client.00c7fb3bf844fd25cced.js"
+    "bundle.client.412a7aa6fadfccd07094.js"
   ],
   "async": [
     "bundle.0.0776a18f2fcddc7cf677.js",
