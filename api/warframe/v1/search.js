@@ -24,6 +24,10 @@ class Search extends Endpoint {
       name: 'threshold',
       default: 0.75,
       description: 'Minimum matching percentage for fuzzy search.'
+    },
+    {
+      name: 'tradable',
+      description: '(true/false) Whether returned items should contain at least one tradable component.'
     }]
     this.schema.request = { url: '/warframe/v1/search?query=nik' }
     this.schema.response = [{
@@ -45,6 +49,7 @@ class Search extends Endpoint {
     const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
     const limit = req.query.limit
     const threshold = 1 - req.query.threshold
+    const tradable = req.query.tradable
 
     // Validate Input
     if (query.length < 2) {
@@ -60,7 +65,7 @@ class Search extends Endpoint {
       })
     }
 
-    let result = await this.search(query, threshold, limit)
+    let result = await this.search(query, threshold, limit, tradable)
     this.cache(result, 60 * 60)
     res.send(result)
   }
@@ -69,8 +74,23 @@ class Search extends Endpoint {
    * Retrieves a list of all names first, fuzzy matches them and gets the full
    * objects afterwards.
    */
-  async search (query, threshold, limit) {
-    const data = await this.db.collection('items').find().project({ _id: 0, name: 1 }).toArray()
+  async search (query, threshold, limit, tradable) {
+    const stored = await this.db.collection('items').find().project({ _id: 0, name: 1, components: 1 }).toArray()
+    let data = []
+
+    // Apply filters to stored data
+    if (tradable !== undefined) {
+      for (const item of stored) {
+        if (!item.components) continue
+        if (item.components.find(c => c.tradable)) {
+          if (tradable) data.push(item)
+        } else {
+          if (!tradable) data.push(item)
+        }
+      }
+    } else {
+      data = stored
+    }
     const fuse = new Fuse(data, {
       shouldSort: true,
       threshold,
