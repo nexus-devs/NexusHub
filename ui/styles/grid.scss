@@ -109,6 +109,10 @@ section {
     flex-wrap: wrap;
   }
 
+  .row-margin {
+    margin: 0;
+  }
+
   .row-margin > *[class*="col-b"] {
     margin: 10px;
     flex-basis: calc(50% - 50px);

@@ -122,6 +122,9 @@ export default {
   & > *:first-of-type {
     margin-bottom: 20px;
   }
+  @media (max-width: $breakpoint-s) {
+    min-width: 0;
+  }
 }
 
 .module {

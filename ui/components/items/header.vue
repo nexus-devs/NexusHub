@@ -164,6 +164,12 @@ export default {
 @import '~src/styles/partials/importer';
 
 .item-header {
+  position: relative;
+  overflow: hidden;
+
+  // 20px because of the shade being hidden due to overflow hidden
+  padding-bottom: 20px;
+  margin-bottom: -20px;
   @include ease(0.15s);
 }
 

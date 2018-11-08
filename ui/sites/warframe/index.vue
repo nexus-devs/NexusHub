@@ -523,8 +523,6 @@ header {
    .activity-data {
      @media (max-width: $breakpoint-m) {
        flex-basis: 100%;
-       margin-left: 0;
-       padding-left: 0;
      }
    }
 
