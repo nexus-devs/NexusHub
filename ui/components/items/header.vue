@@ -164,6 +164,8 @@ export default {
 @import '~src/styles/partials/importer';
 
 .item-header {
+  position: relative;
+  overflow: hidden;
   @include ease(0.15s);
 }
 

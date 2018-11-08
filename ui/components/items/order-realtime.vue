@@ -68,56 +68,63 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.module {
-  flex-basis: 33%;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  @include ease(0.5s);
+#app {
+  .module {
+    flex-basis: 33%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    @include ease(0.5s);
 
-  &:before {
-    border-radius: 2px;
-  }
-  &:nth-of-type(n + 5) {
-    display: none;
-  }
-  &:nth-of-type(n + 5) {
-    @media (max-width: $breakpoint-m) {
+    &:before {
+      border-radius: 2px;
+    }
+    &:nth-of-type(n + 5) {
       display: none;
     }
-  }
-  /deep/ .header {
-    padding: 20px 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .order {
-      margin-left: 5px;
-    }
-    .user {
-      font-size: 0.9em !important;
-      text-transform: none;
-
+    &:nth-of-type(n + 5) {
       @media (max-width: $breakpoint-m) {
         display: none;
       }
     }
-  }
-  /deep/ .body {
-    padding: 0 25px 5px;
-    margin-top: 20px;
+    @media (max-width: $breakpoint-s) {
+      &:nth-of-type(2n) {
+        margin-right: 0;
+      }
+    }
+    /deep/ .header {
+      padding: 20px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    .highlight {
-      font-size: 1.3em;
+      .order {
+        margin-left: 5px;
+      }
+      .user {
+        font-size: 0.9em !important;
+        text-transform: none;
+
+        @media (max-width: $breakpoint-m) {
+          display: none;
+        }
+      }
     }
-    .sub {
-      display: inline-block;
-      margin-top: 2px;
-      font-size: 0.85em;
-      color: $color-font-body;
-    }
-    .price-diff {
-      font-size: 0.9em;
+    /deep/ .body {
+      padding: 0 25px 5px;
+      margin-top: 20px;
+
+      .highlight {
+        font-size: 1.3em;
+      }
+      .sub {
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 0.85em;
+        color: $color-font-body;
+      }
+      .price-diff {
+        font-size: 0.9em;
+      }
     }
   }
 }

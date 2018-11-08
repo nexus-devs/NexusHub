@@ -77,6 +77,10 @@ export default {
 
 .row {
   flex-wrap: nowrap;
+
+  @media (max-width: $breakpoint-s) {
+    flex-wrap: wrap;
+  }
 }
 
 .component {
