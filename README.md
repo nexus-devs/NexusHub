@@ -13,7 +13,7 @@ NexusHub is an online service which provides insights on game economics and othe
 
 <br>
 
-You can find the live version of this repo at [staging.nexushub.co](https://staging.nexushub.co)
+You can find the live version of the latest features from the development branch at [staging.nexushub.co](https://staging.nexushub.co)
 
 <br>
 
