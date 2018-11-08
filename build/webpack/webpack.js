@@ -69,7 +69,7 @@ async function build () {
   process.exit()
 }
 
-if (enabled) {
+if (enabled || !staging) {
   build()
 } else {
   console.log('* No webpack rebuild required.')
