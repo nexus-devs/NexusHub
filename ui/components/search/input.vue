@@ -41,7 +41,9 @@ export default {
     }
   },
   mounted () {
-    this.$refs.input.focus()
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      this.$refs.input.focus()
+    }
   },
 
   storeModule: {
