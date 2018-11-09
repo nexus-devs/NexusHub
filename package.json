@@ -39,7 +39,7 @@
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
     "warframe-items": "^1.112.0",
-    "warframe-patchlogs": "1.58.0",
+    "warframe-patchlogs": "1.59.0",
     "ws": "^6.1.0"
   },
   "devDependencies": {
