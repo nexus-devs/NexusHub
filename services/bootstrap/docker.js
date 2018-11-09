@@ -39,7 +39,6 @@ module.exports = async function () {
 
     // Warframe Services
     if (group === 'warframe' && node === 'core') {
-      require('../../services/warframe/warframe.market.js')
       require('../../services/warframe/opm.js')
     }
   }
