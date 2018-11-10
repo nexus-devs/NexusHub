@@ -184,9 +184,11 @@ class Prices extends Endpoint {
    * Get median from stored values
    */
   getMedian (component) {
-    const buying = component.prices.buying.current.median
-    const selling = component.prices.selling.current.median
-    return Math.round((selling + buying) / (selling && buying ? 2 : 1))
+    if (component.prices) {
+      const buying = component.prices.buying.current.median
+      const selling = component.prices.selling.current.median
+      return Math.round((selling + buying) / (selling && buying ? 2 : 1))
+    }
   }
 
   /**

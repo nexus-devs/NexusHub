@@ -14,9 +14,5 @@ if (process.env.DOCKER && process.env.NODE_ENV === 'production') {
   docker()
 }
 else {
-  process.removeAllListeners('unhandledRejection')
-  process.removeAllListeners('uncaughtException')
-  process.on('unhandledRejection', console.error)
-  process.on('uncaughtException', console.error)
   regular()
 }

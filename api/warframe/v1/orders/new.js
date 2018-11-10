@@ -106,7 +106,7 @@ class Order extends Endpoint {
         components: []
       }
       for (const component of stored.components) {
-        const isNew = component.name === priceData.components[0].name
+        const isNew = priceData.components[0] && component.name === priceData.components[0].name
 
         // Override new component, otherwise keep old stored data
         if (isNew) {
