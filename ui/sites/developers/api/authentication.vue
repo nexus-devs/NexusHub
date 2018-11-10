@@ -7,6 +7,9 @@
       <router-link to="/developers/api/clients">client packages</router-link>
       handle authentication automatically, so we strongly recommend using those if
       you can.
+      <br>
+      <br>
+      <b>All endpoints on this page refer to auth.nexushub.co</b>
     </p>
     <h2>Registration</h2>
     <p>
