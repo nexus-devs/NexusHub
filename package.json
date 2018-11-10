@@ -26,7 +26,7 @@
     "cubic-ui": "2.0.6",
     "d3": "^5.7.0",
     "fuse.js": "^3.3.0",
-    "googleapis": "^34.0.0",
+    "googleapis": "^35.0.0",
     "keyboardjs": "^2.4.1",
     "moment": "^2.22.2",
     "requestretry": "^3.0.2",
@@ -39,7 +39,7 @@
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
     "warframe-items": "^1.112.0",
-    "warframe-patchlogs": "1.60.0",
+    "warframe-patchlogs": "1.61.0",
     "ws": "^6.1.0"
   },
   "devDependencies": {
