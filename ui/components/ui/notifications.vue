@@ -162,7 +162,7 @@ export default {
   overflow-y: scroll;
   background: $color-bg-dark;
   min-height: 80px;
-  max-height: 250px;
+  max-height: calc(250px + 10vh);
 }
 
 .notification {
@@ -209,12 +209,13 @@ export default {
   position: absolute;
   z-index: 1;
   top: 7px;
-  right: 5px;
+  right: 7px;
   font-size: 0.85em;
   color: white;
-  height: 11px;
-  width: 11px;
+  height: 9px;
+  width: 9px;
   border-radius: 25px;
+  border: 2px solid $color-bg-dark;
   opacity: 0;
   transform: scale(0.75);
   pointer-events: none;
