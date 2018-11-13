@@ -47,7 +47,7 @@ class Aggregator {
     const additional = additionalDays.before.concat(additionalDays.after)
       .concat(additionalHours.before).concat(additionalHours.after)
 
-    await this.cleanup(additional, collection, timerange, start)
+    await this.cleanup(query, additional, collection, timerange, start)
 
     // Parse into more usable shape for users, rather than what we need for
     // the database.
@@ -179,13 +179,16 @@ class Aggregator {
   /**
    * Store new data and remove old hourly data.
    */
-  async cleanup (additional, collection, timerange, now) {
+  async cleanup (query, additional, collection, timerange, now) {
     const end = now.clone().subtract(timerange, 'days').startOf('day')
 
     if (additional.length) {
       this.db.collection(collection + 'Aggregation').remove({
-        scope: 'hours',
-        createdAt: { $lte: end.toDate() }
+        ...query,
+        ...{
+          scope: 'hours',
+          createdAt: { $lte: end.toDate() }
+        }
       })
       let currentHour
       if (additional[additional.length - 1].scope === 'hour') {
@@ -200,7 +203,11 @@ class Aggregator {
       // Upsert current hour since it'll always get recalculated.
       if (currentHour) {
         await this.db.collection(collection + 'Aggregation').updateOne({
-          createdAt: currentHour.createdAt
+          ...query,
+          ...{
+            scope: 'hours',
+            createdAt: currentHour.createdAt
+          }
         }, {
           $set: currentHour
         }, {
