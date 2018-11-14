@@ -1,3 +1,4 @@
+const fs = require('fs')
 const Api = require('cubic-api')
 const Core = require('cubic-core')
 const Auth = require('cubic-auth')
@@ -41,5 +42,43 @@ module.exports = async function () {
     if (group === 'warframe' && node === 'core') {
       require('../../services/warframe/opm.js')
     }
+  }
+
+  // Healthchecks
+  //
+  // APIs have a middleware added to check if **they** are responsive, without
+  // relying on the core node.
+  if (node === 'api') {
+    cubic.nodes[group][node].use('/healthcheck', (req, res) => {
+      res.send('ok')
+      return true
+    })
+  }
+
+  // Core nodes write their connection status to the API to a text file on
+  // close/open. This doesn't check if endpoints actually work, but that should
+  // be covered in unit tests.
+  if (node === 'core') {
+    const core = cubic.nodes[group][node]
+    const client = core.client.api
+    const write = up => {
+      fs.writeFile(`${process.cwd()}/.health`, up ? '1' : '0')
+    }
+    const listen = async () => {
+      await client.connecting()
+      client.connection.client.on('close', () => {
+        write(false)
+        setTimeout(() => listen(), 10)
+      })
+      client.connection.client.on('error', () => {
+        write(false)
+        setTimeout(() => listen(), 10)
+      })
+      client.connection.client.on('open', () => {
+        write(true)
+        setTimeout(() => listen(), 10)
+      })
+    }
+    listen()
   }
 }
