@@ -66,6 +66,7 @@ module.exports = async function () {
     }
     const listen = async () => {
       await client.connecting()
+      write(true) // If we got here, the initial connection already worked.
       client.connection.client.on('close', () => {
         write(false)
         setTimeout(() => listen(), 10)
@@ -76,7 +77,6 @@ module.exports = async function () {
       })
       client.connection.client.on('open', () => {
         write(true)
-        setTimeout(() => listen(), 10)
       })
     }
     listen()
