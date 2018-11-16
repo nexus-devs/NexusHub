@@ -23,10 +23,10 @@ module.exports = async function () {
 
   // Load single node
   if (group === 'auth') {
-    cubic.use(new Auth(config.auth))
+    await cubic.use(new Auth(config.auth))
   }
   else if (group === 'ui') {
-    cubic.use(new Ui(config.ui))
+    await cubic.use(new Ui(config.ui))
   }
   else {
     const Node = node === 'api' ? Api : Core
