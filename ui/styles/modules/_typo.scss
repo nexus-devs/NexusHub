@@ -8,6 +8,10 @@
   font-size: 1em;
   font-weight: 400;
   line-height: 1.4;
+
+  @media (max-width: $breakpoint-s) {
+    font-size: 0.99em;
+  }
 }
 
 span, input {

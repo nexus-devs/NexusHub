@@ -89,6 +89,9 @@ export default {
   span {
     display: block;
   }
+  @media (max-width: $breakpoint-s) {
+    padding: 25px 25px 0;
+  }
 }
 
 .body {
@@ -110,6 +113,10 @@ export default {
   }
   li, p, span {
     max-width: 650px;
+  }
+  @media (max-width: $breakpoint-s) {
+    padding: 0 25px;
+    margin: 15px 0 20px;
   }
 }
 

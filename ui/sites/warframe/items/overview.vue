@@ -146,6 +146,10 @@ export default {
 
       h3 {
         padding: 30px 35px 0;
+
+        @media (max-width: $breakpoint-s) {
+          padding: 25px 25px 0;
+        }
       }
       time {
         padding: 0 35px;

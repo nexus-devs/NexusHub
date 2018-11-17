@@ -231,6 +231,10 @@ export default {
   position: absolute;
   width: 100%;
   @include ease(0.3s);
+
+  @media (max-width: $breakpoint-s) {
+    margin: -10px;
+  }
 }
 
 .price-detailed {
