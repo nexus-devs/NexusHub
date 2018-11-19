@@ -1,0 +1,202 @@
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+.module[data-v-99bcc50a] {
+  position: relative;
+  overflow: hidden;
+  max-width: 650px;
+}
+.module[data-v-99bcc50a] .header {
+    position: relative;
+    z-index: 1;
+}
+.module[data-v-99bcc50a] .header h3 {
+      color: white !important;
+      font-size: 1em !important;
+      text-transform: none;
+      letter-spacing: normal;
+}
+.module[data-v-99bcc50a] .body {
+    overflow-y: auto;
+    max-height: 275px;
+}
+.module[data-v-99bcc50a] .body .image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.66;
+      z-index: 0;
+      width: 100%;
+      margin-bottom: 40px;
+      border-radius: 2px;
+}
+.module[data-v-99bcc50a] .body .image img {
+        width: 100%;
+}
+.module[data-v-99bcc50a] .body .image .shade {
+        position: absolute;
+        top: 1px;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(transparent, #3b424f);
+}
+.module[data-v-99bcc50a] .body h3, .module[data-v-99bcc50a] .body h4, .module[data-v-99bcc50a] .body p {
+      position: relative;
+      z-index: 1;
+}
+.module[data-v-99bcc50a] .body h4 {
+      font-size: 0.9em;
+}
+.module[data-v-99bcc50a] .body p {
+      word-wrap: break-word;
+      margin-left: 15px;
+      margin-bottom: 20px;
+}
+.module[data-v-99bcc50a] .footer {
+    position: relative;
+    z-index: 1;
+}
+
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+/**
+ * Color Codes
+ * Shapes
+*/
+/**
+ * Color Codes
+ * Fonts
+*/
+/**
+ * Acceleration Curves
+ */
+/**
+ * Interactive Items
+ */
+/**
+ * Shadows
+ */
+[data-v-7607d91a] .zoom-enter-active,[data-v-7607d91a] .fade-leave-active {
+  transition-timing-function: ease;
+  transition-duration: 0.4s;
+}
+[data-v-7607d91a] .zoom-enter,[data-v-7607d91a] .zoom-leave-to {
+  transform: translateY(7px);
+  transform-origin: top;
+  opacity: 0.75;
+}
+h2 + span[data-v-7607d91a] {
+  display: block;
+  margin-bottom: 20px;
+}
+[data-v-7607d91a] .patchlog {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.no-data[data-v-7607d91a] {
+  text-align: center;
+  color: white;
+}
+.timeline-wrapper[data-v-7607d91a], .patchlogs[data-v-7607d91a] {
+  display: inline-block;
+  vertical-align: top;
+}
+@media (max-width: 40em) {
+.patchlogs[data-v-7607d91a] {
+    display: block;
+}
+}
+.timeline-wrapper[data-v-7607d91a] {
+  width: 200px;
+  transform: translateY(100px);
+  transition-timing-function: ease;
+  transition-duration: 0.45s;
+}
+.timeline-wrapper span[data-v-7607d91a] {
+    margin-left: 80px;
+    font-size: 0.9em;
+}
+@media (max-width: 40em) {
+.timeline-wrapper[data-v-7607d91a] {
+      display: none;
+}
+}
+.timeline[data-v-7607d91a] {
+  position: relative;
+  padding: 10px 20px;
+  margin: 10px 80px;
+  margin-right: 0;
+  border-left: 1px solid rgba(120, 132, 144, 0.4);
+  height: 150px;
+  color: white;
+}
+.timeline .timeline-slider[data-v-7607d91a] {
+    position: absolute;
+    left: -3px;
+    height: 20%;
+    width: 5px;
+    border-radius: 2px;
+    background: #5d6675;
+    transition-timing-function: ease;
+    transition-duration: 0.1s;
+}
+.timeline span[data-v-7607d91a] {
+    display: inline-block;
+    margin-left: 0;
+    margin-top: 6px;
+    transition-timing-function: ease;
+    transition-duration: 0.1s;
+}
+
