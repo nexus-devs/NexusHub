@@ -8,7 +8,7 @@ class Hook {
    */
   async verifyIndices () {
     cubic.log.verbose('Core      | verifying warframe indices')
-    const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl)
+    const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl, { useNewUrlParser: true })
     const verify = async (db, col, index) => {
       return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
     }
@@ -59,7 +59,7 @@ class Hook {
    */
   async verifyItemList () {
     const url = cubic.config.warframe.core.mongoUrl
-    const mongo = await mongodb.connect(url)
+    const mongo = await mongodb.connect(url, { useNewUrlParser: true })
     const db = mongo.db(cubic.config.warframe.core.mongoDb)
     const items = new Items()
     const storedItems = await db.collection('items').find().toArray()

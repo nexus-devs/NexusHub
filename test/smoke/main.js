@@ -16,7 +16,7 @@ before(async function () {
   await awaitCubic
 
   // Generate test user with root perms, so endpoint tests can all pass
-  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl)
+  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl, { useNewUrlParser: true })
   const db = mongo.db('nexus-auth')
   await db.collection('users').updateOne({
     user_key: 'test'

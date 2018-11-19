@@ -30,7 +30,7 @@ module.exports = async function () {
   await cubic.use(new Core(config.warframe.core))
 
   // Generate service users (Remember this file only runs in dev environments)
-  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl)
+  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl, { useNewUrlParser: true })
   const db = mongo.db('nexus-auth')
   await db.collection('users').updateOne({
     user_key: 'nexus-warframe-bot'
