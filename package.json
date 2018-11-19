@@ -23,7 +23,7 @@
     "cubic-core": "2.0.3",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.2.1",
-    "cubic-ui": "2.0.6",
+    "cubic-ui": "2.0.7",
     "d3": "^5.7.0",
     "fuse.js": "^3.3.0",
     "googleapis": "^35.0.0",
