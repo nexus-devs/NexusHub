@@ -33,7 +33,7 @@ async function generate () {
   }
 
   // Generate warframe item pages
-  const mongo = (await mongodb.connect(cubic.config.warframe.core.mongoUrl), { useNewUrlParser: true })
+  const mongo = (await mongodb.connect(cubic.config.warframe.core.mongoUrl, { useNewUrlParser: true }))
     .db(cubic.config.warframe.core.mongoDb)
   const items = await mongo.collection('items').find().toArray()
   for (let item of items) {
