@@ -19,7 +19,7 @@
     "cubic": "2.1.3",
     "cubic-api": "2.2.3",
     "cubic-auth": "2.1.1",
-    "cubic-client": "2.1.1",
+    "cubic-client": "3.0.0",
     "cubic-core": "2.0.4",
     "cubic-defaults": "^1.0.7",
     "cubic-loader": "1.2.1",
