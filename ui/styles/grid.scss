@@ -61,13 +61,13 @@ section {
  */
 @mixin column($size) {
   flex-grow: $size;
-  flex-basis: #{$size + %};
+  flex-basis: percentage($size);
 }
 // .col-1, .col-2...
 @for $i from 0 through 4 {
   .col-#{$i},
   .col-b-#{$i} {
-    @include column(#{$i});
+    @include column($i);
   }
 }
 

@@ -1,8 +1,8 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class User extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Get the warframe profile of the specified user.'
     this.schema.url = '/warframe/v1/users/:name'
     this.schema.request = {

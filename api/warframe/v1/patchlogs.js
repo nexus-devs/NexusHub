@@ -1,10 +1,10 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const patchlogs = require('warframe-patchlogs')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Patchlogs extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Returns patchlogs for all or a single item. Due to the massive amount of data that these patchlogs contain, we require you to load them in "chunks", where the starting point is the `skip` parameter and the `limit` parameter specifies the number of logs.'
     this.schema.url = '/warframe/v1/patchlogs'
     this.schema.query = [{

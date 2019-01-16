@@ -1,11 +1,11 @@
-const Endpoint = cubic.nodes.main.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const { google } = require('googleapis')
 const analytics = google.analytics('v3')
 const options = require(`${process.cwd()}/config/ga/nexushub-ga-user.js`)
 
 class Index extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Provides number of monthly users as tracked by Google Analytics.'
     this.schema.response = Number
     this.schema.limit = {

@@ -7,8 +7,7 @@ module.exports = {
 
   // Output file which will be loaded by Vue (server & client side)
   output: {
-    path: `${cubic.config.ui.core.publicPath}/bundles`,
-    publicPath: '/bundles/',
+    path: `${cubic.config.ui.api.publicPath}/bundles`,
     filename: isProd ? 'bundle.[name].[contenthash].js' : 'dev-[name].bundle.js'
   },
 
@@ -27,7 +26,7 @@ module.exports = {
   resolve: {
     alias: Object.assign({
       src: cubic.config.ui.sourcePath,
-      public: `${cubic.config.ui.core.publicPath}/bundles`
+      public: cubic.config.ui.api.publicPath
     })
   },
 

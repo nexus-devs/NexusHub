@@ -1,9 +1,9 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const Fuse = require('fuse.js')
 
 class Search extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Find fuzzy matched items based on the given input string.'
     this.schema.limit = {
       maxInInterval: 60,

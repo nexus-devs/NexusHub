@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const moment = require('moment')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
@@ -6,8 +6,8 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
  * Orders per minute. This data is used for the 'active traders' chart.
  */
 class Opm extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = "Orders per minute. This data is used for the 'active traders' chart."
     this.schema.query = [
       {

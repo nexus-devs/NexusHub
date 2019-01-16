@@ -1,8 +1,8 @@
-const Endpoint = cubic.nodes.main.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class Index extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.url = '/'
     this.schema.description = 'Landing page for API server.'
     this.schema.response = String

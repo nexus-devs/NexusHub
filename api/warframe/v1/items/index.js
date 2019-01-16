@@ -1,11 +1,11 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 /**
  * Provide list of all items with their fundamental data.
  */
 class List extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Get a list of all items with their basic attributes.'
     this.schema.url = '/warframe/v1/items'
     this.schema.response = [{

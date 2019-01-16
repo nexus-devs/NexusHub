@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
@@ -7,8 +7,8 @@ const Cache = require(`${process.cwd()}/api/lib/cache.js`)
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Stores a new order to the database.'
     this.schema.method = 'POST'
     this.schema.scope = 'write_orders_warframe'
@@ -39,6 +39,11 @@ class Order extends Endpoint {
     const runParallel = (fn) => {
       parallel.push(fn.bind(this)())
     }
+    const options = {
+      ws: this.ws,
+      db: this.db,
+      cache: this.cc
+    }
 
     // Filter order by criteria (No duplicates, no stupid price, etc)
     if (this.cache.find(request)) {
@@ -68,7 +73,7 @@ class Order extends Endpoint {
 
     // Create user if they don't already exist
     runParallel(async () => {
-      const user = new User(this.api, this.db, `/warframe/v1/users/${request.user}`)
+      const user = new User({ ...options, ...{ url: `/warframe/v1/users/${request.user}` } })
       await user.addUser({
         name: request.user,
         online: true
@@ -77,7 +82,7 @@ class Order extends Endpoint {
 
     // Update OPM for this item
     runParallel(async () => {
-      const opm = new Opm(this.api, this.db, `/warframe/v1/orders/opm?item=${item}`)
+      const opm = new Opm({ ...options, ...{ url: `/warframe/v1/orders/opm?item=${item}` } })
       const opmData = await opm.filter(item)
       opm.publish(opmData)
       opm.cache(opmData, 60)
@@ -85,7 +90,7 @@ class Order extends Endpoint {
 
     // Update offer list
     runParallel(async () => {
-      const orders = new Orders(this.api, this.db, `/warframe/v1/orders?item=${item}`)
+      const orders = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
       const { result, discard } = await orders.filter(item)
       orders.publish(result)
       orders.cache(result, 60 * 3)
@@ -94,7 +99,7 @@ class Order extends Endpoint {
 
     // Update prices
     runParallel(async () => {
-      const prices = new Prices(this.api, this.db, `/warframe/v1/items/${item}/prices?component=${component.name}`)
+      const prices = new Prices({ ...options, ...{ url: `/warframe/v1/items/${item}/prices?component=${component.name}` } })
       const priceData = await prices.get(item, 7, stored, component.name)
       prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)

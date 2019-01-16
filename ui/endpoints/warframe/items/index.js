@@ -1,8 +1,8 @@
-const Endpoint = cubic.nodes.ui.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class Index extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.url = '/warframe/items/:item'
     this.schema.view = '/sites/warframe/items/overview.vue'
   }

@@ -1,5 +1,4 @@
 const mongodb = require('mongodb').MongoClient
-const Items = require('warframe-items')
 const _ = require('lodash')
 
 class Hook {
@@ -8,9 +7,10 @@ class Hook {
    */
   async verifyIndices () {
     cubic.log.verbose('Core      | verifying warframe indices')
-    const db = await mongodb.connect(cubic.config.warframe.core.mongoUrl, { useNewUrlParser: true })
+    const config = cubic.config.main.api
+    const db = await mongodb.connect(config.mongoUrl, { useNewUrlParser: true })
     const verify = async (db, col, index) => {
-      return db.db(cubic.config.warframe.core.mongoDb).collection(col).createIndex(index)
+      return db.db(config.mongoDb).collection(col).createIndex(index)
     }
 
     // Order listings
@@ -58,9 +58,11 @@ class Hook {
    * Add item list on startup
    */
   async verifyItemList () {
-    const url = cubic.config.warframe.core.mongoUrl
+    const Items = require('warframe-items')
+    const config = cubic.config.main.api
+    const url = config.mongoUrl
     const mongo = await mongodb.connect(url, { useNewUrlParser: true })
-    const db = mongo.db(cubic.config.warframe.core.mongoDb)
+    const db = mongo.db(config.mongoDb)
     const items = new Items()
     const storedItems = await db.collection('items').find().toArray()
     const parallel = []

@@ -1,9 +1,9 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class History extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Returns all priced orders from the last 24h, including closed ones, for a specified item component.'
     this.schema.query = [
       {

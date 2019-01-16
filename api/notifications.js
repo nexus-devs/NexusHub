@@ -1,8 +1,8 @@
-const Endpoint = cubic.nodes.main.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class Notification extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.method = 'POST'
     this.schema.scope = 'write_notifications_global'
     this.schema.description = 'Endpoint which pushes notifications to the web-client.'

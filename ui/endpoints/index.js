@@ -1,8 +1,8 @@
-const Endpoint = cubic.nodes.ui.core.Endpoint
+const Endpoint = cubic.nodes.auth.api.Endpoint
 
 class Index extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.url = '/'
   }
 

@@ -1,10 +1,10 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 const { ObjectId } = require('mongodb')
 
 class Order extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Removes outdated orders, updates online status of users from other platforms.'
     this.schema.method = 'GET'
     this.schema.scope = 'write_orders_warframe'

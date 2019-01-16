@@ -1,16 +1,14 @@
 const staging = process.argv.includes('staging')
 process.env.NODE_ENV = 'production'
 if (staging) process.env.NEXUS_STAGING = true
-const webpack = require('webpack')
 const rm = require('rimraf')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
 if (process.env.DRONE) {
-  config.api.disable = true
-  config.core.mongoUrl = 'mongodb://mongodb'
-  config.core.redisUrl = 'redis://redis'
-  config.webpack.skipBuild = true
+  config.api.mongoUrl = 'mongodb://mongodb'
+  config.api.redisUrl = 'redis://redis'
   config.client = {
+    disableSsr: true, // disables server-sided
     apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
     authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
   }
@@ -37,35 +35,36 @@ async function build () {
   /**
    * Load up Cubic to generate routes config file.
    */
-  const loader = require('cubic-loader')
-  loader({ logLevel: 'silent', skipAuthCheck: true })
+  const Cubic = require('cubic')
+  const cubic = new Cubic({ logLevel: 'silent' })
 
   /**
    * Load up UI node. No Auth needed, we only need to register the endpoints
    * as routes.
    */
+  const Api = require('cubic-api')
+  const Auth = require('cubic-auth')
   const Ui = require('cubic-ui')
+  const apiConfig = require('../../config/cubic/main.js').api
+  if (process.env.DRONE) apiConfig.mongoUrl = 'mongodb://mongodb'
+  if (process.env.DRONE) apiConfig.redisUrl = 'redis://redis'
+  const authConfig = process.env.DRONE ? {
+    api: {
+      mongoUrl: 'mongodb://mongodb',
+      redisUrl: 'redis://redis'
+    }
+  } : {}
+  await cubic.use(new Auth(authConfig))
+  await cubic.use(new Api(apiConfig))
   await cubic.use(new Ui(config))
 
   /**
    * Trigger endpoint mapping which will also create the custom routes.
    */
-  await cubic.nodes.ui.core.webpackServer.registerEndpoints()
-  const client = require(cubic.config.ui.webpack.clientConfig)
-  const server = require(cubic.config.ui.webpack.serverConfig)
+  await cubic.nodes.ui.api.webpackServer.registerEndpoints()
+  await cubic.nodes.ui.api.webpackServer.done
 
-  /**
-   * Actual webpack build process.
-   */
-  await new Promise((resolve, reject) => {
-    webpack([client, server], (err, stats) => {
-      if (err || stats.hasErrors()) {
-        return reject(err || stats.toJson().errors)
-      }
-      console.log(`> Webpack build successful (${new Date() - timer}ms)`)
-      resolve()
-    })
-  })
+  console.log(`> Webpack build successful (${new Date() - timer}ms)`)
   process.exit()
 }
 

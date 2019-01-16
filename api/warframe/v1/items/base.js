@@ -1,9 +1,9 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Item extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Get data for a specific item with all its default attributes.'
     this.schema.url = '/warframe/v1/items/:item'
     this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }

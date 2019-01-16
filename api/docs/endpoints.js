@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.main.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const path = require('path')
 const fs = require('fs')
 const endpoints = []
@@ -40,7 +40,7 @@ function getEndpointTree (filepath) {
 
     // Routes
     endpoint.name = path.basename(filepath).replace('.js', '')
-    let route = path.resolve(filepath).replace(path.resolve(cubic.config.main.core.endpointPath), '')
+    let route = path.resolve(filepath).replace(path.resolve(cubic.config.main.api.endpointPath), '')
       .replace(/\\/g, '/').replace('.js', '')
     endpoint.sourceUrl = `https://github.com/nexus-devs/nexus-stats/blob/development/api${route}.js`
     endpoint.route = endpoint.url ? endpoint.url : route
@@ -50,8 +50,8 @@ function getEndpointTree (filepath) {
 getEndpointTree(path.resolve(__dirname, '../'))
 
 class Endpoints extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Returns schema for all API endpoints.'
     this.schema.response = {}
   }

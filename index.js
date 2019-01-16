@@ -1,3 +1,4 @@
+Error.stackTraceLimit = Infinity
 const docker = require('./services/bootstrap/docker.js')
 const regular = require('./services/bootstrap/regular.js')
 const config = { cubic: require('./config/cubic/cubic') }

@@ -1,12 +1,7 @@
 const Cubic = require('cubic')
 const Api = require('cubic-api')
 const Auth = require('cubic-auth')
-const Core = require('cubic-core')
 const Client = require('cubic-client')
-
-/**
- * Configuration
- */
 const redisUrl = 'redis://redis'
 const mongoUrl = 'mongodb://mongodb'
 const ci = process.env.DRONE
@@ -23,14 +18,10 @@ config.cubic.logLevel = 'silent'
  * Use different database URLs for CI (because docker)
  */
 if (ci) {
-  config.auth.api = { redisUrl }
-  config.auth.core.redisUrl = redisUrl
-  config.auth.core.mongoUrl = mongoUrl
+  config.auth.api.redisUrl = redisUrl
+  config.auth.api.mongoUrl = mongoUrl
   config.main.api.redisUrl = redisUrl
-  config.main.core.redisUrl = redisUrl
-  config.main.core.mongoUrl = mongoUrl
-  config.warframe.core.redisUrl = redisUrl
-  config.warframe.core.mongoUrl = mongoUrl
+  config.main.api.mongoUrl = mongoUrl
 }
 
 /**
@@ -40,8 +31,6 @@ before(async function () {
   const cubic = new Cubic(config.cubic)
   await cubic.use(new Auth(config.auth))
   await cubic.use(new Api(config.main.api))
-  await cubic.use(new Core(config.main.core))
-  await cubic.use(new Core(config.warframe.core))
 })
 
 /**

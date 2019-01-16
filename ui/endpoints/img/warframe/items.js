@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.ui.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 
 /**
@@ -8,8 +8,8 @@ const request = require('requestretry').defaults({ fullResponse: false })
  * through our domain.
  */
 class Index extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.url = '/img/warframe/items/:item'
     this.schema.limit = {
       disable: true

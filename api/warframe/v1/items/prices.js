@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const Aggregator = require(`${process.cwd()}/api/lib/aggregator.js`)
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
@@ -6,8 +6,8 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
  * Provides detailed item statistics for specific item
  */
 class Prices extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Get item price statistics in a specified timerange. Also returns the previousParallel period as comparison to the given timerange.'
     this.schema.url = '/warframe/v1/items/:item/prices'
     this.schema.query = [

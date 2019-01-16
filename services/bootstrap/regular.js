@@ -1,10 +1,7 @@
 const Api = require('cubic-api')
-const Core = require('cubic-core')
-const Auth = require('cubic-auth')
-const Ui = require('cubic-ui')
+const Auth = require('../../../../cubic/cubic/packages/auth')
+const Ui = require('../../../../cubic/cubic/packages/ui')
 const wfhooks = require('../../hooks/warframe.js')
-const mongodb = require('mongodb').MongoClient
-const bcrypt = require('bcryptjs')
 const config = {
   auth: require('../../config/cubic/auth.js'),
   ui: require('../../config/cubic/ui.js'),
@@ -14,37 +11,17 @@ const config = {
 
 module.exports = async function () {
   // Auth server for verifying users
-  cubic.use(new Auth(config.auth))
+  await cubic.use(new Auth(config.auth))
 
   // View server for providing the web client
   cubic.use(new Ui(config.ui))
 
-  // Main API setup. Used for 'global' endpoints not specific to any game.
-  // Core nodes of other games will still connect to this API server though.
-  cubic.use(new Core(config.main.core))
-  cubic.use(new Api(config.main.api))
-
-  // Warframe Core node
-  cubic.hook('warframe.core', wfhooks.verifyIndices)
-  cubic.hook('warframe.core', wfhooks.verifyItemList.bind(wfhooks))
-  await cubic.use(new Core(config.warframe.core))
-
-  // Generate service users (Remember this file only runs in dev environments)
-  const mongo = await mongodb.connect(cubic.config.auth.core.mongoUrl, { useNewUrlParser: true })
-  const db = mongo.db('nexus-auth')
-  await db.collection('users').updateOne({
-    user_key: 'nexus-warframe-bot'
-  }, {
-    $set: {
-      user_id: 'nexus-warframe-bot',
-      user_key: 'nexus-warframe-bot',
-      user_secret: await bcrypt.hash('dev-only', 1),
-      last_ip: [],
-      scope: 'write_orders_warframe ignore_rate_limit'
-    }
-  }, {
-    upsert: true
-  })
+  // Main API setup. In development, this also covers all game-specific endpoints
+  // since they'd occupy the same port otherwise. However, in production, they're
+  // split into separate nodes for better scaling
+  cubic.hook('main.api', wfhooks.verifyIndices)
+  cubic.hook('main.api', wfhooks.verifyItemList.bind(wfhooks))
+  await cubic.use(new Api(config.main.api))
 
   // Load services
   require('../../services/warframe/tradechat.js')

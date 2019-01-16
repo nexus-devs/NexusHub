@@ -1,10 +1,10 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 const { ObjectId } = require('mongodb')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Orders extends Endpoint {
-  constructor (api, db, url) {
-    super(api, db, url)
+  constructor (options) {
+    super(options)
     this.schema.description = 'Returns all open orders for a specified item.'
     this.schema.url = '/warframe/v1/orders'
     this.schema.query = [
