@@ -1,40 +1,55 @@
 process.env.NODE_ENV = 'production'
 process.env.NEXUS_TARGET_NODE = 'ui-core'
 process.env.NEXUS_STAGING = process.argv.includes('staging')
-
 const fs = require('fs')
 const mongodb = require('mongodb').MongoClient
-const loader = require('cubic-loader')
-const Ui = require('cubic-ui')
-const Core = require('cubic-core')
+const config = require(`${process.cwd()}/config/cubic/ui.js`)
 const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
-const ui = require(`${process.cwd()}/config/cubic/ui.js`)
-const warframe = require(`${process.cwd()}/config/cubic/warframe.js`)
 if (process.env.DRONE) {
-  ui.api.disable = true
-  ui.core.mongoUrl = warframe.core.mongoUrl = 'mongodb://mongodb'
-  ui.core.redisUrl = warframe.core.redisUrl = 'redis://redis'
-  ui.webpack.skipBuild = true
+  config.api.mongoUrl = 'mongodb://mongodb'
+  config.api.redisUrl = 'redis://redis'
+  config.client = {
+    disableSsr: true
+  }
+  config.webpack.skipBuild = true
 }
 
 async function generate () {
   const sitemap = []
-  loader({ logLevel: 'silent', skipAuthCheck: true })
-  cubic.use(new Ui(ui))
-  cubic.use(new Core(warframe.core))
+  const Cubic = require('cubic')
+
+  // eslint-disable-next-line no-new
+  new Cubic({ logLevel: 'silent', skipAuthCheck: true })
+
+  // Load up UI node
+  const Api = require('cubic-api')
+  const Auth = require('cubic-auth')
+  const Ui = require('cubic-ui')
+  const apiConfig = require('../config/cubic/main.js').api
+  if (process.env.DRONE) apiConfig.mongoUrl = 'mongodb://mongodb'
+  if (process.env.DRONE) apiConfig.redisUrl = 'redis://redis'
+  const authConfig = process.env.DRONE ? {
+    api: {
+      mongoUrl: 'mongodb://mongodb',
+      redisUrl: 'redis://redis'
+    }
+  } : {}
+  await cubic.use(new Auth(authConfig))
+  await cubic.use(new Api(apiConfig))
+  await cubic.use(new Ui(config))
   await wfhooks.verifyItemList()
   console.log('* Verified item list!')
 
   // Generate static page sitemap
-  for (let endpoint of cubic.nodes.ui.core.client.endpointController.endpoints) {
+  for (let endpoint of cubic.nodes.ui.api.server.http.endpoints.endpoints) {
     if (!endpoint.route.includes('/:')) {
       sitemap.push(`https://nexushub.co${endpoint.route}`)
     }
   }
 
   // Generate warframe item pages
-  const mongo = (await mongodb.connect(cubic.config.warframe.core.mongoUrl, { useNewUrlParser: true }))
-    .db(cubic.config.warframe.core.mongoDb)
+  const mongo = (await mongodb.connect(cubic.config.main.api.mongoUrl, { useNewUrlParser: true }))
+    .db(cubic.config.main.api.mongoDb)
   const items = await mongo.collection('items').find().toArray()
   for (let item of items) {
     sitemap.push(`https://nexushub.co${item.webUrl}`)
@@ -44,9 +59,8 @@ async function generate () {
   }
 
   // Save to file
-  fs.writeFileSync(`${cubic.config.ui.core.publicPath}/sitemap.txt`, sitemap.join('\n'))
+  fs.writeFileSync(`${cubic.config.ui.api.publicPath}/sitemap.txt`, sitemap.join('\n'))
   console.log(`* Saved sitemap with ${sitemap.length} entries.`)
-  process.exit()
 }
 
-generate()
+generate().then(() => process.exit())
