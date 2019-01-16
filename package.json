@@ -24,7 +24,7 @@
     "cubic-ui": "^3.0.3",
     "d3": "^5.7.0",
     "fuse.js": "^3.3.0",
-    "googleapis": "^35.0.0",
+    "googleapis": "^36.0.0",
     "keyboardjs": "^2.5.1",
     "moment": "^2.22.2",
     "mongodb": "^3.1.10",

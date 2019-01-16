@@ -18,7 +18,7 @@ You can find the live version of the latest features from the development branch
 <br>
 
 ## API
-[Documentation](https://staging.nexushub.co/developers)<br>
+[Documentation](https://nexushub.co/developers)<br>
 [API client](https://github.com/nexus-devs/nexushub-client)
 
 <br>
