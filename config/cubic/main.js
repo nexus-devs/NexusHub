@@ -1,6 +1,6 @@
 const prod = process.env.NODE_ENV === 'production'
 const node = process.env.NEXUS_TARGET_NODE
-
+console.log(process.env.DOCKER && prod && node)
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && prod && node === 'main') {
   const fs = require('fs')
