@@ -16,7 +16,11 @@ if (process.env.DOCKER && prod && node === 'main') {
       mongoDb: 'nexus-main',
       endpointPath: `${process.cwd()}/api/`,
       endpointPathExclude: /(\/warframe|\/lib)/,
-      group: 'main'
+      group: 'main',
+      apiUrl: undefined,
+      authUrl: undefined,
+      userKey: undefined,
+      userSecret: undefined
     }
   }
   module.exports = config
