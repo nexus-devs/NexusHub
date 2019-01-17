@@ -19,10 +19,13 @@ module.exports = async function () {
   else if (node === 'ui') {
     await cubic.use(new Ui(config.ui))
   }
+  else if (node === 'main') {
+    await cubic.use(new Api(config.main))
+  }
   else if (node === 'warframe') {
     cubic.hook('warframe.api', wfhooks.verifyIndices)
     cubic.hook('warframe.api', wfhooks.verifyItemList.bind(wfhooks))
-    await cubic.use(new Api(config[node].api))
+    await cubic.use(new Api(config.warframe.api))
 
     // Warframe Services
     require('../../services/warframe/opm.js')
