@@ -20,8 +20,7 @@ module.exports = async function () {
     await cubic.use(new Ui(config.ui))
   }
   else if (node === 'main') {
-    const main = await cubic.use(new Api(config.main.api))
-    console.log(main)
+    await cubic.use(new Api(config.main.api))
   }
   else if (node === 'warframe') {
     cubic.hook('warframe.api', wfhooks.verifyIndices)
