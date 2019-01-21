@@ -14,9 +14,9 @@ if (process.env.DOCKER && prod && node === 'auth') {
       redisUrl,
       certPublic,
       mongoUrl,
-      mongoDb: 'nexus-auth',
-      skipInitialSetup: true
+      mongoDb: 'nexus-auth'
     },
+    skipInitialSetup: true,
     certPrivate
   }
   module.exports = config
