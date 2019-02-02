@@ -7,7 +7,7 @@
     "start": "node .",
     "build": "node build/webpack/webpack.js",
     "lint": "eslint . --ext .js,.vue",
-    "test": "mocha --exit -s 60000 --timeout 60000 test/smoke/server.js test/smoke/endpoints.js",
+    "test": "mocha --exit -s 120000 --timeout 120000 test/smoke/server.js test/smoke/endpoints.js",
     "scrape": "node build/warframe/index.js",
     "changelogs": "node build/changelogs/index.js",
     "toggle-webpack": "node build/webpack/toggle.js",
@@ -18,7 +18,7 @@
   "dependencies": {
     "cubic": "3.0.1",
     "cubic-api": "3.0.1",
-    "cubic-auth": "3.1.0",
+    "cubic-auth": "^3.1.3",
     "cubic-client": "3.0.0",
     "cubic-defaults": "^2.0.1",
     "cubic-ui": "^3.0.3",
