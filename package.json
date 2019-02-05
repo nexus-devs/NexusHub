@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build": "node build/webpack/webpack.js",
+    "build": "node build/webpack/build.js",
     "lint": "eslint . --ext .js,.vue",
     "test": "mocha --exit -s 120000 --timeout 120000 test/smoke/server.js test/smoke/endpoints.js",
     "scrape": "node build/warframe/index.js",
@@ -57,7 +57,7 @@
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.3",
     "semantic-release": "^15.13.3",
-    "webpack": "^4.29.0"
+    "webpack": "^4.29.1"
   },
   "release": {
     "getLastRelease": "last-release-git"

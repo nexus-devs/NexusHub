@@ -2,17 +2,19 @@ const staging = process.argv.includes('staging')
 process.env.NODE_ENV = 'production'
 if (staging) process.env.NEXUS_STAGING = true
 const rm = require('rimraf')
+const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
 if (process.env.DRONE) {
   config.api.mongoUrl = 'mongodb://mongodb'
   config.api.redisUrl = 'redis://redis'
   config.client = {
-    disableSsr: true, // disables server-sided
     apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
     authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
   }
 }
+config.webpack.skipBuild = true
+config.client = { disableSsr: true }
 
 /**
  * Bundle webpack for production. This will imitate a cubic-ui node to auto-
@@ -42,33 +44,32 @@ async function build () {
    * Load up UI node. No Auth needed, we only need to register the endpoints
    * as routes.
    */
-  const Api = require('cubic-api')
-  const Auth = require('cubic-auth')
-  const Ui = require('cubic-ui')
-  const apiConfig = require('../../config/cubic/main.js').api
-  if (process.env.DRONE) apiConfig.mongoUrl = 'mongodb://mongodb'
-  if (process.env.DRONE) apiConfig.redisUrl = 'redis://redis'
-  const authConfig = process.env.DRONE ? {
-    api: {
-      mongoUrl: 'mongodb://mongodb',
-      redisUrl: 'redis://redis'
-    }
-  } : {}
-  await cubic.use(new Auth(authConfig))
-  await cubic.use(new Api(apiConfig))
+  const Ui = require('../../../../cubic/cubic/packages/ui')
   await cubic.use(new Ui(config))
 
   /**
    * Trigger endpoint mapping which will also create the custom routes.
    */
   await cubic.nodes.ui.api.webpackServer.registerEndpoints()
-  await cubic.nodes.ui.api.webpackServer.done
+  const client = require(cubic.config.ui.webpack.clientConfig)
+  const server = require(cubic.config.ui.webpack.serverConfig)
 
-  console.log(`> Webpack build successful (${new Date() - timer}ms)`)
+  /**
+   * Actual webpack build process.
+   */
+  await new Promise((resolve, reject) => {
+    webpack([client, server], (err, stats) => {
+      if (err || stats.hasErrors()) {
+        return reject(err || stats.toJson().errors)
+      }
+      console.log(`> Webpack build successful (${new Date() - timer}ms)`)
+      resolve()
+    })
+  })
   process.exit()
 }
 
-if (enabled || !staging) {
+if (enabled) {
   build()
 } else {
   console.log('* No webpack rebuild required.')
