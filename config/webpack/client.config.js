@@ -15,7 +15,7 @@ module.exports = merge(baseConfig, {
   // Entry point which guides to everything webpack is supposed to bundle
   // Use app so hot-module-reload can overwrite entry for that specific part
   entry: {
-    client: `${process.cwd()}/node_modules/cubic-ui/vue/app-client.js`
+    client: path.resolve(`${process.cwd()}/node_modules/cubic-ui/vue/app-client.js`)
   },
 
   module: {
