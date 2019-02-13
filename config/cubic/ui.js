@@ -25,6 +25,7 @@ if (process.env.DOCKER && prod && node === 'ui') {
   }
   config.server = {
     apiUrl: 'ws://nexus_api:3003',
+    authUrl: 'ws://nexus_auth:3030',
     user_key: userKey,
     user_secret: userSecret
   }
