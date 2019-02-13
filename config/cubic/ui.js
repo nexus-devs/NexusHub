@@ -19,8 +19,7 @@ if (process.env.DOCKER && prod && node === 'ui') {
         interval: 5000,
         maxInInterval: 100
       },
-      publicPath: `${process.cwd()}/ui/assets`,
-      endpointPath: `${process.cwd()}/ui/endpoints`
+      publicPath: `${process.cwd()}/ui/assets`
     },
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
@@ -50,8 +49,7 @@ else {
         maxInInterval: 100
       },
       mongoDb: 'nexus-ui',
-      publicPath: `${process.cwd()}/ui/assets`,
-      endpointPath: `${process.cwd()}/ui/endpoints`
+      publicPath: `${process.cwd()}/ui/assets`
     },
     webpack: {
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
