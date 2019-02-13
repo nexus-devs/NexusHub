@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.auth.api.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class Index extends Endpoint {
   constructor (options) {
