@@ -48,8 +48,8 @@ async function generate () {
   }
 
   // Generate warframe item pages
-  const mongo = (await mongodb.connect(cubic.config.main.api.mongoUrl, { useNewUrlParser: true }))
-    .db(cubic.config.main.api.mongoDb)
+  const mongo = (await mongodb.connect(cubic.config.api.mongoUrl, { useNewUrlParser: true }))
+    .db(cubic.config.api.mongoDb)
   const items = await mongo.collection('items').find().toArray()
   for (let item of items) {
     sitemap.push(`https://nexushub.co${item.webUrl}`)

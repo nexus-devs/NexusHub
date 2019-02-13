@@ -95,7 +95,7 @@ class Order extends Endpoint {
    */
   async setStatus (users, online) {
     if (users.length) {
-      await this.db.collection('users').update({
+      await this.db.collection('users').updateMany({
         name: { $in: users }
       }, {
         $set: { online }

@@ -1,4 +1,4 @@
-const Endpoint = cubic.nodes.warframe.core.Endpoint
+const Endpoint = require('cubic-api/endpoint')
 
 class User extends Endpoint {
   constructor (api, db, url) {

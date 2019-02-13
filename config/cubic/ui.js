@@ -1,6 +1,7 @@
 const prod = process.env.NODE_ENV === 'production'
 const node = process.env.NEXUS_TARGET_NODE
 const staging = process.env.NEXUS_STAGING
+let config = { api: {} }
 
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && prod && node === 'ui') {
@@ -9,51 +10,46 @@ if (process.env.DOCKER && prod && node === 'ui') {
   const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
-  const config = {
+  config = {
     api: {
       redisUrl,
       certPublic,
-      mongoUrl,
-      mongoDb: 'nexus-ui',
-      limit: {
-        interval: 5000,
-        maxInInterval: 100
-      },
-      publicPath: `${process.cwd()}/ui/assets`
-    },
-    webpack: {
-      clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
-      serverConfig: `${process.cwd()}/config/webpack/server.config.js`
+      mongoUrl
     }
   }
-  if (prod) {
-    const userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
-    const userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
-    config.client = {
-      apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
-      authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws',
-      user_key: userKey,
-      user_secret: userSecret
-    }
-    config.webpack.skipBuild = true
+  const userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
+  const userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
+  config.client = {
+    apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
+    authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
   }
-  module.exports = config
+  config.server = {
+    apiUrl: 'ws://nexus_api:3003',
+    user_key: userKey,
+    user_secret: userSecret
+  }
+  config.webpack.skipBuild = true
 }
 
-// Normal environment should be fine with default config.
-else {
-  module.exports = {
-    api: {
+config = {
+  api: {
+    ...config.api,
+    ...{
       limit: {
         interval: 5000,
         maxInInterval: 100
       },
       mongoDb: 'nexus-ui',
       publicPath: `${process.cwd()}/ui/assets`
-    },
-    webpack: {
+    }
+  },
+  webpack: {
+    ...config.webpack,
+    ...{
       clientConfig: `${process.cwd()}/config/webpack/client.config.js`,
       serverConfig: `${process.cwd()}/config/webpack/server.config.js`
     }
   }
 }
+
+module.exports = config

@@ -1,15 +1,14 @@
-const Api = require('cubic-api')
-const Auth = require('cubic-auth')
-const Ui = require('cubic-ui')
-const wfhooks = require('../../hooks/warframe.js')
-const config = {
-  auth: require('../../config/cubic/auth.js'),
-  ui: require('../../config/cubic/ui.js'),
-  main: require('../../config/cubic/main.js'),
-  warframe: require('../../config/cubic/warframe.js')
-}
-
 module.exports = async function () {
+  const Api = require('cubic-api')
+  const Auth = require('cubic-auth')
+  const Ui = require('cubic-ui')
+  const wfhooks = require('../../hooks/warframe.js')
+  const config = {
+    auth: require('../../config/cubic/auth.js'),
+    ui: require('../../config/cubic/ui.js'),
+    api: require('../../config/cubic/api.js')
+  }
+
   // Auth server for verifying users
   await cubic.use(new Auth(config.auth))
 
@@ -19,9 +18,9 @@ module.exports = async function () {
   // Main API setup. In development, this also covers all game-specific endpoints
   // since they'd occupy the same port otherwise. However, in production, they're
   // split into separate nodes for better scaling
-  cubic.hook('main.api', wfhooks.verifyIndices)
-  cubic.hook('main.api', wfhooks.verifyItemList.bind(wfhooks))
-  await cubic.use(new Api(config.main.api))
+  cubic.hook(Api, wfhooks.verifyIndices)
+  cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
+  await cubic.use(new Api(config.api))
 
   // Load services
   require('../../services/warframe/tradechat.js')

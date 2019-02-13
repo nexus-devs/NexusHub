@@ -2,11 +2,8 @@
  * Dev-only service that listens to orders sent to the real API, just to have
  * some sample data when developing.
  */
-const prod = process.env.NODE_ENV === 'production'
-
 async function monitor () {
-  const endpoints = prod ? cubic.nodes.warframe.api.server.ws.endpoints
-    : cubic.nodes.main.api.server.ws.endpoints
+  const endpoints = cubic.nodes.api.server.ws.endpoints
   const db = (await endpoints.db).db(endpoints.config.mongoDb)
   const options = { db, cache: endpoints.cache, ws: endpoints.ws }
   const Order = require('../../api/warframe/v1/orders/new.js')

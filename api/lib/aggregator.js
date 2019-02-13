@@ -183,7 +183,7 @@ class Aggregator {
     const end = now.clone().subtract(timerange, 'days').startOf('day')
 
     if (additional.length) {
-      this.db.collection(collection + 'Aggregation').remove({
+      this.db.collection(collection + 'Aggregation').deleteMany({
         ...query,
         ...{
           scope: 'hours',

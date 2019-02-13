@@ -196,7 +196,7 @@ class Prices extends Endpoint {
    */
   async store (name, data) {
     for (const component of data.components) {
-      await this.db.collection('items').update({
+      await this.db.collection('items').updateOne({
         name,
         'components.name': component.name
       }, {

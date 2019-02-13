@@ -3,7 +3,7 @@ class Cubic {
     return new Promise(resolve => {
       const awaitInterval = setInterval(() => {
         try {
-          if (cubic.nodes[node].api) {
+          if ((node === 'api' && cubic.nodes.api) || cubic.nodes[node].api) {
             resolve()
             clearInterval(awaitInterval)
           }

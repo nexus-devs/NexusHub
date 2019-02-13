@@ -9,8 +9,7 @@ const config = {
   cubic: require(`${process.cwd()}/config/cubic/cubic`),
   auth: require(`${process.cwd()}/config/cubic/auth.js`),
   ui: require(`${process.cwd()}/config/cubic/ui.js`),
-  main: require(`${process.cwd()}/config/cubic/main.js`),
-  warframe: require(`${process.cwd()}/config/cubic/warframe.js`)
+  api: require(`${process.cwd()}/config/cubic/api.js`)
 }
 config.cubic.logLevel = 'silent'
 
@@ -20,8 +19,8 @@ config.cubic.logLevel = 'silent'
 if (ci) {
   config.auth.api.redisUrl = redisUrl
   config.auth.api.mongoUrl = mongoUrl
-  config.main.api.redisUrl = redisUrl
-  config.main.api.mongoUrl = mongoUrl
+  config.api.redisUrl = redisUrl
+  config.api.mongoUrl = mongoUrl
 }
 
 /**
@@ -30,7 +29,7 @@ if (ci) {
 before(async function () {
   const cubic = new Cubic(config.cubic)
   await cubic.use(new Auth(config.auth))
-  await cubic.use(new Api(config.main.api))
+  await cubic.use(new Api(config.api))
 })
 
 /**

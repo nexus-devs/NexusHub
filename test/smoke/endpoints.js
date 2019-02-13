@@ -4,7 +4,7 @@ const Cubic = require('../lib/cubic.js')
 const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
 
 before(async function () {
-  await Cubic.await('main')
+  await Cubic.await('api')
 
   // Generate test user with root perms, so endpoint tests can all pass
   const mongo = await mongodb.connect(cubic.config.auth.api.mongoUrl, { useNewUrlParser: true })
@@ -34,12 +34,12 @@ before(async function () {
     })
 
     it('should prime database with test order', async function () {
-      const endpoints = cubic.nodes.main.api.server.ws.endpoints.endpoints
+      const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
       const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
       await parser.client.post(postOrder.route, postOrder.request.body)
     })
 
-    for (const endpoint of cubic.nodes.main.api.server.ws.endpoints.endpoints) {
+    for (const endpoint of cubic.nodes.api.server.ws.endpoints.endpoints) {
       it(`should return the specified response for ${endpoint.method} ${endpoint.route}`, async function () {
         await parser.verifyEndpoint(endpoint)
       })

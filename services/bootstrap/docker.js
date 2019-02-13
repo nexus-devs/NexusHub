@@ -1,16 +1,14 @@
-const Api = require('cubic-api')
-const Auth = require('cubic-auth')
-const Ui = require('cubic-ui')
-const wfhooks = require('../../hooks/warframe.js')
-const config = {
-  auth: require('../../config/cubic/auth.js'),
-  ui: require('../../config/cubic/ui.js'),
-  main: require('../../config/cubic/main.js'),
-  warframe: require('../../config/cubic/warframe.js')
-}
-
 module.exports = async function () {
   const node = process.env.NEXUS_TARGET_NODE
+  const Api = require('cubic-api')
+  const Auth = require('cubic-auth')
+  const Ui = require('cubic-ui')
+  const wfhooks = require('../../hooks/warframe.js')
+  const config = {
+    auth: require('../../config/cubic/auth.js'),
+    ui: require('../../config/cubic/ui.js'),
+    api: require('../../config/cubic/api.js')
+  }
 
   // Load node depending on env var
   if (node === 'auth') {
@@ -19,17 +17,15 @@ module.exports = async function () {
   else if (node === 'ui') {
     await cubic.use(new Ui(config.ui))
   }
-  else if (node === 'main') {
-    await cubic.use(new Api(config.main.api))
+  else if (node === 'api') {
+    cubic.hook(Api, wfhooks.verifyIndices)
+    cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
+    await cubic.use(new Api(config.api))
   }
-  else if (node === 'warframe') {
-    cubic.hook('warframe.api', wfhooks.verifyIndices)
-    cubic.hook('warframe.api', wfhooks.verifyItemList.bind(wfhooks))
-    await cubic.use(new Api(config.warframe.api))
 
-    // Warframe Services
-    require('../../services/warframe/opm.js')
-  }
+  // Warframe Services
+  // TODO: Refactor into own docker container.
+  require('../../services/warframe/opm.js')
 
   // All nodes require a URL for internal healthchecks with docker, so we add
   // those here.
