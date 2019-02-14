@@ -6,6 +6,7 @@ let config = { api: {}, client: {}, server: {}, webpack: {} }
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && prod && node === 'ui') {
   const fs = require('fs')
+  const dns = require('dns-sync')
   const certPublic = fs.readFileSync(`/run/secrets/nexus-public-key`, 'utf-8')
   const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
@@ -23,8 +24,8 @@ if (process.env.DOCKER && prod && node === 'ui') {
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     },
     server: {
-      apiUrl: 'ws://nexus_api:3003/ws',
-      authUrl: 'ws://nexus_auth:3030/ws',
+      apiUrl: `ws://${dns.lookup('nexus_api').address}:3003/ws`,
+      authUrl: `ws://${dns.lookup('nexus_auth').address}:3030/ws`,
       user_key: userKey,
       user_secret: userSecret
     },
