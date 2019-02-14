@@ -21,11 +21,11 @@ module.exports = async function () {
     cubic.hook(Api, wfhooks.verifyIndices)
     cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
     await cubic.use(new Api(config.api))
-  }
 
-  // Warframe Services
-  // TODO: Refactor into own docker container.
-  require('../../services/warframe/opm.js')
+    // Warframe Services
+    // TODO: Refactor into own docker container.
+    require('../../services/warframe/opm.js')
+  }
 
   // All nodes require a URL for internal healthchecks with docker, so we add
   // those here.
