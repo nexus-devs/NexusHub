@@ -29,7 +29,8 @@ module.exports = async function () {
 
   // All nodes require a URL for internal healthchecks with docker, so we add
   // those here.
-  cubic.nodes[node].api.use('/healthcheck', (req, res) => {
+  const api = node === 'api' ? cubic.nodes.api : cubic.nodes[node].api
+  api.use('/healthcheck', (req, res) => {
     res.send('ok')
     return true
   })

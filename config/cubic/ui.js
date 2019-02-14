@@ -1,7 +1,7 @@
 const prod = process.env.NODE_ENV === 'production'
 const node = process.env.NEXUS_TARGET_NODE
 const staging = process.env.NEXUS_STAGING
-let config = { api: {} }
+let config = { api: {}, webpack: {} }
 
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && prod && node === 'ui') {
