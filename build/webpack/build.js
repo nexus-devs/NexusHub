@@ -5,7 +5,6 @@ const rm = require('rimraf')
 const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
-const chalk = require('chalk')
 const tree = require('files-tree')
 
 if (process.env.DRONE) {
@@ -55,26 +54,13 @@ async function build () {
   await cubic.nodes.ui.api.webpackServer.registerEndpoints()
   const client = require(cubic.config.ui.webpack.clientConfig)
   const server = require(cubic.config.ui.webpack.serverConfig)
-  const Progress = require('progress-bar-webpack-plugin')
-  const serverProgress = {
-    format: 'server [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-    clear: false
-  }
-  const clientProgress = {
-    format: serverProgress.format.replace('server', 'client'),
-    clear: false
-  }
-  server.plugins.push(new Progress(serverProgress))
-  client.plugins.push(new Progress(clientProgress))
 
   /**
    * Actual webpack build process.
    */
-  let errored = false
   await new Promise((resolve, reject) => {
     webpack([client, server], (err, stats) => {
       if (err) throw err
-      if (stats.hasErrors() || stats.hasWarnings()) errored = true
       console.log(stats.toString())
       resolve()
     })
@@ -86,8 +72,7 @@ async function build () {
    */
   console.log('* Compilation done. Resulting file tree:')
   console.log(tree.tree(client.output.path))
-  if (errored) process.exit(1)
-  else process.exit()
+  process.exit()
 }
 
 if (enabled) {

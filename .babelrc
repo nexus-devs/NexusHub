@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [ "env", {
+      "targets": {
+        "browsers": [">2%", "last 5 versions", "not ie <= 10"],
+        "modules": false
+      }
+    }]
+  ],
+  "plugins": [
+    "transform-runtime",
+    "syntax-dynamic-import",
+    "transform-object-rest-spread"
+  ],
+  "comments": false
+}
