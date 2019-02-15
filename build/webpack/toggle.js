@@ -23,7 +23,7 @@ async function toggle () {
 
     for (let file of commit.files) {
       if (file.includes('ui/') || file.includes('package.json') || file.includes('ui.js') ||
-          file.includes('webpack.js')) {
+          file.includes('build.js') || file.includes('toggle.js')) {
         changed = true
       }
     }
