@@ -2,11 +2,12 @@ const staging = process.argv.includes('staging')
 process.env.NODE_ENV = 'production'
 if (staging) process.env.NEXUS_STAGING = true
 const rm = require('rimraf')
-const { promisify } = require('util')
 const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
 const chalk = require('chalk')
+const tree = require('files-tree')
+
 if (process.env.DRONE) {
   config.api.mongoUrl = 'mongodb://mongodb'
   config.api.redisUrl = 'redis://redis'
@@ -69,9 +70,15 @@ async function build () {
   /**
    * Actual webpack build process.
    */
-  const build = webpack([client, server])
-  const compile = promisify(build.run).bind(build)
-  await compile()
+  await new Promise((resolve, reject) => {
+    webpack([client, server], (err, stats) => {
+      if (err) throw err
+      console.log(stats.toString())
+      resolve()
+    })
+  })
+  console.log('* Compilation done. Resulting file tree:')
+  console.log(tree.tree(client.output.path))
   process.exit()
 }
 
