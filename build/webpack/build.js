@@ -7,6 +7,8 @@ const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
 const chalk = require('chalk')
+const tree = require('files-tree')
+
 if (process.env.DRONE) {
   config.api.mongoUrl = 'mongodb://mongodb'
   config.api.redisUrl = 'redis://redis'
@@ -72,6 +74,8 @@ async function build () {
   const build = webpack([client, server])
   const compile = promisify(build.run).bind(build)
   await compile()
+  console.log('* Compilation done. Resulting file tree:')
+  console.log(tree.tree(client.output.path))
   process.exit()
 }
 
