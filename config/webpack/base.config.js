@@ -1,6 +1,7 @@
 const isProd = cubic.config.local.environment !== 'development'
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
+console.log(`${cubic.config.ui.api.publicPath}/bundles`)
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
@@ -10,7 +11,6 @@ module.exports = {
    */
   output: {
     path: `${cubic.config.ui.api.publicPath}/bundles`,
-    publicPath: '/',
     filename: isProd ? 'bundle.[name].[contenthash].js' : 'dev-[name].bundle.js'
   },
 

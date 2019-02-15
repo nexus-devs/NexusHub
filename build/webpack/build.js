@@ -6,7 +6,8 @@ const { promisify } = require('util')
 const webpack = require('webpack')
 const enabled = require(`${process.cwd()}/config/webpack/build.json`).enable
 const config = require(`${process.cwd()}/config/cubic/ui.js`)
-const chalk = require('chalk')
+const tree = require('files-tree')
+
 if (process.env.DRONE) {
   config.api.mongoUrl = 'mongodb://mongodb'
   config.api.redisUrl = 'redis://redis'
@@ -54,24 +55,27 @@ async function build () {
   await cubic.nodes.ui.api.webpackServer.registerEndpoints()
   const client = require(cubic.config.ui.webpack.clientConfig)
   const server = require(cubic.config.ui.webpack.serverConfig)
-  const Progress = require('progress-bar-webpack-plugin')
-  const serverProgress = {
-    format: 'server [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
-    clear: false
-  }
-  const clientProgress = {
-    format: serverProgress.format.replace('server', 'client'),
-    clear: false
-  }
-  server.plugins.push(new Progress(serverProgress))
-  client.plugins.push(new Progress(clientProgress))
 
   /**
    * Actual webpack build process.
-   */
   const build = webpack([client, server])
   const compile = promisify(build.run).bind(build)
   await compile()
+  */
+  await new Promise((resolve, reject) => {
+    const timer = new Date()
+    webpack([client, server], (err, stats) => {
+      console.log(stats.toString())
+      if (err || stats.hasErrors()) {
+        return reject(err || stats.toJson().errors)
+      }
+      cubic.log.monitor('Webpack build successful', true, `${new Date() - timer}ms`)
+      resolve()
+    })
+  })
+
+  console.log('* Compilation done. Resulting file tree:')
+  console.log(tree.tree(client.output.path))
   process.exit()
 }
 
