@@ -24,8 +24,8 @@ if (process.env.DOCKER && prod && node === 'ui') {
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     },
     server: {
-      apiUrl: `ws://${dns.lookup('nexus_api').address}:3003/ws`,
-      authUrl: `ws://${dns.lookup('nexus_auth').address}:3030/ws`,
+      apiUrl: `ws://${dns.lookup('nexus_api')}:3003/ws`,
+      authUrl: `ws://${dns.lookup('nexus_auth')}:3030/ws`,
       user_key: userKey,
       user_secret: userSecret
     },
