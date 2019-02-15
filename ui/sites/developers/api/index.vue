@@ -92,12 +92,12 @@
 
 <script>
 import Vue from 'vue'
-import navigation from 'src/components/ui/nav/developers.vue'
-import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import sidebarNav from 'src/components/developers/sidebar.vue'
 import VueHighlightJS from 'vue-highlightjs'
+import appContent from 'src/app-content.vue'
+import navigation from 'src/components/ui/nav/developers.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarNav from 'src/components/developers/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 const replacer = (key, value) => {
   // if we get a function, give us the code for that function

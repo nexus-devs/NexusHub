@@ -47,8 +47,8 @@
 <script>
 import Vue from 'vue'
 import VueObserveVisibility from 'vue-observe-visibility'
-import moment from 'moment'
 import module from 'src/components/ui/module.vue'
+import moment from 'moment'
 
 export default {
   components: {

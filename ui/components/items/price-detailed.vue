@@ -60,8 +60,8 @@
 
 
 <script>
-import priceDiff from 'src/components/items/price-diff.vue'
 import indicator from 'src/components/charts/indicator.vue'
+import priceDiff from 'src/components/items/price-diff.vue'
 import userPrices from 'src/components/charts/userprices.vue'
 
 export default {

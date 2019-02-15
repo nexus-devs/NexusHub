@@ -43,11 +43,11 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/general.vue'
 import appContent from 'src/app-content.vue'
+import navigation from 'src/components/ui/nav/warframe/general.vue'
+import resultsGroup from 'src/components/search/results/results-group.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import resultsGroup from 'src/components/search/results/results-group.vue'
 let ongoing = setTimeout(() => {})
 
 export default {

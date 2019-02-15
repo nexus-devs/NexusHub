@@ -74,18 +74,18 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/general.vue'
-import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import search from 'src/components/search/input.vue'
-import timerange from 'src/components/search/time.vue'
-import rank from 'src/components/search/rank.vue'
-import searchButton from 'src/components/search/modules/button.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import opm from 'src/components/items/opm-global.vue'
 import activity from 'src/components/items/activity.vue'
+import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
+import navigation from 'src/components/ui/nav/warframe/general.vue'
+import opm from 'src/components/items/opm-global.vue'
 import patchlog from 'src/components/items/patchlog.vue'
+import rank from 'src/components/search/rank.vue'
+import search from 'src/components/search/input.vue'
+import searchButton from 'src/components/search/modules/button.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import timerange from 'src/components/search/time.vue'
 
 export default {
   components: {

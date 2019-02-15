@@ -11,3 +11,4 @@ rules:
   vue/max-attributes-per-line: off
   vue/require-prop-types: off
   brace-style: off
+  sort-imports: error # Necessary to ensure consistent CSS cascading.

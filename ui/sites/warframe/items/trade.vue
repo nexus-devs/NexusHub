@@ -94,17 +94,17 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import activity from 'src/components/items/activity.vue'
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemHeader from 'src/components/items/header.vue'
-import opm from 'src/components/items/opm-item.vue'
 import component from 'src/components/items/component.vue'
+import itemHeader from 'src/components/items/header.vue'
+import navigation from 'src/components/ui/nav/warframe/items.vue'
+import opm from 'src/components/items/opm-item.vue'
 import order from 'src/components/items/order.vue'
 import orderPopup from 'src/components/items/order-popup.vue'
 import orderRealtime from 'src/components/items/order-realtime.vue'
-import activity from 'src/components/items/activity.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 let selectedComponent = 'Set'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 

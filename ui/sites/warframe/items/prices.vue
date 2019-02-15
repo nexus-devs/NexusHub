@@ -26,14 +26,14 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/warframe/items.vue'
 import appContent from 'src/app-content.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemHeader from 'src/components/items/header.vue'
 import filters from 'src/components/items/price-filters.vue'
+import itemHeader from 'src/components/items/header.vue'
+import navigation from 'src/components/ui/nav/warframe/items.vue'
 import price from 'src/components/items/price.vue'
 import priceDetailed from 'src/components/items/price-detailed.vue'
+import sidebar from 'src/components/ui/sidebar/sidebar.vue'
+import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {

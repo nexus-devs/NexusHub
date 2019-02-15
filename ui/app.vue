@@ -14,8 +14,8 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
-import status from 'src/components/ui/status.vue'
 import bottom from 'src/components/ui/footer.vue'
+import status from 'src/components/ui/status.vue'
 
 /**
  * Main application wrapper. Anything 'global' goes here.

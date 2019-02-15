@@ -35,16 +35,16 @@
 
 <script>
 import Vue from 'vue'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import VueAffix from 'vue-affix'
+import VueObserveVisibility from 'vue-observe-visibility'
 import appContent from 'src/app-content.vue'
+import itemHeader from 'src/components/items/header.vue'
+import moment from 'moment'
+import navigation from 'src/components/ui/nav/warframe/items.vue'
+import noSsr from 'vue-no-ssr'
+import patchlog from 'src/components/items/patchlog.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemHeader from 'src/components/items/header.vue'
-import VueObserveVisibility from 'vue-observe-visibility'
-import VueAffix from 'vue-affix'
-import patchlog from 'src/components/items/patchlog.vue'
-import moment from 'moment'
-import noSsr from 'vue-no-ssr'
 
 export default {
   components: {

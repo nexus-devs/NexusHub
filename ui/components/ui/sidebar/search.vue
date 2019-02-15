@@ -26,14 +26,14 @@
 
 
 <script>
-import wrapper from './modules/wrapper.vue'
-import tooltip from './modules/tooltip.vue'
-import panel from './modules/panel.vue'
 import back from './modules/back.vue'
-import search from 'src/components/search/input.vue'
-import timerange from 'src/components/search/time.vue'
+import panel from './modules/panel.vue'
 import rank from 'src/components/search/rank.vue'
+import search from 'src/components/search/input.vue'
 import searchbutton from 'src/components/search/modules/button.vue'
+import timerange from 'src/components/search/time.vue'
+import tooltip from './modules/tooltip.vue'
+import wrapper from './modules/wrapper.vue'
 
 // Client-side-only requirements
 let shortcut, listener

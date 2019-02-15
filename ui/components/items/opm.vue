@@ -31,8 +31,8 @@
 
 
 <script>
-import module from 'src/components/ui/module.vue'
 import bars from 'src/components/charts/bars.vue'
+import module from 'src/components/ui/module.vue'
 import tweenNum from 'vue-tween-number'
 
 export default {

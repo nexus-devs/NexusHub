@@ -42,8 +42,8 @@
 
 
 <script>
-import navigation from 'src/components/ui/nav/developers.vue'
 import appContent from 'src/app-content.vue'
+import navigation from 'src/components/ui/nav/developers.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 

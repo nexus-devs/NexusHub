@@ -114,8 +114,8 @@
 
 
 <script>
-import module from 'src/components/ui/module.vue'
 import indicator from 'src/components/charts/indicator.vue'
+import module from 'src/components/ui/module.vue'
 
 export default {
   components: {

@@ -61,8 +61,8 @@
 
 
 <script>
-import uiHeader from 'src/components/ui/header.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
+import uiHeader from 'src/components/ui/header.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {

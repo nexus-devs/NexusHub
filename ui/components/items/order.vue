@@ -36,8 +36,8 @@
 
 
 <script>
-import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 import priceDiff from 'src/components/items/price-diff.vue'
+import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 
 export default {
   components: {

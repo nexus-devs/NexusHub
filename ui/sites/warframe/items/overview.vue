@@ -38,17 +38,17 @@
 
 <script>
 import Vue from 'vue'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import VueObserveVisibility from 'vue-observe-visibility'
 import appContent from 'src/app-content.vue'
+import buildRequirements from 'src/components/items/build-requirements.vue'
+import description from 'src/components/items/description.vue'
+import drops from 'src/components/items/drops.vue'
+import itemHeader from 'src/components/items/header.vue'
+import navigation from 'src/components/ui/nav/warframe/items.vue'
+import patchlog from 'src/components/items/patchlog.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-import itemHeader from 'src/components/items/header.vue'
-import patchlog from 'src/components/items/patchlog.vue'
-import VueObserveVisibility from 'vue-observe-visibility'
-import description from 'src/components/items/description.vue'
-import buildRequirements from 'src/components/items/build-requirements.vue'
 import stats from 'src/components/items/stats.vue'
-import drops from 'src/components/items/drops.vue'
 
 export default {
   components: {
