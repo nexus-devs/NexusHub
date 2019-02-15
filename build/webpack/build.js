@@ -70,16 +70,24 @@ async function build () {
   /**
    * Actual webpack build process.
    */
+  let errored = false
   await new Promise((resolve, reject) => {
     webpack([client, server], (err, stats) => {
       if (err) throw err
+      if (stats.hasErrors() || stats.hasWarnings()) errored = true
       console.log(stats.toString())
       resolve()
     })
   })
+
+  /**
+   * Finish up. We'll exit the process manually because cubic would keep it
+   * alive otherwise.
+   */
   console.log('* Compilation done. Resulting file tree:')
   console.log(tree.tree(client.output.path))
-  process.exit()
+  if (errored) process.exit(1)
+  else process.exit()
 }
 
 if (enabled) {
