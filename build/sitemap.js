@@ -25,7 +25,7 @@ async function generate () {
   const Api = require('cubic-api')
   const Auth = require('cubic-auth')
   const Ui = require('cubic-ui')
-  const apiConfig = require('../config/cubic/main.js').api
+  const apiConfig = require('../config/cubic/api.js')
   if (process.env.DRONE) apiConfig.mongoUrl = 'mongodb://mongodb'
   if (process.env.DRONE) apiConfig.redisUrl = 'redis://redis'
   const authConfig = process.env.DRONE ? {
