@@ -39,7 +39,6 @@ section {
 .row {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .row-margin {
@@ -61,7 +60,7 @@ section {
  */
 @mixin column($size) {
   flex-grow: $size;
-  flex-basis: percentage($size);
+  flex-basis: percentage(0.01 * $size);
 }
 // .col-1, .col-2...
 @for $i from 0 through 4 {

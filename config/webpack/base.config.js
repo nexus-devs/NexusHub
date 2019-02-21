@@ -10,6 +10,7 @@ module.exports = {
    */
   output: {
     path: `${cubic.config.ui.api.publicPath}/bundles`,
+    publicPath: '/bundles',
     filename: isProd ? 'bundle.[name].[contenthash].js' : 'dev-[name].bundle.js'
   },
 

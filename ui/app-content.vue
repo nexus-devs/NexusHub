@@ -38,9 +38,6 @@ the sidebar. This also keeps our app.vue more clean.
     -ms-user-select: none;
     user-select: none;
   }
-  & > .container {
-    will-change: padding;
-  }
 }
 
 .zoom-enter-active, .fade-leave-active {
