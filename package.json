@@ -17,11 +17,11 @@
   "license": "CC BY-NC 4.0",
   "dependencies": {
     "cubic": "3.0.1",
-    "cubic-api": "3.1.1",
+    "cubic-api": "^3.1.1",
     "cubic-auth": "3.1.4",
     "cubic-client": "3.0.0",
     "cubic-defaults": "^2.0.1",
-    "cubic-ui": "^3.1.5",
+    "cubic-ui": "^3.1.6",
     "d3": "^5.7.0",
     "dns-sync": "^0.1.3",
     "fuse.js": "^3.3.0",

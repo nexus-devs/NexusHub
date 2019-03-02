@@ -12,11 +12,7 @@ if (process.env.DOCKER && prod && node === 'ui') {
   const redisUrl = 'redis://redis'
   const userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
   const userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
-  const dns = require('dns-sync')
-  const lookup = domain => {
-    const ip = dns.lookup(domain)
-    return ip || lookup(domain)
-  }
+
   config = {
     api: {
       redisUrl,
@@ -28,8 +24,8 @@ if (process.env.DOCKER && prod && node === 'ui') {
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     },
     server: {
-      apiUrl: `ws://${lookup('nexus_api')}:3003/ws`,
-      authUrl: `ws://${lookup('nexus_auth')}:3030/ws`,
+      apiUrl: `ws://nexus_api:3003/ws`,
+      authUrl: `ws://nexus_auth:3030/ws`,
       user_key: userKey,
       user_secret: userSecret
     },
