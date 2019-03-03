@@ -16,7 +16,7 @@ if (process.env.DRONE) {
   }
 }
 config.webpack.skipBuild = true
-config.client = { disableSsr: true }
+config.client = { ...config.client, ...{ disableSsr: true } }
 
 /**
  * Bundle webpack for production. This will imitate a cubic-ui node to auto-
