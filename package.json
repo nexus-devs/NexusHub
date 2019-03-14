@@ -29,7 +29,7 @@
     "keyboardjs": "^2.5.1",
     "moment": "^2.23.0",
     "mongodb": "^3.1.12",
-    "requestretry": "^3.1.0",
+    "requestretry": "^4.0.0",
     "tween.js": "^16.6.0",
     "vue-affix": "^0.5.0",
     "vue-analytics": "^5.16.2",
