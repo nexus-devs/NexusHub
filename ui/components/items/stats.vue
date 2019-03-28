@@ -167,8 +167,8 @@ export default {
 
 .item-data {
   border-bottom: 1px solid $color-subtle-dark;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 7.5px;
+  margin-bottom: 7.5px;
 
   &:last-of-type {
     border-bottom: none;

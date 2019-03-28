@@ -100,17 +100,12 @@ export default {
   /deep/ .header {
     position: relative;
     z-index: 1;
-
-    h3 {
-      color: white !important;
-      font-size: 1em !important;
-      text-transform: none;
-      letter-spacing: normal;
-    }
   }
   /deep/ .body {
     overflow-y: auto;
-    max-height: 275px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    max-height: 225px;
 
     .image {
       position: absolute;
@@ -140,10 +135,10 @@ export default {
     }
     h4 {
       font-size: 0.9em;
+      margin-top: 10px;
     }
     p {
       word-wrap: break-word;
-      margin-left: 15px;
       margin-bottom: 20px;
     }
   }

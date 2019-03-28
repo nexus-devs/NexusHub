@@ -13,7 +13,7 @@ class Patchlogs extends Endpoint {
     }, {
       name: 'limit',
       description: 'Number of patchlogs to return per chunk. Setting this to 0 will return everything up to the end.',
-      default: 3
+      default: 4
     }, {
       name: 'skip',
       description: 'Position to skip to. Logically this would be multiples of your `limit`.',

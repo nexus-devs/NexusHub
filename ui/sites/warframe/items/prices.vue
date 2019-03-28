@@ -145,7 +145,7 @@ export default {
         const components = prices.components
 
         for (const component of components) {
-          component.timerange = 7 // default timerange
+          component.timerange = 30 // default timerange
         }
         state.components = components
       },

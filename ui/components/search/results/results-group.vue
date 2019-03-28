@@ -7,7 +7,7 @@
     <div class="filter">
       <div class="filter-tags">
         <div class="filter-tag-row">
-          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
+          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
             <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
             <span>{{ filter.name }}</span>
             <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
@@ -235,47 +235,6 @@ h2 {
       display: inline-block;
       margin-right: 20px;
       padding-right: 20px;
-    }
-    .tag {
-      border-radius: 999px;
-      display: inline-block;
-      padding: 5px 0 3px 15px;
-      margin-right: 10px;
-      margin-bottom: 5px;
-      border: 1px solid $color-subtle-dark;
-      text-transform: uppercase;
-      font-size: 0.9em;
-
-      &:hover {
-        background: none;
-        border: 1px solid $color-subtle;
-      }
-      &:active {
-        transform: scale(1);
-      }
-      span {
-        font-size: 0.9em;
-        color: white;
-      }
-      // Hide ascending/descending by default and adjust tag box size
-      .asc-desc {
-        opacity: 0;
-        margin-right: -5px;
-        @include ease(0.2s);
-
-        &.descending {
-          transform: rotate(-180deg);
-        }
-      }
-      &.active {
-        border: 1px solid transparent;
-        background: $color-bg;
-
-        .asc-desc {
-          opacity: 1;
-          margin-right: 0;
-        }
-      }
     }
   }
   .filter-view {

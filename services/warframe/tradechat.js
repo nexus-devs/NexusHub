@@ -16,21 +16,24 @@ async function monitor () {
     auth_url: 'wss://auth.nexushub.co/ws'
   })
 
+  await client.connecting
+
   // Track orders from production API and post them locally. This includes wfm
   // orders.
   client.subscribe('/warframe/v1/orders', req => {
     const res = { send () {} }
+    console.log(req)
     order.main({ body: req }, res)
   })
 
   // Removes outdated orders periodically.
-  async function clearOrders () {
+  /**async function clearOrders () {
     while (true) {
       const res = { send () {} }
       await clear.main({}, res)
       await new Promise(resolve => setTimeout(resolve, 1000 * 5))
     }
   }
-  clearOrders()
+  clearOrders()**/
 }
 monitor()

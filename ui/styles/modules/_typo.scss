@@ -5,18 +5,17 @@
 
 * {
   font-family: "Roboto", sans-serif;
-  font-size: 1em;
   font-weight: 400;
   line-height: 1.4;
 
   @media (max-width: $breakpoint-s) {
-    font-size: 0.99em;
+    font-size: 0.995em;
   }
 }
 
 span, input {
   vertical-align: middle;
-  letter-spacing: 0.2;
+  font-size: 1em;
 }
 
 a, a > span {
@@ -60,7 +59,6 @@ h2 {
 
 h3, h4, h5, h6 {
   font-weight: 600;
-  font-size: 1.1em;
 
   span {
     display: inline-block;
@@ -73,14 +71,10 @@ h3, h4, h5, h6 {
   }
 }
 
-h4, h5, h6 {
-  font-size: 1em;
-}
-
 p {
   max-width: 800px;
-  line-height: 1.6;
-  letter-spacing: 0.2;
+  line-height: 1.4;
+  font-size: 0.9em;
 
   a {
     color: $color-primary-subtle !important;

@@ -354,11 +354,11 @@ export default {
   a {
     display: inline-flex;
     align-items: center;
-    padding: 17.5px 20px;
+    padding: 14px 20px;
     margin-right: 5px;
     border-radius: 2px;
     text-transform: uppercase;
-    font-size: 0.875em;
+    font-size: 0.8em;
     letter-spacing: 0.5;
 
     &:before {

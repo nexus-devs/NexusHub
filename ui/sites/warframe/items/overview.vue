@@ -72,7 +72,7 @@ export default {
       const item = this.$store.state.items.item
 
       if (item.patchlogs) {
-        return item.patchlogs.slice(0, 3)
+        return item.patchlogs.slice(0, 4)
       } else {
         return null
       }

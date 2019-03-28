@@ -47,13 +47,13 @@
             <div class="filter-tags">
               <div class="filter-tag-row">
                 <!-- Filters -->
-                <div v-for="filter in filters" v-if="listings.find(o => o[filter.path])" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="tag interactive" @click="selectFilterTag(filter)">
+                <div v-for="filter in filters" v-if="listings.find(o => o[filter.path])" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
                   <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                   <span>{{ filter.name }}</span>
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
                 </div>
                 <!-- Components -->
-                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="tag component"/>
+                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="btn-tag component"/>
               </div>
             </div>
           </div>
@@ -430,97 +430,13 @@ export default {
       margin-right: 20px;
       padding-right: 20px;
     }
-    /deep/ .tag.component {
-      position: relative;
-      top: -1px; // dunno why, but it's just 1px lower than other tags
-                 // may god forgive my hacky code.
-      padding: 0 16px 0 8px;
-      margin-bottom: 10px;
-      background: transparent;
-      text-align: left;
-
-      h4 {
-        font-family: 'Roboto';
-        font-size: 0.9em;
-        font-weight: 400;
-      }
-      span {
-        position: relative;
-        top: 1px;
-        margin-left: 5px;
-        padding: 2px 10px;
-        border-radius: 50px;
-        font-size: 0.8em;
-        color: white;
-        background: $color-bg;
-        @include ease(0.25s);
-      }
-      .image-wrapper {
-        height: 29px;
-        width: 32px;
-        margin-right: 0;
-        margin-bottom: 0 !important;
-      }
-      .data {
-        margin-top: 0;
-        flex-direction: row;
-      }
-    }
-    .tag {
-      border-radius: 999px;
-      display: inline-block;
-      padding: 4px 0 4px 16px;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      border: 1px solid $color-subtle-dark;
-      text-transform: uppercase;
-      font-size: 0.9em;
-      @include shadow-0;
-
-      &:before {
-        border-radius: 999px;
-      }
-      &:hover {
-        background: none;
-        border: 1px solid $color-subtle;
-      }
-      &:active {
-        transform: scale(1);
-      }
-      span {
-        font-size: 0.9em;
-        color: white;
-      }
-      // Hide ascending/descending by default and adjust tag box size
-      .asc-desc {
-        opacity: 0;
-        margin-right: -5px;
-        @include ease(0.2s);
-
-        &.descending {
-          transform: rotate(-180deg);
-        }
-      }
-      &.active {
-        border: 1px solid transparent;
-        background: $color-bg;
-
-        .asc-desc {
-          opacity: 1;
-          margin-right: 0;
-        }
-      }
-      @media (max-width: $breakpoint-m) {
-        margin-bottom: 15px;
-      }
-    }
   }
 }
 
 .labels {
   text-transform: uppercase;
   color: $color-font-subtle;
-  font-size: 0.85em;
+  font-size: 0.8em;
   padding: 10px 20px;
   border-radius: 2px;
   background: $color-bg-darker;

@@ -41,41 +41,6 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.component {
-  border-left: 2px solid transparent;
-  border-radius: 2px;
-  background: $color-bg;
-  padding: 8px;
-
-  &:last-of-type {
-    border-bottom: none;
-  }
-  &:before, &:hover {
-    border-radius: 2px;
-  }
-  &.active {
-    border-left: 2px solid #39E591;
-    background: #3c4451;
-  }
-  @media (max-width: $breakpoint-m) {
-    @include field;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    border-bottom: none;
-    margin-right: 10px;
-    max-height: none;
-    padding: 4px;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-    .image-wrapper {
-      margin-bottom: 10px;
-    }
-  }
-}
 .image-wrapper {
   display: inline-flex;
   vertical-align: middle;

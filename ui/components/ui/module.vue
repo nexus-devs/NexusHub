@@ -49,12 +49,12 @@ export default {
 }
 
 .header {
-  padding: 30px 35px 0;
+  padding: 25px 25px 0;
 
   h2, h3 {
     display: inline-block;
     vertical-align: middle;
-    font-size: 0.85em !important;
+    font-size: 0.8em !important;
     letter-spacing: 0.5;
     color: $color-primary-subtle !important;
     text-transform: uppercase;
@@ -95,8 +95,8 @@ export default {
 }
 
 .body {
-  margin: 25px 0;
-  padding: 0 35px;
+  margin: 20px 0;
+  padding: 0 25px;
 
   li {
     margin-top: 15px;
@@ -109,7 +109,7 @@ export default {
   }
   p, span {
     color: white;
-    font-size: 0.95em;
+    font-size: 0.9em;
   }
   li, p, span {
     max-width: 650px;
@@ -122,7 +122,7 @@ export default {
 
 .footer {
   display: flex;
-  padding: 4px 25px;
+  padding: 2px 15px;
   margin-top: auto;
   background: $color-bg;
   font-size: 0.75em !important;

@@ -1,4 +1,4 @@
-const Endpoint = require('cubic-api/endpoint')
+const Endpoint = require('cubic-ui/endpoint')
 
 class Index extends Endpoint {
   constructor (options) {
