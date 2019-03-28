@@ -49,8 +49,8 @@ describe('Server', function () {
 
   // Check if webpack build works(only if rebuild was required)
   if (webpack.enable) {
-    it('should load up UI node - GET /', async function () {
-      await get('/', 3000)
+    it('should load up UI node - GET /warframe', async function () {
+      await get('/warframe', 3000)
     })
   }
 })
