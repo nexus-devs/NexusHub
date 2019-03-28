@@ -53,7 +53,7 @@
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
                 </div>
                 <!-- Components -->
-                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="btn-tag component"/>
+                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="btn-tag"/>
               </div>
             </div>
           </div>
@@ -343,45 +343,43 @@ export default {
   }
 }
 
-#app {
-  .overview {
-    margin: -20px;
+.overview {
+  margin: -20px;
 
-    & > *[class*="col-b"] {
-      margin: 20px;
-    }
+  & > *[class*="col-b"] {
+    margin: 20px;
   }
+}
 
-  .realtime {
-    display: flex;
+.realtime {
+  display: flex;
 
-    @media (max-width: $breakpoint-s) {
-      flex-direction: column;
-    }
+  @media (max-width: $breakpoint-s) {
+    flex-direction: column;
   }
-  .realtime-users {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    flex-wrap: wrap;
-    vertical-align: top;
-    margin-left: 20px;
-    margin-right: -15px;
-    margin-bottom: -15px;
-    width: 100%;
+}
+.realtime-users {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  flex-wrap: wrap;
+  vertical-align: top;
+  margin-left: 20px;
+  margin-right: -15px;
+  margin-bottom: -15px;
+  width: 100%;
 
-    @media (max-width: $breakpoint-s) {
-      margin-top: 20px;
-      margin-left: 0;
-    }
+  @media (max-width: $breakpoint-s) {
+    margin-top: 20px;
+    margin-left: 0;
   }
+}
 
-  .activity-data {
-    @media (max-width: $breakpoint-m) {
-      flex-basis: 100%;
-      margin-left: 0;
-      padding-left: 0;
-    }
+.activity-data {
+  @media (max-width: $breakpoint-m) {
+    flex-basis: 100%;
+    margin-left: 0;
+    padding-left: 0;
   }
 }
 

@@ -179,6 +179,10 @@ export default {
   @media (min-width: $breakpoint-s) {
     max-width: 250px;
   }
+  
+  * {
+    line-height: 1;
+  }
 }
 
 /deep/ .body {
@@ -198,8 +202,6 @@ export default {
 
 .graphs {
   position: relative;
-  width: 85%;
-  margin: auto;
 }
 /deep/ .sparkline {
   z-index: 1;
