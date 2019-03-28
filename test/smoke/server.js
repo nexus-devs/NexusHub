@@ -22,6 +22,8 @@ config.cubic.logLevel = 'silent'
 if (ci) {
   config.auth.api.redisUrl = redisUrl
   config.auth.api.mongoUrl = mongoUrl
+  config.ui.api.redisUrl = redisUrl
+  config.ui.api.mongoUrl = mongoUrl
   config.api.redisUrl = redisUrl
   config.api.mongoUrl = mongoUrl
 }
