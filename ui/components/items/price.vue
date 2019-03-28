@@ -179,7 +179,7 @@ export default {
   @media (min-width: $breakpoint-s) {
     max-width: 250px;
   }
-  
+
   * {
     line-height: 1;
   }
