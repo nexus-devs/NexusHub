@@ -24,6 +24,7 @@ if (ci) {
   config.auth.api.mongoUrl = mongoUrl
   config.ui.api.redisUrl = redisUrl
   config.ui.api.mongoUrl = mongoUrl
+  config.ui.webpack.skipBuild = true
   config.api.redisUrl = redisUrl
   config.api.mongoUrl = mongoUrl
 }
