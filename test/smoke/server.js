@@ -8,6 +8,7 @@ const redisUrl = 'redis://redis'
 const mongoUrl = 'mongodb://mongodb'
 const webpack = require('../../config/webpack/build.json')
 const ci = process.env.DRONE
+const prod = process.env.NODE_ENV === 'production'
 const config = {
   cubic: require(`${process.cwd()}/config/cubic/cubic`),
   auth: require(`${process.cwd()}/config/cubic/auth.js`),
@@ -36,7 +37,9 @@ before(async function () {
   const cubic = new Cubic(config.cubic)
   await cubic.use(new Auth(config.auth))
   await cubic.use(new Api(config.api))
-  await cubic.use(new Ui(config.ui))
+  if (prod && webpack.enable) {
+    await cubic.use(new Ui(config.ui))
+  }
 })
 
 /**
@@ -49,9 +52,19 @@ describe('Server', function () {
   })
 
   // Check if webpack build works(only if rebuild was required)
-  if (webpack.enable) {
+  if (prod && webpack.enable) {
     it('should load up UI node - GET /warframe', async function () {
       await get('/warframe', 3000)
     })
   }
+})
+
+/**
+ * Close any open handlers so the test won't run infinitely
+ */
+after(function () {
+  const server = cubic.nodes.api.server
+  server.cache.redis.quit()
+  server.http.endpoints.limiter.redis.quit()
+  server.ws.endpoints.limiter.redis.quit()
 })
