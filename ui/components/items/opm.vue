@@ -38,7 +38,7 @@ import tweenNum from 'vue-tween-number'
 export default {
   components: {
     module,
-    'tween-num': tweenNum,
+    tweenNum,
     bars
   },
 
