@@ -56,7 +56,6 @@
 
 
 
-
 <script>
 import moment from 'moment'
 import popup from 'src/components/ui/popup.vue'
@@ -142,7 +141,6 @@ export default {
   }
 }
 </script>
-
 
 
 
