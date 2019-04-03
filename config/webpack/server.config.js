@@ -17,11 +17,6 @@ module.exports = merge(baseConfig, {
   // Let webpack and vue-loader know we're rendering server-sided
   target: 'node',
 
-  // This tells the server bundle to use Node-style exports
-  output: {
-    libraryTarget: 'commonjs2'
-  },
-
   // Exclude css from server bundles
   module: {
     rules: [
