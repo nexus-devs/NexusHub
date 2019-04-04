@@ -6,7 +6,7 @@ const Client = require('cubic-client')
 const get = require('../lib/get.js')
 const redisUrl = 'redis://redis'
 const mongoUrl = 'mongodb://mongodb'
-const webpack = require('../../config/webpack/build.json')
+const webpack = require('../../../config/webpack/build.json')
 const ci = process.env.DRONE
 const prod = process.env.NODE_ENV === 'production'
 const config = {
