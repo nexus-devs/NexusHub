@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "build": "node build/webpack/build.js",
+    "build": "node ci/webpack/build.js",
     "lint": "eslint . --ext .js,.vue",
-    "test": "mocha --exit -s 120000 --timeout 120000 test/smoke/server.js test/smoke/endpoints.js",
-    "scrape": "node build/warframe/index.js",
-    "changelogs": "node build/changelogs/index.js",
-    "toggle-webpack": "node build/webpack/toggle.js",
-    "sitemap": "node build/sitemap.js"
+    "test": "mocha --exit -s 120000 --timeout 120000 ci/test/smoke/server.js ci/test/smoke/endpoints.js",
+    "scrape": "node ci/warframe/index.js",
+    "changelogs": "node ci/changelogs/index.js",
+    "toggle-webpack": "node ci/webpack/toggle.js",
+    "sitemap": "node ci/sitemap.js"
   },
   "author": "Kaptard",
   "license": "CC BY-NC 4.0",

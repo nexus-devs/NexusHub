@@ -74,7 +74,7 @@ pipeline:
       - mv ui/assets/.robots.txt ui/assets/robots.txt # Make search engines ignore the staging site
 
       # Push changes from above and from dev branch
-      - bash build/git/push-staging.sh
+      - bash ci/git/push-staging.sh
     secrets: [ nexus_ci_token ]
     when:
       branch: development
@@ -90,7 +90,7 @@ pipeline:
       - git checkout $${DRONE_BRANCH}
 
       # Push changes to production if last commit contains "release: "
-      - bash build/git/push-production.sh
+      - bash ci/git/push-production.sh
     secrets: [ nexus_ci_token ]
     when:
       branch: rc/*
