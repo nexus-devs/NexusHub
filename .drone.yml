@@ -8,7 +8,7 @@ pipeline:
         exclude: [ production, staging, greenkeeper/* ]
 
   build:
-    image: node
+    image: node:10-jessie
     commands:
       # Determine if webpack needs a rebuild.
       - git fetch origin staging
