@@ -57,7 +57,7 @@ export default {
     font-size: 0.8em !important;
     letter-spacing: 0.5;
     color: $color-primary-subtle !important;
-    text-transform: uppercase;
+    @include uppercase;
   }
   time {
     display: block;
@@ -132,7 +132,7 @@ export default {
     display: flex;
     margin-left: auto;
     align-items: center;
-    text-transform: uppercase;
+    @include uppercase;
     @include ie;
     padding: 5px 10px;
     letter-spacing: 0.5;

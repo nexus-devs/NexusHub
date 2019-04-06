@@ -103,6 +103,7 @@ import appContent from 'src/app-content.vue'
 import navigation from 'src/components/ui/nav/warframe/general.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import storeModule from 'src/store/analytics.js'
 const parseNum = (num) => (Math.round(num / 1000) * 1000)
   .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
@@ -139,24 +140,7 @@ export default {
     this.$store.commit('setAnalyticsOffers', offers)
   },
 
-  storeModule: {
-    name: 'analytics',
-    state: {
-      users: null,
-      views: null
-    },
-    mutations: {
-      setAnalyticsUsers (state, users) {
-        state.users = users
-      },
-      setAnalyticsViews (state, views) {
-        state.views = views
-      },
-      setAnalyticsOffers (state, offers) {
-        state.offers = offers
-      }
-    }
-  }
+  storeModule
 }
 </script>
 

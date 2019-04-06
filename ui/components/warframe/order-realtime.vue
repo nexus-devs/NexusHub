@@ -23,7 +23,7 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
-import priceDiff from 'src/components/items/price-diff.vue'
+import priceDiff from 'src/components/warframe/price-diff.vue'
 
 export default {
   components: {

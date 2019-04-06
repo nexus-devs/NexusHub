@@ -13,7 +13,7 @@ class Prices extends Endpoint {
     this.schema.query = [
       {
         name: 'timerange',
-        default: 7,
+        default: 30,
         description: 'Days from now to the last order.'
       }, {
         name: 'component',

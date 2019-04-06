@@ -54,7 +54,7 @@ export default {
   top: 0;
   padding: 5px 0;
   width: 100%;
-  text-transform: uppercase;
+  @include uppercase;
   font-size: 0.9em;
   color: $color-font-body;
   z-index: 1;

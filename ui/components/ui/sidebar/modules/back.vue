@@ -29,7 +29,7 @@ export default {
   pointer-events: none;
   font-size: 0.8em;
   color: white;
-  text-transform: uppercase;
+  @include uppercase;
   letter-spacing: 1;
   opacity: 0;
 

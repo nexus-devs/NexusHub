@@ -121,7 +121,7 @@ nav {
       display: inline-block;
       margin-top: 40px;
       color: $color-font-body !important;
-      text-transform: uppercase;
+      @include uppercase;
       font-size: 0.75em;
     }
     a {

@@ -251,7 +251,7 @@ h2 {
         opacity: 0.8;
       }
       span {
-        text-transform: uppercase;
+        @include uppercase;
         color: white;
         font-size: 0.8em;
       }

@@ -56,7 +56,7 @@
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
-import priceDiff from 'src/components/items/price-diff.vue'
+import priceDiff from 'src/components/warframe/price-diff.vue'
 import sparkline from 'src/components/charts/sparkline.vue'
 
 export default {

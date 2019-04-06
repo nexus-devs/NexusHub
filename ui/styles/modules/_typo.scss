@@ -29,7 +29,7 @@ h1,h2,h3,h4,h5,h6 {
 section .container h2.sub {
   font-family: 'Roboto';
   font-weight: 400;
-  text-transform: uppercase;
+  @include uppercase;
   font-size: 0.85em;
   margin-bottom: 20px;
   letter-spacing: 0.5;

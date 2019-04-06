@@ -5,7 +5,7 @@
 
 
 <script>
-import opm from 'src/components/items/opm.vue'
+import opm from 'src/components/warframe/opm.vue'
 let updateInterval
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 

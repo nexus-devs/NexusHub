@@ -1,12 +1,12 @@
 <template>
-  <div :class="{ active: active ? true : false }" class="component col interactive" @click="select">
+  <div :class="{ active: active ? true : false }" class="btn-tag component col interactive" @click="select">
     <div class="image-wrapper">
       <img :src="component.imgUrl" alt="component.name">
     </div>
 
     <div class="data">
-      <h4>{{ component.name }}</h4>
-      <span>{{ orders.length }}</span>
+      <span>{{ component.name }}</span>
+      <span class="btn-counter">{{ orders.length }}</span>
     </div>
   </div>
 </template>
@@ -20,10 +20,15 @@ export default {
 
   computed: {
     orders () {
-      return this.$store.state.orders.all.filter(o => o.component === this.component.name)
+      return this.$store.state.orders.all.filter(o => {
+        return o.offer === this.type && o.component === this.component.name
+      })
     },
     active () {
       return this.$store.state.items.selected.component === this.component.name
+    },
+    type () {
+      return this.$store.state.orders.type
     }
   },
 
@@ -41,6 +46,10 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+.component {
+  padding: 0 16px 0 8px;
+}
+
 .image-wrapper {
   display: inline-flex;
   vertical-align: middle;
@@ -48,13 +57,13 @@ export default {
   align-items: center;
   position: relative;
   overflow: hidden;
-  height: 50px;
-  width: 50px;
+  height: 29px;
   margin-right: 5px;
 
   img {
     max-height: 70%;
     border-radius: 60px;
+    margin-right: 0 !important; // Reset .active from .btn-tag
   }
 }
 .data {
@@ -68,10 +77,5 @@ export default {
     flex-direction: column;
     margin-top: -15px;
   }
-}
-span {
-  margin-top: -2px;
-  font-size: 0.9em;
-  color: $color-font-body;
 }
 </style>

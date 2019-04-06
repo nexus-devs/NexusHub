@@ -38,10 +38,10 @@
           <div class="filter">
             <div class="type">
               <span :class="{ active: type === 'Selling' }" class="btn-subtle" @click="setType('Selling')">
-                Sellers <span>{{ count.selling }}</span>
+                Sellers <span class="btn-counter">{{ count.selling }}</span>
               </span>
               <span :class="{ active: type === 'Buying' }" class="btn-subtle" @click="setType('Buying')">
-                Buyers  <span>{{ count.buying }}</span>
+                Buyers  <span class="btn-counter">{{ count.buying }}</span>
               </span>
             </div>
             <div class="filter-tags">
@@ -53,7 +53,7 @@
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
                 </div>
                 <!-- Components -->
-                <comp v-for="component in components" :key="component.uniqueName" :component="component" class="btn-tag"/>
+                <comp v-for="component in components" :key="component.uniqueName" :component="component"/>
               </div>
             </div>
           </div>
@@ -94,72 +94,20 @@
 
 
 <script>
-import activity from 'src/components/items/activity.vue'
+import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
-import component from 'src/components/items/component.vue'
-import itemHeader from 'src/components/items/header.vue'
+import component from 'src/components/warframe/component.vue'
+import itemHeader from 'src/components/warframe/header.vue'
 import navigation from 'src/components/ui/nav/warframe/items.vue'
-import opm from 'src/components/items/opm-item.vue'
-import order from 'src/components/items/order.vue'
-import orderPopup from 'src/components/items/order-popup.vue'
-import orderRealtime from 'src/components/items/order-realtime.vue'
+import opm from 'src/components/warframe/opm-item.vue'
+import order from 'src/components/warframe/order.vue'
+import orderPopup from 'src/components/warframe/order-popup.vue'
+import orderRealtime from 'src/components/warframe/order-realtime.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
-let selectedComponent = 'Set'
+import storeModule from 'src/store/warframe/orders.js'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
-/**
- * Trader sorting logic
- */
-function filter (orders, type = 'Selling', filters = []) {
-  const result = []
-  const resolve = (filter, result) => {
-    filter.path.split('.').forEach(key => { result = result[key] })
-    return result
-  }
-
-  // Filter by component first
-  for (const order of orders) {
-    if ((selectedComponent === order.component || selectedComponent === 'Set') &&
-        order.offer === type) {
-      result.push(order)
-    }
-  }
-
-  const getSortingValue = result => {
-    const filter = filters.find(f => f.active)
-    const res = resolve(filter, result)
-    return filter.descending ? -1 * res : res
-  }
-
-
-  return result.sort((a, b) => {
-    // Keep sorted by component
-    const name = a.component.localeCompare(b.component)
-    if (name !== 0) {
-      return name
-    }
-
-    // Sort by selected filter
-    const aVal = getSortingValue(a)
-    const bVal = getSortingValue(b)
-
-    if (bVal === null) {
-      return -1
-    }
-    if (aVal > bVal) {
-      return 1
-    }
-    if (aVal < bVal) {
-      return -1
-    }
-    return 0
-  })
-}
-
-/**
- * Actual vue component.
- */
 export default {
   components: {
     navigation,
@@ -222,9 +170,10 @@ export default {
   watch: {
     item (to, from) {
       this.$cubic.unsubscribe(`/warframe/v1/orders?item=${from.name}`)
+      this.$store.commit('setOrdersComponent', 'Set')
     },
     selectedComponent (to) {
-      selectedComponent = to
+      this.$store.commit('setOrdersComponent', to)
       this.$store.commit('setOrders', this.$store.state.orders.all)
     }
   },
@@ -280,50 +229,7 @@ export default {
     this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
-  storeModule: {
-    name: 'orders',
-    state: {
-      all: [],
-      listings: [],
-      selected: {},
-      type: 'Selling',
-      filters: [{
-        name: 'Price',
-        category: 'items',
-        icon: '/img/warframe/ui/platinum.svg',
-        unit: 'p',
-        path: 'price',
-        active: true,
-        descending: false
-      }, {
-        name: 'Quantity',
-        icon: '/img/warframe/ui/quantity.svg',
-        unit: '',
-        path: 'quantity'
-      }, {
-        name: 'Rank',
-        hidden: true,
-        path: 'rank'
-      }]
-    },
-    mutations: {
-      setOrders (state, orders) {
-        state.all = orders
-        state.listings = filter(state.all, state.type, state.filters)
-      },
-      selectOrder (state, order) {
-        state.selected = order
-      },
-      setOrderType (state, type) {
-        state.type = type
-        state.listings = filter(state.all, state.type, state.filters)
-      },
-      setOrderFilters (state, filters) {
-        state.filters = filters
-        state.listings = filter(state.all, state.type, state.filters)
-      }
-    }
-  }
+  storeModule
 }
 </script>
 
@@ -399,15 +305,6 @@ export default {
     &:nth-of-type(2) {
       margin-right: 20px;
     }
-
-    // Order count
-    span {
-      font-size: 0.85em;
-      margin-left: 10px;
-      padding: 2px 10px;
-      background: $color-subtle-dark;
-      border-radius: 9999px;
-    }
   }
 }
 
@@ -432,7 +329,7 @@ export default {
 }
 
 .labels {
-  text-transform: uppercase;
+  @include uppercase;
   color: $color-font-subtle;
   font-size: 0.8em;
   padding: 10px 20px;

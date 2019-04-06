@@ -36,7 +36,7 @@
 
 
 <script>
-import priceDiff from 'src/components/items/price-diff.vue'
+import priceDiff from 'src/components/warframe/price-diff.vue'
 import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
 
 export default {

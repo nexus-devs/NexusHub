@@ -101,7 +101,7 @@ nav {
     position: relative;
     top: 1px;
     vertical-align: middle;
-    text-transform: uppercase;
+    @include uppercase;
     font-size: 0.75em;
     margin-left: -12px;
     color: $color-font-body !important;

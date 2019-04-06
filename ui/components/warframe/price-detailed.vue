@@ -61,7 +61,7 @@
 
 <script>
 import indicator from 'src/components/charts/indicator.vue'
-import priceDiff from 'src/components/items/price-diff.vue'
+import priceDiff from 'src/components/warframe/price-diff.vue'
 import userPrices from 'src/components/charts/userprices.vue'
 
 export default {
@@ -206,7 +206,7 @@ export default {
   font-size: 0.85em;
   margin-left: -10px;
   margin-top: -8px;
-  text-transform: uppercase;
+  @include uppercase;
 }
 
 .img-wrapper {

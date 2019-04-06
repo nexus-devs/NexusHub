@@ -100,7 +100,7 @@ class Order extends Endpoint {
     // Update prices
     runParallel(async () => {
       const prices = new Prices({ ...options, ...{ url: `/warframe/v1/items/${item}/prices?component=${component.name}` } })
-      const priceData = await prices.get(item, 7, stored, component.name)
+      const priceData = await prices.get(item, 30, stored, component.name)
       prices.cache(priceData, 60 * 60 * 24)
       prices.store(item, priceData, stored)
 

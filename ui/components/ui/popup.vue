@@ -97,7 +97,7 @@ export default {
 
     h3, h4, h5 {
       color: $color-primary-subtle !important;
-      text-transform: uppercase;
+      @include uppercase;
       font-size: 0.85em;
       letter-spacing: 0.2;
     }

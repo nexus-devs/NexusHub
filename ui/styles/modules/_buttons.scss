@@ -44,7 +44,7 @@
 .btn-subtle {
   display: inline-block;
   @include ie;
-  text-transform: uppercase;
+  @include uppercase;
   cursor: pointer;
   font-size: 0.8em;
   border-radius: 2px;
@@ -65,7 +65,7 @@
 
 .btn-outline {
   font-size: 0.85em;
-  text-transform: uppercase;
+  @include uppercase;
   margin-right: 10px;
   background: none;
   border: 1px solid $color-subtle;
@@ -99,7 +99,7 @@
   margin-right: 10px;
   margin-bottom: 5px;
   border: 1px solid $color-subtle-dark;
-  text-transform: uppercase;
+  @include uppercase;
   font-size: 0.8em;
 
   &:hover {
@@ -141,7 +141,15 @@
     // Reactivate ascending/descending
     // -5px to compensate for material icon padding
     & img:last-of-type {
-      margin-right: -5px; 
+      margin-right: -5px;
     }
   }
+}
+
+.btn-counter {
+  font-size: 0.85em;
+  margin-left: 10px;
+  padding: 2px 10px;
+  background: $color-subtle-dark;
+  border-radius: 9999px;
 }

@@ -46,7 +46,14 @@ class Order extends Endpoint {
     // Get listings for all items, then set new online status and remove old orders
     for (const item of items) {
       const WfmOrders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
-      const wfmOrders = JSON.parse(WfmOrders).payload.orders
+      let wfmOrders
+      try {
+        wfmOrders = JSON.parse(WfmOrders).payload.orders
+      } catch (err) {
+        // The WFM API sometimes sends invalid JSON as a result of dropped
+        // connections or something, so just continue with the next item
+        continue
+      }
 
       for (const order of item.orders) {
         let online

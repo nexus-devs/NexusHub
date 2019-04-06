@@ -74,17 +74,18 @@
 
 
 <script>
-import activity from 'src/components/items/activity.vue'
+import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/warframe/general.vue'
-import opm from 'src/components/items/opm-global.vue'
-import patchlog from 'src/components/items/patchlog.vue'
+import opm from 'src/components/warframe/opm-global.vue'
+import patchlog from 'src/components/warframe/patchlog.vue'
 import rank from 'src/components/search/rank.vue'
 import search from 'src/components/search/input.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import sidebar from 'src/components/ui/sidebar/sidebar.vue'
 import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import storeModule from 'src/store/warframe/warframe.js'
 import timerange from 'src/components/search/time.vue'
 
 export default {
@@ -119,17 +120,7 @@ export default {
     this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
   },
 
-  storeModule: {
-    name: 'warframe',
-    state: {
-      patchlogs: []
-    },
-    mutations: {
-      setWarframePatchlogs (state, patchlogs) {
-        state.patchlogs = patchlogs
-      }
-    }
-  }
+  storeModule
 }
 </script>
 
