@@ -38,6 +38,7 @@ section .container h2.sub {
 
 h1 {
   font-size: 2.25em;
+  @include textshadow;
 
   & + p {
     margin-top: 10px;

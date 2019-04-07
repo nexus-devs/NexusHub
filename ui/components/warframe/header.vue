@@ -1,61 +1,49 @@
 <template>
-  <div class="item-header">
-    <ui-header class="header-bg">
-      <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img-blur">
-      <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-img">
-      <div class="item-img-shade"/>
-    </ui-header>
-    <header>
-      <div class="container">
-        <div class="item-profile">
-          <div class="item-profile-img">
-            <img :src="item.imgUrl" :alt="item.name" draggable="false">
-            <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-profile-img-blur">
-            <div class="item-profile-img-shade"/>
+  <header>
+    <div class="container">
+      <div class="item-profile-img">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-profile-img-blur">
+      </div>
+    </div>
+    <div class="item-img-shade"/>
+    <div class="item-img-shade-2"/>
+    <div class="background"/>
+    <div class="container">
+      <div class="item-profile">
+
+        <div class="item-profile-data-info">
+          <h1>{{ item.name }}</h1>
+          <div v-if="item.vaulted" class="vaulted">
+            <img src="/img/warframe/ui/vaulted.svg" class="ico-h-24 interactive" alt="Vaulted">
+            <tooltip>Vaulted</tooltip>
           </div>
-          <div class="item-profile-data">
-            <div class="item-profile-data-info">
-              <h1>{{ item.name }}</h1>
-              <div v-if="item.vaulted" class="vaulted">
-                <img src="/img/warframe/ui/vaulted.svg" class="ico-h-24 interactive" alt="Vaulted">
-                <tooltip>Vaulted</tooltip>
-              </div>
-              <br>
-              <div v-if="item.components.length > 1">
-                <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
-                      :class="{ selected: selectedComponent === component.name }" class="interactive"
-                      @click="selectComponent">
-                  {{ component.name }}
-                </span>
-              </div>
-              <span v-for="(tag, i) in item.tags" v-else :key="tag + i" class="selected interactive">
-                {{ tag }}
-              </span>
-            </div>
-            <div v-if="item.tradable" class="item-profile-lower">
-              <router-link :to="`${itemUrl}/trading`">
-                <button class="btn-outline buy">Buyers</button>
-              </router-link>
-              <router-link :to="`${itemUrl}/trading`">
-                <button class="btn-outline sell">Sellers</button>
-              </router-link>
-            </div>
+          <br>
+          <div v-if="item.components.length > 1">
+            <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
+                  :class="{ selected: selectedComponent === component.name }" class="interactive"
+                  @click="selectComponent">
+              {{ component.name }}
+            </span>
           </div>
+          <span v-for="(tag, i) in item.tags" v-else :key="tag + i" class="selected interactive">
+            {{ tag }}
+          </span>
         </div>
       </div>
-    </header>
+    </div>
     <nav ref="subnav" class="subnav">
       <div class="container">
         <router-link :to="itemUrl" exact class="interactive">Overview</router-link>
         <router-link v-if="item.tradable" :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
-        <router-link v-if="item.tradable" :to="`${itemUrl}/trading`">
+        <router-link v-if="item.tradable" :to="`${itemUrl}/trading`" class="interactive">
           Trade
-          <span>{{ item.activeOrders }}</span>
+          <span class="btn-counter">{{ item.activeOrders }}</span>
         </router-link>
         <router-link v-if="item.patchlogs && item.patchlogs.length" :to="`${itemUrl}/patchlogs`" class="interactive">Patchlogs</router-link>
       </div>
     </nav>
-  </div>
+  </header>
 </template>
 
 
@@ -121,117 +109,83 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.item-header {
-  position: relative;
-  overflow: hidden;
-
-  // 20px because of the shade being hidden due to overflow hidden
-  padding-bottom: 20px;
-  margin-bottom: -20px;
-  @include ease(0.15s);
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scale3d(1.15,1.15,1.15);
+  }
+  100% {
+    transform: scaleX(1);
+  }
 }
 
-/**
- * Header background. Item image will be visible here on mobile.
- */
- .header-bg {
-   overflow: hidden;
-   padding: 115 0;
-   box-shadow: none;
-   z-index: 0;
-   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
+header {
+  position: relative;
+  background: $color-bg-lighter;
+  overflow: hidden;
+  padding: 150 0 0 0;
+  box-shadow: none;
+  z-index: 0;
+  @include shadow-1;
 
-   /deep/ .background-container {
-     top: 0;
-   }
-   /deep/ .blobs {
-     display: none;
-   }
-   /deep/ .container {
-     position: static;
-   }
-   @media (max-width: $breakpoint-s) {
-     padding: 150 0;
-   }
-   img {
-     position: absolute;
-     bottom: -40%;
-     left: 20%;
-     max-height: 150%;
+  @media (max-width: $breakpoint-s) {
+    padding: 100 0 0 0;
+  }
+}
 
-     @media (max-width: $breakpoint-s) {
-       right: 0;
-       max-height: 90%;
-       bottom: 0;
-     }
-   }
-   .item-img {
-     display: none;
-     border-radius: 999px;
+.item-img-shade {
+  position: absolute;
+  z-index: 0;
+  height: 33%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  @include gradient-smooth($color-bg);
 
-     @media (max-width: $breakpoint-s) {
-       display: block;
-     }
-   }
-   .item-img-shade {
-     position: absolute;
-     z-index: 0;
-     opacity: 0.2;
-     height: 60%;
-     width: 100%;
-     bottom: 0;
-     left: 0;
-     @include gradient-background(transparent, $color-bg);
+  @media (max-width: $breakpoint-s) {
+    bottom: 30px;
+    height: 100%;
+  }
+}
+.item-img-shade-2 {
+  @extend .item-img-shade;
+  height: 100%;
+  opacity: 0.66;
+}
 
-     @media (max-width: $breakpoint-s) {
-       height: 70%;
-       opacity: 1;
-     }
-   }
-   .item-img-blur {
-     position: absolute;
-     z-index: 0;
-     opacity: 0;
-
-     @media (max-width: $breakpoint-s) {
-       left: auto;
-       right: -75%;
-       top: -15%;
-       max-height: 200%;
-       max-width: 200%;
-       height: 200%;
-       width: 200%;
-       opacity: 0.75;
-       filter: blur(60px) brightness(1.1) contrast(0.5);
-     }
-   }
-
-   /deep/ .container {
-     padding: 0;
-   }
- }
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: url('/img/warframe/index-blob.svg');
+    background-size: cover;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+  }
 
 /**
  * Item header data
  */
 .item-profile {
   display: flex;
-  position: relative;
-  top: -80px;
-  margin-bottom: -80px;
+  margin-bottom: 10px;
 }
 .item-profile-img {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-  height: 135px;
-  flex: 0 0 135px;
+  position: absolute;
+  z-index: 0;
+  bottom: -75px;
+  height: 350px;
   margin-right: 25px;
   border-radius: 2px;
-  @include gradient-background-dg(#323947, $color-bg);
-  @include shadow-1;
 
   img {
     position: relative;
@@ -242,58 +196,47 @@ export default {
   .item-profile-img-blur {
     position: absolute;
     z-index: 0;
-    top: -50%;
-    left: -50%;
+    top: 25%;
+    left: -100%;
     min-height: 200%;
-    filter: blur(60px);
-  }
-  .item-profile-img-shade {
-    position: absolute;
-    z-index: 2;
-    height: 70%;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    @include gradient-background(transparent, $color-bg);
+    opacity: 0.75;
+    filter: blur(150px);
   }
   @media (max-width: $breakpoint-s) {
-    display: none;
+    bottom: -10px;
   }
 }
 
-.item-profile-data {
-  .item-profile-data-info {
-    white-space: nowrap;
+.item-profile-data-info {
+  position: relative;
+  white-space: nowrap;
+  padding-bottom: 10px;
 
-    h1 {
-      display: inline-block;
-      vertical-align: middle;
-      margin-top: 5px;
-    }
-    span {
-      position: relative;
-      top: -5px;
-      margin-left: -20px;
-      color: white;
-      opacity: 0.6;
+  h1 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 5px;
+  }
+  span {
+    position: relative;
+    top: -5px;
+    margin-left: -20px;
+    color: white;
+    @include textshadow;
 
-      &:first-of-type {
-        margin-left: -7px; // padding
-      }
+    &:first-of-type {
+      margin-left: -7px; // padding
     }
-    span.selected {
-      opacity: 1;
-    }
-    span:after {
-      content: ' /\00a0'
-    }
-    span:last-of-type:after {
-      content: ''
-    }
-
-    @media (max-width: $breakpoint-s) {
-      margin-top: -5px;
-    }
+  }
+  span.selected {
+    color: $color-primary-subtle;
+  }
+  span:after {
+    content: ' /\00a0';
+    color: white;
+  }
+  span:last-of-type:after {
+    content: ''
   }
 }
 
@@ -305,14 +248,11 @@ export default {
  * Sub-page nav
  */
 .subnav {
-  margin-top: 25px;
-  border-top: 1px solid $color-subtle-dark;
-  @include shadow-1;
-
   a {
     display: inline-flex;
     align-items: center;
-    padding: 14px 20px;
+    padding: 14px 20px 12px; // 12px to compensate for border
+    border-bottom: 2px solid transparent;
     margin-right: 5px;
     border-radius: 2px;
     @include uppercase;
@@ -322,22 +262,22 @@ export default {
     &:before {
       border-radius: 0;
     }
-    span {
-      padding: 4px 8px;
-      margin-left: 5px;
-      font-size: 0.9em;
-      background: $color-bg;
-      border-radius: 99px;
-    }
   }
   .container {
     position: relative;
   }
   @media (max-width: $breakpoint-s) {
+    position: relative;
     margin-top: 20px;
+    background: $color-bg-dark;
+    z-index: 2;
   }
   .router-link-active {
     border-bottom: 2px solid $color-primary-subtle;
+  }
+  .btn-counter {
+    padding: 0px 8px;
+    border: 1px solid $color-subtle;
   }
 }
 

@@ -10,7 +10,8 @@
 }
 
 html {
-  background: $color-bg-dark
+  background: $color-bg-dark;
+  overflow-y: scroll; // Jumping scroll bar fix
 }
 
 *::-webkit-scrollbar-track
