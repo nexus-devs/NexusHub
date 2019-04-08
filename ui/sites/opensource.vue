@@ -116,7 +116,7 @@
 <script>
 import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/general.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import noSsr from 'vue-no-ssr'
 if (process.browser) {
   var vueTyper = require('vue-typer').VueTyper

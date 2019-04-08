@@ -5,7 +5,7 @@
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
-    <search class="" :placeholder="'Search item...'"/>
+    <search/>
     <div class="col nav-r">
       <notifications/>
     </div>

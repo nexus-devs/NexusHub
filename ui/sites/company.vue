@@ -100,7 +100,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe/general.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import storeModule from 'src/store/analytics.js'
 const parseNum = (num) => (Math.round(num / 1000) * 1000)
   .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')

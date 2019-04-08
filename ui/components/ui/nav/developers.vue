@@ -1,13 +1,13 @@
 <template>
   <nav class="row">
-    <div class="nav-l">
+    <div class="col nav-l">
       <router-link to="/warframe" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
       <router-link to="/developers" class="sub">Developers</router-link>
       <router-link to="/developers/api">API Docs</router-link>
     </div>
-    <div class="nav-r">
+    <div class="col nav-r">
       <notifications/>
     </div>
   </nav>
@@ -60,18 +60,18 @@ export default {
 
 nav {
   position: fixed;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
   width: calc(100% - 50px);
   padding: 0 25px;
   height: 56px;
   top: 0;
   z-index: 4;
   background: $color-bg-dark;
-  align-items: center;
   @include shadow-1;
 
   a {
-    margin: 0 15px;
     font-size: 0.9em;
 
     &:nth-of-type(3) {
@@ -80,19 +80,17 @@ nav {
   }
   .logo {
     height: 22px;
+    padding-left: 10px;
+    padding-right: 20px; // For search bar margin
   }
-  @media (max-width: $breakpoint-m) {
-    position: fixed;
-    background: $color-bg-dark;
-    @include shadow-1;
+  @media (max-width: $breakpoint-s) {
+    width: calc(100% - 28px);
+    padding: 0 14px;
   }
 }
 .nav-l {
   a:first-of-type {
-    margin-left: 60px;
-
     @media (max-width: $breakpoint-s) {
-      margin-left: 50px;
       img {
         margin-top: 1px;
       }
