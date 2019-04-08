@@ -1,12 +1,12 @@
 <template>
   <nav class="row">
-    <div class="col nav-l">
+    <div class="nav-l">
       <router-link to="/warframe" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
+      <search :placeholder="'Search item...'"/>
     </div>
-    <search class="" :placeholder="'Search item...'"/>
-    <div class="col nav-r">
+    <div class="nav-r">
       <notifications/>
     </div>
   </nav>
@@ -61,18 +61,18 @@ export default {
 
 nav {
   position: fixed;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: nowrap;
+  justify-content: space-between;
   width: calc(100% - 50px);
   padding: 0 25px;
   height: 56px;
   top: 0;
   z-index: 4;
   background: $color-bg-dark;
+  align-items: center;
   @include shadow-1;
 
   a {
+    margin: 0 15px;
     font-size: 0.9em;
 
     &:nth-of-type(3) {
@@ -81,17 +81,19 @@ nav {
   }
   .logo {
     height: 22px;
-    padding-left: 10px;
-    padding-right: 20px; // For search bar margin
   }
-  @media (max-width: $breakpoint-s) {
-    width: calc(100% - 28px);
-    padding: 0 14px;
+  @media (max-width: $breakpoint-m) {
+    position: fixed;
+    background: $color-bg-dark;
+    @include shadow-1;
   }
 }
 .nav-l {
   a:first-of-type {
+    margin-left: 60px;
+
     @media (max-width: $breakpoint-s) {
+      margin-left: 50px;
       img {
         margin-top: 1px;
       }
@@ -141,10 +143,12 @@ nav {
 
 /deep/ .search {
   position: relative;
+  display: inline-block;
+  vertical-align: middle;
   font-size: 0.9em;
-  width: 100%;
-  max-width: $max-width;
-  flex-grow: 1;
+  border-radius: 3px;
+  background: $color-bg-darker;
+  padding: 6px 12px;
 
   @media (max-width: $breakpoint-s) {
     display: none;
@@ -155,19 +159,10 @@ nav {
   }
 
   input {
-    position: relative; // Overlay autocomplete
-    z-index: 1;
+    position: relative;
+    min-width: 200px;
     color: white;
-    border-radius: 3px;
-    background: $color-bg-darker;
-    padding: 9px 15px;
-    border: 1px solid transparent;
-    width: 100%;
-    @include ease(0.25s);
-
-    &:hover, &:active, &:focus {
-      border: 1px solid $color-subtle;
-    }
+    z-index: 1;
 
     &::placeholder {
       color: $color-font-subtle !important;
@@ -177,7 +172,7 @@ nav {
   .autocomplete {
     position: absolute;
     left: 12px;
-    top: 2px;
+    top: -1px;
     margin-top: 7px;
     z-index: 0;
   }

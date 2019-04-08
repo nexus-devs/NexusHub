@@ -61,7 +61,7 @@
 import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/warframe/general.vue'
+import navigation from 'src/components/ui/nav.vue'
 import opm from 'src/components/warframe/opm-global.vue'
 import patchlog from 'src/components/warframe/patchlog.vue'
 import storeModule from 'src/store/warframe/warframe.js'
@@ -85,6 +85,14 @@ export default {
     },
     patchlogs () {
       return this.$store.state.warframe.patchlogs
+    }
+  },
+
+  mounted () {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+    if (!isMobile) {
+      this.$refs.input.focus()
     }
   },
 

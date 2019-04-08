@@ -121,7 +121,7 @@ export default {
   @include shadow-3;
 
   &.visible {
-    transform: translateY(0);
+    transform: translateY(-1px); // -1px to avoid a very fine transparent line
     opacity: 1;
     pointer-events: all;
   }

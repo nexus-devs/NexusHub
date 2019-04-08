@@ -59,9 +59,8 @@ export default {
 nav {
   position: fixed;
   justify-content: space-between;
-  width: calc(100% - 50px);
+  width: 100%;
   padding: 0 25px;
-  height: 56px;
   top: 0;
   z-index: 4;
   background: $color-bg-dark;

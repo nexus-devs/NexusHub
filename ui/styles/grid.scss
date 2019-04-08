@@ -9,10 +9,10 @@
   margin: auto;
 
   @media(max-width: $breakpoint-m) {
-    padding: 0 96px;
+    padding: 0 35px;
   }
   @media(max-width: $breakpoint-s) {
-    padding: 0 24px;
+    padding: 0 16px;
   }
 }
 
@@ -101,10 +101,6 @@ section {
 * Media Queries
 */
 @media (max-width: $breakpoint-m) {
-  .container {
-    padding: 0 35px;
-  }
-
   .row, .row-margin, .row-pad {
     flex-wrap: wrap;
   }
@@ -144,10 +140,5 @@ section {
     &:nth-child(even) {
       margin-right: 0;
     }
-  }
-}
-@media (max-width: $breakpoint-xs) {
-  .container {
-    padding: 0 20px;
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="col-b search">
+  <div class="search">
     <div class="field">
       <label>Search</label><br>
       <input ref="input" :placeholder="placeholder || 'Try: Soma Prime, Maim...'" :value="input.name || input" type="text"
@@ -38,11 +38,6 @@ export default {
         type: ''
       },
       suggestions: []
-    }
-  },
-  mounted () {
-    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      this.$refs.input.focus()
     }
   },
 
