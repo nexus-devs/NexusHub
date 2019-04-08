@@ -103,8 +103,6 @@ import opm from 'src/components/warframe/opm-item.vue'
 import order from 'src/components/warframe/order.vue'
 import orderPopup from 'src/components/warframe/order-popup.vue'
 import orderRealtime from 'src/components/warframe/order-realtime.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import storeModule from 'src/store/warframe/orders.js'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
@@ -112,8 +110,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     opm,
     orderRealtime,

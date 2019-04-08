@@ -43,15 +43,11 @@ import moment from 'moment'
 import navigation from 'src/components/ui/nav/warframe/items.vue'
 import noSsr from 'vue-no-ssr'
 import patchlog from 'src/components/warframe/patchlog.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     patchlog,
     noSsr

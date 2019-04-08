@@ -33,16 +33,12 @@
 <script>
 import appContent from 'src/app-content.vue'
 import navigation from 'src/components/ui/nav/general.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import uiHeader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     uiHeader
   },
 

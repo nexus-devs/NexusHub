@@ -118,8 +118,6 @@ import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/general.vue'
 import noSsr from 'vue-no-ssr'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 if (process.browser) {
   var vueTyper = require('vue-typer').VueTyper
 } else {
@@ -130,8 +128,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     vueTyper,
     noSsr,
     module

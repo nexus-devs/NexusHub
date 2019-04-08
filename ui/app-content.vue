@@ -30,16 +30,6 @@ the sidebar. This also keeps our app.vue more clean.
   @include ease(0.15s);
 }
 
-.app-content {
-  // Disable accidental text selection on sidebar touch
-  &.deltaX {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-}
-
 .zoom-enter-active, .fade-leave-active {
   @include ease(0.4s);
 }
@@ -55,14 +45,6 @@ the sidebar. This also keeps our app.vue more clean.
 
     & > .container {
       @include ease-out(0.45s);
-    }
-  }
-  .activeSidebar {
-    margin-right: calc(262px + 5vw);
-    transform: translateX(calc(262px + 5vw));
-
-    & > .container {
-      padding: 0 96px !important;
     }
   }
 }
