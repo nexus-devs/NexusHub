@@ -4,6 +4,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./base.config.js')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const MiniCss = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 /**
  * Config is merged with base config which contains common configuration
@@ -49,5 +50,11 @@ module.exports = merge(baseConfig, {
       filename: isProd ? '[name].[contenthash].css' : '[name].css',
       chunkFilename: isProd ? '[id].[contenthash].css' : '[id].css'
     })
-  ]
+  ],
+
+  optimization: {
+    minimizer: [
+      new OptimizeCSSAssetsPlugin()
+    ]
+  }
 })
