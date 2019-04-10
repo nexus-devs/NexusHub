@@ -97,9 +97,9 @@
               </module>
             </a>
 
-            <div class="col-b"></div>
-            <div class="col-b"></div>
-            <div class="col-b"></div>
+            <div class="col-b"/>
+            <div class="col-b"/>
+            <div class="col-b"/>
           </div>
         </div>
       </section>
