@@ -107,7 +107,7 @@ nav {
   width: 25%;
   min-width: 320px;
   max-width: 350px;
-  background: $color-bg;
+  background: $color-bg-darker;
   overflow-y: auto;
   @include shadow-1;
 

@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <item-header/>
     <app-content>
       <section class="patchlogs">
@@ -40,18 +37,14 @@ import VueObserveVisibility from 'vue-observe-visibility'
 import appContent from 'src/app-content.vue'
 import itemHeader from 'src/components/warframe/header.vue'
 import moment from 'moment'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import noSsr from 'vue-no-ssr'
 import patchlog from 'src/components/warframe/patchlog.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     patchlog,
     noSsr

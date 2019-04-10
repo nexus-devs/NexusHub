@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <ui-header>
         <img src="/img/brand/nexushub-typeface-bw.svg" alt="NexusHub">
@@ -142,17 +139,13 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe/general.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import uiHeader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     appContent,
     navigation,
-    sidebar,
-    sidebarSearch,
     uiHeader
   }
 }

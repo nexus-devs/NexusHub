@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <ui-header>
         <h1>Imprint</h1>
@@ -35,17 +32,13 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe/general.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import uiHeader from 'src/components/ui/header.vue'
 
 export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     uiHeader
   }
 }

@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <section>
         <div class="container">
@@ -44,15 +41,11 @@
 <script>
 import appContent from 'src/app-content.vue'
 import navigation from 'src/components/ui/nav/developers.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 
 export default {
   components: {
     navigation,
-    'app-content': appContent,
-    sidebar,
-    'sidebar-search': sidebarSearch
+    appContent
   }
 }
 </script>

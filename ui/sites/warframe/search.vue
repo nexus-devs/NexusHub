@@ -1,9 +1,6 @@
 <template>
   <div class="search">
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <div class="search-input">
         <div class="container">
@@ -44,10 +41,8 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe/general.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import resultsGroup from 'src/components/search/results/results-group.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import storeModule from 'src/store/serp.js'
 let ongoing = setTimeout(() => {})
 
@@ -55,8 +50,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     resultsGroup
   },
 

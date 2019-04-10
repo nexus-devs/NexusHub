@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <order-popup/>
     <item-header/>
     <app-content>
@@ -98,13 +95,11 @@ import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
 import component from 'src/components/warframe/component.vue'
 import itemHeader from 'src/components/warframe/header.vue'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import opm from 'src/components/warframe/opm-item.vue'
 import order from 'src/components/warframe/order.vue'
 import orderPopup from 'src/components/warframe/order-popup.vue'
 import orderRealtime from 'src/components/warframe/order-realtime.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import storeModule from 'src/store/warframe/orders.js'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
@@ -112,8 +107,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     opm,
     orderRealtime,

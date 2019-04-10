@@ -1,5 +1,5 @@
 <template>
-  <a href="/warframe/search" class="button-container" @click.stop.prevent="search">
+  <a href="/warframe/search" class="search-button button-container" @click.stop.prevent="search">
     <div class="button-icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>

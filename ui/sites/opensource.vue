@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <section>
         <div class="container">
@@ -38,6 +35,7 @@
       <section>
         <div class="container repos">
           <h2>Here's some stuff that we've built so far.</h2>
+
           <div class="row-margin">
             <a href="https://github.com/nexus-devs/NexusHub" target="_blank" class="col-b">
               <module class="interactive">
@@ -54,7 +52,7 @@
             <a href="https://github.com/cubic-js/cubic" target="_blank" class="col-b">
               <module class="interactive">
                 <template slot="header">
-                  <img src="/img/open-source/cubic.svg" class="ico-h-32" alt="NexusHub">
+                  <img src="/img/open-source/cubic.svg" class="ico-h-32" alt="Cubic">
                   <h3>Cubic</h3>
                 </template>
                 <template slot="body">
@@ -66,7 +64,7 @@
             <a href="https://github.com/nexus-devs/beholder" target="_blank" class="col-b">
               <module class="interactive">
                 <template slot="header">
-                  <img src="/img/open-source/beholder.svg" class="ico-h-32" alt="NexusHub">
+                  <img src="/img/open-source/beholder.svg" class="ico-h-32" alt="Beholder">
                   <h3>Beholder</h3>
                 </template>
                 <template slot="body">
@@ -78,7 +76,7 @@
             <a href="https://github.com/WFCD/warframe-items" target="_blank" class="col-b">
               <module class="interactive">
                 <template slot="header">
-                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="NexusHub">
+                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="warframe-items">
                   <h3>warframe-items</h3>
                 </template>
                 <template slot="body">
@@ -86,6 +84,22 @@
                 </template>
               </module>
             </a>
+
+            <a href="https://github.com/WFCD/warframe-items" target="_blank" class="col-b">
+              <module class="interactive">
+                <template slot="header">
+                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="warframe-items">
+                  <h3>warframe-patchlogs</h3>
+                </template>
+                <template slot="body">
+                  <p>All patchlogs in Warframe parsed to more usable JSON format.</p>
+                </template>
+              </module>
+            </a>
+
+            <div class="col-b"/>
+            <div class="col-b"/>
+            <div class="col-b"/>
           </div>
         </div>
       </section>
@@ -116,10 +130,8 @@
 <script>
 import appContent from 'src/app-content.vue'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/general.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import noSsr from 'vue-no-ssr'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 if (process.browser) {
   var vueTyper = require('vue-typer').VueTyper
 } else {
@@ -130,8 +142,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     vueTyper,
     noSsr,
     module

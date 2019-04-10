@@ -128,7 +128,6 @@ header {
   padding: 150 0 0 0;
   box-shadow: none;
   z-index: 0;
-  @include shadow-1;
 
   @media (max-width: $breakpoint-s) {
     padding: 100 0 0 0;

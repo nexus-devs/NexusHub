@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <item-header/>
     <app-content>
       <section>
@@ -44,18 +41,14 @@ import buildRequirements from 'src/components/warframe/build-requirements.vue'
 import description from 'src/components/warframe/description.vue'
 import drops from 'src/components/warframe/drops.vue'
 import itemHeader from 'src/components/warframe/header.vue'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import patchlog from 'src/components/warframe/patchlog.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import stats from 'src/components/warframe/stats.vue'
 
 export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     patchlog,
     description,

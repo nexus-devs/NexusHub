@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <item-header/>
     <app-content>
       <section>
@@ -29,11 +26,9 @@
 import appContent from 'src/app-content.vue'
 import filters from 'src/components/warframe/price-filters.vue'
 import itemHeader from 'src/components/warframe/header.vue'
-import navigation from 'src/components/ui/nav/warframe/items.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
 import price from 'src/components/warframe/price.vue'
 import priceDetailed from 'src/components/warframe/price-detailed.vue'
-import sidebar from 'src/components/ui/sidebar/sidebar.vue'
-import sidebarSearch from 'src/components/ui/sidebar/search.vue'
 import storeModule from 'src/store/warframe/prices.js'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
@@ -41,8 +36,6 @@ export default {
   components: {
     navigation,
     appContent,
-    sidebar,
-    sidebarSearch,
     itemHeader,
     filters,
     price,
