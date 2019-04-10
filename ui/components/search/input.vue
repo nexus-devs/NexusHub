@@ -5,7 +5,9 @@
       <input ref="input" :placeholder="placeholder || 'Try: Frost Prime, Maiming Strike...'" :value="input.name || input" type="text"
              @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search">
       <span class="autocomplete">{{ autocomplete.name }}</span>
-      <span class="autocomplete-type">{{ autocomplete.category }}</span>
+      <span v-if="autocomplete.category" class="autocomplete-type">
+        {{ autocomplete.category === 'Any' ? 'Search anywhere' : `Found in ${autocomplete.category}` }}
+      </span>
     </div>
     <div class="tools">
       <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="search(suggestion)">
@@ -96,6 +98,7 @@ export default {
           name: result[0].name.replace(regex, this.input),
           category: result[0].category
         }
+        console.log(result[0])
         this.suggestions = result
       }
 

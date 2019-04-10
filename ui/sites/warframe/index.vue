@@ -288,6 +288,7 @@ header {
       position: absolute;
       z-index: 1;
       right: 10px;
+      top: 6px;
       padding: 7px 10px;
     }
   }

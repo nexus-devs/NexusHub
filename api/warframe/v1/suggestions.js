@@ -22,6 +22,7 @@ class Search extends Endpoint {
     this.schema.request = { url: '/warframe/v1/suggestions?query=nik' }
     this.schema.response = [{
       name: String,
+      category: String,
       apiUrl: {
         _type: String,
         _description: 'It is recommended to get more detailed data from this link.'
@@ -70,7 +71,7 @@ class Search extends Endpoint {
     }).project({
       _id: 0,
       name: 1,
-      type: 1,
+      category: 1,
       components: 1,
       imgUrl: 1,
       apiUrl: 1,
@@ -83,7 +84,7 @@ class Search extends Endpoint {
 
       result.push({
         name: item.name,
-        type: item.type,
+        category: item.category,
         keyData: (set.prices && set.prices.selling && set.prices.buying)
           ? Math.round((set.prices.selling.current.median + set.prices.buying.current.median) / 2) + 'p'
           : set.ducats ? set.ducats + ' Ducats' : null,
