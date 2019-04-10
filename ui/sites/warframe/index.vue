@@ -249,6 +249,7 @@ header {
     margin: auto;
     border-radius: 999px;
     background: $color-bg-dark;
+    z-index: 2;
     width: 100%;
 
     label {
