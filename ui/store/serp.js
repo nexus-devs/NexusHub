@@ -93,6 +93,8 @@ export default {
       // Add each component to results
       for (const item of itemData) {
         for (const component of item.components) {
+          if (!item.description) continue
+
           // Transform damage types into icons
           const description = item.description.split(' ')
           for (let i = 0; i < description.length; i++) {
