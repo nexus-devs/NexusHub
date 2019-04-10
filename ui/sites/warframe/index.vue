@@ -127,7 +127,7 @@ export default {
 @keyframes fadeinUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -136,7 +136,7 @@ export default {
 }
 @keyframes moveUp {
   from {
-    transform: translateY(50px);
+    transform: translateY(30px);
   }
   to {
     transform: translateY(0);
