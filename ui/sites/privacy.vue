@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <ui-header>
         <h1>Things we do with your data. &nbsp; ( ͡° ͜ʖ ͡°)</h1>

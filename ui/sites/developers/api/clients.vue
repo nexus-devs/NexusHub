@@ -1,8 +1,6 @@
 <template>
   <docs>
     <h1>Client Packages</h1>
-
-
     <h2>Setup - Node.js</h2>
     <h4>Installing</h4>
     <pre v-highlightjs>

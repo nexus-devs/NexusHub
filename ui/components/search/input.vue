@@ -1,15 +1,14 @@
 <template>
   <div class="search">
     <div class="field">
-      <label>Search</label><br>
-      <input ref="input" :placeholder="placeholder || 'Try: Soma Prime, Maim...'" :value="input.name || input" type="text"
-             @input="search" @keydown.tab.prevent="complete" @keyup.enter="complete">
+      <label>Search</label>
+      <input ref="input" :placeholder="placeholder || 'Try: Frost Prime, Maiming Strike...'" :value="input.name || input" type="text"
+             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search">
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span class="autocomplete-type">{{ autocomplete.category }}</span>
-      <slot/>
     </div>
     <div class="tools">
-      <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="complete(suggestion)">
+      <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="search(suggestion)">
         <div class="ico-36">
           <img :src="suggestion.imgUrl" :alt="suggestion.name">
           <img :src="suggestion.imgUrl" :alt="suggestion.name" class="backdrop">
@@ -28,7 +27,7 @@
 
 <script>
 export default {
-  props: ['placeholder'],
+  props: ['placeholder', 'focus'],
 
   data () {
     return {
@@ -38,6 +37,14 @@ export default {
         type: ''
       },
       suggestions: []
+    }
+  },
+
+  mounted () {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+
+    if (this.focus && !isMobile) {
+      this.$refs.input.focus()
     }
   },
 
@@ -61,7 +68,7 @@ export default {
   },
 
   methods: {
-    async search (event) {
+    async fetch (event) {
       this.input = event.target.value
       this.$store.commit('setSearchInput', event.target.value)
 
@@ -113,7 +120,15 @@ export default {
      * Change input to full suggestion with correct capitalization
      */
     complete (suggestion = {}) {
-      // Take directly passed suggestion (when selecting from suggestion list)
+      if (this.autocomplete.name) {
+        this.input = this.autocomplete.name
+      }
+    },
+
+    /**
+     * Perform actual search based on selected input
+     */
+    search (suggestion = {}) {
       if (suggestion.name) {
         this.input = ''
         this.autocomplete = {
@@ -121,10 +136,8 @@ export default {
           category: ''
         }
         this.query(suggestion.webUrl)
-        this.suggestions = []
       }
-      // Take first suggestion in list
-      else if (this.suggestions.length) {
+      if (this.suggestions.length) {
         this.input = ''
         this.autocomplete = {
           name: '',
@@ -134,10 +147,6 @@ export default {
         this.suggestions = []
       } else {
         this.$router.push(`/warframe/search?input=${this.input}`)
-      }
-      // Hide sidebar if entered from there
-      if (this.$store.state.sidebar.active) {
-        this.$store.commit('hideSidebar')
       }
     },
 

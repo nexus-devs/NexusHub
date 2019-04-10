@@ -62,8 +62,8 @@ export default {
 nav {
   position: fixed;
   justify-content: space-between;
-  width: calc(100% - 50px);
-  padding: 0 25px;
+  width: calc(100% - 30px);
+  padding: 0 15px;
   height: 56px;
   top: 0;
   z-index: 4;

@@ -1,9 +1,6 @@
 <template>
   <div class="search">
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <div class="search-input">
         <div class="container">

@@ -1,9 +1,6 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <ui-header>
         <img src="/img/brand/nexushub-typeface-bw.svg" alt="NexusHub">

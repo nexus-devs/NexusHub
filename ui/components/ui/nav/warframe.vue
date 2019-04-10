@@ -5,7 +5,7 @@
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
-    <search/>
+    <search placeholder="Search items..."/>
     <div class="col nav-r">
       <notifications/>
     </div>
@@ -64,8 +64,8 @@ nav {
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
-  width: calc(100% - 50px);
-  padding: 0 25px;
+  width: calc(100% - 30px);
+  padding: 0 15px;
   height: 56px;
   top: 0;
   z-index: 4;
@@ -163,7 +163,7 @@ nav {
     padding: 9px 15px;
     border: 1px solid transparent;
     width: 100%;
-    @include ease(0.25s);
+    @include ease(0.15s);
 
     &:hover, &:active, &:focus {
       border: 1px solid $color-subtle;

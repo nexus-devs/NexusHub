@@ -1,20 +1,23 @@
 <template>
   <div>
     <navigation/>
-    <sidebar>
-      <sidebar-search/>
-    </sidebar>
     <app-content>
       <header>
         <div class="background-container">
           <div class="background"/>
         </div>
         <div class="container search-container">
-          <div class="row">
-            <search/>
-            <search-button/>
+          <div class="search-logo">
+            <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+            <span>.co</span>
           </div>
-          <span>Unifying Warframe's Marketplace.</span>
+
+          <div class="search-bar">
+            <search :focus="true"/>
+            <!--<search-button/>-->
+          </div>
+
+          <h2>Warframe's most comprehensive database.</h2>
         </div>
       </header>
 
@@ -88,7 +91,9 @@ export default {
     opm,
     activity,
     module,
-    patchlog
+    patchlog,
+    search,
+    searchButton
   },
 
   computed: {
@@ -100,14 +105,6 @@ export default {
     },
     patchlogs () {
       return this.$store.state.warframe.patchlogs
-    }
-  },
-
-  mounted () {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-
-    if (!isMobile) {
-      this.$refs.input.focus()
     }
   },
 
@@ -124,11 +121,44 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
+/**
+ * Keyframes for search bar
+ */
+@keyframes fadeinUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes moveUp {
+  from {
+    transform: translateY(50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scale3d(1.15,1.15,1.15);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
 header {
   position: relative;
   display: flex;
-  height: 50vh;
-  min-height: 500px;
+  height: 45vh;
+  min-height: 400px;
   width: 100%;
   align-items: center;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
@@ -151,87 +181,124 @@ header {
   }
 
   /**
-    * Search bar
-    */
+  * Search bar
+  */
   .search-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
 
-    .row {
-      margin-top:10px;
+    .search-bar {
+      position: relative;
+      z-index: 1; // Overlay slogan beneath search bar with suggestions
+      margin-top: 30px;
       opacity: 0;
-      animation: fadeinUp 0.7s forwards;
+      animation: fadeinUp 0.6s forwards;
+      animation-delay: 0.2s;
+      width: 55%;
+    }
+
+    & > h2 {
+      display: inline-block;
+      margin-top: 30px;
+      opacity: 0;
+      animation: fadeinUp 0.6s forwards;
       animation-delay: 0.3s;
+      font-size: 1.2em;
+      letter-spacing: 0.2;
+    }
+  }
+
+  .search-logo {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    animation: fadeinUp 0.6s forwards;
+    animation-delay: 0.1s;
+
+    .logo {
+      height: 50px;
+    }
+    span {
+      font-size: 2.2em;
+      color: white;
+      font-family: 'Circular'
+    }
+  }
+
+  @media (max-width: $breakpoint-s) {
+    min-height: 320px;
+    height: 35vh;
+
+    .logo {
+      height: 40px !important;
+    }
+    .search-logo span {
+      font-size: 1.8em !important;
+    }
+    .search-bar {
+      margin-top: 15px !important;
+      width: 100% !important;
     }
   }
 
   // Search fields
-  /deep/ .field {
+  /deep/ .search .field {
     position: relative;
+    margin: auto;
+    border-radius: 999px;
     background: $color-bg-dark;
-    border-radius: 2px;
-    padding: 15px;
-    margin: 1px;
-    @include shadow-1;
+    width: 100%;
 
-    .input-container, .button-container {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .button-container {
-      margin-top: 5px;
-      margin-left: 10px;
-      float:right;
-    }
     label {
-      font-size: 0.85em;
-      font-weight: 400;
-      color: white;
+      display: none;
     }
     input, .input {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       display: inline-block;
       color: white;
-      margin-bottom: -10px;
-      margin-top: -3px;
+      border: 1px solid transparent;
+      width: 100%;
+      border-radius: 999px;
+      padding: 12px 18px;
+      @include ease(0.15s);
 
+      &:hover, &:active, &:focus {
+        border: 1px solid $color-primary-subtle;
+      }
+
+      &::placeholder {
+        color: $color-font-subtle !important;
+      }
       span {
         @include ease(0.15s);
       }
     }
-    input {
-      padding: 10px 0;
-      width: 80%;
-    }
-    .interactive {
-      margin-left:-10px;
-    }
     .autocomplete {
       position: absolute;
-      left: 15px;
+      left: 19px;
+      top: 6px;
       margin-top: 7px;
-      z-index: 0;
+      z-index: 1;
     }
     .autocomplete-type {
       position: absolute;
+      z-index: 1;
       right: 10px;
       padding: 7px 10px;
     }
   }
 
-  /deep/ .col-b .tools {
+  /deep/ .tools {
     position: absolute;
     border-radius: 2px;
-    background: rgba(27, 32, 37, 0.75);
-    width: calc(33.33% - 2px);
-    margin-top: -1px;
-    margin-left: 1px;
-    z-index: 2;
-
-    @media (max-width: $breakpoint-s) {
-      width: calc(100% - 2px);
-      background: $color-bg-darker;
-    }
+    background: $color-bg-dark;
+    width: 100%;
+    margin-top: -25px; // Reach center of input radius
+    z-index: 0;
+    @include shade-0;
 
     // Input Suggestions
     .suggestion {
@@ -241,6 +308,9 @@ header {
 
       &:hover {
         background: $color-bg-darker;
+      }
+      &:first-of-type {
+        padding-top: 40px;
       }
       .ico-36 {
         position: relative;
@@ -281,9 +351,9 @@ header {
       }
     }
   }
-  }
+}
 
-  #app {
+#app {
   .realtime {
     display: inline-flex;
 
@@ -368,39 +438,6 @@ header {
         max-width: none;
       }
     }
-  }
-}
-
-/**
- * Keyframes for search bar
- */
-@keyframes fadeinUp {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes moveUp {
-  from {
-    transform: translateY(50px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@keyframes pulse {
-  0% {
-    transform: scaleX(1);
-  }
-  50% {
-    transform: scale3d(1.15,1.15,1.15);
-  }
-  100% {
-    transform: scaleX(1);
   }
 }
 </style>
