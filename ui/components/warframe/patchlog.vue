@@ -73,6 +73,7 @@ export default {
     moment,
     setVisibility (bool, entry) {
       const buffer = -99999
+      if (!this.$store.state.items) return
 
       if (bool || entry.boundingClientRect.top < entry.rootBounds.bottom + buffer || entry.boundingClientRect.bottom < entry.rootBounds.top + buffer) {
         this.visible = true

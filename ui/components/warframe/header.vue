@@ -65,7 +65,8 @@ export default {
       return this.$store.state.items.item
     },
     itemUrl () {
-      return `/warframe/items/${this.item.name.replace(/ /g, '-').toLowerCase()}`
+      const item = this.item.name.replace(/ /g, '-').toLowerCase()
+      return `/warframe/items/${item}`
     },
     component () {
       const item = this.$store.state.items.item
@@ -79,12 +80,12 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
 
     // Only fetch item data if we actually have a new item
     if (title(store.state.items.item.name) !== item) {
       const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
-      itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${itemData.name}`)
+      itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}`)
 
       if (itemData.tradable) {
         itemData.activeOrders = (await this.$cubic.get(`/warframe/v1/orders?item=${item}`)).length

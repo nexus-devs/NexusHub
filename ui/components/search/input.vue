@@ -28,6 +28,8 @@
 
 
 <script>
+import storeModule from 'src/store/search.js'
+
 export default {
   props: ['placeholder', 'focus'],
 
@@ -50,25 +52,6 @@ export default {
     }
   },
 
-  storeModule: {
-    name: 'search',
-    state: {
-      input: ''
-    },
-    mutations: {
-      setSearchInput (state, input) {
-        state.input = input
-      }
-    },
-    actions: {
-      applyInputQuery ({ commit }, route) {
-        if (route.query.input) {
-          commit('setSearchInput', route.query.input)
-        }
-      }
-    }
-  },
-
   methods: {
     async fetch (event) {
       this.input = event.target.value
@@ -88,7 +71,8 @@ export default {
 
       // Only run if timeout isn't after search is done
       if (this.input.length > 1) {
-        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${this.input}&limit=3`)
+        const query = encodeURIComponent(this.input)
+        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${query}&limit=4`)
       }
 
       // Found suggestions and input still matches result (may not if user types too fast)
@@ -98,7 +82,6 @@ export default {
           name: result[0].name.replace(regex, this.input),
           category: result[0].category
         }
-        console.log(result[0])
         this.suggestions = result
       }
 
@@ -171,6 +154,8 @@ export default {
 
       this.$router.push(path)
     }
-  }
+  },
+
+  storeModule
 }
 </script>

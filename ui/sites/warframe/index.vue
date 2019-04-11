@@ -192,7 +192,7 @@ header {
     .search-bar {
       position: relative;
       z-index: 1; // Overlay slogan beneath search bar with suggestions
-      margin-top: 30px;
+      margin-top: 20px;
       opacity: 0;
       animation: fadeinUp 0.6s forwards;
       animation-delay: 0.2s;
@@ -247,7 +247,7 @@ header {
   /deep/ .search .field {
     position: relative;
     margin: auto;
-    border-radius: 999px;
+    border-radius: 2px;
     background: $color-bg-dark;
     z-index: 2;
     width: 100%;
@@ -260,15 +260,10 @@ header {
       z-index: 2;
       display: inline-block;
       color: white;
-      border: 1px solid transparent;
       width: 100%;
       border-radius: 999px;
-      padding: 12px 18px;
+      padding: 14px 18px;
       @include ease(0.15s);
-
-      &:hover, &:active, &:focus {
-        border: 1px solid $color-primary-subtle;
-      }
 
       &::placeholder {
         color: $color-font-subtle !important;
@@ -279,8 +274,8 @@ header {
     }
     .autocomplete {
       position: absolute;
-      left: 19px;
-      top: 6px;
+      left: 18px;
+      top: 7px;
       margin-top: 7px;
       z-index: 1;
     }

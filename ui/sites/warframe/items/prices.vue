@@ -98,7 +98,7 @@ export default {
   },
 
   async asyncData ({ route }) {
-    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
     this.$store.commit('setPricesItem', item)
     this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
   },
