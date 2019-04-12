@@ -313,7 +313,6 @@ header {
     .suggestion {
       padding: 15px;
       cursor: pointer;
-      @include ease(0.1s);
 
       &:hover {
         background: $color-bg-darker;

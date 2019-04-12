@@ -19,7 +19,7 @@
           <span class="suggestion-name">{{ suggestion.name }}</span>
           <span class="suggestion-type">{{ suggestion.type }}</span>
         </div>
-        <span class="suggestion-data">{{ suggestion.keyData }}</span>
+        <span v-if="suggestion.keyData" class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
     </div>
     <slot/>

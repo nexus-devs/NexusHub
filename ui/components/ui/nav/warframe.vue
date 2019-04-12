@@ -221,7 +221,7 @@ nav {
     top: 10px;
   }
 
-  /deep/ .tools {
+  .tools {
     position: absolute;
     border-radius: 2px;
     background: $color-bg-dark;
@@ -233,7 +233,6 @@ nav {
     .suggestion {
       padding: 15px;
       cursor: pointer;
-      @include ease(0.1s);
 
       &:hover {
         background: $color-bg-darker;
