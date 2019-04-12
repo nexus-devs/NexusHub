@@ -132,6 +132,7 @@ header {
 
   @media (max-width: $breakpoint-s) {
     padding: 100 0 0 0;
+    @include shadow-1; // would blend with background due to colored nav
   }
 }
 
@@ -201,9 +202,6 @@ header {
     min-height: 200%;
     opacity: 0.75;
     filter: blur(150px);
-  }
-  @media (max-width: $breakpoint-s) {
-    bottom: -10px;
   }
 }
 

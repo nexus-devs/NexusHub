@@ -233,6 +233,11 @@ header {
     }
   }
 
+  @media (max-width: $breakpoint-m) {
+    .search-bar {
+      width: 100% !important;
+    }
+  }
   @media (max-width: $breakpoint-s) {
     min-height: 320px;
     height: 35vh;
@@ -288,6 +293,10 @@ header {
       z-index: 1;
       right: 70px; // beyond search button
       top: 14px;
+
+      @media (max-width: $breakpoint-s) {
+        display: none; // Would clip with input
+      }
     }
   }
 

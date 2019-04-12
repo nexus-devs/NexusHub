@@ -226,9 +226,8 @@ nav {
     border-radius: 2px;
     background: $color-bg-dark;
     width: 100%;
-    margin-top: -25px; // Reach center of input radius
     z-index: 0;
-    @include shade-0;
+    @include shadow-1;
 
     // Input Suggestions
     .suggestion {
@@ -238,9 +237,6 @@ nav {
 
       &:hover {
         background: $color-bg-darker;
-      }
-      &:first-of-type {
-        padding-top: 40px;
       }
       .ico-36 {
         position: relative;
