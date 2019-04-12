@@ -57,7 +57,7 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
-  }
+  },
 
   storeModule: {
     name: 'game',
