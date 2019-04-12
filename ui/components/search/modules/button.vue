@@ -1,12 +1,12 @@
 <template>
-  <a href="/warframe/search" class="search-button button-container" @click.stop.prevent="search">
-    <div class="button-icon">
+  <button class="search-button" @click.stop.prevent="search">
+    <div class="icon">
       <img src="/img/sidebar/search.svg" class="ico-16" alt="Search">
     </div>
-    <button type="button">
+    <div class="text">
       Search
-    </button>
-  </a>
+    </div>
+  </button>
 </template>
 
 
@@ -43,15 +43,3 @@ export default {
   }
 }
 </script>
-
-
-
-<style lang="scss" scoped>
-.button-container {
-  position: absolute;
-  right: 15px;
-}
-.button-icon {
-  display: none; // optional
-}
-</style>

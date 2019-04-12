@@ -41,8 +41,9 @@
 
 <script>
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe.vue'
+import navigation from 'src/components/ui/nav/general.vue'
 import resultsGroup from 'src/components/search/results/results-group.vue'
+import search from 'src/components/search/input.vue'
 import storeModule from 'src/store/serp.js'
 let ongoing = setTimeout(() => {})
 
@@ -50,6 +51,7 @@ export default {
   components: {
     navigation,
     appContent,
+    search, // Just load the store module
     resultsGroup
   },
 

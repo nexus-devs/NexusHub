@@ -3,9 +3,11 @@
     <div class="field">
       <label>Search</label>
       <input ref="input" :placeholder="placeholder || 'Try: Frost Prime, Maiming Strike...'" :value="input.name || input" type="text"
-             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search">
+             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search" @keydown.shift.stop>
       <span class="autocomplete">{{ autocomplete.name }}</span>
-      <span class="autocomplete-type">{{ autocomplete.category }}</span>
+      <span v-if="autocomplete.category" class="autocomplete-type">
+        {{ autocomplete.category === 'Any' ? 'Search anywhere' : `Found in ${autocomplete.category}` }}
+      </span>
     </div>
     <div class="tools">
       <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="search(suggestion)">
@@ -20,12 +22,15 @@
         <span class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
     </div>
+    <slot/>
   </div>
 </template>
 
 
 
 <script>
+import storeModule from 'src/store/search.js'
+
 export default {
   props: ['placeholder', 'focus'],
 
@@ -48,25 +53,6 @@ export default {
     }
   },
 
-  storeModule: {
-    name: 'search',
-    state: {
-      input: ''
-    },
-    mutations: {
-      setSearchInput (state, input) {
-        state.input = input
-      }
-    },
-    actions: {
-      applyInputQuery ({ commit }, route) {
-        if (route.query.input) {
-          commit('setSearchInput', route.query.input)
-        }
-      }
-    }
-  },
-
   methods: {
     async fetch (event) {
       this.input = event.target.value
@@ -86,7 +72,8 @@ export default {
 
       // Only run if timeout isn't after search is done
       if (this.input.length > 1) {
-        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${this.input}&limit=3`)
+        const query = encodeURIComponent(this.input)
+        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${query}&limit=4`)
       }
 
       // Found suggestions and input still matches result (may not if user types too fast)
@@ -168,6 +155,8 @@ export default {
 
       this.$router.push(path)
     }
-  }
+  },
+
+  storeModule
 }
 </script>

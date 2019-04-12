@@ -12,11 +12,9 @@ async function monitor () {
   const clear = new Clear({ ...options, ...{ url: '/warframe/v1/orders/clearExternal' } })
   const Client = require('cubic-client')
   const client = new Client({
-    api_url: 'wss://api.nexushub.co/ws',
-    auth_url: 'wss://auth.nexushub.co/ws'
+    api_url: 'wss://api.staging.nexushub.co/ws',
+    auth_url: 'wss://auth.staging.nexushub.co/ws'
   })
-
-  console.log(await client.get('/foo'))
 
   // Track orders from production API and post them locally. This includes wfm
   // orders.

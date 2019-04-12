@@ -63,7 +63,7 @@ export default {
   },
 
   async asyncData () {
-    const item = this.$store.state.items.item.name
+    const item = encodeURIComponent(this.$store.state.items.item.name)
     this.$store.commit('setItemPatchlogs', await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}&limit=0`))
   },
 

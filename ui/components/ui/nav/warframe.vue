@@ -5,7 +5,9 @@
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
-    <search placeholder="Search items..."/>
+    <search placeholder="Search items...">
+      <span class="shortcut">SHIFT + F</span>
+    </search>
     <div class="col nav-r">
       <notifications/>
     </div>
@@ -17,6 +19,12 @@
 <script>
 import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/input.vue'
+
+// Client-side-only requirements
+let shortcut, listener
+try {
+  shortcut = require('keyboardjs')
+} catch (err) {}
 
 export default {
   components: {
@@ -38,6 +46,17 @@ export default {
 
   beforeCreate () {
     this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
+  },
+
+  mounted () {
+    listener = shortcut.bind('shift + f', (e) => {
+      e.preventDefault() // Don't type in input on keyup
+      this.$el.querySelector('input').focus()
+    })
+  },
+
+  beforeDestroy () {
+    shortcut.unbind('shift + f', listener)
   },
 
   storeModule: {
@@ -139,27 +158,42 @@ nav {
   }
 }
 
+.shortcut {
+  position: absolute;
+  z-index: 2;
+  right: 15px;
+  top: 7px;
+  font-size: 0.65em;
+  padding: 5px;
+  border-radius: 2px;
+  border: 1px solid $color-subtle;
+  color: $color-font-subtle;
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
+}
+
 /deep/ .search {
   position: relative;
   font-size: 0.9em;
   width: 100%;
   max-width: $max-width;
   flex-grow: 1;
+  background: $color-bg-darker;
 
   @media (max-width: $breakpoint-s) {
     display: none;
   }
 
-  label, br {
+  label {
     display: none;
   }
 
   input {
     position: relative; // Overlay autocomplete
-    z-index: 1;
+    z-index: 2;
     color: white;
     border-radius: 3px;
-    background: $color-bg-darker;
     padding: 9px 15px;
     border: 1px solid transparent;
     width: 100%;
@@ -176,49 +210,44 @@ nav {
 
   .autocomplete {
     position: absolute;
-    left: 12px;
-    top: 2px;
-    margin-top: 7px;
-    z-index: 0;
+    left: 16px;
+    top: 10px;
+    z-index: 1;
   }
   .autocomplete-type {
-    display: none;
+    position: absolute;
+    z-index: 1;
+    right: 90px;
+    top: 10px;
   }
 
-  .tools {
+  /deep/ .tools {
     position: absolute;
     border-radius: 2px;
     background: $color-bg-dark;
-    left: 0;
     width: 100%;
-    margin-top: 6px;
-    z-index: 2;
-    @include shadow-1;
-
-    @media (max-width: $breakpoint-s) {
-      width: calc(100% - 2px);
-      background: $color-bg-darker;
-    }
+    margin-top: -25px; // Reach center of input radius
+    z-index: 0;
+    @include shade-0;
 
     // Input Suggestions
     .suggestion {
-      padding: 10px 12px;
+      padding: 15px;
       cursor: pointer;
       @include ease(0.1s);
-      border-top: 1px solid $color-subtle-dark;
 
       &:hover {
         background: $color-bg-darker;
+      }
+      &:first-of-type {
+        padding-top: 40px;
       }
       .ico-36 {
         position: relative;
         overflow: hidden;
         text-align: center;
         border-radius: 2px;
-        margin-right: 20px;
-        margin-left: 10px;
-        height: 24px;
-        width: 24px;
+        margin-right: 10px;
 
         img {
           position: relative;
@@ -240,17 +269,17 @@ nav {
         .suggestion-type {
           margin-top: -3px;
           font-size: 0.9em;
-          opacity: 0.8;
         }
       }
       .suggestion-data {
-        position: absolute;
         display: inline-block;
         vertical-align: middle;
-        right: 0;
-        font-size: 0.9em;
-        margin: 7px 0;
+        font-size: 1.1em;
+        color: white;
+        font-family: 'Circular';
+        margin: 7px 10px;
         padding: 3px 10px;
+        border-left: 1px solid $color-subtle;
       }
     }
   }

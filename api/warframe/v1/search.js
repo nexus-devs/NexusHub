@@ -17,7 +17,7 @@ class Search extends Endpoint {
     },
     {
       name: 'limit',
-      default: 12,
+      default: 50,
       description: 'Number of results to limit search to. Min. 2, Max. 20 for non-fuzzy queries.'
     },
     {
@@ -58,10 +58,10 @@ class Search extends Endpoint {
         reason: `Query term must be at least 2 characters. Received ${query.length}.`
       })
     }
-    if (limit > 20) {
+    if (limit > 50) {
       return res.status(400).send({
         error: 'Bad input.',
-        reason: `Limit must not be higher than 20. Received ${limit}.`
+        reason: `Limit must not be higher than 50. Received ${limit}.`
       })
     }
 

@@ -60,7 +60,7 @@
 import moment from 'moment'
 import popup from 'src/components/ui/popup.vue'
 import priceDiff from 'src/components/warframe/price-diff.vue'
-import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
+import tooltip from 'src/components/ui/tooltip.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {

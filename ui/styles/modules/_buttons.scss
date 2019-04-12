@@ -109,11 +109,11 @@
   &:active {
     transform: scale(1);
   }
-  & img:last-of-type {
-    margin-right: -20px; // Clear ascending/descending
-  }
   & img:first-of-type {
     margin-right: 2px; // Clear the rule above if there's no ascending/descending img
+  }
+  & img:last-of-type {
+    margin-right: -20px; // Clear ascending/descending
   }
   span {
     font-size: 0.9em;
