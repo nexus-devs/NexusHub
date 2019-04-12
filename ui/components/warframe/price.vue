@@ -214,9 +214,6 @@ export default {
   z-index: 0;
 
   /deep/ {
-    .blur {
-      display: none;
-    }
     svg {
       .line {
         stroke: $color-font-subtle;

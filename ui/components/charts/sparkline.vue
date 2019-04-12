@@ -194,7 +194,6 @@ svg {
 .point {
   opacity: 0;
   height: 100%;
-  filter: drop-shadow( -5px -5px 5px #000 );
 
   // Helper to extend size of .tooltip, so we can hover properly
   rect.hover {
