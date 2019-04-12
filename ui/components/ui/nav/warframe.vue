@@ -21,7 +21,7 @@ import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/input.vue'
 
 // Client-side-only requirements
-let shortcut, listener
+let shortcut
 try {
   shortcut = require('keyboardjs')
 } catch (err) {}

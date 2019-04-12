@@ -205,7 +205,7 @@ header {
       display: none;
     }
   }
-  
+
   .search-bar {
     position: relative;
     z-index: 1; // Overlay slogan beneath search bar with suggestions

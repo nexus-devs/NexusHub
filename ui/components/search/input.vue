@@ -83,7 +83,6 @@ export default {
           name: result[0].name.replace(regex, this.input),
           category: result[0].category
         }
-        console.log(result)
         this.suggestions = result
       }
 
