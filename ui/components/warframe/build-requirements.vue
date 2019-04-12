@@ -33,7 +33,7 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
-import tooltip from 'src/components/ui/sidebar/modules/tooltip.vue'
+import tooltip from 'src/components/ui/tooltip.vue'
 
 export default {
   components: {
