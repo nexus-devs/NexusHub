@@ -16,8 +16,6 @@ async function monitor () {
     auth_url: 'wss://auth.staging.nexushub.co/ws'
   })
 
-  console.log(await client.get('/foo'))
-
   // Track orders from production API and post them locally. This includes wfm
   // orders.
   client.subscribe('/warframe/v1/orders', req => {

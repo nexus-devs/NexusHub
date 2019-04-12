@@ -14,7 +14,7 @@
 
           <div class="search-bar">
             <search :focus="true"/>
-            <!--<search-button/>-->
+            <search-button/>
           </div>
 
           <h2>Warframe's most comprehensive database.</h2>
@@ -189,25 +189,31 @@ header {
     flex-direction: column;
     width: 100%;
 
-    .search-bar {
-      position: relative;
-      z-index: 1; // Overlay slogan beneath search bar with suggestions
-      margin-top: 20px;
-      opacity: 0;
-      animation: fadeinUp 0.6s forwards;
-      animation-delay: 0.2s;
-      width: 55%;
-    }
-
-    & > h2 {
-      display: inline-block;
+    h2 {
       margin-top: 30px;
-      opacity: 0;
-      animation: fadeinUp 0.6s forwards;
-      animation-delay: 0.3s;
-      font-size: 1.2em;
-      letter-spacing: 0.2;
+      text-align: center;
     }
+  }
+
+  /deep/ .search-button {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    z-index: 2;
+
+    .text {
+      display: none;
+    }
+  }
+  
+  .search-bar {
+    position: relative;
+    z-index: 1; // Overlay slogan beneath search bar with suggestions
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeinUp 0.6s forwards;
+    animation-delay: 0.2s;
+    width: 55%;
   }
 
   .search-logo {
@@ -247,7 +253,7 @@ header {
   /deep/ .search .field {
     position: relative;
     margin: auto;
-    border-radius: 2px;
+    border-radius: 999px;
     background: $color-bg-dark;
     z-index: 2;
     width: 100%;
@@ -261,7 +267,6 @@ header {
       display: inline-block;
       color: white;
       width: 100%;
-      border-radius: 999px;
       padding: 14px 18px;
       @include ease(0.15s);
 
@@ -275,16 +280,14 @@ header {
     .autocomplete {
       position: absolute;
       left: 18px;
-      top: 7px;
-      margin-top: 7px;
+      top: 14px;
       z-index: 1;
     }
     .autocomplete-type {
       position: absolute;
       z-index: 1;
-      right: 10px;
-      top: 6px;
-      padding: 7px 10px;
+      right: 70px; // beyond search button
+      top: 14px;
     }
   }
 
@@ -342,7 +345,9 @@ header {
         display: inline-block;
         vertical-align: middle;
         float: right;
+        font-family: 'Circular';
         font-size: 0.9em;
+        color: white;
         margin: 7px 0;
         padding: 3px 10px;
       }

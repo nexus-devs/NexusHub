@@ -3,7 +3,7 @@
     <div class="field">
       <label>Search</label>
       <input ref="input" :placeholder="placeholder || 'Try: Frost Prime, Maiming Strike...'" :value="input.name || input" type="text"
-             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search">
+             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search" @keydown.shift.stop>
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span v-if="autocomplete.category" class="autocomplete-type">
         {{ autocomplete.category === 'Any' ? 'Search anywhere' : `Found in ${autocomplete.category}` }}
@@ -22,6 +22,7 @@
         <span class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
     </div>
+    <slot/>
   </div>
 </template>
 
@@ -82,6 +83,7 @@ export default {
           name: result[0].name.replace(regex, this.input),
           category: result[0].category
         }
+        console.log(result)
         this.suggestions = result
       }
 
