@@ -67,15 +67,6 @@ export default {
   }
 }
 .data {
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  width: calc(100% - 65px);
-  vertical-align: middle;
-
-  @media (max-width: $breakpoint-m) {
-    flex-direction: column;
-    margin-top: -15px;
-  }
+  display: inline-block;
 }
 </style>
