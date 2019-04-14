@@ -23,7 +23,8 @@ class Order extends Endpoint {
         rank: 0,
         quantity: 1,
         message: 'Hello, I\'m Glen and I\'d like to buy Ammo Drum for 900p. I won\'t ban you, promise.',
-        source: 'Trade Chat'
+        source: 'Trade Chat',
+        createdAt: new Date()
       }
     }
     this.schema.response = String
