@@ -27,8 +27,8 @@ class Aggregator {
    * params: Aggregation function parameters as object.
    */
   async get (collection, query, timerange, aggregateFn, params) {
-    // Dates are confusing, so we'l correct any order issue that may occur.
-    // This simply switches the values so the first value is where we start and
+    // Dates are confusing, so we'll correct any order issue that may occur.
+    // This switches the values so the first value is where we start and
     // the second value is how many days ago we'll stop.
     timerange = timerange[0] > timerange[1] ? [timerange[1], timerange[0]] : timerange
     const start = moment.utc().subtract(timerange[0], 'days')

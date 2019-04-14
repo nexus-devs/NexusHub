@@ -8,7 +8,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 class Prices extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get item price statistics in a specified timerange. Also returns the previousParallel period as comparison to the given timerange.'
+    this.schema.description = 'Get item price statistics in a specified timerange. Also returns the previous period as comparison to the given timerange.'
     this.schema.url = '/warframe/v1/items/:item/prices'
     this.schema.query = [
       {
@@ -52,7 +52,7 @@ class Prices extends Endpoint {
     const name = title(req.params.item)
     const timerange = req.query.timerange
     const component = req.query.component
-    const source = req.query.source
+    const source = title(req.query.source)
     const platform = req.query.platform
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
@@ -144,6 +144,9 @@ class Prices extends Endpoint {
         .replace(' Prices', '')
         .replace(' Trade Chat', '')
         .replace(' Warframe Market', '')
+        .replace(' PC', '')
+        .replace(' XB1', '')
+        .replace(' PS4', '')
       res.components.push({ name, prices: { buying, selling } })
     }
     return res
