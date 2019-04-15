@@ -1,35 +1,41 @@
 <template>
-  <div class="order row" @click="select">
-    <div class="image-wrapper">
-      <img :src="component.imgUrl" :alt="component.name">
-      <img :src="component.imgUrl" :alt="component.name" class="blur">
-    </div>
-    <div class="item col">
-      <span class="component">{{ component.name }}</span>
-      <br>
-      <span>{{ item.name }}</span>
-    </div>
-    <div class="user col">
-      <div class="user-image">
-        <img :alt="order.user" src="/img/ui/placeholder.png">
+  <div class="order" @click="select">
+    <!-- Order listing -->
+    <div class="row">
+      <div class="image-wrapper">
+        <img :src="component.imgUrl" :alt="component.name">
+        <img :src="component.imgUrl" :alt="component.name" class="blur">
       </div>
-      <tooltip>{{ order.user }}</tooltip>
+      <div class="item col">
+        <span class="component">{{ component.name }}</span>
+        <br>
+        <span>{{ item.name }}</span>
+      </div>
+      <div class="user col">
+        <div class="user-image">
+          <img :alt="order.user" src="/img/ui/placeholder.png">
+        </div>
+        <tooltip>{{ order.user }}</tooltip>
+      </div>
+      <div v-if="item.fusionLimit" class="col">
+        {{ order.rank }} / {{ item.fusionLimit }}
+      </div>
+      <div class="col">
+        <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
+        {{ order.quantity }}x
+      </div>
+      <div class="col price">
+        <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
+        <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
+        <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
+      </div>
+      <div class="col buy">
+        <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
+      </div>
     </div>
-    <div v-if="item.fusionLimit" class="col">
-      {{ order.rank }} / {{ item.fusionLimit }}
-    </div>
-    <div class="col">
-      <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
-      {{ order.quantity }}x
-    </div>
-    <div class="col price">
-      <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-      <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
-      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
-    </div>
-    <div class="col buy">
-      <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
-    </div>
+
+    <!-- Order selection -->
+    <selection :order="order" :item="item" :component="component"/>
   </div>
 </template>
 
@@ -37,12 +43,14 @@
 
 <script>
 import priceDiff from 'src/components/warframe/price-diff.vue'
+import selection from 'src/components/warframe/order-selection.vue'
 import tooltip from 'src/components/ui/tooltip.vue'
 
 export default {
   components: {
     tooltip,
-    priceDiff
+    priceDiff,
+    selection
   },
 
   props: ['order'],
@@ -81,7 +89,7 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
-.order {
+.order .row {
   @include field;
   align-items: center;
   width: 100%;
