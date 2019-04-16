@@ -110,7 +110,14 @@ export default {
     }
   },
 
-  storeModule
+  storeModule,
+
+  head () {
+    return {
+      title: `${this.input} · NexusHub Search`,
+      description: this.results.length ? `${this.results[0].description}` : ''
+    }
+  }
 }
 </script>
 

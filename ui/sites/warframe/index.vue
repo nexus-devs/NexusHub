@@ -17,7 +17,7 @@
             <search-button/>
           </div>
 
-          <h2>Warframe's most comprehensive database.</h2>
+          <h2>Never miss out on a trade again!</h2>
         </div>
       </header>
 
@@ -112,7 +112,12 @@ export default {
     this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
   },
 
-  storeModule
+  storeModule,
+
+  head: {
+    title: "NexusHub · Never miss out on a trade again!",
+    description: "Get real-time trading data and prices from the Trade Chat and other platforms like Warframe Market."
+  }
 }
 </script>
 

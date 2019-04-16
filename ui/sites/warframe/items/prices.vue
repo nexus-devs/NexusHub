@@ -122,7 +122,13 @@ export default {
     }
   },
 
-  storeModule
+  storeModule,
+
+  head () {
+    return {
+      title: `${this.item.name} Prices · NexusHub`
+    }
+  }
 }
 </script>
 

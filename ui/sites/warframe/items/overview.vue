@@ -77,6 +77,13 @@ export default {
 
   beforeMount () {
     Vue.use(VueObserveVisibility)
+  },
+
+  header () {
+    return {
+      title: `${item.name} · NexusHub`,
+      description: item.description
+    }
   }
 }
 </script>
