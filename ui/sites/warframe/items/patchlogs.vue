@@ -84,9 +84,9 @@ export default {
     moment
   },
 
-  header () {
+  head () {
     return {
-      title: 
+      title: `${this.item.name} Patchlogs · NexusHub`
     }
   }
 }
