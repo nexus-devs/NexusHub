@@ -32,7 +32,7 @@
         </div>
         <div class="meta-data">
           <h4 v-if="order.message">Original Message</h4>
-          <span v-if="order.message" class="raw">
+          <span v-if="order.message" class="sub raw">
             {{ order.message }}
           </span>
         </div>

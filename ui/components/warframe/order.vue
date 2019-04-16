@@ -89,11 +89,17 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
+.order {
+  margin-top: 10px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
 .order .row {
   @include field;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px;
   @include ease(0.5s);
 
   div {
