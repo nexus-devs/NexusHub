@@ -125,10 +125,26 @@ export default {
   storeModule,
 
   head () {
+    const item = this.item
+    let components = ''
+
+    item.components.forEach((component, i) => {
+      const price = (component.prices.buying.current.median + component.prices.selling.current.median) / 2
+
+      if (component.tradable && price) {
+        components += `${component.name}: ${price}p`
+      } else {
+        components += `${component.name}: No data`
+      }
+
+      if (i !== item.components.length) components += ', '
+    })
+
     return {
-      title: `${this.item.name} Prices · NexusHub`,
+      title: `${item.name} Prices · NexusHub`,
       meta: [{
-        
+        name: 'description',
+        content: `${item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
       }]
     }
   }

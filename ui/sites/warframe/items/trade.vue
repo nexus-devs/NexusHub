@@ -227,7 +227,10 @@ export default {
   head () {
     return {
       title: `${this.item.name} Trades (${this.all.length}) · NexusHub`,
-      description: `${this.all.length} open trades for ${this.item.name} starting at ${Math.min(this.listings.map(o => o.price).filter(p => p))}p`
+      meta: [{
+        name: 'description',
+        content:  `Check out ${this.all.length} open offers for ${this.item.name} ${this.all.length ? `starting at ${this.listings.filter(o => o.component === 'Set' && o.price)[0].price}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
+      }]
     }
   }
 }

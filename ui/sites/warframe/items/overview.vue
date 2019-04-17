@@ -81,7 +81,7 @@ export default {
 
   head () {
     return {
-      title: `${item.name} · NexusHub`,
+      title: `${this.item.name} · NexusHub`,
       meta: [{
         name: 'description',
         content: this.item.description

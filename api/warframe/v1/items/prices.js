@@ -52,7 +52,7 @@ class Prices extends Endpoint {
     const name = title(req.params.item)
     const timerange = req.query.timerange
     const component = req.query.component
-    const source = title(req.query.source)
+    const source = req.query.source ? title(req.query.source) : req.query.source
     const platform = req.query.platform
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
