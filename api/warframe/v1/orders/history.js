@@ -4,7 +4,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 class History extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Returns all priced orders from the last 24h, including closed ones, for a specified item component.'
+    this.schema.description = 'Returns all priced orders from the last 24h, including closed ones, for a specified item component. Usage of this data for commerical purposes must be discussed with us before.'
     this.schema.query = [
       {
         name: 'item',

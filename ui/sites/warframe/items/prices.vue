@@ -126,7 +126,10 @@ export default {
 
   head () {
     return {
-      title: `${this.item.name} Prices · NexusHub`
+      title: `${this.item.name} Prices · NexusHub`,
+      meta: [{
+        
+      }]
     }
   }
 }

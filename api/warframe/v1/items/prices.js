@@ -8,7 +8,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 class Prices extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get item price statistics in a specified timerange. Also returns the previous period as comparison to the given timerange.'
+    this.schema.description = 'Get item price statistics in a specified timerange. Also returns the previous period as comparison to the given timerange. Usage of this data for commerical purposes must be discussed with us before.'
     this.schema.url = '/warframe/v1/items/:item/prices'
     this.schema.query = [
       {

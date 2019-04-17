@@ -116,7 +116,10 @@ export default {
 
   head: {
     title: "NexusHub · Never miss out on a trade again!",
-    description: "Get real-time trading data and prices from the Trade Chat and other platforms like Warframe Market."
+    meta: [{
+      name: 'description',
+      content: "Get real-time trading data and prices from Warframe's Trade Chat and other platforms like Warframe Market."
+    }]
   }
 }
 </script>

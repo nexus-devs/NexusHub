@@ -82,12 +82,6 @@ export default {
 
   methods: {
     moment
-  },
-
-  header () {
-    return {
-      title: 
-    }
   }
 }
 </script>

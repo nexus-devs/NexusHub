@@ -47,6 +47,14 @@ export default {
         return 'there'
       }
     }
+  },
+
+  head: {
+    title: 'NexusHub · Contact',
+    meta: [{
+      name: 'description',
+      content: 'Get in touch with the NexusHub team. You can contact us through Mail or Discord.'
+    }]
   }
 }
 </script>

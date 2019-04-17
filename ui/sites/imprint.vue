@@ -40,6 +40,10 @@ export default {
     navigation,
     appContent,
     uiHeader
+  },
+
+  head: {
+    title: 'NexusHub · Imprint'
   }
 }
 </script>

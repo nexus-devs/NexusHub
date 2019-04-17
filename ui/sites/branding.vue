@@ -147,6 +147,13 @@ export default {
     appContent,
     navigation,
     uiHeader
+  },
+  head: {
+    title: 'NexusHub Brand',
+    meta: [{
+      name: 'description',
+      content: 'Find all media resources for NexusHub such as logos, banners and further brand identity instructions.'
+    }]
   }
 }
 </script>

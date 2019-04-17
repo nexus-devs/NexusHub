@@ -79,10 +79,13 @@ export default {
     Vue.use(VueObserveVisibility)
   },
 
-  header () {
+  head () {
     return {
       title: `${item.name} · NexusHub`,
-      description: item.description
+      meta: [{
+        name: 'description',
+        content: this.item.description
+      }]
     }
   }
 }

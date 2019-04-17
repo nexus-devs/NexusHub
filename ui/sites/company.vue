@@ -133,7 +133,11 @@ export default {
     this.$store.commit('setAnalyticsOffers', offers)
   },
 
-  storeModule
+  storeModule,
+
+  head: {
+    title: 'NexusHub · Company'
+  }
 }
 </script>
 

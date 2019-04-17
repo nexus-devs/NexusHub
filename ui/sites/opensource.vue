@@ -154,6 +154,14 @@ export default {
         body: '..to be precise.'
       })
     }
+  },
+
+  head: {
+    title: 'NexusHub · Open Source',
+    meta: [{
+      name: 'description',
+      content: "Discover NexusHub's open source projects for Warframe, Node.js and DirectX."
+    }]
   }
 }
 </script>

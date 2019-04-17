@@ -46,6 +46,14 @@ export default {
   components: {
     navigation,
     appContent
+  },
+
+  head: {
+    title: 'NexusHub · Developers',
+    meta: [{
+      name: 'description',
+      content: 'Find all resources required to build your own application with data from NexusHub.'
+    }]
   }
 }
 </script>

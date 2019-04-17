@@ -115,7 +115,10 @@ export default {
   head () {
     return {
       title: `${this.input} · NexusHub Search`,
-      description: this.results.length ? `${this.results[0].description}` : ''
+      meta: [{
+        name: 'description',
+        content: this.results.length ? `${this.results[0].description}` : ''
+      }]
     }
   }
 }
