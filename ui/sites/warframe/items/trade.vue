@@ -222,7 +222,14 @@ export default {
     this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
-  storeModule
+  storeModule,
+
+  head () {
+    return {
+      title: `${this.item.name} Trades (${this.all.length}) · NexusHub`,
+      description: `${this.all.length} open trades for ${this.item.name} starting at ${Math.min(this.listings.map(o => o.price).filter(p => p))}p`
+    }
+  }
 }
 </script>
 

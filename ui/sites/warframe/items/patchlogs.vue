@@ -82,6 +82,12 @@ export default {
 
   methods: {
     moment
+  },
+
+  head () {
+    return {
+      title: `${this.item.name} Patchlogs · NexusHub`
+    }
   }
 }
 </script>
