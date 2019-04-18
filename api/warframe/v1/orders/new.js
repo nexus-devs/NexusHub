@@ -48,7 +48,7 @@ class Order extends Endpoint {
 
     // Cast date request into "real" date object
     request.createdAt = new Date(request.createdAt)
-    
+
     // Filter order by criteria (No duplicates, no stupid price, etc)
     if (this.cache.find(request)) {
       return res.send('Rejected. (Duplicate post)')
