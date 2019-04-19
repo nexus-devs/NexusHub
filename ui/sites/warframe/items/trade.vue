@@ -167,7 +167,6 @@ export default {
     },
     selectedComponent (to) {
       this.$store.commit('setOrdersComponent', to)
-      this.$store.commit('setOrders', this.$store.state.orders.all)
     }
   },
 
@@ -225,11 +224,14 @@ export default {
   storeModule,
 
   head () {
+    const valid = this.listings.find(o => o.component === 'Set' && o.price)
+    const min = valid ? this.listings.filter(o => o.component === 'Set' && o.price)[0].price : null
+
     return {
       title: `${this.item.name} Trades (${this.all.length}) · NexusHub`,
       meta: [{
         name: 'description',
-        content:  `Check out ${this.all.length} open offers for ${this.item.name} ${this.all.length ? `starting at ${this.listings.filter(o => o.component === 'Set' && o.price)[0].price}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
+        content: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
       }]
     }
   }

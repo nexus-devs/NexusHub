@@ -115,7 +115,7 @@ export default {
   storeModule,
 
   head: {
-    title: "NexusHub · Never miss out on a trade again!",
+    title: 'NexusHub · Never miss out on a trade again!',
     meta: [{
       name: 'description',
       content: "Get real-time trading data and prices from Warframe's Trade Chat and other platforms like Warframe Market."
