@@ -118,7 +118,25 @@ export default {
     title: 'NexusHub · Never miss out on a trade again!',
     meta: [{
       name: 'description',
-      content: "Get real-time trading data and prices from Warframe's Trade Chat and other platforms like Warframe Market."
+      content: "Get real-time trading data and prices from more than 100,000 players in Warframe's Trade Chat, Warframe Market and more."
+    }, {
+      property: 'og:title',
+      content: 'NexusHub · Never miss out on a trade again!'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/'
+    }, {
+      property: 'og:description',
+      content: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
     }]
   }
 }

@@ -144,7 +144,25 @@ export default {
       title: `${item.name} Prices · NexusHub`,
       meta: [{
         name: 'description',
-        content: `${item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
+        content: `${this.item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
+      }, {
+        property: 'og:title',
+        content: `${this.item.name} Prices on NexusHub`
+      }, {
+        property: 'og:type',
+        content: 'website'
+      }, {
+        property: 'og:image',
+        content: `https://nexushub.co${this.item.imgUrl}`
+      }, {
+        property: 'og:url',
+        content: `https://nexushub.co${this.item.webUrl}/prices`
+      }, {
+        property: 'og:description',
+        content: `${this.item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
+      }, {
+        property: 'og:site_name',
+        content: 'NexusHub'
       }]
     }
   }

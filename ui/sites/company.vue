@@ -136,7 +136,26 @@ export default {
   storeModule,
 
   head: {
-    title: 'NexusHub · Company'
+    title: 'NexusHub · Company',
+    meta: [{
+      property: 'og:title',
+      content: 'NexusHub Brand'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/company'
+    }, {
+      property: 'og:description',
+      content: "Making Games more transparent with NexusHub. Whether it's about buying that item we always wanted, or finding ways to improve our playstyle. NexusHub is about bringing that data to you, regardless if you're a mighty pro gamer or a casual in it for the fun."
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
   }
 }
 </script>

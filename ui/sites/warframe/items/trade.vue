@@ -232,6 +232,24 @@ export default {
       meta: [{
         name: 'description',
         content: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
+      }, {
+        property: 'og:title',
+        content: `${this.item.name} Trades on NexusHub (${this.all.length})`
+      }, {
+        property: 'og:type',
+        content: 'website'
+      }, {
+        property: 'og:image',
+        content: `https://nexushub.co${this.item.imgUrl}`
+      }, {
+        property: 'og:url',
+        content: `https://nexushub.co${this.item.webUrl}/trading`
+      }, {
+        property: 'og:description',
+        content: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
+      }, {
+        property: 'og:site_name',
+        content: 'NexusHub'
       }]
     }
   }

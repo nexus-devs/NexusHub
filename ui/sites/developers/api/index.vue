@@ -212,6 +212,32 @@ export default {
         .replace(/"Boolean"/g, 'Boolean')
         : stringified
     }
+  },
+
+  head: {
+    title: 'NexusHub · API Documentation',
+    meta: [{
+      name: 'description',
+      content: 'Find all resources required to build your own application with data from NexusHub.'
+    }, {
+      property: 'og:title',
+      content: 'NexusHub API Documentation'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/developers/api'
+    }, {
+      property: 'og:description',
+      content: 'Find all resources required to build your own application with data from NexusHub.'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
   }
 }
 </script>
