@@ -59,7 +59,7 @@
             To combat this, we heavily suggest using a unique password for your
             email account that is not shared with any other service. We also
             recommend having a look at <a href="https://haveibeenpwned.com/">
-            haveibeenpwned</a> to see if your password has been leaked at
+            haveibeenpwned</a> to see if your password has been leaked on
             another service.
             <br>
             <br>
@@ -101,6 +101,32 @@ export default {
     navigation,
     appContent,
     uiHeader
+  },
+
+  head: {
+    title: 'NexusHub · Privacy Policy',
+    meta: [{
+      name: 'description',
+      content: 'Things we do with your data. ( ͡° ͜ʖ ͡°)'
+    }, {
+      property: 'og:title',
+      content: 'NexusHub Privacy Policy'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/privacy'
+    }, {
+      property: 'og:description',
+      content: 'Things we do with your data. ( ͡° ͜ʖ ͡°)'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
   }
 }
 </script>

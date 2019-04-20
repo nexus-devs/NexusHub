@@ -147,6 +147,31 @@ export default {
     appContent,
     navigation,
     uiHeader
+  },
+  head: {
+    title: 'NexusHub Brand',
+    meta: [{
+      name: 'description',
+      content: 'Branding resources for NexusHub. Get logos and guidelines to use our brand for whatever you\'re working on.'
+    }, {
+      property: 'og:title',
+      content: 'NexusHub Brand'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/contact'
+    }, {
+      property: 'og:description',
+      content: 'Branding resources for NexusHub. Get logos and guidelines to use our brand for whatever you\'re working on.'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
   }
 }
 </script>

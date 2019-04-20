@@ -5,7 +5,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 class Orders extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Returns all open orders for a specified item.'
+    this.schema.description = 'Returns all open orders for a specified item. Usage of this data for commerical purposes must be discussed with us before.'
     this.schema.url = '/warframe/v1/orders'
     this.schema.query = [
       {

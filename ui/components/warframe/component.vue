@@ -1,7 +1,7 @@
 <template>
   <div :class="{ active: active ? true : false }" class="btn-tag component col interactive" @click="select">
     <div class="image-wrapper">
-      <img :src="component.imgUrl" alt="component.name">
+      <img :src="component.imgUrl" :alt="`${item.name} ${component.name}`">
     </div>
 
     <div class="data">
@@ -19,6 +19,9 @@ export default {
   props: ['component'],
 
   computed: {
+    item () {
+      return this.$store.state.items.item
+    },
     orders () {
       return this.$store.state.orders.all.filter(o => {
         return o.offer === this.type && o.component === this.component.name

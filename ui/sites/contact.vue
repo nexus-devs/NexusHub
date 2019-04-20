@@ -47,6 +47,32 @@ export default {
         return 'there'
       }
     }
+  },
+
+  head: {
+    title: 'NexusHub · Contact',
+    meta: [{
+      name: 'description',
+      content: 'Get in touch with the NexusHub team. You can contact us through Mail or Discord.'
+    }, {
+      property: 'og:title',
+      content: 'Contact us!'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/company'
+    }, {
+      property: 'og:description',
+      content: 'Get in touch with the NexusHub team. You can contact us through Mail or Discord.'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
   }
 }
 </script>

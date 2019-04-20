@@ -82,6 +82,31 @@ export default {
 
   methods: {
     moment
+  },
+
+  head () {
+    return {
+      title: `${this.item.name} Patchlogs · NexusHub`,
+      meta: [{
+        property: 'og:title',
+        content: `${this.item.name} Patchlogs on NexusHub`
+      }, {
+        property: 'og:type',
+        content: 'website'
+      }, {
+        property: 'og:image',
+        content: `https://nexushub.co${this.item.imgUrl}`
+      }, {
+        property: 'og:url',
+        content: `https://nexushub.co${this.item.webUrl}/patchlogs`
+      }, {
+        property: 'og:description',
+        content: `Check out all ${this.item.patchlogs ? this.item.patchlogs.length : 0} patchlogs affecting ${this.item.name} on NexusHub.`
+      }, {
+        property: 'og:site_name',
+        content: 'NexusHub'
+      }]
+    }
   }
 }
 </script>

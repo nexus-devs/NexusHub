@@ -46,7 +46,7 @@ class Order extends Endpoint {
       cache: this.cc
     }
 
-    // Cast date request into "real" date object
+    // Cast date from request into "real" date object
     request.createdAt = new Date(request.createdAt)
 
     // Filter order by criteria (No duplicates, no stupid price, etc)

@@ -1,7 +1,7 @@
 /**
  * Trader sorting logic
  */
-function filter (orders, type = 'Selling', filters = [], component) {
+function filter (orders, type = 'Selling', filters = [], component = 'Set') {
   const result = []
   const resolve = (filter, result) => {
     filter.path.split('.').forEach(key => { result = result[key] })
