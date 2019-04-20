@@ -68,7 +68,7 @@ export default {
       content: 'https://nexushub.co/company'
     }, {
       property: 'og:description',
-      content: "Get in touch with the NexusHub team. You can contact us through Mail or Discord."
+      content: 'Get in touch with the NexusHub team. You can contact us through Mail or Discord.'
     }, {
       property: 'og:site_name',
       content: 'NexusHub'

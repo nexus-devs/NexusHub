@@ -87,7 +87,7 @@ export default {
         content: this.item.description
       }, {
         property: 'og:title',
-        content: `${item.name} on NexusHub`
+        content: `${this.item.name} on NexusHub`
       }, {
         property: 'og:type',
         content: 'website'
