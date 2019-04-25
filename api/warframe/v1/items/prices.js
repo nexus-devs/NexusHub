@@ -33,6 +33,7 @@ class Prices extends Endpoint {
       max: Number,
       orders: Number
     }
+    economyData.days = economyData.hours = [economyData]
     this.schema.response = {
       name: String,
       components: [{

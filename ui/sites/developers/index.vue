@@ -52,22 +52,23 @@ export default {
     title: 'NexusHub · Developers',
     meta: [{
       name: 'description',
+      property: 'og:description',
+      itemprop: 'description',
       content: 'Find all resources required to build your own application with data from NexusHub.'
     }, {
       property: 'og:title',
+      itemprop: 'name',
       content: 'NexusHub for Developers'
     }, {
       property: 'og:type',
       content: 'website'
     }, {
       property: 'og:image',
+      itemprop: 'image primaryImageOfPage',
       content: 'https://nexushub.co/img/brand/og-banner.jpg'
     }, {
       property: 'og:url',
       content: 'https://nexushub.co/developers'
-    }, {
-      property: 'og:description',
-      content: 'Find all resources required to build your own application with data from NexusHub.'
     }, {
       property: 'og:site_name',
       content: 'NexusHub'
