@@ -76,6 +76,7 @@
 <script>
 import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import opm from 'src/components/warframe/opm-global.vue'
@@ -116,28 +117,10 @@ export default {
 
   head: {
     title: 'NexusHub · Never miss out on a trade again!',
-    meta: [{
-      name: 'description',
-      content: "Get real-time trading data and prices from more than 100,000 players in Warframe's Trade Chat, Warframe Market and more."
-    }, {
-      property: 'og:title',
-      content: 'NexusHub · Never miss out on a trade again!'
-    }, {
-      property: 'og:type',
-      content: 'website'
-    }, {
-      property: 'og:image',
-      content: 'https://nexushub.co/img/brand/og-banner.jpg'
-    }, {
-      property: 'og:url',
-      content: 'https://nexushub.co/'
-    }, {
-      property: 'og:description',
-      content: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
-    }, {
-      property: 'og:site_name',
-      content: 'NexusHub'
-    }]
+    meta: meta({
+      title: 'NexusHub · Never miss out on a trade again!',
+      description: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
+    })
   }
 }
 </script>

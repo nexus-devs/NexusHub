@@ -36,6 +36,7 @@ import VueAffix from 'vue-affix'
 import VueObserveVisibility from 'vue-observe-visibility'
 import appContent from 'src/app-content.vue'
 import itemHeader from 'src/components/warframe/header.vue'
+import meta from 'src/components/seo/meta.js'
 import moment from 'moment'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import noSsr from 'vue-no-ssr'
@@ -87,25 +88,11 @@ export default {
   head () {
     return {
       title: `${this.item.name} Patchlogs · NexusHub`,
-      meta: [{
-        property: 'og:title',
-        content: `${this.item.name} Patchlogs on NexusHub`
-      }, {
-        property: 'og:type',
-        content: 'website'
-      }, {
-        property: 'og:image',
-        content: `https://nexushub.co${this.item.imgUrl}`
-      }, {
-        property: 'og:url',
-        content: `https://nexushub.co${this.item.webUrl}/patchlogs`
-      }, {
-        property: 'og:description',
-        content: `Check out all ${this.item.patchlogs ? this.item.patchlogs.length : 0} patchlogs affecting ${this.item.name} on NexusHub.`
-      }, {
-        property: 'og:site_name',
-        content: 'NexusHub'
-      }]
+      meta: meta({
+        title: `${this.item.name} Patchlogs on NexusHub`,
+        description: `Check out all ${this.item.patchlogs ? this.item.patchlogs.length : 0} patchlogs affecting ${this.item.name} on NexusHub.`,
+        image: `https://nexushub.co${this.item.imgUrl}`
+      })
     }
   }
 }

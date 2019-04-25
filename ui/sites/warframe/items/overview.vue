@@ -41,6 +41,7 @@ import buildRequirements from 'src/components/warframe/build-requirements.vue'
 import description from 'src/components/warframe/description.vue'
 import drops from 'src/components/warframe/drops.vue'
 import itemHeader from 'src/components/warframe/header.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import patchlog from 'src/components/warframe/patchlog.vue'
 import stats from 'src/components/warframe/stats.vue'
@@ -82,28 +83,11 @@ export default {
   head () {
     return {
       title: `${this.item.name} · NexusHub`,
-      meta: [{
-        name: 'description',
-        content: this.item.description
-      }, {
-        property: 'og:title',
-        content: `${this.item.name} on NexusHub`
-      }, {
-        property: 'og:type',
-        content: 'website'
-      }, {
-        property: 'og:image',
-        content: `https://nexushub.co${this.item.imgUrl}`
-      }, {
-        property: 'og:url',
-        content: `https://nexushub.co${this.item.webUrl}`
-      }, {
-        property: 'og:description',
-        content: this.item.description
-      }, {
-        property: 'og:site_name',
-        content: 'NexusHub'
-      }]
+      meta: meta({
+        title: `${this.item.name} on NexusHub`,
+        description: this.item.description,
+        image: `https://nexushub.co${this.item.imgUrl}`
+      })
     }
   }
 }

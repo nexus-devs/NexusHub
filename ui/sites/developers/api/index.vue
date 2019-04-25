@@ -91,6 +91,7 @@
 import Vue from 'vue'
 import VueHighlightJS from 'vue-highlightjs'
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/developers.vue'
 import sidebarNav from 'src/components/developers/sidebar.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
@@ -216,28 +217,10 @@ export default {
 
   head: {
     title: 'NexusHub · API Documentation',
-    meta: [{
-      name: 'description',
-      content: 'Find all resources required to build your own application with data from NexusHub.'
-    }, {
-      property: 'og:title',
-      content: 'NexusHub API Documentation'
-    }, {
-      property: 'og:type',
-      content: 'website'
-    }, {
-      property: 'og:image',
-      content: 'https://nexushub.co/img/brand/og-banner.jpg'
-    }, {
-      property: 'og:url',
-      content: 'https://nexushub.co/developers/api'
-    }, {
-      property: 'og:description',
-      content: 'Find all resources required to build your own application with data from NexusHub.'
-    }, {
-      property: 'og:site_name',
-      content: 'NexusHub'
-    }]
+    meta: meta({
+      title: 'NexusHub API Documentation',
+      description: 'Find all resources required to build your own application with data from NexusHub.'
+    })
   }
 }
 </script>

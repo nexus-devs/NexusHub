@@ -93,6 +93,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import uiHeader from 'src/components/ui/header.vue'
 
@@ -105,28 +106,10 @@ export default {
 
   head: {
     title: 'NexusHub · Privacy Policy',
-    meta: [{
-      name: 'description',
-      content: 'Things we do with your data. ( ͡° ͜ʖ ͡°)'
-    }, {
-      property: 'og:title',
-      content: 'NexusHub Privacy Policy'
-    }, {
-      property: 'og:type',
-      content: 'website'
-    }, {
-      property: 'og:image',
-      content: 'https://nexushub.co/img/brand/og-banner.jpg'
-    }, {
-      property: 'og:url',
-      content: 'https://nexushub.co/privacy'
-    }, {
-      property: 'og:description',
-      content: 'Things we do with your data. ( ͡° ͜ʖ ͡°)'
-    }, {
-      property: 'og:site_name',
-      content: 'NexusHub'
-    }]
+    meta: meta({
+      title: 'NexusHub Privacy Policy',
+      description: 'Things we do with your data. ( ͡° ͜ʖ ͡°)'
+    })
   }
 }
 </script>
