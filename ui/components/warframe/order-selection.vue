@@ -1,19 +1,6 @@
 <template>
   <div class="selection">
     <div class="data">
-      <h3>{{ item.name }} {{ order.component }}</h3>
-      <span v-if="order.price" class="sub price">
-        You are
-        {{ order.offer === 'Selling' ? 'buying' : 'selling' }}
-        for
-        {{ order.price ? `${order.price}p` : 'any offer' }}.
-        That is
-        <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
-        compared to the average
-        {{ order.offer === 'Selling' ? 'buying' : 'selling' }}
-        price.
-      </span>
-      <br>
       <div class="meta">
         <div class="meta-data">
           <h4>Posted</h4>
@@ -37,9 +24,6 @@
           </span>
         </div>
       </div>
-
-      <br>
-
       <div class="message">
         <span ref="message">
           <span>/w {{ order.user }}</span> Hi {{ user }},
@@ -62,14 +46,9 @@
 
 <script>
 import moment from 'moment'
-import priceDiff from 'src/components/warframe/price-diff.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
-    components: {
-    priceDiff
-  },
-
   props: ['visible', 'order', 'item', 'component'],
 
   data () {
@@ -79,13 +58,6 @@ export default {
   },
 
   computed: {
-    median () {
-      if (this.order.offer && this.component.prices) {
-        const type = this.order.offer.toLowerCase()
-        return this.component.prices[type].current.median
-      }
-    },
-
     // Short username for more authentic message and less characters to avoid
     // character limit. This will remove numbers at the end and only take the
     // first word long word if camel-cased
@@ -141,39 +113,27 @@ export default {
 @import '~src/styles/partials/importer';
 
 .selection {
-  background: $color-bg-darker;
-  padding: 20px 40px;
+  border-top: 1px solid $color-subtle;
+  padding: 10px 40px;
+  width: 100%;
 }
 
 .sub {
   font-size: 0.9em;
+  color: $color-font-body;
 }
 
 h4 {
   @include uppercase()
-  margin-top: 30px;
   margin-bottom: 4px;
   font-size: 0.8em;
-}
-
-h3 {
-  font-size: 1.5em;
-}
-
-/deep/ .price-diff {
-  pointer-events: none; // Block hover state
-
-  .value {
-    padding: 0;
-    padding-left: 3px;
-  }
 }
 
 .data {
   margin-top: 30px;
 
   .meta {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .meta-data {
     display: inline-block;
@@ -181,16 +141,17 @@ h3 {
   }
 
   .message {
+    margin-top: 5px;
     padding-top: 10px;
 
     span {
       display: inline-block;
       padding: 15px 15px;
-      background: $color-bg-dark;
+      background: $color-bg;
       max-width: 70%;
       margin-top: 10px;
       margin-bottom: 10px;
-      border-radius: 3px;
+      border-radius: 2px;
       color: white;
       font-size: 0.9em;
       letter-spacing: 0.6;

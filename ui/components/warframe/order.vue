@@ -32,10 +32,8 @@
       <div class="col buy">
         <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
       </div>
+      <selection :order="order" :item="item" :component="component"/>
     </div>
-
-    <!-- Order selection -->
-    <selection :order="order" :item="item" :component="component"/>
   </div>
 </template>
 
