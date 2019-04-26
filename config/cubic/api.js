@@ -9,10 +9,14 @@ if (process.env.DOCKER && prod && node === 'api') {
   const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
+  const userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
+  const userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
   config = {
     redisUrl,
     certPublic,
-    mongoUrl
+    mongoUrl,
+    userKey,
+    userSecret
   }
 }
 

@@ -110,7 +110,35 @@ export default {
     }
   },
 
-  storeModule
+  storeModule,
+
+  head () {
+    return {
+      title: `${this.input} · NexusHub Search`,
+      meta: [{
+        name: 'description',
+        content: this.results.length ? `${this.results[0].description}` : ''
+      }, {
+        property: 'og:title',
+        content: `${this.input} · NexusHub Search`
+      }, {
+        property: 'og:type',
+        content: 'website'
+      }, {
+        property: 'og:image',
+        content: this.results.length ? `https://nexushub.co${this.results[0].imgUrl}` : 'https://nexushub.co/img/brand/og-banner.jpg'
+      }, {
+        property: 'og:url',
+        content: `https://nexushub.co/warframe/search?input=${this.input}`
+      }, {
+        property: 'og:description',
+        content: `Find ${this.results.length} matches for ${this.input}.`
+      }, {
+        property: 'og:site_name',
+        content: 'NexusHub'
+      }]
+    }
+  }
 }
 </script>
 

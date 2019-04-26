@@ -77,6 +77,34 @@ export default {
 
   beforeMount () {
     Vue.use(VueObserveVisibility)
+  },
+
+  head () {
+    return {
+      title: `${this.item.name} · NexusHub`,
+      meta: [{
+        name: 'description',
+        content: this.item.description
+      }, {
+        property: 'og:title',
+        content: `${this.item.name} on NexusHub`
+      }, {
+        property: 'og:type',
+        content: 'website'
+      }, {
+        property: 'og:image',
+        content: `https://nexushub.co${this.item.imgUrl}`
+      }, {
+        property: 'og:url',
+        content: `https://nexushub.co${this.item.webUrl}`
+      }, {
+        property: 'og:description',
+        content: this.item.description
+      }, {
+        property: 'og:site_name',
+        content: 'NexusHub'
+      }]
+    }
   }
 }
 </script>

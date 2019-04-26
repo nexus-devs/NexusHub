@@ -17,7 +17,7 @@
             <search-button/>
           </div>
 
-          <h2>Warframe's most comprehensive database.</h2>
+          <h2>Never miss out on a trade again!</h2>
         </div>
       </header>
 
@@ -112,7 +112,33 @@ export default {
     this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
   },
 
-  storeModule
+  storeModule,
+
+  head: {
+    title: 'NexusHub · Never miss out on a trade again!',
+    meta: [{
+      name: 'description',
+      content: "Get real-time trading data and prices from more than 100,000 players in Warframe's Trade Chat, Warframe Market and more."
+    }, {
+      property: 'og:title',
+      content: 'NexusHub · Never miss out on a trade again!'
+    }, {
+      property: 'og:type',
+      content: 'website'
+    }, {
+      property: 'og:image',
+      content: 'https://nexushub.co/img/brand/og-banner.jpg'
+    }, {
+      property: 'og:url',
+      content: 'https://nexushub.co/'
+    }, {
+      property: 'og:description',
+      content: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
+    }, {
+      property: 'og:site_name',
+      content: 'NexusHub'
+    }]
+  }
 }
 </script>
 
