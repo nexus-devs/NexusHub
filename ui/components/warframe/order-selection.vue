@@ -19,7 +19,7 @@
         </div>
         <div class="meta-data">
           <h4 v-if="order.message">Original Message</h4>
-          <span v-if="order.message" class="raw">
+          <span v-if="order.message" class="sub">
             {{ order.message }}
           </span>
         </div>
@@ -31,11 +31,13 @@
           [{{ item.name }} {{ order.component }}]{{ order.price ? ' for ' : '' }}{{ order.price ? `${order.price}p` : '' }}.
           {{ order.source === 'Warframe Market' ? '' : 'Found your offer on NexusHub.' }}
         </span>
-        <button @click="copy">
-          Copy to Clipboard
-        </button>
-        <div :class="{ active: copied }" class="copy-confirm">
-          Copied!
+        <div class="copy">
+          <button @click="copy">
+            Copy
+          </button>
+          <div :class="{ active: copied }" class="copy-confirm">
+            Copied!
+          </div>
         </div>
       </div>
     </div>
@@ -96,7 +98,7 @@ export default {
         this.copied = true
         setTimeout(() => {
           this.copied = false
-        }, 750)
+        }, 1000)
       }, 75)
     },
     minutesAgo (date) {
@@ -114,17 +116,16 @@ export default {
 
 .selection {
   border-top: 1px solid $color-subtle;
-  padding: 10px 40px;
+  padding: 5px 20px;
   width: 100%;
 }
 
 .sub {
-  font-size: 0.9em;
   color: $color-font-body;
 }
 
 h4 {
-  @include uppercase()
+  @include uppercase;
   margin-bottom: 4px;
   font-size: 0.8em;
 }
@@ -141,17 +142,18 @@ h4 {
   }
 
   .message {
-    margin-top: 5px;
+    margin: 0 0 10px;
     padding-top: 10px;
 
     span {
       display: inline-block;
       padding: 15px 15px;
+      padding-right: 80px;
       background: $color-bg;
       max-width: 70%;
       margin-top: 10px;
       margin-bottom: 10px;
-      border-radius: 2px;
+      border-radius: 999px;
       color: white;
       font-size: 0.9em;
       letter-spacing: 0.6;
@@ -166,9 +168,15 @@ h4 {
       }
     }
   }
+  .copy {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+    position: relative;
+    left: -70px;
+  }
   button, .btn-outline {
-    display: inline-block;
-    margin-top: 20px;
     padding: 10px 20px;
     font-size: 0.9em;
     text-transform: none;
@@ -185,14 +193,14 @@ h4 {
   .copy-confirm {
     color: $color-primary-subtle;
     font-size: 0.9em;
-    margin-top: 3px;
-    transform: translateY(-5px);
+    margin-left: 15px;
+    transform: translateX(-5px);
     opacity: 0;
     @include ease-wubble(0.5s)
 
     &.active {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(0);
     }
   }
 }
