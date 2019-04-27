@@ -88,6 +88,42 @@ class Order extends Endpoint {
     res.send('ok')
   }
 
+  async tradechat () {
+    const discardAfter = (1000 * 60 * 10) + ((100 - orders.length) * 1000 * 5)
+    const usercheck = []
+    const discard = []
+    const result = []
+
+    // Clear chat orders directly, store active users in array so we can query
+    // them all at once later on and compare.
+    for (let order of orders) {
+      if (order.source === 'Trade Chat') {
+        const discarded = new Date() - discardAfter > order.createdAt
+        if (discarded) {
+          discard.push(new ObjectId(order._id))
+        } else {
+          const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
+          if (!exists) result.push(order)
+        }
+      } else {
+        if (!usercheck.includes(order.user)) usercheck.push(order.user)
+      }
+    }
+
+    // Second pass, get users and remove offline orders
+    const users = await this.db.collection('users').find({ name: { $in: usercheck } }).toArray()
+
+    for (let order of orders) {
+      if (order.source !== 'Trade Chat') {
+        const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
+        const user = users.find(u => u.name === order.user)
+        if (!exists && user && user.online) result.push(order)
+      }
+    }
+
+    return { result, discard }
+  }
+
   /**
    * Discard filtered results
    */

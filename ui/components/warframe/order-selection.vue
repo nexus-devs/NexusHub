@@ -1,5 +1,5 @@
 <template>
-  <div class="selection">
+  <div :class="{ active }" class="selection">
     <div class="data">
       <div class="meta">
         <div class="meta-data">
@@ -13,7 +13,7 @@
           <span class="sub">
             {{ order.source }}
           </span>
-          <a v-if="order.source === 'Warframe Market'" :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" style="display: inline-block; margin-top: -5px;">
+          <a v-if="order.source === 'Warfarme Market'" :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" style="display: inline-block; margin-top: -5px;">
             <img src="/img/ui/open-link.svg" alt="Open on Warframe Market" class="ico-h-16 interactive">
           </a>
         </div>
@@ -51,7 +51,7 @@ import moment from 'moment'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
-  props: ['visible', 'order', 'item', 'component'],
+  props: ['active', 'order', 'item', 'component'],
 
   data () {
     return {
@@ -116,8 +116,19 @@ export default {
 
 .selection {
   border-top: 1px solid $color-subtle;
-  padding: 5px 20px;
+  padding: 0px 20px;
   width: 100%;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  @include ease(0.4s);
+  will-change: height opacity;
+
+  &.active {
+    max-height: 300;
+    pointer-events: all;
+    opacity: 1;
+  }
 }
 
 .sub {

@@ -1,5 +1,5 @@
 <template>
-  <div class="order" @click="select">
+  <div class="order" @click="active ? null : select()">
     <!-- Order listing -->
     <div class="row">
       <div class="image-wrapper">
@@ -26,13 +26,13 @@
       </div>
       <div class="col price">
         <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-        <span>{{ order.price ? `${order.price}p` : 'any offer' }}</span>
+        <span>{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
         <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
       </div>
-      <div class="col buy">
+      <div class="col buy" @click.stop="select">
         <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
       </div>
-      <selection :order="order" :item="item" :component="component"/>
+      <selection :active="active" :order="order" :item="item" :component="component"/>
     </div>
   </div>
 </template>
@@ -65,12 +65,19 @@ export default {
         const type = this.order.offer.toLowerCase()
         return this.component.prices[type].current.median
       }
+    },
+    active () {
+      return this.$store.state.orders.selected._id === this.order._id
     }
   },
 
   methods: {
     select () {
-      this.$store.commit('selectOrder', this.order)
+      if (this.active) {
+        this.$store.commit('selectOrder', {})
+      } else {
+        this.$store.commit('selectOrder', this.order)
+      }
     },
     priceDiff (order) {
       const type = order.offer.toLowerCase()

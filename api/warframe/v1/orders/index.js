@@ -32,69 +32,15 @@ class Orders extends Endpoint {
     }
   }
 
-  /**
-   * Find all orders, check which ones are still valid (if trade chat orders)
-   * and remove those that aren't. Removed orders are put into the orderHistory
-   * collection instead. Orders from other sources are managed through websocket
-   * listeners.
-   */
   async main (req, res) {
     const item = req.query.item
-    const offline = req.query.offline
-    const { result, discard } = await this.filter(item, offline)
-
+    const result = await this.find(title(item))
     res.send(result)
-    this.discard(discard)
-    this.cache(result, 60 * 60 * 24)
+    this.cache(result, 60 * 3)
   }
 
-  /**
-   * Filter by outdated trade chat offers or online status on trading sites
-   */
-  async filter (item, offline) {
-    const orders = await this.db.collection('activeOrders').find({ item: title(item) }).toArray()
-    const discardAfter = (1000 * 60 * 10) + ((3000 - orders.length) * 10)
-    const usercheck = []
-    const discard = []
-    const result = []
-
-    // Clear chat orders directly, store active users in array so we can query
-    // them all at once later on and compare.
-    for (let order of orders) {
-      if (order.source === 'Trade Chat') {
-        const discarded = new Date() - discardAfter > order.createdAt
-        if (discarded) {
-          discard.push(new ObjectId(order._id))
-        } else {
-          const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
-          if (!exists) result.push(order)
-        }
-      } else {
-        if (!usercheck.includes(order.user)) usercheck.push(order.user)
-      }
-    }
-
-    // Second pass, get users and remove offline orders
-    const users = await this.db.collection('users').find({ name: { $in: usercheck } }).toArray()
-
-    for (let order of orders) {
-      if (order.source !== 'Trade Chat') {
-        const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
-        const user = users.find(u => u.name === order.user)
-        if (!exists && user && user.online) result.push(order)
-      }
-    }
-
-    return { result, discard }
-  }
-
-  /**
-   * Discard filtered results
-   */
-  async discard (discard) {
-    if (discard.length) {
-      await this.db.collection('activeOrders').remove({ _id: { $in: discard } })
-    }
+  async find (item) {
+    return this.db.collection('activeOrders').find({ item }).toArray()
   }
 }
 
