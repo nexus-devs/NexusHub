@@ -34,7 +34,7 @@ export default {
     }
   },
 
-  head() {
+  head () {
     return {
       title: `NexusHub · ${this.error.code} ${this.error.error}`
     }
