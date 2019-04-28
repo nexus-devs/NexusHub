@@ -6,7 +6,6 @@ class Order extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Removes outdated orders, updates online status of users from other platforms.'
-    this.schema.method = 'GET'
     this.schema.scope = 'write_orders_warframe'
     this.schema.response = String
   }
