@@ -33,7 +33,8 @@ class Opm extends Endpoint {
     const item = req.query.item ? title(req.query.item) : null
     const { active, intervals, sources } = await this.filter(item)
     res.send({ active, intervals, sources })
-    this.cache({ active, intervals, sources }, 60)
+    this.cache({ active, intervals, sources }, 5)
+    this.publish({ active, intervals, sources })
   }
 
   async filter (item) {
