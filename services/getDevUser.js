@@ -1,3 +1,6 @@
+/**
+ * Generates user with root perms for dev-mode services.
+ */
 async function getDevUser () {
   function getEndpointFile (endpoint) {
     return cubic.nodes.auth.api.server.ws.endpoints.endpoints
