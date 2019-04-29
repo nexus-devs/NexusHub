@@ -7,11 +7,11 @@ the sidebar. This also keeps our app.vue more clean.
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div class="app-content">
+        <main class="app-content">
           <slot>
             <!-- page content goes here -->
           </slot>
-        </div>
+        </main>
       </div>
     </transition>
   </div>
