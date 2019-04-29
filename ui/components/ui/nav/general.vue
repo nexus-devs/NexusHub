@@ -112,6 +112,7 @@ nav {
 }
 .nav-r {
   text-align: right;
+  margin-left: 10px;
 
   @media (max-width: $breakpoint-s) {
     a span {

@@ -10,11 +10,14 @@
           <div v-for="(hour, i) in day.hours" :key="hour + '' + i" class="hour-wrapper">
             <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour"/>
             <div class="tooltip">
-              <span>
+              <time :datetime="`${i * 2 + 1}:00`">
                 {{ day.day.name.substr(0, 3) }},
                 {{ i * 2 % 12 + 1 }}{{ i * 2 > 11 ? 'pm' : 'am' }}
-                - {{ (i * 2 + 2) % 12 + 1 }}{{ i * 2 + 2 > 11 ? 'pm' : 'am' }}
-              </span>
+              </time>
+              -
+              <time :datetime="`${i * 2 + 3}:00`">
+                {{ (i * 2 + 2) % 12 + 1 }}{{ i * 2 + 2 > 11 ? 'pm' : 'am' }}
+              </time>
               <br>
               <span class="num">{{ hour }}</span>
               <br>
