@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 const { ObjectId } = require('mongodb')
@@ -23,6 +24,8 @@ class Order extends Endpoint {
       _id: 1,
       offer: 1,
       user: 1,
+      price: 1,
+      quantity: 1,
       createdAt: 1,
       wfmName: 1
     }).toArray()
@@ -47,6 +50,7 @@ class Order extends Endpoint {
     // Store new results
     const parallel = []
     parallel.push(this.discard(discard))
+    parallel.push(this.update(update))
     parallel.push(this.setStatus(setOnline, true))
     parallel.push(this.setStatus(setOnline, false))
 
@@ -95,15 +99,11 @@ class Order extends Endpoint {
       return
     }
 
-    // Discard closed/outdated orders orders
+    // Discard closed/outdated orders orders and update modified ones
     for (const order of item.orders) {
-      this.applyOutdatedWfmOrder(discard, order, orders)
+      const discarded = this.applyOutdatedWfmOrder(discard, order, orders)
+      if (!discarded) this.applyModifiedWfmOrder(update, order, orders)
     }
-
-    // Change modified orders
-    // TODO ^
-
-
   }
 
   /**
@@ -117,7 +117,10 @@ class Order extends Endpoint {
       const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 7
       return matchesOffer && matchesUser && notExpired
     })
-    if (!open) discard.push(new ObjectId(order._id))
+    if (!open) {
+      discard.push(new ObjectId(order._id))
+      return true
+    }
   }
 
   /**
@@ -125,7 +128,39 @@ class Order extends Endpoint {
    * Market.
    */
   applyModifiedWfmOrder (update, order, orders) {
+    const target = orders.find(o => {
+      const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
+      const matchesUser = o.user.ingame_name === order.user
+    })
+    if (target) {
+      const clone = _.cloneDeep(order)
+      let modified
 
+      // Modified price
+      if (order.price !== o.platinum) {
+        clone.price = o.platinum
+        modified = true
+      }
+
+      // Modified quantity
+      if (order.quantity !== o.quantity) {
+        clone.quantity = o.quantity
+        modified = true
+      }
+
+      // Modified online status
+      /**const online = o.user.status === 'ingame'
+      if (order.online && !online) {
+        clone.online = false
+        modified = true
+      }
+      if (!order.online && online) {
+        clone.online = true
+        modified = true
+      }**/
+
+      if (modified) update.push(clone)
+    }
   }
 
   /**
@@ -134,6 +169,14 @@ class Order extends Endpoint {
   async discard (discard) {
     if (discard.length) {
       await this.db.collection('activeOrders').remove({ _id: { $in: discard } })
+    }
+  }
+
+  async update (update) {
+    if (update.length) {
+      await this.db.collection('activeOrders').updateMany({
+
+      })
     }
   }
 }
