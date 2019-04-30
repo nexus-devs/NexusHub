@@ -4,6 +4,7 @@
  * change faster than the UI could display anyways.
  */
 const getClient = require('../getClient.js')
+
 async function monitor () {
   const client = await getClient()
 

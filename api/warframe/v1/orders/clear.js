@@ -11,12 +11,15 @@ class Order extends Endpoint {
   }
 
   /**
-   * Main method which is called by MethoHandler on request
+   * Clears database from outdated orders. Orders are outdated on the following
+   * conditions:
+   * - More than ~10min old (Trade Chat)
+   * - User not in-game (WFM/(Trade Chat))
+   * - Order removed (WFM)
+   * This also edits any edited orders on WFM
    */
   async main (req, res) {
-    const orders = await this.db.collection('activeOrders').find({
-      source: 'Warframe Market'
-    }).project({
+    const orders = await this.db.collection('activeOrders').find().project({
       _id: 1,
       offer: 1,
       user: 1,
@@ -24,57 +27,21 @@ class Order extends Endpoint {
       wfmName: 1
     }).toArray()
     const setOnline = []
-    const setOffline = []
     const discard = []
-
-    // Get a list of all items in active orders, so we can just get the listings
+    const update = []
     const items = []
 
-    for (const order of orders) {
-      const item = items.find(i => i.name === order.wfmName)
-      if (!item) {
-        items.push({
-          name: order.wfmName,
-          orders: [ order ]
-        })
-      } else {
-        item.orders.push(order)
-      }
+    // Use regular for loop here because we have a rather big array and no
+    // async in this loop.
+    for (let i = 0; i < orders.length; i++) {
+      const order = orders[i]
+      if (order.source === 'Warframe Market') this.applyOrderedItems(items, order)
+      if (order.source === 'Trade Chat') this.applyOutdatedOrder(discard, order, orders)
     }
 
     // Get listings for all items, then set new online status and remove old orders
     for (const item of items) {
-      const WfmOrders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
-      let wfmOrders
-      try {
-        wfmOrders = JSON.parse(WfmOrders).payload.orders
-      } catch (err) {
-        // The WFM API sometimes sends invalid JSON as a result of dropped
-        // connections or something, so just continue with the next item
-        continue
-      }
-
-      for (const order of item.orders) {
-        let online
-
-        const open = wfmOrders.find(o => {
-          const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
-          const matchesUser = o.user.ingame_name === order.user
-          const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 3
-          online = o.user.status === 'ingame'
-          return matchesOffer && matchesUser && online && notExpired
-        })
-
-        // Update user status if the order is still open, otherwise discard
-        if (open) {
-          const queued = setOnline.find(u => u === order.user)
-          if (!queued) setOnline.push(order.user)
-        } else {
-          const queued = setOffline.find(u => u === order.user)
-          if (!queued && !online) setOffline.push(order.user)
-          discard.push(new ObjectId(order._id))
-        }
-      }
+      await this.updateWfmListings(item, discard, update)
     }
 
     // Store new results
@@ -87,40 +54,78 @@ class Order extends Endpoint {
     res.send('ok')
   }
 
-  async tradechat () {
+  /**
+   * Generate a list of all ordered items so we know what to scrape
+   * from WFM's API
+   */
+  applyOrderedItems (items, order) {
+    const item = items.find(i => i.name === order.wfmName)
+    if (!item) {
+      items.push({
+        name: order.wfmName,
+        orders: [ order ]
+      })
+    } else {
+      item.orders.push(order)
+    }
+  }
+
+  /**
+   * Remove outdated trade chat order
+   */
+  applyOutdatedOrder (discard, order, orders) {
     const discardAfter = (1000 * 60 * 10) + ((100 - orders.length) * 1000 * 5)
-    const usercheck = []
-    const discard = []
-    const result = []
+    const discarded = new Date() - discardAfter > order.createdAt
+    if (discarded) {
+      discard.push(new ObjectId(order._id))
+    }
+  }
 
-    // Clear chat orders directly, store active users in array so we can query
-    // them all at once later on and compare.
-    for (let order of orders) {
-      if (order.source === 'Trade Chat') {
-        const discarded = new Date() - discardAfter > order.createdAt
-        if (discarded) {
-          discard.push(new ObjectId(order._id))
-        } else {
-          const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
-          if (!exists) result.push(order)
-        }
-      } else {
-        if (!usercheck.includes(order.user)) usercheck.push(order.user)
-      }
+  /**
+   * Delete or modify changed orders on Warframe Market
+   */
+  async updateWfmListings (item, discard, update) {
+    const Orders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
+    let orders
+    try {
+      orders = JSON.parse(Orders).payload.orders
+    } catch (err) {
+      // The WFM API sometimes sends invalid JSON as a result of dropped
+      // connections or something, so just continue with the next item
+      return
     }
 
-    // Second pass, get users and remove offline orders
-    const users = await this.db.collection('users').find({ name: { $in: usercheck } }).toArray()
-
-    for (let order of orders) {
-      if (order.source !== 'Trade Chat') {
-        const exists = result.find(o => o.user === order.user && o.item === order.item && o.component === order.component)
-        const user = users.find(u => u.name === order.user)
-        if (!exists && user && user.online) result.push(order)
-      }
+    // Discard closed/outdated orders orders
+    for (const order of item.orders) {
+      this.applyOutdatedWfmOrder(discard, order, orders)
     }
 
-    return { result, discard }
+    // Change modified orders
+    // TODO ^
+
+
+  }
+
+  /**
+   * Discard any outdated orders (closed/too old). If no user with the
+   * appropriate item is matched, we can assume that the order is closed.
+   */
+  applyOutdatedWfmOrder (discard, order, orders) {
+    const open = orders.find(o => {
+      const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
+      const matchesUser = o.user.ingame_name === order.user
+      const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 7
+      return matchesOffer && matchesUser && notExpired
+    })
+    if (!open) discard.push(new ObjectId(order._id))
+  }
+
+  /**
+   * Generate new order object as the result of changed data on Warframe
+   * Market.
+   */
+  applyModifiedWfmOrder (update, order, orders) {
+
   }
 
   /**
@@ -129,19 +134,6 @@ class Order extends Endpoint {
   async discard (discard) {
     if (discard.length) {
       await this.db.collection('activeOrders').remove({ _id: { $in: discard } })
-    }
-  }
-
-  /**
-   * Set user's online status
-   */
-  async setStatus (users, online) {
-    if (users.length) {
-      await this.db.collection('users').updateMany({
-        name: { $in: users }
-      }, {
-        $set: { online }
-      })
     }
   }
 }

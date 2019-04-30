@@ -4,6 +4,7 @@
  * in a separate docker service.
  */
 const getClient = require('../getClient.js')
+
 async function monitor () {
   const client = await getClient()
 
