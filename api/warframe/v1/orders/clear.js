@@ -87,9 +87,9 @@ class Order extends Endpoint {
    * Delete or modify changed orders on Warframe Market
    */
   async updateWfmListings (item, discard, update) {
-    const Orders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
-    let orders
+    let Orders, orders
     try {
+      Orders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
       orders = JSON.parse(Orders).payload.orders
     } catch (err) {
       // The WFM API sometimes sends invalid JSON as a result of dropped
@@ -179,7 +179,7 @@ class Order extends Endpoint {
       const bulk = this.db.collection('activeOrders').initializeUnorderedBulkOp()
 
       for (const object of update) {
-        bulk.update({ _id: new ObjectId(object._id) }, object)
+        bulk.find({ _id: new ObjectId(object._id) }).update(object)
       }
       return bulk.execute()
     }
