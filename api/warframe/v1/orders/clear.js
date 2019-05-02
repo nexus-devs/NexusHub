@@ -27,9 +27,9 @@ class Order extends Endpoint {
       price: 1,
       quantity: 1,
       createdAt: 1,
+      source: 1,
       wfmName: 1
     }).toArray()
-    const setOnline = []
     const discard = []
     const update = []
     const items = []
@@ -136,19 +136,19 @@ class Order extends Endpoint {
       let modified
 
       // Modified price
-      if (order.price !== o.platinum) {
-        clone.price = o.platinum
+      if (order.price !== target.platinum) {
+        clone.price = target.platinum
         modified = true
       }
 
       // Modified quantity
-      if (order.quantity !== o.quantity) {
-        clone.quantity = o.quantity
+      if (order.quantity !== target.quantity) {
+        clone.quantity = target.quantity
         modified = true
       }
 
       // Modified online status
-      const online = o.user.status === 'ingame'
+      const online = target.user.status === 'ingame'
       if (order.online && !online) {
         clone.online = false
         modified = true
