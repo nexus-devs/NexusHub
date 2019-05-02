@@ -106,7 +106,6 @@ class Opm extends Endpoint {
       intervals.push(minute ? minute.count : 0)
     }
     if (!item) {
-      console.log(items)
       for (let item of items) {
         mostTraded.push({ item: item._id, amount: item.count })
       }

@@ -167,7 +167,7 @@ class Order extends Endpoint {
    */
   async discard (discard) {
     if (discard.length) {
-      await this.db.collection('activeOrders').remove({ _id: { $in: discard } })
+      await this.db.collection('activeOrders').deleteMany({ _id: { $in: discard } })
     }
   }
 
@@ -179,7 +179,9 @@ class Order extends Endpoint {
       const bulk = this.db.collection('activeOrders').initializeUnorderedBulkOp()
 
       for (const object of update) {
-        bulk.find({ _id: new ObjectId(object._id) }).update(object)
+        const _id = new ObjectId(object._id)
+        delete object._id
+        bulk.find({ _id }).update(object)
       }
       return bulk.execute()
     }
