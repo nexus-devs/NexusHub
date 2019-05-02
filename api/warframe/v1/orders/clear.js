@@ -51,8 +51,6 @@ class Order extends Endpoint {
     const parallel = []
     parallel.push(this.discard(discard))
     parallel.push(this.update(update))
-    parallel.push(this.setStatus(setOnline, true))
-    parallel.push(this.setStatus(setOnline, false))
 
     await Promise.all(parallel)
     res.send('ok')
@@ -102,7 +100,7 @@ class Order extends Endpoint {
     // Discard closed/outdated orders orders and update modified ones
     for (const order of item.orders) {
       const discarded = this.applyOutdatedWfmOrder(discard, order, orders)
-      if (!discarded) this.applyModifiedWfmOrder(update, order, orders)
+      if (!discarded) this.applyModifiedWfmOrder(update, discard, order, orders)
     }
   }
 
@@ -127,10 +125,11 @@ class Order extends Endpoint {
    * Generate new order object as the result of changed data on Warframe
    * Market.
    */
-  applyModifiedWfmOrder (update, order, orders) {
+  applyModifiedWfmOrder (update, discard, order, orders) {
     const target = orders.find(o => {
       const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
       const matchesUser = o.user.ingame_name === order.user
+      return matchesOffer && matchesUser
     })
     if (target) {
       const clone = _.cloneDeep(order)
@@ -149,7 +148,7 @@ class Order extends Endpoint {
       }
 
       // Modified online status
-      /**const online = o.user.status === 'ingame'
+      const online = o.user.status === 'ingame'
       if (order.online && !online) {
         clone.online = false
         modified = true
@@ -157,7 +156,7 @@ class Order extends Endpoint {
       if (!order.online && online) {
         clone.online = true
         modified = true
-      }**/
+      }
 
       if (modified) update.push(clone)
     }
@@ -172,11 +171,17 @@ class Order extends Endpoint {
     }
   }
 
+  /**
+   * Update modified results
+   */
   async update (update) {
     if (update.length) {
-      await this.db.collection('activeOrders').updateMany({
+      const bulk = this.db.collection('activeOrders').initializeUnorderedBulkOp()
 
-      })
+      for (const object of update) {
+        bulk.update({ _id: new ObjectId(object._id) }, object)
+      }
+      return bulk.execute()
     }
   }
 }
