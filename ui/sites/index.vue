@@ -218,6 +218,9 @@ header {
     h2 {
       margin-top: 30px;
       text-align: center;
+      opacity: 0;
+      animation: fadeinUp 0.6s forwards;
+      animation-delay: 0.3s;
     }
   }
 
