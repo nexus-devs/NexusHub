@@ -1,5 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const { ObjectId } = require('mongodb')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Orders extends Endpoint {

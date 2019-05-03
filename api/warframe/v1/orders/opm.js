@@ -43,7 +43,7 @@ class Opm extends Endpoint {
     const query = {
       ...{ createdAt: { $gte: queryStart } },
       ...(item ? { item } : {})
-    } 
+    }
     const parallel = []
 
     // Intervals
