@@ -37,7 +37,7 @@
     "vue-observe-visibility": "^0.4.3",
     "vue-tween-number": "^0.2.0",
     "vue-typer": "^1.2.0",
-    "warframe-items": "1.281.0",
+    "warframe-items": "^1.284.1",
     "warframe-patchlogs": "1.69.0",
     "ws": "^6.2.1"
   },
@@ -53,11 +53,11 @@
     "eslint-plugin-vue": "^4.7.1",
     "files-tree": "^1.0.8",
     "gitlog": "^3.1.2",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.4",
     "progress-bar-webpack-plugin": "^1.12.1",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.3",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^15.13.12",
     "webpack": "^4.29.6"
   },
   "release": {
