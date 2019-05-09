@@ -14,8 +14,8 @@ async function getClient () {
     const fs = require('fs')
     userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
     userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
-    apiUrl = staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws'
-    authUrl = staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
+    apiUrl = 'ws://api:3003/ws'
+    authUrl = 'ws://auth:3030/ws'
   }
 
   // In dev mode: Register new user if necessary and give it root perms
