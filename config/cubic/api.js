@@ -15,6 +15,8 @@ if (process.env.DOCKER && prod && node === 'api') {
     redisUrl,
     certPublic,
     mongoUrl,
+    apiUrl: `ws://api:3003/ws`,
+    authUrl: `ws://auth:3030/ws`,
     userKey,
     userSecret
   }
