@@ -5,7 +5,6 @@
  */
 const prod = process.env.NODE_ENV === 'production'
 const docker = process.env.DOCKER
-const staging = process.env.NEXUS_STAGING
 let userKey, userSecret, apiUrl, authUrl
 
 async function getClient () {
