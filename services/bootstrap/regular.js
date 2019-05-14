@@ -1,7 +1,7 @@
 module.exports = async function () {
   const Api = require('cubic-api')
   const Auth = require('cubic-auth')
-  const Ui = require('../../.debug/cubic/packages/ui')
+  const Ui = require('cubic-ui')
   const wfhooks = require('../../hooks/warframe.js')
   const config = {
     auth: require('../../config/cubic/auth.js'),
@@ -26,4 +26,5 @@ module.exports = async function () {
   require('../../services/warframe/tradechat.js')
   require('../../services/warframe/opm.js')
   require('../../services/warframe/clear.js')
+  require('../../services/warframe/wfm.js')
 }
