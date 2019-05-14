@@ -13,7 +13,7 @@ async function monitor () {
   const local = await getClient()
 
   client.subscribe('/warframe/v1/orders', req => {
-    local.post('/warframe/v1/orders', req)
+    if (req.source !== 'Warframe Market') local.post('/warframe/v1/orders', req)
   })
 }
 monitor()
