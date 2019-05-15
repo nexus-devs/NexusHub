@@ -2,8 +2,8 @@
   <header>
     <div class="container">
       <div class="item-profile-img">
-        <img :src="item.imgUrl" :alt="item.name" draggable="false">
-        <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-profile-img-blur">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false" onerror="this.style.display='none'">
+        <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-profile-img-blur" onerror="this.style.display='none'">
       </div>
     </div>
     <div class="item-img-shade"/>
@@ -11,7 +11,6 @@
     <div class="background"/>
     <div class="container">
       <div class="item-profile">
-
         <div class="item-profile-data-info">
           <h1>{{ item.name }}</h1>
           <div v-if="item.vaulted" class="vaulted">

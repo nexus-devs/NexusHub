@@ -25,4 +25,6 @@ module.exports = async function () {
   // Load services
   require('../../services/warframe/tradechat.js')
   require('../../services/warframe/opm.js')
+  require('../../services/warframe/clear.js')
+  require('../../services/warframe/wfm.js')
 }

@@ -1,17 +1,16 @@
 <!--
 We'll use this component as helper template in all page views. It allows us to
-adjust the main content (without nav or sidebar), for example when dragging out
-the sidebar. This also keeps our app.vue more clean.
+transition between pages without affecting the navbar or footer.
 -->
 <template>
   <div class="app-container">
     <transition appear name="zoom">
       <div>
-        <div class="app-content">
+        <main class="app-content">
           <slot>
             <!-- page content goes here -->
           </slot>
-        </div>
+        </main>
       </div>
     </transition>
   </div>

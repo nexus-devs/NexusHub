@@ -30,10 +30,11 @@ class Opm extends Endpoint {
   }
 
   async main (req, res) {
-    const item = req.query.item ? title(req.query.item) : null
-    const { active, intervals, sources } = await this.filter(item)
-    res.send({ active, intervals, sources })
-    this.cache({ active, intervals, sources }, 60)
+    const item = req.query.item ? title(req.query.item) : undefined
+    const data = await this.filter(item)
+    res.send(data)
+    this.cache(data, 5)
+    this.publish(data)
   }
 
   async filter (item) {
@@ -44,6 +45,8 @@ class Opm extends Endpoint {
       ...(item ? { item } : {})
     }
     const parallel = []
+
+    // Intervals
     parallel.push(this.db.collection('orders').aggregate([
       { $match: query },
       { $group: {
@@ -54,6 +57,8 @@ class Opm extends Endpoint {
         count: { $sum: 1 }
       } }
     ]).toArray())
+
+    // Sources
     parallel.push(this.db.collection('orders').aggregate([
       { $match: query },
       { $group: {
@@ -61,6 +66,8 @@ class Opm extends Endpoint {
         count: { $sum: 1 }
       } }
     ]).toArray())
+
+    // Most traded item
     if (!item) {
       parallel.push(this.db.collection('orders').aggregate([
         { $match: { createdAt: { $gte: new Date(new Date() - 1000 * 60 * 5) } } },
@@ -98,7 +105,7 @@ class Opm extends Endpoint {
       const minute = minutes.find(m => now.diff(moment(m._id), 'minutes') === i)
       intervals.push(minute ? minute.count : 0)
     }
-    if (items) {
+    if (!item) {
       for (let item of items) {
         mostTraded.push({ item: item._id, amount: item.count })
       }

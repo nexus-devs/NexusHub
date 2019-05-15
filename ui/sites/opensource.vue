@@ -85,7 +85,7 @@
               </module>
             </a>
 
-            <a href="https://github.com/WFCD/warframe-items" target="_blank" class="col-b">
+            <a href="https://github.com/WFCD/warframe-patchlogs" target="_blank" class="col-b">
               <module class="interactive">
                 <template slot="header">
                   <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="warframe-items">
