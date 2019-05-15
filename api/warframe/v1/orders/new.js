@@ -94,10 +94,9 @@ class Order extends Endpoint {
     // Update offer list
     runParallel(async () => {
       const orders = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
-      const { result, discard } = await orders.filter(item)
+      const result = await orders.find(item)
       orders.publish(result)
       orders.cache(result, 60 * 3)
-      orders.discard(discard)
     })
 
     // Update prices

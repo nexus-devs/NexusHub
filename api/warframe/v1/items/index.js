@@ -6,7 +6,7 @@ const Endpoint = require('cubic-api/endpoint')
 class List extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get a list of all items with their basic attributes.'
+    this.schema.description = 'Get a list of all items with their basic attributes. For tradable items this also includes prices.'
     this.schema.url = '/warframe/v1/items'
     this.schema.response = [{
       uniqueName: String,
@@ -36,7 +36,7 @@ class List extends Endpoint {
     }).toArray()
     let result = []
 
-    items.forEach(item => {
+    for (const item of items) {
       // Remove detailed price data to reduce traffic
       for (const component of item.components) {
         const clean = obj => {
@@ -56,7 +56,7 @@ class List extends Endpoint {
         webUrl: item.webUrl,
         imgUrl: item.imgUrl
       })
-    })
+    }
 
     this.cache(result, 60)
     res.send(result)
