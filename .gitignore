@@ -3,3 +3,5 @@
 /out/
 /config/ga/*private.pem
 /ui/assets/bundles/
+/.debug/
+/debug/
