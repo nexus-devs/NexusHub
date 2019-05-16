@@ -40,6 +40,10 @@ function postOrder (order, items, client) {
       const itemName = item.name.split(' ')
       const orderName = order.item.en.item_name.split(' ')
 
+      // Removes parenthesised item names additives from WFM, e.g. (Veiled)
+      const regexParentheses = /\(([^)]+)\)/
+      if (regexParentheses.exec(orderName[orderName.length - 1])) orderName.pop()
+
       // Compare items without component (if it has one) and set it
       let component = 'Set'
       if (itemName.length !== orderName.length) component = orderName.pop()
