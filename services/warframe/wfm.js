@@ -62,7 +62,8 @@ function postOrder (order, items, client) {
           quantity: order.quantity,
           source: 'Warframe Market',
           platform: order.platform.toUpperCase(),
-          wfmName: order.item.url_name
+          wfmName: order.item.url_name,
+          createdAt: order.creation_date
         })
       } catch (err) {} // just try again later, these are usually issues when bootstrapping
     }
