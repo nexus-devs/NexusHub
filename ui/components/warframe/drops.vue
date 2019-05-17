@@ -12,7 +12,7 @@
         <router-link v-if="drop.location.match(/(Intact|Exceptional|Flawless|Radiant)/)"
                      :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`"
                      class="interactive">
-          <img :src="`/img/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}.png`" alt="">
+          <img :src="`/img/warframe/items/${getImageURL(drop)}.png`" alt="">
         </router-link>
         <h4 class="location">{{ drop.location }}</h4>
         <span class="rarity">{{ drop.rarity }} -
@@ -71,6 +71,20 @@ export default {
         }
         return 0
       })
+    }
+  },
+
+  methods: {
+    getImageURL (drop) {
+      const relics = ['lith', 'meso', 'neo', 'axi']
+      const toKebabCase = (str) => str.replace(/( |\/|\*)/g, '-').toLowerCase()
+
+      // Relics have a different naming scheme
+      if (relics.includes(drop.location.split(' ')[0].toLowerCase())) {
+        return toKebabCase(drop.location).replace(/-(.*?)-/, '-') // Remove second word (type)
+      } else {
+        return toKebabCase(drop.location)
+      }
     }
   }
 }
