@@ -56,6 +56,7 @@ export default {
     selected: {
       component: 'Set'
     },
+    scroll: false, // Scroll behavior from realtime orders
     type: 'Selling',
     filters: [{
       name: 'Price',
@@ -96,6 +97,9 @@ export default {
     setOrdersComponent (state, component) {
       state.selected.component = component
       state.listings = filter(state.all, state.type, state.filters, state.selected.component)
+    },
+    setOrdersScrollBehavior (state, enable) {
+      state.scroll = enable
     }
   }
 }

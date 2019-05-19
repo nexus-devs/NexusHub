@@ -117,7 +117,12 @@ export default {
       }
     },
     active () {
-      return this.$store.state.orders.selected._id === this.order._id
+      const active = this.$store.state.orders.selected._id === this.order._id
+      const scroll = this.$store.state.orders.scroll
+      if (active && scroll) {
+        this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+      return active
     },
     // Short username for more authentic message and less characters to avoid
     // character limit. This will remove numbers at the end and only take the
@@ -143,6 +148,7 @@ export default {
       if (this.active) {
         this.$store.commit('selectOrder', {})
       } else {
+        this.$store.commit('setOrdersScrollBehavior', false)
         this.$store.commit('selectOrder', this.order)
       }
     },
@@ -187,6 +193,7 @@ export default {
 
 .order {
   margin-top: 10px;
+  @include ease(0.4s); // For order transitions
 
   &:first-of-type {
     margin-top: 0;
@@ -196,7 +203,6 @@ export default {
   @include field;
   align-items: center;
   width: 100%;
-  @include ease(0.5s);
 
   // Last of type is order selection
   & > div:not(:last-of-type) {
@@ -355,11 +361,11 @@ export default {
   width: 100%;
   opacity: 0;
   max-height: 0;
-  @include ease(0.4s);
-  will-change: max-height opacity;
+  @include ease(0.35s);
+  will-change: height;
 
   &.active {
-    max-height: 999px;
+    max-height: 200px;
     opacity: 1;
   }
 }

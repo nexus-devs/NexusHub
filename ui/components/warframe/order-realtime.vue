@@ -57,6 +57,7 @@ export default {
 
   methods: {
     select () {
+      this.$store.commit('setOrdersScrollBehavior', true)
       this.$store.commit('selectOrder', this.order)
     }
   }
