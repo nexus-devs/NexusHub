@@ -2,24 +2,19 @@
  * Acceleration Curves
  */
 @mixin ease($timing) {
-  transition-timing-function: ease;
-  transition-duration: $timing;
+  transition: all $timing ease;
 }
 @mixin ease-wubble($timing) {
-  transition-timing-function: cubic-bezier(0.17, 0.88, 0.32, 1.27);
-  transition-duration: $timing;
+  transition: all $timing cubic-bezier(0.17, 0.88, 0.32, 1.27);
 }
 @mixin ease-out($timing) {
-  transition-timing-function: cubic-bezier(0, 1.01, .55, .99);
-  transition-duration: $timing;
+  transition: all $timing cubic-bezier(0, 1.01, .55, .99);
 }
 @mixin ease-touch($timing) {
-  transition-timing-function: cubic-bezier(.38,1,.54,.98);
-  transition-duration: $timing;
+  transition: all $timing cubic-bezier(.38,1,.54,.98);
 }
 @mixin notransition() {
-  transition-timing-function: none !important;
-  transition-duration: 0s !important;
+  transition: none !important;
 }
 /**
  * Interactive Items

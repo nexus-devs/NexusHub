@@ -187,6 +187,7 @@ export default {
 
 .order {
   margin-top: 10px;
+  @include ease(0.4s); // For order transitions
 
   &:first-of-type {
     margin-top: 0;
@@ -196,7 +197,6 @@ export default {
   @include field;
   align-items: center;
   width: 100%;
-  @include ease(0.5s);
 
   // Last of type is order selection
   & > div:not(:last-of-type) {
@@ -355,11 +355,11 @@ export default {
   width: 100%;
   opacity: 0;
   max-height: 0;
-  @include ease(0.4s);
-  will-change: max-height opacity;
+  @include ease(0.35s);
+  will-change: height;
 
   &.active {
-    max-height: 999px;
+    max-height: 200px;
     opacity: 1;
   }
 }
