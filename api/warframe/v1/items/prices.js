@@ -34,14 +34,15 @@ class Prices extends Endpoint {
       max: Number,
       orders: Number
     }
-    economyData.days = economyData.hours = [_.cloneDeep(economyData)]
+    const previousEconomyData = _.cloneDeep(economyData)
+    economyData.days = economyData.hours = previousEconomyData.days = [_.cloneDeep(economyData)]
     this.schema.response = {
       name: String,
       components: [{
         name: String,
         prices: {
-          selling: { current: economyData, previous: economyData },
-          buying: { current: economyData, previous: economyData }
+          selling: { current: economyData, previous: previousEconomyData },
+          buying: { current: economyData, previous: previousEconomyData }
         }
       }]
     }

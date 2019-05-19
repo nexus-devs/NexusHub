@@ -37,6 +37,10 @@ before(async function () {
       const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
       const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
       await parser.client.post(postOrder.route, postOrder.request.body)
+
+      // We'll also need one for the `previous` time interval (>30 days ago)
+      postOrder.request.body.createdAt = new Date() - 1000 * 60 * 60 * 24 * 31
+      await parser.client.post(postOrder.route, postOrder.request.body)
     })
 
     for (const endpoint of cubic.nodes.api.server.ws.endpoints.endpoints) {
