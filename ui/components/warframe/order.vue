@@ -117,7 +117,12 @@ export default {
       }
     },
     active () {
-      return this.$store.state.orders.selected._id === this.order._id
+      const active = this.$store.state.orders.selected._id === this.order._id
+      const scroll = this.$store.state.orders.scroll
+      if (active && scroll) {
+        this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+      return active
     },
     // Short username for more authentic message and less characters to avoid
     // character limit. This will remove numbers at the end and only take the
@@ -143,6 +148,7 @@ export default {
       if (this.active) {
         this.$store.commit('selectOrder', {})
       } else {
+        this.$store.commit('setOrdersScrollBehavior', false)
         this.$store.commit('selectOrder', this.order)
       }
     },
