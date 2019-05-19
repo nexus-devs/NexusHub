@@ -14,7 +14,6 @@ function getEndpointTree (filepath) {
   let stats = fs.lstatSync(filepath)
 
   // Don't include this endpoint
-  console.log(filepath)
   if (filepath.includes('docs/endpoints')) {
     return
   }

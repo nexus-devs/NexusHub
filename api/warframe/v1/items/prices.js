@@ -1,5 +1,6 @@
 const Endpoint = require('cubic-api/endpoint')
 const Aggregator = require(`${process.cwd()}/api/lib/aggregator.js`)
+const _ = require('lodash')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 /**
@@ -33,7 +34,7 @@ class Prices extends Endpoint {
       max: Number,
       orders: Number
     }
-    economyData.days = economyData.hours = [economyData]
+    economyData.days = economyData.hours = [_.cloneDeep(economyData)]
     this.schema.response = {
       name: String,
       components: [{
