@@ -129,6 +129,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import noSsr from 'vue-no-ssr'
@@ -158,28 +159,10 @@ export default {
 
   head: {
     title: 'NexusHub · Open Source',
-    meta: [{
-      name: 'description',
-      content: "Discover NexusHub's open source projects for Warframe, Node.js and DirectX."
-    }, {
-      property: 'og:title',
-      content: 'NexusHub Open Source'
-    }, {
-      property: 'og:type',
-      content: 'website'
-    }, {
-      property: 'og:image',
-      content: 'https://nexushub.co/img/brand/og-banner.jpg'
-    }, {
-      property: 'og:url',
-      content: 'https://nexushub.co/opensource'
-    }, {
-      property: 'og:description',
-      content: 'Discover NexusHub\'s open source projects for Warframe, Node.js and DirectX. Giving back to the community and all 👌'
-    }, {
-      property: 'og:site_name',
-      content: 'NexusHub'
-    }]
+    meta: meta({
+      title: 'Open Source on NexusHub',
+      description: 'Discover NexusHub\'s open source projects for Warframe, Node.js and DirectX. Giving back to the community and all 👌'
+    })
   }
 }
 </script>

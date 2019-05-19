@@ -41,6 +41,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/general.vue'
 import resultsGroup from 'src/components/search/results/results-group.vue'
 import search from 'src/components/search/input.vue'
@@ -115,28 +116,11 @@ export default {
   head () {
     return {
       title: `${this.input} · NexusHub Search`,
-      meta: [{
-        name: 'description',
-        content: this.results.length ? `${this.results[0].description}` : ''
-      }, {
-        property: 'og:title',
-        content: `${this.input} · NexusHub Search`
-      }, {
-        property: 'og:type',
-        content: 'website'
-      }, {
-        property: 'og:image',
-        content: this.results.length ? `https://nexushub.co${this.results[0].imgUrl}` : 'https://nexushub.co/img/brand/og-banner.jpg'
-      }, {
-        property: 'og:url',
-        content: `https://nexushub.co/warframe/search?input=${this.input}`
-      }, {
-        property: 'og:description',
-        content: `Find ${this.results.length} matches for ${this.input}.`
-      }, {
-        property: 'og:site_name',
-        content: 'NexusHub'
-      }]
+      meta: meta({
+        title: `${this.input} Search Results on NexusHub`,
+        description: this.results.length ? `Find ${this.results.length} matches for ${this.input}. ${this.results[0].description}` : 'No search results :(',
+        image: this.results.length ? `https://nexushub.co${this.results[0].imgUrl}` : undefined
+      })
     }
   }
 }

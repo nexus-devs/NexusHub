@@ -94,6 +94,7 @@ import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
 import component from 'src/components/warframe/component.vue'
 import itemHeader from 'src/components/warframe/header.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import opm from 'src/components/warframe/opm-item.vue'
 import order from 'src/components/warframe/order.vue'
@@ -226,28 +227,11 @@ export default {
 
     return {
       title: `${this.item.name} Trades (${this.all.length}) · NexusHub`,
-      meta: [{
-        name: 'description',
-        content: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
-      }, {
-        property: 'og:title',
-        content: `${this.item.name} Trades on NexusHub (${this.all.length})`
-      }, {
-        property: 'og:type',
-        content: 'website'
-      }, {
-        property: 'og:image',
-        content: `https://nexushub.co${this.item.imgUrl}`
-      }, {
-        property: 'og:url',
-        content: `https://nexushub.co${this.item.webUrl}/trading`
-      }, {
-        property: 'og:description',
-        content: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`
-      }, {
-        property: 'og:site_name',
-        content: 'NexusHub'
-      }]
+      meta: meta({
+        title: `${this.item.name} Trades on NexusHub (${this.all.length})`,
+        description: `Check out ${this.all.length} open offers for ${this.item.name}${valid ? ` starting at ${min}p.` : '.'} All orders are taken from the ingame Trade Chat and Warframe Market.`,
+        image: `https://nexushub.co${this.item.imgUrl}`
+      })
     }
   }
 }

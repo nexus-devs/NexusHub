@@ -26,6 +26,7 @@
 import appContent from 'src/app-content.vue'
 import filters from 'src/components/warframe/price-filters.vue'
 import itemHeader from 'src/components/warframe/header.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import price from 'src/components/warframe/price.vue'
 import priceDetailed from 'src/components/warframe/price-detailed.vue'
@@ -142,28 +143,11 @@ export default {
 
     return {
       title: `${item.name} Prices · NexusHub`,
-      meta: [{
-        name: 'description',
-        content: `${this.item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
-      }, {
-        property: 'og:title',
-        content: `${this.item.name} Prices on NexusHub`
-      }, {
-        property: 'og:type',
-        content: 'website'
-      }, {
-        property: 'og:image',
-        content: `https://nexushub.co${this.item.imgUrl}`
-      }, {
-        property: 'og:url',
-        content: `https://nexushub.co${this.item.webUrl}/prices`
-      }, {
-        property: 'og:description',
-        content: `${this.item.name} Prices from the Trade Chat and Warframe Market. ${components}.`
-      }, {
-        property: 'og:site_name',
-        content: 'NexusHub'
-      }]
+      meta: meta({
+        title: `${this.item.name} Prices on NexusHub`,
+        description: `${this.item.name} Prices from the Trade Chat and Warframe Market. ${components}.`,
+        image: `https://nexushub.co${this.item.imgUrl}`
+      })
     }
   }
 }

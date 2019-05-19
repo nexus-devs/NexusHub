@@ -97,6 +97,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import storeModule from 'src/store/analytics.js'
 const parseNum = (num) => (Math.round(num / 1000) * 1000)
@@ -137,25 +138,10 @@ export default {
 
   head: {
     title: 'NexusHub · Company',
-    meta: [{
-      property: 'og:title',
-      content: 'NexusHub Brand'
-    }, {
-      property: 'og:type',
-      content: 'website'
-    }, {
-      property: 'og:image',
-      content: 'https://nexushub.co/img/brand/og-banner.jpg'
-    }, {
-      property: 'og:url',
-      content: 'https://nexushub.co/company'
-    }, {
-      property: 'og:description',
-      content: "Making Games more transparent with NexusHub. Whether it's about buying that item we always wanted, or finding ways to improve our playstyle. NexusHub is about bringing that data to you, regardless if you're a mighty pro gamer or a casual in it for the fun."
-    }, {
-      property: 'og:site_name',
-      content: 'NexusHub'
-    }]
+    meta: meta({
+      title: 'NexusHub',
+      description: "Making Games more transparent with NexusHub. Whether it's about buying that item we always wanted, or finding ways to improve our playstyle. NexusHub is about bringing that data to you, regardless if you're a mighty pro gamer or a casual in it for the fun."
+    })
   }
 }
 </script>
