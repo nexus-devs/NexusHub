@@ -136,14 +136,14 @@ export default {
     priceCurrent () {
       if (this.component) {
         if (this.component.prices) {
-          return Math.round((this.component.prices.selling.current.median + this.component.prices.buying.current.median) / 2)
+          return Math.round((this.component.prices.selling.current.avg + this.component.prices.buying.current.avg) / 2)
         }
       }
     },
     pricePrevious () {
       if (this.component) {
         if (this.component.prices) {
-          return Math.round((this.component.prices.selling.previous.median + this.component.prices.buying.previous.median) / 2)
+          return Math.round((this.component.prices.selling.previous.avg + this.component.prices.buying.previous.avg) / 2)
         }
       }
     },

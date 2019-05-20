@@ -43,7 +43,7 @@
         <span class="num">
           {{ selected.price }}p
         </span>
-        <price-diff :current="current" :previous="selected.price" :type="selected.offer.toLowerCase()" unit="p" base="median"/>
+        <price-diff :current="current" :previous="selected.price" :type="selected.offer.toLowerCase()" unit="p" base="avg"/>
       </div>
       <div v-else class="inactive">
         <div class="circle">
@@ -97,17 +97,17 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.current.median + prices.buying.current.median) / 2)
+        return Math.round((prices.selling.current.avg + prices.buying.current.avg) / 2)
       }
-      return prices[this.offerType].current.median
+      return prices[this.offerType].current.avg
     },
     previous () {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        return Math.round((prices.selling.previous.median + prices.buying.previous.median) / 2)
+        return Math.round((prices.selling.previous.avg + prices.buying.previous.avg) / 2)
       }
-      return prices[this.offerType].previous.median
+      return prices[this.offerType].previous.avg
     },
     offerType () {
       return this.$store.state.items.selected.offerType

@@ -29,7 +29,7 @@ class Prices extends Endpoint {
     ]
     this.schema.request = { url: '/warframe/v1/items/nikana prime/prices' }
     const economyData = {
-      median: Number,
+      avg: Number,
       min: Number,
       max: Number,
       orders: Number
@@ -130,7 +130,7 @@ class Prices extends Endpoint {
       orders: 'sum',
       min: 'min',
       max: 'max',
-      median: 'avg'
+      avg: 'avg'
     }
 
     for (const currentData of current) {
@@ -159,7 +159,7 @@ class Prices extends Endpoint {
    * Actual aggregation logic for price statistics.
    */
   async aggregate (start, end, params) {
-    const median = this.getMedian(params.stored)
+    const avg = this.getAvg(params.stored)
     const query = {
       item: params.item,
       component: params.component
@@ -172,12 +172,12 @@ class Prices extends Endpoint {
           createdAt: { $gte: start.toDate(), $lte: end.toDate() }
         },
         ...query,
-        ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
+        ...(avg ? { price: { $gte: avg * 0.3, $lte: avg * 3 } } : {})
       } },
       { $group: {
         _id: '$offer',
         orders: { $sum: 1 },
-        median: { $avg: '$price' },
+        avg: { $avg: '$price' },
         min: { $min: '$price' },
         max: { $max: '$price' }
       } }
@@ -187,12 +187,12 @@ class Prices extends Endpoint {
   }
 
   /**
-   * Get median from stored values
+   * Get avg from stored values
    */
-  getMedian (component) {
+  getAvg (component) {
     if (component.prices) {
-      const buying = component.prices.buying.current.median
-      const selling = component.prices.selling.current.median
+      const buying = component.prices.buying.current.avg
+      const selling = component.prices.selling.current.avg
       return Math.round((selling + buying) / (selling && buying ? 2 : 1))
     }
   }

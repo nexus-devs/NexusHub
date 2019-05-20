@@ -153,7 +153,7 @@ class Hook {
         orders: 0,
         min: null,
         max: null,
-        median: null
+        avg: null
       }
       const fullData = {
         ...economyData,

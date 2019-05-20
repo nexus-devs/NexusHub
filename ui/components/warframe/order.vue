@@ -27,7 +27,7 @@
       <div class="col price">
         <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
         <span>{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
-        <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
+        <price-diff :type="order.offer" :current="avg" :previous="order.price" unit="p"/>
       </div>
       <div class="col buy" @click.stop="select">
         <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
@@ -110,10 +110,10 @@ export default {
     component () {
       return this.item.components.find(c => c.name === this.order.component) || {}
     },
-    median () {
+    avg () {
       if (this.order.offer && this.component.prices) {
         const type = this.order.offer.toLowerCase()
-        return this.component.prices[type].current.median
+        return this.component.prices[type].current.avg
       }
     },
     active () {
@@ -154,8 +154,8 @@ export default {
     },
     priceDiff (order) {
       const type = order.offer.toLowerCase()
-      const median = this.component.prices[type].current.median
-      const value = order.price - median
+      const avg = this.component.prices[type].current.avg
+      const value = order.price - avg
       return value
     },
     close () {

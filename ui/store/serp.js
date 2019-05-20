@@ -130,7 +130,7 @@ export default {
             webUrl: item.webUrl,
             category: item.category,
             rarity: item.rarity,
-            price: component.prices ? Math.round((component.prices.selling.current.median + component.prices.buying.current.median) / 2) : undefined,
+            price: component.prices ? Math.round((component.prices.selling.current.avg + component.prices.buying.current.avg) / 2) : undefined,
             results: 'items',
             description: description.join(' ')
           }))

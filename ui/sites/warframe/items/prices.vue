@@ -130,7 +130,7 @@ export default {
     let components = ''
 
     item.components.forEach((component, i) => {
-      const price = (component.prices.buying.current.median + component.prices.selling.current.median) / 2
+      const price = (component.prices.buying.current.avg + component.prices.selling.current.avg) / 2
 
       if (component.tradable && price) {
         components += `${component.name}: ${price}p`

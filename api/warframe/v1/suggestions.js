@@ -79,7 +79,7 @@ class Search extends Endpoint {
       webUrl: 1
     }).limit(limit).toArray()
 
-    // Get median value from set and append image url
+    // Get avg value from set and append image url
     items.forEach(item => {
       const set = item.components.find(c => c.name === 'Set')
 
@@ -88,7 +88,7 @@ class Search extends Endpoint {
         type: item.type,
         category: item.category,
         keyData: (set.prices && set.prices.selling && set.prices.buying)
-          ? Math.round((set.prices.selling.current.median + set.prices.buying.current.median) / 2) + 'p'
+          ? Math.round((set.prices.selling.current.avg + set.prices.buying.current.avg) / 2) + 'p'
           : set.ducats ? set.ducats + ' Ducats' : null,
         imgUrl: item.imgUrl,
         apiUrl: item.apiUrl,

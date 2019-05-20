@@ -296,8 +296,8 @@ class Aggregator {
    * data from all days combined.
    *
    * `schema` should describe how to parse each key, for example:
-   * { orders: 'sum', median: 'avg', min: 'min', max: 'max' }
-   * This gets us the sum of all orders, average of all medians, the minimum
+   * { orders: 'sum', avg: 'avg', min: 'min', max: 'max' }
+   * This gets us the sum of all orders, average of all avgs, the minimum
    * of all min values and the maximum of all max values.
    *
    * As you might see, this allows for a great deal of flexibility, with queries

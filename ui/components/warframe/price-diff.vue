@@ -5,7 +5,7 @@
       {{ Math.abs(diff) }}{{ unit }}
     </div>
     <div v-if="current" class="tooltip">
-      {{ base || 'median' }} {{ current }}{{ unit }}
+      {{ base || 'avg' }} {{ current }}{{ unit }}
     </div>
   </div>
 </template>

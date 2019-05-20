@@ -10,7 +10,7 @@
     </template>
     <template slot="body">
       <span class="highlight">{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
-      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
+      <price-diff :type="order.offer" :current="avg" :previous="order.price" unit="p"/>
       <br>
       <span class="sub">
         {{ order.offer === 'Selling' ? 'Sold' : 'Bought' }} by {{ order.user }}
@@ -37,10 +37,10 @@ export default {
     item () {
       return this.$store.state.items.item
     },
-    median () {
+    avg () {
       if (this.order.offer && this.component.prices) {
         const type = this.order.offer.toLowerCase()
-        return this.component.prices[type].current.median
+        return this.component.prices[type].current.avg
       }
     },
     component () {

@@ -8,7 +8,7 @@ class Item extends Endpoint {
     this.schema.url = '/warframe/v1/items/:item'
     this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }
     const economyData = {
-      median: Number,
+      avg: Number,
       min: Number,
       max: Number,
       orders: Number

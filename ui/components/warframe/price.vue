@@ -82,21 +82,21 @@ export default {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        const s = prices.selling.current.median
-        const b = prices.buying.current.median
+        const s = prices.selling.current.avg
+        const b = prices.buying.current.avg
         return Math.round((s + b) / (s && b ? 2 : 1))
       }
-      return prices[this.offerType].current.median
+      return prices[this.offerType].current.avg
     },
     previous () {
       const prices = this.priceComponent.prices
 
       if (this.offerType === 'combined') {
-        const s = prices.selling.previous.median
-        const b = prices.buying.previous.median
+        const s = prices.selling.previous.avg
+        const b = prices.buying.previous.avg
         return Math.round((s + b) / (s && b ? 2 : 1))
       }
-      return prices[this.offerType].previous.median
+      return prices[this.offerType].previous.avg
     },
     offerType () {
       return this.$store.state.items.selected.offerType
@@ -118,7 +118,7 @@ export default {
         const selling = this.priceComponent.prices.selling
         const merge = (b, i, period) => {
           const s = selling[period].days[i]
-          return Math.round((b.median + s.median) / (b.median && s.median ? 2 : 1))
+          return Math.round((b.avg + s.avg) / (b.avg && s.avg ? 2 : 1))
         }
         return {
           current: buying.current.days ? buying.current.days.map((b, i) => merge(b, i, 'current')) : [],
@@ -126,8 +126,8 @@ export default {
         }
       } else {
         return {
-          current: this.component.prices[this.offerType].current.days.map(d => Math.round(d.median)),
-          previous: this.component.prices[this.offerType].previous.days.map(d => Math.round(d.median))
+          current: this.component.prices[this.offerType].current.days.map(d => Math.round(d.avg)),
+          previous: this.component.prices[this.offerType].previous.days.map(d => Math.round(d.avg))
         }
       }
     },
