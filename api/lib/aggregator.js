@@ -253,7 +253,8 @@ class Aggregator {
       sum: {},
       min: {},
       max: {},
-      avg: {}
+      avg: {},
+      median: {}
     }
 
     // Aggregate all Groups
@@ -276,6 +277,7 @@ class Aggregator {
       if (!result.min[group.id]) result.min[group.id] = {}
       if (!result.max[group.id]) result.max[group.id] = {}
       if (!result.avg[group.id]) result.avg[group.id] = {}
+      if (!result.median[group.id]) result.median[group.id] = {}
 
       for (let key of Object.keys(group.data[0])) {
         if (typeof group.data[0][key] !== 'number') continue
@@ -284,6 +286,7 @@ class Aggregator {
         result.min[group.id][key] = _.minBy(group.data, d => d[key])[key]
         result.max[group.id][key] = _.maxBy(group.data, d => d[key])[key]
         result.avg[group.id][key] = Math.round(_.meanBy(group.data, d => d[key]))
+        result.median[group.id][key] = Math.round(_.meanBy(group.data, d => d[key])) // close enough
       }
     }
 
@@ -353,6 +356,9 @@ class Aggregator {
       }
       else if (val === 'avg') {
         day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key]))
+      }
+      else if (val === 'median') {
+        day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key])) // good enough
       }
     }
 

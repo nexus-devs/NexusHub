@@ -32,7 +32,8 @@ class Prices extends Endpoint {
       avg: Number,
       min: Number,
       max: Number,
-      orders: Number
+      orders: Number,
+      median: Number
     }
     const previousEconomyData = _.cloneDeep(economyData)
     economyData.days = economyData.hours = previousEconomyData.days = [_.cloneDeep(economyData)]
@@ -130,7 +131,8 @@ class Prices extends Endpoint {
       orders: 'sum',
       min: 'min',
       max: 'max',
-      avg: 'avg'
+      avg: 'avg',
+      median: 'median'
     }
 
     for (const currentData of current) {
@@ -179,9 +181,24 @@ class Prices extends Endpoint {
         orders: { $sum: 1 },
         avg: { $avg: '$price' },
         min: { $min: '$price' },
-        max: { $max: '$price' }
+        max: { $max: '$price' },
+        median: { $push: '$price' }
       } }
     ]).toArray()
+
+    // calculate median
+    for (let group of result) {
+      if (group.median.length < 1) {
+        group.median = null
+      } else if (group.median.length < 2) {
+        group.median = group.median[0]
+      } else {
+        group.median.sort((a, b) => (a - b))
+        let lowerValue = group.median[Math.floor(group.median.length / 2)]
+        let upperValue = group.median[Math.ceil(group.median.length / 2)]
+        group.median = (lowerValue + upperValue) / 2
+      }
+    }
 
     return result
   }
