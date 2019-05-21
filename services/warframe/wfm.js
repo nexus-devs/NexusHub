@@ -3,6 +3,11 @@
  */
 const WebSocket = require('ws')
 const getClient = require('../getClient.js')
+const prod = process.env.NODE_ENV === 'production'
+if (prod) {
+  process.on('uncaughtException', () => process.exit(1))
+  process.on('unhandledRejection', () => process.exit(1))
+}
 
 async function monitor () {
   // Init local client
@@ -28,7 +33,7 @@ async function monitor () {
   })
 }
 
-function postOrder (order, items, client) {
+async function postOrder (order, items, client) {
   if (order.platform === 'pc') {
     let matchedItem
     let matchedComponent
@@ -56,7 +61,7 @@ function postOrder (order, items, client) {
 
     if (matchedItem && matchedComponent) {
       try {
-        client.post('/warframe/v1/orders', {
+        await client.post('/warframe/v1/orders', {
           user: order.user.ingame_name,
           offer: order.order_type === 'sell' ? 'Selling' : 'Buying',
           item: matchedItem,
@@ -69,6 +74,7 @@ function postOrder (order, items, client) {
           wfmName: order.item.url_name,
           createdAt: order.creation_date
         })
+        if (prod) console.log(`${order.user.ingame_name}: ${order.offer} ${matchedItem} ${matchedComponent} ${order.platinum}p`)
       } catch (err) {} // just try again later, these are usually issues when bootstrapping
     }
   }
