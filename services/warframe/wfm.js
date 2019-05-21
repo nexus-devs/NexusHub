@@ -74,7 +74,7 @@ async function postOrder (order, items, client) {
           wfmName: order.item.url_name,
           createdAt: order.creation_date
         })
-        if (prod) console.log(`${order.user.ingame_name}: ${order.offer} ${matchedItem} ${matchedComponent} ${order.platinum}p`)
+        if (prod) console.log(`${order.user.ingame_name}: ${order.order_type} ${matchedItem} ${matchedComponent} ${order.platinum}p`)
       } catch (err) {} // just try again later, these are usually issues when bootstrapping
     }
   }
