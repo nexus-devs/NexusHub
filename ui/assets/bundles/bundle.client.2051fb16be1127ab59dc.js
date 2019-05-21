@@ -8500,7 +8500,7 @@ exports.default = {
     bottom: _footer2.default
   },
   head: {
-    title: 'NexusHub' + ( true ? ' [staging]' : undefined),
+    title: 'NexusHub' + (undefined ? ' [staging]' :  true ? '' : undefined),
     link: [{ rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' }, { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }]
   },
   computed: {
@@ -14710,8 +14710,8 @@ function createApp(context) {
     _vue2.default.prototype.$cubic = context.api;
   } else {
     _vue2.default.prototype.$cubic = new _browser2.default({
-      api_url: "wss://api.staging.nexushub.co/ws",
-      auth_url: "wss://auth.staging.nexushub.co/ws"
+      api_url: "wss://api.nexushub.co/ws",
+      auth_url: "wss://auth.nexushub.co/ws"
     });
   }
 
