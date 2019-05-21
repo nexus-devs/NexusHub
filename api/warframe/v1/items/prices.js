@@ -161,7 +161,7 @@ class Prices extends Endpoint {
    * Actual aggregation logic for price statistics.
    */
   async aggregate (start, end, params) {
-    const avg = this.getAvg(params.stored)
+    const median = this.getMedian(params.stored)
     const query = {
       item: params.item,
       component: params.component
@@ -174,7 +174,7 @@ class Prices extends Endpoint {
           createdAt: { $gte: start.toDate(), $lte: end.toDate() }
         },
         ...query,
-        ...(avg ? { price: { $gte: avg * 0.3, $lte: avg * 3 } } : {})
+        ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
       } },
       { $group: {
         _id: '$offer',
@@ -204,12 +204,12 @@ class Prices extends Endpoint {
   }
 
   /**
-   * Get avg from stored values
+   * Get median from stored values
    */
-  getAvg (component) {
+  getMedian (component) {
     if (component.prices) {
-      const buying = component.prices.buying.current.avg
-      const selling = component.prices.selling.current.avg
+      const buying = component.prices.buying.current.median
+      const selling = component.prices.selling.current.median
       return Math.round((selling + buying) / (selling && buying ? 2 : 1))
     }
   }
