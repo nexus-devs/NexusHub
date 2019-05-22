@@ -29,6 +29,10 @@ class List extends Endpoint {
       _id: 0,
       uniqueName: 1,
       name: 1,
+      tradable: 1,
+      imgUrl: 1,
+      apiUrl: 1,
+      webUrl: 1,
       'components.name': 1,
       'components.imgUrl': 1,
       'components.prices': 1,
@@ -47,10 +51,7 @@ class List extends Endpoint {
       'components.prices.selling.previous.orders': 1,
       'components.prices.selling.previous.min': 1,
       'components.prices.selling.previous.max': 1,
-      'components.prices.selling.previous.median': 1,
-      imgUrl: 1,
-      apiUrl: 1,
-      webUrl: 1
+      'components.prices.selling.previous.median': 1
     }).toArray()
 
     this.cache(items, 60)
