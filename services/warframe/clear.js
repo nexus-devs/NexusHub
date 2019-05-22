@@ -5,6 +5,7 @@
  */
 const getClient = require('../getClient.js')
 const prod = process.env.NODE_ENV === 'production'
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 if (prod) {
   process.on('uncaughtException', () => process.exit(1))
   process.on('unhandledRejection', () => process.exit(1))
@@ -12,12 +13,17 @@ if (prod) {
 
 async function monitor () {
   const client = await getClient()
+  const items = await client.get('/warframe/v1/items?tradable=true')
 
   while (true) {
-    const timer = new Date()
-    await client.get('/warframe/v1/orders/clear')
-    await new Promise(resolve => setTimeout(resolve, 1000 * 60))
-    if (prod) console.log(`Done in ${new Date() - timer}ms`)
+    for (const item of items) {
+      const timer = new Date()
+      const result = await client.get(`/warframe/v1/orders/clear?item=${item.name}`)
+      if (prod) {
+        console.log(`${item.name}: ${result.discarded} removed, ${result.updated} modified, ${result.total} total in ${new Date() - timer}ms`)
+      }
+      await sleep(100 * 1) // Give our and WFM's API some breathing room
+    }
   }
 }
 monitor()

@@ -10,13 +10,8 @@ if (prod) {
 }
 
 async function monitor () {
-  // Init local client
   const client = await getClient()
-
-  // Init items
   const items = await client.get('/warframe/v1/items?tradable=true')
-
-  // Init websocket
   const ws = new WebSocket('wss://warframe.market/socket')
   ws.on('open', () => {
     ws.send(JSON.stringify({ type: '@WS/SUBSCRIBE/MOST_RECENT' }))

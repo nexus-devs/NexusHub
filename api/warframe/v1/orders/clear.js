@@ -2,13 +2,25 @@ const _ = require('lodash')
 const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 const { ObjectId } = require('mongodb')
+const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Removes outdated orders, updates online status of users from other platforms.'
     this.schema.scope = 'write_orders_warframe'
-    this.schema.response = String
+    this.schema.query = [
+      {
+        name: 'item',
+        description: 'Item to filter',
+        required: true
+      }
+    ]
+    this.schema.request = '/warframe/v1/orders/clear?item=frost%20prime'
+    this.schema.response = {
+      discarded: Number,
+      updated: Number
+    }
   }
 
   /**
@@ -20,7 +32,8 @@ class Order extends Endpoint {
    * This also edits any edited orders on WFM
    */
   async main (req, res) {
-    const orders = await this.db.collection('activeOrders').find().project({
+    const item = title(decodeURIComponent(req.query.item))
+    const orders = await this.db.collection('activeOrders').find({ item }).project({
       _id: 1,
       offer: 1,
       user: 1,
@@ -30,21 +43,22 @@ class Order extends Endpoint {
       source: 1,
       wfmName: 1
     }).toArray()
+    if (!orders.length) {
+      return res.send({ discarded: 0, updated: 0, total: 0 })
+    }
     const discard = []
     const update = []
-    const items = []
+    const WfmOrders = await request(`https://api.warframe.market/v1/items/${orders[0].wfmName}/orders`)
+    const wfmOrders = JSON.parse(WfmOrders).payload.orders
 
-    // Use regular for loop here because we have a rather big array and no
-    // async in this loop.
+    // Use regular for loop here because performance
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i]
-      if (order.source === 'Warframe Market') this.applyOrderedItems(items, order)
+      if (order.source === 'Warframe Market') {
+        const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
+        if (!discarded) this.applyModifiedWfmOrder(update, discard, order, wfmOrders)
+      }
       if (order.source === 'Trade Chat') this.applyOutdatedOrder(discard, order, orders)
-    }
-
-    // Get listings for all items, then set new online status and remove old orders
-    for (const item of items) {
-      await this.updateWfmListings(item, discard, update)
     }
 
     // Store new results
@@ -53,23 +67,11 @@ class Order extends Endpoint {
     parallel.push(this.update(update))
 
     await Promise.all(parallel)
-    res.send('ok')
-  }
-
-  /**
-   * Generate a list of all ordered items so we know what to scrape
-   * from WFM's API
-   */
-  applyOrderedItems (items, order) {
-    const item = items.find(i => i.name === order.wfmName)
-    if (!item) {
-      items.push({
-        name: order.wfmName,
-        orders: [ order ]
-      })
-    } else {
-      item.orders.push(order)
-    }
+    res.send({
+      discarded: discard.length,
+      updated: update.length,
+      total: orders.length
+    })
   }
 
   /**
@@ -80,27 +82,6 @@ class Order extends Endpoint {
     const discarded = new Date() - discardAfter > order.createdAt
     if (discarded) {
       discard.push(new ObjectId(order._id))
-    }
-  }
-
-  /**
-   * Delete or modify changed orders on Warframe Market
-   */
-  async updateWfmListings (item, discard, update) {
-    let Orders, orders
-    try {
-      Orders = await request(`https://api.warframe.market/v1/items/${item.name}/orders`)
-      orders = JSON.parse(Orders).payload.orders
-    } catch (err) {
-      // The WFM API sometimes sends invalid JSON as a result of dropped
-      // connections or something, so just continue with the next item
-      return
-    }
-
-    // Discard closed/outdated orders orders and update modified ones
-    for (const order of item.orders) {
-      const discarded = this.applyOutdatedWfmOrder(discard, order, orders)
-      if (!discarded) this.applyModifiedWfmOrder(update, discard, order, orders)
     }
   }
 

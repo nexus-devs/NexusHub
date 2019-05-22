@@ -35,7 +35,7 @@ class Orders extends Endpoint {
     const item = req.query.item
     const result = await this.find(title(item))
     res.send(result)
-    this.cache(result, 60 * 3)
+    this.cache(result, 60)
   }
 
   async find (item) {

@@ -6,7 +6,7 @@ class Item extends Endpoint {
     super(options)
     this.schema.description = 'Get data for a specific item with all its default attributes.'
     this.schema.url = '/warframe/v1/items/:item'
-    this.schema.request = { url: '/warframe/v1/items/nikana%20prime' }
+    this.schema.request = '/warframe/v1/items/nikana%20prime'
     const economyData = {
       median: Number,
       min: Number,
