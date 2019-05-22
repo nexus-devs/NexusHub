@@ -11,7 +11,8 @@ class Item extends Endpoint {
       avg: Number,
       min: Number,
       max: Number,
-      orders: Number
+      orders: Number,
+      median: Number
     }
     this.schema.response = {
       uniqueName: String,
