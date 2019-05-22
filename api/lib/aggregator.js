@@ -285,7 +285,7 @@ class Aggregator {
         result.sum[group.id][key] = _.sumBy(group.data, d => d[key])
         result.min[group.id][key] = _.minBy(group.data, d => d[key])[key]
         result.max[group.id][key] = _.maxBy(group.data, d => d[key])[key]
-        result.avg[group.id][key] = Math.round(_.meanBy(group.data, d => d[key]))
+        result.avg[group.id][key] = Math.round(_.meanBy(group.data, d => d[key]) * 100) / 100 // round to 2 decimals
         result.median[group.id][key] = Math.round(_.meanBy(group.data, d => d[key])) // close enough
       }
     }
@@ -355,7 +355,7 @@ class Aggregator {
         day[key] = max ? max[key] : null
       }
       else if (val === 'avg') {
-        day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key]))
+        day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key]) * 100) / 100 // round to 2 decimals
       }
       else if (val === 'median') {
         day[key] = Math.round(_.meanBy(hours.filter(h => h[key]), h => h[key])) // good enough
