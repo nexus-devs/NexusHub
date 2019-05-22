@@ -62,7 +62,7 @@ class Order extends Endpoint {
     if (!component) {
       return res.send(`Rejected. (${request.component} is not a component)`)
     }
-    const plat = component.prices ? component.prices[request.offer.toLowerCase()].current.avg : undefined
+    const plat = component.prices ? component.prices[request.offer.toLowerCase()].current.median : undefined
     const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
 
     if (isRidiculous) {
