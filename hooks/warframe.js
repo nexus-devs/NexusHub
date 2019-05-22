@@ -17,6 +17,12 @@ class Hook {
     await verify(db, 'activeOrders', {
       item: 1
     })
+    await verify(db, 'activeOrders', {
+      user: 1,
+      item: 1,
+      component: 1,
+      offer: 1
+    })
 
     // Prices
     await verify(db, 'orders', {

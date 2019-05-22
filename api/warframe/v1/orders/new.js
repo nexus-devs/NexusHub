@@ -3,7 +3,6 @@ const Orders = require('./index.js')
 const Opm = require('./opm.js')
 const User = require('../users/new.js')
 const Prices = require('../items/prices.js')
-const Cache = require(`${process.cwd()}/api/lib/cache.js`)
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
@@ -49,19 +48,19 @@ class Order extends Endpoint {
     // Cast date from request into "real" date object
     request.createdAt = request.createdAt ? new Date(request.createdAt) : new Date()
 
-    // Filter order by criteria (No duplicates, no stupid price, etc)
-    if (this.cache.find(request)) {
-      return res.send('Rejected. (Duplicate post)')
-    }
-    this.cache.add(request)
+    // Item not found in db?
     const stored = await this.db.collection('items').findOne({ name: item })
     if (!stored) {
       return res.send(`Rejected. (${request.item} not found)`)
     }
+
+    // Component not found in item?
     const component = stored.components.find(c => c.name === request.component)
     if (!component) {
       return res.send(`Rejected. (${request.component} is not a component)`)
     }
+
+    // Price outside of reasonable range?
     if (component.prices) {
       const plat = component.prices[request.offer.toLowerCase()].current.median
       const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
@@ -69,6 +68,17 @@ class Order extends Endpoint {
       if (isRidiculous) {
         return res.send('Rejected. (Ridiculous price)')
       }
+    }
+
+    // Order already exists in activeOrders?
+    const exists = await this.db.collection('activeOrders').findOne({
+      user: request.user,
+      offer: request.offer,
+      item: request.item,
+      component: request.component
+    })
+    if (exists) {
+      return res.send('Rejected. (Duplicate order)')
     }
 
     // Process offer
