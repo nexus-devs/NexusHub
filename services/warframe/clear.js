@@ -22,7 +22,10 @@ async function monitor () {
       if (prod) {
         console.log(`${item.name}: ${result.discarded} removed, ${result.updated} modified, ${result.total} total in ${new Date() - timer}ms`)
       }
-      await sleep(100 * 1) // Give our and WFM's API some breathing room
+      // Give our and WFM's API some breathing room. WFM rate limits
+      // will be 3RPS. In addition, we'll only wait if we actually made
+      // a request to WFM, which is not the case if result.total is 0.
+      if (result.total) await sleep(333)
     }
   }
 }
