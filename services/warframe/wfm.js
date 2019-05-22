@@ -40,8 +40,6 @@ async function postOrder (order, items, client) {
 
     // Find corresponding item
     for (let item of items) {
-      if (!item.components.find(c => c.name === 'Set').tradable) continue
-
       const itemName = item.name.split(' ')
       const orderName = order.item.en.item_name.split(' ')
 
