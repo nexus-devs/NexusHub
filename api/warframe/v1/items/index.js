@@ -8,6 +8,13 @@ class List extends Endpoint {
     super(options)
     this.schema.description = 'Get a list of all items with their basic attributes. For tradable items this also includes prices.'
     this.schema.url = '/warframe/v1/items'
+    this.schema.query = [
+      {
+        name: 'tradable',
+        default: false,
+        description: 'Removes untradable items from the output if set to true.'
+      }
+    ]
     this.schema.response = [{
       uniqueName: String,
       name: String,
@@ -25,11 +32,11 @@ class List extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const items = await this.db.collection('items').find().project({
+    const query = req.query.tradable ? { tradable: true } : {}
+    const items = await this.db.collection('items').find(query).project({
       _id: 0,
       uniqueName: 1,
       name: 1,
-      tradable: 1,
       imgUrl: 1,
       apiUrl: 1,
       webUrl: 1,

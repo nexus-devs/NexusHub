@@ -14,13 +14,7 @@ async function monitor () {
   const client = await getClient()
 
   // Init items
-  let items
-  try { items = await client.get('/warframe/v1/items') } catch (err) {}
-  setInterval(async () => {
-    try {
-      items = await client.get('/warframe/v1/items')
-    } catch (err) {}
-  }, 1000 * 60)
+  const items = await client.get('/warframe/v1/items?tradable=true')
 
   // Init websocket
   const ws = new WebSocket('wss://warframe.market/socket')

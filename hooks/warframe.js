@@ -42,12 +42,15 @@ class Hook {
       scope: 1
     })
 
-    // Specific User
+    // Item list
     await verify(db, 'items', {
       name: 1
     })
+    await verify(db, 'items', {
+      tradable: 1
+    })
 
-    // Specific item
+    // Users
     await verify(db, 'users', {
       name: 1
     })
