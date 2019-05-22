@@ -25,41 +25,36 @@ class List extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    let items = await this.db.collection('items').find().project({
+    const items = await this.db.collection('items').find().project({
       _id: 0,
       uniqueName: 1,
       name: 1,
-      components: 1,
+      'components.name': 1,
+      'components.imgUrl': 1,
+      'components.prices': 1,
+      'components.prices.buying.current.orders': 1,
+      'components.prices.buying.current.min': 1,
+      'components.prices.buying.current.max': 1,
+      'components.prices.buying.current.median': 1,
+      'components.prices.buying.previous.orders': 1,
+      'components.prices.buying.previous.min': 1,
+      'components.prices.buying.previous.max': 1,
+      'components.prices.buying.previous.median': 1,
+      'components.prices.selling.current.orders': 1,
+      'components.prices.selling.current.min': 1,
+      'components.prices.selling.current.max': 1,
+      'components.prices.selling.current.median': 1,
+      'components.prices.selling.previous.orders': 1,
+      'components.prices.selling.previous.min': 1,
+      'components.prices.selling.previous.max': 1,
+      'components.prices.selling.previous.median': 1,
       imgUrl: 1,
       apiUrl: 1,
       webUrl: 1
     }).toArray()
-    let result = []
 
-    for (const item of items) {
-      // Remove detailed price data to reduce traffic
-      for (const component of item.components) {
-        const clean = obj => {
-          delete obj.current.hours
-          delete obj.current.days
-          delete obj.previous.hours
-          delete obj.previous.days
-        }
-        if (component.prices && component.prices.buying) clean(component.prices.buying)
-        if (component.prices && component.prices.selling) clean(component.prices.selling)
-      }
-      result.push({
-        uniqueName: item.uniqueName,
-        name: item.name,
-        components: item.components,
-        apiUrl: item.apiUrl,
-        webUrl: item.webUrl,
-        imgUrl: item.imgUrl
-      })
-    }
-
-    this.cache(result, 60)
-    res.send(result)
+    this.cache(items, 60)
+    res.send(items)
   }
 }
 
