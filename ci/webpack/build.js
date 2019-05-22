@@ -75,7 +75,8 @@ async function build () {
   process.exit()
 }
 
-if (enabled) {
+// If not staging, we're on production and always need a rebuild
+if (enabled || !staging) {
   build()
 } else {
   console.log('* No webpack rebuild required.')
