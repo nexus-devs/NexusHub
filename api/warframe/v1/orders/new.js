@@ -27,7 +27,6 @@ class Order extends Endpoint {
       }
     }
     this.schema.response = String
-    this.cache = new Cache()
   }
 
   async main (req, res) {
