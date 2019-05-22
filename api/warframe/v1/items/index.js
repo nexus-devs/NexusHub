@@ -29,13 +29,16 @@ class List extends Endpoint {
       _id: 0,
       uniqueName: 1,
       name: 1,
-      components: 1,
+      'components.name': 1,
+      'components.prices': 1,
+      'components.imgUrl': 1,
       imgUrl: 1,
       apiUrl: 1,
       webUrl: 1
     }).toArray()
     let result = []
 
+    const t1 = new Date()
     for (const item of items) {
       // Remove detailed price data to reduce traffic
       for (const component of item.components) {
