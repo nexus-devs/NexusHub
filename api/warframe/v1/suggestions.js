@@ -37,7 +37,7 @@ class Search extends Endpoint {
     */
   async main (req, res) {
     /* eslint no-useless-escape: "off" */
-    const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
+    const query = decodeURIComponent(req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'))
     const limit = req.query.limit
 
     // Validate Input

@@ -36,7 +36,7 @@ class History extends Endpoint {
   }
 
   async main (req, res) {
-    const item = title(req.query.item)
+    const item = title(decodeURIComponent(req.query.item))
     const component = title(req.query.component)
     const source = req.query.source
     const platform = req.query.platform
