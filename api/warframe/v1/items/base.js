@@ -38,7 +38,7 @@ class Item extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const name = title(decodeURIComponent(req.params.item))
+    const name = title(req.params.item)
     let item = await this.db.collection('items').findOne({ name })
 
     if (item) {

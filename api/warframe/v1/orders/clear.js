@@ -32,7 +32,7 @@ class Order extends Endpoint {
    * This also edits any edited orders on WFM
    */
   async main (req, res) {
-    const item = title(decodeURIComponent(req.query.item))
+    const item = title(req.query.item)
     const orders = await this.db.collection('activeOrders').find({ item }).project({
       _id: 1,
       offer: 1,

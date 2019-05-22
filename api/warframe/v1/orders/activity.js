@@ -31,7 +31,7 @@ class Activity extends Endpoint {
    * Entrypoint for EndpointController
    */
   async main (req, res) {
-    const item = req.query.item ? title(decodeURIComponent(req.query.item)) : ''
+    const item = req.query.item ? title(req.query.item) : ''
     const timerange = req.query.timerange + 1
     const data = await this.get(item, timerange)
 

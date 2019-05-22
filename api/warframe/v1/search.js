@@ -46,7 +46,7 @@ class Search extends Endpoint {
     */
   async main (req, res) {
     /* eslint no-useless-escape: "off" */
-    const query = decodeURIComponent(req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&'))
+    const query = req.query.query.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
     const limit = req.query.limit
     const threshold = 1 - req.query.threshold
     const tradable = req.query.tradable

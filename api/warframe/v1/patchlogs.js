@@ -36,7 +36,7 @@ class Patchlogs extends Endpoint {
     const limit = req.query.limit
 
     if (item) {
-      const Item = await this.db.collection('items').findOne({ name: decodeURIComponent(title(item)) })
+      const Item = await this.db.collection('items').findOne({ name: title(item) })
       if (!Item) {
         const response = {
           error: 'Not found.',

@@ -30,7 +30,7 @@ class Opm extends Endpoint {
   }
 
   async main (req, res) {
-    const item = req.query.item ? title(decodeURIComponent(req.query.item)) : undefined
+    const item = req.query.item ? title(req.query.item) : undefined
     const data = await this.filter(item)
     res.send(data)
     this.cache(data, 5)

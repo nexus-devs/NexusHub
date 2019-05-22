@@ -52,7 +52,7 @@ class Prices extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const name = title(decodeURIComponent(req.params.item))
+    const name = title(req.params.item)
     const timerange = req.query.timerange
     const component = req.query.component
     const source = req.query.source ? title(req.query.source) : req.query.source
