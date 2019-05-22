@@ -62,11 +62,13 @@ class Order extends Endpoint {
     if (!component) {
       return res.send(`Rejected. (${request.component} is not a component)`)
     }
-    const plat = component.prices[request.offer.toLowerCase()].current.median
-    const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
+    if (component.prices) {
+      const plat = component.prices[request.offer.toLowerCase()].current.median
+      const isRidiculous = request.price && plat ? request.price < plat * 0.3 || request.price > plat * 3 : false
 
-    if (isRidiculous) {
-      return res.send('Rejected. (Ridiculous price)')
+      if (isRidiculous) {
+        return res.send('Rejected. (Ridiculous price)')
+      }
     }
 
     // Process offer
@@ -96,7 +98,7 @@ class Order extends Endpoint {
       const orders = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
       const result = await orders.find(item)
       orders.publish(result)
-      orders.cache(result, 60 * 3)
+      orders.cache(result, 60)
     })
 
     // Update prices
