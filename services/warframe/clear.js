@@ -26,7 +26,7 @@ async function monitor () {
         console.log(`Failed at ${item.name}`)
         continue
       }
-      
+
       if (prod) {
         console.log(`${item.name}: ${result.discarded} removed, ${result.updated} modified, ${result.total} total in ${new Date() - timer}ms`)
       }
