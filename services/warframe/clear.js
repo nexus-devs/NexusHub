@@ -18,7 +18,15 @@ async function monitor () {
   while (true) {
     for (const item of items) {
       const timer = new Date()
-      const result = await client.get(`/warframe/v1/orders/clear?item=${item.name}`)
+      let result = {}
+
+      try {
+        result = await client.get(`/warframe/v1/orders/clear?item=${item.name}`)
+      } catch (err) {
+        console.log(`Failed at ${item.name}`)
+        continue
+      }
+
       if (prod) {
         console.log(`${item.name}: ${result.discarded} removed, ${result.updated} modified, ${result.total} total in ${new Date() - timer}ms`)
       }
