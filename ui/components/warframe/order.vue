@@ -48,7 +48,7 @@
               <span class="sub">
                 {{ order.source }}
               </span>
-              <a v-if="order.source === 'Warfarme Market'" :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" style="display: inline-block; margin-top: -5px;">
+              <a v-if="order.source === 'Warframe Market'" :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" style="display: inline-block; margin-top: -5px;">
                 <img src="/img/ui/open-link.svg" alt="Open on Warframe Market" class="ico-h-16 interactive">
               </a>
             </div>

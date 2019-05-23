@@ -61,11 +61,15 @@ class Order extends Endpoint {
     // Use regular for loop here because performance
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i]
+
       if (order.source === 'Warframe Market') {
         const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
         if (!discarded) this.applyModifiedWfmOrder(update, discard, order, wfmOrders)
       }
-      if (order.source === 'Trade Chat') this.applyOutdatedOrder(discard, order, orders)
+
+      if (order.source === 'Trade Chat') {
+        this.applyOutdatedOrder(discard, order, orders)
+      }
     }
 
     // Store new results
@@ -86,7 +90,7 @@ class Order extends Endpoint {
    */
   applyOutdatedOrder (discard, order, orders) {
     const discardAfter = (1000 * 60 * 10) + ((100 - orders.length) * 1000 * 5)
-    const discarded = new Date() - discardAfter > order.createdAt
+    const discarded = new Date() - order.createdAt > discardAfter
     if (discarded) {
       discard.push(new ObjectId(order._id))
     }

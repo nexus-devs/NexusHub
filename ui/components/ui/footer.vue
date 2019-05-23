@@ -26,7 +26,6 @@
         <div class="col-b">
           <h4>Resources</h4>
           <router-link to="/privacy">Privacy Policy</router-link>
-          <router-link to="/imprint">Imprint</router-link>
         </div>
       </div>
       <div class="brands">

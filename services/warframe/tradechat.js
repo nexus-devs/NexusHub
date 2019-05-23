@@ -7,8 +7,8 @@ const getClient = require('../getClient.js')
 async function monitor () {
   const Client = require('cubic-client')
   const client = new Client({
-    api_url: 'wss://api.nexushub.co/ws',
-    auth_url: 'wss://auth.nexushub.co/ws'
+    api_url: 'wss://api.staging.nexushub.co/ws',
+    auth_url: 'wss://auth.staging.nexushub.co/ws'
   })
   const local = await getClient()
 

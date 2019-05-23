@@ -9,7 +9,7 @@
       </div>
     </template>
     <template slot="body">
-      <span class="highlight">{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
+      <span class="highlight" :style="{ 'font-size': order.price ? '' : '1em' }">{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
       <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
       <br>
       <span class="sub">
