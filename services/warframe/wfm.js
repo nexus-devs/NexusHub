@@ -9,17 +9,27 @@ if (prod) {
   process.on('unhandledRejection', () => process.exit(1))
 }
 
-async function monitor () {
-  const client = await getClient()
-  const items = await client.get('/warframe/v1/items?tradable=true')
+function initWs (items, client) {
   const ws = new WebSocket('wss://warframe.market/socket')
+  ws.on('close', () => initWs(items, client))
+  ws.on('error', () => initWs(items, client))
   ws.on('open', () => {
     ws.send(JSON.stringify({ type: '@WS/SUBSCRIBE/MOST_RECENT' }))
   })
   ws.on('message', data => {
     data = JSON.parse(data)
-    if (data.type === '@WS/SUBSCRIPTIONS/MOST_RECENT/NEW_ORDER') postOrder(data.payload.order, items, client)
+    if (data.type === '@WS/SUBSCRIPTIONS/MOST_RECENT/NEW_ORDER') {
+      postOrder(data.payload.order, items, client)
+    }
   })
+  return ws
+}
+
+async function monitor () {
+  const client = await getClient()
+  const items = await client.get('/warframe/v1/items?tradable=true')
+
+  initWs(items, client)
 }
 
 async function postOrder (order, items, client) {
