@@ -179,7 +179,7 @@ class Order extends Endpoint {
 
       for (const object of update) {
         const _id = new ObjectId(object._id)
-        bulk.find({ _id }).replaceOne(object)
+        bulk.find({ _id }).updateOne({ $set: object })
       }
       return bulk.execute()
     }
