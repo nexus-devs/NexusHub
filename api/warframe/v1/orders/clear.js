@@ -48,21 +48,19 @@ class Order extends Endpoint {
     }
     const discard = []
     const update = []
+    const wfmName = orders.find(o => o.wfmName).wfmName
     let wfmOrders
 
-    // Sometimes the wfm api returns invalid JSON, so just repeat the request
-    try {
+    if (wfmName) {
       const WfmOrders = await request(`https://api.warframe.market/v1/items/${orders[0].wfmName}/orders`)
       wfmOrders = JSON.parse(WfmOrders).payload.orders
-    } catch (err) {
-      return this.main(req, res)
     }
 
     // Use regular for loop here because performance
     for (let i = 0; i < orders.length; i++) {
       const order = orders[i]
 
-      if (order.source === 'Warframe Market') {
+      if (wfmName && order.source === 'Warframe Market') {
         const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
         if (!discarded) this.applyModifiedWfmOrder(update, discard, order, wfmOrders)
       }
