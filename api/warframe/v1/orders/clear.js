@@ -2,6 +2,7 @@ const _ = require('lodash')
 const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 const { ObjectId } = require('mongodb')
+const Orders = require('./index.js')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
@@ -74,8 +75,16 @@ class Order extends Endpoint {
     const parallel = []
     parallel.push(this.discard(discard))
     parallel.push(this.update(update))
-
     await Promise.all(parallel)
+
+    if (discard.length + update.length > 0) {
+      const options = { ws: this.ws, db: this.db, cache: this.cc }
+      const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
+      const result = await ordersEndpoint.find(item)
+      ordersEndpoint.publish(result)
+      ordersEndpoint.cache(result, 60)
+    }
+
     res.send({
       discarded: discard.length,
       updated: update.length,
