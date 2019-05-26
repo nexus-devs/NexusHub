@@ -38,3 +38,22 @@ pre > code {
   margin-top: -1.00em;
   display: block;
 }
+
+/**
+ * Nitropay GDPR Notice
+ */
+div[class*="app_gdpr"] {
+  div[class*="banner_banner"] {
+    background: $color-bg-darker !important;
+    @include shadow-3;
+  }
+  div[class*="banner_title"] span {
+    font-family: 'Circular' !important;
+    color: white !important;
+  }
+  div[class*="banner_consent"] > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

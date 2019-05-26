@@ -31,6 +31,9 @@ export default {
     link: [
       { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
+    ],
+    script: [
+      { src: 'https://static.nitropay.com/nads/nads-34.min.js' }
     ]
   },
   computed: {
@@ -67,22 +70,6 @@ export default {
 
 #app {
   background: $color-bg-dark;
-  color: $color-font-body;
-
-  input::placeholder {
-    color: $color-font-body;
-  }
-  a {
-    color: white;
-    @include ease(0.2s);
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5 {
-    color: white;
-  }
 }
 
 .interactive {

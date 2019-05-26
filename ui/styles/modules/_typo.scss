@@ -13,9 +13,14 @@
   }
 }
 
-span, input {
+span, input, time {
   vertical-align: middle;
+  color: $color-font-body;
   font-size: 1em;
+}
+
+input::placeholder {
+  color: $color-font-body;
 }
 
 a, a > span {
@@ -24,6 +29,7 @@ a, a > span {
 
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Circular', sans-serif;
+  color: white;
   font-weight: 700;
 }
 section .container h2.sub {
