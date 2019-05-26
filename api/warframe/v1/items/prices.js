@@ -161,18 +161,18 @@ class Prices extends Endpoint {
    * Actual aggregation logic for price statistics.
    */
   async aggregate (start, end, params) {
-    const median = this.getMedian(params.stored)
     const query = {
       item: params.item,
-      component: params.component
+      component: params.component,
+      createdAt: { $gte: start.toDate(), $lte: end.toDate() }
     }
     if (params.source) query.source = params.source
     if (params.platform) query.platform = params.platform
+
+    const { median, medianBuying, medianSelling } = await this.getMedians(query)
+
     const result = await this.db.collection('orders').aggregate([
       { $match: {
-        ...{
-          createdAt: { $gte: start.toDate(), $lte: end.toDate() }
-        },
         ...query,
         ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
       } },
@@ -181,37 +181,38 @@ class Prices extends Endpoint {
         orders: { $sum: 1 },
         avg: { $avg: '$price' },
         min: { $min: '$price' },
-        max: { $max: '$price' },
-        median: { $push: '$price' }
+        max: { $max: '$price' }
       } }
     ]).toArray()
 
-    // calculate median
     for (let group of result) {
-      if (group.median.length < 1) {
-        group.median = null
-      } else if (group.median.length < 2) {
-        group.median = group.median[0]
-      } else {
-        group.median.sort((a, b) => (a - b))
-        let lowerValue = group.median[Math.floor(group.median.length / 2)]
-        let upperValue = group.median[Math.ceil(group.median.length / 2)]
-        group.median = (lowerValue + upperValue) / 2
-      }
+      if (group._id === 'Buying') group.median = medianBuying
+      else if (group._id === 'Selling') group.median = medianSelling
     }
 
     return result
   }
 
   /**
-   * Get median from stored values
+   * Get combined, buying and selling median
    */
-  getMedian (component) {
-    if (component.prices) {
-      const buying = component.prices.buying.current.median
-      const selling = component.prices.selling.current.median
-      return Math.round((selling + buying) / (selling && buying ? 2 : 1))
-    }
+  async getMedians (query) {
+    const median = await this.getSingleMedian(query)
+    const medianBuying = await this.getSingleMedian({ ...query, offer: 'Buying' })
+    const medianSelling = await this.getSingleMedian({ ...query, offer: 'Selling' })
+
+    return { median, medianBuying, medianSelling }
+  }
+
+  /**
+   * Get a median from a given query
+   */
+  async getSingleMedian (query) {
+    const count = await this.db.collection('orders').find(query).count()
+    if (count < 1) return null
+
+    const result = await this.db.collection('orders').find(query).sort({ 'price': 1 }).skip(count / 2 - 1).limit(1).toArray()
+    return result[0].price
   }
 
   /**
