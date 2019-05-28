@@ -69,7 +69,7 @@ class Order extends Endpoint {
 
     // Process Components
     for (const component of components) {
-      this.clear(component, discard, upate)
+      await this.clear(component, discard, upate)
     }
 
     // Store new results
@@ -96,7 +96,7 @@ class Order extends Endpoint {
   /**
    * Clear orders on a per-component basis
    */
-  clear (component, discard, update) {
+  async clear (component, discard, update) {
     const wfmName = component.orders.find(o => o.wfmName)
     let wfmOrders
 
