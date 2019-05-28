@@ -21,7 +21,7 @@ async function monitor () {
       let result = {}
 
       try {
-        result = await client.get(`/warframe/v1/orders/clear?item=${item.name}`)
+        result = await client.get(`/warframe/v1/orders/clear?item=${encodeURIComponent(item.name)}`)
       } catch (err) {
         if (prod) console.log(`Failed at ${item.name}`)
         continue

@@ -2,6 +2,7 @@ const _ = require('lodash')
 const Endpoint = require('cubic-api/endpoint')
 const request = require('requestretry').defaults({ fullResponse: false })
 const { ObjectId } = require('mongodb')
+const Orders = require('./index.js')
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 class Order extends Endpoint {
@@ -62,7 +63,7 @@ class Order extends Endpoint {
 
       if (wfmName && order.source === 'Warframe Market') {
         const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
-        if (!discarded) this.applyModifiedWfmOrder(update, discard, order, wfmOrders)
+        if (!discarded) this.applyModifiedWfmOrder(update, order, wfmOrders)
       }
 
       if (order.source === 'Trade Chat') {
@@ -74,8 +75,16 @@ class Order extends Endpoint {
     const parallel = []
     parallel.push(this.discard(discard))
     parallel.push(this.update(update))
-
     await Promise.all(parallel)
+
+    if (discard.length + update.length > 0) {
+      const options = { ws: this.ws, db: this.db, cache: this.cc }
+      const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
+      const result = await ordersEndpoint.find(item)
+      ordersEndpoint.publish(result)
+      ordersEndpoint.cache(result, 60)
+    }
+
     res.send({
       discarded: discard.length,
       updated: update.length,
@@ -115,7 +124,7 @@ class Order extends Endpoint {
    * Generate new order object as the result of changed data on Warframe
    * Market.
    */
-  applyModifiedWfmOrder (update, discard, order, orders) {
+  applyModifiedWfmOrder (update, order, orders) {
     const target = orders.find(o => {
       const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
       const matchesUser = o.user.ingame_name === order.user
@@ -170,7 +179,7 @@ class Order extends Endpoint {
 
       for (const object of update) {
         const _id = new ObjectId(object._id)
-        bulk.find({ _id }).replaceOne(object)
+        bulk.find({ _id }).updateOne({ $set: object })
       }
       return bulk.execute()
     }
