@@ -70,6 +70,7 @@ export default {
 
 #app {
   background: $color-bg-dark;
+  color: white;
 }
 
 .interactive {
