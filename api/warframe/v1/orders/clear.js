@@ -52,12 +52,12 @@ class Order extends Endpoint {
       const discard = []
       const update = []
       const components = []
-  
+
       // Gather components and their orders
       for (let i = 0; i < orders.length; i++) {
         const order = orders[i]
         const found = components.find(c => c.name === order.component)
-  
+
         if (found) {
           found.orders.push(order)
         } else {
@@ -67,18 +67,18 @@ class Order extends Endpoint {
           })
         }
       }
-  
+
       // Process Components
       for (const component of components) {
         await this.clear(component, discard, update)
       }
-  
+
       // Store new results
       const parallel = []
       parallel.push(this.discard(discard))
       parallel.push(this.update(update))
       await Promise.all(parallel)
-  
+
       if (discard.length + update.length > 0) {
         const options = { ws: this.ws, db: this.db, cache: this.cc }
         const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
@@ -86,7 +86,7 @@ class Order extends Endpoint {
         ordersEndpoint.publish(result)
         ordersEndpoint.cache(result, 60)
       }
-  
+
       res.send({
         discarded: discard.length,
         updated: update.length,
