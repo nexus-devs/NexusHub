@@ -69,7 +69,7 @@ class Order extends Endpoint {
 
     // Process Components
     for (const component of components) {
-      await this.clear(component, discard, upate)
+      await this.clear(component, discard, update)
     }
 
     // Store new results
@@ -114,7 +114,7 @@ class Order extends Endpoint {
       }
 
       if (order.source === 'Trade Chat') {
-        this.applyOutdatedOrder(discard, order, orders)
+        this.applyOutdatedOrder(discard, order, component.orders)
       }
     }
   }
