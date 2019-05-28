@@ -33,71 +33,75 @@ class Order extends Endpoint {
    * This also edits any edited\ orders on WFM
    */
   async main (req, res) {
-    const item = title(req.query.item)
-    const orders = await this.db.collection('activeOrders').find({ item }).project({
-      _id: 1,
-      user: 1,
-      price: 1,
-      offer: 1,
-      component: 1,
-      quantity: 1,
-      createdAt: 1,
-      source: 1,
-      wfmName: 1
-    }).toArray()
-    if (!orders.length) {
-      return res.send({ discarded: 0, updated: 0, total: 0 })
-    }
-    const discard = []
-    const update = []
-    const components = []
-
-    // Gather components and their orders
-    for (let i = 0; i < orders.length; i++) {
-      const order = orders[i]
-      const found = components.find(c => c.name === order.component)
-
-      if (found) {
-        found.orders.push(order)
-      } else {
-        components.push({
-          name: order.component,
-          orders: [order]
-        })
+    try {
+      const item = title(req.query.item)
+      const orders = await this.db.collection('activeOrders').find({ item }).project({
+        _id: 1,
+        user: 1,
+        price: 1,
+        offer: 1,
+        component: 1,
+        quantity: 1,
+        createdAt: 1,
+        source: 1,
+        wfmName: 1
+      }).toArray()
+      if (!orders.length) {
+        return res.send({ discarded: 0, updated: 0, total: 0 })
       }
+      const discard = []
+      const update = []
+      const components = []
+  
+      // Gather components and their orders
+      for (let i = 0; i < orders.length; i++) {
+        const order = orders[i]
+        const found = components.find(c => c.name === order.component)
+  
+        if (found) {
+          found.orders.push(order)
+        } else {
+          components.push({
+            name: order.component,
+            orders: [order]
+          })
+        }
+      }
+  
+      // Process Components
+      for (const component of components) {
+        await this.clear(component, discard, update)
+      }
+  
+      // Store new results
+      const parallel = []
+      parallel.push(this.discard(discard))
+      parallel.push(this.update(update))
+      await Promise.all(parallel)
+  
+      if (discard.length + update.length > 0) {
+        const options = { ws: this.ws, db: this.db, cache: this.cc }
+        const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
+        const result = await ordersEndpoint.find(item)
+        ordersEndpoint.publish(result)
+        ordersEndpoint.cache(result, 60)
+      }
+  
+      res.send({
+        discarded: discard.length,
+        updated: update.length,
+        total: orders.length
+      })
+    } catch (err) {
+      console.error(err)
     }
-
-    // Process Components
-    for (const component of components) {
-      await this.clear(component, discard, update)
-    }
-
-    // Store new results
-    const parallel = []
-    parallel.push(this.discard(discard))
-    parallel.push(this.update(update))
-    await Promise.all(parallel)
-
-    if (discard.length + update.length > 0) {
-      const options = { ws: this.ws, db: this.db, cache: this.cc }
-      const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
-      const result = await ordersEndpoint.find(item)
-      ordersEndpoint.publish(result)
-      ordersEndpoint.cache(result, 60)
-    }
-
-    res.send({
-      discarded: discard.length,
-      updated: update.length,
-      total: orders.length
-    })
   }
 
   /**
    * Clear orders on a per-component basis
    */
   async clear (component, discard, update) {
-    const wfmName = component.orders.find(o => o.wfmName)
+    const wfmName = component.orders.find(o => o.wfmName).wfmName
     let wfmOrders
 
     if (wfmName) {
