@@ -82,15 +82,14 @@ class Order extends Endpoint {
 
     // Process offer
     this.publish(request)
-    await this.db.collection('activeOrders').insertOne(request)
     await this.db.collection('orders').insertOne(request)
+    await this.db.collection('activeOrders').insertOne({ ...request, ...{ online: true } })
 
     // Create user if they don't already exist
     runParallel(async () => {
       const user = new User({ ...options, ...{ url: `/warframe/v1/users/${request.user}` } })
       await user.addUser({
-        name: request.user,
-        online: true
+        name: request.user
       })
     })
 

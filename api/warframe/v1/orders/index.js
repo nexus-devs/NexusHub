@@ -39,7 +39,7 @@ class Orders extends Endpoint {
   }
 
   async find (item) {
-    return this.db.collection('activeOrders').find({ item }).toArray()
+    return this.db.collection('activeOrders').find({ item, online: true }).toArray()
   }
 }
 

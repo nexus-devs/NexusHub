@@ -33,68 +33,64 @@ class Order extends Endpoint {
    * This also edits any edited\ orders on WFM
    */
   async main (req, res) {
-    try {
-      const item = title(req.query.item)
-      const orders = await this.db.collection('activeOrders').find({ item }).project({
-        _id: 1,
-        user: 1,
-        price: 1,
-        offer: 1,
-        component: 1,
-        quantity: 1,
-        createdAt: 1,
-        source: 1,
-        wfmName: 1
-      }).toArray()
-      if (!orders.length) {
-        return res.send({ discarded: 0, updated: 0, total: 0 })
-      }
-      const discard = []
-      const update = []
-      const components = []
-
-      // Gather components and their orders
-      for (let i = 0; i < orders.length; i++) {
-        const order = orders[i]
-        const found = components.find(c => c.name === order.component)
-
-        if (found) {
-          found.orders.push(order)
-        } else {
-          components.push({
-            name: order.component,
-            orders: [order]
-          })
-        }
-      }
-
-      // Process Components
-      for (const component of components) {
-        await this.clear(component, discard, update)
-      }
-
-      // Store new results
-      const parallel = []
-      parallel.push(this.discard(discard))
-      parallel.push(this.update(update))
-      await Promise.all(parallel)
-
-      if (discard.length + update.length > 0) {
-        const options = { ws: this.ws, db: this.db, cache: this.cc }
-        const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
-        const result = await ordersEndpoint.find(item)
-        ordersEndpoint.publish(result)
-        ordersEndpoint.cache(result, 60)
-      }
-
-      res.send({
-        discarded: discard.length,
-        updated: update.length,
-        total: orders.length
-      })
-    } catch (err) {
-      console.error(err)
+    const item = title(req.query.item)
+    const orders = await this.db.collection('activeOrders').find({ item }).project({
+      _id: 1,
+      user: 1,
+      price: 1,
+      offer: 1,
+      component: 1,
+      quantity: 1,
+      createdAt: 1,
+      source: 1,
+      wfmName: 1
+    }).toArray()
+    if (!orders.length) {
+      return res.send({ discarded: 0, updated: 0, total: 0 })
     }
+    const discard = []
+    const update = []
+    const components = []
+
+    // Gather components and their orders
+    for (let i = 0; i < orders.length; i++) {
+      const order = orders[i]
+      const found = components.find(c => c.name === order.component)
+
+      if (found) {
+        found.orders.push(order)
+      } else {
+        components.push({
+          name: order.component,
+          orders: [order]
+        })
+      }
+    }
+
+    // Process Components
+    for (const component of components) {
+      await this.clear(component, discard, update)
+    }
+
+    // Store new results
+    const parallel = []
+    parallel.push(this.discard(discard))
+    parallel.push(this.update(update))
+    await Promise.all(parallel)
+
+    if (discard.length + update.length > 0) {
+      const options = { ws: this.ws, db: this.db, cache: this.cc }
+      const ordersEndpoint = new Orders({ ...options, ...{ url: `/warframe/v1/orders?item=${item}` } })
+      const result = await ordersEndpoint.find(item)
+      ordersEndpoint.publish(result)
+      ordersEndpoint.cache(result, 60)
+    }
+
+    res.send({
+      discarded: discard.length,
+      updated: update.length,
+      total: orders.length
+    })
   }
 
   /**
@@ -142,7 +138,7 @@ class Order extends Endpoint {
     const open = orders.find(o => {
       const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
       const matchesUser = o.user.ingame_name === order.user
-      const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 7
+      const notExpired = new Date() - order.createdAt < 1000 * 60 * 60 * 24 * 7
       return matchesOffer && matchesUser && notExpired
     })
     if (!open) {
@@ -210,6 +206,7 @@ class Order extends Endpoint {
 
       for (const object of update) {
         const _id = new ObjectId(object._id)
+        delete object._id
         bulk.find({ _id }).updateOne({ $set: object })
       }
       return bulk.execute()
