@@ -138,7 +138,7 @@ class Order extends Endpoint {
     const open = orders.find(o => {
       const matchesOffer = o.order_type === (order.offer === 'Selling' ? 'sell' : 'buy')
       const matchesUser = o.user.ingame_name === order.user
-      const notExpired = new Date() - new Date(order.createdAt) < 1000 * 60 * 60 * 24 * 7
+      const notExpired = new Date() - order.createdAt < 1000 * 60 * 60 * 24 * 7
       return matchesOffer && matchesUser && notExpired
     })
     if (!open) {
@@ -206,6 +206,7 @@ class Order extends Endpoint {
 
       for (const object of update) {
         const _id = new ObjectId(object._id)
+        delete object._id
         bulk.find({ _id }).updateOne({ $set: object })
       }
       return bulk.execute()
