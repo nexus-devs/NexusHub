@@ -41,6 +41,7 @@ class Order extends Endpoint {
       offer: 1,
       component: 1,
       quantity: 1,
+      online: 1,
       createdAt: 1,
       source: 1,
       wfmName: 1
@@ -97,7 +98,9 @@ class Order extends Endpoint {
    * Clear orders on a per-component basis
    */
   async clear (component, discard, update) {
-    const wfmName = component.orders.find(o => o.wfmName).wfmName
+    const wfmOrder = component.orders.find(o => o.wfmName)
+    if (!wfmOrder) return
+    const wfmName = wfmOrder.wfmName
     let wfmOrders
 
     if (wfmName) {
