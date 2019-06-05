@@ -31,6 +31,13 @@ section {
     border-bottom: none;
     margin-bottom: 40px;
   }
+
+  // Ad containers placed at the bottom of a section
+  // need some margin to the section content
+  .ad-unit {
+    margin-top: 50px;
+    margin-bottom: -50px;
+  }
 }
 
 /**
@@ -141,4 +148,13 @@ section {
       margin-right: 0;
     }
   }
+}
+
+/**
+ * Generic Layout Styles
+ */
+.layout-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

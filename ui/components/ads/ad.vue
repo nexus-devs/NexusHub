@@ -1,5 +1,5 @@
 <template>
-  <div :id="name"/>
+  <div :id="`ad-${name}`" class="ad-unit layout-center"/>
 </template>
 
 
@@ -8,8 +8,8 @@
 export default {
   props: ['name'],
 
-  beforeMount () {
-    window['nitroAds'].createAd(name, {
+  mounted () {
+    window['nitroAds'].createAd(`ad-${this.name}`, {
       floor: 0.05,
       refreshLimit: 10,
       refreshTime: 60,
@@ -25,6 +25,8 @@ export default {
 
 
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+.ad-unit {
+  padding: 24px;
+}
 </style>

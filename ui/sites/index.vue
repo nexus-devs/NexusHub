@@ -55,6 +55,7 @@
               <activity/>
             </div>
           </div>
+          <ad name="warframe-index-market-overview"/>
         </div>
       </section>
 
@@ -65,6 +66,7 @@
           <div class="row-margin patchlogs">
             <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
           </div>
+          <ad name="warframe-index-patchlogs"/>
         </div>
       </section>
     </app-content>
@@ -75,6 +77,7 @@
 
 <script>
 import activity from 'src/components/warframe/activity.vue'
+import ad from 'src/components/ads/ad.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
@@ -87,6 +90,7 @@ import storeModule from 'src/store/warframe/warframe.js'
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     opm,
