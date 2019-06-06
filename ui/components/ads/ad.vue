@@ -26,7 +26,11 @@ export default {
 
 
 <style lang="scss">
+@import '~src/styles/partials/importer';
+
 .ad-unit {
-  padding: 24px;
+  padding: 24px 0;
+  background: $color-accent-subtle;
+  border-radius: 3px;
 }
 </style>
