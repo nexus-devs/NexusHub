@@ -1,15 +1,29 @@
 <template>
-  <div :id="`ad-${name}`" :style="{ 'max-height', 'max-width' }" class="ad-unit layout-center"/>
+  <div :id="`ad-${name}`" :style="{
+      display,
+      'max-height': maxHeight,
+      'max-width': maxWidth
+    }" ref="ad-container" class="ad-unit layout-center"/>
 </template>
 
 
 
 <script>
 export default {
-  props: ['name', 'max-height', 'max-width'],
+  props: ['name', 'maxHeight', 'maxWidth'],
+
+  data () {
+    return {
+      display: 'none'
+    }
+  },
 
   mounted () {
-    window['nitroAds'].createAd(`ad-${this.name}`, {
+    const nitroAds = window['nitroAds']
+    if (!nitroAds) return
+
+    this.display = 'block'
+    nitroAds.createAd(`ad-${this.name}`, {
       floor: 0.05,
       refreshLimit: 10,
       refreshTime: 60,
@@ -29,7 +43,7 @@ export default {
 @import '~src/styles/partials/importer';
 
 .ad-unit {
-  padding: 24px 0;
+  margin: 24px 0;
   background: $color-accent-subtle;
   border-radius: 3px;
 }
