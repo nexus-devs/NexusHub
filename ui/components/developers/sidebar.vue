@@ -1,6 +1,8 @@
 <template>
   <nav>
     <div class="links">
+      <ad name="developers-api-article"/>
+
       <h3>Connecting</h3>
       <router-link to="/developers/api" exact>Client packages</router-link>
       <router-link to="/developers/api/http" exact>HTTP</router-link>
@@ -22,6 +24,7 @@
 
 
 <script>
+import ad from 'src/components/ads/ad.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 const reviver = (key, value) => {
   if (typeof key === 'string' && key.indexOf('function ') === 0) {
@@ -32,6 +35,10 @@ const reviver = (key, value) => {
 }
 
 export default {
+  components: {
+    ad
+  },
+
   computed: {
     endpoints () {
       return this.$store.state.docs.endpoints
