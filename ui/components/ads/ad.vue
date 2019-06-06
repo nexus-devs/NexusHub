@@ -1,12 +1,12 @@
 <template>
-  <div :id="`ad-${name}`" class="ad-unit layout-center"/>
+  <div :id="`ad-${name}`" :style="{ 'max-height', 'max-width' }" class="ad-unit layout-center"/>
 </template>
 
 
 
 <script>
 export default {
-  props: ['name'],
+  props: ['name', 'max-height', 'max-width'],
 
   mounted () {
     window['nitroAds'].createAd(`ad-${this.name}`, {
