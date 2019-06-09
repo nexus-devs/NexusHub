@@ -17,7 +17,9 @@ if (process.env.DOCKER && prod && node === 'ui') {
     api: {
       redisUrl,
       certPublic,
-      mongoUrl
+      mongoUrl,
+      apiUrl: `ws://api:3003/ws`,
+      authUrl: `ws://auth:3030/ws`
     },
     client: {
       apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
