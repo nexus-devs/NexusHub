@@ -1,9 +1,9 @@
 <template>
   <div :id="`ad-${name}`" :style="{
-      display,
-      'max-height': maxHeight,
-      'max-width': maxWidth
-    }" class="ad-unit layout-center"/>
+    display,
+    'max-height': maxHeight,
+    'max-width': maxWidth
+  }" class="ad-unit layout-center"/>
 </template>
 
 
