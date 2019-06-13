@@ -77,7 +77,7 @@
 
 <script>
 import activity from 'src/components/warframe/activity.vue'
-import ad from 'src/components/ads/ad.vue'
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'

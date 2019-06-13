@@ -24,7 +24,7 @@
 
 
 <script>
-import ad from 'src/components/ads/ad.vue'
+import ad from 'src/components/ads/nitroAds.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 const reviver = (key, value) => {
   if (typeof key === 'string' && key.indexOf('function ') === 0) {

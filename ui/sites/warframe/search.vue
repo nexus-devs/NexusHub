@@ -17,6 +17,7 @@
             </div>
           </div>
         </div>
+        <ad name='warframe-serp-filter'/>
       </div>
       <div ref="filters" :class="{ expanded: filtersExpanded }" class="search-filters-options">
         <div class="container">
@@ -32,6 +33,7 @@
           </div>
           <results-group :type="'items'"/>
         </div>
+        <ad name="warframe-serp-results"/>
       </section>
     </app-content>
   </div>
@@ -40,6 +42,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/general.vue'
@@ -50,6 +53,7 @@ let ongoing = setTimeout(() => {})
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     search, // Just load the store module

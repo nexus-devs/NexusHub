@@ -14,6 +14,7 @@
             <stats class="col-b"/>
             <drops v-if="drops" class="col-b"/>
           </div>
+          <ad name='warframe-item-overview-main'/>
         </div>
       </section>
       <section v-if="patchlogs && patchlogs.length">
@@ -25,6 +26,7 @@
           <router-link :to="`${$route.params.item}/patchlogs`" class="btn-subtle">
             View all patch logs
           </router-link>
+          <ad name="warframe-item-overview-patchlogs"/>
         </div>
       </section>
     </app-content>
@@ -36,6 +38,7 @@
 <script>
 import Vue from 'vue'
 import VueObserveVisibility from 'vue-observe-visibility'
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import buildRequirements from 'src/components/warframe/build-requirements.vue'
 import description from 'src/components/warframe/description.vue'
@@ -48,6 +51,7 @@ import stats from 'src/components/warframe/stats.vue'
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     itemHeader,

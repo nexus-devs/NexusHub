@@ -14,6 +14,7 @@
                      :component="component" class="col"/>
             </div>
           </div>
+          <ad name="warframe-item-prices-main"/>
         </div>
       </section>
     </app-content>
@@ -23,6 +24,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import filters from 'src/components/warframe/price-filters.vue'
 import itemHeader from 'src/components/warframe/header.vue'
@@ -35,6 +37,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     itemHeader,

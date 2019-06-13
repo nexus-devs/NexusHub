@@ -7,7 +7,10 @@
         <div id="patchlogs-container" class="container">
           <div v-if="item.patchlogs" id="patchlogs" class="patchlogs">
             <h2 class="sub">Patchlog History</h2>
-            <patchlog v-for="patchlog in item.patchlogs" :key=" patchlog.name + patchlog.date" :patchlog="patchlog"/>
+            <div v-for="(patchlog, i) in item.patchlogs" :key=" patchlog.name + patchlog.date">
+              <patchlog :patchlog="patchlog"/>
+              <ad v-if="i === 0 || i % 3 === 0" name='warframe-patchlogs-mid'/>
+            </div>
           </div>
           <div v-else class="no-data">
             No patchlogs found :(
@@ -22,6 +25,7 @@
               <span>{{ moment(new Date(item.patchlogs[item.patchlogs.length - 1].date)).fromNow() }}</span>
             </affix>
           </no-ssr>
+          <ad name="warframe-patchlogs-end"/>
         </div>
       </section>
     </app-content>
@@ -34,6 +38,7 @@
 import Vue from 'vue'
 import VueAffix from 'vue-affix'
 import VueObserveVisibility from 'vue-observe-visibility'
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import itemHeader from 'src/components/warframe/header.vue'
 import meta from 'src/components/seo/meta.js'
@@ -44,6 +49,7 @@ import patchlog from 'src/components/warframe/patchlog.vue'
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     itemHeader,

@@ -92,7 +92,7 @@
 <script>
 import Vue from 'vue'
 import VueHighlightJS from 'vue-highlightjs'
-import ad from 'src/components/ads/ad.vue'
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/developers.vue'

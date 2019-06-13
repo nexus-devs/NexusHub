@@ -22,6 +22,7 @@
               <activity :item="item.name"/>
             </div>
           </div>
+          <ad name="warframe-item-trade-realtime"/>
         </div>
       </section>
 
@@ -75,12 +76,16 @@
               <div class="col interactive whitespace"/>
             </div>
             <transition-group>
-              <order v-for="order in listings" :key="order._id" :order="order"/>
+              <div v-for="(order, i) in listings" :key="order._id">
+                <order :order="order"/>
+                <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid"/>
+              </div>
             </transition-group>
           </div>
           <div v-else>
             No orders found.
           </div>
+          <ad name="warframe-item-trade-orders-end"/>
         </div>
       </section>
     </app-content>
@@ -90,6 +95,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import activity from 'src/components/warframe/activity.vue'
 import appContent from 'src/app-content.vue'
 import component from 'src/components/warframe/component.vue'
@@ -104,6 +110,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
+    ads,
     navigation,
     activity,
     appContent,
