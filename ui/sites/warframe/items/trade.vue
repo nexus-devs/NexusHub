@@ -95,8 +95,8 @@
 
 
 <script>
-import ad from 'src/components/ads/nitroAds.vue'
 import activity from 'src/components/warframe/activity.vue'
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import component from 'src/components/warframe/component.vue'
 import itemHeader from 'src/components/warframe/header.vue'
@@ -110,7 +110,7 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
-    ads,
+    ad,
     navigation,
     activity,
     appContent,

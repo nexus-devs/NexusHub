@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <ad name='warframe-serp-filter'/>
+        <ad name="warframe-serp-filter"/>
       </div>
       <div ref="filters" :class="{ expanded: filtersExpanded }" class="search-filters-options">
         <div class="container">

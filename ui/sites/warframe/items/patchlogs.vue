@@ -9,7 +9,7 @@
             <h2 class="sub">Patchlog History</h2>
             <div v-for="(patchlog, i) in item.patchlogs" :key=" patchlog.name + patchlog.date">
               <patchlog :patchlog="patchlog"/>
-              <ad v-if="i === 0 || i % 3 === 0" name='warframe-patchlogs-mid'/>
+              <ad v-if="i === 0 || i % 3 === 0" name="warframe-patchlogs-mid"/>
             </div>
           </div>
           <div v-else class="no-data">
