@@ -14,7 +14,7 @@
             <stats class="col-b"/>
             <drops v-if="drops" class="col-b"/>
           </div>
-          <ad name='warframe-item-overview-main'/>
+          <ad name="warframe-item-overview-main"/>
         </div>
       </section>
       <section v-if="patchlogs && patchlogs.length">
