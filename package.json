@@ -39,7 +39,7 @@
     "vue-typer": "^1.2.0",
     "warframe-items": "^1.306.0",
     "warframe-patchlogs": "^1.86.0",
-    "ws": "^6.2.1"
+    "ws": "^7.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
