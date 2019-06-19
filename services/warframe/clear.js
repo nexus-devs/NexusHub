@@ -14,6 +14,14 @@ if (prod) {
 async function monitor () {
   const client = await getClient()
   const items = await client.get('/warframe/v1/items?tradable=true')
+  let lastDone = new Date()
+
+  // Kill service if it gets stuck. Docker will auto-restart it.
+  setInterval(() => {
+    if (prod && new Date() - lastDone > 1000 * 60 * 30) {
+      process.exit()
+    }
+  }, 1000 * 60 * 30)
 
   while (true) {
     for (const item of items) {
@@ -25,6 +33,8 @@ async function monitor () {
       } catch (err) {
         if (prod) console.log(`Failed at ${item.name}`)
         continue
+      } finally {
+        lastDone = new Date()
       }
 
       if (prod) {

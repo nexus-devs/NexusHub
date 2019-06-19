@@ -12,12 +12,21 @@ if (prod) {
 
 async function monitor () {
   const client = await getClient()
+  let lastDone = new Date()
+
+  // Kill service if it gets stuck. Docker will auto-restart it.
+  setInterval(() => {
+    if (prod && new Date() - lastDone > 1000 * 60 * 30) {
+      process.exit()
+    }
+  }, 1000 * 60 * 30)
 
   while (true) {
     const timer = new Date()
     await client.get('/warframe/v1/orders/opm')
     await new Promise(resolve => setTimeout(resolve, 1000 * 5))
     if (prod) console.log(`Done in ${new Date() - timer}ms`)
+    lastDone = new Date()
   }
 }
 monitor()
