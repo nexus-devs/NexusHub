@@ -24,7 +24,7 @@
     "d3": "^5.9.2",
     "dns-sync": "^0.2.0",
     "fuse.js": "^3.4.4",
-    "googleapis": "^41.0.0",
+    "googleapis": "^42.0.0",
     "keyboardjs": "^2.5.1",
     "moment": "^2.23.0",
     "mongodb": "^3.2.3",
