@@ -12,6 +12,7 @@
           <h4>Project</h4>
           <router-link to="/opensource">Open Source</router-link>
           <router-link to="/branding">Branding</router-link>
+          <router-link to="/discordbot">Discord Bot</router-link>
         </div>
         <div class="col-b">
           <h4>Developers</h4>
