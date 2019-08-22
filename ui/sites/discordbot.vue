@@ -33,6 +33,51 @@
         <section>
           <div class="sub-container">
             <h2>Commands</h2>
+
+            <div class="command">
+              <div class="btn-subtle active route">
+                <div class="verb">price-check</div>
+                &lt;item&gt; [component]
+              </div>
+              <div class="btn-subtle active">Aliases: pc, pcheck</div>
+              <div class="btn-subtle active">Throttling: 5 usages per 10 seconds</div>
+              <p>Returns a comprehensive price check for an item or component.</p>
+            </div>
+            <div class="command">
+              <div class="btn-subtle active route">
+                <div class="verb">price-alert</div>
+                &lt;item&gt; [component] [order type] [threshold type] &lt;price&gt;
+              </div>
+              <div class="btn-subtle active">Aliases: alert, palert</div>
+              <div class="btn-subtle active">Throttling: 3 alerts per user</div>
+              <p>Sets an alert for an item or component. The bot messages you, when the price hits the set threshold.</p>
+            </div>
+            <div class="command">
+              <div class="btn-subtle active route">
+                <div class="verb">price-alert-list</div>
+                [operation] [list item]
+              </div>
+              <div class="btn-subtle active">Aliases: alert-list, palert-list</div>
+              <p>Lists all set alerts or performs an operation on them.</p>
+            </div>
+
+            <div class="command">
+              <div class="btn-subtle active route">
+                <div class="verb">track</div>
+              </div>
+              <div class="btn-subtle active">Permissions: MANAGE_CHANNELS</div>
+              <div class="btn-subtle active">Throttling: 1 channel per server</div>
+              <p>Starts tracking the tradechat in the current channel. Only works on a server.</p>
+            </div>
+            <div class="command">
+              <div class="btn-subtle active route">
+                <div class="verb">untrack</div>
+              </div>
+              <div class="btn-subtle active">Permissions: MANAGE_CHANNELS</div>
+              <p>Stops tracking the tradechat in the current channel. Only works if the tradechat is currently getting tracked.</p>
+            </div>
+
+
           </div>
         </section>
       </div>
@@ -152,6 +197,10 @@ export default {
   overflow: hidden;
   padding: 40px 0 20px;
   background: $color-bg-darker;
+  p, span {
+    font-size: 1.1em;
+    max-width: 800px;
+  }
 }
 .features {
   display: inline-block;
@@ -175,13 +224,40 @@ export default {
   h2 {
     font-size: 1.6em;
   }
-  p, span {
-    font-size: 1.1em;
-    max-width: 800px;
-  }
   a {
     margin-top: 15px;
   }
+}
+
+.command {
+  border-bottom: 1px solid $color-subtle-dark;
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+.btn-subtle {
+  text-transform: none;
+  pointer-events: none;
+  font-size: 0.85em;
+
+  &:not(.route) {
+    background: $color-bg-darker;
+  }
+}
+.route {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+  font-size: 1em;
+  font-family: 'Consolas', Monospace;
+  padding: 7px 12px;
+}
+.verb {
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Consolas', Monospace;
+  color: $color-primary-subtle;
+  font-weight: 600;
+  margin-right: 3px;
 }
 
 section {
