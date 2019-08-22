@@ -6,6 +6,11 @@
         <h1>Get NexusHub on Discord!</h1>
         <p>Have NexusHub conveniently available in your discord server with NexusBot!</p>
 
+        <a href="https://github.com/nexus-devs/nexus-bot/tree/rework" target="_blank" class="source">
+          <img src="/img/developers/github.svg" class="ico-20" alt="Source Code on Github">
+          <span>View source code.</span>
+        </a>
+
         <a href="https://discordapp.com/oauth2/authorize?&client_id=590557310053777428&scope=bot&permissions=0" target="_blank" class="interactive comm">
           <img src="/img/contact/discord.svg" alt="Discord">
           <span>Invite NexusBot</span>
@@ -132,6 +137,10 @@ export default {
   }
 }
 
+.source {
+  display: block;
+  margin-top: 15px;
+}
 .comm {
   @include field;
   position: relative;
