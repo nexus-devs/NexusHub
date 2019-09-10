@@ -32,7 +32,53 @@ class Scan extends Endpoint {
   }
 
   async main (req, res) {
-    return res.send(this.parseData(req.body))
+    const recentOrders = [{
+      seller: 'Iastalyr',
+      item: 'i2838',
+      timeLeft: 5,
+      timeLeftLower: new Date('2019-09-09T24:58:38.000Z'),
+      timeLeftUpper: new Date('2019-09-10T18:58:38.000Z'),
+      itemCount: 20,
+      minBid: 15000,
+      buyout: 15000
+    }] // TODO: Populate this with db data
+
+    let orders = this.parseData(req.body)
+    orders = this.merge(orders, recentOrders)
+    return res.send(orders)
+  }
+
+  // Merge the new parsed orders with recent orders, avoiding scan overlap
+  // Known issues: Bidding can raise the time window, one auction can be bought and replaced with the exact same one
+  merge (orders, recentOrders) {
+    const oldOrderCount = orders.length
+    for (let recent of recentOrders) {
+      // Find orders that are (likely) duplicates
+      const index = orders.findIndex(order => {
+        // Check generic matches
+        const check = (order.seller === recent.seller) && (order.item === recent.item) &&
+          (order.itemCount === recent.itemCount) && (order.buyout === recent.buyout) && (order.minBid === recent.minBid)
+        if (!check) return false // Fast evaluations first
+
+        // If the auctions have the same time window, check if the lower bound fits into the recent orders bound
+        if (order.timeLeft === recent.timeLeft) {
+          if ((order.timeLeftLower <= recent.timeLeftUpper) && (order.timeLeftLower >= recent.timeLeftLower)) return true
+        // If the time window is smaller, check if the entire bounds fit into the recent orders bound
+        } else if (order.timeLeft < recent.timeLeft) {
+          if ((order.timeLeftLower <= recent.timeLeftUpper) && (order.timeLeftLower >= recent.timeLeftLower) &&
+            (order.timeLeftUpper <= recent.timeLeftUpper) && (order.timeLeftUpper >= recent.timeLeftLower)) return true
+        }
+        // Ignore if the time window is actually larger
+
+        return false
+      })
+
+      if (index >= 0) orders.splice(index, 1)
+    }
+
+    const removedOrders = oldOrderCount - orders.length
+    console.log(`Removed ${removedOrders} elements`)
+    return orders
   }
 
   // Parse the AHDB data into something usable TODO: Put this in the client to relieve the server
