@@ -50,6 +50,7 @@ class Scan extends Endpoint {
 
   // Merge the new parsed orders with recent orders, avoiding scan overlap
   // Known issues: Bidding can raise the time window, one auction can be bought and replaced with the exact same one
+  // TODO: Add updating old orders
   merge (orders, recentOrders) {
     const oldOrderCount = orders.length
     for (let recent of recentOrders) {
