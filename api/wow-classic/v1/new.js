@@ -81,13 +81,21 @@ class Scan extends Endpoint {
             default:
           }
 
+          // Guesstimate the auction timestamp
+          // Assume every auction was created with a "Long" time (8h)
+          // Except ofc if the time left is "Very Long", then assume 24h
+          // The estimated timestamp is the average of the assumed creation time
+          let estimatedTimeChange = 180 // 3h
+          if (auctionData[0] === 4) estimatedTimeChange = 480 // 8h
+          const estimatedTimestamp = timestamp.clone().subtract(estimatedTimeChange, 'm').toDate()
+
           const order = {
             seller,
             item: itemId,
             timeLeft: auctionData[0],
-            timeLower: timestamp.clone().add(lowerDateBorder, 'm').toDate(),
-            timeUpper: timestamp.clone().add(upperDateBorder, 'm').toDate(),
-            estimatedTimestamp: timestamp.clone().add((lowerDateBorder + upperDateBorder) / 2, 'm').toDate(),
+            timeLeftLower: timestamp.clone().add(lowerDateBorder, 'm').toDate(),
+            timeLeftUpper: timestamp.clone().add(upperDateBorder, 'm').toDate(),
+            estimatedTimestamp,
             itemCount: auctionData[1],
             minBid: auctionData[2],
             buyout: auctionData[3],
