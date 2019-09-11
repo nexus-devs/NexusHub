@@ -32,27 +32,26 @@ class Scan extends Endpoint {
   }
 
   async main (req, res) {
-    const recentOrders = [{
-      seller: 'Iastalyr',
-      item: 'i2838',
-      timeLeft: 5,
-      timeLeftLower: new Date('2019-09-09T24:58:38.000Z'),
-      timeLeftUpper: new Date('2019-09-10T18:58:38.000Z'),
-      itemCount: 20,
-      minBid: 15000,
-      buyout: 15000
-    }] // TODO: Populate this with db data
+    const timestamp = moment.unix(req.body.ts) // Convert unix timestamp
+    const recentOrders = await this.db.collection('orders').find({
+      estimatedTimestamp: {
+        $gte: timestamp.clone().subtract(24, 'h').toDate(),
+        $lte: timestamp.toDate()
+      }
+    }).toArray()
 
-    let orders = this.parseData(req.body)
-    orders = this.merge(orders, recentOrders)
-    return res.send(orders)
+    const rawOrders = this.parseData(req.body)
+    const rawOrdersLength = rawOrders.length
+    const orders = this.merge(rawOrders, recentOrders)
+    if (orders.length > 0) this.db.collection('orders').insertMany(orders)
+
+    return res.send(`${orders.length} orders added (${rawOrdersLength - orders.length} were removed)!`)
   }
 
   // Merge the new parsed orders with recent orders, avoiding scan overlap
   // Known issues: Bidding can raise the time window, one auction can be bought and replaced with the exact same one
   // TODO: Add updating old orders
   merge (orders, recentOrders) {
-    const oldOrderCount = orders.length
     for (let recent of recentOrders) {
       // Find orders that are (likely) duplicates
       const index = orders.findIndex(order => {
@@ -77,9 +76,6 @@ class Scan extends Endpoint {
       if (index >= 0) orders.splice(index, 1)
     }
 
-    const removedOrders = oldOrderCount - orders.length
-    console.log(`Removed ${removedOrders} elements`)
-    console.log(`Adding ${orders.length} orders to database`)
     return orders
   }
 
@@ -154,7 +150,6 @@ class Scan extends Endpoint {
       }
     }
 
-    console.log(orders[1])
     return orders
   }
 }
