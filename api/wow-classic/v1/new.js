@@ -79,6 +79,7 @@ class Scan extends Endpoint {
 
     const removedOrders = oldOrderCount - orders.length
     console.log(`Removed ${removedOrders} elements`)
+    console.log(`Adding ${orders.length} orders to database`)
     return orders
   }
 

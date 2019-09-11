@@ -1,5 +1,5 @@
 module.exports = async function () {
-  const Api = require('cubic-api')
+  const Api = require('../../../cubic/packages/api')
   const Auth = require('cubic-auth')
   const Ui = require('cubic-ui')
   const wfhooks = require('../../hooks/warframe.js')

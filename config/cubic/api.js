@@ -27,7 +27,12 @@ config = {
   ...{
     mongoDb: 'nexus-api',
     endpointPath: `${process.cwd()}/api/`,
-    endpointPathExclude: /\/lib/
+    endpointPathExclude: /\/lib/,
+    overrideEndpoint: {
+      '/wow-classic': {
+        mongoDb: 'nexus-api-wow-classic'
+      }
+    }
   }
 }
 
