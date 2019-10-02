@@ -98,23 +98,23 @@ class Order extends Endpoint {
    * Clear orders on a per-component basis
    */
   async clear (component, discard, update) {
-    const wfmOrder = component.orders.find(o => o.wfmName)
-    if (!wfmOrder) return
-    const wfmName = wfmOrder.wfmName
-    let wfmOrders
+    //const wfmOrder = component.orders.find(o => o.wfmName)
+    //if (!wfmOrder) return
+    //const wfmName = wfmOrder.wfmName
+    //let wfmOrders
 
-    if (wfmName) {
-      const WfmOrders = await request(`https://api.warframe.market/v1/items/${wfmName}/orders`)
-      wfmOrders = JSON.parse(WfmOrders).payload.orders
-    }
+    //if (wfmName) {
+      //const WfmOrders = await request(`https://api.warframe.market/v1/items/${wfmName}/orders`)
+      //wfmOrders = JSON.parse(WfmOrders).payload.orders
+    //}
 
     for (let i = 0; i < component.orders.length; i++) {
       const order = component.orders[i]
 
-      if (wfmName && order.source === 'Warframe Market') {
-        const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
-        if (!discarded) this.applyModifiedWfmOrder(update, order, wfmOrders)
-      }
+      //if (wfmName && order.source === 'Warframe Market') {
+      //  const discarded = this.applyOutdatedWfmOrder(discard, order, wfmOrders)
+      //  if (!discarded) this.applyModifiedWfmOrder(update, order, wfmOrders)
+      //}
 
       if (order.source === 'Trade Chat') {
         this.applyOutdatedOrder(discard, order, component.orders)
