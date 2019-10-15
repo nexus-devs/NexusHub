@@ -5,6 +5,37 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
+      <div v-if="item.marketValue" class="item-data row">
+        <div class="col">
+          <span>Market Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.marketValue }}
+          </span>
+          <!--<parsedPrice :price="parsePrice(item.marketValue)" />-->
+        </div>
+      </div>
+      <div v-if="item.minBuyout" class="item-data row">
+        <div class="col">
+          <span>Minimum Buyout</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.minBuyout }}
+          </span>
+        </div>
+      </div>
+      <div v-if="item.qty" class="item-data row">
+        <div class="col">
+          <span>Quantity</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.qty }}
+          </span>
+        </div>
+      </div>
     </template>
   </module>
 </template>
@@ -14,11 +45,28 @@
 <script>
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
+import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
 
 export default {
   components: {
     module,
-    indicator
+    indicator,
+    parsedPrice
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    }
+  },
+
+  methods: {
+    parsePrice (price) {
+      const gold = Math.floor(price / 10000)
+      const silver = Math.floor(price / 100 - gold * 100)
+      const copper = price - gold * 10000 - silver * 100
+      return { gold, silver, copper }
+    }
   }
 }
 </script>
