@@ -5,6 +5,9 @@
     <div class="background"/>
     <div class="container">
       <div class="item-profile">
+        <div class="item-profile-data-info">
+          <h1>{{ item.name }}</h1>
+        </div>
       </div>
     </div>
     <nav ref="subnav" class="subnav">
@@ -23,6 +26,21 @@ export default {
   components: {
     uiHeader,
     tooltip
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    }
+  },
+
+  async asyncData ({ store, route }) {
+    const item = route.params.item
+    // Only fetch item data if we actually have a new item
+    if (store.state.items.item.name !== item) {
+      const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}`)
+      store.commit('setItem', itemData)
+    }
   },
 
   storeModule

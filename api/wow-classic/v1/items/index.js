@@ -36,7 +36,7 @@ class Items extends Endpoint {
     // TODO: Currently global
     res.send({
       itemId: item['ItemId'],
-      itemName: item['Name'],
+      name: item['Name'],
       qty: item['USQuantity'] + item['EUQuantity'],
       minBuyout: (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2,
       marketValue: (item['USMarketAvg'] + item['EUMarketAvg']) / 2
