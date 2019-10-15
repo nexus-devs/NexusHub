@@ -6,6 +6,9 @@
       <section>
         <div class="container">
           <h2 class="sub">Item Overview</h2>
+          <div class="row-margin main">
+            <stats class="col-b"/>
+          </div>
         </div>
       </section>
     </app-content>
@@ -17,15 +20,17 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
-import navigation from 'src/components/ui/nav/warframe.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
+import navigation from 'src/components/ui/nav/warframe.vue'
+import stats from 'src/components/wow-classic/stats.vue'
 
 export default {
   components: {
     ad,
     appContent,
     navigation,
-    itemHeader
+    itemHeader,
+    stats
   }
 }
 </script>
