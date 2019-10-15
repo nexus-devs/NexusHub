@@ -1,4 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
+const request = require('request-promise')
 
 /**
  * Provides basic item statistics for a specific item
@@ -12,15 +13,35 @@ class Items extends Endpoint {
     this.schema.response = {
       item: String,
       qty: Number,
-      price: Number,
-      median: Number,
-      avg: Number
+      minBuyout: Number,
+      marketValue: Number,
     }
   }
 
   /**
    * Main method which is called by EndpointHandler on request
    */
+  async main (req, res) {
+    const item = await request({
+      uri: 'http://api.tradeskillmaster.com/v1/item/' + req.params.item ,
+      json: true,
+      headers: { 'User-Agent': 'Request-Promise' },
+      qs: {
+        format: 'json',
+        apiKey: 'iymI28H-EW5H0jne2M_Zm_pylkDRNfAC'
+      }
+    })
+
+    // TODO: Currently global
+    res.send({
+      item: item['Name'],
+      qty: item['USQuantity'] + item['EUQuantity'],
+      minBuyout: (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2,
+      marketValue: (item['USMarketAvg'] + item['EUMarketAvg']) / 2
+    })
+  }
+
+  /*
   async main (req, res) {
     const item = req.params.item
     const orders = await this.db.collection('orders').find({
@@ -56,7 +77,7 @@ class Items extends Endpoint {
       median,
       avg
     })
-  }
+  } */
 }
 
 module.exports = Items

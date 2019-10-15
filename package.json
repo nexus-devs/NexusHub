@@ -28,7 +28,9 @@
     "keyboardjs": "^2.5.1",
     "moment": "^2.23.0",
     "mongodb": "^3.2.3",
+    "request": "^2.88.0",
     "requestretry": "^4.0.0",
+    "requests": "^0.3.0",
     "tween.js": "^16.6.0",
     "vue-affix": "0.2.4",
     "vue-analytics": "^5.16.4",
@@ -55,7 +57,7 @@
     "gitlog": "^3.1.2",
     "mocha": "^6.1.4",
     "progress-bar-webpack-plugin": "^1.12.1",
-    "request-promise": "^4.2.2",
+    "request-promise": "^4.2.4",
     "rimraf": "^2.6.3",
     "semantic-release": "^15.13.12",
     "webpack": "^4.29.6"
