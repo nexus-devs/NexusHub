@@ -14,7 +14,7 @@ class Items extends Endpoint {
       item: String,
       qty: Number,
       minBuyout: Number,
-      marketValue: Number,
+      marketValue: Number
     }
   }
 
