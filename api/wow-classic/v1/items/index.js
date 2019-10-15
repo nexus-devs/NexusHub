@@ -11,7 +11,8 @@ class Items extends Endpoint {
     this.schema.url = '/wow-classic/v1/items/:item'
     this.schema.request = { url: '/wow-classic/v1/items/linen' }
     this.schema.response = {
-      item: String,
+      itemId: Number,
+      itemName: String,
       qty: Number,
       minBuyout: Number,
       marketValue: Number
@@ -34,7 +35,8 @@ class Items extends Endpoint {
 
     // TODO: Currently global
     res.send({
-      item: item['Name'],
+      itemId: item['ItemId'],
+      itemName: item['Name'],
       qty: item['USQuantity'] + item['EUQuantity'],
       minBuyout: (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2,
       marketValue: (item['USMarketAvg'] + item['EUMarketAvg']) / 2
