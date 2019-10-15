@@ -43,6 +43,33 @@ class Items extends Endpoint {
     })
   }
 
+  generateSampleWeek (qty, minBuyout, marketValue) {
+    const week = []
+    for (let i = 0; i < 7; i++) {
+      week[i] = this.generateSampleDay(qty, minBuyout, marketValue)
+    }
+
+    return week
+  }
+
+  generateSampleDay (qty, minBuyout, marketValue) {
+    const day = []
+    for (let i = 0; i < 24; i++) {
+      day[i] = {
+        qty: this.generateSampleData(qty, qty / 4, i),
+        minBuyout: this.generateSampleData(minBuyout, minBuyout / 4, i),
+        marketValue: this.generateSampleData(marketValue, marketValue / 4, i)
+      }
+    }
+
+    return day
+  }
+
+  // Generates sin wave formed sample data
+  generateSampleData (base, variance, iteration) {
+    return base + Math.sin(iteration) * variance
+  }
+
   /*
   async main (req, res) {
     const item = req.params.item
