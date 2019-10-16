@@ -19,7 +19,7 @@
     "cubic": "3.0.1",
     "cubic-api": "3.2.2",
     "cubic-auth": "3.2.1",
-    "cubic-client": "3.1.0",
+    "cubic-client": "3.2.1",
     "cubic-ui": "3.4.0",
     "d3": "^5.9.2",
     "dns-sync": "^0.2.0",
@@ -57,7 +57,7 @@
     "progress-bar-webpack-plugin": "^1.12.1",
     "request-promise": "^4.2.2",
     "rimraf": "^2.6.3",
-    "semantic-release": "^15.13.12",
+    "semantic-release": "^15.13.26",
     "webpack": "^4.29.6"
   },
   "release": {
