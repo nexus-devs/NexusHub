@@ -11,9 +11,8 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ item.marketValue }}
+            <parsedPrice :price="parsePrice(item.marketValue)" />
           </span>
-          <!--<parsedPrice :price="parsePrice(item.marketValue)" />-->
         </div>
       </div>
       <div v-if="item.minBuyout" class="item-data row">
@@ -22,7 +21,7 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ item.minBuyout }}
+            <parsedPrice :price="parsePrice(item.minBuyout)" />
           </span>
         </div>
       </div>
