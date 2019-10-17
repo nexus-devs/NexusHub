@@ -33,41 +33,70 @@ class Items extends Endpoint {
       }
     })
 
+    const qty = item['USQuantity'] + item['EUQuantity']
+    const minBuyout = (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2
+    const marketValue = (item['USMarketAvg'] + item['EUMarketAvg']) / 2
+
     // TODO: Currently global
     res.send({
       itemId: item['ItemId'],
       name: item['Name'],
-      qty: item['USQuantity'] + item['EUQuantity'],
-      minBuyout: (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2,
-      marketValue: (item['USMarketAvg'] + item['EUMarketAvg']) / 2
+      qty,
+      minBuyout,
+      marketValue,
+      current: this.generateSampleWeek(qty, minBuyout, marketValue),
+      previous: this.generateSampleWeek(qty, minBuyout, marketValue)
     })
   }
 
   generateSampleWeek (qty, minBuyout, marketValue) {
-    const week = []
-    for (let i = 0; i < 7; i++) {
-      week[i] = this.generateSampleDay(qty, minBuyout, marketValue)
+    const week = {
+      qty: 0,
+      minBuyout: 0,
+      marketValue: 0,
+      intervals: []
     }
+
+    for (let i = 0; i < 7; i++) {
+      const day = this.generateSampleDay(qty, minBuyout, marketValue)
+      week.intervals[i] = day
+      week.qty += day.qty
+      week.minBuyout += day.minBuyout
+      week.marketValue += day.marketValue
+    }
+    Math.round(week.minBuyout = week.minBuyout / 7)
+    Math.round(week.marketValue = week.marketValue / 7)
 
     return week
   }
 
   generateSampleDay (qty, minBuyout, marketValue) {
-    const day = []
-    for (let i = 0; i < 24; i++) {
-      day[i] = {
-        qty: this.generateSampleData(qty, qty / 4, i),
-        minBuyout: this.generateSampleData(minBuyout, minBuyout / 4, i),
-        marketValue: this.generateSampleData(marketValue, marketValue / 4, i)
-      }
+    const day = {
+      qty: 0,
+      minBuyout: 0,
+      marketValue: 0,
+      intervals: []
     }
+
+    for (let i = 0; i < 24; i++) {
+      qty = this.generateSampleData(qty, qty / 4, i)
+      minBuyout = this.generateSampleData(minBuyout, minBuyout / 4, i)
+      marketValue = this.generateSampleData(marketValue, marketValue / 4, i)
+
+      day.intervals[i] = { qty, minBuyout, marketValue }
+      day.qty += qty
+      day.minBuyout += minBuyout
+      day.marketValue += marketValue
+    }
+    Math.round(day.minBuyout = day.minBuyout / 24)
+    Math.round(day.marketValue = day.marketValue / 24)
 
     return day
   }
 
   // Generates sin wave formed sample data
   generateSampleData (base, variance, iteration) {
-    return base + Math.sin(iteration) * variance
+    return Math.round(base + Math.sin(iteration) * variance)
   }
 
   /*
