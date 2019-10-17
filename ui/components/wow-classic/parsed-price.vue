@@ -1,9 +1,9 @@
 <template>
-  <module>
+  <span>
     <span v-if="price.gold">{{ price.gold }}<span class="price-gold">g</span></span>
     <span v-if="price.silver || price.gold">{{ price.silver }}<span class="price-silver">s</span></span>
     <span>{{ price.copper }}<span class="price-copper">c</span></span>
-  </module>
+  </span>
 </template>
 
 <script>
