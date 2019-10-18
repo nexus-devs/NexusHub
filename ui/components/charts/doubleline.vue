@@ -218,7 +218,7 @@ export default {
 circle {
   fill: $color-primary-subtle;
 }
-circle .circle2 {
+.circle2 {
   fill: $color-error-dark;
 }
 
