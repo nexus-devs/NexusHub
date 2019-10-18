@@ -30,14 +30,14 @@
         <svg :width="width" :height="height">
           <g v-for="(d, i) in data" :key="d.x" class="point">
             <rect :x="scaled.x(d.x)" class="hover"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.y)" r="4"/>
+            <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.marketValue)" r="4"/>
             <g class="tooltip">
               <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="120px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                 {{ data.length - i - 1 === 0 ? 'Today' : `${data.length - i - 1} days ago` }}
               </text>
               <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                {{ data[i] ? `${data[i].y}` : '' }}
+                {{ data[i] ? `${data[i].marketValue}` : '' }}
               </text>
             </g>
           </g>
@@ -78,7 +78,7 @@ export default {
 
   computed: {
     axis () {
-      const yPane = d3.extent(this.data, d => d.y)
+      const yPane = d3.extent(this.data, d => d.marketValue)
       const y = []
       y.push(yPane[1])
       y.push(Math.round(yPane[0] + (yPane[1] - yPane[0]) / 2))
@@ -132,9 +132,9 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.y.domain([0, d3.max(this.data, d => d.y)])
+      this.scaled.y.domain([0, d3.max(this.data, d => d.marketValue)])
 
-      const lineF = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.y(d.y)).curve(d3['curveMonotoneX'])
+      const lineF = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.y(d.marketValue)).curve(d3['curveMonotoneX'])
       this.line = lineF(this.data)
     }
   }
