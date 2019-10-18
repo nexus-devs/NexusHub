@@ -78,7 +78,7 @@ export default {
 
   computed: {
     axis () {
-      const yPane = d3.extent(this.data, d => d.marketValue)
+      const yPane = [0, d3.max(this.data, d => d.marketValue)]
       const y = []
       y.push(yPane[1])
       y.push(Math.round(yPane[0] + (yPane[1] - yPane[0]) / 2))
