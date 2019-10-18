@@ -218,7 +218,7 @@ export default {
   top: 0;
   flex: 1;
   height: 100%;
-  width: calc(100% - 40px);
+  width: calc(50% - 40px);
 }
 
 .sparkline {

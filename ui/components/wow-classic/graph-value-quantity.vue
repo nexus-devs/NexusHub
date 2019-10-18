@@ -43,8 +43,8 @@ export default {
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  min-height: 400px;
+  width: 50%;
+  min-height: 300px;
   @include field;
   background: $color-bg;
   opacity: 0;
