@@ -289,8 +289,9 @@ svg {
     display: flex;
     justify-content: space-between;
 
+    // TODO: Adjust x label scaling based on real data
     span:first-of-type {
-      margin-left: 40px;
+      margin-left: -20px;
     }
   }
 }
