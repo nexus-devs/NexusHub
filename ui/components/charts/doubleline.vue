@@ -21,16 +21,15 @@
     <div class="graphs">
       <div class="sparkline">
         <svg :width="width" :height="height">
-          <g>
-            <path :d="line" class="line"/>
-          </g>
+          <path :d="line.marketValue" class="line"/>
+          <path :d="line.qty" class="line2"/>
         </svg>
       </div>
       <div class="tooltip-container">
         <svg :width="width" :height="height">
           <g v-for="(d, i) in data" :key="d.x" class="point">
             <rect :x="scaled.x(d.x)" class="hover"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.marketValue)" r="4"/>
+            <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="4"/>
             <g class="tooltip">
               <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="120px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
@@ -67,10 +66,14 @@ export default {
       height: 0,
       min: 0,
       max: 0,
-      line: '',
+      line: {
+        marketValue: '',
+        qty: ''
+      },
       scaled: {
         x: (x) => x,
-        y: (x) => x
+        mV: (x) => x,
+        qty: (x) => x
       },
       points: []
     }
@@ -119,7 +122,8 @@ export default {
     // Set graph scaling
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.y = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.mV = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.qty = d3.scaleLinear().range([this.height - 40, 40])
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
@@ -132,10 +136,13 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.y.domain([0, d3.max(this.data, d => d.marketValue)])
+      this.scaled.mV.domain([0, d3.max(this.data, d => d.marketValue)])
+      this.scaled.qty.domain([0, d3.max(this.data, d => d.qty)])
 
-      const lineF = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.y(d.marketValue)).curve(d3['curveMonotoneX'])
-      this.line = lineF(this.data)
+      const lineValue = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.mV(d.marketValue)).curve(d3['curveMonotoneX'])
+      const lineQty = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.qty(d.qty)).curve(d3['curveMonotoneX'])
+      this.line.marketValue = lineValue(this.data)
+      this.line.qty = lineQty(this.data)
     }
   }
 }
@@ -167,10 +174,6 @@ export default {
   z-index: 1;
 }
 
-.line {
-  pointer-events: none; // Make tooltips accessible
-}
-
 circle {
   fill: $color-primary-subtle;
 }
@@ -186,7 +189,14 @@ svg {
     }
   }
   .line {
+    pointer-events: none; // Make tooltips accessible
     stroke: $color-primary-subtle;
+    stroke-width: 2.5px;
+    fill: none;
+  }
+  .line2 {
+    pointer-events: none; // Make tooltips accessible
+    stroke: $color-error-dark;
     stroke-width: 2.5px;
     fill: none;
   }
