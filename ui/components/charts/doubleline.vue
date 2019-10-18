@@ -5,7 +5,7 @@
         <div class="axis"/>
         <div class="labels">
           <span v-for="label in axis.x" :key="label">
-            {{ typeof label === 'number' ? `${label}:00` : 'now' }}
+            {{ label }}
           </span>
         </div>
       </div>
@@ -34,7 +34,7 @@
             <g class="tooltip">
               <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="120px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
-                {{ data.length - i - 1 === 0 ? 'Today' : `${data.length - i - 1} days ago` }}
+                {{ parseHoursAgo(i, data.length) }}
               </text>
               <text :x="scaled.x(d.x) + 20" y="50px" class="num">
                 {{ data[i] ? `${data[i].marketValue}` : '' }}
@@ -56,6 +56,7 @@
 import * as d3 from 'd3'
 import Tween from './_tween.js'
 import indicator from './indicator.vue'
+import moment from 'moment'
 
 export default {
   components: {
@@ -92,14 +93,13 @@ export default {
       y.push(part)
       y.push(yPane[0])
 
-      const now = new Date().getHours()
-      const hour = (h) => now - h
-      const hoursAgo = (h) => h < 0 ? 24 + h : h
-      const start = hoursAgo(hour(22))
-      const x = [start]
-      x.push(hoursAgo(hour(15)))
-      x.push(hoursAgo(hour(8)))
-      x.push('now')
+      const now = moment()
+      const dayAgo = (d) => now.clone().subtract(d, 'days').format('DD. MMM')
+      const x = []
+      for (let i = 7; i > 0; i--) {
+        x.push(dayAgo(i))
+      }
+      x.push('Today')
 
       return { x, y }
     }
@@ -148,6 +148,25 @@ export default {
       const lineQty = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.qty(d.qty)).curve(d3['curveMonotoneX'])
       this.line.marketValue = lineValue(this.data)
       this.line.qty = lineQty(this.data)
+    },
+
+    // parses hours into days + hours ago
+    parseHoursAgo (h, length) {
+      h = length - h - 1
+      const days = Math.floor(h / 24)
+      const hours = h % 24
+
+      let str = ''
+      if (days > 0) str += days + ' day'
+      if (days > 1) str += 's'
+      if (days > 0 && hours > 0) str += ', '
+      if (hours > 0) str += hours + ' hour'
+      if (hours > 1) str += 's'
+
+      if (days > 0 || hours > 0) str += ' ago'
+      else str = 'Today'
+
+      return str
     }
   }
 }
