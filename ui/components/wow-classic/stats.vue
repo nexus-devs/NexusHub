@@ -45,6 +45,7 @@
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
 import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
+import utility from './utility'
 
 export default {
   components: {
@@ -59,13 +60,8 @@ export default {
     }
   },
 
-  methods: {
-    parsePrice (price) {
-      const gold = Math.floor(price / 10000)
-      const silver = Math.floor(price / 100 - gold * 100)
-      const copper = price - gold * 10000 - silver * 100
-      return { gold, silver, copper }
-    }
+  created () {
+    this.parsePrice = utility.parsePrice
   }
 }
 </script>

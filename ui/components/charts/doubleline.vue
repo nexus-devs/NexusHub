@@ -57,10 +57,12 @@ import * as d3 from 'd3'
 import Tween from './_tween.js'
 import indicator from './indicator.vue'
 import moment from 'moment'
+import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
 
 export default {
   components: {
-    indicator
+    indicator,
+    parsedPrice
   },
 
   props: ['data'],
