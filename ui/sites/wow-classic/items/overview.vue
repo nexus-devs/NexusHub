@@ -23,6 +23,7 @@ import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import stats from 'src/components/wow-classic/stats.vue'
 
@@ -34,6 +35,18 @@ export default {
     itemHeader,
     stats,
     graphValueQuantity
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    }
+  },
+
+  head () {
+    return {
+      title: `${this.item.name} · NexusHub`
+    }
   }
 }
 </script>
