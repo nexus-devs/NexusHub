@@ -25,7 +25,7 @@ export default {
       let i = 0
       for (const week of item.intervals) {
         for (const day of week.intervals) {
-          data.push({ x: i, y: day.marketValue })
+          data.push({ x: i, y: day.marketValue, qty: day.qty })
           i++
         }
       }

@@ -96,7 +96,7 @@ class Items extends Endpoint {
 
   // Generates sin wave formed sample data
   generateSampleData (base, variance, iteration) {
-    return Math.round(base + Math.sin(iteration) * variance)
+    return Math.round(base + Math.sin(iteration) / 2 * variance)
   }
 
   /*

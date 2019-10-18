@@ -132,17 +132,10 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.y.domain(d3.extent(this.data, d => d.y))
-      this.points = []
+      this.scaled.y.domain([0, d3.max(this.data, d => d.y)])
 
-      for (const dp of this.data) {
-        const x = this.scaled.x(dp.x)
-        const y = this.scaled.y(dp.y)
-        this.points.push({ x, y })
-      }
-
-      const lineF = d3.line().x(d => d.x).y(d => d.y).curve(d3['curveMonotoneX'])
-      this.line = lineF(this.points)
+      const lineF = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.y(d.y)).curve(d3['curveMonotoneX'])
+      this.line = lineF(this.data)
     }
   }
 }
