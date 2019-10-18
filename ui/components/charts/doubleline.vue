@@ -13,7 +13,7 @@
         <div class="axis"/>
         <div class="labels">
           <span v-for="label in axis.y" :key="label">
-            {{ label }}
+            <parsedPrice :price="parsePrice(label)"/>
           </span>
         </div>
       </div>
@@ -37,7 +37,7 @@
                 {{ parseHoursAgo(i, data.length) }}
               </text>
               <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                {{ data[i] ? `${data[i].marketValue}` : '' }}
+                {{ parsePriceSVG(data[i].marketValue) }}
               </text>
               <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
                 Quantity: {{ data[i] ? `${data[i].qty}` : 0 }}
@@ -58,6 +58,7 @@ import Tween from './_tween.js'
 import indicator from './indicator.vue'
 import moment from 'moment'
 import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -116,6 +117,10 @@ export default {
     }
   },
 
+  created () {
+    this.parsePrice = utility.parsePrice
+  },
+
   mounted () {
     window.addEventListener('resize', this.onResize)
     this.onResize()
@@ -168,6 +173,16 @@ export default {
       if (days > 0 || hours > 0) str += ' ago'
       else str = 'Today'
 
+      return str
+    },
+
+    // Parses price for shitty svg tags
+    parsePriceSVG (price) {
+      const p = this.parsePrice(price)
+      let str = ''
+      if (p.gold) str += p.gold + 'g '
+      if (p.gold || p.silver) str += p.silver + 's '
+      str += p.copper + 'c'
       return str
     }
   }
@@ -314,6 +329,7 @@ svg {
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
+    text-align: right;
     top: 10px;
     height: calc(100% - 20px);
 

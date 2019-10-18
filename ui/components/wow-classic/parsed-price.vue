@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  props: ['price']
+  props: ['price', 'svg']
 }
 </script>
 
