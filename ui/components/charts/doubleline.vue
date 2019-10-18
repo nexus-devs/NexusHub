@@ -30,6 +30,7 @@
           <g v-for="(d, i) in data" :key="d.x" class="point">
             <rect :x="scaled.x(d.x)" class="hover"/>
             <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="4"/>
+            <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="4" class="circle2"/>
             <g class="tooltip">
               <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="120px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
@@ -37,6 +38,9 @@
               </text>
               <text :x="scaled.x(d.x) + 20" y="50px" class="num">
                 {{ data[i] ? `${data[i].marketValue}` : '' }}
+              </text>
+              <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
+                Quantity: {{ data[i] ? `${data[i].qty}` : 0 }}
               </text>
             </g>
           </g>
@@ -176,6 +180,9 @@ export default {
 
 circle {
   fill: $color-primary-subtle;
+}
+circle .circle2 {
+  fill: $color-error-dark;
 }
 
 svg {
