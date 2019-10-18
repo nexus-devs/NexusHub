@@ -13,7 +13,7 @@
         <div class="axis"/>
         <div class="labels">
           <span v-for="label in axis.y" :key="label">
-            <parsedPrice :price="parsePrice(label)"/>
+            {{ parsePriceY(label) }}
           </span>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default {
 
   computed: {
     axis () {
-      const yPane = [0, d3.max(this.data, d => d.marketValue)]
+      const yPane = [0, this.getMarketValueMax()]
       const part = Math.round(yPane[0] + (yPane[1] - yPane[0]) / 3)
       const y = []
       y.push(yPane[1])
@@ -148,7 +148,7 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.mV.domain([0, d3.max(this.data, d => d.marketValue)])
+      this.scaled.mV.domain([0, this.getMarketValueMax()])
       this.scaled.qty.domain([0, d3.max(this.data, d => d.qty)])
 
       const lineValue = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.mV(d.marketValue)).curve(d3['curveMonotoneX'])
@@ -184,6 +184,18 @@ export default {
       if (p.gold || p.silver) str += p.silver + 's '
       str += p.copper + 'c'
       return str
+    },
+
+    // Parses price for y axis
+    parsePriceY (price) {
+      const gold = (price / 10000).toFixed(2)
+      return gold.toString() + 'g'
+    },
+
+    // Scale to next gold
+    getMarketValueMax () {
+      const maxMV = d3.max(this.data, d => d.marketValue)
+      return (Math.floor(maxMV / 10000) + 1) * 10000
     }
   }
 }
@@ -330,6 +342,7 @@ svg {
     justify-content: space-between;
     position: absolute;
     text-align: right;
+    margin-left: -8px;
     top: 10px;
     height: calc(100% - 20px);
 
