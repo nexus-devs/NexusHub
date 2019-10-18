@@ -78,17 +78,18 @@ export default {
         x: (x) => x,
         mV: (x) => x,
         qty: (x) => x
-      },
-      points: []
+      }
     }
   },
 
   computed: {
     axis () {
       const yPane = [0, d3.max(this.data, d => d.marketValue)]
+      const part = Math.round(yPane[0] + (yPane[1] - yPane[0]) / 3)
       const y = []
       y.push(yPane[1])
-      y.push(Math.round(yPane[0] + (yPane[1] - yPane[0]) / 2))
+      y.push(part * 2)
+      y.push(part)
       y.push(yPane[0])
 
       const now = new Date().getHours()
