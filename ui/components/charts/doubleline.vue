@@ -26,13 +26,13 @@
         </svg>
       </div>
       <div class="tooltip-container">
-        <svg :width="width" :height="height">
+        <svg :width="width + 160" :height="height">
           <g v-for="(d, i) in data" :key="d.x" class="point">
             <rect :x="scaled.x(d.x)" class="hover"/>
             <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="4"/>
             <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="4" class="circle2"/>
             <g class="tooltip">
-              <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="120px"/>
+              <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                 {{ parseHoursAgo(i, data.length) }}
               </text>
@@ -282,7 +282,7 @@ svg {
 
 .tooltip {
   rect {
-    fill: $color-bg;
+    fill: $color-bg-darker;
   }
   .num {
     font-size: 1.1em;

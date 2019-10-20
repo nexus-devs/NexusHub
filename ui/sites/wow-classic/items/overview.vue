@@ -44,6 +44,7 @@ export default {
   },
 
   head () {
+    // TODO: Add meta
     return {
       title: `${this.item.name} · NexusHub`
     }
