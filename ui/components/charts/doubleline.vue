@@ -17,6 +17,14 @@
           </span>
         </div>
       </div>
+      <div class="y2">
+        <div class="axis"/>
+        <div class="labels">
+          <span v-for="label in axis.y2" :key="label">
+            {{ label }}
+          </span>
+        </div>
+      </div>
     </div>
     <div class="graphs">
       <div class="sparkline">
@@ -96,6 +104,14 @@ export default {
       y.push(part)
       y.push(yPane[0])
 
+      const y2Pane = [0, this.getQuantityMax()]
+      const part2 = Math.round(y2Pane[0] + (y2Pane[1] - y2Pane[0]) / 3)
+      const y2 = []
+      y2.push(y2Pane[1])
+      y2.push(part2 * 2)
+      y2.push(part2)
+      y2.push(y2Pane[0])
+
       const now = moment()
       const dayAgo = (d) => now.clone().subtract(d, 'days').format('DD. MMM')
       const x = []
@@ -104,7 +120,7 @@ export default {
       }
       x.push('Today')
 
-      return { x, y }
+      return { x, y, y2 }
     }
   },
 
@@ -149,7 +165,7 @@ export default {
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
       this.scaled.mV.domain([0, this.getMarketValueMax()])
-      this.scaled.qty.domain([0, d3.max(this.data, d => d.qty)])
+      this.scaled.qty.domain([0, this.getQuantityMax()])
 
       const lineValue = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.mV(d.marketValue)).curve(d3['curveMonotoneX'])
       const lineQty = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.qty(d.qty)).curve(d3['curveMonotoneX'])
@@ -196,6 +212,17 @@ export default {
     getMarketValueMax () {
       const maxMV = d3.max(this.data, d => d.marketValue)
       return (Math.floor(maxMV / 10000) + 1) * 10000
+    },
+
+    // Scale to next 5
+    getQuantityMax () {
+      const qtyAsString = d3.max(this.data, d => d.qty).toString()
+      const firstDigit = qtyAsString[0]
+
+      let maxVal = Math.pow(10, qtyAsString.length)
+      if (firstDigit < 5) maxVal = maxVal / 2
+
+      return maxVal
     }
   }
 }
@@ -343,6 +370,38 @@ svg {
     position: absolute;
     text-align: right;
     margin-left: -8px;
+    top: 10px;
+    height: calc(100% - 20px);
+
+    span:first-of-type {
+      margin-top: 20px;
+    }
+    span:last-of-type {
+      margin-bottom: 20px;
+    }
+  }
+}
+.y2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  .axis {
+    position: absolute;
+    bottom: 20px;
+    right: 0px;
+    width: 1.25px;
+    height: calc(100% - 25px);
+    border-radius: 1px
+  }
+  .labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    text-align: left;
+    margin-right: -54px;
+    right: 0px;
     top: 10px;
     height: calc(100% - 20px);
 
