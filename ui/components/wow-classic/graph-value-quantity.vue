@@ -135,7 +135,7 @@ export default {
 
 .users {
   display: flex;
-  padding: 25px 40px;
+  padding: 25px 70px 25px 40px;
   flex: 1;
   min-height: 300px;
 }

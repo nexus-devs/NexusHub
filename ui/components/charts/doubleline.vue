@@ -156,7 +156,7 @@ export default {
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
     onResize () {
-      this.width = this.$el.offsetWidth - 40
+      this.width = this.$el.offsetWidth - 37
       this.height = this.$el.offsetHeight
       this.initialize()
       Tween.adjustData(this, this.data, this.data, true)
@@ -241,7 +241,7 @@ export default {
 .graphs {
   position: absolute;
   display: flex;
-  left: 40px;
+  left: 36px;
   top: 0;
   flex: 1;
   height: 100%;
@@ -347,7 +347,10 @@ svg {
 
     // TODO: Adjust x label scaling based on real data
     span:first-of-type {
-      margin-left: -20px;
+      margin-left: -15px;
+    }
+    span:last-of-type {
+      margin-right: -15px;
     }
   }
 }
@@ -369,7 +372,7 @@ svg {
     justify-content: space-between;
     position: absolute;
     text-align: right;
-    margin-left: -8px;
+    margin-left: -14px;
     top: 10px;
     height: calc(100% - 20px);
 
