@@ -1,5 +1,8 @@
 <template>
   <div class="price-detailed active">
+    <div class="header">
+      <h3>Market Value / Quantity</h3>
+    </div>
     <div class="users">
       <doubleline :data="data" />
     </div>
@@ -122,6 +125,52 @@ export default {
       margin-top: -3px;
       margin-left: -2px;
     }
+  }
+}
+
+.header {
+  padding: 25px 25px 0;
+
+  h2, h3 {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.8em !important;
+    letter-spacing: 0.5;
+    color: $color-primary-subtle !important;
+    @include uppercase;
+  }
+  time {
+    display: block;
+    font-size: 0.85em;
+    margin-top: 2px;
+  }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .img {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background: $color-bg;
+
+    img, object {
+      position: relative;
+      max-height: 80%;
+    }
+  }
+  span {
+    display: block;
+  }
+  @media (max-width: $breakpoint-s) {
+    padding: 25px 25px 0;
   }
 }
 
