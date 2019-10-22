@@ -10,9 +10,16 @@ class Items extends Endpoint {
     this.schema.description = 'Get basic item price statistics. Usage of this data for commerical purposes must be discussed with us before.'
     this.schema.url = '/wow-classic/v1/items/:item'
     this.schema.request = { url: '/wow-classic/v1/items/linen' }
+    this.schema.query = [
+      {
+        name: 'timerange',
+        default: 7,
+        description: 'Time range to return data from'
+      }
+    ]
     this.schema.response = {
       itemId: Number,
-      itemName: String,
+      name: String,
       qty: Number,
       minBuyout: Number,
       marketValue: Number
@@ -24,7 +31,7 @@ class Items extends Endpoint {
    */
   async main (req, res) {
     const item = await request({
-      uri: 'http://api.tradeskillmaster.com/v1/item/' + req.params.item ,
+      uri: 'http://api.tradeskillmaster.com/v1/item/' + req.params.item,
       json: true,
       headers: { 'User-Agent': 'Request-Promise' },
       qs: {
@@ -36,6 +43,7 @@ class Items extends Endpoint {
     const qty = item['USQuantity'] + item['EUQuantity']
     const minBuyout = (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2
     const marketValue = (item['USMarketAvg'] + item['EUMarketAvg']) / 2
+    const timerange = req.query.timerange
 
     // TODO: Currently global
     res.send({
@@ -44,12 +52,12 @@ class Items extends Endpoint {
       qty,
       minBuyout,
       marketValue,
-      current: this.generateSampleWeek(qty, minBuyout, marketValue),
-      previous: this.generateSampleWeek(qty, minBuyout, marketValue)
+      current: this.generateSample(qty, minBuyout, marketValue, timerange),
+      previous: this.generateSample(qty, minBuyout, marketValue, timerange)
     })
   }
 
-  generateSampleWeek (qty, minBuyout, marketValue) {
+  generateSample (qty, minBuyout, marketValue, timerange) {
     const week = {
       qty: 0,
       minBuyout: 0,
@@ -57,15 +65,15 @@ class Items extends Endpoint {
       intervals: []
     }
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < timerange; i++) {
       const day = this.generateSampleDay(qty, minBuyout, marketValue)
       week.intervals[i] = day
       week.qty += day.qty
       week.minBuyout += day.minBuyout
       week.marketValue += day.marketValue
     }
-    Math.round(week.minBuyout = week.minBuyout / 7)
-    Math.round(week.marketValue = week.marketValue / 7)
+    Math.round(week.minBuyout = week.minBuyout / timerange)
+    Math.round(week.marketValue = week.marketValue / timerange)
 
     return week
   }

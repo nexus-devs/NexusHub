@@ -48,8 +48,11 @@ export default {
 
   methods: {
     setTimerange (timerange) {
-      return false
-    },
+      const item = this.$store.state.items.item.itemId
+      this.$cubic.get(`/wow-classic/v1/items/${item}?timerange=${timerange}`).then((data) => {
+        this.$store.commit('setItem', data)
+      })
+    }
   }
 }
 </script>
