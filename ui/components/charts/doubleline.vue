@@ -1,6 +1,6 @@
 <template>
   <div class="doubleline">
-    <div class="axis">
+    <!--<div class="axis">
       <div class="x">
         <div class="axis"/>
         <div class="labels">
@@ -25,35 +25,52 @@
           </span>
         </div>
       </div>
+    </div>-->
+    <div class="axis y1">
+      <span v-for="label in axis.y" :key="label">
+        {{ parsePriceY(label) }}
+      </span>
     </div>
-    <div class="graphs">
-      <div class="sparkline">
-        <svg :width="width" :height="height">
-          <path :d="line.marketValue" class="line"/>
-          <path :d="line.qty" class="line2"/>
-        </svg>
-      </div>
-      <div class="tooltip-container">
-        <svg :width="width + 160" :height="height">
-          <g v-for="(d, i) in data" :key="d.x" class="point">
-            <rect :x="scaled.x(d.x)" class="hover"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="3"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="3" class="circle2"/>
-            <g class="tooltip">
-              <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
-              <text :x="scaled.x(d.x) + 20" y="22px" class="title">
-                {{ parseHoursAgo(i, data.length) }}
-              </text>
-              <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                {{ parsePriceSVG(data[i].marketValue) }}
-              </text>
-              <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
-                Quantity: {{ data[i] ? `${data[i].qty}` : 0 }}
-              </text>
+    <div class="middle-content">
+      <div class="graph">
+        <div class="sparkline">
+          <svg :width="width" :height="height">
+            <path :d="line.marketValue" class="line"/>
+            <path :d="line.qty" class="line2"/>
+          </svg>
+        </div>
+        <div class="tooltip-container">
+          <svg :width="width + 160" :height="height">
+            <g v-for="(d, i) in data" :key="d.x" class="point">
+              <rect :x="scaled.x(d.x)" class="hover"/>
+              <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="3"/>
+              <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="3" class="circle2"/>
+              <g class="tooltip">
+                <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
+                <text :x="scaled.x(d.x) + 20" y="22px" class="title">
+                  {{ parseHoursAgo(i, data.length) }}
+                </text>
+                <text :x="scaled.x(d.x) + 20" y="50px" class="num">
+                  {{ parsePriceSVG(data[i].marketValue) }}
+                </text>
+                <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
+                  Quantity: {{ data[i] ? `${data[i].qty}` : 0 }}
+                </text>
+              </g>
             </g>
-          </g>
-        </svg>
+          </svg>
+        </div>
       </div>
+      <div class="axis x">
+        <span v-for="label in axis.x" :key="label">
+          {{ label }}
+        </span>
+      </div>
+    </div>
+    <div class="axis y2">
+      <span v-for="label in axis.y2" :key="label">
+        {{ label }}
+      </span>
     </div>
   </div>
 </template>
@@ -156,8 +173,9 @@ export default {
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
     onResize () {
-      this.width = this.$el.offsetWidth - 37
-      this.height = this.$el.offsetHeight
+      const boundingBox = d3.select(this.$el).select('.sparkline').node().getBoundingClientRect()
+      this.width = boundingBox.width
+      this.height = boundingBox.height
       this.initialize()
       Tween.adjustData(this, this.data, this.data, true)
     },
@@ -237,20 +255,28 @@ export default {
   position: relative;
   display: flex;
   flex: 1;
+  justify-content: space-between;
+  padding-bottom: 15px;
 }
-.graphs {
-  position: absolute;
+.middle-content {
   display: flex;
-  left: 36px;
-  top: 0;
+  flex-direction: column;
   flex: 1;
   height: 100%;
-  width: calc(50% - 40px);
+  width: 100%;
+}
+.graph {
+  // position: absolute;
+  display: flex;
+  flex: 1;
+  height: 100%;
+  width: 100%;
 }
 
 .sparkline {
   position: relative;
-  width: inherit;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 }
 
@@ -328,96 +354,29 @@ svg {
 }
 
 .axis {
-  background: $color-subtle;
-}
-.x {
-  position: absolute;
-  bottom: 0;
-  left: 35px;
-  width: calc(100% - 35px);
-
-  .axis {
-    width: 100%;
-    height: 1.25px;
-    border-radius: 1px
-  }
-  .labels {
-    display: flex;
-    justify-content: space-between;
-
-    // TODO: Adjust x label scaling based on real data
-    span:first-of-type {
-      margin-left: -15px;
-    }
-    span:last-of-type {
-      margin-right: -15px;
-    }
-  }
-}
-.y {
-  position: absolute;
   height: 100%;
-
-  .axis {
-    position: absolute;
-    bottom: 20px;
-    left: 34px;
-    width: 1.25px;
-    height: calc(100% - 25px);
-    border-radius: 1px
-  }
-  .labels {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    text-align: right;
-    margin-left: -14px;
-    top: 10px;
-    height: calc(100% - 20px);
-
-    span:first-of-type {
-      margin-top: 20px;
-    }
-    span:last-of-type {
-      margin-bottom: 20px;
-    }
-  }
-}
-.y2 {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-
-  .axis {
-    position: absolute;
-    bottom: 20px;
-    right: 0px;
-    width: 1.25px;
-    height: calc(100% - 25px);
-    border-radius: 1px
-  }
-  .labels {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    text-align: left;
-    margin-right: -54px;
-    right: 0px;
-    top: 10px;
-    height: calc(100% - 20px);
-
-    span:first-of-type {
-      margin-top: 20px;
-    }
-    span:last-of-type {
-      margin-bottom: 20px;
-    }
-  }
-}
-.labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: $color-font-subtle;
   font-size: 0.9em;
+  line-height: 0.9em;
+}
+.axis.y1 {
+  border-right: 1px solid $color-subtle;
+  padding-right: 5px;
+  text-align: right;
+}
+.axis.y2 {
+  border-left: 1px solid $color-subtle;
+  padding-left: 5px;
+  text-align: left;
+}
+.axis.x {
+  height: 0px;
+  border-top: 1px solid $color-subtle;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>
