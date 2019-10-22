@@ -309,7 +309,7 @@ svg {
 
 .tooltip {
   rect {
-    fill: $color-bg-darker;
+    fill: $color-bg-dark;
   }
   .num {
     font-size: 1.1em;
