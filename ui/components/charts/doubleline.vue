@@ -318,6 +318,7 @@ svg {
 .point {
   opacity: 0;
   height: 100%;
+  transform: translateX(15px);
 
   // Helper to extend size of .tooltip, so we can hover properly
   rect.hover {
@@ -335,6 +336,7 @@ svg {
   position: absolute;
   z-index: 2;
   top: 0;
+  transform: translateX(-15px);
 }
 
 .tooltip {
