@@ -37,8 +37,8 @@
         <svg :width="width + 160" :height="height">
           <g v-for="(d, i) in data" :key="d.x" class="point">
             <rect :x="scaled.x(d.x)" class="hover"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="4"/>
-            <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="4" class="circle2"/>
+            <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="3"/>
+            <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="3" class="circle2"/>
             <g class="tooltip">
               <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
               <text :x="scaled.x(d.x) + 20" y="22px" class="title">
@@ -274,13 +274,13 @@ svg {
   .line {
     pointer-events: none; // Make tooltips accessible
     stroke: $color-primary-subtle;
-    stroke-width: 2.5px;
+    stroke-width: 1.5px;
     fill: none;
   }
   .line2 {
     pointer-events: none; // Make tooltips accessible
     stroke: $color-error-dark;
-    stroke-width: 2.5px;
+    stroke-width: 1.5px;
     fill: none;
   }
 }
