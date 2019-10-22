@@ -9,6 +9,7 @@
     <div class="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
     </div>
+    <progressbar ref="progress"/>
   </div>
 </template>
 
@@ -17,12 +18,14 @@
 import doubleline from 'src/components/charts/doubleline.vue'
 import indicator from 'src/components/charts/indicator.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
+import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
     indicator,
     doubleline,
-    moduleTime
+    moduleTime,
+    progressbar
   },
 
   computed: {
@@ -47,11 +50,10 @@ export default {
   },
 
   methods: {
-    setTimerange (timerange) {
-      const item = this.$store.state.items.item.itemId
-      this.$cubic.get(`/wow-classic/v1/items/${item}?timerange=${timerange}`).then((data) => {
-        this.$store.commit('setItem', data)
-      })
+    async setTimerange (timerange) {
+      this.$refs.progress.start()
+      await this.$store.dispatch('refetchItem', timerange)
+      this.$refs.progress.finish()
     }
   }
 }
