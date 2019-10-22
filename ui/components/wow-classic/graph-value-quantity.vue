@@ -7,7 +7,7 @@
       <doubleline :data="data" />
     </div>
     <div class="footer">
-      <module-time :days="7" :fn="setTimerange"/>
+      <module-time :days="timerange" :fn="setTimerange"/>
     </div>
   </div>
 </template>
@@ -26,14 +26,18 @@ export default {
   },
 
   computed: {
+    timerange () {
+      return this.$store.state.items.item.current.intervals.length
+    },
+
     data () {
       const item = this.$store.state.items.item.current
       const data = []
 
       let i = 0
-      for (const week of item.intervals) {
-        for (const day of week.intervals) {
-          data.push({ x: i, marketValue: day.marketValue, qty: day.qty })
+      for (const day of item.intervals) {
+        for (const hour of day.intervals) {
+          data.push({ x: i, marketValue: hour.marketValue, qty: hour.qty })
           i++
         }
       }
