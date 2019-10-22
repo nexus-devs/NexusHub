@@ -3,6 +3,9 @@
     <div class="users">
       <doubleline :data="data" />
     </div>
+    <div class="footer">
+      <module-time :days="7" :fn="setTimerange"/>
+    </div>
   </div>
 </template>
 
@@ -10,11 +13,13 @@
 <script>
 import doubleline from 'src/components/charts/doubleline.vue'
 import indicator from 'src/components/charts/indicator.vue'
+import moduleTime from 'src/components/ui/module-time.vue'
 
 export default {
   components: {
     indicator,
-    doubleline
+    doubleline,
+    moduleTime
   },
 
   computed: {
@@ -32,6 +37,12 @@ export default {
 
       return data
     }
+  },
+
+  methods: {
+    setTimerange (timerange) {
+      return false
+    },
   }
 }
 </script>
@@ -43,6 +54,7 @@ export default {
   z-index: 1;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   width: 50%;
   min-height: 300px;
   @include field;
@@ -79,6 +91,36 @@ export default {
       .overview {
         padding: 20px 0;
       }
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  padding: 2px 25px;
+  margin-top: auto;
+  background: $color-bg-dark;
+  font-size: 0.75em !important;
+  border-radius: 2px;
+
+  a {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    @include uppercase;
+    @include ie;
+    padding: 5px 10px;
+    letter-spacing: 0.5;
+    position: relative;
+    left: 10px;
+
+    &:hover {
+      color: white !important;
+    }
+    img {
+      height: 20px;
+      margin-top: -3px;
+      margin-left: -2px;
     }
   }
 }
