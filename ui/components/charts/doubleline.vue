@@ -132,7 +132,11 @@ export default {
       const now = moment()
       const dayAgo = (d) => now.clone().subtract(d, 'days').format('DD. MMM')
       const x = []
-      for (let i = 7; i > 0; i--) {
+      const days = this.data.length / 24
+      let stepSize = 1
+      if (days === 30) stepSize = 5
+      else if (days === 90) stepSize = 15
+      for (let i = days; i > 0; i -= stepSize) {
         x.push(dayAgo(i))
       }
       x.push('Today')
