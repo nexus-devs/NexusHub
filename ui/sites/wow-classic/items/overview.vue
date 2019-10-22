@@ -9,7 +9,10 @@
           <div class="row-margin main">
             <stats class="col-b"/>
           </div>
-          <graphValueQuantity/>
+          <div class="row-margin main">
+            <graphValueQuantity class="col-b"/>
+            <graph-value-quantity class="col-b"/>
+          </div>
         </div>
       </section>
     </app-content>

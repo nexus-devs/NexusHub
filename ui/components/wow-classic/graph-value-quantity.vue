@@ -98,6 +98,13 @@ export default {
   }
 }
 
+.users {
+  display: flex;
+  padding: 25px 25px;
+  flex: 1;
+  min-height: 200px;
+}
+
 .footer {
   display: flex;
   padding: 2px 25px;
@@ -172,12 +179,5 @@ export default {
   @media (max-width: $breakpoint-s) {
     padding: 25px 25px 0;
   }
-}
-
-.users {
-  display: flex;
-  padding: 25px 25px;
-  flex: 1;
-  min-height: 300px;
 }
 </style>
