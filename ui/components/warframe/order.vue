@@ -1,4 +1,4 @@
-<template>
+<template class="order">
   <div class="order" @click="active ? null : select()">
     <!-- Order listing -->
     <div class="row">
@@ -194,10 +194,6 @@ export default {
 .order {
   margin-top: 10px;
   @include ease(0.4s); // For order transitions
-
-  &:first-of-type {
-    margin-top: 0;
-  }
 }
 .order .row {
   @include field;

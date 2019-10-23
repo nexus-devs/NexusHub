@@ -76,7 +76,7 @@
               <div class="col interactive whitespace"/>
             </div>
             <transition-group>
-              <div v-for="(order, i) in listings" :key="order._id">
+              <div v-for="(order, i) in listings" :key="order._id" class="order">
                 <order :order="order"/>
                 <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid"/>
               </div>
@@ -372,5 +372,9 @@ export default {
       display: none;
     }
   }
+}
+
+.order:first-of-type /deep/ .order {
+  margin-top: 0;
 }
 </style>
