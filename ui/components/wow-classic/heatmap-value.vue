@@ -4,7 +4,7 @@
       <h3>Heatmap Market Value</h3>
     </div>
     <div class="users">
-      <heatmap/>
+      <heatmap :data="data"/>
     </div>
     <div class="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -31,6 +31,23 @@ export default {
   computed: {
     timerange () {
       return this.$store.state.items.item.current.intervals.length
+    },
+
+    data () {
+      const item = this.$store.state.items.item.current
+      const data = []
+
+      for (let i = 0; i < item.intervals.length; i++) {
+        // TODO: Adjust this so 0 actually reflects monday, 1 tuesday etc.
+        const day = i % 7
+        if (!data[day]) data[day] = []
+
+        for (let j = 0; j < item.intervals[i].intervals.length; j++) {
+          if (!data[day][j]) data[day][j] = 0
+          data[day][j] += item.intervals[i].intervals[j].marketValue
+        }
+      }
+      return data
     }
   },
 
