@@ -1,31 +1,5 @@
 <template>
   <div class="doubleline">
-    <!--<div class="axis">
-      <div class="x">
-        <div class="axis"/>
-        <div class="labels">
-          <span v-for="label in axis.x" :key="label">
-            {{ label }}
-          </span>
-        </div>
-      </div>
-      <div class="y">
-        <div class="axis"/>
-        <div class="labels">
-          <span v-for="label in axis.y" :key="label">
-            {{ parsePriceY(label) }}
-          </span>
-        </div>
-      </div>
-      <div class="y2">
-        <div class="axis"/>
-        <div class="labels">
-          <span v-for="label in axis.y2" :key="label">
-            {{ label }}
-          </span>
-        </div>
-      </div>
-    </div>-->
     <div class="axis y1">
       <span v-for="label in axis.y" :key="label">
         {{ parsePriceY(label) }}

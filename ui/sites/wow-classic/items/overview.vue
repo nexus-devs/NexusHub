@@ -11,7 +11,7 @@
           </div>
           <div class="row-margin main">
             <graphValueQuantity class="col-b"/>
-            <graph-value-quantity class="col-b"/>
+            <heatmapValue class="col-b"/>
           </div>
         </div>
       </section>
@@ -25,6 +25,7 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
+import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
@@ -37,7 +38,8 @@ export default {
     navigation,
     itemHeader,
     stats,
-    graphValueQuantity
+    graphValueQuantity,
+    heatmapValue
   },
 
   computed: {
