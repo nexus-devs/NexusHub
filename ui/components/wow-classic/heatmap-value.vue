@@ -4,6 +4,7 @@
       <h3>Heatmap Market Value</h3>
     </div>
     <div class="users">
+      <heatmap/>
     </div>
     <div class="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -14,6 +15,7 @@
 
 
 <script>
+import heatmap from 'src/components/charts/heatmap.vue'
 import indicator from 'src/components/charts/indicator.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 import progressbar from 'src/components/progress.vue'
@@ -22,7 +24,8 @@ export default {
   components: {
     indicator,
     moduleTime,
-    progressbar
+    progressbar,
+    heatmap
   },
 
   computed: {
