@@ -27,8 +27,11 @@
                 <text :x="scaled.x(d.x) + 20" y="50px" class="num">
                   {{ parsePriceSVG(data[i].value1) }}
                 </text>
-                <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
+                <text v-if="!sameScale" :x="scaled.x(d.x) + 20" y="75px" class="sub">
                   Quantity: {{ data[i] ? `${data[i].value2}` : 0 }}
+                </text>
+                <text v-else :x="scaled.x(d.x) + 20" y="75px" class="sub">
+                  Regional: {{ parsePriceSVG(data[i].value2) }}
                 </text>
               </g>
             </g>
@@ -160,8 +163,13 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.v1.domain([0, this.getGoldValueMax()])
-      this.scaled.v2.domain([0, this.getNormalValueMax()])
+      if (!this.sameScale) {
+        this.scaled.v1.domain([0, this.getGoldValueMax()])
+        this.scaled.v2.domain([0, this.getNormalValueMax()])
+      } else {
+        this.scaled.v1.domain([0, this.getCombinedGoldValueMax()])
+        this.scaled.v2.domain([0, this.getCombinedGoldValueMax()])
+      }
 
       const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3['curveMonotoneX'])
       const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3['curveMonotoneX'])
@@ -207,6 +215,14 @@ export default {
     // Scale to next gold
     getGoldValueMax () {
       const maxGold = d3.max(this.data, d => d.value1)
+      return (Math.floor(maxGold / 10000) + 1) * 10000
+    },
+
+    getCombinedGoldValueMax () {
+      const maxGold1 = d3.max(this.data, d => d.value1)
+      const maxGold2 = d3.max(this.data, d => d.value1)
+      const maxGold = d3.max([maxGold1, maxGold2])
+
       return (Math.floor(maxGold / 10000) + 1) * 10000
     },
 
