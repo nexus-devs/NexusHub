@@ -18,7 +18,7 @@
     </div>
     <div class="axis-hours">
       <div v-for="(hour, i) in 24" :key="hour + '' + i" class="time">
-        <span v-if="i % 4 === 1" class="label">
+        <span v-if="i % 3 === 1" class="label">
           {{ i % 12 + 1 }}{{ i + 1 > 11 ? 'pm' : 'am' }}
         </span>
         <span v-else/>
@@ -150,11 +150,12 @@ export default {
   text-align: right;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 5% - 10px); // Heatmap width without day labels
 
   span {
     display: inline-block;
     font-size: 0.8em;
-    margin-left: 7px;
     margin-top: 2.5px;
   }
 }
