@@ -313,7 +313,6 @@ svg {
   transform: translateX(-15px);
 }
 
-// TODO: Change tooltip from svg to div if possible
 .tooltip {
   rect {
     fill: $color-bg-dark;

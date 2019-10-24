@@ -39,7 +39,6 @@ export default {
       const data = []
 
       for (let i = 0; i < item.intervals.length; i++) {
-        // TODO: Adjust this so 0 actually reflects monday, 1 tuesday etc.
         const day = i % 7
         if (!data[day]) data[day] = []
 

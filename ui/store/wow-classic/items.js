@@ -13,7 +13,6 @@ export default {
   },
 
   actions: {
-    // TODO: Give each graph its own state
     async refetchItem ({ state, commit }, timerange) {
       const itemId = state.item.itemId
       const item = await this.$cubic.get(`/wow-classic/v1/items/${itemId}?timerange=${timerange}`)

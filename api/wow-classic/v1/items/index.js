@@ -45,7 +45,6 @@ class Items extends Endpoint {
     const marketValue = (item['USMarketAvg'] + item['EUMarketAvg']) / 2
     const timerange = req.query.timerange
 
-    // TODO: Currently global
     res.send({
       itemId: item['ItemId'],
       name: item['Name'],
@@ -123,8 +122,6 @@ class Items extends Endpoint {
       // this.cache(response, 60)
       return res.status(404).send(response)
     }
-
-    // TODO: GET THE FUCKING QUANITITY CALCULATION IN HERE WHAT THE FUCK
 
     // Get quantity and average
     const qty = orders.length
