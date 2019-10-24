@@ -55,7 +55,7 @@ export default {
   methods: {
     scale (num) {
       const scale = num / this.max
-      return scale < 0.45 ? 0.45 : scale
+      return scale < 0.3 ? 0.3 : scale // TODO: Adjust this to real data
     },
 
     // Parses price for shitty svg tags
