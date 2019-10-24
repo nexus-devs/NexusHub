@@ -2,7 +2,7 @@
   <div class="row">
     <div v-for="hour in hours" :key="hour" class="day">
       <div v-for="(day, i) in hour" :key="day" class="hour-wrapper">
-
+        <div :style="{ opacity: scale(day), transform: `scale(${scale(day)})` }" :class="{ inactive: !day }" class="hour"/>
       </div>
     </div>
     <div class="axis-days">
@@ -30,6 +30,18 @@ export default {
     // computed because this logic may change
     axisDays () {
       return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    },
+
+    max () {
+      const maxRow = this.data.map((row) => Math.max.apply(Math, row))
+      return Math.max.apply(null, maxRow)
+    }
+  },
+
+  methods: {
+    scale (num) {
+      const scale = num / this.max
+      return scale < 0.45 ? 0.45 : scale
     }
   }
 }
@@ -68,6 +80,16 @@ export default {
       z-index: 5;
       opacity: 1;
     }
+  }
+}
+.hour {
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+  background: $color-primary-subtle;
+
+  &.inactive {
+    background: transparent;
   }
 }
 
