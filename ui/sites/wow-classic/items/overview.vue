@@ -10,12 +10,12 @@
             <stats class="col-b"/>
           </div>
           <div class="row-margin main">
-            <heatmapValue class="col-b graph"/>
-            <heatmapQuantity class="col-b graph"/>
+            <graphValueQuantity class="col-b graph"/>
+            <graphValueQuantity class="col-b graph"/>
           </div>
           <div class="row-margin main">
-            <graphValueQuantity class="col-b graph"/>
             <heatmapValue class="col-b graph"/>
+            <heatmapQuantity class="col-b graph"/>
           </div>
         </div>
       </section>
@@ -29,8 +29,8 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
-import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
 import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
+import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
@@ -84,10 +84,6 @@ export default {
 
 .row-margin {
   justify-content: flex-start;
-
-  /deep/ .graph {
-    max-width: 100%;
-  }
 }
 
 .column {
@@ -108,24 +104,11 @@ export default {
 .module {
   max-width: 450px;
 }
-
-.patchlogs {
-  justify-content: flex-start;
-
-  /deep/ .patchlog {
-    @media (max-width: $breakpoint-m) {
-      max-width: calc(50% - 20px);
-    }
-    @media (max-width: $breakpoint-s) {
-      max-width: none;
-    }
-    .header {
-      img {
-        display: none;
-      }
-    }
-  }
+.graph {
+  max-width: 100%;
+  min-height: 300px;
 }
+
 .btn-subtle {
   margin-top: 20px;
 }
