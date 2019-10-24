@@ -1,8 +1,18 @@
 <template>
   <div class="row">
     <div v-for="(day, i) in data" :key="day" class="day">
-      <div v-for="hour in day" :key="hour" class="hour-wrapper">
+      <div v-for="(hour, j) in day" :key="hour" class="hour-wrapper">
         <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour"/>
+        <div class="tooltip">
+          <time :datetime="`${j * 2 + 1}:00`">
+            {{ axisDays[i] }},
+            {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
+          </time>
+          <br>
+          <span class="num"><parsedPrice :price="parsePrice(hour)"/></span>
+          <br>
+          <span>Market Value</span>
+        </div>
       </div>
       <span class="label">{{ axisDays[i] }}</span>
     </div>
@@ -19,7 +29,14 @@
 
 
 <script>
+import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
+import utility from 'src/components/wow-classic/utility.js'
+
 export default {
+  components: {
+    parsedPrice
+  },
+
   props: ['data'],
 
   computed: {
@@ -32,6 +49,10 @@ export default {
       const maxRow = this.data.map((row) => Math.max.apply(Math, row))
       return Math.max.apply(null, maxRow)
     }
+  },
+
+  created () {
+    this.parsePrice = utility.parsePrice
   },
 
   methods: {
@@ -58,10 +79,12 @@ export default {
   height: 28px;
 
   span {
-    width: 100%;
-    margin-left: 10px;
     text-align: right;
     font-size: 0.8em;
+  }
+  .label {
+    width: 100%;
+    margin-left: 10px;
   }
 }
 
@@ -89,6 +112,23 @@ export default {
 
   &.inactive {
     background: transparent;
+  }
+}
+.tooltip {
+  position: absolute;
+  white-space: nowrap;
+  margin-left: 28px;
+  opacity: 0;
+  background: $color-bg;
+  border-radius: 2px;
+  padding: 10px 12px;
+  pointer-events: none;
+  @include shadow-1;
+
+  .num {
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 3px 0;
   }
 }
 
