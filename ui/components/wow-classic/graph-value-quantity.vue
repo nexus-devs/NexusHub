@@ -1,22 +1,24 @@
 <template>
-  <graphModule ref="graphValueQuantity">
+  <module ref="graphValueQuantity">
     <template slot="header">
       <h3>Market Value / Quantity</h3>
     </template>
-    <template slot="body">
-      <doubleline :data="data"/>
+    <template slot="body" class="body">
+      <div class="doubleline-wrapper active">
+        <doubleline :data="data"/>
+      </div>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
     </template>
-  </graphModule>
+  </module>
 </template>
 
 
 <script>
 import doubleline from 'src/components/charts/doubleline.vue'
-import graphModule from 'src/components/wow-classic/graph-module.vue'
 import indicator from 'src/components/charts/indicator.vue'
+import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 import progressbar from 'src/components/progress.vue'
 
@@ -24,7 +26,7 @@ export default {
   components: {
     indicator,
     doubleline,
-    graphModule,
+    module,
     moduleTime,
     progressbar
   },

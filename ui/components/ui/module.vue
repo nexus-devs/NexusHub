@@ -97,6 +97,7 @@ export default {
 .body {
   margin: 20px 0;
   padding: 0 25px;
+  height: 100%;
 
   li {
     margin-top: 15px;

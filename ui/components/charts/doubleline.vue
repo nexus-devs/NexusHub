@@ -235,6 +235,7 @@ export default {
   flex: 1;
   justify-content: space-between;
   padding-bottom: 15px;
+  height: 100%;
 }
 .middle-content {
   display: flex;

@@ -1,5 +1,5 @@
 <template>
-  <graphModule ref="heatmapValue">
+  <module ref="heatmapValue">
     <template slot="header">
       <h3>Heatmap Market Value</h3>
     </template>
@@ -9,21 +9,21 @@
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
     </template>
-  </graphModule>
+  </module>
 </template>
 
 
 <script>
-import graphModule from 'src/components/wow-classic/graph-module.vue'
 import heatmap from 'src/components/charts/heatmap.vue'
 import indicator from 'src/components/charts/indicator.vue'
+import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
     indicator,
-    graphModule,
+    module,
     moduleTime,
     progressbar,
     heatmap
