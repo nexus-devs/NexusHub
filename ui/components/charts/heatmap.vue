@@ -9,7 +9,7 @@
             {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
           </time>
           <br>
-          <span class="num">{{ parsePriceSVG(hour) }}</span>
+          <span class="num">{{ parseNum ? parsePriceSVG(hour) : hour }}</span>
           <br>
           <span>Market Value</span>
         </div>
@@ -33,7 +33,7 @@
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['data'],
+  props: ['data', 'parseNum'],
 
   computed: {
     // computed because this logic may change

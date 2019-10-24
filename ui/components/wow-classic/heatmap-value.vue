@@ -4,7 +4,7 @@
       <h3>Heatmap Market Value</h3>
     </template>
     <template slot="body">
-      <heatmap :data="data"/>
+      <heatmap :data="data" :parse-num="true"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
