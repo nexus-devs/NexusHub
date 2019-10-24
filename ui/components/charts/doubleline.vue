@@ -339,8 +339,8 @@ svg {
   flex-direction: column;
   justify-content: space-between;
   color: $color-font-body;
-  font-size: 0.9em;
-  line-height: 0.9em;
+  font-size: 0.8em;
+  line-height: 0.8em;
 }
 .axis.y1 {
   border-right: 1px solid $color-font-body;
