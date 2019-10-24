@@ -1,7 +1,7 @@
 <template>
   <div class="row">
-    <div v-for="(day, i) in data" :key="day" class="day">
-      <div v-for="(hour, j) in day" :key="hour" class="hour-wrapper">
+    <div v-for="(day, i) in data" :key="axisDays[i]" class="day">
+      <div v-for="(hour, j) in day" :key="hour + '' + j" class="hour-wrapper">
         <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour"/>
         <div class="tooltip">
           <time :datetime="`${j * 2 + 1}:00`">
