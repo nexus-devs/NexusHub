@@ -4,9 +4,7 @@
       <h3>Market Value / Quantity</h3>
     </template>
     <template slot="body" class="body">
-      <div class="doubleline-wrapper active">
-        <doubleline :data="data"/>
-      </div>
+      <doubleline :data="data"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>

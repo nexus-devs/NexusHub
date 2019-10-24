@@ -10,12 +10,12 @@
             <stats class="col-b"/>
           </div>
           <div class="row-margin main">
-            <heatmapValue class="col-b"/>
-            <heatmapQuantity class="col-b"/>
+            <heatmapValue class="col-b graph"/>
+            <heatmapQuantity class="col-b graph"/>
           </div>
           <div class="row-margin main">
-            <graphValueQuantity class="col-b"/>
-            <heatmapValue class="col-b"/>
+            <graphValueQuantity class="col-b graph"/>
+            <heatmapValue class="col-b graph"/>
           </div>
         </div>
       </section>
@@ -84,6 +84,10 @@ export default {
 
 .row-margin {
   justify-content: flex-start;
+
+  /deep/ .graph {
+    max-width: 100%;
+  }
 }
 
 .column {
