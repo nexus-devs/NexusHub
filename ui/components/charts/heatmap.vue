@@ -9,7 +9,7 @@
             {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
           </time>
           <br>
-          <span class="num"><parsedPrice :price="parsePrice(hour)"/></span>
+          <span class="num">{{ parsePriceSVG(hour) }}</span>
           <br>
           <span>Market Value</span>
         </div>
@@ -29,14 +29,9 @@
 
 
 <script>
-import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  components: {
-    parsedPrice
-  },
-
   props: ['data'],
 
   computed: {
@@ -59,6 +54,17 @@ export default {
     scale (num) {
       const scale = num / this.max
       return scale < 0.45 ? 0.45 : scale
+    },
+
+    // Parses price for shitty svg tags
+    // TODO: Put this in utility
+    parsePriceSVG (price) {
+      const p = this.parsePrice(price)
+      let str = ''
+      if (p.gold) str += p.gold + 'g '
+      if (p.gold || p.silver) str += p.silver + 's '
+      str += p.copper + 'c'
+      return str
     }
   }
 }
