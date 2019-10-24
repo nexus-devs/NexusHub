@@ -125,7 +125,7 @@ export default {
   white-space: nowrap;
   margin-left: 28px;
   opacity: 0;
-  background: $color-bg;
+  background: $color-bg-dark;
   border-radius: 2px;
   padding: 10px 12px;
   pointer-events: none;
