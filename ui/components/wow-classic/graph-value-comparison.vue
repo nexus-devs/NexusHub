@@ -4,7 +4,7 @@
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data"/>
+      <doubleline :data="data" :same-scale="true"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -41,7 +41,7 @@ export default {
       let i = 0
       for (const day of item.intervals) {
         for (const hour of day.intervals) {
-          data.push({ x: i, marketValue: hour.marketValue, qty: hour.qty })
+          data.push({ x: i, value1: hour.marketValue, value2: hour.qty })
           i++
         }
       }

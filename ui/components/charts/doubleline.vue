@@ -9,26 +9,26 @@
       <div class="graph">
         <div class="sparkline">
           <svg :width="width" :height="height">
-            <path :d="line.marketValue" class="line"/>
-            <path :d="line.qty" class="line2"/>
+            <path :d="line.value1" class="line"/>
+            <path :d="line.value2" class="line2"/>
           </svg>
         </div>
         <div class="tooltip-container">
           <svg :width="width + 160" :height="height">
             <g v-for="(d, i) in data" :key="d.x" class="point">
               <rect :x="scaled.x(d.x)" class="hover"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.mV(d.marketValue)" r="3"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.qty(d.qty)" r="3" class="circle2"/>
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3"/>
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" class="circle2"/>
               <g class="tooltip">
                 <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                   {{ parseHoursAgo(i, data.length) }}
                 </text>
                 <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                  {{ parsePriceSVG(data[i].marketValue) }}
+                  {{ parsePriceSVG(data[i].value1) }}
                 </text>
                 <text :x="scaled.x(d.x) + 20" y="75px" class="sub">
-                  Quantity: {{ data[i] ? `${data[i].qty}` : 0 }}
+                  Quantity: {{ data[i] ? `${data[i].value2}` : 0 }}
                 </text>
               </g>
             </g>
@@ -65,7 +65,7 @@ export default {
     parsedPrice
   },
 
-  props: ['data'],
+  props: ['data', 'sameScale'],
 
   data () {
     return {
@@ -74,20 +74,20 @@ export default {
       min: 0,
       max: 0,
       line: {
-        marketValue: '',
-        qty: ''
+        value1: '',
+        value2: ''
       },
       scaled: {
         x: (x) => x,
-        mV: (x) => x,
-        qty: (x) => x
+        v1: (x) => x,
+        v2: (x) => x
       }
     }
   },
 
   computed: {
     axis () {
-      const yPane = [0, this.getMarketValueMax()]
+      const yPane = [0, this.getGoldValueMax()]
       const part = Math.round(yPane[0] + (yPane[1] - yPane[0]) / 3)
       const y = []
       y.push(yPane[1])
@@ -95,7 +95,7 @@ export default {
       y.push(part)
       y.push(yPane[0])
 
-      const y2Pane = [0, this.getQuantityMax()]
+      const y2Pane = [0, this.getNormalValueMax()]
       const part2 = Math.round(y2Pane[0] + (y2Pane[1] - y2Pane[0]) / 3)
       const y2 = []
       y2.push(y2Pane[1])
@@ -145,8 +145,8 @@ export default {
     // Set graph scaling
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.mV = d3.scaleLinear().range([this.height - 40, 40])
-      this.scaled.qty = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.v1 = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.v2 = d3.scaleLinear().range([this.height - 40, 40])
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
@@ -160,13 +160,13 @@ export default {
 
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.mV.domain([0, this.getMarketValueMax()])
-      this.scaled.qty.domain([0, this.getQuantityMax()])
+      this.scaled.v1.domain([0, this.getGoldValueMax()])
+      this.scaled.v2.domain([0, this.getNormalValueMax()])
 
-      const lineValue = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.mV(d.marketValue)).curve(d3['curveMonotoneX'])
-      const lineQty = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.qty(d.qty)).curve(d3['curveMonotoneX'])
-      this.line.marketValue = lineValue(this.data)
-      this.line.qty = lineQty(this.data)
+      const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3['curveMonotoneX'])
+      const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3['curveMonotoneX'])
+      this.line.value1 = lineValue1(this.data)
+      this.line.value2 = lineValue2(this.data)
     },
 
     // parses hours into days + hours ago
@@ -205,17 +205,17 @@ export default {
     },
 
     // Scale to next gold
-    getMarketValueMax () {
-      const maxMV = d3.max(this.data, d => d.marketValue)
-      return (Math.floor(maxMV / 10000) + 1) * 10000
+    getGoldValueMax () {
+      const maxGold = d3.max(this.data, d => d.value1)
+      return (Math.floor(maxGold / 10000) + 1) * 10000
     },
 
     // Scale to next 5
-    getQuantityMax () {
-      const qtyAsString = d3.max(this.data, d => d.qty).toString()
-      const firstDigit = qtyAsString[0]
+    getNormalValueMax () {
+      const valueAsString = d3.max(this.data, d => d.value2).toString()
+      const firstDigit = valueAsString[0]
 
-      let maxVal = Math.pow(10, qtyAsString.length)
+      let maxVal = Math.pow(10, valueAsString.length)
       if (firstDigit < 5) maxVal = maxVal / 2
 
       return maxVal

@@ -41,7 +41,7 @@ export default {
       let i = 0
       for (const day of item.intervals) {
         for (const hour of day.intervals) {
-          data.push({ x: i, marketValue: hour.marketValue, qty: hour.qty })
+          data.push({ x: i, value1: hour.marketValue, value2: hour.qty })
           i++
         }
       }
