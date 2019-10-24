@@ -4,7 +4,7 @@
       <h3>Heatmap Market Quantity</h3>
     </template>
     <template slot="body">
-      <heatmap :data="data"/>
+      <heatmap :data="data" :tooltip-label="'Quantity'"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>

@@ -11,7 +11,7 @@
           <br>
           <span class="num">{{ parseNum ? parsePriceSVG(hour) : hour }}</span>
           <br>
-          <span>Market Value</span>
+          <span>{{ tooltipLabel ? tooltipLabel : '' }}</span>
         </div>
       </div>
       <span class="label">{{ axisDays[i] }}</span>
@@ -33,7 +33,7 @@
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['data', 'parseNum'],
+  props: ['data', 'parseNum', 'tooltipLabel'],
 
   computed: {
     // computed because this logic may change
