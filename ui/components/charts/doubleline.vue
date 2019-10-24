@@ -44,7 +44,7 @@
         </span>
       </div>
     </div>
-    <div class="axis y2">
+    <div v-if="!sameScale" class="axis y2">
       <span v-for="label in axis.y2" :key="label">
         {{ label }}
       </span>
@@ -90,7 +90,8 @@ export default {
 
   computed: {
     axis () {
-      const yPane = [0, this.getGoldValueMax()]
+      let yPane = [0, this.getGoldValueMax()]
+      if (this.sameScale) yPane = [0, this.getCombinedGoldValueMax()]
       const part = Math.round(yPane[0] + (yPane[1] - yPane[0]) / 3)
       const y = []
       y.push(yPane[1])
