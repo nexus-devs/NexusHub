@@ -3,7 +3,7 @@
     <template slot="header">
       <h3>Market Value / Quantity</h3>
     </template>
-    <template slot="body" class="body">
+    <template slot="body">
       <doubleline :data="data"/>
     </template>
     <template slot="footer">

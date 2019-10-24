@@ -334,7 +334,7 @@ svg {
 }
 
 .axis {
-  height: 100%;
+  height: calc(100% - 20px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -354,6 +354,7 @@ svg {
 }
 .axis.x {
   height: 0px;
+  margin-bottom: 20px;
   border-top: 1px solid $color-font-body;
   display: flex;
   flex-direction: row;
