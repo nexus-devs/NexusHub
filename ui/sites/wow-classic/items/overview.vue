@@ -11,7 +11,7 @@
           </div>
           <div class="row-margin main">
             <graphValueQuantity class="col-b graph"/>
-            <graphValueQuantity class="col-b graph"/>
+            <graphValueComparison class="col-b graph"/>
           </div>
           <div class="row-margin main">
             <heatmapValue class="col-b graph"/>
@@ -28,6 +28,7 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
 import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
 import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
@@ -43,6 +44,7 @@ export default {
     navigation,
     itemHeader,
     stats,
+    graphValueComparison,
     graphValueQuantity,
     heatmapValue,
     heatmapQuantity
