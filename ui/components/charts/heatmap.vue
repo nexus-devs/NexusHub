@@ -39,6 +39,7 @@ export default {
     // computed because this logic may change
     axisDays () {
       return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      // return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     },
 
     max () {
@@ -78,11 +79,13 @@ export default {
 .row {
   flex-wrap: nowrap;
   flex-direction: column;
+  width: 100%;
 }
 
 .day {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   height: 28px;
 
   span {
@@ -90,7 +93,7 @@ export default {
     font-size: 0.8em;
   }
   .label {
-    width: 100%;
+    width: 5%;
     margin-left: 10px;
   }
 }
