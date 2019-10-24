@@ -16,11 +16,12 @@
       </div>
       <span class="label">{{ axisDays[i] }}</span>
     </div>
-    <div class="axis-days">
-      <div v-for="day in axisDays" :key="day" class="time">
-        <span class="label">
-          {{ day }}
+    <div class="axis-hours">
+      <div v-for="(hour, i) in 24" :key="hour + '' + i" class="time">
+        <span v-if="i % 4 === 1" class="label">
+          {{ i % 12 + 1 }}{{ i + 1 > 11 ? 'pm' : 'am' }}
         </span>
+        <span v-else/>
       </div>
     </div>
   </div>
@@ -142,7 +143,7 @@ export default {
   color: $color-font-body !important;
 }
 
-.axis-days {
+.axis-hours {
   text-align: right;
   display: flex;
   flex-direction: row;
