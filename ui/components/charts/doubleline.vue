@@ -338,23 +338,23 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: $color-font-subtle;
+  color: $color-font-body;
   font-size: 0.9em;
   line-height: 0.9em;
 }
 .axis.y1 {
-  border-right: 1px solid $color-subtle;
+  border-right: 1px solid $color-font-body;
   padding-right: 5px;
   text-align: right;
 }
 .axis.y2 {
-  border-left: 1px solid $color-subtle;
+  border-left: 1px solid $color-font-body;
   padding-left: 5px;
   text-align: left;
 }
 .axis.x {
   height: 0px;
-  border-top: 1px solid $color-subtle;
+  border-top: 1px solid $color-font-body;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
