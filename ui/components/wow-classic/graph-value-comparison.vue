@@ -31,11 +31,11 @@ export default {
 
   computed: {
     timerange () {
-      return this.$store.state.items.item.current.intervals.length
+      return this.$store.state.graphs.storage['graph-value-comparison'].timerange
     },
 
     data () {
-      const item = this.$store.state.items.item.current
+      const item = this.$store.state.graphs.storage['graph-value-comparison'].data
       const data = []
 
       let i = 0
@@ -53,7 +53,7 @@ export default {
   methods: {
     async setTimerange (timerange) {
       this.$refs.graphValueComparison.$refs.progress.start()
-      await this.$store.dispatch('refetchItem', timerange)
+      await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-comparison', timerange })
       this.$refs.graphValueComparison.$refs.progress.finish()
     }
   }

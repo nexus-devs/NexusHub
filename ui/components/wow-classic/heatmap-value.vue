@@ -31,11 +31,11 @@ export default {
 
   computed: {
     timerange () {
-      return this.$store.state.items.item.current.intervals.length
+      return this.$store.state.graphs.storage['heatmap-value'].timerange
     },
 
     data () {
-      const item = this.$store.state.items.item.current
+      const item = this.$store.state.graphs.storage['heatmap-value'].data
       const data = []
 
       for (let i = 0; i < item.intervals.length; i++) {
@@ -54,7 +54,7 @@ export default {
   methods: {
     async setTimerange (timerange) {
       this.$refs.heatmapValue.$refs.progress.start()
-      await this.$store.dispatch('refetchItem', timerange)
+      await this.$store.dispatch('refetchGraphData', { graph: 'heatmap-value', timerange })
       this.$refs.heatmapValue.$refs.progress.finish()
     }
   }

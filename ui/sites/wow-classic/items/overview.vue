@@ -68,6 +68,7 @@ export default {
     // Only fetch item data if we actually have a new item
     const itemData = (store.state.items.item.name !== item) ? await this.$cubic.get(`/wow-classic/v1/items/${item}`) : store.state.items.item
     const data = itemData.current
+    store.commit('setGraphItem', itemData.itemId)
 
     // Commit start value for all graphs
     store.commit('setGraphData', { graph: 'graph-value-quantity', data })
