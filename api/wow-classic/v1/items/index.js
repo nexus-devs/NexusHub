@@ -9,12 +9,22 @@ class Items extends Endpoint {
     super(options)
     this.schema.description = 'Get basic item price statistics. Usage of this data for commerical purposes must be discussed with us before.'
     this.schema.url = '/wow-classic/v1/items/:item'
-    this.schema.request = { url: '/wow-classic/v1/items/linen' }
+    this.schema.request = { url: '/wow-classic/v1/items/2589' }
     this.schema.query = [
       {
         name: 'timerange',
         default: 7,
-        description: 'Time range to return data from'
+        description: 'Time range to return data from.'
+      },
+      {
+        name: 'region',
+        default: 'all',
+        description: 'Region to return data from.'
+      },
+      {
+        name: 'server',
+        default: '',
+        description: 'Server to return data from.'
       }
     ]
     this.schema.response = {
@@ -30,8 +40,16 @@ class Items extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
+    const region = (['US', 'EU'].includes(req.query.region.toUpperCase())) ? req.query.region.toUpperCase() : null
+    const server = req.query.server ? req.query.server.toLowerCase() : null
+    const local = region && server
+
+    let uri = 'http://api.tradeskillmaster.com/v1/item/'
+    if (local) uri += region + '/' + server + '/'
+    uri += req.params.item
+
     const item = await request({
-      uri: 'http://api.tradeskillmaster.com/v1/item/' + req.params.item,
+      uri,
       json: true,
       headers: { 'User-Agent': 'Request-Promise' },
       qs: {
@@ -40,9 +58,9 @@ class Items extends Endpoint {
       }
     })
 
-    const qty = item['USQuantity'] + item['EUQuantity']
-    const minBuyout = (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2
-    const marketValue = (item['USMarketAvg'] + item['EUMarketAvg']) / 2
+    const qty = local ? item['Quantity'] : item['USQuantity'] + item['EUQuantity']
+    const minBuyout = local ? item['MinBuyout'] : (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2
+    const marketValue = local ? item['MarketValue'] : (item['USMarketAvg'] + item['EUMarketAvg']) / 2
     const timerange = req.query.timerange
 
     res.send({
