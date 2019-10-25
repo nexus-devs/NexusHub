@@ -36,6 +36,7 @@ import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/warframe.vue'
 import stats from 'src/components/wow-classic/stats.vue'
+import storeModule from 'src/store/wow-classic/graphs.js'
 
 export default {
   components: {
@@ -60,7 +61,9 @@ export default {
     return {
       title: `${this.item.name} · NexusHub`
     }
-  }
+  },
+
+  storeModule
 }
 </script>
 
