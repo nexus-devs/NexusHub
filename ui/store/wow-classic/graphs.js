@@ -6,8 +6,8 @@ export default {
   },
 
   mutations: {
-    setGraphData (state, graph, data) {
-      state.storage[graph] = { timerange: data.length, data }
+    setGraphData (state, { graph, data }) {
+      state.storage[graph] = { timerange: data.intervals.length, data }
     }
   }
 }

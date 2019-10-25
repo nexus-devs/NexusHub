@@ -63,6 +63,19 @@ export default {
     }
   },
 
+  async asyncData ({ store, route }) {
+    const item = route.params.item
+    // Only fetch item data if we actually have a new item
+    const itemData = (store.state.items.item.name !== item) ? await this.$cubic.get(`/wow-classic/v1/items/${item}`) : store.state.items.item
+    const data = itemData.current
+
+    // Commit start value for all graphs
+    store.commit('setGraphData', { graph: 'graph-value-quantity', data })
+    store.commit('setGraphData', { graph: 'graph-value-comparison', data })
+    store.commit('setGraphData', { graph: 'heatmap-quantity', data })
+    store.commit('setGraphData', { graph: 'heatmap-value', data })
+  },
+
   storeModule
 }
 </script>
