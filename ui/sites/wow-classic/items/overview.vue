@@ -67,7 +67,27 @@ export default {
     const item = route.params.item
     // Only fetch item data if we actually have a new item
     const itemData = (store.state.items.item.name !== item) ? await this.$cubic.get(`/wow-classic/v1/items/${item}`) : store.state.items.item
-    const data = itemData.current
+    let data = itemData.current
+    if (!data) {
+      const eu = itemData.EU
+      const us = itemData.US
+
+      if (eu && !us) data = eu.current
+      else if (us && !eu) data = us.current
+      else if (us && eu) {
+        data = eu.current
+        for (let i = 0; i < us.current.intervals.length; i++) {
+          for (let j = 0; j < us.current.intervals[i].intervals.length; j++) {
+            data.intervals[i].intervals[j].qty += us.current.intervals[i].intervals[j].qty
+            data.intervals[i].intervals[j].minBuyout += us.current.intervals[i].intervals[j].minBuyout
+            data.intervals[i].intervals[j].marketValue += us.current.intervals[i].intervals[j].marketValue
+            data.intervals[i].intervals[j].minBuyout = data.intervals[i].intervals[j].minBuyout / 2
+            data.intervals[i].intervals[j].marketValue = data.intervals[i].intervals[j].marketValue / 2
+          }
+        }
+      }
+    }
+
     store.commit('setGraphItem', itemData.itemId)
 
     // Commit start value for all graphs

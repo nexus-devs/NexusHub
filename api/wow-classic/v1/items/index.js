@@ -42,10 +42,13 @@ class Items extends Endpoint {
   async main (req, res) {
     const region = (['US', 'EU'].includes(req.query.region.toUpperCase())) ? req.query.region.toUpperCase() : null
     const server = req.query.server ? req.query.server.toLowerCase() : null
-    const local = region && server
+    const timerange = req.query.timerange
 
     let uri = 'http://api.tradeskillmaster.com/v1/item/'
-    if (local) uri += region + '/' + server + '/'
+    if (region) {
+      uri += region + '/'
+      uri += (server || 'blackhand') + '/' // add dummy server so we can request TSM API
+    }
     uri += req.params.item
 
     const item = await request({
@@ -58,20 +61,46 @@ class Items extends Endpoint {
       }
     })
 
-    const qty = local ? item['Quantity'] : item['USQuantity'] + item['EUQuantity']
-    const minBuyout = local ? item['MinBuyout'] : (item['USMinBuyoutAvg'] + item['EUMinBuyoutAvg']) / 2
-    const marketValue = local ? item['MarketValue'] : (item['USMarketAvg'] + item['EUMarketAvg']) / 2
-    const timerange = req.query.timerange
-
-    res.send({
+    let response = {
       itemId: item['ItemId'],
-      name: item['Name'],
-      qty,
-      minBuyout,
-      marketValue,
-      current: this.generateSample(qty, minBuyout, marketValue, timerange),
-      previous: this.generateSample(qty, minBuyout, marketValue, timerange)
-    })
+      name: item['Name']
+    }
+
+    // Reformat this jesus
+    if (region && server) {
+      response['minBuyout'] = item['MinBuyout']
+      response['marketValue'] = item['MarketValue']
+      response['qty'] = item['Quantity']
+      response['current'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
+      response['previous'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
+    }
+    if (region) {
+      response[region] = {
+        minBuyout: item['RegionMinBuyoutAvg'],
+        marketValue: item['RegionMarketAvg'],
+        qty: item['RegionQuantity']
+      }
+      response[region]['current'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
+      response[region]['previous'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
+    }
+    else {
+      response['EU'] = {
+        minBuyout: item['EUMinBuyoutAvg'],
+        marketValue: item['EUMarketAvg'],
+        qty: item['EUQuantity']
+      }
+      response['EU']['current'] = this.generateSample(response['EU']['qty'], response['EU']['minBuyout'], response['EU']['marketValue'], timerange)
+      response['EU']['previous'] = this.generateSample(response['EU']['qty'], response['EU']['minBuyout'], response['EU']['marketValue'], timerange)
+      response['US'] = {
+        minBuyout: item['USMinBuyoutAvg'],
+        marketValue: item['USMarketAvg'],
+        qty: item['USQuantity']
+      }
+      response['US']['current'] = this.generateSample(response['US']['qty'], response['US']['minBuyout'], response['US']['marketValue'], timerange)
+      response['US']['previous'] = this.generateSample(response['US']['qty'], response['US']['minBuyout'], response['US']['marketValue'], timerange)
+    }
+
+    res.send(response)
   }
 
   generateSample (qty, minBuyout, marketValue, timerange) {
