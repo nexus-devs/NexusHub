@@ -35,6 +35,66 @@
           </span>
         </div>
       </div>
+      <div v-if="item.EU && item.EU.marketValue" class="item-data row">
+        <div class="col">
+          <span>EU Market Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            <parsedPrice :price="parsePrice(item.EU.marketValue)" />
+          </span>
+        </div>
+      </div>
+      <div v-if="item.EU && item.EU.minBuyout" class="item-data row">
+        <div class="col">
+          <span>EU Min. Buyout</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            <parsedPrice :price="parsePrice(item.EU.minBuyout)" />
+          </span>
+        </div>
+      </div>
+      <div v-if="item.EU && item.EU.qty" class="item-data row">
+        <div class="col">
+          <span>EU Quantity</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.EU.qty }}
+          </span>
+        </div>
+      </div>
+      <div v-if="item.US && item.US.marketValue" class="item-data row">
+        <div class="col">
+          <span>US Market Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            <parsedPrice :price="parsePrice(item.US.marketValue)" />
+          </span>
+        </div>
+      </div>
+      <div v-if="item.US && item.US.minBuyout" class="item-data row">
+        <div class="col">
+          <span>US Min. Buyout</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            <parsedPrice :price="parsePrice(item.US.minBuyout)" />
+          </span>
+        </div>
+      </div>
+      <div v-if="item.US && item.US.qty" class="item-data row">
+        <div class="col">
+          <span>US Quantity</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.US.qty }}
+          </span>
+        </div>
+      </div>
     </template>
   </module>
 </template>
