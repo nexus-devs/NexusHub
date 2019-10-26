@@ -42,8 +42,11 @@ export default {
     // Only fetch item data if we actually have a new item
     if (store.state.items.item.itemId !== item) {
       let query = ''
-      if (region && server) {
-        query = `?region=${region}&server=${server}`
+      if (region) {
+        query = `?region=${region}`
+        if (server) {
+          query += `&server=${server}`
+        }
       }
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
       store.commit('setItem', itemData)
