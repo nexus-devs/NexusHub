@@ -2,12 +2,16 @@ export default {
   name: 'graphs',
   state: {
     itemId: '',
+    region: '',
+    server: '',
     storage: {}
   },
 
   mutations: {
-    setGraphItem (state, itemId) {
-      state.itemId = itemId
+    setGraphItem (state, item) {
+      state.itemId = item.itemId
+      state.region = item.region
+      state.server = item.server
     },
     setGraphData (state, { graph, data }) {
       const graphData = []
@@ -53,8 +57,15 @@ export default {
   actions: {
     async refetchGraphData ({ state, commit }, { graph, timerange }) {
       const itemId = state.itemId
-      const item = await this.$cubic.get(`/wow-classic/v1/items/${itemId}?timerange=${timerange}`)
-      commit('setGraphData', { graph, data: item.current })
+      const region = state.region
+      const server = state.server
+
+      let query = `/wow-classic/v1/items/${itemId}?timerange=${timerange}`
+      if (region) query += `&region=${region}`
+      if (server) query += `&server=${server}`
+
+      const item = await this.$cubic.get(query)
+      commit('setGraphData', { graph, data: item })
     }
   }
 }

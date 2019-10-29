@@ -81,7 +81,7 @@ export default {
       itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
     }
 
-    store.commit('setGraphItem', itemData.itemId)
+    store.commit('setGraphItem', itemData)
 
     // Commit start value for all graphs
     store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })

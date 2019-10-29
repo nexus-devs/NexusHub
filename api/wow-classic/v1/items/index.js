@@ -62,7 +62,7 @@ class Items extends Endpoint {
     })
 
     let response = {
-      itemId: item['ItemId'],
+      itemId: item['Id'] || item['ItemId'],
       name: item['Name']
     }
 
