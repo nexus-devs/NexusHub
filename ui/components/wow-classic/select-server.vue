@@ -26,12 +26,25 @@ export default {
     }
   },
 
+  created () {
+    const routeArgs = this.$route.fullPath.split('/')
+    for (const arg of routeArgs) {
+      const server = arg.charAt(0).toUpperCase() + arg.slice(1).toLowerCase()
+      if (this.serverlist.includes(server)) {
+        this.server = server
+        break
+      }
+    }
+  },
+
   methods: {
     toggle () {
       this.active = !this.active
     },
 
     selectServer (server) {
+      const route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
+      this.$router.push(route)
       this.server = server
     }
   }

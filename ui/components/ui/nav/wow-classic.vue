@@ -49,7 +49,7 @@ export default {
 
   beforeCreate () {
     this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
-  },
+  },*/
 
   mounted () {
     listener = shortcut.bind('shift + f', (e) => {
@@ -60,7 +60,7 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
-  },*/
+  },
 
   async asyncData ({ store, route }) {
     const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
