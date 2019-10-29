@@ -35,7 +35,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.EU && item.EU.marketValue" class="item-data row">
+      <div v-if="item.region === 'EU' && item.EU.marketValue" class="item-data row">
         <div class="col">
           <span>EU Market Value</span>
         </div>
@@ -45,7 +45,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.EU && item.EU.minBuyout" class="item-data row">
+      <div v-if="item.region === 'EU' && item.EU.minBuyout" class="item-data row">
         <div class="col">
           <span>EU Min. Buyout</span>
         </div>
@@ -55,7 +55,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.EU && item.EU.qty" class="item-data row">
+      <div v-if="item.region === 'EU' && item.EU.qty" class="item-data row">
         <div class="col">
           <span>EU Quantity</span>
         </div>
@@ -65,7 +65,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.US && item.US.marketValue" class="item-data row">
+      <div v-if="item.region === 'US' && item.US.marketValue" class="item-data row">
         <div class="col">
           <span>US Market Value</span>
         </div>
@@ -75,7 +75,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.US && item.US.minBuyout" class="item-data row">
+      <div v-if="item.region === 'US' && item.US.minBuyout" class="item-data row">
         <div class="col">
           <span>US Min. Buyout</span>
         </div>
@@ -85,7 +85,7 @@
           </span>
         </div>
       </div>
-      <div v-if="item.US && item.US.qty" class="item-data row">
+      <div v-if="item.region === 'US' && item.US.qty" class="item-data row">
         <div class="col">
           <span>US Quantity</span>
         </div>

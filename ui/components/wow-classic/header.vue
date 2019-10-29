@@ -35,8 +35,9 @@ export default {
     regionServerString () {
       let str = ''
       if (this.item.region) {
-        const server = this.item.server ? ` - ${this.item.server}` : ''
-        str = `[${this.item.region}${server}]`
+        const server = this.item.server ? this.item.server.charAt(0).toUpperCase() + this.item.server.slice(1).toLowerCase() : undefined
+        const serverString = server ? ` - ${server}` : ''
+        str = `[${this.item.region}${serverString}]`
       }
       return str
     }
@@ -57,8 +58,6 @@ export default {
         }
       }
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
-      itemData.region = region ? region.toUpperCase() : undefined
-      itemData.server = server ? server.charAt(0).toUpperCase() + server.slice(1).toLowerCase() : undefined
       store.commit('setItem', itemData)
     }
   },

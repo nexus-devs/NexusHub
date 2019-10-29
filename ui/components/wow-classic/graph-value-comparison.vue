@@ -46,6 +46,24 @@ export default {
         }
       }
 
+      /*
+      let v1 = item
+      let v2 = item.EU || item.US
+      if (item.EU && item.US) {
+        v1 = item.EU
+        v2 = item.US
+      }
+
+      let x = 0
+      for (const [i, day] of v1.current.intervals) {
+        for (const [j, hour] of day.intervals) {
+          const value2 = v2.current.intervals[i].intervals[j].marketValue
+          data.push({ x, value1: hour.marketValue, value2 })
+          x++
+        }
+      }
+       */
+
       return data
     }
   },

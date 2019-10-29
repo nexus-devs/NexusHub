@@ -45,7 +45,7 @@ class Items extends Endpoint {
     const timerange = req.query.timerange
 
     let uri = 'http://api.tradeskillmaster.com/v1/item/'
-    if (region) {
+    if (region && server) {
       uri += region + '/'
       uri += (server || 'blackhand') + '/' // add dummy server so we can request TSM API
     }
@@ -68,13 +68,14 @@ class Items extends Endpoint {
 
     // Reformat this jesus
     if (region && server) {
+      response['region'] = region
+      response['server'] = server
       response['minBuyout'] = item['MinBuyout']
       response['marketValue'] = item['MarketValue']
       response['qty'] = item['Quantity']
       response['current'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
       response['previous'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
-    }
-    if (region) {
+
       response[region] = {
         minBuyout: item['RegionMinBuyoutAvg'],
         marketValue: item['RegionMarketAvg'],
@@ -82,8 +83,8 @@ class Items extends Endpoint {
       }
       response[region]['current'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
       response[region]['previous'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
-    }
-    else {
+    } else {
+      if (region) response['region'] = region
       response['EU'] = {
         minBuyout: item['EUMinBuyoutAvg'],
         marketValue: item['EUMarketAvg'],
