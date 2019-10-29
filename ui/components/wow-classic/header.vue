@@ -6,7 +6,7 @@
     <div class="container">
       <div class="item-profile">
         <div class="item-profile-data-info">
-          <h1>{{ item.name }}</h1>
+          <h1>{{ item.name }} {{ regionServerString }}</h1>
         </div>
       </div>
     </div>
@@ -31,6 +31,14 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    regionServerString () {
+      let str = ''
+      if (this.item.region) {
+        const server = this.item.server ? ` - ${this.item.server}` : ''
+        str = `[${this.item.region}${server}]`
+      }
+      return str
     }
   },
 
@@ -49,6 +57,8 @@ export default {
         }
       }
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
+      itemData.region = region ? region.toUpperCase() : undefined
+      itemData.server = server ? server.charAt(0).toUpperCase() + server.slice(1).toLowerCase() : undefined
       store.commit('setItem', itemData)
     }
   },
