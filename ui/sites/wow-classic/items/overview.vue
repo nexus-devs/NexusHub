@@ -34,7 +34,7 @@ import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
 import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
-import navigation from 'src/components/ui/nav/warframe.vue'
+import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
 import storeModule from 'src/store/wow-classic/graphs.js'
 
