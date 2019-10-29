@@ -8,7 +8,7 @@
     <search placeholder="Search items...">
       <span class="shortcut">SHIFT + F</span>
     </search>
-    <select-server/>
+    <select-server :serverlist="serversEU"/>
     <div class="col nav-r">
       <notifications/>
     </div>
@@ -36,12 +36,12 @@ export default {
   },
 
   computed: {
-    game () {
-      return this.$store.state.game.name
+    serversEU () {
+      return this.$store.state.servers.EU
     }
   },
 
-  watch: {
+  /* watch: {
     $route (to, from) {
       this.$store.commit('setActiveGame', to.fullPath.split('/')[1])
     }
@@ -60,16 +60,23 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
+  },*/
+
+  async asyncData ({ store, route }) {
+    const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
+    store.commit('setServerlist', serverlist)
   },
 
   storeModule: {
-    name: 'game',
+    name: 'servers',
     state: {
-      name: ''
+      EU: [],
+      US: []
     },
     mutations: {
-      setActiveGame (state, game) {
-        state.name = game
+      setServerlist (state, list) {
+        state.EU = list.serversEU
+        state.US = list.serversUS
       }
     }
   }

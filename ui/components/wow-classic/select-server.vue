@@ -7,6 +7,7 @@
     <div :class="{ active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === 'All' }" @click="selectServer('All'); toggle()">All</span>
+        <span v-for="s in serverlist" :key="s" :class="{ active: server === s }" @click="selectServer(s); toggle()">{{ s }}</span>
       </div>
     </div>
   </div>
