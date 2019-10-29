@@ -89,14 +89,15 @@ export default {
       if (eu && !us) data = eu.current
       else if (us && !eu) data = us.current
       else if (us && eu) {
+        // Merge US and EU data
         data = eu.current
         for (let i = 0; i < us.current.intervals.length; i++) {
           for (let j = 0; j < us.current.intervals[i].intervals.length; j++) {
-            data.intervals[i].intervals[j].qty += us.current.intervals[i].intervals[j].qty
-            data.intervals[i].intervals[j].minBuyout += us.current.intervals[i].intervals[j].minBuyout
-            data.intervals[i].intervals[j].marketValue += us.current.intervals[i].intervals[j].marketValue
-            data.intervals[i].intervals[j].minBuyout = data.intervals[i].intervals[j].minBuyout / 2
-            data.intervals[i].intervals[j].marketValue = data.intervals[i].intervals[j].marketValue / 2
+            const itEU = data.intervals[i].intervals[j]
+            const itUS = us.current.intervals[i].intervals[j]
+            itEU.qty += itUS.qty
+            itEU.minBuyout = (itEU.minBuyout + itUS.minBuyout) / 2
+            itEU.marketValue = (itEU.marketValue + itUS.marketValue) / 2
           }
         }
       }
