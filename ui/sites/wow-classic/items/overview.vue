@@ -81,35 +81,13 @@ export default {
       itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
     }
 
-    let data = itemData.current
-    if (!data) {
-      const eu = itemData.EU
-      const us = itemData.US
-
-      if (eu && !us) data = eu.current
-      else if (us && !eu) data = us.current
-      else if (us && eu) {
-        // Merge US and EU data
-        data = eu.current
-        for (let i = 0; i < us.current.intervals.length; i++) {
-          for (let j = 0; j < us.current.intervals[i].intervals.length; j++) {
-            const itEU = data.intervals[i].intervals[j]
-            const itUS = us.current.intervals[i].intervals[j]
-            itEU.qty += itUS.qty
-            itEU.minBuyout = (itEU.minBuyout + itUS.minBuyout) / 2
-            itEU.marketValue = (itEU.marketValue + itUS.marketValue) / 2
-          }
-        }
-      }
-    }
-
     store.commit('setGraphItem', itemData.itemId)
 
     // Commit start value for all graphs
-    store.commit('setGraphData', { graph: 'graph-value-quantity', data })
-    store.commit('setGraphData', { graph: 'graph-value-comparison', data })
-    store.commit('setGraphData', { graph: 'heatmap-quantity', data })
-    store.commit('setGraphData', { graph: 'heatmap-value', data })
+    store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })
+    store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
+    store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
+    store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })
   },
 
   storeModule
