@@ -221,7 +221,7 @@ export default {
 
     getCombinedGoldValueMax () {
       const maxGold1 = d3.max(this.data, d => d.value1)
-      const maxGold2 = d3.max(this.data, d => d.value1)
+      const maxGold2 = d3.max(this.data, d => d.value2)
       const maxGold = d3.max([maxGold1, maxGold2])
 
       return (Math.floor(maxGold / 10000) + 1) * 10000

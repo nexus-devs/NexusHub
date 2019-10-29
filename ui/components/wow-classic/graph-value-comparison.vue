@@ -41,28 +41,14 @@ export default {
       let i = 0
       for (const day of item) {
         for (const hour of day) {
-          data.push({ x: i, value1: hour.marketValue, value2: hour.qty })
+          let value1 = hour.marketValue
+          const value2 = hour.EUmarketValue || hour.USmarketValue
+          if (hour.EUmarketValue && hour.USmarketValue) value1 = hour.USmarketValue
+
+          data.push({ x: i, value1, value2 })
           i++
         }
       }
-
-      /*
-      let v1 = item
-      let v2 = item.EU || item.US
-      if (item.EU && item.US) {
-        v1 = item.EU
-        v2 = item.US
-      }
-
-      let x = 0
-      for (const [i, day] of v1.current.intervals) {
-        for (const [j, hour] of day.intervals) {
-          const value2 = v2.current.intervals[i].intervals[j].marketValue
-          data.push({ x, value1: hour.marketValue, value2 })
-          x++
-        }
-      }
-       */
 
       return data
     }
