@@ -1,5 +1,5 @@
 <template>
-  <div class="module-time">
+  <div class="select server">
     <div class="interactive" @click="toggle">
       <span>{{ server }}</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
@@ -85,7 +85,7 @@ export default {
 <style lang="scss" scoped>
   @import '~src/styles/partials/importer';
 
-  .module-time {
+  .select {
     position: relative;
     z-index: 2;
     font-size: 1.1em;

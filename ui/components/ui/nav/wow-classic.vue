@@ -183,12 +183,19 @@ nav {
   max-width: $max-width;
 }
 
+/deep/ .select {
+  font-size: 0.9em;
+  flex-shrink: 0;
+}
+/deep/ .select.region {
+  margin-left: 5px;
+}
+
 /deep/ .search {
   position: relative;
   font-size: 0.9em;
   width: 100%;
   max-width: $max-width;
-  flex-grow: 1;
   background: $color-bg-darker;
 
   @media (max-width: $breakpoint-s) {
