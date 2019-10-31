@@ -6,7 +6,7 @@
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: server === 'All' }" @click="selectServer('All'); toggle()">All</span>
+        <span :class="{ active: server === 'All Servers' }" @click="selectServer('All Servers'); toggle()">All Servers</span>
         <span v-for="s in serverlist" :key="s" :class="{ active: server === s }" @click="selectServer(s); toggle()">{{ s }}</span>
       </div>
     </div>
@@ -20,7 +20,7 @@ export default {
   data () {
     return {
       active: false,
-      server: 'All',
+      server: 'All Servers',
       serverlist: []
     }
   },
@@ -30,7 +30,7 @@ export default {
       const routeArgs = to.fullPath.split('/')
       const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
       if (server.length > 0) this.server = server[0]
-      else this.server = 'All'
+      else this.server = 'All Servers'
 
       const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
       if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
@@ -42,7 +42,7 @@ export default {
     const routeArgs = this.$route.fullPath.split('/')
     const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
     if (server.length > 0) this.server = server[0]
-    else this.server = 'All'
+    else this.server = 'All Servers'
 
     const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
     if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
@@ -67,7 +67,7 @@ export default {
             route = args.join('/')
           } else {
             // TODO: Display error message
-            this.server = 'All'
+            this.server = 'All Servers'
             return
           }
         }

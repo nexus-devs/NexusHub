@@ -6,7 +6,7 @@
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: region === 'All' }" @click="selectRegion('All'); toggle()">All</span>
+        <span :class="{ active: region === 'All Regions' }" @click="selectRegion('All Regions'); toggle()">All Regions</span>
         <span :class="{ active: region === 'EU' }" @click="selectRegion('EU'); toggle()">EU</span>
         <span :class="{ active: region === 'US' }" @click="selectRegion('US'); toggle()">US</span>
       </div>
@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       active: false,
-      region: 'All'
+      region: 'All Regions'
     }
   },
 
@@ -46,7 +46,7 @@ export default {
       let regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
       if (regionIndex >= 0) {
         // Set or remove region
-        if (region === 'All') args.splice(regionIndex, 1)
+        if (region === 'All Regions') args.splice(regionIndex, 1)
         else {
           args[regionIndex] = region.toLowerCase()
           regionIndex++
@@ -57,7 +57,7 @@ export default {
         if (this.$store.state.servers.EU.includes(serverArg) || this.$store.state.servers.US.includes(serverArg)) args.splice(regionIndex, 1)
       } else {
         // This might need adjustment. Right now assume that the last route arg is the param
-        if (region !== 'All') args.splice(-1, 0, region.toLowerCase())
+        if (region !== 'All Regions') args.splice(-1, 0, region.toLowerCase())
       }
 
       this.$router.push(args.join('/'))
