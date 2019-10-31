@@ -43,7 +43,10 @@ export default {
     },
 
     selectServer (server) {
-      const route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
+      let route = ''
+      if (!this.serverlist.includes(server)) route = this.$route.fullPath.replace(this.server.toLowerCase() + '/', '')
+      else route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
+
       this.$router.push(route)
       this.server = server
     }
