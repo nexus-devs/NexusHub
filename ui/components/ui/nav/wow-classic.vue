@@ -8,7 +8,7 @@
     <search placeholder="Search items...">
       <span class="shortcut">SHIFT + F</span>
     </search>
-    <select-region :serverlist="serversEU"/>
+    <select-region/>
     <select-server :serverlist="serversEU"/>
     <div class="col nav-r">
       <notifications/>
@@ -41,6 +41,9 @@ export default {
   computed: {
     serversEU () {
       return this.$store.state.servers.EU
+    },
+    serversUS () {
+      return this.$store.state.servers.US
     }
   },
 

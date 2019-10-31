@@ -17,12 +17,11 @@
 
 <script>
 export default {
-  props: ['serverlist'],
-
   data () {
     return {
       active: false,
-      server: 'All'
+      server: 'All',
+      serverlist: []
     }
   },
 
@@ -32,6 +31,10 @@ export default {
       const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
       if (server.length > 0) this.server = server[0]
       else this.server = 'All'
+
+      const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
+      if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
+      else this.serverlist = []
     }
   },
 
@@ -40,6 +43,10 @@ export default {
     const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
     if (server.length > 0) this.server = server[0]
     else this.server = 'All'
+
+    const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
+    if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
+    else this.serverlist = []
   },
 
   methods: {
