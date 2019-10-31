@@ -29,29 +29,37 @@ export default {
   watch: {
     $route (to, from) {
       const routeArgs = to.fullPath.split('/')
-      const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
-      if (server.length > 0) this.server = server[0]
-      else this.server = 'All Servers'
 
       const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
       if (regionIndex >= 0) {
         this.deactivated = false
         this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-      } else this.deactivated = true
+      } else {
+        this.deactivated = true
+        this.serverlist = []
+      }
+
+      const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
+      if (server.length > 0) this.server = server[0]
+      else this.server = 'All Servers'
     }
   },
 
   created () {
     const routeArgs = this.$route.fullPath.split('/')
-    const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
-    if (server.length > 0) this.server = server[0]
-    else this.server = 'All Servers'
 
     const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
     if (regionIndex >= 0) {
       this.deactivated = false
       this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-    } else this.deactivated = true
+    } else {
+      this.deactivated = true
+      this.serverlist = []
+    }
+
+    const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
+    if (server.length > 0) this.server = server[0]
+    else this.server = 'All Servers'
   },
 
   methods: {
