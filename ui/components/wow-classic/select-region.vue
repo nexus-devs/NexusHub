@@ -18,6 +18,8 @@
 
 <script>
 export default {
+  props: ['serverlist'],
+
   data () {
     return {
       active: false,
@@ -42,6 +44,25 @@ export default {
     },
 
     selectRegion (region) {
+      const args = this.$route.fullPath.split('/')
+      let regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
+      if (regionIndex >= 0) {
+        // Set or remove region
+        if (region === 'All') args.splice(regionIndex, 1)
+        else {
+          args[regionIndex] = region.toLowerCase()
+          regionIndex++
+        }
+
+        // Remove server if there
+        const serverArg = args[regionIndex].charAt(0).toUpperCase() + args[regionIndex].slice(1).toLowerCase()
+        if (this.serverlist.includes(serverArg)) args.splice(regionIndex, 1)
+      } else {
+        // This might need adjustment. Right now assume that the last route arg is the param
+        if (region !== 'All') args.splice(-1, 0, region.toLowerCase())
+      }
+
+      this.$router.push(args.join('/'))
       this.region = region
     }
   }

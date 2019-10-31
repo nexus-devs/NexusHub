@@ -8,7 +8,7 @@
     <search placeholder="Search items...">
       <span class="shortcut">SHIFT + F</span>
     </search>
-    <select-region/>
+    <select-region :serverlist="serversEU"/>
     <select-server :serverlist="serversEU"/>
     <div class="col nav-r">
       <notifications/>

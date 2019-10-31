@@ -54,6 +54,7 @@ export default {
             args.splice(regionIndex + 1, 0, server.toLowerCase())
             route = args.join('/')
           } else {
+            // TODO: Display error message
             this.server = 'All'
             return
           }
