@@ -26,15 +26,20 @@ export default {
     }
   },
 
+  watch: {
+    $route (to, from) {
+      const routeArgs = to.fullPath.split('/')
+      const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
+      if (server.length > 0) this.server = server[0]
+      else this.server = 'All'
+    }
+  },
+
   created () {
     const routeArgs = this.$route.fullPath.split('/')
-    for (const arg of routeArgs) {
-      const server = arg.charAt(0).toUpperCase() + arg.slice(1).toLowerCase()
-      if (this.serverlist.includes(server)) {
-        this.server = server
-        break
-      }
-    }
+    const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
+    if (server.length > 0) this.server = server[0]
+    else this.server = 'All'
   },
 
   methods: {
@@ -62,7 +67,7 @@ export default {
       }
 
       this.$router.push(route)
-      this.server = server
+      this.server = server // So it displays already on select
     }
   }
 }
