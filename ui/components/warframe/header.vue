@@ -12,6 +12,7 @@
     <div class="container">
       <div class="item-profile">
         <div class="item-profile-data-info">
+          <img src="{{ item.icon }}">
           <h1>{{ item.name }}</h1>
           <div v-if="item.vaulted" class="vaulted">
             <img src="/img/warframe/ui/vaulted.svg" class="ico-h-24 interactive" alt="Vaulted">

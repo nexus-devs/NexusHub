@@ -1,5 +1,6 @@
 const Endpoint = require('cubic-api/endpoint')
 const request = require('request-promise')
+const parseXml = require('xml2js').parseStringPromise
 
 /**
  * Provides basic item statistics for a specific item
@@ -61,9 +62,16 @@ class Items extends Endpoint {
       }
     })
 
+    const metaReq = await request({
+      uri: `https://wowhead.com/item=${item['Id'] || item['ItemId']}&xml`, // TODO: Change this to classic subdomain once data is there
+      headers: { 'User-Agent': 'Request-Promise' }
+    })
+    const meta = (await parseXml(metaReq)).wowhead.item
+
     let response = {
       itemId: item['Id'] || item['ItemId'],
-      name: item['Name']
+      name: item['Name'],
+      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`
     }
 
     // Reformat this jesus
