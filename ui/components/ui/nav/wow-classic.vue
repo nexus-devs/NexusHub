@@ -8,6 +8,7 @@
     <search placeholder="Search items...">
       <span class="shortcut">SHIFT + F</span>
     </search>
+    <select-region/>
     <select-server :serverlist="serversEU"/>
     <div class="col nav-r">
       <notifications/>
@@ -20,6 +21,7 @@
 <script>
 import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/input.vue'
+import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 
 // Client-side-only requirements
@@ -32,6 +34,7 @@ export default {
   components: {
     notifications,
     search,
+    selectRegion,
     selectServer
   },
 
