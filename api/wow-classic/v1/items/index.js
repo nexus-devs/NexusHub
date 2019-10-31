@@ -66,12 +66,12 @@ class Items extends Endpoint {
       uri: `https://wowhead.com/item=${item['Id'] || item['ItemId']}&xml`, // TODO: Change this to classic subdomain once data is there
       headers: { 'User-Agent': 'Request-Promise' }
     })
-    const meta = (await parseXml(metaReq)).wowhead.item
+    const meta = (await parseXml(metaReq)).wowhead.item[0]
 
     let response = {
       itemId: item['Id'] || item['ItemId'],
       name: item['Name'],
-      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`
+      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon[0]._}.jpg`
     }
 
     // Reformat this jesus

@@ -6,6 +6,7 @@
     <div class="container">
       <div class="item-profile">
         <div class="item-profile-data-info">
+          <img :src="item.icon" class="icon">
           <h1>{{ item.name }} {{ regionServerString }}</h1>
         </div>
       </div>
@@ -95,6 +96,14 @@ header {
     padding: 100 0 0 0;
     @include shadow-1; // would blend with background due to colored nav
   }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 5px;
+  border: 1px solid $color-bg;
 }
 
 .item-img-shade {
@@ -237,24 +246,6 @@ header {
   .btn-counter {
     padding: 0px 8px;
     border: 1px solid $color-subtle;
-  }
-}
-
-.vaulted {
-  display: inline-block;
-  vertical-align: middle;
-  position: relative;
-  margin-left: 5px;
-
-  &:hover {
-    .tooltip {
-      opacity: 1;
-      transform: translateX(5px);
-    }
-  }
-  .tooltip {
-    top: 5px;
-    left: 35px;
   }
 }
 </style>
