@@ -45,7 +45,20 @@ export default {
     selectServer (server) {
       let route = ''
       if (!this.serverlist.includes(server)) route = this.$route.fullPath.replace(this.server.toLowerCase() + '/', '')
-      else route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
+      else {
+        const args = this.$route.fullPath.split('/')
+        if (args.includes(this.server.toLowerCase())) route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
+        else {
+          const regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
+          if (regionIndex >= 0) {
+            args.splice(regionIndex + 1, 0, server.toLowerCase())
+            route = args.join('/')
+          } else {
+            this.server = 'All'
+            return
+          }
+        }
+      }
 
       this.$router.push(route)
       this.server = server
