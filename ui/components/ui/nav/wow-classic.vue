@@ -5,11 +5,13 @@
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
-    <search placeholder="Search items...">
-      <span class="shortcut">SHIFT + F</span>
-    </search>
-    <select-region/>
-    <select-server/>
+    <div class="middle-content">
+      <search placeholder="Search items...">
+        <span class="shortcut">SHIFT + F</span>
+      </search>
+      <select-region/>
+      <select-server/>
+    </div>
     <div class="col nav-r">
       <notifications/>
     </div>
@@ -169,6 +171,16 @@ nav {
   @media (max-width: $breakpoint-s) {
     display: none;
   }
+}
+
+.middle-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex: initial;
+  width: 100%;
+  max-width: $max-width;
 }
 
 /deep/ .search {
