@@ -9,7 +9,7 @@
       <span class="shortcut">SHIFT + F</span>
     </search>
     <select-region/>
-    <select-server :serverlist="serversEU"/>
+    <select-server/>
     <div class="col nav-r">
       <notifications/>
     </div>
@@ -37,25 +37,6 @@ export default {
     selectRegion,
     selectServer
   },
-
-  computed: {
-    serversEU () {
-      return this.$store.state.servers.EU
-    },
-    serversUS () {
-      return this.$store.state.servers.US
-    }
-  },
-
-  /* watch: {
-    $route (to, from) {
-      this.$store.commit('setActiveGame', to.fullPath.split('/')[1])
-    }
-  },
-
-  beforeCreate () {
-    this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
-  },*/
 
   mounted () {
     listener = shortcut.bind('shift + f', (e) => {
