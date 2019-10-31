@@ -1,5 +1,6 @@
 const Endpoint = require('cubic-api/endpoint')
 const request = require('request-promise')
+const parseXml = require('xml2js').parseStringPromise
 
 /**
  * Provides basic item statistics for a specific item
@@ -63,37 +64,17 @@ class Items extends Endpoint {
     })
 
     // Keep this in case the blizzard api doesn't work
-    /* const metaReq = await request({
+    const metaReq = await request({
       uri: `https://wowhead.com/item=${item['Id'] || item['ItemId']}&xml`, // TODO: Change this to classic subdomain once data is there
       headers: { 'User-Agent': 'Request-Promise' }
     })
-    const meta = (await parseXml(metaReq)).wowhead.item[0] */
-    const meta = await request({
-      uri: `https://us.api.blizzard.com/data/wow/item/${item['Id'] || item['ItemId']}`,
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise' },
-      qs: {
-        namespace: 'static-us',
-        locale: 'en_US',
-        access_token: 'US0IuGsN4iZUz6z11CIpBKy54ouk50MyEl'
-      }
-    })
-    const icon = await request({
-      uri: `https://us.api.blizzard.com/data/wow/media/item/${item['Id'] || item['ItemId']}`,
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise' },
-      qs: {
-        namespace: 'static-us',
-        locale: 'en_US',
-        access_token: 'US0IuGsN4iZUz6z11CIpBKy54ouk50MyEl'
-      }
-    })
+    const meta = (await parseXml(metaReq)).wowhead.item[0]
 
     let response = {
       itemId: item['Id'] || item['ItemId'],
       name: item['Name'],
-      icon: icon.assets[0].value,
-      tags: [meta.item_class.name, meta.item_subclass.name]
+      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon[0]._}.jpg`,
+      tags: [meta.class[0]._]
     }
 
     // Reformat this jesus
