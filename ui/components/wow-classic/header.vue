@@ -5,9 +5,13 @@
     <div class="background"/>
     <div class="container">
       <div class="item-profile">
+        <div class="icon">
+          <img :src="item.icon">
+        </div>
         <div class="item-profile-data-info">
-          <img :src="item.icon" class="icon">
           <h1>{{ item.name }} {{ regionServerString }}</h1>
+          <br>
+          <span>Weapon</span>
         </div>
       </div>
     </div>
@@ -102,8 +106,12 @@ header {
   display: inline-block;
   vertical-align: middle;
   position: relative;
-  margin-right: 5px;
-  border: 1px solid $color-bg;
+  margin-right: 10px;
+  padding-top: 12px;
+
+  img {
+    border: 1px solid $color-bg;
+  }
 }
 
 .item-img-shade {
@@ -147,33 +155,6 @@ header {
   display: flex;
   margin-bottom: 10px;
 }
-.item-profile-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 0;
-  bottom: -75px;
-  height: 350px;
-  margin-right: 25px;
-  border-radius: 2px;
-
-  img {
-    position: relative;
-    z-index: 1;
-    max-height: 70%;
-    border-radius: 999px;
-  }
-  .item-profile-img-blur {
-    position: absolute;
-    z-index: 0;
-    top: 25%;
-    left: -100%;
-    min-height: 200%;
-    opacity: 0.75;
-    filter: blur(150px);
-  }
-}
 
 .item-profile-data-info {
   position: relative;
@@ -188,13 +169,8 @@ header {
   span {
     position: relative;
     top: -5px;
-    margin-left: -20px;
     color: white;
     @include textshadow;
-
-    &:first-of-type {
-      margin-left: -7px; // padding
-    }
   }
   span.selected {
     color: $color-primary-subtle;
