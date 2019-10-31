@@ -1,5 +1,5 @@
 <template>
-  <div class="select server">
+  <div :class="{ deactivated }" class="select server">
     <div class="interactive" @click="toggle">
       <span>{{ server }}</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
@@ -20,6 +20,7 @@ export default {
   data () {
     return {
       active: false,
+      deactivated: false,
       server: 'All Servers',
       serverlist: []
     }
@@ -33,8 +34,10 @@ export default {
       else this.server = 'All Servers'
 
       const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
-      if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-      else this.serverlist = []
+      if (regionIndex >= 0) {
+        this.deactivated = false
+        this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
+      } else this.deactivated = true
     }
   },
 
@@ -45,8 +48,10 @@ export default {
     else this.server = 'All Servers'
 
     const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
-    if (regionIndex >= 0) this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-    else this.serverlist = []
+    if (regionIndex >= 0) {
+      this.deactivated = false
+      this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
+    } else this.deactivated = true
   },
 
   methods: {
@@ -90,6 +95,11 @@ export default {
     z-index: 2;
     font-size: 1.1em;
     color: white;
+
+    &.deactivated {
+      pointer-events: none;
+      opacity: 0.5;
+    }
   }
   .interactive {
     padding: 6px 10px;
