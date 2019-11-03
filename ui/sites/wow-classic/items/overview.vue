@@ -78,7 +78,7 @@ export default {
           query += `&server=${server}`
         }
       }
-      itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
+      itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}/prices${query}`)
     }
 
     store.commit('setGraphItem', itemData)

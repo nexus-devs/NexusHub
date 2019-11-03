@@ -60,7 +60,7 @@ export default {
       const region = state.region
       const server = state.server
 
-      let query = `/wow-classic/v1/items/${itemId}?timerange=${timerange}`
+      let query = `/wow-classic/v1/items/${itemId}/prices?timerange=${timerange}`
       if (region) query += `&region=${region}`
       if (server) query += `&server=${server}`
 
