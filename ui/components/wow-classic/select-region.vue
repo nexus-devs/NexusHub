@@ -42,6 +42,8 @@ export default {
     },
 
     selectRegion (region) {
+      if (this.region === region) return
+
       const args = this.$route.fullPath.split('/')
       let regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
       if (regionIndex >= 0) {

@@ -68,6 +68,8 @@ export default {
     },
 
     selectServer (server) {
+      if (this.server === server)
+
       let route = ''
       if (!this.serverlist.includes(server)) route = this.$route.fullPath.replace(this.server.toLowerCase() + '/', '')
       else {
