@@ -68,7 +68,7 @@ export default {
     },
 
     selectServer (server) {
-      if (this.server === server)
+      if (this.server === server) return
 
       let route = ''
       if (!this.serverlist.includes(server)) route = this.$route.fullPath.replace(this.server.toLowerCase() + '/', '')
@@ -78,7 +78,7 @@ export default {
         else {
           const regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
           if (regionIndex >= 0) {
-            args.splice(regionIndex + 1, 0, server.toLowerCase())
+            args.splice(regionIndex + 1, 0, server.toLowerCase().replace(/\s/g, '-'))
             route = args.join('/')
           } else {
             // TODO: Display error message
