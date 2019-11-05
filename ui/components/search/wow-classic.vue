@@ -123,15 +123,14 @@ export default {
           name: '',
           category: ''
         }
-        this.query(suggestion.webUrl)
-      }
-      if (this.suggestions.length) {
+        this.query(suggestion.itemId)
+      } else if (this.suggestions.length) {
         this.input = ''
         this.autocomplete = {
           name: '',
           category: ''
         }
-        this.query(this.suggestions[0].webUrl)
+        this.query(this.suggestions[0].itemId)
         this.suggestions = []
       } else {
         this.$router.push(`/warframe/search?input=${this.input}`)
@@ -142,16 +141,14 @@ export default {
      * Get to new page. If we're on a item sub-page, we'll stay there when
      * switching as well.
      */
-    query (url) {
+    query (itemId) {
       let path
-      const route = this.$route.path
       const item = this.$route.params.item
 
-      if (this.$route.fullPath.startsWith('/warframe/items/')) {
-        path = `${url}${route.split(item)[1]}`
-        path = path.endsWith('//') ? path.slice(0, -1) : path
+      if (this.$route.fullPath.startsWith('/wow-classic/items/')) {
+        path = this.$route.fullPath.replace(item, itemId)
       } else {
-        path = url
+        path = `/wow-classic/items/${itemId}`
       }
 
       this.$router.push(path)
