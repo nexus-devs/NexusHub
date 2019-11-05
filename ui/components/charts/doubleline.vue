@@ -363,6 +363,11 @@ svg {
   border-right: 1px solid $color-font-body;
   padding-right: 5px;
   text-align: right;
+
+  span {
+    position: relative;
+    top: -4px;
+  }
 }
 .axis.y2 {
   border-left: 1px solid $color-font-body;
