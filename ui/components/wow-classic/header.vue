@@ -11,7 +11,7 @@
         <div class="item-profile-data-info">
           <h1>{{ item.name }} {{ regionServerString }}</h1>
           <br>
-          <span v-for="(tag, i) in tags" :key="tag + i">
+          <span v-for="(tag, i) in item.tags" :key="tag + i">
             {{ tag }}
           </span>
         </div>
@@ -38,10 +38,6 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
-    },
-    tags () {
-      const tags = this.item.tags
-      return tags
     },
     regionServerString () {
       let str = ''
@@ -182,7 +178,7 @@ header {
     color: $color-primary-subtle;
   }
   span:after {
-    content: ' /\00a0';
+    content: ' /';
     color: white;
   }
   span:last-of-type:after {

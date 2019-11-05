@@ -68,8 +68,10 @@ class Items extends Endpoint {
       itemId: item['Id'] || item['ItemId'],
       name: item['Name'],
       icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon[0]._}.jpg`,
-      tags: [meta.class[0]._]
+      tags: [meta.class[0]._],
+      tooltip: meta.htmlTooltip[0]
     }
+    if (meta.inventorySlot[0]._) response.tags.push(meta.inventorySlot[0]._)
 
     if (region && server) {
       response['region'] = region
