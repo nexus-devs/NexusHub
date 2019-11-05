@@ -17,7 +17,7 @@
         </div>
         <div class="suggestion-main">
           <span class="suggestion-name">{{ suggestion.name }}</span>
-          <span class="suggestion-type">{{ 'Test' }}</span>
+          <span class="suggestion-type">{{ suggestion.type }}</span>
         </div>
         <span v-if="suggestion.keyData" class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
@@ -81,7 +81,7 @@ export default {
       if (result.length && result[0].name.replace(regex, this.input).startsWith(this.input)) {
         this.autocomplete = {
           name: result[0].name.replace(regex, this.input),
-          category: 'Any'
+          category: result[0].type
         }
         for (const r of result) r.imgUrl = r.imgUrl.replace('/large/', '/medium/') // 36x36 image instead of large
         this.suggestions = result
@@ -134,7 +134,7 @@ export default {
         this.query(this.suggestions[0].itemId)
         this.suggestions = []
       } else {
-        this.$router.push(`/warframe/search?input=${this.input}`)
+        this.$router.push(`/wow-classic/search?input=${this.input}`)
       }
     },
 
