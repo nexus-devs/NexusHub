@@ -7,6 +7,9 @@
         <div class="container">
           <h2 class="sub">Item Overview</h2>
           <div class="row-margin main">
+            <div class="col-b column">
+              <description/>
+            </div>
             <stats class="col-b"/>
           </div>
         </div>
@@ -33,6 +36,7 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import description from 'src/components/wow-classic/description.vue'
 import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
 import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
@@ -49,6 +53,7 @@ export default {
     appContent,
     navigation,
     itemHeader,
+    description,
     stats,
     graphValueComparison,
     graphValueQuantity,
