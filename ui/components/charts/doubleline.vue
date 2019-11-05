@@ -149,8 +149,8 @@ export default {
     // Set graph scaling
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.v1 = d3.scaleLinear().range([this.height - 40, 40])
-      this.scaled.v2 = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.v1 = d3.scaleLinear().range([this.height, 0])
+      this.scaled.v2 = d3.scaleLinear().range([this.height, 0])
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
@@ -368,6 +368,11 @@ svg {
   border-left: 1px solid $color-font-body;
   padding-left: 5px;
   text-align: left;
+
+  span {
+    position: relative;
+    top: -4px;
+  }
 }
 .axis.x {
   height: 0px;
