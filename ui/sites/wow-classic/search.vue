@@ -257,4 +257,11 @@ export default {
     background: $color-bg-dark;
   }
 }
+
+/deep/ .result-info {
+  text-align: center;
+  span {
+    font-size: 0.9em;
+  }
+}
 </style>
