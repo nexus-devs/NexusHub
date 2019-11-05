@@ -75,7 +75,7 @@ export default {
 
       // No new events in the meantime -> perform query
       const B = input.includes('🅱')
-      const itemData = await this.$cubic.get(`/warframe/v1/search?query=${input.replace(/🅱️/g, 'b')}`)
+      const itemData = await this.$cubic.get(`/wow-classic/v1/search?query=${input.replace(/🅱️/g, 'b')}`)
       const items = await dispatch('sanitizeSerpResults', { itemData, B })
       const players = []
       const results = items.concat(players)
@@ -92,49 +92,22 @@ export default {
 
       // Add each component to results
       for (const item of itemData) {
-        for (const component of item.components) {
-          if (!item.description) continue
-
-          // Transform damage types into icons
-          const description = item.description.split(' ')
-          for (let i = 0; i < description.length; i++) {
-            let word = description[i]
-
-            // Convert damage type indicators to img tags
-            // <DT_FREEZING> <DT_HEAT> etc
-            if (word.includes('<DT_')) {
-              word = word.match(/\_(.*?)\>/)[1].toLowerCase()
-              if (word === 'freeze') word = 'cold'
-              if (word === 'fire') word = 'heat'
-              if (word === 'explosion') word = 'blast'
-              word = `<img src="/img/warframe/ui/${word}.png" class="ico-h-16" style="margin-top: -3px;"/>`
-            }
-            description[i] = word
-          }
-
-          // Prevent duplicates
-          if (items.find(i => i.name === item.name)) {
-            continue
-          }
-
-          // Display set data, but not as component
-          let name = item.name.replace('Set', '')
-
-          // Important stuff. Already way past the deadline, so fuck it,
-          // let's add some shitty memes.
-          name = B ? item.name.toLowerCase().replace(/\b\w/g, l => '🅱') : name
-
-          // Add modified item.
-          items.push(Object.assign(component, {
-            name,
-            webUrl: item.webUrl,
-            category: item.category,
-            rarity: item.rarity,
-            price: component.prices ? Math.round((component.prices.selling.current.median + component.prices.buying.current.median) / 2) : undefined,
-            results: 'items',
-            description: description.join(' ')
-          }))
+        // Prevent duplicates
+        if (items.find(i => i.name === item.name)) {
+          continue
         }
+
+        // Important stuff. Already way past the deadline, so fuck it,
+        // let's add some shitty memes.
+        const name = B ? item.name.toLowerCase().replace(/\b\w/g, l => '🅱') : item.name
+
+        // Add modified item.
+        items.push({
+          name,
+          imgUrl: item.imgUrl,
+          webUrl: `/wow-classic/items/${item.itemId}`,
+          results: 'items'
+        })
       }
       return items
     },

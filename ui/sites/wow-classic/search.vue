@@ -6,7 +6,7 @@
         <div class="container">
           <div class="search">
             <div class="field">
-              <input ref="input" type="text" placeholder="Try: Black Lotus, Devilsaur Leather..." @input="search">
+              <input ref="input" type="text" placeholder="Try: Black Lotus, Devils..." @input="search">
               <img src="/img/ui/search.svg" alt="Search" class="search-ico ico-h-16">
             </div>
           </div>
@@ -45,7 +45,7 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
-import navigation from 'src/components/ui/nav/general.vue'
+import navigation from 'src/components/ui/nav/wow-classic.vue'
 import resultsGroup from 'src/components/search/results/results-group.vue'
 import search from 'src/components/search/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/serp.js'
@@ -120,7 +120,7 @@ export default {
   // TODO: Add meta
   head () {
     return {
-      title: `${this.input} · NexusHub Search`,
+      title: `${this.input} · NexusHub Search`
     }
   }
 }
