@@ -260,6 +260,7 @@ export default {
 
 /deep/ .result-info {
   text-align: center;
+
   span {
     font-size: 0.9em;
   }

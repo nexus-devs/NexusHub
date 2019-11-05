@@ -106,7 +106,8 @@ export default {
           name,
           imgUrl: item.imgUrl,
           webUrl: `/wow-classic/items/${item.itemId}`,
-          results: 'items'
+          results: 'items',
+          description: name,
         })
       }
       return items
