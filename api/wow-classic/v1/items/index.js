@@ -68,10 +68,22 @@ class Items extends Endpoint {
       itemId: item['Id'] || item['ItemId'],
       name: item['Name'],
       icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon[0]._}.jpg`,
-      tags: [meta.class[0]._],
-      tooltip: meta.htmlTooltip[0]
+      tags: [meta.class[0]._]
     }
     if (meta.inventorySlot[0]._) response.tags.push(meta.inventorySlot[0]._)
+
+    // TODO: Redo this once api is there
+    // Parse tooltip
+    let tooltip = meta.htmlTooltip[0]
+    tooltip = tooltip.substring(tooltip.indexOf('<!--ndend-->') + 12, tooltip.length - 18) // Cuts of start and end
+    response.tooltip = tooltip
+
+    let description = {
+      ilvl: this.getTooltipAttribute(tooltip, 'ilvl'),
+      bind: this.getTooltipAttribute(tooltip, 'bo'),
+      requiredLvl: this.getTooltipAttribute(tooltip, 'rlvl')
+    }
+    response.description = description
 
     if (region && server) {
       response['region'] = region
@@ -100,6 +112,11 @@ class Items extends Endpoint {
     }
 
     res.send(response)
+  }
+
+  getTooltipAttribute (tooltip, attribute) {
+    attribute = `<!--${attribute}-->`
+    return tooltip.split(attribute)[0].split('<')[0]
   }
 }
 
