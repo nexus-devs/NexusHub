@@ -22,7 +22,7 @@
 
 <script>
 import notifications from 'src/components/ui/notifications.vue'
-import search from 'src/components/search/input.vue'
+import search from 'src/components/search/wow-classic.vue'
 import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 
