@@ -124,7 +124,9 @@ export default {
           category: ''
         }
         this.query(suggestion.itemId)
-      } else if (this.suggestions.length) {
+        this.suggestions = []
+      }
+      if (this.suggestions.length) {
         this.input = ''
         this.autocomplete = {
           name: '',

@@ -123,6 +123,7 @@ export default {
           category: ''
         }
         this.query(suggestion.webUrl)
+        this.suggestions = []
       }
       if (this.suggestions.length) {
         this.input = ''
