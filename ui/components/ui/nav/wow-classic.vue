@@ -263,9 +263,12 @@ nav {
 
         img {
           position: relative;
-          left: -50%;
           max-width: 200%;
           z-index: 1;
+          border: 1px solid $color-bg-darker;
+          // Accomodate for border
+          left: -1px;
+          top: -1px;
         }
       }
       .suggestion-main {

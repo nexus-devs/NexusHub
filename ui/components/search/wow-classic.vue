@@ -17,7 +17,7 @@
         </div>
         <div class="suggestion-main">
           <span class="suggestion-name">{{ suggestion.name }}</span>
-          <span class="suggestion-type">{{ suggestion.type }}</span>
+          <span class="suggestion-type">{{ 'Test' }}</span>
         </div>
         <span v-if="suggestion.keyData" class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
@@ -73,7 +73,7 @@ export default {
       // Only run if timeout isn't after search is done
       if (this.input.length > 1) {
         const query = encodeURIComponent(this.input)
-        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${query}&limit=4`)
+        result = await this.$cubic.get(`/wow-classic/v1/suggestions?query=${query}&limit=4`)
       }
 
       // Found suggestions and input still matches result (may not if user types too fast)
@@ -81,8 +81,9 @@ export default {
       if (result.length && result[0].name.replace(regex, this.input).startsWith(this.input)) {
         this.autocomplete = {
           name: result[0].name.replace(regex, this.input),
-          category: result[0].category
+          category: 'Any'
         }
+        for (const r of result) r.imgUrl = r.imgUrl.replace('/large/', '/medium/') // 36x36 image instead of large
         this.suggestions = result
       }
 
