@@ -124,8 +124,7 @@ export default {
         }
         this.query(suggestion.webUrl)
         this.suggestions = []
-      }
-      if (this.suggestions.length) {
+      } else if (this.suggestions.length) {
         this.input = ''
         this.autocomplete = {
           name: '',
