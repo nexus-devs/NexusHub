@@ -9,6 +9,11 @@
           <div class="row-margin main">
             <stats class="col-b"/>
           </div>
+        </div>
+      </section>
+      <section>
+        <div class="container">
+          <h2 class="sub">Statistics</h2>
           <div class="row-margin main">
             <graphValueQuantity class="col-b graph"/>
             <graphValueComparison class="col-b graph"/>
