@@ -81,10 +81,10 @@ import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/warframe.vue'
+import navigation from 'src/components/ui/nav/wow-classic.vue'
 import opm from 'src/components/warframe/opm-global.vue'
 import patchlog from 'src/components/warframe/patchlog.vue'
-import search from 'src/components/search/input.vue'
+import search from 'src/components/search/wow-classic.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import storeModule from 'src/store/warframe/warframe.js'
 
@@ -345,9 +345,12 @@ header {
 
         img {
           position: relative;
-          left: -50%;
           max-width: 200%;
           z-index: 1;
+          border: 1px solid $color-bg-darker;
+          // Accomodate for border
+          left: -1px;
+          top: -1px;
         }
       }
       .suggestion-main {
