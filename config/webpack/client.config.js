@@ -16,7 +16,7 @@ module.exports = merge(baseConfig, {
   // Entry point which guides to everything webpack is supposed to bundle
   // Use app so hot-module-reload can overwrite entry for that specific part
   entry: {
-    client: path.resolve(`${process.cwd()}/node_modules/cubic-ui/vue/app-client.js`)
+    client: path.resolve(`${process.cwd()}/../cubic/packages/ui/vue/app-client.js`)
   },
 
   module: {
@@ -36,7 +36,7 @@ module.exports = merge(baseConfig, {
         loader: 'babel-loader',
         include: [
           path.resolve(cubic.config.ui.sourcePath),
-          path.resolve(`${process.cwd()}/node_modules/cubic-ui/vue`)
+          path.resolve(`${process.cwd()}/../cubic/packages/ui/vue`)
         ]
       }
     ]

@@ -12,7 +12,7 @@ module.exports = merge(baseConfig, {
   name: 'server',
 
   // Entry point which guides to everything webpack is supposed to bundle
-  entry: `${process.cwd()}/node_modules/cubic-ui/vue/app-server.js`,
+  entry: `${process.cwd()}/../cubic/packages/ui/vue/app-server.js`,
 
   // Let webpack and vue-loader know we're rendering server-sided
   target: 'node',

@@ -1,6 +1,6 @@
 const Endpoint = require('cubic-ui/endpoint')
 
-class Search extends Endpoint {
+class Index extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.url = '/wow-classic/:region'
@@ -8,4 +8,4 @@ class Search extends Endpoint {
   }
 }
 
-module.exports = Search
+module.exports = Index
