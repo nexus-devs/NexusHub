@@ -13,6 +13,11 @@ export default {
 
   // Pushes url with correct region + server
   pushUrl (self, url) {
+    self.$router.push(this.formatUrl(self, url))
+  },
+
+  // Formats url with correct region + server
+  formatUrl (self, url) {
     const params = url.split('?')
     const routeArgs = params[0].split('/')
 
@@ -25,7 +30,7 @@ export default {
     }
 
     params[0] = routeArgs.join('/')
-    self.$router.push(params.join('?'))
+    return params.join('?')
   },
 
   // Changes server name to server slug

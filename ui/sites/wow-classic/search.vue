@@ -46,7 +46,7 @@ import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
-import resultsGroup from 'src/components/search/results/results-group.vue'
+import resultsGroup from 'src/components/search/results-wow-classic/results-group.vue'
 import search from 'src/components/search/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/serp.js'
 let ongoing = setTimeout(() => {})
