@@ -22,6 +22,7 @@
       </header>
 
       <!-- Realtime Orders -->
+      <!--
       <section>
         <div class="container">
           <div class="row-margin overview">
@@ -57,7 +58,7 @@
           </div>
           <ad name="warframe-index-market-overview"/>
         </div>
-      </section>
+      </section>-->
 
       <!-- News -->
       <section>
