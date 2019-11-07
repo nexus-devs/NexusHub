@@ -59,12 +59,12 @@
         </div>
       </section>
 
-      <!-- Patch logs -->
+      <!-- News -->
       <section>
         <div class="container">
-          <h2 class="sub">Latest Patchlogs</h2>
+          <h2 class="sub">Latest News</h2>
           <div class="row-margin patchlogs">
-            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+            <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b"/>
           </div>
           <ad name="warframe-index-patchlogs"/>
         </div>
@@ -82,11 +82,11 @@ import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
+import newsArticle from 'src/components/wow-classic/news-article.vue'
 import opm from 'src/components/warframe/opm-global.vue'
-import patchlog from 'src/components/warframe/patchlog.vue'
 import search from 'src/components/search/wow-classic.vue'
 import searchButton from 'src/components/search/modules/button.vue'
-import storeModule from 'src/store/warframe/warframe.js'
+import storeModule from 'src/store/wow-classic/wowclassic.js'
 
 export default {
   components: {
@@ -96,7 +96,7 @@ export default {
     opm,
     activity,
     module,
-    patchlog,
+    newsArticle,
     search,
     searchButton
   },
@@ -108,13 +108,13 @@ export default {
     activity () {
       return this.$store.state.busyhours.data
     },
-    patchlogs () {
-      return this.$store.state.warframe.patchlogs
+    news () {
+      return this.$store.state.wowclassic.news
     }
   },
 
   async asyncData () {
-    this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
+    this.$store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
   },
 
   storeModule,
