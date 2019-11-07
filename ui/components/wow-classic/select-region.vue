@@ -17,22 +17,18 @@
 
 
 <script>
+import utility from './utility'
+
 export default {
   data () {
     return {
-      active: false,
-      region: 'All Regions'
+      active: false
     }
   },
 
-  created () {
-    const routeArgs = this.$route.fullPath.split('/')
-    for (const arg of routeArgs) {
-      const argRegion = arg.toUpperCase()
-      if (argRegion === 'EU' || argRegion === 'US') {
-        this.region = argRegion
-        break
-      }
+  computed: {
+    region () {
+      return this.$store.state.servers.selectedRegion
     }
   },
 
@@ -44,26 +40,12 @@ export default {
     selectRegion (region) {
       if (this.region === region) return
 
-      const args = this.$route.fullPath.split('/')
-      let regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
-      if (regionIndex >= 0) {
-        // Set or remove region
-        if (region === 'All Regions') args.splice(regionIndex, 1)
-        else {
-          args[regionIndex] = region.toLowerCase()
-          regionIndex++
-        }
+      let route = this.$route.fullPath.replace(`${this.region.toLowerCase()}/`, '')
+      route = route.replace(`${utility.serverSlug(this.$store.state.servers.selectedServer)}/`, '')
 
-        // Remove server if there
-        const serverArg = args[regionIndex].charAt(0).toUpperCase() + args[regionIndex].slice(1).toLowerCase()
-        if (this.$store.state.servers.EU.includes(serverArg) || this.$store.state.servers.US.includes(serverArg)) args.splice(regionIndex, 1)
-      } else {
-        // This might need adjustment. Right now assume that the last route arg is the param
-        if (region !== 'All Regions') args.splice(-1, 0, region.toLowerCase())
-      }
-
-      this.$router.push(args.join('/'))
-      this.region = region
+      this.$store.commit('setRegion', region)
+      this.$store.commit('setServer', 'All Servers')
+      utility.pushUrl(this, route)
     }
   }
 }

@@ -25,6 +25,8 @@ import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/wow-classic.vue'
 import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
+import storeModule from 'src/store/wow-classic/servers.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 // Client-side-only requirements
 let shortcut, listener
@@ -38,6 +40,28 @@ export default {
     search,
     selectRegion,
     selectServer
+  },
+
+  created () {
+    const routeArgs = this.$route.fullPath.split('/')
+    for (const arg of routeArgs) {
+      const argRegion = arg.toUpperCase()
+      if (argRegion === 'EU' || argRegion === 'US') {
+        this.$store.commit('setRegion', argRegion)
+        break
+      }
+    }
+    for (let i = 0; i < routeArgs.length; i++) {
+      const arg = routeArgs[i].toUpperCase()
+      if (arg === 'EU' || arg === 'US') {
+        this.$store.commit('setRegion', arg)
+        if (i < routeArgs.length - 1) {
+          const server = this.$store.state.servers[arg].map(x => utility.serverSlug(x)).indexOf(routeArgs[i + 1])
+          if (server >= 0) this.$store.commit('setServer', this.$store.state.servers[arg][server])
+        }
+        break
+      }
+    }
   },
 
   mounted () {
@@ -56,19 +80,7 @@ export default {
     store.commit('setServerlist', serverlist)
   },
 
-  storeModule: {
-    name: 'servers',
-    state: {
-      EU: [],
-      US: []
-    },
-    mutations: {
-      setServerlist (state, list) {
-        state.EU = list.serversEU
-        state.US = list.serversUS
-      }
-    }
-  }
+  storeModule
 }
 </script>
 

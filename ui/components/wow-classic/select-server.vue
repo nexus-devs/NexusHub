@@ -16,50 +16,26 @@
 
 
 <script>
+import utility from './utility'
+
 export default {
   data () {
     return {
-      active: false,
-      deactivated: false,
-      server: 'All Servers',
-      serverlist: []
+      active: false
     }
   },
 
-  watch: {
-    $route (to, from) {
-      const routeArgs = to.fullPath.split('/')
-
-      const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
-      if (regionIndex >= 0) {
-        this.deactivated = false
-        this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-      } else {
-        this.deactivated = true
-        this.serverlist = []
-      }
-
-      const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
-      if (server.length > 0) this.server = server[0]
-      else this.server = 'All Servers'
+  computed: {
+    server () {
+      return this.$store.state.servers.selectedServer
+    },
+    deactivated () {
+      return this.$store.state.servers.selectedRegion === 'All Regions'
+    },
+    serverlist () {
+      if (this.deactivated) return []
+      else return this.$store.state.servers[this.$store.state.servers.selectedRegion]
     }
-  },
-
-  created () {
-    const routeArgs = this.$route.fullPath.split('/')
-
-    const regionIndex = routeArgs.findIndex(x => x === 'eu' || x === 'us')
-    if (regionIndex >= 0) {
-      this.deactivated = false
-      this.serverlist = this.$store.state.servers[routeArgs[regionIndex].toUpperCase()]
-    } else {
-      this.deactivated = true
-      this.serverlist = []
-    }
-
-    const server = this.serverlist.filter(v => routeArgs.includes(v.toLowerCase()))
-    if (server.length > 0) this.server = server[0]
-    else this.server = 'All Servers'
   },
 
   methods: {
@@ -70,26 +46,11 @@ export default {
     selectServer (server) {
       if (this.server === server) return
 
-      let route = ''
-      if (!this.serverlist.includes(server)) route = this.$route.fullPath.replace(this.server.toLowerCase() + '/', '')
-      else {
-        const args = this.$route.fullPath.split('/')
-        if (args.includes(this.server.toLowerCase())) route = this.$route.fullPath.replace(this.server.toLowerCase(), server.toLowerCase())
-        else {
-          const regionIndex = args.findIndex(x => x === 'eu' || x === 'us')
-          if (regionIndex >= 0) {
-            args.splice(regionIndex + 1, 0, server.toLowerCase().replace(/\s/g, '-'))
-            route = args.join('/')
-          } else {
-            // TODO: Display error message
-            this.server = 'All Servers'
-            return
-          }
-        }
-      }
+      let route = this.$route.fullPath.replace(`${this.$store.state.servers.selectedRegion.toLowerCase()}/`, '')
+      route = route.replace(`${utility.serverSlug(this.server)}/`, '')
 
-      this.$router.push(route)
-      this.server = server // So it displays already on select
+      this.$store.commit('setServer', server)
+      utility.pushUrl(this, route)
     }
   }
 }

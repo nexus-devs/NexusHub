@@ -5,7 +5,7 @@
       <h3>Description</h3>
     </template>
     <template slot="body">
-      <p v-html="item.tooltip"/>
+      <!--<p v-html="item.tooltip"/>-->
     </template>
     <template slot="footer">
       <a v-if="wowheadUrl" :href="wowheadUrl" target="_blank">
