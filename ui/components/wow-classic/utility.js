@@ -13,22 +13,19 @@ export default {
 
   // Pushes url with correct region + server
   pushUrl (self, url) {
-    const routeArgs = url.split('/')
-
-    // TODO: Find a way to automate this
-    const endpoints = ['items']
+    const params = url.split('?')
+    const routeArgs = params[0].split('/')
 
     // Insert region and server into route
-    if (routeArgs[1] === 'wow-classic' && endpoints.includes(routeArgs[2])) {
-      const region = self.$store.state.servers.selectedRegion
-      const server = self.$store.state.servers.selectedServer
-      if (region !== 'All Regions') {
-        routeArgs.splice(3, 0, region.toLowerCase())
-        if (server !== 'All Servers') routeArgs.splice(4, 0, this.serverSlug(server))
-      }
+    const region = self.$store.state.servers.selectedRegion
+    const server = self.$store.state.servers.selectedServer
+    if (region !== 'All Regions') {
+      routeArgs.splice(3, 0, region.toLowerCase())
+      if (server !== 'All Servers') routeArgs.splice(4, 0, this.serverSlug(server))
     }
 
-    self.$router.push(routeArgs.join('/'))
+    params[0] = routeArgs.join('/')
+    self.$router.push(params.join('?'))
   },
 
   // Changes server name to server slug

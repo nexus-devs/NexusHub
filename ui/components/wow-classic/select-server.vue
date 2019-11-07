@@ -46,8 +46,8 @@ export default {
     selectServer (server) {
       if (this.server === server) return
 
-      let route = this.$route.fullPath.replace(`${this.$store.state.servers.selectedRegion.toLowerCase()}/`, '')
-      route = route.replace(`${utility.serverSlug(this.server)}/`, '')
+      let route = this.$route.fullPath.replace(`/${this.$store.state.servers.selectedRegion.toLowerCase()}`, '')
+      route = route.replace(`/${utility.serverSlug(this.server)}`, '')
 
       this.$store.commit('setServer', server)
       utility.pushUrl(this, route)

@@ -30,6 +30,7 @@
 
 <script>
 import storeModule from 'src/store/search.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   props: ['placeholder', 'focus'],
@@ -134,7 +135,7 @@ export default {
         this.query(this.suggestions[0].itemId)
         this.suggestions = []
       } else {
-        this.$router.push(`/wow-classic/search?input=${this.input}`)
+        utility.pushUrl(this, `/wow-classic/search?input=${this.input}`)
       }
     },
 
@@ -143,16 +144,7 @@ export default {
      * switching as well.
      */
     query (itemId) {
-      let path
-      const item = this.$route.params.item
-
-      if (this.$route.fullPath.startsWith('/wow-classic/items/')) {
-        path = this.$route.fullPath.replace(item, itemId)
-      } else {
-        path = `/wow-classic/items/${itemId}`
-      }
-
-      this.$router.push(path)
+      utility.pushUrl(this, `/wow-classic/items/${itemId}`)
     }
   },
 

@@ -43,7 +43,9 @@ export default {
   },
 
   created () {
-    const routeArgs = this.$route.fullPath.split('/')
+    const params = this.$route.fullPath.split('?')
+    const routeArgs = params[0].split('/')
+
     for (const arg of routeArgs) {
       const argRegion = arg.toUpperCase()
       if (argRegion === 'EU' || argRegion === 'US') {

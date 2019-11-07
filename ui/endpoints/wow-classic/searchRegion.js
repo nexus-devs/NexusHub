@@ -1,0 +1,11 @@
+const Endpoint = require('cubic-ui/endpoint')
+
+class Search extends Endpoint {
+  constructor (options) {
+    super(options)
+    this.schema.url = '/wow-classic/search/:region'
+    this.schema.view = '/sites/wow-classic/search.vue'
+  }
+}
+
+module.exports = Search

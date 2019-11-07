@@ -40,8 +40,8 @@ export default {
     selectRegion (region) {
       if (this.region === region) return
 
-      let route = this.$route.fullPath.replace(`${this.region.toLowerCase()}/`, '')
-      route = route.replace(`${utility.serverSlug(this.$store.state.servers.selectedServer)}/`, '')
+      let route = this.$route.fullPath.replace(`/${this.region.toLowerCase()}`, '')
+      route = route.replace(`/${utility.serverSlug(this.$store.state.servers.selectedServer)}`, '')
 
       this.$store.commit('setRegion', region)
       this.$store.commit('setServer', 'All Servers')
