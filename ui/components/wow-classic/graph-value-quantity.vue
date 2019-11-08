@@ -4,7 +4,7 @@
       <h3>Market Value / Quantity</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data"/>
+      <doubleline :data="data" :timerange="timerange"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -38,11 +38,23 @@ export default {
       const item = this.$store.state.graphs.storage['graph-value-quantity'].data
       const data = []
 
+      const weeks = Math.floor(item.length / 7)
+      let skipCounter = 0
+      let v1Aggregate = 0
+      let v2Aggregate = 0
       let i = 0
       for (const day of item) {
         for (const hour of day) {
-          data.push({ x: i, value1: hour.marketValue, value2: hour.qty })
-          i++
+          skipCounter++
+          v1Aggregate += Math.round(hour.marketValue * (1 / weeks))
+          v2Aggregate += Math.round(hour.qty * (1 / weeks))
+          if (skipCounter >= weeks) {
+            data.push({ x: i, value1: v1Aggregate, value2: v2Aggregate })
+            i++
+            skipCounter = 0
+            v1Aggregate = 0
+            v2Aggregate = 0
+          }
         }
       }
 

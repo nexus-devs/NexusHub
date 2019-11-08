@@ -66,7 +66,7 @@ export default {
     indicator
   },
 
-  props: ['data', 'sameScale'],
+  props: ['data', 'sameScale', 'timerange'],
 
   data () {
     return {
@@ -108,7 +108,7 @@ export default {
       const now = moment()
       const dayAgo = (d) => now.clone().subtract(d, 'days').format('DD. MMM')
       const x = []
-      const days = this.data.length / 24
+      const days = (this.data.length * Math.floor(this.timerange / 7)) / 24
       let stepSize = 1
       if (days === 30) stepSize = 5
       else if (days === 90) stepSize = 15
@@ -178,7 +178,8 @@ export default {
 
     // parses hours into days + hours ago
     parseHoursAgo (h, length) {
-      h = length - h - 1
+      const weeks = Math.floor(this.timerange / 7)
+      h = (length * weeks) - ((h + 1) * weeks)
       const days = Math.floor(h / 24)
       const hours = h % 24
 
