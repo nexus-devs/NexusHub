@@ -1,6 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
 const request = require('request-promise')
-const parseXml = require('xml2js').parseStringPromise
 
 /**
  * Provides basic item statistics for a specific item
@@ -28,7 +27,12 @@ class Items extends Endpoint {
       name: String,
       qty: Number,
       minBuyout: Number,
-      marketValue: Number
+      marketValue: Number,
+      previous: {
+        qty: Number,
+        minBuyout: Number,
+        marketValue: Number
+      }
     }
   }
 
@@ -74,12 +78,14 @@ class Items extends Endpoint {
       response['minBuyout'] = item['MinBuyout']
       response['marketValue'] = item['MarketValue']
       response['qty'] = item['Quantity']
+      response['previous'] = this.generatePreviousSampleData(response)
 
       response[region] = {
         minBuyout: item['RegionMinBuyoutAvg'],
         marketValue: item['RegionMarketAvg'],
         qty: item['RegionQuantity']
       }
+      response[region]['previous'] = this.generatePreviousSampleData(response[region])
     } else {
       if (region) response['region'] = region
       response['EU'] = {
@@ -87,19 +93,25 @@ class Items extends Endpoint {
         marketValue: item['EUMarketAvg'],
         qty: item['EUQuantity']
       }
+      response['EU']['previous'] = this.generatePreviousSampleData(response['EU'])
       response['US'] = {
         minBuyout: item['USMinBuyoutAvg'],
         marketValue: item['USMarketAvg'],
         qty: item['USQuantity']
       }
+      response['US']['previous'] = this.generatePreviousSampleData(response['US'])
     }
 
     res.send(response)
   }
 
-  getTooltipAttribute (tooltip, attribute) {
-    attribute = `<!--${attribute}-->`
-    return tooltip.split(attribute)[0].split('<')[0]
+  generatePreviousSampleData (item) {
+    const rand = () => Math.random() * (1.5 - 0.5) + 0.5
+    return {
+      minBuyout: item.minBuyout * rand(),
+      marketValue: item.marketValue * rand(),
+      qty: item.qty * rand()
+    }
   }
 }
 
