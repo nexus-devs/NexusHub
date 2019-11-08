@@ -1,6 +1,7 @@
 <template>
   <module ref="heatmapQuantity">
     <template slot="header">
+      <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3>Heatmap Market Quantity</h3>
     </template>
     <template slot="body">
