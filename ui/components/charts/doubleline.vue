@@ -24,14 +24,14 @@
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                   {{ parseHoursAgo(i, data.length) }}
                 </text>
-                <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                  {{ parsePrice(data[i].value1) }}
+                <text :class="primaryClass" :x="scaled.x(d.x) + 20" y="50px">
+                  {{ primaryLabel }}{{ parsePrice(data[i].value1) }}
                 </text>
                 <text v-if="!sameScale" :x="scaled.x(d.x) + 20" y="75px" class="sub">
                   Quantity: {{ data[i] ? `${data[i].value2}` : 0 }}
                 </text>
                 <text v-else :x="scaled.x(d.x) + 20" y="75px" class="sub">
-                  Regional: {{ parsePrice(data[i].value2) }}
+                  {{ secondaryLabel }}{{ parsePrice(data[i].value2) }}
                 </text>
               </g>
             </g>
@@ -66,7 +66,7 @@ export default {
     indicator
   },
 
-  props: ['data', 'sameScale', 'timerange'],
+  props: ['data', 'sameScale', 'timerange', 'regional'],
 
   data () {
     return {
@@ -118,6 +118,15 @@ export default {
       x.push('Today')
 
       return { x, y, y2 }
+    },
+    primaryLabel () {
+      return this.regional ? 'EU: ' : ''
+    },
+    secondaryLabel () {
+      return this.regional ? 'US: ' : 'Regional: '
+    },
+    primaryClass () {
+      return this.regional ? 'sub' : 'num'
     }
   },
 

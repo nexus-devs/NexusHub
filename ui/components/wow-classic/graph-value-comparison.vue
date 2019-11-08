@@ -4,7 +4,7 @@
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data" :same-scale="true" :timerange="timerange"/>
+      <doubleline :data="data" :same-scale="true" :regional="regional" :timerange="timerange"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -32,6 +32,11 @@ export default {
   computed: {
     timerange () {
       return this.$store.state.graphs.storage['graph-value-comparison'].timerange
+    },
+
+    regional () {
+      const item = this.$store.state.graphs.storage['graph-value-comparison'].data[0][0]
+      return (item.EUmarketValue && item.USmarketValue)
     },
 
     data () {
