@@ -11,7 +11,10 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.marketValue)" />
+            {{ parsePrice(item.marketValue) }}
+          </span>
+          <span :class="{ negative: diff(item.marketValue, item.previous.marketValue).percentage < 0 }" class="data-price-diff">
+            <indicator :diff="diff(item.marketValue, item.previous.marketValue).percentage"/> {{ Math.abs(diff(item.marketValue, item.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>
@@ -21,7 +24,7 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.minBuyout)" />
+            {{ parsePrice(item.minBuyout) }}
           </span>
         </div>
       </div>
@@ -41,7 +44,10 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.EU.marketValue)" />
+            {{ parsePrice(item.EU.marketValue) }}
+          </span>
+          <span :class="{ negative: diff(item.EU.marketValue, item.EU.previous.marketValue).percentage < 0 }" class="data-price-diff">
+            <indicator :diff="diff(item.EU.marketValue, item.EU.previous.marketValue).percentage"/> {{ Math.abs(diff(item.EU.marketValue, item.EU.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>
@@ -51,7 +57,7 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.EU.minBuyout)" />
+            {{ parsePrice(item.EU.minBuyout) }}
           </span>
         </div>
       </div>
@@ -71,7 +77,10 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.US.marketValue)" />
+            {{ parsePrice(item.US.marketValue) }}
+          </span>
+          <span :class="{ negative: diff(item.US.marketValue, item.US.previous.marketValue).percentage < 0 }" class="data-price-diff">
+            <indicator :diff="diff(item.US.marketValue, item.US.previous.marketValue).percentage"/> {{ Math.abs(diff(item.US.marketValue, item.US.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>
@@ -81,7 +90,7 @@
         </div>
         <div class="col-2">
           <span class="data-price">
-            <parsedPrice :price="parsePrice(item.US.minBuyout)" />
+            {{ parsePrice(item.US.minBuyout) }}
           </span>
         </div>
       </div>
@@ -128,6 +137,16 @@ export default {
 
   created () {
     this.parsePrice = utility.parsePrice
+  },
+
+  methods: {
+    diff (current, prev) {
+      const value = current - prev
+      return {
+        value,
+        percentage: (value / prev * 100).toFixed(2)
+      }
+    }
   }
 }
 </script>

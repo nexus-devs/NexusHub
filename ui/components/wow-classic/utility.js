@@ -8,7 +8,12 @@ export default {
     const gold = Math.floor(price / 10000)
     const silver = Math.floor(price / 100 - gold * 100)
     const copper = price - gold * 10000 - silver * 100
-    return { gold, silver, copper }
+    // return { gold, silver, copper }
+    let string = ''
+    if (gold) string += `${gold}g `
+    if (silver) string += `${silver}s `
+    string += `${copper}c`
+    return string
   },
 
   // Pushes url with correct region + server
