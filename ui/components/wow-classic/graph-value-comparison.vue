@@ -4,7 +4,7 @@
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data" :same-scale="true"/>
+      <doubleline :data="data" :same-scale="true" :timerange="timerange"/>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange"/>
@@ -38,15 +38,26 @@ export default {
       const item = this.$store.state.graphs.storage['graph-value-comparison'].data
       const data = []
 
+      const weeks = Math.floor(item.length / 7)
+      let skipCounter = 0
+      let v1Aggregate = 0
+      let v2Aggregate = 0
       let i = 0
       for (const day of item) {
         for (const hour of day) {
-          let value1 = hour.marketValue
+          skipCounter++
+          const value1 = (hour.EUmarketValue && hour.USmarketValue) ? hour.USmarketValue : hour.marketValue
           const value2 = hour.EUmarketValue || hour.USmarketValue
-          if (hour.EUmarketValue && hour.USmarketValue) value1 = hour.USmarketValue
+          v1Aggregate += Math.round(value1 * (1 / weeks))
+          v2Aggregate += Math.round(value2 * (1 / weeks))
 
-          data.push({ x: i, value1, value2 })
-          i++
+          if (skipCounter >= weeks) {
+            data.push({ x: i, value1: v1Aggregate, value2: v2Aggregate })
+            i++
+            skipCounter = 0
+            v1Aggregate = 0
+            v2Aggregate = 0
+          }
         }
       }
 
