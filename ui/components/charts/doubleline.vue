@@ -25,13 +25,13 @@
                   {{ parseHoursAgo(i, data.length) }}
                 </text>
                 <text :x="scaled.x(d.x) + 20" y="50px" class="num">
-                  {{ parsePriceSVG(data[i].value1) }}
+                  {{ parsePrice(data[i].value1) }}
                 </text>
                 <text v-if="!sameScale" :x="scaled.x(d.x) + 20" y="75px" class="sub">
                   Quantity: {{ data[i] ? `${data[i].value2}` : 0 }}
                 </text>
                 <text v-else :x="scaled.x(d.x) + 20" y="75px" class="sub">
-                  Regional: {{ parsePriceSVG(data[i].value2) }}
+                  Regional: {{ parsePrice(data[i].value2) }}
                 </text>
               </g>
             </g>
@@ -59,13 +59,11 @@ import * as d3 from 'd3'
 import Tween from './_tween.js'
 import indicator from './indicator.vue'
 import moment from 'moment'
-import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
-    indicator,
-    parsedPrice
+    indicator
   },
 
   props: ['data', 'sameScale'],
@@ -194,16 +192,6 @@ export default {
       if (days > 0 || hours > 0) str += ' ago'
       else str = 'Today'
 
-      return str
-    },
-
-    // Parses price for shitty svg tags
-    parsePriceSVG (price) {
-      const p = this.parsePrice(price)
-      let str = ''
-      if (p.gold) str += p.gold + 'g '
-      if (p.gold || p.silver) str += p.silver + 's '
-      str += p.copper + 'c'
       return str
     },
 

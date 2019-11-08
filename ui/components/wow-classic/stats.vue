@@ -113,14 +113,12 @@
 <script>
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
-import parsedPrice from 'src/components/wow-classic/parsed-price.vue'
 import utility from './utility'
 
 export default {
   components: {
     module,
     indicator,
-    parsedPrice
   },
 
   computed: {
