@@ -9,7 +9,7 @@
             {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
           </time>
           <br>
-          <span class="num">{{ parseNum ? parsePriceSVG(hour) : hour }}</span>
+          <span class="num">{{ parseNum ? parsePrice(hour) : hour }}</span>
           <br>
           <span>{{ tooltipLabel ? tooltipLabel : '' }}</span>
         </div>
@@ -56,17 +56,6 @@ export default {
     scale (num) {
       const scale = num / this.max
       return scale < 0.3 ? 0.3 : scale // TODO: Adjust this to real data
-    },
-
-    // Parses price for shitty svg tags
-    // TODO: Put this in utility
-    parsePriceSVG (price) {
-      const p = this.parsePrice(price)
-      let str = ''
-      if (p.gold) str += p.gold + 'g '
-      if (p.gold || p.silver) str += p.silver + 's '
-      str += p.copper + 'c'
-      return str
     }
   }
 }

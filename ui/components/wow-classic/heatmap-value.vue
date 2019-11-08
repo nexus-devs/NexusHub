@@ -38,13 +38,14 @@ export default {
       const item = this.$store.state.graphs.storage['heatmap-value'].data
       const data = []
 
-      for (let i = 0; i < item.length; i++) {
+      const weeks = Math.floor(item.length / 7)
+      for (let i = 0; i < weeks * 7; i++) {
         const day = i % 7
         if (!data[day]) data[day] = []
 
         for (let j = 0; j < item[i].length; j++) {
           if (!data[day][j]) data[day][j] = 0
-          data[day][j] += item[i][j].marketValue
+          data[day][j] += Math.round(item[i][j].marketValue * (1 / weeks))
         }
       }
       return data
