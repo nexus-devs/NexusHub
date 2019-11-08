@@ -57,33 +57,16 @@ class Items extends Endpoint {
       }
     })
 
-    // Keep this in case the blizzard api doesn't work
-    const metaReq = await request({
-      uri: `https://wowhead.com/item=${item['Id'] || item['ItemId']}&xml`, // TODO: Change this to classic subdomain once data is there
-      headers: { 'User-Agent': 'Request-Promise' }
-    })
-    const meta = (await parseXml(metaReq)).wowhead.item[0]
+    const meta = await this.db.collection('items').findOne({ itemId: item['Id'] || item['ItemId'] })
 
     let response = {
       itemId: item['Id'] || item['ItemId'],
       name: item['Name'],
-      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon[0]._}.jpg`,
-      tags: [meta.class[0]._]
+      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`,
+      tags: [meta.class]
     }
-    if (meta.inventorySlot[0]._) response.tags.push(meta.inventorySlot[0]._)
 
-    // TODO: Redo this once api is there
-    // Parse tooltip
-    let tooltip = meta.htmlTooltip[0]
-    tooltip = tooltip.substring(tooltip.indexOf('<!--ndend-->') + 12, tooltip.length - 18) // Cuts of start and end
-    response.tooltip = tooltip
-
-    let description = {
-      ilvl: this.getTooltipAttribute(tooltip, 'ilvl'),
-      bind: this.getTooltipAttribute(tooltip, 'bo'),
-      requiredLvl: this.getTooltipAttribute(tooltip, 'rlvl')
-    }
-    response.description = description
+    response.tooltip = ''
 
     if (region && server) {
       response['region'] = region
