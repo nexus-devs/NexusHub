@@ -6,6 +6,16 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const MiniCss = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
+// Generic CSS loader
+const cssLoader = (modules = false) => (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat([{
+  loader: 'css-loader',
+  options: {
+    minimize: isProd,
+    modules,
+    localIdentName: modules ? '[local]_[hash:base64:8]' : undefined // Custom generated class names for modules
+  }
+}, 'sass-loader'])
+
 /**
  * Config is merged with base config which contains common configuration
  * for both server and client bundles
@@ -23,12 +33,15 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /(\.s?[a|c]ss|\.css)$/,
-        use: (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat([{
-          loader: 'css-loader',
-          options: {
-            minimize: isProd
-          }
-        }, 'sass-loader'])
+        oneOf: [
+          // Modules <style module>
+          {
+            resourceQuery: /module/,
+            use: cssLoader(true)
+          },
+          // Plain <style>
+          { use: cssLoader() }
+        ]
       },
       // Transpile ES6/7 into older versions for better browser support
       {
