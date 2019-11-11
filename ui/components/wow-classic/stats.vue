@@ -118,7 +118,7 @@ import utility from './utility'
 export default {
   components: {
     module,
-    indicator,
+    indicator
   },
 
   computed: {
