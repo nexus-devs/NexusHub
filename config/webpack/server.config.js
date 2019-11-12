@@ -27,7 +27,22 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /(\.s?[a|c]ss|\.css)$/,
-        use: (isProd ? [] : ['vue-style-loader']).concat(['css-loader', 'sass-loader'])
+        oneOf: [
+          {
+            resourceQuery: /module/,
+            use: (isProd ? [] : ['vue-style-loader']).concat([{
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]_[hash:base64:5]',
+                onlyLocals: true
+              }
+            }, 'sass-loader'])
+          },
+          {
+            use: (isProd ? [] : ['vue-style-loader']).concat(['css-loader', 'sass-loader'])
+          }
+        ]
       }
     ]
   },

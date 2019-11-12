@@ -12,7 +12,7 @@ const cssLoader = (modules = false) => (isProd ? [MiniCss.loader] : ['vue-style-
   options: {
     minimize: isProd,
     modules,
-    localIdentName: modules ? '[local]_[hash:base64:8]' : undefined // Custom generated class names for modules
+    localIdentName: modules ? '[local]_[hash:base64:5]' : undefined // Custom generated class names for modules
   }
 }, 'sass-loader'])
 
@@ -33,12 +33,15 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /(\.s?[a|c]ss|\.css)$/,
-        use: (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat([{
-          loader: 'css-loader',
-          options: {
-            minimize: isProd
+        oneOf: [
+          {
+            resourceQuery: /module/,
+            use: cssLoader(true)
+          },
+          {
+            use: cssLoader()
           }
-        }, 'sass-loader'])
+        ]
       },
       // Transpile ES6/7 into older versions for better browser support
       {
