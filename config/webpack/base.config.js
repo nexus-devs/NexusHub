@@ -2,6 +2,19 @@ const isProd = cubic.config.local.environment !== 'development'
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 
+// Select theme based on first sub url
+const selectTheme = function () {
+  let theme = 'warframe' // Default theme
+  const route = this.$route.fullPath.split('/')
+
+  // Select possible themes
+  if (route.length > 1) {
+    if (route[1] === 'wow-classic') theme = 'wow-classic'
+  }
+
+  return this[theme]
+}
+
 module.exports = {
   mode: isProd ? 'production' : 'development',
 
@@ -45,7 +58,10 @@ module.exports = {
       '$apiUrl': JSON.stringify(cubic.config.ui.client.apiUrl),
       '$authUrl': JSON.stringify(cubic.config.ui.client.authUrl),
       '$PRODUCTION': process.env.NODE_ENV === 'production',
-      '$STAGING': JSON.stringify(process.env.NEXUS_STAGING)
+      '$STAGING': JSON.stringify(process.env.NEXUS_STAGING),
+      '$globals': {
+        '$theme': selectTheme
+      }
     })
   ])
 }
