@@ -1,6 +1,6 @@
 <template>
   <div class="doubleline">
-    <div class="axis y1">
+    <div :class="[theme.axis, theme.y1]" class="axis y1">
       <span v-for="label in axis.y" :key="label">
         {{ parsePriceY(label) }}
       </span>
@@ -9,17 +9,17 @@
       <div class="graph">
         <div class="sparkline">
           <svg :width="width" :height="height">
-            <path :d="line.value1" class="line"/>
-            <path :d="line.value2" class="line2"/>
+            <path :d="line.value1" :class="theme.line" class="line"/>
+            <path :d="line.value2" :class="theme.line2" class="line2"/>
           </svg>
         </div>
         <div class="tooltip-container">
           <svg :width="width + 160" :height="height">
             <g v-for="(d, i) in data" :key="d.x" class="point">
               <rect :x="scaled.x(d.x)" class="hover"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" class="circle2"/>
-              <g class="tooltip">
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" :class="theme.circle"/>
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" :class="theme.circle2"/>
+              <g :class="theme.tooltip" class="tooltip">
                 <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                   {{ parseHoursAgo(i, data.length) }}
@@ -38,13 +38,13 @@
           </svg>
         </div>
       </div>
-      <div class="axis x">
+      <div :class="[theme.axis, theme.x]" class="axis x">
         <span v-for="label in axis.x" :key="label">
           {{ label }}
         </span>
       </div>
     </div>
-    <div v-if="!sameScale" class="axis y2">
+    <div v-if="!sameScale" :class="[theme.axis, theme.y2]" class="axis y2">
       <span v-for="label in axis.y2" :key="label">
         {{ label }}
       </span>
@@ -57,15 +57,11 @@
 <script>
 import * as d3 from 'd3'
 import Tween from './_tween.js'
-import indicator from './indicator.vue'
+import getTheme from 'src/components/_theme.js'
 import moment from 'moment'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  components: {
-    indicator
-  },
-
   props: ['data', 'sameScale', 'timerange', 'regional'],
 
   data () {
@@ -87,6 +83,9 @@ export default {
   },
 
   computed: {
+    theme () {
+      return getTheme(this)
+    },
     axis () {
       let yPane = [0, this.getGoldValueMax()]
       if (this.sameScale) yPane = [0, this.getCombinedGoldValueMax()]
@@ -240,6 +239,99 @@ export default {
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.circle {
+  fill: $color-primary-subtle;
+}
+.circle2 {
+  fill: $color-error-dark;
+}
+
+.line {
+  stroke: $color-primary-subtle;
+}
+.line2 {
+  stroke: $color-error-dark;
+}
+
+.tooltip {
+  rect {
+    fill: $color-bg-dark;
+  }
+  .sub {
+    fill: $color-font-body;
+  }
+  .price {
+    fill: $color-primary-subtle;
+
+    &.negative {
+      fill: $color-error;
+    }
+  }
+}
+
+.axis {
+  color: $color-font-body;
+}
+.axis.y1 {
+  border-right: 1px solid $color-font-body;
+}
+.axis.y2 {
+  border-left: 1px solid $color-font-body;
+}
+.axis.x {
+  border-top: 1px solid $color-font-body;
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.circle {
+  fill: $color-primary-subtle;
+}
+.circle2 {
+  fill: $color-error-dark;
+}
+
+.line {
+  stroke: $color-primary-subtle;
+}
+.line2 {
+  stroke: $color-error-dark;
+}
+
+.tooltip {
+  rect {
+    fill: $color-bg-dark;
+  }
+  .sub {
+    fill: $color-font-body;
+  }
+  .price {
+    fill: $color-primary-subtle;
+
+    &.negative {
+      fill: $color-error;
+    }
+  }
+}
+
+.axis {
+  color: $color-font-body;
+}
+.axis.y1 {
+  border-right: 1px solid $color-font-body;
+}
+.axis.y2 {
+  border-left: 1px solid $color-font-body;
+}
+.axis.x {
+  border-top: 1px solid $color-font-body;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -273,13 +365,6 @@ export default {
   z-index: 1;
 }
 
-circle {
-  fill: $color-primary-subtle;
-}
-.circle2 {
-  fill: $color-error-dark;
-}
-
 svg {
   text {
     font-size: 0.85em;
@@ -292,13 +377,11 @@ svg {
   }
   .line {
     pointer-events: none; // Make tooltips accessible
-    stroke: $color-primary-subtle;
     stroke-width: 1.5px;
     fill: none;
   }
   .line2 {
     pointer-events: none; // Make tooltips accessible
-    stroke: $color-error-dark;
     stroke-width: 1.5px;
     fill: none;
   }
@@ -329,22 +412,11 @@ svg {
 }
 
 .tooltip {
-  rect {
-    fill: $color-bg-dark;
-  }
   .num {
     font-size: 1.1em;
   }
-  .sub {
-    fill: $color-font-body;
-  }
   .price {
-    fill: $color-primary-subtle;
     text-anchor: start;
-
-    &.negative {
-      fill: $color-error;
-    }
   }
 }
 
@@ -353,12 +425,10 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: $color-font-body;
   font-size: 0.8em;
   line-height: 0.8em;
 }
 .axis.y1 {
-  border-right: 1px solid $color-font-body;
   padding-right: 5px;
   text-align: right;
 
@@ -368,7 +438,6 @@ svg {
   }
 }
 .axis.y2 {
-  border-left: 1px solid $color-font-body;
   padding-left: 5px;
   text-align: left;
 
@@ -380,7 +449,6 @@ svg {
 .axis.x {
   height: 0px;
   margin-bottom: 20px;
-  border-top: 1px solid $color-font-body;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
