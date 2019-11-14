@@ -3,6 +3,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./base.config.js')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
+const getLocalIdent = require('./_getLocalIdent.js')
 
 /**
  * Config is merged with base config which contains common configuration
@@ -28,17 +29,20 @@ module.exports = merge(baseConfig, {
       {
         test: /(\.s?[a|c]ss|\.css)$/,
         oneOf: [
+          // CSS Modules
           {
             resourceQuery: /module/,
             use: (isProd ? [] : ['vue-style-loader']).concat([{
               loader: 'css-loader',
               options: {
-                modules: true,
-                localIdentName: '[local]_[hash:base64:5]',
-                onlyLocals: true
+                modules: {
+                  localIdentName: '[module]_[local]_[hash:base64:5]',
+                  getLocalIdent
+                }
               }
             }, 'sass-loader'])
           },
+          // Vanilla <style>
           {
             use: (isProd ? [] : ['vue-style-loader']).concat(['css-loader', 'sass-loader'])
           }

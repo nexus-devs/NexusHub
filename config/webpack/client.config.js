@@ -5,16 +5,7 @@ const baseConfig = require('./base.config.js')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const MiniCss = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-
-// Generic CSS loader
-const cssLoader = (modules = false) => (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat([{
-  loader: 'css-loader',
-  options: {
-    minimize: isProd,
-    modules,
-    localIdentName: modules ? '[local]_[hash:base64:5]' : undefined // Custom generated class names for modules
-  }
-}, 'sass-loader'])
+const getLocalIdent = require('./_getLocalIdent.js')
 
 /**
  * Config is merged with base config which contains common configuration
@@ -34,12 +25,22 @@ module.exports = merge(baseConfig, {
       {
         test: /(\.s?[a|c]ss|\.css)$/,
         oneOf: [
+          // CSS Modules
           {
             resourceQuery: /module/,
-            use: cssLoader(true)
+            use: (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat([{
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[module]_[local]_[hash:base64:5]',
+                  getLocalIdent
+                }
+              }
+            }, 'sass-loader'])
           },
+          // Vanilla <style>
           {
-            use: cssLoader()
+            use: (isProd ? [MiniCss.loader] : ['vue-style-loader']).concat(['css-loader', 'sass-loader'])
           }
         ]
       },
