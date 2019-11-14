@@ -1,12 +1,12 @@
 <template>
   <div class="module">
-    <div class="header">
+    <div :class="theme.header" class="header">
       <slot name="header"/>
     </div>
     <div class="body">
       <slot name="body"/>
     </div>
-    <div class="footer">
+    <div :class="theme.footer" class="footer">
       <slot name="footer"/>
     </div>
     <progressbar ref="progress"/>
@@ -16,16 +16,52 @@
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
 import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
     progressbar
+  },
+
+  computed: {
+    theme () {
+      return getTheme(this)
+    }
   }
 }
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+.header {
+  h2, h3 {
+    color: $color-primary-subtle !important;
+  }
+  .img {
+    background: $color-bg;
+  }
+}
+.footer {
+  background: $color-bg;
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+.header {
+  h2, h3 {
+    color: $color-primary-subtle !important;
+  }
+  .img {
+    background: $color-bg;
+  }
+}
+.footer {
+  background: $color-bg;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -56,7 +92,6 @@ export default {
     vertical-align: middle;
     font-size: 0.8em !important;
     letter-spacing: 0.5;
-    color: $color-primary-subtle !important;
     @include uppercase;
   }
   time {
@@ -79,7 +114,6 @@ export default {
     height: 40px;
     width: 40px;
     border-radius: 40px;
-    background: $color-bg;
 
     img, object {
       position: relative;
@@ -125,7 +159,6 @@ export default {
   display: flex;
   padding: 2px 15px;
   margin-top: auto;
-  background: $color-bg;
   font-size: 0.75em !important;
   border-radius: 2px;
 

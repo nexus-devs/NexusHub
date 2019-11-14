@@ -6,8 +6,8 @@
  * and to avoid bloating components that don't need the variable
  */
 
-module.exports = function getTheme () {
-  const route = this.$route.fullPath.split('/')
+module.exports = function (self) {
+  const route = self.$route.fullPath.split('/')
 
   let theme = 'warframe' // Default theme
   const availableThemes = ['wow-classic']
@@ -18,5 +18,5 @@ module.exports = function getTheme () {
   }
 
   // Returns directly the injected style object
-  return this[theme]
+  return self[theme]
 }
