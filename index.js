@@ -1,7 +1,7 @@
 const docker = require('./services/bootstrap/docker.js')
 const regular = require('./services/bootstrap/regular.js')
 const config = { cubic: require('./config/cubic/cubic') }
-const Cubic = require('../cubic')
+const Cubic = require('cubic')
 
 // eslint-disable-next-line no-new
 new Cubic(config.cubic)
