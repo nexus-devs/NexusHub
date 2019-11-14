@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
+@import '~src/styles/partials/wow-classic/importer';
 
 .price-gold {
   color: #CAAA00

@@ -184,7 +184,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
+@import '~src/styles/partials/wow-classic/importer';
 
 .list-enter-active, .list-leave-active {
   transition: all 0s;

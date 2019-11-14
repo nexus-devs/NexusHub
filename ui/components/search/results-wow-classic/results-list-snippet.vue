@@ -55,7 +55,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
+@import '~src/styles/partials/wow-classic/importer';
 
 a {
   position: relative;

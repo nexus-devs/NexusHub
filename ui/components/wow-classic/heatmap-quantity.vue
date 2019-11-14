@@ -64,7 +64,7 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
+@import '~src/styles/partials/wow-classic/importer';
 
 /deep/ .hour {
   background: $color-error-dark;

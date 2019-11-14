@@ -65,6 +65,5 @@ export default {
 
 
 <style lang="scss" scoped>
-@import '~src/styles/partials/importer';
 
 </style>
