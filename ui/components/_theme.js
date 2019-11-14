@@ -3,7 +3,7 @@
  * Include this in the component you want to theme and make it a computed property.
  *
  * This approach was chosen over extending the Vue prototype, to make it more clear where the variable comes from,
- * and to avoid bloating components that don't need the variable
+ * and to avoid bloating components that don't need the variable.
  */
 
 module.exports = function (self) {
