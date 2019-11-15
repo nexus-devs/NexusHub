@@ -67,6 +67,9 @@ export default {
 
 <style lang="scss" module="warframe">
 @import '~src/styles/partials/importer';
+:global {
+  @import '~src/styles/modules/importer';
+}
 
 .app {
   background: $color-bg-dark;
@@ -75,6 +78,9 @@ export default {
 
 <style lang="scss" module="wow-classic">
 @import '~src/styles/partials/wow-classic/importer';
+:global {
+  @import '~src/styles/modules/wow-classic/importer';
+}
 
 .app {
   background: $color-bg-dark;
@@ -83,7 +89,6 @@ export default {
 
 <style lang='scss'>
 @import '~src/styles/partials/importer';
-@import '~src/styles/modules/importer';
 @import '~src/styles/reset';
 @import '~src/styles/grid';
 
