@@ -43,6 +43,19 @@ export default {
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.dropdown {
+  background: $color-bg;
+}
+.body {
+  span:not(.active) {
+    color: $color-font-body;
+  }
+}
+</style>
+
 <style lang="scss" module="wow-classic">
 @import '~src/styles/partials/wow-classic/importer';
 
