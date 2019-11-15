@@ -1,5 +1,5 @@
 <template>
-  <div class="module">
+  <div :class="theme.module" class="module">
     <div :class="theme.header" class="header">
       <slot name="header"/>
     </div>
@@ -35,6 +35,10 @@ export default {
 
 <style lang="scss" module="warframe">
 @import '~src/styles/partials/importer';
+
+.module {
+  @include field;
+}
 .header {
   h2, h3 {
     color: $color-primary-subtle !important;
@@ -50,6 +54,10 @@ export default {
 
 <style lang="scss" module="wow-classic">
 @import '~src/styles/partials/wow-classic/importer';
+
+.module {
+  @include field;
+}
 .header {
   h2, h3 {
     color: $color-primary-subtle !important;
@@ -68,7 +76,6 @@ export default {
 
 .module {
   position: relative;
-  @include field;
   display: flex;
   flex-direction: column;
 
