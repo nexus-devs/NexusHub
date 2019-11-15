@@ -66,11 +66,11 @@ export default {
 
 
 <style lang="scss" module="warframe">
-  @import '~src/styles/partials/importer';
+@import '~src/styles/partials/importer';
 
-  .app {
-    background: $color-bg-dark;
-  }
+.app {
+  background: $color-bg-dark;
+}
 </style>
 
 <style lang="scss" module="wow-classic">
