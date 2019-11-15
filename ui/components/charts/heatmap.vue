@@ -2,8 +2,8 @@
   <div class="row">
     <div v-for="(day, i) in data" :key="axisDays[i]" class="day">
       <div v-for="(hour, j) in day" :key="hour + '' + j" class="hour-wrapper">
-        <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour"/>
-        <div class="tooltip">
+        <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="[theme.hour, { inactive: !hour }]" class="hour"/>
+        <div :class="theme.tooltip" class="tooltip">
           <time :datetime="`${j * 2 + 1}:00`">
             {{ axisDays[i] }},
             {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
@@ -14,11 +14,11 @@
           <span>{{ tooltipLabel ? tooltipLabel : '' }}</span>
         </div>
       </div>
-      <span class="label">{{ axisDays[i] }}</span>
+      <span :class="theme.label" class="label">{{ axisDays[i] }}</span>
     </div>
     <div class="axis-hours">
       <div v-for="(hour, i) in 24" :key="hour + '' + i" class="time">
-        <span v-if="i % 3 === 1" class="label">
+        <span v-if="i % 3 === 1" :class="theme.label" class="label">
           {{ i % 12 + 1 }}{{ i + 1 > 11 ? 'pm' : 'am' }}
         </span>
         <span v-else/>
@@ -30,12 +30,16 @@
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   props: ['data', 'parseNum', 'tooltipLabel'],
 
   computed: {
+    theme () {
+      return getTheme(this)
+    },
     // computed because this logic may change
     axisDays () {
       return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -61,6 +65,34 @@ export default {
 }
 </script>
 
+
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.hour {
+  background: $color-primary-subtle;
+}
+.tooltip {
+  background: $color-bg-dark;
+}
+.label {
+  color: $color-font-body !important;
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.hour {
+  background: $color-primary-subtle;
+}
+.tooltip {
+  background: $color-bg-dark;
+}
+.label {
+  color: $color-font-body !important;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -107,7 +139,6 @@ export default {
   height: 10px;
   width: 10px;
   border-radius: 5px;
-  background: $color-primary-subtle;
 
   &.inactive {
     background: transparent;
@@ -118,7 +149,6 @@ export default {
   white-space: nowrap;
   margin-left: 28px;
   opacity: 0;
-  background: $color-bg-dark;
   border-radius: 2px;
   padding: 10px 12px;
   pointer-events: none;
@@ -129,10 +159,6 @@ export default {
     font-size: 1.2em;
     margin: 3px 0;
   }
-}
-
-.label {
-  color: $color-font-body !important;
 }
 
 .axis-hours {
