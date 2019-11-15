@@ -208,7 +208,7 @@ h2 {
   margin: 20px 5px 0px 0;
   padding-bottom: 10px;
   font-size: 1em;
-  border-bottom: 2px solid #39E591;
+  border-bottom: 2px solid $color-primary-subtle;
 
   & + span {
     color: $color-font-subtle;
