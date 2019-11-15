@@ -67,8 +67,13 @@ class Items extends Endpoint {
       itemId: item.Id || item.ItemId,
       name: item.Name,
       icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`,
-      tags: [meta.class]
+      tags: [meta.quality, meta.class],
+      requiredLevel: meta.requiredLevel,
+      itemLevel: meta.itemLevel,
+      sellPrice: meta.sellPrice
     }
+    if (meta.class !== meta.subclass) response.tags.push(meta.subclass)
+    if (meta.slot !== 'Non-equippable') response.tags.push(meta.slot)
 
     response.tooltip = ''
 

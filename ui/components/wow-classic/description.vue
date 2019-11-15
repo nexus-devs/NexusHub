@@ -5,7 +5,9 @@
       <h3>Description</h3>
     </template>
     <template slot="body">
-      <!--<p v-html="item.tooltip"/>-->
+      <p>Item Level: {{ item.itemLevel }}</p>
+      <p>Required Level: {{ item.requiredLevel }}</p>
+      <p>Sell Price: {{ parsePrice(item.sellPrice) }}</p>
     </template>
     <template slot="footer">
       <a v-if="wowheadUrl" :href="wowheadUrl" target="_blank">
@@ -20,6 +22,7 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import utility from './utility'
 
 export default {
   components: {
@@ -33,6 +36,10 @@ export default {
     wowheadUrl () {
       return `https://classic.wowhead.com/item=${this.item.itemId}`
     }
+  },
+
+  created () {
+    this.parsePrice = utility.parsePrice
   }
 }
 </script>
