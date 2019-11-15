@@ -68,6 +68,6 @@ export default {
 @import '~src/styles/partials/wow-classic/importer';
 
 /deep/ .hour {
-  background: $color-error-dark;
+  background: $color-accent-subtle;
 }
 </style>

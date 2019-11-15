@@ -293,14 +293,14 @@ export default {
   fill: $color-primary-subtle;
 }
 .circle2 {
-  fill: $color-error-dark;
+  fill: $color-accent-subtle;
 }
 
 .line {
   stroke: $color-primary-subtle;
 }
 .line2 {
-  stroke: $color-error-dark;
+  stroke: $color-accent-subtle;
 }
 
 .tooltip {
