@@ -5,10 +5,10 @@
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data" :same-scale="true" :regional="regional" :timerange="timerange"/>
+      <doubleline :data="data" :same-scale="true" :regional="regional" :timerange="timerange" />
     </template>
     <template slot="footer">
-      <module-time :days="timerange" :fn="setTimerange"/>
+      <module-time :days="timerange" :fn="setTimerange" />
     </template>
   </module>
 </template>
@@ -16,18 +16,14 @@
 
 <script>
 import doubleline from 'src/components/charts/doubleline.vue'
-import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
-import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
-    indicator,
     doubleline,
     module,
-    moduleTime,
-    progressbar
+    moduleTime
   },
 
   computed: {

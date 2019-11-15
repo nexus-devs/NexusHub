@@ -10,7 +10,7 @@
     </template>
     <template slot="body">
       <span :style="{ 'font-size': order.price ? '' : '1em' }" class="highlight">{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
-      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
+      <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />
       <br>
       <span class="sub">
         {{ order.offer === 'Selling' ? 'Sold' : 'Bought' }} by {{ order.user }}
@@ -42,6 +42,7 @@ export default {
         const type = this.order.offer.toLowerCase()
         return this.component.prices[type].current.median
       }
+      return null
     },
     component () {
       if (this.order) {

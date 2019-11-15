@@ -14,7 +14,7 @@
             {{ parsePrice(item.marketValue) }}
           </span>
           <span :class="{ negative: diff(item.marketValue, item.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.marketValue, item.previous.marketValue).percentage"/> {{ Math.abs(diff(item.marketValue, item.previous.marketValue).percentage) }}%
+            <indicator :diff="diff(item.marketValue, item.previous.marketValue).percentage" /> {{ Math.abs(diff(item.marketValue, item.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>
@@ -47,7 +47,7 @@
             {{ parsePrice(item.EU.marketValue) }}
           </span>
           <span :class="{ negative: diff(item.EU.marketValue, item.EU.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.EU.marketValue, item.EU.previous.marketValue).percentage"/> {{ Math.abs(diff(item.EU.marketValue, item.EU.previous.marketValue).percentage) }}%
+            <indicator :diff="diff(item.EU.marketValue, item.EU.previous.marketValue).percentage" /> {{ Math.abs(diff(item.EU.marketValue, item.EU.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>
@@ -80,7 +80,7 @@
             {{ parsePrice(item.US.marketValue) }}
           </span>
           <span :class="{ negative: diff(item.US.marketValue, item.US.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.US.marketValue, item.US.previous.marketValue).percentage"/> {{ Math.abs(diff(item.US.marketValue, item.US.previous.marketValue).percentage) }}%
+            <indicator :diff="diff(item.US.marketValue, item.US.previous.marketValue).percentage" /> {{ Math.abs(diff(item.US.marketValue, item.US.previous.marketValue).percentage) }}%
           </span>
         </div>
       </div>

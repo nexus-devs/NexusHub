@@ -12,7 +12,7 @@ module.exports = function getLocalIdent (context, localIdentName, localName, opt
 
   const selector = loaderUtils.interpolateName(context, localIdentName, {
     context: context.rootContext,
-    content: resourcePath + resourceQuery + localName,
+    content: resourcePath + resourceQuery + localName
   })
     .replace(/\[local\]/gi, localName)
     .replace(/\[module\]/gi, typeof module === 'boolean' ? '' : module)

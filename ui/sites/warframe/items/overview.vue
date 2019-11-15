@@ -1,32 +1,36 @@
 <template>
   <div>
-    <navigation/>
-    <item-header/>
+    <navigation />
+    <item-header />
     <app-content>
       <section>
         <div class="container">
-          <h2 class="sub">Item Overview</h2>
+          <h2 class="sub">
+            Item Overview
+          </h2>
           <div class="row-margin main">
             <div class="col-b column">
-              <description/>
-              <build-requirements v-if="item.components.length > 1"/>
+              <description />
+              <build-requirements v-if="item.components.length > 1" />
             </div>
-            <stats class="col-b"/>
-            <drops v-if="drops" class="col-b"/>
+            <stats class="col-b" />
+            <drops v-if="drops" class="col-b" />
           </div>
-          <ad name="warframe-item-overview-main"/>
+          <ad name="warframe-item-overview-main" />
         </div>
       </section>
       <section v-if="patchlogs && patchlogs.length">
         <div class="container">
-          <h2 class="sub">Recent Changes</h2>
+          <h2 class="sub">
+            Recent Changes
+          </h2>
           <div class="row-margin patchlogs">
-            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b" />
           </div>
           <router-link :to="`${$route.params.item}/patchlogs`" class="btn-subtle">
             View all patch logs
           </router-link>
-          <ad name="warframe-item-overview-patchlogs"/>
+          <ad name="warframe-item-overview-patchlogs" />
         </div>
       </section>
     </app-content>

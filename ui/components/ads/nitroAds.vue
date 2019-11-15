@@ -3,7 +3,8 @@
     display,
     'max-height': maxHeight,
     'max-width': maxWidth
-  }" class="ad-unit layout-center"/>
+  }" class="ad-unit layout-center"
+  />
 </template>
 
 
@@ -19,7 +20,7 @@ export default {
   },
 
   mounted () {
-    const nitroAds = window['nitroAds']
+    const nitroAds = window.nitroAds
     if (!nitroAds) return
 
     this.display = 'inline-block'

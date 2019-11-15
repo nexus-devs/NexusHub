@@ -1,20 +1,23 @@
 <template>
   <div>
-    <navigation/>
-    <item-header/>
+    <navigation />
+    <item-header />
     <app-content>
       <section>
         <div class="container">
-          <h2 class="sub">{{ item.name }} Prices</h2>
-          <filters/>
+          <h2 class="sub">
+            {{ item.name }} Prices
+          </h2>
+          <filters />
           <div :style="{ height: `${height}px` }" class="prices-wrapper">
-            <price-detailed ref="detailed"/>
+            <price-detailed ref="detailed" />
             <div ref="prices" class="prices row-margin">
-              <price v-for="component in components" v-if="component.tradable" :key="component.name"
-                     :component="component" class="col"/>
+              <price v-for="component in tradableComponents" :key="component.name"
+                     :component="component" class="col"
+              />
             </div>
           </div>
-          <ad name="warframe-item-prices-main"/>
+          <ad name="warframe-item-prices-main" />
         </div>
       </section>
     </app-content>
@@ -46,6 +49,12 @@ export default {
     priceDetailed
   },
 
+  async asyncData ({ route }) {
+    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
+    this.$store.commit('setPricesItem', item)
+    this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
+  },
+
   data () {
     return {
       height: 0
@@ -71,6 +80,9 @@ export default {
     },
     selected () {
       return this.$store.state.prices.selected
+    },
+    tradableComponents () {
+      return this.components.filter(c => c.tradable)
     }
   },
 
@@ -99,12 +111,6 @@ export default {
 
   beforeDestroy () {
     window.removeEventListener('resize', this.onResize)
-  },
-
-  async asyncData ({ route }) {
-    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
-    this.$store.commit('setPricesItem', item)
-    this.$store.commit('setPrices', await this.$cubic.get(`/warframe/v1/items/${item}/prices`))
   },
 
   methods: {

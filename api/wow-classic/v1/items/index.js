@@ -61,11 +61,11 @@ class Items extends Endpoint {
       }
     })
 
-    const meta = await this.db.collection('items').findOne({ itemId: item['Id'] || item['ItemId'] })
+    const meta = await this.db.collection('items').findOne({ itemId: item.Id || item.ItemId })
 
-    let response = {
-      itemId: item['Id'] || item['ItemId'],
-      name: item['Name'],
+    const response = {
+      itemId: item.Id || item.ItemId,
+      name: item.Name,
       icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`,
       tags: [meta.class]
     }
@@ -73,33 +73,33 @@ class Items extends Endpoint {
     response.tooltip = ''
 
     if (region && server) {
-      response['region'] = region
-      response['server'] = server
-      response['minBuyout'] = item['MinBuyout']
-      response['marketValue'] = item['MarketValue']
-      response['qty'] = item['Quantity']
-      response['previous'] = this.generatePreviousSampleData(response)
+      response.region = region
+      response.server = server
+      response.minBuyout = item.MinBuyout
+      response.marketValue = item.MarketValue
+      response.qty = item.Quantity
+      response.previous = this.generatePreviousSampleData(response)
 
       response[region] = {
-        minBuyout: item['RegionMinBuyoutAvg'],
-        marketValue: item['RegionMarketAvg'],
-        qty: item['RegionQuantity']
+        minBuyout: item.RegionMinBuyoutAvg,
+        marketValue: item.RegionMarketAvg,
+        qty: item.RegionQuantity
       }
-      response[region]['previous'] = this.generatePreviousSampleData(response[region])
+      response[region].previous = this.generatePreviousSampleData(response[region])
     } else {
-      if (region) response['region'] = region
-      response['EU'] = {
-        minBuyout: item['EUMinBuyoutAvg'],
-        marketValue: item['EUMarketAvg'],
-        qty: item['EUQuantity']
+      if (region) response.region = region
+      response.EU = {
+        minBuyout: item.EUMinBuyoutAvg,
+        marketValue: item.EUMarketAvg,
+        qty: item.EUQuantity
       }
-      response['EU']['previous'] = this.generatePreviousSampleData(response['EU'])
-      response['US'] = {
-        minBuyout: item['USMinBuyoutAvg'],
-        marketValue: item['USMarketAvg'],
-        qty: item['USQuantity']
+      response.EU.previous = this.generatePreviousSampleData(response.EU)
+      response.US = {
+        minBuyout: item.USMinBuyoutAvg,
+        marketValue: item.USMarketAvg,
+        qty: item.USQuantity
       }
-      response['US']['previous'] = this.generatePreviousSampleData(response['US'])
+      response.US.previous = this.generatePreviousSampleData(response.US)
     }
 
     res.send(response)

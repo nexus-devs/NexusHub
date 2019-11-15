@@ -4,7 +4,8 @@
     'height': height,
     'background-color': canSuccess? color : failedColor,
     'opacity': show ? 1 : 0
-  }" :class="theme.progress" class="progress"/>
+  }" :class="theme.progress" class="progress"
+  />
 </template>
 
 <script>

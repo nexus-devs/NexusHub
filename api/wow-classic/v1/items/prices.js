@@ -62,43 +62,43 @@ class Prices extends Endpoint {
       }
     })
 
-    let response = {
-      itemId: item['Id'] || item['ItemId']
+    const response = {
+      itemId: item.Id || item.ItemId
     }
 
     // Reformat this jesus
     if (region && server) {
-      response['region'] = region
-      response['server'] = server
-      response['minBuyout'] = item['MinBuyout']
-      response['marketValue'] = item['MarketValue']
-      response['qty'] = item['Quantity']
-      response['current'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
-      response['previous'] = this.generateSample(response['qty'], response['minBuyout'], response['marketValue'], timerange)
+      response.region = region
+      response.server = server
+      response.minBuyout = item.MinBuyout
+      response.marketValue = item.MarketValue
+      response.qty = item.Quantity
+      response.current = this.generateSample(response.qty, response.minBuyout, response.marketValue, timerange)
+      response.previous = this.generateSample(response.qty, response.minBuyout, response.marketValue, timerange)
 
       response[region] = {
-        minBuyout: item['RegionMinBuyoutAvg'],
-        marketValue: item['RegionMarketAvg'],
-        qty: item['RegionQuantity']
+        minBuyout: item.RegionMinBuyoutAvg,
+        marketValue: item.RegionMarketAvg,
+        qty: item.RegionQuantity
       }
-      response[region]['current'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
-      response[region]['previous'] = this.generateSample(response[region]['qty'], response[region]['minBuyout'], response[region]['marketValue'], timerange)
+      response[region].current = this.generateSample(response[region].qty, response[region].minBuyout, response[region].marketValue, timerange)
+      response[region].previous = this.generateSample(response[region].qty, response[region].minBuyout, response[region].marketValue, timerange)
     } else {
-      if (region) response['region'] = region
-      response['EU'] = {
-        minBuyout: item['EUMinBuyoutAvg'],
-        marketValue: item['EUMarketAvg'],
-        qty: item['EUQuantity']
+      if (region) response.region = region
+      response.EU = {
+        minBuyout: item.EUMinBuyoutAvg,
+        marketValue: item.EUMarketAvg,
+        qty: item.EUQuantity
       }
-      response['EU']['current'] = this.generateSample(response['EU']['qty'], response['EU']['minBuyout'], response['EU']['marketValue'], timerange)
-      response['EU']['previous'] = this.generateSample(response['EU']['qty'], response['EU']['minBuyout'], response['EU']['marketValue'], timerange)
-      response['US'] = {
-        minBuyout: item['USMinBuyoutAvg'],
-        marketValue: item['USMarketAvg'],
-        qty: item['USQuantity']
+      response.EU.current = this.generateSample(response.EU.qty, response.EU.minBuyout, response.EU.marketValue, timerange)
+      response.EU.previous = this.generateSample(response.EU.qty, response.EU.minBuyout, response.EU.marketValue, timerange)
+      response.US = {
+        minBuyout: item.USMinBuyoutAvg,
+        marketValue: item.USMarketAvg,
+        qty: item.USQuantity
       }
-      response['US']['current'] = this.generateSample(response['US']['qty'], response['US']['minBuyout'], response['US']['marketValue'], timerange)
-      response['US']['previous'] = this.generateSample(response['US']['qty'], response['US']['minBuyout'], response['US']['marketValue'], timerange)
+      response.US.current = this.generateSample(response.US.qty, response.US.minBuyout, response.US.marketValue, timerange)
+      response.US.previous = this.generateSample(response.US.qty, response.US.minBuyout, response.US.marketValue, timerange)
     }
 
     res.send(response)

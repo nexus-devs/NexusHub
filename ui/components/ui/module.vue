@@ -1,15 +1,15 @@
 <template>
   <div :class="theme.module" class="module">
     <div :class="theme.header" class="header">
-      <slot name="header"/>
+      <slot name="header" />
     </div>
     <div class="body">
-      <slot name="body"/>
+      <slot name="body" />
     </div>
     <div :class="theme.footer" class="footer">
-      <slot name="footer"/>
+      <slot name="footer" />
     </div>
-    <progressbar ref="progress"/>
+    <progressbar ref="progress" />
   </div>
 </template>
 

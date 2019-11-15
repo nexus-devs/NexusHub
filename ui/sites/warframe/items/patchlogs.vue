@@ -1,15 +1,17 @@
 <template>
   <div>
-    <navigation/>
-    <item-header/>
+    <navigation />
+    <item-header />
     <app-content>
       <section class="patchlogs">
         <div id="patchlogs-container" class="container">
           <div v-if="item.patchlogs" id="patchlogs" class="patchlogs">
-            <h2 class="sub">Patchlog History</h2>
+            <h2 class="sub">
+              Patchlog History
+            </h2>
             <div v-for="(patchlog, i) in item.patchlogs" :key=" patchlog.name + patchlog.date">
-              <patchlog :patchlog="patchlog"/>
-              <ad v-if="i === 0 || i % 3 === 0" name="warframe-patchlogs-mid"/>
+              <patchlog :patchlog="patchlog" />
+              <ad v-if="i === 0 || i % 3 === 0" name="warframe-patchlogs-mid" />
             </div>
           </div>
           <div v-else class="no-data">
@@ -19,13 +21,13 @@
             <affix v-if="item.patchlogs[patchlogs.current]" :offset="{ top: 150, bottom: 80 }" relative-element-selector="#patchlogs-container" class="timeline-wrapper">
               <span>{{ moment(new Date(item.patchlogs[patchlogs.current].date)).fromNow() }}</span>
               <div class="timeline">
-                <div :style="{ transform: [progress] }" class="timeline-slider"/>
+                <div :style="{ transform: [progress] }" class="timeline-slider" />
                 <span :style="{ transform: [progress] }">{{ patchlogs.current }} / {{ item.patchlogs.length }}</span>
               </div>
               <span>{{ moment(new Date(item.patchlogs[item.patchlogs.length - 1].date)).fromNow() }}</span>
             </affix>
           </no-ssr>
-          <ad name="warframe-patchlogs-end"/>
+          <ad name="warframe-patchlogs-end" />
         </div>
       </section>
     </app-content>
@@ -57,6 +59,11 @@ export default {
     noSsr
   },
 
+  async asyncData () {
+    const item = encodeURIComponent(this.$store.state.items.item.name)
+    this.$store.commit('setItemPatchlogs', await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}&limit=0`))
+  },
+
   computed: {
     item () {
       return this.$store.state.items.item
@@ -67,11 +74,6 @@ export default {
     progress () {
       return `translateY(${120 * (this.$store.state.items.patchlogs.current || 0.0001) / this.item.patchlogs.length}px)`
     }
-  },
-
-  async asyncData () {
-    const item = encodeURIComponent(this.$store.state.items.item.name)
-    this.$store.commit('setItemPatchlogs', await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}&limit=0`))
   },
 
   // Redirect to overview if this site has no content. (May happen when

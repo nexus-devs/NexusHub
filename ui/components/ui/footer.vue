@@ -4,29 +4,44 @@
       <div :class="theme.row" class="row row-b">
         <v-touch class="col-b goosetainer" @pan="move">
           <img :style="{ transform: [`translate(${position[0]}px, ${position[1]}px)`] }" src="/img/brand/nexushub-logo-typeface-bw.svg" alt="NexusHub"
-               :class="theme.logo" class="ico-h-24 logo">
+               :class="theme.logo" class="ico-h-24 logo"
+          >
           <img src="/img/memes/goose.png" class="ico-48 goose">
         </v-touch>
-        <div class="col-b"/>
+        <div class="col-b" />
         <div :class="theme['col-b']" class="col-b">
           <h4>Project</h4>
-          <router-link to="/opensource">Open Source</router-link>
-          <router-link to="/branding">Branding</router-link>
+          <router-link to="/opensource">
+            Open Source
+          </router-link>
+          <router-link to="/branding">
+            Branding
+          </router-link>
           <!-- <router-link to="/discordbot">Discord Bot</router-link> -->
         </div>
         <div :class="theme['col-b']" class="col-b">
           <h4>Developers</h4>
-          <router-link to="/developers">Developer Hub</router-link>
-          <router-link to="/developers/api/General/foo">API Docs</router-link>
+          <router-link to="/developers">
+            Developer Hub
+          </router-link>
+          <router-link to="/developers/api/General/foo">
+            API Docs
+          </router-link>
         </div>
         <div :class="theme['col-b']" class="col-b">
           <h4>Company</h4>
-          <router-link to="/company">About</router-link>
-          <router-link to="/contact">Contact</router-link>
+          <router-link to="/company">
+            About
+          </router-link>
+          <router-link to="/contact">
+            Contact
+          </router-link>
         </div>
         <div :class="theme['col-b']" class="col-b">
           <h4>Resources</h4>
-          <router-link to="/privacy">Privacy Policy</router-link>
+          <router-link to="/privacy">
+            Privacy Policy
+          </router-link>
         </div>
       </div>
       <div class="brands">

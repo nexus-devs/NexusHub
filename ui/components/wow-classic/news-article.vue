@@ -4,7 +4,8 @@
     intersection: {
       rootMargin: '0px 0px 20% 0px'
     }
-  }" :class="{ visible }" class="patchlog">
+  }" :class="{ visible }" class="patchlog"
+  >
     <template slot="header">
       <h3>{{ patchlog.title }}</h3>
       <time :datetime="patchlog.date">{{ overview ? moment (new Date(patchlog.isoDate)).fromNow() : moment(new Date(patchlog.isoDate)).format('MMMM Do YYYY') }}</time>
@@ -12,10 +13,10 @@
     <template slot="body">
       <div class="image">
         <img v-if="(visible || seen) && patchlog.imgUrl" :src="patchlog.imgUrl" :alt="patchlog.name" onerror="this.style.display='none'">
-        <div class="shade"/>
+        <div class="shade" />
       </div>
       <div v-if="patchlog.content">
-        <p v-for="(log, i) in patchlog.content.split('\n')" v-if="log" :key="log + i">
+        <p v-for="(log, i) in content" :key="log + i">
           {{ log }}
         </p>
       </div>
@@ -49,6 +50,12 @@ export default {
       visible: false,
       seen: false,
       itemName: this.$route.params.item
+    }
+  },
+
+  computed: {
+    content () {
+      return this.patchlog.content.split('\n').filter(c => c)
     }
   },
 

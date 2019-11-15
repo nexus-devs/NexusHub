@@ -4,7 +4,7 @@
       <div class="nav-ico interactive" @click="toggle">
         <img src="/img/ui/notifications.svg" alt="Notifications" class="ico-h-20">
       </div>
-      <div :class="[{ unread: unread.length }, theme['unread-bubble']]" class="unread-bubble"/>
+      <div :class="[{ unread: unread.length }, theme['unread-bubble']]" class="unread-bubble" />
       <div :class="{ visible }" class="notification-container">
         <div :class="theme['notification-header']" class="notification-header">
           <span>Notifications</span>
@@ -15,7 +15,9 @@
               <h4>{{ notification.title }}</h4>
               <p>{{ notification.body }}</p>
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
-                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">{{ button.text }}</button>
+                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
+                  {{ button.text }}
+                </button>
               </div>
               <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
             </div>
@@ -26,7 +28,7 @@
         </div>
       </div>
     </div>
-    <div :class="{ visible }" class="hide" @click="toggle"/>
+    <div :class="{ visible }" class="hide" @click="toggle" />
   </div>
 </template>
 

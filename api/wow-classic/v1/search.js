@@ -56,7 +56,7 @@ class Search extends Endpoint {
       })
     }
 
-    let result = await this.search(query, threshold, limit)
+    const result = await this.search(query, threshold, limit)
     this.cache(result, 60 * 60)
     res.send(result)
   }
@@ -90,7 +90,7 @@ class Search extends Endpoint {
 
     // Return to original order
     const result = []
-    for (let item of items) {
+    for (const item of items) {
       const r = full.find(i => i.name === item)
       r.imgUrl = `https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`
       delete r.icon

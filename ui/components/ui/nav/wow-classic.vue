@@ -9,11 +9,11 @@
       <search placeholder="Search items...">
         <span class="shortcut">SHIFT + F</span>
       </search>
-      <select-region/>
-      <select-server/>
+      <select-region />
+      <select-server />
     </div>
     <div class="col nav-r">
-      <notifications/>
+      <notifications />
     </div>
   </nav>
 </template>
@@ -40,6 +40,11 @@ export default {
     search,
     selectRegion,
     selectServer
+  },
+
+  async asyncData ({ store, route }) {
+    const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
+    store.commit('setServerlist', serverlist)
   },
 
   created () {
@@ -75,11 +80,6 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
-  },
-
-  async asyncData ({ store, route }) {
-    const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
-    store.commit('setServerlist', serverlist)
   },
 
   storeModule

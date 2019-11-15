@@ -1,7 +1,7 @@
 <template>
   <div v-if="previous" class="price-diff">
     <div :class="{ negative: type.toLowerCase() === 'selling' ? diff > 0 : diff < 0, positive: type.toLowerCase() === 'selling' ? diff < 0 : diff > 0 }" class="value">
-      <indicator :diff="diff" :reverse="type.toLowerCase() === 'selling'"/>
+      <indicator :diff="diff" :reverse="type.toLowerCase() === 'selling'" />
       {{ Math.abs(diff) }}{{ unit }}
     </div>
     <div v-if="current" class="tooltip">

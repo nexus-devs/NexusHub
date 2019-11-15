@@ -11,8 +11,8 @@ async function getClient () {
   // On staging/prod build? Just read use the pre-generated credentials.
   if (docker && prod) {
     const fs = require('fs')
-    userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
-    userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
+    userKey = fs.readFileSync('/run/secrets/nexus-cubic-key', 'utf-8').trim()
+    userSecret = fs.readFileSync('/run/secrets/nexus-cubic-secret', 'utf-8').trim()
     apiUrl = 'ws://api:3003/ws'
     authUrl = 'ws://auth:3030/ws'
   }

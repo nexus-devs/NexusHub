@@ -1,10 +1,10 @@
 <template>
   <div id="app" :class="theme.app">
     <div class="app-view">
-      <router-view/>
-      <bottom/>
+      <router-view />
+      <bottom />
     </div>
-    <status/>
+    <status />
   </div>
 </template>
 
@@ -25,17 +25,6 @@ export default {
   components: {
     status,
     bottom
-  },
-  head: {
-    /* eslint no-undef: "off" */
-    title: 'NexusHub' + ($STAGING ? ' [staging]' : ($PRODUCTION ? '' : ' [dev]')),
-    link: [
-      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
-    ],
-    script: [
-      { src: 'https://static.nitropay.com/nads/nads-34.min.js' }
-    ]
   },
   computed: {
     theme () {
@@ -60,6 +49,17 @@ export default {
       checkDuplicatedScript: true,
       router: this.$router
     })
+  },
+  head: {
+    /* eslint no-undef: "off" */
+    title: 'NexusHub' + ($STAGING ? ' [staging]' : ($PRODUCTION ? '' : ' [dev]')),
+    link: [
+      { rel: 'preload', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400', as: 'font' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
+    ],
+    script: [
+      { src: 'https://static.nitropay.com/nads/nads-34.min.js' }
+    ]
   }
 }
 </script>

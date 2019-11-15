@@ -5,6 +5,7 @@ const request = require('request-promise')
 let counter = 0
 
 module.exports = async function get (url, port = 3003) {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async resolve => {
     try {
       resolve(await request.get(`http://localhost:${port}${url}`))

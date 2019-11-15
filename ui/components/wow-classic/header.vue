@@ -1,8 +1,8 @@
 <template>
   <header>
-    <div class="item-img-shade"/>
-    <div class="item-img-shade-2"/>
-    <div class="background"/>
+    <div class="item-img-shade" />
+    <div class="item-img-shade-2" />
+    <div class="background" />
     <div class="container">
       <div class="item-profile">
         <div class="icon">
@@ -17,8 +17,7 @@
         </div>
       </div>
     </div>
-    <nav ref="subnav" class="subnav">
-    </nav>
+    <nav ref="subnav" class="subnav" />
   </header>
 </template>
 
@@ -28,20 +27,6 @@
 import storeModule from 'src/store/wow-classic/items.js'
 
 export default {
-  computed: {
-    item () {
-      return this.$store.state.items.item
-    },
-    regionServerString () {
-      let str = ''
-      if (this.item.region) {
-        const server = this.item.server ? this.item.server.charAt(0).toUpperCase() + this.item.server.slice(1).toLowerCase() : undefined
-        const serverString = server ? ` - ${server}` : ''
-        str = `[${this.item.region}${serverString}]`
-      }
-      return str
-    }
-  },
 
   async asyncData ({ store, route }) {
     const item = route.params.item
@@ -59,6 +44,20 @@ export default {
       }
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
       store.commit('setItem', itemData)
+    }
+  },
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    },
+    regionServerString () {
+      let str = ''
+      if (this.item.region) {
+        const server = this.item.server ? this.item.server.charAt(0).toUpperCase() + this.item.server.slice(1).toLowerCase() : undefined
+        const serverString = server ? ` - ${server}` : ''
+        str = `[${this.item.region}${serverString}]`
+      }
+      return str
     }
   },
 

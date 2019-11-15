@@ -2,7 +2,7 @@
   <div class="row">
     <div v-for="(day, i) in data" :key="axisDays[i]" class="day">
       <div v-for="(hour, j) in day" :key="hour + '' + j" class="hour-wrapper">
-        <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="[theme.hour, { inactive: !hour }]" class="hour"/>
+        <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="[theme.hour, { inactive: !hour }]" class="hour" />
         <div :class="theme.tooltip" class="tooltip">
           <time :datetime="`${j * 2 + 1}:00`">
             {{ axisDays[i] }},
@@ -21,7 +21,7 @@
         <span v-if="i % 3 === 1" :class="theme.label" class="label">
           {{ i % 12 + 1 }}{{ i + 1 > 11 ? 'pm' : 'am' }}
         </span>
-        <span v-else/>
+        <span v-else />
       </div>
     </div>
   </div>

@@ -5,10 +5,10 @@
       <h3>Heatmap Market Value</h3>
     </template>
     <template slot="body">
-      <heatmap :data="data" :parse-num="true" :tooltip-label="'Market Value'"/>
+      <heatmap :data="data" :parse-num="true" :tooltip-label="'Market Value'" />
     </template>
     <template slot="footer">
-      <module-time :days="timerange" :fn="setTimerange"/>
+      <module-time :days="timerange" :fn="setTimerange" />
     </template>
   </module>
 </template>
@@ -16,17 +16,13 @@
 
 <script>
 import heatmap from 'src/components/charts/heatmap.vue'
-import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
-import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
-    indicator,
     module,
     moduleTime,
-    progressbar,
     heatmap
   },
 

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <header>
         <div class="background-container">
-          <div class="background"/>
+          <div class="background" />
         </div>
         <div class="container search-container">
           <div class="search-logo">
@@ -13,8 +13,8 @@
           </div>
 
           <div class="search-bar">
-            <search :focus="true"/>
-            <search-button/>
+            <search :focus="true" />
+            <search-button />
           </div>
 
           <h2>Never miss out on a trade again!</h2>
@@ -63,11 +63,13 @@
       <!-- News -->
       <section>
         <div class="container">
-          <h2 class="sub">Latest News</h2>
+          <h2 class="sub">
+            Latest News
+          </h2>
           <div class="row-margin patchlogs">
-            <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b"/>
+            <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b" />
           </div>
-          <ad name="warframe-index-patchlogs"/>
+          <ad name="warframe-index-patchlogs" />
         </div>
       </section>
     </app-content>
@@ -77,14 +79,11 @@
 
 
 <script>
-import activity from 'src/components/warframe/activity.vue'
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
-import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import newsArticle from 'src/components/wow-classic/news-article.vue'
-import opm from 'src/components/warframe/opm-global.vue'
 import search from 'src/components/search/wow-classic.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import storeModule from 'src/store/wow-classic/wowclassic.js'
@@ -94,12 +93,13 @@ export default {
     ad,
     navigation,
     appContent,
-    opm,
-    activity,
-    module,
     newsArticle,
     search,
     searchButton
+  },
+
+  async asyncData () {
+    this.$store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
   },
 
   computed: {
@@ -112,10 +112,6 @@ export default {
     news () {
       return this.$store.state.wowclassic.news
     }
-  },
-
-  async asyncData () {
-    this.$store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
   },
 
   storeModule,

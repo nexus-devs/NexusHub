@@ -107,7 +107,7 @@ export default {
           imgUrl: item.imgUrl,
           webUrl: `/wow-classic/items/${item.itemId}`,
           results: 'items',
-          description: name,
+          description: name
         })
       }
       return items
@@ -124,7 +124,7 @@ export default {
           filter.path.split('.').forEach(key => { result = result[key] })
           return result
         } catch (err) {
-          return
+
         }
       }
       const getSortingValue = result => {

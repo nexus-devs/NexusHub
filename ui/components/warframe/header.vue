@@ -6,9 +6,9 @@
         <img :src="item.imgUrl" :alt="item.name" draggable="false" class="item-profile-img-blur" onerror="this.style.display='none'">
       </div>
     </div>
-    <div class="item-img-shade"/>
-    <div class="item-img-shade-2"/>
-    <div class="background"/>
+    <div class="item-img-shade" />
+    <div class="item-img-shade-2" />
+    <div class="background" />
     <div class="container">
       <div class="item-profile">
         <div class="item-profile-data-info">
@@ -19,9 +19,10 @@
           </div>
           <br>
           <div v-if="item.components.length > 1">
-            <span v-for="component in item.components" v-if="component.tradable || component.name === 'Set'" :key="component.name"
-                  :class="{ selected: selectedComponent === component.name }" class="interactive"
-                  @click="selectComponent">
+            <span v-for="comp in filteredComponents" :key="comp.name"
+                  :class="{ selected: selectedComponent === comp.name }" class="interactive"
+                  @click="selectComponent"
+            >
               {{ component.name }}
             </span>
           </div>
@@ -33,13 +34,19 @@
     </div>
     <nav ref="subnav" class="subnav">
       <div class="container">
-        <router-link :to="itemUrl" exact class="interactive">Overview</router-link>
-        <router-link v-if="item.tradable" :to="`${itemUrl}/prices`" class="interactive">Prices</router-link>
+        <router-link :to="itemUrl" exact class="interactive">
+          Overview
+        </router-link>
+        <router-link v-if="item.tradable" :to="`${itemUrl}/prices`" class="interactive">
+          Prices
+        </router-link>
         <router-link v-if="item.tradable" :to="`${itemUrl}/trading`" class="interactive">
           Trade
           <span class="btn-counter">{{ item.activeOrders }}</span>
         </router-link>
-        <router-link v-if="item.patchlogs && item.patchlogs.length" :to="`${itemUrl}/patchlogs`" class="interactive">Patchlogs</router-link>
+        <router-link v-if="item.patchlogs && item.patchlogs.length" :to="`${itemUrl}/patchlogs`" class="interactive">
+          Patchlogs
+        </router-link>
       </div>
     </nav>
   </header>
@@ -50,13 +57,26 @@
 <script>
 import storeModule from 'src/store/warframe/items.js'
 import tooltip from 'src/components/ui/tooltip.vue'
-import uiHeader from 'src/components/ui/header.vue'
 const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 
 export default {
   components: {
-    uiHeader,
     tooltip
+  },
+
+  async asyncData ({ store, route }) {
+    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
+
+    // Only fetch item data if we actually have a new item
+    if (title(store.state.items.item.name) !== item) {
+      const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
+      itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}`)
+
+      if (itemData.tradable) {
+        itemData.activeOrders = (await this.$cubic.get(`/warframe/v1/orders?item=${item}`)).length
+      }
+      store.commit('setItem', itemData)
+    }
   },
 
   computed: {
@@ -75,21 +95,9 @@ export default {
     },
     selectedComponent () {
       return this.$store.state.items.selected.component
-    }
-  },
-
-  async asyncData ({ store, route }) {
-    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
-
-    // Only fetch item data if we actually have a new item
-    if (title(store.state.items.item.name) !== item) {
-      const itemData = await this.$cubic.get(`/warframe/v1/items/${item}`)
-      itemData.patchlogs = await this.$cubic.get(`/warframe/v1/patchlogs?item=${item}`)
-
-      if (itemData.tradable) {
-        itemData.activeOrders = (await this.$cubic.get(`/warframe/v1/orders?item=${item}`)).length
-      }
-      store.commit('setItem', itemData)
+    },
+    filteredComponents () {
+      return this.item.components.filter(c => c.tradable || c.name === 'Set')
     }
   },
 

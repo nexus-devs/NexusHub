@@ -1,29 +1,33 @@
 <template>
   <div>
-    <navigation/>
-    <item-header/>
+    <navigation />
+    <item-header />
     <app-content>
       <section>
         <div class="container">
-          <h2 class="sub">Item Overview</h2>
+          <h2 class="sub">
+            Item Overview
+          </h2>
           <div class="row-margin main">
             <div class="col-b column">
-              <description/>
+              <description />
             </div>
-            <stats class="col-b"/>
+            <stats class="col-b" />
           </div>
         </div>
       </section>
       <section>
         <div class="container">
-          <h2 class="sub">Statistics</h2>
+          <h2 class="sub">
+            Statistics
+          </h2>
           <div class="row-margin main">
-            <graphValueQuantity class="col-b graph"/>
-            <graphValueComparison class="col-b graph"/>
+            <graphValueQuantity class="col-b graph" />
+            <graphValueComparison class="col-b graph" />
           </div>
           <div class="row-margin main">
-            <heatmapValue class="col-b graph"/>
-            <heatmapQuantity class="col-b graph"/>
+            <heatmapValue class="col-b graph" />
+            <heatmapQuantity class="col-b graph" />
           </div>
         </div>
       </section>
@@ -34,7 +38,6 @@
 
 
 <script>
-import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
 import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
@@ -42,14 +45,12 @@ import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.
 import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
 import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
-import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
 import storeModule from 'src/store/wow-classic/graphs.js'
 
 export default {
   components: {
-    ad,
     appContent,
     navigation,
     itemHeader,
@@ -59,18 +60,6 @@ export default {
     graphValueQuantity,
     heatmapValue,
     heatmapQuantity
-  },
-
-  computed: {
-    item () {
-      return this.$store.state.items.item
-    }
-  },
-
-  head () {
-    return {
-      title: `${this.item.name} · NexusHub`
-    }
   },
 
   async asyncData ({ store, route }) {
@@ -98,6 +87,18 @@ export default {
     store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
     store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
     store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })
+  },
+
+  computed: {
+    item () {
+      return this.$store.state.items.item
+    }
+  },
+
+  head () {
+    return {
+      title: `${this.item.name} · NexusHub`
+    }
   },
 
   storeModule

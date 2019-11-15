@@ -16,8 +16,8 @@ class Logger {
     const changes = {}
 
     commits.forEach(commit => {
-      let message = commit.body.split('\n\n')
-      let scopere = commit.subject.match(/\(([^)]+)\)/)
+      const message = commit.body.split('\n\n')
+      const scopere = commit.subject.match(/\(([^)]+)\)/)
       commit.body = message[0]
       commit.footer = message[1]
       commit.scope = scopere ? scopere[1] : null
@@ -25,15 +25,15 @@ class Logger {
       commit.subject = commit.subject.split(': ')[1]
 
       if (this.types.includes(commit.type)) {
-        let issues = this.getIssues(commit.footer)
-        let change = this.getChange(commit, issues)
+        const issues = this.getIssues(commit.footer)
+        const change = this.getChange(commit, issues)
 
         // Ensure we have an object for commit type
-        let type = commit.type
+        const type = commit.type
         changes[type] = changes[type] || {}
 
         // Ensure scope exists within type
-        let scope = [commit.scope || 'general']
+        const scope = [commit.scope || 'general']
         changes[type][scope] = changes[type][scope] || []
 
         // Add change to target scope within target type
@@ -65,7 +65,7 @@ class Logger {
    * Find related issues in commit footer
    */
   getIssues (footer) {
-    let issues = []
+    const issues = []
 
     if (footer) {
       footer.match(/[0-9]*/g).forEach(num => {
@@ -116,7 +116,7 @@ class Logger {
    * Save formatted unreleased changes to this.logs and save to file
    */
   async save (changes) {
-    let unreleased = {
+    const unreleased = {
       release: {
         name: 'unreleased',
         id: null,

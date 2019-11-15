@@ -52,7 +52,7 @@ class Scan extends Endpoint {
   // Known issues: Bidding can raise the time window, one auction can be bought and replaced with the exact same one
   // TODO: Add updating old orders
   merge (orders, recentOrders) {
-    for (let recent of recentOrders) {
+    for (const recent of recentOrders) {
       // Find orders that are (likely) duplicates
       const index = orders.findIndex(order => {
         // Check generic matches

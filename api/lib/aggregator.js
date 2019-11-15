@@ -271,13 +271,13 @@ class Aggregator {
     }
 
     // Get average, min, max, sum for all days + hours
-    for (let group of groups) {
+    for (const group of groups) {
       if (!result.sum[group.id]) result.sum[group.id] = {}
       if (!result.min[group.id]) result.min[group.id] = {}
       if (!result.max[group.id]) result.max[group.id] = {}
       if (!result.avg[group.id]) result.avg[group.id] = {}
 
-      for (let key of Object.keys(group.data[0])) {
+      for (const key of Object.keys(group.data[0])) {
         if (typeof group.data[0][key] !== 'number') continue
 
         result.sum[group.id][key] = _.sumBy(group.data, d => d[key])

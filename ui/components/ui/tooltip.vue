@@ -1,7 +1,7 @@
 <template>
   <div class="tooltip">
-    <div class="tooltip-pointer"/>
-    <span><slot/></span>
+    <div class="tooltip-pointer" />
+    <span><slot /></span>
   </div>
 </template>
 

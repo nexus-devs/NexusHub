@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <ui-header>
         <img src="/img/brand/nexushub-typeface-bw.svg" alt="NexusHub">
@@ -94,7 +94,7 @@
           <div class="row-margin">
             <div class="col-b color">
               <div class="primary-shade green">
-                <span/>
+                <span />
                 <span>#39e56f</span>
               </div>
               <div class="sub-shade green-shade">
@@ -103,7 +103,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade blue">
-                <span/>
+                <span />
                 <span>#15ced6</span>
               </div>
               <div class="sub-shade blue-shade">
@@ -112,7 +112,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade grey">
-                <span/>
+                <span />
                 <span>#8b97a8</span>
               </div>
               <div class="sub-shade grey-shade">
@@ -121,7 +121,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade dark">
-                <span/>
+                <span />
                 <span>#21232a</span>
               </div>
               <div class="sub-shade dark-shade">

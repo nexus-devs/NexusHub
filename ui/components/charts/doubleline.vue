@@ -9,18 +9,18 @@
       <div class="graph">
         <div class="sparkline">
           <svg :width="width" :height="height">
-            <path :d="line.value1" :class="theme.line" class="line"/>
-            <path :d="line.value2" :class="theme.line2" class="line2"/>
+            <path :d="line.value1" :class="theme.line" class="line" />
+            <path :d="line.value2" :class="theme.line2" class="line2" />
           </svg>
         </div>
         <div class="tooltip-container">
           <svg :width="width + 160" :height="height">
             <g v-for="(d, i) in data" :key="d.x" class="point">
-              <rect :x="scaled.x(d.x)" class="hover"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" :class="theme.circle"/>
-              <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" :class="theme.circle2"/>
+              <rect :x="scaled.x(d.x)" class="hover" />
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" :class="theme.circle" />
+              <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" :class="theme.circle2" />
               <g :class="theme.tooltip" class="tooltip">
-                <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px"/>
+                <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px" />
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                   {{ parseHoursAgo(i, data.length) }}
                 </text>
@@ -178,8 +178,8 @@ export default {
         this.scaled.v2.domain([0, this.getCombinedGoldValueMax()])
       }
 
-      const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3['curveMonotoneX'])
-      const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3['curveMonotoneX'])
+      const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3.curveMonotoneX)
+      const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3.curveMonotoneX)
       this.line.value1 = lineValue1(this.data)
       this.line.value2 = lineValue2(this.data)
     },

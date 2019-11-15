@@ -11,7 +11,7 @@ const replacer = (key, value) => {
 }
 
 function getEndpointTree (filepath) {
-  let stats = fs.lstatSync(filepath)
+  const stats = fs.lstatSync(filepath)
 
   // Don't include this endpoint
   if (filepath.includes('docs/endpoints')) {
@@ -27,15 +27,15 @@ function getEndpointTree (filepath) {
 
   // File -> Set endpoint config
   else {
-    let Endpoint = require(filepath.replace('//', '/'))
-    let endpoint = new Endpoint().schema
+    const Endpoint = require(filepath.replace('//', '/'))
+    const endpoint = new Endpoint().schema
     if (!endpoint) {
       return
     }
 
     // Routes
     endpoint.name = path.basename(filepath).replace('.js', '')
-    let route = path.resolve(filepath).replace(path.resolve(cubic.config.api.endpointPath), '')
+    const route = path.resolve(filepath).replace(path.resolve(cubic.config.api.endpointPath), '')
       .replace(/\\/g, '/').replace('.js', '')
     endpoint.sourceUrl = `https://github.com/nexus-devs/nexus-stats/blob/development/api${route}.js`
     endpoint.route = endpoint.url ? endpoint.url : route
