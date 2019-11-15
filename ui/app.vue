@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="theme.app">
     <div class="app-view">
       <router-view/>
       <bottom/>
@@ -15,6 +15,7 @@ import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
 import bottom from 'src/components/ui/footer.vue'
+import getTheme from 'src/components/_theme.js'
 import status from 'src/components/ui/status.vue'
 
 /**
@@ -37,6 +38,9 @@ export default {
     ]
   },
   computed: {
+    theme () {
+      return getTheme(this)
+    },
     route () {
       return this.$route
     }
@@ -61,6 +65,21 @@ export default {
 </script>
 
 
+<style lang="scss" module="warframe">
+  @import '~src/styles/partials/importer';
+
+  .app {
+    background: $color-bg-dark;
+  }
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.app {
+  background: $color-bg-dark;
+}
+</style>
 
 <style lang='scss'>
 @import '~src/styles/partials/importer';
@@ -69,7 +88,6 @@ export default {
 @import '~src/styles/grid';
 
 #app {
-  background: $color-bg-dark;
   color: white;
 }
 
