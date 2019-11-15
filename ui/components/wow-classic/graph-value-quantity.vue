@@ -65,6 +65,7 @@ export default {
 
   methods: {
     async setTimerange (timerange) {
+      if (timerange === this.timerange) return
       this.$refs.graphValueQuantity.$refs.progress.start()
       await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-quantity', timerange })
       this.$refs.graphValueQuantity.$refs.progress.finish()

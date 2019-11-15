@@ -73,6 +73,7 @@ export default {
 
   methods: {
     async setTimerange (timerange) {
+      if (timerange === this.timerange) return
       this.$refs.graphValueComparison.$refs.progress.start()
       await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-comparison', timerange })
       this.$refs.graphValueComparison.$refs.progress.finish()

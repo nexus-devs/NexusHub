@@ -55,6 +55,7 @@ export default {
 
   methods: {
     async setTimerange (timerange) {
+      if (timerange === this.timerange) return
       this.$refs.heatmapValue.$refs.progress.start()
       await this.$store.dispatch('refetchGraphData', { graph: 'heatmap-value', timerange })
       this.$refs.heatmapValue.$refs.progress.finish()

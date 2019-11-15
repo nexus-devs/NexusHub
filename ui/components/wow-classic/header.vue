@@ -26,15 +26,8 @@
 
 <script>
 import storeModule from 'src/store/wow-classic/items.js'
-import tooltip from 'src/components/ui/tooltip.vue'
-import uiHeader from 'src/components/ui/header.vue'
 
 export default {
-  components: {
-    uiHeader,
-    tooltip
-  },
-
   computed: {
     item () {
       return this.$store.state.items.item
