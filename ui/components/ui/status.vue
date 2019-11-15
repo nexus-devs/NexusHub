@@ -48,12 +48,12 @@ export default {
 
 
 <style lang="scss" module="warframe">
-  @import '~src/styles/partials/importer';
+@import '~src/styles/partials/importer';
 
-  .status {
-    color: $color-font-body;
-    background: $color-bg-darkest;
-  }
+.status {
+  color: $color-font-body;
+  background: $color-bg-darkest;
+}
 </style>
 
 <style lang="scss" module="wow-classic">
