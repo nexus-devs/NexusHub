@@ -185,7 +185,7 @@ export default {
     color: $color-error;
   }
   .data-price-diff {
-    color: $color-primary-subtle;
+    color: $color-positive;
   }
 }
 .ducats {
