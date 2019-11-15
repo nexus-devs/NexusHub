@@ -80,6 +80,14 @@ export default {
 @import '~src/styles/partials/wow-classic/importer';
 :global {
   @import '~src/styles/modules/wow-classic/importer';
+
+  .btn, button {
+    @include gradient-background-dg($color-primary, $color-accent);
+
+    &:after {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
+  }
 }
 
 .app {
