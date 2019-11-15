@@ -100,6 +100,11 @@ export default {
 @import '~src/styles/reset';
 @import '~src/styles/grid';
 
+@font-face {
+  font-family: 'Circular';
+  src: url('/fonts/circular-std.woff');
+}
+
 #app {
   color: white;
 }

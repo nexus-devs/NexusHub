@@ -242,7 +242,7 @@ header {
     span {
       font-size: 2.2em;
       color: white;
-      font-family: 'Circular'
+      font-family: 'Circular';
     }
   }
 
