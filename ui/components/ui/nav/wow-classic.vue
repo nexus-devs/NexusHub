@@ -1,8 +1,8 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link to="/" exact>
-        <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
+      <router-link to="/wow-classic" exact>
+        <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
     <div class="middle-content">
