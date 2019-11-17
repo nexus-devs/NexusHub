@@ -19,10 +19,10 @@
     </div>
     <nav ref="subnav" class="subnav">
       <div class="container">
-        <router-link :to="'/'" exact class="interactive">
+        <router-link :to="`${itemUrl}`" exact class="interactive">
           Overview
         </router-link>
-        <router-link :to="'/'" class="interactive">
+        <router-link :to="`${itemUrl}/crafting`" class="interactive">
           Crafting
         </router-link>
       </div>
@@ -58,6 +58,10 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    itemUrl () {
+      const route = this.$route.fullPath.split(this.item.itemId)[0]
+      return `${route}${this.item.itemId}`
     },
     regionServerString () {
       let str = ''
