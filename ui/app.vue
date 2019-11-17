@@ -82,7 +82,7 @@ export default {
   @import '~src/styles/modules/wow-classic/importer';
 
   .btn, button {
-    @include gradient-background-dg($color-primary, $color-accent);
+    background: linear-gradient(to bottom right, $color-primary 33%, $color-accent);
 
     &:after {
       @include gradient-background-dg($color-primary, $color-accent);

@@ -17,7 +17,16 @@
         </div>
       </div>
     </div>
-    <nav ref="subnav" class="subnav" />
+    <nav ref="subnav" class="subnav">
+      <div class="container">
+        <router-link :to="'/'" exact class="interactive">
+          Overview
+        </router-link>
+        <router-link :to="'/'" class="interactive">
+          Crafting
+        </router-link>
+      </div>
+    </nav>
   </header>
 </template>
 

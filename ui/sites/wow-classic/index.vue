@@ -8,7 +8,7 @@
         </div>
         <div class="container search-container">
           <div class="search-logo">
-            <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+            <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
             <span>.co</span>
           </div>
 
