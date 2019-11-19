@@ -60,7 +60,7 @@ class Item extends Endpoint {
     } else {
       const response = {
         error: 'Not found.',
-        reason: `${item} could not be not found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
+        reason: `${item} could not be found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
       }
       this.cache(response, 60)
       res.status(404).send(response)
