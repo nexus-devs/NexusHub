@@ -31,6 +31,25 @@ async function monitor () {
     if (!reqRealms.success) console.log(`Could not fetch realms: ${reqRealms.error}`)
     else {
       const realms = reqRealms.data
+      for (const realm of realms) {
+        const lastScan = await client.get(`/wow-classic/v1/scans/latest/${realm.master_slug}`)
+
+        // If there are no scans or the last scan is outdated
+        if (lastScan.error || lastScan.scannedAt < realm.last_modified) {
+          const scans = await requestTSM(tsmKey, `/realm/${realm.master_slug}/scans`)
+          if (!scans.success) {
+            console.log(`Could not fetch scans for ${realm.master_slug}: ${reqRealms.error}`)
+            break
+          }
+
+          // Sort TSM scans by date and add them
+          scans.data.sort((a, b) => b.last_modified - a.last_modified)
+          for (const scan of scans) {
+            if (scan.last_modified <= lastScan.scannedAt) break // Stop if last scan is reached
+            client.post('/wow-classic/v1/scans/new', { scanId: scan.id })
+          }
+        }
+      }
     }
 
     if (prod) {
