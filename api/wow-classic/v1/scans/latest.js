@@ -20,7 +20,7 @@ class ScansLast extends Endpoint {
    */
   async main (req, res) {
     const slug = req.params.slug
-    const scan = await this.db.collection('scans').findOne({ slug }, { sort: { scannedAt: -1 } })
+    const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
 
     if (scan) res.send(scan)
     else {

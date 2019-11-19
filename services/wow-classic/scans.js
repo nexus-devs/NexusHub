@@ -46,7 +46,7 @@ async function monitor () {
           scans.data.sort((a, b) => b.last_modified - a.last_modified)
           for (const scan of scans) {
             if (scan.last_modified <= lastScan.scannedAt) break // Stop if last scan is reached
-            client.post('/wow-classic/v1/scans/new', { scanId: scan.id })
+            client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, scanId: scan.id, scannedAt: scan.last_modified })
           }
         }
       }
