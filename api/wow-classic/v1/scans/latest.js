@@ -29,7 +29,8 @@ class ScansLast extends Endpoint {
         reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
       }
       // this.cache(response, 60) TODO: Uncomment this
-      res.status(404).send(response)
+      // res.status(404).send(response)
+      res.send(response)
     }
   }
 }

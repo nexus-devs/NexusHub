@@ -44,18 +44,17 @@ async function monitor () {
 
           // Sort TSM scans by date and add them
           scans.data.sort((a, b) => b.last_modified - a.last_modified)
-          for (const scan of scans) {
+          for (const scan of scans.data) {
             if (scan.last_modified <= lastScan.scannedAt) break // Stop if last scan is reached
-            client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, scanId: scan.id, scannedAt: scan.last_modified })
+            // Await to avoid overloading the TSM servers
+            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, scanId: scan.id, scannedAt: scan.last_modified })
           }
         }
       }
     }
 
-    if (prod) {
-      console.log(`Done in ${new Date() - timer}ms`)
-      await sleep(1000 * 60 * 10)
-    } else await sleep(1000 * 10)
+    if (prod) console.log(`Done in ${new Date() - timer}ms`)
+    await sleep(1000 * 60 * 10)
     lastDone = new Date()
   }
 }
