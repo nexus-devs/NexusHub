@@ -43,9 +43,10 @@ async function monitor () {
           }
 
           // Sort TSM scans by date and add them
-          scans.data.sort((a, b) => b.last_modified - a.last_modified)
+          // Do old -> new so there aren't data holes if the service get's interrupted
+          scans.data.sort((a, b) => a.last_modified - b.last_modified)
           for (const scan of scans.data) {
-            if (scan.last_modified <= lastScan.scannedAt) break // Stop if last scan is reached
+            if (scan.last_modified <= lastScan.scannedAt) continue // If scan is already added
             // Await to avoid overloading the TSM servers
             await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, scanId: scan.id, scannedAt: scan.last_modified })
           }
