@@ -25,7 +25,7 @@ class Scan extends Endpoint {
     const scanId = req.body.scanId
     const scannedAt = req.body.scannedAt
 
-    const scanExistsAlready = await this.db.collection('scans').findOne({ slug, scanId }, { projection: { slug: 1, scanId: 1 } })
+    const scanExistsAlready = await this.db.collection('scans').findOne({ slug, scanId })
     if (scanExistsAlready) {
       return res.send('Rejected. Scan already exists.')
     }
@@ -39,7 +39,16 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt, data: scan.data })
+    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt })
+    const scanData = scan.data.map((obj) => {
+      return {
+        slug,
+        scanId,
+        scannedAt,
+        ...obj
+      }
+    })
+    await this.db.collection('scanData').insertMany(scanData)
 
     res.send('added!')
   }
