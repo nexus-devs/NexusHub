@@ -18,7 +18,7 @@
   "dependencies": {
     "cubic": "3.0.1",
     "cubic-api": "3.2.2",
-    "cubic-auth": "3.2.1",
+    "cubic-auth": "3.2.2",
     "cubic-client": "3.2.1",
     "cubic-ui": "3.4.0",
     "d3": "^5.9.2",
