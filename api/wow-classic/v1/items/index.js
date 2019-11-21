@@ -1,5 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const request = require('request-promise')
 
 /**
  * Provides basic item statistics for a specific item
@@ -7,21 +6,9 @@ const request = require('request-promise')
 class Items extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get basic item stats. Usage of this data for commerical purposes must be discussed with us before.'
-    this.schema.url = '/wow-classic/v1/items/:item'
-    this.schema.request = { url: '/wow-classic/v1/items/2589' }
-    this.schema.query = [
-      {
-        name: 'region',
-        default: 'all',
-        description: 'Region to return data from.'
-      },
-      {
-        name: 'server',
-        default: '',
-        description: 'Server to return data from.'
-      }
-    ]
+    this.schema.description = 'Get basic item stats. Usage of this data for commercial purposes must be discussed with us before.'
+    this.schema.url = '/wow-classic/v1/items/:slug/:item'
+    this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
     this.schema.response = {
       itemId: Number,
       name: String,
@@ -40,83 +27,56 @@ class Items extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const region = (['US', 'EU'].includes(req.query.region.toUpperCase())) ? req.query.region.toUpperCase() : null
-    const server = req.query.server ? req.query.server.toLowerCase() : null
+    const itemId = parseInt(req.params.item)
+    const slug = req.params.slug
 
-    let uri = 'http://api.tradeskillmaster.com/v1/item/'
-    if (region && server) {
-      uri += region + '/'
-      uri += (server || 'blackhand') + '/' // add dummy server so we can request TSM API
+    const item = await this.db.collection('items').findOne({ itemId })
+    if (!item) {
+      return res.status(404).send({
+        error: 'Not found.',
+        reason: `Item with ID ${itemId} could not be found.`
+      })
     }
-    uri += req.params.item
 
-    // TODO: Put all the requests in parallel
-    const item = await request({
-      uri,
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise' },
-      qs: {
-        format: 'json',
-        apiKey: 'iymI28H-EW5H0jne2M_Zm_pylkDRNfAC'
+    // TODO: Change this from unix timestamps to ISODate
+    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
+    const stats = await this.db.collection('scanData').find({
+      slug,
+      item: itemId,
+      scannedAt: { $gte: now - 1000 * 60 * 60 * 24 * 2 } // max 2 days old
+    }).sort({ scannedAt: 1 }).toArray()
+
+    const middle = Math.ceil(stats.length / 2)
+    const previousStats = stats.slice(0, middle)
+    const currentStats = stats.slice(middle, stats.length)
+
+    const reducer = (length) => {
+      return (acc, cV) => {
+        acc.marketValue += cV.market_value * (1 / length)
+        acc.minBuyout += cV.min_buyout * (1 / length)
+        acc.qty += cV.quantity * (1 / length)
+        return acc
       }
-    })
-
-    const meta = await this.db.collection('items').findOne({ itemId: item.Id || item.ItemId })
+    }
+    const previous = previousStats.reduce(reducer(previousStats.length), { marketValue: 0, minBuyout: 0, qty: 0 })
+    const current = currentStats.reduce(reducer(currentStats.length), { marketValue: 0, minBuyout: 0, qty: 0 })
+    for (const k of Object.keys(previous)) {
+      previous[k] = Math.round(previous[k])
+      current[k] = Math.round(current[k])
+    }
 
     const response = {
-      itemId: item.Id || item.ItemId,
-      name: item.Name,
-      icon: `https://wow.zamimg.com/images/wow/icons/large/${meta.icon}.jpg`,
-      tags: [meta.quality, meta.class],
-      requiredLevel: meta.requiredLevel,
-      itemLevel: meta.itemLevel,
-      sellPrice: meta.sellPrice
-    }
-    if (meta.class !== meta.subclass) response.tags.push(meta.subclass)
-    if (meta.slot !== 'Non-equippable') response.tags.push(meta.slot)
-
-    response.tooltip = ''
-
-    if (region && server) {
-      response.region = region
-      response.server = server
-      response.minBuyout = item.MinBuyout
-      response.marketValue = item.MarketValue
-      response.qty = item.Quantity
-      response.previous = this.generatePreviousSampleData(response)
-
-      response[region] = {
-        minBuyout: item.RegionMinBuyoutAvg,
-        marketValue: item.RegionMarketAvg,
-        qty: item.RegionQuantity
-      }
-      response[region].previous = this.generatePreviousSampleData(response[region])
-    } else {
-      if (region) response.region = region
-      response.EU = {
-        minBuyout: item.EUMinBuyoutAvg,
-        marketValue: item.EUMarketAvg,
-        qty: item.EUQuantity
-      }
-      response.EU.previous = this.generatePreviousSampleData(response.EU)
-      response.US = {
-        minBuyout: item.USMinBuyoutAvg,
-        marketValue: item.USMarketAvg,
-        qty: item.USQuantity
-      }
-      response.US.previous = this.generatePreviousSampleData(response.US)
+      itemId,
+      name: item.name,
+      icon: `https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg`,
+      tags: [item.quality, item.class],
+      requiredLevel: item.requiredLevel,
+      itemLevel: item.itemLevel,
+      sellPrice: item.sellPrice,
+      stats: { current, previous }
     }
 
-    res.send(response)
-  }
-
-  generatePreviousSampleData (item) {
-    const rand = () => Math.random() * (1.5 - 0.5) + 0.5
-    return {
-      minBuyout: item.minBuyout * rand(),
-      marketValue: item.marketValue * rand(),
-      qty: item.qty * rand()
-    }
+    return res.send(response)
   }
 }
 
