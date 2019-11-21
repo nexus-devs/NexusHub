@@ -39,19 +39,11 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item
-    const region = route.params.region
-    const server = route.params.server
+    const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item
-    if (store.state.items.item.itemId !== item) {
-      let query = ''
-      if (region) {
-        query = `?region=${region}`
-        if (server) {
-          query += `&server=${server}`
-        }
-      }
-      const itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}${query}`)
+    if (store.state.items.item.itemId !== parseInt(item)) {
+      const itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}`)
       store.commit('setItem', itemData)
     }
   },

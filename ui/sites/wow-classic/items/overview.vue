@@ -21,14 +21,14 @@
           <h2 class="sub">
             Statistics
           </h2>
-          <div class="row-margin main">
+          <!--<div class="row-margin main">
             <graphValueQuantity class="col-b graph" />
             <graphValueComparison class="col-b graph" />
           </div>
           <div class="row-margin main">
             <heatmapValue class="col-b graph" />
             <heatmapQuantity class="col-b graph" />
-          </div>
+          </div>-->
         </div>
       </section>
     </app-content>
@@ -77,16 +77,17 @@ export default {
           query += `&server=${server}`
         }
       }
-      itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}/prices${query}`)
+      // itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}/prices${query}`)
     }
 
+    /*
     store.commit('setGraphItem', itemData)
 
     // Commit start value for all graphs
     store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })
     store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
     store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
-    store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })
+    store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })*/
   },
 
   computed: {

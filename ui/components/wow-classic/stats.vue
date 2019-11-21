@@ -5,102 +5,42 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
-      <div v-if="item.marketValue" class="item-data row">
+      <div v-if="stats.current.marketValue" class="item-data row">
         <div class="col">
           <span>Market Value</span>
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ parsePrice(item.marketValue) }}
+            {{ parsePrice(stats.current.marketValue) }}
           </span>
-          <span :class="{ negative: diff(item.marketValue, item.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.marketValue, item.previous.marketValue).percentage" /> {{ Math.abs(diff(item.marketValue, item.previous.marketValue).percentage) }}%
+          <span :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
+            <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
           </span>
         </div>
       </div>
-      <div v-if="item.minBuyout" class="item-data row">
+      <div v-if="stats.current.minBuyout" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ parsePrice(item.minBuyout) }}
+            {{ parsePrice(stats.current.minBuyout) }}
+          </span>
+          <span :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
+            <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
         </div>
       </div>
-      <div v-if="item.qty" class="item-data row">
+      <div v-if="stats.current.qty" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ item.qty }}
+            {{ stats.current.qty }}
           </span>
-        </div>
-      </div>
-      <div v-if="showEU && item.EU.marketValue" class="item-data row">
-        <div class="col">
-          <span>EU Market Value</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ parsePrice(item.EU.marketValue) }}
-          </span>
-          <span :class="{ negative: diff(item.EU.marketValue, item.EU.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.EU.marketValue, item.EU.previous.marketValue).percentage" /> {{ Math.abs(diff(item.EU.marketValue, item.EU.previous.marketValue).percentage) }}%
-          </span>
-        </div>
-      </div>
-      <div v-if="showEU && item.EU.minBuyout" class="item-data row">
-        <div class="col">
-          <span>EU Min. Buyout</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ parsePrice(item.EU.minBuyout) }}
-          </span>
-        </div>
-      </div>
-      <div v-if="showEU && item.EU.qty" class="item-data row">
-        <div class="col">
-          <span>EU Quantity</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ item.EU.qty }}
-          </span>
-        </div>
-      </div>
-      <div v-if="showUS && item.US.marketValue" class="item-data row">
-        <div class="col">
-          <span>US Market Value</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ parsePrice(item.US.marketValue) }}
-          </span>
-          <span :class="{ negative: diff(item.US.marketValue, item.US.previous.marketValue).percentage < 0 }" class="data-price-diff">
-            <indicator :diff="diff(item.US.marketValue, item.US.previous.marketValue).percentage" /> {{ Math.abs(diff(item.US.marketValue, item.US.previous.marketValue).percentage) }}%
-          </span>
-        </div>
-      </div>
-      <div v-if="showUS && item.US.minBuyout" class="item-data row">
-        <div class="col">
-          <span>US Min. Buyout</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ parsePrice(item.US.minBuyout) }}
-          </span>
-        </div>
-      </div>
-      <div v-if="showUS && item.US.qty" class="item-data row">
-        <div class="col">
-          <span>US Quantity</span>
-        </div>
-        <div class="col-2">
-          <span class="data-price">
-            {{ item.US.qty }}
+          <span :class="{ negative: diff.qty < 0 }" class="data-price-diff">
+            <indicator :diff="diff.qty" /> {{ Math.abs(diff.qty) }}%
           </span>
         </div>
       </div>
@@ -125,26 +65,24 @@ export default {
     item () {
       return this.$store.state.items.item
     },
-    showEU () {
-      return this.item.region === 'EU' || !this.item.region
+    stats () {
+      return this.item.stats
     },
-    showUS () {
-      return this.item.region === 'US' || !this.item.region
+    diff () {
+      const percentage = (property) => {
+        const value = this.stats.current[property] - this.stats.previous[property]
+        return (value / this.stats.previous[property] * 100).toFixed(2)
+      }
+      return {
+        marketValue: percentage('marketValue'),
+        minBuyout: percentage('minBuyout'),
+        qty: percentage('qty')
+      }
     }
   },
 
   created () {
     this.parsePrice = utility.parsePrice
-  },
-
-  methods: {
-    diff (current, prev) {
-      const value = current - prev
-      return {
-        value,
-        percentage: (value / prev * 100).toFixed(2)
-      }
-    }
   }
 }
 </script>
