@@ -10,15 +10,19 @@ class Items extends Endpoint {
     this.schema.url = '/wow-classic/v1/items/:slug/:item'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
     this.schema.response = {
-      itemId: Number,
       name: String,
-      qty: Number,
-      minBuyout: Number,
-      marketValue: Number,
-      previous: {
-        qty: Number,
-        minBuyout: Number,
-        marketValue: Number
+      icon: String,
+      tags: [String],
+      requiredLevel: Number,
+      itemLevel: Number,
+      sellPrice: Number,
+      stats: {
+        current: {
+          qty: Number,
+          minBuyout: Number,
+          marketValue: Number
+        },
+        previous: Object
       }
     }
   }
