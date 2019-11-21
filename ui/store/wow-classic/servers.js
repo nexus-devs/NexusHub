@@ -18,6 +18,9 @@ export default {
     },
     setServer (state, server) {
       state.selectedServer = server
+    },
+    setFaction (state, faction) {
+      state.selectedFaction = faction
     }
   }
 }

@@ -54,13 +54,6 @@ export default {
     const params = this.$route.fullPath.split('?')
     const routeArgs = params[0].split('/')
 
-    for (const arg of routeArgs) {
-      const argRegion = arg.toUpperCase()
-      if (argRegion === 'EU' || argRegion === 'US') {
-        this.$store.commit('setRegion', argRegion)
-        break
-      }
-    }
     for (let i = 0; i < routeArgs.length; i++) {
       const arg = routeArgs[i].toUpperCase()
       if (arg === 'EU' || arg === 'US') {
@@ -68,6 +61,12 @@ export default {
         if (i < routeArgs.length - 1) {
           const server = this.$store.state.servers[arg].map(x => utility.serverSlug(x)).indexOf(routeArgs[i + 1])
           if (server >= 0) this.$store.commit('setServer', this.$store.state.servers[arg][server])
+          if (i < routeArgs.length - 2) {
+            const faction = routeArgs[i + 2]
+            if (faction === 'alliance' || faction === 'horde') {
+              this.$store.commit('setFaction', faction.charAt(0).toUpperCase() + faction.slice(1))
+            }
+          }
         }
         break
       }

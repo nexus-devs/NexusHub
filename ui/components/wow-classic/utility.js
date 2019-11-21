@@ -29,9 +29,13 @@ export default {
     // Insert region and server into route
     const region = self.$store.state.servers.selectedRegion
     const server = self.$store.state.servers.selectedServer
+    const faction = self.$store.state.servers.selectedFaction
     if (region !== 'All Regions') {
       routeArgs.splice(3, 0, region.toLowerCase())
-      if (server !== 'All Servers') routeArgs.splice(4, 0, this.serverSlug(server))
+      if (server !== 'All Servers') {
+        routeArgs.splice(4, 0, this.serverSlug(server))
+        if (faction !== 'All Factions') routeArgs.splice(5, 0, faction.toLowerCase())
+      }
     }
 
     params[0] = routeArgs.join('/')

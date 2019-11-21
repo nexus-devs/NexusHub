@@ -1,5 +1,5 @@
 <template>
-  <div class="select region">
+  <div :class="{ deactivated }" class="select region">
     <div class="interactive" @click="toggle">
       <span>{{ faction }}</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
@@ -29,6 +29,9 @@ export default {
   computed: {
     faction () {
       return this.$store.state.servers.selectedFaction
+    },
+    deactivated () {
+      return this.$store.state.servers.selectedServer === 'All Servers'
     }
   },
 
@@ -39,6 +42,13 @@ export default {
 
     selectFaction (faction) {
       if (this.faction === faction) return
+
+      let route = this.$route.fullPath.replace(`/${this.$store.state.servers.selectedRegion.toLowerCase()}`, '')
+      route = route.replace(`/${utility.serverSlug(this.$store.state.servers.selectedServer)}`, '')
+      route = route.replace(`/${this.faction.toLowerCase()}`, '')
+
+      this.$store.commit('setFaction', faction)
+      utility.pushUrl(this, route)
     }
   }
 }
@@ -54,6 +64,11 @@ export default {
   z-index: 2;
   font-size: 1.1em;
   color: white;
+
+  &.deactivated {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 .interactive {
   padding: 6px 10px;

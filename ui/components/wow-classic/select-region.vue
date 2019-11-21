@@ -42,9 +42,11 @@ export default {
 
       let route = this.$route.fullPath.replace(`/${this.region.toLowerCase()}`, '')
       route = route.replace(`/${utility.serverSlug(this.$store.state.servers.selectedServer)}`, '')
+      route = route.replace(`/${this.$store.state.servers.selectedFaction.toLowerCase()}`, '')
 
       this.$store.commit('setRegion', region)
       this.$store.commit('setServer', 'All Servers')
+      this.$store.commit('setFaction', 'All Factions')
       utility.pushUrl(this, route)
     }
   }
