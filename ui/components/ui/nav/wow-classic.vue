@@ -11,6 +11,7 @@
       </search>
       <select-region />
       <select-server />
+      <select-faction />
     </div>
     <div class="col nav-r">
       <notifications />
@@ -23,6 +24,7 @@
 <script>
 import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/wow-classic.vue'
+import selectFaction from 'src/components/wow-classic/select-faction.vue'
 import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 import storeModule from 'src/store/wow-classic/servers.js'
@@ -39,7 +41,8 @@ export default {
     notifications,
     search,
     selectRegion,
-    selectServer
+    selectServer,
+    selectFaction
   },
 
   async asyncData ({ store, route }) {

@@ -3,6 +3,7 @@ export default {
   state: {
     selectedRegion: 'All Regions',
     selectedServer: 'All Servers',
+    selectedFaction: 'All Factions',
     EU: [],
     US: []
   },
