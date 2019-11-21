@@ -86,6 +86,8 @@ export default {
   .body {
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    max-height: calc(250px + 10vh);
 
     span {
       cursor: pointer;
