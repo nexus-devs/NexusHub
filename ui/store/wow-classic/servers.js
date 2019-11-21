@@ -8,8 +8,9 @@ export default {
   },
   mutations: {
     setServerlist (state, list) {
-      state.EU = list.serversEU
-      state.US = list.serversUS
+      for (const region of Object.keys(list)) {
+        state[region] = list[region]
+      }
     },
     setRegion (state, region) {
       state.selectedRegion = region
