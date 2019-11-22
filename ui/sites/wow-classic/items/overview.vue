@@ -63,21 +63,21 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const item = parseInt(route.params.item)
+    const item = route.params.item
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item
     let itemData = store.state.items.item
-    if (itemData.itemId !== item) {
+    if (itemData.itemId !== parseInt(item)) {
       itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
 
-      store.commit('setGraphItem', { item, slug })
+      store.commit('setGraphItem', { itemId: itemData.itemId, slug })
 
       // Commit start value for all graphs
-      store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })
-      store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
-      store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
-      store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })
+      store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
+      store.commit('setGraphData', { graph: 'graph-value-comparison', item: itemData })
+      store.commit('setGraphData', { graph: 'heatmap-quantity', item: itemData })
+      store.commit('setGraphData', { graph: 'heatmap-value', item: itemData })
     }
   },
 
