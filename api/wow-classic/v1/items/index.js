@@ -48,7 +48,7 @@ class Items extends Endpoint {
     const stats = await this.db.collection('scanData').find({
       slug,
       item: itemId,
-      scannedAt: { $gte: now - 1000 * 60 * 60 * 24 * 2 } // max 2 days old
+      scannedAt: { $gte: now - 60 * 60 * 24 * 2 } // max 2 days old
     }).sort({ scannedAt: 1 }).toArray()
 
     const middle = Math.ceil(stats.length / 2)
