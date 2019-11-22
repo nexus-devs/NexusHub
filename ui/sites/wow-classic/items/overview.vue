@@ -63,31 +63,22 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const item = route.params.item
-    const region = route.params.region
-    const server = route.params.server
+    const item = parseInt(route.params.item)
+    const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item
     let itemData = store.state.items.item
-    if (store.state.items.item.itemId !== item) {
-      let query = ''
-      if (region) {
-        query = `?region=${region}`
-        if (server) {
-          query += `&server=${server}`
-        }
-      }
-      // itemData = await this.$cubic.get(`/wow-classic/v1/items/${item}/prices${query}`)
+    if (itemData.itemId !== item) {
+      itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
+
+      store.commit('setGraphItem', { item, slug })
+
+      // Commit start value for all graphs
+      store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })
+      store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
+      store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
+      store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })
     }
-
-    /*
-    store.commit('setGraphItem', itemData)
-
-    // Commit start value for all graphs
-    store.commit('setGraphData', { graph: 'graph-value-quantity', data: itemData })
-    store.commit('setGraphData', { graph: 'graph-value-comparison', data: itemData })
-    store.commit('setGraphData', { graph: 'heatmap-quantity', data: itemData })
-    store.commit('setGraphData', { graph: 'heatmap-value', data: itemData })*/
   },
 
   computed: {

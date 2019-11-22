@@ -2,19 +2,18 @@ export default {
   name: 'graphs',
   state: {
     itemId: '',
-    region: '',
-    server: '',
+    slug: '',
     storage: {}
   },
 
   mutations: {
     setGraphItem (state, item) {
       state.itemId = item.itemId
-      state.region = item.region
-      state.server = item.server
+      state.slug = item.slug
     },
     setGraphData (state, { graph, data }) {
-      const graphData = []
+      // state.storage[graph] = { timerange: .length, data: graphData } */
+      /* const graphData = []
       let itemData = data
       if (!data.server) itemData = data.region ? data[data.region] : data.EU
 
@@ -50,7 +49,7 @@ export default {
         graphData.push(day)
       }
 
-      state.storage[graph] = { timerange: graphData.length, data: graphData }
+      state.storage[graph] = { timerange: graphData.length, data: graphData } */
     }
   },
 

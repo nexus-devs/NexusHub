@@ -16,12 +16,16 @@ class Prices extends Endpoint {
         description: 'Time range to return data from.'
       }
     ]
-    this.schema.response = [{
-      scannedAt: Number,
-      marketValue: Number,
-      minBuyout: Number,
-      qty: Number
-    }]
+    this.schema.response = {
+      itemId: Number,
+      timerange: Number,
+      data: [{
+        scannedAt: Number,
+        marketValue: Number,
+        minBuyout: Number,
+        qty: Number
+      }]
+    }
   }
 
   /**
@@ -57,7 +61,7 @@ class Prices extends Endpoint {
       }
     })
 
-    return res.send(data)
+    return res.send({ itemId, timerange, data })
   }
 }
 
