@@ -22,7 +22,7 @@
               <g :class="theme.tooltip" class="tooltip">
                 <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px" />
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
-                  {{ parseHoursAgo(i, data.length) }}
+                  {{ parseHoursAgo(d.x) }}
                 </text>
                 <text :class="primaryClass" :x="scaled.x(d.x) + 20" y="50px">
                   {{ primaryLabel }}{{ parsePrice(data[i].value1) }}
@@ -185,11 +185,13 @@ export default {
     },
 
     // parses hours into days + hours ago
-    parseHoursAgo (h, length) {
-      const weeks = Math.floor(this.timerange / 7)
-      h = (length * weeks) - ((h + 1) * weeks)
-      const days = Math.floor(h / 24)
-      const hours = h % 24
+    parseHoursAgo (timestamp) {
+      // TODO: Change from unix timestamp to ISODate
+      const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
+      const rawHours = Math.round((now - timestamp) / 60 / 60)
+
+      const days = Math.floor(rawHours / 24)
+      const hours = rawHours - days * 24
 
       let str = ''
       if (days > 0) str += days + ' day'
