@@ -21,9 +21,10 @@
           <h2 class="sub">
             Statistics
           </h2>
-          <!--<div class="row-margin main">
+          <div class="row-margin main">
             <graphValueQuantity class="col-b graph" />
-            <graphValueComparison class="col-b graph" />
+          </div>
+          <!-- <graphValueComparison class="col-b graph" />
           </div>
           <div class="row-margin main">
             <heatmapValue class="col-b graph" />
@@ -67,9 +68,8 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item
-    let itemData = store.state.items.item
-    if (itemData.itemId !== parseInt(item)) {
-      itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
+    if (store.state.graphs.itemId !== parseInt(item)) {
+      const itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
 
       store.commit('setGraphItem', { itemId: itemData.itemId, slug })
 
