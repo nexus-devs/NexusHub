@@ -22,7 +22,7 @@ export default {
       const slug = state.slug
 
       const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
-      commit('setGraphData', { graph, data: item })
+      commit('setGraphData', { graph, item })
     }
   }
 }
