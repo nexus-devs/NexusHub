@@ -35,16 +35,25 @@ export default {
       const item = this.$store.state.graphs.storage['heatmap-value'].data
       const data = []
 
-      const weeks = Math.floor(item.length / 7)
-      for (let i = 0; i < weeks * 7; i++) {
-        const day = i % 7
+      for (const d of item) {
+        const timestamp = new Date(d.scannedAt * 1000) // TODO: Unix timestamp to ISODate
+
+        const day = (timestamp.getDay() - 1) % 7 // Change it so 0 is monday
         if (!data[day]) data[day] = []
 
-        for (let j = 0; j < item[i].length; j++) {
-          if (!data[day][j]) data[day][j] = 0
-          data[day][j] += Math.round(item[i][j].marketValue * (1 / weeks))
-        }
+        const hour = timestamp.getHours()
+        if (!data[day][hour]) data[day][hour] = []
+        data[day][hour].push(d.marketValue)
       }
+
+      for (const day of data) {
+        day.map((hArr) => {
+          const hNum = hArr.length
+          const hSum = hArr.reduce((acc, cV) => acc + cV)
+          return Math.round(hSum / hNum)
+        })
+      }
+
       return data
     }
   },

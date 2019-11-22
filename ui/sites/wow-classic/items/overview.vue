@@ -24,12 +24,9 @@
           <div class="row-margin main">
             <graphValueQuantity class="col-b graph" />
           </div>
-          <!-- <graphValueComparison class="col-b graph" />
-          </div>
           <div class="row-margin main">
             <heatmapValue class="col-b graph" />
-            <heatmapQuantity class="col-b graph" />
-          </div>-->
+          </div>
         </div>
       </section>
     </app-content>
