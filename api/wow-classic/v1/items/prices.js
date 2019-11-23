@@ -1,4 +1,7 @@
 const Endpoint = require('cubic-api/endpoint')
+const request = require('request-promise')
+const fs = require('fs')
+const tsmKey = fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
 
 /**
  * Provides basic item statistics for a specific item
@@ -14,6 +17,11 @@ class Prices extends Endpoint {
         name: 'timerange',
         default: 7,
         description: 'Time range to return data from.'
+      },
+      {
+        name: 'region',
+        default: false,
+        description: 'If true, slug is treated as a region.'
       }
     ]
     this.schema.response = {
@@ -35,15 +43,9 @@ class Prices extends Endpoint {
     const itemId = parseInt(req.params.item)
     const slug = req.params.slug
     const timerange = req.query.timerange
+    const region = req.query.region
 
-    // TODO: Change this from unix timestamps to ISODate
-    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
-    const daysAgo = 60 * 60 * 24 * timerange
-    let data = await this.db.collection('scanData').find({
-      slug,
-      item: itemId,
-      scannedAt: { $gte: now - daysAgo }
-    }).sort({ scannedAt: 1 }).toArray()
+    const data = region ? await this.getRegionPrices(slug, itemId, timerange) : await this.getServerPrices(slug, itemId, timerange)
 
     if (!data.length) {
       return res.status(404).send({
@@ -52,7 +54,25 @@ class Prices extends Endpoint {
       })
     }
 
-    data = data.map((x) => {
+    // TODO: Cache this (especially region)
+    return res.send({ itemId, timerange, data })
+  }
+
+  /**
+   * Get prices for a single server
+   */
+  async getServerPrices (slug, itemId, timerange) {
+    // TODO: Change this from unix timestamps to ISODate
+    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
+    const daysAgo = 60 * 60 * 24 * timerange
+
+    const data = await this.db.collection('scanData').find({
+      slug,
+      item: itemId,
+      scannedAt: { $gte: now - daysAgo }
+    }).sort({ scannedAt: 1 }).toArray()
+
+    return data.map((x) => {
       return {
         scannedAt: x.scannedAt,
         marketValue: x.market_value,
@@ -60,8 +80,50 @@ class Prices extends Endpoint {
         qty: x.quantity
       }
     })
+  }
 
-    return res.send({ itemId, timerange, data })
+  /**
+   * Get prices for an entire region
+   */
+  async getRegionPrices (slug, itemId, timerange) {
+    // TODO: Change this from unix timestamps to ISODate
+    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
+    const daysAgo = 60 * 60 * 24 * timerange
+
+    const reqServer = await request({
+      uri: 'http://api2.tradeskillmaster.com/realms',
+      json: true,
+      headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': tsmKey }
+    })
+    const servers = reqServer.data.filter((x) => x.region === slug.toUpperCase())
+
+    slug = { $in: servers.map((x) => x.slug) }
+
+    // Group results by hour brackets
+    const data = await this.db.collection('scanData').aggregate([
+      { $match: { slug, item: itemId, scannedAt: { $gte: now - daysAgo } } }, {
+        $group: {
+          _id: {
+            $subtract: [
+              '$scannedAt',
+              { $mod: ['$scannedAt', 60 * 60] }
+            ]
+          },
+          marketValue: { $avg: '$market_value' },
+          minBuyout: { $avg: '$min_buyout' },
+          qty: { $avg: '$quantity' }
+        }
+      }
+    ]).toArray()
+
+    return data.map((x) => {
+      x.scannedAt = x._id
+      delete x._id
+      x.marketValue = Math.round(x.marketValue)
+      x.minBuyout = Math.round(x.minBuyout)
+      x.qty = Math.round(x.qty)
+      return x
+    })
   }
 }
 
