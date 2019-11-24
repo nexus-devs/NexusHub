@@ -41,6 +41,8 @@ class Scan extends Endpoint {
 
     await this.db.collection('scans').insertOne({ slug, scanId, scannedAt })
     const scanData = scan.data.map((obj) => {
+      delete obj.variant_id
+      delete obj.pet_species
       return {
         slug,
         scanId,
