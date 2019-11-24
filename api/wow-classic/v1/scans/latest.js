@@ -22,7 +22,10 @@ class ScansLast extends Endpoint {
     const slug = req.params.slug
     const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
 
-    if (scan) res.send(scan)
+    if (scan) {
+      scan.scannedAt = Math.floor(scan.scannedAt.getTime() / 1000) // TODO: Change this to ISODate
+      res.send(scan)
+    }
     else {
       const response = {
         error: 'Not found.',
