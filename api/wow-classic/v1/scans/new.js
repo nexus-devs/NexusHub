@@ -39,13 +39,12 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt })
+    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt: new Date(scannedAt * 1000) }) // TODO: Convert to ISODate
     const scanData = scan.data.map((obj) => {
       delete obj.variant_id
       delete obj.pet_species
       return {
         slug,
-        scanId,
         scannedAt,
         ...obj
       }

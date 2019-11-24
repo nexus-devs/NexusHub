@@ -33,6 +33,7 @@ async function monitor () {
       const realms = reqRealms.data
       for (const realm of realms) {
         const lastScan = await client.get(`/wow-classic/v1/scans/latest/${realm.master_slug}`)
+        if (lastScan.scannedAt) lastScan.scannedAt = Math.floor(lastScan.scannedAt.getTime() / 1000) // TODO: Change this to ISODate
 
         // If there are no scans or the last scan is outdated
         if (lastScan.error || lastScan.scannedAt < realm.last_modified) {
