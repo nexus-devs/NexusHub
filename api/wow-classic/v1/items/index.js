@@ -43,12 +43,11 @@ class Items extends Endpoint {
       })
     }
 
-    // TODO: Change this from unix timestamps to ISODate
-    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
+    const daysAgo = 1000 * 60 * 60 * 24 * 2 // max 2 days old
     const stats = await this.db.collection('scanData').find({
       slug,
       item: itemId,
-      scannedAt: { $gte: now - 60 * 60 * 24 * 2 } // max 2 days old
+      scannedAt: { $gte: new Date(Date.now() - daysAgo) }
     }).sort({ scannedAt: 1 }).toArray()
 
     const middle = Math.ceil(stats.length / 2)
