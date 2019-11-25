@@ -23,7 +23,7 @@ class Scan extends Endpoint {
   async main (req, res) {
     const slug = req.body.slug
     const scanId = req.body.scanId
-    const scannedAt = req.body.scannedAt
+    const scannedAt = new Date(req.body.scannedAt)
 
     const scanExistsAlready = await this.db.collection('scans').findOne({ slug, scanId })
     if (scanExistsAlready) {
@@ -39,7 +39,7 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt: new Date(scannedAt * 1000) }) // TODO: Convert to ISODate
+    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt })
     const scanData = scan.data.map((obj) => {
       delete obj.variant_id
       delete obj.pet_species
