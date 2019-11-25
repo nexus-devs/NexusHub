@@ -62,14 +62,12 @@ class Prices extends Endpoint {
    * Get prices for a single server
    */
   async getServerPrices (slug, itemId, timerange) {
-    // TODO: Change this from unix timestamps to ISODate
-    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
-    const daysAgo = 60 * 60 * 24 * timerange
+    const daysAgo = 1000 * 60 * 60 * 24 * timerange
 
     const data = await this.db.collection('scanData').find({
       slug,
       item: itemId,
-      scannedAt: { $gte: now - daysAgo }
+      scannedAt: { $gte: new Date(Date.now() - daysAgo) }
     }).sort({ scannedAt: 1 }).toArray()
 
     return data.map((x) => {
@@ -86,9 +84,7 @@ class Prices extends Endpoint {
    * Get prices for an entire region
    */
   async getRegionPrices (slug, itemId, timerange) {
-    // TODO: Change this from unix timestamps to ISODate
-    const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
-    const daysAgo = 60 * 60 * 24 * timerange
+    const daysAgo = 1000 * 60 * 60 * 24 * timerange
 
     const reqServer = await request({
       uri: 'http://api2.tradeskillmaster.com/realms',
@@ -101,20 +97,28 @@ class Prices extends Endpoint {
 
     // Group results by hour brackets
     const data = await this.db.collection('scanData').aggregate([
-      { $match: { slug, item: itemId, scannedAt: { $gte: now - daysAgo } } }, {
+      { $match: { slug, item: itemId, scannedAt: { $gte: new Date(Date.now() - daysAgo) } } }, {
         $group: {
           _id: {
-            $subtract: [
-              '$scannedAt',
-              { $mod: ['$scannedAt', 60 * 60] }
-            ]
+            $toDate: {
+              $concat: [
+                { $toString: { $year: '$scannedAt' } },
+                '-',
+                { $toString: { $month: '$scannedAt' } },
+                '-',
+                { $toString: { $dayOfMonth: '$scannedAt' } },
+                ' ',
+                { $toString: { $hour: '$scannedAt' } },
+                ':00'
+              ]
+            }
           },
           marketValue: { $avg: '$market_value' },
           minBuyout: { $avg: '$min_buyout' },
           qty: { $avg: '$quantity' }
         }
       }
-    ]).toArray()
+    ]).sort({ _id: 1 }).toArray()
 
     return data.map((x) => {
       x.scannedAt = x._id
