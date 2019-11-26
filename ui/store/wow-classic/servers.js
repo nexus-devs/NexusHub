@@ -1,9 +1,7 @@
 export default {
   name: 'servers',
   state: {
-    selectedRegion: 'All Regions',
-    selectedServer: 'All Servers',
-    selectedFaction: 'All Factions',
+    server: '',
     EU: [],
     US: []
   },
@@ -13,14 +11,8 @@ export default {
         state[region] = list[region]
       }
     },
-    setRegion (state, region) {
-      state.selectedRegion = region
-    },
     setServer (state, server) {
-      state.selectedServer = server
-    },
-    setFaction (state, faction) {
-      state.selectedFaction = faction
+      state.server = server
     }
   }
 }

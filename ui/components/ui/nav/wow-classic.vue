@@ -28,7 +28,6 @@ import selectFaction from 'src/components/wow-classic/select-faction.vue'
 import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 import storeModule from 'src/store/wow-classic/servers.js'
-import utility from 'src/components/wow-classic/utility.js'
 
 // Client-side-only requirements
 let shortcut, listener
@@ -46,31 +45,11 @@ export default {
   },
 
   async asyncData ({ store, route }) {
+    const slug = route.params.slug
+    if (slug) store.commit('setServer', slug)
+
     const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
     store.commit('setServerlist', serverlist)
-  },
-
-  created () {
-    const params = this.$route.fullPath.split('?')
-    const routeArgs = params[0].split('/')
-
-    for (let i = 0; i < routeArgs.length; i++) {
-      const arg = routeArgs[i].toUpperCase()
-      if (arg === 'EU' || arg === 'US') {
-        this.$store.commit('setRegion', arg)
-        if (i < routeArgs.length - 1) {
-          const server = this.$store.state.servers[arg].map(x => utility.serverSlug(x)).indexOf(routeArgs[i + 1])
-          if (server >= 0) this.$store.commit('setServer', this.$store.state.servers[arg][server])
-          if (i < routeArgs.length - 2) {
-            const faction = routeArgs[i + 2]
-            if (faction === 'alliance' || faction === 'horde') {
-              this.$store.commit('setFaction', faction.charAt(0).toUpperCase() + faction.slice(1))
-            }
-          }
-        }
-        break
-      }
-    }
   },
 
   mounted () {
