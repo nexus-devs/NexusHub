@@ -21,44 +21,21 @@
         </div>
       </header>
 
-      <!-- Realtime Orders -->
-      <!--
+      <!-- Market Overview -->
       <section>
         <div class="container">
           <div class="row-margin overview">
             <div class="col-b-4">
-              <h2 class="sub">Market Overview</h2>
+              <h2 class="sub">Possible Deals</h2>
               <div class="realtime">
-                <opm/>
                 <div class="most-traded row">
-                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col interactive">
-                    <module>
-                      <template slot="header">
-                        <div class="img">
-                          <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
-                            <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
-                          </object>
-                        </div>
-                        <h3>{{ order.item }}</h3>
-                      </template>
-                      <template slot="body">
-                        <span class="highlight">{{ order.amount }}</span>
-                        <br>
-                        <span class="sub"> Orders for {{ order.item }}</span>
-                      </template>
-                    </module>
-                  </router-link>
                 </div>
               </div>
-            </div>
-            <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity/>
             </div>
           </div>
           <ad name="warframe-index-market-overview"/>
         </div>
-      </section>-->
+      </section>
 
       <!-- News -->
       <section>
