@@ -12,6 +12,10 @@ export default {
       state.slug = item.slug
     },
     setGraphData (state, { graph, item }) {
+      item.data = item.data.map((x) => {
+        x.scannedAt = new Date(x.scannedAt).getTime()
+        return x
+      })
       state.storage[graph] = { timerange: item.timerange, data: item.data }
     }
   },

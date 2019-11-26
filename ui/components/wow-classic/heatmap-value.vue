@@ -36,7 +36,7 @@ export default {
       const data = []
 
       for (const d of item) {
-        const timestamp = new Date(d.scannedAt * 1000) // TODO: Unix timestamp to ISODate
+        const timestamp = new Date(d.scannedAt)
 
         const day = (timestamp.getDay() - 1) % 7 // Change it so 0 is monday
         if (!data[day]) data[day] = []
