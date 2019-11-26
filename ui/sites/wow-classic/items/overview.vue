@@ -67,6 +67,10 @@ export default {
     // Only fetch item data if we actually have a new item
     if (store.state.graphs.itemId !== parseInt(item)) {
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
+      itemData.data = itemData.data.map((x) => {
+        x.scannedAt = new Date(x.scannedAt).getTime()
+        return x
+      })
 
       store.commit('setGraphItem', { itemId: itemData.itemId, slug })
 

@@ -186,9 +186,7 @@ export default {
 
     // parses hours into days + hours ago
     parseHoursAgo (timestamp) {
-      // TODO: Change from unix timestamp to ISODate
-      const now = Math.floor(new Date().getTime() / 1000) // Unix timestamp
-      const rawHours = Math.round((now - timestamp) / 60 / 60)
+      const rawHours = Math.round((new Date().getTime() - timestamp) / 1000 / 60 / 60)
 
       const days = Math.floor(rawHours / 24)
       const hours = rawHours - days * 24
