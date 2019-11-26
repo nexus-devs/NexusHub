@@ -36,6 +36,7 @@ async function monitor () {
         if (lastScan.error) continue
 
         // If there are no scans or the last scan is outdated
+        lastScan.scannedAt = new Date(lastScan.scannedAt)
         const lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
         if (lastScanUnix < realm.last_modified) {
           const scans = await requestTSM(tsmKey, `/realm/${realm.master_slug}/scans`)
