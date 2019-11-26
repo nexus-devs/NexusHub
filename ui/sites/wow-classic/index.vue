@@ -43,9 +43,9 @@
                         <h3>{{ deal.name }}</h3>
                       </template>
                       <template slot="body">
-                        <span class="highlight">{{ deal.dealDiff }}</span>
+                        <span class="highlight">{{ parsePrice(deal.dealDiff) }}</span>
                         <br>
-                        <span class="sub">50% cheaper than Market Value</span>
+                        <span class="sub">cheaper than Market Value</span>
                       </template>
                     </module>
                   </router-link>
@@ -85,6 +85,7 @@ import newsArticle from 'src/components/wow-classic/news-article.vue'
 import search from 'src/components/search/wow-classic.vue'
 import searchButton from 'src/components/search/modules/button.vue'
 import storeModule from 'src/store/wow-classic/wowclassic.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -118,6 +119,10 @@ export default {
     deals () {
       return this.$store.state.wowclassic.deals
     }
+  },
+
+  created () {
+    this.parsePrice = utility.parsePrice
   },
 
   storeModule,
