@@ -26,9 +26,29 @@
         <div class="container">
           <div class="row-margin overview">
             <div class="col-b-4">
-              <h2 class="sub">Possible Deals</h2>
+              <h2 class="sub">
+                Possible Deals
+              </h2>
               <div class="realtime">
                 <div class="most-traded row">
+                  <!-- TODO: Change :to once realm refactoring is there -->
+                  <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/anathema-alliance/${deal.itemId}`" class="item col interactive">
+                    <module>
+                      <template slot="header">
+                        <div class="img">
+                          <object :data="deal.icon" type="image/png">
+                            <img :src="deal.icon" :alt="deal.name" />
+                          </object>
+                        </div>
+                        <h3>{{ deal.name }}</h3>
+                      </template>
+                      <template slot="body">
+                        <span class="highlight">{{ deal.dealDiff }}</span>
+                        <br>
+                        <span class="sub">50% cheaper than Market Value</span>
+                      </template>
+                    </module>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -59,6 +79,7 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
+import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import newsArticle from 'src/components/wow-classic/news-article.vue'
 import search from 'src/components/search/wow-classic.vue'
@@ -72,13 +93,14 @@ export default {
     appContent,
     newsArticle,
     search,
-    searchButton
+    searchButton,
+    module
   },
 
   async asyncData ({ store, route }) {
     // TODO: Maybe parallelize all the async stuff
     const slug = route.params.slug
-    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`)
+    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=6`)
     for (const deal of deals) {
       const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`)
       deal.icon = item.icon
@@ -90,14 +112,11 @@ export default {
   },
 
   computed: {
-    opm () {
-      return this.$store.state.opm.all
-    },
-    activity () {
-      return this.$store.state.busyhours.data
-    },
     news () {
       return this.$store.state.wowclassic.news
+    },
+    deals () {
+      return this.$store.state.wowclassic.deals
     }
   },
 
