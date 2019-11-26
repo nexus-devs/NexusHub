@@ -75,8 +75,18 @@ export default {
     searchButton
   },
 
-  async asyncData () {
-    this.$store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
+  async asyncData ({ store, route }) {
+    // TODO: Maybe parallelize all the async stuff
+    const slug = route.params.slug
+    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`)
+    for (const deal of deals) {
+      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`)
+      deal.icon = item.icon
+      deal.name = item.name
+    }
+
+    store.commit('setDeals', deals)
+    store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
   },
 
   computed: {

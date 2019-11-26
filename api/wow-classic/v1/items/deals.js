@@ -13,7 +13,7 @@ class Deals extends Endpoint {
       {
         name: 'limit',
         default: 4,
-        description: 'Number of best possible deals to return.'
+        description: 'Number of possible deals to return.'
       }
     ]
     this.schema.response = [{
