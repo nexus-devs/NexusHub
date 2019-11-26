@@ -9,9 +9,7 @@
       <search placeholder="Search items...">
         <span class="shortcut">SHIFT + F</span>
       </search>
-      <select-region />
       <select-server />
-      <select-faction />
     </div>
     <div class="col nav-r">
       <notifications />

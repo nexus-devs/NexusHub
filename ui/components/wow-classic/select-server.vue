@@ -1,12 +1,12 @@
 <template>
-  <div :class="{ deactivated }" class="select server">
+  <div class="select server">
     <div class="interactive" @click="toggle">
-      <span>{{ server }}</span>
+      <span>{{ serverPretty }}</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: server === 'All Servers' }" @click="selectServer('All Servers'); toggle()">All Servers</span>
+        <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
         <span v-for="s in serverlist" :key="s" :class="{ active: server === s }" @click="selectServer(s); toggle()">{{ s }}</span>
       </div>
     </div>
@@ -27,14 +27,18 @@ export default {
 
   computed: {
     server () {
-      return this.$store.state.servers.selectedServer
-    },
-    deactivated () {
-      return this.$store.state.servers.selectedRegion === 'All Regions'
+      return this.$store.state.servers.server
     },
     serverlist () {
-      if (this.deactivated) return []
-      else return this.$store.state.servers[this.$store.state.servers.selectedRegion]
+      return this.$store.state.servers.US
+    },
+    serverPretty () {
+      if (this.server === '') return 'Select Server'
+
+      const serverSplit = this.server.split('-')
+      const faction = serverSplit.pop()
+      const serverIndex = this.serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
+      return `${this.serverlist[serverIndex]} - ${faction.charAt(0).toUpperCase() + faction.slice(1)}`
     }
   },
 
@@ -44,14 +48,13 @@ export default {
     },
 
     selectServer (server) {
+      server = utility.serverSlug(server)
       if (this.server === server) return
+      server = `${server}-alliance` // TODO: Remove
 
-      let route = this.$route.fullPath.replace(`/${this.$store.state.servers.selectedRegion.toLowerCase()}`, '')
-      route = route.replace(`/${utility.serverSlug(this.server)}`, '')
-      route = route.replace(`/${this.$store.state.servers.selectedFaction.toLowerCase()}`, '')
-
+      const route = this.$route.fullPath.replace(this.server, server)
+      this.$router.push(route)
       this.$store.commit('setServer', server)
-      utility.pushUrl(this, route)
     }
   }
 }
