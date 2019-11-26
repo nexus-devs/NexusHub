@@ -64,8 +64,8 @@ export default {
     const item = route.params.item
     const slug = route.params.slug
 
-    // Only fetch item data if we actually have a new item
-    if (store.state.graphs.itemId !== parseInt(item)) {
+    // Only fetch item data if we actually have a new item or new server
+    if (store.state.graphs.itemId !== parseInt(item) || store.state.graphs.slug !== slug) {
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`)
 
       store.commit('setGraphItem', { itemId: itemData.itemId, slug })

@@ -70,6 +70,7 @@ class Items extends Endpoint {
     }
 
     const response = {
+      server: slug,
       itemId,
       name: item.name,
       icon: `https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg`,

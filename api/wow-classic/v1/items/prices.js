@@ -55,7 +55,7 @@ class Prices extends Endpoint {
     }
 
     // TODO: Cache this (especially region)
-    return res.send({ itemId, timerange, data })
+    return res.send({ server: slug, itemId, timerange, data })
   }
 
   /**
