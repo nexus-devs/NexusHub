@@ -14,9 +14,9 @@ class Hook {
 
     // Scan Data
     await verify(db, 'scanData', {
-      scannedAt: -1,
       item: 1,
-      slug: 1
+      slug: 1,
+      scannedAt: -1
     })
   }
 }

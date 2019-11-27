@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import getTheme from 'src/components/_theme.js'
+import getTheme from './_theme.js'
 
 export default {
   data () {
