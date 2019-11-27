@@ -13,6 +13,7 @@ class Scan extends Endpoint {
     this.schema.request = {
       body: {
         slug: 'arugal-alliance',
+        region: 'EU',
         scanId: '1573439779',
         scannedAt: new Date()
       }
@@ -22,6 +23,7 @@ class Scan extends Endpoint {
 
   async main (req, res) {
     const slug = req.body.slug
+    const region = req.body.region.toLowerCase()
     const scanId = req.body.scanId
     const scannedAt = new Date(req.body.scannedAt)
 
@@ -39,7 +41,9 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    await this.db.collection('scans').insertOne({ slug, scanId, scannedAt })
+    const parallel = []
+    parallel.push(this.db.collection('scans').insertOne({ slug, scanId, scannedAt }))
+
     const scanData = scan.data.map((obj) => {
       delete obj.variant_id
       delete obj.pet_species
@@ -49,7 +53,32 @@ class Scan extends Endpoint {
         ...obj
       }
     })
-    await this.db.collection('scanData').insertMany(scanData)
+    parallel.push(this.db.collection('scanData').insertMany(scanData))
+
+    // Round date to current bracket
+    const msH = 1000 * 60 * 60
+    const bracketHour = new Date(Math.floor(scannedAt.getTime() / msH) * msH)
+    const bulk = this.db.collection('regionData').initializeUnorderedBulkOp()
+
+    // Update or insert regional data
+    for (const obj of scanData) {
+      bulk.find({
+        item: obj.item,
+        scannedAt: bracketHour,
+        slug: region
+      }).upsert().updateOne({
+        $inc: {
+          count: 1,
+          marketValue: obj.market_value,
+          minBuyout: obj.min_buyout,
+          qty: obj.quantity,
+          numAuctions: obj.num_auctions
+        }
+      })
+    }
+    parallel.push(bulk.execute())
+
+    await Promise.all(parallel)
 
     res.send('added!')
   }

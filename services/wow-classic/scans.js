@@ -53,7 +53,7 @@ async function monitor () {
 
             const scannedAt = new Date(scan.last_modified * 1000)
             // Await to avoid overloading the TSM servers
-            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, scanId: scan.id, scannedAt })
+            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
           }
         }
       }
