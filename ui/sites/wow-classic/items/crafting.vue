@@ -20,6 +20,7 @@
 import appContent from 'src/app-content.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
+import storeModule from 'src/store/wow-classic/crafting.js'
 
 export default {
   components: {
@@ -28,9 +29,26 @@ export default {
     itemHeader
   },
 
+  async asyncData ({ store, route }) {
+    const item = route.params.item
+    const slug = route.params.slug
+
+    // Only fetch item data if we actually have a new item or new server
+    if (store.state.crafting.itemId !== parseInt(item) || store.state.crafting.slug !== slug) {
+      const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting/${slug}/${item}`)
+      store.commit('setCrafting', craftingData)
+    }
+  },
+
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    crafting () {
+      return {
+        createdBy: this.$store.state.crafting.createdBy,
+        reagentFor: this.$store.state.crafting.reagentFor
+      }
     }
   },
 
@@ -38,7 +56,9 @@ export default {
     return {
       title: `${this.item.name} · NexusHub`
     }
-  }
+  },
+
+  storeModule
 }
 </script>
 
