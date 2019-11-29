@@ -8,6 +8,11 @@
           <h2 class="sub">
             Crafting
           </h2>
+
+          <!-- All Orders-->
+          <div v-for="reagent in crafting.reagentFor" :key="reagent.itemId">
+
+          </div>
         </div>
       </section>
     </app-content>
@@ -103,5 +108,40 @@ export default {
 
 .btn-subtle {
   margin-top: 20px;
+}
+
+.labels {
+  @include uppercase;
+  color: $color-font-subtle;
+  font-size: 0.8em;
+  padding: 10px 20px;
+  border-radius: 2px;
+  background: $color-bg-darker;
+
+  .interactive {
+    padding: 0;
+    background: transparent;
+
+    &:before {
+      background: transparent;
+    }
+  }
+  .item {
+    margin-right: 95px;
+  }
+  .price {
+    position: relative;
+    left: 10px;
+  }
+  .user {
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
+  }
+  .whitespace {
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
+  }
 }
 </style>
