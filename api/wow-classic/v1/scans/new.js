@@ -56,7 +56,7 @@ class Scan extends Endpoint {
     parallel.push(this.db.collection('scanData').insertMany(scanData))
 
     // Round date to current bracket
-    const msH = 1000 * 60 * 60
+    /* const msH = 1000 * 60 * 60
     const bracketHour = new Date(Math.floor(scannedAt.getTime() / msH) * msH)
     const bulk = this.db.collection('regionData').initializeUnorderedBulkOp()
 
@@ -76,7 +76,7 @@ class Scan extends Endpoint {
         }
       })
     }
-    parallel.push(bulk.execute())
+    parallel.push(bulk.execute()) */
 
     await Promise.all(parallel)
 

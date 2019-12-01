@@ -5,7 +5,7 @@
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data" :same-scale="true" :regional="regional" :timerange="timerange" />
+      <doubleline :data="data" :same-scale="true" :timerange="timerange" />
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange" />
@@ -31,39 +31,15 @@ export default {
       return this.$store.state.graphs.storage['graph-value-comparison'].timerange
     },
 
-    regional () {
-      const item = this.$store.state.graphs.storage['graph-value-comparison'].data[0][0]
-      return (item.EUmarketValue && item.USmarketValue)
-    },
-
     data () {
-      const item = this.$store.state.graphs.storage['graph-value-comparison'].data
-      const data = []
-
-      const weeks = Math.floor(item.length / 7)
-      let skipCounter = 0
-      let v1Aggregate = 0
-      let v2Aggregate = 0
-      let i = 0
-      for (const day of item) {
-        for (const hour of day) {
-          skipCounter++
-          const value1 = (hour.EUmarketValue && hour.USmarketValue) ? hour.USmarketValue : hour.marketValue
-          const value2 = hour.EUmarketValue || hour.USmarketValue
-          v1Aggregate += Math.round(value1 * (1 / weeks))
-          v2Aggregate += Math.round(value2 * (1 / weeks))
-
-          if (skipCounter >= weeks) {
-            data.push({ x: i, value1: v1Aggregate, value2: v2Aggregate })
-            i++
-            skipCounter = 0
-            v1Aggregate = 0
-            v2Aggregate = 0
-          }
+      const itemData = this.$store.state.graphs.storage['graph-value-comparison'].data
+      return itemData.map((d) => {
+        return {
+          x: d.scannedAt,
+          value1: d.marketValue,
+          value2: d.value2
         }
-      }
-
-      return data
+      })
     }
   },
 
