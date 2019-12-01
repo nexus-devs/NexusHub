@@ -73,29 +73,36 @@ class Crafting extends Endpoint {
     }
 
     // Apply missing data
-    const applyData = (cby) => {
-      const reagents = cby.reagents.map((r) => {
-        const storage = itemStorage[r.itemId]
-        return {
-          ...r,
-          name: storage.name,
-          icon: storage.icon,
-          marketValue: storage.market_value ? storage.market_value : null
-        }
-      })
-      return { ...cby, reagents }
+    const applyData = (applyItem = undefined) => {
+      return (cby) => {
+        const reagents = cby.reagents.map((r) => {
+          const storage = itemStorage[r.itemId]
+          return {
+            ...r,
+            name: storage.name,
+            icon: storage.icon,
+            marketValue: storage.market_value ? storage.market_value : null
+          }
+        })
+        return { ...applyItem, ...cby, reagents }
+      }
     }
     const applyReagentFor = (r) => {
       if (itemStorage[r.itemId].market_value) r.marketValue = itemStorage[r.itemId].market_value
-      const createdBy = r.createdBy.map(applyData)
-      return { ...r, createdBy }
+      const createdBy = r.createdBy.map(applyData({
+        itemId: r.itemId,
+        name: r.name,
+        icon: r.icon,
+        marketValue: r.marketValue
+      }))
+      return createdBy
     }
 
     return res.send({
       itemId: item,
       slug,
-      createdBy: createdBy.map(applyData),
-      reagentFor: reagentFor.map(applyReagentFor)
+      createdBy: createdBy.map(applyData()),
+      reagentFor: [].concat(...reagentFor.map(applyReagentFor))
     })
   }
 }
