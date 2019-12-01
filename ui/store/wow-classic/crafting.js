@@ -4,7 +4,8 @@ export default {
     itemId: null,
     slug: '',
     reagentFor: [],
-    craftedBy: []
+    craftedBy: [],
+    selected: null
   },
 
   mutations: {
@@ -13,6 +14,9 @@ export default {
       state.slug = crafting.slug
       state.reagentFor = crafting.reagentFor
       state.craftedBy = crafting.craftedBy
+    },
+    selectCraftingEntry (state, cid) {
+      state.selected = cid
     }
   }
 }

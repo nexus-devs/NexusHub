@@ -26,11 +26,11 @@
         <span v-if="crafting.marketValue">{{ parsePrice(crafting.marketValue) }}</span>
         <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
       </div>
-      <!--<div class="col buy" @click.stop="select">
+      <div class="col buy" @click.stop="select">
         <button class="btn-outline">
-          {{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}
+          Reagents
         </button>
-      </div>-->
+      </div>
 
       <!-- Order Selection -->
       <!--<div :class="{ active }" class="selection">
@@ -88,18 +88,31 @@
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['crafting'],
+  props: ['crafting', 'cid'],
 
   computed: {
     amountPretty () {
       const amount = this.crafting.amount
       if (amount[0] !== amount[1]) return `${amount[0]}-${amount[1]}`
       return amount[0]
+    },
+    active () {
+      return this.$store.state.crafting.selected === this.cid
     }
   },
 
   created () {
     this.parsePrice = utility.parsePrice
+  },
+
+  methods: {
+    select () {
+      if (this.active) {
+        this.$store.commit('selectCraftingEntry', null)
+      } else {
+        this.$store.commit('selectCraftingEntry', this.cid)
+      }
+    }
   }
 }
 </script>
