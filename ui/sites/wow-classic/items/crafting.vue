@@ -10,8 +10,8 @@
           </h2>
 
           <!-- All Orders-->
-          <div v-for="reagent in crafting.reagentFor" :key="reagent.itemId">
-
+          <div v-for="(entry, i) in crafting.reagentFor" :key="entry.itemId + '-' + i">
+              <crafting-entry :crafting="entry" />
           </div>
         </div>
       </section>
@@ -23,6 +23,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import craftingEntry from 'src/components/wow-classic/crafting-entry.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/crafting.js'
@@ -30,6 +31,7 @@ import storeModule from 'src/store/wow-classic/crafting.js'
 export default {
   components: {
     appContent,
+    craftingEntry,
     navigation,
     itemHeader
   },
