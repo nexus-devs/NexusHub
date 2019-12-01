@@ -9,21 +9,21 @@
       <div class="item col">
         <span class="component">{{ crafting.name }}</span>
         <br>
-        <span>{{ crafting.name }}</span>
+        <span>{{ crafting.category }} ({{ crafting.requiredSkill }})</span>
       </div>
       <div class="user col">
         <div class="user-image">
           <img :alt="crafting.category" src="/img/ui/placeholder.png">
         </div>
-        <tooltip>{{ crafting.category }}</tooltip>
+        <!--<tooltip>{{ crafting.category }}</tooltip>-->
       </div>
       <div class="col">
         <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
-        {{ crafting.amount[0] }}x
+        {{ amountPretty }}x
       </div>
       <div class="col price">
         <img v-if="crafting.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-        <span>{{ crafting.marketValue }}</span>
+        <span v-if="crafting.marketValue">{{ parsePrice(crafting.marketValue) }}</span>
         <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
       </div>
       <!--<div class="col buy" @click.stop="select">
@@ -85,9 +85,22 @@
 
 
 <script>
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['crafting']
+  props: ['crafting'],
+
+  computed: {
+    amountPretty () {
+      const amount = this.crafting.amount
+      if (amount[0] !== amount[1]) return `${amount[0]}-${amount[1]}`
+      return amount[0]
+    }
+  },
+
+  created () {
+    this.parsePrice = utility.parsePrice
+  }
 }
 </script>
 

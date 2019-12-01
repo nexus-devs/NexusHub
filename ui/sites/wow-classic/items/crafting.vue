@@ -10,9 +10,26 @@
           </h2>
 
           <!-- All Orders-->
-          <div v-for="(entry, i) in crafting.reagentFor" :key="entry.itemId + '-' + i">
-              <crafting-entry :crafting="entry" />
+          <div class="row labels">
+            <div class="col item">
+              Item
+            </div>
+            <div class="col user">
+              Profession
+            </div>
+            <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
+              Amount
+            </div>
+            <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
+              Price
+            </div>
+            <div class="col interactive whitespace" />
           </div>
+          <transition-group>
+            <div v-for="(entry, i) in crafting.reagentFor" :key="entry.itemId + '-' + i">
+              <crafting-entry :crafting="entry" />
+            </div>
+          </transition-group>
         </div>
       </section>
     </app-content>
