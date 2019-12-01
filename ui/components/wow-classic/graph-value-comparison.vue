@@ -36,8 +36,8 @@ export default {
       return itemData.map((d) => {
         return {
           x: d.scannedAt,
-          value1: d.marketValue,
-          value2: d.value2
+          value1: d.value2,
+          value2: d.marketValue
         }
       })
     }

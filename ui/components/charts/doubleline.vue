@@ -213,7 +213,7 @@ export default {
     // Scale to next gold
     getGoldValueMax () {
       const maxGold = d3.max(this.data, d => d.value1)
-      return (Math.floor(maxGold / 10000) + 1) * 10000
+      return (Math.floor(maxGold / 1000) + 1) * 1000
     },
 
     getCombinedGoldValueMax () {
@@ -221,7 +221,7 @@ export default {
       const maxGold2 = d3.max(this.data, d => d.value2)
       const maxGold = d3.max([maxGold1, maxGold2])
 
-      return (Math.floor(maxGold / 10000) + 1) * 10000
+      return (Math.floor(maxGold / 1000) + 1) * 1000
     },
 
     // Scale to next 5
