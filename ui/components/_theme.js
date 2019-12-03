@@ -6,7 +6,7 @@
  * and to avoid bloating components that don't need the variable.
  */
 
-module.exports = function (self) {
+module.exports = function (self, returnName = false) {
   const route = self.$route.fullPath.split('/')
 
   let theme = 'warframe' // Default theme
@@ -18,5 +18,5 @@ module.exports = function (self) {
   }
 
   // Returns directly the injected style object
-  return self[theme]
+  return returnName ? theme : self[theme]
 }

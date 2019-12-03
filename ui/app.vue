@@ -44,6 +44,7 @@ export default {
     Vue.use(VueTouch)
   },
   mounted () {
+    document.body.className = this.theme.body // Hack so the progress bar can be styled
     Vue.use(VueAnalytics, {
       id: 'UA-128905436-1',
       checkDuplicatedScript: true,
@@ -80,11 +81,13 @@ export default {
         @include gradient-background-dg($color-primary, $color-accent);
       }
     }
+  }
+}
 
-    // Style progress here because it gets defined in cubic-ui
-    .progress {
-      @include gradient-background-dg($color-primary, $color-accent);
-    }
+.body {
+  // Style progress here because it gets defined in cubic-ui
+  :global .progress {
+    @include gradient-background-dg($color-primary, $color-accent);
   }
 }
 </style>
@@ -105,11 +108,13 @@ export default {
         @include gradient-background-dg($color-primary, $color-accent);
       }
     }
+  }
+}
 
-    // Style progress here because it gets defined in cubic-ui
-    .progress {
-      @include gradient-background-dg($color-primary, $color-accent);
-    }
+.body {
+  // Style progress here because it gets defined in cubic-ui
+  :global .progress {
+    @include gradient-background-dg($color-primary, $color-accent);
   }
 }
 </style>
