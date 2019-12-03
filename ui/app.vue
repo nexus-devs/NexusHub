@@ -67,49 +67,50 @@ export default {
 
 <style lang="scss" module="warframe">
 @import '~src/styles/partials/importer';
-:global {
-  @import '~src/styles/modules/importer';
-
-  .btn, button {
-    @include gradient-background-dg($color-primary, $color-accent);
-
-    &:after {
-      @include gradient-background-dg($color-primary, $color-accent);
-    }
-  }
-
-  // Style progress here because it gets defined in cubic-ui
-  .progress {
-    @include gradient-background-dg($color-primary, $color-accent);
-  }
-}
 
 .app {
   background: $color-bg-dark;
+  :global {
+    @import '~src/styles/modules/importer';
+
+    .btn, button {
+      @include gradient-background-dg($color-primary, $color-accent);
+
+      &:after {
+        @include gradient-background-dg($color-primary, $color-accent);
+      }
+    }
+
+    // Style progress here because it gets defined in cubic-ui
+    .progress {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
+  }
 }
 </style>
 
 <style lang="scss" module="wow-classic">
 @import '~src/styles/partials/wow-classic/importer';
-:global {
-  @import '~src/styles/modules/wow-classic/importer';
-
-  .btn, button {
-    background: linear-gradient(to bottom right, $color-primary 33%, $color-accent);
-
-    &:after {
-      @include gradient-background-dg($color-primary, $color-accent);
-    }
-  }
-
-  // Style progress here because it gets defined in cubic-ui
-  .progress {
-    @include gradient-background-dg($color-primary, $color-accent);
-  }
-}
 
 .app {
   background: $color-bg-dark;
+
+  :global {
+    @import '~src/styles/modules/wow-classic/importer';
+
+    .btn, button {
+      background: linear-gradient(to bottom right, $color-primary 33%, $color-accent);
+
+      &:after {
+        @include gradient-background-dg($color-primary, $color-accent);
+      }
+    }
+
+    // Style progress here because it gets defined in cubic-ui
+    .progress {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
+  }
 }
 </style>
 
