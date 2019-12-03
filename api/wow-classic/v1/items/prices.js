@@ -112,7 +112,7 @@ class Prices extends Endpoint {
           qty: { $avg: '$quantity' }
         }
       }
-    ], { hint: { item: 1, scannedAt: -1, slug: 1 } }).sort({ _id: 1 }).toArray() // Force different index, because slug is reduced in cardinality
+    ]).sort({ _id: 1 }).toArray() // Force different index, because slug is reduced in cardinality
 
     return data.map((x) => {
       x.scannedAt = x._id
