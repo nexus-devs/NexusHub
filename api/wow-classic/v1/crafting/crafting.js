@@ -80,7 +80,7 @@ class Crafting extends Endpoint {
           return {
             ...r,
             name: storage.name,
-            icon: storage.icon,
+            icon: `https://wow.zamimg.com/images/wow/icons/large/${storage.icon}.jpg`,
             marketValue: storage.market_value ? storage.market_value : null
           }
         })

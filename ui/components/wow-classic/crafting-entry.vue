@@ -11,12 +11,6 @@
         <br>
         <span>{{ crafting.category }} ({{ crafting.requiredSkill }})</span>
       </div>
-      <div class="user col">
-        <div class="user-image">
-          <img :alt="crafting.category" src="/img/ui/placeholder.png">
-        </div>
-        <!--<tooltip>{{ crafting.category }}</tooltip>-->
-      </div>
       <div class="col">
         <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
         {{ amountPretty }}x
@@ -31,53 +25,27 @@
           Reagents
         </button>
       </div>
-
-      <!-- Order Selection -->
-      <!--<div :class="{ active }" class="selection">
-        <div class="data">
-          <div class="meta">
-            <div class="meta-data">
-              <h4>Posted</h4>
-              <span class="sub time">
-                {{ minutesAgo(order.createdAt) }}
-              </span>
-            </div>
-            <div class="meta-data">
-              <h4>Source</h4>
-              <span class="sub">
-                {{ order.source }}
-              </span>
-              <a v-if="order.source === 'Warframe Market'" :href="`https://warframe.market/items/${order.wfmName}`" target="_blank" style="display: inline-block; margin-top: -5px;">
-                <img src="/img/ui/open-link.svg" alt="Open on Warframe Market" class="ico-h-16 interactive">
-              </a>
-            </div>
-            <div class="meta-data">
-              <h4 v-if="order.message">
-                Original Message
-              </h4>
-              <span v-if="order.message" class="sub">
-                {{ order.message }}
-              </span>
-            </div>
-          </div>
-          <div class="message">
-            <span ref="message">
-              <span>/w {{ order.user }}</span> Hi {{ user }},
-              I'd like to {{ order.offer === 'Selling' ? 'buy' : 'sell' }}
-              [{{ item.name }} {{ order.component }}]{{ order.price ? ' for ' : '' }}{{ order.price ? `${order.price}p` : '' }}.
-              {{ order.source === 'Warframe Market' ? '' : 'Found your offer on NexusHub.' }}
-            </span>
-            <div class="copy">
-              <button @click="copy">
-                Copy
-              </button>
-              <div :class="{ active: copied }" class="copy-confirm">
-                Copied!
-              </div>
-            </div>
-          </div>
+    </div>
+    <div :class="{ active }" class="selection">
+      <div v-for="(reagent) in crafting.reagents" :key="reagent.itemId" class="row">
+        <div class="image-wrapper">
+          <img :src="reagent.icon" :alt="reagent.name">
+          <img :src="reagent.icon" :alt="reagent.name" class="blur">
         </div>
-      </div>-->
+        <div class="item col">
+          <span>{{ reagent.name }}</span>
+        </div>
+        <div class="col">
+          <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
+          {{ reagent.amount }}x
+        </div>
+        <div class="col price">
+          <img v-if="reagent.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
+          <span v-if="reagent.marketValue">{{ parsePrice(reagent.marketValue) }}</span>
+          <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
+        </div>
+        <div class="col"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -130,20 +98,17 @@ export default {
     margin-top: 0;
   }
 }
-.order .row {
+.row {
   @include field;
   align-items: center;
   width: 100%;
 
-  // Last of type is order selection
-  & > div:not(:last-of-type) {
-    color: white;
-    margin: 0 10px;
-    font-size: 0.9em;
+  color: white;
+  margin: 0 10px;
+  font-size: 0.9em;
 
-    &:first-of-type {
-      margin-left: 0;
-    }
+  &:first-of-type {
+    margin-left: 0;
   }
 }
 
@@ -287,17 +252,25 @@ export default {
  * Order selection
  */
 .selection {
-  border-top: 1px solid $color-subtle;
-  padding: 0px 25px;
-  width: 100%;
+  max-width: calc(100% - 80px);
+  margin-left: 80px;
   opacity: 0;
   max-height: 0;
   @include ease(0.35s);
   will-change: height;
 
   &.active {
-    max-height: 200px;
+    max-height: 100%;
+    border-top: 1px solid $color-subtle;
     opacity: 1;
+  }
+
+  .row {
+    margin: 0;
+
+    .item {
+      color: white;
+    }
   }
 }
 
