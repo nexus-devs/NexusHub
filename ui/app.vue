@@ -69,6 +69,19 @@ export default {
 @import '~src/styles/partials/importer';
 :global {
   @import '~src/styles/modules/importer';
+
+  .btn, button {
+    @include gradient-background-dg($color-primary, $color-accent);
+
+    &:after {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
+  }
+
+  // Style progress here because it gets defined in cubic-ui
+  .progress {
+    @include gradient-background-dg($color-primary, $color-accent);
+  }
 }
 
 .app {
@@ -87,6 +100,11 @@ export default {
     &:after {
       @include gradient-background-dg($color-primary, $color-accent);
     }
+  }
+
+  // Style progress here because it gets defined in cubic-ui
+  .progress {
+    @include gradient-background-dg($color-primary, $color-accent);
   }
 }
 

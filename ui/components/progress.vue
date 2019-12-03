@@ -4,13 +4,11 @@
     'height': height,
     'background-color': canSuccess? color : failedColor,
     'opacity': show ? 1 : 0
-  }" :class="theme.progress" class="progress"
+  }" class="progress"
   />
 </template>
 
 <script>
-import getTheme from './_theme.js'
-
 export default {
   data () {
     return {
@@ -21,12 +19,6 @@ export default {
       height: '0.125em',
       color: '#ffca2b',
       failedColor: '#ff0000'
-    }
-  },
-
-  computed: {
-    theme () {
-      return getTheme(this)
     }
   },
 
@@ -106,22 +98,6 @@ export default {
 }
 </script>
 
-
-<style lang="scss" module="warframe">
-@import '~src/styles/partials/importer';
-
-.progress {
-  @include gradient-background-dg($color-primary, $color-accent);
-}
-</style>
-
-<style lang="scss" module="wow-classic">
-@import '~src/styles/partials/wow-classic/importer';
-
-.progress {
-  @include gradient-background-dg($color-primary, $color-accent);
-}
-</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';

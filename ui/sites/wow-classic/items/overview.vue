@@ -25,7 +25,7 @@
             <graphValueQuantity class="col-b graph" />
           </div>
           <div class="row-margin main">
-            <heatmapValue class="col-b graph" />
+            <!-- <heatmapValue class="col-b graph" /> -->
           </div>
         </div>
       </section>
