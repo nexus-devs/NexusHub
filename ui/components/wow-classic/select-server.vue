@@ -7,12 +7,12 @@
     <div :class="{ active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
-        <span>Europe</span>
+        <span @click="selectRegion('EU')">Europe</span>
         <span v-for="s in serverlist.EU" :key="s"
               :class="{ active: server === s, selected: selectedRegion === 'EU' }"
               class="server"
         >{{ s }}</span>
-        <span>United States</span>
+        <span @click="selectRegion('US')">United States</span>
         <span v-for="s in serverlist.US" :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
               class="server"
         >{{ s }}</span>
@@ -57,6 +57,11 @@ export default {
   methods: {
     toggle () {
       this.active = !this.active
+    },
+
+    selectRegion (region) {
+      if (region === this.selectedRegion) this.$store.commit('selectRegion', '')
+      else this.$store.commit('selectRegion', region)
     },
 
     selectServer (server) {
@@ -129,13 +134,16 @@ export default {
 .server {
   opacity: 0;
   max-height: 0;
-  padding: 0 !important;
+  padding: 0px 15px !important;
   @include ease(0.35s);
   overflow: hidden;
+  background: $color-bg-dark;
 
   &.selected {
     opacity: 1;
     max-height: 100%;
+    padding: 10px 15px !important;
+    overflow: visible;
   }
 }
 </style>

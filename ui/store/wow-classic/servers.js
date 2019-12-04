@@ -17,6 +17,9 @@ export default {
     },
     setServer (state, server) {
       state.server = server
+    },
+    selectRegion (state, region) {
+      state.selected.region = region
     }
   }
 }
