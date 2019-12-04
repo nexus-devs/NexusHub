@@ -12,6 +12,14 @@
               :class="{ active: server === s, selected: selectedRegion === 'EU' }"
               class="server"
         >{{ s }}</span>
+        <div class="faction">
+          <div class="image-wrapper">
+            <img src="/img/wow-classic/logo_alliance.png" alt="Alliance Logo" />
+          </div>
+          <div class="image-wrapper">
+            <img src="/img/wow-classic/logo_horde.png" alt="Horde Logo" />
+          </div>
+        </div>
         <span @click="selectRegion('US')">United States</span>
         <span v-for="s in serverlist.US" :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
               class="server"
@@ -134,7 +142,7 @@ export default {
 .server {
   opacity: 0;
   max-height: 0;
-  padding: 0px 15px !important;
+  padding: 0 15px !important;
   @include ease(0.35s);
   overflow: hidden;
   background: $color-bg-dark;
@@ -144,6 +152,27 @@ export default {
     max-height: 100%;
     padding: 10px 15px !important;
     overflow: visible;
+  }
+}
+.faction {
+  background: $color-bg-darker;
+  display: flex;
+  justify-content: space-around;
+  @include ease(0.35s);
+
+  .image-wrapper{
+    width: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: center;
+
+    img {
+      height: 20px;
+    }
+
+    &:hover {
+      background: darken($color-bg-darker, 2%)
+    }
   }
 }
 </style>
