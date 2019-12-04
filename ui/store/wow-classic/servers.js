@@ -2,6 +2,10 @@ export default {
   name: 'servers',
   state: {
     server: '',
+    selected: {
+      region: '',
+      server: ''
+    },
     EU: [],
     US: []
   },

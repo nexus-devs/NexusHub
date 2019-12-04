@@ -1,5 +1,5 @@
 <template>
-  <div class="select server">
+  <div class="select">
     <div class="interactive" @click="toggle">
       <span>{{ serverPretty }}</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
@@ -7,7 +7,15 @@
     <div :class="{ active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
-        <span v-for="s in serverlist" :key="s" :class="{ active: server === s }" @click="selectServer(s); toggle()">{{ s }}</span>
+        <span>Europe</span>
+        <span v-for="s in serverlist.EU" :key="s"
+              :class="{ active: server === s, selected: selectedRegion === 'EU' }"
+              class="server"
+        >{{ s }}</span>
+        <span>United States</span>
+        <span v-for="s in serverlist.US" :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
+              class="server"
+        >{{ s }}</span>
       </div>
     </div>
   </div>
@@ -30,10 +38,14 @@ export default {
       return this.$store.state.servers.server
     },
     serverlist () {
-      return this.$store.state.servers.US
+      return { EU: this.$store.state.servers.EU, US: this.$store.state.servers.US }
+    },
+    selectedRegion () {
+      return this.$store.state.servers.selected.region
     },
     serverPretty () {
       if (this.server === '') return 'Select Server'
+      return 'Select Server'
 
       const serverSplit = this.server.split('-')
       const faction = serverSplit.pop()
@@ -111,6 +123,19 @@ export default {
     transform: translateY(-5px);
     transform-origin: top;
     @include ease(0.15s);
+  }
+}
+
+.server {
+  opacity: 0;
+  max-height: 0;
+  padding: 0 !important;
+  @include ease(0.35s);
+  overflow: hidden;
+
+  &.selected {
+    opacity: 1;
+    max-height: 100%;
   }
 }
 </style>
