@@ -14,10 +14,10 @@
         >{{ s }}</span>
         <div class="faction">
           <div class="image-wrapper">
-            <img src="/img/wow-classic/logo_alliance.png" alt="Alliance Logo" />
+            <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo" />
           </div>
           <div class="image-wrapper">
-            <img src="/img/wow-classic/logo_horde.png" alt="Horde Logo" />
+            <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo" />
           </div>
         </div>
         <span @click="selectRegion('US')">United States</span>
@@ -167,7 +167,7 @@ export default {
     text-align: center;
 
     img {
-      height: 20px;
+      max-height: 20px;
     }
 
     &:hover {
