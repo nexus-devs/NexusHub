@@ -20,6 +20,10 @@ export default {
     },
     selectRegion (state, region) {
       state.selected.region = region
+      state.selected.server = ''
+    },
+    selectServer (state, server) {
+      state.selected.server = server
     }
   }
 }

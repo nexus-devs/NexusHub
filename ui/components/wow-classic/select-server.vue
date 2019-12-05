@@ -7,23 +7,38 @@
     <div :class="{ active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
+
+        <!-- Europe Servers -->
         <span @click="selectRegion('EU')">Europe</span>
-        <span v-for="s in serverlist.EU" :key="s"
-              :class="{ active: server === s, selected: selectedRegion === 'EU' }"
-              class="server"
-        >{{ s }}</span>
-        <div class="faction">
-          <div class="image-wrapper">
-            <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo" />
+        <template v-for="s in serverlist.EU">
+          <span :key="s" :class="{ active: server === s, selected: selectedRegion === 'EU' }"
+                class="server" @click="selectServer(s)"
+          >{{ s }}</span>
+          <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
+            <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
+              <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo" />
+            </div>
+            <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
+              <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo" />
+            </div>
           </div>
-          <div class="image-wrapper">
-            <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo" />
-          </div>
-        </div>
+        </template>
+
+        <!-- United States Servers -->
         <span @click="selectRegion('US')">United States</span>
-        <span v-for="s in serverlist.US" :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
-              class="server"
-        >{{ s }}</span>
+        <template v-for="s in serverlist.US">
+          <span :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
+                class="server" @click="selectServer(s)"
+          >{{ s }}</span>
+          <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
+            <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
+              <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo" />
+            </div>
+            <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
+              <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo" />
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -51,14 +66,17 @@ export default {
     selectedRegion () {
       return this.$store.state.servers.selected.region
     },
+    selectedServer () {
+      return this.$store.state.servers.selected.server
+    },
     serverPretty () {
       if (this.server === '') return 'Select Server'
-      return 'Select Server'
 
       const serverSplit = this.server.split('-')
       const faction = serverSplit.pop()
-      const serverIndex = this.serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-      return `${this.serverlist[serverIndex]} - ${faction.charAt(0).toUpperCase() + faction.slice(1)}`
+      const serverlist = this.serverlist.EU.concat(this.serverlist.US)
+      const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
+      return `${serverlist[serverIndex]} - ${faction.charAt(0).toUpperCase() + faction.slice(1)}`
     }
   },
 
@@ -66,16 +84,18 @@ export default {
     toggle () {
       this.active = !this.active
     },
-
     selectRegion (region) {
       if (region === this.selectedRegion) this.$store.commit('selectRegion', '')
       else this.$store.commit('selectRegion', region)
     },
-
     selectServer (server) {
+      if (server === this.selectedServer) this.$store.commit('selectServer', '')
+      else this.$store.commit('selectServer', server)
+    },
+    setServer (server, faction) {
       server = utility.serverSlug(server)
       if (this.server === server) return
-      server = `${server}-alliance` // TODO: Remove
+      server = `${server}-${faction}`
 
       const route = this.$route.fullPath.replace(this.server, server)
       this.$router.push(route)
@@ -108,7 +128,7 @@ export default {
   position: absolute;
   top: 0;
   padding: 5px 0;
-  background: $color-bg;
+  background: $color-bg-dark;
   @include ease(0.15s);
   @include shade-1;
 
@@ -145,7 +165,7 @@ export default {
   padding: 0 15px !important;
   @include ease(0.35s);
   overflow: hidden;
-  background: $color-bg-dark;
+  background: $color-bg;
 
   &.selected {
     opacity: 1;
@@ -153,12 +173,18 @@ export default {
     padding: 10px 15px !important;
     overflow: visible;
   }
+  &:hover {
+    background: darken($color-bg, 5%) !important
+  }
 }
 .faction {
-  background: $color-bg-darker;
+  background: lighten($color-bg, 10%);
   display: flex;
   justify-content: space-around;
   @include ease(0.35s);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
 
   .image-wrapper{
     width: 100%;
@@ -171,8 +197,14 @@ export default {
     }
 
     &:hover {
-      background: darken($color-bg-darker, 2%)
+      background: lighten($color-bg, 5%);
     }
+  }
+
+  &.selected {
+    opacity: 1;
+    max-height: 100%;
+    overflow: visible;
   }
 }
 </style>
