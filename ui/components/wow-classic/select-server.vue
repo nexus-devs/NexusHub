@@ -1,7 +1,8 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>{{ serverPretty }}</span>
+      <span>{{ serverPretty.name }}</span>
+      <img :src="`/img/wow-classic/icon_${serverPretty.faction}.gif`" :alt="`${serverPretty.faction} Logo`" class="faction-logo" />
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
@@ -76,7 +77,7 @@ export default {
       const faction = serverSplit.pop()
       const serverlist = this.serverlist.EU.concat(this.serverlist.US)
       const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-      return `${serverlist[serverIndex]} - ${faction.charAt(0).toUpperCase() + faction.slice(1)}`
+      return { name: serverlist[serverIndex], faction }
     }
   },
 
@@ -123,6 +124,10 @@ export default {
 }
 .interactive {
   padding: 6px 10px;
+
+  .faction-logo {
+    vertical-align: middle;
+  }
 }
 .dropdown {
   position: absolute;
