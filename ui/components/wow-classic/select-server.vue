@@ -10,9 +10,9 @@
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
 
         <!-- Europe Servers -->
-        <span @click="selectRegion('EU')">Europe</span>
+        <span :class="{ active: activeRegion === 'EU' }" @click="selectRegion('EU')">Europe</span>
         <template v-for="s in serverlist.EU">
-          <span :key="s" :class="{ active: server === s, selected: selectedRegion === 'EU' }"
+          <span :key="s" :class="{ active: serverPretty.name === s, selected: selectedRegion === 'EU' }"
                 class="server" @click="selectServer(s)"
           >{{ s }}</span>
           <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
@@ -26,9 +26,9 @@
         </template>
 
         <!-- United States Servers -->
-        <span @click="selectRegion('US')">United States</span>
+        <span :class="{ active: activeRegion === 'US' }" @click="selectRegion('US')">United States</span>
         <template v-for="s in serverlist.US">
-          <span :key="s" :class="{ active: server === s, selected: selectedRegion === 'US' }"
+          <span :key="s" :class="{ active: serverPretty.name === s, selected: selectedRegion === 'US' }"
                 class="server" @click="selectServer(s)"
           >{{ s }}</span>
           <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
@@ -78,12 +78,19 @@ export default {
       const serverlist = this.serverlist.EU.concat(this.serverlist.US)
       const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
       return { name: serverlist[serverIndex], faction }
+    },
+    activeRegion () {
+      if (this.serverlist.EU.includes(this.serverPretty.name)) return 'EU'
+      else return 'US'
     }
   },
 
   methods: {
     toggle () {
       this.active = !this.active
+      if (!this.active) {
+        this.$store.commit('selectRegion', '')
+      }
     },
     selectRegion (region) {
       if (region === this.selectedRegion) this.$store.commit('selectRegion', '')
