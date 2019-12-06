@@ -33,10 +33,9 @@ async function monitor () {
       const realms = reqRealms.data
       for (const realm of realms) {
         const lastScan = await client.get(`/wow-classic/v1/scans/latest/${realm.master_slug}`)
-        if (lastScan.error) continue
 
         // If there are no scans or the last scan is outdated
-        lastScan.scannedAt = new Date(lastScan.scannedAt)
+        lastScan.scannedAt = lastScan.error ? new Date(0) : new Date(lastScan.scannedAt)
         const lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
         if (lastScanUnix < realm.last_modified) {
           const scans = await requestTSM(tsmKey, `/realm/${realm.master_slug}/scans`)
@@ -48,13 +47,19 @@ async function monitor () {
           // Sort TSM scans by date and add them
           // Do old -> new so there aren't data holes if the service get's interrupted
           scans.data.sort((a, b) => a.last_modified - b.last_modified)
+          let parallel = []
           for (const scan of scans.data) {
             if (scan.last_modified <= lastScanUnix) continue // If scan is already added
 
             const scannedAt = new Date(scan.last_modified * 1000)
             // Await to avoid overloading the TSM servers
-            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
+            parallel.push(client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt }))
+            if (parallel.length >= 4) {
+              await Promise.all(parallel)
+              parallel = []
+            }
           }
+          if (parallel.length > 0) await Promise.all(parallel)
         }
       }
     }

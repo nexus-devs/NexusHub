@@ -26,6 +26,12 @@ class Scan extends Endpoint {
     const region = req.body.region.toLowerCase()
     const scanId = req.body.scanId
     const scannedAt = new Date(req.body.scannedAt)
+    const scannedAtHour = new Date(scannedAt.getTime())
+    scannedAtHour.setMinutes(0)
+    scannedAtHour.setSeconds(0)
+    scannedAtHour.setMilliseconds(0)
+    const scannedAtDay = new Date(scannedAtHour.getTime())
+    scannedAtDay.setHours(0)
 
     const scanExistsAlready = await this.db.collection('scans').findOne({ slug, scanId })
     if (scanExistsAlready) {
@@ -41,44 +47,29 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    const parallel = []
-    parallel.push(this.db.collection('scans').insertOne({ slug, scanId, scannedAt }))
+    await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
 
-    const scanData = scan.data.map((obj) => {
-      delete obj.variant_id
-      delete obj.pet_species
-      return {
-        slug,
-        scannedAt,
-        ...obj
+    const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
+
+    const hour = scannedAtHour.getHours()
+    for (const obj of scan.data) {
+      const update = { $set: { } }
+      update.$set[`details.${hour}`] = {
+        marketValue: obj.market_value,
+        minBuyout: obj.min_buyout,
+        numAuctions: obj.num_auctions,
+        quantity: obj.quantity
       }
-    })
-    parallel.push(this.db.collection('scanData').insertMany(scanData))
 
-    // Round date to current bracket
-    /* const msH = 1000 * 60 * 60
-    const bracketHour = new Date(Math.floor(scannedAt.getTime() / msH) * msH)
-    const bulk = this.db.collection('regionData').initializeUnorderedBulkOp()
-
-    // Update or insert regional data
-    for (const obj of scanData) {
       bulk.find({
-        item: obj.item,
-        scannedAt: bracketHour,
-        slug: region
-      }).upsert().updateOne({
-        $inc: {
-          count: 1,
-          marketValue: obj.market_value,
-          minBuyout: obj.min_buyout,
-          qty: obj.quantity,
-          numAuctions: obj.num_auctions
-        }
-      })
+        itemId: obj.item,
+        scannedAt: scannedAtDay,
+        slug,
+        region
+      }).upsert().updateOne(update)
     }
-    parallel.push(bulk.execute()) */
 
-    await Promise.all(parallel)
+    await bulk.execute()
 
     res.send('added!')
   }
