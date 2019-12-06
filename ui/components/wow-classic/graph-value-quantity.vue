@@ -37,7 +37,7 @@ export default {
         return {
           x: d.scannedAt,
           value1: d.marketValue,
-          value2: d.qty
+          value2: d.quantity
         }
       })
     }

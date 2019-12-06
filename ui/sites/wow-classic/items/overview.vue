@@ -26,7 +26,8 @@
             <graph-value-comparison class="col-b graph" />
           </div>
           <div class="row-margin main">
-            <!-- <heatmapValue class="col-b graph" /> -->
+            <heatmap-value class="col-b graph" />
+            <heatmap-quantity class="col-b graph" />
           </div>
         </div>
       </section>

@@ -38,7 +38,7 @@ export default {
       for (const d of item) {
         const timestamp = new Date(d.scannedAt)
 
-        const day = (timestamp.getDay() - 1) % 7 // Change it so 0 is monday
+        const day = (((timestamp.getDay() - 1) % 7) + 7) % 7 // Change it so 0 is monday (also emulate modulo, fuck you javascript)
         if (!data[day]) data[day] = []
 
         const hour = timestamp.getHours()
@@ -46,8 +46,8 @@ export default {
         data[day][hour].push(d.marketValue)
       }
 
-      for (const day of data) {
-        day.map((hArr) => {
+      for (let i = 0; i < data.length; i++) {
+        data[i] = data[i].map((hArr) => {
           const hNum = hArr.length
           const hSum = hArr.reduce((acc, cV) => acc + cV)
           return Math.round(hSum / hNum)

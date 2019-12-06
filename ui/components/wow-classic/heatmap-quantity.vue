@@ -35,15 +35,25 @@ export default {
       const item = this.$store.state.graphs.storage['heatmap-quantity'].data
       const data = []
 
-      for (let i = 0; i < item.length; i++) {
-        const day = i % 7
+      for (const d of item) {
+        const timestamp = new Date(d.scannedAt)
+
+        const day = (((timestamp.getDay() - 1) % 7) + 7) % 7 // Change it so 0 is monday (also emulate modulo, fuck you javascript)
         if (!data[day]) data[day] = []
 
-        for (let j = 0; j < item[i].length; j++) {
-          if (!data[day][j]) data[day][j] = 0
-          data[day][j] += item[i][j].qty
-        }
+        const hour = timestamp.getHours()
+        if (!data[day][hour]) data[day][hour] = []
+        data[day][hour].push(d.quantity)
       }
+
+      for (let i = 0; i < data.length; i++) {
+        data[i] = data[i].map((hArr) => {
+          const hNum = hArr.length
+          const hSum = hArr.reduce((acc, cV) => acc + cV)
+          return Math.round(hSum / hNum)
+        })
+      }
+
       return data
     }
   },
