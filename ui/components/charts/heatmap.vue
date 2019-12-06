@@ -47,8 +47,8 @@ export default {
     },
 
     max () {
-      const maxRow = this.data.map((row) => Math.max.apply(Math, row))
-      return Math.max.apply(null, maxRow)
+      const maxRow = this.data.map((row) => Math.max(...row.filter((v) => v)))
+      return Math.max(...maxRow)
     }
   },
 
