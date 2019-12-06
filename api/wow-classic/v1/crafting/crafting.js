@@ -61,14 +61,22 @@ class Crafting extends Endpoint {
       itemId: { $in: Object.keys(itemStorage).filter((key) => !Object.keys(itemStorage[key]).length).map((v) => parseInt(v)) }
     }).toArray())
     for (const i of Object.keys(itemStorage).map((v) => parseInt(v))) {
-      parallel.push(this.db.collection('scanData').findOne({ item: i, slug }, { sort: { scannedAt: -1 } }))
+      parallel.push(this.db.collection('scanData').findOne({ itemId: i, slug }, { sort: { scannedAt: -1 } }))
     }
     const [metaData, ...priceData] = await Promise.all(parallel)
+
+    // Convert price data
+    for (const priceEntry of priceData) {
+      if (!priceEntry) continue
+      const newestKey = Math.max(...Object.keys(priceEntry.details).map((x) => parseInt(x)))
+      const newest = priceEntry.details[newestKey]
+      priceEntry.marketValue = newest.marketValue
+    }
 
     // Merge missing data
     for (const i of Object.keys(itemStorage).map((v) => parseInt(v))) {
       const entryMeta = metaData.find((x) => x.itemId === i)
-      const entryPrice = priceData.find((x) => x ? x.item === i : false)
+      const entryPrice = priceData.find((x) => x ? x.itemId === i : false)
       itemStorage[i] = { ...itemStorage[i], ...entryMeta, ...entryPrice }
     }
 
@@ -81,14 +89,14 @@ class Crafting extends Endpoint {
             ...r,
             name: storage.name,
             icon: `https://wow.zamimg.com/images/wow/icons/large/${storage.icon}.jpg`,
-            marketValue: storage.market_value ? storage.market_value : null
+            marketValue: storage.marketValue ? storage.marketValue : null
           }
         })
         return { ...applyItem, ...cby, reagents }
       }
     }
     const applyReagentFor = (r) => {
-      if (itemStorage[r.itemId].market_value) r.marketValue = itemStorage[r.itemId].market_value
+      if (itemStorage[r.itemId].marketValue) r.marketValue = itemStorage[r.itemId].marketValue
       const createdBy = r.createdBy.map(applyData({
         itemId: r.itemId,
         name: r.name,
