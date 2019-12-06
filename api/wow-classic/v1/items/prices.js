@@ -1,7 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const request = require('request-promise')
-const fs = require('fs')
-const tsmKey = fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
 
 /**
  * Provides basic item statistics for a specific item
@@ -25,13 +22,14 @@ class Prices extends Endpoint {
       }
     ]
     this.schema.response = {
+      slug: String,
       itemId: Number,
       timerange: Number,
       data: [{
-        scannedAt: Number,
         marketValue: Number,
         minBuyout: Number,
-        qty: Number
+        quantity: Number,
+        scannedAt: Number
       }]
     }
   }
@@ -55,7 +53,7 @@ class Prices extends Endpoint {
     }
 
     // TODO: Cache this (especially region)
-    return res.send({ server: slug, itemId, timerange, data })
+    return res.send({ slug, itemId, timerange, data })
   }
 
   /**
@@ -64,20 +62,26 @@ class Prices extends Endpoint {
   async getServerPrices (slug, itemId, timerange) {
     const daysAgo = 1000 * 60 * 60 * 24 * timerange
 
-    const data = await this.db.collection('scanData').find({
+    const rawData = await this.db.collection('scanData').find({
+      itemId,
       slug,
-      item: itemId,
       scannedAt: { $gte: new Date(Date.now() - daysAgo) }
     }).sort({ scannedAt: 1 }).toArray()
 
-    return data.map((x) => {
-      return {
-        scannedAt: x.scannedAt,
-        marketValue: x.market_value,
-        minBuyout: x.min_buyout,
-        qty: x.quantity
+    const data = []
+    for (const day of rawData) {
+      for (const hour of Object.keys(day.details).map((x) => parseInt(x))) {
+        const d = day.details[hour]
+        data.push({
+          marketValue: d.marketValue,
+          minBuyout: d.minBuyout,
+          quantity: d.quantity,
+          scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour)
+        })
       }
-    })
+    }
+
+    return data
   }
 
   /**
@@ -86,40 +90,27 @@ class Prices extends Endpoint {
   async getRegionPrices (slug, itemId, timerange) {
     const daysAgo = 1000 * 60 * 60 * 24 * timerange
 
-    const reqServer = await request({
-      uri: 'http://api2.tradeskillmaster.com/realms',
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': tsmKey }
-    })
-    const servers = reqServer.data.filter((x) => x.region === slug.toUpperCase())
-
-    slug = { $in: servers.map((x) => x.slug) }
-
     // Group results by hour brackets
     const data = await this.db.collection('scanData').aggregate([
-      { $match: { slug, item: itemId, scannedAt: { $gte: new Date(Date.now() - daysAgo) } } }, {
+      { $match: { itemId, scannedAt: { $gte: new Date(Date.now() - daysAgo) }, region: slug } },
+      { $project: { scannedAt: 1, details: { $objectToArray: '$details' } } },
+      { $unwind: '$details' },
+      {
         $group: {
-          _id: {
-            $dateFromParts: {
-              year: { $year: '$scannedAt' },
-              month: { $month: '$scannedAt' },
-              day: { $dayOfMonth: '$scannedAt' },
-              hour: { $hour: '$scannedAt' }
-            }
-          },
-          marketValue: { $avg: '$market_value' },
-          minBuyout: { $avg: '$min_buyout' },
-          qty: { $avg: '$quantity' }
+          _id: { $add: ['$scannedAt', { $multiply: [{ $toInt: '$details.k' }, 1000 * 60 * 60] }] },
+          marketValue: { $avg: '$details.v.marketValue' },
+          minBuyout: { $avg: '$details.v.minBuyout' },
+          quantity: { $avg: '$details.v.quantity' }
         }
       }
-    ]).sort({ _id: 1 }).toArray() // Force different index, because slug is reduced in cardinality
+    ]).sort({ _id: 1 }).toArray()
 
     return data.map((x) => {
       x.scannedAt = x._id
       delete x._id
       x.marketValue = Math.round(x.marketValue)
       x.minBuyout = Math.round(x.minBuyout)
-      x.qty = Math.round(x.qty)
+      x.quantity = Math.round(x.quantity)
       return x
     })
   }

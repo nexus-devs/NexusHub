@@ -13,11 +13,11 @@ class Hook {
     }
 
     // Scan Data
-    await verify(db, 'scanData', {
-      item: 1,
+    /* await verify(db, 'scanData', {
+      itemId: 1,
       slug: 1,
       scannedAt: -1
-    })
+    }) */
   }
 }
 
