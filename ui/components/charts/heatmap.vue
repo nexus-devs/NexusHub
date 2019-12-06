@@ -59,7 +59,7 @@ export default {
   methods: {
     scale (num) {
       const scale = num / this.max
-      return scale < 0.3 ? 0.3 : scale // TODO: Adjust this to real data
+      return scale < 0.45 ? 0.45 : scale
     }
   }
 }
