@@ -19,9 +19,9 @@ class Items extends Endpoint {
       sellPrice: Number,
       stats: {
         current: {
-          qty: Number,
+          marketValue: Number,
           minBuyout: Number,
-          marketValue: Number
+          quantity: Number
         },
         previous: Object
       }
@@ -43,31 +43,8 @@ class Items extends Endpoint {
       })
     }
 
-    const daysAgo = 1000 * 60 * 60 * 24 * 2 // max 2 days old
-    const stats = await this.db.collection('scanData').find({
-      slug,
-      item: itemId,
-      scannedAt: { $gte: new Date(Date.now() - daysAgo) }
-    }).sort({ scannedAt: 1 }).toArray()
-
-    const middle = Math.ceil(stats.length / 2)
-    const previousStats = stats.slice(0, middle)
-    const currentStats = stats.slice(middle, stats.length)
-
-    const reducer = (length) => {
-      return (acc, cV) => {
-        acc.marketValue += cV.market_value * (1 / length)
-        acc.minBuyout += cV.min_buyout * (1 / length)
-        acc.qty += cV.quantity * (1 / length)
-        return acc
-      }
-    }
-    const previous = previousStats.reduce(reducer(previousStats.length), { marketValue: 0, minBuyout: 0, qty: 0 })
-    const current = currentStats.reduce(reducer(currentStats.length), { marketValue: 0, minBuyout: 0, qty: 0 })
-    for (const k of Object.keys(previous)) {
-      previous[k] = Math.round(previous[k])
-      current[k] = Math.round(current[k])
-    }
+    const stats = await this.db.collection('scanData').findOne({ slug, itemId }, { sort: { scannedAt: -1 } })
+    const keys = Object.keys(stats.details).reverse().slice(0, 2)
 
     const response = {
       server: slug,
@@ -78,7 +55,10 @@ class Items extends Endpoint {
       requiredLevel: item.requiredLevel,
       itemLevel: item.itemLevel,
       sellPrice: item.sellPrice,
-      stats: { current, previous }
+      stats: {
+        current: keys[0] ? stats.details[keys[0]] : null,
+        previous: keys[1] ? stats.details[keys[1]] : null
+      }
     }
 
     return res.send(response)
