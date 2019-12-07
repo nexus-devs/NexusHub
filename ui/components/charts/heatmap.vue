@@ -3,7 +3,7 @@
     <div v-for="(day, i) in data" :key="axisDays[i]" class="day">
       <div v-for="(hour, j) in day" :key="hour + '' + j" class="hour-wrapper">
         <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="[theme.hour, { inactive: !hour }]" class="hour" />
-        <div :class="theme.tooltip" class="tooltip">
+        <div :class="[theme.tooltip, { inactive: !hour }]" class="tooltip">
           <time :datetime="`${j * 2 + 1}:00`">
             {{ axisDays[i] }},
             {{ j % 12 + 1 }}{{ j > 11 ? 'pm' : 'am' }}
@@ -129,7 +129,7 @@ export default {
       position: relative;
       opacity: 1 !important;
     }
-    .tooltip {
+    .tooltip:not(.inactive) {
       z-index: 5;
       opacity: 1;
     }
