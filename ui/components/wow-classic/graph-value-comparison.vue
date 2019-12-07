@@ -41,9 +41,9 @@ export default {
         marketValue: itemData[itemData.length - 1].marketValue,
         value2: itemData[itemData.length - 1].value2
       })
-      if (Math.ceil(Math.abs(now - itemData[0].scannedAt) / (1000 * 60 * 60 * 24)) >= 7) {
+      if (Math.ceil(Math.abs(now - itemData[0].scannedAt) / (1000 * 60 * 60 * 24)) >= this.timerange) {
         itemData.unshift({
-          scannedAt: now - (1000 * 60 * 60 * 24 * 7),
+          scannedAt: now - (1000 * 60 * 60 * 24 * this.timerange),
           marketValue: itemData[0].marketValue,
           value2: itemData[0].value2
         })
