@@ -46,12 +46,21 @@ export default {
         data[day][hour].push(d.quantity)
       }
 
-      for (let i = 0; i < data.length; i++) {
-        data[i] = data[i].map((hArr) => {
-          const hNum = hArr.length
-          const hSum = hArr.reduce((acc, cV) => acc + cV)
-          return Math.round(hSum / hNum)
-        })
+      // Interpolate and convert data
+      for (let i = 0; i < 7; i++) {
+        if (!data[i]) {
+          data[i] = new Array(24).fill(null)
+          continue
+        }
+        for (let j = 0; j < 24; j++) {
+          if (!data[i][j]) {
+            data[i][j] = null
+            continue
+          }
+          const hNum = data[i][j].length
+          const hSum = data[i][j].reduce((acc, cV) => acc + cV)
+          data[i][j] = Math.round(hSum / hNum)
+        }
       }
 
       return data
