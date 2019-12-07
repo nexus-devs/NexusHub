@@ -34,21 +34,6 @@ export default {
     data () {
       const itemData = this.$store.state.graphs.storage['graph-value-comparison'].data
 
-      // Interpolate 7 days ago and today
-      const now = new Date().getTime()
-      itemData.push({
-        scannedAt: now,
-        marketValue: itemData[itemData.length - 1].marketValue,
-        value2: itemData[itemData.length - 1].value2
-      })
-      if (Math.ceil(Math.abs(now - itemData[0].scannedAt) / (1000 * 60 * 60 * 24)) >= this.timerange) {
-        itemData.unshift({
-          scannedAt: now - (1000 * 60 * 60 * 24 * this.timerange),
-          marketValue: itemData[0].marketValue,
-          value2: itemData[0].value2
-        })
-      }
-
       return itemData.map((d) => {
         return {
           x: d.scannedAt,

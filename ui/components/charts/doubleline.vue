@@ -107,7 +107,7 @@ export default {
       const now = moment()
       const dayAgo = (d) => now.clone().subtract(d, 'days').format('DD. MMM')
       const x = []
-      const days = parseInt(this.timerange) // (this.data.length * Math.floor(this.timerange / 7)) / 24
+      const days = parseInt(this.timerange)
       let stepSize = 1
       if (days === 30) stepSize = 5
       else if (days === 90) stepSize = 15
@@ -131,10 +131,10 @@ export default {
 
   watch: {
     data (newData, oldData) {
-      Tween.adjustData(this, newData, oldData)
+      /* Tween.adjustData(this, newData, oldData)
       if (newData.length !== oldData.length) {
         this.onResize()
-      }
+      } */
     }
   },
 
