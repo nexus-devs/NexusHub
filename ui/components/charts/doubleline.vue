@@ -1,6 +1,6 @@
 <template>
   <div class="doubleline">
-    <div :class="[theme.axis, theme.y1]" class="axis y1">
+    <div :style="{ width: scaleY1Width }" :class="[theme.axis, theme.y1]" class="axis y1">
       <span v-for="label in axis.y" :key="label">
         {{ parsePriceY(label) }}
       </span>
@@ -44,7 +44,7 @@
         </span>
       </div>
     </div>
-    <div v-if="!sameScale" :class="[theme.axis, theme.y2]" class="axis y2">
+    <div v-if="!sameScale" :style="{ width: scaleY2Width }" :class="[theme.axis, theme.y2]" class="axis y2">
       <span v-for="label in axis.y2" :key="label">
         {{ label }}
       </span>
@@ -68,6 +68,8 @@ export default {
     return {
       width: 0,
       height: 0,
+      scaleY1Width: 'auto',
+      scaleY2Width: 'auto',
       min: 0,
       max: 0,
       line: {
@@ -131,10 +133,10 @@ export default {
 
   watch: {
     data (newData, oldData) {
-      /* Tween.adjustData(this, newData, oldData)
+      Tween.adjustData(this, newData, oldData)
       if (newData.length !== oldData.length) {
         this.onResize()
-      } */
+      }
     }
   },
 
@@ -144,7 +146,7 @@ export default {
 
   mounted () {
     window.addEventListener('resize', this.onResize)
-    this.onResize()
+    this.onResize(true)
   },
 
   beforeDestroy () {
@@ -160,9 +162,18 @@ export default {
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
-    onResize () {
+    onResize (justMounted = false) {
       const boundingBox = d3.select(this.$el).select('.sparkline').node().getBoundingClientRect()
       this.width = boundingBox.width
+
+      if (justMounted) { // Hack to avoid svg exploding on scala change
+        this.scaleY1Width = d3.select(this.$el).select('.y1').node().getBoundingClientRect().width
+        if (!this.sameScale) {
+          this.scaleY2Width = d3.select(this.$el).select('.y2').node().getBoundingClientRect().width
+          this.width -= 12
+        } else this.width -= 6
+      }
+
       this.height = boundingBox.height
       this.initialize()
       Tween.adjustData(this, this.data, this.data, true)
@@ -366,6 +377,8 @@ export default {
 }
 
 svg {
+  position: absolute;
+
   text {
     font-size: 0.85em;
     fill: white;
