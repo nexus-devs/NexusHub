@@ -6,6 +6,7 @@ export default {
     reagentFor: [],
     createdBy: [],
     type: 'reagentFor',
+    filter: '',
     selected: null
   },
 
@@ -24,6 +25,10 @@ export default {
     },
     setOrderType (state, type) {
       state.type = type
+      state.filter = ''
+    },
+    setFilter (state, filter) {
+      state.filter = filter
     }
   }
 }

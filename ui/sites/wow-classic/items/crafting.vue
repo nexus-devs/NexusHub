@@ -18,10 +18,14 @@
             <div class="filter-tags">
               <div class="filter-tag-row">
                 <!-- Filters -->
-                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
-                  <img v-if="filter.icon" :src="filter.icon" :alt="filter.name" class="ico-12">
-                  <span>{{ filter.name }}</span>
-                  <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
+                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.name === selectedFilter }" class="btn-tag component col interactive" @click="selectFilter(filter.name)">
+                  <div class="image-wrapper">
+                    <img v-if="filter.icon" :src="filter.icon" :alt="filter.name" class="ico-12">
+                  </div>
+                  <div class="data">
+                    <span>{{ filter.name }}</span>
+                    <span class="btn-counter">0</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -44,7 +48,7 @@
             <div class="col interactive whitespace" />
           </div>
           <transition-group>
-            <div v-for="(entry, i) in crafting[type]" :key="entry.itemId + '-' + i">
+            <div v-for="(entry, i) in craftingFiltered[type]" :key="entry.itemId + '-' + i">
               <crafting-entry :crafting="entry" :cid="entry.itemId + '-' + i" />
             </div>
           </transition-group>
@@ -101,8 +105,22 @@ export default {
         reagentFor: this.$store.state.crafting.reagentFor
       }
     },
+    craftingFiltered () {
+      let { createdBy, reagentFor } = this.crafting
+
+      // Apply filter
+      if (this.selectedFilter !== '') {
+        createdBy = createdBy.filter((o) => o.category === this.selectedFilter)
+        reagentFor = reagentFor.filter((o) => o.category === this.selectedFilter)
+      }
+
+      return { createdBy, reagentFor }
+    },
     type () {
       return this.$store.state.crafting.type
+    },
+    selectedFilter () {
+      return this.$store.state.crafting.filter
     },
     filters () {
       const filters = []
@@ -123,6 +141,10 @@ export default {
   methods: {
     setType (type) {
       if (type !== this.type) this.$store.commit('setOrderType', type)
+    },
+    selectFilter (filter) {
+      if (filter !== this.selectedFilter) this.$store.commit('setFilter', filter)
+      else this.$store.commit('setFilter', '')
     }
   },
 
@@ -242,10 +264,6 @@ export default {
   padding-top: 20px;
   margin-bottom: 20px;
 
-  img {
-    border-radius: 10px;
-  }
-
   .filter-tags {
     display: flex;
     align-items: center;
@@ -255,6 +273,29 @@ export default {
       margin-right: 20px;
       padding-right: 20px;
     }
+  }
+
+  .component {
+    padding: 0 16px 0 8px;
+  }
+
+  .image-wrapper {
+    display: inline-flex;
+    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 29px;
+    margin-right: 5px;
+
+    img {
+      border-radius: 10px;
+      margin-right: 0 !important; // Reset .active from .btn-tag
+    }
+  }
+  .data {
+    display: inline-block;
   }
 }
 </style>
