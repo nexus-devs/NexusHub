@@ -1,3 +1,5 @@
+import utility from 'src/components/wow-classic/utility.js'
+
 export default {
   name: 'graphs',
   state: {
@@ -73,12 +75,17 @@ export default {
   },
 
   actions: {
-    async refetchGraphData ({ state, commit }, { graph, timerange }) {
+    async refetchGraphData ({ state, commit }, { graph, timerange, regional }) {
       const itemId = state.itemId
       const slug = state.slug
 
-      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
-      commit('setGraphData', { graph, item })
+      const parallel = []
+      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`))
+      if (regional) parallel.push(this.$cubic.get(`/wow-classic/v1/items/us/${itemId}/prices?region=true&timerange=${timerange}`)) // TODO: Change this to be responsive
+      let [itemData, regionalData] = await Promise.all(parallel)
+
+      if (regional) itemData = utility.formatRegionalData(itemData, regionalData)
+      commit('setGraphData', { graph, item: itemData })
     }
   }
 }

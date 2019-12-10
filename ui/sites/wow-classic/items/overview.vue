@@ -48,6 +48,7 @@ import itemHeader from 'src/components/wow-classic/header.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
 import storeModule from 'src/store/wow-classic/graphs.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -72,27 +73,13 @@ export default {
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)) // TODO: Change this to be responsive
       const [itemData, regionalData] = await Promise.all(parallel)
-
-      // Edit data for responsive graphs
-      const msH = 1000 * 60 * 60
-      for (const iD of itemData.data) {
-        const bracketHour = new Date(Math.floor(new Date(iD.scannedAt).getTime() / msH) * msH)
-        const bracketIndex = regionalData.data.findIndex((x) => new Date(x.scannedAt).getTime() === bracketHour.getTime())
-        if (bracketIndex >= 0) regionalData.data[bracketIndex].value2 = iD.marketValue
-      }
-      // Interpolate missing data
-      let validValue = regionalData.data.find((e) => e.value2).value2 // Get first valid value
-      for (const rD of regionalData.data) {
-        if (!validValue) rD.value2 = null
-        else if (!rD.value2) rD.value2 = validValue
-        else if (rD.value2) validValue = rD.value2
-      }
+      const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
 
       store.commit('setGraphItem', { itemId: itemData.itemId, slug })
 
       // Commit start value for all graphs
       store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
-      store.commit('setGraphData', { graph: 'graph-value-comparison', item: regionalData })
+      store.commit('setGraphData', { graph: 'graph-value-comparison', item: regionalDataEdited })
       store.commit('setGraphData', { graph: 'heatmap-quantity', item: itemData })
       store.commit('setGraphData', { graph: 'heatmap-value', item: itemData })
     }

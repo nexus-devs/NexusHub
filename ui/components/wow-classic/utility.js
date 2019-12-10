@@ -45,5 +45,22 @@ export default {
   // Changes server name to server slug
   serverSlug (server) {
     return server.toLowerCase().replace(/\s/g, '-').replace(/'/g, '')
+  },
+
+  // Edit and interpolate data for regional graph
+  formatRegionalData (itemData, regionalData) {
+    const msH = 1000 * 60 * 60
+    for (const iD of itemData.data) {
+      const bracketHour = new Date(Math.floor(new Date(iD.scannedAt).getTime() / msH) * msH)
+      const bracketIndex = regionalData.data.findIndex((x) => new Date(x.scannedAt).getTime() === bracketHour.getTime())
+      if (bracketIndex >= 0) regionalData.data[bracketIndex].value2 = iD.marketValue
+    }
+    let validValue = regionalData.data.find((e) => e.value2).value2 // Get first valid value
+    for (const rD of regionalData.data) {
+      if (!validValue) rD.value2 = null
+      else if (!rD.value2) rD.value2 = validValue
+      else if (rD.value2) validValue = rD.value2
+    }
+    return regionalData
   }
 }

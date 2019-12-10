@@ -377,8 +377,6 @@ export default {
 }
 
 svg {
-  position: absolute;
-
   text {
     font-size: 0.85em;
     fill: white;
