@@ -26,6 +26,7 @@ import selectFaction from 'src/components/wow-classic/select-faction.vue'
 import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 import storeModule from 'src/store/wow-classic/servers.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 // Client-side-only requirements
 let shortcut, listener
@@ -43,11 +44,18 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const slug = route.params.slug
-    if (slug) store.commit('setServer', slug)
-
     const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
     store.commit('setServerlist', serverlist)
+
+    const slug = route.params.slug
+    if (slug) {
+      const server = slug.split('-')
+      server.pop()
+      let region = ''
+      if (serverlist.EU.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'eu'
+      else if (serverlist.US.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'us'
+      store.commit('setServer', { server: slug, region })
+    }
   },
 
   mounted () {

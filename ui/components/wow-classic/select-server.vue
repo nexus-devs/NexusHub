@@ -104,10 +104,11 @@ export default {
       server = utility.serverSlug(server)
       if (this.server === server) return
       server = `${server}-${faction}`
+      const region = this.activeRegion.toLowerCase()
 
       const route = this.$route.fullPath.replace(this.server, server)
       this.$router.push(route)
-      this.$store.commit('setServer', server)
+      this.$store.commit('setServer', { server, region })
     }
   }
 }

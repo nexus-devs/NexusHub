@@ -69,9 +69,11 @@ export default {
 
     // Only fetch item data if we actually have a new item or new server
     if (store.state.graphs.itemId !== parseInt(item) || store.state.graphs.slug !== slug) {
+      const region = this.$store.state.servers.region
+
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
-      parallel.push(this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)) // TODO: Change this to be responsive
+      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${region}/${item}/prices?region=true`))
       const [itemData, regionalData] = await Promise.all(parallel)
       const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
 

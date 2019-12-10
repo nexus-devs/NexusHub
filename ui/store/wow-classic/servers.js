@@ -2,6 +2,7 @@ export default {
   name: 'servers',
   state: {
     server: '',
+    region: '',
     selected: {
       region: '',
       server: ''
@@ -15,8 +16,9 @@ export default {
         state[region] = list[region]
       }
     },
-    setServer (state, server) {
+    setServer (state, { server, region }) {
       state.server = server
+      state.region = region
     },
     selectRegion (state, region) {
       state.selected.region = region

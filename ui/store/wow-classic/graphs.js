@@ -78,10 +78,11 @@ export default {
     async refetchGraphData ({ state, commit }, { graph, timerange, regional }) {
       const itemId = state.itemId
       const slug = state.slug
+      const region = this.$store.state.servers.region
 
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`))
-      if (regional) parallel.push(this.$cubic.get(`/wow-classic/v1/items/us/${itemId}/prices?region=true&timerange=${timerange}`)) // TODO: Change this to be responsive
+      if (regional) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${region}/${itemId}/prices?region=true&timerange=${timerange}`))
       let [itemData, regionalData] = await Promise.all(parallel)
 
       if (regional) itemData = utility.formatRegionalData(itemData, regionalData)
