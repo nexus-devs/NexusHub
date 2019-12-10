@@ -22,7 +22,7 @@
       </div>
       <div class="col profit">
         <span v-if="profit" :class="{ negative: profit < 0 }" class="profit">
-          <indicator :diff="profit" /> {{ parsePrice(profit) }}
+          <indicator :diff="profit" /> {{ parsePrice(Math.abs(profit)) }}
         </span>
       </div>
       <div class="col buy" @click.stop="select">

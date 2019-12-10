@@ -24,7 +24,7 @@
                   </div>
                   <div class="data">
                     <span>{{ filter.name }}</span>
-                    <span class="btn-counter">0</span>
+                    <!--<span class="btn-counter">0</span>-->
                   </div>
                 </div>
               </div>

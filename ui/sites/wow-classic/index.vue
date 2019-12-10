@@ -43,6 +43,9 @@
                       </template>
                       <template slot="body">
                         <span class="highlight">{{ parsePrice(deal.dealDiff) }}</span>
+                        <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
+                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
+                        </span>
                         <br>
                         <span class="sub">cheaper than Market Value</span>
                       </template>
@@ -77,6 +80,7 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import indicator from 'src/components/charts/indicator.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
@@ -94,7 +98,8 @@ export default {
     newsArticle,
     search,
     searchButton,
-    module
+    module,
+    indicator
   },
 
   async asyncData ({ store, route }) {
@@ -113,6 +118,7 @@ export default {
       const item = itemData.shift()
       deal.icon = item.icon
       deal.name = item.name
+      deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
     }
 
     store.commit('setDeals', deals)
@@ -450,6 +456,12 @@ header {
           font-size: 0.85em;
           color: $color-font-body;
         }
+      }
+      span.negative {
+        color: $color-error;
+      }
+      .price-diff {
+        color: $color-positive;
       }
     }
     @media (max-width: $breakpoint-s) {
