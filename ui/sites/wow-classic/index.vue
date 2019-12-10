@@ -31,8 +31,7 @@
               </h2>
               <div class="realtime">
                 <div class="most-traded row">
-                  <!-- TODO: Change :to once realm refactoring is there -->
-                  <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/anathema-alliance/${deal.itemId}`" class="item col interactive">
+                  <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
                     <module>
                       <template slot="header">
                         <div class="img">
@@ -118,6 +117,9 @@ export default {
     },
     deals () {
       return this.$store.state.wowclassic.deals
+    },
+    server () {
+      return this.$store.state.servers.server
     }
   },
 
