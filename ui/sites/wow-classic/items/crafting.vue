@@ -5,10 +5,6 @@
     <app-content>
       <section>
         <div class="container">
-          <h2 class="sub">
-            Crafting
-          </h2>
-
           <!-- Filters -->
           <div class="filter">
             <div class="type">
@@ -18,6 +14,16 @@
               <span :class="{ active: type === 'createdBy' }" class="btn-subtle" @click="setType('createdBy')">
                 Created by <span class="btn-counter">{{ crafting.createdBy ? crafting.createdBy.length : 0 }}</span>
               </span>
+            </div>
+            <div class="filter-tags">
+              <div class="filter-tag-row">
+                <!-- Filters -->
+                <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
+                  <img v-if="filter.icon" :src="filter.icon" :alt="filter.name" class="ico-12">
+                  <span>{{ filter.name }}</span>
+                  <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
+                </div>
+              </div>
             </div>
           </div>
 
@@ -97,6 +103,20 @@ export default {
     },
     type () {
       return this.$store.state.crafting.type
+    },
+    filters () {
+      const filters = []
+      const entries = this.crafting[this.type]
+      for (const entry of entries) {
+        if (filters.find((o) => o.name === entry.category)) continue
+
+        // TODO: Replace this once api endpoint is there
+        filters.push({
+          name: entry.category,
+          icon: `https://wow.zamimg.com/images/wow/icons/small/trade_${entry.category.toLowerCase()}.jpg`
+        })
+      }
+      return filters
     }
   },
 
@@ -191,6 +211,49 @@ export default {
   .whitespace {
     @media (max-width: $breakpoint-s) {
       display: none;
+    }
+  }
+}
+
+.type {
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid $color-subtle-dark;
+
+  & > span {
+    display: inline-flex;
+    align-items: center;
+
+    &:first-of-type {
+      margin-right: 5px;
+    }
+    &:nth-of-type(2) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.filter {
+  position: relative;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin-bottom: 20px;
+
+  img {
+    border-radius: 10px;
+  }
+
+  .filter-tags {
+    display: flex;
+    align-items: center;
+
+    .filter-tags-row {
+      display: inline-block;
+      margin-right: 20px;
+      padding-right: 20px;
     }
   }
 }
