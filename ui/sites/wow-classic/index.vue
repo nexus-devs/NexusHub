@@ -98,17 +98,25 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    // TODO: Maybe parallelize all the async stuff
     const slug = route.params.slug
-    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=6`)
+
+    let parallel = []
+    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=6`))
+    parallel.push(this.$cubic.get('/wow-classic/v1/news'))
+    const [deals, news] = await Promise.all(parallel)
+
+    parallel = []
     for (const deal of deals) {
-      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`)
-      deal.icon = item.icon
-      deal.name = item.name
+      parallel.push(async () => {
+        const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`)
+        deal.icon = item.icon
+        deal.name = item.name
+      })
     }
+    await Promise.all(parallel)
 
     store.commit('setDeals', deals)
-    store.commit('setNews', await this.$cubic.get('/wow-classic/v1/news'))
+    store.commit('setNews', news)
   },
 
   computed: {
