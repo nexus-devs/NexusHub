@@ -81,8 +81,17 @@ export default {
       return this.$store.state.items.item
     },
     crafting () {
+      // Populate createdBy with item details
+      const createdBy = this.$store.state.crafting.createdBy
+      for (const entry of createdBy) {
+        entry.itemId = this.item.itemId
+        entry.name = this.item.name
+        entry.icon = this.item.icon
+        entry.marketValue = this.item.stats.current.marketValue
+      }
+
       return {
-        createdBy: this.$store.state.crafting.createdBy,
+        createdBy,
         reagentFor: this.$store.state.crafting.reagentFor
       }
     },
