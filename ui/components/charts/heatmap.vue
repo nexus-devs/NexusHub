@@ -46,6 +46,10 @@ export default {
       // return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     },
 
+    min () {
+      const minRow = this.data.map((row) => Math.min(...row.filter((v) => v)))
+      return Math.min(...minRow)
+    },
     max () {
       const maxRow = this.data.map((row) => Math.max(...row.filter((v) => v)))
       return Math.max(...maxRow)
@@ -57,9 +61,10 @@ export default {
   },
 
   methods: {
+    // Normalize number to [0.45, 1]
     scale (num) {
-      const scale = num / this.max
-      return scale < 0.45 ? 0.45 : scale
+      const scale = (num - this.min) / (this.max - this.min)
+      return (scale * (1 - 0.45)) + 0.45
     }
   }
 }
