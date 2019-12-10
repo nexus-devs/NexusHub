@@ -1,6 +1,6 @@
 <template>
   <div class="result">
-    <router-link :to="formatUrl(result.webUrl)" class="row interactive">
+    <router-link :to="result.webUrl" class="row interactive">
       <img :src="result.imgUrl" class="result-img-blur">
       <div class="result-title col-b">
         <div class="result-img">
@@ -23,8 +23,6 @@
 
 
 <script>
-import utility from 'src/components/wow-classic/utility.js'
-
 export default {
   props: ['result', 'filters'],
 
@@ -49,10 +47,6 @@ export default {
       } catch (err) {
 
       }
-    },
-
-    formatUrl (url) {
-      return utility.formatUrl(this, url)
     }
   }
 }

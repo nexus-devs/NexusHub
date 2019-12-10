@@ -68,7 +68,7 @@ export default {
     }
   },
   actions: {
-    async fetchSerpResults ({ commit, dispatch }, input) {
+    async fetchSerpResults ({ commit, dispatch }, { input, slug }) {
       if (input.length < 2) {
         return
       }
@@ -76,7 +76,7 @@ export default {
       // No new events in the meantime -> perform query
       const B = input.includes('🅱')
       const itemData = await this.$cubic.get(`/wow-classic/v1/search?query=${input.replace(/🅱️/g, 'b')}`)
-      const items = await dispatch('sanitizeSerpResults', { itemData, B })
+      const items = await dispatch('sanitizeSerpResults', { itemData, B, slug })
       const players = []
       const results = items.concat(players)
       commit('setSerpResults', results)
@@ -87,7 +87,7 @@ export default {
     /**
      * Apply some adjustments for more sensible usage on the UI
      */
-    sanitizeSerpResults (context, { itemData, B }) {
+    sanitizeSerpResults (context, { itemData, B, slug }) {
       const items = []
 
       // Add each component to results
@@ -105,7 +105,7 @@ export default {
         items.push({
           name,
           imgUrl: item.imgUrl,
-          webUrl: `/wow-classic/items/${item.itemId}`,
+          webUrl: `/wow-classic/items/${slug}/${item.itemId}`,
           results: 'items',
           description: name
         })

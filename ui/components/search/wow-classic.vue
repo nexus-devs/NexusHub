@@ -47,6 +47,12 @@ export default {
     }
   },
 
+  computed: {
+    server () {
+      return this.$store.state.servers.server
+    }
+  },
+
   mounted () {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -136,7 +142,7 @@ export default {
         this.query(this.suggestions[0].itemId)
         this.suggestions = []
       } else {
-        utility.pushUrl(this, `/wow-classic/search?input=${this.input}`)
+        this.$router.push(`/wow-classic/search/${this.server}?input=${this.input}`)
       }
     },
 
@@ -145,7 +151,7 @@ export default {
      * switching as well.
      */
     query (itemId) {
-      utility.pushUrl(this, `/wow-classic/items/${itemId}`)
+      this.$router.push(`/wow-classic/items/${this.server}/${itemId}`)
     }
   },
 

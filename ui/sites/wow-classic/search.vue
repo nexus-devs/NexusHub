@@ -60,8 +60,10 @@ export default {
     resultsGroup
   },
 
-  async asyncData ({ store, route: { query: { input }}}) {
-    await store.dispatch('fetchSerpResults', input)
+  async asyncData ({ store, route }) {
+    const slug = route.params.slug
+    const input = route.query.input
+    await store.dispatch('fetchSerpResults', { input, slug })
   },
 
   data () {

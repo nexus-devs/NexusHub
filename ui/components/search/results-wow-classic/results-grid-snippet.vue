@@ -1,6 +1,6 @@
 <template>
   <div class="result col">
-    <router-link :to="formatUrl(result.webUrl)" :class="{ set: result.set }" class="interactive">
+    <router-link :to="result.webUrl" :class="{ set: result.set }" class="interactive">
       <div class="result-img">
         <div class="result-img-shade" />
         <img :src="result.imgUrl" :class="{ mod: result.imgUrl.includes('jpeg') }" :alt="result.name">
@@ -30,8 +30,6 @@
 
 
 <script>
-import utility from 'src/components/wow-classic/utility.js'
-
 export default {
   props: ['result', 'filters', 'selection'],
 
@@ -56,10 +54,6 @@ export default {
       } catch (err) {
 
       }
-    },
-
-    formatUrl (url) {
-      return utility.formatUrl(this, url)
     }
   }
 }
