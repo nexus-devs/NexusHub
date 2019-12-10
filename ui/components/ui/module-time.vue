@@ -50,7 +50,7 @@ export default {
   background: $color-bg;
 }
 .body {
-  span:not(.active) {
+  :global span:not(.active) {
     color: $color-font-body;
   }
 }
@@ -63,7 +63,7 @@ export default {
   background: $color-bg;
 }
 .body {
-  span:not(.active) {
+  :global span:not(.active) {
     color: $color-font-body;
   }
 }
