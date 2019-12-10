@@ -15,13 +15,13 @@
               Item
             </div>
             <div class="col user">
-              Profession
-            </div>
-            <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
               Amount
             </div>
+            <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
+              Market Value
+            </div>
             <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
-              Price
+              Profit
             </div>
             <div class="col interactive whitespace" />
           </div>
@@ -147,6 +147,7 @@ export default {
   }
   .item {
     margin-right: 95px;
+    min-width: 30%;
   }
   .price {
     position: relative;

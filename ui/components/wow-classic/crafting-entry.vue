@@ -20,19 +20,25 @@
         <span v-if="crafting.marketValue">{{ parsePrice(crafting.marketValue) }}</span>
         <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
       </div>
+      <div class="col profit">
+        <span v-if="profit" :class="{ negative: profit < 0 }" class="profit">
+          <indicator :diff="profit" /> {{ parsePrice(profit) }}
+        </span>
+      </div>
       <div class="col buy" @click.stop="select">
         <button class="btn-outline">
           Reagents
         </button>
       </div>
     </div>
+    <!-- Reagents -->
     <div :class="{ active }" class="selection">
       <div v-for="(reagent) in crafting.reagents" :key="reagent.itemId" class="row">
         <div class="image-wrapper">
           <img :src="reagent.icon" :alt="reagent.name">
           <img :src="reagent.icon" :alt="reagent.name" class="blur">
         </div>
-        <div class="item col">
+        <div class="item col reagent">
           <span>{{ reagent.name }}</span>
         </div>
         <div class="col">
@@ -45,6 +51,7 @@
           <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
         </div>
         <div class="col"></div>
+        <div class="col"></div>
       </div>
     </div>
   </div>
@@ -53,9 +60,14 @@
 
 
 <script>
+import indicator from 'src/components/charts/indicator.vue'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
+  components: {
+    indicator
+  },
+
   props: ['crafting', 'cid'],
 
   computed: {
@@ -66,6 +78,10 @@ export default {
     },
     active () {
       return this.$store.state.crafting.selected === this.cid
+    },
+    profit () {
+      const cost = this.crafting.reagents.reduce((acc, cV) => acc + cV.marketValue * cV.amount, 0)
+      return Math.round(this.crafting.marketValue * ((this.crafting.amount[0] + this.crafting.amount[1]) / 2)) - cost
     }
   },
 
@@ -92,7 +108,7 @@ export default {
 
 .order {
   margin-top: 10px;
-  @include ease(0.4s); // For order transitions
+  @include ease(0.3s); // For order transitions
 
   &:first-of-type {
     margin-top: 0;
@@ -144,6 +160,7 @@ export default {
 .item {
   margin-left: 20px;
   color: $color-font-body;
+  min-width: 30%;
 
   .component {
     color: white;
@@ -162,6 +179,16 @@ export default {
       display: none;
     }
   }
+}
+.item.reagent {
+  min-width: calc(calc(100% + 80px) * 0.3 - 80px); // Parent width - image wrapper size
+}
+
+span.negative {
+ color: $color-error;
+}
+.profit {
+  color: $color-positive;
 }
 
 .user {
