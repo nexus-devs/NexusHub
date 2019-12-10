@@ -405,14 +405,14 @@ header {
     overflow: hidden;
     display: inline-flex;
     flex-wrap: wrap;
-    margin-left: 20px;
+    // margin-left: 20px;
     margin-right: -15px;
     margin-bottom: -15px;
 
     .item {
       padding: 0;
       border-radius: 2px;
-      flex-basis: 33%;
+      flex-basis: 25%;
       margin-right: 15px;
       margin-bottom: 15px;
       transition-duration: 0.5s !important;
@@ -423,9 +423,9 @@ header {
       &:before {
         border-radius: 2px;
       }
-      &:nth-of-type(n + 5) {
+      /* &:nth-of-type(n + 5) {
         display: none;
-      }
+      } */
       /deep/ .header {
         padding: 20px 20px 0;
       }
