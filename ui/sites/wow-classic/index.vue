@@ -106,14 +106,14 @@ export default {
     const [deals, news] = await Promise.all(parallel)
 
     parallel = []
+    for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
+    const itemData = await Promise.all(parallel)
+
     for (const deal of deals) {
-      parallel.push(async () => {
-        const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`)
-        deal.icon = item.icon
-        deal.name = item.name
-      })
+      const item = itemData.shift()
+      deal.icon = item.icon
+      deal.name = item.name
     }
-    await Promise.all(parallel)
 
     store.commit('setDeals', deals)
     store.commit('setNews', news)
