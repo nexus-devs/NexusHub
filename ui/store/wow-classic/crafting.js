@@ -4,7 +4,8 @@ export default {
     itemId: null,
     slug: '',
     reagentFor: [],
-    craftedBy: [],
+    createdBy: [],
+    type: 'reagentFor',
     selected: null
   },
 
@@ -13,10 +14,16 @@ export default {
       state.itemId = crafting.itemId
       state.slug = crafting.slug
       state.reagentFor = crafting.reagentFor
-      state.craftedBy = crafting.craftedBy
+      state.createdBy = crafting.createdBy
+
+      // Set start filter
+      if (!crafting.reagentFor.length && crafting.createdBy.length) state.type = 'createdBy'
     },
     selectCraftingEntry (state, cid) {
       state.selected = cid
+    },
+    setOrderType (state, type) {
+      state.type = type
     }
   }
 }

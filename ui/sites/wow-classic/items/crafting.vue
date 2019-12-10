@@ -9,6 +9,18 @@
             Crafting
           </h2>
 
+          <!-- Filters -->
+          <div class="filter">
+            <div class="type">
+              <span :class="{ active: type === 'reagentFor' }" class="btn-subtle" @click="setType('reagentFor')">
+                Reagent for <span class="btn-counter">{{ crafting.reagentFor ? crafting.reagentFor.length : 0 }}</span>
+              </span>
+              <span :class="{ active: type === 'createdBy' }" class="btn-subtle" @click="setType('createdBy')">
+                Created by <span class="btn-counter">{{ crafting.createdBy ? crafting.createdBy.length : 0 }}</span>
+              </span>
+            </div>
+          </div>
+
           <!-- All Orders-->
           <div class="row labels">
             <div class="col item">
@@ -73,6 +85,15 @@ export default {
         createdBy: this.$store.state.crafting.createdBy,
         reagentFor: this.$store.state.crafting.reagentFor
       }
+    },
+    type () {
+      return this.$store.state.crafting.type
+    }
+  },
+
+  methods: {
+    setType (type) {
+      if (type !== this.type) this.$store.commit('setOrderType', type)
     }
   },
 
