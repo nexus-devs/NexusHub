@@ -20,18 +20,20 @@
               <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" :class="theme.circle" />
               <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" :class="theme.circle2" />
               <g :class="theme.tooltip" class="tooltip">
-                <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="141px" />
+                <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="155px" />
                 <text :x="scaled.x(d.x) + 20" y="22px" class="title">
                   {{ parseHoursAgo(d.x) }}
                 </text>
-                <text :class="primaryClass" :x="scaled.x(d.x) + 20" y="50px">
-                  {{ primaryLabel }}{{ parsePrice(data[i].value1) }}
+                <circle :cx="scaled.x(d.x) + 23" cy="45px" r="3" :class="theme.circle" />
+                <text :x="scaled.x(d.x) + 30" y="50px" class="num">
+                  {{ parsePrice(data[i].value1) }}
                 </text>
-                <text v-if="!sameScale" :x="scaled.x(d.x) + 20" y="75px" class="sub">
+                <circle :cx="scaled.x(d.x) + 23" cy="70px" r="3" :class="theme.circle2" />
+                <text v-if="!sameScale" :x="scaled.x(d.x) + 30" y="75px" class="sub">
                   Quantity: {{ data[i] ? `${data[i].value2}` : 0 }}
                 </text>
-                <text v-else :x="scaled.x(d.x) + 20" y="75px" class="sub">
-                  {{ secondaryLabel }}{{ parsePrice(data[i].value2) }}
+                <text v-else :x="scaled.x(d.x) + 30" y="75px" class="sub">
+                  Regional: {{ parsePrice(data[i].value2) }}
                 </text>
               </g>
             </g>
@@ -119,15 +121,6 @@ export default {
       x.push('Today')
 
       return { x, y, y2 }
-    },
-    primaryLabel () {
-      return this.regional ? 'EU: ' : ''
-    },
-    secondaryLabel () {
-      return this.regional ? 'US: ' : 'Regional: '
-    },
-    primaryClass () {
-      return this.regional ? 'sub' : 'num'
     }
   },
 
@@ -268,17 +261,19 @@ export default {
 }
 
 .tooltip {
-  rect {
-    fill: $color-bg-dark;
-  }
-  .sub {
-    fill: $color-font-body;
-  }
-  .price {
-    fill: $color-primary-subtle;
+  :global {
+    rect {
+      fill: $color-bg-dark;
+    }
+    .sub {
+      fill: $color-font-body;
+    }
+    .price {
+      fill: $color-primary-subtle;
 
-    &.negative {
-      fill: $color-error;
+      &.negative {
+        fill: $color-error;
+      }
     }
   }
 }
@@ -315,17 +310,19 @@ export default {
 }
 
 .tooltip {
-  rect {
-    fill: $color-bg-dark;
-  }
-  .sub {
-    fill: $color-font-body;
-  }
-  .price {
-    fill: $color-primary-subtle;
+  :global {
+    rect {
+      fill: $color-bg-dark;
+    }
+    .sub {
+      fill: $color-font-body;
+    }
+    .price {
+      fill: $color-primary-subtle;
 
-    &.negative {
-      fill: $color-error;
+      &.negative {
+        fill: $color-error;
+      }
     }
   }
 }
