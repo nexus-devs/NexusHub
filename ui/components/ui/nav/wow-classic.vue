@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link to="/wow-classic" exact>
+      <router-link :to="`/wow-classic/${server}`" exact>
         <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
@@ -22,8 +22,6 @@
 <script>
 import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/wow-classic.vue'
-import selectFaction from 'src/components/wow-classic/select-faction.vue'
-import selectRegion from 'src/components/wow-classic/select-region.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 import storeModule from 'src/store/wow-classic/servers.js'
 import utility from 'src/components/wow-classic/utility.js'
@@ -38,9 +36,7 @@ export default {
   components: {
     notifications,
     search,
-    selectRegion,
-    selectServer,
-    selectFaction
+    selectServer
   },
 
   async asyncData ({ store, route }) {
@@ -55,6 +51,12 @@ export default {
       if (serverlist.EU.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'eu'
       else if (serverlist.US.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'us'
       store.commit('setServer', { server: slug, region })
+    }
+  },
+
+  computed: {
+    server () {
+      return this.$store.state.servers.server
     }
   },
 
