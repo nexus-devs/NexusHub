@@ -38,7 +38,7 @@
             <div class="col interactive whitespace" />
           </div>
           <transition-group>
-            <div v-for="(entry, i) in crafting.reagentFor" :key="entry.itemId + '-' + i">
+            <div v-for="(entry, i) in crafting[type]" :key="entry.itemId + '-' + i">
               <crafting-entry :crafting="entry" :cid="entry.itemId + '-' + i" />
             </div>
           </transition-group>
