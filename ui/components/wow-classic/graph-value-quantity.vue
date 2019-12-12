@@ -32,7 +32,56 @@ export default {
     },
 
     data () {
-      const itemData = this.$store.state.graphs.storage['graph-value-quantity'].data
+      let itemData = this.$store.state.graphs.storage['graph-value-quantity'].data.slice()
+
+      // Squish data if necessary
+      let stepSize = 1
+      const days = this.timerange
+      if (days === 30) stepSize = 4
+      else if (days === 90) stepSize = 10
+      const squishedData = []
+      if (stepSize > 1) {
+        let accValue1 = 0
+        let accValue2 = 0
+        let counter = 0
+        for (let i = itemData.length - 1; i >= 0; i--) {
+          const d = itemData[i]
+          accValue1 += d.marketValue
+          accValue2 += d.value2 ? d.value2 : d.quantity
+          counter++
+
+          // Squish values if step size reached or end of array
+          if ((itemData.length - i) % stepSize === 0 || i === 0) {
+            squishedData.unshift({
+              scannedAt: d.scannedAt,
+              marketValue: Math.round(accValue1 / counter),
+              value2: d.value2 ? Math.round(accValue2 / counter) : undefined,
+              quantity: d.quantity ? Math.round(accValue2 / counter) : undefined
+            })
+
+            accValue1 = 0
+            accValue2 = 0
+            counter = 0
+          }
+        }
+
+        itemData = squishedData
+      }
+
+      // Interpolate 7 days ago and today
+      const now = new Date().getTime()
+      itemData.push({
+        scannedAt: now,
+        marketValue: itemData[itemData.length - 1].marketValue,
+        quantity: itemData[itemData.length - 1].quantity
+      })
+      if (Math.ceil(Math.abs(now - itemData[0].scannedAt) / (1000 * 60 * 60 * 24)) >= this.timerange) {
+        itemData.unshift({
+          scannedAt: now - (1000 * 60 * 60 * 24 * this.timerange),
+          marketValue: itemData[0].marketValue,
+          quantity: itemData[0].quantity
+        })
+      }
 
       return itemData.map((d) => {
         return {
