@@ -69,7 +69,7 @@ export default {
 
     // Only fetch item data if we actually have a new item or new server
     if (store.state.graphs.itemId !== parseInt(item) || store.state.graphs.slug !== slug) {
-      const region = this.$store.state.servers.region
+      const region = store.state.servers.region
 
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))

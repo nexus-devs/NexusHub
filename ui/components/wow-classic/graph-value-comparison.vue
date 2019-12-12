@@ -30,7 +30,9 @@ export default {
     timerange () {
       return this.$store.state.graphs.storage['graph-value-comparison'].timerange
     },
-
+    region () {
+      return this.$store.state.servers.region
+    },
     data () {
       const itemData = this.$store.state.graphs.storage['graph-value-comparison'].data
 
@@ -48,7 +50,7 @@ export default {
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
       this.$refs.graphValueComparison.$refs.progress.start()
-      await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-comparison', timerange, regional: true })
+      await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-comparison', timerange, regional: this.region })
       this.$refs.graphValueComparison.$refs.progress.finish()
     }
   }
