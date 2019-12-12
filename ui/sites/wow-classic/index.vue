@@ -36,7 +36,7 @@
                       <template slot="header">
                         <div class="img">
                           <object :data="deal.icon" type="image/png">
-                            <img :src="deal.icon" :alt="deal.name" />
+                            <img :src="deal.icon" :alt="deal.name">
                           </object>
                         </div>
                         <h3>{{ deal.name }}</h3>
@@ -55,7 +55,7 @@
               </div>
             </div>
           </div>
-          <ad name="warframe-index-market-overview"/>
+          <ad name="warframe-index-market-overview" />
         </div>
       </section>
 

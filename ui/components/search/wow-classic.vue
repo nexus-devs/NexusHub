@@ -31,7 +31,6 @@
 
 <script>
 import storeModule from 'src/store/search.js'
-import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   props: ['placeholder', 'focus'],

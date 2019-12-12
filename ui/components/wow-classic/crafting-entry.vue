@@ -50,8 +50,8 @@
           <span v-if="reagent.marketValue">{{ parsePrice(reagent.marketValue) }}</span>
           <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
         </div>
-        <div class="col"></div>
-        <div class="col"></div>
+        <div class="col" />
+        <div class="col" />
       </div>
     </div>
   </div>
