@@ -54,16 +54,14 @@ class Scan extends Endpoint {
 
     const hour = scannedAtHour.getHours()
     for (const obj of scan.data) {
-      const updateObj = {
+      // Update scanData
+      const update = { $set: { } }
+      update.$set[`details.${hour}`] = {
         marketValue: obj.market_value,
         minBuyout: obj.min_buyout,
         numAuctions: obj.num_auctions,
         quantity: obj.quantity
       }
-
-      // Update scanData
-      const update = { $set: { } }
-      update.$set[`details.${hour}`] = updateObj
       bulk.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
@@ -73,7 +71,11 @@ class Scan extends Endpoint {
 
       // Update regionData
       const updateRegion = { $inc: { } }
-      updateRegion.$inc[`details.${hour}`] = { ...updateObj, count: 1 }
+      updateRegion.$inc[`details.${hour}.marketValue`] = obj.market_value
+      updateRegion.$inc[`details.${hour}.minBuyout`] = obj.min_buyout
+      updateRegion.$inc[`details.${hour}.numAuctions`] = obj.num_auctions
+      updateRegion.$inc[`details.${hour}.quantity`] = obj.quantity
+      updateRegion.$inc[`details.${hour}.count`] = 1
       bulkRegion.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
