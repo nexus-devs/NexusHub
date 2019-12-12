@@ -43,26 +43,8 @@ class Prices extends Endpoint {
     const timerange = req.query.timerange
     const region = req.query.region
 
-    const data = region ? await this.getRegionPrices(slug, itemId, timerange) : await this.getServerPrices(slug, itemId, timerange)
-
-    if (!data.length) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Item with ID ${itemId} could not be found, or there is no scan data available.`
-      })
-    }
-
-    // TODO: Cache this (especially region)
-    return res.send({ slug, itemId, timerange, data })
-  }
-
-  /**
-   * Get prices for a single server
-   */
-  async getServerPrices (slug, itemId, timerange) {
     const daysAgo = 1000 * 60 * 60 * 24 * timerange
-
-    const rawData = await this.db.collection('scanData').find({
+    const rawData = await this.db.collection(region ? 'regionData' : 'scanData').find({
       itemId,
       slug,
       scannedAt: { $gte: new Date(Date.now() - daysAgo) }
@@ -73,46 +55,23 @@ class Prices extends Endpoint {
       for (const hour of Object.keys(day.details).map((x) => parseInt(x))) {
         const d = day.details[hour]
         data.push({
-          marketValue: d.marketValue,
-          minBuyout: d.minBuyout,
-          quantity: d.quantity,
+          marketValue: !region ? d.marketValue : Math.round(d.marketValue / d.count),
+          minBuyout: !region ? d.minBuyout : Math.round(d.minBuyout / d.count),
+          quantity: !region ? d.quantity : Math.round(d.quantity / d.count),
           scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour)
         })
       }
     }
 
-    return data
-  }
+    if (!data.length) {
+      return res.status(404).send({
+        error: 'Not found.',
+        reason: `Item with ID ${itemId} could not be found, or there is no scan data available.`
+      })
+    }
 
-  /**
-   * Get prices for an entire region
-   */
-  async getRegionPrices (slug, itemId, timerange) {
-    const daysAgo = 1000 * 60 * 60 * 24 * timerange
-
-    // Group results by hour brackets
-    const data = await this.db.collection('scanData').aggregate([
-      { $match: { itemId, scannedAt: { $gte: new Date(Date.now() - daysAgo) }, region: slug } },
-      { $project: { scannedAt: 1, details: { $objectToArray: '$details' } } },
-      { $unwind: '$details' },
-      {
-        $group: {
-          _id: { $add: ['$scannedAt', { $multiply: [{ $toInt: '$details.k' }, 1000 * 60 * 60] }] },
-          marketValue: { $avg: '$details.v.marketValue' },
-          minBuyout: { $avg: '$details.v.minBuyout' },
-          quantity: { $avg: '$details.v.quantity' }
-        }
-      }
-    ]).sort({ _id: 1 }).toArray()
-
-    return data.map((x) => {
-      x.scannedAt = x._id
-      delete x._id
-      x.marketValue = Math.round(x.marketValue)
-      x.minBuyout = Math.round(x.minBuyout)
-      x.quantity = Math.round(x.quantity)
-      return x
-    })
+    // TODO: Cache this
+    return res.send({ slug, itemId, timerange, data })
   }
 }
 
