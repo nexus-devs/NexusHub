@@ -47,19 +47,15 @@ async function monitor () {
           // Sort TSM scans by date and add them
           // Do old -> new so there aren't data holes if the service get's interrupted
           scans.data.sort((a, b) => a.last_modified - b.last_modified)
-          let parallel = []
           for (const scan of scans.data) {
             if (scan.last_modified <= lastScanUnix) continue // If scan is already added
 
             const scannedAt = new Date(scan.last_modified * 1000)
+
             // Await to avoid overloading the TSM servers
-            parallel.push(client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt }))
-            if (parallel.length >= 4) {
-              await Promise.all(parallel)
-              parallel = []
-            }
+            console.log('await')
+            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
           }
-          if (parallel.length > 0) await Promise.all(parallel)
         }
       }
     }

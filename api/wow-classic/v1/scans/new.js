@@ -38,6 +38,7 @@ class Scan extends Endpoint {
       return res.send('Rejected. Scan already exists.')
     }
 
+    console.log('tsm scan')
     const scan = await request({
       uri: `http://api2.tradeskillmaster.com/realm/${slug}/scan/${scanId}`,
       json: true,
@@ -47,6 +48,7 @@ class Scan extends Endpoint {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
+    console.log('scan insert')
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
 
     const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
@@ -83,6 +85,7 @@ class Scan extends Endpoint {
       }).upsert().updateOne(updateRegion)
     }
 
+    console.log('bulk op')
     const parallel = [bulk.execute(), bulkRegion.execute()]
     await Promise.all(parallel)
 
