@@ -50,26 +50,39 @@ class Scan extends Endpoint {
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
 
     const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
+    const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
     const hour = scannedAtHour.getHours()
     for (const obj of scan.data) {
-      const update = { $set: { } }
-      update.$set[`details.${hour}`] = {
+      const updateObj = {
         marketValue: obj.market_value,
         minBuyout: obj.min_buyout,
         numAuctions: obj.num_auctions,
         quantity: obj.quantity
       }
 
+      // Update scanData
+      const update = { $set: { } }
+      update.$set[`details.${hour}`] = updateObj
       bulk.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
         slug,
         region
       }).upsert().updateOne(update)
+
+      // Update regionData
+      const updateRegion = { $inc: { } }
+      updateRegion.$inc[`details.${hour}`] = { ...updateObj, count: 1 }
+      bulkRegion.find({
+        itemId: obj.item,
+        scannedAt: scannedAtDay,
+        slug: region
+      }).upsert().updateOne(updateRegion)
     }
 
-    await bulk.execute()
+    const parallel = [bulk.execute(), bulkRegion.execute()]
+    await Promise.all(parallel)
 
     res.send('added!')
   }
