@@ -13,11 +13,22 @@ class Hook {
     }
 
     // Scan Data
-    /* await verify(db, 'scanData', {
+    await verify(db, 'scanData', { // Regular price fetching
       itemId: 1,
       slug: 1,
       scannedAt: -1
-    }) */
+    })
+    await verify(db, 'scanData', { // Deals
+      slug: 1,
+      scannedAt: -1
+    })
+
+    // Region Data
+    await verify(db, 'regionData', {
+      itemId: 1,
+      scannedAt: -1,
+      slug: 1
+    })
   }
 }
 
