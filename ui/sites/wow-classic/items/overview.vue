@@ -12,11 +12,11 @@
             <div class="col-b column">
               <description />
             </div>
-            <stats class="col-b" />
+            <stats v-if="item.stats.current" class="col-b" />
           </div>
         </div>
       </section>
-      <section>
+      <section v-if="displayGraphs">
         <div class="container">
           <h2 class="sub">
             Statistics
@@ -90,6 +90,9 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    displayGraphs () {
+      return this.$store.state.graphs.storage['graph-value-quantity'].data.length
     }
   },
 

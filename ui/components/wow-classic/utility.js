@@ -55,7 +55,8 @@ export default {
       const bracketIndex = regionalData.data.findIndex((x) => new Date(x.scannedAt).getTime() === bracketHour.getTime())
       if (bracketIndex >= 0) regionalData.data[bracketIndex].value2 = iD.marketValue
     }
-    let validValue = regionalData.data.find((e) => e.value2).value2 // Get first valid value
+    let validValue = regionalData.data.find((e) => e.value2) // Get first valid value
+    if (validValue) validValue = validValue.value2
     for (const rD of regionalData.data) {
       if (!validValue) rD.value2 = null
       else if (!rD.value2) rD.value2 = validValue

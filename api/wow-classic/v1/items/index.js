@@ -44,7 +44,7 @@ class Items extends Endpoint {
     }
 
     const stats = await this.db.collection('scanData').findOne({ slug, itemId }, { sort: { scannedAt: -1 } })
-    const keys = Object.keys(stats.details).reverse().slice(0, 2)
+    const keys = stats ? Object.keys(stats.details).reverse().slice(0, 2) : []
 
     const response = {
       server: slug,

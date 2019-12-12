@@ -5,7 +5,7 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
-      <div v-if="stats.current.marketValue" class="item-data row">
+      <div class="item-data row">
         <div class="col">
           <span>Market Value</span>
         </div>
@@ -18,7 +18,7 @@
           </span>
         </div>
       </div>
-      <div v-if="stats.current.minBuyout" class="item-data row">
+      <div class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
@@ -31,16 +31,16 @@
           </span>
         </div>
       </div>
-      <div v-if="stats.current.qty" class="item-data row">
+      <div class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
         <div class="col-2">
           <span class="data-price">
-            {{ stats.current.qty }}
+            {{ stats.current.quantity }}
           </span>
-          <span :class="{ negative: diff.qty < 0 }" class="data-price-diff">
-            <indicator :diff="diff.qty" /> {{ Math.abs(diff.qty) }}%
+          <span :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
+            <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
         </div>
       </div>
@@ -76,7 +76,7 @@ export default {
       return {
         marketValue: percentage('marketValue'),
         minBuyout: percentage('minBuyout'),
-        qty: percentage('qty')
+        quantity: percentage('quantity')
       }
     }
   },

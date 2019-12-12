@@ -63,13 +63,6 @@ class Prices extends Endpoint {
       }
     }
 
-    if (!data.length) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Item with ID ${itemId} could not be found, or there is no scan data available.`
-      })
-    }
-
     // TODO: Cache this
     return res.send({ slug, itemId, timerange, data })
   }
