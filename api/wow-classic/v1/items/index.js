@@ -38,7 +38,7 @@ class Items extends Endpoint {
 
     const item = await this.db.collection('items').findOne({ itemId })
     if (!item) {
-      return res.status(404).send({
+      return res.send({
         error: 'Not found.',
         reason: `Item with ID ${itemId} could not be found.`
       })
