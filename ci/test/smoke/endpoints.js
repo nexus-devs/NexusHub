@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs')
 const mongodb = require('mongodb').MongoClient
 const Cubic = require('../lib/cubic.js')
-const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
-const wowhooks = require(`${process.cwd()}/hooks/wow-classic.js`)
+// const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
+// const wowhooks = require(`${process.cwd()}/hooks/wow-classic.js`)
 
 before(async function () {
   await Cubic.await('api')
