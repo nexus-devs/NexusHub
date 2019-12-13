@@ -14,7 +14,7 @@ if (prod) {
 
 async function monitor () {
   const client = await getClient()
-  const tsmKey = process.env['tsm-api-key'] || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
+  const tsmKey = process.env['TSM-API-KEY'] || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
   let lastDone = new Date()
 
   // Kill service if it gets stuck. Docker will auto-restart it.
