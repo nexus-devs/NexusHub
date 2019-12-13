@@ -86,8 +86,10 @@ class Scan extends Endpoint {
     }
 
     console.log('bulk op')
-    const parallel = [bulk.execute(), bulkRegion.execute()]
-    await Promise.all(parallel)
+    if (scan.data.length) {
+      const parallel = [bulk.execute(), bulkRegion.execute()]
+      await Promise.all(parallel)
+    }
 
     res.send('added!')
   }
