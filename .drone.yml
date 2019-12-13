@@ -23,6 +23,7 @@ pipeline:
     image: node:8
     commands:
       npm run sitemap
+    secrets: [ tsm_api_key ]
     when:
       branch: development
 
