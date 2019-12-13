@@ -19,10 +19,10 @@ async function monitor () {
 
   // Kill service if it gets stuck. Docker will auto-restart it.
   setInterval(() => {
-    if (prod && new Date() - lastDone > 1000 * 60 * 30) {
+    if (prod && new Date() - lastDone > 1000 * 60 * 60) {
       process.exit()
     }
-  }, 1000 * 60 * 30)
+  }, 1000 * 60 * 60)
 
   while (true) {
     const timer = new Date()
