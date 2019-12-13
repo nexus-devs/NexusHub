@@ -9,12 +9,26 @@ class Crafting extends Endpoint {
     this.schema.description = 'Get crafting price information.'
     this.schema.url = '/wow-classic/v1/crafting/:slug/:item'
     this.schema.request = { url: '/wow-classic/v1/crafting/anathema-alliance/2589' }
-    this.schema.response = [{
+    this.schema.response = {
       itemId: Number,
-      marketValue: Number,
-      minBuyout: Number,
-      dealDiff: Number
-    }]
+      slug: String,
+      createdBy: [Object],
+      reagentFor: [{
+        itemId: Number,
+        name: String,
+        icon: String,
+        marketValue: Number,
+        amount: [Number, Number],
+        requiredSkill: Number,
+        category: String,
+        reagents: [{
+          itemId: Number,
+          amount: Number,
+          icon: String,
+          marketValue: Number
+        }]
+      }]
+    }
   }
 
   /**
