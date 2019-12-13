@@ -48,6 +48,7 @@ pipeline:
     image: node:8
     commands:
       - npm test
+    secrets: [ tsm_api_key ]
     when:
       branch:
         exclude: [ production, staging, rc/*, greenkeeper/* ]
