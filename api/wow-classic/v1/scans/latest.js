@@ -8,7 +8,7 @@ class ScansLast extends Endpoint {
     super(options)
     this.schema.description = 'Get basic information about the last saved scan.'
     this.schema.url = '/wow-classic/v1/scans/latest/:slug'
-    this.schema.request = { url: '/wow-classic/v1/scans/latest/arugal-alliance' }
+    this.schema.request = { url: '/wow-classic/v1/scans/latest/anathema-alliance' }
     this.schema.response = {
       scanId: String,
       scannedAt: String

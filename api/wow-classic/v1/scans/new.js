@@ -15,7 +15,7 @@ class Scan extends Endpoint {
         slug: 'anathema-alliance',
         region: 'EU',
         scanId: '1571761307',
-        scannedAt: new Date()
+        scannedAt: new Date(1571761307 * 1000)
       }
     }
     this.schema.response = String
