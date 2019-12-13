@@ -29,7 +29,7 @@ class Prices extends Endpoint {
         marketValue: Number,
         minBuyout: Number,
         quantity: Number,
-        scannedAt: Number
+        scannedAt: String
       }]
     }
   }
