@@ -26,11 +26,12 @@ class Search extends Endpoint {
       description: 'Minimum matching percentage for fuzzy search.'
     }]
     this.schema.request = { url: '/wow-classic/v1/search?query=devils' }
-    this.schema.response = [{
+    /* this.schema.response = [{
       itemId: Number,
       name: String,
       imgUrl: String
-    }]
+    }] */
+    this.schema.response = [Object]
   }
 
   /**

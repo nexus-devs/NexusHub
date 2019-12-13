@@ -20,11 +20,12 @@ class Search extends Endpoint {
       description: 'Number of results to limit search to. Min. 2, Max. 20 for non-fuzzy queries.'
     }]
     this.schema.request = { url: '/wow-classic/v1/suggestions?query=devils' }
-    this.schema.response = [{
+    /* this.schema.response = [{
       itemId: Number,
       name: String,
       imgUrl: String
-    }]
+    }] */
+    this.schema.response = [Object]
   }
 
   /**

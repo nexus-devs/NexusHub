@@ -12,9 +12,9 @@ class Scan extends Endpoint {
     this.schema.url = '/wow-classic/v1/scans/new'
     this.schema.request = {
       body: {
-        slug: 'arugal-alliance',
+        slug: 'anathema-alliance',
         region: 'EU',
-        scanId: '1573439779',
+        scanId: '1571761307',
         scannedAt: new Date()
       }
     }

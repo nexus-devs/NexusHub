@@ -43,6 +43,12 @@ before(async function () {
       await parser.client.post(postOrder.route, postOrder.request.body)
     })
 
+    it('should prime wow classic item database with test scan', async function () {
+      const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
+      const postScan = endpoints.find(e => e.route === '/wow-classic/v1/scans/new' && e.method === 'POST')
+      await parser.client.post(postScan.route, postScan.request.body)
+    })
+
     for (const endpoint of cubic.nodes.api.server.ws.endpoints.endpoints) {
       it(`should return the specified response for ${endpoint.method} ${endpoint.route}`, async function () {
         await parser.verifyEndpoint(endpoint)
