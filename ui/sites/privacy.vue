@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <ui-header>
         <h1>Things we do with your data. &nbsp; ( ͡° ͜ʖ ͡°)</h1>
@@ -59,7 +59,7 @@
             To combat this, we heavily suggest using a unique password for your
             email account that is not shared with any other service. We also
             recommend having a look at <a href="https://haveibeenpwned.com/">
-            haveibeenpwned</a> to see if your password has been leaked on
+              haveibeenpwned</a> to see if your password has been leaked on
             another service.
             <br>
             <br>

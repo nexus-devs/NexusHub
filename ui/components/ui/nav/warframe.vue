@@ -9,7 +9,7 @@
       <span class="shortcut">SHIFT + F</span>
     </search>
     <div class="col nav-r">
-      <notifications/>
+      <notifications />
     </div>
   </nav>
 </template>

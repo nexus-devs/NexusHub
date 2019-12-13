@@ -31,7 +31,9 @@ const secretUserData = await request.get('/super/secret/userdata')
 
     <p>
       For more information on how to get an access token, check out the
-      <router-link to="/developers/api/authentication">authentication guide</router-link>.
+      <router-link to="/developers/api/authentication">
+        authentication guide
+      </router-link>.
     </p>
   </docs>
 </template>

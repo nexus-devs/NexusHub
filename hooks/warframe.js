@@ -64,7 +64,7 @@ class Hook {
     await verify(db, 'users', {
       name: 1
     })
-    db.close()
+    await db.close()
   }
 
   /**
@@ -80,7 +80,7 @@ class Hook {
     const storedItems = await db.collection('items').find().toArray()
     const parallel = []
 
-    for (let item of items) {
+    for (const item of items) {
       const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
 
       parallel.push(this.separatePatchlogs(item, db))
@@ -100,7 +100,7 @@ class Hook {
     }
 
     await Promise.all(parallel)
-    mongo.close()
+    await mongo.close()
   }
 
   /**
@@ -124,7 +124,7 @@ class Hook {
     if (item.components && item.components[0].ducats) {
       let ducats = 0
 
-      for (let component of item.components) {
+      for (const component of item.components) {
         ducats += component.ducats ? component.ducats : 0
       }
       set.ducats = ducats
@@ -145,12 +145,12 @@ class Hook {
     item.webUrl = `/warframe/items/${item.name.split(' ').join('-').toLowerCase()}`
     item.imgUrl = `/img/warframe/items/${item.imageName}`
 
-    for (let component of item.components) {
+    for (const component of item.components) {
       component.imgUrl = component.imageName ? `/img/warframe/items/${component.imageName}` : item.imgUrl
       delete component.imageName
     }
     if (item.abilities) {
-      for (let ability of item.abilities) {
+      for (const ability of item.abilities) {
         ability.imgUrl = '/img/placeholder.svg'
       }
     }
@@ -161,7 +161,7 @@ class Hook {
    * Add economy data defaults
    */
   addEconomyData (item, stored) {
-    for (let component of item.components) {
+    for (const component of item.components) {
       const economyData = {
         orders: 0,
         min: null,

@@ -2,12 +2,12 @@
   <header>
     <img src="/img/ui/header-blobs-outline.svg" class="blobs">
     <div class="background-container">
-      <div class="background"/>
+      <div class="background" />
     </div>
     <div class="container">
-      <slot/>
+      <slot />
     </div>
-    <slot name="sub"/>
+    <slot name="sub" />
   </header>
 </template>
 

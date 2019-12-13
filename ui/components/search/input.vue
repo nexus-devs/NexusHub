@@ -3,7 +3,8 @@
     <div class="field">
       <label>Search</label>
       <input ref="input" :placeholder="placeholder || 'Try: Frost Prime, Maiming Strike...'" :value="input.name || input" type="text"
-             @input="fetch" @keydown.tab.prevent="complete" @keyup.enter="search" @keydown.shift.stop>
+             @input="fetch" @keydown.tab.prevent.exact="complete" @keyup.enter="search" @keydown.shift.stop
+      >
       <span class="autocomplete">{{ autocomplete.name }}</span>
       <span v-if="autocomplete.category" class="autocomplete-type">
         {{ autocomplete.category === 'Any' ? 'Search anywhere' : `Found in ${autocomplete.category}` }}
@@ -22,7 +23,7 @@
         <span v-if="suggestion.keyData" class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
     </div>
-    <slot/>
+    <slot />
   </div>
 </template>
 
@@ -123,8 +124,8 @@ export default {
           category: ''
         }
         this.query(suggestion.webUrl)
-      }
-      if (this.suggestions.length) {
+        this.suggestions = []
+      } else if (this.suggestions.length) {
         this.input = ''
         this.autocomplete = {
           name: '',

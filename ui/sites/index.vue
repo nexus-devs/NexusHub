@@ -1,10 +1,10 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <header>
         <div class="background-container">
-          <div class="background"/>
+          <div class="background" />
         </div>
         <div class="container search-container">
           <div class="search-logo">
@@ -13,8 +13,8 @@
           </div>
 
           <div class="search-bar">
-            <search :focus="true"/>
-            <search-button/>
+            <search :focus="true" />
+            <search-button />
           </div>
 
           <h2>Never miss out on a trade again!</h2>
@@ -26,9 +26,11 @@
         <div class="container">
           <div class="row-margin overview">
             <div class="col-b-4">
-              <h2 class="sub">Market Overview</h2>
+              <h2 class="sub">
+                Market Overview
+              </h2>
               <div class="realtime">
-                <opm/>
+                <opm />
                 <div class="most-traded row">
                   <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col interactive">
                     <module>
@@ -51,22 +53,26 @@
               </div>
             </div>
             <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity/>
+              <h2 class="sub">
+                Busy Hours
+              </h2>
+              <activity />
             </div>
           </div>
-          <ad name="warframe-index-market-overview"/>
+          <ad name="warframe-index-market-overview" />
         </div>
       </section>
 
       <!-- Patch logs -->
       <section>
         <div class="container">
-          <h2 class="sub">Latest Patchlogs</h2>
+          <h2 class="sub">
+            Latest Patchlogs
+          </h2>
           <div class="row-margin patchlogs">
-            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b" />
           </div>
-          <ad name="warframe-index-patchlogs"/>
+          <ad name="warframe-index-patchlogs" />
         </div>
       </section>
     </app-content>
@@ -101,6 +107,10 @@ export default {
     searchButton
   },
 
+  async asyncData () {
+    this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
+  },
+
   computed: {
     opm () {
       return this.$store.state.opm.all
@@ -111,10 +121,6 @@ export default {
     patchlogs () {
       return this.$store.state.warframe.patchlogs
     }
-  },
-
-  async asyncData () {
-    this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
   },
 
   storeModule,

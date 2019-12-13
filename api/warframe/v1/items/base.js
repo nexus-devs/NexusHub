@@ -39,7 +39,7 @@ class Item extends Endpoint {
    */
   async main (req, res) {
     const name = title(req.params.item)
-    let item = await this.db.collection('items').findOne({ name })
+    const item = await this.db.collection('items').findOne({ name })
 
     if (item) {
       delete item._id
@@ -58,9 +58,9 @@ class Item extends Endpoint {
       this.cache(item, 60)
       res.send(item)
     } else {
-      let response = {
+      const response = {
         error: 'Not found.',
-        reason: `${item} could not be not found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
+        reason: `${item} could not be found. If you think we missed an item, message us at https://discord.gg/8mCNvKp.`
       }
       this.cache(response, 60)
       res.status(404).send(response)

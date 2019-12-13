@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <section>
         <div class="container">
@@ -18,7 +18,7 @@
               <p class="typer">
                 <span>Want to</span>
                 <no-ssr>
-                  <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']"/>
+                  <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']" />
                 </no-ssr>
               </p>
               <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">
@@ -30,7 +30,6 @@
             </div>
           </div>
         </div>
-
       </section>
       <section>
         <div class="container repos">
@@ -97,9 +96,9 @@
               </module>
             </a>
 
-            <div class="col-b"/>
-            <div class="col-b"/>
-            <div class="col-b"/>
+            <div class="col-b" />
+            <div class="col-b" />
+            <div class="col-b" />
           </div>
         </div>
       </section>

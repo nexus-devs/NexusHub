@@ -4,18 +4,20 @@
       <div class="nav-ico interactive" @click="toggle">
         <img src="/img/ui/notifications.svg" alt="Notifications" class="ico-h-20">
       </div>
-      <div :class="{ unread: unread.length }" class="unread-bubble"/>
+      <div :class="[{ unread: unread.length }, theme['unread-bubble']]" class="unread-bubble" />
       <div :class="{ visible }" class="notification-container">
-        <div class="notification-header">
+        <div :class="theme['notification-header']" class="notification-header">
           <span>Notifications</span>
         </div>
-        <div class="notification-body">
+        <div :class="theme['notification-body']" class="notification-body">
           <div v-if="unread.length" class="notification-wrapper">
             <div v-for="notification in unread" :key="notification.title" class="notification">
               <h4>{{ notification.title }}</h4>
               <p>{{ notification.body }}</p>
-              <div v-if="notification.buttons" class="footer">
-                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">{{ button.text }}</button>
+              <div v-if="notification.buttons" :class="theme.footer" class="footer">
+                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
+                  {{ button.text }}
+                </button>
               </div>
               <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
             </div>
@@ -26,13 +28,15 @@
         </div>
       </div>
     </div>
-    <div :class="{ visible }" class="hide" @click="toggle"/>
+    <div :class="{ visible }" class="hide" @click="toggle" />
   </div>
 </template>
 
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
+
 export default {
   data () {
     return {
@@ -41,6 +45,9 @@ export default {
   },
 
   computed: {
+    theme () {
+      return getTheme(this)
+    },
     unread () {
       return this.$store.state.notifications.unread
     }
@@ -90,6 +97,53 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.notification-header {
+  background: $color-bg;
+}
+.notification-body {
+  background: $color-bg-dark;
+}
+.footer /deep/ button {
+  @include gradient-background-dg(transparent, transparent);
+  border: 1px solid $color-subtle;
+
+  &:hover {
+    @include gradient-background-dg($color-primary, $color-accent);
+  }
+}
+.unread-bubble {
+  border: 2px solid $color-bg-dark;
+  @include gradient-background-dg($color-primary, $color-accent);
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.notification-header {
+  background: $color-bg;
+}
+.notification-body {
+  background: $color-bg-dark;
+}
+.footer /deep/ button {
+  @include gradient-background-dg(transparent, transparent);
+  border: 1px solid $color-subtle;
+
+  &:hover {
+    @include gradient-background-dg($color-primary, $color-accent);
+  }
+}
+.unread-bubble {
+  border: 2px solid $color-bg-dark;
+  @include gradient-background-dg($color-primary, $color-accent);
+}
+</style>
 
 
 <style lang='scss' scoped>
@@ -152,7 +206,6 @@ export default {
 }
 
 .notification-header {
-  background: $color-bg;
   padding: 15px 30px;
   color: white;
 }
@@ -160,7 +213,6 @@ export default {
 .notification-body {
   position: relative;
   overflow-y: scroll;
-  background: $color-bg-dark;
   min-height: 80px;
   max-height: calc(250px + 10vh);
 }
@@ -189,17 +241,12 @@ export default {
 }
 
 .footer /deep/ button {
-  @include gradient-background-dg(transparent, transparent);
-  border: 1px solid $color-subtle;
   margin-right: 10px;
   font-size: 0.9em;
   @include shadow-0;
   @include ease(0.25s);
   border-radius: 9999px !important;
 
-  &:hover {
-    @include gradient-background-dg($color-primary, $color-accent);
-  }
   &:after {
     display: none;
   }
@@ -215,11 +262,9 @@ export default {
   height: 9px;
   width: 9px;
   border-radius: 999px;
-  border: 2px solid $color-bg-dark;
   opacity: 0;
   transform: scale(0.75);
   pointer-events: none;
-  @include gradient-background-dg($color-primary, $color-accent);
   @include ease(0.25s);
   animation-name: pulse;
   animation-timing-function: ease;

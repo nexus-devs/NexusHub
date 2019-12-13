@@ -11,12 +11,15 @@
       <div v-for="(drop, i) in drops" :key="drop.location + i" class="drop">
         <router-link v-if="drop.location.match(/(Intact|Exceptional|Flawless|Radiant)/)"
                      :to="`/warframe/items/${drop.location.replace(/( |\/|\*)/g, '-').toLowerCase()}`"
-                     class="interactive">
+                     class="interactive"
+        >
           <img :src="`/img/warframe/items/${getImageURL(drop)}.png`" alt="">
         </router-link>
-        <h4 class="location">{{ drop.location }}</h4>
+        <h4 class="location">
+          {{ drop.location }}
+        </h4>
         <span class="rarity">{{ drop.rarity }} -
-        <span class="chance">{{ (drop.chance * 100).toFixed(2) }}%</span></span>
+          <span class="chance">{{ (drop.chance * 100).toFixed(2) }}%</span></span>
       </div>
     </template>
     <template slot="footer">

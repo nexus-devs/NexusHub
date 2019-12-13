@@ -9,7 +9,7 @@
         <span>{{ result.name }}</span>
       </div>
       <div class="result-data row">
-        <div v-for="filter in filters" v-if="filter.category === result.results" :key="filter.name" :class="{ hidden: filter.hidden }" class="result-data-value">
+        <div v-for="filter in correctFilters" :key="filter.name" :class="{ hidden: filter.hidden }" class="result-data-value">
           <div v-if="resolve(filter)">
             <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
             <span>{{ resolve(filter) }}{{ filter.unit }}</span>
@@ -26,6 +26,12 @@
 export default {
   props: ['result', 'filters'],
 
+  computed: {
+    correctFilters () {
+      return this.filters.filter(f => f.category === this.result.results)
+    }
+  },
+
   methods: {
     // Helper function to access nested object keys
     // Required for getting values from filters
@@ -39,7 +45,7 @@ export default {
         })
         return result
       } catch (err) {
-        return
+
       }
     }
   }

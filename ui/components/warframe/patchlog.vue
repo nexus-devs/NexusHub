@@ -4,7 +4,8 @@
     intersection: {
       rootMargin: '0px 0px 20% 0px'
     }
-  }" :class="{ visible }" class="patchlog">
+  }" :class="{ visible }" class="patchlog"
+  >
     <template slot="header">
       <h3>{{ patchlog.name }}</h3>
       <time :datetime="patchlog.date">{{ overview ? moment (new Date(patchlog.date)).fromNow() : moment(new Date(patchlog.date)).format('MMMM Do YYYY') }}</time>
@@ -12,23 +13,23 @@
     <template slot="body">
       <div class="image">
         <img v-if="(visible || seen) && patchlog.imgUrl" :src="patchlog.imgUrl" :alt="patchlog.name" onerror="this.style.display='none'">
-        <div class="shade"/>
+        <div class="shade" />
       </div>
       <div v-if="patchlog.additions">
         <h4>Additions</h4>
-        <p v-for="(log, i) in patchlog.additions.split('\n')" v-if="log" :key="log + i">
+        <p v-for="(log, i) in additions" :key="log + i">
           {{ log }}
         </p>
       </div>
       <div v-if="patchlog.changes">
         <h4>Changes</h4>
-        <p v-for="(log, i) in patchlog.changes.split('\n')" v-if="log" :key="log + i">
+        <p v-for="(log, i) in changes" :key="log + i">
           {{ log }}
         </p>
       </div>
       <div v-if="patchlog.fixes">
         <h4>Fixes</h4>
-        <p v-for="(log, i) in patchlog.fixes.split('\n')" v-if="log" :key="log + i">
+        <p v-for="(log, i) in fixes" :key="log + i">
           {{ log }}
         </p>
       </div>
@@ -62,6 +63,18 @@ export default {
       visible: false,
       seen: false,
       itemName: this.$route.params.item
+    }
+  },
+
+  computed: {
+    additions () {
+      return this.patchlog.additions.split('\n').filter(a => a)
+    },
+    changes () {
+      return this.patchlog.changes.split('\n').filter(a => a)
+    },
+    fixes () {
+      return this.patchlog.fixes.split('\n').filter(a => a)
     }
   },
 

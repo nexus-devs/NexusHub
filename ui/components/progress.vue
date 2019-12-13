@@ -4,7 +4,8 @@
     'height': height,
     'background-color': canSuccess? color : failedColor,
     'opacity': show ? 1 : 0
-  }" class="progress"/>
+  }" class="progress"
+  />
 </template>
 
 <script>
@@ -97,6 +98,7 @@ export default {
 }
 </script>
 
+
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
@@ -109,7 +111,6 @@ export default {
   width: 0%;
   transition: width 0.2s, opacity 0.4s;
   opacity: 1;
-  @include gradient-background-dg($color-primary, $color-accent);
   z-index: 999999;
 }
 </style>

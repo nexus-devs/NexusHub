@@ -111,7 +111,7 @@ class EndpointParser {
       }
       // Normal nested object - keep traversing
       else {
-        for (let skey in endpoint) {
+        for (const skey in endpoint) {
           this.traverseResponse(response[skey], endpoint[skey], `${key}.${skey}`)
         }
       }

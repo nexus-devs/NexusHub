@@ -2,13 +2,15 @@
   <module ref="activity" class="activity">
     <template slot="header">
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
-      <h3 class="title">Activity</h3>
+      <h3 class="title">
+        Activity
+      </h3>
     </template>
     <template slot="body">
       <div class="row days">
         <div v-for="day in data" :key="day.day.name" class="day">
           <div v-for="(hour, i) in day.hours" :key="hour + '' + i" class="hour-wrapper">
-            <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour"/>
+            <div :style="{ opacity: scale(hour), transform: `scale(${scale(hour)})` }" :class="{ inactive: !hour }" class="hour" />
             <div class="tooltip">
               <time :datetime="`${i * 2 + 1}:00`">
                 {{ day.day.name.substr(0, 3) }},
@@ -31,13 +33,13 @@
             <span v-if="i % 4 === 1" class="label">
               {{ i % 12 + 1 }}{{ i + 1 > 11 ? 'pm' : 'am' }}
             </span>
-            <span v-else/>
+            <span v-else />
           </div>
         </div>
       </div>
     </template>
     <template slot="footer">
-      <module-time :days="timerange" :fn="setTimerange"/>
+      <module-time :days="timerange" :fn="setTimerange" />
     </template>
   </module>
 </template>
@@ -57,6 +59,12 @@ export default {
   },
 
   props: ['item'],
+
+  async asyncData ({ route }) {
+    const item = route.params.item ? title(route.params.item.replace(/-/g, ' ')) : null
+    const data = await this.$cubic.get(`/warframe/v1/orders/activity${item ? `?item=${item}` : ''}`)
+    this.$store.commit('setActivityData', data)
+  },
 
   computed: {
     timerange () {
@@ -111,12 +119,6 @@ export default {
       this.$refs.activity.$refs.progress.finish()
       this.$store.commit('setActivityData', data)
     }
-  },
-
-  async asyncData ({ route }) {
-    const item = route.params.item ? title(route.params.item.replace(/-/g, ' ')) : null
-    const data = await this.$cubic.get(`/warframe/v1/orders/activity${item ? `?item=${item}` : ''}`)
-    this.$store.commit('setActivityData', data)
   },
 
   methods: {

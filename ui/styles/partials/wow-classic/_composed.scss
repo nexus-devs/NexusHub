@@ -1,0 +1,18 @@
+/**
+ * Pre-composed styles based on other mixins go here
+ */
+@import 'colors';
+@import '../animation';
+@import '../depth';
+@import '../breakpoints';
+@import '../misc';
+
+ @mixin field() {
+   border-radius: 2px;
+   @include gradient-background-dg(#554942, #453e36);
+   @include shadow-1;
+
+   &:hover {
+     @include gradient-background-dg(#554942, #453e36);
+   }
+ }

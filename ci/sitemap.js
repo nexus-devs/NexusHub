@@ -41,7 +41,7 @@ async function generate () {
   console.log('* Verified item list!')
 
   // Generate static page sitemap
-  for (let endpoint of cubic.nodes.ui.api.server.http.endpoints.endpoints) {
+  for (const endpoint of cubic.nodes.ui.api.server.http.endpoints.endpoints) {
     if (!endpoint.route.includes('/:')) {
       sitemap.push(`https://nexushub.co${endpoint.route}`)
     }
@@ -51,7 +51,7 @@ async function generate () {
   const mongo = (await mongodb.connect(cubic.config.api.mongoUrl, { useNewUrlParser: true }))
     .db(cubic.config.api.mongoDb)
   const items = await mongo.collection('items').find().toArray()
-  for (let item of items) {
+  for (const item of items) {
     sitemap.push(`https://nexushub.co${item.webUrl}`)
     if (item.tradable) sitemap.push(`https://nexushub.co${item.webUrl}/prices`)
     if (item.tradable) sitemap.push(`https://nexushub.co${item.webUrl}/trading`)

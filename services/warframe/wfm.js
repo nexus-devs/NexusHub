@@ -38,7 +38,7 @@ async function postOrder (order, items, client) {
     let matchedComponent
 
     // Find corresponding item
-    for (let item of items) {
+    for (const item of items) {
       const itemName = item.name.split(' ')
       const orderName = order.item.en.item_name.split(' ')
 

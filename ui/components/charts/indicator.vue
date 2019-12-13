@@ -1,6 +1,6 @@
 <template>
   <svg :class="{ negative: diff < 0, positive: diff > 0, reverse }" height="10px" width="7px" overflow="visible" class="indicator">
-    <path :transform="`translate(${x || 0}, ${y || 0})`" :d="diff < 0 ? negative : positive"/>
+    <path :transform="`translate(${x || 0}, ${y || 0})`" :d="diff < 0 ? negative : positive" />
   </svg>
 </template>
 

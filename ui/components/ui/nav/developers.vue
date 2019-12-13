@@ -4,11 +4,15 @@
       <router-link to="/" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
-      <router-link to="/developers" class="sub">Developers</router-link>
-      <router-link to="/developers/api">API Docs</router-link>
+      <router-link to="/developers" class="sub">
+        Developers
+      </router-link>
+      <router-link to="/developers/api">
+        API Docs
+      </router-link>
     </div>
     <div class="col nav-r">
-      <notifications/>
+      <notifications />
     </div>
   </nav>
 </template>

@@ -3,17 +3,17 @@
     <div class="graph">
       <svg :width="width" :height="height">
         <g>
-          <path :d="paths.line" class="line"/>
+          <path :d="paths.line" class="line" />
         </g>
       </svg>
     </div>
     <div v-if="interactive !== false" class="tooltip-container">
       <svg :width="width + 200" :height="height">
         <g v-for="(d, i) in animatedData" :key="d.x" class="point">
-          <rect :x="scaled.x(d.x)" class="hover"/>
-          <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.y)" r="4"/>
+          <rect :x="scaled.x(d.x)" class="hover" />
+          <circle :cx="scaled.x(d.x)" :cy="scaled.y(d.y)" r="4" />
           <g class="tooltip">
-            <rect :x="scaled.x(d.x) + 12" :height="orders && data[i] ? '87px' : '65px'" width="120px"/>
+            <rect :x="scaled.x(d.x) + 12" :height="orders && data[i] ? '87px' : '65px'" width="120px" />
             <text :x="scaled.x(d.x) + 20" y="22px" class="title">
               {{ data.length - i - 1 === 0 ? 'Today' : `${data.length - i - 1} days ago` }}
             </text>
@@ -21,7 +21,7 @@
               {{ data[i] ? `${data[i]}p` : '' }}
             </text>
             <g v-if="diff(i) && data[i] && compare[i]" :transform="`translate(${scaled.x(d.x)}, 50)`">
-              <indicator :x="73" :diff="diff(i)" y="-9"/>
+              <indicator :x="73" :diff="diff(i)" y="-9" />
               <text :x="85" :class="{ negative: diff(i) < 0 }" class="price" y="0px">
                 {{ Math.abs(diff(i)) }}p
               </text>

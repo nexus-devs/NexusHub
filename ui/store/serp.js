@@ -150,7 +150,7 @@ export default {
           filter.path.split('.').forEach(key => { result = result[key] })
           return result
         } catch (err) {
-          return
+
         }
       }
       const getSortingValue = result => {
