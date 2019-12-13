@@ -1,7 +1,7 @@
 const Endpoint = require('cubic-api/endpoint')
 const request = require('request-promise')
 const fs = require('fs')
-const tsmKey = process.env['TSM-API-KEY'] || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
+const tsmKey = process.env.TSM_API_KEY || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
 
 class Scan extends Endpoint {
   constructor (options) {
