@@ -1,8 +1,8 @@
 const bcrypt = require('bcryptjs')
 const mongodb = require('mongodb').MongoClient
 const Cubic = require('../lib/cubic.js')
-// const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
-// const wowhooks = require(`${process.cwd()}/hooks/wow-classic.js`)
+const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
+const wowhooks = require(`${process.cwd()}/hooks/wow-classic.js`)
 
 before(async function () {
   await Cubic.await('api')
@@ -29,14 +29,14 @@ before(async function () {
   const parser = require('../lib/EndpointParser.js')
 
   describe('API endpoints', function () {
-    /* it('should pass Warframe hooks', async function () {
+    it('should pass Warframe hooks', async function () {
       await wfhooks.verifyIndices()
       await wfhooks.verifyItemList()
     })
 
     it('should pass WoW Classic hooks', async function () {
       await wowhooks.verifyIndices()
-    }) */
+    })
 
     it('should prime database with test order', async function () {
       const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
