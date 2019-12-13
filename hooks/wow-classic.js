@@ -29,6 +29,8 @@ class Hook {
       scannedAt: -1,
       slug: 1
     })
+
+    await db.close()
   }
 }
 

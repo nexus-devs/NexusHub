@@ -64,7 +64,7 @@ class Hook {
     await verify(db, 'users', {
       name: 1
     })
-    db.close()
+    await db.close()
   }
 
   /**
@@ -100,7 +100,7 @@ class Hook {
     }
 
     await Promise.all(parallel)
-    mongo.close()
+    await mongo.close()
   }
 
   /**
