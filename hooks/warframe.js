@@ -81,8 +81,8 @@ class Hook {
     const parallel = []
 
     for (const item of items) {
-      const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
-        .map(({ _id, ...props }) => props) // avoid mutating _id on update
+      let stored = storedItems.find(i => i.uniqueName === item.uniqueName)
+      if (stored) stored = stored.map(({ _id, ...props }) => props) // avoid mutating _id on update
 
       parallel.push(this.separatePatchlogs(item, db))
       this.addItemSet(item)
