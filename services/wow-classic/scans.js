@@ -47,7 +47,7 @@ async function monitor () {
           // Sort TSM scans by date and add them
           // Do old -> new so there aren't data holes if the service get's interrupted
           scans.data.sort((a, b) => a.last_modified - b.last_modified)
-          console.log(`Inserting ${scans.data} scans for ${realm.master_slug}`)
+          console.log(`Inserting ${scans.data.length} scans for ${realm.master_slug}`)
           for (const scan of scans.data) {
             if (scan.last_modified <= lastScanUnix) continue // If scan is already added
 
