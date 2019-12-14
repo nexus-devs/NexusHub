@@ -77,12 +77,11 @@ class Hook {
     const mongo = await mongodb.connect(url, { useNewUrlParser: true })
     const db = mongo.db(config.mongoDb)
     const items = new Items()
-    const storedItems = await db.collection('items').find().toArray()
+    const storedItems = await db.collection('items').find().toArray().map(({ _id, ...props }) => props) // avoid mutating _id on update
     const parallel = []
 
     for (const item of items) {
-      let stored = storedItems.find(i => i.uniqueName === item.uniqueName)
-      if (stored) stored = stored.map(({ _id, ...props }) => props) // avoid mutating _id on update
+      const stored = storedItems.find(i => i.uniqueName === item.uniqueName)
 
       parallel.push(this.separatePatchlogs(item, db))
       this.addItemSet(item)
