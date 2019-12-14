@@ -77,7 +77,7 @@ class Hook {
     const mongo = await mongodb.connect(url, { useNewUrlParser: true })
     const db = mongo.db(config.mongoDb)
     const items = new Items()
-    const storedItems = await db.collection('items').find().toArray().map(({ _id, ...props }) => props) // avoid mutating _id on update
+    const storedItems = (await db.collection('items').find().toArray()).map(({ _id, ...props }) => props) // avoid mutating _id on update
     const parallel = []
 
     for (const item of items) {
