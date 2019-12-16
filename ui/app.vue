@@ -59,7 +59,7 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ],
     script: [
-      { src: 'https://static.nitropay.com/nads/nads-34.min.js' }
+      { src: 'https://s.nitropay.com/ads-227.js' }
     ]
   }
 }
