@@ -27,15 +27,15 @@ class TSMRequest {
    * Makes a GET requests to the TSM servers.
    * Sometimes the TSM servers just timeout for some reason, so we retry a few times.
    */
-  async get (uri) {
+  async get (query) {
     let req = {}
     let reqCounter = 0
 
-    while (req.code === 'ETIMEDOUT') {
+    while (reqCounter === 0 || req.code === 'ETIMEDOUT') {
       if (reqCounter > this.options.retries) return { success: false, error: 'Request connection timed out.' }
       reqCounter++
       req = await request({
-        uri,
+        uri: `http://api2.tradeskillmaster.com${query}`,
         json: true,
         headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': this.tsmKey },
         timeout: this.options.timeout

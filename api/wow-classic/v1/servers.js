@@ -1,7 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
-const request = require('request-promise')
-const fs = require('fs')
-const tsmKey = process.env.TSM_API_KEY || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
+const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
 
 /**
  * Provides a list of available servers
@@ -22,13 +20,10 @@ class Servers extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const reqServer = await request({
-      uri: 'http://api2.tradeskillmaster.com/realms',
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': tsmKey }
-    })
+    const TSMReq = new TSMRequest({ timeout: 5000 })
+    const reqServer = await TSMReq.get('/realms')
     if (!reqServer.success) {
-      return res.send(`Could not fetch servers. Error from TSM: ${reqServer.error}`)
+      return res.send(`Could not fetch servers. Error from TSM: ${JSON.stringify(reqServer)}`)
     }
 
     const servers = reqServer.data
