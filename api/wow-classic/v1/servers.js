@@ -20,7 +20,7 @@ class Servers extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const TSMReq = new TSMRequest({ timeout: 5000 })
+    const TSMReq = new TSMRequest({ timeout: 3000 })
     const reqServer = await TSMReq.get('/realms')
     if (!reqServer.success) {
       return res.send(`Could not fetch servers. Error from TSM: ${JSON.stringify(reqServer)}`)

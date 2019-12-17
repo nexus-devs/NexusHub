@@ -1,7 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
-const request = require('request-promise')
-const fs = require('fs')
-const tsmKey = process.env.TSM_API_KEY || fs.readFileSync('/run/secrets/tsm-api-key', 'utf-8').trim()
+const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
 
 class Scan extends Endpoint {
   constructor (options) {
@@ -38,17 +36,12 @@ class Scan extends Endpoint {
       return res.send('Rejected. Scan already exists.')
     }
 
-    console.log('tsm scan')
-    const scan = await request({
-      uri: `http://api2.tradeskillmaster.com/realm/${slug}/scan/${scanId}`,
-      json: true,
-      headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': tsmKey }
-    })
+    const TSMReq = new TSMRequest()
+    const scan = await TSMReq.get(`/realm/${slug}/scan/${scanId}`)
     if (!scan.success) {
       return res.send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
-    console.log('scan insert')
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
 
     const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
@@ -85,7 +78,6 @@ class Scan extends Endpoint {
       }).upsert().updateOne(updateRegion)
     }
 
-    console.log('bulk op')
     if (scan.data.length) {
       const parallel = [bulk.execute(), bulkRegion.execute()]
       await Promise.all(parallel)
