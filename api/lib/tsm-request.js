@@ -38,7 +38,7 @@ class TSMRequest {
         maxAttempts: this.options.retries,
         retryDelay: this.options.timeout
       })
-      return req
+      return req.body
     } catch (err) {
       return { success: false, error: err }
     }
