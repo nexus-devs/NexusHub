@@ -9,7 +9,7 @@ class Items extends Endpoint {
     this.schema.description = 'Get basic item stats. Usage of this data for commercial purposes must be discussed with us before.'
     this.schema.url = '/wow-classic/v1/items/:slug/:item'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
-    /* this.schema.response = {
+    this.schema.response = {
       itemId: Number,
       name: String,
       icon: String,
@@ -25,7 +25,7 @@ class Items extends Endpoint {
         },
         previous: Object
       }
-    } */
+    }
     this.schema.response = {}
   }
 

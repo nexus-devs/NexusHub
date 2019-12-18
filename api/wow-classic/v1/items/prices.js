@@ -21,7 +21,7 @@ class Prices extends Endpoint {
         description: 'If true, slug is treated as a region.'
       }
     ]
-    /* this.schema.response = {
+    this.schema.response = {
       slug: String,
       itemId: Number,
       timerange: Number,
@@ -31,7 +31,7 @@ class Prices extends Endpoint {
         quantity: Number,
         scannedAt: String
       }]
-    } */
+    }
     this.schema.response = {}
   }
 
