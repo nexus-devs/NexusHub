@@ -22,7 +22,7 @@ class Scan extends Endpoint {
   async main (req, res) {
     const slug = req.body.slug
     const region = req.body.region.toLowerCase()
-    const scanId = req.body.scanId
+    const scanId = parseInt(req.body.scanId)
     const scannedAt = new Date(req.body.scannedAt)
     const scannedAtHour = new Date(scannedAt.getTime())
     scannedAtHour.setMinutes(0)
