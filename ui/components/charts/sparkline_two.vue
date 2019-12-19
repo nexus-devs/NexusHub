@@ -99,7 +99,6 @@ export default {
       this.height = this.$el.offsetHeight
       this.initialize()
       Tween.adjustData(this, this.data, this.data)
-      this.updateTooltipSize()
     },
 
     // Update graph render
@@ -112,6 +111,8 @@ export default {
       const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3.curveMonotoneX)
       this.paths.line1 = lineValue1(this.data)
       this.paths.line2 = lineValue2(this.data)
+
+      this.updateTooltipSize()
     },
 
     // Update tooltip width

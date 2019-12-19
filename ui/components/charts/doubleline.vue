@@ -1,6 +1,6 @@
 <template>
   <div class="doubleline">
-    <div :style="{ width: scaleY1Width }" :class="[theme.axis, theme.y1]" class="axis y1">
+    <div :class="[theme.axis, theme.y1]" class="axis y1">
       <span v-for="label in axis.y" :key="label">
         {{ parsePriceY(label) }}
       </span>
@@ -46,7 +46,7 @@
         </span>
       </div>
     </div>
-    <div v-if="!sameScale" :style="{ width: scaleY2Width }" :class="[theme.axis, theme.y2]" class="axis y2">
+    <div v-if="!sameScale" :class="[theme.axis, theme.y2]" class="axis y2">
       <span v-for="label in axis.y2" :key="label">
         {{ label }}
       </span>

@@ -134,6 +134,7 @@ export default {
 
 .row-margin {
   justify-content: flex-start;
+  flex-wrap: nowrap;
 }
 
 .column {

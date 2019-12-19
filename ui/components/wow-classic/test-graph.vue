@@ -4,8 +4,18 @@
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3>Graph Test</h3>
     </template>
-    <template slot="body">
-      <sparkline :data="data" :secondary-label="'Quantity'" />
+    <template slot="body" class="body">
+      <div class="graph-wrapper">
+        <div class="axis">
+          Test
+        </div>
+        <div class="graph">
+          <sparkline :data="data" :secondary-label="'Quantity'" />
+        </div>
+        <div class="axis">
+          {{ counter }}
+        </div>
+      </div>
     </template>
   </module>
 </template>
@@ -21,8 +31,15 @@ export default {
     module
   },
 
+  data () {
+    return {
+      counter: 8
+    }
+  },
+
   computed: {
     data () {
+      this.counter += 1
       const data = this.$store.state.graphs.storage['graph-value-quantity'].data
       return data.map((d) => {
         return {
@@ -38,7 +55,21 @@ export default {
 
 
 <style lang="scss" scoped>
+@import '~src/styles/partials/wow-classic/importer';
+
+.graph-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.graph {
+  flex: 1;
+}
+.axis {
+}
+
 /deep/ .sparkline {
   height: 100%;
+  width: 100%;
 }
 </style>
