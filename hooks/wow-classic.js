@@ -31,6 +31,11 @@ class Hook {
       slug: 1
     })
 
+    // Item Data
+    await verify(db, 'items', {
+      itemId: 1
+    })
+
     await db.close()
   }
 
@@ -46,22 +51,18 @@ class Hook {
     const items = new Items({ iconSrc: false })
     const storedItems = (await db.collection('items').find().toArray()).map(({ _id, ...props }) => props) // avoid mutating _id on update
 
-    const parallel = []
+    const bulk = db.collection('items').initializeUnorderedBulkOp()
     for (const item of items) {
       const stored = storedItems.find((i) => i.itemId === item.itemId)
 
       if (!_.isEqual(stored, item)) {
-        parallel.push(db.collection('items').updateMany({
-          itemId: item.itemId
-        }, {
+        bulk.find({ itemId: item.itemId }).upsert().updateOne({
           $set: _.merge(stored || {}, item)
-        }, {
-          upsert: true
-        }))
+        })
       }
     }
 
-    await Promise.all(parallel)
+    if (bulk.length > 0) await bulk.execute()
     await mongo.close()
   }
 }
