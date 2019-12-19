@@ -54,6 +54,9 @@ class Hook {
 
     // Item list
     await verify(db, 'items', {
+      uniqueName: 1
+    })
+    await verify(db, 'items', {
       name: 1
     })
     await verify(db, 'items', {
