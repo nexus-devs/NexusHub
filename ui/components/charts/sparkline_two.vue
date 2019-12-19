@@ -10,12 +10,12 @@
     </div>
     <div class="tooltip-container">
       <svg :width="width + 160" :height="height">
-        <g v-for="(d, i) in data" :key="d.x" class="point">
+        <g v-for="d in data" :key="d.x" class="point">
           <rect :x="scaled.x(d.x)" class="hover" />
           <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" class="circle" />
           <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" class="circle secondary" />
           <g class="tooltip">
-            <rect :x="scaled.x(d.x) + 12" :height="'87px'" width="155px" />
+            <rect :x="scaled.x(d.x) + 12" :height="'87px'" :width="tooltipWidth" />
             <text :x="scaled.x(d.x) + 20" y="22px" class="title">
               {{ parseHoursAgo(d.x) }}
             </text>
@@ -50,6 +50,7 @@ export default {
     return {
       width: 0,
       height: 0,
+      tooltipWidth: 0,
       paths: {
         line1: '',
         line2: ''
@@ -98,6 +99,7 @@ export default {
       this.height = this.$el.offsetHeight
       this.initialize()
       Tween.adjustData(this, this.data, this.data)
+      this.updateTooltipSize()
     },
 
     // Update graph render
@@ -110,6 +112,17 @@ export default {
       const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3.curveMonotoneX)
       this.paths.line1 = lineValue1(this.data)
       this.paths.line2 = lineValue2(this.data)
+    },
+
+    // Update tooltip width
+    updateTooltipSize () {
+      const getMaxWidth = (selection) => d3.max(selection.nodes(), n => n.getComputedTextLength())
+      const titles = d3.select(this.$el).selectAll('.title')
+      const primaryLables = d3.select(this.$el).selectAll('.num')
+      const secondaryLables = d3.select(this.$el).selectAll('.sub')
+
+      const widths = [getMaxWidth(titles), getMaxWidth(primaryLables), getMaxWidth(secondaryLables)]
+      this.tooltipWidth = Math.round(d3.max(widths)) + 8 + 8 // Add padding
     },
 
     // Parses hours into days + hours ago
