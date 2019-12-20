@@ -19,7 +19,7 @@ class Servers extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const servers = await this.db.collection('server').find().project({ _id: 0 }).toArray()
+    const servers = await this.db.collection('server').find().toArray()
     servers.sort((a, b) => a.name.localeCompare(b.name))
 
     // Group servers by region and omit faction
