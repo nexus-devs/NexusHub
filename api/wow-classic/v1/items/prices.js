@@ -53,13 +53,12 @@ class Prices extends Endpoint {
 
     const data = []
     for (const day of rawData) {
-      for (const hour of Object.keys(day.details).map((x) => parseInt(x))) {
-        const d = day.details[hour]
+      for (const hour of day.details) {
         data.push({
-          marketValue: !region ? d.marketValue : Math.round(d.marketValue / d.count),
-          minBuyout: !region ? d.minBuyout : Math.round(d.minBuyout / d.count),
-          quantity: !region ? d.quantity : Math.round(d.quantity / d.count),
-          scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour)
+          marketValue: !region ? hour.marketValue : Math.round(hour.marketValue / hour.count),
+          minBuyout: !region ? hour.minBuyout : Math.round(hour.minBuyout / hour.count),
+          quantity: !region ? hour.quantity : Math.round(hour.quantity / hour.count),
+          scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour.hour)
         })
       }
     }
