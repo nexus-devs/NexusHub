@@ -1,5 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
 
 /**
  * Provides a list of available servers
@@ -20,13 +19,7 @@ class Servers extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const TSMReq = new TSMRequest({ timeout: 3000 })
-    const reqServer = await TSMReq.get('/realms')
-    if (!reqServer.success) {
-      return res.send(`Could not fetch servers. Error from TSM: ${JSON.stringify(reqServer)}`)
-    }
-
-    const servers = reqServer.data
+    const servers = await this.db.collection('server').find().project({ _id: 0 }).toArray()
     servers.sort((a, b) => a.name.localeCompare(b.name))
 
     // Group servers by region and omit faction
