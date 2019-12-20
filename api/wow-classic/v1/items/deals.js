@@ -45,32 +45,20 @@ class Deals extends Endpoint {
     lastScan.scannedAt.setSeconds(0)
     lastScan.scannedAt.setMilliseconds(0)
 
-    // TODO: Make this more efficient, for now its okay
     const data = await this.db.collection('scanData').aggregate([
-      { $match: { slug, scannedAt: lastScan.scannedAt } }, {
+      { $match: { slug, scannedAt: lastScan.scannedAt } },
+      {
         $project: {
           _id: 0,
           itemId: 1,
-          scannedAt: 1,
-          details: { $objectToArray: '$details' }
-        }
-      },
-      { $unwind: '$details' },
-      { $addFields: { hour: { $toInt: '$details.k' } } },
-      { $sort: { hour: 1 } },
-      {
-        $group: {
-          _id: '$itemId',
-          details: { $last: '$details' }
-        }
-      },
-      {
-        $project: {
-          _id: 0,
-          itemId: '$_id',
-          marketValue: '$details.v.marketValue',
-          minBuyout: '$details.v.minBuyout',
-          dealDiff: { $subtract: ['$details.v.marketValue', '$details.v.minBuyout'] }
+          marketValue: { $let: { vars: { lastElem: { $arrayElemAt: ['$details', -1] } }, in: '$$lastElem.marketValue' } },
+          minBuyout: { $let: { vars: { lastElem: { $arrayElemAt: ['$details', -1] } }, in: '$$lastElem.minBuyout' } },
+          dealDiff: {
+            $let: {
+              vars: { lastElem: { $arrayElemAt: ['$details', -1] } },
+              in: { $subtract: ['$$lastElem.marketValue', '$$lastElem.minBuyout'] }
+            }
+          }
         }
       },
       { $sort: { dealDiff: -1 } },
