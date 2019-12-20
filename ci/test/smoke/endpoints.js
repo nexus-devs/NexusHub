@@ -37,6 +37,7 @@ before(async function () {
     it('should pass WoW Classic hooks', async function () {
       await wowhooks.verifyIndices()
       await wowhooks.verifyItemList()
+      await wowhooks.verifyServerList()
     })
 
     it('should prime database with test order', async function () {
