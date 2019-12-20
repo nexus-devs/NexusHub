@@ -23,6 +23,7 @@ module.exports = async function () {
     cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
     cubic.hook(Api, wowhooks.verifyIndices)
     cubic.hook(Api, wowhooks.verifyItemList())
+    cubic.hook(Api, wowhooks.verifyServerList())
     await cubic.use(new Api(config.api))
   }
 

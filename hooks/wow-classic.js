@@ -1,5 +1,6 @@
 const mongodb = require('mongodb').MongoClient
 const _ = require('lodash')
+const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
 
 class Hook {
   /**
@@ -55,6 +56,27 @@ class Hook {
     parallel.push(this._verifyCollection(db, 'items', items, 'itemId'))
     parallel.push(this._verifyCollection(db, 'professions', professions, 'name'))
     await Promise.all(parallel)
+
+    await mongo.close()
+  }
+
+  /**
+   * Add server list on startup
+   */
+  async verifyServerList () {
+    const config = cubic.config.api
+    const url = config.mongoUrl
+    const mongo = await mongodb.connect(url, { useNewUrlParser: true })
+    const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
+
+    const TSMReq = new TSMRequest()
+    const serverList = await TSMReq.get('/realms')
+    if (!serverList.success) throw new Error(`Could not fetch realms: ${serverList.error}`)
+    else {
+      // eslint-disable-next-line camelcase
+      const data = serverList.data.map(({ is_classic, last_modified, last_scan_id, master_slug, ...props }) => props)
+      await this._verifyCollection(db, 'server', data, 'slug')
+    }
 
     await mongo.close()
   }
