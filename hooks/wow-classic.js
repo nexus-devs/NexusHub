@@ -43,12 +43,12 @@ class Hook {
    * Add item list on startup
    */
   async verifyItemList () {
-    const Items = require('wow-classic-items')
+    const ItemDb = require('wow-classic-items')
     const config = cubic.config.api
     const url = config.mongoUrl
     const mongo = await mongodb.connect(url, { useNewUrlParser: true })
     const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
-    const items = new Items({ iconSrc: false })
+    const items = new ItemDb.Items({ iconSrc: false })
     const storedItems = (await db.collection('items').find().toArray()).map(({ _id, ...props }) => props) // avoid mutating _id on update
 
     const bulk = db.collection('items').initializeUnorderedBulkOp()
