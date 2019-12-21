@@ -44,12 +44,11 @@ async function monitor () {
           }
 
           // Sort TSM scans by date and add them
+          // Also remove scans that were already added
           // Do old -> new so there aren't data holes if the service get's interrupted
-          scans.data.sort((a, b) => a.last_modified - b.last_modified)
+          scans.data = scans.data.filter((s) => s.last_modified > lastScanUnix).sort((a, b) => a.last_modified - b.last_modified)
           console.log(`Inserting ${scans.data.length} scans for ${realm.master_slug}...`)
           for (const scan of scans.data) {
-            if (scan.last_modified <= lastScanUnix) continue // If scan is already added
-
             const scannedAt = new Date(scan.last_modified * 1000)
 
             // Await to avoid overloading the TSM servers
