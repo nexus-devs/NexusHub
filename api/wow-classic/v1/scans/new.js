@@ -45,41 +45,77 @@ class Scan extends Endpoint {
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
 
     const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
+    const bulkRegionPreinsertion = this.db.collection('regionData').initializeUnorderedBulkOp()
     const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
     const hour = scannedAtHour.getHours()
     for (const obj of scan.data) {
       // Update scanData
-      const update = { $set: { } }
-      update.$set[`details.${hour}`] = {
-        marketValue: obj.market_value,
-        minBuyout: obj.min_buyout,
-        numAuctions: obj.num_auctions,
-        quantity: obj.quantity
+      const update = {
+        $push: {
+          $each: [{
+            marketValue: obj.market_value,
+            minBuyout: obj.min_buyout,
+            numAuctions: obj.num_auctions,
+            quantity: obj.quantity,
+            hour
+          }],
+          $sort: { hour: 1 }
+        }
       }
       bulk.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
-        slug,
-        region
+        slug
       }).upsert().updateOne(update)
 
+      // Make sure the document exists ($ doesn't work with upsert sadly)
+      const updateRegionPreinsertion = {
+        $push: {
+          $each: [{
+            marketValue: 0,
+            minBuyout: 0,
+            numAuctions: 0,
+            quantity: 0,
+            count: 0,
+            hour
+          }],
+          $sort: { hour: 1 }
+        }
+      }
+      bulkRegionPreinsertion.find({
+        itemId: obj.item,
+        scannedAt: scannedAtDay,
+        slug: region,
+        'details.hour': { $ne: hour }
+      }).upsert().updateOne(updateRegionPreinsertion)
+
       // Update regionData
-      const updateRegion = { $inc: { } }
-      updateRegion.$inc[`details.${hour}.marketValue`] = obj.market_value
-      updateRegion.$inc[`details.${hour}.minBuyout`] = obj.min_buyout
-      updateRegion.$inc[`details.${hour}.numAuctions`] = obj.num_auctions
-      updateRegion.$inc[`details.${hour}.quantity`] = obj.quantity
-      updateRegion.$inc[`details.${hour}.count`] = 1
+      const updateRegion = {
+        $inc: {
+          'details.$.marketValue': obj.market_value,
+          'details.$.minBuyout': obj.min_buyout,
+          'details.$.numAuctions': obj.num_auctions,
+          'details.$.quantity': obj.quantity,
+          'details.$.count': 1
+        }
+      }
       bulkRegion.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
-        slug: region
-      }).upsert().updateOne(updateRegion)
+        slug: region,
+        'details.hour': hour
+      }).updateOne(updateRegion)
+    }
+
+    // Make sure hour docs are created before updating
+    const bulkRegionOp = async () => {
+      await bulkRegionPreinsertion.execute()
+      await bulkRegion.execute()
     }
 
     if (scan.data.length) {
-      const parallel = [bulk.execute(), bulkRegion.execute()]
+      const parallel = [bulk.execute(), bulkRegionOp()]
       await Promise.all(parallel)
     }
 
