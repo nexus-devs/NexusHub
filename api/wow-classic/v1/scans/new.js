@@ -53,14 +53,16 @@ class Scan extends Endpoint {
       // Update scanData
       const update = {
         $push: {
-          $each: [{
-            marketValue: obj.market_value,
-            minBuyout: obj.min_buyout,
-            numAuctions: obj.num_auctions,
-            quantity: obj.quantity,
-            hour
-          }],
-          $sort: { hour: 1 }
+          details: {
+            $each: [{
+              marketValue: obj.market_value,
+              minBuyout: obj.min_buyout,
+              numAuctions: obj.num_auctions,
+              quantity: obj.quantity,
+              hour
+            }],
+            $sort: { hour: 1 }
+          }
         }
       }
       bulk.find({
@@ -72,15 +74,17 @@ class Scan extends Endpoint {
       // Make sure the document exists ($ doesn't work with upsert sadly)
       const updateRegionPreinsertion = {
         $push: {
-          $each: [{
-            marketValue: 0,
-            minBuyout: 0,
-            numAuctions: 0,
-            quantity: 0,
-            count: 0,
-            hour
-          }],
-          $sort: { hour: 1 }
+          details: {
+            $each: [{
+              marketValue: 0,
+              minBuyout: 0,
+              numAuctions: 0,
+              quantity: 0,
+              count: 0,
+              hour
+            }],
+            $sort: { hour: 1 }
+          }
         }
       }
       bulkRegionPreinsertion.find({
