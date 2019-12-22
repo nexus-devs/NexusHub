@@ -11,7 +11,7 @@ if (prod) {
   process.on('unhandledRejection', () => process.exit(1))
 }
 
-async function getItems() {
+async function getItems (client) {
   return client.get('/warframe/v1/items?tradable=true')
 }
 
@@ -20,13 +20,12 @@ async function monitor () {
   let items = await getItems()
   let lastDone = new Date()
 
-  
-  setInterval(() => {
+  setInterval(async () => {
     // Kill service if it gets stuck. Docker will auto-restart it.
     if (prod && new Date() - lastDone > 1000 * 60) {
       process.exit()
     }
-    items = await getItems()
+    items = await getItems(client)
   }, 1000 * 60)
 
   while (true) {
