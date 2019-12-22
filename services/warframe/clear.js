@@ -17,7 +17,7 @@ async function getItems (client) {
 
 async function monitor () {
   const client = await getClient()
-  let items = await getItems()
+  let items = await getItems(client)
   let lastDone = new Date()
 
   setInterval(async () => {
