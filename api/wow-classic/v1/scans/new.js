@@ -48,6 +48,11 @@ class Scan extends Endpoint {
     const bulkRegionPreinsertion = this.db.collection('regionData').initializeUnorderedBulkOp()
     const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
+    const emptyDetails = []
+    for (let i = 0; i < 24; i++) {
+      emptyDetails.push({ marketValue: 0, minBuyout: 0, numAuctions: 0, quantity: 0, count: 0, hour: i })
+    }
+
     const hour = scannedAtHour.getHours()
     for (const obj of scan.data) {
       // Update scanData
@@ -73,25 +78,17 @@ class Scan extends Endpoint {
 
       // Make sure the document exists ($ doesn't work with upsert sadly)
       const updateRegionPreinsertion = {
-        $push: {
-          details: {
-            $each: [{
-              marketValue: 0,
-              minBuyout: 0,
-              numAuctions: 0,
-              quantity: 0,
-              count: 0,
-              hour
-            }],
-            $sort: { hour: 1 }
-          }
+        $setOnInsert: {
+          itemId: obj.item,
+          scannedAt: scannedAtDay,
+          slug: region,
+          details: emptyDetails
         }
       }
       bulkRegionPreinsertion.find({
         itemId: obj.item,
         scannedAt: scannedAtDay,
-        slug: region,
-        'details.hour': { $ne: hour }
+        slug: region
       }).upsert().updateOne(updateRegionPreinsertion)
 
       // Update regionData

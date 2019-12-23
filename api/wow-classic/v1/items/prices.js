@@ -54,6 +54,7 @@ class Prices extends Endpoint {
     const data = []
     for (const day of rawData) {
       for (const hour of day.details) {
+        if (region && hour.count <= 0) continue
         data.push({
           marketValue: !region ? hour.marketValue : Math.round(hour.marketValue / hour.count),
           minBuyout: !region ? hour.minBuyout : Math.round(hour.minBuyout / hour.count),
