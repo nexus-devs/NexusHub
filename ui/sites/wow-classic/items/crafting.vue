@@ -84,11 +84,18 @@ export default {
       const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting/${slug}/${item}`)
       store.commit('setCrafting', craftingData)
     }
+    if (!store.state.crafting.professions.length) {
+      const professionData = await this.$cubic.get(`/wow-classic/v1/crafting/professions`)
+      store.commit('setProfessions', professionData)
+    }
   },
 
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    professions () {
+      return this.$store.state.crafting.professions
     },
     crafting () {
       // Populate createdBy with item details
@@ -128,11 +135,8 @@ export default {
       for (const entry of entries) {
         if (filters.find((o) => o.name === entry.category)) continue
 
-        // TODO: Replace this once api endpoint is there
-        filters.push({
-          name: entry.category,
-          icon: `https://wow.zamimg.com/images/wow/icons/small/trade_${entry.category.toLowerCase()}.jpg`
-        })
+        const profession = this.professions.find((p) => p.name === entry.category)
+        if (profession) filters.push(profession)
       }
       return filters
     }

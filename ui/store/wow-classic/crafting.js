@@ -7,7 +7,8 @@ export default {
     createdBy: [],
     type: 'reagentFor',
     filter: '',
-    selected: null
+    selected: null,
+    professions: []
   },
 
   mutations: {
@@ -29,6 +30,9 @@ export default {
     },
     setFilter (state, filter) {
       state.filter = filter
+    },
+    setProfessions (state, professions) {
+      state.professions = professions
     }
   }
 }
