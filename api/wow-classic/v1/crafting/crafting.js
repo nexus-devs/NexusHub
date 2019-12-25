@@ -29,7 +29,6 @@ class Crafting extends Endpoint {
         }]
       }]
     }
-    this.schema.response = {}
   }
 
   /**
