@@ -1,7 +1,7 @@
 <template>
   <module>
     <template slot="header">
-      <img src="/img/warframe/ui/description.svg" alt="Description" class="ico-h-16">
+      <img src="/img/wow-classic/ui/description.svg" alt="Description" class="ico-h-16">
       <h3>Description</h3>
     </template>
     <template slot="body">

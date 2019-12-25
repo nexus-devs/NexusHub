@@ -1,7 +1,7 @@
 <template>
   <module ref="graphTest">
     <template slot="header">
-      <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
+      <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3>Graph Test</h3>
     </template>
     <template slot="body" class="body">
