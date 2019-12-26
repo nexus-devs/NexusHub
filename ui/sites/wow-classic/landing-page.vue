@@ -5,16 +5,28 @@
       <div class="landing-page">
         <div class="container">
           <div class="server-box">
-            <h2>Europe</h2>
-            <div class="server-list">
-              <span v-for="s in serverlist.EU" :key="s">{{ s }}</span>
-            </div>
+            <module>
+              <template slot="header">
+                <h2>Europe</h2>
+              </template>
+              <template slot="body">
+                <div class="server-list">
+                  <span v-for="s in serverlist.EU" :key="s">{{ s }}</span>
+                </div>
+              </template>
+            </module>
           </div>
           <div class="server-box">
-            <h2>United States</h2>
-            <div class="server-list">
-              <span v-for="s in serverlist.US" :key="s">{{ s }}</span>
-            </div>
+            <module>
+              <template slot="header">
+                <h2>United States</h2>
+              </template>
+              <template slot="body">
+                <div class="server-list">
+                  <span v-for="s in serverlist.US" :key="s">{{ s }}</span>
+                </div>
+              </template>
+            </module>
           </div>
         </div>
       </div>
@@ -26,11 +38,13 @@
 <script>
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
+import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 
 export default {
   components: {
     appContent,
+    module,
     navigation
   },
 
@@ -79,18 +93,15 @@ export default {
   flex-direction: column;
   overflow-y: scroll;
   max-height: 50vh;
-  background: $color-bg-dark;
 
   span {
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 15px 15px;
     @include ease(0.15s);
+    color: $color-font-paragraph;
   }
   span:hover {
     background: rgba(0,0,0,0.15);
-  }
-  span:not(.active) {
-    color: $color-font-body;
   }
 }
 </style>
