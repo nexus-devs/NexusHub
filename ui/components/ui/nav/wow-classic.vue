@@ -5,7 +5,7 @@
         <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
-    <div class="middle-content">
+    <div v-if="!landingPage" class="middle-content">
       <search placeholder="Search items...">
         <span class="shortcut">SHIFT + F</span>
       </search>
@@ -38,6 +38,8 @@ export default {
     search,
     selectServer
   },
+
+  props: ['landingPage'],
 
   async asyncData ({ store, route }) {
     const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)

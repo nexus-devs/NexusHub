@@ -1,9 +1,10 @@
 <template>
   <div>
+    <navigation :landing-page="true" />
     <app-content>
-      <header>
+      <div class="container">
 
-      </header>
+      </div>
     </app-content>
   </div>
 </template>
@@ -12,10 +13,12 @@
 <script>
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
+import navigation from 'src/components/ui/nav/wow-classic.vue'
 
 export default {
   components: {
-    appContent
+    appContent,
+    navigation
   },
 
   head: {
@@ -31,4 +34,10 @@ export default {
 
 <style lang='scss' scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.container {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
 </style>
