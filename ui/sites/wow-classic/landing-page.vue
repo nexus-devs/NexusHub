@@ -11,7 +11,13 @@
               </template>
               <template slot="body">
                 <div class="server-list">
-                  <span v-for="s in serverlist.EU" :key="s">{{ s }}</span>
+                  <div v-for="s in serverlist.EU" :key="s" class="server">
+                    <span>{{ s }}</span>
+                    <div class="logo-wrapper">
+                      <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
+                      <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                    </div>
+                  </div>
                 </div>
               </template>
             </module>
@@ -23,7 +29,13 @@
               </template>
               <template slot="body">
                 <div class="server-list">
-                  <span v-for="s in serverlist.US" :key="s">{{ s }}</span>
+                  <div v-for="s in serverlist.US" :key="s" class="server">
+                    <span>{{ s }}</span>
+                    <div class="logo-wrapper">
+                      <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
+                      <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                    </div>
+                  </div>
                 </div>
               </template>
             </module>
@@ -40,6 +52,7 @@ import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -52,6 +65,10 @@ export default {
     serverlist () {
       return { EU: this.$store.state.servers.EU, US: this.$store.state.servers.US }
     }
+  },
+
+  created () {
+    this.serverSlug = utility.serverSlug
   },
 
   head: {
@@ -94,14 +111,37 @@ export default {
   overflow-y: scroll;
   max-height: 50vh;
 
-  span {
-    cursor: pointer;
-    padding: 15px 15px;
+  .server {
+    // cursor: pointer;
+    padding: 10px 15px;
     @include ease(0.15s);
-    color: $color-font-paragraph;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo-wrapper {
+      opacity: 0;
+      flex: 1;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .logo {
+      height: 32px;
+    }
+
+    span {
+      pointer-events: none;
+      flex: 1;
+      color: $color-font-paragraph;
+    }
   }
-  span:hover {
+  .server:hover {
     background: rgba(0,0,0,0.15);
+
+    .logo-wrapper {
+      opacity: 1;
+    }
   }
 }
 </style>
