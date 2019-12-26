@@ -2,7 +2,7 @@
   <div class="select">
     <div class="interactive" @click="toggle">
       <span>{{ serverPretty.name }}</span>
-      <img :src="`/img/wow-classic/icon_${serverPretty.faction}.gif`" :alt="`${serverPretty.faction} Logo`" class="faction-logo">
+      <img :src="`/img/wow-classic/ui/${serverPretty.faction}.svg`" :alt="`${serverPretty.faction} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
@@ -17,10 +17,10 @@
           >{{ s }}</span>
           <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
             <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
-              <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo">
+              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
             <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
-              <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo">
+              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
         </template>
@@ -33,10 +33,10 @@
           >{{ s }}</span>
           <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
             <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
-              <img src="/img/wow-classic/icon_alliance.gif" alt="Alliance Logo">
+              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
             <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
-              <img src="/img/wow-classic/icon_horde.gif" alt="Horde Logo">
+              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
         </template>
@@ -135,6 +135,7 @@ export default {
 
   .faction-logo {
     vertical-align: middle;
+    height: 20px;
   }
 }
 .dropdown {
