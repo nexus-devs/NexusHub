@@ -9,7 +9,7 @@
           <img :src="item.icon">
         </div>
         <div class="item-profile-data-info">
-          <h1>{{ item.name }} {{ regionServerString }}</h1>
+          <h1>{{ item.name }}</h1>
           <br>
           <span v-for="(tag, i) in item.tags" :key="tag + i">
             {{ tag }}
@@ -54,15 +54,6 @@ export default {
     itemUrl () {
       const route = this.$route.fullPath.split(this.item.itemId)[0]
       return `${route}${this.item.itemId}`
-    },
-    regionServerString () {
-      let str = ''
-      if (this.item.region) {
-        const server = this.item.server ? this.item.server.charAt(0).toUpperCase() + this.item.server.slice(1).toLowerCase() : undefined
-        const serverString = server ? ` - ${server}` : ''
-        str = `[${this.item.region}${serverString}]`
-      }
-      return str
     }
   },
 
@@ -153,6 +144,9 @@ header {
 .item-profile {
   display: flex;
   margin-bottom: 10px;
+  @media (max-width: $breakpoint-s) {
+    width: 100% !important;
+  }
 }
 
 .item-profile-data-info {
