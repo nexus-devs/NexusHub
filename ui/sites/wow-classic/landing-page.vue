@@ -3,8 +3,11 @@
     <navigation :landing-page="true" />
     <app-content>
       <div class="landing-page">
-        <div class="container">
+        <div class="background-container">
+          <div class="background" />
+        </div>
 
+        <div class="container">
           <div class="row">
             <div class="nexushub-logo">
               <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
@@ -104,8 +107,26 @@ export default {
   position: relative;
   width: 100%;
   min-height: calc(100vh - 56px);
+  padding-bottom: 75px;
   align-items: center;
   @include gradient-background-dg($color-bg, $color-bg-dark);
+
+  .background-container {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  .background {
+    background: url('/img/warframe/index-blob.svg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    animation-name: pulse;
+    animation-timing-function: ease-in-out;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+  }
 }
 .container {
   .row {
@@ -113,6 +134,13 @@ export default {
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: nowrap;
+
+    @media (max-width: $breakpoint-s) {
+      flex-wrap: wrap;
+      .server-box:first-of-type {
+        margin-bottom: 25px;
+      }
+    }
   }
 }
 
