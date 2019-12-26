@@ -4,42 +4,57 @@
     <app-content>
       <div class="landing-page">
         <div class="container">
-          <div class="server-box">
-            <module>
-              <template slot="header">
-                <h2>Europe</h2>
-              </template>
-              <template slot="body">
-                <div class="server-list">
-                  <div v-for="s in serverlist.EU" :key="s" class="server">
-                    <span>{{ s }}</span>
-                    <div class="logo-wrapper">
-                      <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
-                      <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+
+          <div class="row">
+            <div class="nexushub-logo">
+              <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
+              <span>.co</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <h2 class="subtitle">Select your WoW Classic server</h2>
+          </div>
+
+          <div class="row">
+            <div class="server-box">
+              <module>
+                <template slot="header">
+                  <h2>Europe</h2>
+                </template>
+                <template slot="body">
+                  <div class="server-list">
+                    <div v-for="s in serverlist.EU" :key="s" class="server">
+                      <span>{{ s }}</span>
+                      <div class="logo-wrapper">
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </template>
-            </module>
-          </div>
-          <div class="server-box">
-            <module>
-              <template slot="header">
-                <h2>United States</h2>
-              </template>
-              <template slot="body">
-                <div class="server-list">
-                  <div v-for="s in serverlist.US" :key="s" class="server">
-                    <span>{{ s }}</span>
-                    <div class="logo-wrapper">
-                      <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
-                      <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                </template>
+              </module>
+            </div>
+            <div class="server-box">
+              <module>
+                <template slot="header">
+                  <h2>United States</h2>
+                </template>
+                <template slot="body">
+                  <div class="server-list">
+                    <div v-for="s in serverlist.US" :key="s" class="server">
+                      <span>{{ s }}</span>
+                      <div class="logo-wrapper">
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </template>
-            </module>
+                </template>
+              </module>
+            </div>
           </div>
+
         </div>
       </div>
     </app-content>
@@ -92,11 +107,37 @@ export default {
   align-items: center;
   @include gradient-background-dg($color-bg, $color-bg-dark);
 }
-
 .container {
-  display: flex;
-  justify-content: space-around;
+  .row {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
 }
+
+.nexushub-logo {
+  display: flex;
+  align-items: center;
+  animation: fadeinUp 0.6s forwards;
+  animation-delay: 0.1s;
+  margin-top: 75px;
+  margin-bottom: 25px;
+
+  .logo {
+    height: 50px;
+  }
+  span {
+    font-size: 2.2em;
+    color: white;
+    font-family: 'Circular';
+  }
+}
+.subtitle {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .server-box {
   width: 100%;
   padding: 0 10px;
