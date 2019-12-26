@@ -20,7 +20,7 @@
     "cubic-api": "3.3.3",
     "cubic-auth": "3.2.3",
     "cubic-client": "3.2.1",
-    "cubic-ui": "3.5.1",
+    "cubic-ui": "3.5.3",
     "d3": "^5.12.0",
     "dns-sync": "^0.2.0",
     "fuse.js": "^3.4.5",
