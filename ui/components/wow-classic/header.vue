@@ -153,11 +153,22 @@ header {
   position: relative;
   white-space: nowrap;
   padding-bottom: 10px;
+  min-width: 0;
+
+  // For span children
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   h1 {
     display: inline-block;
     vertical-align: middle;
     margin-top: 5px;
+    max-width: 100%;
+
+    // For header itself
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   span {
     position: relative;
