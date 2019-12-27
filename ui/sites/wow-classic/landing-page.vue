@@ -16,7 +16,9 @@
           </div>
 
           <div class="row">
-            <h2 class="subtitle">Select your WoW Classic server</h2>
+            <h2 class="subtitle">
+              Select your WoW Classic server
+            </h2>
           </div>
 
           <div class="row">
@@ -30,8 +32,12 @@
                     <div v-for="s in serverlist.EU" :key="s" class="server">
                       <span>{{ s }}</span>
                       <div class="logo-wrapper">
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`">
+                          <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo">
+                        </router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`">
+                          <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo">
+                        </router-link>
                       </div>
                     </div>
                   </div>
@@ -48,8 +54,12 @@
                     <div v-for="s in serverlist.US" :key="s" class="server">
                       <span>{{ s }}</span>
                       <div class="logo-wrapper">
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`"><img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo"></router-link>
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`"><img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo"></router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`">
+                          <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo">
+                        </router-link>
+                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`">
+                          <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo">
+                        </router-link>
                       </div>
                     </div>
                   </div>
@@ -57,7 +67,6 @@
               </module>
             </div>
           </div>
-
         </div>
       </div>
     </app-content>
