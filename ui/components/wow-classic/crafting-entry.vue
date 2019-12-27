@@ -45,13 +45,13 @@
           <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
           {{ reagent.amount }}x
         </div>
-        <div class="col price">
+        <div class="col price reagent">
           <img v-if="reagent.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
           <span v-if="reagent.marketValue">{{ parsePrice(reagent.marketValue) }}</span>
           <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
         </div>
-        <div class="col" />
-        <div class="col" />
+        <div class="col whitespace" />
+        <div class="col whitespace" />
       </div>
     </div>
   </div>
@@ -189,6 +189,9 @@ export default {
 }
 .item.reagent {
   min-width: calc(calc(100% + 80px) * 0.3 - 80px); // Parent width - image wrapper size
+  @media (max-width: $breakpoint-s) {
+    word-break: break-word;
+  }
 }
 
 span.negative {
@@ -196,6 +199,11 @@ span.negative {
 }
 .profit {
   color: $color-positive;
+}
+.whitespace {
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
 }
 
 .user {
@@ -270,6 +278,11 @@ span.negative {
     }
   }
 }
+.price.reagent {
+  @media (max-width: $breakpoint-s) {
+    padding: 15px;
+  }
+}
 .profit {
   @media (max-width: $breakpoint-s) {
     padding: 15px;
@@ -314,6 +327,11 @@ span.negative {
   max-height: 0;
   @include ease(0.35s);
   will-change: height;
+
+  @media (max-width: $breakpoint-s) {
+    max-width: calc(100% - 35px);
+    margin-left: 35px;
+  }
 
   &.active {
     max-height: 100%;
