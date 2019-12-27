@@ -39,10 +39,10 @@
             <div class="col amount">
               Amount
             </div>
-            <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
+            <div class="col interactive quantity">
               Market Value
             </div>
-            <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
+            <div class="col interactive price">
               Profit
             </div>
             <div class="col interactive whitespace" />
