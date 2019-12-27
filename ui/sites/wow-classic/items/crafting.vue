@@ -36,7 +36,7 @@
             <div class="col item">
               Item
             </div>
-            <div class="col user">
+            <div class="col amount">
               Amount
             </div>
             <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
@@ -224,12 +224,16 @@ export default {
   .item {
     margin-right: 95px;
     min-width: 30%;
+    @media (max-width: $breakpoint-s) {
+      margin-right: 45px;
+      min-width: 0;
+    }
   }
   .price {
     position: relative;
     left: 10px;
   }
-  .user {
+  .amount {
     @media (max-width: $breakpoint-s) {
       display: none;
     }

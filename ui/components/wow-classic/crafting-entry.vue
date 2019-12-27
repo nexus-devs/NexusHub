@@ -11,7 +11,7 @@
         <br>
         <span>{{ crafting.category }} ({{ crafting.requiredSkill }})</span>
       </div>
-      <div class="col">
+      <div class="col amount">
         <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
         {{ amountPretty }}x
       </div>
@@ -21,7 +21,7 @@
         <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
       </div>
       <div class="col profit">
-        <span v-if="profit" :class="{ negative: profit < 0 }" class="profit">
+        <span v-if="profit" :class="{ negative: profit < 0 }">
           <indicator :diff="profit" /> {{ parsePrice(Math.abs(profit)) }}
         </span>
       </div>
@@ -128,6 +128,12 @@ export default {
   }
 }
 
+.amount {
+  @media (max-width: $breakpoint-s) {
+    display: none;
+  }
+}
+
 .image-wrapper {
   display: flex;
   justify-content: center;
@@ -173,6 +179,7 @@ export default {
     color: $color-font-body;
   }
   @media (max-width: $breakpoint-s) {
+    margin-left: 0;
     padding: 15px;
 
     span:nth-of-type(2) {
@@ -245,8 +252,30 @@ span.negative {
   img {
     margin-right: 2px;
   }
+
   @media (max-width: $breakpoint-s) {
+    padding: 15px 4px 15px 15px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    span {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    img {
+      display: none;
+    }
+  }
+}
+.profit {
+  @media (max-width: $breakpoint-s) {
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
