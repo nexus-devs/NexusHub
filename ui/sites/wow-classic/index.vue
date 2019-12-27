@@ -17,7 +17,7 @@
             <search-button />
           </div>
 
-          <h2>Never miss out on a trade again!</h2>
+          <h2>All WoW Classic Auction House data in one place!</h2>
         </div>
       </header>
 
