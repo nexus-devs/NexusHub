@@ -146,11 +146,22 @@ export default {
   @include ease(0.15s);
   @include shade-1;
 
+  @media (max-width: $breakpoint-s) {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100vw;
+  }
+
   .body {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     max-height: calc(250px + 10vh);
+
+    @media (max-width: $breakpoint-s) {
+      max-height: 100vh;
+    }
 
     span {
       cursor: pointer;
