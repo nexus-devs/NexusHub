@@ -90,7 +90,6 @@ class Deals extends Endpoint {
 
         for (const reagent of createdBy.reagents) {
           const reagentData = itemData.find((i) => i.itemId === reagent.itemId)
-          if (item.itemId === 18168) console.log(reagentData)
           if (reagentData) createdByCosts += reagentData.details.marketValue * reagent.amount
           else {
             allReagentsExist = false

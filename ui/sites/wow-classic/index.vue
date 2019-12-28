@@ -60,7 +60,7 @@
               </h2>
               <div class="realtime">
                 <div class="most-traded row">
-                  <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
+                  <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="item col interactive">
                     <module>
                       <template slot="header">
                         <div class="img">
@@ -72,11 +72,8 @@
                       </template>
                       <template slot="body">
                         <span class="highlight">{{ parsePrice(deal.profit) }}</span>
-                        <!-- <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
-                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
-                        </span> -->
                         <br>
-                        <span class="sub">cheaper than Market Value</span>
+                        <span class="sub">Crafting Profit</span>
                       </template>
                     </module>
                   </router-link>
@@ -457,14 +454,21 @@ header {
     // margin-left: 20px;
     margin-right: -15px;
     margin-bottom: -15px;
+    @media (max-width: $breakpoint-s) {
+      max-width: 100%;
+    }
 
     .item {
       padding: 0;
       border-radius: 2px;
       flex-basis: 35%;
+      min-width: 0;
       margin-right: 15px;
       margin-bottom: 15px;
       transition-duration: 0.5s !important;
+      @media (max-width: $breakpoint-s) {
+        flex-basis: 50%;
+      }
 
       &:hover {
         @include gradient-background-dg(#3c4451, #353d49);
@@ -477,6 +481,13 @@ header {
       } */
       /deep/ .header {
         padding: 20px 20px 0;
+        max-width: 100%;
+        white-space: nowrap;
+        h3 {
+          max-width: calc(100% - 40px);
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       /deep/ .body {
         padding: 0 25px 5px;
