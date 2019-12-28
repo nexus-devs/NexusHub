@@ -54,6 +54,35 @@
                 </div>
               </div>
             </div>
+            <div class="col-b-4">
+              <h2 class="sub">
+                Profitable Recipes
+              </h2>
+              <div class="realtime">
+                <div class="most-traded row">
+                  <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
+                    <module>
+                      <template slot="header">
+                        <div class="img">
+                          <object :data="deal.icon" type="image/png">
+                            <img :src="deal.icon" :alt="deal.name">
+                          </object>
+                        </div>
+                        <h3>{{ deal.name }}</h3>
+                      </template>
+                      <template slot="body">
+                        <span class="highlight">{{ parsePrice(deal.profit) }}</span>
+                        <!-- <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
+                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
+                        </span> -->
+                        <br>
+                        <span class="sub">cheaper than Market Value</span>
+                      </template>
+                    </module>
+                  </router-link>
+                </div>
+              </div>
+            </div>
           </div>
           <ad name="warframe-index-market-overview" />
         </div>
@@ -106,9 +135,10 @@ export default {
     const slug = route.params.slug
 
     let parallel = []
-    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=6`))
+    parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
+    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
     parallel.push(this.$cubic.get('/wow-classic/v1/news'))
-    const [deals, news] = await Promise.all(parallel)
+    const [crafting, deals, news] = await Promise.all(parallel)
 
     parallel = []
     for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
@@ -120,7 +150,9 @@ export default {
       deal.name = item.name
       deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
     }
+    for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
+    store.commit('setCraftingDeals', crafting)
     store.commit('setDeals', deals)
     store.commit('setNews', news)
   },
@@ -131,6 +163,9 @@ export default {
     },
     deals () {
       return this.$store.state.wowclassic.deals
+    },
+    craftingDeals () {
+      return this.$store.state.wowclassic.craftingDeals
     },
     server () {
       return this.$store.state.servers.server
@@ -426,7 +461,7 @@ header {
     .item {
       padding: 0;
       border-radius: 2px;
-      flex-basis: 25%;
+      flex-basis: 35%;
       margin-right: 15px;
       margin-bottom: 15px;
       transition-duration: 0.5s !important;
