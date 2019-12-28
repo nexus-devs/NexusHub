@@ -86,10 +86,18 @@ class Deals extends Endpoint {
 
       for (const createdBy of item.createdBy) {
         let createdByCosts = 0
+        let allReagentsExist = true
+
         for (const reagent of createdBy.reagents) {
           const reagentData = itemData.find((i) => i.itemId === reagent.itemId)
+          if (item.itemId === 18168) console.log(reagentData)
           if (reagentData) createdByCosts += reagentData.details.marketValue * reagent.amount
+          else {
+            allReagentsExist = false
+            break
+          }
         }
+        if (!allReagentsExist) continue
 
         const itemProfit = itemDetails.details.marketValue * ((createdBy.amount[0] + createdBy.amount[1]) / 2)
         deals.push({
@@ -97,6 +105,8 @@ class Deals extends Endpoint {
           name: item.name,
           icon: item.icon,
           profit: Math.round(itemProfit - createdByCosts),
+          itemProfit,
+          createdByCosts,
           ...createdBy
         })
       }
