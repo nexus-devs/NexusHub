@@ -89,8 +89,9 @@ export default {
     // Set graph scaling
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.v1 = d3.scaleLinear().range([this.height, 0])
-      this.scaled.v2 = d3.scaleLinear().range([this.height, 0])
+      // Compensate for line height (~18px)
+      this.scaled.v1 = d3.scaleLinear().range([this.height - 9, 9])
+      this.scaled.v2 = d3.scaleLinear().range([this.height - 9, 9])
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
@@ -118,7 +119,6 @@ export default {
     // Scale domain
     scaleDomain (axis, dataValue) {
       const { lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, dataValue)
-      console.log(axis, lowerBound, upperBound)
       this.scaled[axis].domain([lowerBound, upperBound])
     },
 
