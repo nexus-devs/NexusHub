@@ -1,8 +1,8 @@
 <template>
-  <module ref="graphTest">
+  <module ref="graphValueQuantity">
     <template slot="header">
       <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
-      <h3>Graph Test</h3>
+      <h3>Market Value / Quantity</h3>
     </template>
     <template slot="body">
       <div class="graph-wrapper">
@@ -26,12 +26,16 @@
         </div>
       </div>
     </template>
+    <template slot="footer">
+      <module-time :days="timerange" :fn="setTimerange" />
+    </template>
   </module>
 </template>
 
 
 <script>
 import module from 'src/components/ui/module.vue'
+import moduleTime from 'src/components/ui/module-time.vue'
 import moment from 'moment'
 import sparkline from 'src/components/charts/sparkline_two.vue'
 import utility from './utility'
@@ -39,7 +43,8 @@ import utility from './utility'
 export default {
   components: {
     sparkline,
-    module
+    module,
+    moduleTime
   },
 
   computed: {
@@ -81,6 +86,15 @@ export default {
       const scala = []
       for (let i = this.timerange; i > 0; i -= stepSize) scala.push(now.clone().subtract(i, 'days').format('DD. MMM'))
       return scala.concat(['Today'])
+    }
+  },
+
+  methods: {
+    async setTimerange (timerange) {
+      if (timerange === this.timerange) return
+      this.$refs.graphValueQuantity.$refs.progress.start()
+      await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-quantity', timerange })
+      this.$refs.graphValueQuantity.$refs.progress.finish()
     }
   }
 }
