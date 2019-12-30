@@ -65,9 +65,11 @@ export default {
     return regionalData
   },
 
-  // Generates a nice looking graph scala with a given tick amount and returns { tickRange, lowerBound, upperBound }
-  // If a property is given, it assumes you're passing an array of objects with the data being this property
-  // Taken from https://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
+  /**
+   * Generates a nice looking graph scala with a given tick amount and returns { tickRange, lowerBound, upperBound }
+   * If a property is given, it assumes you're passing an array of objects with the data being this property
+   * Taken from https://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
+   */
   generateGraphScala (data, ticks, prop = false) {
     if (prop) data = data.map(x => x[prop])
 
