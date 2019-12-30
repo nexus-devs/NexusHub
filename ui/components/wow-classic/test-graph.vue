@@ -24,10 +24,7 @@
         </div>
         <div class="axis y2">
           <div class="labels">
-            <span>500</span>
-            <span>300</span>
-            <span>100</span>
-            <span>0</span>
+            <span v-for="(label, i) in axisY2" :key="'axisY2' + i">{{ label }}</span>
           </div>
         </div>
       </div>
@@ -66,6 +63,13 @@ export default {
         // Convert to gold (so 54213 -> 5.42)
         scala.push((tick / 10000).toFixed(2))
       }
+      return scala
+    },
+
+    axisY2 () {
+      const { tickRange, lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, 'value2')
+      const scala = []
+      for (let tick = upperBound; tick >= lowerBound; tick -= tickRange) scala.push(tick)
       return scala
     }
   }

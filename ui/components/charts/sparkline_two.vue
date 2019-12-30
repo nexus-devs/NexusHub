@@ -90,7 +90,7 @@ export default {
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
       this.scaled.v1 = d3.scaleLinear().range([this.height, 0])
-      this.scaled.v2 = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.v2 = d3.scaleLinear().range([this.height, 0])
     },
 
     // Adjust Graph size responsively. Gets called on windows resize and vue mount.
@@ -104,9 +104,8 @@ export default {
     // Update graph render
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      const { lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, 'value1')
-      this.scaled.v1.domain([lowerBound, upperBound])
-      this.scaled.v2.domain(d3.extent(this.data, d => d.value2))
+      this.scaleDomain('v1', 'value1')
+      this.scaleDomain('v2', 'value2')
 
       const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3.curveMonotoneX)
       const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3.curveMonotoneX)
@@ -114,6 +113,13 @@ export default {
       this.paths.line2 = lineValue2(this.data)
 
       this.updateTooltipSize()
+    },
+
+    // Scale domain
+    scaleDomain (axis, dataValue) {
+      const { lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, dataValue)
+      console.log(axis, lowerBound, upperBound)
+      this.scaled[axis].domain([lowerBound, upperBound])
     },
 
     // Update tooltip width
