@@ -22,10 +22,6 @@
             Statistics
           </h2>
           <div class="row-margin main">
-            <graph-test class="col-b graph" />
-            <graph-test class="col-b graph" />
-          </div>
-          <div class="row-margin main">
             <graph-value-quantity class="col-b graph" />
             <graph-value-comparison class="col-b graph" />
           </div>
@@ -44,7 +40,6 @@
 <script>
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
-import graphTest from 'src/components/wow-classic/test-graph.vue'
 import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
 import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
 import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
@@ -65,8 +60,7 @@ export default {
     graphValueComparison,
     graphValueQuantity,
     heatmapValue,
-    heatmapQuantity,
-    graphTest
+    heatmapQuantity
   },
 
   async asyncData ({ store, route }) {
