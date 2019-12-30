@@ -15,10 +15,7 @@
           <sparkline :data="data" :secondary-label="'Quantity'" />
           <div class="axis x">
             <div class="labels">
-              <span>10. Dec</span>
-              <span>20. Dec</span>
-              <span>30. Dec</span>
-              <span>10. Jan</span>
+              <span v-for="(label, i) in axisX" :key="'axisX' + i">{{ label }}</span>
             </div>
           </div>
         </div>
@@ -35,6 +32,7 @@
 
 <script>
 import module from 'src/components/ui/module.vue'
+import moment from 'moment'
 import sparkline from 'src/components/charts/sparkline_two.vue'
 import utility from './utility'
 
@@ -45,6 +43,10 @@ export default {
   },
 
   computed: {
+    timerange () {
+      return this.$store.state.graphs.storage['graph-value-quantity'].timerange
+    },
+
     data () {
       const data = this.$store.state.graphs.storage['graph-value-quantity'].data
       return data.map((d) => {
@@ -71,6 +73,14 @@ export default {
       const scala = []
       for (let tick = upperBound; tick >= lowerBound; tick -= tickRange) scala.push(tick)
       return scala
+    },
+
+    axisX () {
+      const now = moment()
+      const stepSize = Math.floor(this.timerange / 6)
+      const scala = []
+      for (let i = this.timerange; i > 0; i -= stepSize) scala.push(now.clone().subtract(i, 'days').format('DD. MMM'))
+      return scala.concat(['Today'])
     }
   }
 }
