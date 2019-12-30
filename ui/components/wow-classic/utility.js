@@ -63,5 +63,27 @@ export default {
       else if (rD.value2) validValue = rD.value2
     }
     return regionalData
+  },
+
+  // Generates a nice looking graph scala with a given tick amount and returns { tickRange, lowerBound, upperBound }
+  // If a property is given, it assumes you're passing an array of objects with the data being this property
+  // Taken from https://stackoverflow.com/questions/326679/choosing-an-attractive-linear-scale-for-a-graphs-y-axis
+  generateGraphScala (data, ticks, prop = false) {
+    if (prop) data = data.map(x => x[prop])
+
+    let lowerBound = Math.min(...data)
+    let upperBound = Math.max(...data)
+    let tickRange = (upperBound - lowerBound) / (ticks - 1)
+
+    // Determine rounded tick range
+    const x = Math.ceil(Math.log10(tickRange) - 1)
+    const pow10x = Math.pow(10, x)
+    tickRange = Math.ceil(tickRange / pow10x) * pow10x
+
+    // Adjust bounds
+    lowerBound = tickRange * Math.round(lowerBound / tickRange)
+    upperBound = tickRange * Math.round(1 + upperBound / tickRange)
+
+    return { tickRange, lowerBound, upperBound }
   }
 }
