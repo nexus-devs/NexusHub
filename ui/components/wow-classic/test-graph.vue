@@ -8,10 +8,7 @@
       <div class="graph-wrapper">
         <div class="axis y1">
           <div class="labels">
-            <span>50.00g</span>
-            <span>30.00g</span>
-            <span>20.00g</span>
-            <span>0.00g</span>
+            <span v-for="(label, i) in axisY1" :key="'axisY1' + i">{{ label }}g</span>
           </div>
         </div>
         <div class="graph">
@@ -42,6 +39,7 @@
 <script>
 import module from 'src/components/ui/module.vue'
 import sparkline from 'src/components/charts/sparkline_two.vue'
+import utility from './utility'
 
 export default {
   components: {
@@ -59,6 +57,16 @@ export default {
           value2: d.quantity
         }
       })
+    },
+
+    axisY1 () {
+      const { tickRange, lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, 'value1')
+      const scala = []
+      for (let tick = upperBound; tick >= lowerBound; tick -= tickRange) {
+        // Convert to gold (so 54213 -> 5.42)
+        scala.push((tick / 10000).toFixed(2))
+      }
+      return scala
     }
   }
 }
@@ -121,9 +129,5 @@ export default {
 /deep/ .sparkline {
   height: 100%;
   width: 100%;
-}
-
-/deep/ .body {
-  // margin-bottom: 40px;
 }
 </style>

@@ -89,7 +89,7 @@ export default {
     // Set graph scaling
     initialize () {
       this.scaled.x = d3.scaleLinear().range([0, this.width])
-      this.scaled.v1 = d3.scaleLinear().range([this.height - 40, 40])
+      this.scaled.v1 = d3.scaleLinear().range([this.height, 0])
       this.scaled.v2 = d3.scaleLinear().range([this.height - 40, 40])
     },
 
@@ -104,7 +104,8 @@ export default {
     // Update graph render
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaled.v1.domain(d3.extent(this.data, d => d.value1))
+      const { lowerBound, upperBound } = utility.generateGraphScala(this.data, 4, 'value1')
+      this.scaled.v1.domain([lowerBound, upperBound])
       this.scaled.v2.domain(d3.extent(this.data, d => d.value2))
 
       const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3.curveMonotoneX)
