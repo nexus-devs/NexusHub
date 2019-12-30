@@ -83,8 +83,9 @@ export default {
     tickRange = Math.ceil(tickRange / pow10x) * pow10x
 
     // Adjust bounds
-    lowerBound = tickRange * Math.floor(lowerBound / tickRange)
-    upperBound = tickRange * Math.floor(1 + upperBound / tickRange)
+    lowerBound = tickRange ? tickRange * Math.floor(lowerBound / tickRange) : 0
+    upperBound = tickRange ? tickRange * Math.floor(1 + upperBound / tickRange) : upperBound * 2
+    if (!tickRange) tickRange = upperBound / 2
 
     return { tickRange, lowerBound, upperBound }
   }
