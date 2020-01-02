@@ -53,14 +53,19 @@ export default {
     },
 
     data () {
-      const data = this.$store.state.graphs.storage['graph-value-quantity'].data
-      return data.map((d) => {
+      const data = this.$store.state.graphs.storage['graph-value-quantity'].data.map((d) => {
         return {
           x: d.scannedAt,
           value1: d.marketValue,
           value2: d.quantity
         }
       })
+
+      // Interpolate timerange days ago and today
+      data.unshift({ ...data[0], x: new Date().getTime() - 1000 * 60 * 60 * 24 * this.timerange })
+      data.push({ ...data[data.length - 1], x: new Date().getTime() })
+
+      return data
     },
 
     axisY1 () {

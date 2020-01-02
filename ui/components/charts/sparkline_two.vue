@@ -10,7 +10,7 @@
     </div>
     <div class="tooltip-container">
       <svg :width="width + 160" :height="height">
-        <g v-for="d in data" :key="d.x" class="point">
+        <g v-for="(d, i) in data" :key="`${i}${d.x}`" class="point">
           <rect :x="scaled.x(d.x)" class="hover" />
           <circle :cx="scaled.x(d.x)" :cy="scaled.v1(d.value1)" r="3" class="circle" />
           <circle :cx="scaled.x(d.x)" :cy="scaled.v2(d.value2)" r="3" class="circle secondary" />
