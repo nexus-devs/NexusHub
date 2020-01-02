@@ -88,5 +88,41 @@ export default {
     if (!tickRange) tickRange = upperBound / 2
 
     return { tickRange, lowerBound, upperBound }
+  },
+
+  /**
+   * This function merges values in sized brackets if there are too many.
+   * It also interpolates a today value and exact timerange ago value.
+   */
+  mergeValuesAndInterpolateLowerUpper (data, timerange) {
+    // Merge values if there are too many
+    const stepSize = Math.floor(timerange / 6)
+    let bracketLower = 0
+    let bracketUpper = stepSize
+    const mergedData = []
+    if (stepSize > 1) {
+      while (bracketLower < data.length) {
+        const dataBracket = data.slice(bracketLower, bracketUpper > data.length ? data.length : bracketUpper)
+        const mergedBracket = dataBracket.reduce((acc, cV) => {
+          acc.value1 += cV.value1
+          acc.value2 += cV.value2
+          return acc
+        })
+        mergedBracket.value1 = Math.round(mergedBracket.value1 / dataBracket.length)
+        mergedBracket.value2 = Math.round(mergedBracket.value2 / dataBracket.length)
+        mergedBracket.x = dataBracket[Math.floor(dataBracket.length / 2)].x
+
+        mergedData.push(mergedBracket)
+        bracketLower += stepSize
+        bracketUpper += stepSize
+      }
+      data = mergedData
+    }
+
+    // Interpolate timerange days ago and today
+    data.unshift({ ...data[0], x: new Date().getTime() - 1000 * 60 * 60 * 24 * timerange })
+    data.push({ ...data[data.length - 1], x: new Date().getTime() })
+
+    return data
   }
 }

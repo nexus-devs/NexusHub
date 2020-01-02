@@ -61,11 +61,7 @@ export default {
         }
       })
 
-      // Interpolate timerange days ago and today
-      data.unshift({ ...data[0], x: new Date().getTime() - 1000 * 60 * 60 * 24 * this.timerange })
-      data.push({ ...data[data.length - 1], x: new Date().getTime() })
-
-      return data
+      return utility.mergeValuesAndInterpolateLowerUpper(data, this.timerange)
     },
 
     axisY1 () {
