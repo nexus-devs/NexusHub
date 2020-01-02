@@ -64,9 +64,9 @@ class Scan extends Endpoint {
               minBuyout: obj.min_buyout,
               numAuctions: obj.num_auctions,
               quantity: obj.quantity,
-              hour
+              scannedAt
             }],
-            $sort: { hour: 1 }
+            $sort: { scannedAt: 1 }
           }
         }
       }
