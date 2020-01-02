@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="graph">
-          <sparkline :data="data" :secondary-label="'Regional'" />
+          <sparkline :data="data" :secondary-label="'Regional'" :parse-secondary="true" />
           <div class="axis x">
             <div class="labels">
               <span v-for="(label, i) in axisX" :key="'axisX' + i">{{ label }}</span>

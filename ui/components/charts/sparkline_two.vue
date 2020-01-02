@@ -25,10 +25,10 @@
             </text>
             <circle :cx="scaled.x(d.x) + 23" cy="70px" r="3" class="circle secondary" />
             <text v-if="secondaryLabel" :x="scaled.x(d.x) + 30" y="75px" class="sub">
-              {{ secondaryLabel }}: {{ d ? `${d.value2}` : 0 }}
+              {{ secondaryLabel }}: {{ d ? (parseSecondary ? parsePrice(d.value2) : `${d.value2}`) : '0' }}
             </text>
             <text v-else :x="scaled.x(d.x) + 30" y="75px" class="sub">
-              {{ d ? `${d.value2}` : 0 }}
+              {{ d ? (parseSecondary ? parsePrice(d.value2) : `${d.value2}`) : '0' }}
             </text>
           </g>
         </g>
@@ -44,7 +44,7 @@ import Tween from './_tween.js'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['data', 'secondaryLabel'],
+  props: ['data', 'secondaryLabel', 'parseSecondary'],
 
   data () {
     return {
@@ -130,7 +130,7 @@ export default {
       const secondaryLables = d3.select(this.$el).selectAll('.sub')
 
       const widths = [getMaxWidth(titles), getMaxWidth(primaryLables), getMaxWidth(secondaryLables)]
-      this.tooltipWidth = Math.round(d3.max(widths)) + 8 + 8 // Add padding
+      this.tooltipWidth = Math.round(d3.max(widths)) + 12 + 12 // Add padding
     },
 
     // Parses hours into days + hours ago
