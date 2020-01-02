@@ -1,5 +1,6 @@
 const Endpoint = require('cubic-api/endpoint')
 const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
+const moment = require('moment')
 
 class Scan extends Endpoint {
   constructor (options) {
@@ -13,7 +14,7 @@ class Scan extends Endpoint {
         slug: 'anathema-alliance',
         region: 'EU',
         scanId: '1571761307',
-        scannedAt: new Date(1571761307 * 1000)
+        scannedAt: 1571761307 * 1000 // getTime() so everything is correctly parsed in UTC
       }
     }
     this.schema.response = String
@@ -23,13 +24,18 @@ class Scan extends Endpoint {
     const slug = req.body.slug
     const region = req.body.region.toLowerCase()
     const scanId = parseInt(req.body.scanId)
-    const scannedAt = new Date(req.body.scannedAt)
-    const scannedAtHour = new Date(scannedAt.getTime())
-    scannedAtHour.setMinutes(0)
-    scannedAtHour.setSeconds(0)
-    scannedAtHour.setMilliseconds(0)
-    const scannedAtDay = new Date(scannedAtHour.getTime())
-    scannedAtDay.setHours(0)
+
+    // Parse in moment so we can use UTC painlessly
+    const scannedAtMoment = moment(req.body.scannedAt).utc()
+    const scannedAtDayMoment = scannedAtMoment.clone()
+    scannedAtDayMoment.hour(0)
+    scannedAtDayMoment.minute(0)
+    scannedAtDayMoment.second(0)
+    scannedAtDayMoment.millisecond(0)
+
+    // Convert to JS Date for MongoDb
+    const scannedAt = scannedAtMoment.toDate()
+    const scannedAtDay = scannedAtDayMoment.toDate()
 
     const scanExistsAlready = await this.db.collection('scans').findOne({ slug, scanId })
     if (scanExistsAlready) {
@@ -53,7 +59,7 @@ class Scan extends Endpoint {
       emptyDetails.push({ marketValue: 0, minBuyout: 0, numAuctions: 0, quantity: 0, count: 0, hour: i })
     }
 
-    const hour = scannedAtHour.getHours()
+    const hour = scannedAtMoment.hour()
     for (const obj of scan.data) {
       // Update scanData
       const update = {

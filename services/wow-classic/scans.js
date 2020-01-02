@@ -49,7 +49,7 @@ async function monitor () {
           scans.data = scans.data.filter((s) => s.last_modified > lastScanUnix).sort((a, b) => a.last_modified - b.last_modified)
           console.log(`Inserting ${scans.data.length} scans for ${realm.master_slug}...`)
           for (const scan of scans.data) {
-            const scannedAt = new Date(scan.last_modified * 1000)
+            const scannedAt = scan.last_modified * 1000
 
             // Await to avoid overloading the TSM servers
             await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
