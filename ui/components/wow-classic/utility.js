@@ -65,6 +65,29 @@ export default {
     return regionalData
   },
 
+  /* formatRegionalData2 (itemData, regionalData) {
+    for (const entry of itemData.data) {
+      const entryScannedAt = new Date(entry.scannedAt).getTime()
+
+      // Get lower and upper hour of time, e.g. 15:34 -> lower 15:00, upper 16:00
+      const bracketLower = Math.floor(entryScannedAt / 1000 * 60 * 60) * 1000 * 60 * 60
+      const bracketUpper = bracketLower + 1000 * 60 * 60
+
+      // Get corresponding regional values
+      const lowerRegional = regionalData.data.find((r) => r.scannedAt === new Date(bracketLower))
+      const upperRegional = regionalData.data.find((r) => r.scannedAt === new Date(bracketUpper))
+
+      // If values are found, do a linear interpolation
+      if (lowerRegional && upperRegional) {
+        const factor = (entryScannedAt - bracketLower) / (bracketUpper - bracketLower)
+        entry.value2 = lowerRegional.marketValue * (1.0 - factor) + upperRegional.marketValue * factor
+      } else if (lowerRegional) entry.value2 = lowerRegional.marketValue
+      else if (upperRegional) entry.value2 = upperRegional.marketValue
+    }
+
+    return itemData
+  }, */
+
   /**
    * Generates a nice looking graph scala with a given tick amount and returns { tickRange, lowerBound, upperBound }
    * If a property is given, it assumes you're passing an array of objects with the data being this property
