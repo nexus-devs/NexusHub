@@ -59,7 +59,7 @@ class Prices extends Endpoint {
           marketValue: !region ? hour.marketValue : Math.round(hour.marketValue / hour.count),
           minBuyout: !region ? hour.minBuyout : Math.round(hour.minBuyout / hour.count),
           quantity: !region ? hour.quantity : Math.round(hour.quantity / hour.count),
-          scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour.hour)
+          scannedAt: hour.scannedAt
         })
       }
     }
