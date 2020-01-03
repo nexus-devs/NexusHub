@@ -49,7 +49,7 @@ class Items extends Endpoint {
     // If one day doesn't have enough data, add last scan from the day before
     if (stats[0] && stats[0].details.length < 2) stats[0].details.unshift(stats[1].details[stats[1].details.length - 1])
 
-    const statData = stats[0] ? stats[0].details.reverse().slice(0, 2).map(({ hour, ...props }) => props) : []
+    const statData = stats[0] ? stats[0].details.reverse().slice(0, 2).map(({ scannedAt, ...props }) => props) : []
 
     const response = {
       server: slug,
