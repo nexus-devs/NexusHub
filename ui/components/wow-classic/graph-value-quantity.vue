@@ -152,6 +152,12 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media (max-width: $breakpoint-s) {
+      span:not(:first-child):not(:last-child) {
+        display: none;
+      }
+    }
   }
 }
 
