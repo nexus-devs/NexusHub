@@ -27,9 +27,9 @@ module.exports = async function () {
   await cubic.use(new Api(config.api))
 
   // Load services
-  /* require('../../services/warframe/tradechat.js')
+  require('../../services/warframe/tradechat.js')
   require('../../services/warframe/opm.js')
   require('../../services/warframe/clear.js')
-  require('../../services/warframe/wfm.js') */
-  // require('../../services/wow-classic/scans.js')
+  require('../../services/warframe/wfm.js')
+  require('../../services/wow-classic/scans.js')
 }
