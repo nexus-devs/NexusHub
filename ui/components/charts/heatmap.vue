@@ -128,6 +128,9 @@ export default {
 .hour-wrapper {
   padding: 3px;
   width: 9px;
+  @media (max-width: $breakpoint-s) {
+    padding: 0 !important;
+  }
 
   &:hover {
     .hour {

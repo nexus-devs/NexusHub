@@ -36,13 +36,13 @@
             <div class="col item">
               Item
             </div>
-            <div class="col user">
+            <div class="col amount">
               Amount
             </div>
-            <div class="col interactive quantity" @click="selectFilterTag(filters.find(f => f.name === 'Quantity'))">
+            <div class="col interactive quantity">
               Market Value
             </div>
-            <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
+            <div class="col interactive price">
               Profit
             </div>
             <div class="col interactive whitespace" />
@@ -84,11 +84,18 @@ export default {
       const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting/${slug}/${item}`)
       store.commit('setCrafting', craftingData)
     }
+    if (!store.state.crafting.professions.length) {
+      const professionData = await this.$cubic.get(`/wow-classic/v1/crafting/professions`)
+      store.commit('setProfessions', professionData)
+    }
   },
 
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    professions () {
+      return this.$store.state.crafting.professions
     },
     crafting () {
       // Populate createdBy with item details
@@ -128,11 +135,8 @@ export default {
       for (const entry of entries) {
         if (filters.find((o) => o.name === entry.category)) continue
 
-        // TODO: Replace this once api endpoint is there
-        filters.push({
-          name: entry.category,
-          icon: `https://wow.zamimg.com/images/wow/icons/small/trade_${entry.category.toLowerCase()}.jpg`
-        })
+        const profession = this.professions.find((p) => p.name === entry.category)
+        if (profession) filters.push(profession)
       }
       return filters
     }
@@ -220,12 +224,16 @@ export default {
   .item {
     margin-right: 95px;
     min-width: 30%;
+    @media (max-width: $breakpoint-s) {
+      margin-right: 45px;
+      min-width: 0;
+    }
   }
   .price {
     position: relative;
     left: 10px;
   }
-  .user {
+  .amount {
     @media (max-width: $breakpoint-s) {
       display: none;
     }

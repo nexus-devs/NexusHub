@@ -9,7 +9,7 @@ class Items extends Endpoint {
     this.schema.description = 'Get basic item stats. Usage of this data for commercial purposes must be discussed with us before.'
     this.schema.url = '/wow-classic/v1/items/:slug/:item'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
-    /* this.schema.response = {
+    this.schema.response = {
       itemId: Number,
       name: String,
       icon: String,
@@ -25,7 +25,7 @@ class Items extends Endpoint {
         },
         previous: Object
       }
-    } */
+    }
     this.schema.response = {}
   }
 
@@ -44,8 +44,12 @@ class Items extends Endpoint {
       })
     }
 
-    const stats = await this.db.collection('scanData').findOne({ slug, itemId }, { sort: { scannedAt: -1 } })
-    const keys = stats ? Object.keys(stats.details).reverse().slice(0, 2) : []
+    const stats = await this.db.collection('scanData').find({ slug, itemId }).sort({ scannedAt: -1 }).limit(2).toArray()
+
+    // If one day doesn't have enough data, add last scan from the day before
+    if (stats[0] && stats[1] && stats[0].details.length < 2) stats[0].details.unshift(stats[1].details[stats[1].details.length - 1])
+
+    const statData = stats[0] ? stats[0].details.reverse().slice(0, 2).map(({ scannedAt, ...props }) => props) : []
 
     const response = {
       server: slug,
@@ -57,8 +61,8 @@ class Items extends Endpoint {
       itemLevel: item.itemLevel,
       sellPrice: item.sellPrice,
       stats: {
-        current: keys[0] ? stats.details[keys[0]] : null,
-        previous: keys[1] ? stats.details[keys[1]] : null
+        current: statData[0] || null,
+        previous: statData[1] || null
       }
     }
 

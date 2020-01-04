@@ -1,11 +1,25 @@
 <template>
   <module ref="graphValueComparison">
     <template slot="header">
-      <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
+      <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
       <h3>Market Value Server vs. Regional</h3>
     </template>
     <template slot="body">
-      <doubleline :data="data" :same-scale="true" :timerange="timerange" />
+      <div class="graph-wrapper">
+        <div class="axis y1">
+          <div class="labels">
+            <span v-for="(label, i) in axisY1" :key="'axisY1' + i">{{ label }}g</span>
+          </div>
+        </div>
+        <div class="graph">
+          <sparkline :data="data" :secondary-label="'Regional'" :parse-secondary="true" />
+          <div class="axis x">
+            <div class="labels">
+              <span v-for="(label, i) in axisX" :key="'axisX' + i">{{ label }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange" />
@@ -15,13 +29,15 @@
 
 
 <script>
-import doubleline from 'src/components/charts/doubleline.vue'
 import module from 'src/components/ui/module.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
+import moment from 'moment'
+import sparkline from 'src/components/charts/sparkline_two.vue'
+import utility from './utility'
 
 export default {
   components: {
-    doubleline,
+    sparkline,
     module,
     moduleTime
   },
@@ -30,68 +46,42 @@ export default {
     timerange () {
       return this.$store.state.graphs.storage['graph-value-comparison'].timerange
     },
+
     region () {
       return this.$store.state.servers.region
     },
+
     data () {
-      let itemData = this.$store.state.graphs.storage['graph-value-comparison'].data.slice()
-
-      // Squish data if necessary
-      let stepSize = 1
-      const days = this.timerange
-      if (days === 30) stepSize = 4
-      else if (days === 90) stepSize = 10
-      const squishedData = []
-      if (stepSize > 1) {
-        let accValue1 = 0
-        let accValue2 = 0
-        let counter = 0
-        for (let i = itemData.length - 1; i >= 0; i--) {
-          const d = itemData[i]
-          accValue1 += d.marketValue
-          accValue2 += d.value2 ? d.value2 : d.quantity
-          counter++
-
-          // Squish values if step size reached or end of array
-          if ((itemData.length - i) % stepSize === 0 || i === 0) {
-            squishedData.unshift({
-              scannedAt: d.scannedAt,
-              marketValue: Math.round(accValue1 / counter),
-              value2: d.value2 ? Math.round(accValue2 / counter) : undefined,
-              quantity: d.quantity ? Math.round(accValue2 / counter) : undefined
-            })
-
-            accValue1 = 0
-            accValue2 = 0
-            counter = 0
-          }
-        }
-
-        itemData = squishedData
-      }
-
-      // Interpolate 7 days ago and today
-      const now = new Date().getTime()
-      itemData.push({
-        scannedAt: now,
-        marketValue: itemData[itemData.length - 1].marketValue,
-        value2: itemData[itemData.length - 1].value2
-      })
-      if (Math.ceil(Math.abs(now - itemData[0].scannedAt) / (1000 * 60 * 60 * 24)) >= this.timerange) {
-        itemData.unshift({
-          scannedAt: now - (1000 * 60 * 60 * 24 * this.timerange),
-          marketValue: itemData[0].marketValue,
-          value2: itemData[0].value2
-        })
-      }
-
-      return itemData.map((d) => {
+      const data = this.$store.state.graphs.storage['graph-value-comparison'].data.map((d) => {
         return {
           x: d.scannedAt,
           value1: d.value2,
           value2: d.marketValue
         }
       })
+
+      return utility.mergeValuesAndInterpolateLowerUpper(data, this.timerange)
+    },
+
+    axisY1 () {
+      const totalData = this.data.concat(this.data.map(x => {
+        return { value1: x.value2 }
+      }))
+      const { tickRange, lowerBound, upperBound } = utility.generateGraphScala(totalData, 4, 'value1')
+      const scala = []
+      for (let tick = upperBound; tick >= lowerBound; tick -= tickRange) {
+        // Convert to gold (so 54213 -> 5.42)
+        scala.push((tick / 10000).toFixed(2))
+      }
+      return scala
+    },
+
+    axisX () {
+      const now = moment()
+      const stepSize = Math.floor(this.timerange / 6)
+      const scala = []
+      for (let i = this.timerange; i > 0; i -= stepSize) scala.push(now.clone().subtract(i, 'days').format('DD. MMM'))
+      return scala.concat(['Today'])
     }
   },
 
@@ -108,5 +98,66 @@ export default {
 
 
 <style lang="scss" scoped>
+@import '~src/styles/partials/wow-classic/importer';
 
+.graph-wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.graph {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.axis {
+  height: calc(100% - 20px); // Adjust for x axis height
+
+  .labels {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    span {
+      color: $color-font-body;
+      font-size: 0.8em;
+    }
+  }
+}
+.axis.y1 {
+  border-right: 1px solid $color-font-body;
+  padding-right: 5px;
+  text-align: right;
+}
+.axis.y2 {
+  border-left: 1px solid $color-font-body;
+  padding-left: 5px;
+  text-align: left;
+}
+.axis.x {
+  flex-shrink: 0;
+  height: 20px;
+  position: relative;
+  border-top: 1px solid $color-font-body;
+
+  .labels {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @media (max-width: $breakpoint-s) {
+      span:not(:first-child):not(:last-child) {
+        display: none;
+      }
+    }
+  }
+}
+
+/deep/ .sparkline {
+  height: 100%;
+  width: 100%;
+}
 </style>

@@ -21,7 +21,7 @@ class Prices extends Endpoint {
         description: 'If true, slug is treated as a region.'
       }
     ]
-    /* this.schema.response = {
+    this.schema.response = {
       slug: String,
       itemId: Number,
       timerange: Number,
@@ -31,7 +31,7 @@ class Prices extends Endpoint {
         quantity: Number,
         scannedAt: String
       }]
-    } */
+    }
     this.schema.response = {}
   }
 
@@ -53,13 +53,13 @@ class Prices extends Endpoint {
 
     const data = []
     for (const day of rawData) {
-      for (const hour of Object.keys(day.details).map((x) => parseInt(x))) {
-        const d = day.details[hour]
+      for (const hour of day.details) {
+        if (region && hour.count <= 0) continue
         data.push({
-          marketValue: !region ? d.marketValue : Math.round(d.marketValue / d.count),
-          minBuyout: !region ? d.minBuyout : Math.round(d.minBuyout / d.count),
-          quantity: !region ? d.quantity : Math.round(d.quantity / d.count),
-          scannedAt: new Date(day.scannedAt.getTime() + 1000 * 60 * 60 * hour)
+          marketValue: !region ? hour.marketValue : Math.round(hour.marketValue / hour.count),
+          minBuyout: !region ? hour.minBuyout : Math.round(hour.minBuyout / hour.count),
+          quantity: !region ? hour.quantity : Math.round(hour.quantity / hour.count),
+          scannedAt: hour.scannedAt
         })
       }
     }

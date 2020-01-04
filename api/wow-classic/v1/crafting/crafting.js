@@ -9,7 +9,7 @@ class Crafting extends Endpoint {
     this.schema.description = 'Get crafting price information.'
     this.schema.url = '/wow-classic/v1/crafting/:slug/:item'
     this.schema.request = { url: '/wow-classic/v1/crafting/anathema-alliance/2589' }
-    /* this.schema.response = {
+    this.schema.response = {
       itemId: Number,
       slug: String,
       createdBy: [Object],
@@ -27,8 +27,8 @@ class Crafting extends Endpoint {
           icon: String,
           marketValue: Number
         }]
-      } */
-    this.schema.response = {}
+      }]
+    }
   }
 
   /**
@@ -82,8 +82,7 @@ class Crafting extends Endpoint {
     // Convert price data
     for (const priceEntry of priceData) {
       if (!priceEntry) continue
-      const newestKey = Math.max(...Object.keys(priceEntry.details).map((x) => parseInt(x)))
-      const newest = priceEntry.details[newestKey]
+      const newest = priceEntry.details[priceEntry.details.length - 1]
       priceEntry.marketValue = newest.marketValue
     }
 
@@ -111,13 +110,12 @@ class Crafting extends Endpoint {
     }
     const applyReagentFor = (r) => {
       if (itemStorage[r.itemId].marketValue) r.marketValue = itemStorage[r.itemId].marketValue
-      const createdBy = r.createdBy.map(applyData({
+      return r.createdBy.map(applyData({
         itemId: r.itemId,
         name: r.name,
         icon: r.icon,
         marketValue: r.marketValue
       }))
-      return createdBy
     }
 
     return res.send({

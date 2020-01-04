@@ -17,7 +17,7 @@
             <search-button />
           </div>
 
-          <h2>Never miss out on a trade again!</h2>
+          <h2>All WoW Classic Auction House data in one place!</h2>
         </div>
       </header>
 
@@ -48,6 +48,32 @@
                         </span>
                         <br>
                         <span class="sub">cheaper than Market Value</span>
+                      </template>
+                    </module>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+            <div class="col-b-4">
+              <h2 class="sub">
+                Profitable Recipes
+              </h2>
+              <div class="realtime">
+                <div class="most-traded row">
+                  <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="item col interactive">
+                    <module>
+                      <template slot="header">
+                        <div class="img">
+                          <object :data="deal.icon" type="image/png">
+                            <img :src="deal.icon" :alt="deal.name">
+                          </object>
+                        </div>
+                        <h3>{{ deal.name }}</h3>
+                      </template>
+                      <template slot="body">
+                        <span class="highlight">{{ parsePrice(deal.profit) }}</span>
+                        <br>
+                        <span class="sub">Crafting Profit</span>
                       </template>
                     </module>
                   </router-link>
@@ -106,9 +132,10 @@ export default {
     const slug = route.params.slug
 
     let parallel = []
-    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=6`))
+    parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
+    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
     parallel.push(this.$cubic.get('/wow-classic/v1/news'))
-    const [deals, news] = await Promise.all(parallel)
+    const [crafting, deals, news] = await Promise.all(parallel)
 
     parallel = []
     for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
@@ -120,7 +147,9 @@ export default {
       deal.name = item.name
       deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
     }
+    for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
+    store.commit('setCraftingDeals', crafting)
     store.commit('setDeals', deals)
     store.commit('setNews', news)
   },
@@ -131,6 +160,9 @@ export default {
     },
     deals () {
       return this.$store.state.wowclassic.deals
+    },
+    craftingDeals () {
+      return this.$store.state.wowclassic.craftingDeals
     },
     server () {
       return this.$store.state.servers.server
@@ -422,14 +454,21 @@ header {
     // margin-left: 20px;
     margin-right: -15px;
     margin-bottom: -15px;
+    @media (max-width: $breakpoint-s) {
+      max-width: 100%;
+    }
 
     .item {
       padding: 0;
       border-radius: 2px;
-      flex-basis: 25%;
+      flex-basis: 35%;
+      min-width: 0;
       margin-right: 15px;
       margin-bottom: 15px;
       transition-duration: 0.5s !important;
+      @media (max-width: $breakpoint-s) {
+        flex-basis: 50%;
+      }
 
       &:hover {
         @include gradient-background-dg(#3c4451, #353d49);
@@ -442,6 +481,13 @@ header {
       } */
       /deep/ .header {
         padding: 20px 20px 0;
+        max-width: 100%;
+        white-space: nowrap;
+        h3 {
+          max-width: calc(100% - 40px);
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
       /deep/ .body {
         padding: 0 25px 5px;

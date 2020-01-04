@@ -1,8 +1,8 @@
-const request = require('request-promise')
+const request = require('requestretry')
 const fs = require('fs')
 
 /**
- * Wrapper for making requests to the TSM servers.
+ * Small wrapper for making requests to the TSM servers.
  * Handles TSM API key, server timeout etc...
  */
 class TSMRequest {
@@ -29,20 +29,19 @@ class TSMRequest {
    */
   async get (query) {
     let req = {}
-    let reqCounter = 0
 
-    while (reqCounter === 0 || req.code === 'ETIMEDOUT') {
-      if (reqCounter > this.options.retries) return { success: false, error: 'Request connection timed out.' }
-      reqCounter++
+    try {
       req = await request({
         uri: `http://api2.tradeskillmaster.com${query}`,
         json: true,
         headers: { 'User-Agent': 'Request-Promise', 'X-API-Key': this.tsmKey },
-        timeout: this.options.timeout
+        maxAttempts: this.options.retries,
+        retryDelay: this.options.timeout
       })
+      return req.body
+    } catch (err) {
+      return { success: false, error: err }
     }
-
-    return req
   }
 }
 

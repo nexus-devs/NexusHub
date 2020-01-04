@@ -1,11 +1,5 @@
 <template>
-  <module v-observe-visibility="{
-    callback: setVisibility,
-    intersection: {
-      rootMargin: '0px 0px 20% 0px'
-    }
-  }" :class="{ visible }" class="patchlog"
-  >
+  <module :class="{ visible }" class="patchlog">
     <template slot="header">
       <h3>{{ patchlog.title }}</h3>
       <time :datetime="patchlog.date">{{ overview ? moment (new Date(patchlog.isoDate)).fromNow() : moment(new Date(patchlog.isoDate)).format('MMMM Do YYYY') }}</time>
@@ -33,8 +27,6 @@
 
 
 <script>
-import Vue from 'vue'
-import VueObserveVisibility from 'vue-observe-visibility'
 import module from 'src/components/ui/module.vue'
 import moment from 'moment'
 
@@ -59,25 +51,8 @@ export default {
     }
   },
 
-  beforeMount () {
-    Vue.use(VueObserveVisibility)
-  },
-
   methods: {
-    moment,
-    setVisibility (bool, entry) {
-      const buffer = -99999
-      if (!this.$store.state.items) return
-
-      if (bool || entry.boundingClientRect.top < entry.rootBounds.bottom + buffer || entry.boundingClientRect.bottom < entry.rootBounds.top + buffer) {
-        this.visible = true
-        this.seen = true
-        this.$store.commit('addItemPatchlog', this.patchlog)
-      } else {
-        this.visible = false
-        this.$store.commit('removeItemPatchlog', this.patchlog)
-      }
-    }
+    moment
   }
 }
 </script>
