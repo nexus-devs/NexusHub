@@ -99,10 +99,10 @@ export default {
   },
 
   head: {
-    title: 'NexusHub · Never miss out on a trade again!',
+    title: 'NexusHub · All WoW Classic Auction House data in one place!',
     meta: meta({
-      title: 'NexusHub · Never miss out on a trade again!',
-      description: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
+      title: 'NexusHub · All WoW Classic Auction House data in one place!',
+      description: 'Get up-to-date data and prices from all World of Warcraft: Classic servers and auction houses!'
     })
   }
 }

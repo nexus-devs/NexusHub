@@ -44,6 +44,7 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import resultsGroup from 'src/components/search/results-wow-classic/results-group.vue'
 import search from 'src/components/search/wow-classic.vue'
@@ -119,10 +120,14 @@ export default {
 
   storeModule,
 
-  // TODO: Add meta
   head () {
     return {
-      title: `${this.input} · NexusHub Search`
+      title: `${this.input} · NexusHub Search`,
+      meta: meta({
+        title: `${this.input} Search Results on NexusHub`,
+        description: this.results.length ? `Find ${this.results.length} matches for ${this.input}. ${this.results[0].name}` : 'No search results :(',
+        image: this.results.length ? `${this.results[0].imgUrl}` : undefined
+      })
     }
   }
 }

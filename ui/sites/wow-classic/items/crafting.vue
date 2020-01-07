@@ -64,8 +64,10 @@
 import appContent from 'src/app-content.vue'
 import craftingEntry from 'src/components/wow-classic/crafting-entry.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
+import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/crafting.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -153,8 +155,21 @@ export default {
   },
 
   head () {
+    const server = this.$store.state.servers.server
+    const serverlist = this.$store.state.servers.EU.concat(this.$store.state.servers.US)
+
+    const serverSplit = server.split('-')
+    const faction = serverSplit.pop()
+    const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
+    const serverPretty = `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
+
     return {
-      title: `${this.item.name} · NexusHub`
+      title: `${this.item.name} Crafting on ${serverPretty} · NexusHub`,
+      meta: meta({
+        title: `${this.item.name} Crafting on NexusHub`,
+        description: `${this.item.name} Crafting reagents and recipes on ${serverPretty}`,
+        image: `${this.item.imgUrl}`
+      })
     }
   },
 
