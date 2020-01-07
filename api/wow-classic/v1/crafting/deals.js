@@ -1,4 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
+const moment = require('moment')
 
 /**
  * Provides possible crafting deals (most profit)
@@ -46,11 +47,8 @@ class Deals extends Endpoint {
       })
     }
 
-    // Break down to day
-    lastScan.scannedAt.setHours(0)
-    lastScan.scannedAt.setMinutes(0)
-    lastScan.scannedAt.setSeconds(0)
-    lastScan.scannedAt.setMilliseconds(0)
+    // Break down to day (use moment because of utc)
+    const scannedAt = moment(lastScan.scannedAt).utc().hour(0).minute(0).second(0).millisecond(0).toDate()
 
     const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
 
@@ -68,7 +66,7 @@ class Deals extends Endpoint {
 
     // Query range first to make better use of index
     const itemData = await this.db.collection('scanData').aggregate([
-      { $match: { itemId: { $gte: Math.min(...queryItems), $lte: Math.max(...queryItems) }, slug, scannedAt: lastScan.scannedAt } },
+      { $match: { itemId: { $gte: Math.min(...queryItems), $lte: Math.max(...queryItems) }, slug, scannedAt } },
       { $project: { _id: 0, itemId: 1, details: { $arrayElemAt: ['$details', -1] } } },
       { $match: { itemId: { $in: queryItems } } }
     ]).toArray()

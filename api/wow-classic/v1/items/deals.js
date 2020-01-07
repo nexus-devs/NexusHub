@@ -1,4 +1,5 @@
 const Endpoint = require('cubic-api/endpoint')
+const moment = require('moment')
 
 /**
  * Provides possible good deals (minBuyout/marketValue difference)
@@ -39,14 +40,11 @@ class Deals extends Endpoint {
       })
     }
 
-    // Break down to day
-    lastScan.scannedAt.setHours(0)
-    lastScan.scannedAt.setMinutes(0)
-    lastScan.scannedAt.setSeconds(0)
-    lastScan.scannedAt.setMilliseconds(0)
+    // Break down to day (use moment because of utc)
+    const scannedAt = moment(lastScan.scannedAt).utc().hour(0).minute(0).second(0).millisecond(0).toDate()
 
     const data = await this.db.collection('scanData').aggregate([
-      { $match: { slug, scannedAt: lastScan.scannedAt } },
+      { $match: { slug, scannedAt } },
       {
         $project: {
           _id: 0,
