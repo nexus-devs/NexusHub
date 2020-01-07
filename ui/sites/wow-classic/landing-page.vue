@@ -211,7 +211,7 @@ export default {
     span {
       pointer-events: none;
       flex: 1;
-      color: $color-font-paragraph;
+      color: white;
     }
   }
   .server:hover {
