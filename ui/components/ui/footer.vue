@@ -45,8 +45,12 @@
         </div>
       </div>
       <div class="brands">
-        <a href="https://discord.gg/TCxe6P4" target="_blank"><img src="/img/footer/discord.svg" class="ico-h-32" alt="Discord"></a>
-        <a href="https://github.com/nexus-devs/nexus-stats" target="_blank"><img src="/img/footer/github.svg" class="ico-h-20 ico-github" alt="NexusHub on Github"></a>
+        <a href="https://discord.gg/TCxe6P4" target="_blank">
+          <img :src="themeName === 'wow-classic' ? '/img/footer/discord-wow-classic.svg' : '/img/footer/discord.svg'" class="ico-h-32" alt="Discord">
+        </a>
+        <a href="https://github.com/nexus-devs/nexus-stats" target="_blank">
+          <img :src="themeName === 'wow-classic' ? '/img/footer/github-wow-classic.svg' : '/img/footer/github.svg'" class="ico-h-20 ico-github" alt="NexusHub on Github">
+        </a>
       </div>
     </div>
   </footer>
@@ -67,6 +71,9 @@ export default {
   computed: {
     theme () {
       return getTheme(this)
+    },
+    themeName () {
+      return getTheme(this, true)
     }
   },
 
