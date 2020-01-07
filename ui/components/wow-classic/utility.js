@@ -99,6 +99,7 @@ export default {
     let lowerBound = Math.min(...data)
     let upperBound = Math.max(...data)
     let tickRange = (upperBound - lowerBound) / (ticks - 1)
+    if (tickRange < 1) tickRange = 1
 
     // Determine rounded tick range
     const x = Math.ceil(Math.log10(tickRange) - 1)
