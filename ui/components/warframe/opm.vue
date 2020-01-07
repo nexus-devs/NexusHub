@@ -5,7 +5,7 @@
       <h3 class="title">
         Traders right now
       </h3>
-      <tween-num :value="opm.active" :duration="1000" easing="easeInOutQuad" class="active-number" />
+      <tween-num :value="opm.active" :duration="1000" :formatter="value => parseInt(value)" easing="easeInOutQuad" class="active-number" />
       <span class="offers-per-minute">Offers per 5 minutes</span>
     </template>
     <template slot="body">
