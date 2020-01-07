@@ -17,6 +17,7 @@ if (process.env.DRONE) {
 
 async function generate () {
   const sitemap = []
+  let sitemapCounter = 0
   const Cubic = require('cubic')
 
   // eslint-disable-next-line no-new
@@ -45,6 +46,11 @@ async function generate () {
   await wowhooks.verifyServerList()
   console.log('* Verified wow-classic server list!')
 
+  // Create write stream. This is because the sitemap array runs out of memory eventually.
+  // Deletion needed because write stream doesn't overwrite anymore
+  if (fs.existsSync(`${cubic.config.ui.api.publicPath}/sitemap.txt`)) fs.unlinkSync(`${cubic.config.ui.api.publicPath}/sitemap.txt`)
+  const stream = fs.createWriteStream(`${cubic.config.ui.api.publicPath}/sitemap.txt`, { flags: 'a' })
+
   // Generate static page sitemap
   for (const endpoint of cubic.nodes.ui.api.server.http.endpoints.endpoints) {
     if (!endpoint.route.includes('/:')) {
@@ -63,6 +69,8 @@ async function generate () {
     if (item.patchlogs) sitemap.push(`https://nexushub.co${item.webUrl}/patchlogs`)
   }
 
+  sitemapCounter += writeSitemapToStream(stream, sitemap)
+
   // Generate wow-classic item and server pages
   const mongoWow = (await mongodb.connect(cubic.config.api.mongoUrl, { useNewUrlParser: true }))
     .db(cubic.config.api.overrideEndpoint['/wow-classic'].mongoDb)
@@ -74,11 +82,21 @@ async function generate () {
       sitemap.push(`https://nexushub.co/wow-classic/items/${server.slug}/${item.itemId}`)
       sitemap.push(`https://nexushub.co/wow-classic/items/${server.slug}/${item.itemId}/crafting`)
     }
+
+    sitemapCounter += writeSitemapToStream(stream, sitemap)
   }
 
   // Save to file
-  fs.writeFileSync(`${cubic.config.ui.api.publicPath}/sitemap.txt`, sitemap.join('\n'))
-  console.log(`* Saved sitemap with ${sitemap.length} entries.`)
+  console.log(`* Saved sitemap with ${sitemapCounter} entries.`)
+  stream.end()
+}
+
+// Helper function to write sitemap to stream, empty it and return the count
+function writeSitemapToStream (stream, sitemap) {
+  const count = sitemap.length
+  stream.write(`${sitemap.join('\n')}\n`)
+  sitemap.splice(0, count) // Empty array reference
+  return count
 }
 
 generate().then(() => process.exit())
