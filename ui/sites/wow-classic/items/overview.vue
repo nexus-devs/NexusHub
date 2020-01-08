@@ -142,7 +142,12 @@ export default {
 
 .row-margin {
   justify-content: flex-start;
+
+  // Beware: Hack for exploding graphs (medium screens currently broken with this)
   flex-wrap: nowrap;
+  @media (max-width: $breakpoint-s) {
+    flex-wrap: wrap;
+  }
 }
 
 .column {
