@@ -30,28 +30,26 @@
                 Possible Deals
               </h2>
               <div class="realtime">
-                <div class="most-traded row">
-                  <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
-                    <module>
-                      <template slot="header">
-                        <div class="img">
-                          <object :data="deal.icon" type="image/png">
-                            <img :src="deal.icon" :alt="deal.name">
-                          </object>
-                        </div>
-                        <h3>{{ deal.name }}</h3>
-                      </template>
-                      <template slot="body">
-                        <span class="highlight">{{ parsePrice(deal.dealDiff) }}</span>
-                        <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
-                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
-                        </span>
-                        <br>
-                        <span class="sub">cheaper than Market Value</span>
-                      </template>
-                    </module>
-                  </router-link>
-                </div>
+                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
+                  <module>
+                    <template slot="header">
+                      <div class="img">
+                        <object :data="deal.icon" type="image/png">
+                          <img :src="deal.icon" :alt="deal.name">
+                        </object>
+                      </div>
+                      <h3>{{ deal.name }}</h3>
+                    </template>
+                    <template slot="body">
+                      <span class="highlight">{{ parsePrice(deal.dealDiff) }}</span>
+                      <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
+                        <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
+                      </span>
+                      <br>
+                      <span class="sub">cheaper than Market Value</span>
+                    </template>
+                  </module>
+                </router-link>
               </div>
             </div>
             <div class="col-b-4">
@@ -59,25 +57,23 @@
                 Profitable Recipes
               </h2>
               <div class="realtime">
-                <div class="most-traded row">
-                  <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="item col interactive">
-                    <module>
-                      <template slot="header">
-                        <div class="img">
-                          <object :data="deal.icon" type="image/png">
-                            <img :src="deal.icon" :alt="deal.name">
-                          </object>
-                        </div>
-                        <h3>{{ deal.name }}</h3>
-                      </template>
-                      <template slot="body">
-                        <span class="highlight">{{ parsePrice(deal.profit) }}</span>
-                        <br>
-                        <span class="sub">Crafting Profit</span>
-                      </template>
-                    </module>
-                  </router-link>
-                </div>
+                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="item col interactive">
+                  <module>
+                    <template slot="header">
+                      <div class="img">
+                        <object :data="deal.icon" type="image/png">
+                          <img :src="deal.icon" :alt="deal.name">
+                        </object>
+                      </div>
+                      <h3>{{ deal.name }}</h3>
+                    </template>
+                    <template slot="body">
+                      <span class="highlight">{{ parsePrice(deal.profit) }}</span>
+                      <br>
+                      <span class="sub">Crafting Profit</span>
+                    </template>
+                  </module>
+                </router-link>
               </div>
             </div>
           </div>
@@ -441,33 +437,26 @@ header {
 #app {
   .realtime {
     display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
 
     @media (max-width: $breakpoint-s) {
       flex-direction: column;
-    }
-  }
-  .most-traded {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    flex-wrap: wrap;
-    // margin-left: 20px;
-    margin-right: -15px;
-    margin-bottom: -15px;
-    @media (max-width: $breakpoint-s) {
-      max-width: 100%;
     }
 
     .item {
       padding: 0;
       border-radius: 2px;
-      flex-basis: 35%;
+      flex-basis: 50%;
+      max-width: calc(50% - 7.5px);
       min-width: 0;
-      margin-right: 15px;
+      // margin-right: 15px;
       margin-bottom: 15px;
       transition-duration: 0.5s !important;
+
       @media (max-width: $breakpoint-s) {
-        flex-basis: 50%;
+        max-width: calc(100% - 5px);
       }
 
       &:hover {
@@ -509,10 +498,6 @@ header {
       .price-diff {
         color: $color-positive;
       }
-    }
-    @media (max-width: $breakpoint-s) {
-      margin-left: 0;
-      margin-top: 20px;
     }
   }
 
