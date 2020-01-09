@@ -24,13 +24,13 @@
       <!-- Market Overview -->
       <section>
         <div class="container">
-          <div class="row-margin overview">
-            <div class="col-b-4">
+          <div class="row overview">
+            <div class="col-b">
               <h2 class="sub">
                 Possible Deals
               </h2>
-              <div class="realtime">
-                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="item col interactive">
+              <div class="row-margin deals">
+                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -52,12 +52,12 @@
                 </router-link>
               </div>
             </div>
-            <div class="col-b-4">
+            <div class="col-b">
               <h2 class="sub">
                 Profitable Recipes
               </h2>
-              <div class="realtime">
-                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="item col interactive">
+              <div class="row-margin deals">
+                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -77,7 +77,6 @@
               </div>
             </div>
           </div>
-          <ad name="warframe-index-market-overview" />
         </div>
       </section>
 
@@ -436,52 +435,30 @@ header {
 }
 
 #app {
-  .realtime {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    overflow: hidden;
-
+  .deals {
     @media (max-width: $breakpoint-s) {
       flex-direction: column;
     }
 
     .item {
-      padding: 0;
-      border-radius: 2px;
-      flex-basis: 50%;
-      max-width: calc(50% - 7.5px);
       min-width: 0;
-      // margin-right: 15px;
-      margin-bottom: 15px;
+      flex-basis: 40%;
+      border-radius: 2px;
       transition-duration: 0.5s !important;
 
-      @media (max-width: $breakpoint-s) {
-        max-width: calc(100% - 5px);
-      }
-
-      &:hover {
-        @include gradient-background-dg(#3c4451, #353d49);
-      }
-      &:before {
-        border-radius: 2px;
-      }
-      /* &:nth-of-type(n + 5) {
-        display: none;
-      } */
       /deep/ .header {
         padding: 20px 20px 0;
-        max-width: 100%;
+        overflow: hidden;
         white-space: nowrap;
         h3 {
-          max-width: calc(100% - 40px);
+          max-width: calc(100% - 42px);
+          white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
       }
       /deep/ .body {
         padding: 0 25px 5px;
-        margin-top: 20px;
 
         .highlight {
           font-size: 1.3em;
