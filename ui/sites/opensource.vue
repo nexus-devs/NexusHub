@@ -43,7 +43,7 @@
                   <h3>NexusHub</h3>
                 </template>
                 <template slot="body">
-                  <p>Economy Analytics and Game Data for Warframe.</p>
+                  <p>Economy Analytics and Game Data for Warframe and WoW Classic.</p>
                 </template>
               </module>
             </a>
@@ -96,7 +96,18 @@
               </module>
             </a>
 
-            <div class="col-b" />
+            <a href="https://github.com/nakroma/wow-classic-items" target="_blank" class="col-b">
+              <module class="interactive">
+                <template slot="header">
+                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="wow-classic-items">
+                  <h3>wow-classic-items</h3>
+                </template>
+                <template slot="body">
+                  <p>Collection of data for every item in World of Warcraft: Classic.</p>
+                </template>
+              </module>
+            </a>
+
             <div class="col-b" />
             <div class="col-b" />
           </div>
