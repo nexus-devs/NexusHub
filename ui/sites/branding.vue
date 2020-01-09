@@ -154,6 +154,51 @@
               </div>
             </div>
           </div>
+
+          <section>
+            <h2>World of Warcraft Classic Colors</h2>
+            <p>
+              These are the colors our WoW Classic section uses.
+            </p>
+            <div class="row-margin">
+              <div class="col-b color">
+                <div class="primary-shade yellow">
+                  <span />
+                  <span>#e6ad02</span>
+                </div>
+                <div class="sub-shade yellow-shade">
+                  <span>#e0b534</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade blizzard-blue">
+                  <span />
+                  <span>#00c0ff</span>
+                </div>
+                <div class="sub-shade blizzard-blue-shade">
+                  <span>#23acd9</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade brown">
+                  <span />
+                  <span>#a59787</span>
+                </div>
+                <div class="sub-shade brown-shade">
+                  <span>#3b332d</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade dark-brown">
+                  <span />
+                  <span>#252120</span>
+                </div>
+                <div class="sub-shade dark-brown-shade">
+                  <span>#151310</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
       </div>
     </app-content>
@@ -300,6 +345,30 @@ header {
     }
     .dark-shade {
       background: $color-bg-darker;
+    }
+    .yellow {
+      background: #e6ad02;
+    }
+    .yellow-shade {
+      background: #e0b534;
+    }
+    .blizzard-blue {
+      background: #00c0ff;
+    }
+    .blizzard-blue-shade {
+      background: #23acd9;
+    }
+    .brown {
+      background: #a59787;
+    }
+    .brown-shade {
+      background: #3b332d;
+    }
+    .dark-brown {
+      background: #252120;
+    }
+    .dark-brown-shade {
+      background: #151310;
     }
   }
 }
