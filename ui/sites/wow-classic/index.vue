@@ -89,7 +89,7 @@
           <div class="row-margin patchlogs">
             <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b" />
           </div>
-          <ad name="warframe-index-patchlogs" />
+          <ad name="wow-classic-index-news" :max-width="'100%'" />
         </div>
       </section>
     </app-content>
