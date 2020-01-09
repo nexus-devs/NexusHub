@@ -171,7 +171,7 @@ export default {
       this.example = undefined
 
       if (group && groups) {
-        return groups.find(g => g.name === group.replace(/\-/g, ' / '))
+        return groups.find(g => g.name.replace(/\-/g, ' / ') === group.replace(/\-/g, ' / '))
           .endpoints.find(e => e.name === name)
       }
       return {}
