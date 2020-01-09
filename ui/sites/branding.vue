@@ -26,17 +26,10 @@
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexushub-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexushub-logo-typeface-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-bw.png" download>.png</a>
-              </div>
-            </div>
-            <div class="col logo">
-              <img src="/img/brand/nexushub-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
-              <div class="logo-download">
-                <a href="/img/brand/nexushub-logo-typeface-b.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-b.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-wow-classic.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-color.png" download>.png</a>
               </div>
             </div>
           </div>
@@ -55,6 +48,38 @@
                 <a href="/img/brand/nexushub-logo-typeface-v-color.png" download>.png</a>
               </div>
             </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexushub-logo-color.svg" alt="Full Color NexusHub WoW Classic Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-color.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-color.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexushub-logo-typeface-v-color.svg" alt="Full Color NexusHub WoW Classic Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-v-color.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-color.png" download>.png</a>
+              </div>
+            </div>
+          </div>
+          <div class="row-margin">
+            <div class="col logo">
+              <img src="/img/brand/nexushub-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo">
+              <img src="/img/brand/nexushub-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-b.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-b.png" download>.png</a>
+              </div>
+            </div>
+          </div>
+          <div class="row row-margin">
             <div class="col logo-alt">
               <img src="/img/brand/nexushub-logo-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
@@ -187,6 +212,10 @@ header {
 
 .row-margin {
   margin: -5px;
+
+  &:nth-of-type(3) {
+    margin-top: 20px;
+  }
 
   .col, .col-b {
     margin: 5px;
