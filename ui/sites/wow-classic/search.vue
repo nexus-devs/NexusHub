@@ -126,7 +126,7 @@ export default {
       meta: meta({
         title: `${this.input} Search Results on NexusHub`,
         description: this.results.length ? `Find ${this.results.length} matches for ${this.input}. ${this.results[0].name}` : 'No search results :(',
-        image: this.results.length ? `${this.results[0].imgUrl}` : undefined
+        image: this.results.length ? `${this.results[0].imgUrl}` : 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
       })
     }
   }

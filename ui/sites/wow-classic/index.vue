@@ -175,7 +175,8 @@ export default {
     title: 'NexusHub · All WoW Classic Auction House data in one place!',
     meta: meta({
       title: 'NexusHub · All WoW Classic Auction House data in one place!',
-      description: 'Get up-to-date data and prices from all World of Warcraft: Classic servers and auction houses!'
+      description: 'Get up-to-date data and prices from all World of Warcraft: Classic servers and auction houses!',
+      image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
   }
 }
