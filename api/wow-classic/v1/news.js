@@ -11,7 +11,15 @@ class News extends Endpoint {
       description: 'Number of Wowhead news to return per chunk. Setting this to 0 will return everything up to the end.',
       default: 4
     }]
-    this.schema.response = []
+    this.schema.response = [{
+      title: String,
+      link: String,
+      pubDate: String,
+      content: String,
+      guid: String,
+      categories: String,
+      isoDate: String
+    }]
   }
 
   async main (req, res) {

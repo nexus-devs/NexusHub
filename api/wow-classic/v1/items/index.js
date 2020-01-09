@@ -26,7 +26,6 @@ class Items extends Endpoint {
         previous: Object
       }
     }
-    this.schema.response = {}
   }
 
   /**

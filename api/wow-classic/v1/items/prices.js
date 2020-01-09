@@ -32,7 +32,6 @@ class Prices extends Endpoint {
         scannedAt: String
       }]
     }
-    this.schema.response = {}
   }
 
   /**

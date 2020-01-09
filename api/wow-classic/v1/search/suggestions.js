@@ -26,7 +26,6 @@ class Search extends Endpoint {
       name: String,
       imgUrl: String
     }]
-    this.schema.response = [Object]
   }
 
   /**
