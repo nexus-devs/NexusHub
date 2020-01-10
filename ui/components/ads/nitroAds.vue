@@ -23,7 +23,7 @@ export default {
     const nitroAds = window.nitroAds
     if (!nitroAds) return
 
-    this.display = 'inline-block'
+    this.display = 'block'
     nitroAds.createAd(`ad-${this.name}`, {
       floor: 0.05,
       refreshLimit: 10,
