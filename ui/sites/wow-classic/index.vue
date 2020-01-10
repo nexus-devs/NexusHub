@@ -458,6 +458,7 @@ header {
         }
       }
       /deep/ .body {
+        height: auto; // Needed for Safari and Samsung Browser
         padding: 0 25px 5px;
 
         .highlight {

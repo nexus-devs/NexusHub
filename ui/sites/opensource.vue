@@ -272,6 +272,10 @@ section:first-of-type {
     flex-direction: column;
   }
 
+  .body {
+    height: auto; // Needed for Safari and Samsung Browser
+  }
+
   h3 {
     margin-top: 10px;
     font-size: 1em !important;
