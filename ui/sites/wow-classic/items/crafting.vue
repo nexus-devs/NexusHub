@@ -39,13 +39,13 @@
             <div class="col amount">
               Amount
             </div>
-            <div class="col interactive quantity">
+            <div class="col quantity">
               Market Value
             </div>
-            <div class="col interactive price">
+            <div class="col price">
               Profit
             </div>
-            <div class="col interactive whitespace" />
+            <div class="col whitespace" />
           </div>
           <transition-group>
             <div v-for="(entry, i) in craftingFiltered[type]" :key="entry.itemId + '-' + i">

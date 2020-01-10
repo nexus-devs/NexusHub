@@ -18,6 +18,7 @@
       <div class="col price">
         <img v-if="crafting.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
         <span v-if="crafting.marketValue">{{ parsePrice(crafting.marketValue) }}</span>
+        <span v-else class="unavailable">Unavailable</span>
         <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
       </div>
       <div class="col profit">
@@ -48,6 +49,7 @@
         <div class="col price reagent">
           <img v-if="reagent.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
           <span v-if="reagent.marketValue">{{ parsePrice(reagent.marketValue) }}</span>
+          <span v-else class="unavailable">Unavailable</span>
           <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
         </div>
         <div class="col whitespace" />
@@ -276,6 +278,10 @@ span.negative {
     img {
       display: none;
     }
+  }
+
+  .unavailable {
+    color: $color-font-body;
   }
 }
 .price.reagent {
