@@ -14,6 +14,7 @@
             </div>
             <stats v-if="item.stats.current" class="col-b" />
           </div>
+          <ad name="wow-classic-item-overview-main" />
         </div>
       </section>
       <section v-if="displayGraphs">
@@ -29,6 +30,7 @@
             <heatmap-value class="col-b graph" />
             <heatmap-quantity class="col-b graph" />
           </div>
+          <ad name="wow-classic-item-overview-statistics" />
         </div>
       </section>
     </app-content>
@@ -38,6 +40,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
 import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
@@ -53,6 +56,7 @@ import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
+    ad,
     appContent,
     navigation,
     itemHeader,

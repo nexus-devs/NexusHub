@@ -52,6 +52,7 @@
               <crafting-entry :crafting="entry" :cid="entry.itemId + '-' + i" />
             </div>
           </transition-group>
+          <ad name="wow-classic-item-crafting-main" />
         </div>
       </section>
     </app-content>
@@ -61,6 +62,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import craftingEntry from 'src/components/wow-classic/crafting-entry.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
@@ -71,6 +73,7 @@ import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
+    ad,
     appContent,
     craftingEntry,
     navigation,

@@ -77,6 +77,7 @@
               </div>
             </div>
           </div>
+          <ad name="wow-classic-index-overview" />
         </div>
       </section>
 
@@ -89,7 +90,7 @@
           <div class="row-margin patchlogs">
             <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b" />
           </div>
-          <ad name="wow-classic-index-news" :max-width="'100%'" />
+          <ad name="wow-classic-index-news" />
         </div>
       </section>
     </app-content>
