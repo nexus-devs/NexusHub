@@ -148,7 +148,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
 
-    @media (max-width: $breakpoint-s) {
+    @media (max-width: $breakpoint-m) {
       span:not(:first-child):not(:last-child) {
         display: none;
       }

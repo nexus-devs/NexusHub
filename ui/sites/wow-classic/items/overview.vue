@@ -8,7 +8,7 @@
           <h2 class="sub">
             Item Overview
           </h2>
-          <div class="row-margin main">
+          <div class="row-margin">
             <div class="col-b column">
               <description />
             </div>
@@ -21,11 +21,11 @@
           <h2 class="sub">
             Statistics
           </h2>
-          <div class="row-margin main">
+          <div class="row-margin">
             <graph-value-quantity class="col-b graph" />
             <graph-value-comparison class="col-b graph" />
           </div>
-          <div class="row-margin main">
+          <div class="row-margin">
             <heatmap-value class="col-b graph" />
             <heatmap-quantity class="col-b graph" />
           </div>
@@ -171,6 +171,7 @@ export default {
 .graph {
   max-width: 100%;
   min-height: 300px;
+  flex-basis: 60%;
 }
 
 .btn-subtle {
