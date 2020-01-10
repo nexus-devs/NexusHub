@@ -25,12 +25,7 @@ class Prices extends Endpoint {
       slug: String,
       itemId: Number,
       timerange: Number,
-      data: [{
-        marketValue: Number,
-        minBuyout: Number,
-        quantity: Number,
-        scannedAt: String
-      }]
+      data: [Object]
     }
   }
 

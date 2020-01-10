@@ -17,7 +17,7 @@ class News extends Endpoint {
       pubDate: String,
       content: String,
       guid: String,
-      categories: String,
+      categories: [String],
       isoDate: String
     }]
   }

@@ -23,7 +23,7 @@ class Crafting extends Endpoint {
     this.schema.response = {
       itemId: Number,
       slug: String,
-      createdBy: [craftingObj],
+      createdBy: [Object],
       reagentFor: [{
         itemId: Number,
         name: String,
