@@ -5,10 +5,18 @@
       <h3>Description</h3>
     </template>
     <template slot="body">
-      <label v-for="(entry, i) in tooltip" :key="`${i}${entry.label}`" :class="entry.format ? 'format-' + entry.format.toLowerCase() : ''">
-        <p v-if="entry.format !== 'alignRight' && entry.preformat !== 'alignRight'">{{ entry.label }}</p>
-        <span v-else :class="{ 'align-right': entry.format === 'alignRight' }">{{ entry.label }}</span>
-      </label>
+      <template v-for="(entry, i) in tooltip">
+        <p v-if="entry.format !== 'alignRight' && entry.preformat !== 'alignRight'" :key="`${i}${entry.label}`"
+           :class="[entry.format ? 'format-' + entry.format.toLowerCase() : '', !entry.space ? 'tooltip-label' : '']"
+        >
+          {{ entry.label }}
+        </p>
+        <span v-else :key="`${i}${entry.label}`"
+              :class="[entry.format ? 'format-' + entry.format.toLowerCase() : '', !entry.space ? 'tooltip-label' : '']"
+        >
+          {{ entry.label }}
+        </span>
+      </template>
     </template>
     <template slot="footer">
       <a v-if="wowheadUrl" :href="wowheadUrl" target="_blank">
@@ -41,8 +49,21 @@ export default {
       const tooltip = this.item.tooltip.slice(1) // Remove item name
 
       for (let i = 0; i < tooltip.length; i++) {
+        // Add correct formatting
+        tooltip[i].label = tooltip[i].label.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+
         if (tooltip[i].format === 'alignRight' && i > 0) tooltip[i - 1].preformat = 'alignRight'
-        if (tooltip[i].label === 'Sell Price:') tooltip[i].label += ' ' + this.parsePrice(this.item.sellPrice)
+
+        if (tooltip[i].label === 'Sell Price:') {
+          tooltip[i].label += ' ' + this.parsePrice(this.item.sellPrice)
+          if (i < tooltip.length - 1) tooltip[i + 1].space = true // Assign space after sell price
+        }
+
+        // Assign spaces before and after indention
+        if (tooltip[i].format === 'indent') {
+          if (i > 0 && tooltip[i - 1].format !== 'indent') tooltip[i - 1].space = true
+          if (i < tooltip.length - 1 && tooltip[i + 1].format !== 'indent') tooltip[i + 1].space = true
+        }
       }
 
       return tooltip
@@ -60,43 +81,41 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
 
-.align-right {
+// Add space to every <left --- right> span after the first one
+span:not(:first-of-type):nth-of-type(odd) {
+  &:before {
+    content: ' ';
+    display: block;
+  }
+}
+.tooltip-label {
+  margin: 0;
+  padding: 0;
+}
+
+.format-alignright {
   float: right;
 }
 .format-indent {
   text-indent: 10px;
-  p, span {
-    color: $color-bg-lighter !important;
-  }
+  color: $color-bg-lighter !important;
 }
 .format-misc {
-  p, span {
-    color: $color-primary-subtle !important;
-  }
+  color: $color-primary-subtle !important;
 }
 .format-poor {
-  p, span {
-    color: $color-bg-lighter !important;
-  }
+  color: $color-bg-lighter !important;
 }
 .format-uncommon {
-  p, span {
-    color: $color-positive !important;
-  }
+  color: $color-positive !important;
 }
 .format-rare {
-  p, span {
-    color: $color-accent !important;
-  }
+  color: $color-accent !important;
 }
 .format-epic {
-  p, span {
-    color: #bc59ff !important;
-  }
+  color: #bc59ff !important;
 }
 .format-legendary {
-  p, span {
-    color: $color-primary !important;
-  }
+  color: $color-primary !important;
 }
 </style>
