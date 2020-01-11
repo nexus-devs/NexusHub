@@ -17,6 +17,10 @@ class Items extends Endpoint {
       requiredLevel: Number,
       itemLevel: Number,
       sellPrice: Number,
+      itemLink: String,
+      tooltip: [{
+        label: String
+      }],
       stats: {
         current: {
           marketValue: Number,
@@ -59,6 +63,8 @@ class Items extends Endpoint {
       requiredLevel: item.requiredLevel,
       itemLevel: item.itemLevel,
       sellPrice: item.sellPrice,
+      tooltip: item.tooltip,
+      itemLink: item.itemLink,
       stats: {
         current: statData[0] || null,
         previous: statData[1] || null
