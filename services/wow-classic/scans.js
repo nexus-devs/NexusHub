@@ -56,6 +56,7 @@ async function monitor () {
           }
           console.log('Inserting current data...')
           await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
+
           console.log('...done\n')
         }
       }

@@ -36,6 +36,15 @@ class Hook {
     await verify(db, 'items', {
       itemId: 1
     })
+    await verify(db, 'items', {
+      'createdBy.reagents.itemId': 1
+    })
+
+    // Current Data
+    await verify(db, 'currentData', {
+      itemId: 1,
+      slug: 1
+    })
 
     await db.close()
   }
