@@ -47,12 +47,14 @@ class Items extends Endpoint {
       })
     }
 
-    const stats = await this.db.collection('scanData').find({ slug, itemId }).sort({ scannedAt: -1 }).limit(2).toArray()
-
-    // If one day doesn't have enough data, add last scan from the day before
-    if (stats[0] && stats[1] && stats[0].details.length < 2) stats[0].details.unshift(stats[1].details[stats[1].details.length - 1])
-
-    const statData = stats[0] ? stats[0].details.reverse().slice(0, 2).map(({ scannedAt, ...props }) => props) : []
+    const stats = await this.db.collection('currentData').findOne({ itemId, slug })
+    const previous = stats ? stats.previous : null
+    if (stats) {
+      delete stats.previous
+      delete stats._id
+      delete stats.itemId
+      delete stats.slug
+    }
 
     const response = {
       server: slug,
@@ -66,8 +68,8 @@ class Items extends Endpoint {
       tooltip: item.tooltip,
       itemLink: item.itemLink,
       stats: {
-        current: statData[0] || null,
-        previous: statData[1] || null
+        current: stats || null,
+        previous
       }
     }
 
