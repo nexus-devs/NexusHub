@@ -1,5 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const moment = require('moment')
 
 /**
  * Provides possible good deals (minBuyout/marketValue difference)
@@ -32,31 +31,15 @@ class Deals extends Endpoint {
     const slug = req.params.slug
     const limit = req.query.limit
 
-    const lastScan = await this.db.collection('scans').findOne({ slug }, { sort: { scannedAt: -1 } })
-    if (!lastScan) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
-      })
-    }
-
-    // Break down to day (use moment because of utc)
-    const scannedAt = moment(lastScan.scannedAt).utc().hour(0).minute(0).second(0).millisecond(0).toDate()
-
-    const data = await this.db.collection('scanData').aggregate([
-      { $match: { slug, scannedAt } },
+    const data = await this.db.collection('currentData').aggregate([
+      { $match: { slug, minBuyout: { $gt: 0 } } },
       {
         $project: {
           _id: 0,
           itemId: 1,
-          marketValue: { $let: { vars: { lastElem: { $arrayElemAt: ['$details', -1] } }, in: '$$lastElem.marketValue' } },
-          minBuyout: { $let: { vars: { lastElem: { $arrayElemAt: ['$details', -1] } }, in: '$$lastElem.minBuyout' } },
-          dealDiff: {
-            $let: {
-              vars: { lastElem: { $arrayElemAt: ['$details', -1] } },
-              in: { $subtract: ['$$lastElem.marketValue', '$$lastElem.minBuyout'] }
-            }
-          }
+          marketValue: 1,
+          minBuyout: 1,
+          dealDiff: { $subtract: ['$marketValue', '$minBuyout'] }
         }
       },
       { $sort: { dealDiff: -1 } },
