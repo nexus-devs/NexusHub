@@ -78,16 +78,9 @@ class Crafting extends Endpoint {
       itemId: { $in: Object.keys(itemStorage).filter((key) => !Object.keys(itemStorage[key]).length).map((v) => parseInt(v)) }
     }).toArray())
     for (const i of Object.keys(itemStorage).map((v) => parseInt(v))) {
-      parallel.push(this.db.collection('scanData').findOne({ itemId: i, slug }, { sort: { scannedAt: -1 } }))
+      parallel.push(this.db.collection('currentData').findOne({ itemId: i, slug }))
     }
     const [metaData, ...priceData] = await Promise.all(parallel)
-
-    // Convert price data
-    for (const priceEntry of priceData) {
-      if (!priceEntry) continue
-      const newest = priceEntry.details[priceEntry.details.length - 1]
-      priceEntry.marketValue = newest.marketValue
-    }
 
     // Merge missing data
     for (const i of Object.keys(itemStorage).map((v) => parseInt(v))) {
