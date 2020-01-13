@@ -23,7 +23,7 @@ class Current extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.slug
+    const slug = req.body.slug
 
     const TSMReq = new TSMRequest()
     const query = { slug }

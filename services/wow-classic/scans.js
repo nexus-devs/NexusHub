@@ -54,7 +54,9 @@ async function monitor () {
             // Await to avoid overloading the TSM servers
             await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
           }
-          console.log('   ...done')
+          console.log('Inserting current data...')
+          await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
+          console.log('...done\n')
         }
       }
     }
