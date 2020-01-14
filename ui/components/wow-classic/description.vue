@@ -46,7 +46,8 @@ export default {
       return `https://classic.wowhead.com/item=${this.item.itemId}`
     },
     tooltip () {
-      const tooltip = this.item.tooltip.slice(1) // Remove item name
+      // Remove item name and drop chance labels
+      const tooltip = this.item.tooltip.slice(1).filter((t) => !t.label.includes('Dropped by:') && !t.label.includes('Drop Chance:'))
 
       for (let i = 0; i < tooltip.length; i++) {
         // Add correct formatting
