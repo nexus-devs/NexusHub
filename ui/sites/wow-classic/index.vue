@@ -318,13 +318,15 @@ header {
       justify-content: flex-end;
 
       .logo {
-        height: 15px;
+        position: relative;
+        top: -1px;
+        height: 16px;
         margin-left: 3px;
       }
       span {
         @include uppercase();
-        font-size: 0.8em;
-        line-height: 15px;
+        font-size: 0.875em;
+        line-height: 14px;
         color: white;
         font-family: 'Circular';
       }
@@ -352,6 +354,7 @@ header {
     .tsm-logo {
       top: -3px !important;
       .logo {
+        top: 0 !important;
         height: 13px !important;
       }
       span {
