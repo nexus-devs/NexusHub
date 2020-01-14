@@ -30,7 +30,7 @@ class Servers extends Endpoint {
       groupedServers[server.region].push(server.name.split('-')[0])
     }
 
-    this.cache(groupedServers, 60)
+    this.cache(groupedServers, 60 * 60)
     res.send(groupedServers)
   }
 }

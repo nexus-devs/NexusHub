@@ -114,12 +114,14 @@ class Crafting extends Endpoint {
       }))
     }
 
-    return res.send({
+    const response = {
       itemId: item,
       slug,
       createdBy: createdBy.map(applyData()),
       reagentFor: [].concat(...reagentFor.map(applyReagentFor))
-    })
+    }
+    this.cache(response, 60 * 60)
+    return res.send(response)
   }
 }
 

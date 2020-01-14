@@ -21,12 +21,15 @@ class Professions extends Endpoint {
   async main (req, res) {
     const professions = await this.db.collection('professions').find({}).project({ _id: 0 }).toArray()
     if (!professions.length) {
-      return res.send({
+      const response = {
         error: 'Not found.',
         reason: 'Professions could not be fetched.'
-      })
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
     }
 
+    this.cache(professions, 60 * 60)
     return res.send(professions)
   }
 }

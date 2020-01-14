@@ -91,7 +91,9 @@ class Deals extends Endpoint {
 
     deals.sort((a, b) => b.profit - a.profit)
 
-    return res.send(deals.slice(0, limit))
+    const response = deals.slice(0, limit)
+    this.cache(response, 60)
+    return res.send(response)
   }
 }
 

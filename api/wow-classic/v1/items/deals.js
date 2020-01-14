@@ -46,6 +46,7 @@ class Deals extends Endpoint {
       { $limit: limit }
     ]).toArray()
 
+    this.cache(data, 60)
     return res.send(data)
   }
 }

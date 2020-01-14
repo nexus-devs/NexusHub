@@ -35,6 +35,7 @@ class News extends Endpoint {
       delete f.contentSnippet
     }
 
+    this.cache(feed, 60)
     res.send(feed)
   }
 }

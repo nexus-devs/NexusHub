@@ -58,8 +58,9 @@ class Prices extends Endpoint {
       }
     }
 
-    // TODO: Cache this
-    return res.send({ slug, itemId, timerange, data })
+    const response = { slug, itemId, timerange, data }
+    this.cache(response, 60)
+    return res.send(response)
   }
 }
 

@@ -22,14 +22,16 @@ class ScansLast extends Endpoint {
     const slug = req.params.slug
     const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
 
-    if (scan) res.send(scan)
+    if (scan) {
+      this.cache(scan, 60)
+      res.send(scan)
+    }
     else {
       const response = {
         error: 'Not found.',
         reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
       }
-      // this.cache(response, 60) TODO: Uncomment this
-      // res.status(404).send(response)
+      this.cache(response, 60)
       res.send(response)
     }
   }

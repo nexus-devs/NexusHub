@@ -41,10 +41,12 @@ class Items extends Endpoint {
 
     const item = await this.db.collection('items').findOne({ itemId })
     if (!item) {
-      return res.send({
+      const response = {
         error: 'Not found.',
         reason: `Item with ID ${itemId} could not be found.`
-      })
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
     }
 
     const stats = await this.db.collection('currentData').findOne({ itemId, slug })
@@ -73,6 +75,7 @@ class Items extends Endpoint {
       }
     }
 
+    this.cache(response, 60)
     return res.send(response)
   }
 }
