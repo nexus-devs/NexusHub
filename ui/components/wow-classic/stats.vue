@@ -35,13 +35,16 @@
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
-        <div class="col-2">
+        <div v-if="stats.current.minBuyout > 0" class="col-2">
           <span class="data-price">
             {{ parsePrice(stats.current.minBuyout) }}
           </span>
           <span :class="{ negative: diff.minBuyout < 0, neutral: diff.minBuyout === 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
+        </div>
+        <div v-else class="col-2">
+          <span class="data-price neutral">Unavailable</span>
         </div>
       </div>
       <div class="item-data row">
