@@ -1,5 +1,4 @@
 const Endpoint = require('cubic-api/endpoint')
-const moment = require('moment')
 
 /**
  * Provides possible crafting deals (most profit)
@@ -46,9 +45,6 @@ class Deals extends Endpoint {
         reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
       })
     }
-
-    // Break down to day (use moment because of utc)
-    const scannedAt = moment(lastScan.scannedAt).utc().hour(0).minute(0).second(0).millisecond(0).toDate()
 
     const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
 
