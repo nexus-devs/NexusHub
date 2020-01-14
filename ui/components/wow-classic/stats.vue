@@ -13,8 +13,21 @@
           <span class="data-price">
             {{ parsePrice(stats.current.marketValue) }}
           </span>
-          <span :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
+          <span :class="{ negative: diff.marketValue < 0, neutral: diff.marketValue === 0 }" class="data-price-diff">
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
+          </span>
+        </div>
+      </div>
+      <div class="item-data row">
+        <div class="col">
+          <span>Historical Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ parsePrice(stats.current.historicalValue) }}
+          </span>
+          <span :class="{ negative: diff.historicalValue < 0, neutral: diff.historicalValue === 0 }" class="data-price-diff">
+            <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
           </span>
         </div>
       </div>
@@ -26,7 +39,7 @@
           <span class="data-price">
             {{ parsePrice(stats.current.minBuyout) }}
           </span>
-          <span :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
+          <span :class="{ negative: diff.minBuyout < 0, neutral: diff.minBuyout === 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
         </div>
@@ -39,7 +52,7 @@
           <span class="data-price">
             {{ stats.current.quantity }}
           </span>
-          <span :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
+          <span :class="{ negative: diff.quantity < 0, neutral: diff.quantity === 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
         </div>
@@ -70,13 +83,15 @@ export default {
     },
     diff () {
       const percentage = (property) => {
+        if (!this.stats.previous || !this.stats.previous[property]) return 0
         const value = this.stats.current[property] - this.stats.previous[property]
         return (value / this.stats.previous[property] * 100).toFixed(2)
       }
       return {
         marketValue: percentage('marketValue'),
         minBuyout: percentage('minBuyout'),
-        quantity: percentage('quantity')
+        quantity: percentage('quantity'),
+        historicalValue: percentage('historicalValue')
       }
     }
   },
@@ -118,6 +133,9 @@ export default {
   img {
     padding: 3.5px;
     margin-right: 2px;
+  }
+  span.neutral {
+    color: $color-font-body;
   }
   span.negative {
     color: $color-error;
