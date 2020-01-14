@@ -36,17 +36,17 @@ export default {
     fill: $color-font-body;
   }
 
-  &.negative {
+  &:global(.negative) {
     path {
       fill: $color-error;
     }
   }
-  &.positive {
+  &:global(.positive) {
     path {
       fill: $color-primary-subtle;
     }
   }
-  &.reverse {
+  &:global(.reverse) {
     &.negative {
       path {
         fill: $color-primary-subtle;
@@ -69,20 +69,20 @@ export default {
     fill: $color-font-body;
   }
 
-  &.negative {
+  &:global(.negative) {
     path {
       fill: $color-error;
     }
   }
-  &.positive {
+  &:global(.positive) {
     path {
-      fill: $color-primary-subtle;
+      fill: $color-positive;
     }
   }
-  &.reverse {
+  &:global(.reverse) {
     &.negative {
       path {
-        fill: $color-primary-subtle;
+        fill: $color-positive;
       }
     }
     &.positive {

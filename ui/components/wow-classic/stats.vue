@@ -94,7 +94,7 @@ export default {
       const percentage = (property) => {
         if (!this.stats.previous || !this.stats.previous[property]) return 0
         const value = this.stats.current[property] - this.stats.previous[property]
-        return (value / this.stats.previous[property] * 100).toFixed(2)
+        return Math.round((value / this.stats.previous[property] * 100) * 1e2) / 1e2 // Round to 2 digits
       }
       return {
         marketValue: percentage('marketValue'),
