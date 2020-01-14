@@ -17,7 +17,6 @@
             </div>
           </div>
         </div>
-        <ad name="warframe-serp-filter" />
       </div>
       <div ref="filters" :class="{ expanded: filtersExpanded }" class="search-filters-options">
         <div class="container">
@@ -33,7 +32,7 @@
           </div>
           <results-group :type="'items'" />
         </div>
-        <ad name="warframe-serp-results" />
+        <ad name="wow-classic-serp-results" />
       </section>
     </app-content>
   </div>
