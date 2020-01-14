@@ -46,13 +46,6 @@ class Deals extends Endpoint {
       { $limit: limit }
     ]).toArray()
 
-    if (!data.length) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Deals for ${slug} could not be found. Either there are no recent entries for that realm, or that realm doesn't exist.`
-      })
-    }
-
     return res.send(data)
   }
 }

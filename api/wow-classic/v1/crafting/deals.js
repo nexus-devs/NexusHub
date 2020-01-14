@@ -56,12 +56,6 @@ class Deals extends Endpoint {
     const itemData = await this.db.collection('currentData').aggregate([
       { $match: { itemId: { $in: queryItems }, slug } }
     ]).toArray()
-    if (!itemData.length) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Profitable crafting deals for ${slug} could not be found. Either there are no recent entries for that realm, or that realm doesn't exist.`
-      })
-    }
 
     const deals = []
     for (const item of items) {
