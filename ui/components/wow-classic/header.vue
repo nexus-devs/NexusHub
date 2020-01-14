@@ -169,6 +169,11 @@ header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @media (max-width: $breakpoint-s) {
+      margin-top: 10px;
+      font-size: 1.8em;
+    }
   }
   span {
     position: relative;
