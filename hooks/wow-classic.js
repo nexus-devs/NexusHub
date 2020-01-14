@@ -20,10 +20,6 @@ class Hook {
       slug: 1,
       scannedAt: -1
     })
-    await verify(db, 'scanData', { // Deals
-      slug: 1,
-      scannedAt: -1
-    })
 
     // Region Data
     await verify(db, 'regionData', {
