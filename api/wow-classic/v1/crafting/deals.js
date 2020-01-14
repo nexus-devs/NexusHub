@@ -65,10 +65,8 @@ class Deals extends Endpoint {
     queryItems = [...new Set(queryItems)]
 
     // Query range first to make better use of index
-    const itemData = await this.db.collection('scanData').aggregate([
-      { $match: { itemId: { $gte: Math.min(...queryItems), $lte: Math.max(...queryItems) }, slug, scannedAt } },
-      { $project: { _id: 0, itemId: 1, details: { $arrayElemAt: ['$details', -1] } } },
-      { $match: { itemId: { $in: queryItems } } }
+    const itemData = await this.db.collection('currentData').aggregate([
+      { $match: { itemId: { $in: queryItems }, slug } }
     ]).toArray()
     if (!itemData.length) {
       return res.status(404).send({
@@ -88,7 +86,7 @@ class Deals extends Endpoint {
 
         for (const reagent of createdBy.reagents) {
           const reagentData = itemData.find((i) => i.itemId === reagent.itemId)
-          if (reagentData) createdByCosts += reagentData.details.marketValue * reagent.amount
+          if (reagentData) createdByCosts += reagentData.marketValue * reagent.amount
           else {
             allReagentsExist = false
             break
@@ -96,7 +94,7 @@ class Deals extends Endpoint {
         }
         if (!allReagentsExist) continue
 
-        const itemProfit = itemDetails.details.marketValue * ((createdBy.amount[0] + createdBy.amount[1]) / 2)
+        const itemProfit = itemDetails.marketValue * ((createdBy.amount[0] + createdBy.amount[1]) / 2)
         deals.push({
           itemId: item.itemId,
           name: item.name,
