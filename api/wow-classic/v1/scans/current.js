@@ -38,7 +38,7 @@ class Current extends Endpoint {
     }
 
     parallel = []
-    parallel.push(this.db.collection('currentData').deleteMany(query))
+    parallel.push(this.db.collection('currentData').deleteMany({ ...query, _id: { $in: oldData.map((i) => i._id) } }))
     parallel.push(this.db.collection('currentData').insertMany(stats.data.map((i) => {
       const previousItem = oldData.find((pI) => pI.itemId === i.item)
       if (previousItem) {
