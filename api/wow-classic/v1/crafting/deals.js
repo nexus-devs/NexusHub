@@ -38,14 +38,6 @@ class Deals extends Endpoint {
     const slug = req.params.slug
     const limit = req.query.limit
 
-    const lastScan = await this.db.collection('scans').findOne({ slug }, { sort: { scannedAt: -1 } })
-    if (!lastScan) {
-      return res.status(404).send({
-        error: 'Not found.',
-        reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
-      })
-    }
-
     const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
 
     // Get all item ids
