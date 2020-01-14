@@ -2,15 +2,15 @@
   <div class="order" @click="active ? null : select()">
     <!-- Order listing -->
     <div class="row">
-      <div class="image-wrapper">
+      <router-link :to="`/wow-classic/items/${server}/${crafting.itemId}`" class="image-wrapper">
         <img :src="crafting.icon" :alt="crafting.name">
         <img :src="crafting.icon" :alt="crafting.name" class="blur">
-      </div>
-      <div class="item col">
+      </router-link>
+      <router-link :to="`/wow-classic/items/${server}/${crafting.itemId}`" class="item col">
         <span class="component">{{ crafting.name }}</span>
         <br>
         <span>{{ crafting.category }} ({{ crafting.requiredSkill }})</span>
-      </div>
+      </router-link>
       <div class="col amount">
         <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
         {{ amountPretty }}x
@@ -35,13 +35,13 @@
     <!-- Reagents -->
     <div :class="{ active }" class="selection">
       <div v-for="(reagent) in crafting.reagents" :key="reagent.itemId" class="row">
-        <div class="image-wrapper">
+        <router-link :to="`/wow-classic/items/${server}/${reagent.itemId}`" class="image-wrapper">
           <img :src="reagent.icon" :alt="reagent.name">
           <img :src="reagent.icon" :alt="reagent.name" class="blur">
-        </div>
-        <div class="item col reagent">
+        </router-link>
+        <router-link :to="`/wow-classic/items/${server}/${reagent.itemId}`" class="item col reagent">
           <span>{{ reagent.name }}</span>
-        </div>
+        </router-link>
         <div class="col">
           <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
           {{ reagent.amount }}x
@@ -84,6 +84,9 @@ export default {
     profit () {
       const cost = this.crafting.reagents.reduce((acc, cV) => acc + cV.marketValue * cV.amount, 0)
       return Math.round(this.crafting.marketValue * ((this.crafting.amount[0] + this.crafting.amount[1]) / 2)) - cost
+    },
+    server () {
+      return this.$store.state.servers.server
     }
   },
 
