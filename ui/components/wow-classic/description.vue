@@ -1,8 +1,8 @@
 <template>
   <module>
     <template slot="header">
-      <img src="/img/wow-classic/ui/description.svg" alt="Description" class="ico-h-16">
-      <h3>Description</h3>
+      <img src="/img/wow-classic/ui/description.svg" alt="Tooltip" class="ico-h-16">
+      <h3>Tooltip</h3>
     </template>
     <template slot="body">
       <template v-for="(entry, i) in tooltip">
