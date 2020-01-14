@@ -53,7 +53,8 @@ before(async function () {
     it('should prime WoW Classic database with test scan', async function () {
       const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
       const postScan = endpoints.find(e => e.route === '/wow-classic/v1/scans/new' && e.method === 'POST')
-      await parser.client.post(postScan.route, postScan.request.body)
+      const postCurrent = endpoints.find(e => e.route === '/wow-classic/v1/scans/current' && e.method === 'POST')
+      await Promise.all([parser.client.post(postScan.route, postScan.request.body), parser.client.post(postCurrent.route, postCurrent.request.body)])
     })
 
     for (const endpoint of cubic.nodes.api.server.ws.endpoints.endpoints) {
