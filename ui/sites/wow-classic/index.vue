@@ -7,9 +7,15 @@
           <div class="background" />
         </div>
         <div class="container search-container">
-          <div class="search-logo">
-            <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
-            <span>.co</span>
+          <div class="logo-container">
+            <div class="search-logo">
+              <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
+              <span>.co</span>
+            </div>
+            <div class="tsm-logo">
+              <span>Powered by</span>
+              <img src="/img/wow-classic/tsm-logo.svg" alt="TradeSkillMaster Logo" class="logo">
+            </div>
           </div>
 
           <div class="search-bar">
@@ -285,20 +291,43 @@ header {
     width: 55%;
   }
 
-  .search-logo {
-    display: flex;
-    align-items: center;
+  .logo-container {
     opacity: 0;
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
 
-    .logo {
-      height: 50px;
+    .search-logo {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        height: 50px;
+      }
+      span {
+        font-size: 2.2em;
+        color: white;
+        font-family: 'Circular';
+      }
     }
-    span {
-      font-size: 2.2em;
-      color: white;
-      font-family: 'Circular';
+
+    .tsm-logo {
+      position: relative;
+      top: -5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .logo {
+        height: 15px;
+        margin-left: 3px;
+      }
+      span {
+        @include uppercase();
+        font-size: 0.8em;
+        line-height: 15px;
+        color: white;
+        font-family: 'Circular';
+      }
     }
   }
 
@@ -311,11 +340,24 @@ header {
     min-height: 320px;
     height: 35vh;
 
-    .logo {
-      height: 40px !important;
+
+    .search-logo {
+      .logo {
+        height: 40px !important;
+      }
+      span {
+        font-size: 1.8em !important;
+      }
     }
-    .search-logo span {
-      font-size: 1.8em !important;
+    .tsm-logo {
+      top: -3px !important;
+      .logo {
+        height: 13px !important;
+      }
+      span {
+        font-size: 0.65em !important;
+        line-height: 13px !important;
+      }
     }
     .search-bar {
       margin-top: 15px !important;
