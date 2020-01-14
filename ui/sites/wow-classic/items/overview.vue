@@ -12,7 +12,7 @@
             <div class="col-b column">
               <description />
             </div>
-            <stats v-if="item.stats.current" class="col-b" />
+            <stats v-if="item.stats.current" class="col-b stats" />
           </div>
           <ad name="wow-classic-item-overview-main" />
         </div>
@@ -147,7 +147,6 @@ export default {
 .row-margin {
   justify-content: flex-start;
 
-  // Beware: Hack for exploding graphs (medium screens currently broken with this)
   flex-wrap: nowrap;
   @media (max-width: $breakpoint-s) {
     flex-wrap: wrap;
@@ -167,6 +166,10 @@ export default {
   @media (max-width: $breakpoint-s) {
     min-width: 0;
   }
+}
+
+.stats {
+  align-self: flex-start;
 }
 
 .module {

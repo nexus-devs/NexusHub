@@ -61,6 +61,12 @@
         </div>
       </div>
     </template>
+    <template slot="footer">
+      <a href="https://www.tradeskillmaster.com/" target="_blank">
+        Powered by TSM
+        <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
+      </a>
+    </template>
   </module>
 </template>
 
