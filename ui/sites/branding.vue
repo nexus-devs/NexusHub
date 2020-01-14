@@ -29,7 +29,7 @@
               <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexushub-logo-typeface-wow-classic.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-wow-classic.png" download>.png</a>
               </div>
             </div>
           </div>
@@ -52,14 +52,14 @@
               <img src="/img/brand/nexushub-logo-color-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexushub-logo-color-wow-classic.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-color-wow-classic.png" download>.png</a>
               </div>
             </div>
             <div class="col logo-alt">
               <img src="/img/brand/nexushub-logo-typeface-v-color-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
               <div class="logo-download">
                 <a href="/img/brand/nexushub-logo-typeface-v-color-wow-classic.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-v-color.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-color-wow-classic.png" download>.png</a>
               </div>
             </div>
           </div>
