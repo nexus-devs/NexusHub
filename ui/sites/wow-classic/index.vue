@@ -312,21 +312,21 @@ header {
 
     .tsm-logo {
       position: relative;
-      top: -5px;
+      top: -4px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
 
       .logo {
         position: relative;
-        top: -1px;
-        height: 16px;
+        top: -0.85px;
+        height: 10px;
         margin-left: 3px;
       }
       span {
         @include uppercase();
-        font-size: 0.875em;
-        line-height: 14px;
+        font-size: 14px;
+        line-height: 12px;
         color: white;
         font-family: 'Circular';
       }
@@ -352,14 +352,13 @@ header {
       }
     }
     .tsm-logo {
-      top: -3px !important;
+      top: -2px !important;
       .logo {
-        top: 0 !important;
-        height: 13px !important;
+        height: 8px !important;
       }
       span {
-        font-size: 0.65em !important;
-        line-height: 13px !important;
+        font-size: 10px !important;
+        line-height: 9px !important;
       }
     }
     .search-bar {
