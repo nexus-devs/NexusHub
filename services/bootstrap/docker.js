@@ -18,9 +18,12 @@ module.exports = async function () {
   else if (node === 'ui') {
     await cubic.use(new Ui(config.ui))
   }
-  else if (node === 'api') {
+  else if (node === 'api-warframe') {
     cubic.hook(Api, wfhooks.verifyIndices)
     cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
+    await cubic.use(new Api(config.api))
+  }
+  else if (node === 'api-wow-classic') {
     cubic.hook(Api, wowhooks.verifyIndices)
     cubic.hook(Api, wowhooks.verifyItemList.bind(wowhooks))
     cubic.hook(Api, wowhooks.verifyServerList.bind(wowhooks))
@@ -29,7 +32,7 @@ module.exports = async function () {
 
   // All nodes require a URL for internal healthchecks with docker, so we add
   // those here.
-  const api = node === 'api' ? cubic.nodes.api : cubic.nodes[node].api
+  const api = node.slice(0, 3) === 'api' ? cubic.nodes.api : cubic.nodes[node].api
   api.use('/healthcheck', (req, res) => {
     res.send('ok')
     return true
