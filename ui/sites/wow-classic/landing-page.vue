@@ -10,8 +10,14 @@
         <div class="container">
           <div class="row">
             <div class="nexushub-logo">
-              <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
-              <span>.co</span>
+              <div class="search-logo">
+                <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo">
+                <span>.co</span>
+              </div>
+              <div class="tsm-logo">
+                <span>Powered by</span>
+                <img src="/img/wow-classic/tsm-logo.svg" alt="TradeSkillMaster Logo" class="logo">
+              </div>
             </div>
           </div>
 
@@ -155,25 +161,77 @@ export default {
 }
 
 .nexushub-logo {
-  display: flex;
-  align-items: center;
+  //display: flex;
+  //align-items: center;
   animation: fadeinUp 0.6s forwards;
   animation-delay: 0.1s;
   margin-top: 75px;
   margin-bottom: 25px;
 
-  .logo {
-    height: 50px;
+  .search-logo {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      height: 50px;
+    }
+    span {
+      font-size: 2.2em;
+      color: white;
+      font-family: 'Circular';
+    }
   }
-  span {
-    font-size: 2.2em;
-    color: white;
-    font-family: 'Circular';
+
+  .tsm-logo {
+    position: relative;
+    top: -4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .logo {
+      position: relative;
+      top: -0.85px;
+      height: 10px;
+      margin-left: 3px;
+    }
+    span {
+      @include uppercase();
+      font-size: 14px;
+      line-height: 12px;
+      color: white;
+      font-family: 'Circular';
+    }
+  }
+
+  @media (max-width: $breakpoint-s) {
+    .search-logo {
+      .logo {
+        height: 40px !important;
+      }
+      span {
+        font-size: 1.8em !important;
+      }
+    }
+    .tsm-logo {
+      top: -2px !important;
+      .logo {
+        height: 8px !important;
+      }
+      span {
+        font-size: 10px !important;
+        line-height: 9px !important;
+      }
+    }
   }
 }
 .subtitle {
   margin-top: 25px;
   margin-bottom: 25px;
+
+  @media (max-width: $breakpoint-s) {
+    font-size: 1.2em;
+  }
 }
 
 .server-box {
