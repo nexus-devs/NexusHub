@@ -60,7 +60,7 @@
     "files-tree": "^1.0.8",
     "gitlog": "^3.1.2",
     "mocha": "^6.2.2",
-    "progress-bar-webpack-plugin": "^1.12.1",
+    "progress-bar-webpack-plugin": "^2.0.0",
     "request-promise": "^4.2.5",
     "rimraf": "^3.0.0",
     "semantic-release": "^15.13.30",
