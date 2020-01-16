@@ -18,7 +18,7 @@ module.exports = async function () {
   else if (node === 'ui') {
     await cubic.use(new Ui(config.ui))
   }
-  else if (node === 'api-warframe') {
+  else if (node.slice(0, 3) === 'api') {
     cubic.hook(Api, wfhooks.verifyIndices)
     cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
     cubic.hook(Api, wowhooks.verifyIndices)
