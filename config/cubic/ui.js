@@ -18,7 +18,7 @@ if (process.env.DOCKER && prod && node === 'ui') {
       redisUrl,
       certPublic,
       mongoUrl,
-      apiUrl: 'ws://api:3003/ws',
+      apiUrl: 'ws://api_warframe:3003/ws',
       authUrl: 'ws://auth:3030/ws'
     },
     client: {
@@ -26,7 +26,7 @@ if (process.env.DOCKER && prod && node === 'ui') {
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     },
     server: {
-      apiUrl: 'ws://api:3003/ws',
+      apiUrl: 'ws://api_warframe:3003/ws',
       authUrl: 'ws://auth:3030/ws',
       user_key: userKey,
       user_secret: userSecret
