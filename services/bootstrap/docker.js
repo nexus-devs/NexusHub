@@ -21,9 +21,6 @@ module.exports = async function () {
   else if (node === 'api-warframe') {
     cubic.hook(Api, wfhooks.verifyIndices)
     cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
-    await cubic.use(new Api(config.api))
-  }
-  else if (node === 'api-wow-classic') {
     cubic.hook(Api, wowhooks.verifyIndices)
     cubic.hook(Api, wowhooks.verifyItemList.bind(wowhooks))
     cubic.hook(Api, wowhooks.verifyServerList.bind(wowhooks))
