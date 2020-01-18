@@ -20,6 +20,8 @@ if (process.env.DOCKER && prod && node.slice(0, 3) === 'api') {
     userKey,
     userSecret
   }
+
+  if (node === 'api-wowclassic') config.port = 3004
 }
 
 config = {
