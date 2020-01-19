@@ -13,7 +13,7 @@ async function getClient () {
     const fs = require('fs')
     userKey = fs.readFileSync('/run/secrets/nexus-cubic-key', 'utf-8').trim()
     userSecret = fs.readFileSync('/run/secrets/nexus-cubic-secret', 'utf-8').trim()
-    apiUrl = 'ws://api_warframe:3003/ws'
+    apiUrl = 'wss://api.staging.nexushub.co/ws'
     authUrl = 'ws://auth:3030/ws'
   }
 

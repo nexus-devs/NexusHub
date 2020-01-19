@@ -15,7 +15,7 @@ if (process.env.DOCKER && prod && node.slice(0, 3) === 'api') {
     redisUrl,
     certPublic,
     mongoUrl,
-    apiUrl: 'ws://api_warframe:3003/ws',
+    apiUrl: 'wss://api.staging.nexushub.co/ws',
     authUrl: 'ws://auth:3030/ws',
     userKey,
     userSecret
