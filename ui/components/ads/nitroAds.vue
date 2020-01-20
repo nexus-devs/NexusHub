@@ -47,7 +47,6 @@ export default {
   position: relative;
   overflow: hidden; // for border-radius
   margin: 24px 0;
-  background: $color-accent-subtle;
   border-radius: 3px;
 }
 </style>
