@@ -73,6 +73,7 @@ export default {
   background: $color-bg-dark;
   :global {
     @import '~src/styles/modules/importer';
+    @import '~src/styles/gdpr';
 
     .btn, button {
       @include gradient-background-dg($color-primary, $color-accent);
@@ -100,6 +101,7 @@ export default {
 
   :global {
     @import '~src/styles/modules/wow-classic/importer';
+    @import '~src/styles/gdpr_wow-classic';
 
     .btn, button {
       background: linear-gradient(to bottom right, $color-primary 33%, $color-accent);
