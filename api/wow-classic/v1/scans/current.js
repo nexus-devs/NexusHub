@@ -46,7 +46,7 @@ class Current extends Endpoint {
       const updateValue = (entry, newValue, previousEntry, prop) => {
         if (previousEntry) {
           if (newValue !== previousEntry[prop]) {
-            entry.previous[prop] = previousEntry[prop]
+            entry.previous[prop] = entry[prop]
             entry[prop] = newValue
           }
         } else entry[prop] = newValue
