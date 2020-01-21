@@ -5,7 +5,12 @@ export default {
   state: {
     itemId: '',
     slug: '',
-    storage: {}
+    storage: {
+      'graph-value-quantity': {},
+      'graph-value-comparison': {},
+      'heatmap-value': {},
+      'heapmap-quantity': {}
+    }
   },
 
   mutations: {
