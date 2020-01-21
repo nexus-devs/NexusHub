@@ -14,7 +14,7 @@
 
           <div class="search-bar">
             <search :focus="true" />
-            <search-button />
+            <search-button :path="'/warframe/search'" />
           </div>
 
           <h2>Never miss out on a trade again!</h2>

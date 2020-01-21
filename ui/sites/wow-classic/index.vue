@@ -20,7 +20,7 @@
 
           <div class="search-bar">
             <search :focus="true" />
-            <search-button />
+            <search-button :path="'/wow-classic/search'" />
           </div>
 
           <h2>All WoW Classic Auction House data in one place!</h2>

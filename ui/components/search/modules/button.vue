@@ -13,6 +13,8 @@
 
 <script>
 export default {
+  props: ['path'],
+
   methods: {
     async search () {
       const input = this.$store.state.search.input
@@ -33,7 +35,7 @@ export default {
             path = input.webUrl
           }
         } else {
-          path = `/warframe/search?input=${input}`
+          path = `${this.path}?input=${input}`
         }
 
         // View generated URL
