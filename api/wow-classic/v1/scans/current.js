@@ -41,23 +41,30 @@ class Current extends Endpoint {
     parallel.push(this.db.collection('currentData').deleteMany({ ...query, _id: { $in: oldData.map((i) => i._id) } }))
     parallel.push(this.db.collection('currentData').insertMany(stats.data.map((i) => {
       const previousItem = oldData.find((pI) => pI.itemId === i.item)
-      if (previousItem) {
-        delete previousItem._id
-        delete previousItem.slug
-        delete previousItem.itemId
-        delete previousItem.previous
+
+      // Update value and push old value to previous if it's different, otherwise don't change
+      const updateValue = (entry, newValue, previousEntry, prop) => {
+        if (previousEntry) {
+          if (newValue !== previousEntry[prop]) {
+            entry.previous[prop] = previousEntry[prop]
+            entry[prop] = newValue
+          }
+        } else entry[prop] = newValue
       }
 
-      return {
+      const obj = {
         slug,
         itemId: i.item,
-        marketValue: i.market_value,
-        historicalValue: i.historical_value,
-        minBuyout: i.min_buyout,
-        numAuctions: i.num_auctions,
-        quantity: i.quantity,
-        previous: previousItem || null
+        previous: previousItem ? {} : null
       }
+
+      updateValue(obj, i.market_value, previousItem, 'marketValue')
+      updateValue(obj, i.historical_value, previousItem, 'historicalValue')
+      updateValue(obj, i.min_buyout, previousItem, 'minBuyout')
+      updateValue(obj, i.num_auctions, previousItem, 'numAuctions')
+      updateValue(obj, i.quantity, previousItem, 'quantity')
+
+      return obj
     })))
 
     await Promise.all(parallel)
