@@ -47,18 +47,18 @@ class Current extends Endpoint {
         if (previousEntry) {
           if (newValue !== previousEntry[prop]) {
             entry[prop] = newValue
+            if (!entry.previous) entry.previous = {}
             entry.previous[prop] = previousEntry[prop]
           } else {
             entry[prop] = previousEntry[prop]
-            entry.previous[prop] = previousEntry.previous[prop]
+            if (previousEntry.previous) entry.previous[prop] = previousEntry.previous[prop]
           }
         } else entry[prop] = newValue
       }
 
       const obj = {
         slug,
-        itemId: i.item,
-        previous: previousItem ? {} : null
+        itemId: i.item
       }
 
       updateValue(obj, i.market_value, previousItem, 'marketValue')
@@ -66,6 +66,8 @@ class Current extends Endpoint {
       updateValue(obj, i.min_buyout, previousItem, 'minBuyout')
       updateValue(obj, i.num_auctions, previousItem, 'numAuctions')
       updateValue(obj, i.quantity, previousItem, 'quantity')
+
+      if (!obj.previous) obj.previous = null
 
       return obj
     })))
