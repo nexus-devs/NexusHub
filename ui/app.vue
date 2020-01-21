@@ -73,7 +73,6 @@ export default {
   background: $color-bg-dark;
   :global {
     @import '~src/styles/modules/importer';
-    @import '~src/styles/gdpr';
 
     .btn, button {
       @include gradient-background-dg($color-primary, $color-accent);
@@ -86,9 +85,13 @@ export default {
 }
 
 .body {
-  // Style progress here because it gets defined in cubic-ui
-  :global .progress {
-    @include gradient-background-dg($color-primary, $color-accent);
+  :global {
+    @import '~src/styles/gdpr';
+
+    // Style progress here because it gets defined in cubic-ui
+    .progress {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
   }
 }
 </style>
@@ -101,7 +104,6 @@ export default {
 
   :global {
     @import '~src/styles/modules/wow-classic/importer';
-    @import '~src/styles/gdpr_wow-classic';
 
     .btn, button {
       background: linear-gradient(to bottom right, $color-primary 33%, $color-accent);
@@ -114,9 +116,13 @@ export default {
 }
 
 .body {
-  // Style progress here because it gets defined in cubic-ui
-  :global .progress {
-    @include gradient-background-dg($color-primary, $color-accent);
+  :global {
+    @import '~src/styles/gdpr_wow-classic';
+
+    // Style progress here because it gets defined in cubic-ui
+    .progress {
+      @include gradient-background-dg($color-primary, $color-accent);
+    }
   }
 }
 </style>
