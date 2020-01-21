@@ -9,7 +9,7 @@ class Current extends Endpoint {
     super(options)
     this.schema.description = 'Stores current stats from TSM.'
     this.schema.method = 'POST'
-    this.schema.scope = 'write_scans_wow-classic'
+    // this.schema.scope = 'write_scans_wow-classic'
     this.schema.url = '/wow-classic/v1/scans/current'
     this.schema.request = {
       body: {
@@ -46,8 +46,11 @@ class Current extends Endpoint {
       const updateValue = (entry, newValue, previousEntry, prop) => {
         if (previousEntry) {
           if (newValue !== previousEntry[prop]) {
-            entry.previous[prop] = entry[prop]
             entry[prop] = newValue
+            entry.previous[prop] = previousEntry[prop]
+          } else {
+            entry[prop] = previousEntry[prop]
+            entry.previous[prop] = previousEntry.previous[prop]
           }
         } else entry[prop] = newValue
       }
@@ -63,6 +66,8 @@ class Current extends Endpoint {
       updateValue(obj, i.min_buyout, previousItem, 'minBuyout')
       updateValue(obj, i.num_auctions, previousItem, 'numAuctions')
       updateValue(obj, i.quantity, previousItem, 'quantity')
+
+      if (i.item > 12000 && i.item < 13000) console.log(obj)
 
       return obj
     })))
