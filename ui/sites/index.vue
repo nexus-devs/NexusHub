@@ -125,6 +125,11 @@ export default {
   padding-top: 35px;
   padding-bottom: 35px;
   justify-content: center;
+
+  @media (max-width: $breakpoint-s) {
+    padding-top: 10px;
+    padding-bottom: 0;
+  }
 }
 .container {
   display: flex;
@@ -149,6 +154,8 @@ export default {
     }
 
     @media (max-width: $breakpoint-s) {
+      margin-top: 35px;
+
       .logo {
         height: 40px !important;
       }
@@ -169,6 +176,10 @@ export default {
     margin-top: auto;
     margin-bottom: 100px;
 
+    @media (max-width: $breakpoint-m) {
+      margin-bottom: 30px;
+    }
+
     img {
       transform: rotate(90deg);
       background: rgba(200,225,255,0.1);
@@ -180,6 +191,11 @@ export default {
   margin: 15px;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: $breakpoint-s) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   &:hover {
     @include shadow-3;
@@ -197,6 +213,11 @@ export default {
   /deep/ .body {
     min-width: 320px;
     min-height: 80px;
+
+    @media (max-width: $breakpoint-s) {
+      min-width: 240px;
+      min-height: 70px;
+    }
 
     .image {
       position: absolute;
