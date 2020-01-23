@@ -21,12 +21,25 @@
             </h2>
           </div>
 
-          <div class="row">
+          <div class="row games">
+            <router-link to="/warframe">
+              <module>
+                <template slot="body">
+                  <div class="image">
+                    <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
+                    <div class="shade" />
+                  </div>
+                </template>
+                <template slot="footer">
+                  <h3>Warframe</h3>
+                </template>
+              </module>
+            </router-link>
             <router-link to="/wow-classic">
               <module>
                 <template slot="body">
                   <div class="image">
-                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail" />
+                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
                     <div class="shade" />
                   </div>
                 </template>
@@ -74,7 +87,6 @@ export default {
   position: relative;
   width: 100%;
   min-height: calc(100vh - 56px);
-  // padding-bottom: 56px;
   align-items: center;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
@@ -95,22 +107,26 @@ export default {
     animation-iteration-count: infinite;
   }
 }
-.container {
-  .row {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    flex-wrap: nowrap;
+.row {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
 
-    @media (max-width: $breakpoint-s) {
-      flex-wrap: wrap;
-    }
+  @media (max-width: $breakpoint-s) {
+    flex-wrap: wrap;
   }
-
+}
+.games {
+  padding-top: 35px;
+  padding-bottom: 35px;
+  justify-content: center;
+}
+.container {
   .nexushub-logo {
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
-    margin-top: 75px;
+    margin-top: 150px;
     margin-bottom: 25px;
     display: flex;
     align-items: center;
@@ -143,6 +159,7 @@ export default {
 }
 
 .module {
+  margin: 15px;
   position: relative;
   overflow: hidden;
 
