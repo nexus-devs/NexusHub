@@ -20,6 +20,22 @@
               Making Games more transparent!
             </h2>
           </div>
+
+          <div class="row">
+            <router-link to="/wow-classic">
+              <module>
+                <template slot="body">
+                  <div class="image">
+                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail" />
+                    <div class="shade" />
+                  </div>
+                </template>
+                <template slot="footer">
+                  <h3>World of Warcraft: Classic</h3>
+                </template>
+              </module>
+            </router-link>
+          </div>
         </div>
       </div>
     </app-content>
@@ -30,11 +46,13 @@
 <script>
 import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
+import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/general.vue'
 
 export default {
   components: {
     appContent,
+    module,
     navigation
   },
 
@@ -120,6 +138,60 @@ export default {
   .subtitle {
     @media (max-width: $breakpoint-s) {
       font-size: 1.2em;
+    }
+  }
+}
+
+.module {
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    @include shadow-3;
+  }
+
+  /deep/ .header {
+    position: relative;
+    z-index: 1;
+  }
+
+  /deep/ .body {
+    min-width: 320px;
+    min-height: 80px;
+
+    .image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 0;
+
+      img {
+        width: 100%;
+      }
+
+      .shade {
+        position: absolute;
+        top: 1px; // 1px because the bottom may not cover the image on high res screens
+        height: 100%;
+        width: 100%;
+        @include gradient-background(transparent, rgba(59, 66, 79, 0.3));
+      }
+    }
+  }
+
+  /deep/ .footer {
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+    background: $color-bg-transparent;
+
+    h3 {
+      color: $color-primary;
+      @include uppercase;
+      padding: 5px 10px;
+      letter-spacing: 0.5;
+      position: relative;
     }
   }
 }
