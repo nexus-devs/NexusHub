@@ -49,6 +49,10 @@
               </module>
             </router-link>
           </div>
+
+          <div class="row scrolldown">
+            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down">
+          </div>
         </div>
       </div>
     </app-content>
@@ -123,6 +127,10 @@ export default {
   justify-content: center;
 }
 .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   .nexushub-logo {
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
@@ -154,6 +162,16 @@ export default {
   .subtitle {
     @media (max-width: $breakpoint-s) {
       font-size: 1.2em;
+    }
+  }
+
+  .scrolldown {
+    margin-top: auto;
+    margin-bottom: 100px;
+
+    img {
+      transform: rotate(90deg);
+      background: rgba(200,225,255,0.1);
     }
   }
 }
