@@ -165,6 +165,10 @@ export default {
 
   &:hover {
     @include shadow-3;
+
+    /deep/ .footer {
+      background: rgba($color-bg-transparent, 0.8)
+    }
   }
 
   /deep/ .header {
