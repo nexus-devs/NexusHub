@@ -23,7 +23,7 @@
 
           <div class="row games">
             <router-link to="/warframe">
-              <module>
+              <module class="game-module">
                 <template slot="body">
                   <div class="image">
                     <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
@@ -36,7 +36,7 @@
               </module>
             </router-link>
             <router-link to="/wow-classic">
-              <module>
+              <module class="game-module">
                 <template slot="body">
                   <div class="image">
                     <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
@@ -58,7 +58,7 @@
 
       <section ref="blog" class="spa-section">
         <div class="container blog">
-          Test
+          <blog-preview :blogpost="wowClassicAnnouncement" />
         </div>
       </section>
     </app-content>
@@ -68,6 +68,7 @@
 
 <script>
 import appContent from 'src/app-content.vue'
+import blogPreview from 'src/components/blog/blog-preview.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/general.vue'
@@ -75,8 +76,22 @@ import navigation from 'src/components/ui/nav/general.vue'
 export default {
   components: {
     appContent,
+    blogPreview,
     module,
     navigation
+  },
+
+  data () {
+    return {
+      wowClassicAnnouncement: {
+        title: 'World of Warcraft: Classic announced!',
+        date: '2020-01-25 19:00',
+        content: [
+          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+        ]
+      }
+    }
   },
 
   methods: {
@@ -149,6 +164,10 @@ export default {
     padding-bottom: 0;
   }
 }
+.blog {
+  flex-direction: row;
+  align-items: center;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -205,7 +224,7 @@ export default {
   }
 }
 
-.module {
+.game-module {
   margin: 15px;
   position: relative;
   overflow: hidden;
