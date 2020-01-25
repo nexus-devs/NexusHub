@@ -58,7 +58,14 @@
 
       <section ref="blog" class="spa-section">
         <div class="container blog">
-          <blog-preview :blogpost="wowClassicAnnouncement" />
+          <div class="row-margin">
+            <div class="col-b-4">
+              <h2 class="sub">
+                NexusHub Blog
+              </h2>
+              <blog-preview :blogpost="wowClassicAnnouncement" />
+            </div>
+          </div>
         </div>
       </section>
     </app-content>
