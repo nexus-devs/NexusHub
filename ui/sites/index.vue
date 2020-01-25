@@ -55,6 +55,9 @@
           </div>
         </div>
       </div>
+      <div class="landing-page">
+        Test
+      </div>
     </app-content>
   </div>
 </template>
@@ -90,7 +93,8 @@ export default {
 .landing-page {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 56px);
+  height: calc(100vh - 56px);
+  min-height: 600px;
   align-items: center;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
