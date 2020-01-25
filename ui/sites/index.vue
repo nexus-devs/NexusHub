@@ -2,7 +2,7 @@
   <div>
     <navigation />
     <app-content>
-      <div class="landing-page">
+      <div class="landing-page spa-section">
         <div class="background-container">
           <div class="background" />
         </div>
@@ -51,13 +51,16 @@
           </div>
 
           <div class="row scrolldown">
-            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down">
+            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
           </div>
         </div>
       </div>
-      <div class="landing-page">
-        Test
-      </div>
+
+      <section ref="blog" class="spa-section">
+        <div class="container blog">
+          Test
+        </div>
+      </section>
     </app-content>
   </div>
 </template>
@@ -76,6 +79,14 @@ export default {
     navigation
   },
 
+  methods: {
+    scrollDown () {
+      const el = this.$refs.blog
+      const position = el.getBoundingClientRect().top - 56 // Navbar offset
+      window.scrollTo({ top: position, behavior: 'smooth' })
+    }
+  },
+
   head: {
     title: 'NexusHub · Making Games more transparent!',
     meta: meta({
@@ -90,11 +101,14 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-.landing-page {
+.spa-section {
   position: relative;
   width: 100%;
   height: calc(100vh - 56px);
   min-height: 600px;
+}
+
+.landing-page {
   align-items: center;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 
