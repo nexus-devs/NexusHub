@@ -25,8 +25,11 @@ class News extends Endpoint {
   async main (req, res) {
     const limit = req.query.limit
     const parser = new RSSParser()
-    let feed = await parser.parseURL('https://www.wowhead.com/news/rss/classic')
-    feed = feed.items.slice(0, limit)
+    let feed = []
+    try {
+      feed = await parser.parseURL('https://www.wowhead.com/news/rss/classic')
+      feed = feed.items.slice(0, limit)
+    } catch (err) {}
 
     // Parse contentSnippet correctly
     for (const f of feed) {
