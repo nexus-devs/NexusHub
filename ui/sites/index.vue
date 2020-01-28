@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation />
+    <navigation :page-elements="this.$refs" />
     <app-content>
       <div class="landing-page spa-section">
         <div class="background-container">

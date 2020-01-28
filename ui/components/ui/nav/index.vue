@@ -6,12 +6,12 @@
       </router-link>
     </div>
     <div class="subnav">
-      <a href="#" :class="{ 'router-link-active': activePage === 'Start' }" class="interactive">
+      <p :class="{ 'router-link-active': activePage === 'Start' }" class="interactive" @click="scrollToPage('Start')">
         Start
-      </a>
-      <a href="#" :class="{ 'router-link-active': activePage === 'Blog' }" class="interactive">
+      </p>
+      <p :class="{ 'router-link-active': activePage === 'Blog' }" class="interactive" @click="scrollToPage('Blog')">
         Blog
-      </a>
+      </p>
     </div>
     <div class="col nav-r">
       <notifications />
@@ -29,9 +29,22 @@ export default {
     notifications
   },
 
+  props: ['pageElements'],
+
   computed: {
     activePage () {
       return this.$store.state.index.activePage
+    }
+  },
+
+  methods: {
+    scrollToPage (page) {
+      let position = 0
+      if (page !== 'Start') {
+        const el = this.pageElements[page.toLowerCase()]
+        position = el.getBoundingClientRect().top + window.pageYOffset - 56 // Absolute position + Navbar offset
+      }
+      window.scrollTo({ top: position, behavior: 'smooth' })
     }
   },
 
@@ -128,21 +141,23 @@ nav {
 .subnav {
   position: relative;
   width: 100%;
+  height: 100%;
   flex-grow: 1;
   max-width: $max-width;
   display: flex;
   justify-content: right;
 
-  a {
+  p {
     display: inline-flex;
     align-items: center;
-    padding: 14px 20px 12px; // 12px to compensate for border
+    padding: 14px 20px 8px; // 8px to compensate for border
     border-bottom: 2px solid transparent;
     margin-right: 5px;
     border-radius: 2px;
     @include uppercase;
     font-size: 0.8em;
     letter-spacing: 0.5;
+    margin-top: 0;
 
     &:before {
       border-radius: 0;
