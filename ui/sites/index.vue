@@ -92,10 +92,14 @@ export default {
     return {
       wowClassicAnnouncement: {
         title: 'World of Warcraft: Classic announced!',
-        date: '2020-01-25 19:00',
+        date: '2020-01-30 17:00',
         content: [
-          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
-          'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+          'We\'re very happy to announce the launch of a Classic WoW Auction House database and website that we\'ve spent the last few months working on together with TradeSkillMaster!',
+          'Through NexusHub, you can monitor and report on current item prices on the Classic WoW Auction House as well as dive in to pricing history for all realms and factions in both regions, completely free. With this data we\'re also able to offer estimated Crafting profits and material price information for your convenience.',
+          'In addition, the entire database is available in a fully open and free <a href="https://nexushub.co/developers/api/General/foo">API</a> to integrate in your gold-making spreadsheets, apps or services.',
+          'We\'re keen to continue working with TSM and integrating related or requested features on to the site (think having the website notice you when an item hits your sniper price without having to monitor the AH in-game).',
+          'You can access the site on desktop and mobile via <a href="https://wow-classic.nexushub.co/">wow-classic.nexushub.co</a> or <a href="https://nexushub.co/wow-classic">nexushub.co/wow-classic</a>',
+          'Please share your feedback and questions, we are very excited to hear how you make use of this new tool!'
         ]
       }
     }

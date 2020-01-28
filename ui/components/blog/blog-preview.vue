@@ -6,9 +6,8 @@
     </template>
     <template slot="body">
       <div>
-        <p v-for="(line, i) in blogpost.content" :key="line + i">
-          {{ line }}
-        </p>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <p v-for="(line, i) in blogpost.content" :key="line + i" v-html="line" />
       </div>
     </template>
   </module>
