@@ -78,7 +78,7 @@ import appContent from 'src/app-content.vue'
 import blogPreview from 'src/components/blog/blog-preview.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/general.vue'
+import navigation from 'src/components/ui/nav/index.vue'
 
 export default {
   components: {
@@ -105,11 +105,28 @@ export default {
     }
   },
 
+  mounted () {
+    window.addEventListener('scroll', this.updateOnScroll)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.updateOnScroll)
+  },
+
   methods: {
     scrollDown () {
       const el = this.$refs.blog
-      const position = el.getBoundingClientRect().top - 56 // Navbar offset
+      const position = el.getBoundingClientRect().top + window.pageYOffset - 56 // Absolute position + Navbar offset
       window.scrollTo({ top: position, behavior: 'smooth' })
+    },
+    updateOnScroll () {
+      const blogEl = this.$refs.blog
+      const blogPosition = blogEl.getBoundingClientRect().top + window.pageYOffset - 56 // Absolute position + Navbar offset
+      const viewportHeight = window.innerHeight
+
+      let page = 'Start'
+      if (window.scrollY >= blogPosition - (viewportHeight / 2)) page = 'Blog'
+      this.$store.commit('setActivePage', page)
     }
   },
 
