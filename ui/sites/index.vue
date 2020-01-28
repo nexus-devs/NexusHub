@@ -17,7 +17,7 @@
 
           <div class="row">
             <h2 class="subtitle">
-              Making Games more transparent!
+              Giving you the data for your daily grind!
             </h2>
           </div>
 
@@ -131,9 +131,9 @@ export default {
   },
 
   head: {
-    title: 'NexusHub · Making Games more transparent!',
+    title: 'NexusHub · Giving you the data for your daily grind!',
     meta: meta({
-      title: 'NexusHub · Making Games more transparent!',
+      title: 'NexusHub · Giving you the data for your daily grind!',
       description: 'Get up-to-date trading data and prices for Warframe and World of Warcraft: Classic.'
     })
   }
