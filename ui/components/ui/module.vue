@@ -40,11 +40,13 @@ export default {
   @include field;
 }
 .header {
-  h2, h3 {
-    color: $color-primary-subtle !important;
-  }
-  .img {
-    background: $color-bg;
+  :global {
+    h2, h3 {
+      color: $color-primary-subtle !important;
+    }
+    .img {
+      background: $color-bg;
+    }
   }
 }
 .footer {
@@ -59,11 +61,10 @@ export default {
   @include field;
 }
 .header {
-  h2, h3 {
-    color: $color-primary-subtle !important;
-  }
-  .img {
-    background: $color-bg;
+  :global {
+    h2, h3 {
+      color: $color-primary-subtle !important;
+    }
   }
 }
 .footer {
