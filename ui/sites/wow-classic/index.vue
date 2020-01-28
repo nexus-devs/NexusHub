@@ -206,6 +206,16 @@ export default {
     transform: translateY(0);
   }
 }
+@keyframes fadeinUpSearch {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
+}
 @keyframes moveUp {
   from {
     transform: translateY(30px);
@@ -219,7 +229,7 @@ export default {
     transform: scaleX(1);
   }
   50% {
-    transform: scale3d(1.15,1.15,1.15);
+    transform: scale3d(1.05, 1.05, 1.05);
   }
   100% {
     transform: scaleX(1);
@@ -233,7 +243,7 @@ header {
   min-height: 400px;
   width: 100%;
   align-items: center;
-  @include gradient-background-dg($color-bg-lighter, $color-bg-light);
+  @include gradient-background-dg($color-bg-lighter, $color-bg);
 
   .background-container {
     position: absolute;
@@ -242,8 +252,9 @@ header {
     height: 100%;
   }
   .background {
-    background: url('/img/warframe/index-blob.svg');
-    background-size: cover;
+    background: url('/img/ui/thumbnail-wow-classic.jpg') -80px -120px;
+    opacity: 0.58;
+    background-size: calc(100% + 80px);
     width: 100%;
     height: 100%;
     animation-name: pulse;
@@ -267,6 +278,7 @@ header {
       opacity: 0;
       animation: fadeinUp 0.6s forwards;
       animation-delay: 0.3s;
+      filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.35));
     }
   }
 
@@ -286,7 +298,7 @@ header {
     z-index: 1; // Overlay slogan beneath search bar with suggestions
     margin-top: 20px;
     opacity: 0;
-    animation: fadeinUp 0.6s forwards;
+    animation: fadeinUpSearch 0.6s forwards;
     animation-delay: 0.2s;
     width: 55%;
   }
@@ -302,11 +314,13 @@ header {
 
       .logo {
         height: 50px;
+        filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.35));
       }
       span {
         font-size: 2.2em;
         color: white;
         font-family: 'Circular';
+        filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.35));
       }
     }
 
@@ -322,6 +336,7 @@ header {
         top: -0.85px;
         height: 10px;
         margin-left: 3px;
+        filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.35));
       }
       span {
         @include uppercase();
@@ -329,6 +344,7 @@ header {
         line-height: 12px;
         color: white;
         font-family: 'Circular';
+        filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.35));
       }
     }
   }
@@ -341,7 +357,6 @@ header {
   @media (max-width: $breakpoint-s) {
     min-height: 320px;
     height: 35vh;
-
 
     .search-logo {
       .logo {
