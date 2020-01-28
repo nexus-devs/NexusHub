@@ -33,7 +33,7 @@
           <div class="row overview">
             <div class="col-b">
               <h2 class="sub">
-                Possible Deals
+                Most Profitable Deals
               </h2>
               <div class="row-margin deals">
                 <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="col-b item">
@@ -60,7 +60,7 @@
             </div>
             <div class="col-b">
               <h2 class="sub">
-                Profitable Recipes
+                Most Profitable Recipes
               </h2>
               <div class="row-margin deals">
                 <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="col-b item">
