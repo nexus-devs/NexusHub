@@ -1,0 +1,155 @@
+.btn, button {
+  position :relative;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  color: white;
+  border-radius: 999px !important;
+  @include gradient-background-dg($color-primary, $color-accent);
+  @include ease-wubble(0.25s);
+  @include shadow-1;
+  cursor: pointer;
+  padding: 6px 14px !important;
+  font-weight: 400;
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  &:hover {
+    @include shadow-2;
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+  &:disabled {
+    &:hover {
+      transform: none;
+    }
+  }
+  &:after {
+    position: absolute;
+    z-index: -1;
+    top: 20%;
+    left: 10%;
+    border-radius: 999px;
+    filter: blur(10px);
+    opacity: 0.12;
+    width: 85%;
+    height: 100%;
+    @include shadow-1;
+    @include gradient-background-dg($color-primary, $color-accent);
+    content: '';
+  }
+}
+
+.btn-subtle {
+  display: inline-block;
+  @include ie;
+  @include uppercase;
+  cursor: pointer;
+  font-size: 0.8em;
+  border-radius: 2px;
+  padding: 10px 14px;
+
+  &:before {
+    border-radius: 0;
+  }
+  &.active {
+    color: white;
+    background: rgba(190, 170, 155, 0.1);
+  }
+}
+
+.btn-round {
+  border-radius: 1000px !important;
+}
+
+.btn-outline {
+  font-size: 0.85em;
+  @include uppercase;
+  margin-right: 10px;
+  background: none;
+  border: 1px solid $color-subtle;
+  box-shadow: none;
+  color: $color-font-subtle;
+  @include ie;
+
+  &:hover {
+    color: white;
+    box-shadow: none;
+  }
+  &::before {
+    border-radius: 999px;
+  }
+  &:after {
+    display: none;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.btn-tag {
+  @include ie;
+  padding: 5px 12px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: 1px solid $color-subtle-dark;
+  @include uppercase;
+  font-size: 0.8em;
+
+  &:hover {
+    background: none;
+    border: 1px solid $color-subtle;
+  }
+  &:active {
+    transform: scale(1);
+  }
+  & img:first-of-type {
+    margin-right: 2px; // Clear the rule above if there's no ascending/descending img
+  }
+  & img:last-of-type {
+    margin-right: -20px; // Clear ascending/descending
+  }
+  span {
+    font-size: 0.9em;
+    color: white;
+  }
+
+  // Hide ascending/descending by default and adjust tag box size
+  .asc-desc {
+    opacity: 0;
+    margin-right: -5px;
+    @include ease(0.2s);
+
+    &.descending {
+      transform: rotate(-180deg);
+    }
+  }
+  &.active {
+    border: 1px solid transparent;
+    background: $color-bg;
+
+    .asc-desc {
+      opacity: 1;
+      margin-right: 0;
+    }
+    // Reactivate ascending/descending
+    // -5px to compensate for material icon padding
+    & img:last-of-type {
+      margin-right: -5px;
+    }
+  }
+}
+
+.btn-counter {
+  font-size: 0.85em;
+  margin-left: 10px;
+  padding: 2px 10px;
+  background: $color-subtle-dark;
+  border-radius: 9999px;
+}

@@ -69,6 +69,10 @@ export default {
 }
 .footer {
   background: $color-bg;
+
+  :global(a:hover) {
+    background: rgba(222, 200, 187, 0.1) !important;
+  }
 }
 </style>
 
