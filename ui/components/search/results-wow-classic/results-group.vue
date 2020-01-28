@@ -226,6 +226,10 @@ h2 {
   padding-top: 15px;
 
   .filter-tags {
+    // Filters currently disabled, but height needed
+    opacity: 0;
+    pointer-events: none;
+
     display: flex;
     align-items: center;
     margin-right: 150px; // break when view type is supposed to cause break
