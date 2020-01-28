@@ -13,7 +13,7 @@
           <span class="data-price">
             {{ parsePrice(stats.current.marketValue) }}
           </span>
-          <span :class="{ negative: diff.marketValue < 0, neutral: diff.marketValue === 0 }" class="data-price-diff">
+          <span v-if="diff.marketValue !== 0" :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
           </span>
         </div>
@@ -26,7 +26,7 @@
           <span class="data-price">
             {{ parsePrice(stats.current.historicalValue) }}
           </span>
-          <span :class="{ negative: diff.historicalValue < 0, neutral: diff.historicalValue === 0 }" class="data-price-diff">
+          <span v-if="diff.historicalValue !== 0" :class="{ negative: diff.historicalValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
           </span>
         </div>
@@ -39,7 +39,7 @@
           <span class="data-price">
             {{ parsePrice(stats.current.minBuyout) }}
           </span>
-          <span :class="{ negative: diff.minBuyout < 0, neutral: diff.minBuyout === 0 }" class="data-price-diff">
+          <span v-if="diff.minBuyout !== 0" :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
         </div>
@@ -55,7 +55,7 @@
           <span class="data-price">
             {{ stats.current.quantity }}
           </span>
-          <span :class="{ negative: diff.quantity < 0, neutral: diff.quantity === 0 }" class="data-price-diff">
+          <span v-if="diff.quantity !== 0" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
         </div>
