@@ -114,10 +114,6 @@ export default {
 .order {
   margin-top: 10px;
   @include ease(0.3s); // For order transitions
-
-  &:first-of-type {
-    margin-top: 0;
-  }
 }
 .row {
   @include field;
