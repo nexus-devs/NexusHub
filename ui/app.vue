@@ -81,10 +81,6 @@ export default {
         @include gradient-background-dg($color-primary, $color-accent);
       }
     }
-
-    .interactive {
-      @include ie();
-    }
   }
 }
 
@@ -128,7 +124,6 @@ export default {
     }
 
     .interactive {
-      @include ie();
       &:hover {
         background: rgba(222, 200, 187, 0.1);
       }
@@ -160,6 +155,10 @@ export default {
 
 #app {
   color: white;
+}
+
+.interactive {
+  @include ie();
 }
 
 // Sticky Footer
