@@ -71,7 +71,7 @@ nav {
   position: fixed;
   align-items: center;
   justify-content: center;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   width: calc(100% - 30px);
   padding: 0 15px;
   height: 56px;
