@@ -249,6 +249,7 @@ export default {
   max-height: 50vh;
 
   .server {
+    min-height: 32px; // Fuck you safari trash software
     // cursor: pointer;
     padding: 10px 15px;
     @include ease(0.15s);
