@@ -261,6 +261,11 @@ header {
     animation-timing-function: ease-in-out;
     animation-duration: 35s;
     animation-iteration-count: infinite;
+
+    @media (max-width: $breakpoint-s) {
+      background-size: cover;
+      background-position-y: 0;
+    }
   }
 
   /**
