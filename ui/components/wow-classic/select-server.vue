@@ -5,7 +5,7 @@
       <img :src="`/img/wow-classic/ui/${serverPretty.faction}.svg`" :alt="`${serverPretty.faction} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
-    <div :class="{ active }" class="dropdown">
+    <div :class="{ active: !active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
 
@@ -204,12 +204,9 @@ export default {
 }
 .faction {
   background: lighten($color-bg, 10%);
-  display: flex;
+  display: none;
   justify-content: space-around;
   @include ease(0.35s);
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
 
   .image-wrapper{
     width: 100%;
@@ -227,9 +224,7 @@ export default {
   }
 
   &.selected {
-    opacity: 1;
-    max-height: 100%;
-    overflow: visible;
+    display: flex;
   }
 }
 </style>
