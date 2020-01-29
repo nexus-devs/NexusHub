@@ -510,6 +510,7 @@ header {
       flex-basis: 40%;
       border-radius: 2px;
       transition-duration: 0.5s !important;
+      max-width: 100%;
 
       /deep/ .header {
         padding: 20px 20px 0;
@@ -550,6 +551,14 @@ header {
 
     & > *[class*="col-b"] {
       margin: 20px;
+      @media (max-width: $breakpoint-s) {
+        max-width: 100%;
+        margin: 0 0 20px;
+      }
+    }
+
+    @media (max-width: $breakpoint-s) {
+      margin: 0;
     }
   }
 
