@@ -179,6 +179,10 @@ export default {
   max-width: 100%;
   min-height: 300px;
   flex-basis: 60%;
+
+  /deep/ .body {
+    height: 100%;
+  }
 }
 
 .btn-subtle {

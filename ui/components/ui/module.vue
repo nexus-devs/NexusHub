@@ -143,7 +143,8 @@ export default {
 .body {
   margin: 20px 0;
   padding: 0 25px;
-  height: 100%;
+  // height: 100%;
+  height: auto; // Needed for Safari and Samsung Browser
 
   li {
     margin-top: 15px;
