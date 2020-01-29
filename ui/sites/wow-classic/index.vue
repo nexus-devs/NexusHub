@@ -511,6 +511,7 @@ header {
       border-radius: 2px;
       transition-duration: 0.5s !important;
       max-width: 100%;
+      height: auto; // Safari fix
 
       /deep/ .header {
         padding: 20px 20px 0;

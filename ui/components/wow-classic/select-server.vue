@@ -5,7 +5,7 @@
       <img :src="`/img/wow-classic/ui/${serverPretty.faction}.svg`" :alt="`${serverPretty.faction} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
-    <div :class="{ active: !active }" class="dropdown">
+    <div :class="{ active }" class="dropdown">
       <div class="body">
         <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
 
