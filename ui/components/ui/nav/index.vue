@@ -145,7 +145,7 @@ nav {
   flex-grow: 1;
   max-width: $max-width;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
 
   p {
     display: inline-flex;
