@@ -137,9 +137,9 @@ export default {
   },
 
   head: {
-    title: 'NexusHub · Giving you the data for your daily grind!',
+    title: 'NexusHub · Providing you with the data for your daily grind!',
     meta: meta({
-      title: 'NexusHub · Giving you the data for your daily grind!',
+      title: 'NexusHub · Providing you with the data for your daily grind!',
       description: 'Get up-to-date trading data and prices for Warframe and World of Warcraft: Classic.'
     })
   }
