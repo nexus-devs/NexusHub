@@ -203,6 +203,10 @@ export default {
   height: calc(100vh - 56px);
   min-height: 600px;
 
+  @media (max-width: $breakpoint-m) {
+    padding: 0;
+  }
+
   .nexushub-logo {
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
