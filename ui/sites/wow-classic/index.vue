@@ -513,6 +513,10 @@ header {
       max-width: 100%;
       height: auto; // Safari fix
 
+      @media (max-width: $breakpoint-s) {
+        flex-basis: 0; // Safari fix
+      }
+
       /deep/ .header {
         padding: 20px 20px 0;
         overflow: hidden;

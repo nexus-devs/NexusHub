@@ -225,6 +225,7 @@ export default {
 
   &.selected {
     display: flex;
+    min-height: 40px; // Fucking safari
   }
 }
 </style>
