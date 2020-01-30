@@ -66,12 +66,12 @@
     "bundle.7.02f0afa5a6ab3d0f314b.js",
     "bundle.8.bf4e0a653e52ff0f6438.js",
     "bundle.9.dd1df84dff635563b807.js",
-    "bundle.client.5d3ed5df7613c99ddd8b.js",
+    "bundle.client.c73968aed29627836bc8.js",
     "client.51dbe458edb8058c4c5e.css"
   ],
   "initial": [
     "client.51dbe458edb8058c4c5e.css",
-    "bundle.client.5d3ed5df7613c99ddd8b.js"
+    "bundle.client.c73968aed29627836bc8.js"
   ],
   "async": [
     "10.1860ebc32ec36248fc5d.css",
