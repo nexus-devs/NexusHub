@@ -2,62 +2,60 @@
   <div>
     <navigation :page-elements="this.$refs" />
     <app-content>
-      <div class="landing-page">
-        <div class="container game-container">
-          <div class="background-container">
-            <div class="background" />
-          </div>
+      <div class="background-container">
+        <div class="background" />
+      </div>
 
-          <div class="container" />
-          <div class="container">
-            <div class="row">
-              <div class="nexushub-logo">
-                <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
-                <span>.co</span>
-              </div>
-            </div>
-
-            <div class="row">
-              <h2 class="subtitle">
-                Providing you with the data for your daily grind!
-              </h2>
-            </div>
-
-            <div class="row games">
-              <router-link to="/warframe">
-                <module class="game-module">
-                  <template slot="body">
-                    <div class="image">
-                      <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
-                      <div class="shade" />
-                    </div>
-                  </template>
-                  <template slot="footer">
-                    <h3>Warframe</h3>
-                    <div class="footer-shade" />
-                  </template>
-                </module>
-              </router-link>
-              <router-link to="/wow-classic">
-                <module class="game-module">
-                  <template slot="body">
-                    <div class="image">
-                      <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
-                      <div class="shade" />
-                    </div>
-                  </template>
-                  <template slot="footer">
-                    <h3>World of Warcraft: Classic</h3>
-                    <div class="footer-shade" />
-                  </template>
-                </module>
-              </router-link>
+      <div class="container game-container">
+        <div class="container" />
+        <div class="container">
+          <div class="row">
+            <div class="nexushub-logo">
+              <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+              <span>.co</span>
             </div>
           </div>
 
-          <div class="row scrolldown">
-            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
+          <div class="row">
+            <h2 class="subtitle">
+              Providing you with the data for your daily grind!
+            </h2>
           </div>
+
+          <div class="row games">
+            <router-link to="/warframe">
+              <module class="game-module">
+                <template slot="body">
+                  <div class="image">
+                    <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
+                    <div class="shade" />
+                  </div>
+                </template>
+                <template slot="footer">
+                  <h3>Warframe</h3>
+                  <div class="footer-shade" />
+                </template>
+              </module>
+            </router-link>
+            <router-link to="/wow-classic">
+              <module class="game-module">
+                <template slot="body">
+                  <div class="image">
+                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
+                    <div class="shade" />
+                  </div>
+                </template>
+                <template slot="footer">
+                  <h3>World of Warcraft: Classic</h3>
+                  <div class="footer-shade" />
+                </template>
+              </module>
+            </router-link>
+          </div>
+        </div>
+
+        <div class="row scrolldown">
+          <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
         </div>
       </div>
 
@@ -137,9 +135,9 @@ export default {
   },
 
   head: {
-    title: 'NexusHub · Giving you the data for your daily grind!',
+    title: 'NexusHub · Providing you with the data for your daily grind!',
     meta: meta({
-      title: 'NexusHub · Giving you the data for your daily grind!',
+      title: 'NexusHub · Providing you with the data for your daily grind!',
       description: 'Get up-to-date trading data and prices for Warframe and World of Warcraft: Classic.'
     })
   }
@@ -150,36 +148,28 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-.landing-page {
-  align-items: center;
+.background-container {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: calc(100vh - 56px);
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
-
-  .background-container {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-  }
-  .background {
-    background: url('/img/warframe/index-blob.svg');
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    animation-name: pulse;
-    animation-timing-function: ease-in-out;
-    animation-duration: 35s;
-    animation-iteration-count: infinite;
-  }
 }
+.background {
+  background: url('/img/warframe/index-blob.svg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  animation-name: pulse;
+  animation-timing-function: ease-in-out;
+  animation-duration: 35s;
+  animation-iteration-count: infinite;
+}
+
 .row {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  flex-wrap: nowrap;
-
-  @media (max-width: $breakpoint-s) {
-    flex-wrap: wrap;
-  }
 }
 .games {
   padding-top: 35px;
@@ -198,7 +188,6 @@ export default {
 .game-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   position: relative;
   height: calc(100vh - 56px);
   min-height: 600px;
