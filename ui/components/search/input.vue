@@ -74,7 +74,7 @@ export default {
       // Only run if timeout isn't after search is done
       if (this.input.length > 1) {
         const query = encodeURIComponent(this.input)
-        result = await this.$cubic.get(`/warframe/v1/search/suggestions?query=${query}&limit=4`)
+        result = await this.$cubic.get(`/warframe/v1/suggestions?query=${query}&limit=4`)
       }
 
       // Found suggestions and input still matches result (may not if user types too fast)
