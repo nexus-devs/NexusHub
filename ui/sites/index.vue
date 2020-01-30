@@ -20,6 +20,36 @@
             <h2 class="subtitle">
               Providing you with the data for your daily grind!
             </h2>
+            <div class="row games">
+              <router-link to="/warframe">
+                <module class="game-module">
+                  <template slot="body">
+                    <div class="image">
+                      <img src="/img/ui/thumbnail-warframe-small.png" alt="Warframe Thumbnail">
+                      <div class="shade" />
+                    </div>
+                  </template>
+                  <template slot="footer">
+                    <h3>Warframe</h3>
+                    <div class="footer-shade" />
+                  </template>
+                </module>
+              </router-link>
+              <router-link to="/wow-classic">
+                <module class="game-module">
+                  <template slot="body">
+                    <div class="image">
+                      <img src="/img/ui/thumbnail-wow-classic-small.png" alt="World of Warcraft: Classic Thumbnail">
+                      <div class="shade" />
+                    </div>
+                  </template>
+                  <template slot="footer">
+                    <h3>World of Warcraft: Classic</h3>
+                    <div class="footer-shade" />
+                  </template>
+                </module>
+              </router-link>
+            </div>
           </div>
 
           <div class="row games">
@@ -222,8 +252,9 @@ export default {
   }
 
   .subtitle {
+    text-align: center;
     @media (max-width: $breakpoint-s) {
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
   }
 
@@ -266,11 +297,11 @@ export default {
 
   /deep/ .body {
     min-width: 320px;
-    min-height: 80px;
+    min-height: 75px;
 
     @media (max-width: $breakpoint-s) {
       min-width: 240px;
-      min-height: 70px;
+      min-height: 45px;
     }
 
     .image {
@@ -281,7 +312,7 @@ export default {
       z-index: 0;
 
       img {
-        width: 100%;
+          width: 100%;
       }
 
       .shade {
@@ -318,6 +349,10 @@ export default {
       font-size: 1.4em;
       @include uppercase;
       padding: 5px 10px;
+
+      @media (max-width: $breakpoint-s) {
+        font-size: 1.2em;
+      }
     }
   }
 }
