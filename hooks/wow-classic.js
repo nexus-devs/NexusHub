@@ -11,7 +11,7 @@ class Hook {
     const config = cubic.config.api
     const db = await mongodb.connect(config.mongoUrl, { useNewUrlParser: true })
     const verify = async (db, col, index) => {
-      return db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex(index)
+      return db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex(index, { background: true })
     }
 
     // Scan Data
