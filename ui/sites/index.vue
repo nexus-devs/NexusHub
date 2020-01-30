@@ -28,7 +28,7 @@
                 <module class="game-module">
                   <template slot="body">
                     <div class="image">
-                      <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
+                      <img src="/img/ui/thumbnail-warframe-small.png" alt="Warframe Thumbnail">
                       <div class="shade" />
                     </div>
                   </template>
@@ -42,7 +42,7 @@
                 <module class="game-module">
                   <template slot="body">
                     <div class="image">
-                      <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
+                      <img src="/img/ui/thumbnail-wow-classic-small.png" alt="World of Warcraft: Classic Thumbnail">
                       <div class="shade" />
                     </div>
                   </template>
@@ -198,14 +198,9 @@ export default {
 .game-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
   position: relative;
   height: calc(100vh - 56px);
   min-height: 600px;
-
-  @media (max-width: $breakpoint-m) {
-    padding: 0;
-  }
 
   .nexushub-logo {
     animation: fadeinUp 0.6s forwards;
@@ -237,8 +232,9 @@ export default {
   }
 
   .subtitle {
+    text-align: center;
     @media (max-width: $breakpoint-s) {
-      font-size: 1.2em;
+      font-size: 1.1em;
     }
   }
 
@@ -281,11 +277,11 @@ export default {
 
   /deep/ .body {
     min-width: 320px;
-    min-height: 80px;
+    min-height: 75px;
 
     @media (max-width: $breakpoint-s) {
       min-width: 240px;
-      min-height: 70px;
+      min-height: 45px;
     }
 
     .image {
@@ -296,7 +292,7 @@ export default {
       z-index: 0;
 
       img {
-        width: 100%;
+          width: 100%;
       }
 
       .shade {
@@ -333,6 +329,10 @@ export default {
       font-size: 1.4em;
       @include uppercase;
       padding: 5px 10px;
+
+      @media (max-width: $breakpoint-s) {
+        font-size: 1.2em;
+      }
     }
   }
 }
