@@ -2,61 +2,63 @@
   <div>
     <navigation :page-elements="this.$refs" />
     <app-content>
-      <div class="background-container">
-        <div class="background" />
-      </div>
+      <header>
+        <div class="background-container">
+          <div class="background" />
+        </div>
 
-      <div class="container game-container">
-        <div class="container" />
-        <div class="container">
-          <div class="row">
-            <div class="nexushub-logo">
-              <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
-              <span>.co</span>
+        <div class="container game-container">
+          <div class="container">
+            <div class="row">
+              <div class="nexushub-logo">
+                <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+                <span>.co</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <h2 class="subtitle">
+                Providing you with the data for your daily grind!
+              </h2>
+              <div class="row games">
+                <router-link to="/warframe">
+                  <module class="game-module">
+                    <template slot="body">
+                      <div class="image">
+                        <img src="/img/ui/thumbnail-warframe-small.png" alt="Warframe Thumbnail">
+                        <div class="shade" />
+                      </div>
+                    </template>
+                    <template slot="footer">
+                      <h3>Warframe</h3>
+                      <div class="footer-shade" />
+                    </template>
+                  </module>
+                </router-link>
+                <router-link to="/wow-classic">
+                  <module class="game-module">
+                    <template slot="body">
+                      <div class="image">
+                        <img src="/img/ui/thumbnail-wow-classic-small.png" alt="World of Warcraft: Classic Thumbnail">
+                        <div class="shade" />
+                      </div>
+                    </template>
+                    <template slot="footer">
+                      <h3>World of Warcraft: Classic</h3>
+                      <div class="footer-shade" />
+                    </template>
+                  </module>
+                </router-link>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <h2 class="subtitle">
-              Providing you with the data for your daily grind!
-            </h2>
-            <div class="row games">
-              <router-link to="/warframe">
-                <module class="game-module">
-                  <template slot="body">
-                    <div class="image">
-                      <img src="/img/ui/thumbnail-warframe-small.png" alt="Warframe Thumbnail">
-                      <div class="shade" />
-                    </div>
-                  </template>
-                  <template slot="footer">
-                    <h3>Warframe</h3>
-                    <div class="footer-shade" />
-                  </template>
-                </module>
-              </router-link>
-              <router-link to="/wow-classic">
-                <module class="game-module">
-                  <template slot="body">
-                    <div class="image">
-                      <img src="/img/ui/thumbnail-wow-classic-small.png" alt="World of Warcraft: Classic Thumbnail">
-                      <div class="shade" />
-                    </div>
-                  </template>
-                  <template slot="footer">
-                    <h3>World of Warcraft: Classic</h3>
-                    <div class="footer-shade" />
-                  </template>
-                </module>
-              </router-link>
-            </div>
+          <div class="row scrolldown">
+            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
           </div>
         </div>
+      </header>
 
-        <div class="row scrolldown">
-          <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
-        </div>
-      </div>
 
 
       <section ref="blog">
@@ -147,11 +149,15 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
+header {
+  position: relative;
+}
+
 .background-container {
   position: absolute;
   overflow: hidden;
   width: 100%;
-  height: calc(100vh - 56px);
+  height: 100%;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
 }
 .background {
@@ -192,6 +198,7 @@ export default {
   min-height: 600px;
 
   .nexushub-logo {
+    margin-top: 100px;
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
     margin-bottom: 20px;
