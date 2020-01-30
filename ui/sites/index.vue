@@ -2,52 +2,57 @@
   <div>
     <navigation :page-elements="this.$refs" />
     <app-content>
-      <div class="landing-page spa-section">
-        <div class="background-container">
-          <div class="background" />
-        </div>
+      <div class="landing-page">
+        <div class="container game-container">
+          <div class="background-container">
+            <div class="background" />
+          </div>
 
-        <div class="container">
-          <div class="row">
-            <div class="nexushub-logo">
-              <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
-              <span>.co</span>
+          <div class="container" />
+          <div class="container">
+            <div class="row">
+              <div class="nexushub-logo">
+                <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+                <span>.co</span>
+              </div>
             </div>
-          </div>
 
-          <div class="row">
-            <h2 class="subtitle">
-              Giving you the data for your daily grind!
-            </h2>
-          </div>
+            <div class="row">
+              <h2 class="subtitle">
+                Providing you with the data for your daily grind!
+              </h2>
+            </div>
 
-          <div class="row games">
-            <router-link to="/warframe">
-              <module class="game-module">
-                <template slot="body">
-                  <div class="image">
-                    <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
-                    <div class="shade" />
-                  </div>
-                </template>
-                <template slot="footer">
-                  <h3>Warframe</h3>
-                </template>
-              </module>
-            </router-link>
-            <router-link to="/wow-classic">
-              <module class="game-module">
-                <template slot="body">
-                  <div class="image">
-                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
-                    <div class="shade" />
-                  </div>
-                </template>
-                <template slot="footer">
-                  <h3>World of Warcraft: Classic</h3>
-                </template>
-              </module>
-            </router-link>
+            <div class="row games">
+              <router-link to="/warframe">
+                <module class="game-module">
+                  <template slot="body">
+                    <div class="image">
+                      <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
+                      <div class="shade" />
+                    </div>
+                  </template>
+                  <template slot="footer">
+                    <h3>Warframe</h3>
+                    <div class="footer-shade" />
+                  </template>
+                </module>
+              </router-link>
+              <router-link to="/wow-classic">
+                <module class="game-module">
+                  <template slot="body">
+                    <div class="image">
+                      <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
+                      <div class="shade" />
+                    </div>
+                  </template>
+                  <template slot="footer">
+                    <h3>World of Warcraft: Classic</h3>
+                    <div class="footer-shade" />
+                  </template>
+                </module>
+              </router-link>
+            </div>
           </div>
 
           <div class="row scrolldown">
@@ -56,12 +61,13 @@
         </div>
       </div>
 
-      <section ref="blog" class="spa-section">
+
+      <section ref="blog">
         <div class="container blog">
           <div class="row-margin">
             <div class="col-b-4">
               <h2 class="sub">
-                NexusHub Blog
+                News
               </h2>
               <blog-preview :blogpost="wowClassicAnnouncement" />
             </div>
@@ -144,13 +150,6 @@ export default {
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-.spa-section {
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 56px);
-  min-height: 600px;
-}
-
 .landing-page {
   align-items: center;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
@@ -196,16 +195,18 @@ export default {
   flex-direction: row;
   align-items: center;
 }
-.container {
+.game-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  width: 100%;
+  position: relative;
+  height: calc(100vh - 56px);
+  min-height: 600px;
 
   .nexushub-logo {
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
-    margin-top: 150px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
 
@@ -256,6 +257,8 @@ export default {
   margin: 15px;
   position: relative;
   overflow: hidden;
+  @include ease(0.2s);
+  transform: translateY(0);
 
   @media (max-width: $breakpoint-s) {
     margin-left: 0;
@@ -264,10 +267,7 @@ export default {
 
   &:hover {
     @include shadow-3;
-
-    /deep/ .footer {
-      background: rgba($color-bg-transparent, 0.8)
-    }
+    transform: translateY(-3px);
   }
 
   /deep/ .header {
@@ -309,14 +309,26 @@ export default {
     justify-content: space-around;
     position: relative;
     z-index: 1;
-    background: $color-bg-transparent;
+    background: transparent;
+
+    .footer-shade {
+      position: absolute;
+      z-index: 0;
+      height: 160px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      @include gradient-background(transparent, $color-bg-transparent);
+      @include ease(0.25s);
+    }
 
     h3 {
-      color: $color-primary;
+      position: relative;
+      z-index: 1;
+      font-family: 'Circular';
+      font-size: 1.4em;
       @include uppercase;
       padding: 5px 10px;
-      letter-spacing: 0.5;
-      position: relative;
     }
   }
 }
