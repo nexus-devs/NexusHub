@@ -51,37 +51,6 @@
               </router-link>
             </div>
           </div>
-
-          <div class="row games">
-            <router-link to="/warframe">
-              <module class="game-module">
-                <template slot="body">
-                  <div class="image">
-                    <img src="/img/ui/thumbnail-warframe.png" alt="Warframe Thumbnail">
-                    <div class="shade" />
-                  </div>
-                </template>
-                <template slot="footer">
-                  <h3>Warframe</h3>
-                  <div class="footer-shade" />
-                </template>
-              </module>
-            </router-link>
-            <router-link to="/wow-classic">
-              <module class="game-module">
-                <template slot="body">
-                  <div class="image">
-                    <img src="/img/ui/thumbnail-wow-classic.jpg" alt="World of Warcraft: Classic Thumbnail">
-                    <div class="shade" />
-                  </div>
-                </template>
-                <template slot="footer">
-                  <h3>World of Warcraft: Classic</h3>
-                  <div class="footer-shade" />
-                </template>
-              </module>
-            </router-link>
-          </div>
         </div>
 
         <div class="row scrolldown">
