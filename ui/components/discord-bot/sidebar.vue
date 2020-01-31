@@ -1,16 +1,19 @@
 <template>
   <nav>
     <div class="links">
-      <ad name="developers-api-article"/>
+      <ad name="developers-api-article" />
 
       <h3>General</h3>
-      <router-link to="/discord-bot/overview" exact>Overview</router-link>
+      <router-link to="/discord-bot/overview" exact>
+        Overview
+      </router-link>
 
       <div v-for="group in groups" :key="group.name">
         <h3>{{ group.name }}</h3>
         <router-link v-for="endpoint in group.endpoints" :key="endpoint.route + endpoint.method"
                      :to="`/developers/api/${group.name.replace(/ \/ /g, '-')}/${endpoint.name}`"
-                     exact>
+                     exact
+        >
           {{ endpoint.name }}
         </router-link>
       </div>
@@ -34,6 +37,13 @@ const reviver = (key, value) => {
 export default {
   components: {
     ad
+  },
+
+  async asyncData () {
+    const endpoints = await this.$cubic.get('/docs/endpoints')
+    // console.log(JSON.parse(endpoints, reviver)[0])
+
+    this.$store.commit('setDocsEndpoints', JSON.parse(endpoints, reviver))
   },
 
   computed: {
@@ -77,13 +87,6 @@ export default {
       this.$store.commit('setDocsGroups', groups)
       return groups
     }
-  },
-
-  async asyncData () {
-    const endpoints = await this.$cubic.get('/docs/endpoints')
-    // console.log(JSON.parse(endpoints, reviver)[0])
-
-    this.$store.commit('setDocsEndpoints', JSON.parse(endpoints, reviver))
   },
 
   storeModule: {

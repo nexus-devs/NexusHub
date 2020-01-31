@@ -12,11 +12,11 @@
         </div>
         <h3>{{ item.name }} {{ component.name }}</h3>
         <div class="price">
-          <indicator :diff="current - previous"/>
+          <indicator :diff="current - previous" />
           <span class="num">{{ current }}p</span>
           <br>
           <span class="diff">
-            {{ previous }}p (<price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously"/>)
+            {{ previous }}p (<price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously" />)
           </span>
         </div>
       </div>
@@ -24,7 +24,7 @@
 
     <!-- Middle panel / Graph -->
     <div v-if="active" class="users">
-      <user-prices :data="detailed.data"/>
+      <user-prices :data="detailed.data" />
     </div>
 
     <!-- Right panel -->
@@ -43,11 +43,11 @@
         <span class="num">
           {{ selected.price }}p
         </span>
-        <price-diff :current="current" :previous="selected.price" :type="selected.offer.toLowerCase()" unit="p" base="median"/>
+        <price-diff :current="current" :previous="selected.price" :type="selected.offer.toLowerCase()" unit="p" base="median" />
       </div>
       <div v-else class="inactive">
         <div class="circle">
-          <div class="inner"/>
+          <div class="inner" />
         </div>
         <div class="info">
           Click on a data point to show more details

@@ -1,14 +1,14 @@
 <template>
   <div class="popup">
-    <div class="overlay" @click="close"/>
+    <div class="overlay" @click="close" />
     <div class="popup-content">
       <div class="header">
-        <slot name="header"/>
+        <slot name="header" />
         <img src="/img/ui/close.svg" class="ico-h-20 interactive" alt="Close" @click="close">
       </div>
       <div class="body">
         <div class="body-content">
-          <slot name="body"/>
+          <slot name="body" />
         </div>
         <img src="/img/ui/popup-blob-bottom.svg" class="blob-bottom">
         <img src="/img/ui/popup-blob-top.svg" class="blob-top">

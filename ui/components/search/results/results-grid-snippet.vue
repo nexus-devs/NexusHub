@@ -2,10 +2,10 @@
   <div class="result col">
     <router-link :to="result.webUrl" :class="{ set: result.set }" class="interactive">
       <div class="result-img">
-        <div class="result-img-shade"/>
+        <div class="result-img-shade" />
         <img :src="result.imgUrl" :class="{ mod: result.imgUrl.includes('jpeg') }" :alt="result.name">
         <img :src="result.imgUrl" class="result-img-blur">
-        <p v-html="result.description"/>
+        <p>{{ result.description }}</p>
       </div>
       <div class="result-info">
         <span>{{ result.name }}</span>
@@ -15,7 +15,7 @@
           <span>{{ result._score ? result._score + ' ' + selection : 'No data' }} </span>
         </div>
         <div v-else>
-          <div v-for="filter in filters" v-if="filter.category === result.results" :key="filter.name" class="result-data-value col">
+          <div v-for="filter in correctFilters" :key="filter.name" class="result-data-value col">
             <div v-if="!filter.hidden && resolve(filter)">
               <img :src="filter.icon" :alt="filter.alt" class="ico-12">
               <span>{{ resolve(filter) }}{{ filter.unit }}</span>
@@ -33,6 +33,12 @@
 export default {
   props: ['result', 'filters', 'selection'],
 
+  computed: {
+    correctFilters () {
+      return this.filters.filter(f => f.category === this.result.results)
+    }
+  },
+
   methods: {
     // Helper function to access nested object keys
     // Required for getting values from filters
@@ -46,7 +52,7 @@ export default {
         })
         return result
       } catch (err) {
-        return
+
       }
     }
   }

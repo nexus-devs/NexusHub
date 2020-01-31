@@ -4,8 +4,8 @@
       <span>Last {{ days }} days</span>
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
-    <div :class="{ active }" class="dropdown">
-      <div class="body">
+    <div :class="[{ active }, theme.dropdown]" class="dropdown">
+      <div :class="theme.body" class="body">
         <span :class="{ active: days === 7 }" @click="fn(7); toggle()">Last 7 days</span>
         <span :class="{ active: days === 30 }" @click="fn(30); toggle()">Last 30 days</span>
         <span :class="{ active: days === 90 }" @click="fn(90); toggle()">Last 90 days</span>
@@ -17,12 +17,20 @@
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
+
 export default {
   props: ['days', 'fn'],
 
   data () {
     return {
       active: false
+    }
+  },
+
+  computed: {
+    theme () {
+      return getTheme(this)
     }
   },
 
@@ -35,6 +43,31 @@ export default {
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.dropdown {
+  background: $color-bg;
+}
+.body {
+  :global span:not(.active) {
+    color: $color-font-body;
+  }
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.dropdown {
+  background: $color-bg;
+}
+.body {
+  :global span:not(.active) {
+    color: $color-font-body;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -52,7 +85,6 @@ export default {
   position: absolute;
   top: 0;
   padding: 5px 0;
-  background: $color-bg;
   @include ease(0.15s);
   @include shade-1;
 
@@ -67,9 +99,6 @@ export default {
     }
     span:hover {
       background: rgba(0,0,0,0.15);
-    }
-    span:not(.active) {
-      color: $color-font-body;
     }
   }
   &:not(.active) {

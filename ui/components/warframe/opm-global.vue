@@ -1,5 +1,5 @@
 <template>
-  <opm :opm="opm"/>
+  <opm :opm="opm" />
 </template>
 
 
@@ -12,6 +12,11 @@ let updateInterval
 export default {
   components: {
     opm
+  },
+
+  async asyncData () {
+    const opm = await this.$cubic.get('/warframe/v1/orders/opm')
+    this.$store.commit('setOpmAll', opm)
   },
 
   computed: {
@@ -33,11 +38,6 @@ export default {
   beforeDestroy () {
     this.$cubic.unsubscribe(`/warframe/v1/orders/opm`)
     clearInterval(updateInterval)
-  },
-
-  async asyncData () {
-    const opm = await this.$cubic.get('/warframe/v1/orders/opm')
-    this.$store.commit('setOpmAll', opm)
   },
 
   storeModule

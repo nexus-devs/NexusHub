@@ -23,7 +23,9 @@ const ws = new WebSocket('wss://api.nexushub.co/ws', {
     </pre>
     <p>
       For more information on how to get an access token, check out the
-      <router-link to="/developers/api/authentication">authentication guide</router-link>.
+      <router-link to="/developers/api/authentication">
+        authentication guide
+      </router-link>.
     </p>
 
     <h2>Ping/Pong</h2>

@@ -9,10 +9,10 @@
 
     <template slot="body">
       <span class="highlight">{{ current }}p</span>
-      <price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously"/>
+      <price-diff :current="previous" :previous="current" type="buying" unit="p" base="previously" />
       <div class="graphs">
-        <sparkline :data="data.current" :compare="data.previous" :component="component.name"/>
-        <sparkline :data="data.previous" :ceil="ceil" class="sparkline-previous"/>
+        <sparkline :data="data.current" :compare="data.previous" :component="component.name" />
+        <sparkline :data="data.previous" :ceil="ceil" class="sparkline-previous" />
       </div>
       <div class="more">
         <div class="btn-subtle active" @click="fetchDetailed">
@@ -27,7 +27,7 @@
               {{ component.prices.buying.current.orders }}
             </span>
             <span :class="{ negative: orderDiff < 0 }" class="diff">
-              ( <indicator :diff="orderDiff.buying"/> {{ Math.abs(orderDiff.buying) }} )
+              ( <indicator :diff="orderDiff.buying" /> {{ Math.abs(orderDiff.buying) }} )
             </span>
           </div>
         </div>
@@ -38,14 +38,14 @@
               {{ component.prices.selling.current.orders }}
             </span>
             <span class="diff">
-              ( <indicator :diff="orderDiff.selling"/> {{ Math.abs(orderDiff.selling) }} )
+              ( <indicator :diff="orderDiff.selling" /> {{ Math.abs(orderDiff.selling) }} )
             </span>
           </div>
         </div>
       </div>
     </template>
     <template slot="footer">
-      <module-time :days="timerange" :fn="setTimerange"/>
+      <module-time :days="timerange" :fn="setTimerange" />
     </template>
   </module>
 </template>

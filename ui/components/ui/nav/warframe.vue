@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link to="/" exact>
+      <router-link to="/warframe" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
@@ -9,7 +9,7 @@
       <span class="shortcut">SHIFT + F</span>
     </search>
     <div class="col nav-r">
-      <notifications/>
+      <notifications />
     </div>
   </nav>
 </template>

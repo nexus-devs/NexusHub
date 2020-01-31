@@ -11,7 +11,7 @@
     </template>
     <template slot="body">
       <div class="row">
-        <div v-for="component in item.components" v-if="component.name !== 'Set'" :key="component.uniqueName" class="component col">
+        <div v-for="component in filteredComponents" :key="component.uniqueName" class="component col">
           <div class="component-wrapper interactive" @click="selectComponent(component.name)">
             <img :src="component.imgUrl" :alt="component.name">
             <span v-if="component.itemCount > 1" class="count">x{{ component.itemCount }}</span>
@@ -44,6 +44,9 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    filteredComponents () {
+      return this.item.components.filter(c => c.name !== 'Set')
     }
   },
 

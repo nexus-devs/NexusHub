@@ -1,5 +1,5 @@
 <template>
-  <opm :opm="opm"/>
+  <opm :opm="opm" />
 </template>
 
 
@@ -12,6 +12,12 @@ const title = (str) => str.toLowerCase().replace(/\b\w/g, l => l.toUpperCase())
 export default {
   components: {
     opm
+  },
+
+  async asyncData ({ route }) {
+    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
+    const opm = await this.$cubic.get(`/warframe/v1/orders/opm?item=${item}`)
+    this.$store.commit('setOpmItem', opm)
   },
 
   computed: {
@@ -43,12 +49,6 @@ export default {
   beforeDestroy () {
     this.$cubic.unsubscribe(`/warframe/v1/orders/opm?item=${this.item.name}`)
     clearInterval(updateInterval)
-  },
-
-  async asyncData ({ route }) {
-    const item = title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-'))
-    const opm = await this.$cubic.get(`/warframe/v1/orders/opm?item=${item}`)
-    this.$store.commit('setOpmItem', opm)
   },
 
   storeModule: {

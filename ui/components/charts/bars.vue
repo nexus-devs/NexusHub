@@ -3,11 +3,11 @@
     <svg ref="bars" :width="width + 200" :height="height + 5">
       <g v-for="(d, i) in points" :key="`bar-${i}`">
         <g class="bar-wrapper">
-          <rect :height="d.y" :width="barWidth" :x="d.x" :y="height - d.y + 6" class="bar"/>
-          <rect :height="2" :width="barWidth" :x="d.x" :y="height - d.y + 2" class="cap"/>
+          <rect :height="d.y" :width="barWidth" :x="d.x" :y="height - d.y + 6" class="bar" />
+          <rect :height="2" :width="barWidth" :x="d.x" :y="height - d.y + 2" class="cap" />
         </g>
         <g class="tooltip">
-          <rect :x="d.x + 12" height="60px" width="120px"/>
+          <rect :x="d.x + 12" height="60px" width="120px" />
           <text :x="d.x + 20" y="22px" class="title">{{ data.length - i }} mins ago</text>
           <text :x="d.x + 20" y="48px" class="num">{{ data[i] }}</text>
         </g>

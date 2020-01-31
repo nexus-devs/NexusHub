@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ offline }" class="status">
+  <div :class="[{ offline }, theme.status]" class="status">
     <img src="/img/ui/status-loading.svg" class="ico-h-24" alt="loading">
     <p>{{ offline ? 'Connecting to the NexusHub API...' : 'Connected!' }}</p>
   </div>
@@ -8,8 +8,13 @@
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
+
 export default {
   computed: {
+    theme () {
+      return getTheme(this)
+    },
     offline () {
       return this.$store.state.api.offline
     }
@@ -42,6 +47,23 @@ export default {
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.status {
+  color: $color-font-body;
+  background: $color-bg-darkest;
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.status {
+  color: $color-font-body;
+  background: $color-bg-darkest;
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
@@ -56,11 +78,9 @@ export default {
   width: 100%;
   @include uppercase;
   font-size: 0.9em;
-  color: $color-font-body;
   z-index: 1;
   transform: translateY(-40px);
   transition-delay: 1s;
-  background: $color-bg-darkest;
   @include shadow-1;
   @include ease(0.35s);
 

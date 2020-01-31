@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <ui-header>
         <h1>Hey {{ user }}!</h1>

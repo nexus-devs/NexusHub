@@ -1,72 +1,76 @@
 <template>
   <div>
-    <navigation/>
+    <navigation :page-elements="this.$refs" />
     <app-content>
       <header>
         <div class="background-container">
-          <div class="background"/>
+          <div class="background" />
         </div>
-        <div class="container search-container">
-          <div class="search-logo">
-            <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
-            <span>.co</span>
+
+        <div class="container game-container">
+          <div class="container">
+            <div class="row">
+              <div class="nexushub-logo">
+                <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo">
+                <span>.co</span>
+              </div>
+            </div>
+
+            <div class="row">
+              <h2 class="subtitle">
+                Providing you with the data for your daily grind!
+              </h2>
+              <div class="row games">
+                <router-link to="/warframe">
+                  <module class="game-module">
+                    <template slot="body">
+                      <div class="image">
+                        <img src="/img/ui/thumbnail-warframe-small.png" alt="Warframe Thumbnail">
+                        <div class="shade" />
+                      </div>
+                    </template>
+                    <template slot="footer">
+                      <h3>Warframe</h3>
+                      <div class="footer-shade" />
+                    </template>
+                  </module>
+                </router-link>
+                <router-link to="/wow-classic">
+                  <module class="game-module">
+                    <template slot="body">
+                      <div class="image">
+                        <img src="/img/ui/thumbnail-wow-classic-small.png" alt="World of Warcraft: Classic Thumbnail">
+                        <div class="shade" />
+                      </div>
+                    </template>
+                    <template slot="footer">
+                      <h3>World of Warcraft: Classic</h3>
+                      <div class="footer-shade" />
+                    </template>
+                  </module>
+                </router-link>
+              </div>
+            </div>
           </div>
 
-          <div class="search-bar">
-            <search :focus="true"/>
-            <search-button/>
+          <div class="row scrolldown">
+            <img src="/img/ui/arrow-right.svg" class="ico-h-32 interactive" alt="Scroll down" @click="scrollDown()">
           </div>
-
-          <h2>Never miss out on a trade again!</h2>
         </div>
       </header>
 
-      <!-- Realtime Orders -->
-      <section>
-        <div class="container">
-          <div class="row-margin overview">
-            <div class="col-b-4">
-              <h2 class="sub">Market Overview</h2>
-              <div class="realtime">
-                <opm/>
-                <div class="most-traded row">
-                  <router-link v-for="order in opm.mostTraded" :key="order.item" :to="`/warframe/items/${order.item.split(' ').join('-').toLowerCase()}/trading`" class="item col interactive">
-                    <module>
-                      <template slot="header">
-                        <div class="img">
-                          <object :data="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.png`" type="image/png">
-                            <img :src="`/img/warframe/items/${order.item.split(' ').join('-').toLowerCase()}.jpeg`" :alt="order.item">
-                          </object>
-                        </div>
-                        <h3>{{ order.item }}</h3>
-                      </template>
-                      <template slot="body">
-                        <span class="highlight">{{ order.amount }}</span>
-                        <br>
-                        <span class="sub"> Orders for {{ order.item }}</span>
-                      </template>
-                    </module>
-                  </router-link>
-                </div>
-              </div>
-            </div>
-            <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity/>
-            </div>
-          </div>
-          <ad name="warframe-index-market-overview"/>
-        </div>
-      </section>
 
-      <!-- Patch logs -->
-      <section>
-        <div class="container">
-          <h2 class="sub">Latest Patchlogs</h2>
-          <div class="row-margin patchlogs">
-            <patchlog v-for="patchlog in patchlogs" :key="patchlog.date" :patchlog="patchlog" :overview="true" class="col-b"/>
+
+      <section ref="blog">
+        <div class="container blog">
+          <div class="row-margin">
+            <div class="col-b-4">
+              <h2 class="sub">
+                News
+              </h2>
+              <blog-preview :blogpost="wowClassicAnnouncement" />
+            </div>
           </div>
-          <ad name="warframe-index-patchlogs"/>
         </div>
       </section>
     </app-content>
@@ -74,170 +78,132 @@
 </template>
 
 
-
 <script>
-import activity from 'src/components/warframe/activity.vue'
-import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import blogPreview from 'src/components/blog/blog-preview.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
-import navigation from 'src/components/ui/nav/warframe.vue'
-import opm from 'src/components/warframe/opm-global.vue'
-import patchlog from 'src/components/warframe/patchlog.vue'
-import search from 'src/components/search/input.vue'
-import searchButton from 'src/components/search/modules/button.vue'
-import storeModule from 'src/store/warframe/warframe.js'
+import navigation from 'src/components/ui/nav/index.vue'
 
 export default {
   components: {
-    ad,
-    navigation,
     appContent,
-    opm,
-    activity,
+    blogPreview,
     module,
-    patchlog,
-    search,
-    searchButton
+    navigation
   },
 
-  computed: {
-    opm () {
-      return this.$store.state.opm.all
-    },
-    activity () {
-      return this.$store.state.busyhours.data
-    },
-    patchlogs () {
-      return this.$store.state.warframe.patchlogs
+  data () {
+    return {
+      wowClassicAnnouncement: {
+        title: 'World of Warcraft: Classic announced!',
+        date: '2020-01-30 17:00',
+        content: [
+          'We\'re very happy to announce the launch of a Classic WoW Auction House database and website that we\'ve spent the last few months working on together with TradeSkillMaster!',
+          'Through NexusHub, you can monitor and report on current item prices on the Classic WoW Auction House as well as dive in to pricing history for all realms and factions in both regions, completely free. With this data we\'re also able to offer estimated Crafting profits and material price information for your convenience.',
+          'In addition, the entire database is available in a fully open and free <a href="https://nexushub.co/developers/api/General/foo">API</a> to integrate in your gold-making spreadsheets, apps or services.',
+          'We\'re keen to continue working with TSM and integrating related or requested features on to the site (think having the website notice you when an item hits your sniper price without having to monitor the AH in-game).',
+          'You can access the site on desktop and mobile via <a href="https://wow-classic.nexushub.co/">wow-classic.nexushub.co</a> or <a href="https://nexushub.co/wow-classic">nexushub.co/wow-classic</a>',
+          'Please share your feedback and questions, we are very excited to hear how you make use of this new tool!'
+        ]
+      }
     }
   },
 
-  async asyncData () {
-    this.$store.commit('setWarframePatchlogs', await this.$cubic.get('/warframe/v1/patchlogs'))
+  mounted () {
+    window.addEventListener('scroll', this.updateOnScroll)
   },
 
-  storeModule,
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.updateOnScroll)
+  },
+
+  methods: {
+    scrollDown () {
+      const el = this.$refs.blog
+      const position = el.getBoundingClientRect().top + window.pageYOffset - 56 // Absolute position + Navbar offset
+      window.scrollTo({ top: position, behavior: 'smooth' })
+    },
+    updateOnScroll () {
+      const blogEl = this.$refs.blog
+      const blogPosition = blogEl.getBoundingClientRect().top + window.pageYOffset - 56 // Absolute position + Navbar offset
+      const viewportHeight = window.innerHeight
+
+      let page = 'Start'
+      if (window.scrollY >= blogPosition - (viewportHeight / 2)) page = 'Blog'
+      this.$store.commit('setActivePage', page)
+    }
+  },
 
   head: {
-    title: 'NexusHub · Never miss out on a trade again!',
+    title: 'NexusHub · Providing you with the data for your daily grind!',
     meta: meta({
-      title: 'NexusHub · Never miss out on a trade again!',
-      description: 'Get real-time trading data and prices from more than 100,000 players in Warframe\'s Trade Chat, Warframe Market and more.'
+      title: 'NexusHub · Providing you with the data for your daily grind!',
+      description: 'Get up-to-date trading data and prices for Warframe and World of Warcraft: Classic.'
     })
   }
 }
 </script>
 
 
-
 <style lang='scss' scoped>
 @import '~src/styles/partials/importer';
 
-/**
- * Keyframes for search bar
- */
-@keyframes fadeinUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes moveUp {
-  from {
-    transform: translateY(30px);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-@keyframes pulse {
-  0% {
-    transform: scaleX(1);
-  }
-  50% {
-    transform: scale3d(1.15,1.15,1.15);
-  }
-  100% {
-    transform: scaleX(1);
-  }
-}
-
 header {
   position: relative;
-  display: flex;
-  height: 45vh;
-  min-height: 400px;
+}
+
+.background-container {
+  position: absolute;
+  overflow: hidden;
   width: 100%;
-  align-items: center;
+  height: 100%;
   @include gradient-background-dg($color-bg-lighter, $color-bg-light);
+}
+.background {
+  background: url('/img/warframe/index-blob.svg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  animation-name: pulse;
+  animation-timing-function: ease-in-out;
+  animation-duration: 35s;
+  animation-iteration-count: infinite;
+}
 
-  .background-container {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+.row {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.games {
+  padding-top: 35px;
+  padding-bottom: 35px;
+  justify-content: center;
+
+  @media (max-width: $breakpoint-s) {
+    padding-top: 10px;
+    padding-bottom: 0;
   }
-  .background {
-    background: url('/img/warframe/index-blob.svg');
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    animation-name: pulse;
-    animation-timing-function: ease-in-out;
-    animation-duration: 35s;
-    animation-iteration-count: infinite;
-  }
+}
+.blog {
+  flex-direction: row;
+  align-items: center;
+}
+.game-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: calc(100vh - 56px);
+  min-height: 600px;
 
-  /**
-  * Search bar
-  */
-  .search-container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-
-    h2 {
-      margin-top: 30px;
-      text-align: center;
-      opacity: 0;
-      animation: fadeinUp 0.6s forwards;
-      animation-delay: 0.3s;
-    }
-  }
-
-  /deep/ .search-button {
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    z-index: 2;
-
-    .text {
-      display: none;
-    }
-  }
-
-  .search-bar {
-    position: relative;
-    z-index: 1; // Overlay slogan beneath search bar with suggestions
-    margin-top: 20px;
-    opacity: 0;
-    animation: fadeinUp 0.6s forwards;
-    animation-delay: 0.2s;
-    width: 55%;
-  }
-
-  .search-logo {
-    display: flex;
-    align-items: center;
-    opacity: 0;
+  .nexushub-logo {
+    margin-top: 100px;
     animation: fadeinUp 0.6s forwards;
     animation-delay: 0.1s;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 
     .logo {
       height: 50px;
@@ -245,223 +211,123 @@ header {
     span {
       font-size: 2.2em;
       color: white;
-      font-family: 'Circular'
+      font-family: 'Circular';
     }
-  }
 
-  @media (max-width: $breakpoint-m) {
-    .search-bar {
-      width: 100% !important;
-    }
-  }
-  @media (max-width: $breakpoint-s) {
-    min-height: 320px;
-    height: 35vh;
+    @media (max-width: $breakpoint-s) {
+      margin-top: 35px;
 
-    .logo {
-      height: 40px !important;
-    }
-    .search-logo span {
-      font-size: 1.8em !important;
-    }
-    .search-bar {
-      margin-top: 15px !important;
-      width: 100% !important;
-    }
-  }
-
-  // Search fields
-  /deep/ .search .field {
-    position: relative;
-    margin: auto;
-    border-radius: 999px;
-    background: $color-bg-dark;
-    z-index: 2;
-    width: 100%;
-
-    label {
-      display: none;
-    }
-    input, .input {
-      position: relative;
-      z-index: 2;
-      display: inline-block;
-      color: white;
-      width: 100%;
-      padding: 14px 18px;
-      @include ease(0.15s);
-
-      &::placeholder {
-        color: $color-font-subtle !important;
+      .logo {
+        height: 40px !important;
       }
+
       span {
-        @include ease(0.15s);
-      }
-    }
-    .autocomplete {
-      position: absolute;
-      left: 18px;
-      top: 14px;
-      z-index: 1;
-    }
-    .autocomplete-type {
-      position: absolute;
-      z-index: 1;
-      right: 70px; // beyond search button
-      top: 14px;
-
-      @media (max-width: $breakpoint-s) {
-        display: none; // Would clip with input
+        font-size: 1.8em !important;
       }
     }
   }
 
-  /deep/ .tools {
-    position: absolute;
-    border-radius: 2px;
-    background: $color-bg-dark;
-    width: 100%;
-    margin-top: -25px; // Reach center of input radius
-    z-index: 0;
-    @include shade-0;
+  .subtitle {
+    text-align: center;
+    @media (max-width: $breakpoint-s) {
+      font-size: 1.1em;
+    }
+  }
 
-    // Input Suggestions
-    .suggestion {
-      padding: 15px;
-      cursor: pointer;
+  .scrolldown {
+    margin-top: auto;
+    margin-bottom: 100px;
 
-      &:hover {
-        background: $color-bg-darker;
-      }
-      &:first-of-type {
-        padding-top: 40px;
-      }
-      .ico-36 {
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        border-radius: 2px;
-        margin-right: 10px;
+    @media (max-width: $breakpoint-m) {
+      margin-bottom: 30px;
+    }
 
-        img {
-          position: relative;
-          left: -50%;
-          max-width: 200%;
-          z-index: 1;
-        }
-      }
-      .suggestion-main {
-        display: inline-block;
-        vertical-align: middle;
-
-        .suggestion-name, .suggestion-type {
-          display: block;
-        }
-        .suggestion-name {
-          color: white;
-        }
-        .suggestion-type {
-          margin-top: -3px;
-          font-size: 0.9em;
-        }
-      }
-      .suggestion-data {
-        display: inline-block;
-        vertical-align: middle;
-        float: right;
-        font-family: 'Circular';
-        font-size: 0.9em;
-        color: white;
-        margin: 7px 0;
-        padding: 3px 10px;
-      }
+    img {
+      transform: rotate(90deg);
+      background: rgba(200,225,255,0.1);
     }
   }
 }
 
-#app {
-  .realtime {
-    display: inline-flex;
+.game-module {
+  margin: 15px;
+  position: relative;
+  overflow: hidden;
+  @include ease(0.2s);
+  transform: translateY(0);
 
-    @media (max-width: $breakpoint-s) {
-      flex-direction: column;
-    }
+  @media (max-width: $breakpoint-s) {
+    margin-left: 0;
+    margin-right: 0;
   }
-  .most-traded {
+
+  &:hover {
+    @include shadow-3;
+    transform: translateY(-3px);
+  }
+
+  /deep/ .header {
     position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    flex-wrap: wrap;
-    margin-left: 20px;
-    margin-right: -15px;
-    margin-bottom: -15px;
+    z-index: 1;
+  }
 
-    .item {
-      padding: 0;
-      border-radius: 2px;
-      flex-basis: 33%;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      transition-duration: 0.5s !important;
+  /deep/ .body {
+    min-width: 320px;
+    min-height: 75px;
 
-      &:hover {
-        @include gradient-background-dg(#3c4451, #353d49);
-      }
-      &:before {
-        border-radius: 2px;
-      }
-      &:nth-of-type(n + 5) {
-        display: none;
-      }
-      /deep/ .header {
-        padding: 20px 20px 0;
-      }
-      /deep/ .body {
-        padding: 0 25px 5px;
-        margin-top: 20px;
-
-        .highlight {
-          font-size: 1.3em;
-        }
-        .sub {
-          display: inline-block;
-          margin-top: 2px;
-          font-size: 0.85em;
-          color: $color-font-body;
-        }
-      }
-    }
     @media (max-width: $breakpoint-s) {
-      margin-left: 0;
-      margin-top: 20px;
+      min-width: 240px;
+      min-height: 45px;
     }
-  }
 
-  .overview {
-    margin: -20px;
+    .image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 0;
 
-    & > *[class*="col-b"] {
-      margin: 20px;
-    }
-  }
-
-  .activity-data {
-    @media (max-width: $breakpoint-m) {
-      flex-basis: 100%;
-    }
-  }
-
-  .patchlogs {
-    justify-content: flex-start;
-
-    /deep/ .patchlog {
-      width: 33%;
-
-      @media (max-width: $breakpoint-m) {
-        max-width: calc(50% - 20px);
+      img {
+        width: 100%;
       }
+
+      .shade {
+        position: absolute;
+        top: 1px; // 1px because the bottom may not cover the image on high res screens
+        height: 100%;
+        width: 100%;
+        @include gradient-background(transparent, rgba(59, 66, 79, 0.3));
+      }
+    }
+  }
+
+  /deep/ .footer {
+    justify-content: space-around;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+
+    .footer-shade {
+      position: absolute;
+      z-index: 0;
+      height: 160px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      @include gradient-background(transparent, $color-bg-transparent);
+      @include ease(0.25s);
+    }
+
+    h3 {
+      position: relative;
+      z-index: 1;
+      font-family: 'Circular';
+      font-size: 1.4em;
+      @include uppercase;
+      padding: 5px 10px;
+
       @media (max-width: $breakpoint-s) {
-        max-width: none;
+        font-size: 1.2em;
       }
     }
   }

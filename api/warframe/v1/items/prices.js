@@ -59,7 +59,7 @@ class Prices extends Endpoint {
     const platform = req.query.platform
     const item = await this.db.collection('items').findOne({ name })
     if (!item) {
-      let response = {
+      const response = {
         error: `Could not find data for ${item}.`,
         reason: 'Item doesn\'t exist.'
       }
@@ -167,20 +167,24 @@ class Prices extends Endpoint {
     if (params.source) query.source = params.source
     if (params.platform) query.platform = params.platform
     const result = await this.db.collection('orders').aggregate([
-      { $match: {
-        ...{
-          createdAt: { $gte: start.toDate(), $lte: end.toDate() }
-        },
-        ...query,
-        ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
-      } },
-      { $group: {
-        _id: '$offer',
-        orders: { $sum: 1 },
-        median: { $avg: '$price' },
-        min: { $min: '$price' },
-        max: { $max: '$price' }
-      } }
+      {
+        $match: {
+          ...{
+            createdAt: { $gte: start.toDate(), $lte: end.toDate() }
+          },
+          ...query,
+          ...(median ? { price: { $gte: median * 0.3, $lte: median * 3 } } : {})
+        }
+      },
+      {
+        $group: {
+          _id: '$offer',
+          orders: { $sum: 1 },
+          median: { $avg: '$price' },
+          min: { $min: '$price' },
+          max: { $max: '$price' }
+        }
+      }
     ]).toArray()
 
     return result

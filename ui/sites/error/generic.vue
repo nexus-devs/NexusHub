@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <div class="container err">
         <h1>{{ error.code }} - {{ error.error }}</h1>

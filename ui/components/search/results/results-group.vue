@@ -29,16 +29,18 @@
     <!-- Content -->
     <div :style="{ height: `${listHeight}px` }" class="results-container">
       <transition-group ref="grid" :class="{ active: listType === 'grid' }" name="list" class="result-grid list">
-        <item-grid v-for="result in results" :key="result.name" :result="result" :filters="filters" :selection="selection"/>
+        <item-grid v-for="result in results" :key="result.name" :result="result" :filters="filters" :selection="selection" />
       </transition-group>
       <transition-group ref="list" :class="{ active: listType === 'list' }" name="list" class="result-list list">
-        <item-list v-for="result in results" :key="result.name" :result="result" :filters="filters" class="result row"/>
+        <item-list v-for="result in results" :key="result.name" :result="result" :filters="filters" class="result row" />
       </transition-group>
     </div>
 
     <div class="add-items">
       Think we missed an item?
-      <router-link to="/contact">Let us know</router-link> or
+      <router-link to="/contact">
+        Let us know
+      </router-link> or
       <a href="https://github.com/nexus-devs/warframe-items" target="_blank">add items yourself</a> if you
       wanna help us support the project.
     </div>

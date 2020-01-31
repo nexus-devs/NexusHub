@@ -8,7 +8,7 @@
             {{ supply.count }}
           </span>
           <span :class="{ 'inline-data-increase': supply.diff > 0 }" class="diff">
-            <indicator :diff="supply.diff"/>
+            <indicator :diff="supply.diff" />
             {{ supply.diff }}%
           </span>
         </div>
@@ -18,23 +18,27 @@
             {{ demand.count }}
           </span>
           <span :class="{ 'inline-data-increase': demand.diff > 0 }" class="diff">
-            <indicator :diff="demand.diff"/>
+            <indicator :diff="demand.diff" />
             {{ demand.diff }}%
           </span>
         </div>
-        <div class="col"><!-- Dummy --></div>
+        <div class="col">
+          <!-- Dummy -->
+        </div>
       </div>
       <div class="col-b disabled">
         <label>Platform</label>
         <div v-for="d in platform" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
-             type="button" @click="select('platform', d)">
+             type="button" @click="select('platform', d)"
+        >
           <span>{{ d.name }}</span>
         </div>
       </div>
       <div class="col-b disabled">
         <label>Data Source</label>
         <div v-for="d in source" :key="d.name" :class="{ active: !d.inactive, disabled: d.disabled }" class="btn-subtle"
-             type="button" @click="select('source', d)">
+             type="button" @click="select('source', d)"
+        >
           <span>{{ d.name }}</span>
         </div>
       </div>

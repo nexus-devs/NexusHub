@@ -1,12 +1,12 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <div class="content-wrapper">
-        <sidebar-nav/>
+        <sidebar-nav />
         <section>
           <!-- Manual Documentation -->
-          <slot v-if="!endpoint"/>
+          <slot v-if="!endpoint" />
 
           <!-- Auto-generated endpoint -->
           <div v-else>
@@ -48,7 +48,7 @@
             <div v-if="endpoint.method !== 'GET'" class="sub-section">
               <h2>Request Format</h2>
               <pre v-highlightjs="stringify(endpoint.request.body)">
-                <code class="javascript"/>
+                <code class="javascript" />
               </pre>
             </div>
             <div v-if="endpoint.response || example" class="sub-section">
@@ -59,7 +59,7 @@
                 </div>
               </div>
               <pre v-highlightjs="stringify(example) || stringify(endpoint.response)">
-                <code class="javascript"/>
+                <code class="javascript" />
               </pre>
             </div>
 
@@ -68,18 +68,21 @@
               <h2>Query Params</h2>
               <div v-for="query in endpoint.query" :key="query.name">
                 <h3>{{ query.name }}{{ query.required ? ' (required)' : '' }}</h3>
-                <p v-if="query.description">{{ query.description }}</p>
+                <p v-if="query.description">
+                  {{ query.description }}
+                </p>
                 <div v-if="query.default !== undefined">
                   <h4>Default</h4>
                   <pre v-highlightjs="typeof query.default === 'string' && (query.default.startsWith('function') || query.default.startsWith('() => '))
-                  ? query.default : stringify(query.default)">
-                    <code class="javascript"/>
+                    ? query.default : stringify(query.default)"
+                  >
+                    <code class="javascript" />
                   </pre>
                 </div>
               </div>
             </div>
 
-            <ad name="developers-api-article"/>
+            <ad name="developers-api-article" />
           </div>
         </section>
       </div>
@@ -171,6 +174,7 @@ export default {
         return groups.find(g => g.name === group.replace(/\-/g, ' / '))
           .endpoints.find(e => e.name === name)
       }
+      return {}
     }
   },
 

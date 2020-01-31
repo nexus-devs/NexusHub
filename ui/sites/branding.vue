@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <ui-header>
         <img src="/img/brand/nexushub-typeface-bw.svg" alt="NexusHub">
@@ -26,17 +26,10 @@
               </div>
             </div>
             <div class="col logo">
-              <img src="/img/brand/nexushub-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
+              <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
               <div class="logo-download">
-                <a href="/img/brand/nexushub-logo-typeface-bw.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-bw.png" download>.png</a>
-              </div>
-            </div>
-            <div class="col logo">
-              <img src="/img/brand/nexushub-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
-              <div class="logo-download">
-                <a href="/img/brand/nexushub-logo-typeface-b.svg" download>.svg</a>
-                <a href="/img/brand/nexushub-logo-typeface-b.png" download>.png</a>
+                <a href="/img/brand/nexushub-logo-typeface-wow-classic.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-wow-classic.png" download>.png</a>
               </div>
             </div>
           </div>
@@ -55,6 +48,38 @@
                 <a href="/img/brand/nexushub-logo-typeface-v-color.png" download>.png</a>
               </div>
             </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexushub-logo-color-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-color-wow-classic.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-color-wow-classic.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo-alt">
+              <img src="/img/brand/nexushub-logo-typeface-v-color-wow-classic.svg" alt="Full Color NexusHub WoW Classic Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-v-color-wow-classic.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-v-color-wow-classic.png" download>.png</a>
+              </div>
+            </div>
+          </div>
+          <div class="row-margin">
+            <div class="col logo">
+              <img src="/img/brand/nexushub-logo-typeface-bw.svg" alt="Black/White NexusHub Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-bw.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-bw.png" download>.png</a>
+              </div>
+            </div>
+            <div class="col logo">
+              <img src="/img/brand/nexushub-logo-typeface-b.svg" alt="Full Color NexusHub Logo">
+              <div class="logo-download">
+                <a href="/img/brand/nexushub-logo-typeface-b.svg" download>.svg</a>
+                <a href="/img/brand/nexushub-logo-typeface-b.png" download>.png</a>
+              </div>
+            </div>
+          </div>
+          <div class="row row-margin">
             <div class="col logo-alt">
               <img src="/img/brand/nexushub-logo-bw.svg" alt="Black/White NexusHub Logo">
               <div class="logo-download">
@@ -94,7 +119,7 @@
           <div class="row-margin">
             <div class="col-b color">
               <div class="primary-shade green">
-                <span/>
+                <span />
                 <span>#39e56f</span>
               </div>
               <div class="sub-shade green-shade">
@@ -103,7 +128,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade blue">
-                <span/>
+                <span />
                 <span>#15ced6</span>
               </div>
               <div class="sub-shade blue-shade">
@@ -112,7 +137,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade grey">
-                <span/>
+                <span />
                 <span>#8b97a8</span>
               </div>
               <div class="sub-shade grey-shade">
@@ -121,7 +146,7 @@
             </div>
             <div class="col-b color">
               <div class="primary-shade dark">
-                <span/>
+                <span />
                 <span>#21232a</span>
               </div>
               <div class="sub-shade dark-shade">
@@ -129,6 +154,51 @@
               </div>
             </div>
           </div>
+
+          <section>
+            <h2>World of Warcraft Classic Colors</h2>
+            <p>
+              These are the colors our WoW Classic section uses.
+            </p>
+            <div class="row-margin">
+              <div class="col-b color">
+                <div class="primary-shade yellow">
+                  <span />
+                  <span>#e6ad02</span>
+                </div>
+                <div class="sub-shade yellow-shade">
+                  <span>#e0b534</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade blizzard-blue">
+                  <span />
+                  <span>#00c0ff</span>
+                </div>
+                <div class="sub-shade blizzard-blue-shade">
+                  <span>#23acd9</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade brown">
+                  <span />
+                  <span>#a59787</span>
+                </div>
+                <div class="sub-shade brown-shade">
+                  <span>#3b332d</span>
+                </div>
+              </div>
+              <div class="col-b color">
+                <div class="primary-shade dark-brown">
+                  <span />
+                  <span>#252120</span>
+                </div>
+                <div class="sub-shade dark-brown-shade">
+                  <span>#151310</span>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
       </div>
     </app-content>
@@ -187,6 +257,10 @@ header {
 
 .row-margin {
   margin: -5px;
+
+  &:nth-of-type(3) {
+    margin-top: 20px;
+  }
 
   .col, .col-b {
     margin: 5px;
@@ -271,6 +345,30 @@ header {
     }
     .dark-shade {
       background: $color-bg-darker;
+    }
+    .yellow {
+      background: #e6ad02;
+    }
+    .yellow-shade {
+      background: #e0b534;
+    }
+    .blizzard-blue {
+      background: #00c0ff;
+    }
+    .blizzard-blue-shade {
+      background: #23acd9;
+    }
+    .brown {
+      background: #a59787;
+    }
+    .brown-shade {
+      background: #3b332d;
+    }
+    .dark-brown {
+      background: #252120;
+    }
+    .dark-brown-shade {
+      background: #151310;
     }
   }
 }

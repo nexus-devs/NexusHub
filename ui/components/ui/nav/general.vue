@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <div class="col nav-r">
-      <notifications/>
+      <notifications />
     </div>
   </nav>
 </template>

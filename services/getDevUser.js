@@ -7,7 +7,7 @@ async function getDevUser () {
       .find(e => e.name === endpoint).file
   }
   let userKey
-  let userSecret = 'dev'
+  const userSecret = 'dev'
 
   // In dev mode: Register new user if necessary and give it root perms
   const Register = getEndpointFile('register')

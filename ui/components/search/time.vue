@@ -1,13 +1,13 @@
 <template>
   <div class="col-b time">
     <div :class="{ active }" class="field">
-      <label>Time</label><br >
+      <label>Time</label><br>
       <div class="input interactive" @click="toggle">
         <span :class="{ selected: selected === 'start' }">{{ from }}</span> -
         <span :class="{ selected: selected === 'end' }">{{ to }}</span>
         <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
       </div>
-      <slot/>
+      <slot />
     </div>
     <div :class="{ active }" class="tools timepicker">
       <div class="suggestions row">

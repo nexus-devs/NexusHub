@@ -6,28 +6,28 @@ let config = { api: {}, client: {}, server: {}, webpack: { skipBuild: prod } }
 // Use some adaptions when inside docker, especially database connections.
 if (process.env.DOCKER && prod && node === 'ui') {
   const fs = require('fs')
-  const certPublic = fs.readFileSync(`/run/secrets/nexus-public-key`, 'utf-8')
-  const dbSecret = fs.readFileSync(`/run/secrets/mongo-admin-pwd`, 'utf-8').trim()
+  const certPublic = fs.readFileSync('/run/secrets/nexus-public-key', 'utf-8')
+  const dbSecret = fs.readFileSync('/run/secrets/mongo-admin-pwd', 'utf-8').trim()
   const mongoUrl = `mongodb://admin:${dbSecret}@mongo/admin?replicaSet=nexus`
   const redisUrl = 'redis://redis'
-  const userKey = fs.readFileSync(`/run/secrets/nexus-cubic-key`, 'utf-8').trim()
-  const userSecret = fs.readFileSync(`/run/secrets/nexus-cubic-secret`, 'utf-8').trim()
+  const userKey = fs.readFileSync('/run/secrets/nexus-cubic-key', 'utf-8').trim()
+  const userSecret = fs.readFileSync('/run/secrets/nexus-cubic-secret', 'utf-8').trim()
 
   config = {
     api: {
       redisUrl,
       certPublic,
       mongoUrl,
-      apiUrl: `ws://api:3003/ws`,
-      authUrl: `ws://auth:3030/ws`
+      apiUrl: 'ws://api_warframe:3003/ws',
+      authUrl: 'ws://auth:3030/ws'
     },
     client: {
       apiUrl: staging ? 'wss://api.staging.nexushub.co/ws' : 'wss://api.nexushub.co/ws',
       authUrl: staging ? 'wss://auth.staging.nexushub.co/ws' : 'wss://auth.nexushub.co/ws'
     },
     server: {
-      apiUrl: `ws://api:3003/ws`,
-      authUrl: `ws://auth:3030/ws`,
+      apiUrl: 'ws://api_warframe:3003/ws',
+      authUrl: 'ws://auth:3030/ws',
       user_key: userKey,
       user_secret: userSecret
     },

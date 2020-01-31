@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const mongodb = require('mongodb').MongoClient
 const Cubic = require('../lib/cubic.js')
 const wfhooks = require(`${process.cwd()}/hooks/warframe.js`)
+const wowhooks = require(`${process.cwd()}/hooks/wow-classic.js`)
 
 before(async function () {
   await Cubic.await('api')
@@ -33,6 +34,12 @@ before(async function () {
       await wfhooks.verifyItemList()
     })
 
+    it('should pass WoW Classic hooks', async function () {
+      await wowhooks.verifyIndices()
+      await wowhooks.verifyItemList()
+      await wowhooks.verifyServerList()
+    })
+
     it('should prime database with test order', async function () {
       const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
       const postOrder = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
@@ -41,6 +48,13 @@ before(async function () {
       // We'll also need one for the `previous` time interval (>30 days ago)
       postOrder.request.body.createdAt = new Date() - 1000 * 60 * 60 * 24 * 31
       await parser.client.post(postOrder.route, postOrder.request.body)
+    })
+
+    it('should prime WoW Classic database with test scan', async function () {
+      const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
+      const postScan = endpoints.find(e => e.route === '/wow-classic/v1/scans/new' && e.method === 'POST')
+      const postCurrent = endpoints.find(e => e.route === '/wow-classic/v1/scans/current' && e.method === 'POST')
+      await Promise.all([parser.client.post(postScan.route, postScan.request.body), parser.client.post(postCurrent.route, postCurrent.request.body)])
     })
 
     for (const endpoint of cubic.nodes.api.server.ws.endpoints.endpoints) {

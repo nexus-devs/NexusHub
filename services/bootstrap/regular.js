@@ -3,6 +3,7 @@ module.exports = async function () {
   const Auth = require('cubic-auth')
   const Ui = require('cubic-ui')
   const wfhooks = require('../../hooks/warframe.js')
+  const wowhooks = require('../../hooks/wow-classic.js')
   const config = {
     auth: require('../../config/cubic/auth.js'),
     ui: require('../../config/cubic/ui.js'),
@@ -20,11 +21,15 @@ module.exports = async function () {
   // split into separate nodes for better scaling
   cubic.hook(Api, wfhooks.verifyIndices)
   cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
+  cubic.hook(Api, wowhooks.verifyIndices)
+  cubic.hook(Api, wowhooks.verifyItemList.bind(wowhooks))
+  cubic.hook(Api, wowhooks.verifyServerList.bind(wowhooks))
   await cubic.use(new Api(config.api))
 
   // Load services
-  require('../../services/warframe/tradechat.js')
+  /* require('../../services/warframe/tradechat.js')
   require('../../services/warframe/opm.js')
   require('../../services/warframe/clear.js')
-  require('../../services/warframe/wfm.js')
+  require('../../services/warframe/wfm.js') */
+  // require('../../services/wow-classic/scans.js')
 }

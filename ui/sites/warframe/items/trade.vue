@@ -1,35 +1,40 @@
 <template>
   <div>
-    <navigation/>
-    <item-header/>
+    <navigation />
+    <item-header />
     <app-content>
-
       <!-- Realtime Orders -->
       <section>
         <div class="container">
           <div class="row-margin overview">
             <div class="col-b-3 realtime-container">
-              <h2 class="sub">Realtime Orders</h2>
+              <h2 class="sub">
+                Realtime Orders
+              </h2>
               <div class="realtime">
-                <opm/>
+                <opm />
                 <transition-group name="realtime" class="realtime-users row">
-                  <order-realtime v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b"/>
+                  <order-realtime v-for="order in realtime" :key="order._id ? order._id : Math.random()" :order="order" class="realtime-user col-b" />
                 </transition-group>
               </div>
             </div>
             <div class="col-b activity-data">
-              <h2 class="sub">Busy Hours</h2>
-              <activity :item="item.name"/>
+              <h2 class="sub">
+                Busy Hours
+              </h2>
+              <activity :item="item.name" />
             </div>
           </div>
-          <ad name="warframe-item-trade-realtime"/>
+          <ad name="warframe-item-trade-realtime" />
         </div>
       </section>
 
       <!-- Active Listings -->
       <section>
         <div class="container listings">
-          <h2 class="sub">Open Trades</h2>
+          <h2 class="sub">
+            Open Trades
+          </h2>
 
           <!-- Filters -->
           <div class="filter">
@@ -44,13 +49,13 @@
             <div class="filter-tags">
               <div class="filter-tag-row">
                 <!-- Filters -->
-                <div v-for="filter in filters" v-if="listings.find(o => o[filter.path])" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
+                <div v-for="filter in listedFilters" :key="filter.name" :class="{ active: filter.active, descending: filter.descending }" class="btn-tag" @click="selectFilterTag(filter)">
                   <img v-if="filter.icon" :src="filter.icon" :alt="filter.alt" class="ico-12">
                   <span>{{ filter.name }}</span>
                   <img :class="{ descending: filter.descending }" src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
                 </div>
                 <!-- Components -->
-                <comp v-for="component in components" :key="component.uniqueName" :component="component"/>
+                <comp v-for="component in components" :key="component.uniqueName" :component="component" />
               </div>
             </div>
           </div>
@@ -73,19 +78,19 @@
               <div class="col interactive price" @click="selectFilterTag(filters.find(f => f.name === 'Price'))">
                 Price
               </div>
-              <div class="col interactive whitespace"/>
+              <div class="col interactive whitespace" />
             </div>
             <transition-group>
-              <div v-for="(order, i) in listings" :key="order._id" class="order">
-                <order :order="order"/>
-                <!-- <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid"/> -->
+              <div v-for="(order, i) in listings" :key="order._id">
+                <order :order="order" />
+                <!-- <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid" /> -->
               </div>
             </transition-group>
           </div>
           <div v-else>
             No orders found.
           </div>
-          <ad name="warframe-item-trade-orders-end"/>
+          <ad name="warframe-item-trade-orders-end" />
         </div>
       </section>
     </app-content>
@@ -119,6 +124,11 @@ export default {
     orderRealtime,
     comp: component,
     order
+  },
+
+  async asyncData ({ route }) {
+    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
+    this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
   computed: {
@@ -160,6 +170,9 @@ export default {
     },
     type () {
       return this.$store.state.orders.type || 'Selling'
+    },
+    listedFilters () {
+      return this.filters.filter(f => this.listings.find(o => o[f.path]))
     }
   },
 
@@ -219,11 +232,6 @@ export default {
       // Overwrite original to trigger DOM update
       this.$store.commit('setOrderFilters', filters)
     }
-  },
-
-  async asyncData ({ route }) {
-    const item = encodeURIComponent(title(route.params.item.replace(/(?:(\-)(?!\1))+/g, ' ').replace(/- /g, '-')))
-    this.$store.commit('setOrders', await this.$cubic.get(`/warframe/v1/orders?item=${item}`))
   },
 
   storeModule,
@@ -372,9 +380,5 @@ export default {
       display: none;
     }
   }
-}
-
-.order:first-of-type /deep/ .order {
-  margin-top: 0;
 }
 </style>

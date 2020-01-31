@@ -4,7 +4,9 @@
     <p>
       In order to access protected endpoints, you'll need an <b>access token</b>
       which contains data on your user identity and permissions. Our
-      <router-link to="/developers/api/clients">client packages</router-link>
+      <router-link to="/developers/api/clients">
+        client packages
+      </router-link>
       handle authentication automatically, so we strongly recommend using those if
       you can.
       <br>

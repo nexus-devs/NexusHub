@@ -1,7 +1,8 @@
 <template>
   <module v-if="priceCurrent || component.ducats || item.masteryReq || item.health
     || item.shield || item.armor || item.power || item.criticalChance || item.procChance
-  || item.damageTypes || item.vaulted">
+    || item.damageTypes || item.vaulted"
+  >
     <template slot="header">
       <img src="/img/warframe/ui/stats.svg" alt="Statistics" class="ico-h-20">
       <h3>Item Stats</h3>
@@ -17,7 +18,7 @@
             {{ priceCurrent }}p
           </span>
           <span :class="{ negative: priceDiff.percentage < 0 }" class="data-price-diff">
-            <indicator :diff="priceDiff.percentage"/> {{ Math.abs(priceDiff.percentage) }}%
+            <indicator :diff="priceDiff.percentage" /> {{ Math.abs(priceDiff.percentage) }}%
           </span>
         </div>
       </div>
@@ -88,7 +89,7 @@
           <span>{{ Math.round(item.procChance * 100) }}%</span>
         </div>
       </div>
-      <div v-for="(damage, type) in item.damageTypes" v-if="item.damageTypes" :key="type" class="item-data row">
+      <div v-for="(damage, type) in item.damageTypes" :key="type" class="item-data row">
         <div class="col">
           <span>{{ type.replace(/\b\w/g, l => l.toUpperCase()) }}</span>
         </div>
@@ -139,6 +140,7 @@ export default {
           return Math.round((this.component.prices.selling.current.median + this.component.prices.buying.current.median) / 2)
         }
       }
+      return null
     },
     pricePrevious () {
       if (this.component) {
@@ -146,6 +148,7 @@ export default {
           return Math.round((this.component.prices.selling.previous.median + this.component.prices.buying.previous.median) / 2)
         }
       }
+      return null
     },
     priceDiff () {
       if (this.component) {
@@ -155,6 +158,7 @@ export default {
           percentage: (value / this.pricePrevious * 100).toFixed(2)
         }
       }
+      return null
     }
   }
 }

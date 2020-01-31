@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <navigation/>
+    <navigation />
     <app-content>
       <div class="search-input">
         <div class="container">
@@ -17,7 +17,7 @@
             </div>
           </div>
         </div>
-        <ad name="warframe-serp-filter"/>
+        <ad name="warframe-serp-filter" />
       </div>
       <div ref="filters" :class="{ expanded: filtersExpanded }" class="search-filters-options">
         <div class="container">
@@ -25,15 +25,15 @@
         </div>
       </div>
       <section :class="{ expanded: filtersExpanded }" class="results">
-        <div class="results-background-fix"/>
+        <div class="results-background-fix" />
         <div class="container">
           <div class="results-headline">
             <span>Results for</span>
             <h1>{{ input }}</h1>
           </div>
-          <results-group :type="'items'"/>
+          <results-group :type="'items'" />
         </div>
-        <ad name="warframe-serp-results"/>
+        <ad name="warframe-serp-results" />
       </section>
     </app-content>
   </div>
@@ -56,8 +56,13 @@ export default {
     ad,
     navigation,
     appContent,
+    // eslint-disable-next-line vue/no-unused-components
     search, // Just load the store module
     resultsGroup
+  },
+
+  async asyncData ({ store, route: { query: { input }}}) {
+    await store.dispatch('fetchSerpResults', input)
   },
 
   data () {
@@ -91,10 +96,6 @@ export default {
     for (let i = 0; i < this.$store.state.serp.activeFilters.length; i++) {
       this.$store.commit('popSerpActiveFilter')
     }
-  },
-
-  async asyncData ({ store, route: { query: { input }}}) {
-    await store.dispatch('fetchSerpResults', input)
   },
 
   methods: {

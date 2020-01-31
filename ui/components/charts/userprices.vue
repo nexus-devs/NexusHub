@@ -2,7 +2,7 @@
   <div class="userprices">
     <div class="axis">
       <div class="x">
-        <div class="axis"/>
+        <div class="axis" />
         <div class="labels">
           <span v-for="label in axis.x" :key="label">
             {{ typeof label === 'number' ? `${label}:00` : 'now' }}
@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="y">
-        <div class="axis"/>
+        <div class="axis" />
         <div class="labels">
           <span v-for="label in axis.y" :key="label">
             {{ label }}p
@@ -19,11 +19,12 @@
       </div>
     </div>
     <div class="graphs">
-      <sparkline :data="sparklineData" :interactive="false" curve="curveBasis"/>
+      <sparkline :data="sparklineData" :interactive="false" curve="curveBasis" />
       <div :style="{ width, height }" class="points">
         <div v-for="(order, i) in userData" :key="i" :style="{ left: scaled.x(Date.parse(order.createdAt)), top: scaled.y(order.price) }"
-             :class="{ active: selected.user === order.user }" class="point-wrapper">
-          <div class="point"/>
+             :class="{ active: selected.user === order.user }" class="point-wrapper"
+        >
+          <div class="point" />
           <div class="info" @click="select(order)">
             <div class="img-wrapper interactive">
               <img :alt="order.user" src="/img/ui/placeholder.png">
@@ -44,7 +45,6 @@
 <script>
 import * as d3 from 'd3'
 import Tween from './_tween.js'
-import indicator from './indicator.vue'
 import sparkline from './sparkline.vue'
 
 // Simplify sparkline data to show trends rather than precise values.
@@ -67,7 +67,6 @@ function simplify (data) {
 
 export default {
   components: {
-    indicator,
     sparkline
   },
 

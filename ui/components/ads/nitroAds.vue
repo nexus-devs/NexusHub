@@ -3,7 +3,8 @@
     display,
     'max-height': maxHeight,
     'max-width': maxWidth
-  }" class="ad-unit layout-center"/>
+  }" class="ad-unit layout-center"
+  />
 </template>
 
 
@@ -19,10 +20,10 @@ export default {
   },
 
   mounted () {
-    const nitroAds = window['nitroAds']
+    const nitroAds = window.nitroAds
     if (!nitroAds) return
 
-    this.display = 'inline-block'
+    this.display = 'block'
     nitroAds.createAd(`ad-${this.name}`, {
       floor: 0.05,
       refreshLimit: 10,
@@ -46,7 +47,6 @@ export default {
   position: relative;
   overflow: hidden; // for border-radius
   margin: 24px 0;
-  background: $color-accent-subtle;
   border-radius: 3px;
 }
 </style>

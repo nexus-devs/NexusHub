@@ -36,7 +36,7 @@
     width: 85%;
     height: 100%;
     @include shadow-1;
-    @include gradient-background-dg($color-primary, $color-accent)
+    @include gradient-background-dg($color-primary, $color-accent);
     content: '';
   }
 }

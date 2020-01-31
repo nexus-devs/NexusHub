@@ -1,38 +1,86 @@
 <template>
-  <div class="module">
-    <div class="header">
-      <slot name="header"/>
+  <div :class="theme.module" class="module">
+    <div :class="theme.header" class="header">
+      <slot name="header" />
     </div>
     <div class="body">
-      <slot name="body"/>
+      <slot name="body" />
     </div>
-    <div class="footer">
-      <slot name="footer"/>
+    <div :class="theme.footer" class="footer">
+      <slot name="footer" />
     </div>
-    <progressbar ref="progress"/>
+    <progressbar ref="progress" />
   </div>
 </template>
 
 
 
 <script>
+import getTheme from 'src/components/_theme.js'
 import progressbar from 'src/components/progress.vue'
 
 export default {
   components: {
     progressbar
+  },
+
+  computed: {
+    theme () {
+      return getTheme(this)
+    }
   }
 }
 </script>
 
 
+<style lang="scss" module="warframe">
+@import '~src/styles/partials/importer';
+
+.module {
+  @include field;
+}
+.header {
+  :global {
+    h2, h3 {
+      color: $color-primary-subtle !important;
+    }
+    .img {
+      background: $color-bg;
+    }
+  }
+}
+.footer {
+  background: $color-bg;
+}
+</style>
+
+<style lang="scss" module="wow-classic">
+@import '~src/styles/partials/wow-classic/importer';
+
+.module {
+  @include field;
+}
+.header {
+  :global {
+    h2, h3 {
+      color: $color-primary-subtle !important;
+    }
+  }
+}
+.footer {
+  background: $color-bg;
+
+  :global(a:hover) {
+    background: rgba(222, 200, 187, 0.1) !important;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/importer';
 
 .module {
   position: relative;
-  @include field;
   display: flex;
   flex-direction: column;
 
@@ -56,7 +104,6 @@ export default {
     vertical-align: middle;
     font-size: 0.8em !important;
     letter-spacing: 0.5;
-    color: $color-primary-subtle !important;
     @include uppercase;
   }
   time {
@@ -79,7 +126,6 @@ export default {
     height: 40px;
     width: 40px;
     border-radius: 40px;
-    background: $color-bg;
 
     img, object {
       position: relative;
@@ -97,6 +143,8 @@ export default {
 .body {
   margin: 20px 0;
   padding: 0 25px;
+  // height: 100%;
+  height: auto; // Needed for Safari and Samsung Browser
 
   li {
     margin-top: 15px;
@@ -124,7 +172,6 @@ export default {
   display: flex;
   padding: 2px 15px;
   margin-top: auto;
-  background: $color-bg;
   font-size: 0.75em !important;
   border-radius: 2px;
 

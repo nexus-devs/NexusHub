@@ -29,7 +29,7 @@ class Tween {
   }
 
   /**
-   * Functions which ease transitions between prop value cahnges
+   * Functions which ease transitions between prop value changes
    */
   adjustData (vm, newData, oldData, doNormalize) {
     // Animate data

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <section>
         <div class="container">
@@ -18,7 +18,7 @@
               <p class="typer">
                 <span>Want to</span>
                 <no-ssr>
-                  <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']"/>
+                  <vue-typer :text="['join a family of developers?', 'create awesome tools for the game you love?', 'make a living with your passion for games?']" />
                 </no-ssr>
               </p>
               <a href="https://discord.gg/TCxe6P4" target="_blank" class="btn">
@@ -30,7 +30,6 @@
             </div>
           </div>
         </div>
-
       </section>
       <section>
         <div class="container repos">
@@ -44,7 +43,7 @@
                   <h3>NexusHub</h3>
                 </template>
                 <template slot="body">
-                  <p>Economy Analytics and Game Data for Warframe.</p>
+                  <p>Economy Analytics and Game Data for Warframe and WoW Classic.</p>
                 </template>
               </module>
             </a>
@@ -97,9 +96,20 @@
               </module>
             </a>
 
-            <div class="col-b"/>
-            <div class="col-b"/>
-            <div class="col-b"/>
+            <a href="https://github.com/nakroma/wow-classic-items" target="_blank" class="col-b">
+              <module class="interactive">
+                <template slot="header">
+                  <img src="/img/open-source/warframe-items.svg" class="ico-h-32" alt="wow-classic-items">
+                  <h3>wow-classic-items</h3>
+                </template>
+                <template slot="body">
+                  <p>Collection of data for every item in World of Warcraft: Classic.</p>
+                </template>
+              </module>
+            </a>
+
+            <div class="col-b" />
+            <div class="col-b" />
           </div>
         </div>
       </section>
@@ -260,6 +270,10 @@ section:first-of-type {
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+
+  .body {
+    height: auto; // Needed for Safari and Samsung Browser
   }
 
   h3 {

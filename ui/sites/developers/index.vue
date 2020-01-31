@@ -1,14 +1,20 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <section>
         <div class="container">
           <h1>
             Build awesome tools that reach thousands of gamers with
-            <router-link to="/developers/api/Warframe-Orders/orders">trading data</router-link>,
-            <router-link to="/developers/api/Warframe-Items/base">item data</router-link>, and
-            <router-link to="/developers/api/General/foo">anything else on this platform</router-link>.
+            <router-link to="/developers/api/Warframe-Orders/orders">
+              trading data
+            </router-link>,
+            <router-link to="/developers/api/Warframe-Items/base">
+              item data
+            </router-link>, and
+            <router-link to="/developers/api/General/foo">
+              anything else on this platform
+            </router-link>.
           </h1>
           <p>
             These pages are made to help you build up your tools with data from NexusHub.
@@ -23,7 +29,9 @@
           <h2>Feeling especially awesome?</h2>
           <p>
             If you think your tool would be a good fit as an addition to NexusHub,
-            <router-link to="/contact">let us know!</router-link> We'd love to help you
+            <router-link to="/contact">
+              let us know!
+            </router-link> We'd love to help you
             integrate and maintain your idea on this site and serve it to millions of people,
             while <b>you</b> get the revenue in return.
           </p>

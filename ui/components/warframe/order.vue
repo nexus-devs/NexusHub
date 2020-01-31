@@ -27,10 +27,12 @@
       <div class="col price">
         <img v-if="order.price" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
         <span>{{ order.price ? `${order.price}p` : 'PM for price' }}</span>
-        <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p"/>
+        <price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />
       </div>
       <div class="col buy" @click.stop="select">
-        <button class="btn-outline">{{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}</button>
+        <button class="btn-outline">
+          {{ order.offer === 'Selling' ? 'Buy' : 'Sell' }}
+        </button>
       </div>
 
       <!-- Order Selection -->
@@ -53,7 +55,9 @@
               </a>
             </div>
             <div class="meta-data">
-              <h4 v-if="order.message">Original Message</h4>
+              <h4 v-if="order.message">
+                Original Message
+              </h4>
               <span v-if="order.message" class="sub">
                 {{ order.message }}
               </span>
@@ -115,6 +119,7 @@ export default {
         const type = this.order.offer.toLowerCase()
         return this.component.prices[type].current.median
       }
+      return null
     },
     active () {
       const active = this.$store.state.orders.selected._id === this.order._id
@@ -140,6 +145,7 @@ export default {
         }
         return title(noDigits)
       }
+      return ''
     }
   },
 

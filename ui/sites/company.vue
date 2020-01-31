@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <navigation />
     <app-content>
       <div class="company">
         <div class="container">
@@ -8,7 +8,7 @@
           <div class="box-top">
             <h1>Making Games more transparent with NexusHub.</h1>
           </div>
-          <div class="box-top-sub"/>
+          <div class="box-top-sub" />
           <div class="box-sub">
             <h2>The best decisions in gaming are made on data</h2>
             <p>
@@ -109,18 +109,6 @@ export default {
     appContent
   },
 
-  computed: {
-    users () {
-      return parseNum(this.$store.state.analytics.users)
-    },
-    views () {
-      return parseNum(this.$store.state.analytics.views)
-    },
-    offers () {
-      return parseNum(this.$store.state.analytics.offers)
-    }
-  },
-
   async asyncData () {
     let users, views, offers
 
@@ -132,6 +120,18 @@ export default {
     this.$store.commit('setAnalyticsUsers', users)
     this.$store.commit('setAnalyticsViews', views)
     this.$store.commit('setAnalyticsOffers', offers)
+  },
+
+  computed: {
+    users () {
+      return parseNum(this.$store.state.analytics.users)
+    },
+    views () {
+      return parseNum(this.$store.state.analytics.views)
+    },
+    offers () {
+      return parseNum(this.$store.state.analytics.offers)
+    }
   },
 
   storeModule,

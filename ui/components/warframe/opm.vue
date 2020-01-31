@@ -2,26 +2,28 @@
   <module v-if="opm" class="opm">
     <template slot="header">
       <img src="/img/warframe/ui/trade.svg" alt="Trade" class="ico-h-20">
-      <h3 class="title">Traders right now</h3>
-      <tween-num :value="opm.active" :duration="1000" easing="easeInOutQuad" class="active-number"/>
+      <h3 class="title">
+        Traders right now
+      </h3>
+      <tween-num :value="opm.active" :duration="1000" :formatter="value => parseInt(value)" easing="easeInOutQuad" class="active-number" />
       <span class="offers-per-minute">Offers per 5 minutes</span>
     </template>
     <template slot="body">
-      <bars :data="opm.intervals"/>
+      <bars :data="opm.intervals" />
     </template>
     <template slot="footer">
       <div class="distribution">
         <div class="distribution-label">
-          <div/>
+          <div />
           <span>Trade Chat {{ (opm.sources.tradeChat * 100).toFixed(0) }}%</span>
         </div>
         <div class="distribution-label">
-          <div/>
+          <div />
           <span>WFM {{ (opm.sources.wfm * 100).toFixed(0) }}%</span>
         </div>
         <div class="distribution-bar">
-          <div ref="tradechat" :style="{ width: `${opm.sources.tradeChat * 100}%` }"/>
-          <div ref="wfm" :style="{ width: `${opm.sources.wfm * 100}%` }"/>
+          <div ref="tradechat" :style="{ width: `${opm.sources.tradeChat * 100}%` }" />
+          <div ref="wfm" :style="{ width: `${opm.sources.wfm * 100}%` }" />
         </div>
       </div>
     </template>

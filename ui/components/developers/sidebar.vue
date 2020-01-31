@@ -1,19 +1,28 @@
 <template>
   <nav>
     <div class="links">
-      <ad name="developers-api-article"/>
+      <ad name="developers-api-article" />
 
       <h3>Connecting</h3>
-      <router-link to="/developers/api" exact>Client packages</router-link>
-      <router-link to="/developers/api/http" exact>HTTP</router-link>
-      <router-link to="/developers/api/ws" exact>WebSockets</router-link>
-      <router-link to="/developers/api/authentication" exact>Authentication</router-link>
+      <router-link to="/developers/api" exact>
+        Client packages
+      </router-link>
+      <router-link to="/developers/api/http" exact>
+        HTTP
+      </router-link>
+      <router-link to="/developers/api/ws" exact>
+        WebSockets
+      </router-link>
+      <router-link to="/developers/api/authentication" exact>
+        Authentication
+      </router-link>
 
       <div v-for="group in groups" :key="group.name">
         <h3>{{ group.name }}</h3>
         <router-link v-for="endpoint in group.endpoints" :key="endpoint.route + endpoint.method"
                      :to="`/developers/api/${group.name.replace(/ \/ /g, '-')}/${endpoint.name}`"
-                     exact>
+                     exact
+        >
           {{ endpoint.name }}
         </router-link>
       </div>
@@ -37,6 +46,11 @@ const reviver = (key, value) => {
 export default {
   components: {
     ad
+  },
+
+  async asyncData () {
+    const endpoints = await this.$cubic.get('/docs/endpoints')
+    this.$store.commit('setDocsEndpoints', JSON.parse(endpoints, reviver))
   },
 
   computed: {
@@ -80,11 +94,6 @@ export default {
       this.$store.commit('setDocsGroups', groups)
       return groups
     }
-  },
-
-  async asyncData () {
-    const endpoints = await this.$cubic.get('/docs/endpoints')
-    this.$store.commit('setDocsEndpoints', JSON.parse(endpoints, reviver))
   },
 
   storeModule: {

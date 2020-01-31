@@ -17,7 +17,7 @@ class Opm extends Endpoint {
     ]
     this.schema.response = {
       active: Number,
-      intervals: [ Number ],
+      intervals: [Number],
       sources: {
         tradeChat: Number,
         wfm: Number
@@ -49,35 +49,47 @@ class Opm extends Endpoint {
     // Intervals
     parallel.push(this.db.collection('orders').aggregate([
       { $match: query },
-      { $group: {
-        _id: { $toDate: { $subtract: [
-          { $toLong: '$createdAt' },
-          { $mod: [{ $toLong: '$createdAt' }, 1000 * 60] }
-        ] } },
-        count: { $sum: 1 }
-      } }
+      {
+        $group: {
+          _id: {
+            $toDate: {
+              $subtract: [
+                { $toLong: '$createdAt' },
+                { $mod: [{ $toLong: '$createdAt' }, 1000 * 60] }
+              ]
+            }
+          },
+          count: { $sum: 1 }
+        }
+      }
     ]).toArray())
 
     // Sources
     parallel.push(this.db.collection('orders').aggregate([
       { $match: query },
-      { $group: {
-        _id: '$source',
-        count: { $sum: 1 }
-      } }
+      {
+        $group: {
+          _id: '$source',
+          count: { $sum: 1 }
+        }
+      }
     ]).toArray())
 
     // Most traded item
     if (!item) {
       parallel.push(this.db.collection('orders').aggregate([
         { $match: { createdAt: { $gte: new Date(new Date() - 1000 * 60 * 5) } } },
-        { $group: {
-          _id: '$item',
-          count: { $sum: 1 }
-        } },
-        { $sort: {
-          count: -1
-        } },
+        {
+          $group: {
+            _id: '$item',
+            count: { $sum: 1 }
+          }
+        },
+        {
+          $sort: {
+            count: -1
+          }
+        },
         { $limit: 4 }
       ]).toArray())
     }
@@ -106,7 +118,7 @@ class Opm extends Endpoint {
       intervals.push(minute ? minute.count : 0)
     }
     if (!item) {
-      for (let item of items) {
+      for (const item of items) {
         mostTraded.push({ item: item._id, amount: item.count })
       }
     }

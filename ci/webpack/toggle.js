@@ -16,12 +16,12 @@ async function toggle () {
   })
   let changed = false
 
-  for (let commit of commits) {
+  for (const commit of commits) {
     if (commit.abbrevHash === config.lastBuild || changed) {
       break
     }
 
-    for (let file of commit.files) {
+    for (const file of commit.files) {
       if (file.includes('ui/') || file.includes('package.json') || file.includes('ui.js') ||
           file.includes('build.js') || file.includes('toggle.js') || file.includes('webpack')) {
         changed = true

@@ -2,13 +2,13 @@
   <div class="col-b rank">
     <div class="field">
       <div class="input-container">
-        <label>Rank</label><br >
+        <label>Rank</label><br>
         <div class="input interactive" @click="toggle">
           <span>{{ selected }}</span>
           <img src="/img/ui/dropdown.svg" class="ico-16" alt="">
         </div>
       </div>
-      <slot/>
+      <slot />
     </div>
     <div :class="{ active }" class="tools ranks">
       <div class="ranks-head">

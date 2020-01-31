@@ -23,7 +23,7 @@ class Activity extends Endpoint {
         number: Number,
         name: String
       },
-      hours: [ Number ]
+      hours: [Number]
     }]
   }
 
@@ -80,7 +80,7 @@ class Activity extends Endpoint {
     // Get average hour value per day
     const result = []
 
-    for (let day of days) {
+    for (const day of days) {
       if (day) {
         const hours = []
 
@@ -106,20 +106,26 @@ class Activity extends Endpoint {
   async aggregate (start, end, params) {
     const { item } = params
     const result = await this.db.collection('orders').aggregate([
-      { $match: {
-        ...{
-          createdAt: { $gte: start.toDate(), $lte: end.toDate() }
-        },
-        ...(item ? { item } : {})
-      } },
-      { $project: {
-        createdAt: 1,
-        hour: { $hour: '$createdAt' }
-      } },
-      { $group: {
-        _id: '$hour',
-        orders: { $sum: 1 }
-      } }
+      {
+        $match: {
+          ...{
+            createdAt: { $gte: start.toDate(), $lte: end.toDate() }
+          },
+          ...(item ? { item } : {})
+        }
+      },
+      {
+        $project: {
+          createdAt: 1,
+          hour: { $hour: '$createdAt' }
+        }
+      },
+      {
+        $group: {
+          _id: '$hour',
+          orders: { $sum: 1 }
+        }
+      }
     ]).toArray()
 
     return result
