@@ -51,7 +51,10 @@ class Current extends Endpoint {
             entry.previous[prop] = previousEntry[prop]
           } else {
             entry[prop] = previousEntry[prop]
-            if (previousEntry.previous) entry.previous[prop] = previousEntry.previous[prop]
+            if (previousEntry.previous) {
+              if (!entry.previous) entry.previous = {}
+              entry.previous[prop] = previousEntry.previous[prop]
+            }
           }
         } else entry[prop] = newValue
       }
