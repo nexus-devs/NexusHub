@@ -81,7 +81,7 @@
               <div class="col interactive whitespace" />
             </div>
             <transition-group>
-              <div v-for="(order, i) in listings" :key="order._id">
+              <div v-for="order in listings" :key="order._id">
                 <order :order="order" />
                 <!-- <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid" /> -->
               </div>
