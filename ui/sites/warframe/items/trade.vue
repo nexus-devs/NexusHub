@@ -78,7 +78,7 @@
             <transition-group>
               <div v-for="(order, i) in listings" :key="order._id" class="order">
                 <order :order="order"/>
-                <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid"/>
+                <!-- <ad v-if="i % 5 === 0" name="warframe-item-trade-orders-mid"/> -->
               </div>
             </transition-group>
           </div>
