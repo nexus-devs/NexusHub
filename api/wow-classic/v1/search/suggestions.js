@@ -51,7 +51,7 @@ class Search extends Endpoint {
     }
 
     const result = await this.search(query, limit)
-    this.cache(result, 60 * 60)
+    // this.cache(result, 60 * 60)
     res.send(result)
   }
 
@@ -62,15 +62,21 @@ class Search extends Endpoint {
    */
   async search (query, limit) {
     const result = []
-    const items = await this.db.collection('items').find({
-      name: new RegExp(`^${query}`, 'i')
-    }).project({
-      _id: 0,
-      itemId: 1,
-      name: 1,
-      icon: 1,
-      class: 1
-    }).limit(limit).toArray()
+    const items = await this.db.collection('items').aggregate([
+      { $match: { name: new RegExp(`^${query}`, 'i') } },
+      {
+        $project: {
+          _id: 0,
+          itemId: 1,
+          name: 1,
+          icon: 1,
+          class: 1,
+          nameLength: { $strLenCP: '$name' }
+        }
+      },
+      { $sort: { nameLength: 1 } },
+      { $limit: limit }
+    ]).toArray()
 
     // Get median value from set and append image url
     items.forEach(item => {
