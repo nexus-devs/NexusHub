@@ -27,7 +27,10 @@ class Servers extends Endpoint {
     for (const server of servers) {
       if (server.faction === 'Horde') continue // Skip to prevent duplicated servers
       if (!groupedServers[server.region]) groupedServers[server.region] = []
-      groupedServers[server.region].push(server.name.split('-')[0])
+
+      const nameWithoutFaction = server.name.split('-')
+      nameWithoutFaction.pop()
+      groupedServers[server.region].push(nameWithoutFaction.join('-'))
     }
 
     this.cache(groupedServers, 60 * 60)

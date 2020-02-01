@@ -44,6 +44,13 @@ export default {
 
   // Changes server name to server slug
   serverSlug (server) {
+    // Hotfix for russian server slugs
+    if (server === 'Вестник Рока') server = 'Doomsayer'
+    else if (server === 'Хроми') server = 'Chromie'
+    else if (server === 'Пламегор') server = 'Flamegor'
+    else if (server === 'Рок-Делар') server = 'Rhokdelar'
+    else if (server === 'Змейталак') server = 'Wyrmthalak'
+
     return server.toLowerCase().replace(/\s/g, '-').replace(/'/g, '')
   },
 
