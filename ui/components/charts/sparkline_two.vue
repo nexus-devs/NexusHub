@@ -105,8 +105,17 @@ export default {
     // Update graph render
     update () {
       this.scaled.x.domain(d3.extent(this.data, d => d.x))
-      this.scaleDomain('v1', 'value1')
-      this.scaleDomain('v2', 'value2')
+      if (!this.parseSecondary) {
+        this.scaleDomain('v1', 'value1')
+        this.scaleDomain('v2', 'value2')
+      } else {
+        const totalData = this.data.concat(this.data.map(x => {
+          return { value1: x.value2 }
+        }))
+        const { lowerBound, upperBound } = utility.generateGraphScala(totalData, 4, 'value1')
+        this.scaled.v1.domain([lowerBound, upperBound])
+        this.scaled.v2.domain([lowerBound, upperBound])
+      }
 
       const lineValue1 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v1(d.value1)).curve(d3.curveMonotoneX)
       const lineValue2 = d3.line().x(d => this.scaled.x(d.x)).y(d => this.scaled.v2(d.value2)).curve(d3.curveMonotoneX)
