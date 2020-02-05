@@ -88,9 +88,16 @@ export default {
     },
     mutations: {
       addNotification (state, notification) {
-        state.unread.push(notification)
+        const hash = crypto.subtle.digest('SHA-1', new TextEncoder('utf-8').encode(JSON.stringify(notification)))
+
+        if (!document.cookie.find(`notifications_has_seen_${hash}`)) {
+          state.unread.push(notification)
+        }
       },
       removeNotification (state, notification) {
+        const hash = crypto.subtle.digest('SHA-1', new TextEncoder('utf-8').encode(JSON.stringify(notification)))
+
+        document.cookie = hash
         state.unread.splice(state.unread.findIndex(n => n.title === notification.title), 1)
       }
     }
