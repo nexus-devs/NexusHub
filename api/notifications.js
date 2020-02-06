@@ -3,34 +3,20 @@ const Endpoint = require('cubic-api/endpoint')
 class Notification extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.method = 'POST'
-    this.schema.scope = 'write_notifications_global'
-    this.schema.description = 'Endpoint which pushes notifications to the web-client.'
-    this.schema.request = {
-      body: {
-        game: 'warframe',
-        message: {
-          title: 'Example Notification',
-          body: 'This is where something important happens.'
-        }
-      }
-    }
-    this.schema.response = {
+    this.schema.method = 'GET'
+    this.schema.description = 'Get a list of all active notifications.'
+    this.schema.response = [{
       game: String,
       message: {
         title: String,
         body: String
       }
-    }
-    this.schema.pubsub = {
-      url: '/notifications',
-      response: this.schema.response
-    }
+    }]
   }
 
   async main (req, res) {
-    await this.publish(req.body)
-    res.send(req.body)
+    const notifications = await this.db.collection('notifications').find().toArray()
+    res.send(notifications)
   }
 }
 

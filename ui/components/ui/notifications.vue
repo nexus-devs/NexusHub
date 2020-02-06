@@ -4,14 +4,24 @@
       <div class="nav-ico interactive" @click="toggle">
         <img src="/img/ui/notifications.svg" alt="Notifications" class="ico-h-20">
       </div>
-      <div :class="[{ unread: unread.length }, theme['unread-bubble']]" class="unread-bubble" />
+      <div :class="[{ unread: notifications.unread.length }, theme['unread-bubble']]" class="unread-bubble" />
       <div :class="{ visible }" class="notification-container">
         <div :class="theme['notification-header']" class="notification-header">
           <span>Notifications</span>
         </div>
         <div :class="theme['notification-body']" class="notification-body">
-          <div v-if="unread.length" class="notification-wrapper">
-            <div v-for="notification in unread" :key="notification.title" class="notification">
+          <div v-if="notifications.unread.length || notifications.hasread.length" class="notification-wrapper">
+            <div v-for="notification in notifications.unread" :key="notification.title + notification.body.length" class="notification">
+              <h4>{{ notification.title }}</h4>
+              <p>{{ notification.body }}</p>
+              <div v-if="notification.buttons" :class="theme.footer" class="footer">
+                <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
+                  {{ button.text }}
+                </button>
+              </div>
+              <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
+            </div>
+            <div v-for="notification in notifications.hasread" :key="notification.title + notification.body.length" class="notification">
               <h4>{{ notification.title }}</h4>
               <p>{{ notification.body }}</p>
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
@@ -48,33 +58,53 @@ export default {
     theme () {
       return getTheme(this)
     },
-    unread () {
-      return this.$store.state.notifications.unread
-    }
-  },
+    notifications () {
+      const notifications = this.$store.state.notifications.all
+      const res = { hasread: [], unread: [] }
 
-  watch: {
-    unread () {
-      if (this.unread.length) {
-        this.visible = true
+      for (const notification of notifications) {
+        const id = `${notification.title}-l${notification.body.length}`
+        if (document.cookie.includes(`notifications_has_removed_${id}`)) continue
+
+        if (!document.cookie.includes(`notifications_has_seen_${id}`)) {
+          res.unread.push(notification)
+        } else {
+          res.hasread.push(notification)
+        }
       }
+      return res
     }
   },
 
-  mounted () {
+  async mounted () {
     this.listen()
+    const notifications = await this.$cubic.get('/notifications')
+    for (const notification of notifications) {
+      this.$store.commit('addNotification', notification.message)
+    }
   },
 
   methods: {
     listen () {
       this.$cubic.subscribe('/notifications', notification => {
         if (notification.game === this.$store.state.game.name || notification.game === 'global') {
+          this.visible = true
           this.$store.commit('addNotification', notification.message)
         }
       })
     },
     toggle () {
       this.visible = !this.visible
+
+      // When notifications are hidden, update read/unread messages,
+      // so the notification bubble will disappear too
+      if (!this.visible) {
+        for (const notification of this.notifications.unread) {
+          const id = `${notification.title}-l${notification.body.length}`
+          document.cookie += `notifications_has_seen_${id};`
+        }
+        this.$store.commit('forceUpdateNotifications')
+      }
     },
     dismiss (notification) {
       this.$store.commit('removeNotification', notification)
@@ -84,21 +114,27 @@ export default {
   storeModule: {
     name: 'notifications',
     state: {
-      unread: []
+      all: []
     },
     mutations: {
       addNotification (state, notification) {
-        const hash = crypto.subtle.digest('SHA-1', new TextEncoder('utf-8').encode(JSON.stringify(notification)))
+        const id = `${notification.title}-l${notification.body.length}`
 
-        if (!document.cookie.find(`notifications_has_seen_${hash}`)) {
-          state.unread.push(notification)
+        if (!document.cookie.includes(`notifications_has_removed_${id}`) &&
+          !state.all.find(n => n.title === notification.title && n.body === notification.body)) {
+          state.all.push(notification)
         }
       },
       removeNotification (state, notification) {
-        const hash = crypto.subtle.digest('SHA-1', new TextEncoder('utf-8').encode(JSON.stringify(notification)))
+        const id = `${notification.title}-l${notification.body.length}`
 
-        document.cookie = hash
-        state.unread.splice(state.unread.findIndex(n => n.title === notification.title), 1)
+        document.cookie += `notifications_has_removed_${id};`
+        state.all.splice(state.all.findIndex(n => n.title === notification.title), 1)
+      },
+      // Kind of debug, to retrigger computed props, thus updating the cookie state
+      forceUpdateNotifications (state) {
+        state.all.push({})
+        state.all.pop()
       }
     }
   }

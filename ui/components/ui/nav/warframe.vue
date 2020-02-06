@@ -32,22 +32,6 @@ export default {
     search
   },
 
-  computed: {
-    game () {
-      return this.$store.state.game.name
-    }
-  },
-
-  watch: {
-    $route (to, from) {
-      this.$store.commit('setActiveGame', to.fullPath.split('/')[1])
-    }
-  },
-
-  beforeCreate () {
-    this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
-  },
-
   mounted () {
     listener = shortcut.bind('shift + f', (e) => {
       e.preventDefault() // Don't type in input on keyup
@@ -57,18 +41,6 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
-  },
-
-  storeModule: {
-    name: 'game',
-    state: {
-      name: ''
-    },
-    mutations: {
-      setActiveGame (state, game) {
-        state.name = game
-      }
-    }
   }
 }
 </script>

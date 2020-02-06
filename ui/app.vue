@@ -26,6 +26,7 @@ export default {
     status,
     bottom
   },
+
   computed: {
     theme () {
       return getTheme(this)
@@ -34,15 +35,22 @@ export default {
       return this.$route
     }
   },
+
   watch: {
     // Apply query params to state if applicable.
     route () {
       this.$store.dispatch('applyInputQuery', this.$route)
+    },
+    $route (to, from) {
+      this.$store.commit('setActiveGame', to.fullPath.split('/')[1])
     }
   },
+
   beforeCreate () {
     Vue.use(VueTouch)
+    this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
   },
+
   mounted () {
     document.body.className = this.theme.body // Hack so the progress bar can be styled
     Vue.use(VueAnalytics, {
@@ -51,6 +59,19 @@ export default {
       router: this.$router
     })
   },
+
+  storeModule: {
+    name: 'game',
+    state: {
+      name: ''
+    },
+    mutations: {
+      setActiveGame (state, game) {
+        state.name = game
+      }
+    }
+  },
+
   head: {
     /* eslint no-undef: "off" */
     title: 'NexusHub' + ($STAGING ? ' [staging]' : ($PRODUCTION ? '' : ' [dev]')),
