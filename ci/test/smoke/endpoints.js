@@ -40,7 +40,7 @@ before(async function () {
       await wowhooks.verifyServerList()
     })
 
-    it('should prime database with test notification', async function() {
+    it('should prime database with test notification', async function () {
       const endpoints = cubic.nodes.api.server.ws.endpoints.endpoints
       const postNotification = endpoints.find(e => e.route === '/warframe/v1/orders' && e.method === 'POST')
       await parser.client.post(postNotification.route, postNotification.request.body)
