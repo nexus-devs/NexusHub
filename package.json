@@ -40,7 +40,7 @@
     "vue-highlightjs": "^1.3.3",
     "vue-no-ssr": "^1.1.1",
     "vue-observe-visibility": "^0.4.6",
-    "vue-tween-number": "^0.2.0",
+    "vue-tween-number": "^0.3.0",
     "vue-typer": "^1.2.0",
     "warframe-items": "^1.792.0",
     "warframe-patchlogs": "^1.328.0",
