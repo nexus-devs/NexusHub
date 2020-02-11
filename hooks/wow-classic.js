@@ -43,10 +43,12 @@ class Hook {
     // Current Data
     await verify(db, 'currentData', {
       itemId: 1,
-      slug: 1
+      slug: 1,
+      quantity: 1
     })
     await verify(db, 'currentData', {
-      slug: 1
+      slug: 1,
+      quantity: 1
     })
 
     await db.close()

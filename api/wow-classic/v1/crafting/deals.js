@@ -14,6 +14,11 @@ class Deals extends Endpoint {
         name: 'limit',
         default: 4,
         description: 'Number of possible deals to return.'
+      },
+      {
+        name: 'min_quantity',
+        default: 3,
+        description: 'Filters out items with low quantity.'
       }
     ]
     this.schema.response = [{
@@ -37,6 +42,7 @@ class Deals extends Endpoint {
   async main (req, res) {
     const slug = req.params.slug
     const limit = req.query.limit
+    const minQuantity = req.query.min_quantity
 
     const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
 
@@ -54,7 +60,7 @@ class Deals extends Endpoint {
 
     // Query range first to make better use of index
     const itemData = await this.db.collection('currentData').aggregate([
-      { $match: { itemId: { $in: queryItems }, slug } }
+      { $match: { itemId: { $in: queryItems }, slug, quantity: { $gte: minQuantity } } }
     ]).toArray()
 
     const deals = []
