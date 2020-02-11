@@ -15,6 +15,10 @@ class Hook {
     }
 
     // Scan Data
+    await verify(db, 'scans', {
+      slug: 1,
+      scannedAt: -1
+    })
     await verify(db, 'scanData', { // Regular price fetching
       itemId: 1,
       slug: 1,
