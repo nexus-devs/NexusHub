@@ -17,7 +17,7 @@ class Deals extends Endpoint {
       },
       {
         name: 'min_quantity',
-        default: 5,
+        default: 3,
         description: 'Filters out items with low quantity.'
       }
     ]
