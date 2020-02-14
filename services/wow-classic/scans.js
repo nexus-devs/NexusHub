@@ -16,6 +16,8 @@ async function monitor () {
   let lastDone = new Date()
   const TSMReq = new TSMRequest()
 
+  if (!TSMReq.tsmKey) return
+
   // Kill service if it gets stuck. Docker will auto-restart it.
   setInterval(() => {
     if (prod && new Date() - lastDone > 1000 * 60 * 60) {
