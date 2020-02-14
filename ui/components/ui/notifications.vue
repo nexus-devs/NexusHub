@@ -11,9 +11,9 @@
         </div>
         <div :class="theme['notification-body']" class="notification-body">
           <div v-if="notifications.unread.length || notifications.hasread.length" class="notification-wrapper">
-            <div v-for="notification in notifications.unread" :key="notification.title + notification.body.length" class="notification">
-              <h4>{{ notification.title }}</h4>
-              <p>{{ notification.body }}</p>
+            <div v-for="notification in notifications.unread" :key="notification.message.title + notification.message.body.length" class="notification">
+              <h4>{{ notification.message.title }}</h4>
+              <p>{{ notification.message.body }}</p>
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
                 <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
                   {{ button.text }}
@@ -21,9 +21,9 @@
               </div>
               <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
             </div>
-            <div v-for="notification in notifications.hasread" :key="notification.title + notification.body.length" class="notification">
-              <h4>{{ notification.title }}</h4>
-              <p>{{ notification.body }}</p>
+            <div v-for="notification in notifications.hasread" :key="notification.message.title + notification.message.body.length" class="notification">
+              <h4>{{ notification.message.title }}</h4>
+              <p>{{ notification.message.body }}</p>
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
                 <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
                   {{ button.text }}
@@ -63,7 +63,8 @@ export default {
       const res = { hasread: [], unread: [] }
 
       for (const notification of notifications) {
-        const id = `${notification.title}-l${notification.body.length}`
+        if (!this.isValidGame(notification)) continue
+        const id = `${notification.message.title}-l${notification.message.body.length}`
         if (document.cookie.includes(`notifications_has_removed_${id}`)) continue
 
         if (!document.cookie.includes(`notifications_has_seen_${id}`)) {
@@ -80,16 +81,16 @@ export default {
     this.listen()
     const notifications = await this.$cubic.get('/notifications')
     for (const notification of notifications) {
-      this.$store.commit('addNotification', notification.message)
+      this.$store.commit('addNotification', notification)
     }
   },
 
   methods: {
     listen () {
       this.$cubic.subscribe('/notifications', notification => {
-        if (notification.game === this.$store.state.game.name || notification.game === 'global') {
+        if (this.isValidGame(notification)) {
           this.visible = true
-          this.$store.commit('addNotification', notification.message)
+          this.$store.commit('addNotification', notification)
         }
       })
     },
@@ -100,7 +101,7 @@ export default {
       // so the notification bubble will disappear too
       if (!this.visible) {
         for (const notification of this.notifications.unread) {
-          const id = `${notification.title}-l${notification.body.length}`
+          const id = `${notification.message.title}-l${notification.message.body.length}`
           document.cookie += `notifications_has_seen_${id};`
         }
         this.$store.commit('forceUpdateNotifications')
@@ -108,6 +109,10 @@ export default {
     },
     dismiss (notification) {
       this.$store.commit('removeNotification', notification)
+    },
+    isValidGame (notification) {
+      const game = this.$store.state.game.name
+      return notification.game === 'global' || notification.game === '' || notification.game === game
     }
   },
 
@@ -118,18 +123,20 @@ export default {
     },
     mutations: {
       addNotification (state, notification) {
-        const id = `${notification.title}-l${notification.body.length}`
+        const id = `${notification.message.title}-l${notification.message.body.length}`
 
         if (!document.cookie.includes(`notifications_has_removed_${id}`) &&
-          !state.all.find(n => n.title === notification.title && n.body === notification.body)) {
+          !state.all.find(n => n.message.title === notification.message.title &&
+          n.message.body === notification.message.body))
+        {
           state.all.push(notification)
         }
       },
       removeNotification (state, notification) {
-        const id = `${notification.title}-l${notification.body.length}`
+        const id = `${notification.message.title}-l${notification.message.body.length}`
 
         document.cookie += `notifications_has_removed_${id};`
-        state.all.splice(state.all.findIndex(n => n.title === notification.title), 1)
+        state.all.splice(state.all.findIndex(n => n.message.title === notification.message.title), 1)
       },
       // Kind of debug, to retrigger computed props, thus updating the cookie state
       forceUpdateNotifications (state) {
