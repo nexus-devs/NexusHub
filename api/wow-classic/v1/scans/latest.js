@@ -7,7 +7,7 @@ class ScansLast extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Get basic information about the last saved scan.'
-    this.schema.url = '/wow-classic/v1/scans/latest/:slug'
+    this.schema.url = '/wow-classic/v1/scans/latest/:server'
     this.schema.request = { url: '/wow-classic/v1/scans/latest/anathema-alliance' }
     this.schema.response = {
       scanId: Number,
@@ -19,7 +19,7 @@ class ScansLast extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.slug
+    const slug = req.params.server
     const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
 
     if (scan) {

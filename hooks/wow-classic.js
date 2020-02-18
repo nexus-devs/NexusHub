@@ -84,6 +84,8 @@ class Hook {
     const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
 
     const TSMReq = new TSMRequest()
+    if (!TSMReq.tsmKey) return
+
     const serverList = await TSMReq.get('/realms')
     if (!serverList.success) throw new Error(`Could not fetch realms: ${serverList.error}`)
     else {

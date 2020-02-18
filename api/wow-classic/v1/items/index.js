@@ -7,7 +7,7 @@ class Items extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Get basic item stats. Usage of this data for commercial purposes must be discussed with us before.'
-    this.schema.url = '/wow-classic/v1/items/:slug/:item'
+    this.schema.url = '/wow-classic/v1/items/:server/:item'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
     this.schema.response = {
       itemId: Number,
@@ -37,7 +37,7 @@ class Items extends Endpoint {
    */
   async main (req, res) {
     const itemId = parseInt(req.params.item)
-    const slug = req.params.slug
+    const slug = req.params.server
 
     const item = await this.db.collection('items').findOne({ itemId })
     if (!item) {

@@ -6,6 +6,7 @@ class Notification extends Endpoint {
     this.schema.method = 'POST'
     this.schema.scope = 'write_notifications_global'
     this.schema.description = 'Endpoint which pushes notifications to the web-client.'
+    this.schema.url = '/notifications'
     this.schema.request = {
       body: {
         game: 'warframe',
@@ -29,6 +30,7 @@ class Notification extends Endpoint {
   }
 
   async main (req, res) {
+    await this.db.collection('notifications').insertOne(req.body)
     await this.publish(req.body)
     res.send(req.body)
   }
