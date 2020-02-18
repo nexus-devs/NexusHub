@@ -57,6 +57,12 @@
                   </module>
                 </router-link>
               </div>
+              <div class="expand-deals">
+                <router-link :to="`/wow-classic/deals/${server}`">
+                  More Deals
+                  <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
+                </router-link>
+              </div>
             </div>
             <div class="col-b">
               <h2 class="sub">
@@ -79,6 +85,12 @@
                       <span class="sub">Crafting Profit</span>
                     </template>
                   </module>
+                </router-link>
+              </div>
+              <div class="expand-deals">
+                <router-link :to="`/wow-classic/recipes/${server}`">
+                  More Recipes
+                  <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
                 </router-link>
               </div>
             </div>
@@ -564,6 +576,33 @@ header {
 
     @media (max-width: $breakpoint-s) {
       margin: 0;
+    }
+
+    .expand-deals {
+      display: flex;
+      margin-top: 20px;
+
+      a {
+        font-size: 0.75em;
+        @include uppercase;
+        @include ie;
+        letter-spacing: 0.5;
+        padding: 5px 10px;
+        margin-left: auto;
+        left: 10px;
+        align-items: center;
+        position: relative;
+
+        &:hover {
+          color: white !important;
+        }
+
+        img {
+          height: 20px;
+          margin-top: -3px;
+          margin-left: -2px;
+        }
+      }
     }
   }
 
