@@ -7,7 +7,7 @@ class Deals extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Get the best possible deals.'
-    this.schema.url = '/wow-classic/v1/items/:slug/deals'
+    this.schema.url = '/wow-classic/v1/items/:server/deals'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/deals' }
     this.schema.query = [
       {
@@ -33,7 +33,7 @@ class Deals extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.slug
+    const slug = req.params.server
     const limit = req.query.limit
     const minQuantity = req.query.min_quantity
 
