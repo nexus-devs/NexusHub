@@ -13,7 +13,8 @@
           <div v-if="notifications.unread.length || notifications.hasread.length" class="notification-wrapper">
             <div v-for="notification in notifications.unread" :key="notification.message.title + notification.message.body.length" class="notification">
               <h4>{{ notification.message.title }}</h4>
-              <p>{{ notification.message.body }}</p>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <p v-html="notification.message.body" />
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
                 <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
                   {{ button.text }}
@@ -23,7 +24,8 @@
             </div>
             <div v-for="notification in notifications.hasread" :key="notification.message.title + notification.message.body.length" class="notification">
               <h4>{{ notification.message.title }}</h4>
-              <p>{{ notification.message.body }}</p>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <p v-html="notification.message.body" />
               <div v-if="notification.buttons" :class="theme.footer" class="footer">
                 <button v-for="button in notification.buttons" :key="button.text" @click="button.fn">
                   {{ button.text }}
