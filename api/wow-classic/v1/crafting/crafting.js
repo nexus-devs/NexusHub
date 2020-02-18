@@ -7,7 +7,7 @@ class Crafting extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Get crafting price information.'
-    this.schema.url = '/wow-classic/v1/crafting/:slug/:item'
+    this.schema.url = '/wow-classic/v1/crafting/:server/:item'
     this.schema.request = { url: '/wow-classic/v1/crafting/anathema-alliance/2589' }
     const craftingObj = {
       amount: [Number, Number],
@@ -38,8 +38,28 @@ class Crafting extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.slug
+    const slug = req.params.server.toLowerCase()
     const item = parseInt(req.params.item)
+
+    const server = await this.db.collection('server').findOne({ slug })
+    if (!server) {
+      const response = {
+        error: 'Not found.',
+        reason: `Server ${slug} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
+
+    const findItem = await this.db.collection('items').findOne({ itemId: item })
+    if (!findItem) {
+      const response = {
+        error: 'Not found.',
+        reason: `Item with ID ${item} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
 
     const items = await this.db.collection('items').find({
       $or: [

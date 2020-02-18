@@ -33,9 +33,19 @@ class Deals extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.server
+    const slug = req.params.server.toLowerCase()
     const limit = req.query.limit
     const minQuantity = req.query.min_quantity
+
+    const server = await this.db.collection('server').findOne({ slug })
+    if (!server) {
+      const response = {
+        error: 'Not found.',
+        reason: `Server ${slug} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
 
     const data = await this.db.collection('currentData').aggregate([
       { $match: { slug, minBuyout: { $gt: 0 }, quantity: { $gte: minQuantity } } },

@@ -7,7 +7,7 @@ class Deals extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Get the most profitable crafting items.'
-    this.schema.url = '/wow-classic/v1/crafting/:slug/deals'
+    this.schema.url = '/wow-classic/v1/crafting/:server/deals'
     this.schema.request = { url: '/wow-classic/v1/crafting/anathema-alliance/deals' }
     this.schema.query = [
       {
@@ -40,9 +40,19 @@ class Deals extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.slug
+    const slug = req.params.server.toLowerCase()
     const limit = req.query.limit
     const minQuantity = req.query.min_quantity
+
+    const server = await this.db.collection('server').findOne({ slug })
+    if (!server) {
+      const response = {
+        error: 'Not found.',
+        reason: `Server ${slug} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
 
     const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
 

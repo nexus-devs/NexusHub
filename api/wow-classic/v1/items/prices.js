@@ -34,9 +34,29 @@ class Prices extends Endpoint {
    */
   async main (req, res) {
     const itemId = parseInt(req.params.item)
-    const slug = req.params.server
+    const slug = req.params.server.toLowerCase()
     const timerange = req.query.timerange
     const region = req.query.region
+
+    const server = await this.db.collection('server').findOne({ slug })
+    if (!server) {
+      const response = {
+        error: 'Not found.',
+        reason: `Server ${slug} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
+
+    const item = await this.db.collection('items').findOne({ itemId })
+    if (!item) {
+      const response = {
+        error: 'Not found.',
+        reason: `Item with ID ${itemId} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
 
     const daysAgo = 1000 * 60 * 60 * 24 * timerange
     const rawData = await this.db.collection(region ? 'regionData' : 'scanData').find({

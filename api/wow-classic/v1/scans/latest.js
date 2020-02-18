@@ -19,8 +19,18 @@ class ScansLast extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const slug = req.params.server
+    const slug = req.params.server.toLowerCase()
     const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
+
+    const server = await this.db.collection('server').findOne({ slug })
+    if (!server) {
+      const response = {
+        error: 'Not found.',
+        reason: `Server ${slug} could not be found.`
+      }
+      this.cache(response, 60 * 60)
+      return res.status(404).send(response)
+    }
 
     if (scan) {
       this.cache(scan, 60)
@@ -29,7 +39,7 @@ class ScansLast extends Endpoint {
     else {
       const response = {
         error: 'Not found.',
-        reason: `Scans for ${slug} could not be found. Either there are no scans for that realm, or that realm doesn't exist.`
+        reason: `Scans for ${slug} could not be found.`
       }
       this.cache(response, 60)
       res.send(response)
