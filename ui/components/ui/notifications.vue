@@ -11,7 +11,7 @@
         </div>
         <div :class="theme['notification-body']" class="notification-body">
           <div v-if="notifications.unread.length || notifications.hasread.length" class="notification-wrapper">
-            <div v-for="notification in notifications.unread" :key="notification.message.title + notification.message.body.length" class="notification">
+            <div v-for="notification in notifications.unread" :key="notification.message.title + notification.message.body.length" :class="theme.notification" class="notification">
               <h4>{{ notification.message.title }}</h4>
               <!-- eslint-disable-next-line vue/no-v-html -->
               <p v-html="notification.message.body" />
@@ -22,7 +22,7 @@
               </div>
               <img src="/img/ui/close.svg" alt="Dismiss" class="dismiss ico-h-20 interactive" @click="dismiss(notification)">
             </div>
-            <div v-for="notification in notifications.hasread" :key="notification.message.title + notification.message.body.length" class="notification">
+            <div v-for="notification in notifications.hasread" :key="notification.message.title + notification.message.body.length" :class="theme.notification" class="notification">
               <h4>{{ notification.message.title }}</h4>
               <!-- eslint-disable-next-line vue/no-v-html -->
               <p v-html="notification.message.body" />
@@ -160,6 +160,9 @@ export default {
 .notification-body {
   background: $color-bg-dark;
 }
+.notification {
+  @include field;
+}
 .footer /deep/ button {
   @include gradient-background-dg(transparent, transparent);
   border: 1px solid $color-subtle;
@@ -182,6 +185,9 @@ export default {
 }
 .notification-body {
   background: $color-bg-dark;
+}
+.notification {
+  @include field;
 }
 .footer /deep/ button {
   @include gradient-background-dg(transparent, transparent);
@@ -270,7 +276,6 @@ export default {
 }
 
 .notification {
-  @include field;
   position: relative;
   margin: 20px;
   padding: 20px;
