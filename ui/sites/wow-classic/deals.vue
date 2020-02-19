@@ -5,7 +5,7 @@
       <section class="results">
         <div class="container">
           <div class="deals-headline">
-            <h1>Deals</h1>
+            <h2 class="sub">Profitable Deals on {{ serverPretty }}</h2>
           </div>
           <div class="deal-group">
             <div class="filter">
@@ -89,6 +89,13 @@ export default {
     },
     server () {
       return this.$store.state.servers.server
+    },
+    serverPretty () {
+      const serverlist = this.$store.state.servers.EU.concat(this.$store.state.servers.US)
+      const serverSplit = this.server.split('-')
+      const faction = serverSplit.pop()
+      const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
+      return `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
     }
   },
 
@@ -96,18 +103,18 @@ export default {
     this.parsePrice = utility.parsePrice
   },
 
-  storeModule
+  storeModule,
 
-  /* head () {
+  head () {
     return {
-      title: `${this.input} · NexusHub Profitable Deals`,
+      title: `Profitable Deals on ${this.serverPretty} · NexusHub`,
       meta: meta({
-        title: `${this.input} Search Results on NexusHub`,
-        description: this.results.length ? `Find ${this.results.length} matches for ${this.input}. ${this.results[0].name}` : 'No search results :(',
-        image: this.results.length ? `${this.results[0].imgUrl}` : 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
+        title: `Profitable Deals for ${this.serverPretty} on NexusHub`,
+        description: `Get the most profitable deals on the World of Warcraft Classic Auction House for ${this.serverPretty} on NexusHub`,
+        image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
       })
     }
-  } */
+  }
 }
 </script>
 
