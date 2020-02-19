@@ -22,6 +22,18 @@
                       </div>
                       <span>{{ deal.name }}</span>
                     </div>
+                    <div class="deal-data row">
+                      <div class="deal-data-value">
+                        <img src="/img/warframe/ui/platinum.svg" alt="Gold" class="ico-12">
+                        <span>{{ parsePrice(deal.dealDiff) }}</span>
+                      </div>
+                      <div class="deal-data-value">
+                        <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
+                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
+                        </span>
+                      </div>
+                      <div class="deal-data-value whitespace" />
+                    </div>
                   </router-link>
                 </div>
               </transition-group>
@@ -39,15 +51,18 @@
 <script>
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
+import indicator from 'src/components/charts/indicator.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/wowclassic.js'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
     ad,
     navigation,
-    appContent
+    appContent,
+    indicator
   },
 
   async asyncData ({ store, route }) {
@@ -75,6 +90,10 @@ export default {
     server () {
       return this.$store.state.servers.server
     }
+  },
+
+  created () {
+    this.parsePrice = utility.parsePrice
   },
 
   storeModule
@@ -142,17 +161,22 @@ export default {
     position: relative;
     flex-wrap: wrap;
     align-items: center;
-    width: 75%;
+    width: 70%;
   }
   .deal-data-value {
+    flex: 1;
     font-size: 0.9em;
     white-space: nowrap;
 
-    &:last-of-type {
-      flex-grow: 0;
-      text-align: right;
-      margin-right: 0;
+    span.negative {
+      color: $color-error;
     }
+    .price-diff {
+      color: $color-positive;
+    }
+  }
+  .whitespace {
+    flex-grow: 3;
   }
   @media (max-width: $breakpoint-s) {
     .deal-title {
@@ -185,6 +209,9 @@ export default {
       &.hidden {
         display: none;
       }
+    }
+    .whitespace {
+      display: none;
     }
   }
 }
