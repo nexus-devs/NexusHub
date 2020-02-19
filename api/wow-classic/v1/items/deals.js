@@ -16,6 +16,11 @@ class Deals extends Endpoint {
         description: 'Number of possible deals to return.'
       },
       {
+        name: 'skip',
+        default: 0,
+        description: 'Number of possible deals to skip.'
+      },
+      {
         name: 'min_quantity',
         default: 3,
         description: 'Filters out items with low quantity.'
@@ -35,6 +40,7 @@ class Deals extends Endpoint {
   async main (req, res) {
     const slug = req.params.server.toLowerCase()
     const limit = req.query.limit
+    const skip = req.query.skip
     const minQuantity = req.query.min_quantity
 
     const server = await this.db.collection('server').findOne({ slug })
@@ -47,7 +53,7 @@ class Deals extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const data = await this.db.collection('currentData').aggregate([
+    const aggregationPipeline = [
       { $match: { slug, minBuyout: { $gt: 0 }, quantity: { $gte: minQuantity } } },
       {
         $project: {
@@ -58,11 +64,17 @@ class Deals extends Endpoint {
           dealDiff: { $subtract: ['$marketValue', '$minBuyout'] }
         }
       },
-      { $sort: { dealDiff: -1 } },
-      { $limit: limit }
-    ]).toArray()
+      { $sort: { dealDiff: -1 } }
+    ]
 
-    this.cache(data, 60)
+    // We have to do this because skip doesn't accept 0 as a value.
+    // The sort->skip->limit order is fine performance wise: https://docs.mongodb.com/manual/core/aggregation-pipeline-optimization/
+    if (skip) aggregationPipeline.push({ $skip: skip })
+    aggregationPipeline.push({ $limit: limit })
+
+    const data = await this.db.collection('currentData').aggregate(aggregationPipeline).toArray()
+
+    // this.cache(data, 60) TODO: Uncomment this
     return res.send(data)
   }
 }

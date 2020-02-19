@@ -67,7 +67,7 @@ export default {
 
   async asyncData ({ store, route }) {
     const slug = route.params.slug
-    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`)
+    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=10`)
 
     const parallel = []
     for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
