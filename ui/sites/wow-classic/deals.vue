@@ -5,12 +5,14 @@
       <section class="results">
         <div class="container">
           <div class="deals-headline">
-            <h2 class="sub">Profitable Deals on {{ serverPretty }}</h2>
+            <h2 class="sub">
+              Profitable Deals on {{ serverPretty }}
+            </h2>
           </div>
           <div class="deal-group">
-            <div class="filter">
+            <!-- <div class="filter">
 
-            </div>
+            </div> -->
             <div class="deal-container">
               <transition-group class="deal-list">
                 <div v-for="deal in deals" :key="deal.itemId" class="deal">
