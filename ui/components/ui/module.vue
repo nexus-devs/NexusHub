@@ -51,6 +51,11 @@ export default {
 }
 .footer {
   background: $color-bg;
+  :global {
+    a {
+      @include ie;
+    }
+  }
 }
 </style>
 
@@ -69,9 +74,10 @@ export default {
 }
 .footer {
   background: $color-bg;
-
-  :global(a:hover) {
-    background: rgba(222, 200, 187, 0.1) !important;
+  :global {
+    a {
+      @include ie;
+    }
   }
 }
 </style>
@@ -180,7 +186,6 @@ export default {
     margin-left: auto;
     align-items: center;
     @include uppercase;
-    @include ie;
     padding: 5px 10px;
     letter-spacing: 0.5;
     position: relative;
