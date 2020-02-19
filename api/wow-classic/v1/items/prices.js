@@ -18,7 +18,7 @@ class Prices extends Endpoint {
       {
         name: 'region',
         default: false,
-        description: 'If true, slug is treated as a region.'
+        description: 'If true, server is treated as a region (us or eu).'
       }
     ]
     this.schema.response = {
@@ -39,10 +39,10 @@ class Prices extends Endpoint {
     const region = req.query.region
 
     const server = await this.db.collection('server').findOne({ slug })
-    if (!server) {
+    if ((!server && !region) || (region && !['eu', 'us'].includes(slug))) {
       const response = {
         error: 'Not found.',
-        reason: `Server ${slug} could not be found.`
+        reason: !region ? `Server ${slug} could not be found.` : `Region ${slug} could not be found.`
       }
       this.cache(response, 60 * 60)
       return res.status(404).send(response)
