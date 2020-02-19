@@ -170,7 +170,7 @@ export default {
       title: `${this.item.name} Crafting on ${serverPretty} · NexusHub`,
       meta: meta({
         title: `${this.item.name} Crafting on NexusHub`,
-        description: `${this.item.name} Crafting reagents and recipes on ${serverPretty}`,
+        description: `${this.item.name} Crafting reagents and recipes on the World of Warcaft Classic Auction House for ${serverPretty}`,
         image: `${this.item.imgUrl}`
       })
     }

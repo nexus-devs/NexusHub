@@ -114,7 +114,7 @@ export default {
       title: `${this.item.name} on ${serverPretty} · NexusHub`,
       meta: meta({
         title: `${this.item.name} on NexusHub`,
-        description: `${this.item.name} on ${serverPretty}`,
+        description: `${this.item.name} prices on the World of Warcaft Classic Auction House for ${serverPretty}`,
         image: `${this.item.imgUrl}`
       })
     }
