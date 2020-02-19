@@ -1,0 +1,69 @@
+/**
+ * Acceleration Curves
+ */
+@mixin ease($timing) {
+  transition: all $timing ease;
+}
+@mixin ease-wubble($timing) {
+  transition: all $timing cubic-bezier(0.17, 0.88, 0.32, 1.27);
+}
+@mixin ease-out($timing) {
+  transition: all $timing cubic-bezier(0, 1.01, .55, .99);
+}
+@mixin ease-touch($timing) {
+  transition: all $timing cubic-bezier(.38,1,.54,.98);
+}
+@mixin notransition() {
+  transition: none !important;
+}
+/**
+ * Interactive Items
+ */
+@mixin ie($size: 28) {
+  transform: scale(1);
+  padding: ($size / 3);
+  cursor: pointer;
+  border-radius: 1000px;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(21, 19, 16, 0);
+  @include ease(0.2s);
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    border-radius: 1000px;
+    background: rgba(222, 200, 187, 0.2);
+    @include ease(0.15s);
+  }
+
+  &:hover {
+    &:before {
+      @include ease(0.8s);
+    }
+    background: rgba(222, 200, 187, 0.1);
+    @include ease(0.3s);
+
+    @media (max-width: $breakpoint-s) {
+      background: transparent;
+    }
+  }
+
+  &:active {
+    &:before {
+      opacity:1;
+      @include ease(0.1s);
+    }
+    @include ease(0.2s);
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(21, 19, 16, 0.1), 0 1px 2px rgba(21, 19, 16, 0.1);
+  }
+
+  &.interactive-nz {
+    transform: scale(1) !important;
+  }
+}
