@@ -67,12 +67,6 @@ export default {
     indicator
   },
 
-  data () {
-    return {
-      fetchingDeals: false
-    }
-  },
-
   async asyncData ({ store, route }) {
     const slug = route.params.slug
     const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=15`)
@@ -83,6 +77,12 @@ export default {
     }
 
     store.commit('setDeals', deals)
+  },
+
+  data () {
+    return {
+      fetchingDeals: false
+    }
   },
 
   computed: {
