@@ -40,6 +40,10 @@
                 </div>
               </transition-group>
             </div>
+            <div class="deal-status">
+              <img src="/img/ui/status-loading-wow-classic.svg" class="ico-h-24" alt="loading">
+              <p>Loading deals...</p>
+            </div>
           </div>
         </div>
         <ad name="wow-classic-profitable-deals" />
@@ -245,6 +249,26 @@ export default {
     .whitespace {
       display: none;
     }
+  }
+}
+.deal-status {
+  color: $color-font-body;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0;
+  width: 100%;
+  @include uppercase;
+  font-size: 0.9em;
+  @include ease(0.35s);
+  margin-top: 15px;
+
+  img {
+    margin-right: 3px;
+  }
+
+  @media (max-width: $breakpoint-s) {
+    font-size: 0.8em;
   }
 }
 
