@@ -1,6 +1,6 @@
 <template>
   <div :class="[{ offline }, theme.status]" class="status">
-    <img src="/img/ui/status-loading.svg" class="ico-h-24" alt="loading">
+    <img :src="themeName === 'wow-classic' ? '/img/ui/status-loading-wow-classic.svg' : '/img/ui/status-loading.svg'" class="ico-h-24" alt="loading">
     <p>{{ offline ? 'Connecting to the NexusHub API...' : 'Connected!' }}</p>
   </div>
 </template>
@@ -14,6 +14,9 @@ export default {
   computed: {
     theme () {
       return getTheme(this)
+    },
+    themeName () {
+      return getTheme(this, true)
     },
     offline () {
       return this.$store.state.api.offline
