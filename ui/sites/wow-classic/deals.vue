@@ -14,7 +14,7 @@
 
             </div> -->
             <div class="deal-container">
-              <transition-group class="deal-list">
+              <transition-group ref="deals" class="deal-list">
                 <div v-for="deal in deals" :key="deal.itemId" class="deal">
                   <router-link :to="`/wow-classic/items/${server}/${deal.itemId}`" class="row interactive">
                     <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
@@ -67,9 +67,15 @@ export default {
     indicator
   },
 
+  data () {
+    return {
+      fetchingDeals: false
+    }
+  },
+
   async asyncData ({ store, route }) {
     const slug = route.params.slug
-    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=10`)
+    const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=15`)
 
     for (const deal of deals) {
       deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
@@ -97,6 +103,29 @@ export default {
 
   created () {
     this.parsePrice = utility.parsePrice
+  },
+
+  mounted () {
+    window.addEventListener('scroll', this.updateOnScroll)
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('scroll', this.updateOnScroll)
+  },
+
+  methods: {
+    async updateOnScroll () {
+      const lastDeal = this.$refs.deals.$children[this.$refs.deals.$children.length - 1].$el
+      const lastDealPosition = lastDeal.getBoundingClientRect().top + window.pageYOffset // Absolute position
+      const viewportHeight = window.innerHeight
+
+      // Scrolled to last element
+      if (window.scrollY >= lastDealPosition - viewportHeight && !this.fetchingDeals) {
+        this.fetchingDeals = true
+        await this.$store.dispatch('addDeals', this.server)
+        this.fetchingDeals = false
+      }
+    }
   },
 
   storeModule,
