@@ -145,20 +145,14 @@ export default {
   async asyncData ({ store, route }) {
     const slug = route.params.slug
 
-    let parallel = []
+    const parallel = []
     parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
     parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
     parallel.push(this.$cubic.get('/wow-classic/v1/news'))
     const [crafting, deals, news] = await Promise.all(parallel)
 
-    parallel = []
-    for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
-    const itemData = await Promise.all(parallel)
-
     for (const deal of deals) {
-      const item = itemData.shift()
-      deal.icon = item.icon
-      deal.name = item.name
+      deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
       deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
     }
     for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`

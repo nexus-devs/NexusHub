@@ -74,7 +74,17 @@ class Deals extends Endpoint {
 
     const data = await this.db.collection('currentData').aggregate(aggregationPipeline).toArray()
 
-    // this.cache(data, 60) TODO: Uncomment this
+    // Add icon and name
+    const meta = await this.db.collection('items').find({ itemId: { $in: data.map(i => i.itemId) } }).toArray()
+    for (const metaEntry of meta) {
+      const item = data.find(i => i.itemId === metaEntry.itemId)
+      if (item) {
+        item.name = metaEntry.name
+        item.icon = metaEntry.icon
+      }
+    }
+
+    this.cache(data, 60)
     return res.send(data)
   }
 }

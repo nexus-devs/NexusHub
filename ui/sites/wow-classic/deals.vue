@@ -71,14 +71,8 @@ export default {
     const slug = route.params.slug
     const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=10`)
 
-    const parallel = []
-    for (const deal of deals) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${deal.itemId}`))
-    const itemData = await Promise.all(parallel)
-
     for (const deal of deals) {
-      const item = itemData.shift()
-      deal.icon = item.icon
-      deal.name = item.name
+      deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
       deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
     }
 
