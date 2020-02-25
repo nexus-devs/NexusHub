@@ -6,7 +6,7 @@ const Endpoint = require('cubic-api/endpoint')
 class Deals extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get the best possible deals.'
+    this.schema.description = 'Get the best possible deals (Difference between minimum buyout and market value).'
     this.schema.url = '/wow-classic/v1/items/:server/deals'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/deals' }
     this.schema.query = [
@@ -24,13 +24,21 @@ class Deals extends Endpoint {
         name: 'min_quantity',
         default: 3,
         description: 'Filters out items with low quantity.'
+      },
+      {
+        name: 'relative',
+        default: false,
+        description: 'Sorts by relative difference instead of absolute if set to true.'
       }
     ]
     this.schema.response = [{
       itemId: Number,
+      name: String,
+      icon: String,
       marketValue: Number,
       minBuyout: Number,
-      dealDiff: Number
+      dealDiff: Number,
+      dealPercentage: Number
     }]
   }
 
@@ -42,6 +50,7 @@ class Deals extends Endpoint {
     const limit = req.query.limit
     const skip = req.query.skip
     const minQuantity = req.query.min_quantity
+    const relative = req.query.relative
 
     const server = await this.db.collection('server').findOne({ slug })
     if (!server) {
@@ -61,10 +70,11 @@ class Deals extends Endpoint {
           itemId: 1,
           marketValue: 1,
           minBuyout: 1,
-          dealDiff: { $subtract: ['$marketValue', '$minBuyout'] }
+          dealDiff: { $subtract: ['$marketValue', '$minBuyout'] },
+          dealPercentage: { $round: [ { $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }, 4] }
         }
       },
-      { $sort: { dealDiff: -1 } }
+      { $sort: relative ? { dealPercentage: -1 } : { dealDiff: -1 } }
     ]
 
     // We have to do this because skip doesn't accept 0 as a value.
