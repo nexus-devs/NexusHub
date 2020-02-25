@@ -8,9 +8,15 @@
             <h1>Most Profitable Deals on {{ serverPretty }}</h1>
           </div>
           <div class="deal-group">
-            <!-- <div class="filter">
-
-            </div> -->
+            <div class="filter">
+              <div class="filter-tags">
+                <div class="filter-tag-row">
+                  <div class="btn-tag">
+                    <span>Test Filter</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="deal-container">
               <transition-group ref="deals" class="deal-list">
                 <div v-for="deal in deals" :key="deal.itemId" class="deal">
@@ -148,6 +154,7 @@ export default {
 @import '~src/styles/partials/wow-classic/importer';
 
 .deal-container {
+  margin-top: 30px;
   position: relative; // for position: absolute item list views
   overflow: hidden;
   @include ease-out(0.35s); // When results block gets resized
@@ -268,6 +275,30 @@ export default {
 
   @media (max-width: $breakpoint-s) {
     font-size: 0.8em;
+  }
+}
+
+.filter {
+  position: relative;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid $color-subtle-dark;
+  padding-top: 15px;
+
+  .filter-tags {
+    display: flex;
+    align-items: center;
+    margin-right: 150px; // break when view type is supposed to cause break
+
+    @media (max-width: $breakpoint-s) {
+      width: 100%;
+    }
+    .filter-tags-row {
+      display: inline-block;
+      margin-right: 20px;
+      padding-right: 20px;
+    }
   }
 }
 
