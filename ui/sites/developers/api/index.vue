@@ -140,7 +140,7 @@ export default {
           const saved = groups.find(g => g.name === name)
 
           // Change some endpoint data
-          endpoint.name = endpoint.name === 'index' ? name.split(' / ')[1].toLowerCase() : endpoint.name
+          endpoint.name = endpoint.name === 'index' ? (name.split(' / ').pop()).toLowerCase() : endpoint.name
           endpoint.group = name
 
           if (saved) {

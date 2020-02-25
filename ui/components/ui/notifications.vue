@@ -81,7 +81,7 @@ export default {
 
   async mounted () {
     this.listen()
-    const notifications = await this.$cubic.get('/notifications')
+    const notifications = await this.$cubic.get('/notifications/v1')
     for (const notification of notifications) {
       this.$store.commit('addNotification', notification)
     }
@@ -89,7 +89,7 @@ export default {
 
   methods: {
     listen () {
-      this.$cubic.subscribe('/notifications', notification => {
+      this.$cubic.subscribe('/notifications/v1', notification => {
         if (this.isValidGame(notification)) {
           this.visible = true
           this.$store.commit('addNotification', notification)

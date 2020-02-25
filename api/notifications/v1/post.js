@@ -6,7 +6,7 @@ class Notification extends Endpoint {
     this.schema.method = 'POST'
     this.schema.scope = 'write_notifications_global'
     this.schema.description = 'Endpoint which pushes notifications to the web-client.'
-    this.schema.url = '/notifications'
+    this.schema.url = '/notifications/v1'
     this.schema.request = {
       body: {
         game: 'warframe',
@@ -24,7 +24,7 @@ class Notification extends Endpoint {
       }
     }
     this.schema.pubsub = {
-      url: '/notifications',
+      url: '/notifications/v1',
       response: this.schema.response
     }
   }
