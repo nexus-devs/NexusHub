@@ -71,7 +71,7 @@ class Deals extends Endpoint {
           marketValue: 1,
           minBuyout: 1,
           dealDiff: { $subtract: ['$marketValue', '$minBuyout'] },
-          dealPercentage: { $round: [ { $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }, 4] }
+          dealPercentage: { $round: [{ $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }, 4] }
         }
       },
       { $sort: relative ? { dealPercentage: -1 } : { dealDiff: -1 } }
