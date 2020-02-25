@@ -71,7 +71,7 @@ class Deals extends Endpoint {
           marketValue: 1,
           minBuyout: 1,
           dealDiff: { $subtract: ['$marketValue', '$minBuyout'] },
-          dealPercentage: { $round: [{ $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }, 4] }
+          dealPercentage: { $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }
         }
       },
       { $sort: relative ? { dealPercentage: -1 } : { dealDiff: -1 } }
@@ -91,6 +91,7 @@ class Deals extends Endpoint {
       if (item) {
         item.name = metaEntry.name
         item.icon = metaEntry.icon
+        item.dealPercentage = Math.round(item.dealPercentage * 10000) / 10000 // Round to 4 digits
       }
     }
 
