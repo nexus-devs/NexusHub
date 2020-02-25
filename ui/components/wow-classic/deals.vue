@@ -3,7 +3,7 @@
     <div class="filter">
       <div class="filter-tags">
         <div class="filter-tag-row">
-          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active }" class="btn-tag">
+          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active }" class="btn-tag" @click="selectFilter(filter)">
             <img v-if="filter.icon" :src="filter.icon" :alt="filter.name" class="ico-12">
             <span>{{ filter.name }}</span>
           </div>
@@ -102,6 +102,20 @@ export default {
         await this.$store.dispatch('addDeals', this.server)
         this.fetchingDeals = false
       }
+    },
+    selectFilter (filter) {
+      const newFilters = this.filters
+
+      if (filter.unique) {
+        for (const newFilter of newFilters) {
+          if (newFilter.unique) newFilter.active = false
+        }
+      }
+
+      const currentFilter = newFilters.find(f => f.name === filter.name)
+      currentFilter.active = true
+
+      this.$store.commit('setFilters', newFilters)
     }
   }
 }
