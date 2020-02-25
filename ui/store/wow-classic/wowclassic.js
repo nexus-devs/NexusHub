@@ -4,7 +4,8 @@ export default {
   state: {
     news: [],
     deals: [],
-    craftingDeals: []
+    craftingDeals: [],
+    filters: []
   },
 
   mutations: {
@@ -16,6 +17,9 @@ export default {
     },
     setCraftingDeals (state, deals) {
       state.craftingDeals = deals
+    },
+    setFilters (state, filters) {
+      state.filters = filters
     }
   },
 
