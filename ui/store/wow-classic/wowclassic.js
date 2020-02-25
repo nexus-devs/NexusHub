@@ -5,7 +5,8 @@ export default {
     news: [],
     deals: [],
     craftingDeals: [],
-    filters: []
+    filters: [],
+    fetchUrl: ''
   },
 
   mutations: {
@@ -20,16 +21,16 @@ export default {
     },
     setFilters (state, filters) {
       state.filters = filters
+    },
+    setFetchUrl (state, fetchUrl) {
+      state.fetchUrl = fetchUrl
     }
   },
 
   actions: {
     async addDeals ({ state, commit }, server) {
-      const newDeals = await this.$cubic.get(`/wow-classic/v1/items/${server}/deals?limit=${15}&skip=${state.deals.length}`)
-      for (const deal of newDeals) {
-        deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
-        deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
-      }
+      const newDeals = await this.$cubic.get(`${state.fetchUrl}&skip=${state.deals.length}`)
+      for (const deal of newDeals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
       commit('setDeals', state.deals.concat(newDeals))
     }
   }

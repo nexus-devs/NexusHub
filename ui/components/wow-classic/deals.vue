@@ -105,15 +105,19 @@ export default {
     },
     selectFilter (filter) {
       const newFilters = this.filters
+      const selectedFilter = newFilters.find(f => f.name === filter.name)
 
+      if (!selectedFilter || selectedFilter.active) return // Terminate if non-existent or already active
+
+      // Disable other unique filters
       if (filter.unique) {
         for (const newFilter of newFilters) {
           if (newFilter.unique) newFilter.active = false
         }
       }
 
-      const currentFilter = newFilters.find(f => f.name === filter.name)
-      currentFilter.active = true
+      if (filter.fn) filter.fn()
+      selectedFilter.active = true
 
       this.$store.commit('setFilters', newFilters)
     }
