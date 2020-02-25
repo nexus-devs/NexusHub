@@ -30,8 +30,8 @@
                         <span>{{ parsePrice(deal.dealDiff) }}</span>
                       </div>
                       <div class="deal-data-value">
-                        <span :class="{ negative: deal.percentage < 0 }" class="price-diff">
-                          <indicator :diff="deal.percentage" /> {{ Math.abs(deal.percentage) }}%
+                        <span :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
+                          <indicator :diff="deal.dealPercentage" /> {{ +Math.abs(deal.dealPercentage * 100).toFixed(2) }}%
                         </span>
                       </div>
                       <div class="deal-data-value whitespace" />
@@ -75,10 +75,7 @@ export default {
     const slug = route.params.slug
     const deals = await this.$cubic.get(`/wow-classic/v1/items/${slug}/deals?limit=15`)
 
-    for (const deal of deals) {
-      deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
-      deal.percentage = ((deal.marketValue - deal.minBuyout) / deal.minBuyout * 100).toFixed(2)
-    }
+    for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
     store.commit('setDeals', deals)
   },
