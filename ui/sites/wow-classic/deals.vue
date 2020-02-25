@@ -5,9 +5,7 @@
       <section class="results">
         <div class="container">
           <div class="deals-headline">
-            <h2 class="sub">
-              Profitable Deals on {{ serverPretty }}
-            </h2>
+            <h1>Most Profitable Deals on {{ serverPretty }}</h1>
           </div>
           <div class="deal-group">
             <!-- <div class="filter">
@@ -153,6 +151,10 @@ export default {
   position: relative; // for position: absolute item list views
   overflow: hidden;
   @include ease-out(0.35s); // When results block gets resized
+}
+.deals-headline {
+  padding-top: 40px;
+  padding-bottom: 50px;
 }
 .deal {
   @include ease(0.5s);
