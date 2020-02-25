@@ -44,8 +44,8 @@ export default {
     store.commit('setFetchUrl', fetchUrl)
     store.commit('setDeals', deals)
     store.commit('setFilters', [
-      { name: 'Absolute Profit', unique: true, active: true, icon: '/img/warframe/ui/platinum.svg' },
-      { name: 'Relative Profit', unique: true, active: false, icon: '/img/warframe/ui/platinum.svg' }
+      { name: 'Absolute Profit', unique: true, active: true, icon: '/img/warframe/ui/platinum.svg', fetchUrl },
+      { name: 'Relative Profit', unique: true, active: false, icon: '/img/warframe/ui/platinum.svg', fetchUrl: `${fetchUrl}&relative=true` }
     ])
   },
 

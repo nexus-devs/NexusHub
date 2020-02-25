@@ -66,6 +66,9 @@ export default {
     filters () {
       return this.$store.state.wowclassic.filters
     },
+    fetchUrl () {
+      return this.$store.state.wowclassic.fetchUrl
+    },
     server () {
       return this.$store.state.servers.server
     },
@@ -103,7 +106,7 @@ export default {
         this.fetchingDeals = false
       }
     },
-    selectFilter (filter) {
+    async selectFilter (filter) {
       const newFilters = this.filters
       const selectedFilter = newFilters.find(f => f.name === filter.name)
 
@@ -116,7 +119,12 @@ export default {
         }
       }
 
-      if (filter.fn) filter.fn()
+      if (filter.fetchUrl && filter.fetchUrl !== this.fetchUrl) {
+        this.$store.commit('setFetchUrl', filter.fetchUrl)
+        const deals = await this.$cubic.get(filter.fetchUrl)
+        for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+        this.$store.commit('setDeals', deals)
+      }
       selectedFilter.active = true
 
       this.$store.commit('setFilters', newFilters)
