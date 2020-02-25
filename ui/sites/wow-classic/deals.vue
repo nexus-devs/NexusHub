@@ -41,6 +41,10 @@ export default {
     for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
     store.commit('setDeals', deals)
+    store.commit('setFilters', [
+      { name: 'Absolute Profit', unique: true, active: true, icon: '/img/warframe/ui/platinum.svg' },
+      { name: 'Relative Profit', unique: true, active: false, icon: '/img/warframe/ui/platinum.svg' }
+    ])
   },
 
   computed: {

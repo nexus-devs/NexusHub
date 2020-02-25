@@ -3,9 +3,9 @@
     <div class="filter">
       <div class="filter-tags">
         <div class="filter-tag-row">
-          <div v-for="filter in filters" :key="filter.name" class="btn-tag">
+          <div v-for="filter in filters" :key="filter.name" :class="{ active: filter.active }" class="btn-tag">
+            <img v-if="filter.icon" :src="filter.icon" :alt="filter.name" class="ico-12">
             <span>{{ filter.name }}</span>
-            <img src="/img/ui/dropdown.svg" class="ico-16 asc-desc" alt="Ascending/Descending">
           </div>
         </div>
       </div>
@@ -252,6 +252,13 @@ export default {
       margin-right: 20px;
       padding-right: 20px;
     }
+  }
+}
+
+// Fix for btn-tags having no ascending tag
+.btn-tag {
+  img {
+    margin-right: 2px !important;
   }
 }
 
