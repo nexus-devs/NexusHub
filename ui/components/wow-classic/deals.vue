@@ -13,7 +13,7 @@
     <div class="deal-container">
       <transition-group ref="deals" class="deal-list">
         <div v-for="deal in deals" :key="deal.itemId" class="deal">
-          <router-link :to="`/wow-classic/items/${server}/${deal.itemId}`" class="row interactive">
+          <router-link :to="!crafting ? `/wow-classic/items/${server}/${deal.itemId}` : `/wow-classic/items/${server}/${deal.itemId}/crafting`" class="row interactive">
             <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
             <div class="deal-title col-b">
               <div class="deal-img">
@@ -24,12 +24,13 @@
             <div class="deal-data row">
               <div class="deal-data-value">
                 <img src="/img/warframe/ui/platinum.svg" alt="Gold" class="ico-12">
-                <span>{{ parsePrice(deal.dealDiff) }}</span>
+                <span>{{ parsePrice(!crafting ? deal.dealDiff : deal.profit) }}</span>
               </div>
               <div class="deal-data-value">
-                <span :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
+                <span v-if="!crafting" :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
                   <indicator :diff="deal.dealPercentage" /> {{ +Math.abs(deal.dealPercentage * 100).toFixed(2) }}%
                 </span>
+                <span v-else class="category">{{ deal.category }}</span>
               </div>
               <div class="deal-data-value whitespace" />
             </div>
@@ -52,6 +53,8 @@ export default {
   components: {
     indicator
   },
+
+  props: ['crafting'],
 
   data () {
     return {
@@ -235,6 +238,9 @@ export default {
       display: none;
     }
   }
+}
+.category {
+  color: $color-font-body;
 }
 .deal-status {
   color: $color-font-body;
