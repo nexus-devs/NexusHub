@@ -174,7 +174,7 @@ export default {
         return groups.find(g => g.name.replace(/\-/g, ' / ') === group.replace(/\-/g, ' / '))
           .endpoints.find(e => e.name === name)
       }
-      return undefined
+      return
     }
   },
 
