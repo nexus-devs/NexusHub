@@ -16,6 +16,11 @@ class Deals extends Endpoint {
         description: 'Number of possible deals to return.'
       },
       {
+        name: 'skip',
+        default: 0,
+        description: 'Number of possible deals to skip.'
+      },
+      {
         name: 'min_quantity',
         default: 3,
         description: 'Filters out items with low quantity.'
@@ -42,6 +47,7 @@ class Deals extends Endpoint {
   async main (req, res) {
     const slug = req.params.server.toLowerCase()
     const limit = req.query.limit
+    const skip = req.query.skip
     const minQuantity = req.query.min_quantity
 
     const server = await this.db.collection('server').findOne({ slug })
@@ -107,7 +113,7 @@ class Deals extends Endpoint {
 
     deals.sort((a, b) => b.profit - a.profit)
 
-    const response = deals.slice(0, limit)
+    const response = deals.slice(skip, skip + limit)
     this.cache(response, 60)
     return res.send(response)
   }
