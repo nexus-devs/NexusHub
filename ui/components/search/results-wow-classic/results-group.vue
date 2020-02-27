@@ -41,7 +41,7 @@
       <router-link to="/contact">
         Let us know
       </router-link> or
-      <a href="https://github.com/nexus-devs/warframe-items" target="_blank">add items yourself</a> if you
+      <a href="https://github.com/nexus-devs/wow-classic-items" target="_blank">add items yourself</a> if you
       wanna help us support the project.
     </div>
   </div>
