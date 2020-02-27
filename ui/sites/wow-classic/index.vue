@@ -88,7 +88,7 @@
                 </router-link>
               </div>
               <div class="expand-deals">
-                <router-link :to="`/wow-classic/recipes/${server}`">
+                <router-link :to="`/wow-classic/deals/recipes/${server}`">
                   More Recipes
                   <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
                 </router-link>
