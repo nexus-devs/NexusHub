@@ -6,7 +6,8 @@ export default {
     deals: [],
     craftingDeals: [],
     filters: [],
-    fetchUrl: ''
+    fetchUrl: '',
+    reachedEndOfDeals: false
   },
 
   mutations: {
@@ -24,6 +25,10 @@ export default {
     },
     setFetchUrl (state, fetchUrl) {
       state.fetchUrl = fetchUrl
+    },
+    setReachedEnd (state, reachedEnd) {
+      console.log(reachedEnd)
+      state.reachedEndOfDeals = reachedEnd
     }
   },
 
@@ -31,6 +36,11 @@ export default {
     async addDeals ({ state, commit }, server) {
       const newDeals = await this.$cubic.get(`${state.fetchUrl}&skip=${state.deals.length}`)
       for (const deal of newDeals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+
+      // Check if less < limit are returned -> we've reached the end!
+      if (newDeals.length < 15) commit('setReachedEnd', true)
+      else commit('setReachedEnd', false)
+
       // Filters here because of a edge case where items are updated
       commit('setDeals', state.deals.concat(newDeals.filter(nD => !state.deals.find(d => nD.itemId === d.itemId))))
     }

@@ -38,9 +38,12 @@
         </div>
       </transition-group>
     </div>
-    <div class="deal-status">
+    <div v-if="!reachedEndOfDeals" class="deal-status">
       <img src="/img/ui/status-loading-wow-classic.svg" class="ico-h-24" alt="loading">
       <p>Loading deals...</p>
+    </div>
+    <div v-else class="deal-status">
+      <p>You've reached the end</p>
     </div>
   </div>
 </template>
@@ -82,6 +85,9 @@ export default {
     },
     filters () {
       return this.$store.state.wowclassic.filters
+    },
+    reachedEndOfDeals () {
+      return this.$store.state.wowclassic.reachedEndOfDeals
     },
     fetchUrl () {
       return this.$store.state.wowclassic.fetchUrl
