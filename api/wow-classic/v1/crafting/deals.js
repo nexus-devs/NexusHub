@@ -75,9 +75,8 @@ class Deals extends Endpoint {
     queryItems = [...new Set(queryItems)]
 
     // Query range first to make better use of index
-    const itemData = await this.db.collection('currentData').aggregate([
-      { $match: { itemId: { $in: queryItems }, slug, quantity: { $gte: minQuantity } } }
-    ]).toArray()
+    const itemData = await this.db.collection('currentData').find({ itemId: { $in: queryItems }, slug, quantity: { $gte: minQuantity } }).toArray()
+    const itemMetaData = await this.db.collection('items').find({ itemId: { $in: queryItems } }).toArray()
 
     const deals = []
     for (const item of items) {
@@ -90,7 +89,8 @@ class Deals extends Endpoint {
 
         for (const reagent of createdBy.reagents) {
           const reagentData = itemData.find((i) => i.itemId === reagent.itemId)
-          if (reagentData) createdByCosts += reagentData.marketValue * reagent.amount
+          const reagentMetaData = itemMetaData.find(i => i.itemId === reagent.itemId)
+          if (reagentData) createdByCosts += Math.min(reagentData.marketValue, reagentMetaData.vendorPrice || Infinity) * reagent.amount
           else {
             allReagentsExist = false
             break
