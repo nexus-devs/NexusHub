@@ -83,7 +83,10 @@ export default {
         }
       }
 
-      if (activeFilters.length) filteredDeals.sort((a, b) => b.profit - a.profit)
+      if (activeFilters.length) {
+        filteredDeals.sort((a, b) => b.profit - a.profit)
+        if (filteredDeals.length < 15) this.$nextTick(this.updateOnScroll.bind(this, null, true))
+      }
       return activeFilters.length ? filteredDeals : deals
     },
     filters () {
@@ -120,15 +123,18 @@ export default {
   },
 
   methods: {
-    async updateOnScroll () {
+    async updateOnScroll (event, forceUpdate = false) {
       const lastDeal = this.$refs.deals.$children[this.$refs.deals.$children.length - 1].$el
       const lastDealPosition = lastDeal.getBoundingClientRect().top + window.pageYOffset // Absolute position
       const viewportHeight = window.innerHeight
 
       // Scrolled to last element
-      if (window.scrollY >= lastDealPosition - viewportHeight && !this.fetchingDeals) {
+      if ((forceUpdate || window.scrollY >= lastDealPosition - viewportHeight) && !this.fetchingDeals && !this.reachedEndOfDeals) {
         this.fetchingDeals = true
-        await this.$store.dispatch('addDeals', this.server)
+        await this.$store.dispatch('addDeals')
+        while (this.deals.length < 15 && !this.reachedEndOfDeals) {
+          await this.$store.dispatch('addDeals')
+        }
         this.fetchingDeals = false
       }
     },
@@ -155,7 +161,6 @@ export default {
 
       // Toggle filter
       selectedFilter.active = !selectedFilter.active
-
       this.$store.commit('setFilters', newFilters)
     }
   }

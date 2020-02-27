@@ -27,13 +27,12 @@ export default {
       state.fetchUrl = fetchUrl
     },
     setReachedEnd (state, reachedEnd) {
-      console.log(reachedEnd)
       state.reachedEndOfDeals = reachedEnd
     }
   },
 
   actions: {
-    async addDeals ({ state, commit }, server) {
+    async addDeals ({ state, commit }) {
       const newDeals = await this.$cubic.get(`${state.fetchUrl}&skip=${state.deals.length}`)
       for (const deal of newDeals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
