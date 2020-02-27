@@ -35,7 +35,6 @@
               <div class="deal-data-value whitespace" />
             </div>
           </router-link>
-          <ad v-if="i % 10 === 0" :name="`wow-classic-profitable-${crafting ? 'recipes' : 'deals'}-${i/10}`" />
         </div>
       </transition-group>
     </div>
@@ -50,13 +49,11 @@
 </template>
 
 <script>
-import ad from 'src/components/ads/nitroAds.vue'
 import indicator from 'src/components/charts/indicator.vue'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
-    ad,
     indicator
   },
 

@@ -7,6 +7,7 @@
           <div class="deals-headline">
             <h1>Most Profitable Recipes on {{ serverPretty }}</h1>
           </div>
+          <ad name="wow-classic-deals-crafting" />
           <deals :crafting="true" />
         </div>
       </section>
@@ -17,6 +18,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import deals from 'src/components/wow-classic/deals.vue'
 import meta from 'src/components/seo/meta.js'
@@ -26,6 +28,7 @@ import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
+    ad,
     navigation,
     appContent,
     deals
