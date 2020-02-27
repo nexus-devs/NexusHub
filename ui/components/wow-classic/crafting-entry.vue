@@ -52,7 +52,7 @@
         </div>
         <div v-else-if="reagent.marketValue && reagent.marketValue >= reagent.vendorPrice" class="col price reagent">
           <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-          <span>{{ parsePrice(reagent.vendorPrice) }}</span>
+          <span>{{ parsePrice(reagent.vendorPrice) }} (Vendor)</span>
         </div>
         <div v-else class="col price reagent">
           <span class="unavailable">Unavailable</span>
