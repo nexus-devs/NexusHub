@@ -46,11 +46,16 @@
           <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">
           {{ reagent.amount }}x
         </div>
-        <div class="col price reagent">
-          <img v-if="reagent.marketValue" src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
-          <span v-if="reagent.marketValue">{{ parsePrice(reagent.marketValue) }}</span>
-          <span v-else class="unavailable">Unavailable</span>
-          <!--<price-diff :type="order.offer" :current="median" :previous="order.price" unit="p" />-->
+        <div v-if="reagent.marketValue && (!reagent.vendorPrice || reagent.marketValue < reagent.vendorPrice)" class="col price reagent">
+          <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
+          <span>{{ parsePrice(reagent.marketValue) }}</span>
+        </div>
+        <div v-else-if="reagent.marketValue && reagent.marketValue >= reagent.vendorPrice" class="col price reagent">
+          <img src="/img/warframe/ui/platinum.svg" alt="Platinum" class="ico-h-12">
+          <span>{{ parsePrice(reagent.vendorPrice) }}</span>
+        </div>
+        <div v-else class="col price reagent">
+          <span class="unavailable">Unavailable</span>
         </div>
         <div class="col whitespace" />
         <div class="col whitespace" />
@@ -82,7 +87,7 @@ export default {
       return this.$store.state.crafting.selected === this.cid
     },
     profit () {
-      const cost = this.crafting.reagents.reduce((acc, cV) => acc + cV.marketValue * cV.amount, 0)
+      const cost = this.crafting.reagents.reduce((acc, cV) => acc + Math.min(cV.marketValue, cV.vendorPrice || Infinity) * cV.amount, 0)
       return Math.round(this.crafting.marketValue * ((this.crafting.amount[0] + this.crafting.amount[1]) / 2)) - cost
     },
     server () {
