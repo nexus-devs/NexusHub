@@ -118,7 +118,8 @@ class Crafting extends Endpoint {
             ...r,
             name: storage.name,
             icon: `https://wow.zamimg.com/images/wow/icons/large/${storage.icon}.jpg`,
-            marketValue: storage.marketValue ? storage.marketValue : null
+            marketValue: storage.marketValue || null,
+            vendorPrice: storage.vendorPrice || null
           }
         })
         return { ...applyItem, ...cby, reagents }
@@ -130,7 +131,8 @@ class Crafting extends Endpoint {
         itemId: r.itemId,
         name: r.name,
         icon: r.icon,
-        marketValue: r.marketValue
+        marketValue: r.marketValue,
+        vendorPrice: r.vendorPrice || null
       }))
     }
 
@@ -140,7 +142,7 @@ class Crafting extends Endpoint {
       createdBy: createdBy.map(applyData()),
       reagentFor: [].concat(...reagentFor.map(applyReagentFor))
     }
-    this.cache(response, 60 * 60)
+    // this.cache(response, 60 * 60)
     return res.send(response)
   }
 }

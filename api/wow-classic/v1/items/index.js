@@ -17,6 +17,7 @@ class Items extends Endpoint {
       requiredLevel: Number,
       itemLevel: Number,
       sellPrice: Number,
+      vendorPrice: Number,
       itemLink: String,
       tooltip: [{
         label: String
@@ -77,6 +78,7 @@ class Items extends Endpoint {
       requiredLevel: item.requiredLevel,
       itemLevel: item.itemLevel,
       sellPrice: item.sellPrice,
+      vendorPrice: item.vendorPrice || null,
       tooltip: item.tooltip,
       itemLink: item.itemLink,
       stats: {
@@ -85,7 +87,7 @@ class Items extends Endpoint {
       }
     }
 
-    this.cache(response, 60)
+    // this.cache(response, 60)
     return res.send(response)
   }
 }
