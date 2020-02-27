@@ -12,7 +12,7 @@
     </div>
     <div class="deal-container">
       <transition-group ref="deals" class="deal-list">
-        <div v-for="deal in deals" :key="deal.itemId" class="deal">
+        <div v-for="(deal, i) in deals" :key="`${i}-${deal.itemId}`" class="deal">
           <router-link :to="!crafting ? `/wow-classic/items/${server}/${deal.itemId}` : `/wow-classic/items/${server}/${deal.itemId}/crafting`" class="row interactive">
             <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
             <div class="deal-title col-b">
@@ -64,7 +64,21 @@ export default {
 
   computed: {
     deals () {
-      return this.$store.state.wowclassic.deals
+      const deals = this.$store.state.wowclassic.deals
+
+      // Apply active filters
+      const activeFilters = this.filters.filter(f => f.active && !f.unique)
+      const filteredDeals = []
+      for (const f of activeFilters) {
+        const filtered = deals.filter(d => d.category === f.name)
+        for (const deal of filtered) {
+          const dealAlreadyExists = filteredDeals.find(d => d.itemId === deal.itemId)
+          if (!dealAlreadyExists) filteredDeals.push(deal)
+        }
+      }
+
+      if (activeFilters.length) filteredDeals.sort((a, b) => b.profit - a.profit)
+      return activeFilters.length ? filteredDeals : deals
     },
     filters () {
       return this.$store.state.wowclassic.filters
@@ -113,22 +127,25 @@ export default {
       const newFilters = this.filters
       const selectedFilter = newFilters.find(f => f.name === filter.name)
 
-      if (!selectedFilter || selectedFilter.active) return // Terminate if non-existent or already active
+      // Terminate if non-existent or unique already active
+      if (!selectedFilter || (selectedFilter.unique && selectedFilter.active)) return
 
       // Disable other unique filters
       if (filter.unique) {
         for (const newFilter of newFilters) {
           if (newFilter.unique) newFilter.active = false
         }
+
+        if (filter.fetchUrl && filter.fetchUrl !== this.fetchUrl) {
+          this.$store.commit('setFetchUrl', filter.fetchUrl)
+          const deals = await this.$cubic.get(filter.fetchUrl)
+          for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+          this.$store.commit('setDeals', deals)
+        }
       }
 
-      if (filter.fetchUrl && filter.fetchUrl !== this.fetchUrl) {
-        this.$store.commit('setFetchUrl', filter.fetchUrl)
-        const deals = await this.$cubic.get(filter.fetchUrl)
-        for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
-        this.$store.commit('setDeals', deals)
-      }
-      selectedFilter.active = true
+      // Toggle filter
+      selectedFilter.active = !selectedFilter.active
 
       this.$store.commit('setFilters', newFilters)
     }

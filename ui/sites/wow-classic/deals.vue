@@ -66,9 +66,9 @@ export default {
 
   head () {
     return {
-      title: `Profitable Deals on ${this.serverPretty} · NexusHub`,
+      title: `Most Profitable Deals on ${this.serverPretty} · NexusHub`,
       meta: meta({
-        title: `Profitable Deals for ${this.serverPretty} on NexusHub`,
+        title: `Most Profitable Deals for ${this.serverPretty} on NexusHub`,
         description: `Get the most profitable deals on the World of Warcraft Classic Auction House for ${this.serverPretty} on NexusHub`,
         image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
       })

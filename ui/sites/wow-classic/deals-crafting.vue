@@ -38,11 +38,15 @@ export default {
     const slug = route.params.slug
     const fetchUrl = `/wow-classic/v1/crafting/${slug}/deals?limit=15`
 
-    const deals = await this.$cubic.get(fetchUrl)
+    const parallel = [this.$cubic.get(fetchUrl), this.$cubic.get('/wow-classic/v1/crafting/professions')]
+    const [deals, professions] = await Promise.all(parallel)
     for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
     store.commit('setFetchUrl', fetchUrl)
     store.commit('setDeals', deals)
+    store.commit('setFilters', professions.map(p => {
+      return { name: p.name, unique: false, active: false, icon: p.icon }
+    }))
   },
 
   computed: {
@@ -62,9 +66,9 @@ export default {
 
   head () {
     return {
-      title: `Profitable Recipes on ${this.serverPretty} · NexusHub`,
+      title: `Most Profitable Recipes on ${this.serverPretty} · NexusHub`,
       meta: meta({
-        title: `Profitable Recipes for ${this.serverPretty} on NexusHub`,
+        title: `Most Profitable Recipes for ${this.serverPretty} on NexusHub`,
         description: `Get the most profitable crafting recipes on the World of Warcraft Classic Auction House for ${this.serverPretty} on NexusHub`,
         image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
       })
