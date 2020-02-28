@@ -69,6 +69,7 @@ class Search extends Endpoint {
           _id: 0,
           itemId: 1,
           name: 1,
+          uniqueName: 1,
           icon: 1,
           class: 1,
           nameLength: { $strLenCP: '$name' }
@@ -83,6 +84,7 @@ class Search extends Endpoint {
       result.push({
         itemId: item.itemId,
         name: item.name,
+        uniqueName: item.uniqueName,
         type: item.class,
         imgUrl: `https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg`
       })
