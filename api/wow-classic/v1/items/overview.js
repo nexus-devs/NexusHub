@@ -46,6 +46,15 @@ class Overview extends Endpoint {
     for (const entry of data) {
       delete entry._id
       delete entry.slug
+      if (!entry.previous) {
+        entry.previous = {
+          marketValue: null,
+          historicalValue: null,
+          minBuyout: null,
+          numAuctions: null,
+          quantity: null
+        }
+      }
     }
 
     const response = { slug, data }
