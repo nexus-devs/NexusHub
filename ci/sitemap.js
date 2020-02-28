@@ -100,9 +100,11 @@ class Sitemap {
     const servers = await mongoWow.collection('server').find().toArray()
     for (const server of servers) {
       this.pushToSitemap(`https://nexushub.co/wow-classic/${server.slug}`)
+      this.pushToSitemap(`https://nexushub.co/wow-classic/deals/${server.slug}`)
+      this.pushToSitemap(`https://nexushub.co/wow-classic/deals/recipes/${server.slug}`)
       for (const item of itemsWow) {
-        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.itemId}`)
-        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.itemId}/crafting`)
+        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.uniqueName}`)
+        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.uniqueName}/crafting`)
       }
     }
   }
