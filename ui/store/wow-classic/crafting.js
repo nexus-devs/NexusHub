@@ -2,6 +2,7 @@ export default {
   name: 'crafting',
   state: {
     itemId: null,
+    uniqueName: '',
     slug: '',
     reagentFor: [],
     createdBy: [],
@@ -14,6 +15,7 @@ export default {
   mutations: {
     setCrafting (state, crafting) {
       state.itemId = crafting.itemId
+      state.uniqueName = crafting.uniqueName
       state.slug = crafting.slug
       state.reagentFor = crafting.reagentFor
       state.createdBy = crafting.createdBy

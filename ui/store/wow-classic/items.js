@@ -1,7 +1,7 @@
 export default {
   name: 'items',
   state: {
-    item: { name: '' },
+    item: { itemId: '', name: '', uniqueName: '' },
     timerange: 7
   },
 

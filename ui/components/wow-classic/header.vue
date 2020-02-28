@@ -42,7 +42,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if (store.state.items.item.itemId !== parseInt(item) || store.state.items.item.server !== slug) {
+    if ((store.state.items.item.itemId !== parseInt(item) && store.state.items.item.uniqueName !== item) || store.state.items.item.server !== slug) {
       const itemData = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}`)
       store.commit('setItem', itemData)
     }
@@ -52,8 +52,8 @@ export default {
       return this.$store.state.items.item
     },
     itemUrl () {
-      const route = this.$route.fullPath.split(this.item.itemId)[0]
-      return `${route}${this.item.itemId}`
+      const route = this.$route.fullPath.split(this.item.uniqueName)[0]
+      return `${route}${this.item.uniqueName}`
     }
   },
 

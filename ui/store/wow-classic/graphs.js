@@ -4,6 +4,7 @@ export default {
   name: 'graphs',
   state: {
     itemId: '',
+    uniqueName: '',
     slug: '',
     storage: {
       'graph-value-quantity': {},
@@ -16,6 +17,7 @@ export default {
   mutations: {
     setGraphItem (state, item) {
       state.itemId = item.itemId
+      state.uniqueName = item.uniqueName
       state.slug = item.slug
     },
     setGraphData (state, { graph, item }) {

@@ -73,7 +73,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if (store.state.graphs.itemId !== parseInt(item) || store.state.graphs.slug !== slug) {
+    if ((store.state.graphs.itemId !== parseInt(item) && store.state.graphs.uniqueName !== item) || store.state.graphs.slug !== slug) {
       const region = store.state.servers.region
 
       const parallel = []
@@ -82,7 +82,7 @@ export default {
       const [itemData, regionalData] = await Promise.all(parallel)
       const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
 
-      store.commit('setGraphItem', { itemId: itemData.itemId, slug })
+      store.commit('setGraphItem', { itemId: itemData.itemId, uniqueName: itemData.uniqueName, slug })
 
       // Commit start value for all graphs
       store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
