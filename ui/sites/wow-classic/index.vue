@@ -154,8 +154,8 @@ export default {
     for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
     for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
-    store.commit('setCraftingDeals', crafting)
-    store.commit('setDeals', deals)
+    store.commit('setIndexCraftingDeals', crafting)
+    store.commit('setIndexDeals', deals)
     store.commit('setNews', news)
   },
 

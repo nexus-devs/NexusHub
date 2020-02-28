@@ -67,7 +67,7 @@ export default {
 
   computed: {
     deals () {
-      const deals = this.$store.state.wowclassic.deals
+      const deals = this.$store.state.deals.deals
 
       // Apply active filters
       const activeFilters = this.filters.filter(f => f.active && !f.unique)
@@ -87,13 +87,13 @@ export default {
       return activeFilters.length ? filteredDeals : deals
     },
     filters () {
-      return this.$store.state.wowclassic.filters
+      return this.$store.state.deals.filters
     },
     reachedEndOfDeals () {
-      return this.$store.state.wowclassic.reachedEndOfDeals
+      return this.$store.state.deals.reachedEndOfDeals
     },
     fetchUrl () {
-      return this.$store.state.wowclassic.fetchUrl
+      return this.$store.state.deals.fetchUrl
     },
     server () {
       return this.$store.state.servers.server

@@ -23,7 +23,7 @@ import appContent from 'src/app-content.vue'
 import deals from 'src/components/wow-classic/deals.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
-import storeModule from 'src/store/wow-classic/wowclassic.js'
+import storeModule from 'src/store/wow-classic/deals.js'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
