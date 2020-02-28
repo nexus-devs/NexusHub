@@ -12,7 +12,7 @@
             <div class="col-b column">
               <description />
             </div>
-            <stats v-if="item.stats.current" class="col-b stats" />
+            <stats class="col-b stats" />
           </div>
           <ad name="wow-classic-item-overview-main" />
         </div>

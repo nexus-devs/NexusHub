@@ -5,7 +5,7 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
-      <div class="item-data row">
+      <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Market Value</span>
         </div>
@@ -18,7 +18,7 @@
           </span>
         </div>
       </div>
-      <div class="item-data row">
+      <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Historical Value</span>
         </div>
@@ -31,7 +31,7 @@
           </span>
         </div>
       </div>
-      <div class="item-data row">
+      <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
@@ -47,7 +47,7 @@
           <span class="data-price neutral">Unavailable</span>
         </div>
       </div>
-      <div class="item-data row">
+      <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
@@ -58,6 +58,24 @@
           <span v-if="diff.quantity !== 0" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
+        </div>
+      </div>
+      <div v-if="item.vendorPrice" class="item-data row">
+        <div class="col">
+          <span>Vendor Price</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ parsePrice(item.vendorPrice) }}
+          </span>
+        </div>
+      </div>
+      <div class="item-data row">
+        <div class="col">
+          <span>Ingame Item Link</span>
+        </div>
+        <div class="col-2">
+          <input ref="itemLink" type="text" class="item-link" :value="item.itemLink" readonly @click="copyToClipboard()" />
         </div>
       </div>
     </template>
@@ -107,6 +125,15 @@ export default {
 
   created () {
     this.parsePrice = utility.parsePrice
+  },
+
+  methods: {
+    copyToClipboard () {
+      const itemLink = this.$refs.itemLink
+      itemLink.select()
+      itemLink.setSelectionRange(0, 99999)
+      document.execCommand('copy')
+    }
   }
 }
 </script>
@@ -166,5 +193,13 @@ export default {
   &:first-of-type span {
     font-size: 0.9em;
   }
+}
+.item-link {
+  width: 100%;
+  padding-left: 4px;
+  padding-right: 4px;
+  background-color: $color-bg;
+  color: $color-font-body;
+  font-size: 0.9em !important;
 }
 </style>
