@@ -37,7 +37,7 @@ class Items extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    const itemId = parseInt(req.params.item)
+    let itemId = parseInt(req.params.item)
     const slug = req.params.server.toLowerCase()
 
     const server = await this.db.collection('server').findOne({ slug })
@@ -50,15 +50,16 @@ class Items extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const item = await this.db.collection('items').findOne({ itemId })
+    const item = await this.db.collection('items').findOne(itemId ? { itemId } : { uniqueName: req.params.item })
     if (!item) {
       const response = {
         error: 'Not found.',
-        reason: `Item with ID ${itemId} could not be found.`
+        reason: `Item ${req.params.item} could not be found.`
       }
       this.cache(response, 60 * 60)
       return res.status(404).send(response)
     }
+    if (!itemId) itemId = item.itemId // Set ID if API call was made with unique name
 
     const stats = await this.db.collection('currentData').findOne({ itemId, slug })
     const previous = stats ? stats.previous : null
@@ -73,6 +74,7 @@ class Items extends Endpoint {
       server: slug,
       itemId,
       name: item.name,
+      uniqueName: item.uniqueName,
       icon: `https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg`,
       tags: [item.quality, item.class],
       requiredLevel: item.requiredLevel,
