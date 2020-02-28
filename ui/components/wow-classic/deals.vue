@@ -13,7 +13,7 @@
     <div class="deal-container">
       <transition-group ref="deals" class="deal-list">
         <div v-for="(deal, i) in deals" :key="`${i}-${deal.itemId}`" class="deal">
-          <router-link :to="!crafting ? `/wow-classic/items/${server}/${deal.itemId}` : `/wow-classic/items/${server}/${deal.itemId}/crafting`" class="row interactive">
+          <router-link :to="!crafting ? `/wow-classic/items/${server}/${deal.uniqueName}` : `/wow-classic/items/${server}/${deal.uniqueName}/crafting`" class="row interactive">
             <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
             <div class="deal-title col-b">
               <div class="deal-img">
