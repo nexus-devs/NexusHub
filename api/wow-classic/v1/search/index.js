@@ -86,6 +86,7 @@ class Search extends Endpoint {
       _id: 0,
       itemId: 1,
       name: 1,
+      uniqueName: 1,
       icon: 1
     }).toArray()
 
