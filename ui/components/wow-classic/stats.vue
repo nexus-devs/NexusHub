@@ -5,6 +5,14 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
+      <div class="item-data row">
+        <div class="col">
+          <span>Last Updated</span>
+        </div>
+        <div class="col-2">
+          <span>{{ lastUpdated }}</span>
+        </div>
+      </div>
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Market Value</span>
@@ -93,6 +101,7 @@
 <script>
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
+import moment from 'moment'
 import utility from './utility'
 
 export default {
@@ -120,6 +129,10 @@ export default {
         quantity: percentage('quantity'),
         historicalValue: percentage('historicalValue')
       }
+    },
+    lastUpdated () {
+      const lastUpdated = this.stats.lastUpdated
+      return lastUpdated ? moment.utc(lastUpdated).fromNow() : 'Unknown'
     }
   },
 
