@@ -11,7 +11,7 @@
       </span>
     </div>
     <div class="tools">
-      <div v-for="suggestion in suggestions" :key="suggestion.uniqueName" class="suggestion" @click="search(suggestion)">
+      <div v-for="suggestion in suggestions" :key="suggestion.itemId" class="suggestion" @click="search(suggestion)">
         <div class="ico-36">
           <img :src="suggestion.imgUrl" :alt="suggestion.name">
           <img :src="suggestion.imgUrl" :alt="suggestion.name" class="backdrop">
@@ -20,7 +20,6 @@
           <span class="suggestion-name">{{ suggestion.name }}</span>
           <span class="suggestion-type">{{ suggestion.type }}</span>
         </div>
-        <span v-if="suggestion.keyData" class="suggestion-data">{{ suggestion.keyData }}</span>
       </div>
     </div>
     <slot />
@@ -130,7 +129,7 @@ export default {
           name: '',
           category: ''
         }
-        this.query(suggestion.itemId)
+        this.query(suggestion.uniqueName)
         this.suggestions = []
       } else if (this.suggestions.length) {
         this.input = ''
@@ -138,7 +137,7 @@ export default {
           name: '',
           category: ''
         }
-        this.query(this.suggestions[0].itemId)
+        this.query(this.suggestions[0].uniqueName)
         this.suggestions = []
       } else {
         this.$router.push(`/wow-classic/search/${this.server}?input=${this.input}`)
