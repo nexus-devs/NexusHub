@@ -50,7 +50,7 @@ class Items extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const item = await this.db.collection('items').findOne(itemId ? { itemId } : { uniqueName: req.params.item })
+    const item = await this.db.collection('items').findOne(itemId ? { itemId } : { uniqueName: req.params.item.toLowerCase() })
     if (!item) {
       const response = {
         error: 'Not found.',
