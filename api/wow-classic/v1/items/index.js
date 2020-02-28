@@ -71,6 +71,10 @@ class Items extends Endpoint {
       delete stats.slug
     }
 
+    const lastEntry = await this.db.collection('scanData').find({ itemId, slug })
+      .sort({ scannedAt: -1 }).limit(1).toArray()
+    const lastUpdated = lastEntry.length ? lastEntry[0].details[lastEntry[0].details.length - 1].scannedAt : null
+
     const response = {
       server: slug,
       itemId,
@@ -85,12 +89,13 @@ class Items extends Endpoint {
       tooltip: item.tooltip,
       itemLink: item.itemLink,
       stats: {
+        lastUpdated,
         current: stats || null,
         previous
       }
     }
 
-    this.cache(response, 60)
+    // this.cache(response, 60)
     return res.send(response)
   }
 }
