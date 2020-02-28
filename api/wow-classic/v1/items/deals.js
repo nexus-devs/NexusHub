@@ -90,6 +90,7 @@ class Deals extends Endpoint {
       const item = data.find(i => i.itemId === metaEntry.itemId)
       if (item) {
         item.name = metaEntry.name
+        item.uniqueName = metaEntry.uniqueName
         item.icon = metaEntry.icon
         item.dealPercentage = Math.round(item.dealPercentage * 10000) / 10000 // Round to 4 digits
       }
