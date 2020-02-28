@@ -39,7 +39,7 @@ class Crafting extends Endpoint {
    */
   async main (req, res) {
     const slug = req.params.server.toLowerCase()
-    const item = parseInt(req.params.item)
+    let item = parseInt(req.params.item)
 
     const server = await this.db.collection('server').findOne({ slug })
     if (!server) {
@@ -51,15 +51,16 @@ class Crafting extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const findItem = await this.db.collection('items').findOne({ itemId: item })
+    const findItem = await this.db.collection('items').findOne(item ? { itemId: item } : { uniqueName: req.params.item.toLowerCase() })
     if (!findItem) {
       const response = {
         error: 'Not found.',
-        reason: `Item with ID ${item} could not be found.`
+        reason: `Item ${req.params.item} could not be found.`
       }
       this.cache(response, 60 * 60)
       return res.status(404).send(response)
     }
+    if (!item) item = findItem.itemId // Set ID if API call was made with unique name
 
     const items = await this.db.collection('items').find({
       $or: [
@@ -81,6 +82,7 @@ class Crafting extends Endpoint {
         const reagent = {
           itemId: entry.itemId,
           name: entry.name,
+          uniqueName: entry.uniqueName,
           icon: `https://wow.zamimg.com/images/wow/icons/large/${entry.icon}.jpg`
         }
         if (!itemStorage[entry.itemId] || !Object.keys(itemStorage[entry.itemId]).length) itemStorage[entry.itemId] = reagent
@@ -117,6 +119,7 @@ class Crafting extends Endpoint {
           return {
             ...r,
             name: storage.name,
+            uniqueName: storage.uniqueName,
             icon: `https://wow.zamimg.com/images/wow/icons/large/${storage.icon}.jpg`,
             marketValue: storage.marketValue || null,
             vendorPrice: storage.vendorPrice || null
@@ -130,6 +133,7 @@ class Crafting extends Endpoint {
       return r.createdBy.map(applyData({
         itemId: r.itemId,
         name: r.name,
+        uniqueName: r.uniqueName,
         icon: r.icon,
         marketValue: r.marketValue,
         vendorPrice: r.vendorPrice || null
@@ -138,11 +142,13 @@ class Crafting extends Endpoint {
 
     const response = {
       itemId: item,
+      name: findItem.name,
+      uniqueName: findItem.uniqueName,
       slug,
       createdBy: createdBy.map(applyData()),
       reagentFor: [].concat(...reagentFor.map(applyReagentFor))
     }
-    this.cache(response, 60 * 60)
+    // this.cache(response, 60 * 60)
     return res.send(response)
   }
 }
