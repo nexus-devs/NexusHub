@@ -52,7 +52,8 @@ export default {
       return this.$store.state.items.item
     },
     itemUrl () {
-      const route = this.$route.fullPath.split(this.item.uniqueName)[0]
+      const split = this.$route.fullPath.split(this.item.uniqueName)
+      const route = split.length > 1 ? split[0] : this.$route.fullPath.split(this.item.itemId)[0]
       return `${route}${this.item.uniqueName}`
     }
   },

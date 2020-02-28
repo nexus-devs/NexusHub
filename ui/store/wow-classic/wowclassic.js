@@ -4,7 +4,7 @@ export default {
   state: {
     news: [],
     deals: [],
-    craftingDeals: [],
+    craftingDeals: []
   },
 
   mutations: {
