@@ -109,7 +109,7 @@ export default {
         entry.itemId = this.item.itemId
         entry.name = this.item.name
         entry.icon = this.item.icon
-        entry.marketValue = this.item.stats.current.marketValue
+        entry.marketValue = this.item.stats.current ? this.item.stats.current.marketValue : null
       }
 
       return {

@@ -87,6 +87,8 @@ export default {
       return this.$store.state.crafting.selected === this.cid
     },
     profit () {
+      if (!this.crafting.marketValue) return null
+
       const cost = this.crafting.reagents.reduce((acc, cV) => acc + Math.min(cV.marketValue, cV.vendorPrice || Infinity) * cV.amount, 0)
       return Math.round(this.crafting.marketValue * ((this.crafting.amount[0] + this.crafting.amount[1]) / 2)) - cost
     },
