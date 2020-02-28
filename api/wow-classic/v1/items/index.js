@@ -12,6 +12,7 @@ class Items extends Endpoint {
     this.schema.response = {
       itemId: Number,
       name: String,
+      uniqueName: String,
       icon: String,
       tags: [String],
       requiredLevel: Number,

@@ -24,6 +24,8 @@ class Prices extends Endpoint {
     this.schema.response = {
       slug: String,
       itemId: Number,
+      name: String,
+      uniqueName: String,
       timerange: Number,
       data: [Object]
     }
@@ -79,7 +81,7 @@ class Prices extends Endpoint {
       }
     }
 
-    const response = { slug, itemId, uniqueName: item.uniqueName, timerange, data }
+    const response = { slug, itemId, name: item.name, uniqueName: item.uniqueName, timerange, data }
     this.cache(response, 60)
     return res.send(response)
   }

@@ -24,6 +24,7 @@ class Search extends Endpoint {
     this.schema.response = [{
       itemId: Number,
       name: String,
+      uniqueName: String,
       imgUrl: String
     }]
   }

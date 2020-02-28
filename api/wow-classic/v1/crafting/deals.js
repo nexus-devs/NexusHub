@@ -29,8 +29,11 @@ class Deals extends Endpoint {
     this.schema.response = [{
       itemId: Number,
       name: String,
+      uniqueName: String,
       icon: String,
       profit: Number,
+      itemProfit: Number,
+      createdByCosts: Number,
       amount: [Number, Number],
       requiredSkill: Number,
       category: String,

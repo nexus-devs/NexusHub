@@ -34,6 +34,7 @@ class Deals extends Endpoint {
     this.schema.response = [{
       itemId: Number,
       name: String,
+      uniqueName: String,
       icon: String,
       marketValue: Number,
       minBuyout: Number,

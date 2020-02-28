@@ -15,20 +15,27 @@ class Crafting extends Endpoint {
       category: String,
       reagents: [{
         itemId: Number,
+        name: String,
+        uniqueName: String,
         amount: Number,
         icon: String,
-        marketValue: Number
+        marketValue: Number,
+        vendorPrice: Number
       }]
     }
     this.schema.response = {
       itemId: Number,
+      name: String,
+      uniqueName: String,
       slug: String,
       createdBy: [Object],
       reagentFor: [{
         itemId: Number,
         name: String,
+        uniqueName: String,
         icon: String,
         marketValue: Number,
+        vendorPrice: Number,
         ...craftingObj
       }]
     }
