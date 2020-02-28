@@ -62,7 +62,9 @@ class Items extends Endpoint {
     }
     if (!itemId) itemId = item.itemId // Set ID if API call was made with unique name
 
-    const stats = await this.db.collection('currentData').findOne({ itemId, slug })
+    const parallel = [this.db.collection('currentData').findOne({ itemId, slug }), this.db.collection('scanData').find({ itemId, slug }).sort({ scannedAt: -1 }).limit(1).toArray()]
+    const [stats, lastEntry] = await Promise.all(parallel)
+
     const previous = stats ? stats.previous : null
     if (stats) {
       delete stats.previous
@@ -70,9 +72,6 @@ class Items extends Endpoint {
       delete stats.itemId
       delete stats.slug
     }
-
-    const lastEntry = await this.db.collection('scanData').find({ itemId, slug })
-      .sort({ scannedAt: -1 }).limit(1).toArray()
     const lastUpdated = lastEntry.length ? lastEntry[0].details[lastEntry[0].details.length - 1].scannedAt : null
 
     const response = {
