@@ -59,7 +59,7 @@ class Overview extends Endpoint {
 
     const response = { slug, data }
 
-    // this.cache(response, 60)
+    this.cache(response, 60)
     return res.send(response)
   }
 }
