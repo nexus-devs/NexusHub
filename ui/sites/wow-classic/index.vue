@@ -36,7 +36,7 @@
                 Most Profitable Deals
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}`" class="col-b item">
+                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.uniqueName}`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -69,7 +69,7 @@
                 Most Profitable Recipes
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.itemId}/crafting`" class="col-b item">
+                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.uniqueName}/crafting`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
