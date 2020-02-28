@@ -102,6 +102,7 @@ class Deals extends Endpoint {
         deals.push({
           itemId: item.itemId,
           name: item.name,
+          uniqueName: item.uniqueName,
           icon: item.icon,
           profit: Math.round(itemProfit - createdByCosts),
           itemProfit,
