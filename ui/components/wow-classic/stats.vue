@@ -83,7 +83,7 @@
           <span>Ingame Item Link</span>
         </div>
         <div class="col-3">
-          <input ref="itemLink" type="text" class="item-link" :value="item.itemLink" readonly @click="copyToClipboard()" />
+          <input ref="itemLink" type="text" class="item-link" :value="item.itemLink" readonly @click="copyToClipboard()">
         </div>
         <div class="col item-link-copied">
           <span :class="{ active: copied }" class="item-link-copy-confirmed">Copied!</span>
