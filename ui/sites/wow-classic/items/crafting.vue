@@ -171,7 +171,7 @@ export default {
       meta: meta({
         title: `${this.item.name} Crafting on NexusHub`,
         description: `${this.item.name} Crafting reagents and recipes on the World of Warcaft Classic Auction House for ${serverPretty}`,
-        image: `${this.item.imgUrl}`
+        image: `${this.item.icon}`
       })
     }
   },

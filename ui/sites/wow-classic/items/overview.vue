@@ -94,6 +94,7 @@ export default {
 
   computed: {
     item () {
+      console.log(this.$store.state.items.item)
       return this.$store.state.items.item
     },
     displayGraphs () {
@@ -115,7 +116,7 @@ export default {
       meta: meta({
         title: `${this.item.name} on NexusHub`,
         description: `${this.item.name} prices on the World of Warcaft Classic Auction House for ${serverPretty}`,
-        image: `${this.item.imgUrl}`
+        image: `${this.item.icon}`
       })
     }
   },
