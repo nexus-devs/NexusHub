@@ -2,7 +2,7 @@
   <div class="deals">
     <navigation />
     <app-content>
-      <section class="results">
+      <div class="results">
         <div class="container">
           <div class="deals-headline">
             <h1>Most Profitable Recipes on {{ serverPretty }}</h1>
@@ -10,7 +10,7 @@
           <ad name="wow-classic-deals-crafting" />
           <deals :crafting="true" />
         </div>
-      </section>
+      </div>
     </app-content>
   </div>
 </template>
@@ -81,6 +81,9 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
 
+.results {
+  padding: 60px 0;
+}
 .deals-headline {
   padding-top: 40px;
   padding-bottom: 50px;
