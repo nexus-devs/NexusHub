@@ -79,11 +79,14 @@
         </div>
       </div>
       <div class="item-data row">
-        <div class="col">
+        <div class="col-2 item-link-label">
           <span>Ingame Item Link</span>
         </div>
-        <div class="col-2">
+        <div class="col-3">
           <input ref="itemLink" type="text" class="item-link" :value="item.itemLink" readonly @click="copyToClipboard()" />
+        </div>
+        <div class="col item-link-copied">
+          <span :class="{ active: copied }" class="item-link-copy-confirmed">Copied!</span>
         </div>
       </div>
     </template>
@@ -108,6 +111,12 @@ export default {
   components: {
     module,
     indicator
+  },
+
+  data () {
+    return {
+      copied: false
+    }
   },
 
   computed: {
@@ -146,6 +155,11 @@ export default {
       itemLink.select()
       itemLink.setSelectionRange(0, 99999)
       document.execCommand('copy')
+
+      this.copied = true
+      setTimeout(() => {
+        this.copied = false
+      }, 1000)
     }
   }
 }
@@ -171,6 +185,17 @@ export default {
     font-size: 0.9em !important;
     padding-right: 8px;
     border-right: 1px solid $color-subtle;
+  }
+  .item-link-copy-confirmed {
+    color: $color-primary-subtle;
+    transform: translateX(-5px);
+    @include ease-wubble(0.5s);
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
   // Every span after first
   span:nth-of-type(1) ~ span {
@@ -207,12 +232,27 @@ export default {
     font-size: 0.9em;
   }
 }
+.item-link-label {
+  display: flex;
+  align-items: center;
+}
 .item-link {
+  font-family: 'Consolas', Monospace;
   width: 100%;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 6px 8px;
+  border-radius: 2px;
+  text-overflow: ellipsis;
   background-color: $color-bg;
   color: $color-font-body;
   font-size: 0.9em !important;
+
+  &::selection {
+    background: $color-bg-light;
+  }
+}
+.item-link-copied {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 </style>
