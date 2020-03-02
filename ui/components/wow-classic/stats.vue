@@ -237,14 +237,14 @@ export default {
   align-items: center;
 }
 .item-link {
-  font-family: 'Consolas', Monospace;
+  font-family: Monospace;
+  font-weight: bold;
   width: 100%;
   padding: 6px 8px;
   border-radius: 2px;
   text-overflow: ellipsis;
   background-color: $color-bg;
   color: $color-font-body;
-  font-size: 0.9em !important;
 
   &::selection {
     background: $color-bg-light;
