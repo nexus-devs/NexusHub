@@ -92,7 +92,7 @@ export default {
   background: $color-primary-subtle;
 }
 .tooltip {
-  background: $color-bg-dark;
+  background: $color-bg;
 }
 .label {
   color: $color-font-body !important;
