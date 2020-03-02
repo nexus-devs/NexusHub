@@ -192,9 +192,17 @@ export default {
     @include ease-wubble(0.5s);
     opacity: 0;
 
+    @media (max-width: $breakpoint-s) {
+      transform: translateX(0);
+    }
+
     &.active {
       opacity: 1;
       transform: translateX(0);
+
+      @media (max-width: $breakpoint-s) {
+        transform: translateX(5px);
+      }
     }
   }
   // Every span after first
@@ -254,5 +262,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  @media (max-width: $breakpoint-s) {
+    align-items: flex-start;
+    padding-top: 4px;
+  }
 }
 </style>
