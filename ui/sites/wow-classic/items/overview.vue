@@ -22,6 +22,9 @@
           <h2 class="sub">
             Statistics
           </h2>
+          <div class="mobile-hover-info">
+            <span>Click on the graphs to see more detailed information.</span>
+          </div>
           <div class="row-margin">
             <graph-value-quantity class="col-b graph" />
             <graph-value-comparison class="col-b graph" />
@@ -188,5 +191,14 @@ export default {
 
 .btn-subtle {
   margin-top: 20px;
+}
+.mobile-hover-info {
+  display: none;
+  color: $color-font-body;
+  font-size: 0.9em;
+
+  @media (max-width: $breakpoint-s) {
+    display: inline;
+  }
 }
 </style>
