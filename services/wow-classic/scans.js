@@ -18,12 +18,12 @@ async function monitor () {
 
   if (!TSMReq.tsmKey) return
 
-  // Kill service if it gets stuck. Docker will auto-restart it.
+  // Kill service if it gets stuck (2 hours without being done). Docker will auto-restart it.
   setInterval(() => {
-    if (prod && new Date() - lastDone > 1000 * 60 * 60) {
+    if (prod && new Date() - lastDone > 1000 * 60 * 60 * 2) {
       process.exit()
     }
-  }, 1000 * 60 * 60)
+  }, 1000 * 60 * 60 * 2)
 
   while (true) {
     const timer = new Date()
@@ -60,12 +60,17 @@ async function monitor () {
           await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
 
           console.log('...done\n')
-        }
+
+          // Wait 5 seconds before processing next realm
+          // The worst case (~8 seconds per realm) is only 36.4 minutes, well in the TSM update interval (>=35 min)
+          // If there are no scans, all realms take 14 minutes
+          // If there are >= 5 scans being inserted, assume that the server has some catching up to do and ignore the delay
+          if (scans.data.length < 5) await sleep(1000 * 5)
+        } else await sleep(1000 * 5)
       }
     }
 
     if (prod) console.log(`Done in ${new Date() - timer}ms`)
-    await sleep(1000 * 60 * 10)
     lastDone = new Date()
   }
 }
