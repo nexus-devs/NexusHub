@@ -34,7 +34,7 @@ section {
 
   // Ad containers placed at the bottom of a section
   // need some margin to the section content
-  .ad-unit {
+  .ad-unit, .blocked-unit {
     margin-top: 50px;
     margin-bottom: -50px;
   }
