@@ -48,10 +48,10 @@ before(async function () {
 describe('Server', function () {
   it('should load up API node', async function () {
     const client = new Client()
-    await client.connecting()
+    await client.connection._connecting()
   })
 
-  // Check if webpack build works(only if rebuild was required)
+  // Check if webpack build works (only if rebuild was required)
   if (prod && webpack.enable) {
     it('should load up UI node - GET /warframe', async function () {
       await get('/warframe', 3000)
