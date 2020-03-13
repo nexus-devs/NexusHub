@@ -50,12 +50,13 @@ class Search extends Endpoint {
     const limit = req.query.limit
     const threshold = 1 - req.query.threshold
     const tradable = req.query.tradable
+    const maxPatternLength = 16
 
     // Validate Input
-    if (query.length < 2) {
+    if (query.length < 2 || query.length > maxPatternLength) {
       return res.status(400).send({
         error: 'Bad input.',
-        reason: `Query term must be at least 2 characters. Received ${query.length}.`
+        reason: `Query term must be at least 2 characters and at most ${maxPatternLength} characters. Received ${query.length}.`
       })
     }
     if (limit > 50) {
@@ -65,7 +66,7 @@ class Search extends Endpoint {
       })
     }
 
-    const result = await this.search(query, threshold, limit, tradable)
+    const result = await this.search(query, threshold, limit, tradable, maxPatternLength)
     this.cache(result, 60 * 60)
     res.send(result)
   }
@@ -74,7 +75,7 @@ class Search extends Endpoint {
    * Retrieves a list of all names first, fuzzy matches them and gets the full
    * objects afterwards.
    */
-  async search (query, threshold, limit, tradable) {
+  async search (query, threshold, limit, tradable, maxPatternLength) {
     const stored = await this.db.collection('items').find().project({ _id: 0, name: 1, components: 1 }).toArray()
     let data = []
 
@@ -96,7 +97,7 @@ class Search extends Endpoint {
       threshold,
       location: 0,
       distance: 250,
-      maxPatternLength: 16,
+      maxPatternLength,
       minMatchCharLength: 2,
       keys: ['name']
     })

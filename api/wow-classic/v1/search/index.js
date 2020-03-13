@@ -48,7 +48,7 @@ class Search extends Endpoint {
     if (query.length < 2 || query.length > maxPatternLength) {
       return res.status(400).send({
         error: 'Bad input.',
-        reason: `Query term must be at least 2 characters and at most 48 characters. Received ${query.length}.`
+        reason: `Query term must be at least 2 characters and at most ${maxPatternLength} characters. Received ${query.length}.`
       })
     }
     if (limit > 50) {
