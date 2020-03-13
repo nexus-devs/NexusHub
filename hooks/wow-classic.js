@@ -115,6 +115,10 @@ class Hook {
         })
       }
     }
+    const deletedItems = storedList.filter(stored => !list.find(item => item[uniqueKey] === stored[uniqueKey]))
+    const deleteQuery = {}
+    deleteQuery[uniqueKey] = { $in: deletedItems.map(i => i[uniqueKey]) }
+    bulk.find(deleteQuery).remove()
 
     if (bulk.length > 0) await bulk.execute()
   }
