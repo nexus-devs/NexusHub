@@ -115,7 +115,7 @@ export default {
     const serverPretty = `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
 
     return {
-      title: `${this.item.name} on ${serverPretty} · NexusHub`,
+      title: `${this.item.name} Prices on ${serverPretty} · NexusHub`,
       meta: meta({
         title: `${this.item.name} on NexusHub`,
         description: `${this.item.name} prices on the World of Warcaft Classic Auction House for ${serverPretty}`,
