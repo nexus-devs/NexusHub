@@ -94,7 +94,7 @@ class Items extends Endpoint {
       }
     }
 
-    // this.cache(response, 60)
+    this.cache(response, 60)
     return res.send(response)
   }
 }

@@ -114,7 +114,7 @@ class Hook {
       { contentPhase: 5, releaseDate: null, description: 'Ahn\'Qiraj' },
       { contentPhase: 6, releaseDate: null, description: 'Naxxramas' }
     ]
-    await this._verifyCollection(db, 'content-phases', data, 'contentPhase')
+    await this._verifyCollection(db, 'contentPhases', data, 'contentPhase')
 
     await mongo.close()
   }

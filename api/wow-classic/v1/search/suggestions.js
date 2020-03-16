@@ -52,7 +52,7 @@ class Search extends Endpoint {
     }
 
     const result = await this.search(query, limit)
-    // this.cache(result, 60 * 60)
+    this.cache(result, 60 * 60)
     res.send(result)
   }
 
