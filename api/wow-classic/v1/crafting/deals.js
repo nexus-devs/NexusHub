@@ -63,23 +63,36 @@ class Deals extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const items = await this.db.collection('items').find({ createdBy: { $exists: true } }).toArray()
+    const [rawItems, phases] = await Promise.all([
+      this.db.collection('items').find({ createdBy: { $exists: true } }).toArray(),
+      this.db.collection('contentPhases').find({ releaseDate: { $lte: new Date() } }).project({ _id: 0 }).sort({ contentPhase: -1 }).toArray()
+    ])
+    const currentPhase = phases[0].contentPhase
+
+    // Filter out items that aren't craftable yet
+    const items = rawItems.filter(i => {
+      for (const cB of i.createdBy) {
+        if (!cB.contentPhase || cB.contentPhase <= currentPhase) return true
+      }
+      return false
+    })
+    console.log(rawItems.map(i => i.itemId).filter(x => !items.map(i => i.itemId).includes(x)))
 
     // Get all item ids
     let queryItems = []
     for (const item of items) {
       queryItems.push(item.itemId)
       for (const cB of item.createdBy) {
-        for (const r of cB.reagents) {
-          queryItems.push(r.itemId)
-        }
+        for (const r of cB.reagents) queryItems.push(r.itemId)
       }
     }
     queryItems = [...new Set(queryItems)]
 
     // Query range first to make better use of index
-    const itemData = await this.db.collection('currentData').find({ itemId: { $in: queryItems }, slug, quantity: { $gte: minQuantity } }).toArray()
-    const itemMetaData = await this.db.collection('items').find({ itemId: { $in: queryItems } }).toArray()
+    const [itemData, itemMetaData] = await Promise.all([
+      this.db.collection('currentData').find({ itemId: { $in: queryItems }, slug, quantity: { $gte: minQuantity } }).toArray(),
+      this.db.collection('items').find({ itemId: { $in: queryItems } }).toArray()
+    ])
 
     const deals = []
     for (const item of items) {
