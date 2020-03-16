@@ -129,7 +129,9 @@ class Crafting extends Endpoint {
             uniqueName: storage.uniqueName,
             icon: `https://wow.zamimg.com/images/wow/icons/large/${storage.icon}.jpg`,
             marketValue: storage.marketValue || null,
-            vendorPrice: storage.vendorPrice || null
+            vendorPrice: storage.vendorPrice || null,
+            recipes: storage.recipes,
+            contentPhase: storage.contentPhase || undefined
           }
         })
         return { ...applyItem, ...cby, reagents }
@@ -143,7 +145,9 @@ class Crafting extends Endpoint {
         uniqueName: r.uniqueName,
         icon: r.icon,
         marketValue: r.marketValue,
-        vendorPrice: r.vendorPrice || null
+        vendorPrice: r.vendorPrice || null,
+        recipes: r.recipes,
+        contentPhase: r.contentPhase || undefined
       }))
     }
 
