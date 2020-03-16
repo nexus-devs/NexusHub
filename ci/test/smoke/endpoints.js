@@ -38,6 +38,7 @@ before(async function () {
       await wowhooks.verifyIndices()
       await wowhooks.verifyItemList()
       await wowhooks.verifyServerList()
+      await wowhooks.verifyContentPhases()
     })
 
     it('should prime database with test notification', async function () {

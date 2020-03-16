@@ -52,6 +52,8 @@ class Sitemap {
     console.log('* Verified wow-classic item list!')
     await wowhooks.verifyServerList()
     console.log('* Verified wow-classic server list!')
+    await wowhooks.verifyContentPhases()
+    console.log('* Verified wow-classic content phases!')
 
     await this.generateStaticPages()
     await this.generateWarframePages()

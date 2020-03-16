@@ -98,6 +98,28 @@ class Hook {
   }
 
   /**
+   * Add content release phases
+   */
+  async verifyContentPhases () {
+    const config = cubic.config.api
+    const url = config.mongoUrl
+    const mongo = await mongodb.connect(url, { useNewUrlParser: true })
+    const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
+
+    const data = [
+      { contentPhase: 1, releaseDate: new Date(Date.UTC(2019, 7, 26)), description: 'Onyxia and Molten Core' },
+      { contentPhase: 2, releaseDate: new Date(Date.UTC(2019, 10, 12)), description: 'Battlegrounds, Honor System and World Bosses' },
+      { contentPhase: 3, releaseDate: new Date(Date.UTC(2020, 1, 12)), description: 'Blackwing Lair and Darkmoon Faire' },
+      { contentPhase: 4, releaseDate: null, description: 'Zul\'Gurub and Arathi Basin' },
+      { contentPhase: 5, releaseDate: null, description: 'Ahn\'Qiraj' },
+      { contentPhase: 6, releaseDate: null, description: 'Naxxramas' }
+    ]
+    await this._verifyCollection(db, 'content-phases', data, 'contentPhase')
+
+    await mongo.close()
+  }
+
+  /**
    * Helper function to verify a given list against a collection
    */
   async _verifyCollection (db, collection, list, uniqueKey) {
