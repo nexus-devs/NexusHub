@@ -79,6 +79,7 @@ class Items extends Endpoint {
       itemId,
       name: item.name,
       uniqueName: item.uniqueName,
+      contentPhase: item.contentPhase,
       icon: `https://wow.zamimg.com/images/wow/icons/large/${item.icon}.jpg`,
       tags: [item.quality, item.class],
       requiredLevel: item.requiredLevel,
