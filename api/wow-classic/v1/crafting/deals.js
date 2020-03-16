@@ -76,7 +76,6 @@ class Deals extends Endpoint {
       }
       return false
     })
-    console.log(rawItems.map(i => i.itemId).filter(x => !items.map(i => i.itemId).includes(x)))
 
     // Get all item ids
     let queryItems = []
