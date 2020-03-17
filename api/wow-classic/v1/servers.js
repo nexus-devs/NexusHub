@@ -6,7 +6,7 @@ const Endpoint = require('cubic-api/endpoint')
 class Servers extends Endpoint {
   constructor (options) {
     super(options)
-    this.schema.description = 'Get a list of all servers, grouped by regions.'
+    this.schema.description = 'Get a list of all servers, grouped by regions. This is deprecated and will be removed in the next version.'
     this.schema.url = '/wow-classic/v1/servers'
     this.schema.request = { url: '/wow-classic/v1/servers' }
     this.schema.response = {
