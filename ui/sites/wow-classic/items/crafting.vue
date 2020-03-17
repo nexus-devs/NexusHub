@@ -159,13 +159,8 @@ export default {
   },
 
   head () {
-    const server = this.$store.state.servers.server
-    const serverlist = this.$store.state.servers.EU.concat(this.$store.state.servers.US)
-
-    const serverSplit = server.split('-')
-    const faction = serverSplit.pop()
-    const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-    const serverPretty = `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
+    const server = this.$store.state.servers.activeServer
+    const serverPretty = `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
 
     return {
       title: `${this.item.name} Crafting Prices on ${serverPretty} · NexusHub`,

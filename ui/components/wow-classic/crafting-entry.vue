@@ -2,11 +2,11 @@
   <div class="order" @click="active ? null : select()">
     <!-- Order listing -->
     <div class="row">
-      <router-link :to="`/wow-classic/items/${server}/${crafting.uniqueName}`" class="image-wrapper">
+      <router-link :to="`/wow-classic/items/${activeServer.slug}/${crafting.uniqueName}`" class="image-wrapper">
         <img :src="crafting.icon" :alt="crafting.name">
         <img :src="crafting.icon" :alt="crafting.name" class="blur">
       </router-link>
-      <router-link :to="`/wow-classic/items/${server}/${crafting.uniqueName}`" class="item col">
+      <router-link :to="`/wow-classic/items/${activeServer.slug}/${crafting.uniqueName}`" class="item col">
         <span class="component">{{ crafting.name }}</span>
         <br>
         <span>{{ crafting.category }} ({{ crafting.requiredSkill }}){{ crafting.contentPhase ? ` - Content Phase ${crafting.contentPhase}` : '' }}</span>
@@ -35,11 +35,11 @@
     <!-- Reagents -->
     <div :class="{ active }" class="selection">
       <div v-for="(reagent) in crafting.reagents" :key="reagent.itemId" class="row">
-        <router-link :to="`/wow-classic/items/${server}/${reagent.uniqueName}`" class="image-wrapper">
+        <router-link :to="`/wow-classic/items/${activeServer.slug}/${reagent.uniqueName}`" class="image-wrapper">
           <img :src="reagent.icon" :alt="reagent.name">
           <img :src="reagent.icon" :alt="reagent.name" class="blur">
         </router-link>
-        <router-link :to="`/wow-classic/items/${server}/${reagent.uniqueName}`" class="item col reagent">
+        <router-link :to="`/wow-classic/items/${activeServer.slug}/${reagent.uniqueName}`" class="item col reagent">
           <span>{{ reagent.name }}</span>
         </router-link>
         <div class="col">
@@ -92,8 +92,8 @@ export default {
       const cost = this.crafting.reagents.reduce((acc, cV) => acc + Math.min(cV.marketValue, cV.vendorPrice || Infinity) * cV.amount, 0)
       return Math.round(this.crafting.marketValue * ((this.crafting.amount[0] + this.crafting.amount[1]) / 2)) - cost
     },
-    server () {
-      return this.$store.state.servers.server
+    activeServer () {
+      return this.$store.state.servers.activeServer
     }
   },
 
