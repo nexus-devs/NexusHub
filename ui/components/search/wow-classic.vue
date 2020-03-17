@@ -46,8 +46,8 @@ export default {
   },
 
   computed: {
-    server () {
-      return this.$store.state.servers.server
+    activeServer () {
+      return this.$store.state.servers.activeServer
     }
   },
 
@@ -140,7 +140,7 @@ export default {
         this.query(this.suggestions[0].uniqueName)
         this.suggestions = []
       } else {
-        this.$router.push(`/wow-classic/search/${this.server}?input=${this.input}`)
+        this.$router.push(`/wow-classic/search/${this.activeServer.slug}?input=${this.input}`)
       }
     },
 
@@ -149,7 +149,7 @@ export default {
      * switching as well.
      */
     query (itemId) {
-      this.$router.push(`/wow-classic/items/${this.server}/${itemId}`)
+      this.$router.push(`/wow-classic/items/${this.activeServer.slug}/${itemId}`)
     }
   },
 
