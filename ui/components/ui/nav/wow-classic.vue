@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link :to="`/wow-classic/${server}`" exact>
+      <router-link :to="`/wow-classic/${activeServer.slug}`" exact>
         <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
@@ -24,7 +24,6 @@ import notifications from 'src/components/ui/notifications.vue'
 import search from 'src/components/search/wow-classic.vue'
 import selectServer from 'src/components/wow-classic/select-server.vue'
 import storeModule from 'src/store/wow-classic/servers.js'
-import utility from 'src/components/wow-classic/utility.js'
 
 // Client-side-only requirements
 let shortcut, listener
@@ -47,18 +46,19 @@ export default {
 
     const slug = route.params.slug
     if (slug) {
-      const server = slug.split('-')
-      server.pop()
-      let region = ''
-      if (serverlist.EU.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'eu'
-      else if (serverlist.US.map((x) => utility.serverSlug(x)).includes(server.join('-'))) region = 'us'
-      store.commit('setServer', { server: slug, region })
+      const serverQuery = slug.split('-')
+      const faction = serverQuery.pop()
+      const server = serverlist.find(s => s.slug === serverQuery.join('-'))
+      if (server) {
+        server.faction = faction.toLowerCase()
+        store.commit('setActiveServer', server)
+      }
     }
   },
 
   computed: {
-    server () {
-      return this.$store.state.servers.server
+    activeServer () {
+      return this.$store.state.servers.activeServer
     }
   },
 

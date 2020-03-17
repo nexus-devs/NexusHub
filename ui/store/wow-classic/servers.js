@@ -1,8 +1,11 @@
 export default {
   name: 'servers',
   state: {
-    server: '',
-    region: '',
+    activeServer: {
+      slug: '',
+      name: '',
+      region: ''
+    },
     selected: {
       region: '',
       server: ''
@@ -13,9 +16,9 @@ export default {
     setServerlist (state, list) {
       state.serverlist = list
     },
-    setServer (state, { server, region }) {
-      state.server = server
-      state.region = region
+    setActiveServer (state, server) {
+      server.slug = `${server.slug}-${server.faction}`
+      state.activeServer = server
     },
     selectRegion (state, region) {
       state.selected.region = region
