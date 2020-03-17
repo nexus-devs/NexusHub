@@ -35,13 +35,13 @@
                 </template>
                 <template slot="body">
                   <div class="server-list">
-                    <div v-for="s in serverlist.EU" :key="s" class="server">
-                      <span>{{ s }}</span>
+                    <div v-for="s in serverlist.EU" :key="s.slug" class="server">
+                      <span>{{ s.name }}</span>
                       <div class="logo-wrapper">
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`">
+                        <router-link :to="`/wow-classic/${s.slug}-alliance`">
                           <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo">
                         </router-link>
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`">
+                        <router-link :to="`/wow-classic/${s.slug}-horde`">
                           <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo">
                         </router-link>
                       </div>
@@ -57,13 +57,13 @@
                 </template>
                 <template slot="body">
                   <div class="server-list">
-                    <div v-for="s in serverlist.US" :key="s" class="server">
-                      <span>{{ s }}</span>
+                    <div v-for="s in serverlist.US" :key="s.slug" class="server">
+                      <span>{{ s.name }}</span>
                       <div class="logo-wrapper">
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-alliance`">
+                        <router-link :to="`/wow-classic/${s.slug}-alliance`">
                           <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo" class="logo">
                         </router-link>
-                        <router-link :to="`/wow-classic/${serverSlug(s)}-horde`">
+                        <router-link :to="`/wow-classic/${s.slug}-horde`">
                           <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo" class="logo">
                         </router-link>
                       </div>
@@ -96,12 +96,11 @@ export default {
 
   computed: {
     serverlist () {
-      return { EU: this.$store.state.servers.EU, US: this.$store.state.servers.US }
+      return {
+        EU: this.$store.state.servers.serverlist.filter(s => s.region === 'EU'),
+        US: this.$store.state.servers.serverlist.filter(s => s.region === 'US')
+      }
     }
-  },
-
-  created () {
-    this.serverSlug = utility.serverSlug
   },
 
   head: {

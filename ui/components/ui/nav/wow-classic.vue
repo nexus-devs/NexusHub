@@ -42,7 +42,7 @@ export default {
   props: ['landingPage'],
 
   async asyncData ({ store, route }) {
-    const serverlist = await this.$cubic.get(`/wow-classic/v1/servers`)
+    const serverlist = await this.$cubic.get(`/wow-classic/v1/servers/full`)
     store.commit('setServerlist', serverlist)
 
     const slug = route.params.slug

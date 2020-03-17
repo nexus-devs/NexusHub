@@ -29,7 +29,7 @@ class Servers extends Endpoint {
         region: s.region
       }
     })
-    response.sort((a, b) => a.slug.localeCompare(b.name))
+    response.sort((a, b) => a.name.localeCompare(b.name))
 
     this.cache(response, 60 * 60)
     res.send(response)
