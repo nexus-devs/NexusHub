@@ -79,9 +79,7 @@ export default {
   methods: {
     toggle () {
       this.active = !this.active
-      if (!this.active) {
-        this.$store.commit('selectRegion', '')
-      }
+      if (!this.active) this.selectRegion('')
     },
     selectRegion (region) {
       if (region === this.selected.region) this.selected.region = ''
