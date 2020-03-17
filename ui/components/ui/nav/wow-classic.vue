@@ -9,7 +9,7 @@
       <search placeholder="Search items...">
         <span class="shortcut">SHIFT + F</span>
       </search>
-      <select-server />
+      <select-server :route-fn="generateSwitchUrl" />
     </div>
     <div class="col nav-r">
       <notifications />
@@ -59,6 +59,12 @@ export default {
   computed: {
     activeServer () {
       return this.$store.state.servers.activeServer
+    }
+  },
+
+  methods: {
+    generateSwitchUrl (server) {
+      return this.$route.fullPath.replace(this.activeServer.slug, server)
     }
   },
 
