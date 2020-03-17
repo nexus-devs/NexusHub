@@ -12,10 +12,10 @@
         <!-- Europe Servers -->
         <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
         <template v-for="s in serverlist.EU">
-          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selectedRegion === 'EU' }"
+          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selected.region === 'EU' }"
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
-          <div :key="s.slug + 'faction'" :class="{ selected: selectedServer === s.slug }" class="faction">
+          <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="generateSwitchUrl(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
@@ -30,10 +30,10 @@
         <!-- United States Servers -->
         <span :class="{ active: activeServer.region === 'US' }" @click="selectRegion('US')">United States</span>
         <template v-for="s in serverlist.US">
-          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selectedRegion === 'US' }"
+          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selected.region === 'US' }"
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
-          <div :key="s.slug + 'faction'" :class="{ selected: selectedServer === s.slug }" class="faction">
+          <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="generateSwitchUrl(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
@@ -53,7 +53,11 @@
 export default {
   data () {
     return {
-      active: false
+      active: false,
+      selected: {
+        region: '',
+        server: ''
+      }
     }
   },
 
@@ -69,12 +73,6 @@ export default {
         EU: this.$store.state.servers.serverlist.filter(s => s.region === 'EU'),
         US: this.$store.state.servers.serverlist.filter(s => s.region === 'US')
       }
-    },
-    selectedRegion () {
-      return this.$store.state.servers.selected.region
-    },
-    selectedServer () {
-      return this.$store.state.servers.selected.server
     }
   },
 
@@ -86,12 +84,13 @@ export default {
       }
     },
     selectRegion (region) {
-      if (region === this.selectedRegion) this.$store.commit('selectRegion', '')
-      else this.$store.commit('selectRegion', region)
+      if (region === this.selected.region) this.selected.region = ''
+      else this.selected.region = region
+      this.selected.server = ''
     },
     selectServer (server) {
-      if (server === this.selectedServer) this.$store.commit('selectServer', '')
-      else this.$store.commit('selectServer', server.slug)
+      if (server === this.selected.server) this.selected.server = ''
+      else this.selected.server = server.slug
     },
     generateSwitchUrl (server) {
       return this.$route.fullPath.replace(this.activeServer.slug, server)
