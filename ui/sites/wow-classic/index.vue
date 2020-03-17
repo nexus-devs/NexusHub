@@ -36,7 +36,7 @@
                 Most Profitable Deals
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.uniqueName}`" class="col-b item">
+                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -58,7 +58,7 @@
                 </router-link>
               </div>
               <div class="expand-deals">
-                <router-link :to="`/wow-classic/deals/${server}`">
+                <router-link :to="`/wow-classic/deals/${activeServer.slug}`">
                   More Deals
                   <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
                 </router-link>
@@ -69,7 +69,7 @@
                 Most Profitable Recipes
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${server}/${deal.uniqueName}/crafting`" class="col-b item">
+                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}/crafting`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -88,7 +88,7 @@
                 </router-link>
               </div>
               <div class="expand-deals">
-                <router-link :to="`/wow-classic/deals/recipes/${server}`">
+                <router-link :to="`/wow-classic/deals/recipes/${activeServer.slug}`">
                   More Recipes
                   <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
                 </router-link>
@@ -169,8 +169,8 @@ export default {
     craftingDeals () {
       return this.$store.state.wowclassic.craftingDeals
     },
-    server () {
-      return this.$store.state.servers.server
+    activeServer () {
+      return this.$store.state.servers.activeServer
     }
   },
 
