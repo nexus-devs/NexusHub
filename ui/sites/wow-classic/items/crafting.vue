@@ -110,6 +110,7 @@ export default {
         entry.name = this.item.name
         entry.icon = this.item.icon
         entry.marketValue = this.item.stats.current ? this.item.stats.current.marketValue : null
+        entry.uniqueName = this.item.uniqueName
       }
 
       return {
