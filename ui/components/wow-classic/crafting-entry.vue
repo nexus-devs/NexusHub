@@ -9,7 +9,7 @@
       <router-link :to="`/wow-classic/items/${server}/${crafting.uniqueName}`" class="item col">
         <span class="component">{{ crafting.name }}</span>
         <br>
-        <span>{{ crafting.category }} ({{ crafting.requiredSkill }})</span>
+        <span>{{ crafting.category }} ({{ crafting.requiredSkill }}){{ crafting.contentPhase ? ` - Content Phase ${crafting.contentPhase}` : '' }}</span>
       </router-link>
       <div class="col amount">
         <img src="/img/warframe/ui/quantity.svg" alt="Quantity" class="ico-h-20">

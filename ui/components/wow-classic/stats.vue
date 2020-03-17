@@ -68,6 +68,16 @@
           </span>
         </div>
       </div>
+      <div v-if="item.contentPhase" class="item-data row">
+        <div class="col">
+          <span>Content Phase</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ item.contentPhase }}
+          </span>
+        </div>
+      </div>
       <div v-if="item.vendorPrice" class="item-data row">
         <div class="col">
           <span>Vendor Price</span>
