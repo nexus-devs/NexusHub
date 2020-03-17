@@ -1,43 +1,45 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>{{ serverPretty.name }}</span>
-      <img :src="`/img/wow-classic/ui/${serverPretty.faction}.svg`" :alt="`${serverPretty.faction} Logo`" class="faction-logo">
+      <span>{{ activeServer.name }}</span>
+      <img :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: server === '' }" @click="toggle()">Select Server</span>
+        <span :class="{ active: activeServer.slug === '' }" @click="toggle()">Select Server</span>
 
         <!-- Europe Servers -->
-        <span :class="{ active: activeRegion === 'EU' }" @click="selectRegion('EU')">Europe</span>
+        <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
         <template v-for="s in serverlist.EU">
-          <span :key="s" :class="{ active: serverPretty.name === s, selected: selectedRegion === 'EU' }"
+          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selectedRegion === 'EU' }"
                 class="server" @click="selectServer(s)"
-          >{{ s }}</span>
-          <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
-            <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
+          >{{ s.name }}</span>
+          <div :key="s.slug + 'faction'" :class="{ selected: selectedServer === s.slug }" class="faction">
+            <router-link :to="generateSwitchUrl(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
-            </div>
-            <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
+            </router-link>
+            <router-link :to="generateSwitchUrl(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
-            </div>
+            </router-link>
           </div>
         </template>
 
+        <!-- TODO: Make this more modular (e.g. a click function) -->
+
         <!-- United States Servers -->
-        <span :class="{ active: activeRegion === 'US' }" @click="selectRegion('US')">United States</span>
+        <span :class="{ active: activeServer.region === 'US' }" @click="selectRegion('US')">United States</span>
         <template v-for="s in serverlist.US">
-          <span :key="s" :class="{ active: serverPretty.name === s, selected: selectedRegion === 'US' }"
+          <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selectedRegion === 'US' }"
                 class="server" @click="selectServer(s)"
-          >{{ s }}</span>
-          <div :key="s + 'faction'" :class="{ selected: selectedServer === s }" class="faction">
-            <div class="image-wrapper" @click="setServer(s, 'alliance'); toggle();">
+          >{{ s.name }}</span>
+          <div :key="s.slug + 'faction'" :class="{ selected: selectedServer === s.slug }" class="faction">
+            <router-link :to="generateSwitchUrl(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
-            </div>
-            <div class="image-wrapper" @click="setServer(s, 'horde'); toggle();">
+            </router-link>
+            <router-link :to="generateSwitchUrl(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
-            </div>
+            </router-link>
           </div>
         </template>
       </div>
@@ -48,8 +50,6 @@
 
 
 <script>
-import utility from './utility'
-
 export default {
   data () {
     return {
@@ -58,30 +58,23 @@ export default {
   },
 
   computed: {
-    server () {
-      return this.$store.state.servers.server
+    activeServer () {
+      return this.$store.state.servers.activeServer
+    },
+    activeFactionPretty () {
+      return this.activeServer.faction.charAt(0).toUpperCase() + this.activeServer.faction.slice(1)
     },
     serverlist () {
-      return { EU: this.$store.state.servers.EU, US: this.$store.state.servers.US }
+      return {
+        EU: this.$store.state.servers.serverlist.filter(s => s.region === 'EU'),
+        US: this.$store.state.servers.serverlist.filter(s => s.region === 'US')
+      }
     },
     selectedRegion () {
       return this.$store.state.servers.selected.region
     },
     selectedServer () {
       return this.$store.state.servers.selected.server
-    },
-    serverPretty () {
-      if (this.server === '') return 'Select Server'
-
-      const serverSplit = this.server.split('-')
-      const faction = serverSplit.pop()
-      const serverlist = this.serverlist.EU.concat(this.serverlist.US)
-      const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-      return { name: serverlist[serverIndex], faction }
-    },
-    activeRegion () {
-      if (this.serverlist.EU.includes(this.serverPretty.name)) return 'EU'
-      else return 'US'
     }
   },
 
@@ -98,17 +91,10 @@ export default {
     },
     selectServer (server) {
       if (server === this.selectedServer) this.$store.commit('selectServer', '')
-      else this.$store.commit('selectServer', server)
+      else this.$store.commit('selectServer', server.slug)
     },
-    setServer (server, faction) {
-      server = utility.serverSlug(server)
-      if (this.server === server) return
-      server = `${server}-${faction}`
-      const region = this.activeRegion.toLowerCase()
-
-      const route = this.$route.fullPath.replace(this.server, server)
-      this.$router.push(route)
-      this.$store.commit('setServer', { server, region })
+    generateSwitchUrl (server) {
+      return this.$route.fullPath.replace(this.activeServer.slug, server)
     }
   }
 }

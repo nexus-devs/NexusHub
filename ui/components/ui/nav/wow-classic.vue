@@ -48,7 +48,7 @@ export default {
     if (slug) {
       const serverQuery = slug.split('-')
       const faction = serverQuery.pop()
-      const server = serverlist.find(s => s.slug === serverQuery.join('-'))
+      const server = { ...serverlist.find(s => s.slug === serverQuery.join('-')) } // Clone object to avoid mutating serverlist
       if (server) {
         server.faction = faction.toLowerCase()
         store.commit('setActiveServer', server)

@@ -4,7 +4,8 @@ export default {
     activeServer: {
       slug: '',
       name: '',
-      region: ''
+      region: '',
+      faction: ''
     },
     selected: {
       region: '',
