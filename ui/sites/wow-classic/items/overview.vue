@@ -97,7 +97,6 @@ export default {
 
   computed: {
     item () {
-      console.log(this.$store.state.items.item)
       return this.$store.state.items.item
     },
     displayGraphs () {

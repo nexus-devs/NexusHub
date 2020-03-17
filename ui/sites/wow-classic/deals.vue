@@ -24,7 +24,6 @@ import deals from 'src/components/wow-classic/deals.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/deals.js'
-import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
@@ -50,15 +49,9 @@ export default {
   },
 
   computed: {
-    server () {
-      return this.$store.state.servers.server
-    },
     serverPretty () {
-      const serverlist = this.$store.state.servers.EU.concat(this.$store.state.servers.US)
-      const serverSplit = this.server.split('-')
-      const faction = serverSplit.pop()
-      const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-      return `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
+      const server = this.$store.state.servers.activeServer
+      return `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
     }
   },
 

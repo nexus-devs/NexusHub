@@ -85,7 +85,6 @@ import appContent from 'src/app-content.vue'
 import meta from 'src/components/seo/meta.js'
 import module from 'src/components/ui/module.vue'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
-import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {

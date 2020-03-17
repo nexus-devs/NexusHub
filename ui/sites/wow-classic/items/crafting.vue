@@ -69,7 +69,6 @@ import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import storeModule from 'src/store/wow-classic/crafting.js'
-import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {

@@ -13,7 +13,7 @@
     <div class="deal-container">
       <transition-group ref="deals" class="deal-list">
         <div v-for="(deal, i) in deals" :key="`${i}-${deal.itemId}`" class="deal">
-          <router-link :to="!crafting ? `/wow-classic/items/${server}/${deal.uniqueName}` : `/wow-classic/items/${server}/${deal.uniqueName}/crafting`" class="row interactive">
+          <router-link :to="!crafting ? `/wow-classic/items/${activeServer.slug}/${deal.uniqueName}` : `/wow-classic/items/${activeServer.slug}/${deal.uniqueName}/crafting`" class="row interactive">
             <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
             <div class="deal-title col-b">
               <div class="deal-img">
@@ -95,15 +95,8 @@ export default {
     fetchUrl () {
       return this.$store.state.deals.fetchUrl
     },
-    server () {
-      return this.$store.state.servers.server
-    },
-    serverPretty () {
-      const serverlist = this.$store.state.servers.EU.concat(this.$store.state.servers.US)
-      const serverSplit = this.server.split('-')
-      const faction = serverSplit.pop()
-      const serverIndex = serverlist.map((x) => utility.serverSlug(x)).indexOf(serverSplit.join('-'))
-      return `${serverlist[serverIndex]} (${faction.charAt(0).toUpperCase() + faction.slice(1)})`
+    activeServer () {
+      return this.$store.state.servers.activeServer
     }
   },
 
