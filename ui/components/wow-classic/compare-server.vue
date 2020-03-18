@@ -1,13 +1,13 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>{{ activeServer.name }}</span>
-      <img :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
+      <span>Compare with {{ activeServer.name }}</span>
+      <img v-if="activeServer.slug !== ''" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: activeServer.slug === '' }" @click="toggle()">Select Server</span>
+        <span :class="{ active: activeServer.slug === '' }" @click="toggle()">Compare Realm</span>
 
         <!-- Europe Servers -->
         <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
@@ -16,10 +16,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <div class="image-wrapper" @click="fn(s.slug + '-alliance'); toggle();">
+            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-alliance');">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
-            <div class="image-wrapper" @click="fn(s.slug + '-horde'); toggle();">
+            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-horde');">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
@@ -32,10 +32,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <div class="image-wrapper" @click="fn(s.slug + '-alliance'); toggle();">
+            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-alliance');">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
-            <div class="image-wrapper" @click="fn(s.slug + '-horde'); toggle();">
+            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-horde');">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
@@ -57,14 +57,17 @@ export default {
       selected: {
         region: '',
         server: ''
+      },
+      activeServer: {
+        slug: '',
+        name: 'Realm',
+        region: '',
+        faction: ''
       }
     }
   },
 
   computed: {
-    activeServer () {
-      return this.$store.state.servers.activeServer
-    },
     activeFactionPretty () {
       return this.activeServer.faction.charAt(0).toUpperCase() + this.activeServer.faction.slice(1)
     },
@@ -90,8 +93,12 @@ export default {
       if (server === this.selected.server) this.selected.server = ''
       else this.selected.server = server.slug
     },
-    generateSwitchUrl (server) {
-      return this.$route.fullPath.replace(this.activeServer.slug, server)
+    setServer (server) {
+      this.fn(server)
+      const serverSplit = server.split('-')
+      const faction = serverSplit.pop()
+      const servers = this.$store.state.servers.serverlist
+      this.activeServer = { ...servers.find(s => s.slug === serverSplit.join('-')), faction }
     }
   }
 }
@@ -125,7 +132,7 @@ export default {
   position: absolute;
   top: 0;
   padding: 5px 0;
-  background: $color-bg-dark;
+  background: $color-bg;
   @include ease(0.15s);
   @include shade-1;
 
@@ -173,7 +180,7 @@ export default {
   padding: 0 15px !important;
   @include ease(0.35s);
   overflow: hidden;
-  background: $color-bg;
+  background: lighten($color-bg, 5%);
 
   &.selected {
     opacity: 1;
@@ -182,7 +189,7 @@ export default {
     overflow: visible;
   }
   &:hover {
-    background: darken($color-bg, 5%) !important
+    background: lighten($color-bg, 2.5%) !important
   }
 }
 .faction {
@@ -202,7 +209,7 @@ export default {
     }
 
     &:hover {
-      background: lighten($color-bg, 5%);
+      background: lighten($color-bg, 7.5%);
     }
   }
 
