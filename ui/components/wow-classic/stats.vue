@@ -101,6 +101,7 @@
       </div>
     </template>
     <template slot="footer">
+      <compare-server />
       <a href="https://www.tradeskillmaster.com/" target="_blank">
         Powered by TSM
         <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
@@ -112,6 +113,7 @@
 
 
 <script>
+import compareServer from 'src/components/wow-classic/compare-server.vue'
 import indicator from 'src/components/charts/indicator.vue'
 import module from 'src/components/ui/module.vue'
 import moment from 'moment'
@@ -120,7 +122,8 @@ import utility from './utility'
 export default {
   components: {
     module,
-    indicator
+    indicator,
+    compareServer
   },
 
   data () {

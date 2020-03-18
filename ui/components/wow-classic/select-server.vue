@@ -16,18 +16,12 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <router-link v-if="routeFn" :to="routeFn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
-            <div v-else class="image-wrapper" @click="clickFn(s.slug + '-alliance'); toggle();">
-              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
-            </div>
-            <router-link v-if="routeFn" :to="routeFn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </router-link>
-            <div v-else class="image-wrapper" @click="clickFn(s.slug + '-horde'); toggle();">
-              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
-            </div>
           </div>
         </template>
 
@@ -38,18 +32,12 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <router-link v-if="routeFn" :to="routeFn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
-            <div v-else class="image-wrapper" @click="clickFn(s.slug + '-alliance'); toggle();">
-              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
-            </div>
-            <router-link v-if="routeFn" :to="routeFn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </router-link>
-            <div v-else class="image-wrapper" @click="clickFn(s.slug + '-horde'); toggle();">
-              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
-            </div>
           </div>
         </template>
       </div>
@@ -61,7 +49,7 @@
 
 <script>
 export default {
-  props: ['routeFn', 'clickFn'], // routeFn > clickFn
+  props: ['fn'],
 
   data () {
     return {

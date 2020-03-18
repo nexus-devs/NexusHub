@@ -9,7 +9,7 @@
       <search placeholder="Search items...">
         <span class="shortcut">SHIFT + F</span>
       </search>
-      <select-server :route-fn="generateSwitchUrl" />
+      <select-server :fn="generateSwitchUrl" />
     </div>
     <div class="col nav-r">
       <notifications />
