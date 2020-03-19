@@ -17,12 +17,17 @@
         <div class="col">
           <span>Market Value</span>
         </div>
-        <div class="col-2">
+        <div :class="comparison ? 'col' : 'col-2'">
           <span class="data-price">
             {{ parsePrice(stats.current.marketValue) }}
           </span>
-          <span v-if="diff.marketValue !== 0" :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
+          <span v-if="diff.marketValue !== 0 && !comparison" :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
+          </span>
+        </div>
+        <div v-if="comparison" class="col">
+          <span class="data-price">
+            {{ parsePrice(comparison.current.marketValue) }}
           </span>
         </div>
       </div>
@@ -30,12 +35,17 @@
         <div class="col">
           <span>Historical Value</span>
         </div>
-        <div class="col-2">
+        <div :class="comparison ? 'col' : 'col-2'">
           <span class="data-price">
             {{ parsePrice(stats.current.historicalValue) }}
           </span>
-          <span v-if="diff.historicalValue !== 0" :class="{ negative: diff.historicalValue < 0 }" class="data-price-diff">
+          <span v-if="diff.historicalValue !== 0 && !comparison" :class="{ negative: diff.historicalValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
+          </span>
+        </div>
+        <div v-if="comparison" class="col">
+          <span class="data-price">
+            {{ parsePrice(comparison.current.historicalValue) }}
           </span>
         </div>
       </div>
@@ -43,28 +53,38 @@
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
-        <div v-if="stats.current.minBuyout > 0" class="col-2">
+        <div v-if="stats.current.minBuyout > 0" :class="comparison ? 'col' : 'col-2'">
           <span class="data-price">
             {{ parsePrice(stats.current.minBuyout) }}
           </span>
-          <span v-if="diff.minBuyout !== 0" :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
+          <span v-if="diff.minBuyout !== 0 && !comparison" :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
         </div>
         <div v-else class="col-2">
           <span class="data-price neutral">Unavailable</span>
         </div>
+        <div v-if="comparison" class="col">
+          <span class="data-price">
+            {{ parsePrice(comparison.current.minBuyout) }}
+          </span>
+        </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
-        <div class="col-2">
+        <div :class="comparison ? 'col' : 'col-2'">
           <span class="data-price">
             {{ stats.current.quantity }}
           </span>
-          <span v-if="diff.quantity !== 0" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
+          <span v-if="diff.quantity !== 0 && !comparison" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
+          </span>
+        </div>
+        <div v-if="comparison" class="col">
+          <span class="data-price">
+            {{ comparison.current.quantity }}
           </span>
         </div>
       </div>
@@ -101,7 +121,7 @@
       </div>
     </template>
     <template slot="footer">
-      <compare-server />
+      <compare-server :fn="compareServer" />
       <a href="https://www.tradeskillmaster.com/" target="_blank">
         Powered by TSM
         <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
@@ -135,6 +155,9 @@ export default {
   computed: {
     item () {
       return this.$store.state.items.item
+    },
+    comparison () {
+      return this.$store.state.items.itemComparison.current ? this.$store.state.items.itemComparison : null
     },
     stats () {
       return this.item.stats
@@ -173,6 +196,9 @@ export default {
       setTimeout(() => {
         this.copied = false
       }, 1000)
+    },
+    async compareServer (server) {
+      await this.$store.dispatch('fetchItemComparison', server)
     }
   }
 }

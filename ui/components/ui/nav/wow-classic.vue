@@ -62,12 +62,6 @@ export default {
     }
   },
 
-  methods: {
-    generateSwitchUrl (server) {
-      return this.$route.fullPath.replace(this.activeServer.slug, server)
-    }
-  },
-
   mounted () {
     listener = shortcut.bind('shift + f', (e) => {
       e.preventDefault() // Don't type in input on keyup
@@ -77,6 +71,12 @@ export default {
 
   beforeDestroy () {
     shortcut.unbind('shift + f', listener)
+  },
+
+  methods: {
+    generateSwitchUrl (server) {
+      return this.$route.fullPath.replace(this.activeServer.slug, server)
+    }
   },
 
   storeModule
