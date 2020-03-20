@@ -3,6 +3,12 @@ export default {
   state: {
     item: { itemId: '', name: '', uniqueName: '' },
     itemComparison: {
+      server: {
+        slug: '',
+        name: '',
+        region: '',
+        faction: ''
+      },
       current: null,
       previous: null
     },
@@ -14,16 +20,18 @@ export default {
       state.item = item
       if (!state.timerange) state.timerange = item.current.intervals.length
     },
-    setItemComparison (state, item) {
-      state.itemComparison = item.stats
+    setItemComparison (state, { item, server }) {
+      state.itemComparison.current = item.stats.current
+      state.itemComparison.previous = item.stats.previous
+      state.itemComparison.server = server
     }
   },
 
   actions: {
     async fetchItemComparison ({ state, commit }, server) {
       const itemId = state.item.itemId
-      const item = await this.$cubic.get(`/wow-classic/v1/items/${server}/${itemId}`)
-      commit('setItemComparison', item)
+      const item = await this.$cubic.get(`/wow-classic/v1/items/${server.slug}/${itemId}`)
+      commit('setItemComparison', { item, server })
     }
   }
 }

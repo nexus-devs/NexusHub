@@ -25,10 +25,11 @@
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
           </span>
         </div>
-        <div v-if="comparison" class="col">
+        <div v-if="comparison" class="col comparison">
           <span class="data-price">
             {{ parsePrice(comparison.current.marketValue) }}
           </span>
+          <p>{{ compareServerPretty }}</p>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
@@ -43,10 +44,11 @@
             <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
           </span>
         </div>
-        <div v-if="comparison" class="col">
+        <div v-if="comparison" class="col comparison">
           <span class="data-price">
             {{ parsePrice(comparison.current.historicalValue) }}
           </span>
+          <p>{{ compareServerPretty }}</p>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
@@ -64,10 +66,11 @@
         <div v-else class="col-2">
           <span class="data-price neutral">Unavailable</span>
         </div>
-        <div v-if="comparison" class="col">
+        <div v-if="comparison" class="col comparison">
           <span class="data-price">
             {{ parsePrice(comparison.current.minBuyout) }}
           </span>
+          <p>{{ compareServerPretty }}</p>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
@@ -82,10 +85,11 @@
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
         </div>
-        <div v-if="comparison" class="col">
+        <div v-if="comparison" class="col comparison">
           <span class="data-price">
             {{ comparison.current.quantity }}
           </span>
+          <p>{{ compareServerPretty }}</p>
         </div>
       </div>
       <div v-if="item.contentPhase" class="item-data row">
@@ -159,6 +163,11 @@ export default {
     comparison () {
       return this.$store.state.items.itemComparison.current ? this.$store.state.items.itemComparison : null
     },
+    compareServerPretty () {
+      if (!this.comparison) return null
+      const factionPretty = this.comparison.server.faction.charAt(0).toUpperCase() + this.comparison.server.faction.slice(1)
+      return `${this.comparison.server.name} ${factionPretty}`
+    },
     stats () {
       return this.item.stats
     },
@@ -198,7 +207,12 @@ export default {
       }, 1000)
     },
     async compareServer (server) {
-      await this.$store.dispatch('fetchItemComparison', server)
+      const serverSplit = server.split('-')
+      const faction = serverSplit.pop()
+      const serverObj = { ...this.$store.state.servers.serverlist.find(s => s.slug === serverSplit.join('-')) } // Avoid mutating
+      serverObj.slug = server
+      serverObj.faction = faction
+      await this.$store.dispatch('fetchItemComparison', serverObj)
     }
   }
 }
@@ -305,6 +319,19 @@ export default {
   @media (max-width: $breakpoint-s) {
     align-items: flex-start;
     padding-top: 4px;
+  }
+}
+.col {
+  display: flex;
+  align-items: center;
+}
+.comparison {
+  flex-wrap: wrap;
+
+  p {
+    font-size: 0.7em;
+    color: $color-font-body;
+    @include uppercase()
   }
 }
 </style>
