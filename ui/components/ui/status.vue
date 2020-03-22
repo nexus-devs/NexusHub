@@ -31,7 +31,7 @@ export default {
 
   methods: {
     update () {
-      this.$store.commit('setApiStatus', this.$cubic.client.api.connection.readyState !== 1)
+      this.$store.commit('setApiStatus', !this.$cubic.isConnected())
     }
   },
 
