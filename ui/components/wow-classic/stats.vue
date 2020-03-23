@@ -13,6 +13,8 @@
           <span>{{ lastUpdated }}</span>
         </div>
       </div>
+
+      <!-- Market Value -->
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Market Value</span>
@@ -24,17 +26,22 @@
           <span v-if="diff.marketValue !== 0 && !comparison" :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
           </span>
+
+          <!-- Comparison -->
           <div v-if="comparison" class="compare-container col-2">
-            <span class="data-price">
+            <span v-if="comparison.current" class="data-price">
               {{ parsePrice(comparison.current.marketValue) }}
             </span>
-            <span :class="{ negative: diff.comparison.marketValue < 0 }" class="data-price-diff">
+            <span v-else class="data-price neutral">Unavailable</span>
+            <span v-if="diff.comparison.marketValue !== 0" :class="{ negative: diff.comparison.marketValue < 0 }" class="data-price-diff">
               <indicator :diff="diff.comparison.marketValue" /> {{ Math.abs(diff.comparison.marketValue) }}%
             </span>
             <p>{{ compareServerPretty }}</p>
           </div>
         </div>
       </div>
+
+      <!-- Historical Value -->
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Historical Value</span>
@@ -46,17 +53,22 @@
           <span v-if="diff.historicalValue !== 0 && !comparison" :class="{ negative: diff.historicalValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
           </span>
+
+          <!-- Comparison -->
           <div v-if="comparison" class="compare-container col-2">
-            <span class="data-price">
+            <span v-if="comparison.current" class="data-price">
               {{ parsePrice(comparison.current.historicalValue) }}
             </span>
-            <span :class="{ negative: diff.comparison.historicalValue < 0 }" class="data-price-diff">
+            <span v-else class="data-price neutral">Unavailable</span>
+            <span v-if="diff.comparison.historicalValue !== 0" :class="{ negative: diff.comparison.historicalValue < 0 }" class="data-price-diff">
               <indicator :diff="diff.comparison.historicalValue" /> {{ Math.abs(diff.comparison.historicalValue) }}%
             </span>
             <p>{{ compareServerPretty }}</p>
           </div>
         </div>
       </div>
+
+      <!-- Minimum Buyout -->
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
@@ -68,11 +80,14 @@
           <span v-if="diff.minBuyout !== 0 && !comparison" :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
+
+          <!-- Comparison -->
           <div v-if="comparison" class="compare-container col-2">
-            <span class="data-price">
+            <span v-if="comparison.current && comparison.current.minBuyout > 0" class="data-price">
               {{ parsePrice(comparison.current.minBuyout) }}
             </span>
-            <span :class="{ negative: diff.comparison.minBuyout < 0 }" class="data-price-diff">
+            <span v-else class="data-price neutral">Unavailable</span>
+            <span v-if="diff.comparison.minBuyout !== 0" :class="{ negative: diff.comparison.minBuyout < 0 }" class="data-price-diff">
               <indicator :diff="diff.comparison.minBuyout" /> {{ Math.abs(diff.comparison.minBuyout) }}%
             </span>
             <p>{{ compareServerPretty }}</p>
@@ -82,6 +97,8 @@
           <span class="data-price neutral">Unavailable</span>
         </div>
       </div>
+
+      <!-- Quantity -->
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
@@ -93,17 +110,21 @@
           <span v-if="diff.quantity !== 0 && !comparison" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
+
+          <!-- Comparison -->
           <div v-if="comparison" class="compare-container col-2">
-            <span class="data-price">
+            <span v-if="comparison.current" class="data-price">
               {{ comparison.current.quantity }}
             </span>
-            <span :class="{ negative: diff.comparison.quantity < 0 }" class="data-price-diff">
+            <span v-else class="data-price neutral">Unavailable</span>
+            <span v-if="diff.comparison.quantity !== 0" :class="{ negative: diff.comparison.quantity < 0 }" class="data-price-diff">
               <indicator :diff="diff.comparison.quantity" /> {{ Math.abs(diff.comparison.quantity) }}%
             </span>
             <p>{{ compareServerPretty }}</p>
           </div>
         </div>
       </div>
+
       <div v-if="item.contentPhase" class="item-data row">
         <div class="col">
           <span>Content Phase</span>
@@ -173,7 +194,8 @@ export default {
       return this.$store.state.items.item
     },
     comparison () {
-      return this.$store.state.items.itemComparison.current ? this.$store.state.items.itemComparison : null
+      if (!this.$store.state.items.itemComparison.server.slug) return null
+      return this.$store.state.items.itemComparison
     },
     compareServerPretty () {
       if (!this.comparison) return null
@@ -185,7 +207,7 @@ export default {
     },
     diff () {
       const percentage = (property, main = this.stats.current, secondary = this.stats.previous) => {
-        if (!secondary || !secondary[property]) return 0
+        if (!main || !secondary || !secondary[property]) return 0
         const value = main[property] - secondary[property]
         return Math.round((value / secondary[property] * 100) * 1e2) / 1e2 // Round to 2 digits
       }
