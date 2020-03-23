@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>Compare with {{ activeServer.name }}</span>
+      <span>Compare {{ activeServer.name }}</span>
       <img v-if="activeServer.slug !== ''" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
