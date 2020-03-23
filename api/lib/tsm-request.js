@@ -9,8 +9,8 @@ class TSMRequest {
   constructor (options) {
     this.options = {
       ...{
-        timeout: 10000, // 10 seconds
-        retries: 5 // Number of retries on timeout
+        timeout: 2500, // Timeout between retries
+        retries: 5 // Number of retries
       },
       ...options
     }
