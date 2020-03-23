@@ -147,7 +147,7 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    max-height: calc(250px + 10vh);
+    max-height: calc(175px + 10vh);
 
     @media (max-width: $breakpoint-s) {
       max-height: 100vh;
