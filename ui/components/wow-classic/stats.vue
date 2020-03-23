@@ -17,79 +17,91 @@
         <div class="col">
           <span>Market Value</span>
         </div>
-        <div :class="comparison ? 'col' : 'col-2'">
-          <span class="data-price">
+        <div :class="{ comparison }" class="col-2">
+          <span :class="{ col: comparison }" class="data-price">
             {{ parsePrice(stats.current.marketValue) }}
           </span>
           <span v-if="diff.marketValue !== 0 && !comparison" :class="{ negative: diff.marketValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.marketValue" /> {{ Math.abs(diff.marketValue) }}%
           </span>
-        </div>
-        <div v-if="comparison" class="col comparison">
-          <span class="data-price">
-            {{ parsePrice(comparison.current.marketValue) }}
-          </span>
-          <p>{{ compareServerPretty }}</p>
+          <div v-if="comparison" class="compare-container col-2">
+            <span class="data-price">
+              {{ parsePrice(comparison.current.marketValue) }}
+            </span>
+            <span :class="{ negative: diff.comparison.marketValue < 0 }" class="data-price-diff">
+              <indicator :diff="diff.comparison.marketValue" /> {{ Math.abs(diff.comparison.marketValue) }}%
+            </span>
+            <p>{{ compareServerPretty }}</p>
+          </div>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Historical Value</span>
         </div>
-        <div :class="comparison ? 'col' : 'col-2'">
-          <span class="data-price">
+        <div :class="{ comparison }" class="col-2">
+          <span :class="{ col: comparison }" class="data-price">
             {{ parsePrice(stats.current.historicalValue) }}
           </span>
           <span v-if="diff.historicalValue !== 0 && !comparison" :class="{ negative: diff.historicalValue < 0 }" class="data-price-diff">
             <indicator :diff="diff.historicalValue" /> {{ Math.abs(diff.historicalValue) }}%
           </span>
-        </div>
-        <div v-if="comparison" class="col comparison">
-          <span class="data-price">
-            {{ parsePrice(comparison.current.historicalValue) }}
-          </span>
-          <p>{{ compareServerPretty }}</p>
+          <div v-if="comparison" class="compare-container col-2">
+            <span class="data-price">
+              {{ parsePrice(comparison.current.historicalValue) }}
+            </span>
+            <span :class="{ negative: diff.comparison.historicalValue < 0 }" class="data-price-diff">
+              <indicator :diff="diff.comparison.historicalValue" /> {{ Math.abs(diff.comparison.historicalValue) }}%
+            </span>
+            <p>{{ compareServerPretty }}</p>
+          </div>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
-        <div v-if="stats.current.minBuyout > 0" :class="comparison ? 'col' : 'col-2'">
-          <span class="data-price">
+        <div v-if="stats.current.minBuyout > 0" :class="{ comparison }" class="col-2">
+          <span :class="{ col: comparison }" class="data-price">
             {{ parsePrice(stats.current.minBuyout) }}
           </span>
           <span v-if="diff.minBuyout !== 0 && !comparison" :class="{ negative: diff.minBuyout < 0 }" class="data-price-diff">
             <indicator :diff="diff.minBuyout" /> {{ Math.abs(diff.minBuyout) }}%
           </span>
+          <div v-if="comparison" class="compare-container col-2">
+            <span class="data-price">
+              {{ parsePrice(comparison.current.minBuyout) }}
+            </span>
+            <span :class="{ negative: diff.comparison.minBuyout < 0 }" class="data-price-diff">
+              <indicator :diff="diff.comparison.minBuyout" /> {{ Math.abs(diff.comparison.minBuyout) }}%
+            </span>
+            <p>{{ compareServerPretty }}</p>
+          </div>
         </div>
         <div v-else class="col-2">
           <span class="data-price neutral">Unavailable</span>
-        </div>
-        <div v-if="comparison" class="col comparison">
-          <span class="data-price">
-            {{ parsePrice(comparison.current.minBuyout) }}
-          </span>
-          <p>{{ compareServerPretty }}</p>
         </div>
       </div>
       <div v-if="item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
-        <div :class="comparison ? 'col' : 'col-2'">
-          <span class="data-price">
+        <div :class="{ comparison }" class="col-2">
+          <span :class="{ col: comparison }" class="data-price">
             {{ stats.current.quantity }}
           </span>
           <span v-if="diff.quantity !== 0 && !comparison" :class="{ negative: diff.quantity < 0 }" class="data-price-diff">
             <indicator :diff="diff.quantity" /> {{ Math.abs(diff.quantity) }}%
           </span>
-        </div>
-        <div v-if="comparison" class="col comparison">
-          <span class="data-price">
-            {{ comparison.current.quantity }}
-          </span>
-          <p>{{ compareServerPretty }}</p>
+          <div v-if="comparison" class="compare-container col-2">
+            <span class="data-price">
+              {{ comparison.current.quantity }}
+            </span>
+            <span :class="{ negative: diff.comparison.quantity < 0 }" class="data-price-diff">
+              <indicator :diff="diff.comparison.quantity" /> {{ Math.abs(diff.comparison.quantity) }}%
+            </span>
+            <p>{{ compareServerPretty }}</p>
+          </div>
         </div>
       </div>
       <div v-if="item.contentPhase" class="item-data row">
@@ -172,16 +184,22 @@ export default {
       return this.item.stats
     },
     diff () {
-      const percentage = (property) => {
-        if (!this.stats.previous || !this.stats.previous[property]) return 0
-        const value = this.stats.current[property] - this.stats.previous[property]
-        return Math.round((value / this.stats.previous[property] * 100) * 1e2) / 1e2 // Round to 2 digits
+      const percentage = (property, main = this.stats.current, secondary = this.stats.previous) => {
+        if (!secondary || !secondary[property]) return 0
+        const value = main[property] - secondary[property]
+        return Math.round((value / secondary[property] * 100) * 1e2) / 1e2 // Round to 2 digits
       }
       return {
         marketValue: percentage('marketValue'),
         minBuyout: percentage('minBuyout'),
         quantity: percentage('quantity'),
-        historicalValue: percentage('historicalValue')
+        historicalValue: percentage('historicalValue'),
+        comparison: this.comparison ? {
+          marketValue: percentage('marketValue', this.comparison.current, this.stats.current),
+          minBuyout: percentage('minBuyout', this.comparison.current, this.stats.current),
+          quantity: percentage('quantity', this.comparison.current, this.stats.current),
+          historicalValue: percentage('historicalValue', this.comparison.current, this.stats.current)
+        } : null
       }
     },
     lastUpdated () {
@@ -326,12 +344,17 @@ export default {
   align-items: center;
 }
 .comparison {
-  flex-wrap: wrap;
+  display: flex;
+  // justify-content: space-between;
+  align-items: center;
 
   p {
     font-size: 0.7em;
     color: $color-font-body;
     @include uppercase()
+  }
+  .compare-container {
+    flex-wrap: wrap;
   }
 }
 </style>
