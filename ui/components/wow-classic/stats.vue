@@ -384,6 +384,10 @@ export default {
   }
   .compare-container {
     flex-wrap: wrap;
+
+    @media (max-width: $breakpoint-s) {
+      display: flex;
+    }
   }
 }
 </style>
