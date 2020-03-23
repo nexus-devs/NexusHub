@@ -234,6 +234,13 @@ export default {
     this.parsePrice = utility.parsePrice
   },
 
+  beforeDestroy () {
+    this.$store.commit('setItemComparison', {
+      item: { stats: { current: null, previous: null }},
+      server: { slug: '' }
+    })
+  },
+
   methods: {
     copyToClipboard () {
       const itemLink = this.$refs.itemLink
