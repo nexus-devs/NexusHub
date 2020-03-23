@@ -123,7 +123,6 @@ class Crafting extends Endpoint {
       return (cby) => {
         const reagents = cby.reagents.map((r) => {
           const storage = itemStorage[r.itemId]
-          console.log(storage.icon)
           return {
             ...r,
             name: storage.name,
