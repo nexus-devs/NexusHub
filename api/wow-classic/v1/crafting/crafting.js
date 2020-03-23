@@ -90,7 +90,7 @@ class Crafting extends Endpoint {
           itemId: entry.itemId,
           name: entry.name,
           uniqueName: entry.uniqueName,
-          icon: `https://wow.zamimg.com/images/wow/icons/large/${entry.icon}.jpg`
+          icon: entry.icon // `https://wow.zamimg.com/images/wow/icons/large/${entry.icon}.jpg`
         }
         if (!itemStorage[entry.itemId] || !Object.keys(itemStorage[entry.itemId]).length) itemStorage[entry.itemId] = reagent
         reagentFor.push({ ...reagent, createdBy: entry.createdBy })
@@ -123,6 +123,7 @@ class Crafting extends Endpoint {
       return (cby) => {
         const reagents = cby.reagents.map((r) => {
           const storage = itemStorage[r.itemId]
+          console.log(storage.icon)
           return {
             ...r,
             name: storage.name,
@@ -143,7 +144,7 @@ class Crafting extends Endpoint {
         itemId: r.itemId,
         name: r.name,
         uniqueName: r.uniqueName,
-        icon: r.icon,
+        icon: `https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`,
         marketValue: r.marketValue,
         vendorPrice: r.vendorPrice || null,
         recipes: r.recipes,
