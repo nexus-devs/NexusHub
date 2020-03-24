@@ -158,7 +158,7 @@
       </div>
     </template>
     <template slot="footer">
-      <compare-server :fn="compareServer" />
+      <compare-server :fn="compareServer" :active-server="comparisonActiveServer" />
       <a href="https://www.tradeskillmaster.com/" target="_blank">
         Powered by TSM
         <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
@@ -197,6 +197,9 @@ export default {
       if (!this.$store.state.items.itemComparison.server.slug) return null
       return this.$store.state.items.itemComparison
     },
+    comparisonActiveServer () {
+      return this.$store.state.items.itemComparison.server
+    },
     compareServerPretty () {
       if (!this.comparison) return null
       const factionPretty = this.comparison.server.faction.charAt(0).toUpperCase() + this.comparison.server.faction.slice(1)
@@ -232,13 +235,6 @@ export default {
 
   created () {
     this.parsePrice = utility.parsePrice
-  },
-
-  beforeDestroy () {
-    this.$store.commit('setItemComparison', {
-      item: { stats: { current: null, previous: null }},
-      server: { slug: '' }
-    })
   },
 
   methods: {

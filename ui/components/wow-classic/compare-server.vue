@@ -1,13 +1,13 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>Compare {{ activeServer.name }}</span>
-      <img v-if="activeServer.slug !== ''" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
+      <span>Compare {{ activeServer.slug ? activeServer.name : 'Realm' }}</span>
+      <img v-if="activeServer.slug" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: activeServer.slug === '' }" @click="toggle()">Compare Realm</span>
+        <span :class="{ active: !activeServer.slug }" @click="toggle()">Compare Realm</span>
 
         <!-- Europe Servers -->
         <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
@@ -16,10 +16,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-alliance');">
+            <div class="image-wrapper" @click="toggle(); fn(s.slug + '-alliance');">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
-            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-horde');">
+            <div class="image-wrapper" @click="toggle(); fn(s.slug + '-horde');">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
@@ -32,10 +32,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-alliance');">
+            <div class="image-wrapper" @click="toggle(); fn(s.slug + '-alliance');">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </div>
-            <div class="image-wrapper" @click="toggle(); setServer(s.slug + '-horde');">
+            <div class="image-wrapper" @click="toggle(); fn(s.slug + '-horde');">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </div>
           </div>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  props: ['fn'],
+  props: ['fn', 'activeServer'],
 
   data () {
     return {
@@ -57,12 +57,6 @@ export default {
       selected: {
         region: '',
         server: ''
-      },
-      activeServer: {
-        slug: '',
-        name: 'Realm',
-        region: '',
-        faction: ''
       }
     }
   },
@@ -92,13 +86,6 @@ export default {
     selectServer (server) {
       if (server === this.selected.server) this.selected.server = ''
       else this.selected.server = server.slug
-    },
-    setServer (server) {
-      this.fn(server)
-      const serverSplit = server.split('-')
-      const faction = serverSplit.pop()
-      const servers = this.$store.state.servers.serverlist
-      this.activeServer = { ...servers.find(s => s.slug === serverSplit.join('-')), faction }
     }
   }
 }
