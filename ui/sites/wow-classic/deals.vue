@@ -8,7 +8,7 @@
             <h1>Most Profitable Deals on {{ serverPretty }}</h1>
           </div>
           <ad name="wow-classic-deals" />
-          <deals />
+          <deals :compare-fn="compareServer" />
         </div>
       </div>
     </app-content>
@@ -52,6 +52,23 @@ export default {
     serverPretty () {
       const server = this.$store.state.servers.activeServer
       return `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
+    }
+  },
+
+  methods: {
+    async compareServer (server) {
+      const fetchUrlSplit = this.$store.state.deals.fetchUrl.split('&')
+      const fetchUrl = `${fetchUrlSplit[0]}&compare_with=${server}`
+
+      this.$store.commit('setFetchUrl', fetchUrl)
+      this.$store.commit('setFilters', [
+        { name: 'Absolute Profit', unique: true, active: true, icon: '/img/warframe/ui/platinum.svg', fetchUrl },
+        { name: 'Relative Profit', unique: true, active: false, icon: '/img/warframe/ui/platinum.svg', fetchUrl: `${fetchUrl}&relative=true` }
+      ])
+
+      const deals = await this.$cubic.get(fetchUrl)
+      for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+      this.$store.commit('setDeals', deals)
     }
   },
 

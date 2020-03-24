@@ -9,6 +9,7 @@
           </div>
         </div>
       </div>
+      <compare-server :fn="compareServer" :active-server="comparisonServer" />
     </div>
     <div class="deal-container">
       <div class="row labels">
@@ -59,19 +60,27 @@
 </template>
 
 <script>
+import compareServer from 'src/components/wow-classic/compare-server.vue'
 import indicator from 'src/components/charts/indicator.vue'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   components: {
-    indicator
+    indicator,
+    compareServer
   },
 
-  props: ['crafting'],
+  props: ['crafting', 'compareFn'],
 
   data () {
     return {
-      fetchingDeals: false
+      fetchingDeals: false,
+      comparisonServer: {
+        slug: '',
+        name: '',
+        region: '',
+        faction: ''
+      }
     }
   },
 
@@ -162,6 +171,15 @@ export default {
       // Toggle filter
       selectedFilter.active = !selectedFilter.active
       this.$store.commit('setFilters', newFilters)
+    },
+    async compareServer (server) {
+      this.compareFn(server)
+      const serverSplit = server.split('-')
+      const faction = serverSplit.pop()
+      const serverObj = { ...this.$store.state.servers.serverlist.find(s => s.slug === serverSplit.join('-')) } // Avoid mutating
+      serverObj.slug = server
+      serverObj.faction = faction
+      this.comparisonServer = serverObj
     }
   }
 }
@@ -281,6 +299,7 @@ export default {
 .filter {
   position: relative;
   display: flex;
+  justify-content: space-between;
   align-content: center;
   flex-wrap: wrap;
   border-top: 1px solid $color-subtle-dark;
@@ -357,5 +376,9 @@ a {
   @media (max-width: $breakpoint-s) {
     display: none;
   }
+}
+
+.select {
+  font-size: 0.8em;
 }
 </style>
