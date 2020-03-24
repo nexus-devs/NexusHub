@@ -9,7 +9,7 @@
           </div>
         </div>
       </div>
-      <compare-server :fn="compareServer" :active-server="comparisonServer" />
+      <compare-server v-if="compareFn" :fn="compareServer" :active-server="comparisonServer" />
     </div>
     <div class="deal-container">
       <div class="row labels">
