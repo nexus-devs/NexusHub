@@ -87,7 +87,7 @@
               {{ parsePrice(comparison.current.minBuyout) }}
             </span>
             <span v-else class="data-price neutral">Unavailable</span>
-            <span v-if="diff.comparison.minBuyout !== 0" :class="{ negative: diff.comparison.minBuyout < 0 }" class="data-price-diff">
+            <span v-if="diff.comparison.minBuyout !== 0 && comparison.current.minBuyout > 0" :class="{ negative: diff.comparison.minBuyout < 0 }" class="data-price-diff">
               <indicator :diff="diff.comparison.minBuyout" /> {{ Math.abs(diff.comparison.minBuyout) }}%
             </span>
             <p>{{ compareServerPretty }}</p>
@@ -182,7 +182,7 @@ export default {
     indicator,
     compareServer
   },
-  
+
   data () {
     return {
       copied: false
