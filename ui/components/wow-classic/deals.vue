@@ -11,29 +11,39 @@
       </div>
     </div>
     <div class="deal-container">
+      <div class="row labels">
+        <div class="col-2 item">
+          Item
+        </div>
+        <div class="col amount">
+          Absolute Profit
+        </div>
+        <div class="col quantity">
+          {{ crafting ? 'Profession' : 'Relative Profit' }}
+        </div>
+        <div class="col whitespace" />
+      </div>
       <transition-group ref="deals" class="deal-list">
         <div v-for="(deal, i) in deals" :key="`${i}-${deal.itemId}`" class="deal">
           <router-link :to="!crafting ? `/wow-classic/items/${activeServer.slug}/${deal.uniqueName}` : `/wow-classic/items/${activeServer.slug}/${deal.uniqueName}/crafting`" class="row interactive">
             <img :src="deal.icon" class="deal-img-blur" :alt="deal.name">
-            <div class="deal-title col-b">
+            <div class="deal-title col-b-2">
               <div class="deal-img">
                 <img :src="deal.icon" :class="{ mod: deal.icon.includes('jpeg') }" :alt="deal.name">
               </div>
               <span>{{ deal.name }}</span>
             </div>
-            <div class="deal-data row">
-              <div class="deal-data-value">
-                <img src="/img/warframe/ui/platinum.svg" alt="Gold" class="ico-12">
-                <span>{{ parsePrice(!crafting ? deal.dealDiff : deal.profit) }}</span>
-              </div>
-              <div class="deal-data-value">
-                <span v-if="!crafting" :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
-                  <indicator :diff="deal.dealPercentage" /> {{ +Math.abs(deal.dealPercentage * 100).toFixed(2) }}%
-                </span>
-                <span v-else class="category">{{ deal.category }}</span>
-              </div>
-              <div class="deal-data-value whitespace" />
+            <div class="deal-data-value col-b">
+              <img src="/img/warframe/ui/platinum.svg" alt="Gold" class="ico-12">
+              <span>{{ parsePrice(!crafting ? deal.dealDiff : deal.profit) }}</span>
             </div>
+            <div class="deal-data-value col-b">
+              <span v-if="!crafting" :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
+                <indicator :diff="deal.dealPercentage" /> {{ +Math.abs(deal.dealPercentage * 100).toFixed(2) }}%
+              </span>
+              <span v-else class="category">{{ deal.category }}</span>
+            </div>
+            <div class="deal-data-value col-b whitespace" />
           </router-link>
         </div>
       </transition-group>
@@ -161,7 +171,7 @@ export default {
 @import '~src/styles/partials/wow-classic/importer';
 
 .deal-container {
-  margin-top: 30px;
+  margin-top: 20px;
   position: relative; // for position: absolute item list views
   overflow: hidden;
   @include ease-out(0.35s); // When results block gets resized
@@ -169,9 +179,6 @@ export default {
 .deal {
   @include ease(0.5s);
 
-  .row {
-    justify-content: space-between;
-  }
   .deal-title {
     position: relative;
     display: flex;
@@ -209,7 +216,6 @@ export default {
     width: 70%;
   }
   .deal-data-value {
-    flex: 1;
     font-size: 0.9em;
     white-space: nowrap;
 
@@ -219,9 +225,6 @@ export default {
     .price-diff {
       color: $color-positive;
     }
-  }
-  .whitespace {
-    flex-grow: 3;
   }
   @media (max-width: $breakpoint-s) {
     .deal-title {
@@ -238,22 +241,13 @@ export default {
     .deal-img-blur {
       left: -50%;
     }
-    .deal-data {
-      justify-content: flex-start;
+    .deal-data-value {
+      flex-grow: 1;
+      flex-basis: 1%;
+      position: relative;
       top: -23px;
       margin-bottom: -20px;
       margin-left: 60px;
-    }
-    .deal-data-value {
-      font-size: 0.85em;
-      margin-right: 10px;
-
-      img {
-        height: 10px;
-      }
-      &.hidden {
-        display: none;
-      }
     }
     .whitespace {
       display: none;
@@ -318,7 +312,6 @@ export default {
 a {
   position: relative;
   overflow: hidden;
-  width: 100%;
   @include field;
   align-items: center;
   border-radius: 2px;
@@ -335,6 +328,34 @@ a {
   }
   &:before {
     border-radius: 0;
+  }
+}
+
+.labels {
+  @include uppercase;
+  color: $color-font-subtle;
+  font-size: 0.8em;
+  padding: 10px 20px;
+  border-radius: 2px;
+  background: $color-bg-darker;
+  margin-bottom: 8px;
+
+  .interactive {
+    padding: 0;
+    background: transparent;
+
+    &:before {
+      background: transparent;
+    }
+  }
+  .whitespace {
+    @media (max-width: $breakpoint-s) {
+      display: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-s) {
+    display: none;
   }
 }
 </style>
