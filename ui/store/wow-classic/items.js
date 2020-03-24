@@ -23,7 +23,7 @@ export default {
     setItemComparison (state, { item, server }) {
       state.itemComparison.current = item.stats.current
       state.itemComparison.previous = item.stats.previous
-      state.itemComparison.server = server
+      if (server) state.itemComparison.server = server
     }
   },
 

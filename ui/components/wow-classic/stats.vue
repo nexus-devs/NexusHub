@@ -182,7 +182,7 @@ export default {
     indicator,
     compareServer
   },
-
+  
   data () {
     return {
       copied: false
