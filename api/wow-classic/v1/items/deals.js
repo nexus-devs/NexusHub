@@ -29,6 +29,11 @@ class Deals extends Endpoint {
         name: 'relative',
         default: false,
         description: 'Sorts by relative difference instead of absolute if set to true.'
+      },
+      {
+        name: 'compare_with',
+        default: '',
+        description: 'If specified, returns best deals compared to another realm instead.'
       }
     ]
     this.schema.response = [{
@@ -52,6 +57,7 @@ class Deals extends Endpoint {
     const skip = req.query.skip
     const minQuantity = req.query.min_quantity
     const relative = req.query.relative
+    const compareWith = req.query.compare_with
 
     const server = await this.db.collection('server').findOne({ slug })
     if (!server) {
@@ -63,7 +69,7 @@ class Deals extends Endpoint {
       return res.status(404).send(response)
     }
 
-    const aggregationPipeline = [
+    let aggregationPipeline = [
       { $match: { slug, minBuyout: { $gt: 0 }, quantity: { $gte: minQuantity } } },
       {
         $project: {
@@ -72,14 +78,42 @@ class Deals extends Endpoint {
           marketValue: 1,
           minBuyout: 1,
           dealDiff: { $subtract: ['$marketValue', '$minBuyout'] },
-          dealPercentage: { $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$marketValue'] }
+          dealPercentage: { $divide: [{ $subtract: ['$marketValue', '$minBuyout'] }, '$minBuyout'] }
         }
-      },
-      { $sort: relative ? { dealPercentage: -1 } : { dealDiff: -1 } }
+      }
     ]
+
+    // On comparison, check which order slug <> compareWith is sorted, sort them accordingly
+    // Then group them together, use $first as slug and $last as compareWith
+    // Use marketValue as compareWith market value and minBuyout as slug market value
+    if (compareWith) {
+      const sortOrder = slug.localeCompare(compareWith)
+      aggregationPipeline = [
+        { $match: { $or: [{ slug }, { slug: compareWith }], quantity: { $gte: minQuantity } } },
+        { $sort: { slug: sortOrder < 0 ? 1 : -1 } },
+        {
+          $group: {
+            _id: '$itemId',
+            comparisonMarketValue: { $last: '$marketValue' },
+            marketValue: { $first: '$marketValue' }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            itemId: '$_id',
+            marketValue: 1,
+            comparisonMarketValue: 1,
+            dealDiff: { $subtract: ['$comparisonMarketValue', '$marketValue'] },
+            dealPercentage: { $divide: [{ $subtract: ['$comparisonMarketValue', '$marketValue'] }, '$marketValue'] }
+          }
+        }
+      ]
+    }
 
     // We have to do this because skip doesn't accept 0 as a value.
     // The sort->skip->limit order is fine performance wise: https://docs.mongodb.com/manual/core/aggregation-pipeline-optimization/
+    aggregationPipeline.push({ $sort: relative ? { dealPercentage: -1 } : { dealDiff: -1 } })
     if (skip) aggregationPipeline.push({ $skip: skip })
     aggregationPipeline.push({ $limit: limit })
 
@@ -97,7 +131,7 @@ class Deals extends Endpoint {
       }
     }
 
-    this.cache(data, 60)
+    // this.cache(data, 60)
     return res.send(data)
   }
 }
