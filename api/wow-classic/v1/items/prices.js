@@ -35,7 +35,7 @@ class Prices extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    let itemId = parseInt(req.params.item)
+    let itemId = req.params.item
     const slug = req.params.server.toLowerCase()
     const timerange = req.query.timerange
     const region = req.query.region
@@ -50,6 +50,7 @@ class Prices extends Endpoint {
       return res.status(404).send(response)
     }
 
+    itemId = !isNaN(parseFloat(itemId)) && isFinite(itemId) ? parseInt(itemId) : false
     const item = await this.db.collection('items').findOne(itemId ? { itemId } : { uniqueName: req.params.item.toLowerCase() })
     if (!item) {
       const response = {

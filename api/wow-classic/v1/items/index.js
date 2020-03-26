@@ -38,7 +38,7 @@ class Items extends Endpoint {
    * Main method which is called by EndpointHandler on request
    */
   async main (req, res) {
-    let itemId = parseInt(req.params.item)
+    let itemId = req.params.item
     const slug = req.params.server.toLowerCase()
 
     const server = await this.db.collection('server').findOne({ slug })
@@ -51,6 +51,7 @@ class Items extends Endpoint {
       return res.status(404).send(response)
     }
 
+    itemId = !isNaN(parseFloat(itemId)) && isFinite(itemId) ? parseInt(itemId) : false
     const item = await this.db.collection('items').findOne(itemId ? { itemId } : { uniqueName: req.params.item.toLowerCase() })
     if (!item) {
       const response = {

@@ -46,7 +46,7 @@ class Crafting extends Endpoint {
    */
   async main (req, res) {
     const slug = req.params.server.toLowerCase()
-    let item = parseInt(req.params.item)
+    let item = req.params.item
 
     const server = await this.db.collection('server').findOne({ slug })
     if (!server) {
@@ -58,6 +58,7 @@ class Crafting extends Endpoint {
       return res.status(404).send(response)
     }
 
+    item = !isNaN(parseFloat(item)) && isFinite(item) ? parseInt(item) : false
     const findItem = await this.db.collection('items').findOne(item ? { itemId: item } : { uniqueName: req.params.item.toLowerCase() })
     if (!findItem) {
       const response = {
