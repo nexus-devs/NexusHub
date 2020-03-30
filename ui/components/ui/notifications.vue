@@ -154,6 +154,10 @@ export default {
 <style lang="scss" module="warframe">
 @import '~src/styles/partials/importer';
 
+.unread-bubble {
+  @include gradient-background-dg($color-primary, $color-accent);
+  border: 2px solid $color-bg-dark;
+}
 .notification-header {
   background: $color-bg;
 }
@@ -170,16 +174,16 @@ export default {
   &:hover {
     @include gradient-background-dg($color-primary, $color-accent);
   }
-}
-.unread-bubble {
-  border: 2px solid $color-bg-dark;
-  @include gradient-background-dg($color-primary, $color-accent);
 }
 </style>
 
 <style lang="scss" module="wow-classic">
 @import '~src/styles/partials/wow-classic/importer';
 
+.unread-bubble {
+  @include gradient-background-dg($color-primary, $color-accent);
+  border: 2px solid $color-bg-dark;
+}
 .notification-header {
   background: $color-bg;
 }
@@ -196,10 +200,6 @@ export default {
   &:hover {
     @include gradient-background-dg($color-primary, $color-accent);
   }
-}
-.unread-bubble {
-  border: 2px solid $color-bg-dark;
-  @include gradient-background-dg($color-primary, $color-accent);
 }
 </style>
 
