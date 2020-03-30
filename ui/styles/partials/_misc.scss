@@ -34,6 +34,8 @@
   background: linear-gradient($top, $bot);
 }
 @mixin gradient-background-dg($top, $bot) {
+  background: -webkit-linear-gradient(to bottom right, $top, $bot);
+  background: -moz-linear-gradient(to bottom right, $top, $bot);
   background: linear-gradient(to bottom right, $top, $bot);
 }
 @mixin gradient-background-dg-tri($top, $mid, $bot) {
