@@ -67,9 +67,9 @@ export default {
       for (const notification of notifications) {
         if (!this.isValidGame(notification)) continue
         const id = `${notification.message.title}-l${notification.message.body.length}`
-        if (document.cookie.includes(`notifications_has_removed_${id}`)) continue
+        if (localStorage.getItem(`notification_${id}`) === 'removed') continue
 
-        if (!document.cookie.includes(`notifications_has_seen_${id}`)) {
+        if (localStorage.getItem(`notification_${id}`) !== 'seen') {
           res.unread.push(notification)
         } else {
           res.hasread.push(notification)
@@ -104,7 +104,7 @@ export default {
       if (!this.visible) {
         for (const notification of this.notifications.unread) {
           const id = `${notification.message.title}-l${notification.message.body.length}`
-          document.cookie += `notifications_has_seen_${id};`
+          if (!localStorage.getItem(`notification_${id}`)) localStorage.setItem(`notification_${id}`, 'seen')
         }
         this.$store.commit('forceUpdateNotifications')
       }
@@ -127,7 +127,7 @@ export default {
       addNotification (state, notification) {
         const id = `${notification.message.title}-l${notification.message.body.length}`
 
-        if (!document.cookie.includes(`notifications_has_removed_${id}`) &&
+        if (!(localStorage.getItem(`notification_${id}`) === 'removed') &&
           !state.all.find(n => n.message.title === notification.message.title &&
           n.message.body === notification.message.body))
         {
@@ -137,7 +137,7 @@ export default {
       removeNotification (state, notification) {
         const id = `${notification.message.title}-l${notification.message.body.length}`
 
-        document.cookie += `notifications_has_removed_${id};`
+        localStorage.setItem(`notification_${id}`, 'removed')
         state.all.splice(state.all.findIndex(n => n.message.title === notification.message.title), 1)
       },
       // Kind of debug, to retrigger computed props, thus updating the cookie state
