@@ -318,7 +318,7 @@ export default {
   color: white;
   height: 9px;
   width: 9px;
-  border-radius: 999px;
+  border-radius: 50%;
   opacity: 0;
   transform: scale(0.75);
   pointer-events: none;
