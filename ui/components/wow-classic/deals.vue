@@ -38,7 +38,7 @@
               <img src="/img/warframe/ui/platinum.svg" alt="Gold" class="ico-12">
               <span>{{ parsePrice(!crafting ? deal.dealDiff : deal.profit) }}</span>
             </div>
-            <div class="deal-data-value col-b">
+            <div class="deal-data-value col-b price">
               <span v-if="!crafting" :class="{ negative: deal.dealPercentage < 0 }" class="price-diff">
                 <indicator :diff="deal.dealPercentage" /> {{ +Math.abs(deal.dealPercentage * 100).toFixed(2) }}%
               </span>
@@ -278,6 +278,10 @@ export default {
       top: -23px;
       margin-bottom: -20px;
       margin-left: 60px;
+
+      &.price {
+        padding-top: 1px;
+      }
     }
     .whitespace {
       display: none;
