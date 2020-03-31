@@ -44,7 +44,11 @@
               </span>
               <span v-else class="category">{{ deal.category }}</span>
             </div>
-            <div class="deal-data-value col-b whitespace" />
+            <div class="deal-data-value col-b whitespace">
+              <span v-if="!crafting && !comparisonServer.slug" class="unavailable">Cheaper than Market Value</span>
+              <span v-else-if="crafting" class="unavailable">Crafting Profit</span>
+              <span v-else-if="!crafting && comparisonServer.slug" class="unavailable">Compared with {{ compareServerPretty }}</span>
+            </div>
           </router-link>
         </div>
       </transition-group>
@@ -85,6 +89,11 @@ export default {
   },
 
   computed: {
+    compareServerPretty () {
+      if (!this.comparisonServer.slug) return null
+      const factionPretty = this.comparisonServer.faction.charAt(0).toUpperCase() + this.comparisonServer.faction.slice(1)
+      return `${this.comparisonServer.name} (${factionPretty})`
+    },
     deals () {
       const deals = this.$store.state.deals.deals
 
@@ -193,6 +202,9 @@ export default {
   position: relative; // for position: absolute item list views
   overflow: hidden;
   @include ease-out(0.35s); // When results block gets resized
+}
+.unavailable {
+  color: $color-font-body;
 }
 .deal {
   @include ease(0.5s);
