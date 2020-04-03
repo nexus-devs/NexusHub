@@ -7,7 +7,10 @@ class Index extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Provides number of most viewed items in the last 24 hours as tracked by Google Analytics.'
-    this.schema.response = Number
+    this.schema.response = [{
+      path: String,
+      views: Number
+    }]
     this.schema.limit = {
       interval: 20000,
       maxInInterval: 5
@@ -56,10 +59,9 @@ class Index extends Endpoint {
         }
       })
       res.send(views)
-      // this.cache(users, 60 * 60)
+      this.cache(views, 60 * 60)
     } catch (err) {
-      console.log(err)
-      res.send('999') // Placeholder if auth fails (which it would on dev builds)
+      res.send([{ path: 'Placeholder', views: 0 }]) // Placeholder if auth fails (which it would on dev builds)
     }
   }
 }
