@@ -14,7 +14,7 @@ export default {
       state.serverlist = list
     },
     setActiveServer (state, server) {
-      server.slug = `${server.slug}-${server.faction}`
+      if (server.slug) server.slug = `${server.slug}-${server.faction}`
       state.activeServer = server
     }
   }

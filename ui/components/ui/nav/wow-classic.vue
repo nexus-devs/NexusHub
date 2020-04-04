@@ -52,8 +52,10 @@ export default {
       if (server) {
         server.faction = faction.toLowerCase()
         store.commit('setActiveServer', server)
+        return
       }
     }
+    store.commit('setActiveServer', { slug: '', name: '', region: '', faction: '' })
   },
 
   computed: {
