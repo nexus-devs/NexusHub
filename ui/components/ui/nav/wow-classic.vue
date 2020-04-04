@@ -75,7 +75,19 @@ export default {
 
   methods: {
     generateSwitchUrl (server) {
-      return this.$route.fullPath.replace(this.activeServer.slug, server)
+      if (this.activeServer.slug) {
+        const route = this.$route.fullPath.replace(this.activeServer.slug, server)
+        return route.slice(-1) === '/' ? route.slice(0, -1) : route // Remove trailing slash
+      } else {
+        const routeSplit = this.$route.fullPath.split('/')
+        if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
+
+        // Insert at last position if landing page, otherwise after second item
+        if (routeSplit.length > 2) routeSplit.splice(3, 0, server)
+        else if (server) routeSplit.push(server)
+
+        return routeSplit.join('/')
+      }
     }
   },
 

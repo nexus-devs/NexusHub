@@ -1,13 +1,15 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
-      <span>{{ activeServer.name }}</span>
-      <img :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
+      <span>{{ activeServer.slug ? activeServer.name : 'Select Realm' }}</span>
+      <img v-if="activeServer.slug" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span :class="{ active: activeServer.slug === '' }" @click="toggle()">Select Server</span>
+        <router-link :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="toggle()">
+          Global
+        </router-link>
 
         <!-- Europe Servers -->
         <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
@@ -89,9 +91,6 @@ export default {
     selectServer (server) {
       if (server === this.selected.server) this.selected.server = ''
       else this.selected.server = server.slug
-    },
-    generateSwitchUrl (server) {
-      return this.$route.fullPath.replace(this.activeServer.slug, server)
     }
   }
 }
@@ -146,15 +145,15 @@ export default {
       max-height: 100vh;
     }
 
-    span {
+    span, a {
       cursor: pointer;
       padding: 10px 15px;
       @include ease(0.15s);
     }
-    span:hover {
+    span:hover, a:hover {
       background: rgba(0,0,0,0.15);
     }
-    span:not(.active) {
+    span:not(.active), a:not(.active) {
       color: $color-font-body;
     }
   }

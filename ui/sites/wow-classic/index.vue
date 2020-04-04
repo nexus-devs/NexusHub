@@ -143,7 +143,7 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const slug = route.params.slug
+    const slug = route.params.slug || 'anathema-alliance'
 
     const parallel = []
     parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
