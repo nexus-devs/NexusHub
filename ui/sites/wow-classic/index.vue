@@ -31,12 +31,34 @@
       <section>
         <div class="container">
           <div class="row overview">
-            <div class="col-b">
+            <div v-if="global" class="col-b">
+              <h2 class="sub">
+                Trending Items
+              </h2>
+              <div class="row-margin deals">
+                <router-link v-for="item in trendingItems" :key="item.itemId" :to="`/wow-classic/items/${item.uniqueName}`" class="col-b item trending">
+                  <module>
+                    <template slot="header">
+                      <div class="img">
+                        <object :data="item.icon" type="image/png">
+                          <img :src="item.icon" :alt="item.name">
+                        </object>
+                      </div>
+                      <h3>{{ item.name }}</h3>
+                    </template>
+                    <template slot="body">
+                      <span class="sub">{{ (item.viewPercentage * 100).toFixed(2) }}% of all item views</span>
+                    </template>
+                  </module>
+                </router-link>
+              </div>
+            </div>
+            <div v-if="!global" class="col-b">
               <h2 class="sub">
                 Most Profitable Deals
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in deals" :key="deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}`" class="col-b item">
+                <router-link v-for="deal in deals" :key="'deal' + deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -64,12 +86,12 @@
                 </router-link>
               </div>
             </div>
-            <div class="col-b">
+            <div v-if="!global" class="col-b">
               <h2 class="sub">
                 Most Profitable Recipes
               </h2>
               <div class="row-margin deals">
-                <router-link v-for="deal in craftingDeals" :key="deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}/crafting`" class="col-b item">
+                <router-link v-for="deal in craftingDeals" :key="'recipe' + deal.itemId" :to="`/wow-classic/items/${activeServer.slug}/${deal.uniqueName}/crafting`" class="col-b item">
                   <module>
                     <template slot="header">
                       <div class="img">
@@ -144,15 +166,18 @@ export default {
 
   async asyncData ({ store, route }) {
     const slug = route.params.slug
+    const news = this.$cubic.get('/wow-classic/v1/news')
 
     // Global Landing Page
     if (!slug) {
       store.commit('setGlobalIndex', true)
       const gaItems = await this.$cubic.get(`/analytics/v1/ga/items?game=wow-classic`)
       const items = []
+      let viewSum = 0
 
       // Get trending items
       for (const gaEntry of gaItems) {
+        viewSum += gaEntry.views
         const urlSplit = gaEntry.path.split('/')
         const uniqueName = urlSplit[urlSplit.length - 1] === 'crafting' ? urlSplit[urlSplit.length - 2].split('?')[0] : urlSplit[urlSplit.length - 1].split('?')[0]
         const storedItem = items.find(i => i.uniqueName === uniqueName)
@@ -160,7 +185,14 @@ export default {
         else items.push({ uniqueName, views: gaEntry.views })
       }
       items.sort((a, b) => b.views - a.views)
-      store.commit('setIndexTrendingItems', items.slice(0, 8))
+
+      const parallel = []
+      for (const item of items.slice(0, 6)) parallel.push(this.$cubic.get(`/wow-classic/v1/item/${item.uniqueName}`))
+      const trendingItems = (await Promise.all(parallel)).map((item, index) => {
+        return { ...item, viewPercentage: Math.round((items[index].views / viewSum) * 10000) / 10000 }
+      })
+      store.commit('setIndexTrendingItems', trendingItems)
+      store.commit('setNews', news)
 
     // Server Landing Page
     } else {
@@ -169,16 +201,15 @@ export default {
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
-      parallel.push(this.$cubic.get('/wow-classic/v1/news'))
-      const [crafting, deals, news] = await Promise.all(parallel)
+      const [crafting, deals] = await Promise.all(parallel)
 
       for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
       for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
 
       store.commit('setIndexCraftingDeals', crafting)
       store.commit('setIndexDeals', deals)
-      store.commit('setNews', news)
     }
+    store.commit('setNews', await news)
   },
 
   computed: {
@@ -191,8 +222,14 @@ export default {
     craftingDeals () {
       return this.$store.state.wowclassic.craftingDeals
     },
+    trendingItems () {
+      return this.$store.state.wowclassic.trendingItems
+    },
     activeServer () {
       return this.$store.state.servers.activeServer
+    },
+    global () {
+      return this.$store.state.wowclassic.globalIndex
     }
   },
 
@@ -537,6 +574,10 @@ header {
       transition-duration: 0.5s !important;
       max-width: 100%;
       height: auto; // Safari fix
+
+      &.trending {
+        flex-basis: 30%;
+      }
 
       @media (max-width: $breakpoint-s) {
         flex-basis: 0; // Safari fix
