@@ -77,19 +77,20 @@ export default {
 
   methods: {
     generateSwitchUrl (server) {
-      if (this.activeServer.slug) {
-        const route = this.$route.fullPath.replace(this.activeServer.slug, server)
-        return route.slice(-1) === '/' ? route.slice(0, -1) : route // Remove trailing slash
-      } else {
-        const routeSplit = this.$route.fullPath.split('/')
-        if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
+      const propSplit = this.$route.fullPath.split('?')
+      const routeSplit = propSplit[0].split('/')
+      if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
 
+      if (this.activeServer.slug) {
+        propSplit[0] = routeSplit.join('/').replace(this.activeServer.slug, server)
+      } else {
         // Insert at last position if landing page, otherwise after second item
         if (routeSplit.length > 2) routeSplit.splice(3, 0, server)
         else if (server) routeSplit.push(server)
-
-        return routeSplit.join('/')
+        propSplit[0] = routeSplit.join('/')
       }
+
+      return propSplit.join('?')
     }
   },
 
