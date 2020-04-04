@@ -149,7 +149,7 @@ export default {
      * switching as well.
      */
     query (itemId) {
-      this.$router.push(`/wow-classic/items/${this.activeServer.slug}/${itemId}`)
+      this.$router.push(`/wow-classic/items/${this.activeServer.slug ? `${this.activeServer.slug}/` : ''}${itemId}`)
     }
   },
 
