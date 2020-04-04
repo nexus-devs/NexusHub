@@ -10,6 +10,7 @@ class Items extends Endpoint {
     this.schema.url = '/wow-classic/v1/items/:server/:item'
     this.schema.request = { url: '/wow-classic/v1/items/anathema-alliance/2589' }
     this.schema.response = {
+      server: String,
       itemId: Number,
       name: String,
       uniqueName: String,
