@@ -38,7 +38,7 @@ class News extends Endpoint {
       delete f.contentSnippet
     }
 
-    this.cache(feed, 60)
+    this.cache(feed, feed.length ? 60 * 60 : 60) // Cache 1 minute on error, otherwise 1 hour
     res.send(feed)
   }
 }
