@@ -143,20 +143,42 @@ export default {
   },
 
   async asyncData ({ store, route }) {
-    const slug = route.params.slug || 'anathema-alliance'
+    const slug = route.params.slug
 
-    const parallel = []
-    parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
-    parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
-    parallel.push(this.$cubic.get('/wow-classic/v1/news'))
-    const [crafting, deals, news] = await Promise.all(parallel)
+    // Global Landing Page
+    if (!slug) {
+      store.commit('setGlobalIndex', true)
+      const gaItems = await this.$cubic.get(`/analytics/v1/ga/items?game=wow-classic`)
+      const items = []
 
-    for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
-    for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+      // Get trending items
+      for (const gaEntry of gaItems) {
+        const urlSplit = gaEntry.path.split('/')
+        const uniqueName = urlSplit[urlSplit.length - 1] === 'crafting' ? urlSplit[urlSplit.length - 2].split('?')[0] : urlSplit[urlSplit.length - 1].split('?')[0]
+        const storedItem = items.find(i => i.uniqueName === uniqueName)
+        if (storedItem) storedItem.views += gaEntry.views
+        else items.push({ uniqueName, views: gaEntry.views })
+      }
+      items.sort((a, b) => b.views - a.views)
+      store.commit('setIndexTrendingItems', items.slice(0, 8))
 
-    store.commit('setIndexCraftingDeals', crafting)
-    store.commit('setIndexDeals', deals)
-    store.commit('setNews', news)
+    // Server Landing Page
+    } else {
+      store.commit('setGlobalIndex', false)
+
+      const parallel = []
+      parallel.push(this.$cubic.get(`/wow-classic/v1/crafting/${slug}/deals`))
+      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/deals`))
+      parallel.push(this.$cubic.get('/wow-classic/v1/news'))
+      const [crafting, deals, news] = await Promise.all(parallel)
+
+      for (const deal of deals) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+      for (const deal of crafting) deal.icon = `https://render-classic-us.worldofwarcraft.com/icons/56/${deal.icon}.jpg`
+
+      store.commit('setIndexCraftingDeals', crafting)
+      store.commit('setIndexDeals', deals)
+      store.commit('setNews', news)
+    }
   },
 
   computed: {

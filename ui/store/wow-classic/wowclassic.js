@@ -4,7 +4,9 @@ export default {
   state: {
     news: [],
     deals: [],
-    craftingDeals: []
+    craftingDeals: [],
+    trendingItems: [],
+    globalIndex: false
   },
 
   mutations: {
@@ -16,6 +18,12 @@ export default {
     },
     setIndexCraftingDeals (state, deals) {
       state.craftingDeals = deals
+    },
+    setIndexTrendingItems (state, items) {
+      state.trendingItems = items
+    },
+    setGlobalIndex (state, value) {
+      state.globalIndex = value
     }
   }
 }
