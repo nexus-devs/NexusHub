@@ -105,7 +105,7 @@ export default {
         items.push({
           name,
           imgUrl: item.imgUrl,
-          webUrl: `/wow-classic/items/${slug}/${item.uniqueName}`,
+          webUrl: slug ? `/wow-classic/items/${slug}/${item.uniqueName}` : `/wow-classic/items/${item.uniqueName}`,
           results: 'items',
           description: name
         })
