@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link :to="`/wow-classic/${activeServer.slug}`" exact>
+      <router-link :to="activeServer.slug ? `/wow-classic/${activeServer.slug}` : '/'" exact>
         <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
