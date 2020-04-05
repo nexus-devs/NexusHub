@@ -123,7 +123,9 @@ export default {
       return this.$store.state.items.item
     },
     displayGraphs () {
-      return this.global ? this.$store.state.graphs.storage['graph-overview-us'].data.length : this.$store.state.graphs.storage['graph-value-quantity'].data.length
+      return this.global
+        ? this.$store.state.graphs.storage['graph-overview-us'].data && this.$store.state.graphs.storage['graph-overview-us'].data.length
+        : this.$store.state.graphs.storage['graph-value-quantity'].data && this.$store.state.graphs.storage['graph-value-quantity'].data.length
     }
   },
 

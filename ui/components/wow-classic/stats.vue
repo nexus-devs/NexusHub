@@ -75,7 +75,7 @@
       </div>
 
       <!-- Market Value -->
-      <div v-if="!global && item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats && item.stats.current" class="item-data row">
         <div class="col">
           <span>Market Value</span>
         </div>
@@ -102,7 +102,7 @@
       </div>
 
       <!-- Historical Value -->
-      <div v-if="!global && item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats && item.stats.current" class="item-data row">
         <div class="col">
           <span>Historical Value</span>
         </div>
@@ -129,7 +129,7 @@
       </div>
 
       <!-- Minimum Buyout -->
-      <div v-if="!global && item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats && item.stats.current" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
@@ -159,7 +159,7 @@
       </div>
 
       <!-- Quantity -->
-      <div v-if="!global && item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats && item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
@@ -314,7 +314,7 @@ export default {
       }
     },
     lastUpdated () {
-      const lastUpdated = this.stats.lastUpdated
+      const lastUpdated = this.stats ? this.stats.lastUpdated : null
       return lastUpdated ? moment.utc(lastUpdated).fromNow() : 'Unknown'
     }
   },
