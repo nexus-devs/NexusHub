@@ -47,7 +47,7 @@ export default {
     moduleTime
   },
 
-  props: ['storage', 'title'],
+  props: ['storage', 'title', 'region'],
 
   computed: {
     timerange () {
@@ -96,7 +96,7 @@ export default {
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
       this.$refs.graphValueQuantity.$refs.progress.start()
-      await this.$store.dispatch('refetchGraphData', { graph: this.storage, timerange })
+      await this.$store.dispatch('refetchGraphData', { graph: this.storage, timerange, regional: this.region })
       this.$refs.graphValueQuantity.$refs.progress.finish()
     }
   }

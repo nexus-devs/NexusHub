@@ -26,8 +26,8 @@
             <span>Click on the graphs to see more detailed information.</span>
           </div>
           <div v-if="global" class="row-margin">
-            <graph-value-quantity storage="graph-overview-eu" title="Europe" class="col-b graph" />
-            <graph-value-quantity storage="graph-overview-us" title="United States" class="col-b graph" />
+            <graph-value-quantity storage="graph-overview-eu" region="eu" title="Europe" class="col-b graph" />
+            <graph-value-quantity storage="graph-overview-us" region="us" title="United States" class="col-b graph" />
           </div>
           <div v-if="!global" class="row-margin">
             <graph-value-quantity storage="graph-value-quantity" class="col-b graph" />

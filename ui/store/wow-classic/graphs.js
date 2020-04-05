@@ -38,11 +38,11 @@ export default {
       const slug = state.slug
 
       const parallel = []
-      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`))
+      if (slug) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`))
       if (regional) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${regional}/${itemId}/prices?region=true&timerange=${timerange}`))
       let [itemData, regionalData] = await Promise.all(parallel)
 
-      if (regional) itemData = utility.formatRegionalData(itemData, regionalData)
+      if (regional && slug) itemData = utility.formatRegionalData(itemData, regionalData)
       commit('setGraphData', { graph, item: itemData })
     }
   }
