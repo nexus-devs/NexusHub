@@ -87,14 +87,16 @@ export default {
       if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
 
       if (this.activeServer.slug) {
-        propSplit[0] = routeSplit.join('/').replace(this.activeServer.slug, server)
+        const index = routeSplit.indexOf(this.activeServer.slug)
+        if (server) routeSplit[index] = server
+        else routeSplit.splice(index, 1)
       } else {
         // Insert at last position if landing page, otherwise after second item
         if (routeSplit.length > 2) routeSplit.splice(3, 0, server)
         else if (server) routeSplit.push(server)
-        propSplit[0] = routeSplit.join('/')
       }
 
+      propSplit[0] = routeSplit.join('/')
       return propSplit.join('?')
     }
   },
