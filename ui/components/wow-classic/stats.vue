@@ -158,7 +158,7 @@
       </div>
     </template>
     <template slot="footer">
-      <compare-server :fn="compareServer" :active-server="comparisonActiveServer" />
+      <compare-server v-if="!global" :fn="compareServer" :active-server="comparisonActiveServer" />
       <a href="https://www.tradeskillmaster.com/" target="_blank">
         Powered by TSM
         <img src="/img/ui/arrow-right.svg" alt="Powered by TSM" class="ico-20">
@@ -190,6 +190,9 @@ export default {
   },
 
   computed: {
+    global () {
+      return !this.$store.state.servers.activeServer.slug
+    },
     item () {
       return this.$store.state.items.item
     },

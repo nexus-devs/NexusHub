@@ -25,11 +25,11 @@
           <div class="mobile-hover-info">
             <span>Click on the graphs to see more detailed information.</span>
           </div>
-          <div class="row-margin">
+          <div v-if="!global" class="row-margin">
             <graph-value-quantity class="col-b graph" />
             <graph-value-comparison class="col-b graph" />
           </div>
-          <div class="row-margin">
+          <div v-if="!global" class="row-margin">
             <heatmap-value class="col-b graph" />
             <heatmap-quantity class="col-b graph" />
           </div>
@@ -73,34 +73,53 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item
-    const slug = route.params.slug || 'anathema-alliance'
+    const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
     if ((store.state.graphs.itemId !== parseInt(item) && store.state.graphs.uniqueName !== item) || store.state.graphs.slug !== slug) {
-      const region = store.state.servers.activeServer.region || 'eu'
+      // Fetch EU and US graphs
+      if (!slug) {
+        const [dataEU, dataUS] = await Promise.all([
+          this.$cubic.get(`/wow-classic/v1/items/eu/${item}/prices?region=true`),
+          this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)
+        ])
 
-      const parallel = []
-      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
-      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${region}/${item}/prices?region=true`))
-      const [itemData, regionalData] = await Promise.all(parallel)
-      const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
+        store.commit('setGraphItem', { itemId: dataEU.itemId, uniqueName: dataEU.uniqueName, slug: '' })
 
-      store.commit('setGraphItem', { itemId: itemData.itemId, uniqueName: itemData.uniqueName, slug })
+        // Commit start value for all graphs
+        store.commit('setGraphData', { graph: 'graph-overview-eu', item: dataEU })
+        store.commit('setGraphData', { graph: 'graph-overview-us', item: dataUS })
 
-      // Commit start value for all graphs
-      store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
-      store.commit('setGraphData', { graph: 'graph-value-comparison', item: regionalDataEdited })
-      store.commit('setGraphData', { graph: 'heatmap-quantity', item: itemData })
-      store.commit('setGraphData', { graph: 'heatmap-value', item: itemData })
+      // Fetch local server graphs
+      } else {
+        const region = store.state.servers.activeServer.region
+
+        const parallel = []
+        parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
+        parallel.push(this.$cubic.get(`/wow-classic/v1/items/${region}/${item}/prices?region=true`))
+        const [itemData, regionalData] = await Promise.all(parallel)
+        const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
+
+        store.commit('setGraphItem', { itemId: itemData.itemId, uniqueName: itemData.uniqueName, slug })
+
+        // Commit start value for all graphs
+        store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
+        store.commit('setGraphData', { graph: 'graph-value-comparison', item: regionalDataEdited })
+        store.commit('setGraphData', { graph: 'heatmap-quantity', item: itemData })
+        store.commit('setGraphData', { graph: 'heatmap-value', item: itemData })
+      }
     }
   },
 
   computed: {
+    global () {
+      return !this.$store.state.servers.activeServer.slug
+    },
     item () {
       return this.$store.state.items.item
     },
     displayGraphs () {
-      return this.$store.state.graphs.storage['graph-value-quantity'].data.length
+      return this.global ? this.$store.state.graphs.storage['graph-overview-us'].data.length : this.$store.state.graphs.storage['graph-value-quantity'].data.length
     }
   },
 

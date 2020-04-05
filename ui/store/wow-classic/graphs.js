@@ -10,7 +10,9 @@ export default {
       'graph-value-quantity': {},
       'graph-value-comparison': {},
       'heatmap-value': {},
-      'heapmap-quantity': {}
+      'heapmap-quantity': {},
+      'graph-overview-eu': {},
+      'graph-overview-us': {}
     }
   },
 
