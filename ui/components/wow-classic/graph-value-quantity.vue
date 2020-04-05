@@ -2,7 +2,7 @@
   <module ref="graphValueQuantity">
     <template slot="header">
       <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
-      <h3>Market Value / Quantity</h3>
+      <h3>{{ title || '' }} Market Value / Quantity</h3>
     </template>
     <template slot="body">
       <div class="graph-wrapper">
@@ -47,13 +47,15 @@ export default {
     moduleTime
   },
 
+  props: ['storage', 'title'],
+
   computed: {
     timerange () {
-      return this.$store.state.graphs.storage['graph-value-quantity'].timerange
+      return this.$store.state.graphs.storage[this.storage].timerange
     },
 
     data () {
-      const data = this.$store.state.graphs.storage['graph-value-quantity'].data.map((d) => {
+      const data = this.$store.state.graphs.storage[this.storage].data.map((d) => {
         return {
           x: d.scannedAt,
           value1: d.marketValue,
@@ -94,7 +96,7 @@ export default {
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
       this.$refs.graphValueQuantity.$refs.progress.start()
-      await this.$store.dispatch('refetchGraphData', { graph: 'graph-value-quantity', timerange })
+      await this.$store.dispatch('refetchGraphData', { graph: this.storage, timerange })
       this.$refs.graphValueQuantity.$refs.progress.finish()
     }
   }
