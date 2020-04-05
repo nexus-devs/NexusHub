@@ -5,7 +5,7 @@
       <h3>Item Stats</h3>
     </template>
     <template slot="body">
-      <div class="item-data row">
+      <div v-if="!global" class="item-data row">
         <div class="col">
           <span>Last Updated</span>
         </div>
@@ -14,8 +14,68 @@
         </div>
       </div>
 
+      <!-- EU Market Value -->
+      <div v-if="global && globalStats.EU" class="item-data row">
+        <div class="col">
+          <span>EU Market Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ parsePrice(globalStats.EU.marketValue) }}
+          </span>
+          <span :class="{ negative: diff.global.EU.marketValue < 0 }" class="data-price-diff">
+            <indicator :diff="diff.global.EU.marketValue" /> {{ Math.abs(diff.global.EU.marketValue) }}%
+          </span>
+        </div>
+      </div>
+
+      <!-- EU Quantity -->
+      <div v-if="global && globalStats.EU" class="item-data row">
+        <div class="col">
+          <span>EU Quantity (Avg)</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ globalStats.EU.quantity }}
+          </span>
+          <span :class="{ negative: diff.global.EU.quantity < 0 }" class="data-price-diff">
+            <indicator :diff="diff.global.EU.quantity" /> {{ Math.abs(diff.global.EU.quantity) }}%
+          </span>
+        </div>
+      </div>
+
+      <!-- US Market Value -->
+      <div v-if="global && globalStats.US" class="item-data row">
+        <div class="col">
+          <span>US Market Value</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ parsePrice(globalStats.US.marketValue) }}
+          </span>
+          <span :class="{ negative: diff.global.US.marketValue < 0 }" class="data-price-diff">
+            <indicator :diff="diff.global.US.marketValue" /> {{ Math.abs(diff.global.US.marketValue) }}%
+          </span>
+        </div>
+      </div>
+
+      <!-- US Quantity -->
+      <div v-if="global && globalStats.US" class="item-data row">
+        <div class="col">
+          <span>US Quantity (Avg)</span>
+        </div>
+        <div class="col-2">
+          <span class="data-price">
+            {{ globalStats.US.quantity }}
+          </span>
+          <span :class="{ negative: diff.global.US.quantity < 0 }" class="data-price-diff">
+            <indicator :diff="diff.global.US.quantity" /> {{ Math.abs(diff.global.US.quantity) }}%
+          </span>
+        </div>
+      </div>
+
       <!-- Market Value -->
-      <div v-if="item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats.current" class="item-data row">
         <div class="col">
           <span>Market Value</span>
         </div>
@@ -42,7 +102,7 @@
       </div>
 
       <!-- Historical Value -->
-      <div v-if="item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats.current" class="item-data row">
         <div class="col">
           <span>Historical Value</span>
         </div>
@@ -69,7 +129,7 @@
       </div>
 
       <!-- Minimum Buyout -->
-      <div v-if="item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats.current" class="item-data row">
         <div class="col">
           <span>Minimum Buyout</span>
         </div>
@@ -99,7 +159,7 @@
       </div>
 
       <!-- Quantity -->
-      <div v-if="item.stats.current" class="item-data row">
+      <div v-if="!global && item.stats.current" class="item-data row">
         <div class="col">
           <span>Quantity</span>
         </div>
@@ -211,8 +271,21 @@ export default {
     stats () {
       return this.item.stats
     },
+    globalStatsPrevious () {
+      const [EU] = this.$store.state.graphs.storage['graph-overview-eu'].data.slice(-2, -1)
+      const [US] = this.$store.state.graphs.storage['graph-overview-us'].data.slice(-2, -1)
+      return { EU, US }
+    },
+    globalStats () {
+      const [EU] = this.$store.state.graphs.storage['graph-overview-eu'].data.slice(-1)
+      const [US] = this.$store.state.graphs.storage['graph-overview-us'].data.slice(-1)
+      return { EU, US }
+    },
     diff () {
-      const percentage = (property, main = this.stats.current, secondary = this.stats.previous) => {
+      const percentage = (property, main, secondary) => {
+        if (!main) main = this.stats ? this.stats.current : null
+        if (!secondary) secondary = this.stats ? this.stats.previous : null
+
         if (!main || !secondary || !secondary[property]) return 0
         const value = main[property] - secondary[property]
         return Math.round((value / secondary[property] * 100) * 1e2) / 1e2 // Round to 2 digits
@@ -227,6 +300,16 @@ export default {
           minBuyout: percentage('minBuyout', this.comparison.current, this.stats.current),
           quantity: percentage('quantity', this.comparison.current, this.stats.current),
           historicalValue: percentage('historicalValue', this.comparison.current, this.stats.current)
+        } : null,
+        global: this.global ? {
+          EU: {
+            marketValue: percentage('marketValue', this.globalStats.EU, this.globalStatsPrevious.EU),
+            quantity: percentage('quantity', this.globalStats.EU, this.globalStatsPrevious.EU)
+          },
+          US: {
+            marketValue: percentage('marketValue', this.globalStats.US, this.globalStatsPrevious.US),
+            quantity: percentage('quantity', this.globalStats.US, this.globalStatsPrevious.US)
+          }
         } : null
       }
     },

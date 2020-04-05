@@ -39,12 +39,12 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item
-    const slug = route.params.slug || 'anathema-alliance'
+    const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
     if ((store.state.items.item.itemId !== parseInt(item) && store.state.items.item.uniqueName !== item) || store.state.items.item.server !== slug) {
       const parallel = []
-      parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug ? `${slug}/` : ''}${item}`))
+      parallel.push(this.$cubic.get(`/wow-classic/v1${slug ? `/items/${slug}/` : '/item/'}${item}`))
 
       // Fetch item comparison if item got changed and there is a comparison set
       if (slug && store.state.items.itemComparison.server.slug && store.state.items.item.server === slug) {
