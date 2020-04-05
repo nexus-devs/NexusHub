@@ -39,7 +39,7 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item
-    const slug = route.params.slug
+    const slug = route.params.slug || 'anathema-alliance'
 
     // Only fetch item data if we actually have a new item or new server
     if ((store.state.items.item.itemId !== parseInt(item) && store.state.items.item.uniqueName !== item) || store.state.items.item.server !== slug) {

@@ -73,11 +73,11 @@ export default {
 
   async asyncData ({ store, route }) {
     const item = route.params.item
-    const slug = route.params.slug
+    const slug = route.params.slug || 'anathema-alliance'
 
     // Only fetch item data if we actually have a new item or new server
     if ((store.state.graphs.itemId !== parseInt(item) && store.state.graphs.uniqueName !== item) || store.state.graphs.slug !== slug) {
-      const region = store.state.servers.activeServer.region
+      const region = store.state.servers.activeServer.region || 'eu'
 
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
