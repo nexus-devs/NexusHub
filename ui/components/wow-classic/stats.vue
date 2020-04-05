@@ -271,15 +271,22 @@ export default {
     stats () {
       return this.item.stats
     },
-    globalStatsPrevious () {
-      const [EU] = this.$store.state.graphs.storage['graph-overview-eu'].data.slice(-2, -1)
-      const [US] = this.$store.state.graphs.storage['graph-overview-us'].data.slice(-2, -1)
+    globalGraphData () {
+      const EU = this.$store.state.graphs.storage['graph-overview-eu'].data
+      const US = this.$store.state.graphs.storage['graph-overview-us'].data
       return { EU, US }
     },
+    globalStatsPrevious () {
+      return {
+        EU: this.globalGraphData.EU ? this.globalGraphData.EU.slice(-2, -1)[0] : undefined,
+        US: this.globalGraphData.US ? this.globalGraphData.US.slice(-2, -1)[0] : undefined
+      }
+    },
     globalStats () {
-      const [EU] = this.$store.state.graphs.storage['graph-overview-eu'].data.slice(-1)
-      const [US] = this.$store.state.graphs.storage['graph-overview-us'].data.slice(-1)
-      return { EU, US }
+      return {
+        EU: this.globalGraphData.EU ? this.globalGraphData.EU.slice(-1)[0] : undefined,
+        US: this.globalGraphData.US ? this.globalGraphData.US.slice(-1)[0] : undefined
+      }
     },
     diff () {
       const percentage = (property, main, secondary) => {
