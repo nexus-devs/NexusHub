@@ -18,16 +18,14 @@ async function monitor () {
 
   if (!TSMReq.tsmKey) return
 
-  // Kill service if it gets stuck (2 hours without being done). Docker will auto-restart it.
+  // Kill service if it gets stuck (10 minutes without activity). Docker will auto-restart it.
   setInterval(() => {
-    if (prod && new Date() - lastDone > 1000 * 60 * 60 * 2) {
+    if (prod && new Date() - lastDone > 1000 * 60 * 10) {
       process.exit()
     }
-  }, 1000 * 60 * 60 * 2)
+  }, 1000 * 60 * 10)
 
   while (true) {
-    const timer = new Date()
-
     const reqRealms = await TSMReq.get('/realms')
     if (!reqRealms.success) console.log(`Could not fetch realms: ${reqRealms.error}`)
     else {
@@ -42,7 +40,7 @@ async function monitor () {
           const scans = await TSMReq.get(`/realm/${realm.master_slug}/scans`)
           if (!scans.success) {
             console.log(`Could not fetch scans for ${realm.master_slug}: ${reqRealms.error}`)
-            break
+            continue
           }
 
           // Sort TSM scans by date and add them
@@ -55,10 +53,12 @@ async function monitor () {
 
             // Await to avoid overloading the TSM servers
             await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
+            lastDone = new Date()
           }
           console.log('Inserting current data...')
           await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
 
+          lastDone = new Date()
           console.log('...done\n')
 
           // Wait 5 seconds before processing next realm
@@ -69,9 +69,6 @@ async function monitor () {
         } else await sleep(1000 * 5)
       }
     }
-
-    if (prod) console.log(`Done in ${new Date() - timer}ms`)
-    lastDone = new Date()
   }
 }
 
