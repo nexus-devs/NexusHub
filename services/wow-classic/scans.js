@@ -5,6 +5,7 @@
 const getClient = require('../getClient.js')
 const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
 const prod = process.env.NODE_ENV === 'production'
+const staging = process.env.NEXUS_STAGING
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 if (prod) {
   process.on('uncaughtException', () => process.exit(1))
@@ -35,12 +36,19 @@ async function monitor () {
 
         // If there are no scans or the last scan is outdated
         lastScan.scannedAt = lastScan.error ? new Date(0) : new Date(lastScan.scannedAt)
-        const lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
+        let lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
         if (lastScanUnix < realm.last_modified) {
           const scans = await TSMReq.get(`/realm/${realm.master_slug}/scans`)
           if (!scans.success) {
             console.log(`Could not fetch scans for ${realm.master_slug}: ${reqRealms.error}`)
             continue
+          }
+
+          // If staging, only add entries from max 7 days ago
+          if (staging) {
+            lastScanUnix = new Date()
+            lastScanUnix.setDate(lastScanUnix.getDate() - 7)
+            lastScanUnix = Math.floor(lastScanUnix.getTime() / 1000)
           }
 
           // Sort TSM scans by date and add them

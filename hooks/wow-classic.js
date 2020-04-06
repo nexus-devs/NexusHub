@@ -1,6 +1,7 @@
 const mongodb = require('mongodb').MongoClient
 const _ = require('lodash')
 const TSMRequest = require(`${process.cwd()}/api/lib/tsm-request.js`)
+const staging = process.env.NEXUS_STAGING
 
 class Hook {
   /**
@@ -10,7 +11,8 @@ class Hook {
     cubic.log.verbose('Core      | verifying wow-classic indices')
     const config = cubic.config.api
     const db = await mongodb.connect(config.mongoUrl, { useNewUrlParser: true })
-    const verify = async (db, col, index) => {
+    const verify = async (db, col, index, expire = false) => {
+      if (expire && staging) await db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex({ scannedAt: 1 }, { expireAfterSeconds: 60 * 60 * 24 * 7 })
       return db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex(index, { background: true })
     }
 
@@ -18,19 +20,19 @@ class Hook {
     await verify(db, 'scans', {
       slug: 1,
       scannedAt: -1
-    })
+    }, true)
     await verify(db, 'scanData', { // Regular price fetching
       itemId: 1,
       slug: 1,
       scannedAt: -1
-    })
+    }, true)
 
     // Region Data
     await verify(db, 'regionData', {
       itemId: 1,
       scannedAt: -1,
       slug: 1
-    })
+    }, true)
 
     // Item Data
     await verify(db, 'items', {
