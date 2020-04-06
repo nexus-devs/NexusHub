@@ -34,7 +34,7 @@ class Current extends Endpoint {
     const [stats, oldData] = await Promise.all(parallel)
 
     if (!stats.success) {
-      return res.send(`Rejected. Error from TSM: ${stats.error}`)
+      return res.status(500).send(`Rejected. Error from TSM: ${stats.error}`)
     }
 
     parallel = []

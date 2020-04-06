@@ -45,7 +45,7 @@ class Scan extends Endpoint {
     const TSMReq = new TSMRequest()
     const scan = await TSMReq.get(`/realm/${slug}/scan/${scanId}`)
     if (!scan.success) {
-      return res.send(`Rejected. Error from TSM: ${scan.error}`)
+      return res.status(500).send(`Rejected. Error from TSM: ${scan.error}`)
     }
 
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
