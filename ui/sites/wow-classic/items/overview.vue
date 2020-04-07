@@ -134,10 +134,10 @@ export default {
     const serverPretty = `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
 
     return {
-      title: `${this.item.name} Prices on ${serverPretty} · NexusHub`,
+      title: server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
       meta: meta({
-        title: `${this.item.name} on NexusHub`,
-        description: `${this.item.name} prices on the World of Warcaft Classic Auction House for ${serverPretty}`,
+        title: `${this.item.name} Prices on NexusHub`,
+        description: server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
         image: `${this.item.icon}`
       })
     }
