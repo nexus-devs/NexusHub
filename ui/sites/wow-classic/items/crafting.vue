@@ -85,7 +85,7 @@ export default {
 
     // Only fetch item data if we actually have a new item or new server
     if ((store.state.crafting.itemId !== parseInt(item) && store.state.crafting.uniqueName !== item) || store.state.crafting.slug !== slug) {
-      const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting/${slug}/${item}`)
+      const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting${slug ? `/${slug}` : ''}/${item}`)
       store.commit('setCrafting', craftingData)
     }
     if (!store.state.crafting.professions.length) {
@@ -108,7 +108,7 @@ export default {
         entry.itemId = this.item.itemId
         entry.name = this.item.name
         entry.icon = this.item.icon
-        entry.marketValue = this.item.stats.current ? this.item.stats.current.marketValue : null
+        entry.marketValue = this.item.stats && this.item.stats.current ? this.item.stats.current.marketValue : null
         entry.uniqueName = this.item.uniqueName
       }
 
