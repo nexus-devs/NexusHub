@@ -72,8 +72,8 @@ async function monitor () {
           // Wait 5 seconds before processing next realm
           // The worst case (~8 seconds per realm) is only 36.4 minutes, well in the TSM update interval (>=35 min)
           // If there are no scans, all realms take 14 minutes
-          // If there are >= 5 scans being inserted, assume that the server has some catching up to do and ignore the delay
-          if (scans.data.length < 5) await sleep(1000 * 5)
+          // If there are >= 3 scans being inserted, assume that the server has some catching up to do and ignore the delay
+          if (scans.data.length < 3) await sleep(1000 * 5)
         } else await sleep(1000 * 5)
       }
     }
