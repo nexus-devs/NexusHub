@@ -8,8 +8,14 @@ const prod = process.env.NODE_ENV === 'production'
 const staging = process.env.NEXUS_STAGING
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 if (prod) {
-  process.on('uncaughtException', () => process.exit(1))
-  process.on('unhandledRejection', () => process.exit(1))
+  process.on('uncaughtException', (err) => {
+    console.log(err)
+    process.exit(1)
+  })
+  process.on('unhandledRejection', (err) => {
+    console.log(err)
+    process.exit(1)
+  })
 }
 
 async function monitor () {
@@ -18,6 +24,8 @@ async function monitor () {
   const TSMReq = new TSMRequest()
 
   if (!TSMReq.tsmKey) return
+
+  if (staging) console.log('Starting in staging mode (only retrieve the last 7 days)')
 
   // Kill service if it gets stuck (10 minutes without activity). Docker will auto-restart it.
   setInterval(() => {
