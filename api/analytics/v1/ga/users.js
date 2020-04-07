@@ -7,7 +7,7 @@ class Index extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Provides number of monthly users as tracked by Google Analytics.'
-    this.schema.response = Number
+    this.schema.response = String
     this.schema.limit = {
       interval: 20000,
       maxInInterval: 5
