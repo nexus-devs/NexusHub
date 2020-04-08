@@ -2,6 +2,7 @@ const Endpoint = require('cubic-api/endpoint')
 const { google } = require('googleapis')
 const analytics = google.analyticsreporting({ version: 'v4' })
 const options = require(`${process.cwd()}/config/ga/nexushub-ga-user.js`)
+const fs = require('fs')
 
 class Index extends Endpoint {
   constructor (options) {
@@ -28,7 +29,8 @@ class Index extends Endpoint {
     const game = req.query.game.toLowerCase()
 
     try {
-      const auth = new google.auth.JWT(options.email, null, options.key, ['https://www.googleapis.com/auth/analytics.readonly'])
+      const key = fs.readFileSync(options.keyFile, 'utf-8')
+      const auth = new google.auth.JWT(options.email, null, key, ['https://www.googleapis.com/auth/analytics.readonly'])
       await auth.authorize()
       const ga = await analytics.reports.batchGet({
         auth,
