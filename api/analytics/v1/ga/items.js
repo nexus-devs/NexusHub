@@ -28,7 +28,7 @@ class Index extends Endpoint {
     const game = req.query.game.toLowerCase()
 
     try {
-      const auth = new google.auth.JWT(options.email, options.key, null, ['https://www.googleapis.com/auth/analytics.readonly'])
+      const auth = new google.auth.JWT(options.email, null, options.key, ['https://www.googleapis.com/auth/analytics.readonly'])
       await auth.authorize()
       const ga = await analytics.reports.batchGet({
         auth,
@@ -61,7 +61,7 @@ class Index extends Endpoint {
       res.send(views)
       this.cache(views, 60 * 60)
     } catch (err) {
-      res.send([{ path: 'Placeholder', views: 0 }]) // Placeholder if auth fails (which it would on dev builds)
+      res.send([{ path: 'Placeholder', views: 0, err }]) // Placeholder if auth fails (which it would on dev builds)
     }
   }
 }

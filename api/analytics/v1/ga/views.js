@@ -16,7 +16,7 @@ class Index extends Endpoint {
 
   async main (req, res) {
     try {
-      const auth = new google.auth.JWT(options.email, options.key, null, ['https://www.googleapis.com/auth/analytics.readonly'])
+      const auth = new google.auth.JWT(options.email, null, options.key, ['https://www.googleapis.com/auth/analytics.readonly'])
       await auth.authorize()
       const ga = await analytics.reports.batchGet({
         auth,
