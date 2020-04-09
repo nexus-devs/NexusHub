@@ -35,7 +35,7 @@
                     </template>
                   </module>
                 </router-link>
-                <router-link to="/wow-classic">
+                <router-link :to="`/wow-classic${wowclassicServer}`">
                   <module class="game-module">
                     <template slot="body">
                       <div class="image">
@@ -107,6 +107,12 @@ export default {
           'Please share your feedback and questions, we are very excited to hear how you make use of this new tool!'
         ]
       }
+    }
+  },
+
+  computed: {
+    wowclassicServer () {
+      return this.$cookies.isKey('lastVisitedRealm') ? '/' + this.$cookies.get('lastVisitedRealm') : ''
     }
   },
 
