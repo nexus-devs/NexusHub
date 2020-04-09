@@ -92,7 +92,7 @@ export default {
         else routeSplit.splice(index, 1)
       } else {
         // Insert at last position if landing page, otherwise after second item
-        if (routeSplit.length > 2) routeSplit.splice(3, 0, server)
+        if (routeSplit.length > 2 && server) routeSplit.splice(3, 0, server)
         else if (server) routeSplit.push(server)
       }
 
