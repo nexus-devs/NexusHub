@@ -52,8 +52,12 @@ class Sitemap {
     console.log('* Verified wow-classic item list!')
     await wowhooks.verifyServerList()
     console.log('* Verified wow-classic server list!')
-    await wowhooks.verifyContentPhases()
-    console.log('* Verified wow-classic content phases!')
+
+    // Clean up old sitemaps
+    const sitemapRegex = /sitemap[.]xml$|sitemap[0-9]*[.]txt$/
+    fs.readdirSync(`${cubic.config.ui.api.publicPath}/`)
+      .filter(f => sitemapRegex.test(f))
+      .map(f => fs.unlinkSync(`${cubic.config.ui.api.publicPath}/${f}`))
 
     await this.generateStaticPages()
     await this.generateWarframePages()
@@ -61,9 +65,10 @@ class Sitemap {
 
     if (this.sitemapCounter > 0) {
       fs.writeFileSync(`${cubic.config.ui.api.publicPath}/sitemap${this.sitemapCounter}.txt`, this.sitemap.join('\n'))
-    }
-    this.generateSitemapIndex()
-    console.log(`* Saved ${this.sitemapCounter} sitemaps with ${this.sitemapCounter * 50000 + this.sitemap.length} entries.`)
+      this.generateSitemapIndex()
+    } else fs.writeFileSync(`${cubic.config.ui.api.publicPath}/sitemap.txt`, this.sitemap.join('\n'))
+
+    console.log(`* Saved ${this.sitemapCounter + 1} sitemaps with ${this.sitemapCounter * 50000 + this.sitemap.length} entries.`)
   }
 
   /**
@@ -104,10 +109,10 @@ class Sitemap {
       this.pushToSitemap(`https://nexushub.co/wow-classic/${server.slug}`)
       this.pushToSitemap(`https://nexushub.co/wow-classic/deals/${server.slug}`)
       this.pushToSitemap(`https://nexushub.co/wow-classic/deals/recipes/${server.slug}`)
-      for (const item of itemsWow) {
-        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.uniqueName}`)
-        this.pushToSitemap(`https://nexushub.co/wow-classic/items/${server.slug}/${item.uniqueName}/crafting`)
-      }
+    }
+    for (const item of itemsWow) {
+      this.pushToSitemap(`https://nexushub.co/wow-classic/items/${item.uniqueName}`)
+      this.pushToSitemap(`https://nexushub.co/wow-classic/items/${item.uniqueName}/crafting`)
     }
   }
 
