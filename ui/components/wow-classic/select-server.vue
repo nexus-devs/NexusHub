@@ -7,7 +7,7 @@
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <router-link :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="toggle()">
+        <router-link :disabled="disableGlobal" :event="!disableGlobal ? 'click' : ''" :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="toggle()">
           Global
         </router-link>
 
@@ -75,6 +75,10 @@ export default {
         EU: this.$store.state.servers.serverlist.filter(s => s.region === 'EU'),
         US: this.$store.state.servers.serverlist.filter(s => s.region === 'US')
       }
+    },
+    disableGlobal () { // Some pages are not meant to be accessed globally
+      const routeSplit = this.$route.fullPath.split('/')
+      return routeSplit[2] === 'deals'
     }
   },
 
@@ -155,6 +159,10 @@ export default {
     }
     span:not(.active), a:not(.active) {
       color: $color-font-body;
+    }
+    a[disabled] {
+      pointer-events: none;
+      color: $color-subtle;
     }
   }
   &:not(.active) {
