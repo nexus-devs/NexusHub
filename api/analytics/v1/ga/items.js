@@ -41,6 +41,7 @@ class Index extends Endpoint {
               startDate: '1daysAgo',
               endDate: 'today'
             }],
+            pageSize: 2000,
             metrics: [{ expression: 'ga:pageviews' }],
             orderBys: [{ fieldName: 'ga:pageviews', sortOrder: 'DESCENDING' }],
             dimensions: [{ name: 'ga:pagePath' }],
