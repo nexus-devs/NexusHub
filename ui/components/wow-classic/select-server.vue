@@ -18,10 +18,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
-            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="setCookie(s.slug + '-horde'); toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </router-link>
           </div>
@@ -34,10 +34,10 @@
                 class="server" @click="selectServer(s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
-            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
               <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
             </router-link>
-            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="toggle();">
+            <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="setCookie(s.slug + '-horde'); toggle();">
               <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
             </router-link>
           </div>
@@ -95,6 +95,9 @@ export default {
     selectServer (server) {
       if (server === this.selected.server) this.selected.server = ''
       else this.selected.server = server.slug
+    },
+    setCookie (server) {
+      this.$cookies.set('lastVisitedRealm', server, '7d')
     }
   }
 }
