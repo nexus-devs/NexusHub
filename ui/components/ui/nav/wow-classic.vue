@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link :to="returnToOverview ? `/wow-classic${activeServer.slug ? `/${activeServer.slug}` : ''}` : '/'" exact>
+      <router-link :to="logoReturnTo" exact>
         <img src="/img/brand/nexushub-logo-typeface-wow-classic.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
@@ -62,10 +62,13 @@ export default {
     activeServer () {
       return this.$store.state.servers.activeServer
     },
-    returnToOverview () {
+    logoReturnTo () {
+      const slug = this.activeServer.slug
       const routeSplit = this.$route.fullPath.split('/')
       if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
-      return routeSplit.length > 2
+      if (slug && routeSplit.length === 3) return `/wow-classic`
+      else if (routeSplit.length > 2) return `/wow-classic${slug ? `/${slug}` : ''}`
+      else return '/'
     }
   },
 
