@@ -37,6 +37,9 @@ export default {
       const itemId = state.itemId
       const slug = state.slug
 
+      console.log(slug)
+      console.log(regional)
+
       const parallel = []
       if (slug) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`))
       if (regional) parallel.push(this.$cubic.get(`/wow-classic/v1/items/${regional}/${itemId}/prices?region=true&timerange=${timerange}`))

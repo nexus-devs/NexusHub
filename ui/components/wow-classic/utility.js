@@ -16,44 +16,6 @@ export default {
     return string
   },
 
-  // Pushes url with correct region + server
-  pushUrl (self, url) {
-    self.$router.push(this.formatUrl(self, url))
-  },
-
-  // Formats url with correct region + server
-  formatUrl (self, url) {
-    const params = url.split('?')
-    const routeArgs = params[0].split('/')
-
-    // Insert region and server into route
-    const region = self.$store.state.servers.selectedRegion
-    const server = self.$store.state.servers.selectedServer
-    const faction = self.$store.state.servers.selectedFaction
-    if (region !== 'All Regions') {
-      routeArgs.splice(3, 0, region.toLowerCase())
-      if (server !== 'All Servers') {
-        routeArgs.splice(4, 0, this.serverSlug(server))
-        if (faction !== 'All Factions') routeArgs.splice(5, 0, faction.toLowerCase())
-      }
-    }
-
-    params[0] = routeArgs.join('/')
-    return params.join('?')
-  },
-
-  // Changes server name to server slug
-  serverSlug (server) {
-    // Hotfix for russian server slugs
-    if (server === 'Вестник Рока') server = 'Doomsayer'
-    else if (server === 'Хроми') server = 'Chromie'
-    else if (server === 'Пламегор') server = 'Flamegor'
-    else if (server === 'Рок-Делар') server = 'Rhokdelar'
-    else if (server === 'Змейталак') server = 'Wyrmthalak'
-
-    return server.toLowerCase().replace(/\s/g, '-').replace(/'/g, '')
-  },
-
   // Edit and interpolate data for regional graph
   formatRegionalData (itemData, regionalData) {
     const msH = 1000 * 60 * 60

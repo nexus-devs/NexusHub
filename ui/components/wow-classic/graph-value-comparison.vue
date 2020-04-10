@@ -48,7 +48,7 @@ export default {
     },
 
     region () {
-      return this.$store.state.servers.region
+      return this.$store.state.servers.activeServer.region
     },
 
     data () {
