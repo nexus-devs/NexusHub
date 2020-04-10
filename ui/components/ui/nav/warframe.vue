@@ -1,7 +1,7 @@
 <template>
   <nav class="row">
     <div class="col nav-l">
-      <router-link to="/warframe" exact>
+      <router-link :to="logoReturnTo" exact>
         <img src="/img/brand/nexushub-logo-typeface.svg" alt="Nexushub Logo" class="logo ico-h-20">
       </router-link>
     </div>
@@ -30,6 +30,15 @@ export default {
   components: {
     notifications,
     search
+  },
+
+  computed: {
+    logoReturnTo () {
+      const routeSplit = this.$route.fullPath.split('/')
+      if (!routeSplit[routeSplit.length - 1]) routeSplit.pop() // Remove trailing slash
+      if (routeSplit.length > 2) return '/warframe'
+      else return '/'
+    }
   },
 
   mounted () {
