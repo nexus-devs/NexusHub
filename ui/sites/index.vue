@@ -35,7 +35,7 @@
                     </template>
                   </module>
                 </router-link>
-                <router-link :to="`/wow-classic${wowclassicServer}`">
+                <router-link :to="`/wow-classic${wowClassicServer}`">
                   <module class="game-module">
                     <template slot="body">
                       <div class="image">
@@ -106,18 +106,15 @@ export default {
           'You can access the site on desktop and mobile via <a href="https://wow-classic.nexushub.co/">wow-classic.nexushub.co</a> or <a href="https://nexushub.co/wow-classic">nexushub.co/wow-classic</a>',
           'Please share your feedback and questions, we are very excited to hear how you make use of this new tool!'
         ]
-      }
-    }
-  },
-
-  computed: {
-    wowclassicServer () {
-      return this.$cookies.isKey('lastVisitedRealm') ? '/' + this.$cookies.get('lastVisitedRealm') : ''
+      },
+      wowClassicServer: ''
     }
   },
 
   mounted () {
     window.addEventListener('scroll', this.updateOnScroll)
+
+    if (this.$cookies.isKey('lastVisitedRealm')) this.wowClassicServer = '/' + this.$cookies.get('lastVisitedRealm')
   },
 
   beforeDestroy () {

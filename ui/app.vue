@@ -14,6 +14,7 @@
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import VueTouch from 'vue-touch-hotfix'
+import VueCookies from 'vue-cookies'
 import bottom from 'src/components/ui/footer.vue'
 import getTheme from 'src/components/_theme.js'
 import status from 'src/components/ui/status.vue'
@@ -48,6 +49,7 @@ export default {
 
   beforeCreate () {
     Vue.use(VueTouch)
+    Vue.use(VueCookies)
     this.$store.commit('setActiveGame', this.$route.fullPath.split('/')[1])
   },
 

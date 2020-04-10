@@ -7,7 +7,7 @@
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <router-link :disabled="disableGlobal" :event="!disableGlobal ? 'click' : ''" :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="toggle()">
+        <router-link :disabled="disableGlobal" :event="!disableGlobal ? 'click' : ''" :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="setCookie(''); toggle()">
           Global
         </router-link>
 
@@ -97,7 +97,8 @@ export default {
       else this.selected.server = server.slug
     },
     setCookie (server) {
-      this.$cookies.set('lastVisitedRealm', server, '7d')
+      if (server) this.$cookies.set('lastVisitedRealm', server, '7d')
+      else this.$cookies.remove('lastVisitedRealm')
     }
   }
 }

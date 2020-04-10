@@ -12,7 +12,7 @@ class Index extends Endpoint {
     const cookies = new Cookies(req, res)
     const lastVisitedRealm = cookies.get('lastVisitedRealm')
 
-    if (lastVisitedRealm && !req.params.slug) res.status(301).redirect(`/wow-classic/${lastVisitedRealm}`)
+    if (lastVisitedRealm && !req.params.slug) res.status(307).redirect(`/wow-classic/${lastVisitedRealm}`)
     else super.main(req, res)
   }
 }
