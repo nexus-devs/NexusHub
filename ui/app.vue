@@ -13,8 +13,8 @@
 <script>
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
-import VueTouch from 'vue-touch-hotfix'
 import VueCookies from 'vue-cookies'
+import VueTouch from 'vue-touch-hotfix'
 import bottom from 'src/components/ui/footer.vue'
 import getTheme from 'src/components/_theme.js'
 import status from 'src/components/ui/status.vue'
