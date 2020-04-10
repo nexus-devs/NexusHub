@@ -187,7 +187,7 @@ export default {
       items.sort((a, b) => b.views - a.views)
 
       const parallel = []
-      for (const item of items.slice(0, 6)) parallel.push(this.$cubic.get(`/wow-classic/v1/item/${item.uniqueName}`))
+      for (const item of items.slice(0, 8)) parallel.push(this.$cubic.get(`/wow-classic/v1/item/${item.uniqueName}`))
       const trendingItems = (await Promise.all(parallel)).map((item, index) => {
         return { ...item, viewPercentage: Math.round((items[index].views / viewSum) * 10000) / 10000 }
       })
@@ -576,7 +576,7 @@ header {
       height: auto; // Safari fix
 
       &.trending {
-        flex-basis: 30%;
+        flex-basis: 20%;
       }
 
       @media (max-width: $breakpoint-s) {
