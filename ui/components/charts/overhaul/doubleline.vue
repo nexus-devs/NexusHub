@@ -6,6 +6,7 @@
 
 <script>
 import * as d3 from 'd3'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   props: ['data'],
@@ -19,9 +20,9 @@ export default {
 
     // Get dimensions
     const padding = {
-      top: 5, // Font size compensation
+      top: 0,
       bottom: 20,
-      left: 40,
+      left: 50,
       right: 5
     }
     const boundingBox = svg.node().getBoundingClientRect()
@@ -91,7 +92,7 @@ export default {
         focus.attr('transform', `translate(${xScale(d.x)}, ${yScale(d.y1)})`)
         tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale(d.y1) - 32}px;`)
         tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
-        tooltipValue1.text(d.y1)
+        tooltipValue1.text(utility.parsePrice(d.y1))
       })
   }
 }
