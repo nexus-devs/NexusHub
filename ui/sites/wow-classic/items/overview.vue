@@ -26,8 +26,8 @@
             <span>Click on the graphs to see more detailed information.</span>
           </div>
           <div class="row-margin">
-            <graph-market-value-quantity class="col-b" />
-            <graph-market-value-quantity class="col-b" />
+            <graph-market-value-quantity class="col-b graph" />
+            <graph-market-value-quantity class="col-b graph" />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
         </div>
@@ -70,7 +70,7 @@ export default {
       graph: 'marketValue-quantity',
       data: prices.data.map(p => {
         return {
-          x: new Date(p.scannedAt),
+          x: p.scannedAt,
           y1: p.marketValue,
           y2: p.quantity
         }
@@ -159,15 +159,6 @@ export default {
 
 .module {
   max-width: 450px;
-}
-.graph {
-  max-width: 100%;
-  min-height: 300px;
-  flex-basis: 60%;
-
-  /deep/ .body {
-    height: 100%;
-  }
 }
 
 .btn-subtle {
