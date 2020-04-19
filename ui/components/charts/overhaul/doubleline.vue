@@ -63,8 +63,8 @@ export default {
     focus.append('circle').attr('r', 3)
 
     // Create tooltip content
-    const tooltipDate = tooltip.append('div')
-    const tooltipValue1 = tooltip.append('div')
+    const tooltipDate = tooltip.append('div').attr('class', 'tooltip-date')
+    const tooltipValue1 = tooltip.append('div').attr('class', 'tooltip-value')
 
     // Create overlay for tooltip
     chart.append('rect')
@@ -88,7 +88,7 @@ export default {
 
         focus.attr('transform', `translate(${xScale(d.x)}, ${yScale(d.y1)})`)
         tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale(d.y1)}px;`)
-        tooltipDate.text(d3.timeFormat('%d. %b')(d.x))
+        tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
         tooltipValue1.text(d.y1)
       })
   }
@@ -117,6 +117,7 @@ svg {
   pointer-events: all;
 }
 /deep/ .tooltip {
+  white-space: nowrap;
   z-index: 1;
   padding: 10px 12px;
   position: absolute;
@@ -126,6 +127,12 @@ svg {
   @include shadow-1;
   border-radius: 2px;
   font-size: 1em;
+
+  .tooltip-date {
+    color: $color-font-paragraph;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
 }
 /deep/ .focus circle {
   fill: #e0b534;
