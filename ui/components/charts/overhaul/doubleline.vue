@@ -19,10 +19,10 @@ export default {
 
     // Get dimensions
     const padding = {
-      top: 1, // Stroke width compensator
+      top: 5, // Font size compensation
       bottom: 20,
       left: 40,
-      right: 10
+      right: 5
     }
     const boundingBox = svg.node().getBoundingClientRect()
     const height = boundingBox.height - padding.top - padding.bottom
@@ -32,9 +32,11 @@ export default {
     const chart = svg.append('g').attr('transform', `translate(${padding.left}, ${padding.top})`)
 
     // Create scales
+    const yExtents = d3.extent(data, d => d.y1)
+    const yPadding = Math.round((yExtents[1] - yExtents[0]) / 6)
     const yScale = d3.scaleLinear()
       .range([height, 0])
-      .domain(d3.extent(data, d => d.y1))
+      .domain([yExtents[0] - yPadding < 0 ? 0 : yExtents[0] - yPadding, yExtents[1] + yPadding])
     const xScale = d3.scaleTime()
       .range([0, width])
       .domain(d3.extent(data, d => d.x))
@@ -42,11 +44,11 @@ export default {
     // Create axes
     chart.append('g') // Y1 left axis
       .attr('class', 'axis')
-      .call(d3.axisLeft(yScale).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5))
+      .call(d3.axisLeft(yScale).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5).tickSizeOuter(0))
     chart.append('g') // X axis
       .attr('transform', `translate(0, ${height})`)
       .attr('class', 'axis')
-      .call(d3.axisBottom(xScale).ticks(7).tickFormat(d3.timeFormat('%d. %b')))
+      .call(d3.axisBottom(xScale).ticks(7).tickFormat(d3.timeFormat('%d. %b')).tickSize(4).tickSizeOuter(0))
 
     // Create lines
     chart.append('path')
