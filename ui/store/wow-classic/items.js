@@ -12,7 +12,10 @@ export default {
       current: null,
       previous: null
     },
-    timerange: 7
+    timerange: 7,
+    graphs: {
+      'marketValue-quantity': {}
+    }
   },
 
   mutations: {
@@ -24,6 +27,9 @@ export default {
       state.itemComparison.current = item.stats.current
       state.itemComparison.previous = item.stats.previous
       if (server) state.itemComparison.server = server
+    },
+    setGraph (state, { graph, data }) {
+      state.graphs[graph] = { timerange: state.timerange, data }
     }
   },
 
