@@ -33,11 +33,16 @@ export default {
     const chart = svg.append('g').attr('transform', `translate(${padding.left}, ${padding.top})`)
 
     // Create scales
-    const yExtents = d3.extent(data, d => d.y1)
-    const yPadding = Math.round((yExtents[1] - yExtents[0]) / 6)
-    const yScale = d3.scaleLinear()
+    const yExtents1 = d3.extent(data, d => d.y1)
+    const yPadding1 = Math.round((yExtents1[1] - yExtents1[0]) / 6)
+    const yScale1 = d3.scaleLinear()
       .range([height, 0])
-      .domain([yExtents[0] - yPadding < 0 ? 0 : yExtents[0] - yPadding, yExtents[1] + yPadding])
+      .domain([yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1, yExtents1[1] + yPadding1])
+    const yExtents2 = d3.extent(data, d => d.y2)
+    const yPadding2 = Math.round((yExtents2[1] - yExtents2[0]) / 6)
+    const yScale2 = d3.scaleLinear()
+      .range([height, 0])
+      .domain([yExtents2[0] - yPadding2 < 0 ? 0 : yExtents2[0] - yPadding2, yExtents2[1] + yPadding2])
     const xScale = d3.scaleTime()
       .range([0, width])
       .domain(d3.extent(data, d => d.x))
@@ -45,7 +50,7 @@ export default {
     // Create axes
     chart.append('g') // Y1 left axis
       .attr('class', 'axis')
-      .call(d3.axisLeft(yScale).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5).tickSizeOuter(0))
+      .call(d3.axisLeft(yScale1).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5).tickSizeOuter(0))
     chart.append('g') // X axis
       .attr('transform', `translate(0, ${height})`)
       .attr('class', 'axis')
@@ -54,20 +59,40 @@ export default {
     // Create lines
     chart.append('path')
       .datum(data)
-      .attr('class', 'line')
+      .attr('class', 'line-1')
       .attr('fill', 'none')
       .attr('stroke-width', 1.5)
-      .attr('d', d3.line().x(d => xScale(d.x)).y(d => yScale(d.y1)))
+      .attr('d', d3.line().x(d => xScale(d.x)).y(d => yScale1(d.y1)))
+    chart.append('path')
+      .datum(data)
+      .attr('class', 'line-2')
+      .attr('fill', 'none')
+      .attr('stroke-width', 1.5)
+      .attr('d', d3.line().x(d => xScale(d.x)).y(d => yScale2(d.y2)))
 
     // Create tooltip focus point
-    const focus = chart.append('g')
-      .attr('class', 'focus')
-      .style('display', 'none')
-    focus.append('circle').attr('r', 3)
+    const focusBar = chart.append('g').style('display', 'none')
+    focusBar.append('line')
+      .attr('class', 'focus-bar')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', height)
+      .attr('fill', 'none')
+      .attr('stroke-width', 1)
+    const focusValue1 = chart.append('g').style('display', 'none')
+    focusValue1.append('circle')
+      .attr('r', 3)
+      .attr('class', 'focus-value-1')
+    const focusValue2 = chart.append('g').style('display', 'none')
+    focusValue2.append('circle')
+      .attr('r', 3)
+      .attr('class', 'focus-value-2')
 
     // Create tooltip content
     const tooltipDate = tooltip.append('div').attr('class', 'tooltip-date')
     const tooltipValue1 = tooltip.append('div').attr('class', 'tooltip-value')
+    const tooltipValue2 = tooltip.append('div').attr('class', 'tooltip-value')
 
     // Create overlay for tooltip
     chart.append('rect')
@@ -75,24 +100,31 @@ export default {
       .attr('width', width)
       .attr('height', height)
       .on('mouseover', () => {
-        focus.style('display', null)
+        focusBar.style('display', null)
+        focusValue1.style('display', null)
+        focusValue2.style('display', null)
         tooltip.style('display', null)
       })
       .on('mouseout', () => {
-        focus.style('display', 'none')
+        focusBar.style('display', 'none')
+        focusValue1.style('display', 'none')
+        focusValue2.style('display', 'none')
         tooltip.style('display', 'none')
       })
       .on('mousemove', function () {
         const x0 = xScale.invert(d3.mouse(this)[0])
         const i = bisect(data, x0, 1)
         const d0 = data[i - 1]
-        const d1 = data[i]
+        const d1 = i > data.length - 1 ? data[i - 1] : data[i]
         const d = x0 - d0.x > d1.x - x0 ? d1 : d0
 
-        focus.attr('transform', `translate(${xScale(d.x)}, ${yScale(d.y1)})`)
-        tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale(d.y1) - 32}px;`)
+        focusBar.attr('transform', `translate(${xScale(d.x)}, 0)`)
+        focusValue1.attr('transform', `translate(${xScale(d.x)}, ${yScale1(d.y1)})`)
+        focusValue2.attr('transform', `translate(${xScale(d.x)}, ${yScale2(d.y2)})`)
+        tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale1(d.y1) - 32}px;`)
         tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
         tooltipValue1.text(utility.parsePrice(d.y1))
+        tooltipValue2.text(d.y2)
       })
   }
 }
@@ -112,8 +144,11 @@ svg {
   color: $color-font-body;
   font-size: 0.7em;
 }
-/deep/ .line {
+/deep/ .line-1 {
   stroke: $color-primary-subtle;
+}
+/deep/ .line-2 {
+  stroke: $color-accent-subtle;
 }
 /deep/ .overlay {
   fill: none;
@@ -134,10 +169,18 @@ svg {
   .tooltip-date {
     color: $color-font-paragraph;
     font-size: 0.9em;
-    margin-bottom: 5px;
+  }
+  .tooltip-value {
+    margin-top: 5px;
   }
 }
-/deep/ .focus circle {
-  fill: #e0b534;
+/deep/ .focus-bar {
+  stroke: $color-font-body;
+}
+/deep/ .focus-value-1 {
+  fill: $color-primary-subtle;
+}
+/deep/ .focus-value-2 {
+  fill: $color-accent-subtle;
 }
 </style>
