@@ -87,7 +87,7 @@ export default {
         const d = x0 - d0.x > d1.x - x0 ? d1 : d0
 
         focus.attr('transform', `translate(${xScale(d.x)}, ${yScale(d.y1)})`)
-        tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale(d.y1)}px;`)
+        tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale(d.y1) - 32}px;`)
         tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
         tooltipValue1.text(d.y1)
       })
