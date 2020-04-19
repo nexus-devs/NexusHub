@@ -29,8 +29,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '~src/styles/partials/wow-classic/importer';
+
 .graph {
   max-width: none !important;
+}
+/deep/ .body {
+  height: 200px;
 }
 </style>
