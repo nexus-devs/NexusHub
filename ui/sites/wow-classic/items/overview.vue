@@ -74,7 +74,8 @@ export default {
           y1: p.marketValue,
           y2: p.quantity
         }
-      })
+      }),
+      timerange: 7
     })
   },
 

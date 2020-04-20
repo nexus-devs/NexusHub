@@ -25,6 +25,14 @@ export default {
     }
   },
 
+  watch: {
+    data (newData, oldData) {
+      if (newData.length !== oldData.length) {
+        this.onResize()
+      }
+    }
+  },
+
   mounted () {
     this.svg = d3.select(this.$el).select('svg')
     this.tooltip = d3.select(this.$el).append('div')

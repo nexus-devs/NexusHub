@@ -1,5 +1,5 @@
 <template>
-  <module class="graph">
+  <module ref="graphMarketValueQuantity" class="graph">
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
@@ -19,23 +19,56 @@
     <template slot="body">
       <doubleline :data="data" />
     </template>
+    <template slot="footer">
+      <module-time :days="timerange" :fn="setTimerange" />
+    </template>
   </module>
 </template>
 
 <script>
 import doubleline from 'src/components/charts/overhaul/doubleline.vue'
 import module from 'src/components/ui/module.vue'
+import moduleTime from 'src/components/ui/module-time.vue'
 
 export default {
   components: {
     module,
-    doubleline
+    doubleline,
+    moduleTime
   },
+
   computed: {
+    timerange () {
+      return this.$store.state.items.graphs['marketValue-quantity'].timerange
+    },
     data () {
       return this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
         return { ...d, x: new Date(d.x) }
       })
+    }
+  },
+
+  methods: {
+    async setTimerange (timerange) {
+      if (timerange === this.timerange) return
+      this.$refs.graphMarketValueQuantity.$refs.progress.start()
+
+      const slug = this.$store.state.servers.activeServer.slug
+      const itemId = this.$store.state.items.item.itemId
+      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
+      await this.$store.commit('setGraph', {
+        graph: 'marketValue-quantity',
+        data: item.data.map(p => {
+          return {
+            x: p.scannedAt,
+            y1: p.marketValue,
+            y2: p.quantity
+          }
+        }),
+        timerange
+      })
+
+      this.$refs.graphMarketValueQuantity.$refs.progress.finish()
     }
   }
 }
