@@ -59,6 +59,10 @@ export default {
   justify-content: right;
   flex: 1;
   padding-right: 35px;
+
+  @media (max-width: $breakpoint-s) {
+    padding-right: 0;
+  }
 }
 .legend {
   white-space: nowrap;
