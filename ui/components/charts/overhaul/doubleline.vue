@@ -30,6 +30,11 @@ export default {
     this.tooltip = d3.select(this.$el).append('div')
       .attr('class', 'tooltip')
       .style('display', 'none')
+    this.tooltip.append('div').attr('class', 'tooltip-date')
+    this.tooltip.append('div').attr('class', 'tooltip-value')
+    this.tooltip.append('div').attr('class', 'tooltip-value')
+      .append('span').text('Quantity: ')
+      .append('span').attr('class', 'tooltip-value-2')
     this.bisect = d3.bisector(d => d.x.getTime()).left
 
     window.addEventListener('resize', this.onResize)
@@ -116,12 +121,9 @@ export default {
         .attr('class', 'focus-value-2')
 
       // Create tooltip content
-      const tooltipDate = tooltip.append('div').attr('class', 'tooltip-date')
-      const tooltipValue1 = tooltip.append('div').attr('class', 'tooltip-value')
-      const tooltipValue2Container = tooltip.append('div').attr('class', 'tooltip-value')
-        .append('span')
-        .text('Quantity: ')
-      const tooltipValue2 = tooltipValue2Container.append('span')
+      const tooltipDate = this.tooltip.select('.tooltip-date')
+      const tooltipValue1 = this.tooltip.select('.tooltip-value')
+      const tooltipValue2 = this.tooltip.select('.tooltip-value-2')
 
       // Create overlay for tooltip
       this.chart.append('rect')
