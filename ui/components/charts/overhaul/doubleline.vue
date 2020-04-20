@@ -93,7 +93,10 @@ export default {
     // Create tooltip content
     const tooltipDate = tooltip.append('div').attr('class', 'tooltip-date')
     const tooltipValue1 = tooltip.append('div').attr('class', 'tooltip-value')
-    const tooltipValue2 = tooltip.append('div').attr('class', 'tooltip-value')
+    const tooltipValue2Container = tooltip.append('div').attr('class', 'tooltip-value')
+      .append('span')
+      .text('Quantity: ')
+    const tooltipValue2 = tooltipValue2Container.append('span')
 
     // Create overlay for tooltip
     chart.append('rect')
@@ -175,6 +178,10 @@ svg {
   }
   .tooltip-value {
     margin-top: 5px;
+
+    span {
+      vertical-align: initial;
+    }
   }
 }
 /deep/ .focus-bar {

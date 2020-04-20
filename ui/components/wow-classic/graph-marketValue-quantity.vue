@@ -35,7 +35,4 @@ export default {
 .graph {
   max-width: none !important;
 }
-/deep/ .body {
-  height: 200px;
-}
 </style>
