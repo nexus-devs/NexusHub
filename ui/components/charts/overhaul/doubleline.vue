@@ -47,8 +47,11 @@ export default {
 
   methods: {
     onResize () {
-      this.svg.selectAll('*').remove()
-      this.createChart()
+      // Timeout because certain actions like maximize trigger the resize event before actually maximizing
+      setTimeout(() => {
+        this.svg.selectAll('*').remove()
+        this.createChart()
+      }, 100)
     },
     createChart () {
       const data = this.data
