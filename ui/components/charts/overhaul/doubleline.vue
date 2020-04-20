@@ -170,11 +170,10 @@ svg {
   transition: all 0.05s;
   @include shadow-1;
   border-radius: 2px;
-  font-size: 1em;
+  font-size: 0.9em;
 
   .tooltip-date {
     color: $color-font-paragraph;
-    font-size: 0.9em;
   }
   .tooltip-value {
     margin-top: 5px;
