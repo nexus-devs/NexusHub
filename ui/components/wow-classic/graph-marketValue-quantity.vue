@@ -80,10 +80,16 @@ export default {
 .graph {
   max-width: none !important;
 }
+/deep/ .body {
+  padding: 0;
+  margin: 0;
+  min-height: 200px;
+}
 /deep/ .header {
   display: flex;
   justify-content: space-between;
 }
+
 .title {
   display: inline-block;
 }

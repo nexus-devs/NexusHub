@@ -9,7 +9,7 @@ import * as d3 from 'd3'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['data'],
+  props: ['data', 'opts'],
   data () {
     return {
       svg: '',
@@ -17,11 +17,23 @@ export default {
       chart: '',
       bisect: null,
       padding: {
-        top: 0,
-        bottom: 20,
-        left: 50,
-        right: 35
+        top: 20,
+        bottom: 20 + 10,
+        left: 25 + 50,
+        right: 25 + 35
       }
+    }
+  },
+
+  computed: {
+    options () {
+      const defaultOptions = {
+        secondaryLabel: 'Quantity: ',
+        secondaryScale: true,
+        parsePrice: { primary: true, secondary: false },
+        areaChart: { primary: false, secondary: true }
+      }
+      return { ...defaultOptions, ...this.opts }
     }
   },
 
