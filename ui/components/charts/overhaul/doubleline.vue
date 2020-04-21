@@ -29,7 +29,7 @@ export default {
     options () {
       const defaultOptions = {
         secondaryLabel: 'Quantity: ',
-        secondaryScale: true,
+        secondaryScale: false,
         parsePrice: { primary: true, secondary: false },
         areaChart: { primary: false, secondary: true }
       }
@@ -46,6 +46,8 @@ export default {
   },
 
   mounted () {
+    if (!this.options.secondaryScale) this.padding.right = 25
+
     this.svg = d3.select(this.$el).select('svg')
     this.tooltip = d3.select(this.$el).append('div')
       .attr('class', 'tooltip')
@@ -53,7 +55,7 @@ export default {
     this.tooltip.append('div').attr('class', 'tooltip-date')
     this.tooltip.append('div').attr('class', 'tooltip-value')
     this.tooltip.append('div').attr('class', 'tooltip-value')
-      .append('span').text('Quantity: ')
+      .append('span').text(this.options.secondaryLabel)
       .append('span').attr('class', 'tooltip-value-2')
     this.bisect = d3.bisector(d => d.x.getTime()).left
 
@@ -91,9 +93,9 @@ export default {
       const yScale1 = d3.scaleLinear()
         .range([height, 0])
         .domain([yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1, yExtents1[1] + yPadding1])
-      const yScale2 = d3.scaleLinear()
+      const yScale2 = this.options.secondaryScale ? d3.scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(data, d => d.y2) + Math.round(d3.max(data, d => d.y2) / 6)])
+        .domain([0, d3.max(data, d => d.y2) + Math.round(d3.max(data, d => d.y2) / 6)]) : yScale1
       const xScale = d3.scaleTime()
         .range([0, width])
         .domain(d3.extent(data, d => d.x))
@@ -115,7 +117,7 @@ export default {
       this.chart.append('g') // Y1 left axis
         .attr('class', 'axis')
         .call(d3.axisLeft(yScale1).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5).tickSizeOuter(0))
-      this.chart.append('g') // Y2 left axis
+      if (this.options.secondaryScale) this.chart.append('g') // Y2 left axis
         .attr('transform', `translate(${width}, 0)`)
         .attr('class', 'axis')
         .call(d3.axisRight(yScale2).tickSize(3).ticks(5).tickSizeOuter(0))
