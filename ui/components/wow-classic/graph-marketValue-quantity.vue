@@ -83,7 +83,7 @@ export default {
 /deep/ .body {
   padding: 0;
   margin: 0;
-  min-height: 200px;
+  min-height: 210px;
 }
 /deep/ .header {
   display: flex;

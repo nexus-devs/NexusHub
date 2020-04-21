@@ -18,7 +18,7 @@ export default {
       bisect: null,
       padding: {
         top: 20,
-        bottom: 20 + 10,
+        bottom: 20 + 20,
         left: 25 + 50,
         right: 25 + 35
       }
@@ -185,7 +185,7 @@ export default {
           focusBar.attr('transform', `translate(${xScale(d.x)}, 0)`)
           focusValue1.attr('transform', `translate(${xScale(d.x)}, ${yScale1(d.y1)})`)
           focusValue2.attr('transform', `translate(${xScale(d.x)}, ${yScale2(d.y2)})`)
-          tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale1(d.y1) - 32}px;`)
+          tooltip.attr('style', `left: ${xScale(d.x) + 96}px; top: ${yScale1(d.y1) - 32}px;`)
           tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
           tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
           tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
