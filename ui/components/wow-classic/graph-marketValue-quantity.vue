@@ -21,6 +21,7 @@
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange" />
+      <module-options />
     </template>
   </module>
 </template>
@@ -28,12 +29,14 @@
 <script>
 import doubleline from 'src/components/charts/overhaul/doubleline.vue'
 import module from 'src/components/ui/module.vue'
+import moduleOptions from 'src/components/wow-classic/module-chart-options.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 
 export default {
   components: {
     module,
     doubleline,
+    moduleOptions,
     moduleTime
   },
 
@@ -79,17 +82,18 @@ export default {
 
 .graph {
   max-width: none !important;
-}
-/deep/ .body {
-  padding: 0;
-  margin: 0;
-  min-height: 210px;
-}
-/deep/ .header {
-  display: flex;
-  justify-content: space-between;
-}
 
+  > /deep/ .body {
+    padding: 0;
+    margin: 0;
+    min-height: 210px;
+  }
+
+  > /deep/ .header {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .title {
   display: inline-block;
 }
