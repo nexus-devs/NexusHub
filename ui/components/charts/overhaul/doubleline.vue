@@ -91,12 +91,16 @@ export default {
       // Create scales
       const yExtents1 = d3.extent(data, d => d.y1)
       const yPadding1 = Math.round((yExtents1[1] - yExtents1[0]) / 6)
+      const yScale1Min = this.options.areaChart.primary || yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1
       const yScale1 = d3.scaleLinear()
         .range([height, 0])
-        .domain([yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1, yExtents1[1] + yPadding1])
+        .domain([yScale1Min, yExtents1[1] + yPadding1])
+      const yExtents2 = d3.extent(data, d => d.y2)
+      const yPadding2 = Math.round((yExtents2[1] - yExtents2[0]) / 6)
+      const yScale2Min = this.options.areaChart.secondary || yExtents2[0] - yPadding2 < 0 ? 0 : yExtents2[0] - yPadding2
       const yScale2 = this.options.secondaryScale ? d3.scaleLinear()
         .range([height, 0])
-        .domain([0, d3.max(data, d => d.y2) + Math.round(d3.max(data, d => d.y2) / 6)]) : yScale1
+        .domain([yScale2Min, yExtents2[1] + yPadding2]) : yScale1
       const xScale = d3.scaleTime()
         .range([0, width])
         .domain(d3.extent(data, d => d.x))
@@ -104,15 +108,16 @@ export default {
       // Create lines
       this.chart.append('path')
         .datum(data)
-        .attr('class', 'line-2')
+        .attr('class', `line-2 ${this.options.areaChart.secondary ? 'area-2' : ''}`)
+        .attr('fill', this.options.areaChart.secondary ? undefined : 'none')
         .attr('stroke-width', 1.5)
-        .attr('d', d3.area().x(d => xScale(d.x)).y0(yScale2(0)).y1(d => yScale2(d.y2)))
+        .attr('d', this.options.areaChart.secondary ? d3.area().x(d => xScale(d.x)).y0(yScale2(yScale2.domain()[0])).y1(d => yScale2(d.y2)) : d3.line().x(d => xScale(d.x)).y(d => yScale2(d.y2)))
       this.chart.append('path')
         .datum(data)
-        .attr('class', 'line-1')
-        .attr('fill', 'none')
+        .attr('class', `line-1 ${this.options.areaChart.primary ? 'area-1' : ''}`)
+        .attr('fill', this.options.areaChart.primary ? undefined : 'none')
         .attr('stroke-width', 1.5)
-        .attr('d', d3.line().x(d => xScale(d.x)).y(d => yScale1(d.y1)))
+        .attr('d', this.options.areaChart.primary ? d3.area().x(d => xScale(d.x)).y0(yScale1(yScale1.domain()[0])).y1(d => yScale1(d.y1)) : d3.line().x(d => xScale(d.x)).y(d => yScale1(d.y1)))
 
       // Create axes
       this.chart.append('g') // Y1 left axis
@@ -207,10 +212,16 @@ svg {
 /deep/ .line-1 {
   stroke: $color-primary-subtle;
 }
-/deep/ .line-2 {
-  fill: $color-accent-subtle;
+/deep/ .area-1 {
+  fill: $color-primary-subtle;
   fill-opacity: 0.45;
+}
+/deep/ .line-2 {
   stroke: $color-accent-subtle;
+}
+/deep/ .area-2 {
+ fill: $color-accent-subtle;
+ fill-opacity: 0.45;
 }
 /deep/ .overlay {
   fill: none;
