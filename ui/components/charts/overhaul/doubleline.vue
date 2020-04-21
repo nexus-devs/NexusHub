@@ -29,7 +29,7 @@ export default {
     options () {
       const defaultOptions = {
         secondaryLabel: 'Quantity: ',
-        secondaryScale: false,
+        secondaryScale: true,
         parsePrice: { primary: true, secondary: false },
         areaChart: { primary: false, secondary: true }
       }
@@ -76,6 +76,7 @@ export default {
       }, 100)
     },
     createChart () {
+      const options = this.options
       const data = this.data
       const tooltip = this.tooltip
       const bisect = this.bisect
@@ -116,11 +117,13 @@ export default {
       // Create axes
       this.chart.append('g') // Y1 left axis
         .attr('class', 'axis')
-        .call(d3.axisLeft(yScale1).tickFormat(d => (d / 10000).toFixed(2) + 'g').tickSize(3).ticks(5).tickSizeOuter(0))
-      if (this.options.secondaryScale) this.chart.append('g') // Y2 left axis
-        .attr('transform', `translate(${width}, 0)`)
-        .attr('class', 'axis')
-        .call(d3.axisRight(yScale2).tickSize(3).ticks(5).tickSizeOuter(0))
+        .call(d3.axisLeft(yScale1).tickFormat(this.options.parsePrice.primary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
+      if (this.options.secondaryScale) {
+        this.chart.append('g') // Y2 left axis
+          .attr('transform', `translate(${width}, 0)`)
+          .attr('class', 'axis')
+          .call(d3.axisRight(yScale2).tickFormat(this.options.parsePrice.secondary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
+      }
       this.chart.append('g') // X axis
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
@@ -179,8 +182,8 @@ export default {
           focusValue2.attr('transform', `translate(${xScale(d.x)}, ${yScale2(d.y2)})`)
           tooltip.attr('style', `left: ${xScale(d.x) + 64}px; top: ${yScale1(d.y1) - 32}px;`)
           tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
-          tooltipValue1.text(utility.parsePrice(d.y1))
-          tooltipValue2.text(d.y2)
+          tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
+          tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
         })
     }
   }
