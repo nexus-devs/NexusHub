@@ -191,6 +191,7 @@ export default {
       const trendingItems = (await Promise.all(parallel)).map((item, index) => {
         return { ...item, viewPercentage: Math.round((items[index].views / viewSum) * 10000) / 10000 }
       })
+
       store.commit('setIndexTrendingItems', trendingItems)
       store.commit('setNews', news)
 

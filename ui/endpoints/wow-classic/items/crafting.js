@@ -1,5 +1,6 @@
 const Endpoint = require('cubic-ui/endpoint')
 const Cookies = require('cookies')
+const request = require('requestretry').defaults({ fullResponse: false })
 
 class Index extends Endpoint {
   constructor (options) {
@@ -9,10 +10,21 @@ class Index extends Endpoint {
   }
 
   async main (req, res) {
+    const slug = req.params.slug
+    const item = req.params.item
     const cookies = new Cookies(req, res)
     const lastVisitedRealm = cookies.get('lastVisitedRealm')
 
-    if (lastVisitedRealm && !req.params.slug) res.status(301).redirect(`/wow-classic/items/${lastVisitedRealm}/${req.params.item}/crafting`)
+    const itemId = !isNaN(parseFloat(item)) && isFinite(item) ? parseInt(item) : false
+    if (itemId) {
+      const storedItem = await request({ url: `https://api.nexushub.co/wow-classic/v1/item/${itemId}`, json: true })
+      if (storedItem) {
+        res.status(301).redirect(`/wow-classic/items/${slug ? slug + '/' : ''}${storedItem.uniqueName}/crafting`)
+        return
+      }
+    }
+
+    if (lastVisitedRealm && !slug) res.status(307).redirect(`/wow-classic/items/${lastVisitedRealm}/${item}/crafting`)
     else super.main(req, res)
   }
 }

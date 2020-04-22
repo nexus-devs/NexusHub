@@ -42,7 +42,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if ((store.state.items.item.itemId !== parseInt(item) && store.state.items.item.uniqueName !== item) || store.state.items.item.server !== slug) {
+    if (store.state.items.item.uniqueName !== item || store.state.items.item.server !== slug) {
       const parallel = []
       parallel.push(this.$cubic.get(`/wow-classic/v1${slug ? `/items/${slug}/` : '/item/'}${item}`))
 

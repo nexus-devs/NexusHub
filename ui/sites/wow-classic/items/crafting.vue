@@ -84,7 +84,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if ((store.state.crafting.itemId !== parseInt(item) && store.state.crafting.uniqueName !== item) || store.state.crafting.slug !== slug) {
+    if (store.state.crafting.uniqueName !== item || store.state.crafting.slug !== slug) {
       const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting${slug ? `/${slug}` : ''}/${item}`)
       store.commit('setCrafting', craftingData)
     }

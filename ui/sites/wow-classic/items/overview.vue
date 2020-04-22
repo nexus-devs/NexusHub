@@ -80,7 +80,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if ((store.state.graphs.itemId !== parseInt(item) && store.state.graphs.uniqueName !== item) || store.state.graphs.slug !== slug) {
+    if (store.state.graphs.uniqueName !== item || store.state.graphs.slug !== slug) {
       // Fetch EU and US graphs
       if (!slug) {
         const [dataEU, dataUS] = await Promise.all([
