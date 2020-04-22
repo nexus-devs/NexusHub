@@ -1,5 +1,5 @@
 <template>
-  <module ref="graphMarketValueQuantity" class="graph">
+  <module ref="graphMarketValueQuantity" :class="{ optionsActive }" class="graph">
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
@@ -19,9 +19,15 @@
     <template slot="body">
       <doubleline :data="data" />
     </template>
-    <template slot="footer">
+    <template slot="footer" class="optionsActive">
       <module-time :days="timerange" :fn="setTimerange" />
-      <module-options />
+      <div class="interactive" @click="toggleOptions()">
+        <span>Options</span>
+        <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+      </div>
+      <div :class="{ active: optionsActive }" class="options">
+        Hey na
+      </div>
     </template>
   </module>
 </template>
@@ -29,15 +35,19 @@
 <script>
 import doubleline from 'src/components/charts/overhaul/doubleline.vue'
 import module from 'src/components/ui/module.vue'
-import moduleOptions from 'src/components/wow-classic/module-chart-options.vue'
 import moduleTime from 'src/components/ui/module-time.vue'
 
 export default {
   components: {
     module,
     doubleline,
-    moduleOptions,
     moduleTime
+  },
+
+  data () {
+    return {
+      optionsActive: false
+    }
   },
 
   computed: {
@@ -52,6 +62,9 @@ export default {
   },
 
   methods: {
+    toggleOptions () {
+      this.optionsActive = !this.optionsActive
+    },
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
       this.$refs.graphMarketValueQuantity.$refs.progress.start()
@@ -82,6 +95,7 @@ export default {
 
 .graph {
   max-width: none !important;
+  max-height: 306px;
 
   > /deep/ .body {
     padding: 0;
@@ -93,7 +107,29 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+
+  > /deep/ .footer {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &.optionsActive {
+    max-height: none;
+  }
 }
+
+.interactive {
+  padding: 6px 10px;
+}
+.options {
+  padding: 10px;
+  flex-basis: 100%;
+
+  &:not(.active) {
+    display: none;
+  }
+}
+
 .title {
   display: inline-block;
 }

@@ -6,9 +6,10 @@
     </div>
     <div :class="{ active }" class="dropdown">
       <div class="body">
-        <span @click="toggle()">Last 7 days</span>
-        <span @click="toggle()">Last 7 days</span>
-        <span @click="toggle()">Last 7 days</span>
+        <span @click="toggle()">Options</span>
+        <span>Primary: <input /></span>
+        <span>Secondary:</span>
+        <span>Purge Outliers:</span>
       </div>
     </div>
   </div>
@@ -47,9 +48,11 @@ export default {
   padding: 6px 10px;
 }
 .dropdown {
+  white-space: nowrap;
   background: $color-bg;
   position: absolute;
   top: 0;
+  right: 0;
   padding: 5px 0;
   @include ease(0.15s);
   @include shade-1;
@@ -68,6 +71,9 @@ export default {
     }
     span:not(.active) {
       color: $color-font-body;
+    }
+    input {
+      background-color: $color-font-body;
     }
   }
   &:not(.active) {
