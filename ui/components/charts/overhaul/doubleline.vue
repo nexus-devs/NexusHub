@@ -18,7 +18,7 @@ export default {
       bisect: null,
       padding: {
         top: 20,
-        bottom: 20 + 20,
+        bottom: 20 + 16,
         left: 25,
         right: 25
       }
