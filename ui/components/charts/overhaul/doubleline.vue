@@ -21,7 +21,8 @@ export default {
         bottom: 20 + 16,
         left: 25,
         right: 25
-      }
+      },
+      breakpointSmall: 640
     }
   },
 
@@ -79,6 +80,7 @@ export default {
       const tooltip = this.tooltip
       const bisect = this.bisect
       const padding = { ...this.padding }
+      const smallDevice = window.innerWidth <= this.breakpointSmall
 
       // Create scales initially here so we can get a dynamic axis
       const yExtents1 = d3.extent(data, d => d.y1)
@@ -95,12 +97,17 @@ export default {
         .domain([yScale2Min, yExtents2[1] + yPadding2]) : yScale1
 
       // Create fake axes and calculate needed axis width
-      const fakeAxis1 = this.createAxisY1(this.svg, yScale1)
-      const fakeAxis2 = this.createAxisY2(this.svg, yScale2, 200)
-      padding.left += d3.max(fakeAxis1.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width)
-      padding.right += this.options.secondaryScale ? d3.max(fakeAxis2.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width) : 0
-      fakeAxis1.remove()
-      fakeAxis2.remove()
+      if (!smallDevice) {
+        const fakeAxis1 = this.createAxisY1(this.svg, yScale1)
+        const fakeAxis2 = this.createAxisY2(this.svg, yScale2, 200)
+        padding.left += d3.max(fakeAxis1.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width)
+        padding.right += this.options.secondaryScale ? d3.max(fakeAxis2.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width) : 0
+        fakeAxis1.remove()
+        fakeAxis2.remove()
+      } else {
+        padding.left = 10
+        padding.right = 10
+      }
 
       // Get dimensions
       const boundingBox = this.svg.node().getBoundingClientRect()
@@ -132,8 +139,8 @@ export default {
         .attr('d', this.options.areaChart.primary ? d3.area().x(d => xScale(d.x)).y0(yScale1(yScale1.domain()[0])).y1(d => yScale1(d.y1)) : d3.line().x(d => xScale(d.x)).y(d => yScale1(d.y1)))
 
       // Create axes
-      this.createAxisY1(this.chart, yScale1)
-      if (this.options.secondaryScale) this.createAxisY2(this.chart, yScale2, width)
+      this.createAxisY1(this.chart, yScale1, smallDevice)
+      if (this.options.secondaryScale) this.createAxisY2(this.chart, yScale2, width, smallDevice)
       this.chart.append('g') // X axis
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
@@ -196,16 +203,18 @@ export default {
           tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
         })
     },
-    createAxisY1 (node, yScale) {
+    createAxisY1 (node, yScale, smallDevice = false) {
+      const axis = smallDevice ? d3.axisRight(yScale) : d3.axisLeft(yScale)
       return node.append('g') // Y1 left axis
         .attr('class', 'axis')
-        .call(d3.axisLeft(yScale).tickFormat(this.options.parsePrice.primary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
+        .call(axis.tickFormat(this.options.parsePrice.primary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
     },
-    createAxisY2 (node, yScale, width) {
+    createAxisY2 (node, yScale, width, smallDevice = false) {
+      const axis = smallDevice ? d3.axisLeft(yScale) : d3.axisRight(yScale)
       return node.append('g') // Y2 left axis
         .attr('transform', `translate(${width}, 0)`)
         .attr('class', 'axis')
-        .call(d3.axisRight(yScale).tickFormat(this.options.parsePrice.secondary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
+        .call(axis.tickFormat(this.options.parsePrice.secondary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
     }
   }
 }
