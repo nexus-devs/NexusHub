@@ -19,8 +19,8 @@ export default {
       padding: {
         top: 20,
         bottom: 20 + 20,
-        left: 25 + 50,
-        right: 25 + 35
+        left: 25,
+        right: 25
       }
     }
   },
@@ -46,8 +46,6 @@ export default {
   },
 
   mounted () {
-    if (!this.options.secondaryScale) this.padding.right = 25
-
     this.svg = d3.select(this.$el).select('svg')
     this.tooltip = d3.select(this.$el).append('div')
       .attr('class', 'tooltip')
@@ -80,27 +78,41 @@ export default {
       const data = this.data
       const tooltip = this.tooltip
       const bisect = this.bisect
+      const padding = { ...this.padding }
 
-      const boundingBox = this.svg.node().getBoundingClientRect()
-      const height = boundingBox.height - this.padding.top - this.padding.bottom
-      const width = boundingBox.width - this.padding.left - this.padding.right
-
-      // Create chart (needed for custom padding)
-      this.chart = this.svg.append('g').attr('transform', `translate(${this.padding.left}, ${this.padding.top})`)
-
-      // Create scales
+      // Create scales initially here so we can get a dynamic axis
       const yExtents1 = d3.extent(data, d => d.y1)
       const yPadding1 = Math.round((yExtents1[1] - yExtents1[0]) / 6)
       const yScale1Min = this.options.areaChart.primary || yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1
       const yScale1 = d3.scaleLinear()
-        .range([height, 0])
+        .range([200, 0]) // Random height
         .domain([yScale1Min, yExtents1[1] + yPadding1])
       const yExtents2 = d3.extent(data, d => d.y2)
       const yPadding2 = Math.round((yExtents2[1] - yExtents2[0]) / 6)
       const yScale2Min = this.options.areaChart.secondary || yExtents2[0] - yPadding2 < 0 ? 0 : yExtents2[0] - yPadding2
       const yScale2 = this.options.secondaryScale ? d3.scaleLinear()
-        .range([height, 0])
+        .range([200, 0])
         .domain([yScale2Min, yExtents2[1] + yPadding2]) : yScale1
+
+      // Create fake axes and calculate needed axis width
+      const fakeAxis1 = this.createAxisY1(this.svg, yScale1)
+      const fakeAxis2 = this.createAxisY2(this.svg, yScale2, 200)
+      padding.left += d3.max(fakeAxis1.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width)
+      padding.right += this.options.secondaryScale ? d3.max(fakeAxis2.selectAll('.tick > text').nodes(), t => t.getBoundingClientRect().width) : 0
+      fakeAxis1.remove()
+      fakeAxis2.remove()
+
+      // Get dimensions
+      const boundingBox = this.svg.node().getBoundingClientRect()
+      const height = boundingBox.height - padding.top - padding.bottom
+      const width = boundingBox.width - padding.left - padding.right
+
+      // Create chart (needed for custom padding)
+      this.chart = this.svg.append('g').attr('transform', `translate(${padding.left}, ${padding.top})`)
+
+      // Set scales to actual range
+      yScale1.range([height, 0])
+      yScale2.range([height, 0])
       const xScale = d3.scaleTime()
         .range([0, width])
         .domain(d3.extent(data, d => d.x))
@@ -120,15 +132,8 @@ export default {
         .attr('d', this.options.areaChart.primary ? d3.area().x(d => xScale(d.x)).y0(yScale1(yScale1.domain()[0])).y1(d => yScale1(d.y1)) : d3.line().x(d => xScale(d.x)).y(d => yScale1(d.y1)))
 
       // Create axes
-      this.chart.append('g') // Y1 left axis
-        .attr('class', 'axis')
-        .call(d3.axisLeft(yScale1).tickFormat(this.options.parsePrice.primary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
-      if (this.options.secondaryScale) {
-        this.chart.append('g') // Y2 left axis
-          .attr('transform', `translate(${width}, 0)`)
-          .attr('class', 'axis')
-          .call(d3.axisRight(yScale2).tickFormat(this.options.parsePrice.secondary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
-      }
+      this.createAxisY1(this.chart, yScale1)
+      if (this.options.secondaryScale) this.createAxisY2(this.chart, yScale2, width)
       this.chart.append('g') // X axis
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
@@ -190,6 +195,17 @@ export default {
           tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
           tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
         })
+    },
+    createAxisY1 (node, yScale) {
+      return node.append('g') // Y1 left axis
+        .attr('class', 'axis')
+        .call(d3.axisLeft(yScale).tickFormat(this.options.parsePrice.primary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
+    },
+    createAxisY2 (node, yScale, width) {
+      return node.append('g') // Y2 left axis
+        .attr('transform', `translate(${width}, 0)`)
+        .attr('class', 'axis')
+        .call(d3.axisRight(yScale).tickFormat(this.options.parsePrice.secondary ? d => (d / 10000).toFixed(2) + 'g' : undefined).tickSize(3).ticks(5).tickSizeOuter(0))
     }
   }
 }
