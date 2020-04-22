@@ -26,7 +26,21 @@
         <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
       </div>
       <div :class="{ active: optionsActive }" class="options">
-        Hey na
+        <div class="row">
+          <div class="col-b">
+            Primary:
+          </div>
+          <div class="col-b">
+            Secondary:
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-b">
+            <span>Remove outliers:</span>
+            <input v-model="options.outlier" />
+            <span>%</span>
+          </div>
+        </div>
       </div>
     </template>
   </module>
@@ -46,7 +60,10 @@ export default {
 
   data () {
     return {
-      optionsActive: false
+      optionsActive: false,
+      options: {
+        outlier: 10
+      }
     }
   },
 
@@ -55,9 +72,16 @@ export default {
       return this.$store.state.items.graphs['marketValue-quantity'].timerange
     },
     data () {
-      return this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
+      const data = this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
         return { ...d, x: new Date(d.x) }
       })
+      data[4].y1 = 15000000
+
+      const medianArr = data.slice(0).sort((a, b) => a.y1 - b.y1)
+      const len = medianArr.length
+      const median = len % 2 ? medianArr[Math.floor(len / 2)].y1 : (medianArr[len / 2].y1 + medianArr[len / 2 - 1].y1) / 2
+
+      return data.filter(d => (median / d.y1 > this.options.outlier / 100) && (d.y1 > median * (this.options.outlier / 100)))
     }
   },
 
@@ -120,13 +144,27 @@ export default {
 
 .interactive {
   padding: 6px 10px;
+  font-size: 1.1em;
 }
 .options {
+  border-top: 1px solid $color-font-subtle;
   padding: 10px;
   flex-basis: 100%;
+  font-size: 1.1em;
 
   &:not(.active) {
     display: none;
+  }
+  .row:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  input {
+    background-color: #554942;
+    padding: 2px 4px;
+    text-align: center;
+    width: 35px;
+    margin-left: 5px;
   }
 }
 
