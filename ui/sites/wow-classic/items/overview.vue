@@ -23,7 +23,7 @@
             Statistics
           </h2>
           <div class="mobile-hover-info">
-            <span>Click on the graphs to see more detailed information.</span>
+            <span>Tap on the graphs to see more detailed information.</span>
           </div>
           <div class="row-margin">
             <graph-market-value-quantity class="col-b graph" />
