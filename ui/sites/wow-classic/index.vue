@@ -240,9 +240,9 @@ export default {
   storeModule,
 
   head: {
-    title: 'NexusHub · All WoW Classic Auction House data and prices in one place!',
+    title: 'NexusHub · WoW Classic Auction House data and prices',
     meta: meta({
-      title: 'NexusHub · All WoW Classic Auction House data and prices in one place!',
+      title: 'NexusHub · WoW Classic Auction House data and prices',
       description: 'Get up-to-date data and prices from all World of Warcraft Classic realms and auction houses!',
       image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
