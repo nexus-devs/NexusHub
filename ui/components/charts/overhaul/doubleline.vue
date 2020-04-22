@@ -175,13 +175,13 @@ export default {
         .attr('class', 'overlay')
         .attr('width', width)
         .attr('height', height)
-        .on('mouseover', () => {
+        .on('mouseover touchstart', () => {
           focusBar.style('display', null)
           focusValue1.style('display', null)
           focusValue2.style('display', null)
           tooltip.style('display', null)
         })
-        .on('mouseout', () => {
+        .on('mouseout touchend', () => {
           focusBar.style('display', 'none')
           focusValue1.style('display', 'none')
           focusValue2.style('display', 'none')
@@ -189,20 +189,28 @@ export default {
         })
         .on('mousemove', function () {
           const x0 = xScale.invert(d3.mouse(this)[0])
-          const i = bisect(data, x0, 1)
-          const d0 = data[i - 1]
-          const d1 = i > data.length - 1 ? data[i - 1] : data[i]
-          const d = x0 - d0.x > d1.x - x0 ? d1 : d0
-
-          focusBar.attr('transform', `translate(${xScale(d.x)}, 0)`)
-          focusValue1.attr('transform', `translate(${xScale(d.x)}, ${yScale1(d.y1)})`)
-          focusValue2.attr('transform', `translate(${xScale(d.x)}, ${yScale2(d.y2)})`)
-          if (!smallDevice) tooltip.attr('style', `left: ${xScale(d.x) + 96}px; top: ${yScale1(d.y1) - 32}px;`)
-          else tooltip.attr('style', `left: ${width / 4}px; top: ${-64}px;`)
-          tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
-          tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
-          tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
+          tooltipMove(x0)
         })
+        .on('touchmove', function () {
+          const x0 = xScale.invert(d3.touches(this)[0][0])
+          tooltipMove(x0)
+        })
+
+      const tooltipMove = x0 => {
+        const i = bisect(data, x0, 1)
+        const d0 = data[i - 1]
+        const d1 = i > data.length - 1 ? data[i - 1] : data[i]
+        const d = x0 - d0.x > d1.x - x0 ? d1 : d0
+
+        focusBar.attr('transform', `translate(${xScale(d.x)}, 0)`)
+        focusValue1.attr('transform', `translate(${xScale(d.x)}, ${yScale1(d.y1)})`)
+        focusValue2.attr('transform', `translate(${xScale(d.x)}, ${yScale2(d.y2)})`)
+        if (!smallDevice) tooltip.attr('style', `left: ${xScale(d.x) + 96}px; top: ${yScale1(d.y1) - 32}px;`)
+        else tooltip.attr('style', `left: ${width / 4}px; top: ${-64}px;`)
+        tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
+        tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
+        tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
+      }
     },
     createAxisY1 (node, yScale, smallDevice = false) {
       const axis = smallDevice ? d3.axisRight(yScale) : d3.axisLeft(yScale)
