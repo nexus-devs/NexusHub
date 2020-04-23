@@ -73,19 +73,14 @@ async function monitor () {
           }
           console.log('Inserting current data...')
           await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
-
-          lastDone = new Date()
           console.log('...done\n')
+        } else console.log(`No new scans found for ${realm.master_slug}\n`)
 
-          // Wait 300ms before processing next realm
-          // If there are >= 3 scans being inserted, assume that the server has some catching up to do and ignore the delay
-          if (scans.data.length < 3) await sleep(300)
-        } else {
-          lastDone = new Date()
-          console.log(`No new scans found for ${realm.master_slug}\n`)
-          await sleep(100)
-        }
+        lastDone = new Date()
       }
+
+      lastDone = new Date()
+      sleep(300) // Breathing room
     }
   }
 }
