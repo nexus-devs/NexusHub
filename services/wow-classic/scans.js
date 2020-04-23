@@ -27,12 +27,12 @@ async function monitor () {
 
   if (staging) console.log('Starting in staging mode (only retrieve the last 7 days)')
 
-  // Kill service if it gets stuck (10 minutes without activity). Docker will auto-restart it.
+  // Kill service if it gets stuck (5 minutes without activity). Docker will auto-restart it.
   setInterval(() => {
-    if (prod && new Date() - lastDone > 1000 * 60 * 10) {
+    if (prod && new Date() - lastDone > 1000 * 60 * 5) {
       process.exit()
     }
-  }, 1000 * 60 * 10)
+  }, 1000 * 60 * 5)
 
   while (true) {
     const reqRealms = await TSMReq.get('/realms')
@@ -77,10 +77,14 @@ async function monitor () {
           lastDone = new Date()
           console.log('...done\n')
 
-          // Wait 1 second before processing next realm
+          // Wait 300ms before processing next realm
           // If there are >= 3 scans being inserted, assume that the server has some catching up to do and ignore the delay
-          if (scans.data.length < 3) await sleep(1000)
-        } else await sleep(1000)
+          if (scans.data.length < 3) await sleep(300)
+        } else {
+          lastDone = new Date()
+          console.log(`No new scans found for ${realm.master_slug}\n`)
+          await sleep(100)
+        }
       }
     }
   }
