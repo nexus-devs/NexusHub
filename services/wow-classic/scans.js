@@ -78,7 +78,7 @@ async function monitor () {
           console.log('...done\n')
 
           // Wait 300ms before processing next realm
-          // If there are >= 3 scans being inserted, assume that the server has some catching up to do and ignore the delay
+          // If there are >= 3 scans being inserted, assume that the server has some catching up to do and don't delay
           if (scans.data.length < 3) await sleep(300)
         } else await sleep(300)
       }
