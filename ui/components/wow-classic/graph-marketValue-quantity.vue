@@ -21,17 +21,34 @@
     </template>
     <template slot="footer" class="optionsActive">
       <module-time :days="timerange" :fn="setTimerange" />
-      <div class="interactive" @click="toggleOptions()">
+      <div class="interactive" @click="toggleOptions('optionsActive')">
         <span>Options</span>
         <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
       </div>
       <div :class="{ active: optionsActive }" class="options">
         <div class="row">
           <div class="col-b">
-            Primary:
+            <span>Primary:</span>
+            <div class="dropdown-container">
+              <div class="interactive" @click="toggleOptions('optionsPrimaryActive')">
+                <span>Market Value</span>
+                <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+              </div>
+              <div :class="{ active: optionsPrimaryActive }" class="dropdown">
+                <div class="dropdown-body">
+                  <span>Market Value</span>
+                  <span>Min Buyout</span>
+                  <span>Market Value</span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col-b">
-            Secondary:
+            <span>Secondary:</span>
+            <div class="interactive">
+              <span>Quantity</span>
+              <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+            </div>
           </div>
         </div>
         <div class="row">
@@ -61,6 +78,7 @@ export default {
   data () {
     return {
       optionsActive: false,
+      optionsPrimaryActive: false,
       options: {
         outlier: 10
       }
@@ -75,7 +93,6 @@ export default {
       const data = this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
         return { ...d, x: new Date(d.x) }
       })
-      data[4].y1 = 15000000
 
       const medianArr = data.slice(0).sort((a, b) => a.y1 - b.y1)
       const len = medianArr.length
@@ -86,8 +103,8 @@ export default {
   },
 
   methods: {
-    toggleOptions () {
-      this.optionsActive = !this.optionsActive
+    toggleOptions (dropdown) {
+      this[dropdown] = !this[dropdown]
     },
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
@@ -152,6 +169,49 @@ export default {
   flex-basis: 100%;
   font-size: 1.1em;
 
+  .col-b {
+    display: flex;
+    align-items: center;
+  }
+  .interactive {
+    margin-left: 5px;
+    font-size: 1em;
+  }
+  .dropdown-container {
+    position: relative;
+  }
+  .dropdown {
+    z-index: 1;
+    background-color: $color-bg;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 5px 0;
+    @include ease(0.15s);
+    @include shade-1;
+
+    .dropdown-body {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        cursor: pointer;
+        padding: 10px 15px;
+        @include ease(0.15s);
+      }
+      span:hover {
+        background: rgba(0,0,0,0.15);
+      }
+    }
+    &:not(.active) {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-5px);
+      transform-origin: top;
+      @include ease(0.15s);
+    }
+  }
+
   &:not(.active) {
     display: none;
   }
@@ -160,8 +220,13 @@ export default {
   }
 
   input {
+    font-family: Monospace;
+    font-weight: bold;
+    border-radius: 2px;
+    text-overflow: ellipsis;
+
     background-color: #554942;
-    padding: 2px 4px;
+    padding: 4px 6px;
     text-align: center;
     width: 35px;
     margin-left: 5px;
