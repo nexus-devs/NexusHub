@@ -80,7 +80,7 @@ async function monitor () {
       }
 
       lastDone = new Date()
-      sleep(300) // Breathing room
+      await sleep(300) // Breathing room
     }
   }
 }
