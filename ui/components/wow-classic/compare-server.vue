@@ -1,6 +1,7 @@
 <template>
   <div class="select">
     <div class="interactive" @click="toggle">
+      <img src="/img/ui/compare.svg" class="ico-h-20" alt="Compare">
       <span>Compare {{ activeServer.slug ? activeServer.name : 'Realm' }}</span>
       <img v-if="activeServer.slug" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
@@ -120,6 +121,8 @@ export default {
   }
 }
 .dropdown {
+  letter-spacing: unset;
+  text-transform: initial;
   position: absolute;
   top: 0;
   padding: 5px 0;
