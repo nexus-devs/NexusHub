@@ -181,11 +181,14 @@ export default {
   font-size: 0.75em !important;
   border-radius: 2px;
 
+  a, .select {
+    font-family: Circular;
+    @include uppercase;
+  }
   a {
     display: flex;
     margin-left: auto;
     align-items: center;
-    @include uppercase;
     padding: 5px 10px;
     letter-spacing: 0.5;
     position: relative;

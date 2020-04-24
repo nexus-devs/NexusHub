@@ -108,10 +108,15 @@ export default {
 }
 .interactive {
   padding: 6px 10px;
+  font-family: inherit !important;
 
   .faction-logo {
     vertical-align: middle;
     height: 20px;
+  }
+
+  span {
+    font-family: inherit !important;
   }
 }
 .dropdown {
