@@ -183,9 +183,9 @@ export default {
 
   a, .select {
     font-family: Circular;
-    @include uppercase;
   }
   a {
+    @include uppercase;
     display: flex;
     margin-left: auto;
     align-items: center;

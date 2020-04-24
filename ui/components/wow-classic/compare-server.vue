@@ -110,6 +110,7 @@ export default {
 .interactive {
   padding: 6px 10px;
   font-family: inherit !important;
+  @include uppercase;
 
   .faction-logo {
     vertical-align: middle;
@@ -121,8 +122,6 @@ export default {
   }
 }
 .dropdown {
-  letter-spacing: unset;
-  text-transform: initial;
   position: absolute;
   top: 0;
   padding: 5px 0;
