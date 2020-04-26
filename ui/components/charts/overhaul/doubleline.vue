@@ -140,7 +140,7 @@ export default {
       this.chart.append('g') // X axis
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
-        .call(d3.axisBottom(xScale).ticks(7).tickFormat(d3.timeFormat('%d. %b')).tickSize(4).tickSizeOuter(0))
+        .call(d3.axisBottom(xScale).ticks(6).tickFormat(d3.timeFormat('%d. %b')).tickSize(4).tickSizeOuter(0))
 
       // Create tooltip focus point
       const focusBar = this.chart.append('g').style('display', 'none')
