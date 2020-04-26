@@ -32,9 +32,9 @@
                               :value-entries="valueEntriesLocal"
             />
             <graph-doubleline class="col-b graph"
-                              :title="`${serverPretty} / ${server.region.toUpperCase()}`"
-                              storage="marketValue-quantity"
-                              :value-entries="valueEntriesLocal"
+                              :title="`${serverPretty} / ${regionPretty}`"
+                              storage="regional-comparison"
+                              :value-entries="valueEntriesRegional"
             />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
@@ -55,6 +55,7 @@ import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
+import utility from 'src/components/wow-classic/utility';
 
 export default {
   components: {
@@ -73,10 +74,30 @@ export default {
 
     // Only fetch item data if we actually have a new item or new server
     // if ((store.state.graphs.itemId !== parseInt(item) && store.state.graphs.uniqueName !== item) || store.state.graphs.slug !== slug) {}
-    const prices = await this.$cubic.get((`/wow-classic/v1/items/${slug}/${item}/prices`))
+    const [localPrices, regionalPrices] = await Promise.all([
+      this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`),
+      this.$cubic.get(`/wow-classic/v1/items/${store.state.servers.activeServer.region}/${item}/prices?region=true`)
+    ])
+
+    const interpolatedRegional = utility.interpolateValues(
+      localPrices.data.map(p => {
+        return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+      }),
+      regionalPrices.data.map(p => {
+        return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+      }),
+      'scannedAt', 'marketValue')
+
     store.commit('setGraph', {
       graph: 'marketValue-quantity',
-      data: prices.data,
+      data: localPrices.data,
+      timerange: 7
+    })
+    store.commit('setGraph', {
+      graph: 'regional-comparison',
+      data: localPrices.data.map((d, i) => {
+        return { ...d, regionalMarketValue: interpolatedRegional[i].marketValue }
+      }),
       timerange: 7
     })
   },
@@ -99,6 +120,9 @@ export default {
     serverPretty () {
       return `${this.server.name} ${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)}`
     },
+    regionPretty () {
+      return this.server.region.toUpperCase()
+    },
     valueEntriesLocal () {
       return [{
         name: 'Market Value',
@@ -113,6 +137,19 @@ export default {
       }, {
         name: 'Min Buyout',
         key: 'minBuyout',
+        area: false,
+        price: true
+      }]
+    },
+    valueEntriesRegional () {
+      return [{
+        name: 'Market Value',
+        key: 'marketValue',
+        area: false,
+        price: true
+      }, {
+        name: `${this.regionPretty} Market Value`,
+        key: 'regionalMarketValue',
         area: false,
         price: true
       }]
