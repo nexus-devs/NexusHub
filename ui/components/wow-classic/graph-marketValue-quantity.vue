@@ -8,16 +8,16 @@
       <div class="legend-container">
         <div class="legend">
           <div class="primary">
-            <span class="dot" /> Market Value
+            <span class="dot" /> {{ options.primary.name }}
           </div>
           <div class="secondary">
-            <span class="dot" /> Quantity
+            <span class="dot" /> {{ options.secondary.name }}
           </div>
         </div>
       </div>
     </template>
     <template slot="body">
-      <doubleline :data="data" />
+      <doubleline :data="data" :opts="doublelineOpts" />
     </template>
     <template slot="footer" class="optionsActive">
       <module-time :days="timerange" :fn="setTimerange" />
@@ -31,23 +31,32 @@
             <span>Primary:</span>
             <div class="dropdown-container">
               <div class="interactive" @click="toggleOptions('optionsPrimaryActive')">
-                <span>Market Value</span>
+                <span>{{ options.primary.name }}</span>
                 <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
               </div>
               <div :class="{ active: optionsPrimaryActive }" class="dropdown">
                 <div class="dropdown-body">
-                  <span>Market Value</span>
-                  <span>Min Buyout</span>
-                  <span>Market Value</span>
+                  <span v-for="entry in valueEntries" :key="'primary' + entry.key" @click="selectValueEntry('primary', entry); toggleOptions('optionsPrimaryActive')">
+                    {{ entry.name }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-b">
             <span>Secondary:</span>
-            <div class="interactive">
-              <span>Quantity</span>
-              <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+            <div class="dropdown-container">
+              <div class="interactive" @click="toggleOptions('optionsSecondaryActive')">
+                <span>{{ options.secondary.name }}</span>
+                <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+              </div>
+              <div :class="{ active: optionsSecondaryActive }" class="dropdown">
+                <div class="dropdown-body">
+                  <span v-for="entry in valueEntries" :key="'secondary' + entry.key" @click="selectValueEntry('secondary', entry); toggleOptions('optionsSecondaryActive')">
+                    {{ entry.name }}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -76,12 +85,33 @@ export default {
   },
 
   data () {
+    const valueEntries = [{
+      name: 'Market Value',
+      key: 'marketValue',
+      area: false,
+      price: true
+    }, {
+      name: 'Min Buyout',
+      key: 'minBuyout',
+      area: false,
+      price: true
+    }, {
+      name: 'Quantity',
+      key: 'quantity',
+      area: true,
+      price: false
+    }]
+
     return {
       optionsActive: false,
       optionsPrimaryActive: false,
+      optionsSecondaryActive: false,
       options: {
-        outlier: 10
-      }
+        outlier: 10,
+        primary: valueEntries[0],
+        secondary: valueEntries[2]
+      },
+      valueEntries
     }
   },
 
@@ -91,7 +121,11 @@ export default {
     },
     data () {
       const data = this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
-        return { ...d, x: new Date(d.x) }
+        return {
+          x: new Date(d.scannedAt),
+          y1: d[this.options.primary.key],
+          y2: d[this.options.secondary.key]
+        }
       })
 
       const medianArr = data.slice(0).sort((a, b) => a.y1 - b.y1)
@@ -99,10 +133,22 @@ export default {
       const median = len % 2 ? medianArr[Math.floor(len / 2)].y1 : (medianArr[len / 2].y1 + medianArr[len / 2 - 1].y1) / 2
 
       return data.filter(d => (median / d.y1 > this.options.outlier / 100) && (d.y1 > median * (this.options.outlier / 100)))
+    },
+    doublelineOpts () {
+      return {
+        secondaryLabel: this.options.secondary.name,
+        secondaryScale: this.options.primary.price !== this.options.secondary.price,
+        parsePrice: { primary: this.options.primary.price, secondary: this.options.secondary.price },
+        areaChart: { primary: this.options.primary.area, secondary: this.options.secondary.area }
+      }
     }
   },
 
   methods: {
+    selectValueEntry (value, entry) {
+      if (this.options[value].key === entry.key) return
+      this.options[value] = entry
+    },
     toggleOptions (dropdown) {
       this[dropdown] = !this[dropdown]
     },
@@ -115,13 +161,7 @@ export default {
       const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
       await this.$store.commit('setGraph', {
         graph: 'marketValue-quantity',
-        data: item.data.map(p => {
-          return {
-            x: p.scannedAt,
-            y1: p.marketValue,
-            y2: p.quantity
-          }
-        }),
+        data: item.data,
         timerange
       })
 
@@ -174,6 +214,8 @@ export default {
     align-items: center;
   }
   .interactive {
+    text-align: center;
+    min-width: 100px;
     margin-left: 5px;
     font-size: 1em;
   }

@@ -68,13 +68,7 @@ export default {
     const prices = await this.$cubic.get((`/wow-classic/v1/items/${slug}/${item}/prices`))
     store.commit('setGraph', {
       graph: 'marketValue-quantity',
-      data: prices.data.map(p => {
-        return {
-          x: p.scannedAt,
-          y1: p.marketValue,
-          y2: p.quantity
-        }
-      }),
+      data: prices.data,
       timerange: 7
     })
   },

@@ -40,9 +40,7 @@ export default {
 
   watch: {
     data (newData, oldData) {
-      if (newData.length !== oldData.length) {
-        this.onResize()
-      }
+      this.onResize()
     }
   },
 
@@ -53,9 +51,7 @@ export default {
       .style('display', 'none')
     this.tooltip.append('div').attr('class', 'tooltip-date')
     this.tooltip.append('div').attr('class', 'tooltip-value')
-    this.tooltip.append('div').attr('class', 'tooltip-value')
-      .append('span').text(this.options.secondaryLabel)
-      .append('span').attr('class', 'tooltip-value-2')
+    this.tooltip.append('div').attr('class', 'tooltip-value tooltip-value-2')
     this.bisect = d3.bisector(d => d.x.getTime()).left
 
     window.addEventListener('resize', this.onResize)
@@ -209,7 +205,7 @@ export default {
         else tooltip.attr('style', `left: ${width / 4}px; top: ${-64}px;`)
         tooltipDate.text(d3.timeFormat('%a %d. %B, %H:%M UTC')(d.x))
         tooltipValue1.text(options.parsePrice.primary ? utility.parsePrice(d.y1) : d.y1)
-        tooltipValue2.text(options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2)
+        tooltipValue2.text(`${options.secondaryLabel}: ${options.parsePrice.secondary ? utility.parsePrice(d.y2) : d.y2}`)
       }
     },
     createAxisY1 (node, yScale, smallDevice = false) {
