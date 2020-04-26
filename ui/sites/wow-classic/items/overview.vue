@@ -55,7 +55,7 @@ import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
-import utility from 'src/components/wow-classic/utility';
+import utility from 'src/components/wow-classic/utility'
 
 export default {
   components: {
@@ -86,7 +86,7 @@ export default {
       regionalPrices.data.map(p => {
         return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
       }),
-      'scannedAt', 'marketValue')
+      'scannedAt')
 
     store.commit('setGraph', {
       graph: 'marketValue-quantity',
@@ -96,7 +96,12 @@ export default {
     store.commit('setGraph', {
       graph: 'regional-comparison',
       data: localPrices.data.map((d, i) => {
-        return { ...d, regionalMarketValue: interpolatedRegional[i].marketValue }
+        return {
+          ...d,
+          regionalMarketValue: interpolatedRegional[i].marketValue,
+          regionalMinBuyout: interpolatedRegional[i].minBuyout,
+          regionalQuantity: interpolatedRegional[i].quantity
+        }
       }),
       timerange: 7
     })
@@ -142,14 +147,20 @@ export default {
       }]
     },
     valueEntriesRegional () {
-      return [{
-        name: 'Market Value',
-        key: 'marketValue',
-        area: false,
-        price: true
-      }, {
+      const localEntries = this.valueEntriesLocal.slice()
+      return [localEntries[0], {
         name: `${this.regionPretty} Market Value`,
         key: 'regionalMarketValue',
+        area: false,
+        price: true
+      }, localEntries[1], {
+        name: `${this.regionPretty} Quantity`,
+        key: 'regionalQuantity',
+        area: true,
+        price: false
+      }, localEntries[2], {
+        name: `${this.regionPretty} Min Buyout`,
+        key: 'regionalMinBuyout',
         area: false,
         price: true
       }]
@@ -188,6 +199,9 @@ export default {
   }
 }
 
+.app-container {
+  overflow: unset;
+}
 .app-content {
   background: $color-bg-darker;
 }

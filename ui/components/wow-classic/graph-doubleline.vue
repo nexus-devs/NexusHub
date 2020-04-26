@@ -36,7 +36,11 @@
               </div>
               <div :class="{ active: optionsPrimaryActive }" class="dropdown">
                 <div class="dropdown-body">
-                  <span v-for="entry in valueEntries" :key="'primary' + entry.key" @click="selectValueEntry('primary', entry); toggleOptions('optionsPrimaryActive')">
+                  <span v-for="entry in valueEntries"
+                        :key="'primary' + entry.key"
+                        :class="{ selected: options.primary.key === entry.key }"
+                        @click="selectValueEntry('primary', entry); toggleOptions('optionsPrimaryActive')"
+                  >
                     {{ entry.name }}
                   </span>
                 </div>
@@ -52,7 +56,11 @@
               </div>
               <div :class="{ active: optionsSecondaryActive }" class="dropdown">
                 <div class="dropdown-body">
-                  <span v-for="entry in valueEntries" :key="'secondary' + entry.key" @click="selectValueEntry('secondary', entry); toggleOptions('optionsSecondaryActive')">
+                  <span v-for="entry in valueEntries"
+                        :key="'secondary' + entry.key"
+                        :class="{ selected: options.secondary.key === entry.key }"
+                        @click="selectValueEntry('secondary', entry); toggleOptions('optionsSecondaryActive')"
+                  >
                     {{ entry.name }}
                   </span>
                 </div>
@@ -227,6 +235,9 @@ export default {
       }
       span:hover {
         background: rgba(0,0,0,0.15);
+      }
+      span:not(.selected) {
+        color: $color-font-body;
       }
     }
     &:not(.active) {

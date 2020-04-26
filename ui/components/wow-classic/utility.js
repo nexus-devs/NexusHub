@@ -16,10 +16,11 @@ export default {
     return string
   },
 
-  // Interpolates a secondary value array of { x, y } on the primary values
-  // Assumes already sorted arrays
-  interpolateValues (primary, secondary, xKey, yKey) {
+  // Interpolates a secondary value array of { x, [y1, y2...] } on the primary values
+  // Assumes already sorted arrays by x
+  interpolateValues (primary, secondary, xKey) {
     const interpolated = []
+    const yKeys = Object.keys(secondary[0]).filter(k => k !== xKey)
 
     for (const primaryEntry of primary) {
       const primaryX = primaryEntry[xKey]
@@ -36,13 +37,13 @@ export default {
       else if (before && after) {
         let iplPct = (primaryX - before[xKey]) / (after[xKey] - before[xKey])
         if (isNaN(iplPct)) iplPct = 0 // Catch zero divide
-        iplElem[yKey] = Math.round(before[yKey] * (1 - iplPct) + after[yKey] * iplPct)
+        for (const yKey of yKeys) iplElem[yKey] = Math.round(before[yKey] * (1 - iplPct) + after[yKey] * iplPct)
       }
 
       // Otherwise just use the leftover element
       else {
         const matchingElem = before || after
-        iplElem[yKey] = matchingElem[yKey]
+        for (const yKey of yKeys) iplElem[yKey] = matchingElem[yKey]
       }
 
       interpolated.push(iplElem)
