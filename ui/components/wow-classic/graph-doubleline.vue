@@ -3,7 +3,7 @@
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
-        <h3>Market Value / Quantity</h3>
+        <h3>{{ title }}</h3>
       </div>
       <div class="legend-container">
         <div class="legend">
@@ -84,43 +84,27 @@ export default {
     moduleTime
   },
 
-  data () {
-    const valueEntries = [{
-      name: 'Market Value',
-      key: 'marketValue',
-      area: false,
-      price: true
-    }, {
-      name: 'Min Buyout',
-      key: 'minBuyout',
-      area: false,
-      price: true
-    }, {
-      name: 'Quantity',
-      key: 'quantity',
-      area: true,
-      price: false
-    }]
+  props: ['valueEntries', 'title', 'storage'],
 
+  data () {
     return {
       optionsActive: false,
       optionsPrimaryActive: false,
       optionsSecondaryActive: false,
       options: {
         outlier: 10,
-        primary: valueEntries[0],
-        secondary: valueEntries[2]
-      },
-      valueEntries
+        primary: this.valueEntries[0],
+        secondary: this.valueEntries[1]
+      }
     }
   },
 
   computed: {
     timerange () {
-      return this.$store.state.items.graphs['marketValue-quantity'].timerange
+      return this.$store.state.items.graphs[this.storage].timerange
     },
     data () {
-      const data = this.$store.state.items.graphs['marketValue-quantity'].data.map(d => {
+      const data = this.$store.state.items.graphs[this.storage].data.map(d => {
         return {
           x: new Date(d.scannedAt),
           y1: d[this.options.primary.key],
@@ -160,7 +144,7 @@ export default {
       const itemId = this.$store.state.items.item.itemId
       const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
       await this.$store.commit('setGraph', {
-        graph: 'marketValue-quantity',
+        graph: this.storage,
         data: item.data,
         timerange
       })

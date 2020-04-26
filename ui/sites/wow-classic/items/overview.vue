@@ -26,8 +26,16 @@
             <span>Tap on the graphs to see more detailed information.</span>
           </div>
           <div class="row-margin">
-            <graph-market-value-quantity class="col-b graph" />
-            <graph-market-value-quantity class="col-b graph" />
+            <graph-doubleline class="col-b graph"
+                              :title="serverPretty"
+                              storage="marketValue-quantity"
+                              :value-entries="valueEntriesLocal"
+            />
+            <graph-doubleline class="col-b graph"
+                              :title="`${serverPretty} / ${server.region.toUpperCase()}`"
+                              storage="marketValue-quantity"
+                              :value-entries="valueEntriesLocal"
+            />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
         </div>
@@ -42,7 +50,7 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
-import graphMarketValueQuantity from 'src/components/wow-classic/graph-marketValue-quantity.vue'
+import graphDoubleline from 'src/components/wow-classic/graph-doubleline.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
@@ -56,7 +64,7 @@ export default {
     itemHeader,
     description,
     stats,
-    graphMarketValueQuantity
+    graphDoubleline
   },
 
   async asyncData ({ store, route }) {
@@ -75,7 +83,7 @@ export default {
 
   computed: {
     global () {
-      return !this.$store.state.servers.activeServer.slug
+      return !this.server.slug
     },
     item () {
       return this.$store.state.items.item
@@ -84,19 +92,42 @@ export default {
       return this.global
         ? this.$store.state.graphs.storage['graph-overview-us'].data && this.$store.state.graphs.storage['graph-overview-us'].data.length
         : this.$store.state.graphs.storage['graph-value-quantity'].data && this.$store.state.graphs.storage['graph-value-quantity'].data.length
+    },
+    server () {
+      return this.$store.state.servers.activeServer
+    },
+    serverPretty () {
+      return `${this.server.name} ${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)}`
+    },
+    valueEntriesLocal () {
+      return [{
+        name: 'Market Value',
+        key: 'marketValue',
+        area: false,
+        price: true
+      }, {
+        name: 'Quantity',
+        key: 'quantity',
+        area: true,
+        price: false
+      }, {
+        name: 'Min Buyout',
+        key: 'minBuyout',
+        area: false,
+        price: true
+      }]
     }
   },
 
   head () {
-    const server = this.$store.state.servers.activeServer
-    const serverPretty = `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
+    const serverPretty = `${this.server.name} (${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)})`
 
     return {
-      title: server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
-      link: server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
+      title: this.server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
+      link: this.server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
       meta: meta({
         title: `${this.item.name} Prices on NexusHub`,
-        description: server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
+        description: this.server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
         image: `${this.item.icon}`
       })
     }
