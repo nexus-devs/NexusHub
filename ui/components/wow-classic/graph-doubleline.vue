@@ -122,7 +122,7 @@ export default {
 
       const medianArr = data.slice(0).sort((a, b) => a.y1 - b.y1)
       const len = medianArr.length
-      const median = len % 2 ? medianArr[Math.floor(len / 2)].y1 : (medianArr[len / 2].y1 + medianArr[len / 2 - 1].y1) / 2
+      const median = len ? (len % 2 ? medianArr[Math.floor(len / 2)].y1 : (medianArr[len / 2].y1 + medianArr[len / 2 - 1].y1) / 2) : 0
 
       return data.filter(d => (median / d.y1 > this.options.outlier / 100) && (d.y1 > median * (this.options.outlier / 100)))
     },
