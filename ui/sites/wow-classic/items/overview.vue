@@ -30,11 +30,13 @@
                               :title="serverPretty"
                               storage="marketValue-quantity"
                               :value-entries="valueEntriesLocal"
+                              :refetch-fn="refetchLocalGraph"
             />
             <graph-doubleline class="col-b graph"
                               :title="`${serverPretty} / ${regionPretty}`"
                               storage="regional-comparison"
                               :value-entries="valueEntriesRegional"
+                              :refetch-fn="refetchRegionalGraph"
             />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
@@ -164,6 +166,50 @@ export default {
         area: false,
         price: true
       }]
+    }
+  },
+
+  methods: {
+    async refetchLocalGraph (timerange) {
+      const slug = this.$store.state.servers.activeServer.slug
+      const itemId = this.$store.state.items.item.itemId
+      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
+      await this.$store.commit('setGraph', {
+        graph: 'marketValue-quantity',
+        data: item.data,
+        timerange
+      })
+    },
+    async refetchRegionalGraph (timerange) {
+      const slug = this.$store.state.servers.activeServer.slug
+      const itemId = this.$store.state.items.item.itemId
+      const region = this.$store.state.servers.activeServer.region.toLowerCase()
+      const [localPrices, regionalPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`),
+        this.$cubic.get(`/wow-classic/v1/items/${region}/${itemId}/prices?region=true&timerange=${timerange}`)
+      ])
+
+      const interpolatedRegional = utility.interpolateValues(
+        localPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        regionalPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        'scannedAt')
+
+      await this.$store.commit('setGraph', {
+        graph: 'regional-comparison',
+        data: localPrices.data.map((d, i) => {
+          return {
+            ...d,
+            regionalMarketValue: interpolatedRegional[i].marketValue,
+            regionalMinBuyout: interpolatedRegional[i].minBuyout,
+            regionalQuantity: interpolatedRegional[i].quantity
+          }
+        }),
+        timerange: timerange
+      })
     }
   },
 

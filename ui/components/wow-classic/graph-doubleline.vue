@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-b">
             <span>Remove outliers:</span>
-            <input v-model="options.outlier" />
+            <input v-model="options.outlier">
             <span>%</span>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default {
     moduleTime
   },
 
-  props: ['valueEntries', 'title', 'storage'],
+  props: ['valueEntries', 'title', 'storage', 'refetchFn'],
 
   data () {
     return {
@@ -146,17 +146,9 @@ export default {
     },
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
+
       this.$refs.graphMarketValueQuantity.$refs.progress.start()
-
-      const slug = this.$store.state.servers.activeServer.slug
-      const itemId = this.$store.state.items.item.itemId
-      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
-      await this.$store.commit('setGraph', {
-        graph: this.storage,
-        data: item.data,
-        timerange
-      })
-
+      await this.refetchFn(timerange)
       this.$refs.graphMarketValueQuantity.$refs.progress.finish()
     }
   }
