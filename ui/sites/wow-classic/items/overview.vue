@@ -88,60 +88,57 @@ export default {
     const item = route.params.item
     const slug = route.params.slug
 
-    // Only fetch item data if we actually have a new item or new server
-    if ((store.state.items.item.itemId !== parseInt(item) && store.state.items.item.uniqueName !== item) || store.state.servers.activeServer.slug !== slug) {
-      // Fetch EU and US graphs
-      if (!slug) {
-        const [euPrices, usPrices] = await Promise.all([
-          this.$cubic.get(`/wow-classic/v1/items/eu/${item}/prices?region=true`),
-          this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)
-        ])
+    // Fetch EU and US graphs
+    if (!slug) {
+      const [euPrices, usPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/eu/${item}/prices?region=true`),
+        this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)
+      ])
 
-        store.commit('setGraph', {
-          graph: 'overview-eu',
-          data: euPrices.data,
-          timerange: 7
-        })
-        store.commit('setGraph', {
-          graph: 'overview-us',
-          data: usPrices.data,
-          timerange: 7
-        })
+      store.commit('setGraph', {
+        graph: 'overview-eu',
+        data: euPrices.data,
+        timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'overview-us',
+        data: usPrices.data,
+        timerange: 7
+      })
 
-      // Fetch local server graphs
-      } else {
-        const [localPrices, regionalPrices] = await Promise.all([
-          this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`),
-          this.$cubic.get(`/wow-classic/v1/items/${store.state.servers.activeServer.region}/${item}/prices?region=true`)
-        ])
+    // Fetch local server graphs
+    } else {
+      const [localPrices, regionalPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`),
+        this.$cubic.get(`/wow-classic/v1/items/${store.state.servers.activeServer.region}/${item}/prices?region=true`)
+      ])
 
-        const interpolatedRegional = utility.interpolateValues(
-          localPrices.data.map(p => {
-            return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
-          }),
-          regionalPrices.data.map(p => {
-            return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
-          }),
-          'scannedAt')
+      const interpolatedRegional = utility.interpolateValues(
+        localPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        regionalPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        'scannedAt')
 
-        store.commit('setGraph', {
-          graph: 'marketValue-quantity',
-          data: localPrices.data,
-          timerange: 7
-        })
-        store.commit('setGraph', {
-          graph: 'regional-comparison',
-          data: localPrices.data.map((d, i) => {
-            return {
-              ...d,
-              regionalMarketValue: interpolatedRegional[i].marketValue,
-              regionalMinBuyout: interpolatedRegional[i].minBuyout,
-              regionalQuantity: interpolatedRegional[i].quantity
-            }
-          }),
-          timerange: 7
-        })
-      }
+      store.commit('setGraph', {
+        graph: 'marketValue-quantity',
+        data: localPrices.data,
+        timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'regional-comparison',
+        data: localPrices.data.map((d, i) => {
+          return {
+            ...d,
+            regionalMarketValue: interpolatedRegional[i].marketValue,
+            regionalMinBuyout: interpolatedRegional[i].minBuyout,
+            regionalQuantity: interpolatedRegional[i].quantity
+          }
+        }),
+        timerange: 7
+      })
     }
   },
 
