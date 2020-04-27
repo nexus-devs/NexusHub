@@ -1,5 +1,5 @@
 <template>
-  <module ref="graphMarketValueQuantity" :class="{ optionsActive }" class="graph">
+  <module ref="graphDoubleline" :class="{ optionsActive }" class="graph">
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
@@ -147,9 +147,9 @@ export default {
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
 
-      this.$refs.graphMarketValueQuantity.$refs.progress.start()
+      this.$refs.graphDoubleline.$refs.progress.start()
       await this.refetchFn(timerange)
-      this.$refs.graphMarketValueQuantity.$refs.progress.finish()
+      this.$refs.graphDoubleline.$refs.progress.finish()
     }
   }
 }
