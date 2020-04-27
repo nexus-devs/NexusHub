@@ -44,11 +44,13 @@
                               title="Overview Europe"
                               storage="overview-eu"
                               :value-entries="valueEntriesGlobal[0]"
+                              :refetch-fn="refetchGlobalGraph('eu')"
             />
             <graph-doubleline class="col-b graph"
                               title="Overview United States"
                               storage="overview-us"
                               :value-entries="valueEntriesGlobal[1]"
+                              :refetch-fn="refetchGlobalGraph('us')"
             />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
@@ -264,6 +266,17 @@ export default {
         }),
         timerange: timerange
       })
+    },
+    refetchGlobalGraph (region) {
+      return async (timerange) => {
+        const itemId = this.$store.state.items.item.itemId
+        const itemData = await this.$cubic.get(`/wow-classic/v1/items/${region}/${itemId}/prices?region=true&timerange=${timerange}`)
+        this.$store.commit('setGraph', {
+          graph: `overview-${region}`,
+          data: itemData.data,
+          timerange
+        })
+      }
     }
   },
 
