@@ -51,6 +51,10 @@
                 </router-link>
               </div>
             </div>
+
+            <div class="row">
+              <ad name="landing-page" />
+            </div>
           </div>
 
           <div class="row scrolldown">
@@ -79,6 +83,7 @@
 
 
 <script>
+import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import blogPreview from 'src/components/blog/blog-preview.vue'
 import meta from 'src/components/seo/meta.js'
@@ -87,6 +92,7 @@ import navigation from 'src/components/ui/nav/index.vue'
 
 export default {
   components: {
+    ad,
     appContent,
     blogPreview,
     module,
