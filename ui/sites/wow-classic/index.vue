@@ -30,6 +30,7 @@
       <!-- Market Overview -->
       <section>
         <div class="container">
+          <ad name="wow-classic-index-overview" />
           <div class="row overview">
             <div v-if="global" class="col-b">
               <h2 class="sub">
@@ -117,7 +118,7 @@
               </div>
             </div>
           </div>
-          <ad name="wow-classic-index-overview" />
+          <ad name="wow-classic-index-news" />
         </div>
       </section>
 
@@ -130,7 +131,6 @@
           <div class="row-margin patchlogs">
             <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b" />
           </div>
-          <ad name="wow-classic-index-news" />
         </div>
       </section>
     </app-content>
@@ -297,6 +297,11 @@ export default {
   100% {
     transform: scaleX(1);
   }
+}
+
+.ad-unit:first-of-type {
+  margin-top: -50px;
+  margin-bottom: 10px;
 }
 
 header {
