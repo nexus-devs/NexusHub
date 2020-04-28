@@ -4,6 +4,7 @@
     <item-header />
     <app-content>
       <section>
+        <ad name="wow-classic-item-crafting-filter" />
         <div class="container">
           <!-- Filters -->
           <div class="filter">
@@ -180,6 +181,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.ad-unit:first-of-type {
+  margin-top: -40px;
+  margin-bottom: -10px;
+}
 
 /deep/ {
   .zoom-enter-active, .fade-leave-active {
