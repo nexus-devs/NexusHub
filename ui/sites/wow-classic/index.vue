@@ -299,9 +299,11 @@ export default {
   }
 }
 
-.ad-unit:first-of-type {
-  margin-top: -50px;
-  margin-bottom: 10px;
+.ad-unit, .blocked-unit {
+  &:first-of-type {
+    margin-top: -50px;
+    margin-bottom: 10px;
+  }
 }
 
 header {

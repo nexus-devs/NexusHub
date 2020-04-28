@@ -182,9 +182,11 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
 
-.ad-unit:first-of-type {
-  margin-top: -40px;
-  margin-bottom: -10px;
+.ad-unit, .blocked-unit {
+  &:first-of-type {
+    margin-top: -40px;
+    margin-bottom: -10px;
+  }
 }
 
 /deep/ {

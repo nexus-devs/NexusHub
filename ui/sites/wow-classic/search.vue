@@ -138,8 +138,10 @@ export default {
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
 
-.ad-unit:not(:last-of-type) { // For whatever reason first of type doesnt work here
-  margin: 0;
+.ad-unit, .blocked-unit { // For whatever reason first of type doesnt work here
+  &:not(:last-of-type) {
+    margin: 0;
+  }
 }
 
 .search-input {
