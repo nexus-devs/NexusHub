@@ -4,6 +4,7 @@
     <item-header />
     <app-content>
       <section>
+        <ad name="wow-classic-item-overview-main" />
         <div class="container">
           <h2 class="sub">
             Item Overview
@@ -14,8 +15,8 @@
             </div>
             <stats class="col-b stats" />
           </div>
-          <ad name="wow-classic-item-overview-main" />
         </div>
+        <ad name="wow-classic-item-overview-statistics" />
       </section>
       <section v-if="displayGraphs">
         <div class="container">
@@ -37,7 +38,6 @@
             <heatmap-value class="col-b graph" />
             <heatmap-quantity class="col-b graph" />
           </div>
-          <ad name="wow-classic-item-overview-statistics" />
         </div>
       </section>
     </app-content>
@@ -152,6 +152,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.ad-unit:first-of-type {
+  margin-top: -50px;
+  margin-bottom: 10px;
+}
 
 /deep/ {
   .zoom-enter-active, .fade-leave-active {
