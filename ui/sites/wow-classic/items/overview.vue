@@ -114,13 +114,15 @@ export default {
 
     // Fetch local server graphs
     } else {
-      const [localPrices, regionalPrices] = await Promise.all([
-        this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`),
+      const [priceData, regionalPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices?timerange=30`),
         this.$cubic.get(`/wow-classic/v1/items/${store.state.servers.activeServer.region}/${item}/prices?region=true`)
       ])
 
+      const localPrices = priceData.data.filter(d => new Date(d.scannedAt) >= new Date(Date.now() - 1000 * 60 * 60 * 24 * 7))
+
       const interpolatedRegional = utility.interpolateValues(
-        localPrices.data.map(p => {
+        localPrices.map(p => {
           return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
         }),
         regionalPrices.data.map(p => {
@@ -130,12 +132,12 @@ export default {
 
       store.commit('setGraph', {
         graph: 'marketValue-quantity',
-        data: localPrices.data,
+        data: localPrices,
         timerange: 7
       })
       store.commit('setGraph', {
         graph: 'regional-comparison',
-        data: localPrices.data.map((d, i) => {
+        data: localPrices.map((d, i) => {
           return {
             ...d,
             regionalMarketValue: interpolatedRegional[i].marketValue,
@@ -144,6 +146,11 @@ export default {
           }
         }),
         timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'heatmap-primary',
+        data: priceData.data,
+        timerange: 30
       })
     }
   },

@@ -8,7 +8,7 @@
 import * as d3 from 'd3'
 
 export default {
-  props: ['data'],
+  props: ['data', 'medium'],
   data () {
     return {
       svg: '',
@@ -41,26 +41,39 @@ export default {
 
       // Create chart (needed for custom padding)
       this.chart = this.svg.append('g').attr('transform', `translate(${padding.left}, ${padding.top})`)
+      const xTicks = ['12am', '2am', '4am', '6am', '8am', '10am', '12pm', '2pm', '4pm', '6pm', '8pm', '10pm', '12pm']
+      const yTicks = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
       // Create scales
       const xScale = d3.scaleBand()
         .range([0, width])
-        .padding(0.25)
-        .domain(['12am', '2am', '4am', '6am', '8am', '10am', '12pm', '2pm', '4pm', '6pm', '8pm', '10pm', '12pm'])
+        .padding(0.15)
+        .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
       const yScale = d3.scaleBand()
-        .range([height, 0])
+        .range([0, height])
         .padding(0.25)
-        .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
-      /* const colorScale = d3.scaleLinear()
-        .range(['#e0b534', 'transparent', '#23acd9']) */
+        .domain([0, 1, 2, 3, 4, 5, 6])
+      const colorScale = d3.scaleLinear()
+        .range(['#00c0ff', 'transparent', '#e6ad02'])
+        .domain([d3.min(this.data, d => d.value), this.medium, d3.max(this.data, d => d.value)])
 
       this.chart.append('g')
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
-        .call(d3.axisBottom(xScale).tickSize(0))
+        .call(d3.axisBottom(xScale).tickSize(0).tickFormat(d => xTicks[d]))
       this.chart.append('g')
         .attr('class', 'axis')
-        .call(d3.axisLeft(yScale).tickSize(0))
+        .call(d3.axisLeft(yScale).tickSize(0).tickFormat(d => yTicks[d]))
+
+      this.chart.selectAll()
+        .data(this.data, d => d.hour + ':' + d.day)
+        .enter()
+        .append('rect')
+        .attr('x', d => xScale(d.hour))
+        .attr('y', d => yScale(d.day))
+        .attr('width', xScale.bandwidth())
+        .attr('height', yScale.bandwidth())
+        .style('fill', d => colorScale(d.value))
     }
   }
 }
