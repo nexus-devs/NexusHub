@@ -17,7 +17,7 @@ export default {
       padding: {
         top: 20,
         bottom: 20 + 16,
-        left: 25,
+        left: 25 + 20,
         right: 25
       },
       breakpointSmall: 640
@@ -57,10 +57,10 @@ export default {
       this.chart.append('g')
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
-        .call(d3.axisBottom(xScale))
+        .call(d3.axisBottom(xScale).tickSize(0))
       this.chart.append('g')
         .attr('class', 'axis')
-        .call(d3.axisLeft(yScale))
+        .call(d3.axisLeft(yScale).tickSize(0))
     }
   }
 }
@@ -68,4 +68,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.heatmap {
+  position: relative;
+}
+svg {
+  width: 100%;
+  height: 100%;
+}
+/deep/ .axis {
+  color: $color-font-body;
+  font-size: 0.7em;
+
+  path {
+    stroke: none;
+  }
+}
 </style>

@@ -53,6 +53,10 @@
                               :refetch-fn="refetchGlobalGraph('us')"
             />
           </div>
+          <div v-if="!global" class="row-margin">
+            <graph-heatmap class="col-b graph" />
+            <graph-heatmap class="col-b graph" />
+          </div>
           <ad name="wow-classic-item-overview-statistics" />
         </div>
       </section>
@@ -67,6 +71,7 @@ import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
 import graphDoubleline from 'src/components/wow-classic/graph-doubleline.vue'
+import graphHeatmap from 'src/components/wow-classic/graph-heatmap.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
@@ -81,7 +86,8 @@ export default {
     itemHeader,
     description,
     stats,
-    graphDoubleline
+    graphDoubleline,
+    graphHeatmap
   },
 
   async asyncData ({ store, route }) {
