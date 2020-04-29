@@ -6,6 +6,7 @@
 
 <script>
 import * as d3 from 'd3'
+import utility from 'src/components/wow-classic/utility.js'
 
 export default {
   props: ['data', 'medium'],
@@ -32,6 +33,11 @@ export default {
 
   mounted () {
     this.svg = d3.select(this.$el).select('svg')
+    this.tooltip = d3.select(this.$el).append('div')
+      .attr('class', 'tooltip')
+      .style('display', 'none')
+    this.tooltip.append('div').attr('class', 'tooltip-date')
+    this.tooltip.append('div').attr('class', 'tooltip-value')
 
     window.addEventListener('resize', this.onResize)
     this.createChart()
@@ -50,7 +56,15 @@ export default {
       }, delay ? 100 : 0)
     },
     createChart () {
+      const tooltip = this.tooltip
       const padding = { ...this.padding }
+      const smallDevice = window.innerWidth <= this.breakpointSmall
+
+      // Adjust padding if small device
+      if (smallDevice) {
+        padding.left = 10 + 20
+        padding.right = 10
+      }
 
       // Get dimensions
       const boundingBox = this.svg.node().getBoundingClientRect()
@@ -60,7 +74,7 @@ export default {
       // Create chart (needed for custom padding)
       this.chart = this.svg.append('g').attr('transform', `translate(${padding.left}, ${padding.top})`)
       const xTicks = ['12am', '2am', '4am', '6am', '8am', '10am', '12pm', '2pm', '4pm', '6pm', '8pm', '10pm', '12pm']
-      const yTicks = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      const yTicks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
       // Create scales
       const xScale = d3.scaleBand()
@@ -75,23 +89,44 @@ export default {
         .range(['#00c0ff', 'transparent', '#e6ad02'])
         .domain([d3.min(this.data, d => d.value), this.medium, d3.max(this.data, d => d.value)])
 
+      // Create axes
       this.chart.append('g')
         .attr('transform', `translate(0, ${height})`)
         .attr('class', 'axis')
         .call(d3.axisBottom(xScale).tickSize(0).tickFormat(d => xTicks[d]))
       this.chart.append('g')
         .attr('class', 'axis')
-        .call(d3.axisLeft(yScale).tickSize(0).tickFormat(d => yTicks[d]))
+        .call(d3.axisLeft(yScale).tickSize(0).tickFormat(d => yTicks[d].slice(0, 3)))
 
+      // Select tooltip content
+      const tooltipDate = this.tooltip.select('.tooltip-date')
+      const tooltipValue = this.tooltip.select('.tooltip-value')
+
+      // Create rectangles
       this.chart.selectAll()
         .data(this.data, d => d.hour + ':' + d.day)
         .enter()
         .append('rect')
         .attr('x', d => xScale(d.hour))
         .attr('y', d => yScale(d.day))
+        .attr('rx', 0)
         .attr('width', xScale.bandwidth())
         .attr('height', yScale.bandwidth())
         .style('fill', d => colorScale(d.value))
+        .on('mouseover', function () {
+          d3.select(this).attr('class', 'rect-hover')
+          tooltip.style('display', null)
+        })
+        .on('mouseout', function () {
+          d3.select(this).attr('class', null)
+          tooltip.style('display', 'none')
+        })
+        .on('mousemove', function (d) {
+          if (!smallDevice) tooltip.attr('style', `left: ${xScale(d.hour) + 96}px; top: ${yScale(d.day)}px;`)
+          else tooltip.attr('style', `left: ${width / 3}px; top: -48px;`)
+          tooltipDate.text(`${yTicks[d.day]}, ${xTicks[d.hour]} - ${xTicks[(d.hour + 1) % 12]}`)
+          tooltipValue.text(utility.parsePrice(d.value))
+        })
     }
   }
 }
@@ -114,5 +149,31 @@ svg {
   path {
     stroke: none;
   }
+}
+/deep/ .tooltip {
+  white-space: nowrap;
+  z-index: 1;
+  padding: 10px 12px;
+  position: absolute;
+  background-color: $color-bg;
+  pointer-events: none;
+  transition: all 0.05s;
+  @include shadow-1;
+  border-radius: 2px;
+  font-size: 0.9em;
+
+  .tooltip-date {
+    color: $color-font-paragraph;
+  }
+  .tooltip-value {
+    margin-top: 5px;
+
+    span {
+      vertical-align: initial;
+    }
+  }
+}
+/deep/ .rect-hover {
+  outline: thin solid $color-font-body;
 }
 </style>
