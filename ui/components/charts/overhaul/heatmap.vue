@@ -24,13 +24,31 @@ export default {
     }
   },
 
+  watch: {
+    data (newData, oldData) {
+      this.onResize(false)
+    }
+  },
+
   mounted () {
     this.svg = d3.select(this.$el).select('svg')
 
+    window.addEventListener('resize', this.onResize)
     this.createChart()
   },
 
+  beforeDestroy () {
+    window.removeEventListener('resize', this.onResize)
+  },
+
   methods: {
+    onResize (delay = true) {
+      // Timeout because certain actions like maximize trigger the resize event before actually maximizing
+      setTimeout(() => {
+        this.svg.selectAll('*').remove()
+        this.createChart()
+      }, delay ? 100 : 0)
+    },
     createChart () {
       const padding = { ...this.padding }
 

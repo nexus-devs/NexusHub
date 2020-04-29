@@ -29,7 +29,7 @@ export default {
 
   computed: {
     medium () {
-      return this.$store.state.items.item.stats.current.marketValue
+      return this.$store.state.items.item.stats.current ? this.$store.state.items.item.stats.current.marketValue : null
     },
     data () {
       const data = []

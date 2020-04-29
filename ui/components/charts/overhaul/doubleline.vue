@@ -40,7 +40,7 @@ export default {
 
   watch: {
     data (newData, oldData) {
-      this.onResize()
+      this.onResize(false)
     }
   },
 
@@ -63,12 +63,12 @@ export default {
   },
 
   methods: {
-    onResize () {
+    onResize (delay = true) {
       // Timeout because certain actions like maximize trigger the resize event before actually maximizing
       setTimeout(() => {
         this.svg.selectAll('*').remove()
         this.createChart()
-      }, 100)
+      }, delay ? 100 : 0)
     },
     createChart () {
       const options = this.options
