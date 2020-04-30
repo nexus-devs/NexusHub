@@ -56,12 +56,12 @@
           <div v-if="!global" class="row-margin">
             <graph-heatmap class="col-b graph"
                            title="Market Value Heatmap"
-                           storage="heatmap"
+                           storage="heatmap-primary"
                            :value-entries="valueEntriesLocal"
             />
             <graph-heatmap class="col-b graph"
                            title="Quantity Heatmap"
-                           storage="heatmap"
+                           storage="heatmap-secondary"
                            :value-entries="valueEntriesLocal.slice(1).concat(valueEntriesLocal.slice(0, 1))"
             />
           </div>
@@ -156,7 +156,12 @@ export default {
         timerange: 7
       })
       store.commit('setGraph', {
-        graph: 'heatmap',
+        graph: 'heatmap-primary',
+        data: priceData.data,
+        timerange: 30
+      })
+      store.commit('setGraph', {
+        graph: 'heatmap-secondary',
         data: priceData.data,
         timerange: 30
       })

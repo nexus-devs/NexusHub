@@ -24,7 +24,7 @@
       <heatmap :data="data" :medium="medium" />
     </template>
     <template slot="footer">
-      <module-time />
+      <module-time :days="timerange" :fn="setTimerange" />
     </template>
   </module>
 </template>
@@ -55,6 +55,9 @@ export default {
   },
 
   computed: {
+    timerange () {
+      return this.$store.state.items.graphs[this.storage].timerange
+    },
     medium () {
       return this.$store.state.items.item.stats.current ? this.$store.state.items.item.stats.current.marketValue : null
     },
@@ -94,6 +97,25 @@ export default {
 
       const toGold = (p) => (p / 10000).toFixed(2) + 'g'
       return { min: toGold(min), max: toGold(max), medium: toGold(this.medium) }
+    }
+  },
+
+  methods: {
+    async setTimerange (timerange) {
+      if (timerange === this.timerange) return
+
+      this.$refs.graphHeatmap.$refs.progress.start()
+
+      const itemId = this.$store.state.items.item.itemId
+      const server = this.$store.state.servers.activeServer.slug
+      const itemData = await this.$cubic.get(`/wow-classic/v1/items/${server}/${itemId}/prices?timerange=${timerange}`)
+      this.$store.commit('setGraph', {
+        graph: this.storage,
+        data: itemData.data,
+        timerange
+      })
+
+      this.$refs.graphHeatmap.$refs.progress.finish()
     }
   }
 }
