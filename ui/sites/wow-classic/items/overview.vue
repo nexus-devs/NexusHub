@@ -54,8 +54,14 @@
             />
           </div>
           <div v-if="!global" class="row-margin">
-            <graph-heatmap class="col-b graph" />
-            <graph-heatmap class="col-b graph" />
+            <graph-heatmap class="col-b graph"
+                           title="Market Value Heatmap"
+                           storage="heatmap"
+            />
+            <graph-heatmap class="col-b graph"
+                           title="Quantity Heatmap"
+                           storage="heatmap"
+            />
           </div>
           <ad name="wow-classic-item-overview-statistics" />
         </div>
@@ -148,7 +154,7 @@ export default {
         timerange: 7
       })
       store.commit('setGraph', {
-        graph: 'heatmap-primary',
+        graph: 'heatmap',
         data: priceData.data,
         timerange: 30
       })

@@ -3,7 +3,7 @@
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
-        <h3>Heatmap</h3>
+        <h3>{{ title }}</h3>
       </div>
       <div class="legend-container">
         <div class="legend">
@@ -41,6 +41,8 @@ export default {
     moduleTime
   },
 
+  props: ['title', 'storage'],
+
   computed: {
     medium () {
       return this.$store.state.items.item.stats.current ? this.$store.state.items.item.stats.current.marketValue : null
@@ -48,7 +50,7 @@ export default {
     data () {
       const data = []
       const bracketSize = 2 // Hours per bracket
-      const rawData = this.$store.state.items.graphs['heatmap-primary'].data
+      const rawData = this.$store.state.items.graphs[this.storage].data
 
       for (const entry of rawData) {
         const scannedAt = new Date(entry.scannedAt)
@@ -104,7 +106,7 @@ export default {
   }
 }
 .legend-container {
-  flex-basis: 42%;
+  flex-basis: 35%;
   padding-right: 5px;
 
   @media (max-width: $breakpoint-s) {
