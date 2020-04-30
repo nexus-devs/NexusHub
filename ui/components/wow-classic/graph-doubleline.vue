@@ -22,8 +22,7 @@
     <template slot="footer" class="optionsActive">
       <module-time :days="timerange" :fn="setTimerange" />
       <div class="interactive" @click="toggleOptions('optionsActive')">
-        <span>Options</span>
-        <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+        <img src="/img/ui/settings.svg" :class="{ active: optionsActive }" class="ico-h-20" alt="Options">
       </div>
       <div :class="{ active: optionsActive }" class="options">
         <div class="row">
@@ -186,6 +185,10 @@ export default {
 .interactive {
   padding: 6px 10px;
   font-size: 1.1em;
+
+  img:not(.active) {
+    opacity: 0.5;
+  }
 }
 .options {
   border-top: 1px solid $color-font-subtle;
