@@ -16,7 +16,7 @@ export default {
       tooltip: '',
       chart: '',
       padding: {
-        top: 20,
+        top: 20 - 8, // Compensate for legend height
         bottom: 20 + 16,
         left: 25 + 20,
         right: 25
