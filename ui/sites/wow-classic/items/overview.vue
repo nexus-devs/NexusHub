@@ -57,10 +57,12 @@
             <graph-heatmap class="col-b graph"
                            title="Market Value Heatmap"
                            storage="heatmap"
+                           :value-entries="valueEntriesLocal"
             />
             <graph-heatmap class="col-b graph"
                            title="Quantity Heatmap"
                            storage="heatmap"
+                           :value-entries="valueEntriesLocal.slice(1).concat(valueEntriesLocal.slice(0, 1))"
             />
           </div>
           <ad name="wow-classic-item-overview-statistics" />

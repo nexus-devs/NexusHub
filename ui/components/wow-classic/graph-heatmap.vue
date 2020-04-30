@@ -41,7 +41,18 @@ export default {
     moduleTime
   },
 
-  props: ['title', 'storage'],
+  props: ['valueEntries', 'title', 'storage'],
+
+  data () {
+    return {
+      optionsActive: false,
+      optionsPrimaryActive: false,
+      options: {
+        outlier: 10,
+        primary: this.valueEntries[0]
+      }
+    }
+  },
 
   computed: {
     medium () {
@@ -50,17 +61,24 @@ export default {
     data () {
       const data = []
       const bracketSize = 2 // Hours per bracket
-      const rawData = this.$store.state.items.graphs[this.storage].data
+      const rawData = this.$store.state.items.graphs[this.storage].data.slice()
+
+      rawData.sort((a, b) => a[this.options.primary.key] - b[this.options.primary.key])
+      const len = rawData.length
+      const median = len ? (len % 2 ? rawData[Math.floor(len / 2)].y1 : (rawData[len / 2].y1 + rawData[len / 2 - 1].y1) / 2) : 0
 
       for (const entry of rawData) {
+        const value = entry[this.options.primary.key]
+        if ((median / value <= this.options.outlier / 100) || (value <= median * (this.options.outlier / 100))) continue
+
         const scannedAt = new Date(entry.scannedAt)
         const day = (((scannedAt.getDay() - 1) % 7) + 7) % 7 // Change it so 0 is monday (also emulate modulo, fuck you javascript)
         const hour = Math.floor(scannedAt.getHours() / bracketSize)
 
         const storedData = data.find(d => d.day === day && d.hour === hour)
-        if (!storedData) data.push({ value: entry.marketValue, count: 1, day, hour })
+        if (!storedData) data.push({ value, count: 1, day, hour })
         else {
-          storedData.value += entry.marketValue
+          storedData.value += value
           storedData.count++
         }
       }
