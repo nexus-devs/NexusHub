@@ -29,7 +29,7 @@ export default {
   computed: {
     options () {
       const defaultOptions = {
-        secondaryLabel: 'Quantity',
+        secondaryLabel: '',
         secondaryScale: true,
         parsePrice: { primary: true, secondary: false },
         areaChart: { primary: false, secondary: true }

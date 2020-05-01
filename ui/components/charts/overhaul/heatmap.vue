@@ -9,7 +9,7 @@ import * as d3 from 'd3'
 import utility from 'src/components/wow-classic/utility.js'
 
 export default {
-  props: ['data', 'medium'],
+  props: ['data', 'medium', 'opts'],
   data () {
     return {
       svg: '',
@@ -22,6 +22,15 @@ export default {
         right: 25
       },
       breakpointSmall: 640
+    }
+  },
+
+  computed: {
+    options () {
+      const defaultOptions = {
+        parsePrice: true
+      }
+      return { ...defaultOptions, ...this.opts }
     }
   },
 
@@ -56,6 +65,7 @@ export default {
       }, delay ? 100 : 0)
     },
     createChart () {
+      const options = this.options
       const tooltip = this.tooltip
       const padding = { ...this.padding }
       const smallDevice = window.innerWidth <= this.breakpointSmall
@@ -125,7 +135,7 @@ export default {
           if (!smallDevice) tooltip.attr('style', `left: ${xScale(d.hour) + 96}px; top: ${yScale(d.day)}px;`)
           else tooltip.attr('style', `left: ${width / 3}px; top: -48px;`)
           tooltipDate.text(`${yTicks[d.day]}, ${xTicks[d.hour]} - ${xTicks[(d.hour + 1) % 12]}`)
-          tooltipValue.text(utility.parsePrice(d.value))
+          tooltipValue.text(options.parsePrice ? utility.parsePrice(d.value) : d.value)
         })
     }
   }

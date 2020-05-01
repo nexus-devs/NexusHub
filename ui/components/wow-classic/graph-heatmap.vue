@@ -21,7 +21,7 @@
       </div>
     </template>
     <template slot="body">
-      <heatmap :data="data" :medium="medium.value" />
+      <heatmap :data="data" :medium="medium.value" :opts="heatmapOpts" />
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange" />
@@ -99,7 +99,14 @@ export default {
       const max = Math.max(...mappedValues)
 
       const toGold = (p) => (p / 10000).toFixed(2) + 'g'
-      return { min: toGold(min), max: toGold(max), medium: toGold(this.medium.value) }
+      return this.heatmapOpts.parsePrice
+        ? { min: toGold(min), max: toGold(max), medium: toGold(this.medium.value) }
+        : { min, max, medium: this.medium.value }
+    },
+    heatmapOpts () {
+      return {
+        parsePrice: this.options.primary.price
+      }
     }
   },
 
