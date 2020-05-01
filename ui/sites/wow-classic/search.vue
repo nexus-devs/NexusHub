@@ -30,6 +30,7 @@
             <span>Results for</span>
             <h1>{{ input }}</h1>
           </div>
+          <ad name="wow-classic-serp-filter" />
           <results-group :type="'items'" />
         </div>
         <ad name="wow-classic-serp-results" />
@@ -136,6 +137,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.ad-unit, .blocked-unit { // For whatever reason first of type doesnt work here
+  &:not(:last-of-type) {
+    margin: 0;
+  }
+}
 
 .search-input {
   position: relative;

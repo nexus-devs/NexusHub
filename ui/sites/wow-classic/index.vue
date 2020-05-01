@@ -30,6 +30,7 @@
       <!-- Market Overview -->
       <section>
         <div class="container">
+          <ad name="wow-classic-index-overview" />
           <div class="row overview">
             <div v-if="global" class="col-b">
               <h2 class="sub">
@@ -117,7 +118,7 @@
               </div>
             </div>
           </div>
-          <ad name="wow-classic-index-overview" />
+          <ad name="wow-classic-index-news" />
         </div>
       </section>
 
@@ -130,7 +131,6 @@
           <div class="row-margin patchlogs">
             <news-article v-for="article in news" :key="article.date" :patchlog="article" :overview="true" class="col-b" />
           </div>
-          <ad name="wow-classic-index-news" />
         </div>
       </section>
     </app-content>
@@ -191,6 +191,7 @@ export default {
       const trendingItems = (await Promise.all(parallel)).map((item, index) => {
         return { ...item, viewPercentage: Math.round((items[index].views / viewSum) * 10000) / 10000 }
       })
+
       store.commit('setIndexTrendingItems', trendingItems)
       store.commit('setNews', news)
 
@@ -240,9 +241,9 @@ export default {
   storeModule,
 
   head: {
-    title: 'NexusHub · All WoW Classic Auction House data and prices in one place!',
+    title: 'NexusHub · WoW Classic Auction House data and prices',
     meta: meta({
-      title: 'NexusHub · All WoW Classic Auction House data and prices in one place!',
+      title: 'NexusHub · WoW Classic Auction House data and prices',
       description: 'Get up-to-date data and prices from all World of Warcraft Classic realms and auction houses!',
       image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
@@ -295,6 +296,13 @@ export default {
   }
   100% {
     transform: scaleX(1);
+  }
+}
+
+.ad-unit, .blocked-unit {
+  &:first-of-type {
+    margin-top: -50px;
+    margin-bottom: 10px;
   }
 }
 

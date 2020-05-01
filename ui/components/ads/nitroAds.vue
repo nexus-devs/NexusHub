@@ -1,8 +1,7 @@
 <template>
-  <div :id="`ad-${name}`" :style="{
-    'max-height': maxHeight,
-    'max-width': maxWidth
-  }" :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']" class="layout-center"
+  <div :id="`ad-${name}`" :style="{ 'max-height': maxHeight, 'max-width': maxWidth}"
+       :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
+       class="layout-center"
   >
     <span v-if="blocked">Advertising seems to be blocked by your browser. This is fine.</span>
     <span v-if="blocked">NexusHub is completely free and we want it to stay that way.
@@ -40,6 +39,7 @@ export default {
     }
 
     nitroAds.createAd(`ad-${this.name}`, {
+      demo: !this.$PRODUCTION,
       floor: 0.05,
       refreshLimit: 10,
       refreshTime: 60,

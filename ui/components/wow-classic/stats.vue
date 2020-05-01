@@ -272,8 +272,8 @@ export default {
       return this.item.stats
     },
     globalGraphData () {
-      const EU = this.$store.state.graphs.storage['graph-overview-eu'].data
-      const US = this.$store.state.graphs.storage['graph-overview-us'].data
+      const EU = this.$store.state.items.graphs['overview-eu'].data
+      const US = this.$store.state.items.graphs['overview-us'].data
       return { EU, US }
     },
     globalStatsPrevious () {

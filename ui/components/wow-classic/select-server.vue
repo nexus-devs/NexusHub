@@ -2,7 +2,7 @@
   <div class="select">
     <div class="interactive" @click="toggle">
       <span>{{ activeServer.slug ? activeServer.name : 'Select Realm' }}</span>
-      <img v-if="activeServer.slug" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeFactionPretty} Logo`" class="faction-logo">
+      <img v-if="activeServer.slug" :src="`/img/wow-classic/ui/${activeServer.faction}.svg`" :alt="`${activeServer.name } (${activeFactionPretty})`" class="faction-logo">
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
@@ -19,10 +19,10 @@
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
-              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
+              <img src="/img/wow-classic/ui/alliance.svg" :alt="`${s.name} (Alliance)`">
             </router-link>
             <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="setCookie(s.slug + '-horde'); toggle();">
-              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
+              <img src="/img/wow-classic/ui/horde.svg" :alt="`${s.name} (Horde)`">
             </router-link>
           </div>
         </template>
@@ -35,10 +35,10 @@
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
-              <img src="/img/wow-classic/ui/alliance.svg" alt="Alliance Logo">
+              <img src="/img/wow-classic/ui/alliance.svg" :alt="`${s.name} (Alliance)`">
             </router-link>
             <router-link :to="fn(s.slug + '-horde')" class="image-wrapper" @click.native="setCookie(s.slug + '-horde'); toggle();">
-              <img src="/img/wow-classic/ui/horde.svg" alt="Horde Logo">
+              <img src="/img/wow-classic/ui/horde.svg" :alt="`${s.name} (Horde)`">
             </router-link>
           </div>
         </template>

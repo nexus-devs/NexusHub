@@ -4,6 +4,7 @@
     <item-header />
     <app-content>
       <section>
+        <ad name="wow-classic-item-crafting-filter" />
         <div class="container">
           <!-- Filters -->
           <div class="filter">
@@ -84,7 +85,7 @@ export default {
     const slug = route.params.slug
 
     // Only fetch item data if we actually have a new item or new server
-    if ((store.state.crafting.itemId !== parseInt(item) && store.state.crafting.uniqueName !== item) || store.state.crafting.slug !== slug) {
+    if (store.state.crafting.uniqueName !== item || store.state.crafting.slug !== slug) {
       const craftingData = await this.$cubic.get(`/wow-classic/v1/crafting${slug ? `/${slug}` : ''}/${item}`)
       store.commit('setCrafting', craftingData)
     }
@@ -180,6 +181,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~src/styles/partials/wow-classic/importer';
+
+.ad-unit, .blocked-unit {
+  &:first-of-type {
+    margin-top: -40px;
+    margin-bottom: -10px;
+  }
+}
 
 /deep/ {
   .zoom-enter-active, .fade-leave-active {
