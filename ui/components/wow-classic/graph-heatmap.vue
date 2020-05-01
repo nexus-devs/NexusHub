@@ -15,13 +15,13 @@
             <div class="medium-divide" />
           </div>
           <div class="legend-below">
-            <span>Market Value ({{ legendStats.medium }})</span>
+            <span>{{ medium.label }} ({{ legendStats.medium }})</span>
           </div>
         </div>
       </div>
     </template>
     <template slot="body">
-      <heatmap :data="data" :medium="medium" />
+      <heatmap :data="data" :medium="medium.value" />
     </template>
     <template slot="footer">
       <module-time :days="timerange" :fn="setTimerange" />
@@ -41,7 +41,7 @@ export default {
     moduleTime
   },
 
-  props: ['valueEntries', 'title', 'storage'],
+  props: ['valueEntries', 'title', 'storage', 'customMedium'],
 
   data () {
     return {
@@ -59,7 +59,10 @@ export default {
       return this.$store.state.items.graphs[this.storage].timerange
     },
     medium () {
-      return this.$store.state.items.item.stats.current ? this.$store.state.items.item.stats.current.marketValue : null
+      return this.customMedium || {
+        label: 'Avg. ' + this.options.primary.name,
+        value: Math.round(this.data.reduce((total, next) => total + next.value, 0) / this.data.length)
+      }
     },
     data () {
       const data = []
@@ -96,7 +99,7 @@ export default {
       const max = Math.max(...mappedValues)
 
       const toGold = (p) => (p / 10000).toFixed(2) + 'g'
-      return { min: toGold(min), max: toGold(max), medium: toGold(this.medium) }
+      return { min: toGold(min), max: toGold(max), medium: toGold(this.medium.value) }
     }
   },
 

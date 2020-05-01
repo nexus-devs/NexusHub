@@ -58,6 +58,7 @@
                            title="Market Value Heatmap"
                            storage="heatmap-primary"
                            :value-entries="valueEntriesLocal"
+                           :custom-medium="item.stats.current ? { label: 'Market Value', value: item.stats.current.marketValue } : null"
             />
             <graph-heatmap class="col-b graph"
                            title="Quantity Heatmap"
