@@ -1,5 +1,5 @@
 <template>
-  <module ref="graphHeatmap" class="graph">
+  <module ref="graphHeatmap" :class="{ optionsActive }" class="graph">
     <template slot="header">
       <div class="title">
         <img src="/img/wow-classic/ui/trade.svg" alt="Trade" class="ico-h-20">
@@ -23,8 +23,40 @@
     <template slot="body">
       <heatmap :data="data" :medium="medium.value" :opts="heatmapOpts" />
     </template>
-    <template slot="footer">
+    <template slot="footer" class="optionsActive">
       <module-time :days="timerange" :fn="setTimerange" />
+      <div class="interactive" @click="toggleOptions('optionsActive')">
+        <img src="/img/ui/settings.svg" :class="{ active: optionsActive }" class="ico-h-20" alt="Options">
+      </div>
+      <div :class="{ active: optionsActive }" class="options">
+        <div class="row">
+          <div class="col-b">
+            <span>Primary:</span>
+            <div class="dropdown-container">
+              <div class="interactive" @click="toggleOptions('optionsPrimaryActive')">
+                <span>{{ options.primary.name }}</span>
+                <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
+              </div>
+              <div :class="{ active: optionsPrimaryActive }" class="dropdown">
+                <div class="dropdown-body">
+                  <span v-for="entry in valueEntries"
+                        :key="'primary' + entry.key"
+                        :class="{ selected: options.primary.key === entry.key }"
+                        @click="selectValueEntry(entry); toggleOptions('optionsPrimaryActive')"
+                  >
+                    {{ entry.name }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-b">
+            <span>Remove outliers:</span>
+            <input v-model="options.outlier">
+            <span>%</span>
+          </div>
+        </div>
+      </div>
     </template>
   </module>
 </template>
@@ -72,7 +104,7 @@ export default {
 
       rawData.sort((a, b) => a[this.options.primary.key] - b[this.options.primary.key])
       const len = rawData.length
-      const median = len ? (len % 2 ? rawData[Math.floor(len / 2)].y1 : (rawData[len / 2].y1 + rawData[len / 2 - 1].y1) / 2) : 0
+      const median = len ? (len % 2 ? rawData[Math.floor(len / 2)][this.options.primary.key] : (rawData[len / 2][this.options.primary.key] + rawData[len / 2 - 1][this.options.primary.key]) / 2) : 0
 
       for (const entry of rawData) {
         const value = entry[this.options.primary.key]
@@ -112,6 +144,13 @@ export default {
   },
 
   methods: {
+    selectValueEntry (entry) {
+      if (this.options.primary.key === entry.key) return
+      this.options.primary = entry
+    },
+    toggleOptions (dropdown) {
+      this[dropdown] = !this[dropdown]
+    },
     async setTimerange (timerange) {
       if (timerange === this.timerange) return
 
@@ -137,7 +176,7 @@ export default {
 
 .graph {
   max-width: none !important;
-  // max-height: 306px;
+  max-height: 314px;
 
   > /deep/ .body {
     padding: 0;
@@ -154,6 +193,92 @@ export default {
   > /deep/ .footer {
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+
+  &.optionsActive {
+    max-height: none;
+  }
+}
+.interactive {
+  padding: 6px 10px;
+  font-size: 1.1em;
+
+  img:not(.active) {
+    opacity: 0.5;
+  }
+}
+.options {
+  border-top: 1px solid $color-font-subtle;
+  padding: 10px;
+  flex-basis: 100%;
+  font-size: 1.1em;
+
+  .col-b {
+    display: flex;
+    align-items: center;
+  }
+  .interactive {
+    text-align: center;
+    min-width: 100px;
+    margin-left: 5px;
+    font-size: 1em;
+  }
+  .dropdown-container {
+    position: relative;
+  }
+  .dropdown {
+    z-index: 1;
+    background-color: $color-bg;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 5px 0;
+    @include ease(0.15s);
+    @include shade-1;
+
+    .dropdown-body {
+      display: flex;
+      flex-direction: column;
+
+      span {
+        cursor: pointer;
+        padding: 10px 15px;
+        @include ease(0.15s);
+      }
+      span:hover {
+        background: rgba(0,0,0,0.15);
+      }
+      span:not(.selected) {
+        color: $color-font-body;
+      }
+    }
+    &:not(.active) {
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-5px);
+      transform-origin: top;
+      @include ease(0.15s);
+    }
+  }
+
+  &:not(.active) {
+    display: none;
+  }
+  .row:not(:first-child) {
+    margin-top: 10px;
+  }
+
+  input {
+    font-family: Monospace;
+    font-weight: bold;
+    border-radius: 2px;
+    text-overflow: ellipsis;
+
+    background-color: #554942;
+    padding: 4px 6px;
+    text-align: center;
+    width: 35px;
+    margin-left: 5px;
   }
 }
 .legend-container {
