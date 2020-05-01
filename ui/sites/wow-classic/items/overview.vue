@@ -18,25 +18,53 @@
         </div>
         <ad name="wow-classic-item-overview-statistics" />
       </section>
-      <section v-if="displayGraphs">
+      <section>
         <div class="container">
           <h2 class="sub">
             Statistics
           </h2>
           <div class="mobile-hover-info">
-            <span>Click on the graphs to see more detailed information.</span>
-          </div>
-          <div v-if="global" class="row-margin">
-            <graph-value-quantity storage="graph-overview-eu" region="eu" title="Europe" class="col-b graph" />
-            <graph-value-quantity storage="graph-overview-us" region="us" title="United States" class="col-b graph" />
+            <span>Tap on the graphs to see more detailed information.</span>
           </div>
           <div v-if="!global" class="row-margin">
-            <graph-value-quantity storage="graph-value-quantity" class="col-b graph" />
-            <graph-value-comparison class="col-b graph" />
+            <graph-doubleline class="col-b graph"
+                              :title="serverPretty"
+                              storage="marketValue-quantity"
+                              :value-entries="valueEntriesLocal"
+                              :refetch-fn="refetchLocalGraph"
+            />
+            <graph-doubleline class="col-b graph"
+                              :title="`${serverPretty} / ${regionPretty}`"
+                              storage="regional-comparison"
+                              :value-entries="valueEntriesRegional"
+                              :refetch-fn="refetchRegionalGraph"
+            />
+          </div>
+          <div v-else class="row-margin">
+            <graph-doubleline class="col-b graph"
+                              title="Overview Europe"
+                              storage="overview-eu"
+                              :value-entries="valueEntriesGlobal[0]"
+                              :refetch-fn="refetchGlobalGraph('eu')"
+            />
+            <graph-doubleline class="col-b graph"
+                              title="Overview United States"
+                              storage="overview-us"
+                              :value-entries="valueEntriesGlobal[1]"
+                              :refetch-fn="refetchGlobalGraph('us')"
+            />
           </div>
           <div v-if="!global" class="row-margin">
-            <heatmap-value class="col-b graph" />
-            <heatmap-quantity class="col-b graph" />
+            <graph-heatmap class="col-b graph"
+                           title="Market Value Heatmap"
+                           storage="heatmap-primary"
+                           :value-entries="valueEntriesLocal"
+            />
+            <graph-heatmap class="col-b graph"
+                           title="Quantity Heatmap"
+                           storage="heatmap-secondary"
+                           :value-entries="valueEntriesLocal.slice(1).concat(valueEntriesLocal.slice(0, 1))"
+            />
           </div>
         </div>
       </section>
@@ -50,16 +78,13 @@
 import ad from 'src/components/ads/nitroAds.vue'
 import appContent from 'src/app-content.vue'
 import description from 'src/components/wow-classic/description.vue'
-import graphValueComparison from 'src/components/wow-classic/graph-value-comparison.vue'
-import graphValueQuantity from 'src/components/wow-classic/graph-value-quantity.vue'
-import heatmapQuantity from 'src/components/wow-classic/heatmap-quantity.vue'
-import heatmapValue from 'src/components/wow-classic/heatmap-value.vue'
+import graphDoubleline from 'src/components/wow-classic/graph-doubleline.vue'
+import graphHeatmap from 'src/components/wow-classic/graph-heatmap.vue'
 import itemHeader from 'src/components/wow-classic/header.vue'
 import meta from 'src/components/seo/meta.js'
 import navigation from 'src/components/ui/nav/wow-classic.vue'
 import stats from 'src/components/wow-classic/stats.vue'
-import storeModule from 'src/store/wow-classic/graphs.js'
-import utility from 'src/components/wow-classic/utility.js'
+import utility from 'src/components/wow-classic/utility'
 
 export default {
   components: {
@@ -69,55 +94,83 @@ export default {
     itemHeader,
     description,
     stats,
-    graphValueComparison,
-    graphValueQuantity,
-    heatmapValue,
-    heatmapQuantity
+    graphDoubleline,
+    graphHeatmap
   },
 
   async asyncData ({ store, route }) {
     const item = route.params.item
     const slug = route.params.slug
 
-    // Only fetch item data if we actually have a new item or new server
-    if (store.state.graphs.uniqueName !== item || store.state.graphs.slug !== slug) {
-      // Fetch EU and US graphs
-      if (!slug) {
-        const [dataEU, dataUS] = await Promise.all([
-          this.$cubic.get(`/wow-classic/v1/items/eu/${item}/prices?region=true`),
-          this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)
-        ])
+    // Fetch EU and US graphs
+    if (!slug) {
+      const [euPrices, usPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/eu/${item}/prices?region=true`),
+        this.$cubic.get(`/wow-classic/v1/items/us/${item}/prices?region=true`)
+      ])
 
-        store.commit('setGraphItem', { itemId: dataEU.itemId, uniqueName: dataEU.uniqueName, slug: '' })
+      store.commit('setGraph', {
+        graph: 'overview-eu',
+        data: euPrices.data,
+        timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'overview-us',
+        data: usPrices.data,
+        timerange: 7
+      })
 
-        // Commit start value for all graphs
-        store.commit('setGraphData', { graph: 'graph-overview-eu', item: dataEU })
-        store.commit('setGraphData', { graph: 'graph-overview-us', item: dataUS })
+    // Fetch local server graphs
+    } else {
+      const [priceData, regionalPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices?timerange=30`),
+        this.$cubic.get(`/wow-classic/v1/items/${store.state.servers.activeServer.region}/${item}/prices?region=true`)
+      ])
 
-      // Fetch local server graphs
-      } else {
-        const region = store.state.servers.activeServer.region
+      const localPrices = priceData.data.filter(d => new Date(d.scannedAt) >= new Date(Date.now() - 1000 * 60 * 60 * 24 * 7))
 
-        const parallel = []
-        parallel.push(this.$cubic.get(`/wow-classic/v1/items/${slug}/${item}/prices`))
-        parallel.push(this.$cubic.get(`/wow-classic/v1/items/${region}/${item}/prices?region=true`))
-        const [itemData, regionalData] = await Promise.all(parallel)
-        const regionalDataEdited = utility.formatRegionalData(itemData, regionalData)
+      const interpolatedRegional = utility.interpolateValues(
+        localPrices.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        regionalPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        'scannedAt')
 
-        store.commit('setGraphItem', { itemId: itemData.itemId, uniqueName: itemData.uniqueName, slug })
-
-        // Commit start value for all graphs
-        store.commit('setGraphData', { graph: 'graph-value-quantity', item: itemData })
-        store.commit('setGraphData', { graph: 'graph-value-comparison', item: regionalDataEdited })
-        store.commit('setGraphData', { graph: 'heatmap-quantity', item: itemData })
-        store.commit('setGraphData', { graph: 'heatmap-value', item: itemData })
-      }
+      store.commit('setGraph', {
+        graph: 'marketValue-quantity',
+        data: localPrices,
+        timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'regional-comparison',
+        data: localPrices.map((d, i) => {
+          return {
+            ...d,
+            regionalMarketValue: interpolatedRegional[i].marketValue,
+            regionalMinBuyout: interpolatedRegional[i].minBuyout,
+            regionalQuantity: interpolatedRegional[i].quantity
+          }
+        }),
+        timerange: 7
+      })
+      store.commit('setGraph', {
+        graph: 'heatmap-primary',
+        data: priceData.data,
+        timerange: 30
+      })
+      store.commit('setGraph', {
+        graph: 'heatmap-secondary',
+        data: priceData.data,
+        timerange: 30
+      })
     }
   },
 
   computed: {
     global () {
-      return !this.$store.state.servers.activeServer.slug
+      return !this.server.slug
     },
     item () {
       return this.$store.state.items.item
@@ -126,25 +179,143 @@ export default {
       return this.global
         ? this.$store.state.graphs.storage['graph-overview-us'].data && this.$store.state.graphs.storage['graph-overview-us'].data.length
         : this.$store.state.graphs.storage['graph-value-quantity'].data && this.$store.state.graphs.storage['graph-value-quantity'].data.length
-    }
-  },
-
-  head () {
-    const server = this.$store.state.servers.activeServer
-    const serverPretty = `${server.name} (${server.faction.charAt(0).toUpperCase() + server.faction.slice(1)})`
-
-    return {
-      title: server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
-      link: server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
-      meta: meta({
-        title: `${this.item.name} Prices on NexusHub`,
-        description: server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
-        image: `${this.item.icon}`
+    },
+    server () {
+      return this.$store.state.servers.activeServer
+    },
+    serverPretty () {
+      return `${this.server.name} ${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)}`
+    },
+    regionPretty () {
+      return this.server.region.toUpperCase()
+    },
+    valueEntriesLocal () {
+      return [{
+        name: 'Market Value',
+        key: 'marketValue',
+        area: false,
+        price: true
+      }, {
+        name: 'Quantity',
+        key: 'quantity',
+        area: true,
+        price: false
+      }, {
+        name: 'Min Buyout',
+        key: 'minBuyout',
+        area: false,
+        price: true
+      }]
+    },
+    valueEntriesRegional () {
+      const localEntries = this.valueEntriesLocal.slice()
+      return [localEntries[0], {
+        name: `${this.regionPretty} Market Value`,
+        key: 'regionalMarketValue',
+        area: false,
+        price: true
+      }, localEntries[1], {
+        name: `${this.regionPretty} Quantity`,
+        key: 'regionalQuantity',
+        area: true,
+        price: false
+      }, localEntries[2], {
+        name: `${this.regionPretty} Min Buyout`,
+        key: 'regionalMinBuyout',
+        area: false,
+        price: true
+      }]
+    },
+    valueEntriesGlobal () {
+      return ['EU', 'US'].map(region => {
+        return [{
+          name: `${region} Market Value`,
+          key: 'marketValue',
+          area: false,
+          price: true
+        }, {
+          name: `${region} Quantity`,
+          key: 'quantity',
+          area: true,
+          price: false
+        }, {
+          name: `${region} Min Buyout`,
+          key: 'minBuyout',
+          area: false,
+          price: true
+        }]
       })
     }
   },
 
-  storeModule
+  methods: {
+    async refetchLocalGraph (timerange) {
+      const slug = this.$store.state.servers.activeServer.slug
+      const itemId = this.$store.state.items.item.itemId
+      const item = await this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`)
+      await this.$store.commit('setGraph', {
+        graph: 'marketValue-quantity',
+        data: item.data,
+        timerange
+      })
+    },
+    async refetchRegionalGraph (timerange) {
+      const slug = this.$store.state.servers.activeServer.slug
+      const itemId = this.$store.state.items.item.itemId
+      const region = this.$store.state.servers.activeServer.region.toLowerCase()
+      const [localPrices, regionalPrices] = await Promise.all([
+        this.$cubic.get(`/wow-classic/v1/items/${slug}/${itemId}/prices?timerange=${timerange}`),
+        this.$cubic.get(`/wow-classic/v1/items/${region}/${itemId}/prices?region=true&timerange=${timerange}`)
+      ])
+
+      const interpolatedRegional = utility.interpolateValues(
+        localPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        regionalPrices.data.map(p => {
+          return { ...p, scannedAt: new Date(p.scannedAt).getTime() }
+        }),
+        'scannedAt')
+
+      await this.$store.commit('setGraph', {
+        graph: 'regional-comparison',
+        data: localPrices.data.map((d, i) => {
+          return {
+            ...d,
+            regionalMarketValue: interpolatedRegional[i].marketValue,
+            regionalMinBuyout: interpolatedRegional[i].minBuyout,
+            regionalQuantity: interpolatedRegional[i].quantity
+          }
+        }),
+        timerange: timerange
+      })
+    },
+    refetchGlobalGraph (region) {
+      return async (timerange) => {
+        const itemId = this.$store.state.items.item.itemId
+        const itemData = await this.$cubic.get(`/wow-classic/v1/items/${region}/${itemId}/prices?region=true&timerange=${timerange}`)
+        this.$store.commit('setGraph', {
+          graph: `overview-${region}`,
+          data: itemData.data,
+          timerange
+        })
+      }
+    }
+  },
+
+  head () {
+    const serverPretty = `${this.server.name} (${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)})`
+
+    return {
+      title: this.server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
+      link: this.server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
+      meta: meta({
+        title: `${this.item.name} Prices on NexusHub`,
+        description: this.server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
+        image: `${this.item.icon}`
+      })
+    }
+  }
 }
 </script>
 
@@ -171,6 +342,9 @@ export default {
   }
 }
 
+.app-container {
+  overflow: unset;
+}
 .app-content {
   background: $color-bg-darker;
 }
@@ -205,15 +379,6 @@ export default {
 
 .module {
   max-width: 450px;
-}
-.graph {
-  max-width: 100%;
-  min-height: 300px;
-  flex-basis: 60%;
-
-  /deep/ .body {
-    height: 100%;
-  }
 }
 
 .btn-subtle {
