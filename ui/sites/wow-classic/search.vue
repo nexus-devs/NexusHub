@@ -32,8 +32,8 @@
           </div>
           <ad name="wow-classic-serp-filter" />
           <results-group :type="'items'" />
+          <ad name="wow-classic-serp-results" />
         </div>
-        <ad name="wow-classic-serp-results" />
       </section>
     </app-content>
   </div>

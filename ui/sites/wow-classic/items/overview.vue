@@ -4,8 +4,8 @@
     <item-header />
     <app-content>
       <section>
-        <ad name="wow-classic-item-overview-main" />
         <div class="container">
+          <ad name="wow-classic-item-overview-main" />
           <h2 class="sub">
             Item Overview
           </h2>
@@ -15,8 +15,8 @@
             </div>
             <stats class="col-b stats" />
           </div>
+          <ad name="wow-classic-item-overview-statistics" />
         </div>
-        <ad name="wow-classic-item-overview-statistics" />
       </section>
       <section>
         <div class="container">
