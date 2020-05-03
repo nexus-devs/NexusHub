@@ -80,12 +80,16 @@ export default {
 
       // Create scales initially here so we can get a dynamic axis
       const yExtents1 = d3.extent(data, d => d.y1)
+      const yExtents2 = d3.extent(data, d => d.y2)
+      if (!this.options.secondaryScale) { // Correctly scale if sameScale
+        if (yExtents2[0] < yExtents1[0]) yExtents1[0] = yExtents2[0]
+        if (yExtents2[1] > yExtents1[0]) yExtents1[1] = yExtents2[1]
+      }
       const yPadding1 = Math.round((yExtents1[1] - yExtents1[0]) / 6)
       const yScale1Min = this.options.areaChart.primary || yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1
       const yScale1 = d3.scaleLinear()
         .range([200, 0]) // Random height
         .domain([yScale1Min, yExtents1[1] + yPadding1])
-      const yExtents2 = d3.extent(data, d => d.y2)
       const yPadding2 = Math.round((yExtents2[1] - yExtents2[0]) / 6)
       const yScale2Min = this.options.areaChart.secondary || yExtents2[0] - yPadding2 < 0 ? 0 : yExtents2[0] - yPadding2
       const yScale2 = this.options.secondaryScale ? d3.scaleLinear()
