@@ -119,7 +119,7 @@ export default {
         .append('rect')
         .attr('x', d => xScale(d.hour))
         .attr('y', d => yScale(d.day))
-        .attr('rx', 0)
+        .attr('rx', 1)
         .attr('width', xScale.bandwidth())
         .attr('height', yScale.bandwidth())
         .style('fill', d => colorScale(d.value))
