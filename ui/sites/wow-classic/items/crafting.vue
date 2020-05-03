@@ -4,8 +4,9 @@
     <item-header />
     <app-content>
       <section>
-        <ad name="wow-classic-item-crafting-filter" />
         <div class="container">
+          <ad name="wow-classic-item-crafting-filter" />
+
           <!-- Filters -->
           <div class="filter">
             <div class="type">

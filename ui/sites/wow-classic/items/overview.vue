@@ -4,8 +4,8 @@
     <item-header />
     <app-content>
       <section>
-        <ad name="wow-classic-item-overview-main" />
         <div class="container">
+          <ad name="wow-classic-item-overview-main" />
           <h2 class="sub">
             Item Overview
           </h2>
@@ -15,10 +15,10 @@
             </div>
             <stats class="col-b stats" />
           </div>
+          <ad name="wow-classic-item-overview-statistics" />
         </div>
-        <ad name="wow-classic-item-overview-statistics" />
       </section>
-      <section>
+      <section v-if="global || !showGraph.hideAll">
         <div class="container">
           <h2 class="sub">
             Statistics
@@ -27,20 +27,36 @@
             <span>Tap on the graphs to see more detailed information.</span>
           </div>
           <div v-if="!global" class="row-margin">
-            <graph-doubleline class="col-b graph"
+            <graph-doubleline v-if="showGraph['marketValue-quantity']"
+                              class="col-b graph"
                               :title="serverPretty"
                               storage="marketValue-quantity"
                               :value-entries="valueEntriesLocal"
                               :refetch-fn="refetchLocalGraph"
             />
-            <graph-doubleline class="col-b graph"
+            <graph-doubleline v-if="showGraph['regional-comparison']"
+                              class="col-b graph"
                               :title="`${serverPretty} / ${regionPretty}`"
                               storage="regional-comparison"
                               :value-entries="valueEntriesRegional"
                               :refetch-fn="refetchRegionalGraph"
             />
           </div>
-          <div v-else class="row-margin">
+          <div v-if="!global" class="row-margin">
+            <graph-heatmap v-if="showGraph['heatmap-primary']"
+                           class="col-b graph"
+                           title="Market Value Heatmap"
+                           storage="heatmap-primary"
+                           :value-entries="valueEntriesLocal"
+            />
+            <graph-heatmap v-if="showGraph['heatmap-secondary']"
+                           class="col-b graph"
+                           title="Quantity Heatmap"
+                           storage="heatmap-secondary"
+                           :value-entries="valueEntriesLocal.slice(1).concat(valueEntriesLocal.slice(0, 1))"
+            />
+          </div>
+          <div v-if="global" class="row-margin">
             <graph-doubleline class="col-b graph"
                               title="Overview Europe"
                               storage="overview-eu"
@@ -52,18 +68,6 @@
                               storage="overview-us"
                               :value-entries="valueEntriesGlobal[1]"
                               :refetch-fn="refetchGlobalGraph('us')"
-            />
-          </div>
-          <div v-if="!global" class="row-margin">
-            <graph-heatmap class="col-b graph"
-                           title="Market Value Heatmap"
-                           storage="heatmap-primary"
-                           :value-entries="valueEntriesLocal"
-            />
-            <graph-heatmap class="col-b graph"
-                           title="Quantity Heatmap"
-                           storage="heatmap-secondary"
-                           :value-entries="valueEntriesLocal.slice(1).concat(valueEntriesLocal.slice(0, 1))"
             />
           </div>
         </div>
@@ -175,11 +179,6 @@ export default {
     item () {
       return this.$store.state.items.item
     },
-    displayGraphs () {
-      return this.global
-        ? this.$store.state.graphs.storage['graph-overview-us'].data && this.$store.state.graphs.storage['graph-overview-us'].data.length
-        : this.$store.state.graphs.storage['graph-value-quantity'].data && this.$store.state.graphs.storage['graph-value-quantity'].data.length
-    },
     server () {
       return this.$store.state.servers.activeServer
     },
@@ -188,6 +187,16 @@ export default {
     },
     regionPretty () {
       return this.server.region.toUpperCase()
+    },
+    showGraph () {
+      let hideCounter = 0
+      const storages = ['marketValue-quantity', 'regional-comparison', 'heatmap-primary', 'heatmap-secondary']
+      const returnObj = {}
+      for (const storage of storages) {
+        returnObj[storage] = this.$store.state.items.graphs[storage].data && this.$store.state.items.graphs[storage].data.length
+        if (!returnObj[storage]) hideCounter++
+      }
+      return { hideAll: hideCounter === storages.length, ...returnObj }
     },
     valueEntriesLocal () {
       return [{

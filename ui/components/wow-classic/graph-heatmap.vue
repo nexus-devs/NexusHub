@@ -94,7 +94,7 @@ export default {
       return this.$store.state.items.graphs[this.storage].timerange
     },
     medium () {
-      if (this.options.primary.key === 'marketValue') return this.item.stats.current ? { label: 'Market Value', value: this.item.stats.current.marketValue } : null
+      if (this.options.primary.key === 'marketValue') return { label: 'Market Value', value: this.item.stats.current ? this.item.stats.current.marketValue : null }
       return { label: 'Avg. ' + this.options.primary.name, value: Math.round(this.data.reduce((total, next) => total + next.value, 0) / this.data.length) }
     },
     data () {

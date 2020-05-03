@@ -19,6 +19,8 @@ export default {
   // Interpolates a secondary value array of { x, [y1, y2...] } on the primary values
   // Assumes already sorted arrays by x
   interpolateValues (primary, secondary, xKey) {
+    if (!primary.length || !secondary.length) return []
+
     const interpolated = []
     const yKeys = Object.keys(secondary[0]).filter(k => k !== xKey)
 
