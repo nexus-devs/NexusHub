@@ -13,7 +13,12 @@ export default {
       previous: null
     },
     graphs: {
-      'marketValue-quantity': {}
+      'marketValue-quantity': {},
+      'regional-comparison': {},
+      'heatmap-primary': {},
+      'heatmap-secondary': {},
+      'overview-eu': {},
+      'overview-us': {}
     }
   },
 

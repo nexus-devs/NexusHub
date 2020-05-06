@@ -111,6 +111,7 @@ export default {
       return this.$store.state.items.graphs[this.storage].timerange
     },
     data () {
+      if (!this.$store.state.items.graphs[this.storage].data) return []
       const data = this.$store.state.items.graphs[this.storage].data.map(d => {
         return {
           x: new Date(d.scannedAt),
