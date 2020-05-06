@@ -166,6 +166,9 @@ export default {
     margin: 0;
     min-height: 210px;
   }
+  /deep/ .doubleline {
+    height: 210px;
+  }
 
   > /deep/ .header {
     display: flex;
@@ -270,7 +273,7 @@ export default {
 }
 .legend-container {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   flex: 1;
   padding-right: 35px;
 

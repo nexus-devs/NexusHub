@@ -183,6 +183,9 @@ export default {
     margin: 0;
     min-height: 210px;
   }
+  /deep/ .heatmap {
+    height: 210px;
+  }
 
   > /deep/ .header {
     display: flex;
