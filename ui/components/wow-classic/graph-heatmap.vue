@@ -94,10 +94,12 @@ export default {
       return this.$store.state.items.graphs[this.storage].timerange
     },
     medium () {
-      if (this.options.primary.key === 'marketValue') return { label: 'Market Value', value: this.item.stats.current ? this.item.stats.current.marketValue : null }
+      if (this.options.primary.key === 'marketValue') return { label: 'Market Value', value: this.item.stats && this.item.stats.current ? this.item.stats.current.marketValue : null }
       return { label: 'Avg. ' + this.options.primary.name, value: Math.round(this.data.reduce((total, next) => total + next.value, 0) / this.data.length) }
     },
     data () {
+      if (!this.$store.state.items.graphs[this.storage].data) return []
+
       const data = []
       const bracketSize = 2 // Hours per bracket
       const rawData = this.$store.state.items.graphs[this.storage].data.slice()
@@ -182,6 +184,9 @@ export default {
     padding: 0;
     margin: 0;
     min-height: 210px;
+  }
+  /deep/ .heatmap {
+    height: 210px;
   }
 
   > /deep/ .header {

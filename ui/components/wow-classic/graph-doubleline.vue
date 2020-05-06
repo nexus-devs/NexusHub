@@ -111,6 +111,7 @@ export default {
       return this.$store.state.items.graphs[this.storage].timerange
     },
     data () {
+      if (!this.$store.state.items.graphs[this.storage].data) return []
       const data = this.$store.state.items.graphs[this.storage].data.map(d => {
         return {
           x: new Date(d.scannedAt),
@@ -165,6 +166,9 @@ export default {
     padding: 0;
     margin: 0;
     min-height: 210px;
+  }
+  /deep/ .doubleline {
+    height: 210px;
   }
 
   > /deep/ .header {
@@ -270,7 +274,7 @@ export default {
 }
 .legend-container {
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   flex: 1;
   padding-right: 35px;
 
