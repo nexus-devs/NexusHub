@@ -83,7 +83,7 @@ export default {
       const yExtents2 = d3.extent(data, d => d.y2)
       if (!this.options.secondaryScale) { // Correctly scale if sameScale
         if (yExtents2[0] < yExtents1[0]) yExtents1[0] = yExtents2[0]
-        if (yExtents2[1] > yExtents1[0]) yExtents1[1] = yExtents2[1]
+        if (yExtents2[1] > yExtents1[1]) yExtents1[1] = yExtents2[1]
       }
       const yPadding1 = Math.round((yExtents1[1] - yExtents1[0]) / 6)
       const yScale1Min = this.options.areaChart.primary || yExtents1[0] - yPadding1 < 0 ? 0 : yExtents1[0] - yPadding1
