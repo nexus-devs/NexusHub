@@ -6,7 +6,7 @@
       <img src="/img/ui/dropdown.svg" class="ico-h-20" alt="Dropdown">
     </div>
     <div :class="{ active }" class="dropdown">
-      <div class="body">
+      <div ref="scrollbody" class="body">
         <router-link :disabled="disableGlobal" :event="!disableGlobal ? 'click' : ''" :to="fn('')" :class="{ active: !activeServer.slug }" @click.native="setCookie(''); toggle()">
           Global
         </router-link>
@@ -15,7 +15,7 @@
         <span :class="{ active: activeServer.region === 'EU' }" @click="selectRegion('EU')">Europe</span>
         <template v-for="s in serverlist.EU">
           <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selected.region === 'EU' }"
-                class="server" @click="selectServer(s)"
+                class="server" @click="selectServer($event, s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
@@ -31,7 +31,7 @@
         <span :class="{ active: activeServer.region === 'US' }" @click="selectRegion('US')">United States</span>
         <template v-for="s in serverlist.US">
           <span :key="s.slug" :class="{ active: activeServer.name === s.name, selected: selected.region === 'US' }"
-                class="server" @click="selectServer(s)"
+                class="server" @click="selectServer($event, s)"
           >{{ s.name }}</span>
           <div :key="s.slug + 'faction'" :class="{ selected: selected.server === s.slug }" class="faction">
             <router-link :to="fn(s.slug + '-alliance')" class="image-wrapper" @click.native="setCookie(s.slug + '-alliance'); toggle();">
@@ -92,9 +92,12 @@ export default {
       else this.selected.region = region
       this.selected.server = ''
     },
-    selectServer (server) {
+    selectServer (event, server) {
       if (server === this.selected.server) this.selected.server = ''
       else this.selected.server = server.slug
+
+      const body = this.$refs.scrollbody
+      if (event.target.offsetTop > body.scrollTop + body.offsetHeight - 80) body.scrollTop += 40
     },
     setCookie (server) {
       if (server) this.$cookies.set('lastVisitedRealm', server, '7d')
