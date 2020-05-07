@@ -13,7 +13,7 @@ class Search extends Endpoint {
       name: 'query',
       default: '',
       required: true,
-      description: 'Search string to query for.'
+      description: 'Search string to query for. Maximum length of 16 allowed, minumum of 2 allowed.'
     },
     {
       name: 'limit',
