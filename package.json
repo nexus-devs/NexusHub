@@ -18,7 +18,7 @@
   "dependencies": {
     "cookies": "^0.8.0",
     "cubic": "3.0.2",
-    "cubic-api": "^3.5.0",
+    "cubic-api": "3.5.1",
     "cubic-auth": "3.2.3",
     "cubic-client": "3.6.4",
     "cubic-ui": "3.6.1",
