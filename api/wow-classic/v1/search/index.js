@@ -14,12 +14,12 @@ class Search extends Endpoint {
       name: 'query',
       default: '',
       required: true,
-      description: 'Search string to query for.'
+      description: 'Search string to query for. Maximum length of 48 allowed, minimum of 2 allowed.'
     },
     {
       name: 'limit',
       default: 50,
-      description: 'Number of results to limit search to. Min. 2, Max. 20 for non-fuzzy queries.'
+      description: 'Number of results to limit search to. Min. 2, Max. 50 for non-fuzzy queries.'
     },
     {
       name: 'threshold',

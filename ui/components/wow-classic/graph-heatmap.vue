@@ -298,6 +298,7 @@ export default {
   .legend {
     display: flex;
     flex-direction: column;
+    height: 38px;
 
     .legend-above, .legend-below {
       color: $color-font-body;
@@ -308,6 +309,7 @@ export default {
       width: 100%;
     }
     .legend-below {
+      vertical-align: bottom;
       justify-content: space-around;
     }
     .legend-bar {
