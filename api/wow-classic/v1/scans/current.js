@@ -26,56 +26,51 @@ class Current extends Endpoint {
     const slug = req.body.slug
 
     const TSMReq = new TSMRequest()
-    const query = { slug }
-
-    let parallel = []
+    const parallel = []
     parallel.push(TSMReq.get(`/realm/${slug}/stats`))
-    parallel.push(this.db.collection('currentData').find(query).toArray())
+    parallel.push(this.db.collection('currentData').find({ slug }).toArray())
     const [stats, oldData] = await Promise.all(parallel)
 
     if (!stats.success) {
       return res.status(500).send(`Rejected. Error from TSM: ${stats.error}`)
     }
 
-    parallel = []
-    parallel.push(this.db.collection('currentData').deleteMany({ ...query, _id: { $in: oldData.map((i) => i._id) } }))
-    parallel.push(this.db.collection('currentData').insertMany(stats.data.map((i) => {
-      const previousItem = oldData.find((pI) => pI.itemId === i.item)
-
-      // Update value and push old value to previous if it's different, otherwise don't change
-      const updateValue = (entry, newValue, previousEntry, prop) => {
-        if (previousEntry) {
-          if (newValue !== previousEntry[prop]) {
-            entry[prop] = newValue
-            if (!entry.previous) entry.previous = {}
-            entry.previous[prop] = previousEntry[prop]
-          } else {
-            entry[prop] = previousEntry[prop]
-            if (previousEntry.previous) {
-              if (!entry.previous) entry.previous = {}
-              entry.previous[prop] = previousEntry.previous[prop]
-            }
-          }
-        } else entry[prop] = newValue
+    const bulk = this.db.collection('currentData').initializeUnorderedBulkOp()
+    let atLeast1BulkOp = false
+    for (const entry of stats.data) {
+      const storedEntry = oldData.find(i => i.itemId === entry.item)
+      if (!storedEntry) {
+        atLeast1BulkOp = true
+        bulk.insert({
+          itemId: entry.item,
+          slug,
+          previous: {},
+          historicalValue: entry.historical_value,
+          marketValue: entry.market_value,
+          minBuyout: entry.min_buyout,
+          numAuctions: entry.num_auctions,
+          quantity: entry.quantity
+        })
+        continue
       }
 
-      const obj = {
-        slug,
-        itemId: i.item
+      const setObj = {}
+      for (const tsmKey of ['historical_value', 'market_value', 'min_buyout', 'num_auctions', 'quantity']) {
+        const nexusKey = tsmKey.split('_').map((k, i) => i > 0 ? k.charAt(0).toUpperCase() + k.slice(1) : k).join('')
+
+        if (entry[tsmKey] !== storedEntry[nexusKey]) {
+          setObj['previous.' + nexusKey] = storedEntry[nexusKey]
+          setObj[nexusKey] = entry[tsmKey]
+        }
       }
 
-      updateValue(obj, i.market_value, previousItem, 'marketValue')
-      updateValue(obj, i.historical_value, previousItem, 'historicalValue')
-      updateValue(obj, i.min_buyout, previousItem, 'minBuyout')
-      updateValue(obj, i.num_auctions, previousItem, 'numAuctions')
-      updateValue(obj, i.quantity, previousItem, 'quantity')
+      if (Object.keys(setObj).length) {
+        atLeast1BulkOp = true
+        bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
+      }
+    }
 
-      if (!obj.previous) obj.previous = null
-
-      return obj
-    })))
-
-    await Promise.all(parallel)
+    if (atLeast1BulkOp) await bulk.execute()
 
     return res.send('added!')
   }
