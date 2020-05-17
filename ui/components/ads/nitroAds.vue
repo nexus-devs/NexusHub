@@ -39,6 +39,7 @@ export default {
     }
 
     nitroAds.createAd(`ad-${this.name}`, {
+      /* eslint no-undef: "off" */
       demo: !$PRODUCTION,
       floor: 0.05,
       refreshLimit: 10,
