@@ -39,7 +39,7 @@ export default {
     }
 
     nitroAds.createAd(`ad-${this.name}`, {
-      demo: !this.$PRODUCTION,
+      demo: !$PRODUCTION,
       floor: 0.05,
       refreshLimit: 10,
       refreshTime: 60,
