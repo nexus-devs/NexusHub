@@ -8560,7 +8560,7 @@ exports.default = {
   },
 
   head: {
-    title: 'NexusHub' + ( true ? ' [staging]' : undefined),
+    title: 'NexusHub' + (undefined ? ' [staging]' :  true ? '' : undefined),
     htmlAttrs: {
       lang: 'en'
     },
@@ -15061,8 +15061,8 @@ function createApp(context) {
     _vue2.default.prototype.$cubic = context.api;
   } else {
     _vue2.default.prototype.$cubic = new _browser2.default({
-      api_url: "wss://api.staging.nexushub.co/ws",
-      auth_url: "wss://auth.staging.nexushub.co/ws"
+      api_url: "wss://api.nexushub.co/ws",
+      auth_url: "wss://auth.nexushub.co/ws"
     });
   }
 
