@@ -26,6 +26,16 @@ class Hook {
       slug: 1,
       scannedAt: -1
     }, true)
+    await verify(db, 'scanData', { // Archiving
+      scannedAt: -1
+    }, true)
+
+    // Archived Data
+    await verify(db, 'archivedData', { // Regular price fetching
+      itemId: 1,
+      slug: 1,
+      scannedAt: -1
+    })
 
     // Region Data
     await verify(db, 'regionData', {
