@@ -7,8 +7,17 @@ class Current extends Endpoint {
   constructor (options) {
     super(options)
     this.schema.description = 'Archives scans older than 6 months. The hour details will be averaged for each day and stored in a different collection.'
-    // this.schema.scope = 'write_scans_wow-classic'
+    this.schema.scope = 'write_scans_wow-classic'
+    this.schema.method = 'POST'
     this.schema.url = '/wow-classic/v1/scans/archive'
+    this.schema.request = {
+      body: {
+        batchSize: 10000,
+        batchAmount: 10,
+        regionSize: 1500,
+        regionAmount: 1
+      }
+    }
     this.schema.response = String
   }
 
@@ -17,22 +26,37 @@ class Current extends Endpoint {
    */
   async main (req, res) {
     const collection = this.db.collection('scanData')
-    const archive = this.db.collection('archivedData')
-    const daysAgo = 1000 * 60 * 60 * 24 // * 30 * 6 // 6 months
+    const archive = this.db.collection('archivedScanData')
+    const regionCollection = this.db.collection('regionData')
+    const regionArchive = this.db.collection('archivedRegionData')
+
+    const daysAgo = 1000 * 60 * 60 * 24 * 30 * 6 // 6 months
     const query = { scannedAt: { $lt: new Date(Date.now() - daysAgo) } }
-    const batchSize = 10000
+    const batchSize = req.body.batchSize
+    const batchAmount = req.body.batchAmount
+    const regionSize = req.body.regionSize
+    const regionAmount = req.body.regionAmount
 
+    const [archivedDocs, archivedRegionDocs] = await Promise.all([
+      this.archive(collection, archive, query, batchSize, batchAmount),
+      this.archive(regionCollection, regionArchive, query, regionSize, regionAmount)
+    ])
+
+    return res.send(`archived ${archivedDocs + archivedRegionDocs} (${archivedDocs} scanData / ${archivedRegionDocs} regionData) documents!`)
+  }
+
+  async archive (collection, archive, query, batchSize, batchAmount) {
     const wholeCount = await collection.find(query).count()
-    let count = wholeCount
-    while (count > 0) {
+    let count = 0
+    while (count < batchAmount) {
       const batch = await collection.find(query).limit(batchSize).toArray()
-
       await Promise.all([this.insertAndModifyBatch(archive, batch), this.deleteBatch(collection, batch)])
 
-      count = await collection.find(query).count()
+      count++
+      if (await collection.find(query).count() === 0) break
     }
 
-    return res.send(`archived ${wholeCount} documents!`)
+    return wholeCount < count * batchAmount ? wholeCount : count * batchAmount
   }
 
   async insertAndModifyBatch (collection, batch) {
@@ -49,10 +73,11 @@ class Current extends Endpoint {
       }
 
       for (const detail of doc.details) {
-        newDoc.marketValue += Math.round(detail.marketValue * (1 / doc.details.length))
-        newDoc.minBuyout += Math.round(detail.minBuyout * (1 / doc.details.length))
-        newDoc.numAuctions += Math.round(detail.numAuctions * (1 / doc.details.length))
-        newDoc.quantity += Math.round(detail.quantity * (1 / doc.details.length))
+        const divider = detail.hour || 1
+        newDoc.marketValue += Math.round(detail.marketValue / divider * (1 / doc.details.length))
+        newDoc.minBuyout += Math.round(detail.minBuyout / divider * (1 / doc.details.length))
+        newDoc.numAuctions += Math.round(detail.numAuctions / divider * (1 / doc.details.length))
+        newDoc.quantity += Math.round(detail.quantity / divider * (1 / doc.details.length))
       }
 
       bulk.insert(newDoc)
