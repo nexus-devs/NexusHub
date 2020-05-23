@@ -46,17 +46,19 @@ class Current extends Endpoint {
   }
 
   async archive (collection, archive, query, batchSize, batchAmount) {
-    const wholeCount = await collection.find(query).count()
     let count = 0
+    let docCounter = 0
+
     while (count < batchAmount) {
       const batch = await collection.find(query).limit(batchSize).toArray()
-      await Promise.all([this.insertAndModifyBatch(archive, batch), this.deleteBatch(collection, batch)])
+      if (batch.length === 0) break
+      docCounter += batch.length
 
+      await Promise.all([this.insertAndModifyBatch(archive, batch), this.deleteBatch(collection, batch)])
       count++
-      if (await collection.find(query).count() === 0) break
     }
 
-    return wholeCount < count * batchAmount ? wholeCount : count * batchAmount
+    return docCounter
   }
 
   async insertAndModifyBatch (collection, batch) {
