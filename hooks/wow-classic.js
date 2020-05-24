@@ -31,10 +31,15 @@ class Hook {
     }, true)
 
     // Archived Data
-    await verify(db, 'archivedData', { // Regular price fetching
+    await verify(db, 'archivedData', {
       itemId: 1,
       slug: 1,
       scannedAt: -1
+    })
+    await verify(db, 'archivedRegionData', {
+      itemId: 1,
+      scannedAt: -1,
+      slug: 1
     })
 
     // Region Data
