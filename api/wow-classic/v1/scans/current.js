@@ -37,6 +37,8 @@ class Current extends Endpoint {
 
     const bulk = this.db.collection('currentData').initializeUnorderedBulkOp()
     let atLeast1BulkOp = false
+
+    // Upsert new data
     for (const entry of stats.data) {
       const storedEntry = oldData.find(i => i.itemId === entry.item)
       if (!storedEntry) {
@@ -53,6 +55,7 @@ class Current extends Endpoint {
         })
         continue
       }
+      storedEntry.updated = true
 
       const setObj = {}
       for (const tsmKey of ['historical_value', 'market_value', 'min_buyout', 'num_auctions', 'quantity']) {
@@ -68,6 +71,12 @@ class Current extends Endpoint {
         atLeast1BulkOp = true
         bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
       }
+    }
+
+    // Delete outdated entries
+    for (const notUpdated of oldData.filter(d => !d.updated)) {
+      atLeast1BulkOp = true
+      bulk.find({ _id: notUpdated._id }).removeOne()
     }
 
     if (atLeast1BulkOp) await bulk.execute()
