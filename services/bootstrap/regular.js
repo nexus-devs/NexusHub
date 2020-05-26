@@ -33,4 +33,5 @@ module.exports = async function () {
   require('../../services/warframe/clear.js')
   require('../../services/warframe/wfm.js') */
   // require('../../services/wow-classic/scans.js')
+  // require('../../services/wow-classic/archivist.js')
 }

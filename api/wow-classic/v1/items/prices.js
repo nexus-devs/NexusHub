@@ -13,7 +13,7 @@ class Prices extends Endpoint {
       {
         name: 'timerange',
         default: 7,
-        description: 'Time range to return data from.'
+        description: 'Time range to return data from. If the time range is longer than 6 months, the operation may take more time.'
       },
       {
         name: 'region',
@@ -63,13 +63,27 @@ class Prices extends Endpoint {
     if (!itemId) itemId = item.itemId // Set ID if API call was made with unique name
 
     const daysAgo = 1000 * 60 * 60 * 24 * timerange
-    const rawData = await this.db.collection(region ? 'regionData' : 'scanData').find({
+    const query = {
       itemId,
       slug,
       scannedAt: { $gte: new Date(Date.now() - daysAgo) }
-    }).sort({ scannedAt: 1 }).toArray()
+    }
+    const parallel = []
+    parallel.push(this.db.collection(region ? 'regionData' : 'scanData').find(query).sort({ scannedAt: 1 }).toArray())
+    if (timerange >= 30 * 6) parallel.push(this.db.collection(region ? 'archivedRegionData' : 'archivedScanData').find(query).sort({ scannedAt: 1 }).toArray())
+    const [rawData, archivedRawData] = await Promise.all(parallel)
 
     const data = []
+    if (archivedRawData) {
+      for (const day of archivedRawData) {
+        data.push({
+          marketValue: day.marketValue,
+          minBuyout: day.minBuyout,
+          quantity: day.quantity,
+          scannedAt: day.scannedAt
+        })
+      }
+    }
     for (const day of rawData) {
       for (const hour of day.details) {
         if (region && hour.count <= 0) continue

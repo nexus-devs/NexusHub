@@ -332,7 +332,8 @@ export default {
 
   methods: {
     copyToClipboard () {
-      const itemLink = this.$refs.itemLink
+      const pureItemLink = this.$refs.itemLink.replace('|', '\\124')
+      const itemLink = `script DEFAULT_CHAT_FRAME:AddMessage("${pureItemLink}");`
       itemLink.select()
       itemLink.setSelectionRange(0, 99999)
       document.execCommand('copy')
