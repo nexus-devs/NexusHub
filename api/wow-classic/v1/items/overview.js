@@ -46,7 +46,7 @@ class Overview extends Endpoint {
     for (const entry of data) {
       delete entry._id
       delete entry.slug
-      if (!entry.previous) {
+      if (!entry.previous || !Object.keys(entry.previous).length) {
         entry.previous = {
           marketValue: null,
           historicalValue: null,
