@@ -31,7 +31,7 @@ class Hook {
     }, true)
 
     // Archived Data
-    await verify(db, 'archivedData', {
+    await verify(db, 'archivedScanData', {
       itemId: 1,
       slug: 1,
       scannedAt: -1
