@@ -10,7 +10,6 @@ class ScansLast extends Endpoint {
     this.schema.url = '/wow-classic/v1/scans/latest/:server'
     this.schema.request = { url: '/wow-classic/v1/scans/latest/anathema-alliance' }
     this.schema.response = {
-      scanId: Number,
       scannedAt: String
     }
   }
