@@ -34,7 +34,7 @@ class ScansLast extends Endpoint {
 
     const scan = await this.db.collection('scanData').find({ itemId: 2589, slug }).sort({ scannedAt: -1 }).limit(1).toArray()
     if (scan.length) {
-      const latestDate = scanExistsAlready[0].details[scanExistsAlready[0].details.length - 1]
+      const latestDate = scan[0].details[scan[0].details.length - 1]
       this.cache(latestDate, 60)
       res.send(latestDate)
     }
