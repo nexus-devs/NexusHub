@@ -20,7 +20,7 @@ class ScansLast extends Endpoint {
    */
   async main (req, res) {
     const slug = req.params.server.toLowerCase()
-    const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
+    // const scan = await this.db.collection('scans').findOne({ slug }, { projection: { _id: 0, scanId: 1, slug: 1, scannedAt: 1 }, sort: { scannedAt: -1 } })
 
     const server = await this.db.collection('server').findOne({ slug })
     if (!server) {
@@ -32,6 +32,22 @@ class ScansLast extends Endpoint {
       return res.status(404).send(response)
     }
 
+    const scan = await this.db.collection('scanData').find({ itemId: 2589, slug }).sort({ scannedAt: -1 }).limit(1).toArray()
+    if (scan.length) {
+      const latestDate = scanExistsAlready[0].details[scanExistsAlready[0].details.length - 1]
+      this.cache(latestDate, 60)
+      res.send(latestDate)
+    }
+    else {
+      const response = {
+        error: 'Not found.',
+        reason: `Scans for ${slug} could not be found.`
+      }
+      this.cache(response, 60)
+      res.send(response)
+    }
+
+    /*
     if (scan) {
       this.cache(scan, 60)
       res.send(scan)
@@ -43,7 +59,7 @@ class ScansLast extends Endpoint {
       }
       this.cache(response, 60)
       res.send(response)
-    }
+    } */
   }
 }
 
