@@ -30,10 +30,8 @@ async function monitor () {
     // Archive 20k docs per call
     await client.post('/wow-classic/v1/scans/archive', { batchSize: 10000, batchAmount: 20, regionSize: 3000, regionAmount: 1 })
 
-    // Run more archive calls between 4am and 10am (least amount of activity)
-    const currentHour = new Date().getHours()
-    if (currentHour >= 4 && currentHour <= 10) await sleep(1000 * 20)
-    else await sleep(1000 * 60)
+    // Breathing room
+    await sleep(1000 * 60)
 
     lastDone = new Date()
   }
