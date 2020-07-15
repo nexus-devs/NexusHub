@@ -10,7 +10,7 @@ class Hook {
   async verifyIndices () {
     cubic.log.verbose('Core      | verifying wow-classic indices')
     const config = cubic.config.api
-    const db = await mongodb.connect(config.mongoUrl, { useNewUrlParser: true })
+    const db = await mongodb.connect(config.mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     const verify = async (db, col, index, expire = false) => {
       if (expire && staging) await db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex({ scannedAt: 1 }, { expireAfterSeconds: 60 * 60 * 24 * 7 })
       return db.db(config.overrideEndpoint['/wow-classic'].mongoDb).collection(col).createIndex(index, { background: true })
