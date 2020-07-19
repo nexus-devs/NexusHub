@@ -91,7 +91,7 @@ class Hook {
       this.addItemUrl(item)
       if (item.tradable) this.addEconomyData(item, stored)
 
-      if (!_.isEqual(stored, item)) {
+      if (!stored || !_.isEqual(stored, item)) {
         parallel.push(db.collection('items').updateMany({
           uniqueName: item.uniqueName
         }, {
