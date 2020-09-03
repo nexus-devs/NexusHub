@@ -137,7 +137,7 @@ pipeline:
 
 services:
   mongodb:
-    image: mongo:4.2.9-bionic
+    image: mongo:4.2-bionic
     pull: true
     when:
       branch:
