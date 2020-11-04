@@ -132,7 +132,7 @@ class Hook {
       { contentPhase: 3, releaseDate: new Date(Date.UTC(2020, 1, 12)), description: 'Blackwing Lair and Darkmoon Faire' },
       { contentPhase: 4, releaseDate: new Date('04 15 2020 15:00:00 PDT'), description: 'Zul\'Gurub, Arathi Basin and the Green Dragons' },
       { contentPhase: 5, releaseDate: new Date(Date.UTC(2020, 7, 28)), description: 'Ahn\'Qiraj' },
-      { contentPhase: 6, releaseDate: null, description: 'Naxxramas' }
+      { contentPhase: 6, releaseDate: new Date(Date.UTC(2020, 12, 1)), description: 'Naxxramas' }
     ]
     await this._verifyCollection(db, 'contentPhases', data, 'contentPhase')
 
