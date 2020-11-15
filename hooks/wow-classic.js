@@ -118,7 +118,7 @@ class Hook {
   }
 
   /**
-   * Add content release phases
+   * Add content release phases (hardcode for now)
    */
   async verifyContentPhases () {
     const config = cubic.config.api
