@@ -7,7 +7,7 @@ class Ads extends Endpoint {
   }
 
   async main (req, res) {
-    res.status(301).redirect('https://api.nitropay.com/v1/ads-227.txt')
+    res.status(301).redirect('https://adstxt.venatusmedia.com/master_ads.txt')
   }
 }
 
