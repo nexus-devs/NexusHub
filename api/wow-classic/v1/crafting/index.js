@@ -9,7 +9,7 @@ class Crafting extends Endpoint {
     this.schema.description = 'Get crafting price information.'
     this.schema.url = '/wow-classic/v1/crafting/:server?/:item'
     this.schema.request = { url: '/wow-classic/v1/crafting/anathema-alliance/2589' }
-    const craftingObj = {
+    /* const craftingObj = {
       amount: [Number, Number],
       requiredSkill: Number,
       category: String,
@@ -22,7 +22,7 @@ class Crafting extends Endpoint {
         marketValue: Number,
         vendorPrice: Number
       }]
-    }
+    } */
     this.schema.response = {
       itemId: Number,
       name: String,
