@@ -29,7 +29,8 @@ class Crafting extends Endpoint {
       uniqueName: String,
       slug: String,
       createdBy: [Object],
-      reagentFor: [{
+      reagentFor: [Object]
+      /* reagentFor: [{
         itemId: Number,
         name: String,
         uniqueName: String,
@@ -37,7 +38,7 @@ class Crafting extends Endpoint {
         marketValue: Number,
         vendorPrice: Number,
         ...craftingObj
-      }]
+      }] */
     }
   }
 
