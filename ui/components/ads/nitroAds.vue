@@ -1,6 +1,5 @@
 <template>
-  <div :id="`ad-${name}`" :style="{ 'max-height': maxHeight, 'max-width': maxWidth}"
-       :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
+  <div :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
        class="layout-center vm-placement"
        data-id="601a74e94b1a0874cf35a794"
   >
