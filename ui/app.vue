@@ -85,7 +85,13 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400' }
     ],
     script: [
-      { src: 'https://s.nitropay.com/ads-227.js' }
+      {
+        src: 'https://hb.vntsm.com/v3/live/ad-manager.min.js',
+        type: 'text/javascript',
+        'data-site-id': '60141fc2fe24b76bfed264da',
+        'data-mode': 'scan',
+        async: true
+      }
     ]
   }
 }
