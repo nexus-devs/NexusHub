@@ -1,5 +1,6 @@
 <template>
-  <div :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
+  <div ref="venatusAd"
+       :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
        class="layout-center vm-placement"
        data-id="601a74e94b1a0874cf35a794"
   >
@@ -32,24 +33,17 @@ export default {
   },
 
   mounted () {
-    const nitroAds = window.nitroAds
-    if (!nitroAds) {
-      // this.blocked = true
-      return
-    }
-
-    nitroAds.createAd(`ad-${this.name}`, {
-      /* eslint no-undef: "off" */
-      demo: !$PRODUCTION,
-      floor: 0.05,
-      refreshLimit: 10,
-      refreshTime: 60,
-      report: {
-        enabled: true,
-        wording: 'Report Abuse',
-        position: 'fixed-bottom-right'
-      }
+    this.$nextTick(() => {
+      // eslint-disable-next-line camelcase
+      window.top.__vm_add = window.top.__vm_add || []
+      window.top.__vm_add.push(this.$refs.venatusAd)
     })
+  },
+
+  beforeDestroy () {
+    // eslint-disable-next-line camelcase
+    window.top.__vm_remove = window.top.__vm_remove || []
+    window.top.__vm_remove.push(this.$refs.venatusAd)
   }
 }
 </script>
