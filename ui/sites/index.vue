@@ -54,6 +54,7 @@
 
             <div class="row">
               <ad name="landing-page" />
+              <ad name="landing-page-rich-media" :rich-media="true" />
             </div>
           </div>
 

@@ -2,7 +2,8 @@
   <div ref="venatusAd"
        :class="[{ 'blocked-unit': blocked, 'ad-unit': !blocked }, blocked ? theme.blocked : '']"
        class="layout-center vm-placement"
-       data-id="601a74e94b1a0874cf35a794"
+       :data-id="richMedia ? '60197c513e135f1f211a3afb' : '601a74e94b1a0874cf35a794'"
+       :style="{ display: richMedia ? 'none' : undefined }"
   >
     <span v-if="blocked">Advertising seems to be blocked by your browser. This is fine.</span>
     <span v-if="blocked">NexusHub is completely free and we want it to stay that way.
@@ -18,7 +19,7 @@
 import getTheme from 'src/components/_theme.js'
 
 export default {
-  props: ['name', 'maxHeight', 'maxWidth'],
+  props: ['name', 'maxHeight', 'maxWidth', 'richMedia'],
 
   data () {
     return {
