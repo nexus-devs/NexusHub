@@ -118,11 +118,11 @@ class Hook {
       ]
       const regionLookup = {
         200: 'US',
-        2001: 'EU'
+        201: 'EU'
       }
 
       // eslint-disable-next-line camelcase
-      const data = serverList.data.map(d => {
+      const data = serverList.data.filter(r => [200, 201].includes(r.region_id)).map(d => { // BCC EU and US
         if (/[а-яА-ЯЁё]/.test(d.localized_name)) {
           const split = d.localized_name.split('-')
           const rusLocale = split.slice(0, -1).join('-')
