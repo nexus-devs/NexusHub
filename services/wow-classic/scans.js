@@ -84,7 +84,7 @@ async function monitor () {
 
             const regionLookup = {
               200: 'us',
-              2001: 'eu'
+              201: 'eu'
             }
 
             // Await to avoid overloading the TSM servers
