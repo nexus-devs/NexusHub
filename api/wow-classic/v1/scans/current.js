@@ -13,7 +13,8 @@ class Current extends Endpoint {
     this.schema.url = '/wow-classic/v1/scans/current'
     this.schema.request = {
       body: {
-        slug: 'anathema-alliance'
+        slug: 'anathema-alliance',
+        connectedRealmId: '200027'
       }
     }
     this.schema.response = String
@@ -24,10 +25,11 @@ class Current extends Endpoint {
    */
   async main (req, res) {
     const slug = req.body.slug
+    const connectedRealmId = parseInt(req.body.connectedRealmId)
 
     const TSMReq = new TSMRequest()
     const parallel = []
-    parallel.push(TSMReq.get(`/realm/${slug}/stats`))
+    parallel.push(TSMReq.get(`/realm/${connectedRealmId}/stats`))
     parallel.push(this.db.collection('currentData').find({ slug }).toArray())
     const [stats, oldData] = await Promise.all(parallel)
 

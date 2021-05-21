@@ -14,6 +14,7 @@ class Scan extends Endpoint {
         slug: 'anathema-alliance',
         region: 'EU',
         scanId: '1571761307',
+        connectedRealmId: '200027',
         scannedAt: 1571761307 * 1000 // getTime() so everything is correctly parsed in UTC
       }
     }
@@ -24,6 +25,7 @@ class Scan extends Endpoint {
     const slug = req.body.slug
     const region = req.body.region.toLowerCase()
     const scanId = parseInt(req.body.scanId)
+    const connectedRealmId = parseInt(req.body.connectedRealmId)
 
     // Parse in moment so we can use UTC painlessly
     const scannedAtMoment = moment(req.body.scannedAt).utc()
@@ -43,7 +45,7 @@ class Scan extends Endpoint {
     }
 
     const TSMReq = new TSMRequest()
-    const scan = await TSMReq.get(`/realm/${slug}/scan/${scanId}`)
+    const scan = await TSMReq.get(`/realm/${connectedRealmId}/scan/${scanId}`)
     if (!scan.success) {
       return res.status(500).send(`Rejected. Error from TSM: ${scan.error}`)
     }

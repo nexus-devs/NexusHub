@@ -109,8 +109,34 @@ class Hook {
     const serverList = await TSMReq.get('/realms')
     if (!serverList.success) throw new Error(`Could not fetch realms: ${serverList.error}`)
     else {
+      const russianLookups = [
+        { locale: 'Вестник Рока', slug: 'doomsayer' },
+        { locale: 'Хроми', slug: 'chromie' },
+        { locale: 'Змейталак', slug: 'wyrmthalak' },
+        { locale: 'Рок-Делар', slug: 'rhokdelar' },
+        { locale: 'Пламегор', slug: 'flamegor' }
+      ]
+      const regionLookup = {
+        200: 'US',
+        201: 'EU'
+      }
+
       // eslint-disable-next-line camelcase
-      const data = serverList.data.map(({ is_classic, last_modified, last_scan_id, master_slug, ...props }) => props)
+      const data = serverList.data.filter(r => [200, 201].includes(r.region_id)).map(d => { // BCC EU and US
+        if (/[а-яА-ЯЁё]/.test(d.localized_name)) {
+          const split = d.localized_name.split('-')
+          const rusLocale = split.slice(0, -1).join('-')
+          d.localized_name = `${russianLookups.find(l => l.locale === rusLocale).slug}-${split[split.length - 1]}`
+        }
+
+        return {
+          slug: d.localized_name.replace(/'/g, '').replace(/ /g, '-').toLowerCase(),
+          connectedRealmId: d.connected_realm_id,
+          faction: d.faction,
+          name: d.localized_name,
+          region: regionLookup[d.region_id]
+        }
+      })
       await this._verifyCollection(db, 'server', data, 'slug')
     }
 

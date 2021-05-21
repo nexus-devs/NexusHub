@@ -38,17 +38,32 @@ async function monitor () {
     const reqRealms = await TSMReq.get('/realms')
     if (!reqRealms.success) console.log(`Could not fetch realms: ${reqRealms.error}`)
     else {
-      const realms = reqRealms.data
+      const russianLookups = [
+        { locale: 'Вестник Рока', slug: 'doomsayer' },
+        { locale: 'Хроми', slug: 'chromie' },
+        { locale: 'Змейталак', slug: 'wyrmthalak' },
+        { locale: 'Рок-Делар', slug: 'rhokdelar' },
+        { locale: 'Пламегор', slug: 'flamegor' }
+      ]
+
+      const realms = reqRealms.data.filter(r => [200, 201].includes(r.region_id)) // BCC EU and US
       for (const realm of realms) {
-        const lastScan = await client.get(`/wow-classic/v1/scans/latest/${realm.master_slug}`)
+        if (/[а-яА-ЯЁё]/.test(realm.localized_name)) {
+          const split = realm.localized_name.split('-')
+          const rusLocale = split.slice(0, -1).join('-')
+          realm.localized_name = `${russianLookups.find(l => l.locale === rusLocale).slug}-${split[split.length - 1]}`
+        }
+        const masterSlug = realm.localized_name.replace(/'/g, '').replace(/ /g, '-').toLowerCase()
+
+        const lastScan = await client.get(`/wow-classic/v1/scans/latest/${masterSlug}`)
 
         // If there are no scans or the last scan is outdated
         lastScan.scannedAt = lastScan.error ? new Date(0) : new Date(lastScan.scannedAt)
         let lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
         if (lastScanUnix < realm.last_modified) {
-          const scans = await TSMReq.get(`/realm/${realm.master_slug}/scans`)
+          const scans = await TSMReq.get(`/realm/${realm.connected_realm_id}/scans`)
           if (!scans.success) {
-            console.log(`Could not fetch scans for ${realm.master_slug}: ${reqRealms.error}`)
+            console.log(`Could not fetch scans for ${masterSlug}: ${reqRealms.error}`)
             continue
           }
 
@@ -63,18 +78,23 @@ async function monitor () {
           // Also remove scans that were already added
           // Do old -> new so there aren't data holes if the service get's interrupted
           scans.data = scans.data.filter((s) => s.last_modified > lastScanUnix).sort((a, b) => a.last_modified - b.last_modified)
-          console.log(`Inserting ${scans.data.length} scans for ${realm.master_slug}...`)
+          console.log(`Inserting ${scans.data.length} scans for ${masterSlug}...`)
           for (const scan of scans.data) {
             const scannedAt = scan.last_modified * 1000
 
+            const regionLookup = {
+              200: 'us',
+              201: 'eu'
+            }
+
             // Await to avoid overloading the TSM servers
-            await client.post('/wow-classic/v1/scans/new', { slug: realm.master_slug, region: realm.region, scanId: scan.id, scannedAt })
+            await client.post('/wow-classic/v1/scans/new', { slug: masterSlug, region: regionLookup[realm.region_id], scanId: scan.id, scannedAt, connectedRealmId: realm.connected_realm_id })
             lastDone = new Date()
           }
           console.log('Inserting current data...')
-          await client.post('/wow-classic/v1/scans/current', { slug: realm.master_slug })
+          await client.post('/wow-classic/v1/scans/current', { slug: masterSlug, connectedRealmId: realm.connected_realm_id })
           console.log('...done\n')
-        } else console.log(`No new scans found for ${realm.master_slug}\n`)
+        } else console.log(`No new scans found for ${masterSlug}\n`) // TODO
 
         lastDone = new Date()
       }
