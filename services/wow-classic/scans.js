@@ -92,7 +92,7 @@ async function monitor () {
             lastDone = new Date()
           }
           console.log('Inserting current data...')
-          await client.post('/wow-classic/v1/scans/current', { slug: masterSlug })
+          await client.post('/wow-classic/v1/scans/current', { slug: masterSlug, connectedRealmId: realm.connected_realm_id })
           console.log('...done\n')
         } else console.log(`No new scans found for ${masterSlug}\n`) // TODO
 
