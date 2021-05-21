@@ -116,6 +116,10 @@ class Hook {
         { locale: 'Рок-Делар', slug: 'rhokdelar' },
         { locale: 'Пламегор', slug: 'flamegor' }
       ]
+      const regionLookup = {
+        200: 'US',
+        2001: 'EU'
+      }
 
       // eslint-disable-next-line camelcase
       const data = serverList.data.map(d => {
@@ -129,8 +133,8 @@ class Hook {
           slug: d.localized_name.replace(/'/g, '').replace(/ /g, '-').toLowerCase(),
           connectedRealmId: d.connected_realm_id,
           faction: d.faction,
-          localizedName: d.localized_name,
-          regionId: d.region_id
+          name: d.localized_name,
+          region: regionLookup[d.region_id]
         }
       })
       await this._verifyCollection(db, 'server', data, 'slug')
