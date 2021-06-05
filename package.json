@@ -65,7 +65,7 @@
     "progress-bar-webpack-plugin": "^1.12.1",
     "request-promise": "^4.2.5",
     "rimraf": "^3.0.0",
-    "semantic-release": "^15.13.30",
+    "semantic-release": "^17.2.3",
     "webpack": "^4.41.2"
   },
   "release": {
