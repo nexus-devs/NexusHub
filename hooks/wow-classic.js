@@ -153,7 +153,7 @@ class Hook {
     const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
 
     const data = [
-      { contentPhase: 1, releaseDate: new Date(Date.UTC(2021, 7, 26)), description: 'Karazhan, Gruul\'s and Magtheridon\'s Lair' },
+      { contentPhase: 1, releaseDate: new Date(Date.UTC(2021, 6, 1)), description: 'Karazhan, Gruul\'s and Magtheridon\'s Lair' },
       { contentPhase: 2, releaseDate: null, description: 'Serpent Shrine Cavern and Tempest Keep' },
       { contentPhase: 3, releaseDate: null, description: 'Battle for Mount Hyjal and Black Temple' },
       { contentPhase: 4, releaseDate: null, description: 'Zul\'Aman' },
