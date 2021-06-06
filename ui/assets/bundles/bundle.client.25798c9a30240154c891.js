@@ -15852,7 +15852,7 @@ var status_component = Object(componentNormalizer["a" /* default */])(
     }
   },
   head: {
-    title: 'NexusHub' + ( true ? ' [staging]' : undefined),
+    title: 'NexusHub' + (undefined ? ' [staging]' :  true ? '' : undefined),
     htmlAttrs: {
       lang: 'en'
     },
@@ -19206,8 +19206,8 @@ function createApp(context) {
     vue_runtime_esm["a" /* default */].prototype.$cubic = context.api;
   } else {
     vue_runtime_esm["a" /* default */].prototype.$cubic = new browser_default.a({
-      api_url: "wss://api.staging.nexushub.co/ws",
-      auth_url: "wss://auth.staging.nexushub.co/ws"
+      api_url: "wss://api.nexushub.co/ws",
+      auth_url: "wss://auth.nexushub.co/ws"
     });
   }
 
