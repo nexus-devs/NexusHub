@@ -22,8 +22,8 @@ module.exports = async function () {
     cubic.hook(Api, wfhooks.verifyIndices)
     if (process.env.DRONE) {
       cubic.hook(Api, wfhooks.verifyItemList.bind(wfhooks))
+      cubic.hook(Api, wowhooks.verifyItemList.bind(wowhooks))
     }
-    cubic.hook(Api, wowhooks.verifyItemList.bind(wowhooks))
     cubic.hook(Api, wowhooks.verifyIndices)
     cubic.hook(Api, wowhooks.verifyServerList.bind(wowhooks))
     cubic.hook(Api, wowhooks.verifyContentPhases.bind(wowhooks))
