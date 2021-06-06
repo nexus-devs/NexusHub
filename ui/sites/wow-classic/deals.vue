@@ -79,7 +79,7 @@ export default {
       title: `Most Profitable Deals on ${this.serverPretty} · NexusHub`,
       meta: meta({
         title: `Most Profitable Deals for ${this.serverPretty} on NexusHub`,
-        description: `Get the most profitable deals on The Burning Crusade Classic Auction House for ${this.serverPretty} on NexusHub`,
+        description: `Get the most profitable deals on the WoW TBC Classic Auction House for ${this.serverPretty} on NexusHub`,
         image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
       })
     }

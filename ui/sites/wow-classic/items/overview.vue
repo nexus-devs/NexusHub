@@ -320,7 +320,7 @@ export default {
       link: this.server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
       meta: meta({
         title: `${this.item.name} Prices on NexusHub`,
-        description: this.server.slug ? `${this.item.name} Prices on The Burning Crusade Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on The Burning Crusade Classic Auction House.`,
+        description: this.server.slug ? `${this.item.name} Prices on the WoW TBC Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the WoW TBC Classic Auction House.`,
         image: `${this.item.icon}`
       })
     }

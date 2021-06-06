@@ -244,7 +244,7 @@ export default {
     title: 'NexusHub · TBC Classic Auction House data and prices',
     meta: meta({
       title: 'NexusHub · TBC Classic Auction House data and prices',
-      description: 'Get up-to-date data and prices from all The Burning Crusade Classic realms and auction houses!',
+      description: 'Get up-to-date data and prices from all the WoW TBC Classic realms and auction houses!',
       image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
   }
