@@ -23,7 +23,7 @@
             <search-button :path="'/wow-classic/search'" />
           </div>
 
-          <h2>All WoW Classic Auction House data and prices in one place!</h2>
+          <h2>All TBC Classic Auction House data and prices in one place!</h2>
         </div>
       </header>
 
@@ -241,10 +241,10 @@ export default {
   storeModule,
 
   head: {
-    title: 'NexusHub · WoW Classic Auction House data and prices',
+    title: 'NexusHub · TBC Classic Auction House data and prices',
     meta: meta({
-      title: 'NexusHub · WoW Classic Auction House data and prices',
-      description: 'Get up-to-date data and prices from all World of Warcraft Classic realms and auction houses!',
+      title: 'NexusHub · TBC Classic Auction House data and prices',
+      description: 'Get up-to-date data and prices from all The Burning Crusade Classic realms and auction houses!',
       image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
   }

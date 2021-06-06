@@ -316,11 +316,11 @@ export default {
     const serverPretty = `${this.server.name} (${this.server.faction.charAt(0).toUpperCase() + this.server.faction.slice(1)})`
 
     return {
-      title: this.server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the WoW Classic Auction House · NexusHub`,
+      title: this.server.slug ? `${this.item.name} Prices on ${serverPretty} · NexusHub` : `${this.item.name} Prices on the TBC Classic Auction House · NexusHub`,
       link: this.server.slug ? [{ rel: 'canonical', href: `https://nexushub.co/wow-classic/items/${this.item.uniqueName}` }] : undefined,
       meta: meta({
         title: `${this.item.name} Prices on NexusHub`,
-        description: this.server.slug ? `${this.item.name} Prices on the World of Warcaft Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on the World of Warcaft Classic Auction House.`,
+        description: this.server.slug ? `${this.item.name} Prices on The Burning Crusade Classic Auction House for ${serverPretty}` : `${this.item.name} Prices on The Burning Crusade Classic Auction House.`,
         image: `${this.item.icon}`
       })
     }
