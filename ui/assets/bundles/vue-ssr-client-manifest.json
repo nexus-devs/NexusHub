@@ -70,12 +70,12 @@
     "bundle.7.ffc98c3ce7b87242f063.js",
     "bundle.8.7f9ed046f57c7bcefe90.js",
     "bundle.9.7c4b9fb00e15022cca16.js",
-    "bundle.client.4c91294e0793f4fe4e19.js",
+    "bundle.client.aa995ed4da97ac9b0757.js",
     "client.6d8b15008b9629ddbd14.css"
   ],
   "initial": [
     "client.6d8b15008b9629ddbd14.css",
-    "bundle.client.4c91294e0793f4fe4e19.js"
+    "bundle.client.aa995ed4da97ac9b0757.js"
   ],
   "async": [
     "10.63c952f28692d3ffdd6c.css",
