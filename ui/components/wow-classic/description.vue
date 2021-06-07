@@ -43,7 +43,7 @@ export default {
       return this.$store.state.items.item
     },
     wowheadUrl () {
-      return `https://classic.wowhead.com/item=${this.item.itemId}`
+      return `https://tbc.wowhead.com/item=${this.item.itemId}`
     },
     tooltip () {
       // Remove item name and drop chance labels
