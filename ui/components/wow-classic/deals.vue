@@ -142,7 +142,7 @@ export default {
 
   methods: {
     async updateOnScroll (event, forceUpdate = false) {
-      const lastDeal = this.$refs.deals.$children[this.$refs.deals.$children.length - 1].$el
+      const lastDeal = this.$refs.deals.$children.length ? this.$refs.deals.$children[this.$refs.deals.$children.length - 1].$el : this.$refs.deals.$el
       const lastDealPosition = lastDeal.getBoundingClientRect().top + window.pageYOffset // Absolute position
       const viewportHeight = window.innerHeight
 
