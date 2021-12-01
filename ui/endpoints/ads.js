@@ -7,7 +7,7 @@ class Ads extends Endpoint {
   }
 
   async main (req, res) {
-    res.status(301).redirect('https://adstxt.venatusmedia.com/master_ads.txt')
+    res.status(301).redirect('https://adstxt.venatusmedia.com/60141fc2fe24b76bfed264da_ads.txt')
   }
 }
 
