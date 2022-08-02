@@ -1,6 +1,6 @@
 pipeline:
   install:
-    image: node:8
+    image: node:10
     commands:
       - npm install
     when:
@@ -8,7 +8,7 @@ pipeline:
         exclude: [ production, staging, greenkeeper/* ]
 
   build:
-    image: node:8
+    image: node:10
     commands:
       # Determine if webpack needs a rebuild.
       - git fetch origin staging
@@ -29,7 +29,7 @@ pipeline:
 
   # Rebuild for production up here so we can run tests afterwards.
   prepare - production:
-    image: node:8
+    image: node:10
     commands:
       - rm ui/assets/robots.txt # Allow search engines to scrape
       - npm run build # Rebuild webpack without staging config
@@ -38,7 +38,7 @@ pipeline:
 
   # Smoke tests
   lint:
-    image: node:8
+    image: node:10
     commands:
       - npm run lint
     when:
@@ -46,7 +46,7 @@ pipeline:
         exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   test - development:
-    image: node:8
+    image: node:10
     commands:
       - npm test
     secrets: [ tsm_client_id, tsm_client_secret ]
@@ -55,7 +55,7 @@ pipeline:
         exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   test - production:
-    image: node:8
+    image: node:10
     commands:
       - npm test --production
     secrets: [ tsm_client_id, tsm_client_secret ]
@@ -65,7 +65,7 @@ pipeline:
 
   # Add to staging branch
   push - staging:
-    image: node:8
+    image: node:10
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"
@@ -85,7 +85,7 @@ pipeline:
 
   # Push production preparations to release candidate
   push - production:
-    image: node:8
+    image: node:10
     commands:
       - git config --global user.email "apps@nexus-stats.com"
       - git config --global user.name "nexus-ci"

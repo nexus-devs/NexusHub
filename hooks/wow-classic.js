@@ -137,8 +137,6 @@ class Hook {
       }
     }
 
-    console.log(data[0])
-
     await this._verifyCollection(db, 'server', data, 'slug')
     await mongo.close()
   }
