@@ -7,7 +7,7 @@
     "start": "node .",
     "build": "node ci/webpack/build.js",
     "lint": "eslint . --ext .js,.vue",
-    "test": "mocha --exit -s 160000 --timeout 200000 ci/test/smoke/server.js ci/test/smoke/endpoints.js",
+    "test": "mocha --exit -s 160000 --timeout 250000 ci/test/smoke/server.js ci/test/smoke/endpoints.js",
     "scrape": "node ci/warframe/index.js",
     "changelogs": "node ci/changelogs/index.js",
     "toggle-webpack": "node ci/webpack/toggle.js",

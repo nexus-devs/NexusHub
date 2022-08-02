@@ -35,13 +35,9 @@ before(async function () {
     })
 
     it('should pass WoW Classic hooks', async function () {
-      console.log('indices!')
       await wowhooks.verifyIndices()
-      console.log('itemlist')
       await wowhooks.verifyItemList()
-      console.log('serverlist')
       await wowhooks.verifyServerList()
-      console.log('content')
       await wowhooks.verifyContentPhases()
     })
 
