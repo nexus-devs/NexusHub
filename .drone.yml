@@ -20,7 +20,7 @@ pipeline:
         exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   sitemap:
-    image: node:8
+    image: node:10
     commands:
       npm run sitemap
     secrets: [ tsm_client_id, tsm_client_secret ]
