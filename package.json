@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "build": "node ci/webpack/build.js",
+    "start": "node . --harmony",
+    "build": "node ci/webpack/build.js --harmony",
     "lint": "eslint . --ext .js,.vue",
     "test": "mocha --exit -s 160000 --timeout 160000 ci/test/smoke/server.js ci/test/smoke/endpoints.js",
-    "scrape": "node ci/warframe/index.js",
-    "changelogs": "node ci/changelogs/index.js",
-    "toggle-webpack": "node ci/webpack/toggle.js",
-    "sitemap": "node ci/sitemap.js"
+    "scrape": "node ci/warframe/index.js --harmony",
+    "changelogs": "node ci/changelogs/index.js --harmony",
+    "toggle-webpack": "node ci/webpack/toggle.js --harmony",
+    "sitemap": "node ci/sitemap.js --harmony"
   },
   "author": "Kaptard",
   "license": "CC BY-NC 4.0",
