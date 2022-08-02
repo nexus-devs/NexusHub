@@ -17,5 +17,6 @@ else
   git merge -s recursive -X theirs development
 fi
 
-git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
+git push git@github.com:nexus-devs/NexusHub.git staging
+# git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
 # ^ 2>/dev/null to suppress output which would contain the secret token
