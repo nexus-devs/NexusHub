@@ -104,42 +104,42 @@ class Hook {
     const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
 
     const TSMReq = new TSMRequest()
-    if (!TSMReq.tsmKey) return
+    await TSMReq.init()
+    if (!TSMReq.tsmToken) return
 
-    const serverList = await TSMReq.get('/realms')
-    if (!serverList.success) throw new Error(`Could not fetch realms: ${serverList.error}`)
-    else {
-      const russianLookups = [
-        { locale: 'Вестник Рока', slug: 'doomsayer' },
-        { locale: 'Хроми', slug: 'chromie' },
-        { locale: 'Змейталак', slug: 'wyrmthalak' },
-        { locale: 'Рок-Делар', slug: 'rhokdelar' },
-        { locale: 'Пламегор', slug: 'flamegor' }
-      ]
-      const regionLookup = {
-        200: 'US',
-        201: 'EU'
-      }
-
-      // eslint-disable-next-line camelcase
-      const data = serverList.data.filter(r => [200, 201].includes(r.region_id)).map(d => { // BCC EU and US
-        if (/[а-яА-ЯЁё]/.test(d.localized_name)) {
-          const split = d.localized_name.split('-')
-          const rusLocale = split.slice(0, -1).join('-')
-          d.localized_name = `${russianLookups.find(l => l.locale === rusLocale).slug}-${split[split.length - 1]}`
-        }
-
-        return {
-          slug: d.localized_name.replace(/'/g, '').replace(/ /g, '-').toLowerCase(),
-          connectedRealmId: d.connected_realm_id,
-          faction: d.faction,
-          name: d.localized_name,
-          region: regionLookup[d.region_id]
-        }
-      })
-      await this._verifyCollection(db, 'server', data, 'slug')
+    const reqRealms = await TSMReq.get('realm', '/realms')
+    const regionLookup = {
+      13: 'US',
+      14: 'EU'
     }
 
+    const regions = reqRealms.items.filter(r => [13, 14].includes(r.regionId))
+    const data = []
+    for (const region of regions) {
+      for (const realm of region.realms) {
+        const realmSlug = realm.name
+          .replace(/'/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
+
+        for (const auctionHouse of realm.auctionHouses) {
+          const auctionHouseSlug = auctionHouse.type.toLowerCase()
+          const slug = `${realmSlug}-${auctionHouseSlug}`
+
+          data.push({
+            slug,
+            auctionHouseId: auctionHouse.auctionHouseId,
+            faction: auctionHouse.type,
+            name: `${realm.localizedName}-${auctionHouse.type}`,
+            region: regionLookup[region.regionId]
+          })
+        }
+      }
+    }
+
+    console.log(data[0])
+
+    await this._verifyCollection(db, 'server', data, 'slug')
     await mongo.close()
   }
 

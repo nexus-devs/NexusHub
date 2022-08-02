@@ -23,7 +23,9 @@ async function monitor () {
   let lastDone = new Date()
   const TSMReq = new TSMRequest()
 
-  if (!TSMReq.tsmKey) return
+  console.log('TEST-1')
+  if (!await TSMReq.init()) return
+  console.log('TEST0')
 
   if (staging) console.log('Starting in staging mode (only retrieve the last 7 days)')
 
@@ -35,73 +37,91 @@ async function monitor () {
   }, 1000 * 60 * 5)
 
   while (true) {
-    const reqRealms = await TSMReq.get('/realms')
-    if (!reqRealms.success) console.log(`Could not fetch realms: ${reqRealms.error}`)
-    else {
-      const russianLookups = [
-        { locale: 'Вестник Рока', slug: 'doomsayer' },
-        { locale: 'Хроми', slug: 'chromie' },
-        { locale: 'Змейталак', slug: 'wyrmthalak' },
-        { locale: 'Рок-Делар', slug: 'rhokdelar' },
-        { locale: 'Пламегор', slug: 'flamegor' }
-      ]
+    const regionLookup = {
+      13: 'us',
+      14: 'eu'
+    }
+    const reqRealms = await TSMReq.get('realm', '/realms')
+    const regions = reqRealms.items.filter(r => [13, 14].includes(r.regionId))
 
-      const realms = reqRealms.data.filter(r => [200, 201].includes(r.region_id)) // BCC EU and US
-      for (const realm of realms) {
-        if (/[а-яА-ЯЁё]/.test(realm.localized_name)) {
-          const split = realm.localized_name.split('-')
-          const rusLocale = split.slice(0, -1).join('-')
-          realm.localized_name = `${russianLookups.find(l => l.locale === rusLocale).slug}-${split[split.length - 1]}`
-        }
-        const masterSlug = realm.localized_name.replace(/'/g, '').replace(/ /g, '-').toLowerCase()
+    for (const region of regions) {
+      for (const realm of region.realms) {
+        const realmSlug = realm.name
+          .replace(/'/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
 
-        const lastScan = await client.get(`/wow-classic/v1/scans/latest/${masterSlug}`)
+        for (const auctionHouse of realm.auctionHouses) {
+          const auctionHouseSlug = auctionHouse.type.toLowerCase()
+          const slug = `${realmSlug}-${auctionHouseSlug}`
 
-        // If there are no scans or the last scan is outdated
-        lastScan.scannedAt = lastScan.error ? new Date(0) : new Date(lastScan.scannedAt)
-        let lastScanUnix = Math.floor(lastScan.scannedAt.getTime() / 1000)
-        if (lastScanUnix < realm.last_modified) {
-          const scans = await TSMReq.get(`/realm/${realm.connected_realm_id}/scans`)
-          if (!scans.success) {
-            console.log(`Could not fetch scans for ${masterSlug}: ${reqRealms.error}`)
+          const lastScan = await client.get(`/wow-classic/v1/scans/latest/${slug}`)
+          const lastScannedAt = lastScan.error ? new Date(0) : new Date(lastScan.scannedAt)
+          let lastScannedUnix = Math.floor(lastScannedAt.getTime() / 1000)
+          if (lastScannedUnix >= auctionHouse.lastModified) {
+            console.log(`No new scans found for ${slug}\n`)
+            lastDone = new Date()
             continue
           }
 
-          // If staging, only add entries from max 7 days ago
-          if (staging) {
-            lastScanUnix = new Date()
-            lastScanUnix.setDate(lastScanUnix.getDate() - 7)
-            lastScanUnix = Math.floor(lastScanUnix.getTime() / 1000)
-          }
-
-          // Sort TSM scans by date and add them
-          // Also remove scans that were already added
-          // Do old -> new so there aren't data holes if the service get's interrupted
-          scans.data = scans.data.filter((s) => s.last_modified > lastScanUnix).sort((a, b) => a.last_modified - b.last_modified)
-          console.log(`Inserting ${scans.data.length} scans for ${masterSlug}...`)
-          for (const scan of scans.data) {
-            const scannedAt = scan.last_modified * 1000
-
-            const regionLookup = {
-              200: 'us',
-              201: 'eu'
+          let page = 1
+          let totalPages = 1
+          while (page <= totalPages) {
+            let scans = {}
+            try {
+              scans = await TSMReq.get('pricing', `/ah/${auctionHouse.auctionHouseId}/scan?page=${page}&pageSize=50`)
+              totalPages = scans.metadata.totalPages
+            } catch (err) {
+              console.log(`Could not fetch scans for ${slug}: ${err}`)
+              break
             }
 
-            // Await to avoid overloading the TSM servers
-            await client.post('/wow-classic/v1/scans/new', { slug: masterSlug, region: regionLookup[realm.region_id], scanId: scan.id, scannedAt, connectedRealmId: realm.connected_realm_id })
-            lastDone = new Date()
+            // If staging, only add entries from max 7 days ago
+            if (staging) {
+              lastScannedUnix = new Date()
+              lastScannedUnix.setDate(lastScannedUnix.getDate() - 7)
+              lastScannedUnix = Math.floor(lastScannedUnix.getTime() / 1000)
+            }
+
+            // Filter new scans - sort them from old->new to avoid data holes on service interruption
+            scans.items = scans.items
+              .filter(s => s.scanTime > lastScannedUnix)
+              .sort((a, b) => a.scanTime - b.scanTime)
+            console.log(`Inserting ${scans.items.length} scans for ${slug}...`)
+            for (const scan of scans.items) {
+              // Await to avoid overloading the TSM servers
+              try {
+                await client.post('/wow-classic/v1/scans/new', {
+                  slug,
+                  region: regionLookup[region.regionId],
+                  scanId: scan.scanId,
+                  scannedAt: scan.scanTime * 1000,
+                  auctionHouseId: auctionHouse.auctionHouseId
+                })
+                lastDone = new Date()
+              } catch (err) {
+                console.log(`Could not insert scan ${scan.scanId} for ${slug}: ${err}`)
+              }
+            }
+
+            // Break loop if old scans in current page
+            if (scans.items.length < scans.metadata.itemsPerPage) break
+            page++
           }
+
           console.log('Inserting current data...')
-          await client.post('/wow-classic/v1/scans/current', { slug: masterSlug, connectedRealmId: realm.connected_realm_id })
+          await client.post('/wow-classic/v1/scans/current', {
+            slug,
+            auctionHouseId: auctionHouse.auctionHouseId
+          })
           console.log('...done\n')
-        } else console.log(`No new scans found for ${masterSlug}\n`) // TODO
-
-        lastDone = new Date()
+          lastDone = new Date()
+        }
       }
-
-      lastDone = new Date()
-      await sleep(300) // Breathing room
     }
+
+    lastDone = new Date()
+    await sleep(300) // Breathing room
   }
 }
 

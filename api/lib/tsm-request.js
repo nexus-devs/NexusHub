@@ -61,9 +61,6 @@ class TSMRequest {
         headers: {
           Authorization: `Bearer ${this.tsmToken.access_token}`,
           Accept: 'application/json'
-        },
-        retry: {
-          limit: this.options.retries
         }
       }).json()
     } catch (error) {
@@ -72,7 +69,7 @@ class TSMRequest {
         await this._refreshToken()
         await this.get(api, query, true)
       } else {
-        return { success: false, error }
+        throw error
       }
     }
   }

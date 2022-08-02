@@ -14,7 +14,7 @@ class Current extends Endpoint {
     this.schema.request = {
       body: {
         slug: 'anathema-alliance',
-        connectedRealmId: '200027'
+        auctionHouseId: '367'
       }
     }
     this.schema.response = String
@@ -25,54 +25,61 @@ class Current extends Endpoint {
    */
   async main (req, res) {
     const slug = req.body.slug
-    const connectedRealmId = parseInt(req.body.connectedRealmId)
+    const auctionHouseId = parseInt(req.body.auctionHouseId)
 
     const TSMReq = new TSMRequest()
-    const parallel = []
-    parallel.push(TSMReq.get(`/realm/${connectedRealmId}/stats`))
-    parallel.push(this.db.collection('currentData').find({ slug }).toArray())
-    const [stats, oldData] = await Promise.all(parallel)
-
-    if (!stats.success) {
-      return res.status(500).send(`Rejected. Error from TSM: ${stats.error}`)
-    }
+    await TSMReq.init()
+    const oldData = await this.db.collection('currentData').find({ slug }).toArray()
 
     const bulk = this.db.collection('currentData').initializeUnorderedBulkOp()
     let atLeast1BulkOp = false
 
-    // Upsert new data
-    for (const entry of stats.data) {
-      const storedEntry = oldData.find(i => i.itemId === entry.item)
-      if (!storedEntry) {
-        atLeast1BulkOp = true
-        bulk.insert({
-          itemId: entry.item,
-          slug,
-          previous: {},
-          historicalValue: entry.historical_value,
-          marketValue: entry.market_value,
-          minBuyout: entry.min_buyout,
-          numAuctions: entry.num_auctions,
-          quantity: entry.quantity
-        })
-        continue
+    let page = 1
+    let totalPages = 1
+    while (page <= totalPages) {
+      let scan = {}
+      try {
+        scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}?page=${page}&pageSize=100`)
+        totalPages = scan.metadata.totalPages
+      } catch (err) {
+        return res.status(500).send(`Rejected. Error from TSM: ${err}`)
       }
-      storedEntry.updated = true
 
-      const setObj = {}
-      for (const tsmKey of ['historical_value', 'market_value', 'min_buyout', 'num_auctions', 'quantity']) {
-        const nexusKey = tsmKey.split('_').map((k, i) => i > 0 ? k.charAt(0).toUpperCase() + k.slice(1) : k).join('')
+      for (const entry of scan.items) {
+        const storedEntry = oldData.find(i => i.itemId === entry.itemId)
+        if (!storedEntry) {
+          atLeast1BulkOp = true
+          bulk.insert({
+            itemId: entry.itemId,
+            slug,
+            previous: {},
+            historicalValue: entry.historical,
+            marketValue: entry.marketValue,
+            minBuyout: entry.minBuyout,
+            numAuctions: entry.numAuctions,
+            quantity: entry.quantity
+          })
+          continue
+        }
+        storedEntry.updated = true
 
-        if (entry[tsmKey] !== storedEntry[nexusKey]) {
-          setObj['previous.' + nexusKey] = storedEntry[nexusKey]
-          setObj[nexusKey] = entry[tsmKey]
+        const setObj = {}
+        for (const tsmKey of ['historical', 'marketValue', 'minBuyout', 'numAuctions', 'quantity']) {
+          const nexusKey = tsmKey === 'historical' ? 'historicalValue' : tsmKey
+
+          if (entry[tsmKey] !== storedEntry[nexusKey]) {
+            setObj['previous.' + nexusKey] = storedEntry[nexusKey]
+            setObj[nexusKey] = entry[tsmKey]
+          }
+        }
+
+        if (Object.keys(setObj).length) {
+          atLeast1BulkOp = true
+          bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
         }
       }
 
-      if (Object.keys(setObj).length) {
-        atLeast1BulkOp = true
-        bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
-      }
+      page++
     }
 
     // Delete outdated entries
