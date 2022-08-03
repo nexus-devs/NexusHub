@@ -23,6 +23,7 @@ printf "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 printf '%s' "$NEXUS_CI_SSH_KEY" >> /root/.ssh/id_ed25519
 chmod 700 /root/.ssh/id_ed25519
 
+ssh -vT git@github.com
 git push git@github.com:nexus-devs/NexusHub.git staging
 # git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
 # ^ 2>/dev/null to suppress output which would contain the secret token
