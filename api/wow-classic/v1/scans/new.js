@@ -53,12 +53,9 @@ class Scan extends Endpoint {
 
     let page = 1
     let totalPages = 1
-    console.log(auctionHouseId)
-    console.log(scanId)
     while (page <= totalPages) {
       let scan = {}
       try {
-        console.log(page)
         scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}/scan/${scanId}?page=${page}&pageSize=100`)
         totalPages = scan.metadata.totalPages
       } catch (err) {
