@@ -23,9 +23,10 @@ async function monitor () {
   let lastDone = new Date()
   const TSMReq = new TSMRequest()
 
-  console.log('TEST-1')
-  if (!await TSMReq.init()) return
-  console.log('TEST0')
+  if (!await TSMReq.init()) {
+    console.log('Couldn\'t initialize TSMRequest')
+    return
+  }
 
   if (staging) console.log('Starting in staging mode (only retrieve the last 7 days)')
 
