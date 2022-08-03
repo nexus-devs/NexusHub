@@ -25,8 +25,6 @@ printf "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3t2DRk8iReQKxQ3g69FU/pblzb0jo2+xt9
 chmod 700 /root/.ssh/id_ed25519
 chmod 700 /root/.ssh/id_ed25519.pub
 
-ssh -vT git@github.com
-git branch
-head -2 /root/.ssh/id_ed25519
+git push
 # git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
 # ^ 2>/dev/null to suppress output which would contain the secret token
