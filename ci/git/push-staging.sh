@@ -20,7 +20,7 @@ fi
 # Get SSH key and push to staging
 mkdir -p /root/.ssh
 printf "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-printf $NEXUS_CI_SSH_KEY >> /root/.ssh/id_ed25519
+printf '%s' "$NEXUS_CI_SSH_KEY" >> /root/.ssh/id_ed25519
 chmod 700 /root/.ssh/id_ed25519
 
 git push git@github.com:nexus-devs/NexusHub.git staging
