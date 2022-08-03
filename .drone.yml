@@ -25,7 +25,7 @@ pipeline:
       npm run sitemap
     secrets: [ tsm_client_id, tsm_client_secret ]
     when:
-      branch: developmentnot
+      branch: development
 
   # Rebuild for production up here so we can run tests afterwards.
   prepare - production:
@@ -52,7 +52,7 @@ pipeline:
     secrets: [ tsm_client_id, tsm_client_secret ]
     when:
       branch:
-        exclude: [ production, staging, rc/*, greenkeeper/*, development ]
+        exclude: [ production, staging, rc/*, greenkeeper/* ]
 
   test - production:
     image: node:10
@@ -61,7 +61,7 @@ pipeline:
     secrets: [ tsm_client_id, tsm_client_secret ]
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/*, development ]
+        exclude: [ production, staging, greenkeeper/* ]
 
   # Add to staging branch
   push - staging:

@@ -12,7 +12,8 @@ if [[ $last_commit =~ $release_pattern ]]; then
   git reset --hard $DRONE_BRANCH
   git merge -m "ci: Merge ${DRONE_BRANCH} with production." -s ours origin/production
   git tag $version production
-  git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' production --tags 2>/dev/null
+  git remote set-url origin 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub.git'
+  git push origin production --tags
   echo '* Pushed to staging! Good luck out there brother.'
 else
   echo '* No release commit found, not pushing to production.'

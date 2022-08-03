@@ -19,4 +19,3 @@ fi
 
 git remote set-url origin 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub.git'
 git push origin staging
-# ^ 2>/dev/null to suppress output which would contain the secret token
