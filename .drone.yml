@@ -78,7 +78,7 @@ pipeline:
 
       # Push changes from above and from dev branch
       - bash ci/git/push-staging.sh
-    secrets: [ nexus_ci_ssh_key ]
+    secrets: [ nexus_ci_token ]
     when:
       branch: development
       event: [ push ]

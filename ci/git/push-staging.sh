@@ -17,14 +17,5 @@ else
   git merge -s recursive -X theirs development
 fi
 
-# Get SSH key and push to staging
-mkdir -p /root/.ssh
-printf "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
-printf '%s' "$NEXUS_CI_SSH_KEY" >> /root/.ssh/id_ed25519
-printf "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3t2DRk8iReQKxQ3g69FU/pblzb0jo2+xt9WWPEPfl9 apps@nexus-stats.com" >> /root/.ssh/id_ed25519.pub
-chmod 700 /root/.ssh/id_ed25519
-chmod 700 /root/.ssh/id_ed25519.pub
-
-git push origin staging
-# git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging 2>/dev/null
+git push 'https://nexus-ci:'$NEXUS_CI_TOKEN'@github.com/nexus-devs/NexusHub' staging
 # ^ 2>/dev/null to suppress output which would contain the secret token
