@@ -70,7 +70,7 @@ async function monitor () {
           while (page <= totalPages) {
             let scans = {}
             try {
-              scans = await TSMReq.get('pricing', `/ah/${auctionHouse.auctionHouseId}/scan?page=${page}&pageSize=50`)
+              scans = await TSMReq.get('pricing', `/ah/${auctionHouse.auctionHouseId}/scan?page=${page}&pageSize=200`)
               totalPages = scans.metadata.totalPages
             } catch (err) {
               console.log(`Could not fetch scans for ${slug}: ${err}`)
@@ -106,7 +106,7 @@ async function monitor () {
             }
 
             // Break loop if old scans in current page
-            if (scans.items.length < scans.metadata.itemsPerPage) break
+            // if (scans.items.length < scans.metadata.itemsPerPage) break
             page++
           }
 
