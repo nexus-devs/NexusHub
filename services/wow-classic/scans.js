@@ -67,6 +67,7 @@ async function monitor () {
 
           let page = 1
           let totalPages = 1
+          let whileBreak = false
           while (page <= totalPages) {
             let scans = {}
             try {
@@ -88,6 +89,14 @@ async function monitor () {
             scans.items = scans.items
               .filter(s => s.scanTime > lastScannedUnix)
               .sort((a, b) => a.scanTime - b.scanTime)
+            // Sometimes lastModified doesn't actually reflect the last scan, so we need to break out here
+            if (!scans.items.length) {
+              console.log(`No new scans found for ${slug} (lM)\n`)
+              lastDone = new Date()
+              whileBreak = true
+              break
+            }
+
             console.log(`Inserting ${scans.items.length} scans for ${slug}...`)
             for (const scan of scans.items) {
               // Await to avoid overloading the TSM servers
@@ -109,6 +118,7 @@ async function monitor () {
             if (scans.items.length < scans.metadata.itemsPerPage) break
             page++
           }
+          if (whileBreak) continue
 
           console.log('Inserting current data...')
           await client.post('/wow-classic/v1/scans/current', {
