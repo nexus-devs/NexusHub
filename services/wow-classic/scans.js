@@ -108,10 +108,10 @@ async function monitor () {
                   scannedAt: scan.scanTime * 1000,
                   auctionHouseId: auctionHouse.auctionHouseId
                 })
-                lastDone = new Date()
               } catch (err) {
                 console.log(`Could not insert scan ${scan.scanId} for ${slug}: ${err}`)
               }
+              lastDone = new Date()
             }
 
             // Break loop if old scans in current page
