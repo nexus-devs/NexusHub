@@ -241,10 +241,10 @@ export default {
   storeModule,
 
   head: {
-    title: 'NexusHub · TBC Classic Auction House data and prices',
+    title: 'NexusHub · WotLK Classic Auction House data and prices',
     meta: meta({
-      title: 'NexusHub · TBC Classic Auction House data and prices',
-      description: 'Get up-to-date data and prices from all the WoW TBC Classic realms and auction houses!',
+      title: 'NexusHub · WotLK Classic Auction House data and prices',
+      description: 'Get up-to-date data and prices from all the WoW WotLK Classic realms and auction houses!',
       image: 'https://nexushub.co/img/brand/og-banner-wow-classic.jpg'
     })
   }
