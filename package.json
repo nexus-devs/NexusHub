@@ -61,7 +61,7 @@
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.0.1",
     "files-tree": "^1.0.8",
-    "gitlog": "^3.1.2",
+    "gitlog": "^4.0.4",
     "mocha": "^6.2.2",
     "progress-bar-webpack-plugin": "^1.12.1",
     "request-promise": "^4.2.5",
