@@ -33,7 +33,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.4.1",
     "request": "^2.88.0",
-    "requestretry": "^4.0.2",
+    "requestretry": "^7.0.0",
     "requests": "^0.3.0",
     "rss-parser": "^3.7.3",
     "tween.js": "^16.6.0",
