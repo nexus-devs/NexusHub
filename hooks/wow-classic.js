@@ -151,11 +151,11 @@ class Hook {
     const db = mongo.db(config.overrideEndpoint['/wow-classic'].mongoDb)
 
     const data = [
-      { contentPhase: 1, releaseDate: new Date(Date.UTC(2021, 5, 1)), description: 'Karazhan, Gruul\'s and Magtheridon\'s Lair' },
-      { contentPhase: 2, releaseDate: null, description: 'Serpent Shrine Cavern and Tempest Keep' },
-      { contentPhase: 3, releaseDate: null, description: 'Battle for Mount Hyjal and Black Temple' },
-      { contentPhase: 4, releaseDate: null, description: 'Zul\'Aman' },
-      { contentPhase: 5, releaseDate: null, description: 'Isle of Quel\'Danas, Magister\'s Terrace and Sunwell' }
+      { contentPhase: 1, releaseDate: new Date(Date.UTC(2022, 10, 6)), description: 'Naxxramas, The Eye of Eternity, The Obsidian Sanctum' },
+      { contentPhase: 2, releaseDate: null, description: 'Ulduar' },
+      { contentPhase: 3, releaseDate: null, description: 'Trial of the Crusader, Onyxia\'s Lair' },
+      { contentPhase: 4, releaseDate: null, description: 'Icecrown Citadel' },
+      { contentPhase: 5, releaseDate: null, description: 'The Ruby Sanctum' }
     ]
     await this._verifyCollection(db, 'contentPhases', data, 'contentPhase')
 
