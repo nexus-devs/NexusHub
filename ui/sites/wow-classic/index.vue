@@ -23,7 +23,7 @@
             <search-button :path="'/wow-classic/search'" />
           </div>
 
-          <h2>All TBC Classic Auction House data and prices in one place!</h2>
+          <h2>All WotLK Classic Auction House data and prices in one place!</h2>
         </div>
       </header>
 
