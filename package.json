@@ -47,7 +47,7 @@
     "vue-typer": "^1.2.0",
     "warframe-items": "^1.891.0",
     "warframe-patchlogs": "^1.417.0",
-    "wow-classic-items": "1.0.0",
+    "wow-classic-items": "2.0.0",
     "ws": "^7.2.0"
   },
   "devDependencies": {
