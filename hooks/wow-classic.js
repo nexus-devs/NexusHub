@@ -166,6 +166,7 @@ class Hook {
    * Helper function to verify a given list against a collection
    */
   async _verifyCollection (db, collection, list, uniqueKey) {
+    if (collection === 'items') console.log('items verify')
     const storedList = (await db.collection(collection).find().toArray()).map(({ _id, ...props }) => props) // avoid mutating _id on update
     const bulk = db.collection(collection).initializeUnorderedBulkOp()
 
@@ -185,6 +186,7 @@ class Hook {
     deleteQuery[uniqueKey] = { $in: deletedItems.map(i => i[uniqueKey]) }
     bulk.find(deleteQuery).remove()
 
+    if (collection === 'items') console.log('execute')
     if (bulk.length > 0) await bulk.execute()
   }
 }
