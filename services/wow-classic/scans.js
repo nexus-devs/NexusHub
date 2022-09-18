@@ -65,48 +65,60 @@ async function monitor () {
             continue
           }
 
-          let scans = []
-          try {
-            scans = await TSMReq.get('pricing', `/ah/${auctionHouse.auctionHouseId}/scan`)
-          } catch (err) {
-            console.log(`Could not fetch scans for ${slug}: ${err}`)
-            continue
-          }
-
-          // If staging, only add entries from max 7 days ago
-          if (staging) {
-            lastScannedUnix = new Date()
-            lastScannedUnix.setDate(lastScannedUnix.getDate() - 7)
-            lastScannedUnix = Math.floor(lastScannedUnix.getTime() / 1000)
-          }
-
-          // Filter new scans - sort them from old->new to avoid data holes on service interruption
-          scans = scans
-            .filter(s => s.scanTime > lastScannedUnix)
-            .sort((a, b) => a.scanTime - b.scanTime)
-          // Sometimes lastModified doesn't actually reflect the last scan, so we need to break out here
-          if (!scans.length) {
-            console.log(`No new scans found for ${slug} (lM)\n`)
-            lastDone = new Date()
-            continue
-          }
-
-          console.log(`Inserting ${scans.length} scans for ${slug}...`)
-          for (const scan of scans) {
-            // Await to avoid overloading the TSM servers
+          let page = 1
+          let totalPages = 1
+          let whileBreak = false
+          while (page <= totalPages) {
+            let scans = {}
             try {
-              await client.post('/wow-classic/v1/scans/new', {
-                slug,
-                region: regionLookup[region.regionId],
-                scanId: scan.scanId,
-                scannedAt: scan.scanTime * 1000,
-                auctionHouseId: auctionHouse.auctionHouseId
-              })
+              scans = await TSMReq.get('pricing', `/ah/${auctionHouse.auctionHouseId}/scan?page=${page}&pageSize=50`)
+              totalPages = scans.metadata.totalPages
             } catch (err) {
-              console.log(`Could not insert scan ${scan.scanId} for ${slug}: ${err}`)
+              console.log(`Could not fetch scans for ${slug}: ${err}`)
+              break
             }
-            lastDone = new Date()
+
+            // If staging, only add entries from max 7 days ago
+            if (staging) {
+              lastScannedUnix = new Date()
+              lastScannedUnix.setDate(lastScannedUnix.getDate() - 7)
+              lastScannedUnix = Math.floor(lastScannedUnix.getTime() / 1000)
+            }
+
+            // Filter new scans - sort them from old->new to avoid data holes on service interruption
+            scans.items = scans.items
+              .filter(s => s.scanTime > lastScannedUnix)
+              .sort((a, b) => a.scanTime - b.scanTime)
+            // Sometimes lastModified doesn't actually reflect the last scan, so we need to break out here
+            if (!scans.items.length) {
+              console.log(`No new scans found for ${slug} (lM)\n`)
+              lastDone = new Date()
+              whileBreak = true
+              break
+            }
+
+            console.log(`Inserting ${scans.items.length} scans for ${slug}...`)
+            for (const scan of scans.items) {
+              // Await to avoid overloading the TSM servers
+              try {
+                await client.post('/wow-classic/v1/scans/new', {
+                  slug,
+                  region: regionLookup[region.regionId],
+                  scanId: scan.scanId,
+                  scannedAt: scan.scanTime * 1000,
+                  auctionHouseId: auctionHouse.auctionHouseId
+                })
+              } catch (err) {
+                console.log(`Could not insert scan ${scan.scanId} for ${slug}: ${err}`)
+              }
+              lastDone = new Date()
+            }
+
+            // Break loop if old scans in current page
+            if (scans.items.length < scans.metadata.itemsPerPage) break
+            page++
           }
+          if (whileBreak) continue
 
           console.log('Inserting current data...')
           await client.post('/wow-classic/v1/scans/current', {
