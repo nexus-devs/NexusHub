@@ -51,77 +51,70 @@ class Scan extends Endpoint {
     const bulkRegionPreinsertion = this.db.collection('regionData').initializeUnorderedBulkOp()
     const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
-    let page = 1
-    let totalPages = 1
-    while (page <= totalPages) {
-      let scan = {}
-      try {
-        scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}/scan/${scanId}?page=${page}&pageSize=100`)
-        totalPages = scan.metadata.totalPages
-      } catch (err) {
-        return res.status(500).send(`Rejected. Error from TSM: ${err}`)
+    let scan = []
+    try {
+      scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}/scan/${scanId}`)
+    } catch (err) {
+      return res.status(500).send(`Rejected. Error from TSM: ${err}`)
+    }
+
+    for (const obj of scan) {
+      // Update scanData
+      const update = {
+        $push: {
+          details: {
+            $each: [{
+              marketValue: obj.marketValue,
+              minBuyout: obj.minBuyout,
+              numAuctions: obj.numAuctions,
+              quantity: obj.quantity,
+              scannedAt
+            }],
+            $sort: { scannedAt: 1 }
+          }
+        }
       }
+      bulk.find({
+        itemId: obj.itemId,
+        scannedAt: scannedAtDay,
+        slug
+      }).upsert().updateOne(update)
 
-      for (const obj of scan.items) {
-        // Update scanData
-        const update = {
-          $push: {
-            details: {
-              $each: [{
-                marketValue: obj.marketValue,
-                minBuyout: obj.minBuyout,
-                numAuctions: obj.numAuctions,
-                quantity: obj.quantity,
-                scannedAt
-              }],
-              $sort: { scannedAt: 1 }
-            }
-          }
-        }
-        bulk.find({
-          itemId: obj.itemId,
-          scannedAt: scannedAtDay,
-          slug
-        }).upsert().updateOne(update)
-
-        // Make sure the document exists ($ doesn't work with upsert sadly)
-        const emptyDetails = []
-        for (let i = 0; i < 24; i++) {
-          emptyDetails.push({ marketValue: 0, minBuyout: 0, numAuctions: 0, quantity: 0, count: 0, hour: i })
-        }
-        const updateRegionPreinsertion = {
-          $setOnInsert: {
-            itemId: obj.itemId,
-            scannedAt: scannedAtDay,
-            slug: region,
-            details: emptyDetails
-          }
-        }
-        bulkRegionPreinsertion.find({
-          itemId: obj.itemId,
-          scannedAt: scannedAtDay,
-          slug: region
-        }).upsert().updateOne(updateRegionPreinsertion)
-
-        // Update regionData
-        const updateRegion = {
-          $inc: {
-            'details.$.marketValue': obj.marketValue,
-            'details.$.minBuyout': obj.minBuyout,
-            'details.$.numAuctions': obj.numAuctions,
-            'details.$.quantity': obj.quantity,
-            'details.$.count': 1
-          }
-        }
-        bulkRegion.find({
+      // Make sure the document exists ($ doesn't work with upsert sadly)
+      const emptyDetails = []
+      for (let i = 0; i < 24; i++) {
+        emptyDetails.push({ marketValue: 0, minBuyout: 0, numAuctions: 0, quantity: 0, count: 0, hour: i })
+      }
+      const updateRegionPreinsertion = {
+        $setOnInsert: {
           itemId: obj.itemId,
           scannedAt: scannedAtDay,
           slug: region,
-          'details.hour': hour
-        }).updateOne(updateRegion)
+          details: emptyDetails
+        }
       }
+      bulkRegionPreinsertion.find({
+        itemId: obj.itemId,
+        scannedAt: scannedAtDay,
+        slug: region
+      }).upsert().updateOne(updateRegionPreinsertion)
 
-      page++
+      // Update regionData
+      const updateRegion = {
+        $inc: {
+          'details.$.marketValue': obj.marketValue,
+          'details.$.minBuyout': obj.minBuyout,
+          'details.$.numAuctions': obj.numAuctions,
+          'details.$.quantity': obj.quantity,
+          'details.$.count': 1
+        }
+      }
+      bulkRegion.find({
+        itemId: obj.itemId,
+        scannedAt: scannedAtDay,
+        slug: region,
+        'details.hour': hour
+      }).updateOne(updateRegion)
     }
 
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
