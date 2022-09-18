@@ -61,7 +61,7 @@ pipeline:
     secrets: [ tsm_client_id, tsm_client_secret ]
     when:
       branch:
-        exclude: [ production, staging, greenkeeper/*, development ]
+        exclude: [ production, staging, rc/*, greenkeeper/*, development ]
 
   # Add to staging branch
   push - staging:
