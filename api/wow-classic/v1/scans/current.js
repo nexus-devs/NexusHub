@@ -34,52 +34,45 @@ class Current extends Endpoint {
     const bulk = this.db.collection('currentData').initializeUnorderedBulkOp()
     let atLeast1BulkOp = false
 
-    let page = 1
-    let totalPages = 1
-    while (page <= totalPages) {
-      let scan = {}
-      try {
-        scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}?page=${page}&pageSize=100`)
-        totalPages = scan.metadata.totalPages
-      } catch (err) {
-        return res.status(500).send(`Rejected. Error from TSM: ${err}`)
+    let scan = []
+    try {
+      scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}`)
+    } catch (err) {
+      return res.status(500).send(`Rejected. Error from TSM: ${err}`)
+    }
+
+    for (const entry of scan) {
+      const storedEntry = oldData.find(i => i.itemId === entry.itemId)
+      if (!storedEntry) {
+        atLeast1BulkOp = true
+        bulk.insert({
+          itemId: entry.itemId,
+          slug,
+          previous: {},
+          historicalValue: entry.historical,
+          marketValue: entry.marketValue,
+          minBuyout: entry.minBuyout,
+          numAuctions: entry.numAuctions,
+          quantity: entry.quantity
+        })
+        continue
       }
+      storedEntry.updated = true
 
-      for (const entry of scan.items) {
-        const storedEntry = oldData.find(i => i.itemId === entry.itemId)
-        if (!storedEntry) {
-          atLeast1BulkOp = true
-          bulk.insert({
-            itemId: entry.itemId,
-            slug,
-            previous: {},
-            historicalValue: entry.historical,
-            marketValue: entry.marketValue,
-            minBuyout: entry.minBuyout,
-            numAuctions: entry.numAuctions,
-            quantity: entry.quantity
-          })
-          continue
-        }
-        storedEntry.updated = true
+      const setObj = {}
+      for (const tsmKey of ['historical', 'marketValue', 'minBuyout', 'numAuctions', 'quantity']) {
+        const nexusKey = tsmKey === 'historical' ? 'historicalValue' : tsmKey
 
-        const setObj = {}
-        for (const tsmKey of ['historical', 'marketValue', 'minBuyout', 'numAuctions', 'quantity']) {
-          const nexusKey = tsmKey === 'historical' ? 'historicalValue' : tsmKey
-
-          if (entry[tsmKey] !== storedEntry[nexusKey]) {
-            setObj['previous.' + nexusKey] = storedEntry[nexusKey]
-            setObj[nexusKey] = entry[tsmKey]
-          }
-        }
-
-        if (Object.keys(setObj).length) {
-          atLeast1BulkOp = true
-          bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
+        if (entry[tsmKey] !== storedEntry[nexusKey]) {
+          setObj['previous.' + nexusKey] = storedEntry[nexusKey]
+          setObj[nexusKey] = entry[tsmKey]
         }
       }
 
-      page++
+      if (Object.keys(setObj).length) {
+        atLeast1BulkOp = true
+        bulk.find({ _id: storedEntry._id }).updateOne({ $set: setObj })
+      }
     }
 
     // Delete outdated entries
