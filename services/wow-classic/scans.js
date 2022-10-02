@@ -98,6 +98,7 @@ async function monitor () {
             }
 
             console.log(`Inserting ${scans.items.length} scans for ${slug}...`)
+            let scanError = false
             for (const scan of scans.items) {
               // Await to avoid overloading the TSM servers
               try {
@@ -108,11 +109,17 @@ async function monitor () {
                   scannedAt: scan.scanTime * 1000,
                   auctionHouseId: auctionHouse.auctionHouseId
                 })
+                lastDone = new Date()
               } catch (err) {
                 console.log(`Could not insert scan ${scan.scanId} for ${slug}: ${err}`)
+                lastDone = new Date()
+                scanError = true
+                break
               }
-              lastDone = new Date()
             }
+
+            // Break loop and skip server for now if there was an error
+            if (scanError) break
 
             // Break loop if old scans in current page
             if (scans.items.length < scans.metadata.itemsPerPage) break
