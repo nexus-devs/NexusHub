@@ -46,21 +46,21 @@ class Scan extends Endpoint {
     const TSMReq = new TSMRequest()
     await TSMReq.init()
 
-    // Bulk operations
-    const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
-    const bulkRegionPreinsertion = this.db.collection('regionData').initializeUnorderedBulkOp()
-    const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
-
     let page = 1
     let totalPages = 1
     while (page <= totalPages) {
       let scan = {}
       try {
-        scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}/scan/${scanId}?page=${page}&pageSize=100`)
+        scan = await TSMReq.get('pricing', `/ah/${auctionHouseId}/scan/${scanId}?page=${page}&pageSize=500`)
         totalPages = scan.metadata.totalPages
       } catch (err) {
-        return res.status(500).send(`Rejected. Error from TSM: ${err}`)
+        return res.send(`Rejected. Error from TSM: ${err}`)
       }
+
+      // Bulk operations
+      const bulk = this.db.collection('scanData').initializeUnorderedBulkOp()
+      const bulkRegionPreinsertion = this.db.collection('regionData').initializeUnorderedBulkOp()
+      const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
       for (const obj of scan.items) {
         // Update scanData
@@ -121,18 +121,18 @@ class Scan extends Endpoint {
         }).updateOne(updateRegion)
       }
 
+      // Make sure hour docs are created before updating
+      const bulkRegionOp = async () => {
+        await bulkRegionPreinsertion.execute()
+        await bulkRegion.execute()
+      }
+
+      if (bulk.length) await Promise.all([bulk.execute(), bulkRegionOp()])
+
       page++
     }
 
     await this.db.collection('scans').insertOne({ slug, region, scanId, scannedAt })
-
-    // Make sure hour docs are created before updating
-    const bulkRegionOp = async () => {
-      await bulkRegionPreinsertion.execute()
-      await bulkRegion.execute()
-    }
-
-    if (bulk.length) await Promise.all([bulk.execute(), bulkRegionOp()])
 
     res.send('added!')
   }
