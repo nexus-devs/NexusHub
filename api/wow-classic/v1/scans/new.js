@@ -63,6 +63,11 @@ class Scan extends Endpoint {
       const bulkRegion = this.db.collection('regionData').initializeUnorderedBulkOp()
 
       for (const obj of scan.items) {
+        if (obj.marketValue === null) obj.marketValue = 0
+        if (obj.minBuyout === null) obj.minBuyout = 0
+        if (obj.quantity === null) obj.quantity = 0
+        if (obj.numAuctions === null) obj.numAuctions = 0
+
         // Update scanData
         const update = {
           $push: {
