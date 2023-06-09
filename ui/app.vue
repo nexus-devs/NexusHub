@@ -12,7 +12,6 @@
 
 <script>
 import Vue from 'vue'
-import VueAnalytics from 'vue-analytics'
 import VueCookies from 'vue-cookies'
 import VueTouch from 'vue-touch-hotfix'
 import bottom from 'src/components/ui/footer.vue'
@@ -55,11 +54,6 @@ export default {
 
   mounted () {
     document.body.className = this.theme.body // Hack so the progress bar can be styled
-    Vue.use(VueAnalytics, {
-      id: 'UA-128905436-1',
-      checkDuplicatedScript: true,
-      router: this.$router
-    })
   },
 
   storeModule: {
@@ -91,8 +85,26 @@ export default {
         'data-site-id': '60141fc2fe24b76bfed264da',
         'data-mode': 'scan',
         async: true
+      },
+      {
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-6DWFV92FKH',
+        type: 'text/javascript',
+        async: true
+      },
+      {
+        vmid: 'gtag',
+        type: 'text/javascript',
+        innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6DWFV92FKH');
+        `
       }
-    ]
+    ],
+    __dangerouslyDisableSanitizersByTagID: {
+      gtag: ['innerHTML']
+    }
   }
 }
 </script>
