@@ -35,7 +35,7 @@ class TSMRequest {
    * Get oauth2 token from TSM
    */
   async _refreshToken () {
-    this.tsmToken = await got.post('https://auth.tradeskillmaster.com/oauth2/token', {
+    this.tsmToken = await got.post('https://id.tradeskillmaster.com/realms/app/protocol/openid-connect/token', {
       json: {
         client_id: this.tsmClientId,
         client_secret: this.tsmClientSecret,
