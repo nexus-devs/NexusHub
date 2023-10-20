@@ -41,7 +41,7 @@ class TSMRequest {
         client_secret: this.tsmClientSecret,
         grant_type: 'client_credentials'
       }
-    })
+    }).json()
     this.tsmToken.expires_in = Date.now() + this.tsmToken.expires_in * 1000 // Convert to unix timestamp
   }
 
