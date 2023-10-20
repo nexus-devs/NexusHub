@@ -36,13 +36,12 @@ class TSMRequest {
    */
   async _refreshToken () {
     this.tsmToken = await got.post('https://id.tradeskillmaster.com/realms/app/protocol/openid-connect/token', {
-      json: {
+      form: {
         client_id: this.tsmClientId,
         client_secret: this.tsmClientSecret,
-        grant_type: 'client_credentials',
-        scope: 'app:realm-api app:pricing-api app:pricing-api:scans'
+        grant_type: 'client_credentials'
       }
-    }).json()
+    })
     this.tsmToken.expires_in = Date.now() + this.tsmToken.expires_in * 1000 // Convert to unix timestamp
   }
 
